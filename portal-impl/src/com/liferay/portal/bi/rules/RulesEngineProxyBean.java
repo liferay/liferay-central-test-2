@@ -25,8 +25,8 @@ package com.liferay.portal.bi.rules;
 import com.liferay.portal.kernel.bi.rules.Fact;
 import com.liferay.portal.kernel.bi.rules.Query;
 import com.liferay.portal.kernel.bi.rules.RulesEngine;
+import com.liferay.portal.kernel.bi.rules.RulesResourceRetriever;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
-import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
 import java.util.Map;
@@ -39,7 +39,7 @@ import java.util.Map;
 public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 
 	public void add(
-		String domainName, ResourceRetriever resourceRetriever,
+		String domainName, RulesResourceRetriever RulesResourceRetriever,
 		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
@@ -50,14 +50,15 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 	}
 
 	public void execute(
-		ResourceRetriever resourceRetriever, List<Fact<?>> facts,
+		RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
 		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public Map<String, ?> execute(
-		ResourceRetriever resourceRetriever, List<Fact<?>> facts, Query query,
+		RulesResourceRetriever RulesResourceRetriever,
+		List<Fact<?>> facts, Query query,
 		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
@@ -82,7 +83,7 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 	}
 
 	public void update(
-		String domainName, ResourceRetriever resourceRetriever,
+		String domainName, RulesResourceRetriever RulesResourceRetriever,
 		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();

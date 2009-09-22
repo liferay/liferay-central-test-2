@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.bi.rules;
 import com.liferay.portal.kernel.messaging.proxy.ExecutingClassLoaders;
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
-import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
 import java.util.Map;
@@ -40,7 +39,7 @@ public interface RulesEngine {
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void add(
-			String domainName, ResourceRetriever resourceRetriever,
+			String domainName, RulesResourceRetriever RulesResourceRetriever,
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
@@ -50,13 +49,13 @@ public interface RulesEngine {
 
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void execute(
-			ResourceRetriever resourceRetriever, List<Fact<?>> facts,
+			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public Map<String, ?> execute(
-			ResourceRetriever resourceRetriever,
+			RulesResourceRetriever RulesResourceRetriever,
 			List<Fact<?>> facts, Query query,
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
@@ -78,7 +77,7 @@ public interface RulesEngine {
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void update(
-			String domainName, ResourceRetriever resourceRetriever,
+			String domainName, RulesResourceRetriever RulesResourceRetriever,
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
