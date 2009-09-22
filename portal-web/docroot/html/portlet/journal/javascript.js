@@ -974,7 +974,7 @@
 				var type = fieldInstance.get('fieldType');
 				var optionsList = source.find('> .folder > .field-container > .journal-article-component-container > .journal-list-subfield option');
 
-		 		if (optionsList.length) {
+				 if (optionsList.length) {
 					jQuery(optionsList).each(
 						function() {
 							var option = jQuery(this);
@@ -1043,8 +1043,8 @@
 						xsd: xsd,
 						serviceContext: jQuery.toJSON(
 							{
-								communityPermissions: addCommunityPermissions,
-								guestPermissions: addGuestPermissions,
+								addCommunityPermissions: addCommunityPermissions,
+								addGuestPermissions: addGuestPermissions,
 								scopeGroupId: themeDisplay.getScopeGroupId()
 							}
 						),
