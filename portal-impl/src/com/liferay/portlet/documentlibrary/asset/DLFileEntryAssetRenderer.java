@@ -87,7 +87,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 		if (DLPermission.contains(
 				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_FILE)) {
+				themeDisplay.getScopeGroupId(), ActionKeys.ADD_DOCUMENT)) {
 
 			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.DOCUMENT_LIBRARY);
