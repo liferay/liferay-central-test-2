@@ -292,7 +292,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 				finderPath.isEntityCacheEnabled(), modelClass, primaryKeyObj,
 				sessionFactory);
 		}
-		else if (primaryKey instanceof List) {
+		else if (primaryKey instanceof List<?>) {
 			List<Object> cachedList = (List<Object>)primaryKey;
 
 			List<Object> list = new ArrayList<Object>(cachedList.size());
@@ -312,7 +312,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	private Object _resultToPrimaryKey(Object result) {
-		if (result instanceof BaseModel) {
+		if (result instanceof BaseModel<?>) {
 			BaseModel<?> model = (BaseModel<?>)result;
 
 			Class<?> modelClass = model.getClass();
@@ -320,7 +320,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 			return new CacheKVP(modelClass, primaryKeyObj);
 		}
-		else if (result instanceof List) {
+		else if (result instanceof List<?>) {
 			List<Object> list = (List<Object>)result;
 
 			List<Object> cachedList = new ArrayList<Object>(list.size());
@@ -342,14 +342,14 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	private static final String _PARAMS_SEPARATOR = "_P_";
 
-	private static ThreadLocal<Map> _localCache;
+	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
 	private static ThreadLocal<Boolean> _localCacheEnabled =
 		new InitialThreadLocal<Boolean>(Boolean.FALSE);
 
 	static {
 		if (PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
-			_localCache = new InitialThreadLocal<Map>(new LRUMap(
+			_localCache = new InitialThreadLocal<LRUMap>(new LRUMap(
 				PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
 			_localCacheAvailable = true;
 		}

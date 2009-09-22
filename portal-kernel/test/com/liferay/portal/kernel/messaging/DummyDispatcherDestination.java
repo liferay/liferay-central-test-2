@@ -31,16 +31,6 @@ import java.util.Set;
  */
 public class DummyDispatcherDestination extends BaseDestination {
 
-	public DummyDispatcherDestination(String name) {
-		super(name);
-	}
-
-	public DummyDispatcherDestination(
-		String name, int workersCoreSize, int workersMaxSize) {
-
-		super(name, workersCoreSize, workersMaxSize);
-	}
-
 	protected void dispatch(
 		Set<MessageListener> listeners, Message message) {
 	}

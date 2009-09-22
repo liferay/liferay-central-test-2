@@ -51,8 +51,9 @@ public class DispatcherDestinationTest extends TestCase {
 		_executorService = Executors.newFixedThreadPool(
 			REGISTER_TASK_COUNT + UNREGISTER_TASK_COUNT);
 
-		_destination = new DummyDispatcherDestination(
-			DispatcherDestinationTest.class.getName());
+		_destination = new DummyDispatcherDestination();
+
+		_destination.setName(DispatcherDestinationTest.class.getName());
 
 		_listeners = new MessageListener[LISTENER_COUNT];
 
@@ -95,7 +96,7 @@ public class DispatcherDestinationTest extends TestCase {
 		_executorService.invokeAll(_tasks);
 	}
 
-	private Destination _destination;
+	private BaseDestination _destination;
 	private ExecutorService _executorService;
 	private MessageListener[] _listeners;
 	private long _startTime;

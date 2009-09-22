@@ -32,45 +32,55 @@ import com.liferay.portal.ModelListenerException;
 public class BaseModelListener<T extends BaseModel<T>>
 	implements ModelListener<T> {
 
+	@SuppressWarnings("unused")
 	public void onAfterAddAssociation(
 			Object classPK, String associationClassName,
 			Object associationClassPK)
 		throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onAfterCreate(T model) throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onAfterRemove(T model) throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onAfterRemoveAssociation(
 			Object classPK, String associationClassName,
 			Object associationClassPK)
 		throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onAfterUpdate(T model) throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onBeforeAddAssociation(
 			Object classPK, String associationClassName,
 			Object associationClassPK)
 		throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onBeforeCreate(T model) throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onBeforeRemove(T model) throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onBeforeRemoveAssociation(
 			Object classPK, String associationClassName,
 			Object associationClassPK)
 		throws ModelListenerException {
 	}
 
+	@SuppressWarnings("unused")
 	public void onBeforeUpdate(T model) throws ModelListenerException {
 	}
 

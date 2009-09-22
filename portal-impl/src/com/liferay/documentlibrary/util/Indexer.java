@@ -22,8 +22,6 @@
 
 package com.liferay.documentlibrary.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -37,7 +35,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
@@ -65,7 +63,5 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	private static final String[] _CLASS_NAMES = new String[0];
-
-	private static Log _log = LogFactoryUtil.getLog(Indexer.class);
 
 }
