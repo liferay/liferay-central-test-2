@@ -38,7 +38,8 @@ public class UpgradeWiki extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type WikiPage parentTitle varchar(255) null");
-			runSQL("alter_column_type WikiPage redirectTitle varchar(255) null");
+			runSQL(
+				"alter_column_type WikiPage redirectTitle varchar(255) null");
 		}
 		catch (Exception e) {
 
