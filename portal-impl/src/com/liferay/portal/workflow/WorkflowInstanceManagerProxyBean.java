@@ -23,6 +23,7 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceHistory;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
@@ -71,20 +72,23 @@ public class WorkflowInstanceManagerProxyBean
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean retrieveChildrenInfo) {
+		boolean retrieveChildrenInfo, int start, int end,
+			OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean finished, boolean retrieveChildrenInfo) {
+		boolean finished, boolean retrieveChildrenInfo, int start, int end,
+			OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-		String relationType, long relationId, boolean retrieveChildrenInfo) {
+		String relationType, long relationId, boolean retrieveChildrenInfo,
+		int start, int end,	OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

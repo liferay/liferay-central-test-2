@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+
 import java.util.List;
 import java.util.Map;
 
@@ -102,12 +104,13 @@ public class WorkflowInstanceManagerUtil {
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished, boolean retrieveChildrenInfo)
+			boolean finished, boolean retrieveChildrenInfo, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfos(
 			workflowDefinitionName, workflowDefinitionVersion, finished,
-			retrieveChildrenInfo);
+			retrieveChildrenInfo, start, end, orderByComparator);
 	}
 
 	/**
@@ -116,12 +119,13 @@ public class WorkflowInstanceManagerUtil {
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean retrieveChildrenInfo)
+			boolean retrieveChildrenInfo, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfos(
 			workflowDefinitionName, workflowDefinitionVersion,
-			retrieveChildrenInfo);
+			retrieveChildrenInfo, start, end, orderByComparator);
 	}
 
 	/**
@@ -129,11 +133,13 @@ public class WorkflowInstanceManagerUtil {
 	 *		boolean)
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-			String relationType, long relationId, boolean retrieveChildrenInfo)
+			String relationType, long relationId, boolean retrieveChildrenInfo,
+			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfos(
-			relationType, relationId, retrieveChildrenInfo);
+			relationType, relationId, retrieveChildrenInfo, start, end,
+			orderByComparator);
 	}
 
 	public static WorkflowInstanceManager getWorkflowInstanceManager() {

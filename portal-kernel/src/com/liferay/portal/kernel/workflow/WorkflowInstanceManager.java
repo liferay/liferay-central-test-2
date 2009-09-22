@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
 import java.util.Map;
@@ -221,6 +222,11 @@ public interface WorkflowInstanceManager {
 	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
 	 *		   children's information should be returned as well or if only the
 	 *		   root workflow instance should be returned, without the children
+	 * @param  start start position for the result pagination(inculde element on
+	 *		   start)
+	 * @param  end end position for the result pagination(exclude element on
+	 *		   end)
+	 * @param  orderByComparator the comparator for sorting the result list.
 	 * @return a list of workflow instance information for the given definition,
 	 *		   will return an empty list rather than <code>null</code> if no
 	 *		   instances found
@@ -228,7 +234,8 @@ public interface WorkflowInstanceManager {
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean retrieveChildrenInfo)
+			boolean retrieveChildrenInfo, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	/**
@@ -248,6 +255,11 @@ public interface WorkflowInstanceManager {
 	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
 	 *		   children's information should be returned as well or if only the
 	 *		   root workflow instance should be returned, without the children
+	 * @param  start start position for the result pagination(inculde element on
+	 *		   start)
+	 * @param  end end position for the result pagination(exclude element on
+	 *		   end)
+	 * @param  orderByComparator the comparator for sorting the result list.
 	 * @return a list of workflow instance information for the given definition,
 	 *		   will return an empty list rather than <code>null</code> if no
 	 *		   instances found
@@ -255,7 +267,8 @@ public interface WorkflowInstanceManager {
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished, boolean retrieveChildrenInfo)
+			boolean finished, boolean retrieveChildrenInfo, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	/**
@@ -285,13 +298,19 @@ public interface WorkflowInstanceManager {
 	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
 	 *		   children's information should be returned as well or if only the
 	 *		   root workflow instance should be returned, without the children
+	 * @param  start start position for the result pagination(inculde element on
+	 *		   start)
+	 * @param  end end position for the result pagination(exclude element on
+	 *		   end)
+	 * @param  orderByComparator the comparator for sorting the result list.
 	 * @return the list of workflow instance information found in relation to
 	 *		   the specified domain object instance or an empty list, if nothing
 	 *		   found, never <code>null</code>
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-			String relationType, long relationId, boolean retrieveChildrenInfo)
+			String relationType, long relationId, boolean retrieveChildrenInfo,
+			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	/**
