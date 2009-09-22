@@ -59,7 +59,6 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 		throw new UnsupportedOperationException();
 	}
 
-
 	public void execute(
 		String domainName, List<Fact<?>> facts,
 		ClassLoader... clientClassLoaders) {

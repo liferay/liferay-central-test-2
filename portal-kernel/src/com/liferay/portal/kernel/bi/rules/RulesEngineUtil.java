@@ -48,7 +48,7 @@ public class RulesEngineUtil {
 
 		_rulesEngine.add(domainName, resourceRetriever, classloaders);
 	}
-	
+
 	public static void execute(
 			ResourceRetriever resourceRetriever, List<Fact<?>> facts)
 		throws RulesEngineException {

@@ -24,10 +24,11 @@ package com.liferay.portal.kernel.bi.rules;
 
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.io.Serializable;
 
 /**
  * <a href="Query.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +45,7 @@ public class Query implements Serializable {
 		if (Validator.isNull(identifier)) {
 			throw new IllegalArgumentException("Query idenfier is null.");
 		}
-		
+
 		if (Validator.isNull(queryName)) {
 			throw new IllegalArgumentException("Query string is null.");
 		}

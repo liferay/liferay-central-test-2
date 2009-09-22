@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,26 +30,21 @@ import java.io.Serializable;
  * @author Michael C. Han
  */
 public class Fact<T> implements Serializable {
+
 	public Fact(String identifier, T object) {
 		_identifier = identifier;
 		_factObject = object;
-	}
-
-	public String getIdentifier() {
-		return _identifier;
 	}
 
 	public T getFactObject() {
 		return _factObject;
 	}
 
-	public String toString() {
-		return "Fact{" +
-			"_identifier='" + _identifier + '\'' +
-			", _factObject=" + _factObject +
-			'}';
+	public String getIdentifier() {
+		return _identifier;
 	}
 
-	private String _identifier;
 	private T _factObject;
+	private String _identifier;
+
 }
