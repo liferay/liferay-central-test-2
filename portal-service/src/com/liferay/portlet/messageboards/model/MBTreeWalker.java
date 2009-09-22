@@ -33,16 +33,16 @@ import java.util.List;
  */
 public interface MBTreeWalker extends Serializable {
 
-	public MBMessage getRoot();
-
 	public List<MBMessage> getChildren(MBMessage message);
 
 	public int[] getChildrenRange(MBMessage message);
 
 	public List<MBMessage> getMessages();
 
-	public boolean isOdd();
+	public MBMessage getRoot();
 
 	public boolean isLeaf(MBMessage message);
+
+	public boolean isOdd();
 
 }

@@ -32,20 +32,20 @@ import java.io.Serializable;
  */
 public interface MBMessageDisplay extends Serializable {
 
-	public MBMessage getMessage();
-
-	public MBMessage getParentMessage();
-
 	public MBCategory getCategory();
 
-	public MBThread getThread();
-
-	public MBTreeWalker getTreeWalker();
-
-	public MBThread getPreviousThread();
+	public MBMessage getMessage();
 
 	public MBThread getNextThread();
 
+	public MBMessage getParentMessage();
+
+	public MBThread getPreviousThread();
+
+	public MBThread getThread();
+
 	public String getThreadView();
+
+	public MBTreeWalker getTreeWalker();
 
 }
