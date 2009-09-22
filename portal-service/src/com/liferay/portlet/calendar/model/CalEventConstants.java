@@ -20,48 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.calendar.model.impl;
+package com.liferay.portlet.calendar.model;
 
-import com.liferay.portal.kernel.cal.TZSRecurrence;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.Time;
 
 /**
- * <a href="CalEventImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalEventConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CalEventImpl extends CalEventModelImpl implements CalEvent {
+public class CalEventConstants {
 
-	public CalEventImpl() {
-	}
+	public static final String[] TYPES =
+		PropsUtil.getArray(PropsKeys.CALENDAR_EVENT_TYPES);
 
-	public void setRecurrence(String recurrence) {
-		_recurrenceObj = null;
+	public static final String BIRTHDAY = "birthday";
 
-		super.setRecurrence(recurrence);
-	}
+	public static final int REMIND_BY_AIM = 3;
 
-	public TZSRecurrence getRecurrenceObj() {
-		if (_recurrenceObj == null) {
-			String recurrence = getRecurrence();
+	public static final int REMIND_BY_EMAIL = 1;
 
-			if (Validator.isNotNull(recurrence)) {
-				_recurrenceObj = (TZSRecurrence)JSONFactoryUtil.deserialize(
-					recurrence);
-			}
-		}
+	public static final int REMIND_BY_ICQ = 4;
 
-		return _recurrenceObj;
-	}
+	public static final int REMIND_BY_MSN = 5;
 
-	public void setRecurrenceObj(TZSRecurrence recurrenceObj) {
-		_recurrenceObj = recurrenceObj;
+	public static final int REMIND_BY_NONE = 0;
 
-		super.setRecurrence(JSONFactoryUtil.serialize(recurrenceObj));
-	}
+	public static final int REMIND_BY_SMS = 2;
 
-	private TZSRecurrence _recurrenceObj = null;
+	public static final int REMIND_BY_YM = 6;
+
+	public static final long[] REMINDERS = {
+		Time.MINUTE * 5, Time.MINUTE * 15, Time.MINUTE * 30, Time.HOUR,
+		Time.HOUR * 2, Time.HOUR * 3, Time.HOUR * 6, Time.HOUR * 12, Time.DAY,
+		Time.DAY * 2, Time.DAY * 3, Time.DAY * 4, Time.DAY * 5, Time.DAY * 6,
+		Time.DAY * 7, Time.DAY * 8, Time.DAY * 9, Time.DAY * 10, Time.DAY * 11,
+		Time.DAY * 12, Time.DAY * 13, Time.DAY * 14
+	};
 
 }

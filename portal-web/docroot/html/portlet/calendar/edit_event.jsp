@@ -96,7 +96,7 @@ if (Validator.isNull(endDateOccurrenceParam) && (event != null)) {
 	}
 }
 
-int remindBy = BeanParamUtil.getInteger(event, request, "remindBy", CalEventImpl.REMIND_BY_EMAIL);
+int remindBy = BeanParamUtil.getInteger(event, request, "remindBy", CalEventConstants.REMIND_BY_EMAIL);
 int firstReminder = BeanParamUtil.getInteger(event, request, "firstReminder", (int)Time.MINUTE * 15);
 int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", (int)Time.MINUTE * 5);
 %>
@@ -200,10 +200,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<aui:select name="type">
 
 			<%
-			for (int i = 0; i < CalEventImpl.TYPES.length; i++) {
+			for (int i = 0; i < CalEventConstants.TYPES.length; i++) {
 			%>
 
-				<aui:option label="<%= CalEventImpl.TYPES[i] %>" selected="<%= type.equals(CalEventImpl.TYPES[i]) %>" />
+				<aui:option label="<%= CalEventConstants.TYPES[i] %>" selected="<%= type.equals(CalEventConstants.TYPES[i]) %>" />
 
 			<%
 			}
@@ -257,10 +257,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 				<aui:select inlineField="<%= true %>" inlineLabel="left" label="remind-me" name="firstReminder">
 
 					<%
-					for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
+					for (int i = 0; i < CalEventConstants.REMINDERS.length; i++) {
 					%>
 
-						<aui:option selected="<%= (firstReminder == CalEventImpl.REMINDERS[i]) %>" value="<%= CalEventImpl.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventImpl.REMINDERS[i]) %></aui:option>
+						<aui:option selected="<%= (firstReminder == CalEventConstants.REMINDERS[i]) %>" value="<%= CalEventConstants.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventConstants.REMINDERS[i]) %></aui:option>
 
 					<%
 					}
@@ -271,10 +271,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 				<aui:select inlineField="<%= true %>" inlineLabel="left" label="before-and-again" name="secondReminder" suffix="before-the-event-by">
 
 					<%
-					for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
+					for (int i = 0; i < CalEventConstants.REMINDERS.length; i++) {
 					%>
 
-						<aui:option selected="<%= (secondReminder == CalEventImpl.REMINDERS[i]) %>" value="<%= CalEventImpl.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventImpl.REMINDERS[i]) %></aui:option>
+						<aui:option selected="<%= (secondReminder == CalEventConstants.REMINDERS[i]) %>" value="<%= CalEventConstants.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventConstants.REMINDERS[i]) %></aui:option>
 
 					<%
 					}
@@ -283,13 +283,13 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 				</aui:select>
 
 				<aui:field-wrapper cssClass="reminders" label="">
-					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_NONE %>" label="do-not-send-a-reminder" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>" />
-					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_EMAIL %>" label='<%= LanguageUtil.get(pageContext, "email-address") + " (" + user.getEmailAddress() + ")" %>' name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_EMAIL %>" />
-					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_SMS %>" label='<%= LanguageUtil.get(pageContext, "sms") + (Validator.isNotNull(contact.getSmsSn()) ? " (" + contact.getSmsSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_SMS %>" />
-					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_AIM %>" label='<%= LanguageUtil.get(pageContext, "aim") + (Validator.isNotNull(contact.getAimSn()) ? " (" + contact.getAimSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_AIM %>" />
-					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_ICQ %>" label='<%= LanguageUtil.get(pageContext, "icq") + (Validator.isNotNull(contact.getIcqSn()) ? " (" + contact.getIcqSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_ICQ %>" />
-					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_MSN %>" label='<%= LanguageUtil.get(pageContext, "msn") + (Validator.isNotNull(contact.getMsnSn()) ? " (" + contact.getMsnSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_MSN %>" />
-					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_YM %>" label='<%= LanguageUtil.get(pageContext, "ym") + (Validator.isNotNull(contact.getYmSn()) ? " (" + contact.getYmSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_YM %>" />
+					<aui:input checked="<%= remindBy == CalEventConstants.REMIND_BY_NONE %>" label="do-not-send-a-reminder" name="remindBy" type="radio" value="<%= CalEventConstants.REMIND_BY_NONE %>" />
+					<aui:input checked="<%= remindBy == CalEventConstants.REMIND_BY_EMAIL %>" label='<%= LanguageUtil.get(pageContext, "email-address") + " (" + user.getEmailAddress() + ")" %>' name="remindBy" type="radio" value="<%= CalEventConstants.REMIND_BY_EMAIL %>" />
+					<aui:input checked="<%= remindBy == CalEventConstants.REMIND_BY_SMS %>" label='<%= LanguageUtil.get(pageContext, "sms") + (Validator.isNotNull(contact.getSmsSn()) ? " (" + contact.getSmsSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventConstants.REMIND_BY_SMS %>" />
+					<aui:input checked="<%= remindBy == CalEventConstants.REMIND_BY_AIM %>" label='<%= LanguageUtil.get(pageContext, "aim") + (Validator.isNotNull(contact.getAimSn()) ? " (" + contact.getAimSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventConstants.REMIND_BY_AIM %>" />
+					<aui:input checked="<%= remindBy == CalEventConstants.REMIND_BY_ICQ %>" label='<%= LanguageUtil.get(pageContext, "icq") + (Validator.isNotNull(contact.getIcqSn()) ? " (" + contact.getIcqSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventConstants.REMIND_BY_ICQ %>" />
+					<aui:input checked="<%= remindBy == CalEventConstants.REMIND_BY_MSN %>" label='<%= LanguageUtil.get(pageContext, "msn") + (Validator.isNotNull(contact.getMsnSn()) ? " (" + contact.getMsnSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventConstants.REMIND_BY_MSN %>" />
+					<aui:input checked="<%= remindBy == CalEventConstants.REMIND_BY_YM %>" label='<%= LanguageUtil.get(pageContext, "ym") + (Validator.isNotNull(contact.getYmSn()) ? " (" + contact.getYmSn() + ")" : "") %>' name="remindBy" type="radio" value="<%= CalEventConstants.REMIND_BY_YM %>" />
 				</aui:field-wrapper>
 			</aui:fieldset>
 		</liferay-ui:panel>

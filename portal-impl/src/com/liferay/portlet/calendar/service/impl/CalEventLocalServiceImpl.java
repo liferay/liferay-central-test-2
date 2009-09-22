@@ -70,7 +70,7 @@ import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.job.CheckEventJob;
 import com.liferay.portlet.calendar.model.CalEvent;
-import com.liferay.portlet.calendar.model.impl.CalEventImpl;
+import com.liferay.portlet.calendar.model.CalEventConstants;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.social.CalendarActivityKeys;
 import com.liferay.portlet.calendar.util.CalUtil;
@@ -330,7 +330,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public void checkEvents() throws PortalException, SystemException {
 		Iterator<CalEvent> itr = calEventPersistence.findByRemindBy(
-			CalEventImpl.REMIND_BY_NONE).iterator();
+			CalEventConstants.REMIND_BY_NONE).iterator();
 
 		while (itr.hasNext()) {
 			CalEvent event = itr.next();
@@ -366,7 +366,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			if (event.isRepeating()) {
 				double daysToCheck = Math.ceil(
-					CalEventImpl.REMINDERS[CalEventImpl.REMINDERS.length - 1] /
+					CalEventConstants.REMINDERS[
+						CalEventConstants.REMINDERS.length - 1] /
 					Time.DAY);
 
 				Calendar cal = (Calendar)now.clone();
@@ -1085,7 +1086,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		Property comment = event.getProperty(Property.COMMENT);
 
 		if (Validator.isNotNull(comment) &&
-			ArrayUtil.contains(CalEventImpl.TYPES, comment.getValue())) {
+			ArrayUtil.contains(CalEventConstants.TYPES, comment.getValue())) {
 
 			type = comment.getValue();
 		}
@@ -1127,7 +1128,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Reminder
 
-		int remindBy = CalEventImpl.REMIND_BY_NONE;
+		int remindBy = CalEventConstants.REMIND_BY_NONE;
 		int firstReminder = 300000;
 		int secondReminder = 300000;
 
@@ -1188,7 +1189,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	protected void remindUser(CalEvent event, User user, Calendar startDate) {
 		int remindBy = event.getRemindBy();
 
-		if (remindBy == CalEventImpl.REMIND_BY_NONE) {
+		if (remindBy == CalEventConstants.REMIND_BY_NONE) {
 			return;
 		}
 
@@ -1216,7 +1217,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
 
-			if (remindBy == CalEventImpl.REMIND_BY_SMS) {
+			if (remindBy == CalEventConstants.REMIND_BY_SMS) {
 				toAddress = contact.getSmsSn();
 			}
 
@@ -1272,8 +1273,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					toName,
 				});
 
-			if ((remindBy == CalEventImpl.REMIND_BY_EMAIL) ||
-				(remindBy == CalEventImpl.REMIND_BY_SMS)) {
+			if ((remindBy == CalEventConstants.REMIND_BY_EMAIL) ||
+				(remindBy == CalEventConstants.REMIND_BY_SMS)) {
 
 				InternetAddress from = new InternetAddress(
 					fromAddress, fromName);
@@ -1285,22 +1286,22 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 				mailService.sendEmail(message);
 			}
-			else if ((remindBy == CalEventImpl.REMIND_BY_AIM) &&
+			else if ((remindBy == CalEventConstants.REMIND_BY_AIM) &&
 					 (Validator.isNotNull(contact.getAimSn()))) {
 
 				AIMConnector.send(contact.getAimSn(), body);
 			}
-			else if ((remindBy == CalEventImpl.REMIND_BY_ICQ) &&
+			else if ((remindBy == CalEventConstants.REMIND_BY_ICQ) &&
 					 (Validator.isNotNull(contact.getIcqSn()))) {
 
 				ICQConnector.send(contact.getIcqSn(), body);
 			}
-			else if ((remindBy == CalEventImpl.REMIND_BY_MSN) &&
+			else if ((remindBy == CalEventConstants.REMIND_BY_MSN) &&
 					 (Validator.isNotNull(contact.getMsnSn()))) {
 
 				MSNConnector.send(contact.getMsnSn(), body);
 			}
-			else if ((remindBy == CalEventImpl.REMIND_BY_YM) &&
+			else if ((remindBy == CalEventConstants.REMIND_BY_YM) &&
 					 (Validator.isNotNull(contact.getYmSn()))) {
 
 				YMConnector.send(contact.getYmSn(), body);
