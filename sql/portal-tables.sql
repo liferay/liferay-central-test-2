@@ -1709,8 +1709,8 @@ create table WikiPage (
 	summary STRING null,
 	format VARCHAR(75) null,
 	head BOOLEAN,
-	parentTitle VARCHAR(75) null,
-	redirectTitle VARCHAR(75) null
+	parentTitle VARCHAR(255) null,
+	redirectTitle VARCHAR(255) null
 );
 
 create table WikiPageResource (

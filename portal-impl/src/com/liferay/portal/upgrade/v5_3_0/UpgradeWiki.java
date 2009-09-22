@@ -26,6 +26,7 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_3_0.util.WikiPageResourceTable;
+import com.liferay.portal.upgrade.v5_3_0.util.WikiPageTable;
 
 /**
  * <a href="UpgradeWiki.java.html"><b><i>View Source</i></b></a>
@@ -35,6 +36,22 @@ import com.liferay.portal.upgrade.v5_3_0.util.WikiPageResourceTable;
 public class UpgradeWiki extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
+		try {
+			runSQL("alter_column_type WikiPage parentTitle varchar(255) null");
+			runSQL("alter_column_type WikiPage redirectTitle varchar(255) null");
+		}
+		catch (Exception e) {
+
+			// WikiPage
+
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				WikiPageTable.TABLE_NAME, WikiPageTable.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
+
 		try {
 			runSQL(
 				"alter_column_type WikiPageResource title varchar(255) null");
