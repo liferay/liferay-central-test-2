@@ -129,8 +129,8 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		RenderRequest renderRequest, RenderResponse renderResponse,
 		String template) {
 
-		if (template.equals(TEMPLATE_FULL_CONTENT) ||
-			template.equals(TEMPLATE_ABSTRACT)) {
+		if (template.equals(TEMPLATE_ABSTRACT) ||
+			template.equals(TEMPLATE_FULL_CONTENT)) {
 
 			renderRequest.setAttribute(WebKeys.IMAGE_GALLERY_IMAGE, _image);
 

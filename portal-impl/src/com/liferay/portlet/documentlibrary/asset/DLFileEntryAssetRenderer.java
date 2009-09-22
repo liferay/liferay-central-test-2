@@ -152,8 +152,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			String template)
 		throws Exception {
 
-		if (template.equals(TEMPLATE_FULL_CONTENT) ||
-			template.equals(TEMPLATE_ABSTRACT)) {
+		if (template.equals(TEMPLATE_ABSTRACT) ||
+			template.equals(TEMPLATE_FULL_CONTENT)) {
 
 			renderRequest.setAttribute(
 				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, _entry);
