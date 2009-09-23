@@ -126,7 +126,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 						</c:if>
 
 						<c:if test="<%= foldersCount > 0 %>">
-							<liferay-ui:panel id='subFoldersPanel' title='<%= LanguageUtil.get(pageContext, folder!= null ? "subfolders" : "folders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+							<liferay-ui:panel id='subFoldersPanel' title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 								<liferay-ui:search-container
 									curParam="cur1"
 									delta="<%= foldersPerPage %>"
@@ -187,11 +187,11 @@ request.setAttribute("view.jsp-folderId", folderId);
 				<liferay-ui:icon
 					image='<%= "../document_library/folder" + (((foldersCount + fileEntriesCount) > 0) ? "_full" : StringPool.BLANK) %>'
 					cssClass="folder-avatar"
-					message="<%= folder!= null ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %>"
+					message='<%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %>'
 				/>
 
 				<div class="folder-name">
-					<h4><%= folder!= null ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %></h4>
+					<h4><%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "document-home") %></h4>
 				</div>
 			</div>
 
