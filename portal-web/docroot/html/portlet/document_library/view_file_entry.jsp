@@ -325,15 +325,9 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 }
 %>
 
-<div class="file-entry-tabs">
-	<liferay-ui:tabs
-		names="<%= tabs2Names %>"
-		param="tabs2"
-		url="<%= portletURL.toString() %>"
-	/>
-
-	<c:choose>
-		<c:when test='<%= tabs2.equals("version-history") %>'>
+<div class="file-entry-panels">
+	<liferay-ui:panel-container id='documentPanels' extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
+		<liferay-ui:panel cssClass="version-history" id='documentVersionHistory' title='<%= LanguageUtil.get(pageContext, "version-history") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 
 			<%
 			boolean comparableFileEntry = false;
@@ -471,8 +465,9 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("comments") %>'>
+		</liferay-ui:panel>
+
+		<liferay-ui:panel id='documentComments' title='<%= LanguageUtil.get(pageContext, "comments") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
 				<portlet:actionURL var="discussionURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
@@ -489,8 +484,8 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 					ratingsEnabled="<%= enableCommentRatings %>"
 				/>
 			</c:if>
-		</c:when>
-	</c:choose>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 </div>
 
 <%

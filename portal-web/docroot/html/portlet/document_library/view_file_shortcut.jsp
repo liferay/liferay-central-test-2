@@ -242,7 +242,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 }
 %>
 
-<div class="file-entry-tabs">
+<div class="file-entry-panels">
 	<liferay-ui:tabs
 		names="<%= tabs2Names %>"
 		param="tabs2"

@@ -124,12 +124,12 @@
 	margin: 2em 0;
 }
 
-.portlet-document-library .file-entry-tabs {
+.portlet-document-library .file-entry-panels {
 	clear: both;
 	padding-top: 1em;
 }
 
-.portlet-document-library .file-entry-tabs .version-history {
+.portlet-document-library .file-entry-panels .version-history {
 	margin-bottom: 3em;
 }
 
@@ -146,7 +146,7 @@
 	padding-right: 2em;
 }
 
-.portlet-document-library .folder-column #documentLibraryPanels, .portlet-document-library .file-entry-tabs #documentPanels {
+.portlet-document-library .folder-column #documentLibraryPanels, .portlet-document-library .file-entry-panels #documentPanels {
 	border: none;
 }
 
