@@ -124,7 +124,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public boolean isDiscussion() {
-		if ((getCategoryId() == 0) && (getGroupId() == 0)) {
+		if ((getGroupId() == 0) && (getCategoryId() == 0)) {
 			return true;
 		}
 		else {
