@@ -25,8 +25,6 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-themeDisplay.setIncludeCalendarJs(true);
-
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
 if (GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disableNamespace"))) {
