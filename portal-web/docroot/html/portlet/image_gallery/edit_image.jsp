@@ -136,7 +136,7 @@ if (image != null) {
 				sb.append(StringPool.SLASH);
 				sb.append(WebDAVUtil.encodeURL(image.getNameWithExtension()));
 
-				Group group = layout.getGroup();
+				Group group = themeDisplay.getScopeGroup();
 				%>
 
 				<liferay-ui:input-resource
