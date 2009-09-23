@@ -65,7 +65,8 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	/**
-	 * @see WorkflowInstanceManager#getWorkflowInstanceHistory(long, boolean)
+	 * @see WorkflowInstanceManager#getWorkflowInstanceHistory(long, boolean,
+	 *		start, end, OrderByComparator)
 	 */
 	public static List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
 			long workflowInstanceId, boolean includeChildren, int start,

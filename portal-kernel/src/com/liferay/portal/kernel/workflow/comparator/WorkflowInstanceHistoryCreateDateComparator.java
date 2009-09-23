@@ -37,7 +37,9 @@ public class WorkflowInstanceHistoryCreateDateComparator
 	extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "createDate ASC, id ASC";
+
 	public static String ORDER_BY_DESC = "createDate DESC, id DESC";
+	
 	public static String[] ORDER_BY_FIELDS = {"createDate", "id"};
 
 	public WorkflowInstanceHistoryCreateDateComparator() {
@@ -60,6 +62,7 @@ public class WorkflowInstanceHistoryCreateDateComparator
 		if (value != 0) {
 			Long historyId1 = history1.getHistoryEntryId();
 			Long historyId2 = history2.getWorkflowInstanceId();
+
 			value = historyId1.compareTo(historyId2);
 		}
 

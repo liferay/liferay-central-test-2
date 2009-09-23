@@ -34,7 +34,9 @@ import com.liferay.portal.kernel.workflow.WorkflowInstanceHistory;
 public class WorkflowInstanceHistoryUserIdComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "userId ASC, id ASC";
+
 	public static String ORDER_BY_DESC = "userId DESC, id DESC";
+	
 	public static String[] ORDER_BY_FIELDS = {"userId", "id"};
 
 	public WorkflowInstanceHistoryUserIdComparator() {
@@ -46,8 +48,8 @@ public class WorkflowInstanceHistoryUserIdComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		WorkflowInstanceHistory history1 = (WorkflowInstanceHistory) obj1;
-		WorkflowInstanceHistory history2 = (WorkflowInstanceHistory) obj2;
+		WorkflowInstanceHistory history1 = (WorkflowInstanceHistory)obj1;
+		WorkflowInstanceHistory history2 = (WorkflowInstanceHistory)obj2;
 
 		Long userId1 = history1.getUserId();
 		Long userId2 = history2.getUserId();
@@ -57,6 +59,7 @@ public class WorkflowInstanceHistoryUserIdComparator extends OrderByComparator {
 		if (value == 0) {
 			Long historyId1 = history1.getHistoryEntryId();
 			Long historyId2 = history2.getWorkflowInstanceId();
+
 			value = historyId1.compareTo(historyId2);
 		}
 
