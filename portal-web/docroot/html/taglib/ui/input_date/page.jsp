@@ -79,9 +79,9 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					displayBoundingBox: '#<%= randomNamespace %>displayDate',
 					monthField: '#<%= monthParam %>',
 					monthFieldName: '<%= monthParam %>',
+					populateMonth: false,
 					yearFieldName: '<%= yearParam %>',
 					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>],
-
 					on: {
 						select: function(event) {
 							var formatted = event.date.formatted[0];
