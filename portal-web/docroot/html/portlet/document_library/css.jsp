@@ -147,7 +147,7 @@
 }
 
 .portlet-document-library .folder-column #documentLibraryPanels, .portlet-document-library .file-entry-panels #documentPanels {
-	border: none;
+	border-width: 0;
 }
 
 .portlet-document-library .folder-column #subFoldersPanel, .portlet-document-library .folder-column #documentsPanel {
