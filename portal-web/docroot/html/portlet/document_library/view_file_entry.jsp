@@ -261,7 +261,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			sbf.append(StringPool.SLASH);
 			sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
 
-			Group group = layout.getGroup();
+			Group group = themeDisplay.getScopeGroup();
 			%>
 
 			<liferay-ui:input-resource
