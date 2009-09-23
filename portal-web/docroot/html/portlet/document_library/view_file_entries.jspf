@@ -1,0 +1,105 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<liferay-ui:search-container
+	curParam="cur2"
+	delta="<%= fileEntriesPerPage %>"
+	headerNames="<%= StringUtil.merge(fileEntryColumns) %>"
+	iteratorURL="<%= portletURL %>"
+>
+
+	<liferay-ui:search-container-results>
+
+		<%
+		if (mergedView) {
+			results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
+		}
+		else {
+			results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
+		}
+
+		if (mergedView) {
+			total = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+		}
+		else {
+			total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+		}
+
+		pageContext.setAttribute("results", results);
+		pageContext.setAttribute("total", total);
+		%>
+
+	</liferay-ui:search-container-results>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.BaseModel"
+		keyProperty="primaryKeyObj"
+		modelVar="result"
+	>
+		<%@ include file="/html/portlet/document_library/cast_result.jspf" %>
+
+		<%
+		if (curFolder != null) {
+		%>
+
+			<liferay-portlet:renderURL varImpl="rowURL">
+				<portlet:param name="struts_action" value="/document_library/view" />
+				<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+			</liferay-portlet:renderURL>
+
+			<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
+
+		<%
+		}
+		else {
+			String rowHREF = null;
+
+			if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW)) {
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				if (fileShortcut == null) {
+					rowURL.setParameter("struts_action", "/document_library/view_file_entry");
+					rowURL.setParameter("redirect", currentURL);
+					rowURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+					rowURL.setParameter("name", HtmlUtil.unescape(fileEntry.getName()));
+				}
+				else {
+					rowURL.setParameter("struts_action", "/document_library/view_file_shortcut");
+					rowURL.setParameter("redirect", currentURL);
+					rowURL.setParameter("fileShortcutId", String.valueOf(fileShortcut.getFileShortcutId()));
+				}
+				rowHREF = rowURL.toString();
+			}
+		%>
+
+			<%@ include file="/html/portlet/document_library/file_entry_columns.jspf" %>
+
+		<%
+		}
+		%>
+
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>

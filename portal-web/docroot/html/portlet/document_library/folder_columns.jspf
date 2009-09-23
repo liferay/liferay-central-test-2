@@ -29,8 +29,8 @@ subfolderIds.add(new Long(curFolder.getFolderId()));
 
 DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
-int foldersCount = subfolderIds.size() - 1;
-int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, subfolderIds, status);
+int curFoldersCount = subfolderIds.size() - 1;
+int curFileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, subfolderIds, status);
 
 for (int j = 0; j < folderColumns.length; j++) {
 	String folderColumn = folderColumns[j];
@@ -142,14 +142,14 @@ for (int j = 0; j < folderColumns.length; j++) {
 			<liferay-ui:search-container-column-text
 				href="<%= rowURL %>"
 				name="<%= folderColumn %>"
-				value="<%= String.valueOf(fileEntriesCount) %>"
+				value="<%= String.valueOf(curFileEntriesCount) %>"
 			/>
 		</c:when>
 		<c:when test='<%= folderColumn.equals("num-of-folders") %>'>
 			<liferay-ui:search-container-column-text
 				href="<%= rowURL %>"
 				name="<%= folderColumn %>"
-				value="<%= String.valueOf(foldersCount) %>"
+				value="<%= String.valueOf(curFoldersCount) %>"
 			/>
 		</c:when>
 		<c:when test='<%= folderColumn.equals("size") %>'>

@@ -24,15 +24,14 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-document-library .file-entry-column-first .file-entry-column-content {
-	margin-right: 4em;
-}
-
-.portlet-document-library .file-entry-column-first h3 {
+.portlet-document-library h3.file-entry-title, .portlet-document-library h3.folder-title {
 	border-bottom: 1px solid #000;
 	font-size: 14px;
 	font-weight: 700;
-	margin: 10px 0;
+}
+
+.portlet-document-library .file-entry-column-first .file-entry-column-content {
+	margin-right: 4em;
 }
 
 .portlet-document-library .file-entry-column-last {
@@ -71,19 +70,6 @@
 	width: 200px;
 }
 
-.portlet-document-library img.shortcut-icon {
-	display: inline;
-	margin-top: 100px;
-	position: absolute;
-	z-index: 10;
-}
-
-.portlet-document-library img.locked-icon {
-	display: inline;
-	margin: 95px 0 0 130px;
-	position: absolute;
-	z-index: 10;
-}
 
 .portlet-document-library .file-entry-categories .asset-category {
 	color: #555;
@@ -105,7 +91,7 @@
 }
 
 .portlet-document-library .file-entry-description, .portlet-document-library .folder-description {
-	margin: 1em auto;
+	margin: 0 auto 2em;
 }
 
 .portlet-document-library .file-entry-download .file-entry-name {
@@ -143,6 +129,10 @@
 	padding-top: 1em;
 }
 
+.portlet-document-library .file-entry-tabs .version-history {
+	margin-bottom: 3em;
+}
+
 .portlet-document-library .file-entry-tags .tag {
 	color: #555;
 }
@@ -152,10 +142,30 @@
 }
 
 .portlet-document-library .folder-avatar img {
-	left: -45px;
-	margin-bottom: 1em;
-	position: relative;
-	width: 180px;
+	margin: 0 auto;
+	padding-right: 2em;
+}
+
+.portlet-document-library .folder-column #documentLibraryPanels, .portlet-document-library .file-entry-tabs #documentPanels {
+	border: none;
+}
+
+.portlet-document-library .folder-column #subFoldersPanel, .portlet-document-library .folder-column #documentsPanel {
+	clear: both;
+}
+
+.portlet-document-library .folder-column-content {
+	margin-right: 1em;
+	padding: 0;
+}
+
+.portlet-document-library .folder-metadata {
+	clear: both;
+}
+
+.portlet-document-library .folder-search {
+	float: right;
+	margin: 0 0 0.5em 0.5em;
 }
 
 .portlet-document-library .folder-file-entries {
@@ -173,4 +183,22 @@
 	margin-right: 10px;
 	padding-left: 25px;
 	padding-right: 10px;
+}
+
+.portlet-document-library img.shortcut-icon {
+	display: inline;
+	margin-top: 100px;
+	position: absolute;
+	z-index: 10;
+}
+
+.portlet-document-library img.locked-icon {
+	display: inline;
+	margin: 95px 0 0 130px;
+	position: absolute;
+	z-index: 10;
+}
+
+.portlet-document-library .taglib-webdav {
+	margin-top: 3em;
 }

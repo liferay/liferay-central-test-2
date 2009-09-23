@@ -120,7 +120,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 	}
 	%>
 
-	<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + versionText + ")") %></h3>
+	<h3 class="file-entry-title"><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + versionText + ")") %></h3>
 
 	<div class="file-entry-categories">
 		<liferay-ui:asset-categories-summary

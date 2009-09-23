@@ -176,7 +176,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	}
 	%>
 
-	<h3><%= fileEntry.getTitle() + " (" + versionText + ")" %></h3>
+	<h3 class="file-entry-title"><%= fileEntry.getTitle() + " (" + versionText + ")" %></h3>
 
 	<div class="file-entry-categories">
 		<liferay-ui:asset-categories-summary
