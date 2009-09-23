@@ -226,7 +226,6 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			/>
 
 			<c:if test="<%= showTime %>">
-
 				<liferay-ui:input-time
 					hourParam='<%= fieldParam + "Hour" %>'
 					hourValue="<%= hour %>"

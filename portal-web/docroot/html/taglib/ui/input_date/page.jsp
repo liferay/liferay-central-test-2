@@ -103,6 +103,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 
 <c:choose>
 	<c:when test="<%= monthAndYearParam.equals(namespace) %>">
+
 		<%
 		int[] monthIds = CalendarUtil.getMonthIds();
 		String[] months = CalendarUtil.getMonths(locale);
