@@ -963,14 +963,6 @@ public class ThemeDisplay implements Serializable {
 		_tilesSelectable = tilesSelectable;
 	}
 
-	public boolean isIncludeCalendarJs() {
-		return _includeCalendarJs;
-	}
-
-	public void setIncludeCalendarJs(boolean includeCalendarJs) {
-		_includeCalendarJs = includeCalendarJs;
-	}
-
 	public boolean isIncludePortletCssJs() {
 		return _includePortletCssJs;
 	}
@@ -990,13 +982,8 @@ public class ThemeDisplay implements Serializable {
 	public boolean isIncludedJs(String js) {
 		String path = getPathJavaScript();
 
-		if (isIncludeCalendarJs() &&
-			js.startsWith(path + "/calendar/calendar_stripped.js")) {
-
-			return true;
-		}
-		else if (isIncludePortletCssJs() &&
-				 js.startsWith(path + "/liferay/portlet_css.js")) {
+		if (isIncludePortletCssJs() &&
+			js.startsWith(path + "/liferay/portlet_css.js")) {
 
 			return true;
 		}
@@ -1119,7 +1106,6 @@ public class ThemeDisplay implements Serializable {
 		_tilesTitle = StringPool.BLANK;
 		_tilesContent = StringPool.BLANK;
 		_tilesSelectable = false;
-		_includeCalendarJs = false;
 		_includePortletCssJs = false;
 		_includeServiceJs = false;
 		_portletDisplay.recycle();
@@ -1224,7 +1210,6 @@ public class ThemeDisplay implements Serializable {
 	private String _tilesTitle = StringPool.BLANK;
 	private String _tilesContent = StringPool.BLANK;
 	private boolean _tilesSelectable;
-	private boolean _includeCalendarJs;
 	private boolean _includePortletCssJs;
 	private boolean _includeServiceJs;
 	private PortletDisplay _portletDisplay = new PortletDisplay();
