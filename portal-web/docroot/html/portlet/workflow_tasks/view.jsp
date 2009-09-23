@@ -52,7 +52,7 @@ try {
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= TaskInstanceManagerUtil.getTaskInstanceInfosByUser(user.getUserId(), completed) %>"
+			results="<%= TaskInstanceManagerUtil.getTaskInstanceInfosByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
 			total="<%= TaskInstanceManagerUtil.getTaskInstanceCountForUser(user.getUserId()) %>"
 		/>
 
