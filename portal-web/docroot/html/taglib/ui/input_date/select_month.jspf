@@ -22,9 +22,7 @@
  */
 %>
 
-<label class="hidden-label" for="<%= monthParam %>"><liferay-ui:message key="month" /></label>
-
-<select <%= disabled ? "disabled" : "" %> id="<%= monthParam %>" name="<%= monthParam %>">
+<select class="aui-helper-hidden" <%= disabled ? "disabled" : "" %> id="<%= monthParam %>" name="<%= monthParam %>">
 	<c:if test="<%= monthNullable %>">
 		<option value=""></option>
 	</c:if>

@@ -68,221 +68,45 @@ if (dateFormatPattern.indexOf("y") == 0) {
 %>
 
 <script type="text/javascript">
-	if (!Liferay.DatePicker) {
-		Liferay.DatePicker = Alloy.DatePicker.extend(
-			{
-				initialize: function(options) {
-					var instance = this;
-
-					instance._input = jQuery(options.input);
-					instance._monthField = jQuery(options.monthField);
-					instance._dayField = jQuery(options.dayField);
-					instance._yearField = jQuery(options.yearField);
-					instance._monthYearField = jQuery(options.monthAndYearField);
-					instance._combinedMonthYear = options.combinedMonthYear;
-					instance._yearRange = options.yearRange.join(':');
-					instance._firstDay = options.firstDay;
-
-					if ((options.dayField != options.monthField) &&
-						(options.dayField != options.yearField)) {
-
-						instance._setDayField();
-
-						instance._yearField.bind(
-							'change keypress',
-							function() {
-								instance._setDayField();
-							}
-						);
-
-						instance._monthField.bind(
-							'change keypress',
-							function() {
-								instance._setDayField();
-							}
-						);
-					}
-
-					var button = jQuery('<img alt="<liferay-ui:message key="display-a-datapicker" />" class="aui-datepicker-button" src="<%= themeDisplay.getPathThemeImages() %>/common/calendar.png" />');
-
-					instance._input.after(button);
-
-					options.button = button[0];
-
-					options.mindate = '1/1/' + options.yearRange[0];
-					options.maxdate = '12/31/' + options.yearRange[1];
-
-					instance._super(options);
-
-					instance.selectEvent.subscribe(instance._onSelect, instance, true);
-
-					instance.panel.beforeShowEvent.subscribe(instance._beforeShow, instance, true);
-				},
-
-				_beforeShow: function() {
-					var instance = this;
-
-					var month = null;
-					var day = null;
-					var year = null;
-
-					if (!instance._combinedMonthYear) {
-						month = instance._monthField.val();
-						year = instance._yearField.val();
-					}
-					else {
-						var value = instance._monthYearField.val();
-
-						value = value.split('_');
-
-						month = value[0];
-						year = value[1];
-					}
-
-					month++;
-
-					day = instance._dayField.val();
-
-					instance._input.val(
-						month + '/' + day + '/' + year
-					);
-				},
-
-				_getDaysInMonth: function(year, month) {
-					var daysInMonth = 31;
-
-					if (year != '' && month != '') {
-						daysInMonth = 32 - (new Date(year, month, 32)).getDate();
-					}
-
-					return daysInMonth;
-				},
-
-				_onSelect: function(eventName, dates) {
-					var instance = this;
-
-					var selectedDate = dates[0][0];
-
-					var year = selectedDate[0];
-					var month = selectedDate[1] - 1;
-					var day = selectedDate[2];
-
-					if (!instance._combinedMonthYear) {
-						instance._monthField.val(month);
-						instance._yearField.val(year);
-					}
-					else {
-						var monthYearValue = month + '_' + year;
-						instance._monthYearField.val(monthYearValue);
-					}
-
-					instance._dayField.val(day);
-				},
-
-				_setDayField: function() {
-					var instance = this;
-
-					var daysInMonth = instance._getDaysInMonth(instance._yearField.val(), instance._monthField.val());
-
-					var dayFieldValue = instance._dayField.val();
-
-					if (dayFieldValue > daysInMonth) {
-						dayFieldValue = daysInMonth;
-					}
-
-					if (!instance._dayOptions) {
-						instance._dayOptions = instance._dayField.find('option');
-					}
-
-					instance._dayField.empty();
-					instance._dayField.append(instance._dayOptions.slice(0, daysInMonth));
-					instance._dayField.val(dayFieldValue);
-				},
-
-				_showDatePicker: function() {
-					var instance = this;
-
-					if (!instance._input.is('.disabled')) {
-						instance._super.apply(instance, arguments);
-					}
-				}
-			}
-		);
-	}
-
 	AUI().ready(
-		function() {
-			new Liferay.DatePicker(
+		'date-picker-select',
+		function(A) {
+			var datePicker = new A.DatePickerSelect(
 				{
-					combinedMonthYear: (!<%= monthAndYearParam.equals(namespace) %>),
-					dayField: '#<%= dayParam %>',
-					firstDay: <%= firstDayOfWeek %>,
-					input: '#<%= imageInputId %>Input',
+					dateFormat: <%= dateFormatMDY ? "'%m/%d/%Y'" : "'%Y/%m/%d'" %>,
+					dayFieldName: '<%= dayParam %>',
+					displayBoundingBox: '#<%= randomNamespace %>displayDate',
 					monthField: '#<%= monthParam %>',
-					monthAndYearField: '#<%= monthAndYearParam %>',
-					yearField: '#<%= yearParam %>',
-					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
+					monthFieldName: '<%= monthParam %>',
+					yearFieldName: '<%= yearParam %>',
+					on: {
+						select: function(event) {
+							var formatted = event.date.formatted[0];
+
+							A.get('#<%= imageInputId %>Input').val(formatted);
+						},
+						render: function() {
+							A.get('#<%= monthParam %>').removeClass('aui-helper-hidden');
+						}
+					}
 				}
-			);
+			)
+			.render();
 		}
 	);
 </script>
 
+<div id="<%= randomNamespace %>displayDate"></div>
+
 <c:choose>
 	<c:when test="<%= monthAndYearParam.equals(namespace) %>">
-
 		<%
 		int[] monthIds = CalendarUtil.getMonthIds();
 		String[] months = CalendarUtil.getMonths(locale);
 		%>
 
-		<c:choose>
-			<c:when test="<%= dateFormatMDY %>">
-				<%@ include file="select_month.jspf" %>
-
-				<%@ include file="select_day.jspf" %>
-
-				<%@ include file="select_year.jspf" %>
-			</c:when>
-
-			<c:otherwise>
-				<%@ include file="select_year.jspf" %>
-
-				<%@ include file="select_month.jspf" %>
-
-				<%@ include file="select_day.jspf" %>
-			</c:otherwise>
-		</c:choose>
+		<%@ include file="select_month.jspf" %>
 	</c:when>
-
-	<c:otherwise>
-
-		<%
-		int[] monthIds = CalendarUtil.getMonthIds();
-		String[] months = CalendarUtil.getMonths(locale, "MMM");
-		%>
-
-		<select <%= disabled ? "disabled" : "" %> id="<%= monthAndYearParam %>" name="<%= monthAndYearParam %>">
-			<c:if test="<%= monthAndYearNullable %>">
-				<option value=""></option>
-			</c:if>
-
-			<%
-			for (int i = yearRangeStart; i <= yearRangeEnd; i++) {
-				for (int j = 0; j < months.length; j++) {
-			%>
-
-					<option <%= (monthValue == monthIds[j]) && (yearValue == i) ? "selected" : "" %> value="<%= monthIds[j] %>_<%= i %>"><%= months[j] %> <%= i %></option>
-
-			<%
-				}
-			}
-			%>
-
-		</select>
-
-		<%@ include file="select_day.jspf" %>
-	</c:otherwise>
 </c:choose>
 
 <input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />

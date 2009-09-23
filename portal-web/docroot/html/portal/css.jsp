@@ -1237,6 +1237,10 @@ li.toggle-expand a {
 	zoom: 1;
 }
 
+.gecko .lfr-input-time, .ie .lfr-input-time {
+	padding-left: 2px;
+}
+
 /* ---------- Liferay forms ---------- */
 
 .aui-form-button.aui-input-disabled input, .aui-form-button.aui-input-disabled button {

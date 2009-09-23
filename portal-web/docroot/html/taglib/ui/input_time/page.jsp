@@ -49,66 +49,62 @@ if (timeFormatPattern.indexOf("a") == -1) {
 }
 %>
 
-<label class="hidden-label" for="<%= hourParam %>"><liferay-ui:message key="hour" /></label>
-
-<select <%= disabled ? "disabled" : "" %> name="<%= hourParam %>">
-	<c:if test="<%= hourNullable %>">
-		<option value=""></option>
-	</c:if>
-
-	<%
-	for (int i = 0; i < (timeFormatAmPm ? 12 : 24); i++) {
-		String hourString = String.valueOf(i);
-
-		if (timeFormatAmPm && (i == 0)) {
-			hourString = "12";
-		}
-	%>
-
-		<option <%= (hourValue == i) ? "selected" : "" %> value="<%= i %>"><%= hourString %></option>
-
-	<%
-	}
-	%>
-
-</select>
-
-<label class="hidden-label" for="<%= minuteParam %>"><liferay-ui:message key="minute" /></label>
-
-<select <%= disabled ? "disabled" : "" %> name="<%= minuteParam %>">
-	<c:if test="<%= minuteNullable %>">
-		<option value=""></option>
-	</c:if>
-
-	<%
-	for (int i = 0; i < 60; i++) {
-		String minute = numberFormat.format(i);
-	%>
-
-		<c:if test="<%= (minuteInterval == 0) || ((i % minuteInterval) == 0) %>">
-			<option <%= (minuteValue == i) ? "selected" : "" %> value="<%= i %>">:<%= minute %></option>
+<div class="lfr-input-time">
+	<select <%= disabled ? "disabled" : "" %> name="<%= hourParam %>">
+		<c:if test="<%= hourNullable %>">
+			<option value=""></option>
 		</c:if>
 
-	<%
-	}
-	%>
+		<%
+		for (int i = 0; i < (timeFormatAmPm ? 12 : 24); i++) {
+			String hourString = String.valueOf(i);
 
-</select>
+			if (timeFormatAmPm && (i == 0)) {
+				hourString = "12";
+			}
+		%>
 
-<label class="hidden-label" for="<%= amPmParam %>"><liferay-ui:message key="am-pm" /></label>
+			<option <%= (hourValue == i) ? "selected" : "" %> value="<%= i %>"><%= hourString %></option>
 
-<c:choose>
-	<c:when test="<%= ! timeFormatAmPm %>">
-		<input type="hidden" name="<%= amPmParam %>" value="<%= Calendar.AM %>" />
-	</c:when>
-	<c:otherwise>
-		<select <%= disabled ? "disabled" : "" %> name="<%= amPmParam %>">
-			<c:if test="<%= amPmNullable %>">
-				<option value=""></option>
+		<%
+		}
+		%>
+
+	</select>
+
+	<select <%= disabled ? "disabled" : "" %> name="<%= minuteParam %>">
+		<c:if test="<%= minuteNullable %>">
+			<option value=""></option>
+		</c:if>
+
+		<%
+		for (int i = 0; i < 60; i++) {
+			String minute = numberFormat.format(i);
+		%>
+
+			<c:if test="<%= (minuteInterval == 0) || ((i % minuteInterval) == 0) %>">
+				<option <%= (minuteValue == i) ? "selected" : "" %> value="<%= i %>">:<%= minute %></option>
 			</c:if>
 
-			<option <%= (amPmValue == Calendar.AM) ? "selected" : "" %> value="<%= Calendar.AM %>"><liferay-ui:message key="am" /></option>
-			<option <%= (amPmValue == Calendar.PM) ? "selected" : "" %> value="<%= Calendar.PM %>"><liferay-ui:message key="pm" /></option>
-		</select>
-	</c:otherwise>
-</c:choose>
+		<%
+		}
+		%>
+
+	</select>
+
+	<c:choose>
+		<c:when test="<%= ! timeFormatAmPm %>">
+			<input type="hidden" name="<%= amPmParam %>" value="<%= Calendar.AM %>" />
+		</c:when>
+		<c:otherwise>
+			<select <%= disabled ? "disabled" : "" %> name="<%= amPmParam %>">
+				<c:if test="<%= amPmNullable %>">
+					<option value=""></option>
+				</c:if>
+
+				<option <%= (amPmValue == Calendar.AM) ? "selected" : "" %> value="<%= Calendar.AM %>"><liferay-ui:message key="am" /></option>
+				<option <%= (amPmValue == Calendar.PM) ? "selected" : "" %> value="<%= Calendar.PM %>"><liferay-ui:message key="pm" /></option>
+			</select>
+		</c:otherwise>
+	</c:choose>
+</div>
