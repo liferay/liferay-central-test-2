@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * <a href="AggregateClassLoader.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +36,7 @@ package com.liferay.portal.kernel.util;
 public class AggregateClassLoader extends ClassLoader {
 
 	public static ClassLoader getAggregateClassLoader(
-		ClassLoader[] classLoaders) {
+		ClassLoader... classLoaders) {
 
 		if ((classLoaders == null) || (classLoaders.length == 0)) {
 			return null;
@@ -41,49 +46,88 @@ public class AggregateClassLoader extends ClassLoader {
 			return classLoaders[0];
 		}
 
-		AggregateClassLoader aggregateLoader = new AggregateClassLoader(
-			classLoaders[1], classLoaders[0]);
-
-		for (int i = 2; i < classLoaders.length; i++) {
-			aggregateLoader = new AggregateClassLoader(
-				classLoaders[i], aggregateLoader);
-		}
+		AggregateClassLoader aggregateLoader = new AggregateClassLoader();
+		aggregateLoader.addClassLoader(Arrays.asList(classLoaders));
 
 		return aggregateLoader;
 	}
 
+	public AggregateClassLoader() {
+		super();
+	}
+
+	public AggregateClassLoader(ClassLoader parentClassLoader) {
+		super(parentClassLoader);
+	}
+
+	@Deprecated
+	/**
+	 * Used for backwards compatibility to 5.1 and 5.2
+	 */
 	public AggregateClassLoader(
-		ClassLoader defaultClassLoader, ClassLoader backupClassLoader) {
+		ClassLoader classLoader1, ClassLoader classLoader2) {
+		super();
+		addClassLoader(classLoader1);
+		addClassLoader(classLoader2);
 
-		super(defaultClassLoader);
+	}
 
-		_backupClassLoader = backupClassLoader;
+	public void addClassLoader(ClassLoader classLoader) {
+		if (_classLoaders.contains(classLoader)) {
+			return;
+		}
+		
+		if ((classLoader instanceof AggregateClassLoader) &&
+			(classLoader.getParent().equals(getParent()))){
+
+			AggregateClassLoader toConsolidate =
+				(AggregateClassLoader)classLoader;
+			
+			for (ClassLoader childLoader : toConsolidate.getClassLoaders()) {
+				addClassLoader(childLoader);
+			}
+		}
+		else {
+			_classLoaders.add(classLoader);
+		}
+	}
+	
+	public void addClassLoader(Collection<ClassLoader> classLoaders) {
+		for (ClassLoader classLoader : classLoaders) {
+			addClassLoader(classLoader);
+		}
 	}
 
 	protected Class<?> loadClass(String name, boolean resolve)
 		throws ClassNotFoundException {
 
-		Class<?> loadedClass = null;
+		Class clazz = null;
 
-		try {
-			loadedClass = super.loadClass(name, resolve);
+		for (ClassLoader classLoader : _classLoaders) {
+			try {
+				clazz = classLoader.loadClass(name);
+			}
+			catch (ClassNotFoundException e) {
+				//nothing to do here...
+			}
 		}
-		catch (ClassNotFoundException cnfe) {
-			if (_backupClassLoader != null) {
-				loadedClass = _backupClassLoader.loadClass(name);
-			}
-			else {
-				throw cnfe;
-			}
+
+		if (clazz == null) {
+			clazz = getParent().loadClass(name);
 		}
 
 		if (resolve) {
-			resolveClass(loadedClass);
+			resolveClass(clazz);
 		}
 
-		return loadedClass;
+		return clazz;
 	}
 
-	private ClassLoader _backupClassLoader;
+	List<ClassLoader> getClassLoaders() {
+		return _classLoaders;
+	}
+
+	//cannot use a Set because order of class lookup matters.
+	private List<ClassLoader> _classLoaders = new ArrayList<ClassLoader>();
 
 }

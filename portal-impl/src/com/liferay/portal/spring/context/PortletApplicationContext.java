@@ -52,7 +52,7 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 
 	protected void initBeanDefinitionReader(XmlBeanDefinitionReader reader) {
 		reader.setBeanClassLoader(
-			new AggregateClassLoader(
+			AggregateClassLoader.getAggregateClassLoader(
 				PortletClassLoaderUtil.getClassLoader(),
 				PortalClassLoaderUtil.getClassLoader()));
 	}
