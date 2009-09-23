@@ -73,15 +73,12 @@ if (dateFormatPattern.indexOf("y") == 0) {
 		function(A) {
 			var datePicker = new A.DatePickerSelect(
 				{
-					appendOrder: <%= dateFormatMDY ? "[ 'm', 'd', 'y' ]" : "[ 'y', 'm', 'd' ]" %>,
+					appendOrder: <%= dateFormatMDY ? "['m', 'd', 'y']" : "['y', 'm', 'd']" %>,
 					dateFormat: '%m/%e/%Y',
 					dayFieldName: '<%= dayParam %>',
 					displayBoundingBox: '#<%= randomNamespace %>displayDate',
 					monthField: '#<%= monthParam %>',
 					monthFieldName: '<%= monthParam %>',
-					populateMonth: false,
-					yearFieldName: '<%= yearParam %>',
-					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>],
 					on: {
 						select: function(event) {
 							var formatted = event.date.formatted[0];
@@ -92,6 +89,9 @@ if (dateFormatPattern.indexOf("y") == 0) {
 							A.get('#<%= monthParam %>').removeClass('aui-helper-hidden');
 						}
 					}
+					populateMonth: false,
+					yearFieldName: '<%= yearParam %>',
+					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>],
 				}
 			)
 			.render();
