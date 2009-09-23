@@ -167,22 +167,28 @@ else {
 </div>
 
 <script type="text/javascript">
-		AUI().use('dialog', function(A) {
-			A.on('click', function(event) {
-				var popup = new A.Dialog(
-					{
-						bodyContent: A.get('#<portlet:namespace />webDav').html(),
-						centered: true,
-						destroyOnClose: true,
-						title: '<liferay-ui:message key="access-from-my-desktop" />',
-						modal: true,
-						width: 500
-					}
-				)
-				.render();
+		AUI().ready(
+			'dialog',
+			function(A) {
+				A.on(
+					'click',
+					function(event) {
+						var popup = new A.Dialog(
+							{
+								bodyContent: A.get('#<portlet:namespace />webDav').html(),
+								centered: true,
+								destroyOnClose: true,
+								modal: true,
+								title: '<liferay-ui:message key="access-from-my-desktop" />',
+								width: 500
+							}
+						)
+						.render();
 
-				event.preventDefault();
-			},
-			'.webdav-action');
-		});
+						event.preventDefault();
+					},
+					'.webdav-action'
+				);
+			}
+		);
 </script>
