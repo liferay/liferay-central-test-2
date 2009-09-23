@@ -90,14 +90,14 @@ public class TaskInstanceManagerProxyBean
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 		UserCredential userCredential, int start, int end,
-			OrderByComparator orderByComparator) {
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 		UserCredential userCredential, boolean completed, int start, int end,
-			OrderByComparator orderByComparator) {
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

@@ -135,10 +135,11 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential,
+	 *		int, int, OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-			UserCredential userCredential,int start, int end,
+			UserCredential userCredential, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
@@ -148,7 +149,7 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential,
-	 *		boolean)
+	 *		boolean, int, int, OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 			UserCredential userCredential, boolean completed, int start,
@@ -160,7 +161,8 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long, int, int,
+	 *		OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(
 			long roleId, int start, int end,
@@ -172,7 +174,8 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long, boolean)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long, boolean, int,
+	 *		int, OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(
 			long roleId, boolean completed, int start, int end,
@@ -184,7 +187,8 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long, int, int,
+	 *		OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByUser(
 			long userId, int start, int end,
@@ -196,7 +200,8 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long, boolean)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long, boolean, int,
+	 *		int, OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByUser(
 			long userId, boolean completed, int start, int end,
@@ -208,7 +213,8 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
+	 *		int, int, OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
 			long workflowInstanceId, int start, int end,
@@ -221,7 +227,7 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
-	 *		boolean)
+	 *		boolean, int, int, OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
 			long workflowInstanceId, boolean completed, int start, int end,
