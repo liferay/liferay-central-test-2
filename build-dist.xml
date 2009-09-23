@@ -198,7 +198,7 @@
 			value="&lt;jvm-options&gt;-Xmx1024m&lt;/jvm-options&gt;&lt;jvm-options&gt;-XX:MaxPermSize=256m&lt;/jvm-options&gt;"
 		/>
 
-		<ant antfile="setup.xml" target="build-jarinstaller-pe" dir="${app.server.glassfish.installer.dir}" >
+		<ant antfile="setup.xml" dir="${app.server.glassfish.installer.dir}" target="build-jarinstaller-pe">
 			<property name="glassfish.class" value="glassfish.class" />
 		</ant>
 
