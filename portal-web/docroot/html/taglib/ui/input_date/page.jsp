@@ -86,7 +86,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 						render: function() {
 							A.get('#<%= monthParam %>').removeClass('aui-helper-hidden');
 						}
-					}
+					},
 					populateMonth: false,
 					yearFieldName: '<%= yearParam %>',
 					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>],
