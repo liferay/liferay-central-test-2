@@ -97,7 +97,7 @@ boolean showFoldersSearch = PrefsParamUtil.getBoolean(preferences, request, "sho
 boolean showSubfolders = PrefsParamUtil.getBoolean(preferences, request, "showSubfolders", true);
 int foldersPerPage = PrefsParamUtil.getInteger(preferences, request, "foldersPerPage", SearchContainer.DEFAULT_DELTA);
 
-String defaultFolderColumns = "folder,num-of-folders,num-of-documents";
+String defaultFolderColumns = "name,num-of-folders,num-of-documents";
 
 String portletId = portletDisplay.getId();
 
