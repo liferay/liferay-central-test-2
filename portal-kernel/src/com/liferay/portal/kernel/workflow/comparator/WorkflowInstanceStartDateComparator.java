@@ -33,12 +33,6 @@ import java.util.Date;
  *
  * @author Shuyang Zhou
  */
-/**
- * <a href="WorkflowInstanceStartDateComparator.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Shuyang Zhou
- */
 public class WorkflowInstanceStartDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "startDate ASC, id ASC";

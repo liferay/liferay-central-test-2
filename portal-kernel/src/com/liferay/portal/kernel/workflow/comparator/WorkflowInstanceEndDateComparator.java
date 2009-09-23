@@ -33,12 +33,6 @@ import java.util.Date;
  *
  * @author Shuyang Zhou
  */
-/**
- * <a href="WorkflowInstanceEndDateComparator.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Shuyang Zhou
- */
 public class WorkflowInstanceEndDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "endDate ASC, id ASC";
