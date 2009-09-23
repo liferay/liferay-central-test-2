@@ -144,8 +144,8 @@ public class EditDiscussionAction extends PortletAction {
 			// Add message
 
 			message = MBMessageServiceUtil.addDiscussionMessage(
-				className, classPK, threadId, parentMessageId, subject,
-				body, StatusConstants.APPROVED, serviceContext);
+				className, classPK, threadId, parentMessageId, subject, body,
+				StatusConstants.APPROVED, serviceContext);
 		}
 		else {
 

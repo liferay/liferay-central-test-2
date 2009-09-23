@@ -163,8 +163,8 @@ public class MailingListMessageListener implements MessageListener {
 		Company company = CompanyLocalServiceUtil.getCompany(
 			mailingListRequest.getCompanyId());
 
-		long categoryId = mailingListRequest.getCategoryId();
 		long groupId = mailingListRequest.getGroupId();
+		long categoryId = mailingListRequest.getCategoryId();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Category id " + categoryId);

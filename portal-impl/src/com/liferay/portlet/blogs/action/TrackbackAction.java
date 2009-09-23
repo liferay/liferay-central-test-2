@@ -97,7 +97,6 @@ public class TrackbackAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getScopeGroupId();
-
 		String title = ParamUtil.getString(actionRequest, "title");
 		String excerpt = ParamUtil.getString(actionRequest, "excerpt");
 		String url = ParamUtil.getString(actionRequest, "url");

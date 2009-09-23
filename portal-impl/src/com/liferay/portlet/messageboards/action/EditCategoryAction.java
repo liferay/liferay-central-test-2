@@ -142,7 +142,6 @@ public class EditCategoryAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getScopeGroupId();
-
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
 		MBCategoryServiceUtil.deleteCategory(groupId, categoryId);
@@ -155,7 +154,6 @@ public class EditCategoryAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getScopeGroupId();
-
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
 		MBCategoryServiceUtil.subscribeCategory(groupId, categoryId);
@@ -168,7 +166,6 @@ public class EditCategoryAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getScopeGroupId();
-
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
 		MBCategoryServiceUtil.unsubscribeCategory(groupId, categoryId);

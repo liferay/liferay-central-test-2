@@ -145,8 +145,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			boolean mergeWithParentCategory, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		MBCategory category =
-			mbCategoryLocalService.getCategory(categoryId);
+		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
 
 		MBCategoryPermission.check(
 			getPermissionChecker(), category, ActionKeys.UPDATE);

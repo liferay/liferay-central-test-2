@@ -186,7 +186,6 @@ public class EditMessageAction extends PortletAction {
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		long groupId = themeDisplay.getScopeGroupId();
-
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 		long parentMessageId = ParamUtil.getLong(

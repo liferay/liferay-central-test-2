@@ -104,6 +104,44 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByG_C",
 			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_S = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_S = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_S",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_S = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_C_L = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_C_L",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Date.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_C_L = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_C_L",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Date.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_L = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_C_L",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Date.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_BY_G_C_S = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_C_S",
@@ -128,44 +166,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				Long.class.getName(), Long.class.getName(),
 				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_G_C_L = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_C_L",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Date.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_C_L = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_C_L",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Date.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_L = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_C_L",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Date.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_G_S = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_S",
-			new String[] { Long.class.getName(), Integer.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_S = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_S",
-			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_S = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_S",
-			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -947,13 +947,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<MBThread> findByG_C_S(long groupId, long categoryId, int status)
+	public List<MBThread> findByG_S(long groupId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId), new Integer(status)
+				new Long(groupId), new Integer(status)
 			};
 
-		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C_S,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -967,10 +967,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
 				query.append("mbThread.groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbThread.categoryId = ?");
 
 				query.append(" AND ");
 
@@ -989,8 +985,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				qPos.add(categoryId);
-
 				qPos.add(status);
 
 				list = q.list();
@@ -1005,8 +999,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_S,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_S, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1015,21 +1009,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public List<MBThread> findByG_C_S(long groupId, long categoryId,
-		int status, int start, int end) throws SystemException {
-		return findByG_C_S(groupId, categoryId, status, start, end, null);
+	public List<MBThread> findByG_S(long groupId, int status, int start, int end)
+		throws SystemException {
+		return findByG_S(groupId, status, start, end, null);
 	}
 
-	public List<MBThread> findByG_C_S(long groupId, long categoryId,
-		int status, int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<MBThread> findByG_S(long groupId, int status, int start,
+		int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId), new Integer(status),
+				new Long(groupId), new Integer(status),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_S,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1043,10 +1036,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
 				query.append("mbThread.groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbThread.categoryId = ?");
 
 				query.append(" AND ");
 
@@ -1089,8 +1078,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				qPos.add(categoryId);
-
 				qPos.add(status);
 
 				list = (List<MBThread>)QueryUtil.list(q, getDialect(), start,
@@ -1106,7 +1093,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_C_S,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_S,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1116,39 +1103,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public MBThread findByG_C_S_First(long groupId, long categoryId,
-		int status, OrderByComparator obc)
-		throws NoSuchThreadException, SystemException {
-		List<MBThread> list = findByG_C_S(groupId, categoryId, status, 0, 1, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No MBThread exists with the key {");
-
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("categoryId=" + categoryId);
-
-			msg.append(", ");
-			msg.append("status=" + status);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchThreadException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public MBThread findByG_C_S_Last(long groupId, long categoryId, int status,
+	public MBThread findByG_S_First(long groupId, int status,
 		OrderByComparator obc) throws NoSuchThreadException, SystemException {
-		int count = countByG_C_S(groupId, categoryId, status);
-
-		List<MBThread> list = findByG_C_S(groupId, categoryId, status,
-				count - 1, count, obc);
+		List<MBThread> list = findByG_S(groupId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
@@ -1156,9 +1113,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			msg.append("No MBThread exists with the key {");
 
 			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("categoryId=" + categoryId);
 
 			msg.append(", ");
 			msg.append("status=" + status);
@@ -1172,12 +1126,37 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public MBThread[] findByG_C_S_PrevAndNext(long threadId, long groupId,
-		long categoryId, int status, OrderByComparator obc)
+	public MBThread findByG_S_Last(long groupId, int status,
+		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		int count = countByG_S(groupId, status);
+
+		List<MBThread> list = findByG_S(groupId, status, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBThread exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBThread[] findByG_S_PrevAndNext(long threadId, long groupId,
+		int status, OrderByComparator obc)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
-		int count = countByG_C_S(groupId, categoryId, status);
+		int count = countByG_S(groupId, status);
 
 		Session session = null;
 
@@ -1189,10 +1168,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
 			query.append("mbThread.groupId = ?");
-
-			query.append(" AND ");
-
-			query.append("mbThread.categoryId = ?");
 
 			query.append(" AND ");
 
@@ -1234,8 +1209,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
-
-			qPos.add(categoryId);
 
 			qPos.add(status);
 
@@ -1594,13 +1567,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<MBThread> findByG_S(long groupId, int status)
+	public List<MBThread> findByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status)
+				new Long(groupId), new Long(categoryId), new Integer(status)
 			};
 
-		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_S,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1614,6 +1587,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
 				query.append("mbThread.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("mbThread.categoryId = ?");
 
 				query.append(" AND ");
 
@@ -1632,6 +1609,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
+				qPos.add(categoryId);
+
 				qPos.add(status);
 
 				list = q.list();
@@ -1646,8 +1625,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_S, finderArgs,
-					list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_S,
+					finderArgs, list);
 
 				closeSession(session);
 			}
@@ -1656,20 +1635,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public List<MBThread> findByG_S(long groupId, int status, int start, int end)
-		throws SystemException {
-		return findByG_S(groupId, status, start, end, null);
+	public List<MBThread> findByG_C_S(long groupId, long categoryId,
+		int status, int start, int end) throws SystemException {
+		return findByG_C_S(groupId, categoryId, status, start, end, null);
 	}
 
-	public List<MBThread> findByG_S(long groupId, int status, int start,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<MBThread> findByG_C_S(long groupId, long categoryId,
+		int status, int start, int end, OrderByComparator obc)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status),
+				new Long(groupId), new Long(categoryId), new Integer(status),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_S,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1683,6 +1663,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
 				query.append("mbThread.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("mbThread.categoryId = ?");
 
 				query.append(" AND ");
 
@@ -1725,6 +1709,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
+				qPos.add(categoryId);
+
 				qPos.add(status);
 
 				list = (List<MBThread>)QueryUtil.list(q, getDialect(), start,
@@ -1740,7 +1726,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_S,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_C_S,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1750,60 +1736,68 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public MBThread findByG_S_First(long groupId, int status,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
-		List<MBThread> list = findByG_S(groupId, status, 0, 1, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No MBThread exists with the key {");
-
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("status=" + status);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchThreadException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public MBThread findByG_S_Last(long groupId, int status,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
-		int count = countByG_S(groupId, status);
-
-		List<MBThread> list = findByG_S(groupId, status, count - 1, count, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No MBThread exists with the key {");
-
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("status=" + status);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchThreadException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public MBThread[] findByG_S_PrevAndNext(long threadId, long groupId,
+	public MBThread findByG_C_S_First(long groupId, long categoryId,
 		int status, OrderByComparator obc)
+		throws NoSuchThreadException, SystemException {
+		List<MBThread> list = findByG_C_S(groupId, categoryId, status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBThread exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("categoryId=" + categoryId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBThread findByG_C_S_Last(long groupId, long categoryId, int status,
+		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		int count = countByG_C_S(groupId, categoryId, status);
+
+		List<MBThread> list = findByG_C_S(groupId, categoryId, status,
+				count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBThread exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("categoryId=" + categoryId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBThread[] findByG_C_S_PrevAndNext(long threadId, long groupId,
+		long categoryId, int status, OrderByComparator obc)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
-		int count = countByG_S(groupId, status);
+		int count = countByG_C_S(groupId, categoryId, status);
 
 		Session session = null;
 
@@ -1815,6 +1809,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
 
 			query.append("mbThread.groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("mbThread.categoryId = ?");
 
 			query.append(" AND ");
 
@@ -1856,6 +1854,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+
+			qPos.add(categoryId);
 
 			qPos.add(status);
 
@@ -2018,9 +2018,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByG_C_S(long groupId, long categoryId, int status)
-		throws SystemException {
-		for (MBThread mbThread : findByG_C_S(groupId, categoryId, status)) {
+	public void removeByG_S(long groupId, int status) throws SystemException {
+		for (MBThread mbThread : findByG_S(groupId, status)) {
 			remove(mbThread);
 		}
 	}
@@ -2032,8 +2031,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByG_S(long groupId, int status) throws SystemException {
-		for (MBThread mbThread : findByG_S(groupId, status)) {
+	public void removeByG_C_S(long groupId, long categoryId, int status)
+		throws SystemException {
+		for (MBThread mbThread : findByG_C_S(groupId, categoryId, status)) {
 			remove(mbThread);
 		}
 	}
@@ -2147,13 +2147,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByG_C_S(long groupId, long categoryId, int status)
-		throws SystemException {
+	public int countByG_S(long groupId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId), new Integer(status)
+				new Long(groupId), new Integer(status)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_S,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
 				finderArgs, this);
 
 		if (count == null) {
@@ -2171,10 +2170,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("mbThread.categoryId = ?");
-
-				query.append(" AND ");
-
 				query.append("mbThread.status = ?");
 
 				query.append(" ");
@@ -2184,8 +2179,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(groupId);
-
-				qPos.add(categoryId);
 
 				qPos.add(status);
 
@@ -2199,8 +2192,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_S,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -2280,12 +2273,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByG_S(long groupId, int status) throws SystemException {
+	public int countByG_C_S(long groupId, long categoryId, int status)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Integer(status)
+				new Long(groupId), new Long(categoryId), new Integer(status)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_S,
 				finderArgs, this);
 
 		if (count == null) {
@@ -2303,6 +2297,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
+				query.append("mbThread.categoryId = ?");
+
+				query.append(" AND ");
+
 				query.append("mbThread.status = ?");
 
 				query.append(" ");
@@ -2312,6 +2310,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(groupId);
+
+				qPos.add(categoryId);
 
 				qPos.add(status);
 
@@ -2325,8 +2325,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
-					count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_S,
+					finderArgs, count);
 
 				closeSession(session);
 			}

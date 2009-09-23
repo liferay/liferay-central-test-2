@@ -65,8 +65,6 @@ public class MBCategoryFinderImpl
 		Session session = null;
 
 		try {
-			int retVal = 0;
-
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
@@ -81,13 +79,15 @@ public class MBCategoryFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
+			int count = 0;
+
 			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = itr.next();
+				Long l = itr.next();
 
-				if (count != null) {
-					retVal = count.intValue();
+				if (l != null) {
+					count = l.intValue();
 				}
 			}
 
@@ -98,12 +98,12 @@ public class MBCategoryFinderImpl
 					group.getCompanyId(), userId, MBCategory.class.getName(),
 					groupId);
 
-				retVal++;
+				count++;
 			}
 			catch (NoSuchSubscriptionException nsse) {
 			}
 
-			return retVal;
+			return count;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -153,15 +153,15 @@ public class MBCategoryFinderImpl
 						groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
 						StatusConstants.APPROVED);
 
-				MBCategory rootCategory = new MBCategoryImpl();
+				MBCategory category = new MBCategoryImpl();
 
-				rootCategory.setCompanyId(group.getCompanyId());
-				rootCategory.setName(group.getName());
-				rootCategory.setDescription(group.getDescription());
-				rootCategory.setThreadCount(threadCount);
-				rootCategory.setMessageCount(messageCount);
+				category.setCompanyId(group.getCompanyId());
+				category.setName(group.getName());
+				category.setDescription(group.getDescription());
+				category.setThreadCount(threadCount);
+				category.setMessageCount(messageCount);
 
-				list.add(rootCategory);
+				list.add(category);
 			}
 			catch (NoSuchSubscriptionException nsse) {
 			}

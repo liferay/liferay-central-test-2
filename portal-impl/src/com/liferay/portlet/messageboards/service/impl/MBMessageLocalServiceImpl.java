@@ -107,7 +107,7 @@ import org.apache.commons.lang.time.StopWatch;
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Mika Koivisto
  */
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
@@ -150,8 +150,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = mbCategoryLocalService.getSystemCategory();
 
-		long categoryId = category.getCategoryId();
 		long groupId = category.getGroupId();
+		long categoryId = category.getCategoryId();
 
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
@@ -324,8 +324,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				(categoryId !=
 					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
-				MBCategory category =
-					mbCategoryPersistence.findByPrimaryKey(categoryId);
+				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+					categoryId);
 
 				category.setThreadCount(category.getThreadCount() + 1);
 
@@ -375,7 +375,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (files.size() > 0) {
 			long companyId = message.getCompanyId();
 			String portletId = CompanyConstants.SYSTEM_STRING;
-			long groupId2 = GroupConstants.DEFAULT_PARENT_GROUP_ID;
+			long dlGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
@@ -399,7 +399,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				try {
 					dlService.addFile(
-						companyId, portletId, groupId2, repositoryId,
+						companyId, portletId, dlGroupId, repositoryId,
 						dirName + "/" + fileName, 0, StringPool.BLANK,
 						message.getModifiedDate(), new ServiceContext(), bytes);
 				}
@@ -456,8 +456,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if ((status == StatusConstants.APPROVED) &&
 			(categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
-			MBCategory category =
-				mbCategoryPersistence.findByPrimaryKey(categoryId);
+			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+				categoryId);
 
 			category.setMessageCount(category.getMessageCount() + 1);
 			category.setLastPostDate(now);
@@ -823,7 +823,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				groupId, categoryId, start, end);
 		}
 		else {
-			return mbMessagePersistence.findByG_CA_S(
+			return mbMessagePersistence.findByG_C_S(
 				groupId, categoryId, status, start, end);
 		}
 	}
@@ -838,7 +838,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				groupId, categoryId, start, end, obc);
 		}
 		else {
-			return mbMessagePersistence.findByG_CA_S(
+			return mbMessagePersistence.findByG_C_S(
 				groupId, categoryId, status, start, end, obc);
 		}
 	}
@@ -851,7 +851,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return mbMessagePersistence.countByG_C(groupId, categoryId);
 		}
 		else {
-			return mbMessagePersistence.countByG_CA_S(
+			return mbMessagePersistence.countByG_C_S(
 				groupId, categoryId, status);
 		}
 	}

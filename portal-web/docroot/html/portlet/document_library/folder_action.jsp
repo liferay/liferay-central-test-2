@@ -132,7 +132,7 @@ else {
 <div id="<portlet:namespace />webDav" style="display: none;">
 	<div class="portlet-document-library">
 		<liferay-ui:message key='<%= LanguageUtil.format(pageContext, "webdav-help", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/Accessing+the+Document+Library+with+WebDAV") %>' />
-		
+
 		<br /><br />
 
 		<div class="file-entry-field">
