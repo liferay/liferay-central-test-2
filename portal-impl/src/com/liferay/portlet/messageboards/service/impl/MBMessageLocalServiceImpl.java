@@ -107,7 +107,7 @@ import org.apache.commons.lang.time.StopWatch;
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug√©
  * @author Mika Koivisto
  */
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
