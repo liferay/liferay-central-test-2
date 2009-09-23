@@ -204,6 +204,8 @@
 
 .aui-form .aui-ctrl-holder.input-text-search {
 	float: left;
+	position: relative;
+	top: -2px;
 }
 
 .aui-form .aui-block-labels label em, .aui-form .aui-block-labels .label em {
