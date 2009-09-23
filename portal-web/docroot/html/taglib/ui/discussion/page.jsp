@@ -49,7 +49,7 @@ boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("lif
 
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
 
-MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, scopeGroupId, className, classPK, StatusConstants.APPROVED, threadView);
+MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK, StatusConstants.APPROVED, threadView);
 
 MBCategory category = messageDisplay.getCategory();
 MBThread thread = messageDisplay.getThread();

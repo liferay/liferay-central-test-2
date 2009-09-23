@@ -107,7 +107,7 @@ import org.apache.commons.lang.time.StopWatch;
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug√©
+ * @author Raymond Augé
  * @author Mika Koivisto
  */
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
@@ -896,18 +896,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
-			long userId, long groupId, String className, long classPK,
-			int status)
+			long userId, String className, long classPK, int status)
 		throws PortalException, SystemException {
 
 		return getDiscussionMessageDisplay(
-			userId, groupId, className, classPK, status,
+			userId, className, classPK, status,
 			MBThreadConstants.THREAD_VIEW_COMBINATION);
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
-			long userId, long groupId, String className, long classPK,
-			int status, String threadView)
+			long userId, String className, long classPK, int status,
+			String threadView)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -1767,7 +1766,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(
 			message.getCompanyId());
 
-		Group group = groupPersistence.findByPrimaryKey(message.getGroupId());
+		Group group = groupPersistence.findByPrimaryKey(
+			serviceContext.getScopeGroupId());
 
 		User user = userPersistence.findByPrimaryKey(message.getUserId());
 

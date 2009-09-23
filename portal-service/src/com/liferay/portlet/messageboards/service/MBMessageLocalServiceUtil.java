@@ -279,23 +279,22 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
-		long userId, long groupId, java.lang.String className, long classPK,
-		int status)
+		long userId, java.lang.String className, long classPK, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getDiscussionMessageDisplay(userId, groupId, className,
-			classPK, status);
+				   .getDiscussionMessageDisplay(userId, className, classPK,
+			status);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
-		long userId, long groupId, java.lang.String className, long classPK,
-		int status, java.lang.String threadView)
+		long userId, java.lang.String className, long classPK, int status,
+		java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getDiscussionMessageDisplay(userId, groupId, className,
-			classPK, status, threadView);
+				   .getDiscussionMessageDisplay(userId, className, classPK,
+			status, threadView);
 	}
 
 	public static int getDiscussionMessagesCount(long classNameId,

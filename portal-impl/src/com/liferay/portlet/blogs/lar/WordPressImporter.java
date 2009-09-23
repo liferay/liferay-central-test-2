@@ -62,7 +62,7 @@ import java.util.TimeZone;
 /**
  * <a href="WordPressImporter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augï¿½
+ * @author Raymond AugŽ
  */
 public class WordPressImporter {
 
@@ -316,8 +316,8 @@ public class WordPressImporter {
 
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-				userId, context.getGroupId(), BlogsEntry.class.getName(),
-				entry.getEntryId(), StatusConstants.APPROVED);
+				userId, BlogsEntry.class.getName(), entry.getEntryId(),
+				StatusConstants.APPROVED);
 
 		Map<Long, Long> messageIdMap = new HashMap<Long, Long>();
 
