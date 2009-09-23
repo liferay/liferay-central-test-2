@@ -74,8 +74,8 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
 		<c:if test="<%= category == null %>">
-			<div>
-				<div style="float: right;">
+			<div class="category-subscriptions">
+				<div class="category-subscription-types">
 					<liferay-ui:icon image="rss" url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&mbCategoryId=" + scopeGroupId + rssURLParams %>' label="<%= true %>" method="get" target="_blank" />
 
 					<c:if test="<%= MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.SUBSCRIBE) %>">
@@ -103,8 +103,6 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 						</c:choose>
 					</c:if>
 				</div>
-
-				<div style="clear: both;"></div>
 			</div>
 		</c:if>
 

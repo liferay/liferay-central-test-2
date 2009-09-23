@@ -181,6 +181,7 @@ td.user-info {
 	height: 100%;
 	width: 100%;
 }
+
 .portlet-message-boards .lfr-textarea.message-edit textarea {
 	height: 378px;
 	min-height: 100%;
@@ -194,4 +195,12 @@ td.user-info {
 .portlet-message-boards .taglib-flags {
 	float: left;
 	margin-left: 20px;
+}
+
+.portlet-message-boards .category-subscriptions {
+	overflow: hidden;
+}
+
+.portlet-message-boards .category-subscription-types {
+	float: right;
 }
