@@ -42,16 +42,14 @@ if ((folder == null) && (defaultFolderId != DLFolderConstants.DEFAULT_PARENT_FOL
 	}
 }
 
-request.setAttribute("view.jsp-folder", folder);
-request.setAttribute("view.jsp-folderId", folderId);
-
 int status = StatusConstants.APPROVED;
-int foldersCount = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
-int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
 
 if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
 	status = StatusConstants.ANY;
 }
+
+int foldersCount = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -60,6 +58,9 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/document_library/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", String.valueOf(folderId));
+
+request.setAttribute("view.jsp-folder", folder);
+request.setAttribute("view.jsp-folderId", folderId);
 %>
 
 <c:if test="<%= folder == null %>">
@@ -169,7 +170,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<c:choose>
-					<c:when test="<%= showTabs && showSubfolders %>">
+					<c:when test="<%= showSubfolders && showTabs %>">
 						<liferay-ui:panel id='documentsPanel' title='<%= LanguageUtil.get(pageContext, "documents") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 							<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
 						</liferay-ui:panel>

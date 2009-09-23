@@ -32,9 +32,9 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 DLFolder folder = null;
 long folderId = 0;
 
-String modelResource;
-String modelResourceDescription;
-String resourcePrimKey;
+String modelResource = null;
+String modelResourceDescription = null;
+String resourcePrimKey = null;
 
 boolean view = false;
 

@@ -28,7 +28,6 @@
 	headerNames="<%= StringUtil.merge(fileEntryColumns) %>"
 	iteratorURL="<%= portletURL %>"
 >
-
 	<liferay-ui:search-container-results>
 
 		<%
