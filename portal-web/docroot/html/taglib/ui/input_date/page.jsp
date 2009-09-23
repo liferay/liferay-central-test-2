@@ -73,12 +73,15 @@ if (dateFormatPattern.indexOf("y") == 0) {
 		function(A) {
 			var datePicker = new A.DatePickerSelect(
 				{
-					dateFormat: <%= dateFormatMDY ? "'%m/%d/%Y'" : "'%Y/%m/%d'" %>,
+					appendOrder: <%= dateFormatMDY ? "[ 'm', 'd', 'y' ]" : "[ 'y', 'm', 'd' ]" %>,
+					dateFormat: '%m/%e/%Y',
 					dayFieldName: '<%= dayParam %>',
 					displayBoundingBox: '#<%= randomNamespace %>displayDate',
 					monthField: '#<%= monthParam %>',
 					monthFieldName: '<%= monthParam %>',
 					yearFieldName: '<%= yearParam %>',
+					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>],
+
 					on: {
 						select: function(event) {
 							var formatted = event.date.formatted[0];
