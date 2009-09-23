@@ -26,7 +26,7 @@ Liferay.Portal.Tabs = {
 
 	var elementsCache = {};
 
-	AUI().use(
+	AUI().ready(
 		'tooltip',
 		'simulate',
 		function(A) {
