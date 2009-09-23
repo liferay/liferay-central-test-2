@@ -133,4 +133,66 @@ else {
 
 		<liferay-ui:icon image="add_instance"  message="add-shortcut" url="<%= editFileShortcutURL %>" />
 	</c:if>
+
+	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
+		<liferay-ui:icon cssClass="webdav-action" image="desktop"  message="access-from-my-desktop" url="javascript:;" />
+	</c:if>
 </liferay-ui:icon-menu>
+
+
+<div id="<portlet:namespace />webDav" style="display:none">
+	<div class="portlet-document-library">
+		<liferay-ui:message key="webdav-help" /> <br /><br />
+
+		<div class="file-entry-field">
+			<label><liferay-ui:message key="webdav-url" /></label>
+
+			<%
+			StringBuffer sb = new StringBuffer();
+
+			if (folder != null) {
+				DLFolder curFolder = folder;
+
+				while (true) {
+					sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+					sb.insert(0, StringPool.SLASH);
+
+					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+						break;
+					}
+					else {
+						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					}
+				}
+			}
+
+			Group group = themeDisplay.getScopeGroup();
+			%>
+
+			<liferay-ui:input-resource
+				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
+			/>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+		AUI().use('dialog', function(A) {
+			A.on('click', function(event) {
+				var popup = new A.Dialog(
+					{
+						bodyContent: A.get('#<portlet:namespace />webDav').html(),
+						centered: true,
+						destroyOnClose: true,
+						title: '<liferay-ui:message key="access-from-my-desktop" />',
+						modal: true,
+						width: 500
+					}
+				)
+				.render();
+
+				event.preventDefault();
+			},
+			'.webdav-action');
+		});
+</script>

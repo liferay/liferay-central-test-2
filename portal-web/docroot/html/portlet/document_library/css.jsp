@@ -41,7 +41,7 @@
 
 .portlet-document-library .file-entry-column-last .file-entry-column-content {
 	border: 1px solid #88C5D9;
-	padding: 1em;
+	padding: 0.7em;
 }
 
 .portlet-document-library .custom-attributes label {

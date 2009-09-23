@@ -237,36 +237,36 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<div class="file-entry-field">
-			<label><liferay-ui:message key="webdav-url" /></label>
+			<aui:field-wrapper helpMessage="webdav-help" label="webdav-url">
+				<%
+				StringBuffer sbf = new StringBuffer();
 
-			<%
-			StringBuffer sbf = new StringBuffer();
+				if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+					DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-			if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
+					while (true) {
+						sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+						sbf.insert(0, StringPool.SLASH);
 
-				while (true) {
-					sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-					sbf.insert(0, StringPool.SLASH);
-
-					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-						break;
-					}
-					else {
-						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+						if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+							break;
+						}
+						else {
+							curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+						}
 					}
 				}
-			}
 
-			sbf.append(StringPool.SLASH);
-			sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
+				sbf.append(StringPool.SLASH);
+				sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
 
-			Group group = themeDisplay.getScopeGroup();
-			%>
+				Group group = themeDisplay.getScopeGroup();
+				%>
 
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sbf.toString() %>'
-			/>
+				<liferay-ui:input-resource
+					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sbf.toString() %>'
+				/>
+			</aui:field-wrapper>
 		</div>
 	</c:if>
 </aui:column>

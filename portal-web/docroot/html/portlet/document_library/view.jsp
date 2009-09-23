@@ -179,37 +179,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					</c:otherwise>
 				</c:choose>
 			</liferay-ui:panel-container>
-
-			<%
-			StringBuffer sb = new StringBuffer();
-
-			if (folder != null) {
-				DLFolder curFolder = folder;
-
-				while (true) {
-					sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-					sb.insert(0, StringPool.SLASH);
-
-					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-						break;
-					}
-					else {
-						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-					}
-				}
-
-				DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
-
-				if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-					PortalUtil.setPageSubtitle(folder.getName(), request);
-					PortalUtil.setPageDescription(folder.getDescription(), request);
-				}
-			}
-			%>
-
-			<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-				<liferay-ui:webdav path='<%= "/document_library" + sb.toString() %>' />
-			</c:if>
 		</aui:column>
 
 		<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
@@ -231,6 +200,18 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 		</aui:column>
+
+		<%
+		if (folder != null) {
+			DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+
+			if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+				PortalUtil.setPageSubtitle(folder.getName(), request);
+				PortalUtil.setPageDescription(folder.getDescription(), request);
+			}
+		}
+		%>
+
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-documents") || tabs1.equals("recent-documents") %>'>
 
