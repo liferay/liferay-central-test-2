@@ -26,45 +26,6 @@
 
 <%-- Portal JavaScript --%>
 
-<c:if test="<%= themeDisplay.isIncludeCalendarJs() %>">
-
-	<%
-	String[] calendarDays = new String[CalendarUtil.DAYS_ABBREVIATION.length];
-
-	Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-	for (int i = 0; i < CalendarUtil.DAYS_ABBREVIATION.length; i++) {
-		calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[i]);
-	}
-	%>
-
-	<script type="text/javascript">
-		// <![CDATA[
-			(function() {
-				var defaultConfig = YAHOO.widget.Calendar._DEFAULT_CONFIG;
-
-				defaultConfig.MONTHS_LONG.value = <%= JS.toScript(CalendarUtil.getMonths(locale)) %>;
-				defaultConfig.MONTHS_SHORT.value = <%= JS.toScript(CalendarUtil.getMonths(locale, "MMM")) %>;
-
-				defaultConfig.WEEKDAYS_LONG.value = <%= JS.toScript(CalendarUtil.getDays(locale)) %>;
-				defaultConfig.WEEKDAYS_MEDIUM.value = <%= JS.toScript(CalendarUtil.getDays(locale, "EEE")) %>;
-				defaultConfig.WEEKDAYS_SHORT.value = <%= JS.toScript(CalendarUtil.getDays(locale, "EE")) %>;
-				defaultConfig.WEEKDAYS_1CHAR.value = <%= JS.toScript(calendarDays) %>;
-
-				defaultConfig.START_WEEKDAY.value = <%= (cal.getFirstDayOfWeek() - 1) % 7 %>;
-
-				defaultConfig.NAV.value = true;
-
-				defaultConfig.STRINGS.value = {
-					close: '<%= UnicodeLanguageUtil.get(pageContext, "close") %>',
-					nextMonth: '<%= UnicodeLanguageUtil.get(pageContext, "next") %>',
-					previousMonth: '<%= UnicodeLanguageUtil.get(pageContext, "previous") %>'
-				};
-			})();
-		// ]]>
-	</script>
-</c:if>
-
 <c:if test="<%= themeDisplay.isIncludePortletCssJs() %>">
 
 	<%
