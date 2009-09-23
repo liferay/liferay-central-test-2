@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListTree;
 import com.liferay.portal.kernel.util.TreeNode;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBCategoryDisplay;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
@@ -171,6 +172,12 @@ public class MBCategoryDisplayImpl implements MBCategoryDisplay {
 
 		if (categories == null) {
 			return;
+		}
+
+		if (category.getCategoryId() ==
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
+			_categoryNodesMap.put(category.getCategoryId(), node);
 		}
 
 		for (MBCategory curCategory : categories) {

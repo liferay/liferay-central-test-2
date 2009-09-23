@@ -386,7 +386,7 @@ public class MBUtil {
 	}
 
 	public static String getMailingListAddress(
-		long categoryId, long messageId, String mx,
+		long groupId, long categoryId, long messageId, String mx,
 		String defaultMailingListAddress) {
 
 		if (POP_SERVER_SUBDOMAIN_LENGTH <= 0) {
@@ -395,7 +395,7 @@ public class MBUtil {
 			try {
 				MBMailingList mailingList =
 					MBMailingListLocalServiceUtil.getCategoryMailingList(
-						categoryId);
+						groupId, categoryId);
 
 				mailingListAddress = mailingList.getEmailAddress();
 			}

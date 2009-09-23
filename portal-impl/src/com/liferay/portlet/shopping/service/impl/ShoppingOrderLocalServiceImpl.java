@@ -160,9 +160,8 @@ public class ShoppingOrderLocalServiceImpl
 
 			if (PropsValues.SHOPPING_ORDER_COMMENTS_ENABLED) {
 				mbMessageLocalService.addDiscussionMessage(
-					userId, order.getUserName(),
-					ShoppingOrder.class.getName(), orderId,
-					StatusConstants.APPROVED);
+					userId, order.getUserName(), ShoppingOrder.class.getName(),
+					orderId, StatusConstants.APPROVED);
 			}
 		}
 

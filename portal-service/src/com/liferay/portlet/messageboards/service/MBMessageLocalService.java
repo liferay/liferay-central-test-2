@@ -114,7 +114,7 @@ public interface MBMessageLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, java.lang.String userName, long categoryId,
+		long userId, java.lang.String userName, long groupId, long categoryId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, int status,
@@ -123,8 +123,9 @@ public interface MBMessageLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, java.lang.String userName, long categoryId, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body,
+		long userId, java.lang.String userName, long groupId, long categoryId,
+		long threadId, long parentMessageId, java.lang.String subject,
+		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -133,7 +134,7 @@ public interface MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String uuid, long userId, java.lang.String userName,
-		long categoryId, long threadId, long parentMessageId,
+		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, int status,
@@ -185,18 +186,18 @@ public interface MBMessageLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int status, int start, int end)
+		long groupId, long categoryId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int status, int start, int end,
+		long groupId, long categoryId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCategoryMessagesCount(long categoryId, int status)
-		throws com.liferay.portal.SystemException;
+	public int getCategoryMessagesCount(long groupId, long categoryId,
+		int status) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCompanyMessages(
@@ -215,14 +216,15 @@ public interface MBMessageLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
-		long userId, java.lang.String className, long classPK, int status)
+		long userId, long groupId, java.lang.String className, long classPK,
+		int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
-		long userId, java.lang.String className, long classPK, int status,
-		java.lang.String threadView)
+		long userId, long groupId, java.lang.String className, long classPK,
+		int status, java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

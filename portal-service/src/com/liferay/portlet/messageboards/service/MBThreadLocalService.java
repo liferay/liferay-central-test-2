@@ -108,12 +108,12 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteThreads(long categoryId)
+	public void deleteThreads(long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCategoryThreadsCount(long categoryId, int status)
+	public int getCategoryThreadsCount(long groupId, long categoryId, int status)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -166,15 +166,15 @@ public interface MBThreadLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(
-		long categoryId, int status, int start, int end)
+		long groupId, long categoryId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getThreadsCount(long categoryId, int status)
+	public int getThreadsCount(long groupId, long categoryId, int status)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(
-		long categoryId, long threadId)
+		long groupId, long categoryId, long threadId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

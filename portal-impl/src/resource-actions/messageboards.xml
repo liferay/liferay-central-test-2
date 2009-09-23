@@ -25,13 +25,20 @@
 			<portlet-name>19</portlet-name>
 		</portlet-ref>
 		<supports>
+			<action-key>ADD_FILE</action-key>	
 			<action-key>ADD_CATEGORY</action-key>
 			<action-key>BAN_USER</action-key>
+			<action-key>MOVE_THREAD</action-key>
+			<action-key>REPLY_TO_MESSAGE</action-key>
+			<action-key>SUBSCRIBE</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_CATEGORY</action-key>
+			<action-key>ADD_FILE</action-key>
+			<action-key>ADD_MESSAGE</action-key>
+			<action-key>SUBSCRIBE</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>

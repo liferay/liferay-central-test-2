@@ -92,19 +92,24 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	public MBCategory getCategory() {
 		MBCategory category = null;
 
-		try {
-			if (getCategoryId() == CompanyConstants.SYSTEM) {
-				category = MBCategoryLocalServiceUtil.getSystemCategory();
+		if (getCategoryId() > 0) {
+			try {
+				if (getCategoryId() == CompanyConstants.SYSTEM) {
+					category = MBCategoryLocalServiceUtil.getSystemCategory();
+				}
+				else {
+					category = MBCategoryLocalServiceUtil.getCategory(
+						getCategoryId());
+				}
 			}
-			else {
-				category = MBCategoryLocalServiceUtil.getCategory(
-					getCategoryId());
+			catch (Exception e) {
+				category = new MBCategoryImpl();
+
+				_log.error(e);
 			}
 		}
-		catch (Exception e) {
+		else {
 			category = new MBCategoryImpl();
-
-			_log.error(e);
 		}
 
 		return category;

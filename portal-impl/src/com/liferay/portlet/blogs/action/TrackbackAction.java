@@ -96,6 +96,8 @@ public class TrackbackAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long groupId = themeDisplay.getScopeGroupId();
+
 		String title = ParamUtil.getString(actionRequest, "title");
 		String excerpt = ParamUtil.getString(actionRequest, "excerpt");
 		String url = ParamUtil.getString(actionRequest, "url");
@@ -164,7 +166,7 @@ public class TrackbackAction extends PortletAction {
 
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-				userId, className, classPK, StatusConstants.APPROVED);
+				userId, groupId, className, classPK, StatusConstants.APPROVED);
 
 		MBThread thread = messageDisplay.getThread();
 

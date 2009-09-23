@@ -234,11 +234,11 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void subscribeCategory(long userId, long categoryId)
+	public void subscribeCategory(long userId, long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void unsubscribeCategory(long userId, long categoryId)
+	public void unsubscribeCategory(long userId, long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

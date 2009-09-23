@@ -22,16 +22,26 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
@@ -40,7 +50,7 @@ import java.util.List;
 /**
  * <a href="MBCategoryFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class MBCategoryFinderImpl
 	extends BasePersistenceImpl implements MBCategoryFinder {
@@ -55,6 +65,8 @@ public class MBCategoryFinderImpl
 		Session session = null;
 
 		try {
+			int retVal = 0;
+
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
@@ -75,11 +87,23 @@ public class MBCategoryFinderImpl
 				Long count = itr.next();
 
 				if (count != null) {
-					return count.intValue();
+					retVal = count.intValue();
 				}
 			}
 
-			return 0;
+			try {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				SubscriptionLocalServiceUtil.getSubscription(
+					group.getCompanyId(), userId, MBCategory.class.getName(),
+					groupId);
+
+				retVal++;
+			}
+			catch (NoSuchSubscriptionException nsse) {
+			}
+
+			return retVal;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -110,8 +134,40 @@ public class MBCategoryFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return (List<MBCategory>)QueryUtil.list(
-				q, getDialect(), start, end);
+			List<MBCategory> list = (List<MBCategory>)QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, false);
+
+			try {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				SubscriptionLocalServiceUtil.getSubscription(
+					group.getCompanyId(), userId, MBCategory.class.getName(),
+					groupId);
+
+				int threadCount =
+					MBThreadLocalServiceUtil.getCategoryThreadsCount(
+						groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
+						StatusConstants.APPROVED);
+				int messageCount =
+					MBMessageLocalServiceUtil.getCategoryMessagesCount(
+						groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
+						StatusConstants.APPROVED);
+
+				MBCategory rootCategory = new MBCategoryImpl();
+
+				rootCategory.setCompanyId(group.getCompanyId());
+				rootCategory.setName(group.getName());
+				rootCategory.setDescription(group.getDescription());
+				rootCategory.setThreadCount(threadCount);
+				rootCategory.setMessageCount(messageCount);
+
+				list.add(rootCategory);
+			}
+			catch (NoSuchSubscriptionException nsse) {
+			}
+
+			return new UnmodifiableList<MBCategory>(
+				ListUtil.subList(list, start, end));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

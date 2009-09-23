@@ -316,8 +316,8 @@ public class WordPressImporter {
 
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-				userId, BlogsEntry.class.getName(), entry.getEntryId(),
-				StatusConstants.APPROVED);
+				userId, context.getGroupId(), BlogsEntry.class.getName(),
+				entry.getEntryId(), StatusConstants.APPROVED);
 
 		Map<Long, Long> messageIdMap = new HashMap<Long, Long>();
 

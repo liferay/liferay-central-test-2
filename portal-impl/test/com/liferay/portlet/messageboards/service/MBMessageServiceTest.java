@@ -88,7 +88,8 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 	public void tearDown() throws Exception {
 		if (_category != null) {
-			MBCategoryServiceUtil.deleteCategory(_category.getCategoryId());
+			MBCategoryServiceUtil.deleteCategory(
+				_category.getGroupId(), _category.getCategoryId());
 		}
 
 		super.tearDown();
@@ -155,8 +156,9 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 			serviceContext.setAddGuestPermissions(true);
 
 			MBMessageServiceUtil.addMessage(
-				_category.getCategoryId(), _subject, body, files, anonymous,
-				priority, StatusConstants.APPROVED, serviceContext);
+				_category.getGroupId(), _category.getCategoryId(), _subject,
+				body, files, anonymous, priority, StatusConstants.APPROVED,
+				serviceContext);
 		}
 
 		private String _subject;

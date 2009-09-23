@@ -101,7 +101,7 @@ public interface MBMailingListLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMailingList addMailingList(
-		java.lang.String uuid, long userId, long categoryId,
+		java.lang.String uuid, long userId, long groupId, long categoryId,
 		java.lang.String emailAddress, java.lang.String inProtocol,
 		java.lang.String inServerName, int inServerPort, boolean inUseSSL,
 		java.lang.String inUserName, java.lang.String inPassword,
@@ -112,7 +112,7 @@ public interface MBMailingListLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteCategoryMailingList(long categoryId)
+	public void deleteCategoryMailingList(long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -127,7 +127,7 @@ public interface MBMailingListLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMailingList getCategoryMailingList(
-		long categoryId)
+		long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

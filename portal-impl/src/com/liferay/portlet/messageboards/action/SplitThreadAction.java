@@ -168,10 +168,11 @@ public class SplitThreadAction extends PortletAction {
 			serviceContext.setAddGuestPermissions(true);
 
 			MBMessageServiceUtil.addMessage(
-				message.getCategoryId(), oldThreadId, oldParentMessageId,
-				subject, body, new ArrayList<ObjectValuePair<String, byte[]>>(),
-				false, MBThreadConstants.PRIORITY_NOT_GIVEN,
-				StatusConstants.APPROVED, serviceContext);
+				message.getGroupId(), message.getCategoryId(), oldThreadId,
+				oldParentMessageId, subject, body,
+				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
+				MBThreadConstants.PRIORITY_NOT_GIVEN, StatusConstants.APPROVED,
+				serviceContext);
 		}
 
 		PortletURL portletURL =

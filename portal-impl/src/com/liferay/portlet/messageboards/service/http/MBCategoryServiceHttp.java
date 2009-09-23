@@ -212,14 +212,16 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static void deleteCategory(HttpPrincipal httpPrincipal,
-		long categoryId)
+		long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(categoryId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"deleteCategory", new Object[] { paramObj0 });
+					"deleteCategory", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -357,14 +359,16 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static void subscribeCategory(HttpPrincipal httpPrincipal,
-		long categoryId)
+		long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(categoryId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"subscribeCategory", new Object[] { paramObj0 });
+					"subscribeCategory", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -389,14 +393,16 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static void unsubscribeCategory(HttpPrincipal httpPrincipal,
-		long categoryId)
+		long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(categoryId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"unsubscribeCategory", new Object[] { paramObj0 });
+					"unsubscribeCategory", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

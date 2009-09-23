@@ -152,25 +152,27 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		mbThreadPersistence.remove(thread);
 	}
 
-	public void deleteThreads(long categoryId)
+	public void deleteThreads(long groupId, long categoryId)
 		throws PortalException, SystemException {
 
-		List<MBThread> threads = mbThreadPersistence.findByCategoryId(
-			categoryId);
+		List<MBThread> threads = mbThreadPersistence.findByG_C(
+			groupId, categoryId);
 
 		for (MBThread thread : threads) {
 			deleteThread(thread);
 		}
 	}
 
-	public int getCategoryThreadsCount(long categoryId, int status)
+	public int getCategoryThreadsCount(
+			long groupId, long categoryId, int status)
 		throws SystemException {
 
 		if (status == StatusConstants.ANY) {
-			return mbThreadPersistence.countByCategoryId(categoryId);
+			return mbThreadPersistence.countByG_C(groupId, categoryId);
 		}
 		else {
-			return mbThreadPersistence.countByC_S(categoryId, status);
+			return mbThreadPersistence.countByG_C_S(
+				groupId, categoryId, status);
 		}
 	}
 
@@ -309,30 +311,32 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	public List<MBThread> getThreads(
-			long categoryId, int status, int start, int end)
+			long groupId, long categoryId, int status, int start, int end)
 		throws SystemException {
 
 		if (status == StatusConstants.ANY) {
-			return mbThreadPersistence.findByCategoryId(categoryId, start, end);
+			return mbThreadPersistence.findByG_C(
+				groupId, categoryId, start, end);
 		}
 		else {
-			return mbThreadPersistence.findByC_S(
-				categoryId, status, start, end);
+			return mbThreadPersistence.findByG_C_S(
+				groupId, categoryId, status, start, end);
 		}
 	}
 
-	public int getThreadsCount(long categoryId, int status)
+	public int getThreadsCount(long groupId, long categoryId, int status)
 		throws SystemException {
 
 		if (status == StatusConstants.ANY) {
-			return mbThreadPersistence.countByCategoryId(categoryId);
+			return mbThreadPersistence.countByG_C(groupId, categoryId);
 		}
 		else {
-			return mbThreadPersistence.countByC_S(categoryId, status);
+			return mbThreadPersistence.countByG_C_S(
+				groupId, categoryId, status);
 		}
 	}
 
-	public MBThread moveThread(long categoryId, long threadId)
+	public MBThread moveThread(long groupId, long categoryId, long threadId)
 		throws PortalException, SystemException {
 
 		MBThread thread = mbThreadPersistence.findByPrimaryKey(
@@ -348,8 +352,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Messages
 
-		List<MBMessage> messages = mbMessagePersistence.findByC_T(
-			oldCategoryId, thread.getThreadId());
+		List<MBMessage> messages = mbMessagePersistence.findByG_C_T(
+			groupId, oldCategoryId, thread.getThreadId());
 
 		for (MBMessage message : messages) {
 			message.setCategoryId(category.getCategoryId());

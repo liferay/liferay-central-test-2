@@ -165,7 +165,7 @@
 					</c:if>
 				</div>
 
-				<c:if test="<%= editable && (MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, category, ActionKeys.REPLY_TO_MESSAGE)) %>">
+				<c:if test="<%= editable && (MBCategoryPermission.contains(permissionChecker, scopeGroupId, category.getCategoryId(), ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, scopeGroupId, category.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE)) %>">
 					<ul class="edit-controls lfr-component">
 
 						<%
@@ -483,7 +483,7 @@
 						</li>
 					</c:if>
 
-					<c:if test="<%= (message.getParentMessageId() != MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
+					<c:if test="<%= (message.getParentMessageId() != MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) && MBCategoryPermission.contains(permissionChecker, scopeGroupId, category.getCategoryId(), ActionKeys.MOVE_THREAD) %>">
 						<li>
 							<portlet:renderURL var="splitThreadURL">
 								<portlet:param name="struts_action" value="/message_boards/split_thread" />

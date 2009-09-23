@@ -31,7 +31,9 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.MailingListEmailAddressException;
 import com.liferay.portlet.messageboards.MailingListInServerNameException;
@@ -136,25 +138,40 @@ public class EditCategoryAction extends PortletAction {
 	protected void deleteCategory(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
+
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
-		MBCategoryServiceUtil.deleteCategory(categoryId);
+		MBCategoryServiceUtil.deleteCategory(groupId, categoryId);
 	}
 
 	protected void subscribeCategory(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
+
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
-		MBCategoryServiceUtil.subscribeCategory(categoryId);
+		MBCategoryServiceUtil.subscribeCategory(groupId, categoryId);
 	}
 
 	protected void unsubscribeCategory(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
+
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
-		MBCategoryServiceUtil.unsubscribeCategory(categoryId);
+		MBCategoryServiceUtil.unsubscribeCategory(groupId, categoryId);
 	}
 
 	protected void updateCategory(ActionRequest actionRequest)

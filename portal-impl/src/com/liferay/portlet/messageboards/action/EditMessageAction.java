@@ -38,8 +38,10 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.messageboards.MessageBodyException;
@@ -178,7 +180,12 @@ public class EditMessageAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
+
+		long groupId = themeDisplay.getScopeGroupId();
 
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
@@ -229,8 +236,8 @@ public class EditMessageAction extends PortletAction {
 				// Post new thread
 
 				message = MBMessageServiceUtil.addMessage(
-					categoryId, subject, body, files, anonymous, priority,
-					StatusConstants.APPROVED, serviceContext);
+					groupId, categoryId, subject, body, files, anonymous,
+					priority, StatusConstants.APPROVED, serviceContext);
 
 				if (question) {
 					MBMessageFlagLocalServiceUtil.addQuestionFlag(
@@ -242,8 +249,8 @@ public class EditMessageAction extends PortletAction {
 				// Post reply
 
 				message = MBMessageServiceUtil.addMessage(
-					categoryId, threadId, parentMessageId, subject, body, files,
-					anonymous, priority, StatusConstants.APPROVED,
+					groupId, categoryId, threadId, parentMessageId, subject,
+					body, files, anonymous, priority, StatusConstants.APPROVED,
 					serviceContext);
 			}
 		}

@@ -37,8 +37,10 @@ import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
@@ -120,11 +122,24 @@ public class MessageListenerImpl implements MessageListener {
 				_log.debug("Message id " + messageId);
 			}
 
+			long groupId = 0;
 			long categoryId = getCategoryId(messageId);
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Category id " + categoryId);
-			}
+            try {
+            	MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+            		categoryId);
+
+            	groupId = category.getGroupId();
+         	}
+         	catch (NoSuchCategoryException nsce) {
+         		groupId = categoryId;
+         		categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
+         	}
+
+         	 if (_log.isDebugEnabled()) {
+         		 _log.debug("Group id " + groupId);
+         		 _log.debug("Category id " + categoryId);
+         	 }
 
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
 				company.getCompanyId(), from);
@@ -169,13 +184,13 @@ public class MessageListenerImpl implements MessageListener {
 
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(
-					categoryId, subject, collector.getBody(),
+					groupId, categoryId, subject, collector.getBody(),
 					collector.getFiles(), false, 0.0, StatusConstants.APPROVED,
 					serviceContext);
 			}
 			else {
 				MBMessageServiceUtil.addMessage(
-					categoryId, parentMessage.getThreadId(),
+					groupId, categoryId, parentMessage.getThreadId(),
 					parentMessage.getMessageId(), subject, collector.getBody(),
 					collector.getFiles(), false, 0.0, StatusConstants.APPROVED,
 					serviceContext);

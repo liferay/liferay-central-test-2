@@ -122,8 +122,8 @@ public class RSSAction extends Action {
 						"&mbCategoryId=" + categoryId;
 
 			rss = MBMessageServiceUtil.getCategoryMessagesRSS(
-				categoryId, StatusConstants.APPROVED, max, type, version,
-				displayStyle, feedURL, entryURL, themeDisplay);
+				groupId, categoryId, StatusConstants.APPROVED, max, type,
+				version, displayStyle, feedURL, entryURL, themeDisplay);
 		}
 		else if (threadId > 0) {
 			String feedURL =

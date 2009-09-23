@@ -271,8 +271,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		List<MBMessage> messages = MBMessageUtil.findByCategoryId(
-			category.getCategoryId());
+		List<MBMessage> messages = MBMessageUtil.findByG_C(
+			category.getGroupId(), category.getCategoryId());
 
 		for (MBMessage message : messages) {
 			exportMessage(
@@ -671,8 +671,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 				catch (NoSuchMessageException nsme) {
 					existingMessage = MBMessageLocalServiceUtil.addMessage(
-						message.getUuid(), userId, userName, categoryId,
-						threadId, parentMessageId, message.getSubject(),
+						message.getUuid(), userId, userName,
+						message.getGroupId(), categoryId, threadId,
+						parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
 						message.getPriority(), message.getStatus(),
 						serviceContext);
@@ -680,10 +681,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				existingMessage = MBMessageLocalServiceUtil.addMessage(
-					userId, userName, categoryId, threadId, parentMessageId,
-					message.getSubject(), message.getBody(), files,
-					message.getAnonymous(), message.getPriority(),
-					message.getStatus(), serviceContext);
+					userId, userName, message.getGroupId(), categoryId,
+					threadId, parentMessageId, message.getSubject(),
+					message.getBody(), files, message.getAnonymous(),
+					message.getPriority(), message.getStatus(), serviceContext);
 			}
 
 			threadPKs.put(message.getThreadId(), existingMessage.getThreadId());

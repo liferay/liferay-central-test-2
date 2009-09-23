@@ -319,7 +319,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 		else if (name.equals(MBCategory.class.getName())) {
 			MBCategoryPermission.check(
-				permissionChecker, GetterUtil.getLong(primKey),
+				permissionChecker, groupId, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(PollsQuestion.class.getName())) {
