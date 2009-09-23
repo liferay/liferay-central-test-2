@@ -803,10 +803,12 @@ public class SourceFormatter {
 		ds.setExcludes(
 			new String[] {
 				"**\\model\\*Clp.java", "**\\model\\*Model.java",
-				"**\\model\\*Soap.java", "**\\model\\impl\\*ModelImpl.java",
+				"**\\model\\*Soap.java", "**\\model\\*Wrapper.java",
+				"**\\model\\impl\\*ModelImpl.java",
 				"**\\service\\*Service.java", "**\\service\\*ServiceClp.java",
 				"**\\service\\*ServiceFactory.java",
 				"**\\service\\*ServiceUtil.java",
+				"**\\service\\*ServiceWrapper.java",
 				"**\\service\\ClpSerializer.java",
 				"**\\service\\base\\*ServiceBaseImpl.java",
 				"**\\service\\http\\*JSONSerializer.java",
@@ -846,6 +848,7 @@ public class SourceFormatter {
 				"**\\*_IW.java", "**\\XHTMLComplianceFormatter.java",
 				"**\\portal-service\\**\\model\\*Model.java",
 				"**\\portal-service\\**\\model\\*Soap.java",
+				"**\\portal-service\\**\\model\\*Wrapper.java",
 				"**\\model\\impl\\*ModelImpl.java",
 				"**\\portal\\service\\**", "**\\portal-client\\**",
 				"**\\portal-web\\classes\\**\\*.java",
