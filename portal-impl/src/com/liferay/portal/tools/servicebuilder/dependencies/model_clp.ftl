@@ -6,28 +6,24 @@ package ${packagePath}.model;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.LocalizationUtil;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.util.Date;
-
-<#if entity.hasLocalizedColumn()>
-	import com.liferay.portal.kernel.language.LanguageUtil;
-	import com.liferay.portal.kernel.util.LocaleUtil;
-	import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-	import com.liferay.portal.kernel.util.Validator;
-	import com.liferay.util.LocalizationUtil;
-
-	import java.util.Locale;
-	import java.util.Map;
-</#if>
+import java.util.Locale;
+import java.util.Map;
 
 public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements ${entity.name} {
 

@@ -225,6 +225,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.model_hints_xml=" + _TPL_ROOT + "model_hints_xml.ftl\n"+
 				"\t-Dservice.tpl.model_impl=" + _TPL_ROOT + "model_impl.ftl\n"+
 				"\t-Dservice.tpl.model_soap=" + _TPL_ROOT + "model_soap.ftl\n"+
+				"\t-Dservice.tpl.model_wrapper=" + _TPL_ROOT + "model_wrapper.ftl\n"+
 				"\t-Dservice.tpl.persistence=" + _TPL_ROOT + "persistence.ftl\n"+
 				"\t-Dservice.tpl.persistence_impl=" + _TPL_ROOT + "persistence_impl.ftl\n"+
 				"\t-Dservice.tpl.persistence_util=" + _TPL_ROOT + "persistence_util.ftl\n"+
@@ -241,6 +242,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.service_json_serializer=" + _TPL_ROOT + "service_json_serializer.ftl\n"+
 				"\t-Dservice.tpl.service_soap=" + _TPL_ROOT + "service_soap.ftl\n"+
 				"\t-Dservice.tpl.service_util=" + _TPL_ROOT + "service_util.ftl\n"+
+				"\t-Dservice.tpl.service_wrapper=" + _TPL_ROOT + "service_wrapper.ftl\n"+
 				"\t-Dservice.tpl.spring_base_xml=" + _TPL_ROOT + "spring_base_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_dynamic_data_source_xml=" + _TPL_ROOT + "spring_dynamic_data_source_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_hibernate_xml=" + _TPL_ROOT + "spring_hibernate_xml.ftl\n"+
@@ -456,6 +458,7 @@ public class ServiceBuilder {
 			"model_hints_xml", _tplModelHintsXml);
 		_tplModelImpl = _getTplProperty("model_impl", _tplModelImpl);
 		_tplModelSoap = _getTplProperty("model_soap", _tplModelSoap);
+		_tplModelWrapper = _getTplProperty("model_wrapper", _tplModelWrapper);
 		_tplPersistence = _getTplProperty("persistence", _tplPersistence);
 		_tplPersistenceImpl = _getTplProperty(
 			"persistence_impl", _tplPersistenceImpl);
@@ -479,6 +482,8 @@ public class ServiceBuilder {
 			"service_json_serializer", _tplServiceJsonSerializer);
 		_tplServiceSoap = _getTplProperty("service_soap", _tplServiceSoap);
 		_tplServiceUtil = _getTplProperty("service_util", _tplServiceUtil);
+		_tplServiceWrapper = _getTplProperty(
+			"service_wrapper", _tplServiceWrapper);
 		_tplSpringBaseXml = _getTplProperty(
 			"spring_base_xml", _tplSpringBaseXml);
 		_tplSpringDynamicDataSourceXml = _getTplProperty(
@@ -1013,9 +1018,10 @@ public class ServiceBuilder {
 							_createModel(entity);
 							_createExtendedModel(entity);
 
-							_createModelSoap(entity);
-
 							_createModelClp(entity);
+							_createModelWrapper(entity);
+
+							_createModelSoap(entity);
 
 							_createPool(entity);
 
@@ -1035,6 +1041,7 @@ public class ServiceBuilder {
 							_createServiceUtil(entity, _SESSION_TYPE_LOCAL);
 
 							_createServiceClp(entity, _SESSION_TYPE_LOCAL);
+							_createServiceWrapper(entity, _SESSION_TYPE_LOCAL);
 						}
 
 						if (entity.hasRemoteService()) {
@@ -1046,6 +1053,7 @@ public class ServiceBuilder {
 							_createServiceUtil(entity, _SESSION_TYPE_REMOTE);
 
 							_createServiceClp(entity, _SESSION_TYPE_REMOTE);
+							_createServiceWrapper(entity, _SESSION_TYPE_REMOTE);
 
 							if (Validator.isNotNull(_jsonFileName)) {
 								_createServiceHttp(entity);
@@ -2259,6 +2267,34 @@ public class ServiceBuilder {
 		}
 	}
 
+	private void _createModelWrapper(Entity entity) throws Exception {
+		JavaClass modelJavaClass = _getJavaClass(
+			_serviceOutputPath + "/model/" + entity.getName() + "Model.java");
+		JavaClass extendedModelJavaClass = _getJavaClass(
+			_serviceOutputPath + "/model/" + entity.getName() + ".java");
+
+		Object[] methods = _getMethods(modelJavaClass);
+
+		methods = ArrayUtil.append(
+			methods, _getMethods(extendedModelJavaClass));
+
+		Map<String, Object> context = _getContext();
+
+		context.put("entity", entity);
+		context.put("methods", methods);
+
+		// Content
+
+		String content = _processTemplate(_tplModelWrapper, context);
+
+		// Write file
+
+		File modelFile = new File(
+			_serviceOutputPath + "/model/" + entity.getName() + "Wrapper.java");
+
+		writeFile(modelFile, content, _author);
+	}
+
 	private void _createOrmXml() throws Exception {
 		Map<String, Object> context = _getContext();
 
@@ -2928,6 +2964,32 @@ public class ServiceBuilder {
 				ejbFile.delete();
 			}
 		}
+	}
+
+	private void _createServiceWrapper(Entity entity, int sessionType)
+		throws Exception {
+
+		JavaClass javaClass = _getJavaClass(
+			_serviceOutputPath + "/service/" + entity.getName() +
+				_getSessionTypeName(sessionType) + "Service.java");
+
+		Map<String, Object> context = _getContext();
+
+		context.put("entity", entity);
+		context.put("methods", _getMethods(javaClass));
+		context.put("sessionTypeName", _getSessionTypeName(sessionType));
+
+		// Content
+
+		String content = _processTemplate(_tplServiceWrapper, context);
+
+		// Write file
+
+		File ejbFile = new File(
+			_serviceOutputPath + "/service/" + entity.getName() +
+				_getSessionTypeName(sessionType) + "ServiceWrapper.java");
+
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createSpringBaseXml() throws Exception {
@@ -3942,7 +4004,13 @@ public class ServiceBuilder {
 	}
 
 	private JavaMethod[] _getMethods(JavaClass javaClass) {
-		JavaMethod[] methods = javaClass.getMethods();
+		return _getMethods(javaClass, false);
+	}
+
+	private JavaMethod[] _getMethods(
+		JavaClass javaClass, boolean superclasses) {
+
+		JavaMethod[] methods = javaClass.getMethods(superclasses);
 
 		for (JavaMethod method : methods) {
 			Arrays.sort(method.getExceptions());
@@ -4112,6 +4180,7 @@ public class ServiceBuilder {
 	private String _tplModelHintsXml = _TPL_ROOT + "model_hints_xml.ftl";
 	private String _tplModelImpl = _TPL_ROOT + "model_impl.ftl";
 	private String _tplModelSoap = _TPL_ROOT + "model_soap.ftl";
+	private String _tplModelWrapper = _TPL_ROOT + "model_wrapper.ftl";
 	private String _tplOrmXml = _TPL_ROOT + "orm_xml.ftl";
 	private String _tplPersistence = _TPL_ROOT + "persistence.ftl";
 	private String _tplPersistenceImpl = _TPL_ROOT + "persistence_impl.ftl";
@@ -4133,6 +4202,7 @@ public class ServiceBuilder {
 		_TPL_ROOT + "service_json_serializer.ftl";
 	private String _tplServiceSoap = _TPL_ROOT + "service_soap.ftl";
 	private String _tplServiceUtil = _TPL_ROOT + "service_util.ftl";
+	private String _tplServiceWrapper = _TPL_ROOT + "service_wrapper.ftl";
 	private String _tplSpringBaseXml = _TPL_ROOT + "spring_base_xml.ftl";
 	private String _tplSpringDynamicDataSourceXml =
 		_TPL_ROOT + "spring_dynamic_data_source_xml.ftl";

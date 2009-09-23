@@ -17,13 +17,20 @@ import ${packagePath}.model.${entity.name}Soap;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+import com.liferay.util.LocalizationUtil;
 
 import java.io.Serializable;
 
@@ -34,22 +41,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
-	import com.liferay.portlet.expando.model.ExpandoBridge;
-	import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
-</#if>
-
-<#if entity.hasLocalizedColumn()>
-	import com.liferay.portal.kernel.language.LanguageUtil;
-	import com.liferay.portal.kernel.util.LocaleUtil;
-	import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-	import com.liferay.portal.kernel.util.Validator;
-	import com.liferay.util.LocalizationUtil;
-
-	import java.util.Locale;
-	import java.util.Map;
-</#if>
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="${entity.name}ModelImpl.java.html"><b><i>View Source</i></b></a>

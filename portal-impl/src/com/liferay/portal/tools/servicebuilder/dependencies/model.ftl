@@ -6,13 +6,15 @@ package ${packagePath}.model;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+
+import java.io.Serializable;
 
 import java.util.Date;
-
-<#if entity.hasLocalizedColumn()>
-	import java.util.Locale;
-	import java.util.Map;
-</#if>
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * <a href="${entity.name}Model.java.html"><b><i>View Source</i></b></a>
@@ -78,5 +80,38 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 	</#list>
 
 	public ${entity.name} toEscapedModel();
+
+	<#--
+	Copy methods from com.liferay.portal.model.BaseModel and java.lang.Object to
+	correctly generate wrappers.
+	-->
+
+	public boolean isNew();
+
+	public boolean setNew(boolean n);
+
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
+	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public Object clone();
+
+	public int compareTo(${entity.name} ${entity.varName});
+
+	public int hashCode();
+
+	public String toString();
+
+	public String toXmlString();
 
 }

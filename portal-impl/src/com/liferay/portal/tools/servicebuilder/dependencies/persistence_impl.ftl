@@ -276,6 +276,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	protected ${entity.name} removeImpl(${entity.name} ${entity.varName}) throws SystemException {
+		${entity.varName} = toUnwrappedModel(${entity.varName});
+
 		<#list entity.columnList as column>
 			<#if column.isCollection() && column.isMappingManyToMany()>
 				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
@@ -411,6 +413,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	public ${entity.name} updateImpl(${packagePath}.model.${entity.name} ${entity.varName}, boolean merge) throws SystemException {
+		${entity.varName} = toUnwrappedModel(${entity.varName});
+
 		<#assign uniqueFinderList = entity.getUniqueFinderList()>
 
 		<#if (uniqueFinderList?size != 0) || entity.isHierarchicalTree()>
@@ -545,6 +549,31 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		</#list>
 
 		return ${entity.varName};
+	}
+
+	protected ${entity.name} toUnwrappedModel(${entity.name} ${entity.varName}) {
+		if (${entity.varName} instanceof ${entity.name}Impl) {
+			return ${entity.varName};
+		}
+
+		${entity.name}Impl ${entity.varName}Impl = new ${entity.name}Impl();
+
+		${entity.varName}Impl.setNew(${entity.varName}.isNew());
+		${entity.varName}Impl.setPrimaryKey(${entity.varName}.getPrimaryKey());
+
+		<#list entity.regularColList as column>
+			${entity.varName}Impl.set${column.methodName}(
+
+			<#if column.type == "boolean">
+				${entity.varName}.is${column.methodName}()
+			<#else>
+				${entity.varName}.get${column.methodName}()
+			</#if>
+
+			);
+		</#list>
+
+		return ${entity.varName}Impl;
 	}
 
 	public ${entity.name} findByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws ${noSuchEntity}Exception, SystemException {
