@@ -53,7 +53,8 @@ public class WorkflowInstanceManagerProxyBean
 	}
 
 	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
-		long workflowInstanceId, boolean includeChildren) {
+		long workflowInstanceId, boolean includeChildren, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

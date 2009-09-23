@@ -68,11 +68,12 @@ public class WorkflowInstanceManagerUtil {
 	 * @see WorkflowInstanceManager#getWorkflowInstanceHistory(long, boolean)
 	 */
 	public static List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
-			long workflowInstanceId, boolean includeChildren)
+			long workflowInstanceId, boolean includeChildren, int start,
+			int end, OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceHistory(
-			workflowInstanceId, includeChildren);
+			workflowInstanceId, includeChildren, start, end, orderByComparator);
 	}
 
 	/**

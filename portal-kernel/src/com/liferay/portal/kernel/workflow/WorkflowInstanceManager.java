@@ -134,12 +134,16 @@ public interface WorkflowInstanceManager {
 	 *		   history
 	 * @param  includeChildren flag, indicating whether to return the history of
 	 *		   children too
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return the list of history entries for the given instance and optionally
 	 *		   its children
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
-			long workflowInstanceId, boolean includeChildren)
+			long workflowInstanceId, boolean includeChildren, int start,
+			int end, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	/**
