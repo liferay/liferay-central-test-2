@@ -22,29 +22,31 @@ import java.util.List;
 /**
  * <a href="ReportsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ReportsEntry table in the
+ * database.
+ * </p>
+ *
+ * @author    Brian Wing Shun Chan
+ * @see       ReportsEntryImpl
+ * @see       com.ext.portlet.reports.model.ReportsEntry
+ * @see       com.ext.portlet.reports.model.ReportsEntryModel
+ * @generated
  */
 public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     public static final String TABLE_NAME = "ReportsEntry";
     public static final Object[][] TABLE_COLUMNS = {
             { "entryId", new Integer(Types.VARCHAR) },
-            
-
             { "companyId", new Integer(Types.VARCHAR) },
-            
-
             { "userId", new Integer(Types.VARCHAR) },
-            
-
             { "userName", new Integer(Types.VARCHAR) },
-            
-
             { "createDate", new Integer(Types.TIMESTAMP) },
-            
-
             { "modifiedDate", new Integer(Types.TIMESTAMP) },
-            
-
             { "name", new Integer(Types.VARCHAR) }
         };
     public static final String TABLE_SQL_CREATE = "create table ReportsEntry (entryId VARCHAR(75) not null primary key,companyId VARCHAR(75) null,userId VARCHAR(75) null,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";

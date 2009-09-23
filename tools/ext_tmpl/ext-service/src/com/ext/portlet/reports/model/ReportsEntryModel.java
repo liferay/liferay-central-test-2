@@ -8,7 +8,21 @@ import java.util.Date;
 /**
  * <a href="ReportsEntryModel.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ReportsEntry table in the
+ * database.
+ * </p>
+ *
+ * @author    Brian Wing Shun Chan
+ * @see       ReportsEntry
+ * @see       com.ext.portlet.reports.model.impl.ReportsEntryImpl
+ * @see       com.ext.portlet.reports.model.impl.ReportsEntryModelImpl
+ * @generated
  */
 public interface ReportsEntryModel extends BaseModel<ReportsEntry> {
     public String getPrimaryKey();

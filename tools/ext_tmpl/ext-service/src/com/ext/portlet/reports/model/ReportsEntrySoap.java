@@ -10,7 +10,19 @@ import java.util.List;
 /**
  * <a href="ReportsEntrySoap.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by
+ * {@link com.ext.portlet.reports.service.http.ReportsEntryServiceSoap}.
+ * </p>
+ *
+ * @author    Brian Wing Shun Chan
+ * @see       com.ext.portlet.reports.service.http.ReportsEntryServiceSoap
+ * @generated
  */
 public class ReportsEntrySoap implements Serializable {
     private String _entryId;

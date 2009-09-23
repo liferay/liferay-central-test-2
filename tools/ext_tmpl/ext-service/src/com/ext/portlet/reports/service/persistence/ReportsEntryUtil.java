@@ -1,9 +1,18 @@
 package com.ext.portlet.reports.service.persistence;
 
+
 /**
  * <a href="ReportsEntryUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author    Brian Wing Shun Chan
+ * @see       ReportsEntryPersistence
+ * @see       ReportsEntryPersistenceImpl
+ * @generated
  */
 public class ReportsEntryUtil {
     private static ReportsEntryPersistence _persistence;
@@ -40,12 +49,27 @@ public class ReportsEntryUtil {
         return getPersistence().remove(reportsEntry);
     }
 
+    /**
+     * @deprecated Use {@link #update(ReportsEntry, boolean merge)}.
+     */
     public static com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry)
         throws com.liferay.portal.SystemException {
         return getPersistence().update(reportsEntry);
     }
 
+    /**
+     * Add, update, or merge, the entity. This method also calls the model
+     * listeners to trigger the proper events associated with adding, deleting,
+     * or updating an entity.
+     *
+     * @param  reportsEntry the entity to add, update, or merge
+     * @param  merge boolean value for whether to merge the entity. The default
+     *         value is false. Setting merge to true is more expensive and
+     *         should only be true when reportsEntry is transient. See
+     *         LEP-5473 for a detailed discussion of this method.
+     * @return the entity that was added, updated, or merged
+     */
     public static com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
         throws com.liferay.portal.SystemException {
