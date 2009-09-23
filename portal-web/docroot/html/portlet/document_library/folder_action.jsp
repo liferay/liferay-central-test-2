@@ -101,7 +101,7 @@ else {
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="../document_library/add_folder"  message='<%= folder != null ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
+		<liferay-ui:icon image="../document_library/add_folder" message='<%= folder != null ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
@@ -111,7 +111,7 @@ else {
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="../document_library/add_document"  message="add-document" url="<%= editFileEntryURL %>" />
+		<liferay-ui:icon image="../document_library/add_document" message="add-document" url="<%= editFileEntryURL %>" />
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_SHORTCUT) %>">
@@ -121,18 +121,19 @@ else {
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="add_instance"  message="add-shortcut" url="<%= editFileShortcutURL %>" />
+		<liferay-ui:icon image="add_instance" message="add-shortcut" url="<%= editFileShortcutURL %>" />
 	</c:if>
 
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-		<liferay-ui:icon cssClass="webdav-action" image="desktop"  message="access-from-my-desktop" url="javascript:;" />
+		<liferay-ui:icon cssClass="webdav-action" image="desktop" message="access-from-my-desktop" url="javascript:;" />
 	</c:if>
 </liferay-ui:icon-menu>
 
-
-<div id="<portlet:namespace />webDav" style="display:none">
+<div id="<portlet:namespace />webDav" style="display: none;">
 	<div class="portlet-document-library">
-		<liferay-ui:message key="webdav-help" /> <br /><br />
+		<liferay-ui:message key='<%= LanguageUtil.format(pageContext, "webdav-help", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/Accessing+the+Document+Library+with+WebDAV") %>' />
+		
+		<br /><br />
 
 		<div class="file-entry-field">
 			<label><liferay-ui:message key="webdav-url" /></label>
@@ -167,28 +168,28 @@ else {
 </div>
 
 <script type="text/javascript">
-		AUI().ready(
-			'dialog',
-			function(A) {
-				A.on(
-					'click',
-					function(event) {
-						var popup = new A.Dialog(
-							{
-								bodyContent: A.get('#<portlet:namespace />webDav').html(),
-								centered: true,
-								destroyOnClose: true,
-								modal: true,
-								title: '<liferay-ui:message key="access-from-my-desktop" />',
-								width: 500
-							}
-						)
-						.render();
+	AUI().ready(
+		'dialog',
+		function(A) {
+			A.on(
+				'click',
+				function(event) {
+					var popup = new A.Dialog(
+						{
+							bodyContent: A.get('#<portlet:namespace />webDav').html(),
+							centered: true,
+							destroyOnClose: true,
+							modal: true,
+							title: '<liferay-ui:message key="access-from-my-desktop" />',
+							width: 500
+						}
+					)
+					.render();
 
-						event.preventDefault();
-					},
-					'.webdav-action'
-				);
-			}
-		);
+					event.preventDefault();
+				},
+				'.webdav-action'
+			);
+		}
+	);
 </script>

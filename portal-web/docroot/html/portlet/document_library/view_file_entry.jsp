@@ -237,7 +237,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<div class="file-entry-field">
-			<aui:field-wrapper helpMessage="webdav-help" label="webdav-url">
+			<aui:field-wrapper helpMessage='<%= LanguageUtil.format(pageContext, "webdav-help", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/Accessing+the+Document+Library+with+WebDAV") %>' label="webdav-url">
+
 				<%
 				StringBuffer sbf = new StringBuffer();
 
