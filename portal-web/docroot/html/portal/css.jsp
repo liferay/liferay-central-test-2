@@ -1691,6 +1691,7 @@ fieldset:last-child, .aui-form fieldset:last-child {
 }
 
 .taglib-page-iterator .search-results {
+	color: #555;
 	float: left;
 }
 

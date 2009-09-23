@@ -8,13 +8,6 @@
 	border: 0;
 }
 
-.results-grid {
-	border: 1px solid #DEDEDE;
-	border-left: none;
-	border-right: none;
-	padding: 5px 0;
-}
-
 .results-header {
 	background: #727C81;
 }
