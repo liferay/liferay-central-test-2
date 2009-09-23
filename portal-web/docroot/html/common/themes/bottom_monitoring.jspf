@@ -39,7 +39,7 @@ if (portalRequestDataSample != null) {
 }
 %>
 
-<c:if test="<%= PropsValues.MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE %>">
+<!--<c:if test="<%= PropsValues.MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE %>">
 
 	<%
 	List<DataSample> dataSamples = DataSampleThreadLocal.getDataSamples();
@@ -55,4 +55,4 @@ if (portalRequestDataSample != null) {
 	}
 	%>
 
-</c:if>
+</c:if>-->
