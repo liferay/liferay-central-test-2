@@ -23,6 +23,7 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
 import com.liferay.portal.kernel.workflow.TaskInstanceManager;
 import com.liferay.portal.kernel.workflow.UserCredential;
@@ -88,49 +89,55 @@ public class TaskInstanceManagerProxyBean
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-		UserCredential userCredential) {
+		UserCredential userCredential, int start, int end,
+			OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-		UserCredential userCredential, boolean completed) {
+		UserCredential userCredential, boolean completed, int start, int end,
+			OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
-		long roleId) {
+		long roleId, int start, int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
-		long roleId, boolean completed) {
+		long roleId, boolean completed, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
-		long userId) {
+		long userId, int start, int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
-		long userId, boolean completed) {
+		long userId, boolean completed, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
-		long workflowInstanceId) {
+		long workflowInstanceId, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
-		long workflowInstanceId, boolean completed) {
+		long workflowInstanceId, boolean completed, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
