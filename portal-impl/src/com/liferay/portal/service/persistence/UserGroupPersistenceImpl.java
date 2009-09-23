@@ -211,6 +211,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 	protected UserGroup removeImpl(UserGroup userGroup)
 		throws SystemException {
+		userGroup = toUnwrappedModel(userGroup);
+
 		try {
 			clearUsers.clear(userGroup.getPrimaryKey());
 		}
@@ -316,6 +318,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 	public UserGroup updateImpl(com.liferay.portal.model.UserGroup userGroup,
 		boolean merge) throws SystemException {
+		userGroup = toUnwrappedModel(userGroup);
+
 		boolean isNew = userGroup.isNew();
 
 		UserGroupModelImpl userGroupModelImpl = (UserGroupModelImpl)userGroup;
@@ -366,6 +370,25 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return userGroup;
+	}
+
+	protected UserGroup toUnwrappedModel(UserGroup userGroup) {
+		if (userGroup instanceof UserGroupImpl) {
+			return userGroup;
+		}
+
+		UserGroupImpl userGroupImpl = new UserGroupImpl();
+
+		userGroupImpl.setNew(userGroup.isNew());
+		userGroupImpl.setPrimaryKey(userGroup.getPrimaryKey());
+
+		userGroupImpl.setUserGroupId(userGroup.getUserGroupId());
+		userGroupImpl.setCompanyId(userGroup.getCompanyId());
+		userGroupImpl.setParentUserGroupId(userGroup.getParentUserGroupId());
+		userGroupImpl.setName(userGroup.getName());
+		userGroupImpl.setDescription(userGroup.getDescription());
+
+		return userGroupImpl;
 	}
 
 	public UserGroup findByPrimaryKey(long userGroupId)

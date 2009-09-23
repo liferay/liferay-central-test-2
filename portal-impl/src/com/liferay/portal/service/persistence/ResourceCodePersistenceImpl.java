@@ -209,6 +209,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	protected ResourceCode removeImpl(ResourceCode resourceCode)
 		throws SystemException {
+		resourceCode = toUnwrappedModel(resourceCode);
+
 		Session session = null;
 
 		try {
@@ -307,6 +309,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	public ResourceCode updateImpl(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws SystemException {
+		resourceCode = toUnwrappedModel(resourceCode);
+
 		boolean isNew = resourceCode.isNew();
 
 		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCode;
@@ -360,6 +364,24 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return resourceCode;
+	}
+
+	protected ResourceCode toUnwrappedModel(ResourceCode resourceCode) {
+		if (resourceCode instanceof ResourceCodeImpl) {
+			return resourceCode;
+		}
+
+		ResourceCodeImpl resourceCodeImpl = new ResourceCodeImpl();
+
+		resourceCodeImpl.setNew(resourceCode.isNew());
+		resourceCodeImpl.setPrimaryKey(resourceCode.getPrimaryKey());
+
+		resourceCodeImpl.setCodeId(resourceCode.getCodeId());
+		resourceCodeImpl.setCompanyId(resourceCode.getCompanyId());
+		resourceCodeImpl.setName(resourceCode.getName());
+		resourceCodeImpl.setScope(resourceCode.getScope());
+
+		return resourceCodeImpl;
 	}
 
 	public ResourceCode findByPrimaryKey(long codeId)

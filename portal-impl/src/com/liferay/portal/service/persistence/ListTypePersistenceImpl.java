@@ -169,6 +169,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected ListType removeImpl(ListType listType) throws SystemException {
+		listType = toUnwrappedModel(listType);
+
 		Session session = null;
 
 		try {
@@ -255,6 +257,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 	public ListType updateImpl(com.liferay.portal.model.ListType listType,
 		boolean merge) throws SystemException {
+		listType = toUnwrappedModel(listType);
+
 		Session session = null;
 
 		try {
@@ -277,6 +281,23 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 			ListTypeImpl.class, listType.getPrimaryKey(), listType);
 
 		return listType;
+	}
+
+	protected ListType toUnwrappedModel(ListType listType) {
+		if (listType instanceof ListTypeImpl) {
+			return listType;
+		}
+
+		ListTypeImpl listTypeImpl = new ListTypeImpl();
+
+		listTypeImpl.setNew(listType.isNew());
+		listTypeImpl.setPrimaryKey(listType.getPrimaryKey());
+
+		listTypeImpl.setListTypeId(listType.getListTypeId());
+		listTypeImpl.setName(listType.getName());
+		listTypeImpl.setType(listType.getType());
+
+		return listTypeImpl;
 	}
 
 	public ListType findByPrimaryKey(int listTypeId)

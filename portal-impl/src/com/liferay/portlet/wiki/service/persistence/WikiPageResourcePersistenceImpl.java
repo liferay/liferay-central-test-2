@@ -178,6 +178,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 	protected WikiPageResource removeImpl(WikiPageResource wikiPageResource)
 		throws SystemException {
+		wikiPageResource = toUnwrappedModel(wikiPageResource);
+
 		Session session = null;
 
 		try {
@@ -276,6 +278,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 	public WikiPageResource updateImpl(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean merge) throws SystemException {
+		wikiPageResource = toUnwrappedModel(wikiPageResource);
+
 		boolean isNew = wikiPageResource.isNew();
 
 		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
@@ -327,6 +331,24 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return wikiPageResource;
+	}
+
+	protected WikiPageResource toUnwrappedModel(
+		WikiPageResource wikiPageResource) {
+		if (wikiPageResource instanceof WikiPageResourceImpl) {
+			return wikiPageResource;
+		}
+
+		WikiPageResourceImpl wikiPageResourceImpl = new WikiPageResourceImpl();
+
+		wikiPageResourceImpl.setNew(wikiPageResource.isNew());
+		wikiPageResourceImpl.setPrimaryKey(wikiPageResource.getPrimaryKey());
+
+		wikiPageResourceImpl.setResourcePrimKey(wikiPageResource.getResourcePrimKey());
+		wikiPageResourceImpl.setNodeId(wikiPageResource.getNodeId());
+		wikiPageResourceImpl.setTitle(wikiPageResource.getTitle());
+
+		return wikiPageResourceImpl;
 	}
 
 	public WikiPageResource findByPrimaryKey(long resourcePrimKey)

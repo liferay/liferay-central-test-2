@@ -176,6 +176,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	protected UserTrackerPath removeImpl(UserTrackerPath userTrackerPath)
 		throws SystemException {
+		userTrackerPath = toUnwrappedModel(userTrackerPath);
+
 		Session session = null;
 
 		try {
@@ -265,6 +267,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 	public UserTrackerPath updateImpl(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
 		throws SystemException {
+		userTrackerPath = toUnwrappedModel(userTrackerPath);
+
 		Session session = null;
 
 		try {
@@ -288,6 +292,24 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 			userTrackerPath);
 
 		return userTrackerPath;
+	}
+
+	protected UserTrackerPath toUnwrappedModel(UserTrackerPath userTrackerPath) {
+		if (userTrackerPath instanceof UserTrackerPathImpl) {
+			return userTrackerPath;
+		}
+
+		UserTrackerPathImpl userTrackerPathImpl = new UserTrackerPathImpl();
+
+		userTrackerPathImpl.setNew(userTrackerPath.isNew());
+		userTrackerPathImpl.setPrimaryKey(userTrackerPath.getPrimaryKey());
+
+		userTrackerPathImpl.setUserTrackerPathId(userTrackerPath.getUserTrackerPathId());
+		userTrackerPathImpl.setUserTrackerId(userTrackerPath.getUserTrackerId());
+		userTrackerPathImpl.setPath(userTrackerPath.getPath());
+		userTrackerPathImpl.setPathDate(userTrackerPath.getPathDate());
+
+		return userTrackerPathImpl;
 	}
 
 	public UserTrackerPath findByPrimaryKey(long userTrackerPathId)

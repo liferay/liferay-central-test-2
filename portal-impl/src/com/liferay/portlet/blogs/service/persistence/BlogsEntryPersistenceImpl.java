@@ -463,6 +463,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 	protected BlogsEntry removeImpl(BlogsEntry blogsEntry)
 		throws SystemException {
+		blogsEntry = toUnwrappedModel(blogsEntry);
+
 		Session session = null;
 
 		try {
@@ -565,6 +567,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 	public BlogsEntry updateImpl(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry, boolean merge)
 		throws SystemException {
+		blogsEntry = toUnwrappedModel(blogsEntry);
+
 		boolean isNew = blogsEntry.isNew();
 
 		BlogsEntryModelImpl blogsEntryModelImpl = (BlogsEntryModelImpl)blogsEntry;
@@ -642,6 +646,38 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return blogsEntry;
+	}
+
+	protected BlogsEntry toUnwrappedModel(BlogsEntry blogsEntry) {
+		if (blogsEntry instanceof BlogsEntryImpl) {
+			return blogsEntry;
+		}
+
+		BlogsEntryImpl blogsEntryImpl = new BlogsEntryImpl();
+
+		blogsEntryImpl.setNew(blogsEntry.isNew());
+		blogsEntryImpl.setPrimaryKey(blogsEntry.getPrimaryKey());
+
+		blogsEntryImpl.setUuid(blogsEntry.getUuid());
+		blogsEntryImpl.setEntryId(blogsEntry.getEntryId());
+		blogsEntryImpl.setGroupId(blogsEntry.getGroupId());
+		blogsEntryImpl.setCompanyId(blogsEntry.getCompanyId());
+		blogsEntryImpl.setUserId(blogsEntry.getUserId());
+		blogsEntryImpl.setUserName(blogsEntry.getUserName());
+		blogsEntryImpl.setCreateDate(blogsEntry.getCreateDate());
+		blogsEntryImpl.setModifiedDate(blogsEntry.getModifiedDate());
+		blogsEntryImpl.setTitle(blogsEntry.getTitle());
+		blogsEntryImpl.setUrlTitle(blogsEntry.getUrlTitle());
+		blogsEntryImpl.setContent(blogsEntry.getContent());
+		blogsEntryImpl.setDisplayDate(blogsEntry.getDisplayDate());
+		blogsEntryImpl.setAllowTrackbacks(blogsEntry.isAllowTrackbacks());
+		blogsEntryImpl.setTrackbacks(blogsEntry.getTrackbacks());
+		blogsEntryImpl.setStatus(blogsEntry.getStatus());
+		blogsEntryImpl.setStatusByUserId(blogsEntry.getStatusByUserId());
+		blogsEntryImpl.setStatusByUserName(blogsEntry.getStatusByUserName());
+		blogsEntryImpl.setStatusDate(blogsEntry.getStatusDate());
+
+		return blogsEntryImpl;
 	}
 
 	public BlogsEntry findByPrimaryKey(long entryId)

@@ -192,6 +192,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	protected ServiceComponent removeImpl(ServiceComponent serviceComponent)
 		throws SystemException {
+		serviceComponent = toUnwrappedModel(serviceComponent);
+
 		Session session = null;
 
 		try {
@@ -289,6 +291,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 	public ServiceComponent updateImpl(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
 		boolean merge) throws SystemException {
+		serviceComponent = toUnwrappedModel(serviceComponent);
+
 		boolean isNew = serviceComponent.isNew();
 
 		ServiceComponentModelImpl serviceComponentModelImpl = (ServiceComponentModelImpl)serviceComponent;
@@ -338,6 +342,26 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return serviceComponent;
+	}
+
+	protected ServiceComponent toUnwrappedModel(
+		ServiceComponent serviceComponent) {
+		if (serviceComponent instanceof ServiceComponentImpl) {
+			return serviceComponent;
+		}
+
+		ServiceComponentImpl serviceComponentImpl = new ServiceComponentImpl();
+
+		serviceComponentImpl.setNew(serviceComponent.isNew());
+		serviceComponentImpl.setPrimaryKey(serviceComponent.getPrimaryKey());
+
+		serviceComponentImpl.setServiceComponentId(serviceComponent.getServiceComponentId());
+		serviceComponentImpl.setBuildNamespace(serviceComponent.getBuildNamespace());
+		serviceComponentImpl.setBuildNumber(serviceComponent.getBuildNumber());
+		serviceComponentImpl.setBuildDate(serviceComponent.getBuildDate());
+		serviceComponentImpl.setData(serviceComponent.getData());
+
+		return serviceComponentImpl;
 	}
 
 	public ServiceComponent findByPrimaryKey(long serviceComponentId)

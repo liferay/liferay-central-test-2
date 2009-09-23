@@ -220,6 +220,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	protected MBStatsUser removeImpl(MBStatsUser mbStatsUser)
 		throws SystemException {
+		mbStatsUser = toUnwrappedModel(mbStatsUser);
+
 		Session session = null;
 
 		try {
@@ -316,6 +318,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 	public MBStatsUser updateImpl(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
 		boolean merge) throws SystemException {
+		mbStatsUser = toUnwrappedModel(mbStatsUser);
+
 		boolean isNew = mbStatsUser.isNew();
 
 		MBStatsUserModelImpl mbStatsUserModelImpl = (MBStatsUserModelImpl)mbStatsUser;
@@ -362,6 +366,25 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbStatsUser;
+	}
+
+	protected MBStatsUser toUnwrappedModel(MBStatsUser mbStatsUser) {
+		if (mbStatsUser instanceof MBStatsUserImpl) {
+			return mbStatsUser;
+		}
+
+		MBStatsUserImpl mbStatsUserImpl = new MBStatsUserImpl();
+
+		mbStatsUserImpl.setNew(mbStatsUser.isNew());
+		mbStatsUserImpl.setPrimaryKey(mbStatsUser.getPrimaryKey());
+
+		mbStatsUserImpl.setStatsUserId(mbStatsUser.getStatsUserId());
+		mbStatsUserImpl.setGroupId(mbStatsUser.getGroupId());
+		mbStatsUserImpl.setUserId(mbStatsUser.getUserId());
+		mbStatsUserImpl.setMessageCount(mbStatsUser.getMessageCount());
+		mbStatsUserImpl.setLastPostDate(mbStatsUser.getLastPostDate());
+
+		return mbStatsUserImpl;
 	}
 
 	public MBStatsUser findByPrimaryKey(long statsUserId)

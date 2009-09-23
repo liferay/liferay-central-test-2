@@ -179,6 +179,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 
 	protected ShoppingItemField removeImpl(ShoppingItemField shoppingItemField)
 		throws SystemException {
+		shoppingItemField = toUnwrappedModel(shoppingItemField);
+
 		Session session = null;
 
 		try {
@@ -268,6 +270,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 	public ShoppingItemField updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
 		boolean merge) throws SystemException {
+		shoppingItemField = toUnwrappedModel(shoppingItemField);
+
 		Session session = null;
 
 		try {
@@ -291,6 +295,26 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 			shoppingItemField);
 
 		return shoppingItemField;
+	}
+
+	protected ShoppingItemField toUnwrappedModel(
+		ShoppingItemField shoppingItemField) {
+		if (shoppingItemField instanceof ShoppingItemFieldImpl) {
+			return shoppingItemField;
+		}
+
+		ShoppingItemFieldImpl shoppingItemFieldImpl = new ShoppingItemFieldImpl();
+
+		shoppingItemFieldImpl.setNew(shoppingItemField.isNew());
+		shoppingItemFieldImpl.setPrimaryKey(shoppingItemField.getPrimaryKey());
+
+		shoppingItemFieldImpl.setItemFieldId(shoppingItemField.getItemFieldId());
+		shoppingItemFieldImpl.setItemId(shoppingItemField.getItemId());
+		shoppingItemFieldImpl.setName(shoppingItemField.getName());
+		shoppingItemFieldImpl.setValues(shoppingItemField.getValues());
+		shoppingItemFieldImpl.setDescription(shoppingItemField.getDescription());
+
+		return shoppingItemFieldImpl;
 	}
 
 	public ShoppingItemField findByPrimaryKey(long itemFieldId)

@@ -290,6 +290,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Group removeImpl(Group group) throws SystemException {
+		group = toUnwrappedModel(group);
+
 		try {
 			clearOrganizations.clear(group.getPrimaryKey());
 		}
@@ -468,6 +470,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public Group updateImpl(com.liferay.portal.model.Group group, boolean merge)
 		throws SystemException {
+		group = toUnwrappedModel(group);
+
 		boolean isNew = group.isNew();
 
 		GroupModelImpl groupModelImpl = (GroupModelImpl)group;
@@ -635,6 +639,33 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return group;
+	}
+
+	protected Group toUnwrappedModel(Group group) {
+		if (group instanceof GroupImpl) {
+			return group;
+		}
+
+		GroupImpl groupImpl = new GroupImpl();
+
+		groupImpl.setNew(group.isNew());
+		groupImpl.setPrimaryKey(group.getPrimaryKey());
+
+		groupImpl.setGroupId(group.getGroupId());
+		groupImpl.setCompanyId(group.getCompanyId());
+		groupImpl.setCreatorUserId(group.getCreatorUserId());
+		groupImpl.setClassNameId(group.getClassNameId());
+		groupImpl.setClassPK(group.getClassPK());
+		groupImpl.setParentGroupId(group.getParentGroupId());
+		groupImpl.setLiveGroupId(group.getLiveGroupId());
+		groupImpl.setName(group.getName());
+		groupImpl.setDescription(group.getDescription());
+		groupImpl.setType(group.getType());
+		groupImpl.setTypeSettings(group.getTypeSettings());
+		groupImpl.setFriendlyURL(group.getFriendlyURL());
+		groupImpl.setActive(group.isActive());
+
+		return groupImpl;
 	}
 
 	public Group findByPrimaryKey(long groupId)

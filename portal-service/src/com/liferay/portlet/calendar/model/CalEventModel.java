@@ -24,6 +24,11 @@ package com.liferay.portlet.calendar.model;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.ServiceContext;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+
+import java.io.Serializable;
 
 import java.util.Date;
 
@@ -150,4 +155,32 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	public void setSecondReminder(int secondReminder);
 
 	public CalEvent toEscapedModel();
+
+	public boolean isNew();
+
+	public boolean setNew(boolean n);
+
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
+	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public Object clone();
+
+	public int compareTo(CalEvent calEvent);
+
+	public int hashCode();
+
+	public String toString();
+
+	public String toXmlString();
 }

@@ -210,6 +210,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected MBBan removeImpl(MBBan mbBan) throws SystemException {
+		mbBan = toUnwrappedModel(mbBan);
+
 		Session session = null;
 
 		try {
@@ -304,6 +306,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	public MBBan updateImpl(
 		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
 		throws SystemException {
+		mbBan = toUnwrappedModel(mbBan);
+
 		boolean isNew = mbBan.isNew();
 
 		MBBanModelImpl mbBanModelImpl = (MBBanModelImpl)mbBan;
@@ -349,6 +353,28 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbBan;
+	}
+
+	protected MBBan toUnwrappedModel(MBBan mbBan) {
+		if (mbBan instanceof MBBanImpl) {
+			return mbBan;
+		}
+
+		MBBanImpl mbBanImpl = new MBBanImpl();
+
+		mbBanImpl.setNew(mbBan.isNew());
+		mbBanImpl.setPrimaryKey(mbBan.getPrimaryKey());
+
+		mbBanImpl.setBanId(mbBan.getBanId());
+		mbBanImpl.setGroupId(mbBan.getGroupId());
+		mbBanImpl.setCompanyId(mbBan.getCompanyId());
+		mbBanImpl.setUserId(mbBan.getUserId());
+		mbBanImpl.setUserName(mbBan.getUserName());
+		mbBanImpl.setCreateDate(mbBan.getCreateDate());
+		mbBanImpl.setModifiedDate(mbBan.getModifiedDate());
+		mbBanImpl.setBanUserId(mbBan.getBanUserId());
+
+		return mbBanImpl;
 	}
 
 	public MBBan findByPrimaryKey(long banId)

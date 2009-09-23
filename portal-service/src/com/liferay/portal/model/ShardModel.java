@@ -22,6 +22,11 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.service.ServiceContext;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+
+import java.io.Serializable;
 
 /**
  * <a href="ShardModel.java.html"><b><i>View Source</i></b></a>
@@ -66,4 +71,32 @@ public interface ShardModel extends BaseModel<Shard> {
 	public void setName(String name);
 
 	public Shard toEscapedModel();
+
+	public boolean isNew();
+
+	public boolean setNew(boolean n);
+
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
+	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public Object clone();
+
+	public int compareTo(Shard shard);
+
+	public int hashCode();
+
+	public String toString();
+
+	public String toXmlString();
 }

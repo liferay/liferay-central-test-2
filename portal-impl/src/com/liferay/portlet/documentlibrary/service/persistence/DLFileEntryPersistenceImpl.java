@@ -303,6 +303,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	protected DLFileEntry removeImpl(DLFileEntry dlFileEntry)
 		throws SystemException {
+		dlFileEntry = toUnwrappedModel(dlFileEntry);
+
 		Session session = null;
 
 		try {
@@ -407,6 +409,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	public DLFileEntry updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
 		boolean merge) throws SystemException {
+		dlFileEntry = toUnwrappedModel(dlFileEntry);
+
 		boolean isNew = dlFileEntry.isNew();
 
 		DLFileEntryModelImpl dlFileEntryModelImpl = (DLFileEntryModelImpl)dlFileEntry;
@@ -488,6 +492,39 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFileEntry;
+	}
+
+	protected DLFileEntry toUnwrappedModel(DLFileEntry dlFileEntry) {
+		if (dlFileEntry instanceof DLFileEntryImpl) {
+			return dlFileEntry;
+		}
+
+		DLFileEntryImpl dlFileEntryImpl = new DLFileEntryImpl();
+
+		dlFileEntryImpl.setNew(dlFileEntry.isNew());
+		dlFileEntryImpl.setPrimaryKey(dlFileEntry.getPrimaryKey());
+
+		dlFileEntryImpl.setUuid(dlFileEntry.getUuid());
+		dlFileEntryImpl.setFileEntryId(dlFileEntry.getFileEntryId());
+		dlFileEntryImpl.setGroupId(dlFileEntry.getGroupId());
+		dlFileEntryImpl.setCompanyId(dlFileEntry.getCompanyId());
+		dlFileEntryImpl.setUserId(dlFileEntry.getUserId());
+		dlFileEntryImpl.setUserName(dlFileEntry.getUserName());
+		dlFileEntryImpl.setVersionUserId(dlFileEntry.getVersionUserId());
+		dlFileEntryImpl.setVersionUserName(dlFileEntry.getVersionUserName());
+		dlFileEntryImpl.setCreateDate(dlFileEntry.getCreateDate());
+		dlFileEntryImpl.setModifiedDate(dlFileEntry.getModifiedDate());
+		dlFileEntryImpl.setFolderId(dlFileEntry.getFolderId());
+		dlFileEntryImpl.setName(dlFileEntry.getName());
+		dlFileEntryImpl.setTitle(dlFileEntry.getTitle());
+		dlFileEntryImpl.setDescription(dlFileEntry.getDescription());
+		dlFileEntryImpl.setVersion(dlFileEntry.getVersion());
+		dlFileEntryImpl.setPendingVersion(dlFileEntry.getPendingVersion());
+		dlFileEntryImpl.setSize(dlFileEntry.getSize());
+		dlFileEntryImpl.setReadCount(dlFileEntry.getReadCount());
+		dlFileEntryImpl.setExtraSettings(dlFileEntry.getExtraSettings());
+
+		return dlFileEntryImpl;
 	}
 
 	public DLFileEntry findByPrimaryKey(long fileEntryId)

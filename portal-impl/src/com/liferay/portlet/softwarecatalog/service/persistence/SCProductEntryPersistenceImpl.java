@@ -239,6 +239,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	protected SCProductEntry removeImpl(SCProductEntry scProductEntry)
 		throws SystemException {
+		scProductEntry = toUnwrappedModel(scProductEntry);
+
 		try {
 			clearSCLicenses.clear(scProductEntry.getPrimaryKey());
 		}
@@ -346,6 +348,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	public SCProductEntry updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean merge) throws SystemException {
+		scProductEntry = toUnwrappedModel(scProductEntry);
+
 		boolean isNew = scProductEntry.isNew();
 
 		SCProductEntryModelImpl scProductEntryModelImpl = (SCProductEntryModelImpl)scProductEntry;
@@ -399,6 +403,36 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return scProductEntry;
+	}
+
+	protected SCProductEntry toUnwrappedModel(SCProductEntry scProductEntry) {
+		if (scProductEntry instanceof SCProductEntryImpl) {
+			return scProductEntry;
+		}
+
+		SCProductEntryImpl scProductEntryImpl = new SCProductEntryImpl();
+
+		scProductEntryImpl.setNew(scProductEntry.isNew());
+		scProductEntryImpl.setPrimaryKey(scProductEntry.getPrimaryKey());
+
+		scProductEntryImpl.setProductEntryId(scProductEntry.getProductEntryId());
+		scProductEntryImpl.setGroupId(scProductEntry.getGroupId());
+		scProductEntryImpl.setCompanyId(scProductEntry.getCompanyId());
+		scProductEntryImpl.setUserId(scProductEntry.getUserId());
+		scProductEntryImpl.setUserName(scProductEntry.getUserName());
+		scProductEntryImpl.setCreateDate(scProductEntry.getCreateDate());
+		scProductEntryImpl.setModifiedDate(scProductEntry.getModifiedDate());
+		scProductEntryImpl.setName(scProductEntry.getName());
+		scProductEntryImpl.setType(scProductEntry.getType());
+		scProductEntryImpl.setTags(scProductEntry.getTags());
+		scProductEntryImpl.setShortDescription(scProductEntry.getShortDescription());
+		scProductEntryImpl.setLongDescription(scProductEntry.getLongDescription());
+		scProductEntryImpl.setPageURL(scProductEntry.getPageURL());
+		scProductEntryImpl.setAuthor(scProductEntry.getAuthor());
+		scProductEntryImpl.setRepoGroupId(scProductEntry.getRepoGroupId());
+		scProductEntryImpl.setRepoArtifactId(scProductEntry.getRepoArtifactId());
+
+		return scProductEntryImpl;
 	}
 
 	public SCProductEntry findByPrimaryKey(long productEntryId)

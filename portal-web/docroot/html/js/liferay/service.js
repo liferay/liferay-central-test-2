@@ -453,7 +453,6 @@ Liferay.Service.registerClass(
 		getEntriesCount: true,
 		getEntriesRSS: true,
 		getEntry: true,
-		getEntryTypes: true,
 		incrementViewCounter: true,
 		searchEntryDisplays: true,
 		searchEntryDisplaysCount: true,

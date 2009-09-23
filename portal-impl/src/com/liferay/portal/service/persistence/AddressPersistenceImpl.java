@@ -270,6 +270,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Address removeImpl(Address address) throws SystemException {
+		address = toUnwrappedModel(address);
+
 		Session session = null;
 
 		try {
@@ -356,6 +358,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 	public Address updateImpl(com.liferay.portal.model.Address address,
 		boolean merge) throws SystemException {
+		address = toUnwrappedModel(address);
+
 		Session session = null;
 
 		try {
@@ -378,6 +382,38 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 			AddressImpl.class, address.getPrimaryKey(), address);
 
 		return address;
+	}
+
+	protected Address toUnwrappedModel(Address address) {
+		if (address instanceof AddressImpl) {
+			return address;
+		}
+
+		AddressImpl addressImpl = new AddressImpl();
+
+		addressImpl.setNew(address.isNew());
+		addressImpl.setPrimaryKey(address.getPrimaryKey());
+
+		addressImpl.setAddressId(address.getAddressId());
+		addressImpl.setCompanyId(address.getCompanyId());
+		addressImpl.setUserId(address.getUserId());
+		addressImpl.setUserName(address.getUserName());
+		addressImpl.setCreateDate(address.getCreateDate());
+		addressImpl.setModifiedDate(address.getModifiedDate());
+		addressImpl.setClassNameId(address.getClassNameId());
+		addressImpl.setClassPK(address.getClassPK());
+		addressImpl.setStreet1(address.getStreet1());
+		addressImpl.setStreet2(address.getStreet2());
+		addressImpl.setStreet3(address.getStreet3());
+		addressImpl.setCity(address.getCity());
+		addressImpl.setZip(address.getZip());
+		addressImpl.setRegionId(address.getRegionId());
+		addressImpl.setCountryId(address.getCountryId());
+		addressImpl.setTypeId(address.getTypeId());
+		addressImpl.setMailing(address.isMailing());
+		addressImpl.setPrimary(address.isPrimary());
+
+		return addressImpl;
 	}
 
 	public Address findByPrimaryKey(long addressId)

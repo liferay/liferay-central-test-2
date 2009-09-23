@@ -197,6 +197,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Country removeImpl(Country country) throws SystemException {
+		country = toUnwrappedModel(country);
+
 		Session session = null;
 
 		try {
@@ -294,6 +296,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 	public Country updateImpl(com.liferay.portal.model.Country country,
 		boolean merge) throws SystemException {
+		country = toUnwrappedModel(country);
+
 		boolean isNew = country.isNew();
 
 		CountryModelImpl countryModelImpl = (CountryModelImpl)country;
@@ -362,6 +366,27 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return country;
+	}
+
+	protected Country toUnwrappedModel(Country country) {
+		if (country instanceof CountryImpl) {
+			return country;
+		}
+
+		CountryImpl countryImpl = new CountryImpl();
+
+		countryImpl.setNew(country.isNew());
+		countryImpl.setPrimaryKey(country.getPrimaryKey());
+
+		countryImpl.setCountryId(country.getCountryId());
+		countryImpl.setName(country.getName());
+		countryImpl.setA2(country.getA2());
+		countryImpl.setA3(country.getA3());
+		countryImpl.setNumber(country.getNumber());
+		countryImpl.setIdd(country.getIdd());
+		countryImpl.setActive(country.isActive());
+
+		return countryImpl;
 	}
 
 	public Country findByPrimaryKey(long countryId)

@@ -232,6 +232,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	protected Organization removeImpl(Organization organization)
 		throws SystemException {
+		organization = toUnwrappedModel(organization);
+
 		try {
 			clearGroups.clear(organization.getPrimaryKey());
 		}
@@ -351,6 +353,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 	public Organization updateImpl(
 		com.liferay.portal.model.Organization organization, boolean merge)
 		throws SystemException {
+		organization = toUnwrappedModel(organization);
+
 		boolean isNew = organization.isNew();
 
 		OrganizationModelImpl organizationModelImpl = (OrganizationModelImpl)organization;
@@ -411,6 +415,32 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return organization;
+	}
+
+	protected Organization toUnwrappedModel(Organization organization) {
+		if (organization instanceof OrganizationImpl) {
+			return organization;
+		}
+
+		OrganizationImpl organizationImpl = new OrganizationImpl();
+
+		organizationImpl.setNew(organization.isNew());
+		organizationImpl.setPrimaryKey(organization.getPrimaryKey());
+
+		organizationImpl.setOrganizationId(organization.getOrganizationId());
+		organizationImpl.setCompanyId(organization.getCompanyId());
+		organizationImpl.setParentOrganizationId(organization.getParentOrganizationId());
+		organizationImpl.setLeftOrganizationId(organization.getLeftOrganizationId());
+		organizationImpl.setRightOrganizationId(organization.getRightOrganizationId());
+		organizationImpl.setName(organization.getName());
+		organizationImpl.setType(organization.getType());
+		organizationImpl.setRecursable(organization.isRecursable());
+		organizationImpl.setRegionId(organization.getRegionId());
+		organizationImpl.setCountryId(organization.getCountryId());
+		organizationImpl.setStatusId(organization.getStatusId());
+		organizationImpl.setComments(organization.getComments());
+
+		return organizationImpl;
 	}
 
 	public Organization findByPrimaryKey(long organizationId)

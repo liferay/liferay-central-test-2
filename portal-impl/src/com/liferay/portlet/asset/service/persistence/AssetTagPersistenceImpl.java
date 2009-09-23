@@ -182,6 +182,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected AssetTag removeImpl(AssetTag assetTag) throws SystemException {
+		assetTag = toUnwrappedModel(assetTag);
+
 		try {
 			clearAssetEntries.clear(assetTag.getPrimaryKey());
 		}
@@ -279,6 +281,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl
 	public AssetTag updateImpl(
 		com.liferay.portlet.asset.model.AssetTag assetTag, boolean merge)
 		throws SystemException {
+		assetTag = toUnwrappedModel(assetTag);
+
 		Session session = null;
 
 		try {
@@ -301,6 +305,29 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl
 			AssetTagImpl.class, assetTag.getPrimaryKey(), assetTag);
 
 		return assetTag;
+	}
+
+	protected AssetTag toUnwrappedModel(AssetTag assetTag) {
+		if (assetTag instanceof AssetTagImpl) {
+			return assetTag;
+		}
+
+		AssetTagImpl assetTagImpl = new AssetTagImpl();
+
+		assetTagImpl.setNew(assetTag.isNew());
+		assetTagImpl.setPrimaryKey(assetTag.getPrimaryKey());
+
+		assetTagImpl.setTagId(assetTag.getTagId());
+		assetTagImpl.setGroupId(assetTag.getGroupId());
+		assetTagImpl.setCompanyId(assetTag.getCompanyId());
+		assetTagImpl.setUserId(assetTag.getUserId());
+		assetTagImpl.setUserName(assetTag.getUserName());
+		assetTagImpl.setCreateDate(assetTag.getCreateDate());
+		assetTagImpl.setModifiedDate(assetTag.getModifiedDate());
+		assetTagImpl.setName(assetTag.getName());
+		assetTagImpl.setAssetCount(assetTag.getAssetCount());
+
+		return assetTagImpl;
 	}
 
 	public AssetTag findByPrimaryKey(long tagId)

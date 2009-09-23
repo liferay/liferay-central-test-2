@@ -23,6 +23,11 @@
 package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.ServiceContext;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+
+import java.io.Serializable;
 
 /**
  * <a href="JournalArticleResourceModel.java.html"><b><i>View Source</i></b></a>
@@ -61,4 +66,32 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	public void setArticleId(String articleId);
 
 	public JournalArticleResource toEscapedModel();
+
+	public boolean isNew();
+
+	public boolean setNew(boolean n);
+
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
+	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public Object clone();
+
+	public int compareTo(JournalArticleResource journalArticleResource);
+
+	public int hashCode();
+
+	public String toString();
+
+	public String toXmlString();
 }

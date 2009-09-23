@@ -193,6 +193,8 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 	protected ExpandoColumn removeImpl(ExpandoColumn expandoColumn)
 		throws SystemException {
+		expandoColumn = toUnwrappedModel(expandoColumn);
+
 		Session session = null;
 
 		try {
@@ -290,6 +292,8 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 	public ExpandoColumn updateImpl(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn,
 		boolean merge) throws SystemException {
+		expandoColumn = toUnwrappedModel(expandoColumn);
+
 		boolean isNew = expandoColumn.isNew();
 
 		ExpandoColumnModelImpl expandoColumnModelImpl = (ExpandoColumnModelImpl)expandoColumn;
@@ -341,6 +345,27 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return expandoColumn;
+	}
+
+	protected ExpandoColumn toUnwrappedModel(ExpandoColumn expandoColumn) {
+		if (expandoColumn instanceof ExpandoColumnImpl) {
+			return expandoColumn;
+		}
+
+		ExpandoColumnImpl expandoColumnImpl = new ExpandoColumnImpl();
+
+		expandoColumnImpl.setNew(expandoColumn.isNew());
+		expandoColumnImpl.setPrimaryKey(expandoColumn.getPrimaryKey());
+
+		expandoColumnImpl.setColumnId(expandoColumn.getColumnId());
+		expandoColumnImpl.setCompanyId(expandoColumn.getCompanyId());
+		expandoColumnImpl.setTableId(expandoColumn.getTableId());
+		expandoColumnImpl.setName(expandoColumn.getName());
+		expandoColumnImpl.setType(expandoColumn.getType());
+		expandoColumnImpl.setDefaultData(expandoColumn.getDefaultData());
+		expandoColumnImpl.setTypeSettings(expandoColumn.getTypeSettings());
+
+		return expandoColumnImpl;
 	}
 
 	public ExpandoColumn findByPrimaryKey(long columnId)

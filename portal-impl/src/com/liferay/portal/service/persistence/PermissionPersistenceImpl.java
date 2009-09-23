@@ -196,6 +196,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	protected Permission removeImpl(Permission permission)
 		throws SystemException {
+		permission = toUnwrappedModel(permission);
+
 		try {
 			clearGroups.clear(permission.getPrimaryKey());
 		}
@@ -321,6 +323,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 	public Permission updateImpl(
 		com.liferay.portal.model.Permission permission, boolean merge)
 		throws SystemException {
+		permission = toUnwrappedModel(permission);
+
 		boolean isNew = permission.isNew();
 
 		PermissionModelImpl permissionModelImpl = (PermissionModelImpl)permission;
@@ -369,6 +373,24 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return permission;
+	}
+
+	protected Permission toUnwrappedModel(Permission permission) {
+		if (permission instanceof PermissionImpl) {
+			return permission;
+		}
+
+		PermissionImpl permissionImpl = new PermissionImpl();
+
+		permissionImpl.setNew(permission.isNew());
+		permissionImpl.setPrimaryKey(permission.getPrimaryKey());
+
+		permissionImpl.setPermissionId(permission.getPermissionId());
+		permissionImpl.setCompanyId(permission.getCompanyId());
+		permissionImpl.setActionId(permission.getActionId());
+		permissionImpl.setResourceId(permission.getResourceId());
+
+		return permissionImpl;
 	}
 
 	public Permission findByPrimaryKey(long permissionId)

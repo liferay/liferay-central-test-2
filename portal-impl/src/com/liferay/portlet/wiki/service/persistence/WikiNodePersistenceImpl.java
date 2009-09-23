@@ -231,6 +231,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected WikiNode removeImpl(WikiNode wikiNode) throws SystemException {
+		wikiNode = toUnwrappedModel(wikiNode);
+
 		Session session = null;
 
 		try {
@@ -333,6 +335,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	public WikiNode updateImpl(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
 		throws SystemException {
+		wikiNode = toUnwrappedModel(wikiNode);
+
 		boolean isNew = wikiNode.isNew();
 
 		WikiNodeModelImpl wikiNodeModelImpl = (WikiNodeModelImpl)wikiNode;
@@ -406,6 +410,31 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return wikiNode;
+	}
+
+	protected WikiNode toUnwrappedModel(WikiNode wikiNode) {
+		if (wikiNode instanceof WikiNodeImpl) {
+			return wikiNode;
+		}
+
+		WikiNodeImpl wikiNodeImpl = new WikiNodeImpl();
+
+		wikiNodeImpl.setNew(wikiNode.isNew());
+		wikiNodeImpl.setPrimaryKey(wikiNode.getPrimaryKey());
+
+		wikiNodeImpl.setUuid(wikiNode.getUuid());
+		wikiNodeImpl.setNodeId(wikiNode.getNodeId());
+		wikiNodeImpl.setGroupId(wikiNode.getGroupId());
+		wikiNodeImpl.setCompanyId(wikiNode.getCompanyId());
+		wikiNodeImpl.setUserId(wikiNode.getUserId());
+		wikiNodeImpl.setUserName(wikiNode.getUserName());
+		wikiNodeImpl.setCreateDate(wikiNode.getCreateDate());
+		wikiNodeImpl.setModifiedDate(wikiNode.getModifiedDate());
+		wikiNodeImpl.setName(wikiNode.getName());
+		wikiNodeImpl.setDescription(wikiNode.getDescription());
+		wikiNodeImpl.setLastPostDate(wikiNode.getLastPostDate());
+
+		return wikiNodeImpl;
 	}
 
 	public WikiNode findByPrimaryKey(long nodeId)

@@ -224,6 +224,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	protected SCFrameworkVersion removeImpl(
 		SCFrameworkVersion scFrameworkVersion) throws SystemException {
+		scFrameworkVersion = toUnwrappedModel(scFrameworkVersion);
+
 		try {
 			clearSCProductVersions.clear(scFrameworkVersion.getPrimaryKey());
 		}
@@ -323,6 +325,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	public SCFrameworkVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
 		boolean merge) throws SystemException {
+		scFrameworkVersion = toUnwrappedModel(scFrameworkVersion);
+
 		Session session = null;
 
 		try {
@@ -346,6 +350,32 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			scFrameworkVersion);
 
 		return scFrameworkVersion;
+	}
+
+	protected SCFrameworkVersion toUnwrappedModel(
+		SCFrameworkVersion scFrameworkVersion) {
+		if (scFrameworkVersion instanceof SCFrameworkVersionImpl) {
+			return scFrameworkVersion;
+		}
+
+		SCFrameworkVersionImpl scFrameworkVersionImpl = new SCFrameworkVersionImpl();
+
+		scFrameworkVersionImpl.setNew(scFrameworkVersion.isNew());
+		scFrameworkVersionImpl.setPrimaryKey(scFrameworkVersion.getPrimaryKey());
+
+		scFrameworkVersionImpl.setFrameworkVersionId(scFrameworkVersion.getFrameworkVersionId());
+		scFrameworkVersionImpl.setGroupId(scFrameworkVersion.getGroupId());
+		scFrameworkVersionImpl.setCompanyId(scFrameworkVersion.getCompanyId());
+		scFrameworkVersionImpl.setUserId(scFrameworkVersion.getUserId());
+		scFrameworkVersionImpl.setUserName(scFrameworkVersion.getUserName());
+		scFrameworkVersionImpl.setCreateDate(scFrameworkVersion.getCreateDate());
+		scFrameworkVersionImpl.setModifiedDate(scFrameworkVersion.getModifiedDate());
+		scFrameworkVersionImpl.setName(scFrameworkVersion.getName());
+		scFrameworkVersionImpl.setUrl(scFrameworkVersion.getUrl());
+		scFrameworkVersionImpl.setActive(scFrameworkVersion.isActive());
+		scFrameworkVersionImpl.setPriority(scFrameworkVersion.getPriority());
+
+		return scFrameworkVersionImpl;
 	}
 
 	public SCFrameworkVersion findByPrimaryKey(long frameworkVersionId)

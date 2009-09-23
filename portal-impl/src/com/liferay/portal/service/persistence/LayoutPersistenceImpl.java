@@ -309,6 +309,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Layout removeImpl(Layout layout) throws SystemException {
+		layout = toUnwrappedModel(layout);
+
 		Session session = null;
 
 		try {
@@ -418,6 +420,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public Layout updateImpl(com.liferay.portal.model.Layout layout,
 		boolean merge) throws SystemException {
+		layout = toUnwrappedModel(layout);
+
 		boolean isNew = layout.isNew();
 
 		LayoutModelImpl layoutModelImpl = (LayoutModelImpl)layout;
@@ -520,6 +524,43 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return layout;
+	}
+
+	protected Layout toUnwrappedModel(Layout layout) {
+		if (layout instanceof LayoutImpl) {
+			return layout;
+		}
+
+		LayoutImpl layoutImpl = new LayoutImpl();
+
+		layoutImpl.setNew(layout.isNew());
+		layoutImpl.setPrimaryKey(layout.getPrimaryKey());
+
+		layoutImpl.setPlid(layout.getPlid());
+		layoutImpl.setGroupId(layout.getGroupId());
+		layoutImpl.setCompanyId(layout.getCompanyId());
+		layoutImpl.setPrivateLayout(layout.isPrivateLayout());
+		layoutImpl.setLayoutId(layout.getLayoutId());
+		layoutImpl.setParentLayoutId(layout.getParentLayoutId());
+		layoutImpl.setName(layout.getName());
+		layoutImpl.setTitle(layout.getTitle());
+		layoutImpl.setDescription(layout.getDescription());
+		layoutImpl.setType(layout.getType());
+		layoutImpl.setTypeSettings(layout.getTypeSettings());
+		layoutImpl.setHidden(layout.isHidden());
+		layoutImpl.setFriendlyURL(layout.getFriendlyURL());
+		layoutImpl.setIconImage(layout.isIconImage());
+		layoutImpl.setIconImageId(layout.getIconImageId());
+		layoutImpl.setThemeId(layout.getThemeId());
+		layoutImpl.setColorSchemeId(layout.getColorSchemeId());
+		layoutImpl.setWapThemeId(layout.getWapThemeId());
+		layoutImpl.setWapColorSchemeId(layout.getWapColorSchemeId());
+		layoutImpl.setCss(layout.getCss());
+		layoutImpl.setPriority(layout.getPriority());
+		layoutImpl.setLayoutPrototypeId(layout.getLayoutPrototypeId());
+		layoutImpl.setDlFolderId(layout.getDlFolderId());
+
+		return layoutImpl;
 	}
 
 	public Layout findByPrimaryKey(long plid)

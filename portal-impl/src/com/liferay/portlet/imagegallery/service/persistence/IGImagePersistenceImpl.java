@@ -298,6 +298,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected IGImage removeImpl(IGImage igImage) throws SystemException {
+		igImage = toUnwrappedModel(igImage);
+
 		Session session = null;
 
 		try {
@@ -405,6 +407,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 	public IGImage updateImpl(
 		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
 		throws SystemException {
+		igImage = toUnwrappedModel(igImage);
+
 		boolean isNew = igImage.isNew();
 
 		IGImageModelImpl igImageModelImpl = (IGImageModelImpl)igImage;
@@ -513,6 +517,34 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return igImage;
+	}
+
+	protected IGImage toUnwrappedModel(IGImage igImage) {
+		if (igImage instanceof IGImageImpl) {
+			return igImage;
+		}
+
+		IGImageImpl igImageImpl = new IGImageImpl();
+
+		igImageImpl.setNew(igImage.isNew());
+		igImageImpl.setPrimaryKey(igImage.getPrimaryKey());
+
+		igImageImpl.setUuid(igImage.getUuid());
+		igImageImpl.setImageId(igImage.getImageId());
+		igImageImpl.setGroupId(igImage.getGroupId());
+		igImageImpl.setCompanyId(igImage.getCompanyId());
+		igImageImpl.setUserId(igImage.getUserId());
+		igImageImpl.setCreateDate(igImage.getCreateDate());
+		igImageImpl.setModifiedDate(igImage.getModifiedDate());
+		igImageImpl.setFolderId(igImage.getFolderId());
+		igImageImpl.setName(igImage.getName());
+		igImageImpl.setDescription(igImage.getDescription());
+		igImageImpl.setSmallImageId(igImage.getSmallImageId());
+		igImageImpl.setLargeImageId(igImage.getLargeImageId());
+		igImageImpl.setCustom1ImageId(igImage.getCustom1ImageId());
+		igImageImpl.setCustom2ImageId(igImage.getCustom2ImageId());
+
+		return igImageImpl;
 	}
 
 	public IGImage findByPrimaryKey(long imageId)

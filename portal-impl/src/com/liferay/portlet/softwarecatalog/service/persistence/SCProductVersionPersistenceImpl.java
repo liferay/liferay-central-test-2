@@ -203,6 +203,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 	protected SCProductVersion removeImpl(SCProductVersion scProductVersion)
 		throws SystemException {
+		scProductVersion = toUnwrappedModel(scProductVersion);
+
 		try {
 			clearSCFrameworkVersions.clear(scProductVersion.getPrimaryKey());
 		}
@@ -309,6 +311,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 	public SCProductVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean merge) throws SystemException {
+		scProductVersion = toUnwrappedModel(scProductVersion);
+
 		boolean isNew = scProductVersion.isNew();
 
 		SCProductVersionModelImpl scProductVersionModelImpl = (SCProductVersionModelImpl)scProductVersion;
@@ -353,6 +357,33 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return scProductVersion;
+	}
+
+	protected SCProductVersion toUnwrappedModel(
+		SCProductVersion scProductVersion) {
+		if (scProductVersion instanceof SCProductVersionImpl) {
+			return scProductVersion;
+		}
+
+		SCProductVersionImpl scProductVersionImpl = new SCProductVersionImpl();
+
+		scProductVersionImpl.setNew(scProductVersion.isNew());
+		scProductVersionImpl.setPrimaryKey(scProductVersion.getPrimaryKey());
+
+		scProductVersionImpl.setProductVersionId(scProductVersion.getProductVersionId());
+		scProductVersionImpl.setCompanyId(scProductVersion.getCompanyId());
+		scProductVersionImpl.setUserId(scProductVersion.getUserId());
+		scProductVersionImpl.setUserName(scProductVersion.getUserName());
+		scProductVersionImpl.setCreateDate(scProductVersion.getCreateDate());
+		scProductVersionImpl.setModifiedDate(scProductVersion.getModifiedDate());
+		scProductVersionImpl.setProductEntryId(scProductVersion.getProductEntryId());
+		scProductVersionImpl.setVersion(scProductVersion.getVersion());
+		scProductVersionImpl.setChangeLog(scProductVersion.getChangeLog());
+		scProductVersionImpl.setDownloadPageURL(scProductVersion.getDownloadPageURL());
+		scProductVersionImpl.setDirectDownloadURL(scProductVersion.getDirectDownloadURL());
+		scProductVersionImpl.setRepoStoreArtifact(scProductVersion.isRepoStoreArtifact());
+
+		return scProductVersionImpl;
 	}
 
 	public SCProductVersion findByPrimaryKey(long productVersionId)

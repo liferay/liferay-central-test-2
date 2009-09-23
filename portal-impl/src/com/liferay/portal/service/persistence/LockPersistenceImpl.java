@@ -199,6 +199,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Lock removeImpl(Lock lock) throws SystemException {
+		lock = toUnwrappedModel(lock);
+
 		Session session = null;
 
 		try {
@@ -293,6 +295,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl
 
 	public Lock updateImpl(com.liferay.portal.model.Lock lock, boolean merge)
 		throws SystemException {
+		lock = toUnwrappedModel(lock);
+
 		boolean isNew = lock.isNew();
 
 		LockModelImpl lockModelImpl = (LockModelImpl)lock;
@@ -345,6 +349,31 @@ public class LockPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return lock;
+	}
+
+	protected Lock toUnwrappedModel(Lock lock) {
+		if (lock instanceof LockImpl) {
+			return lock;
+		}
+
+		LockImpl lockImpl = new LockImpl();
+
+		lockImpl.setNew(lock.isNew());
+		lockImpl.setPrimaryKey(lock.getPrimaryKey());
+
+		lockImpl.setUuid(lock.getUuid());
+		lockImpl.setLockId(lock.getLockId());
+		lockImpl.setCompanyId(lock.getCompanyId());
+		lockImpl.setUserId(lock.getUserId());
+		lockImpl.setUserName(lock.getUserName());
+		lockImpl.setCreateDate(lock.getCreateDate());
+		lockImpl.setClassName(lock.getClassName());
+		lockImpl.setKey(lock.getKey());
+		lockImpl.setOwner(lock.getOwner());
+		lockImpl.setInheritable(lock.isInheritable());
+		lockImpl.setExpirationDate(lock.getExpirationDate());
+
+		return lockImpl;
 	}
 
 	public Lock findByPrimaryKey(long lockId)

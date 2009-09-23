@@ -194,6 +194,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 	protected OrgGroupPermission removeImpl(
 		OrgGroupPermission orgGroupPermission) throws SystemException {
+		orgGroupPermission = toUnwrappedModel(orgGroupPermission);
+
 		Session session = null;
 
 		try {
@@ -283,6 +285,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 	public OrgGroupPermission updateImpl(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean merge) throws SystemException {
+		orgGroupPermission = toUnwrappedModel(orgGroupPermission);
+
 		Session session = null;
 
 		try {
@@ -306,6 +310,24 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 			orgGroupPermission);
 
 		return orgGroupPermission;
+	}
+
+	protected OrgGroupPermission toUnwrappedModel(
+		OrgGroupPermission orgGroupPermission) {
+		if (orgGroupPermission instanceof OrgGroupPermissionImpl) {
+			return orgGroupPermission;
+		}
+
+		OrgGroupPermissionImpl orgGroupPermissionImpl = new OrgGroupPermissionImpl();
+
+		orgGroupPermissionImpl.setNew(orgGroupPermission.isNew());
+		orgGroupPermissionImpl.setPrimaryKey(orgGroupPermission.getPrimaryKey());
+
+		orgGroupPermissionImpl.setOrganizationId(orgGroupPermission.getOrganizationId());
+		orgGroupPermissionImpl.setGroupId(orgGroupPermission.getGroupId());
+		orgGroupPermissionImpl.setPermissionId(orgGroupPermission.getPermissionId());
+
+		return orgGroupPermissionImpl;
 	}
 
 	public OrgGroupPermission findByPrimaryKey(

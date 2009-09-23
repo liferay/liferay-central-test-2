@@ -230,6 +230,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 	protected DLFileRank removeImpl(DLFileRank dlFileRank)
 		throws SystemException {
+		dlFileRank = toUnwrappedModel(dlFileRank);
+
 		Session session = null;
 
 		try {
@@ -328,6 +330,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 	public DLFileRank updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
 		boolean merge) throws SystemException {
+		dlFileRank = toUnwrappedModel(dlFileRank);
+
 		boolean isNew = dlFileRank.isNew();
 
 		DLFileRankModelImpl dlFileRankModelImpl = (DLFileRankModelImpl)dlFileRank;
@@ -386,6 +390,27 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFileRank;
+	}
+
+	protected DLFileRank toUnwrappedModel(DLFileRank dlFileRank) {
+		if (dlFileRank instanceof DLFileRankImpl) {
+			return dlFileRank;
+		}
+
+		DLFileRankImpl dlFileRankImpl = new DLFileRankImpl();
+
+		dlFileRankImpl.setNew(dlFileRank.isNew());
+		dlFileRankImpl.setPrimaryKey(dlFileRank.getPrimaryKey());
+
+		dlFileRankImpl.setFileRankId(dlFileRank.getFileRankId());
+		dlFileRankImpl.setGroupId(dlFileRank.getGroupId());
+		dlFileRankImpl.setCompanyId(dlFileRank.getCompanyId());
+		dlFileRankImpl.setUserId(dlFileRank.getUserId());
+		dlFileRankImpl.setCreateDate(dlFileRank.getCreateDate());
+		dlFileRankImpl.setFolderId(dlFileRank.getFolderId());
+		dlFileRankImpl.setName(dlFileRank.getName());
+
+		return dlFileRankImpl;
 	}
 
 	public DLFileRank findByPrimaryKey(long fileRankId)

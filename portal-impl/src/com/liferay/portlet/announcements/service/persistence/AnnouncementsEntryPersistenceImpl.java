@@ -243,6 +243,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	protected AnnouncementsEntry removeImpl(
 		AnnouncementsEntry announcementsEntry) throws SystemException {
+		announcementsEntry = toUnwrappedModel(announcementsEntry);
+
 		Session session = null;
 
 		try {
@@ -332,6 +334,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 	public AnnouncementsEntry updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry,
 		boolean merge) throws SystemException {
+		announcementsEntry = toUnwrappedModel(announcementsEntry);
+
 		if (Validator.isNull(announcementsEntry.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -361,6 +365,38 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 			announcementsEntry);
 
 		return announcementsEntry;
+	}
+
+	protected AnnouncementsEntry toUnwrappedModel(
+		AnnouncementsEntry announcementsEntry) {
+		if (announcementsEntry instanceof AnnouncementsEntryImpl) {
+			return announcementsEntry;
+		}
+
+		AnnouncementsEntryImpl announcementsEntryImpl = new AnnouncementsEntryImpl();
+
+		announcementsEntryImpl.setNew(announcementsEntry.isNew());
+		announcementsEntryImpl.setPrimaryKey(announcementsEntry.getPrimaryKey());
+
+		announcementsEntryImpl.setUuid(announcementsEntry.getUuid());
+		announcementsEntryImpl.setEntryId(announcementsEntry.getEntryId());
+		announcementsEntryImpl.setCompanyId(announcementsEntry.getCompanyId());
+		announcementsEntryImpl.setUserId(announcementsEntry.getUserId());
+		announcementsEntryImpl.setUserName(announcementsEntry.getUserName());
+		announcementsEntryImpl.setCreateDate(announcementsEntry.getCreateDate());
+		announcementsEntryImpl.setModifiedDate(announcementsEntry.getModifiedDate());
+		announcementsEntryImpl.setClassNameId(announcementsEntry.getClassNameId());
+		announcementsEntryImpl.setClassPK(announcementsEntry.getClassPK());
+		announcementsEntryImpl.setTitle(announcementsEntry.getTitle());
+		announcementsEntryImpl.setContent(announcementsEntry.getContent());
+		announcementsEntryImpl.setUrl(announcementsEntry.getUrl());
+		announcementsEntryImpl.setType(announcementsEntry.getType());
+		announcementsEntryImpl.setDisplayDate(announcementsEntry.getDisplayDate());
+		announcementsEntryImpl.setExpirationDate(announcementsEntry.getExpirationDate());
+		announcementsEntryImpl.setPriority(announcementsEntry.getPriority());
+		announcementsEntryImpl.setAlert(announcementsEntry.isAlert());
+
+		return announcementsEntryImpl;
 	}
 
 	public AnnouncementsEntry findByPrimaryKey(long entryId)

@@ -503,6 +503,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	protected MBMessage removeImpl(MBMessage mbMessage)
 		throws SystemException {
+		mbMessage = toUnwrappedModel(mbMessage);
+
 		Session session = null;
 
 		try {
@@ -598,6 +600,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 	public MBMessage updateImpl(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
 		boolean merge) throws SystemException {
+		mbMessage = toUnwrappedModel(mbMessage);
+
 		boolean isNew = mbMessage.isNew();
 
 		MBMessageModelImpl mbMessageModelImpl = (MBMessageModelImpl)mbMessage;
@@ -651,6 +655,42 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbMessage;
+	}
+
+	protected MBMessage toUnwrappedModel(MBMessage mbMessage) {
+		if (mbMessage instanceof MBMessageImpl) {
+			return mbMessage;
+		}
+
+		MBMessageImpl mbMessageImpl = new MBMessageImpl();
+
+		mbMessageImpl.setNew(mbMessage.isNew());
+		mbMessageImpl.setPrimaryKey(mbMessage.getPrimaryKey());
+
+		mbMessageImpl.setUuid(mbMessage.getUuid());
+		mbMessageImpl.setMessageId(mbMessage.getMessageId());
+		mbMessageImpl.setGroupId(mbMessage.getGroupId());
+		mbMessageImpl.setCompanyId(mbMessage.getCompanyId());
+		mbMessageImpl.setUserId(mbMessage.getUserId());
+		mbMessageImpl.setUserName(mbMessage.getUserName());
+		mbMessageImpl.setCreateDate(mbMessage.getCreateDate());
+		mbMessageImpl.setModifiedDate(mbMessage.getModifiedDate());
+		mbMessageImpl.setClassNameId(mbMessage.getClassNameId());
+		mbMessageImpl.setClassPK(mbMessage.getClassPK());
+		mbMessageImpl.setCategoryId(mbMessage.getCategoryId());
+		mbMessageImpl.setThreadId(mbMessage.getThreadId());
+		mbMessageImpl.setParentMessageId(mbMessage.getParentMessageId());
+		mbMessageImpl.setSubject(mbMessage.getSubject());
+		mbMessageImpl.setBody(mbMessage.getBody());
+		mbMessageImpl.setAttachments(mbMessage.isAttachments());
+		mbMessageImpl.setAnonymous(mbMessage.isAnonymous());
+		mbMessageImpl.setPriority(mbMessage.getPriority());
+		mbMessageImpl.setStatus(mbMessage.getStatus());
+		mbMessageImpl.setStatusByUserId(mbMessage.getStatusByUserId());
+		mbMessageImpl.setStatusByUserName(mbMessage.getStatusByUserName());
+		mbMessageImpl.setStatusDate(mbMessage.getStatusDate());
+
+		return mbMessageImpl;
 	}
 
 	public MBMessage findByPrimaryKey(long messageId)

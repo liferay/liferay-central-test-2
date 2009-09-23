@@ -252,6 +252,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected MBThread removeImpl(MBThread mbThread) throws SystemException {
+		mbThread = toUnwrappedModel(mbThread);
+
 		Session session = null;
 
 		try {
@@ -339,6 +341,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	public MBThread updateImpl(
 		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
 		throws SystemException {
+		mbThread = toUnwrappedModel(mbThread);
+
 		Session session = null;
 
 		try {
@@ -361,6 +365,33 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
 
 		return mbThread;
+	}
+
+	protected MBThread toUnwrappedModel(MBThread mbThread) {
+		if (mbThread instanceof MBThreadImpl) {
+			return mbThread;
+		}
+
+		MBThreadImpl mbThreadImpl = new MBThreadImpl();
+
+		mbThreadImpl.setNew(mbThread.isNew());
+		mbThreadImpl.setPrimaryKey(mbThread.getPrimaryKey());
+
+		mbThreadImpl.setThreadId(mbThread.getThreadId());
+		mbThreadImpl.setGroupId(mbThread.getGroupId());
+		mbThreadImpl.setCategoryId(mbThread.getCategoryId());
+		mbThreadImpl.setRootMessageId(mbThread.getRootMessageId());
+		mbThreadImpl.setMessageCount(mbThread.getMessageCount());
+		mbThreadImpl.setViewCount(mbThread.getViewCount());
+		mbThreadImpl.setLastPostByUserId(mbThread.getLastPostByUserId());
+		mbThreadImpl.setLastPostDate(mbThread.getLastPostDate());
+		mbThreadImpl.setPriority(mbThread.getPriority());
+		mbThreadImpl.setStatus(mbThread.getStatus());
+		mbThreadImpl.setStatusByUserId(mbThread.getStatusByUserId());
+		mbThreadImpl.setStatusByUserName(mbThread.getStatusByUserName());
+		mbThreadImpl.setStatusDate(mbThread.getStatusDate());
+
+		return mbThreadImpl;
 	}
 
 	public MBThread findByPrimaryKey(long threadId)

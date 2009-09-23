@@ -206,6 +206,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Company removeImpl(Company company) throws SystemException {
+		company = toUnwrappedModel(company);
+
 		Session session = null;
 
 		try {
@@ -306,6 +308,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 	public Company updateImpl(com.liferay.portal.model.Company company,
 		boolean merge) throws SystemException {
+		company = toUnwrappedModel(company);
+
 		boolean isNew = company.isNew();
 
 		CompanyModelImpl companyModelImpl = (CompanyModelImpl)company;
@@ -386,6 +390,29 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return company;
+	}
+
+	protected Company toUnwrappedModel(Company company) {
+		if (company instanceof CompanyImpl) {
+			return company;
+		}
+
+		CompanyImpl companyImpl = new CompanyImpl();
+
+		companyImpl.setNew(company.isNew());
+		companyImpl.setPrimaryKey(company.getPrimaryKey());
+
+		companyImpl.setCompanyId(company.getCompanyId());
+		companyImpl.setAccountId(company.getAccountId());
+		companyImpl.setWebId(company.getWebId());
+		companyImpl.setKey(company.getKey());
+		companyImpl.setVirtualHost(company.getVirtualHost());
+		companyImpl.setMx(company.getMx());
+		companyImpl.setHomeURL(company.getHomeURL());
+		companyImpl.setLogoId(company.getLogoId());
+		companyImpl.setSystem(company.isSystem());
+
+		return companyImpl;
 	}
 
 	public Company findByPrimaryKey(long companyId)

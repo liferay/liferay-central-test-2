@@ -194,6 +194,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	protected LayoutSet removeImpl(LayoutSet layoutSet)
 		throws SystemException {
+		layoutSet = toUnwrappedModel(layoutSet);
+
 		Session session = null;
 
 		try {
@@ -291,6 +293,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet updateImpl(com.liferay.portal.model.LayoutSet layoutSet,
 		boolean merge) throws SystemException {
+		layoutSet = toUnwrappedModel(layoutSet);
+
 		boolean isNew = layoutSet.isNew();
 
 		LayoutSetModelImpl layoutSetModelImpl = (LayoutSetModelImpl)layoutSet;
@@ -352,6 +356,34 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return layoutSet;
+	}
+
+	protected LayoutSet toUnwrappedModel(LayoutSet layoutSet) {
+		if (layoutSet instanceof LayoutSetImpl) {
+			return layoutSet;
+		}
+
+		LayoutSetImpl layoutSetImpl = new LayoutSetImpl();
+
+		layoutSetImpl.setNew(layoutSet.isNew());
+		layoutSetImpl.setPrimaryKey(layoutSet.getPrimaryKey());
+
+		layoutSetImpl.setLayoutSetId(layoutSet.getLayoutSetId());
+		layoutSetImpl.setGroupId(layoutSet.getGroupId());
+		layoutSetImpl.setCompanyId(layoutSet.getCompanyId());
+		layoutSetImpl.setPrivateLayout(layoutSet.isPrivateLayout());
+		layoutSetImpl.setLogo(layoutSet.isLogo());
+		layoutSetImpl.setLogoId(layoutSet.getLogoId());
+		layoutSetImpl.setThemeId(layoutSet.getThemeId());
+		layoutSetImpl.setColorSchemeId(layoutSet.getColorSchemeId());
+		layoutSetImpl.setWapThemeId(layoutSet.getWapThemeId());
+		layoutSetImpl.setWapColorSchemeId(layoutSet.getWapColorSchemeId());
+		layoutSetImpl.setCss(layoutSet.getCss());
+		layoutSetImpl.setPageCount(layoutSet.getPageCount());
+		layoutSetImpl.setVirtualHost(layoutSet.getVirtualHost());
+		layoutSetImpl.setLayoutSetPrototypeId(layoutSet.getLayoutSetPrototypeId());
+
+		return layoutSetImpl;
 	}
 
 	public LayoutSet findByPrimaryKey(long layoutSetId)

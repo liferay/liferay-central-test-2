@@ -199,6 +199,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 	protected ExpandoTable removeImpl(ExpandoTable expandoTable)
 		throws SystemException {
+		expandoTable = toUnwrappedModel(expandoTable);
+
 		Session session = null;
 
 		try {
@@ -297,6 +299,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 	public ExpandoTable updateImpl(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
 		boolean merge) throws SystemException {
+		expandoTable = toUnwrappedModel(expandoTable);
+
 		boolean isNew = expandoTable.isNew();
 
 		ExpandoTableModelImpl expandoTableModelImpl = (ExpandoTableModelImpl)expandoTable;
@@ -351,6 +355,24 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return expandoTable;
+	}
+
+	protected ExpandoTable toUnwrappedModel(ExpandoTable expandoTable) {
+		if (expandoTable instanceof ExpandoTableImpl) {
+			return expandoTable;
+		}
+
+		ExpandoTableImpl expandoTableImpl = new ExpandoTableImpl();
+
+		expandoTableImpl.setNew(expandoTable.isNew());
+		expandoTableImpl.setPrimaryKey(expandoTable.getPrimaryKey());
+
+		expandoTableImpl.setTableId(expandoTable.getTableId());
+		expandoTableImpl.setCompanyId(expandoTable.getCompanyId());
+		expandoTableImpl.setClassNameId(expandoTable.getClassNameId());
+		expandoTableImpl.setName(expandoTable.getName());
+
+		return expandoTableImpl;
 	}
 
 	public ExpandoTable findByPrimaryKey(long tableId)

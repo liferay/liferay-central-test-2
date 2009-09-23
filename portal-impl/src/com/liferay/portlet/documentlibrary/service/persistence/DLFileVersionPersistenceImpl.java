@@ -232,6 +232,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 	protected DLFileVersion removeImpl(DLFileVersion dlFileVersion)
 		throws SystemException {
+		dlFileVersion = toUnwrappedModel(dlFileVersion);
+
 		Session session = null;
 
 		try {
@@ -331,6 +333,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 	public DLFileVersion updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		boolean merge) throws SystemException {
+		dlFileVersion = toUnwrappedModel(dlFileVersion);
+
 		boolean isNew = dlFileVersion.isNew();
 
 		DLFileVersionModelImpl dlFileVersionModelImpl = (DLFileVersionModelImpl)dlFileVersion;
@@ -389,6 +393,34 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFileVersion;
+	}
+
+	protected DLFileVersion toUnwrappedModel(DLFileVersion dlFileVersion) {
+		if (dlFileVersion instanceof DLFileVersionImpl) {
+			return dlFileVersion;
+		}
+
+		DLFileVersionImpl dlFileVersionImpl = new DLFileVersionImpl();
+
+		dlFileVersionImpl.setNew(dlFileVersion.isNew());
+		dlFileVersionImpl.setPrimaryKey(dlFileVersion.getPrimaryKey());
+
+		dlFileVersionImpl.setFileVersionId(dlFileVersion.getFileVersionId());
+		dlFileVersionImpl.setGroupId(dlFileVersion.getGroupId());
+		dlFileVersionImpl.setCompanyId(dlFileVersion.getCompanyId());
+		dlFileVersionImpl.setUserId(dlFileVersion.getUserId());
+		dlFileVersionImpl.setUserName(dlFileVersion.getUserName());
+		dlFileVersionImpl.setCreateDate(dlFileVersion.getCreateDate());
+		dlFileVersionImpl.setFolderId(dlFileVersion.getFolderId());
+		dlFileVersionImpl.setName(dlFileVersion.getName());
+		dlFileVersionImpl.setVersion(dlFileVersion.getVersion());
+		dlFileVersionImpl.setSize(dlFileVersion.getSize());
+		dlFileVersionImpl.setStatus(dlFileVersion.getStatus());
+		dlFileVersionImpl.setStatusByUserId(dlFileVersion.getStatusByUserId());
+		dlFileVersionImpl.setStatusByUserName(dlFileVersion.getStatusByUserName());
+		dlFileVersionImpl.setStatusDate(dlFileVersion.getStatusDate());
+
+		return dlFileVersionImpl;
 	}
 
 	public DLFileVersion findByPrimaryKey(long fileVersionId)

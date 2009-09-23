@@ -23,6 +23,11 @@
 package com.liferay.portlet.polls.model;
 
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.ServiceContext;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+
+import java.io.Serializable;
 
 import java.util.Locale;
 import java.util.Map;
@@ -86,4 +91,32 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
 
 	public PollsChoice toEscapedModel();
+
+	public boolean isNew();
+
+	public boolean setNew(boolean n);
+
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
+	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public Object clone();
+
+	public int compareTo(PollsChoice pollsChoice);
+
+	public int hashCode();
+
+	public String toString();
+
+	public String toXmlString();
 }

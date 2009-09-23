@@ -190,6 +190,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 	protected ShoppingCoupon removeImpl(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
+		shoppingCoupon = toUnwrappedModel(shoppingCoupon);
+
 		Session session = null;
 
 		try {
@@ -283,6 +285,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 	public ShoppingCoupon updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
 		boolean merge) throws SystemException {
+		shoppingCoupon = toUnwrappedModel(shoppingCoupon);
+
 		boolean isNew = shoppingCoupon.isNew();
 
 		ShoppingCouponModelImpl shoppingCouponModelImpl = (ShoppingCouponModelImpl)shoppingCoupon;
@@ -324,6 +328,38 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shoppingCoupon;
+	}
+
+	protected ShoppingCoupon toUnwrappedModel(ShoppingCoupon shoppingCoupon) {
+		if (shoppingCoupon instanceof ShoppingCouponImpl) {
+			return shoppingCoupon;
+		}
+
+		ShoppingCouponImpl shoppingCouponImpl = new ShoppingCouponImpl();
+
+		shoppingCouponImpl.setNew(shoppingCoupon.isNew());
+		shoppingCouponImpl.setPrimaryKey(shoppingCoupon.getPrimaryKey());
+
+		shoppingCouponImpl.setCouponId(shoppingCoupon.getCouponId());
+		shoppingCouponImpl.setGroupId(shoppingCoupon.getGroupId());
+		shoppingCouponImpl.setCompanyId(shoppingCoupon.getCompanyId());
+		shoppingCouponImpl.setUserId(shoppingCoupon.getUserId());
+		shoppingCouponImpl.setUserName(shoppingCoupon.getUserName());
+		shoppingCouponImpl.setCreateDate(shoppingCoupon.getCreateDate());
+		shoppingCouponImpl.setModifiedDate(shoppingCoupon.getModifiedDate());
+		shoppingCouponImpl.setCode(shoppingCoupon.getCode());
+		shoppingCouponImpl.setName(shoppingCoupon.getName());
+		shoppingCouponImpl.setDescription(shoppingCoupon.getDescription());
+		shoppingCouponImpl.setStartDate(shoppingCoupon.getStartDate());
+		shoppingCouponImpl.setEndDate(shoppingCoupon.getEndDate());
+		shoppingCouponImpl.setActive(shoppingCoupon.isActive());
+		shoppingCouponImpl.setLimitCategories(shoppingCoupon.getLimitCategories());
+		shoppingCouponImpl.setLimitSkus(shoppingCoupon.getLimitSkus());
+		shoppingCouponImpl.setMinOrder(shoppingCoupon.getMinOrder());
+		shoppingCouponImpl.setDiscount(shoppingCoupon.getDiscount());
+		shoppingCouponImpl.setDiscountType(shoppingCoupon.getDiscountType());
+
+		return shoppingCouponImpl;
 	}
 
 	public ShoppingCoupon findByPrimaryKey(long couponId)

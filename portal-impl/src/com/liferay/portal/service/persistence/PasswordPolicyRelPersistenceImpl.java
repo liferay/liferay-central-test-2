@@ -193,6 +193,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 	protected PasswordPolicyRel removeImpl(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
+		passwordPolicyRel = toUnwrappedModel(passwordPolicyRel);
+
 		Session session = null;
 
 		try {
@@ -297,6 +299,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 	public PasswordPolicyRel updateImpl(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
 		boolean merge) throws SystemException {
+		passwordPolicyRel = toUnwrappedModel(passwordPolicyRel);
+
 		boolean isNew = passwordPolicyRel.isNew();
 
 		PasswordPolicyRelModelImpl passwordPolicyRelModelImpl = (PasswordPolicyRelModelImpl)passwordPolicyRel;
@@ -368,6 +372,25 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return passwordPolicyRel;
+	}
+
+	protected PasswordPolicyRel toUnwrappedModel(
+		PasswordPolicyRel passwordPolicyRel) {
+		if (passwordPolicyRel instanceof PasswordPolicyRelImpl) {
+			return passwordPolicyRel;
+		}
+
+		PasswordPolicyRelImpl passwordPolicyRelImpl = new PasswordPolicyRelImpl();
+
+		passwordPolicyRelImpl.setNew(passwordPolicyRel.isNew());
+		passwordPolicyRelImpl.setPrimaryKey(passwordPolicyRel.getPrimaryKey());
+
+		passwordPolicyRelImpl.setPasswordPolicyRelId(passwordPolicyRel.getPasswordPolicyRelId());
+		passwordPolicyRelImpl.setPasswordPolicyId(passwordPolicyRel.getPasswordPolicyId());
+		passwordPolicyRelImpl.setClassNameId(passwordPolicyRel.getClassNameId());
+		passwordPolicyRelImpl.setClassPK(passwordPolicyRel.getClassPK());
+
+		return passwordPolicyRelImpl;
 	}
 
 	public PasswordPolicyRel findByPrimaryKey(long passwordPolicyRelId)

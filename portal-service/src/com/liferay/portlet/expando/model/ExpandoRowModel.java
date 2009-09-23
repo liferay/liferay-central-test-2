@@ -23,6 +23,9 @@
 package com.liferay.portlet.expando.model;
 
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.ServiceContext;
+
+import java.io.Serializable;
 
 /**
  * <a href="ExpandoRowModel.java.html"><b><i>View Source</i></b></a>
@@ -65,4 +68,32 @@ public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	public void setClassPK(long classPK);
 
 	public ExpandoRow toEscapedModel();
+
+	public boolean isNew();
+
+	public boolean setNew(boolean n);
+
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
+	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public Object clone();
+
+	public int compareTo(ExpandoRow expandoRow);
+
+	public int hashCode();
+
+	public String toString();
+
+	public String toXmlString();
 }

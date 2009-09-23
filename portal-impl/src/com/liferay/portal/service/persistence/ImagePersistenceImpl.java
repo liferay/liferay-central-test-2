@@ -167,6 +167,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Image removeImpl(Image image) throws SystemException {
+		image = toUnwrappedModel(image);
+
 		Session session = null;
 
 		try {
@@ -252,6 +254,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 	public Image updateImpl(com.liferay.portal.model.Image image, boolean merge)
 		throws SystemException {
+		image = toUnwrappedModel(image);
+
 		Session session = null;
 
 		try {
@@ -274,6 +278,27 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 			ImageImpl.class, image.getPrimaryKey(), image);
 
 		return image;
+	}
+
+	protected Image toUnwrappedModel(Image image) {
+		if (image instanceof ImageImpl) {
+			return image;
+		}
+
+		ImageImpl imageImpl = new ImageImpl();
+
+		imageImpl.setNew(image.isNew());
+		imageImpl.setPrimaryKey(image.getPrimaryKey());
+
+		imageImpl.setImageId(image.getImageId());
+		imageImpl.setModifiedDate(image.getModifiedDate());
+		imageImpl.setText(image.getText());
+		imageImpl.setType(image.getType());
+		imageImpl.setHeight(image.getHeight());
+		imageImpl.setWidth(image.getWidth());
+		imageImpl.setSize(image.getSize());
+
+		return imageImpl;
 	}
 
 	public Image findByPrimaryKey(long imageId)

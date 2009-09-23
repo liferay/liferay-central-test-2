@@ -171,6 +171,8 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	protected BrowserTracker removeImpl(BrowserTracker browserTracker)
 		throws SystemException {
+		browserTracker = toUnwrappedModel(browserTracker);
+
 		Session session = null;
 
 		try {
@@ -264,6 +266,8 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 	public BrowserTracker updateImpl(
 		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
 		throws SystemException {
+		browserTracker = toUnwrappedModel(browserTracker);
+
 		boolean isNew = browserTracker.isNew();
 
 		BrowserTrackerModelImpl browserTrackerModelImpl = (BrowserTrackerModelImpl)browserTracker;
@@ -306,6 +310,23 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return browserTracker;
+	}
+
+	protected BrowserTracker toUnwrappedModel(BrowserTracker browserTracker) {
+		if (browserTracker instanceof BrowserTrackerImpl) {
+			return browserTracker;
+		}
+
+		BrowserTrackerImpl browserTrackerImpl = new BrowserTrackerImpl();
+
+		browserTrackerImpl.setNew(browserTracker.isNew());
+		browserTrackerImpl.setPrimaryKey(browserTracker.getPrimaryKey());
+
+		browserTrackerImpl.setBrowserTrackerId(browserTracker.getBrowserTrackerId());
+		browserTrackerImpl.setUserId(browserTracker.getUserId());
+		browserTrackerImpl.setBrowserKey(browserTracker.getBrowserKey());
+
+		return browserTrackerImpl;
 	}
 
 	public BrowserTracker findByPrimaryKey(long browserTrackerId)

@@ -169,6 +169,8 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected OrgLabor removeImpl(OrgLabor orgLabor) throws SystemException {
+		orgLabor = toUnwrappedModel(orgLabor);
+
 		Session session = null;
 
 		try {
@@ -255,6 +257,8 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public OrgLabor updateImpl(com.liferay.portal.model.OrgLabor orgLabor,
 		boolean merge) throws SystemException {
+		orgLabor = toUnwrappedModel(orgLabor);
+
 		Session session = null;
 
 		try {
@@ -277,6 +281,37 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 			OrgLaborImpl.class, orgLabor.getPrimaryKey(), orgLabor);
 
 		return orgLabor;
+	}
+
+	protected OrgLabor toUnwrappedModel(OrgLabor orgLabor) {
+		if (orgLabor instanceof OrgLaborImpl) {
+			return orgLabor;
+		}
+
+		OrgLaborImpl orgLaborImpl = new OrgLaborImpl();
+
+		orgLaborImpl.setNew(orgLabor.isNew());
+		orgLaborImpl.setPrimaryKey(orgLabor.getPrimaryKey());
+
+		orgLaborImpl.setOrgLaborId(orgLabor.getOrgLaborId());
+		orgLaborImpl.setOrganizationId(orgLabor.getOrganizationId());
+		orgLaborImpl.setTypeId(orgLabor.getTypeId());
+		orgLaborImpl.setSunOpen(orgLabor.getSunOpen());
+		orgLaborImpl.setSunClose(orgLabor.getSunClose());
+		orgLaborImpl.setMonOpen(orgLabor.getMonOpen());
+		orgLaborImpl.setMonClose(orgLabor.getMonClose());
+		orgLaborImpl.setTueOpen(orgLabor.getTueOpen());
+		orgLaborImpl.setTueClose(orgLabor.getTueClose());
+		orgLaborImpl.setWedOpen(orgLabor.getWedOpen());
+		orgLaborImpl.setWedClose(orgLabor.getWedClose());
+		orgLaborImpl.setThuOpen(orgLabor.getThuOpen());
+		orgLaborImpl.setThuClose(orgLabor.getThuClose());
+		orgLaborImpl.setFriOpen(orgLabor.getFriOpen());
+		orgLaborImpl.setFriClose(orgLabor.getFriClose());
+		orgLaborImpl.setSatOpen(orgLabor.getSatOpen());
+		orgLaborImpl.setSatClose(orgLabor.getSatClose());
+
+		return orgLaborImpl;
 	}
 
 	public OrgLabor findByPrimaryKey(long orgLaborId)

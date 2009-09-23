@@ -202,6 +202,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	protected UserTracker removeImpl(UserTracker userTracker)
 		throws SystemException {
+		userTracker = toUnwrappedModel(userTracker);
+
 		Session session = null;
 
 		try {
@@ -290,6 +292,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 	public UserTracker updateImpl(
 		com.liferay.portal.model.UserTracker userTracker, boolean merge)
 		throws SystemException {
+		userTracker = toUnwrappedModel(userTracker);
+
 		Session session = null;
 
 		try {
@@ -312,6 +316,28 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 			UserTrackerImpl.class, userTracker.getPrimaryKey(), userTracker);
 
 		return userTracker;
+	}
+
+	protected UserTracker toUnwrappedModel(UserTracker userTracker) {
+		if (userTracker instanceof UserTrackerImpl) {
+			return userTracker;
+		}
+
+		UserTrackerImpl userTrackerImpl = new UserTrackerImpl();
+
+		userTrackerImpl.setNew(userTracker.isNew());
+		userTrackerImpl.setPrimaryKey(userTracker.getPrimaryKey());
+
+		userTrackerImpl.setUserTrackerId(userTracker.getUserTrackerId());
+		userTrackerImpl.setCompanyId(userTracker.getCompanyId());
+		userTrackerImpl.setUserId(userTracker.getUserId());
+		userTrackerImpl.setModifiedDate(userTracker.getModifiedDate());
+		userTrackerImpl.setSessionId(userTracker.getSessionId());
+		userTrackerImpl.setRemoteAddr(userTracker.getRemoteAddr());
+		userTrackerImpl.setRemoteHost(userTracker.getRemoteHost());
+		userTrackerImpl.setUserAgent(userTracker.getUserAgent());
+
+		return userTrackerImpl;
 	}
 
 	public UserTracker findByPrimaryKey(long userTrackerId)

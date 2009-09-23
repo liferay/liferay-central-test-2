@@ -201,6 +201,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Region removeImpl(Region region) throws SystemException {
+		region = toUnwrappedModel(region);
+
 		Session session = null;
 
 		try {
@@ -287,6 +289,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public Region updateImpl(com.liferay.portal.model.Region region,
 		boolean merge) throws SystemException {
+		region = toUnwrappedModel(region);
+
 		Session session = null;
 
 		try {
@@ -309,6 +313,25 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 			RegionImpl.class, region.getPrimaryKey(), region);
 
 		return region;
+	}
+
+	protected Region toUnwrappedModel(Region region) {
+		if (region instanceof RegionImpl) {
+			return region;
+		}
+
+		RegionImpl regionImpl = new RegionImpl();
+
+		regionImpl.setNew(region.isNew());
+		regionImpl.setPrimaryKey(region.getPrimaryKey());
+
+		regionImpl.setRegionId(region.getRegionId());
+		regionImpl.setCountryId(region.getCountryId());
+		regionImpl.setRegionCode(region.getRegionCode());
+		regionImpl.setName(region.getName());
+		regionImpl.setActive(region.isActive());
+
+		return regionImpl;
 	}
 
 	public Region findByPrimaryKey(long regionId)

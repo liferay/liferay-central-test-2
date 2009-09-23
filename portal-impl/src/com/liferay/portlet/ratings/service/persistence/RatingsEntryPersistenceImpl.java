@@ -195,6 +195,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 	protected RatingsEntry removeImpl(RatingsEntry ratingsEntry)
 		throws SystemException {
+		ratingsEntry = toUnwrappedModel(ratingsEntry);
+
 		Session session = null;
 
 		try {
@@ -292,6 +294,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 	public RatingsEntry updateImpl(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
 		boolean merge) throws SystemException {
+		ratingsEntry = toUnwrappedModel(ratingsEntry);
+
 		boolean isNew = ratingsEntry.isNew();
 
 		RatingsEntryModelImpl ratingsEntryModelImpl = (RatingsEntryModelImpl)ratingsEntry;
@@ -342,6 +346,29 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return ratingsEntry;
+	}
+
+	protected RatingsEntry toUnwrappedModel(RatingsEntry ratingsEntry) {
+		if (ratingsEntry instanceof RatingsEntryImpl) {
+			return ratingsEntry;
+		}
+
+		RatingsEntryImpl ratingsEntryImpl = new RatingsEntryImpl();
+
+		ratingsEntryImpl.setNew(ratingsEntry.isNew());
+		ratingsEntryImpl.setPrimaryKey(ratingsEntry.getPrimaryKey());
+
+		ratingsEntryImpl.setEntryId(ratingsEntry.getEntryId());
+		ratingsEntryImpl.setCompanyId(ratingsEntry.getCompanyId());
+		ratingsEntryImpl.setUserId(ratingsEntry.getUserId());
+		ratingsEntryImpl.setUserName(ratingsEntry.getUserName());
+		ratingsEntryImpl.setCreateDate(ratingsEntry.getCreateDate());
+		ratingsEntryImpl.setModifiedDate(ratingsEntry.getModifiedDate());
+		ratingsEntryImpl.setClassNameId(ratingsEntry.getClassNameId());
+		ratingsEntryImpl.setClassPK(ratingsEntry.getClassPK());
+		ratingsEntryImpl.setScore(ratingsEntry.getScore());
+
+		return ratingsEntryImpl;
 	}
 
 	public RatingsEntry findByPrimaryKey(long entryId)

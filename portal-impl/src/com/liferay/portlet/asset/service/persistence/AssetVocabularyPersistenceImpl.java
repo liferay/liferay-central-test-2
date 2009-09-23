@@ -247,6 +247,8 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	protected AssetVocabulary removeImpl(AssetVocabulary assetVocabulary)
 		throws SystemException {
+		assetVocabulary = toUnwrappedModel(assetVocabulary);
+
 		Session session = null;
 
 		try {
@@ -351,6 +353,8 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 	public AssetVocabulary updateImpl(
 		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary,
 		boolean merge) throws SystemException {
+		assetVocabulary = toUnwrappedModel(assetVocabulary);
+
 		boolean isNew = assetVocabulary.isNew();
 
 		AssetVocabularyModelImpl assetVocabularyModelImpl = (AssetVocabularyModelImpl)assetVocabulary;
@@ -430,6 +434,30 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetVocabulary;
+	}
+
+	protected AssetVocabulary toUnwrappedModel(AssetVocabulary assetVocabulary) {
+		if (assetVocabulary instanceof AssetVocabularyImpl) {
+			return assetVocabulary;
+		}
+
+		AssetVocabularyImpl assetVocabularyImpl = new AssetVocabularyImpl();
+
+		assetVocabularyImpl.setNew(assetVocabulary.isNew());
+		assetVocabularyImpl.setPrimaryKey(assetVocabulary.getPrimaryKey());
+
+		assetVocabularyImpl.setUuid(assetVocabulary.getUuid());
+		assetVocabularyImpl.setVocabularyId(assetVocabulary.getVocabularyId());
+		assetVocabularyImpl.setGroupId(assetVocabulary.getGroupId());
+		assetVocabularyImpl.setCompanyId(assetVocabulary.getCompanyId());
+		assetVocabularyImpl.setUserId(assetVocabulary.getUserId());
+		assetVocabularyImpl.setUserName(assetVocabulary.getUserName());
+		assetVocabularyImpl.setCreateDate(assetVocabulary.getCreateDate());
+		assetVocabularyImpl.setModifiedDate(assetVocabulary.getModifiedDate());
+		assetVocabularyImpl.setName(assetVocabulary.getName());
+		assetVocabularyImpl.setDescription(assetVocabulary.getDescription());
+
+		return assetVocabularyImpl;
 	}
 
 	public AssetVocabulary findByPrimaryKey(long vocabularyId)

@@ -188,6 +188,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	protected OrgGroupRole removeImpl(OrgGroupRole orgGroupRole)
 		throws SystemException {
+		orgGroupRole = toUnwrappedModel(orgGroupRole);
+
 		Session session = null;
 
 		try {
@@ -276,6 +278,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 	public OrgGroupRole updateImpl(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
 		throws SystemException {
+		orgGroupRole = toUnwrappedModel(orgGroupRole);
+
 		Session session = null;
 
 		try {
@@ -298,6 +302,23 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 			OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey(), orgGroupRole);
 
 		return orgGroupRole;
+	}
+
+	protected OrgGroupRole toUnwrappedModel(OrgGroupRole orgGroupRole) {
+		if (orgGroupRole instanceof OrgGroupRoleImpl) {
+			return orgGroupRole;
+		}
+
+		OrgGroupRoleImpl orgGroupRoleImpl = new OrgGroupRoleImpl();
+
+		orgGroupRoleImpl.setNew(orgGroupRole.isNew());
+		orgGroupRoleImpl.setPrimaryKey(orgGroupRole.getPrimaryKey());
+
+		orgGroupRoleImpl.setOrganizationId(orgGroupRole.getOrganizationId());
+		orgGroupRoleImpl.setGroupId(orgGroupRole.getGroupId());
+		orgGroupRoleImpl.setRoleId(orgGroupRole.getRoleId());
+
+		return orgGroupRoleImpl;
 	}
 
 	public OrgGroupRole findByPrimaryKey(OrgGroupRolePK orgGroupRolePK)

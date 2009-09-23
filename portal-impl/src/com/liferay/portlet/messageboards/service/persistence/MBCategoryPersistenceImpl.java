@@ -237,6 +237,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	protected MBCategory removeImpl(MBCategory mbCategory)
 		throws SystemException {
+		mbCategory = toUnwrappedModel(mbCategory);
+
 		Session session = null;
 
 		try {
@@ -332,6 +334,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 	public MBCategory updateImpl(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean merge) throws SystemException {
+		mbCategory = toUnwrappedModel(mbCategory);
+
 		boolean isNew = mbCategory.isNew();
 
 		MBCategoryModelImpl mbCategoryModelImpl = (MBCategoryModelImpl)mbCategory;
@@ -385,6 +389,34 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbCategory;
+	}
+
+	protected MBCategory toUnwrappedModel(MBCategory mbCategory) {
+		if (mbCategory instanceof MBCategoryImpl) {
+			return mbCategory;
+		}
+
+		MBCategoryImpl mbCategoryImpl = new MBCategoryImpl();
+
+		mbCategoryImpl.setNew(mbCategory.isNew());
+		mbCategoryImpl.setPrimaryKey(mbCategory.getPrimaryKey());
+
+		mbCategoryImpl.setUuid(mbCategory.getUuid());
+		mbCategoryImpl.setCategoryId(mbCategory.getCategoryId());
+		mbCategoryImpl.setGroupId(mbCategory.getGroupId());
+		mbCategoryImpl.setCompanyId(mbCategory.getCompanyId());
+		mbCategoryImpl.setUserId(mbCategory.getUserId());
+		mbCategoryImpl.setUserName(mbCategory.getUserName());
+		mbCategoryImpl.setCreateDate(mbCategory.getCreateDate());
+		mbCategoryImpl.setModifiedDate(mbCategory.getModifiedDate());
+		mbCategoryImpl.setParentCategoryId(mbCategory.getParentCategoryId());
+		mbCategoryImpl.setName(mbCategory.getName());
+		mbCategoryImpl.setDescription(mbCategory.getDescription());
+		mbCategoryImpl.setThreadCount(mbCategory.getThreadCount());
+		mbCategoryImpl.setMessageCount(mbCategory.getMessageCount());
+		mbCategoryImpl.setLastPostDate(mbCategory.getLastPostDate());
+
+		return mbCategoryImpl;
 	}
 
 	public MBCategory findByPrimaryKey(long categoryId)

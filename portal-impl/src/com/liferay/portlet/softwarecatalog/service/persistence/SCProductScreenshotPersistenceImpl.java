@@ -217,6 +217,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	protected SCProductScreenshot removeImpl(
 		SCProductScreenshot scProductScreenshot) throws SystemException {
+		scProductScreenshot = toUnwrappedModel(scProductScreenshot);
+
 		Session session = null;
 
 		try {
@@ -324,6 +326,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 	public SCProductScreenshot updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
 		boolean merge) throws SystemException {
+		scProductScreenshot = toUnwrappedModel(scProductScreenshot);
+
 		boolean isNew = scProductScreenshot.isNew();
 
 		SCProductScreenshotModelImpl scProductScreenshotModelImpl = (SCProductScreenshotModelImpl)scProductScreenshot;
@@ -401,6 +405,28 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return scProductScreenshot;
+	}
+
+	protected SCProductScreenshot toUnwrappedModel(
+		SCProductScreenshot scProductScreenshot) {
+		if (scProductScreenshot instanceof SCProductScreenshotImpl) {
+			return scProductScreenshot;
+		}
+
+		SCProductScreenshotImpl scProductScreenshotImpl = new SCProductScreenshotImpl();
+
+		scProductScreenshotImpl.setNew(scProductScreenshot.isNew());
+		scProductScreenshotImpl.setPrimaryKey(scProductScreenshot.getPrimaryKey());
+
+		scProductScreenshotImpl.setProductScreenshotId(scProductScreenshot.getProductScreenshotId());
+		scProductScreenshotImpl.setCompanyId(scProductScreenshot.getCompanyId());
+		scProductScreenshotImpl.setGroupId(scProductScreenshot.getGroupId());
+		scProductScreenshotImpl.setProductEntryId(scProductScreenshot.getProductEntryId());
+		scProductScreenshotImpl.setThumbnailId(scProductScreenshot.getThumbnailId());
+		scProductScreenshotImpl.setFullImageId(scProductScreenshot.getFullImageId());
+		scProductScreenshotImpl.setPriority(scProductScreenshot.getPriority());
+
+		return scProductScreenshotImpl;
 	}
 
 	public SCProductScreenshot findByPrimaryKey(long productScreenshotId)

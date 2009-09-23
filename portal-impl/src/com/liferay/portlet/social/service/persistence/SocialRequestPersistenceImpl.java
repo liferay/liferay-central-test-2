@@ -356,6 +356,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	protected SocialRequest removeImpl(SocialRequest socialRequest)
 		throws SystemException {
+		socialRequest = toUnwrappedModel(socialRequest);
+
 		Session session = null;
 
 		try {
@@ -461,6 +463,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 	public SocialRequest updateImpl(
 		com.liferay.portlet.social.model.SocialRequest socialRequest,
 		boolean merge) throws SystemException {
+		socialRequest = toUnwrappedModel(socialRequest);
+
 		boolean isNew = socialRequest.isNew();
 
 		SocialRequestModelImpl socialRequestModelImpl = (SocialRequestModelImpl)socialRequest;
@@ -548,6 +552,33 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return socialRequest;
+	}
+
+	protected SocialRequest toUnwrappedModel(SocialRequest socialRequest) {
+		if (socialRequest instanceof SocialRequestImpl) {
+			return socialRequest;
+		}
+
+		SocialRequestImpl socialRequestImpl = new SocialRequestImpl();
+
+		socialRequestImpl.setNew(socialRequest.isNew());
+		socialRequestImpl.setPrimaryKey(socialRequest.getPrimaryKey());
+
+		socialRequestImpl.setUuid(socialRequest.getUuid());
+		socialRequestImpl.setRequestId(socialRequest.getRequestId());
+		socialRequestImpl.setGroupId(socialRequest.getGroupId());
+		socialRequestImpl.setCompanyId(socialRequest.getCompanyId());
+		socialRequestImpl.setUserId(socialRequest.getUserId());
+		socialRequestImpl.setCreateDate(socialRequest.getCreateDate());
+		socialRequestImpl.setModifiedDate(socialRequest.getModifiedDate());
+		socialRequestImpl.setClassNameId(socialRequest.getClassNameId());
+		socialRequestImpl.setClassPK(socialRequest.getClassPK());
+		socialRequestImpl.setType(socialRequest.getType());
+		socialRequestImpl.setExtraData(socialRequest.getExtraData());
+		socialRequestImpl.setReceiverUserId(socialRequest.getReceiverUserId());
+		socialRequestImpl.setStatus(socialRequest.getStatus());
+
+		return socialRequestImpl;
 	}
 
 	public SocialRequest findByPrimaryKey(long requestId)

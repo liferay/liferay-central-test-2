@@ -175,6 +175,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Shard removeImpl(Shard shard) throws SystemException {
+		shard = toUnwrappedModel(shard);
+
 		Session session = null;
 
 		try {
@@ -271,6 +273,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 	public Shard updateImpl(com.liferay.portal.model.Shard shard, boolean merge)
 		throws SystemException {
+		shard = toUnwrappedModel(shard);
+
 		boolean isNew = shard.isNew();
 
 		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
@@ -331,6 +335,24 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shard;
+	}
+
+	protected Shard toUnwrappedModel(Shard shard) {
+		if (shard instanceof ShardImpl) {
+			return shard;
+		}
+
+		ShardImpl shardImpl = new ShardImpl();
+
+		shardImpl.setNew(shard.isNew());
+		shardImpl.setPrimaryKey(shard.getPrimaryKey());
+
+		shardImpl.setShardId(shard.getShardId());
+		shardImpl.setClassNameId(shard.getClassNameId());
+		shardImpl.setClassPK(shard.getClassPK());
+		shardImpl.setName(shard.getName());
+
+		return shardImpl;
 	}
 
 	public Shard findByPrimaryKey(long shardId)

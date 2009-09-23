@@ -182,6 +182,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Resource removeImpl(Resource resource) throws SystemException {
+		resource = toUnwrappedModel(resource);
+
 		Session session = null;
 
 		try {
@@ -277,6 +279,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public Resource updateImpl(com.liferay.portal.model.Resource resource,
 		boolean merge) throws SystemException {
+		resource = toUnwrappedModel(resource);
+
 		boolean isNew = resource.isNew();
 
 		ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resource;
@@ -327,6 +331,23 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return resource;
+	}
+
+	protected Resource toUnwrappedModel(Resource resource) {
+		if (resource instanceof ResourceImpl) {
+			return resource;
+		}
+
+		ResourceImpl resourceImpl = new ResourceImpl();
+
+		resourceImpl.setNew(resource.isNew());
+		resourceImpl.setPrimaryKey(resource.getPrimaryKey());
+
+		resourceImpl.setResourceId(resource.getResourceId());
+		resourceImpl.setCodeId(resource.getCodeId());
+		resourceImpl.setPrimKey(resource.getPrimKey());
+
+		return resourceImpl;
 	}
 
 	public Resource findByPrimaryKey(long resourceId)

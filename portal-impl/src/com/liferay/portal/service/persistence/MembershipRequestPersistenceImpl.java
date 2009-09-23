@@ -211,6 +211,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	protected MembershipRequest removeImpl(MembershipRequest membershipRequest)
 		throws SystemException {
+		membershipRequest = toUnwrappedModel(membershipRequest);
+
 		Session session = null;
 
 		try {
@@ -300,6 +302,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	public MembershipRequest updateImpl(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
 		boolean merge) throws SystemException {
+		membershipRequest = toUnwrappedModel(membershipRequest);
+
 		Session session = null;
 
 		try {
@@ -323,6 +327,31 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 			membershipRequest);
 
 		return membershipRequest;
+	}
+
+	protected MembershipRequest toUnwrappedModel(
+		MembershipRequest membershipRequest) {
+		if (membershipRequest instanceof MembershipRequestImpl) {
+			return membershipRequest;
+		}
+
+		MembershipRequestImpl membershipRequestImpl = new MembershipRequestImpl();
+
+		membershipRequestImpl.setNew(membershipRequest.isNew());
+		membershipRequestImpl.setPrimaryKey(membershipRequest.getPrimaryKey());
+
+		membershipRequestImpl.setMembershipRequestId(membershipRequest.getMembershipRequestId());
+		membershipRequestImpl.setCompanyId(membershipRequest.getCompanyId());
+		membershipRequestImpl.setUserId(membershipRequest.getUserId());
+		membershipRequestImpl.setCreateDate(membershipRequest.getCreateDate());
+		membershipRequestImpl.setGroupId(membershipRequest.getGroupId());
+		membershipRequestImpl.setComments(membershipRequest.getComments());
+		membershipRequestImpl.setReplyComments(membershipRequest.getReplyComments());
+		membershipRequestImpl.setReplyDate(membershipRequest.getReplyDate());
+		membershipRequestImpl.setReplierUserId(membershipRequest.getReplierUserId());
+		membershipRequestImpl.setStatusId(membershipRequest.getStatusId());
+
+		return membershipRequestImpl;
 	}
 
 	public MembershipRequest findByPrimaryKey(long membershipRequestId)

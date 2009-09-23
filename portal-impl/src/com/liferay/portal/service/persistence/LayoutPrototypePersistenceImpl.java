@@ -193,6 +193,8 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 
 	protected LayoutPrototype removeImpl(LayoutPrototype layoutPrototype)
 		throws SystemException {
+		layoutPrototype = toUnwrappedModel(layoutPrototype);
+
 		Session session = null;
 
 		try {
@@ -282,6 +284,8 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 	public LayoutPrototype updateImpl(
 		com.liferay.portal.model.LayoutPrototype layoutPrototype, boolean merge)
 		throws SystemException {
+		layoutPrototype = toUnwrappedModel(layoutPrototype);
+
 		Session session = null;
 
 		try {
@@ -305,6 +309,26 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 			layoutPrototype);
 
 		return layoutPrototype;
+	}
+
+	protected LayoutPrototype toUnwrappedModel(LayoutPrototype layoutPrototype) {
+		if (layoutPrototype instanceof LayoutPrototypeImpl) {
+			return layoutPrototype;
+		}
+
+		LayoutPrototypeImpl layoutPrototypeImpl = new LayoutPrototypeImpl();
+
+		layoutPrototypeImpl.setNew(layoutPrototype.isNew());
+		layoutPrototypeImpl.setPrimaryKey(layoutPrototype.getPrimaryKey());
+
+		layoutPrototypeImpl.setLayoutPrototypeId(layoutPrototype.getLayoutPrototypeId());
+		layoutPrototypeImpl.setCompanyId(layoutPrototype.getCompanyId());
+		layoutPrototypeImpl.setName(layoutPrototype.getName());
+		layoutPrototypeImpl.setDescription(layoutPrototype.getDescription());
+		layoutPrototypeImpl.setSettings(layoutPrototype.getSettings());
+		layoutPrototypeImpl.setActive(layoutPrototype.isActive());
+
+		return layoutPrototypeImpl;
 	}
 
 	public LayoutPrototype findByPrimaryKey(long layoutPrototypeId)

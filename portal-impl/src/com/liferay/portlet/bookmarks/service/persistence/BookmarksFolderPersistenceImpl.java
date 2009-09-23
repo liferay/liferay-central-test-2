@@ -249,6 +249,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 
 	protected BookmarksFolder removeImpl(BookmarksFolder bookmarksFolder)
 		throws SystemException {
+		bookmarksFolder = toUnwrappedModel(bookmarksFolder);
+
 		Session session = null;
 
 		try {
@@ -346,6 +348,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 	public BookmarksFolder updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
 		boolean merge) throws SystemException {
+		bookmarksFolder = toUnwrappedModel(bookmarksFolder);
+
 		boolean isNew = bookmarksFolder.isNew();
 
 		BookmarksFolderModelImpl bookmarksFolderModelImpl = (BookmarksFolderModelImpl)bookmarksFolder;
@@ -401,6 +405,30 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return bookmarksFolder;
+	}
+
+	protected BookmarksFolder toUnwrappedModel(BookmarksFolder bookmarksFolder) {
+		if (bookmarksFolder instanceof BookmarksFolderImpl) {
+			return bookmarksFolder;
+		}
+
+		BookmarksFolderImpl bookmarksFolderImpl = new BookmarksFolderImpl();
+
+		bookmarksFolderImpl.setNew(bookmarksFolder.isNew());
+		bookmarksFolderImpl.setPrimaryKey(bookmarksFolder.getPrimaryKey());
+
+		bookmarksFolderImpl.setUuid(bookmarksFolder.getUuid());
+		bookmarksFolderImpl.setFolderId(bookmarksFolder.getFolderId());
+		bookmarksFolderImpl.setGroupId(bookmarksFolder.getGroupId());
+		bookmarksFolderImpl.setCompanyId(bookmarksFolder.getCompanyId());
+		bookmarksFolderImpl.setUserId(bookmarksFolder.getUserId());
+		bookmarksFolderImpl.setCreateDate(bookmarksFolder.getCreateDate());
+		bookmarksFolderImpl.setModifiedDate(bookmarksFolder.getModifiedDate());
+		bookmarksFolderImpl.setParentFolderId(bookmarksFolder.getParentFolderId());
+		bookmarksFolderImpl.setName(bookmarksFolder.getName());
+		bookmarksFolderImpl.setDescription(bookmarksFolder.getDescription());
+
+		return bookmarksFolderImpl;
 	}
 
 	public BookmarksFolder findByPrimaryKey(long folderId)

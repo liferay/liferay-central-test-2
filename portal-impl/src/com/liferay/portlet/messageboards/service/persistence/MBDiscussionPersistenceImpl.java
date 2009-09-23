@@ -199,6 +199,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	protected MBDiscussion removeImpl(MBDiscussion mbDiscussion)
 		throws SystemException {
+		mbDiscussion = toUnwrappedModel(mbDiscussion);
+
 		Session session = null;
 
 		try {
@@ -298,6 +300,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 	public MBDiscussion updateImpl(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean merge) throws SystemException {
+		mbDiscussion = toUnwrappedModel(mbDiscussion);
+
 		boolean isNew = mbDiscussion.isNew();
 
 		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
@@ -359,6 +363,24 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbDiscussion;
+	}
+
+	protected MBDiscussion toUnwrappedModel(MBDiscussion mbDiscussion) {
+		if (mbDiscussion instanceof MBDiscussionImpl) {
+			return mbDiscussion;
+		}
+
+		MBDiscussionImpl mbDiscussionImpl = new MBDiscussionImpl();
+
+		mbDiscussionImpl.setNew(mbDiscussion.isNew());
+		mbDiscussionImpl.setPrimaryKey(mbDiscussion.getPrimaryKey());
+
+		mbDiscussionImpl.setDiscussionId(mbDiscussion.getDiscussionId());
+		mbDiscussionImpl.setClassNameId(mbDiscussion.getClassNameId());
+		mbDiscussionImpl.setClassPK(mbDiscussion.getClassPK());
+		mbDiscussionImpl.setThreadId(mbDiscussion.getThreadId());
+
+		return mbDiscussionImpl;
 	}
 
 	public MBDiscussion findByPrimaryKey(long discussionId)

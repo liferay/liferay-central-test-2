@@ -176,6 +176,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 	protected PasswordTracker removeImpl(PasswordTracker passwordTracker)
 		throws SystemException {
+		passwordTracker = toUnwrappedModel(passwordTracker);
+
 		Session session = null;
 
 		try {
@@ -265,6 +267,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	public PasswordTracker updateImpl(
 		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
 		throws SystemException {
+		passwordTracker = toUnwrappedModel(passwordTracker);
+
 		Session session = null;
 
 		try {
@@ -288,6 +292,24 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 			passwordTracker);
 
 		return passwordTracker;
+	}
+
+	protected PasswordTracker toUnwrappedModel(PasswordTracker passwordTracker) {
+		if (passwordTracker instanceof PasswordTrackerImpl) {
+			return passwordTracker;
+		}
+
+		PasswordTrackerImpl passwordTrackerImpl = new PasswordTrackerImpl();
+
+		passwordTrackerImpl.setNew(passwordTracker.isNew());
+		passwordTrackerImpl.setPrimaryKey(passwordTracker.getPrimaryKey());
+
+		passwordTrackerImpl.setPasswordTrackerId(passwordTracker.getPasswordTrackerId());
+		passwordTrackerImpl.setUserId(passwordTracker.getUserId());
+		passwordTrackerImpl.setCreateDate(passwordTracker.getCreateDate());
+		passwordTrackerImpl.setPassword(passwordTracker.getPassword());
+
+		return passwordTrackerImpl;
 	}
 
 	public PasswordTracker findByPrimaryKey(long passwordTrackerId)

@@ -165,6 +165,8 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 
 	protected ClassName removeImpl(ClassName className)
 		throws SystemException {
+		className = toUnwrappedModel(className);
+
 		Session session = null;
 
 		try {
@@ -256,6 +258,8 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 
 	public ClassName updateImpl(com.liferay.portal.model.ClassName className,
 		boolean merge) throws SystemException {
+		className = toUnwrappedModel(className);
+
 		boolean isNew = className.isNew();
 
 		ClassNameModelImpl classNameModelImpl = (ClassNameModelImpl)className;
@@ -296,6 +300,22 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return className;
+	}
+
+	protected ClassName toUnwrappedModel(ClassName className) {
+		if (className instanceof ClassNameImpl) {
+			return className;
+		}
+
+		ClassNameImpl classNameImpl = new ClassNameImpl();
+
+		classNameImpl.setNew(className.isNew());
+		classNameImpl.setPrimaryKey(className.getPrimaryKey());
+
+		classNameImpl.setClassNameId(className.getClassNameId());
+		classNameImpl.setValue(className.getValue());
+
+		return classNameImpl;
 	}
 
 	public ClassName findByPrimaryKey(long classNameId)

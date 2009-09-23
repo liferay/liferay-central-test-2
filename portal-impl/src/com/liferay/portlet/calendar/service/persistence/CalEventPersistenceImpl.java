@@ -268,6 +268,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected CalEvent removeImpl(CalEvent calEvent) throws SystemException {
+		calEvent = toUnwrappedModel(calEvent);
+
 		Session session = null;
 
 		try {
@@ -363,6 +365,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 	public CalEvent updateImpl(
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws SystemException {
+		calEvent = toUnwrappedModel(calEvent);
+
 		boolean isNew = calEvent.isNew();
 
 		CalEventModelImpl calEventModelImpl = (CalEventModelImpl)calEvent;
@@ -415,6 +419,42 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return calEvent;
+	}
+
+	protected CalEvent toUnwrappedModel(CalEvent calEvent) {
+		if (calEvent instanceof CalEventImpl) {
+			return calEvent;
+		}
+
+		CalEventImpl calEventImpl = new CalEventImpl();
+
+		calEventImpl.setNew(calEvent.isNew());
+		calEventImpl.setPrimaryKey(calEvent.getPrimaryKey());
+
+		calEventImpl.setUuid(calEvent.getUuid());
+		calEventImpl.setEventId(calEvent.getEventId());
+		calEventImpl.setGroupId(calEvent.getGroupId());
+		calEventImpl.setCompanyId(calEvent.getCompanyId());
+		calEventImpl.setUserId(calEvent.getUserId());
+		calEventImpl.setUserName(calEvent.getUserName());
+		calEventImpl.setCreateDate(calEvent.getCreateDate());
+		calEventImpl.setModifiedDate(calEvent.getModifiedDate());
+		calEventImpl.setTitle(calEvent.getTitle());
+		calEventImpl.setDescription(calEvent.getDescription());
+		calEventImpl.setStartDate(calEvent.getStartDate());
+		calEventImpl.setEndDate(calEvent.getEndDate());
+		calEventImpl.setDurationHour(calEvent.getDurationHour());
+		calEventImpl.setDurationMinute(calEvent.getDurationMinute());
+		calEventImpl.setAllDay(calEvent.isAllDay());
+		calEventImpl.setTimeZoneSensitive(calEvent.isTimeZoneSensitive());
+		calEventImpl.setType(calEvent.getType());
+		calEventImpl.setRepeating(calEvent.isRepeating());
+		calEventImpl.setRecurrence(calEvent.getRecurrence());
+		calEventImpl.setRemindBy(calEvent.getRemindBy());
+		calEventImpl.setFirstReminder(calEvent.getFirstReminder());
+		calEventImpl.setSecondReminder(calEvent.getSecondReminder());
+
+		return calEventImpl;
 	}
 
 	public CalEvent findByPrimaryKey(long eventId)

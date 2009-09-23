@@ -195,6 +195,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	protected AnnouncementsDelivery removeImpl(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
+		announcementsDelivery = toUnwrappedModel(announcementsDelivery);
+
 		Session session = null;
 
 		try {
@@ -295,6 +297,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	public AnnouncementsDelivery updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery,
 		boolean merge) throws SystemException {
+		announcementsDelivery = toUnwrappedModel(announcementsDelivery);
+
 		boolean isNew = announcementsDelivery.isNew();
 
 		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = (AnnouncementsDeliveryModelImpl)announcementsDelivery;
@@ -346,6 +350,28 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return announcementsDelivery;
+	}
+
+	protected AnnouncementsDelivery toUnwrappedModel(
+		AnnouncementsDelivery announcementsDelivery) {
+		if (announcementsDelivery instanceof AnnouncementsDeliveryImpl) {
+			return announcementsDelivery;
+		}
+
+		AnnouncementsDeliveryImpl announcementsDeliveryImpl = new AnnouncementsDeliveryImpl();
+
+		announcementsDeliveryImpl.setNew(announcementsDelivery.isNew());
+		announcementsDeliveryImpl.setPrimaryKey(announcementsDelivery.getPrimaryKey());
+
+		announcementsDeliveryImpl.setDeliveryId(announcementsDelivery.getDeliveryId());
+		announcementsDeliveryImpl.setCompanyId(announcementsDelivery.getCompanyId());
+		announcementsDeliveryImpl.setUserId(announcementsDelivery.getUserId());
+		announcementsDeliveryImpl.setType(announcementsDelivery.getType());
+		announcementsDeliveryImpl.setEmail(announcementsDelivery.isEmail());
+		announcementsDeliveryImpl.setSms(announcementsDelivery.isSms());
+		announcementsDeliveryImpl.setWebsite(announcementsDelivery.isWebsite());
+
+		return announcementsDeliveryImpl;
 	}
 
 	public AnnouncementsDelivery findByPrimaryKey(long deliveryId)

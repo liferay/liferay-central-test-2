@@ -356,6 +356,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected WikiPage removeImpl(WikiPage wikiPage) throws SystemException {
+		wikiPage = toUnwrappedModel(wikiPage);
+
 		Session session = null;
 
 		try {
@@ -459,6 +461,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 	public WikiPage updateImpl(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean merge)
 		throws SystemException {
+		wikiPage = toUnwrappedModel(wikiPage);
+
 		boolean isNew = wikiPage.isNew();
 
 		WikiPageModelImpl wikiPageModelImpl = (WikiPageModelImpl)wikiPage;
@@ -538,6 +542,39 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return wikiPage;
+	}
+
+	protected WikiPage toUnwrappedModel(WikiPage wikiPage) {
+		if (wikiPage instanceof WikiPageImpl) {
+			return wikiPage;
+		}
+
+		WikiPageImpl wikiPageImpl = new WikiPageImpl();
+
+		wikiPageImpl.setNew(wikiPage.isNew());
+		wikiPageImpl.setPrimaryKey(wikiPage.getPrimaryKey());
+
+		wikiPageImpl.setUuid(wikiPage.getUuid());
+		wikiPageImpl.setPageId(wikiPage.getPageId());
+		wikiPageImpl.setResourcePrimKey(wikiPage.getResourcePrimKey());
+		wikiPageImpl.setGroupId(wikiPage.getGroupId());
+		wikiPageImpl.setCompanyId(wikiPage.getCompanyId());
+		wikiPageImpl.setUserId(wikiPage.getUserId());
+		wikiPageImpl.setUserName(wikiPage.getUserName());
+		wikiPageImpl.setCreateDate(wikiPage.getCreateDate());
+		wikiPageImpl.setModifiedDate(wikiPage.getModifiedDate());
+		wikiPageImpl.setNodeId(wikiPage.getNodeId());
+		wikiPageImpl.setTitle(wikiPage.getTitle());
+		wikiPageImpl.setVersion(wikiPage.getVersion());
+		wikiPageImpl.setMinorEdit(wikiPage.isMinorEdit());
+		wikiPageImpl.setContent(wikiPage.getContent());
+		wikiPageImpl.setSummary(wikiPage.getSummary());
+		wikiPageImpl.setFormat(wikiPage.getFormat());
+		wikiPageImpl.setHead(wikiPage.isHead());
+		wikiPageImpl.setParentTitle(wikiPage.getParentTitle());
+		wikiPageImpl.setRedirectTitle(wikiPage.getRedirectTitle());
+
+		return wikiPageImpl;
 	}
 
 	public WikiPage findByPrimaryKey(long pageId)

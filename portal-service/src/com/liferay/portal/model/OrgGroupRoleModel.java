@@ -22,7 +22,12 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.OrgGroupRolePK;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+
+import java.io.Serializable;
 
 /**
  * <a href="OrgGroupRoleModel.java.html"><b><i>View Source</i></b></a>
@@ -61,4 +66,32 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	public void setRoleId(long roleId);
 
 	public OrgGroupRole toEscapedModel();
+
+	public boolean isNew();
+
+	public boolean setNew(boolean n);
+
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
+	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public Object clone();
+
+	public int compareTo(OrgGroupRole orgGroupRole);
+
+	public int hashCode();
+
+	public String toString();
+
+	public String toXmlString();
 }

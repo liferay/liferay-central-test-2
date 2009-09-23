@@ -22,6 +22,12 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.service.ServiceContext;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+
+import java.io.Serializable;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -90,4 +96,32 @@ public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {
 	public void setActive(boolean active);
 
 	public LayoutPrototype toEscapedModel();
+
+	public boolean isNew();
+
+	public boolean setNew(boolean n);
+
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
+	public boolean isEscapedModel();
+
+	public void setEscapedModel(boolean escapedModel);
+
+	public Serializable getPrimaryKeyObj();
+
+	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
+
+	public Object clone();
+
+	public int compareTo(LayoutPrototype layoutPrototype);
+
+	public int hashCode();
+
+	public String toString();
+
+	public String toXmlString();
 }

@@ -246,6 +246,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Website removeImpl(Website website) throws SystemException {
+		website = toUnwrappedModel(website);
+
 		Session session = null;
 
 		try {
@@ -332,6 +334,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public Website updateImpl(com.liferay.portal.model.Website website,
 		boolean merge) throws SystemException {
+		website = toUnwrappedModel(website);
+
 		Session session = null;
 
 		try {
@@ -354,6 +358,31 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 			WebsiteImpl.class, website.getPrimaryKey(), website);
 
 		return website;
+	}
+
+	protected Website toUnwrappedModel(Website website) {
+		if (website instanceof WebsiteImpl) {
+			return website;
+		}
+
+		WebsiteImpl websiteImpl = new WebsiteImpl();
+
+		websiteImpl.setNew(website.isNew());
+		websiteImpl.setPrimaryKey(website.getPrimaryKey());
+
+		websiteImpl.setWebsiteId(website.getWebsiteId());
+		websiteImpl.setCompanyId(website.getCompanyId());
+		websiteImpl.setUserId(website.getUserId());
+		websiteImpl.setUserName(website.getUserName());
+		websiteImpl.setCreateDate(website.getCreateDate());
+		websiteImpl.setModifiedDate(website.getModifiedDate());
+		websiteImpl.setClassNameId(website.getClassNameId());
+		websiteImpl.setClassPK(website.getClassPK());
+		websiteImpl.setUrl(website.getUrl());
+		websiteImpl.setTypeId(website.getTypeId());
+		websiteImpl.setPrimary(website.isPrimary());
+
+		return websiteImpl;
 	}
 
 	public Website findByPrimaryKey(long websiteId)

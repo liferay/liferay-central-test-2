@@ -171,6 +171,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 	protected WebDAVProps removeImpl(WebDAVProps webDAVProps)
 		throws SystemException {
+		webDAVProps = toUnwrappedModel(webDAVProps);
+
 		Session session = null;
 
 		try {
@@ -267,6 +269,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 	public WebDAVProps updateImpl(
 		com.liferay.portal.model.WebDAVProps webDAVProps, boolean merge)
 		throws SystemException {
+		webDAVProps = toUnwrappedModel(webDAVProps);
+
 		boolean isNew = webDAVProps.isNew();
 
 		WebDAVPropsModelImpl webDAVPropsModelImpl = (WebDAVPropsModelImpl)webDAVProps;
@@ -313,6 +317,27 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return webDAVProps;
+	}
+
+	protected WebDAVProps toUnwrappedModel(WebDAVProps webDAVProps) {
+		if (webDAVProps instanceof WebDAVPropsImpl) {
+			return webDAVProps;
+		}
+
+		WebDAVPropsImpl webDAVPropsImpl = new WebDAVPropsImpl();
+
+		webDAVPropsImpl.setNew(webDAVProps.isNew());
+		webDAVPropsImpl.setPrimaryKey(webDAVProps.getPrimaryKey());
+
+		webDAVPropsImpl.setWebDavPropsId(webDAVProps.getWebDavPropsId());
+		webDAVPropsImpl.setCompanyId(webDAVProps.getCompanyId());
+		webDAVPropsImpl.setCreateDate(webDAVProps.getCreateDate());
+		webDAVPropsImpl.setModifiedDate(webDAVProps.getModifiedDate());
+		webDAVPropsImpl.setClassNameId(webDAVProps.getClassNameId());
+		webDAVPropsImpl.setClassPK(webDAVProps.getClassPK());
+		webDAVPropsImpl.setProps(webDAVProps.getProps());
+
+		return webDAVPropsImpl;
 	}
 
 	public WebDAVProps findByPrimaryKey(long webDavPropsId)

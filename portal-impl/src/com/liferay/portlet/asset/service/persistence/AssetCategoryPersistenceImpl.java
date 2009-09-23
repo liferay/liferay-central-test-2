@@ -293,6 +293,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 	protected AssetCategory removeImpl(AssetCategory assetCategory)
 		throws SystemException {
+		assetCategory = toUnwrappedModel(assetCategory);
+
 		try {
 			clearAssetEntries.clear(assetCategory.getPrimaryKey());
 		}
@@ -399,6 +401,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	public AssetCategory updateImpl(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory,
 		boolean merge) throws SystemException {
+		assetCategory = toUnwrappedModel(assetCategory);
+
 		boolean isNew = assetCategory.isNew();
 
 		AssetCategoryModelImpl assetCategoryModelImpl = (AssetCategoryModelImpl)assetCategory;
@@ -454,6 +458,31 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetCategory;
+	}
+
+	protected AssetCategory toUnwrappedModel(AssetCategory assetCategory) {
+		if (assetCategory instanceof AssetCategoryImpl) {
+			return assetCategory;
+		}
+
+		AssetCategoryImpl assetCategoryImpl = new AssetCategoryImpl();
+
+		assetCategoryImpl.setNew(assetCategory.isNew());
+		assetCategoryImpl.setPrimaryKey(assetCategory.getPrimaryKey());
+
+		assetCategoryImpl.setUuid(assetCategory.getUuid());
+		assetCategoryImpl.setCategoryId(assetCategory.getCategoryId());
+		assetCategoryImpl.setGroupId(assetCategory.getGroupId());
+		assetCategoryImpl.setCompanyId(assetCategory.getCompanyId());
+		assetCategoryImpl.setUserId(assetCategory.getUserId());
+		assetCategoryImpl.setUserName(assetCategory.getUserName());
+		assetCategoryImpl.setCreateDate(assetCategory.getCreateDate());
+		assetCategoryImpl.setModifiedDate(assetCategory.getModifiedDate());
+		assetCategoryImpl.setParentCategoryId(assetCategory.getParentCategoryId());
+		assetCategoryImpl.setName(assetCategory.getName());
+		assetCategoryImpl.setVocabularyId(assetCategory.getVocabularyId());
+
+		return assetCategoryImpl;
 	}
 
 	public AssetCategory findByPrimaryKey(long categoryId)

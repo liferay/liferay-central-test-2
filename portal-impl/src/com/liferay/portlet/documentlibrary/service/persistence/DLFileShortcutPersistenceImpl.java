@@ -286,6 +286,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	protected DLFileShortcut removeImpl(DLFileShortcut dlFileShortcut)
 		throws SystemException {
+		dlFileShortcut = toUnwrappedModel(dlFileShortcut);
+
 		Session session = null;
 
 		try {
@@ -382,6 +384,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	public DLFileShortcut updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean merge) throws SystemException {
+		dlFileShortcut = toUnwrappedModel(dlFileShortcut);
+
 		boolean isNew = dlFileShortcut.isNew();
 
 		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
@@ -437,6 +441,35 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFileShortcut;
+	}
+
+	protected DLFileShortcut toUnwrappedModel(DLFileShortcut dlFileShortcut) {
+		if (dlFileShortcut instanceof DLFileShortcutImpl) {
+			return dlFileShortcut;
+		}
+
+		DLFileShortcutImpl dlFileShortcutImpl = new DLFileShortcutImpl();
+
+		dlFileShortcutImpl.setNew(dlFileShortcut.isNew());
+		dlFileShortcutImpl.setPrimaryKey(dlFileShortcut.getPrimaryKey());
+
+		dlFileShortcutImpl.setUuid(dlFileShortcut.getUuid());
+		dlFileShortcutImpl.setFileShortcutId(dlFileShortcut.getFileShortcutId());
+		dlFileShortcutImpl.setGroupId(dlFileShortcut.getGroupId());
+		dlFileShortcutImpl.setCompanyId(dlFileShortcut.getCompanyId());
+		dlFileShortcutImpl.setUserId(dlFileShortcut.getUserId());
+		dlFileShortcutImpl.setUserName(dlFileShortcut.getUserName());
+		dlFileShortcutImpl.setCreateDate(dlFileShortcut.getCreateDate());
+		dlFileShortcutImpl.setModifiedDate(dlFileShortcut.getModifiedDate());
+		dlFileShortcutImpl.setFolderId(dlFileShortcut.getFolderId());
+		dlFileShortcutImpl.setToFolderId(dlFileShortcut.getToFolderId());
+		dlFileShortcutImpl.setToName(dlFileShortcut.getToName());
+		dlFileShortcutImpl.setStatus(dlFileShortcut.getStatus());
+		dlFileShortcutImpl.setStatusByUserId(dlFileShortcut.getStatusByUserId());
+		dlFileShortcutImpl.setStatusByUserName(dlFileShortcut.getStatusByUserName());
+		dlFileShortcutImpl.setStatusDate(dlFileShortcut.getStatusDate());
+
+		return dlFileShortcutImpl;
 	}
 
 	public DLFileShortcut findByPrimaryKey(long fileShortcutId)

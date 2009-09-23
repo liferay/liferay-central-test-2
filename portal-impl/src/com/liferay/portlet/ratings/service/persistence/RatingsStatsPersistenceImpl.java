@@ -173,6 +173,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 
 	protected RatingsStats removeImpl(RatingsStats ratingsStats)
 		throws SystemException {
+		ratingsStats = toUnwrappedModel(ratingsStats);
+
 		Session session = null;
 
 		try {
@@ -269,6 +271,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 	public RatingsStats updateImpl(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
 		boolean merge) throws SystemException {
+		ratingsStats = toUnwrappedModel(ratingsStats);
+
 		boolean isNew = ratingsStats.isNew();
 
 		RatingsStatsModelImpl ratingsStatsModelImpl = (RatingsStatsModelImpl)ratingsStats;
@@ -315,6 +319,26 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return ratingsStats;
+	}
+
+	protected RatingsStats toUnwrappedModel(RatingsStats ratingsStats) {
+		if (ratingsStats instanceof RatingsStatsImpl) {
+			return ratingsStats;
+		}
+
+		RatingsStatsImpl ratingsStatsImpl = new RatingsStatsImpl();
+
+		ratingsStatsImpl.setNew(ratingsStats.isNew());
+		ratingsStatsImpl.setPrimaryKey(ratingsStats.getPrimaryKey());
+
+		ratingsStatsImpl.setStatsId(ratingsStats.getStatsId());
+		ratingsStatsImpl.setClassNameId(ratingsStats.getClassNameId());
+		ratingsStatsImpl.setClassPK(ratingsStats.getClassPK());
+		ratingsStatsImpl.setTotalEntries(ratingsStats.getTotalEntries());
+		ratingsStatsImpl.setTotalScore(ratingsStats.getTotalScore());
+		ratingsStatsImpl.setAverageScore(ratingsStats.getAverageScore());
+
+		return ratingsStatsImpl;
 	}
 
 	public RatingsStats findByPrimaryKey(long statsId)

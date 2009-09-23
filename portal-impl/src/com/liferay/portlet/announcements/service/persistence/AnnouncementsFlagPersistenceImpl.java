@@ -200,6 +200,8 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	protected AnnouncementsFlag removeImpl(AnnouncementsFlag announcementsFlag)
 		throws SystemException {
+		announcementsFlag = toUnwrappedModel(announcementsFlag);
+
 		Session session = null;
 
 		try {
@@ -298,6 +300,8 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 	public AnnouncementsFlag updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
 		boolean merge) throws SystemException {
+		announcementsFlag = toUnwrappedModel(announcementsFlag);
+
 		boolean isNew = announcementsFlag.isNew();
 
 		AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlag;
@@ -349,6 +353,26 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return announcementsFlag;
+	}
+
+	protected AnnouncementsFlag toUnwrappedModel(
+		AnnouncementsFlag announcementsFlag) {
+		if (announcementsFlag instanceof AnnouncementsFlagImpl) {
+			return announcementsFlag;
+		}
+
+		AnnouncementsFlagImpl announcementsFlagImpl = new AnnouncementsFlagImpl();
+
+		announcementsFlagImpl.setNew(announcementsFlag.isNew());
+		announcementsFlagImpl.setPrimaryKey(announcementsFlag.getPrimaryKey());
+
+		announcementsFlagImpl.setFlagId(announcementsFlag.getFlagId());
+		announcementsFlagImpl.setUserId(announcementsFlag.getUserId());
+		announcementsFlagImpl.setCreateDate(announcementsFlag.getCreateDate());
+		announcementsFlagImpl.setEntryId(announcementsFlag.getEntryId());
+		announcementsFlagImpl.setValue(announcementsFlag.getValue());
+
+		return announcementsFlagImpl;
 	}
 
 	public AnnouncementsFlag findByPrimaryKey(long flagId)

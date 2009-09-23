@@ -233,6 +233,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 	protected Subscription removeImpl(Subscription subscription)
 		throws SystemException {
+		subscription = toUnwrappedModel(subscription);
+
 		Session session = null;
 
 		try {
@@ -331,6 +333,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 	public Subscription updateImpl(
 		com.liferay.portal.model.Subscription subscription, boolean merge)
 		throws SystemException {
+		subscription = toUnwrappedModel(subscription);
+
 		boolean isNew = subscription.isNew();
 
 		SubscriptionModelImpl subscriptionModelImpl = (SubscriptionModelImpl)subscription;
@@ -385,6 +389,29 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return subscription;
+	}
+
+	protected Subscription toUnwrappedModel(Subscription subscription) {
+		if (subscription instanceof SubscriptionImpl) {
+			return subscription;
+		}
+
+		SubscriptionImpl subscriptionImpl = new SubscriptionImpl();
+
+		subscriptionImpl.setNew(subscription.isNew());
+		subscriptionImpl.setPrimaryKey(subscription.getPrimaryKey());
+
+		subscriptionImpl.setSubscriptionId(subscription.getSubscriptionId());
+		subscriptionImpl.setCompanyId(subscription.getCompanyId());
+		subscriptionImpl.setUserId(subscription.getUserId());
+		subscriptionImpl.setUserName(subscription.getUserName());
+		subscriptionImpl.setCreateDate(subscription.getCreateDate());
+		subscriptionImpl.setModifiedDate(subscription.getModifiedDate());
+		subscriptionImpl.setClassNameId(subscription.getClassNameId());
+		subscriptionImpl.setClassPK(subscription.getClassPK());
+		subscriptionImpl.setFrequency(subscription.getFrequency());
+
+		return subscriptionImpl;
 	}
 
 	public Subscription findByPrimaryKey(long subscriptionId)

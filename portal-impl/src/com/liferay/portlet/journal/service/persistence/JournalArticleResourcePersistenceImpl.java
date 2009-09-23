@@ -198,6 +198,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 	protected JournalArticleResource removeImpl(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
+		journalArticleResource = toUnwrappedModel(journalArticleResource);
+
 		Session session = null;
 
 		try {
@@ -299,6 +301,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 	public JournalArticleResource updateImpl(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
 		boolean merge) throws SystemException {
+		journalArticleResource = toUnwrappedModel(journalArticleResource);
+
 		boolean isNew = journalArticleResource.isNew();
 
 		JournalArticleResourceModelImpl journalArticleResourceModelImpl = (JournalArticleResourceModelImpl)journalArticleResource;
@@ -350,6 +354,24 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalArticleResource;
+	}
+
+	protected JournalArticleResource toUnwrappedModel(
+		JournalArticleResource journalArticleResource) {
+		if (journalArticleResource instanceof JournalArticleResourceImpl) {
+			return journalArticleResource;
+		}
+
+		JournalArticleResourceImpl journalArticleResourceImpl = new JournalArticleResourceImpl();
+
+		journalArticleResourceImpl.setNew(journalArticleResource.isNew());
+		journalArticleResourceImpl.setPrimaryKey(journalArticleResource.getPrimaryKey());
+
+		journalArticleResourceImpl.setResourcePrimKey(journalArticleResource.getResourcePrimKey());
+		journalArticleResourceImpl.setGroupId(journalArticleResource.getGroupId());
+		journalArticleResourceImpl.setArticleId(journalArticleResource.getArticleId());
+
+		return journalArticleResourceImpl;
 	}
 
 	public JournalArticleResource findByPrimaryKey(long resourcePrimKey)

@@ -169,6 +169,8 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Contact removeImpl(Contact contact) throws SystemException {
+		contact = toUnwrappedModel(contact);
+
 		Session session = null;
 
 		try {
@@ -255,6 +257,8 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public Contact updateImpl(com.liferay.portal.model.Contact contact,
 		boolean merge) throws SystemException {
+		contact = toUnwrappedModel(contact);
+
 		Session session = null;
 
 		try {
@@ -277,6 +281,50 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 			ContactImpl.class, contact.getPrimaryKey(), contact);
 
 		return contact;
+	}
+
+	protected Contact toUnwrappedModel(Contact contact) {
+		if (contact instanceof ContactImpl) {
+			return contact;
+		}
+
+		ContactImpl contactImpl = new ContactImpl();
+
+		contactImpl.setNew(contact.isNew());
+		contactImpl.setPrimaryKey(contact.getPrimaryKey());
+
+		contactImpl.setContactId(contact.getContactId());
+		contactImpl.setCompanyId(contact.getCompanyId());
+		contactImpl.setUserId(contact.getUserId());
+		contactImpl.setUserName(contact.getUserName());
+		contactImpl.setCreateDate(contact.getCreateDate());
+		contactImpl.setModifiedDate(contact.getModifiedDate());
+		contactImpl.setAccountId(contact.getAccountId());
+		contactImpl.setParentContactId(contact.getParentContactId());
+		contactImpl.setFirstName(contact.getFirstName());
+		contactImpl.setMiddleName(contact.getMiddleName());
+		contactImpl.setLastName(contact.getLastName());
+		contactImpl.setPrefixId(contact.getPrefixId());
+		contactImpl.setSuffixId(contact.getSuffixId());
+		contactImpl.setMale(contact.isMale());
+		contactImpl.setBirthday(contact.getBirthday());
+		contactImpl.setSmsSn(contact.getSmsSn());
+		contactImpl.setAimSn(contact.getAimSn());
+		contactImpl.setFacebookSn(contact.getFacebookSn());
+		contactImpl.setIcqSn(contact.getIcqSn());
+		contactImpl.setJabberSn(contact.getJabberSn());
+		contactImpl.setMsnSn(contact.getMsnSn());
+		contactImpl.setMySpaceSn(contact.getMySpaceSn());
+		contactImpl.setSkypeSn(contact.getSkypeSn());
+		contactImpl.setTwitterSn(contact.getTwitterSn());
+		contactImpl.setYmSn(contact.getYmSn());
+		contactImpl.setEmployeeStatusId(contact.getEmployeeStatusId());
+		contactImpl.setEmployeeNumber(contact.getEmployeeNumber());
+		contactImpl.setJobTitle(contact.getJobTitle());
+		contactImpl.setJobClass(contact.getJobClass());
+		contactImpl.setHoursOfOperation(contact.getHoursOfOperation());
+
+		return contactImpl;
 	}
 
 	public Contact findByPrimaryKey(long contactId)

@@ -209,6 +209,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 
 	protected AssetTagStats removeImpl(AssetTagStats assetTagStats)
 		throws SystemException {
+		assetTagStats = toUnwrappedModel(assetTagStats);
+
 		Session session = null;
 
 		try {
@@ -305,6 +307,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 	public AssetTagStats updateImpl(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats,
 		boolean merge) throws SystemException {
+		assetTagStats = toUnwrappedModel(assetTagStats);
+
 		boolean isNew = assetTagStats.isNew();
 
 		AssetTagStatsModelImpl assetTagStatsModelImpl = (AssetTagStatsModelImpl)assetTagStats;
@@ -352,6 +356,24 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetTagStats;
+	}
+
+	protected AssetTagStats toUnwrappedModel(AssetTagStats assetTagStats) {
+		if (assetTagStats instanceof AssetTagStatsImpl) {
+			return assetTagStats;
+		}
+
+		AssetTagStatsImpl assetTagStatsImpl = new AssetTagStatsImpl();
+
+		assetTagStatsImpl.setNew(assetTagStats.isNew());
+		assetTagStatsImpl.setPrimaryKey(assetTagStats.getPrimaryKey());
+
+		assetTagStatsImpl.setTagStatsId(assetTagStats.getTagStatsId());
+		assetTagStatsImpl.setTagId(assetTagStats.getTagId());
+		assetTagStatsImpl.setClassNameId(assetTagStats.getClassNameId());
+		assetTagStatsImpl.setAssetCount(assetTagStats.getAssetCount());
+
+		return assetTagStatsImpl;
 	}
 
 	public AssetTagStats findByPrimaryKey(long tagStatsId)

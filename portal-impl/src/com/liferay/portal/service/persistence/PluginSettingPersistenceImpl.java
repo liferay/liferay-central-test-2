@@ -200,6 +200,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	protected PluginSetting removeImpl(PluginSetting pluginSetting)
 		throws SystemException {
+		pluginSetting = toUnwrappedModel(pluginSetting);
+
 		Session session = null;
 
 		try {
@@ -299,6 +301,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 	public PluginSetting updateImpl(
 		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
 		throws SystemException {
+		pluginSetting = toUnwrappedModel(pluginSetting);
+
 		boolean isNew = pluginSetting.isNew();
 
 		PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSetting;
@@ -358,6 +362,26 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return pluginSetting;
+	}
+
+	protected PluginSetting toUnwrappedModel(PluginSetting pluginSetting) {
+		if (pluginSetting instanceof PluginSettingImpl) {
+			return pluginSetting;
+		}
+
+		PluginSettingImpl pluginSettingImpl = new PluginSettingImpl();
+
+		pluginSettingImpl.setNew(pluginSetting.isNew());
+		pluginSettingImpl.setPrimaryKey(pluginSetting.getPrimaryKey());
+
+		pluginSettingImpl.setPluginSettingId(pluginSetting.getPluginSettingId());
+		pluginSettingImpl.setCompanyId(pluginSetting.getCompanyId());
+		pluginSettingImpl.setPluginId(pluginSetting.getPluginId());
+		pluginSettingImpl.setPluginType(pluginSetting.getPluginType());
+		pluginSettingImpl.setRoles(pluginSetting.getRoles());
+		pluginSettingImpl.setActive(pluginSetting.isActive());
+
+		return pluginSettingImpl;
 	}
 
 	public PluginSetting findByPrimaryKey(long pluginSettingId)

@@ -203,6 +203,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	protected ShoppingCart removeImpl(ShoppingCart shoppingCart)
 		throws SystemException {
+		shoppingCart = toUnwrappedModel(shoppingCart);
+
 		Session session = null;
 
 		try {
@@ -299,6 +301,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 	public ShoppingCart updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
 		boolean merge) throws SystemException {
+		shoppingCart = toUnwrappedModel(shoppingCart);
+
 		boolean isNew = shoppingCart.isNew();
 
 		ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCart;
@@ -345,6 +349,31 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shoppingCart;
+	}
+
+	protected ShoppingCart toUnwrappedModel(ShoppingCart shoppingCart) {
+		if (shoppingCart instanceof ShoppingCartImpl) {
+			return shoppingCart;
+		}
+
+		ShoppingCartImpl shoppingCartImpl = new ShoppingCartImpl();
+
+		shoppingCartImpl.setNew(shoppingCart.isNew());
+		shoppingCartImpl.setPrimaryKey(shoppingCart.getPrimaryKey());
+
+		shoppingCartImpl.setCartId(shoppingCart.getCartId());
+		shoppingCartImpl.setGroupId(shoppingCart.getGroupId());
+		shoppingCartImpl.setCompanyId(shoppingCart.getCompanyId());
+		shoppingCartImpl.setUserId(shoppingCart.getUserId());
+		shoppingCartImpl.setUserName(shoppingCart.getUserName());
+		shoppingCartImpl.setCreateDate(shoppingCart.getCreateDate());
+		shoppingCartImpl.setModifiedDate(shoppingCart.getModifiedDate());
+		shoppingCartImpl.setItemIds(shoppingCart.getItemIds());
+		shoppingCartImpl.setCouponCodes(shoppingCart.getCouponCodes());
+		shoppingCartImpl.setAltShipping(shoppingCart.getAltShipping());
+		shoppingCartImpl.setInsure(shoppingCart.isInsure());
+
+		return shoppingCartImpl;
 	}
 
 	public ShoppingCart findByPrimaryKey(long cartId)

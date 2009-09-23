@@ -290,6 +290,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected User removeImpl(User user) throws SystemException {
+		user = toUnwrappedModel(user);
+
 		try {
 			clearGroups.clear(user.getPrimaryKey());
 		}
@@ -462,6 +464,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User updateImpl(com.liferay.portal.model.User user, boolean merge)
 		throws SystemException {
+		user = toUnwrappedModel(user);
+
 		boolean isNew = user.isNew();
 
 		UserModelImpl userModelImpl = (UserModelImpl)user;
@@ -616,6 +620,56 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return user;
+	}
+
+	protected User toUnwrappedModel(User user) {
+		if (user instanceof UserImpl) {
+			return user;
+		}
+
+		UserImpl userImpl = new UserImpl();
+
+		userImpl.setNew(user.isNew());
+		userImpl.setPrimaryKey(user.getPrimaryKey());
+
+		userImpl.setUuid(user.getUuid());
+		userImpl.setUserId(user.getUserId());
+		userImpl.setCompanyId(user.getCompanyId());
+		userImpl.setCreateDate(user.getCreateDate());
+		userImpl.setModifiedDate(user.getModifiedDate());
+		userImpl.setDefaultUser(user.isDefaultUser());
+		userImpl.setContactId(user.getContactId());
+		userImpl.setPassword(user.getPassword());
+		userImpl.setPasswordEncrypted(user.isPasswordEncrypted());
+		userImpl.setPasswordReset(user.isPasswordReset());
+		userImpl.setPasswordModifiedDate(user.getPasswordModifiedDate());
+		userImpl.setReminderQueryQuestion(user.getReminderQueryQuestion());
+		userImpl.setReminderQueryAnswer(user.getReminderQueryAnswer());
+		userImpl.setGraceLoginCount(user.getGraceLoginCount());
+		userImpl.setScreenName(user.getScreenName());
+		userImpl.setEmailAddress(user.getEmailAddress());
+		userImpl.setOpenId(user.getOpenId());
+		userImpl.setPortraitId(user.getPortraitId());
+		userImpl.setLanguageId(user.getLanguageId());
+		userImpl.setTimeZoneId(user.getTimeZoneId());
+		userImpl.setGreeting(user.getGreeting());
+		userImpl.setComments(user.getComments());
+		userImpl.setFirstName(user.getFirstName());
+		userImpl.setMiddleName(user.getMiddleName());
+		userImpl.setLastName(user.getLastName());
+		userImpl.setJobTitle(user.getJobTitle());
+		userImpl.setLoginDate(user.getLoginDate());
+		userImpl.setLoginIP(user.getLoginIP());
+		userImpl.setLastLoginDate(user.getLastLoginDate());
+		userImpl.setLastLoginIP(user.getLastLoginIP());
+		userImpl.setLastFailedLoginDate(user.getLastFailedLoginDate());
+		userImpl.setFailedLoginAttempts(user.getFailedLoginAttempts());
+		userImpl.setLockout(user.isLockout());
+		userImpl.setLockoutDate(user.getLockoutDate());
+		userImpl.setAgreedToTermsOfUse(user.isAgreedToTermsOfUse());
+		userImpl.setActive(user.isActive());
+
+		return userImpl;
 	}
 
 	public User findByPrimaryKey(long userId)

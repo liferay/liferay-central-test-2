@@ -275,6 +275,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected DLFolder removeImpl(DLFolder dlFolder) throws SystemException {
+		dlFolder = toUnwrappedModel(dlFolder);
+
 		Session session = null;
 
 		try {
@@ -378,6 +380,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	public DLFolder updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
 		boolean merge) throws SystemException {
+		dlFolder = toUnwrappedModel(dlFolder);
+
 		boolean isNew = dlFolder.isNew();
 
 		DLFolderModelImpl dlFolderModelImpl = (DLFolderModelImpl)dlFolder;
@@ -458,6 +462,32 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFolder;
+	}
+
+	protected DLFolder toUnwrappedModel(DLFolder dlFolder) {
+		if (dlFolder instanceof DLFolderImpl) {
+			return dlFolder;
+		}
+
+		DLFolderImpl dlFolderImpl = new DLFolderImpl();
+
+		dlFolderImpl.setNew(dlFolder.isNew());
+		dlFolderImpl.setPrimaryKey(dlFolder.getPrimaryKey());
+
+		dlFolderImpl.setUuid(dlFolder.getUuid());
+		dlFolderImpl.setFolderId(dlFolder.getFolderId());
+		dlFolderImpl.setGroupId(dlFolder.getGroupId());
+		dlFolderImpl.setCompanyId(dlFolder.getCompanyId());
+		dlFolderImpl.setUserId(dlFolder.getUserId());
+		dlFolderImpl.setUserName(dlFolder.getUserName());
+		dlFolderImpl.setCreateDate(dlFolder.getCreateDate());
+		dlFolderImpl.setModifiedDate(dlFolder.getModifiedDate());
+		dlFolderImpl.setParentFolderId(dlFolder.getParentFolderId());
+		dlFolderImpl.setName(dlFolder.getName());
+		dlFolderImpl.setDescription(dlFolder.getDescription());
+		dlFolderImpl.setLastPostDate(dlFolder.getLastPostDate());
+
+		return dlFolderImpl;
 	}
 
 	public DLFolder findByPrimaryKey(long folderId)

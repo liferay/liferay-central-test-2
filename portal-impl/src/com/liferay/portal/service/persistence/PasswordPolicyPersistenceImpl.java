@@ -189,6 +189,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 
 	protected PasswordPolicy removeImpl(PasswordPolicy passwordPolicy)
 		throws SystemException {
+		passwordPolicy = toUnwrappedModel(passwordPolicy);
+
 		Session session = null;
 
 		try {
@@ -293,6 +295,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 	public PasswordPolicy updateImpl(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
 		throws SystemException {
+		passwordPolicy = toUnwrappedModel(passwordPolicy);
+
 		boolean isNew = passwordPolicy.isNew();
 
 		PasswordPolicyModelImpl passwordPolicyModelImpl = (PasswordPolicyModelImpl)passwordPolicy;
@@ -365,6 +369,46 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return passwordPolicy;
+	}
+
+	protected PasswordPolicy toUnwrappedModel(PasswordPolicy passwordPolicy) {
+		if (passwordPolicy instanceof PasswordPolicyImpl) {
+			return passwordPolicy;
+		}
+
+		PasswordPolicyImpl passwordPolicyImpl = new PasswordPolicyImpl();
+
+		passwordPolicyImpl.setNew(passwordPolicy.isNew());
+		passwordPolicyImpl.setPrimaryKey(passwordPolicy.getPrimaryKey());
+
+		passwordPolicyImpl.setPasswordPolicyId(passwordPolicy.getPasswordPolicyId());
+		passwordPolicyImpl.setCompanyId(passwordPolicy.getCompanyId());
+		passwordPolicyImpl.setUserId(passwordPolicy.getUserId());
+		passwordPolicyImpl.setUserName(passwordPolicy.getUserName());
+		passwordPolicyImpl.setCreateDate(passwordPolicy.getCreateDate());
+		passwordPolicyImpl.setModifiedDate(passwordPolicy.getModifiedDate());
+		passwordPolicyImpl.setDefaultPolicy(passwordPolicy.isDefaultPolicy());
+		passwordPolicyImpl.setName(passwordPolicy.getName());
+		passwordPolicyImpl.setDescription(passwordPolicy.getDescription());
+		passwordPolicyImpl.setChangeable(passwordPolicy.isChangeable());
+		passwordPolicyImpl.setChangeRequired(passwordPolicy.isChangeRequired());
+		passwordPolicyImpl.setMinAge(passwordPolicy.getMinAge());
+		passwordPolicyImpl.setCheckSyntax(passwordPolicy.isCheckSyntax());
+		passwordPolicyImpl.setAllowDictionaryWords(passwordPolicy.isAllowDictionaryWords());
+		passwordPolicyImpl.setMinLength(passwordPolicy.getMinLength());
+		passwordPolicyImpl.setHistory(passwordPolicy.isHistory());
+		passwordPolicyImpl.setHistoryCount(passwordPolicy.getHistoryCount());
+		passwordPolicyImpl.setExpireable(passwordPolicy.isExpireable());
+		passwordPolicyImpl.setMaxAge(passwordPolicy.getMaxAge());
+		passwordPolicyImpl.setWarningTime(passwordPolicy.getWarningTime());
+		passwordPolicyImpl.setGraceLimit(passwordPolicy.getGraceLimit());
+		passwordPolicyImpl.setLockout(passwordPolicy.isLockout());
+		passwordPolicyImpl.setMaxFailure(passwordPolicy.getMaxFailure());
+		passwordPolicyImpl.setLockoutDuration(passwordPolicy.getLockoutDuration());
+		passwordPolicyImpl.setRequireUnlock(passwordPolicy.isRequireUnlock());
+		passwordPolicyImpl.setResetFailureCount(passwordPolicy.getResetFailureCount());
+
+		return passwordPolicyImpl;
 	}
 
 	public PasswordPolicy findByPrimaryKey(long passwordPolicyId)

@@ -152,6 +152,8 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Account removeImpl(Account account) throws SystemException {
+		account = toUnwrappedModel(account);
+
 		Session session = null;
 
 		try {
@@ -238,6 +240,8 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 	public Account updateImpl(com.liferay.portal.model.Account account,
 		boolean merge) throws SystemException {
+		account = toUnwrappedModel(account);
+
 		Session session = null;
 
 		try {
@@ -260,6 +264,36 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 			AccountImpl.class, account.getPrimaryKey(), account);
 
 		return account;
+	}
+
+	protected Account toUnwrappedModel(Account account) {
+		if (account instanceof AccountImpl) {
+			return account;
+		}
+
+		AccountImpl accountImpl = new AccountImpl();
+
+		accountImpl.setNew(account.isNew());
+		accountImpl.setPrimaryKey(account.getPrimaryKey());
+
+		accountImpl.setAccountId(account.getAccountId());
+		accountImpl.setCompanyId(account.getCompanyId());
+		accountImpl.setUserId(account.getUserId());
+		accountImpl.setUserName(account.getUserName());
+		accountImpl.setCreateDate(account.getCreateDate());
+		accountImpl.setModifiedDate(account.getModifiedDate());
+		accountImpl.setParentAccountId(account.getParentAccountId());
+		accountImpl.setName(account.getName());
+		accountImpl.setLegalName(account.getLegalName());
+		accountImpl.setLegalId(account.getLegalId());
+		accountImpl.setLegalType(account.getLegalType());
+		accountImpl.setSicCode(account.getSicCode());
+		accountImpl.setTickerSymbol(account.getTickerSymbol());
+		accountImpl.setIndustry(account.getIndustry());
+		accountImpl.setType(account.getType());
+		accountImpl.setSize(account.getSize());
+
+		return accountImpl;
 	}
 
 	public Account findByPrimaryKey(long accountId)

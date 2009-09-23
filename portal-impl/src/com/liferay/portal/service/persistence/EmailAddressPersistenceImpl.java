@@ -250,6 +250,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	protected EmailAddress removeImpl(EmailAddress emailAddress)
 		throws SystemException {
+		emailAddress = toUnwrappedModel(emailAddress);
+
 		Session session = null;
 
 		try {
@@ -338,6 +340,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	public EmailAddress updateImpl(
 		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
 		throws SystemException {
+		emailAddress = toUnwrappedModel(emailAddress);
+
 		Session session = null;
 
 		try {
@@ -360,6 +364,31 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 			EmailAddressImpl.class, emailAddress.getPrimaryKey(), emailAddress);
 
 		return emailAddress;
+	}
+
+	protected EmailAddress toUnwrappedModel(EmailAddress emailAddress) {
+		if (emailAddress instanceof EmailAddressImpl) {
+			return emailAddress;
+		}
+
+		EmailAddressImpl emailAddressImpl = new EmailAddressImpl();
+
+		emailAddressImpl.setNew(emailAddress.isNew());
+		emailAddressImpl.setPrimaryKey(emailAddress.getPrimaryKey());
+
+		emailAddressImpl.setEmailAddressId(emailAddress.getEmailAddressId());
+		emailAddressImpl.setCompanyId(emailAddress.getCompanyId());
+		emailAddressImpl.setUserId(emailAddress.getUserId());
+		emailAddressImpl.setUserName(emailAddress.getUserName());
+		emailAddressImpl.setCreateDate(emailAddress.getCreateDate());
+		emailAddressImpl.setModifiedDate(emailAddress.getModifiedDate());
+		emailAddressImpl.setClassNameId(emailAddress.getClassNameId());
+		emailAddressImpl.setClassPK(emailAddress.getClassPK());
+		emailAddressImpl.setAddress(emailAddress.getAddress());
+		emailAddressImpl.setTypeId(emailAddress.getTypeId());
+		emailAddressImpl.setPrimary(emailAddress.isPrimary());
+
+		return emailAddressImpl;
 	}
 
 	public EmailAddress findByPrimaryKey(long emailAddressId)

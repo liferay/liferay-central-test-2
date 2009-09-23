@@ -251,6 +251,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 	protected JournalArticleImage removeImpl(
 		JournalArticleImage journalArticleImage) throws SystemException {
+		journalArticleImage = toUnwrappedModel(journalArticleImage);
+
 		Session session = null;
 
 		try {
@@ -356,6 +358,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 	public JournalArticleImage updateImpl(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
 		boolean merge) throws SystemException {
+		journalArticleImage = toUnwrappedModel(journalArticleImage);
+
 		boolean isNew = journalArticleImage.isNew();
 
 		JournalArticleImageModelImpl journalArticleImageModelImpl = (JournalArticleImageModelImpl)journalArticleImage;
@@ -435,6 +439,29 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalArticleImage;
+	}
+
+	protected JournalArticleImage toUnwrappedModel(
+		JournalArticleImage journalArticleImage) {
+		if (journalArticleImage instanceof JournalArticleImageImpl) {
+			return journalArticleImage;
+		}
+
+		JournalArticleImageImpl journalArticleImageImpl = new JournalArticleImageImpl();
+
+		journalArticleImageImpl.setNew(journalArticleImage.isNew());
+		journalArticleImageImpl.setPrimaryKey(journalArticleImage.getPrimaryKey());
+
+		journalArticleImageImpl.setArticleImageId(journalArticleImage.getArticleImageId());
+		journalArticleImageImpl.setGroupId(journalArticleImage.getGroupId());
+		journalArticleImageImpl.setArticleId(journalArticleImage.getArticleId());
+		journalArticleImageImpl.setVersion(journalArticleImage.getVersion());
+		journalArticleImageImpl.setElInstanceId(journalArticleImage.getElInstanceId());
+		journalArticleImageImpl.setElName(journalArticleImage.getElName());
+		journalArticleImageImpl.setLanguageId(journalArticleImage.getLanguageId());
+		journalArticleImageImpl.setTempImage(journalArticleImage.isTempImage());
+
+		return journalArticleImageImpl;
 	}
 
 	public JournalArticleImage findByPrimaryKey(long articleImageId)

@@ -229,6 +229,8 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl
 
 	protected AssetTagProperty removeImpl(AssetTagProperty assetTagProperty)
 		throws SystemException {
+		assetTagProperty = toUnwrappedModel(assetTagProperty);
+
 		Session session = null;
 
 		try {
@@ -327,6 +329,8 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl
 	public AssetTagProperty updateImpl(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
 		boolean merge) throws SystemException {
+		assetTagProperty = toUnwrappedModel(assetTagProperty);
+
 		boolean isNew = assetTagProperty.isNew();
 
 		AssetTagPropertyModelImpl assetTagPropertyModelImpl = (AssetTagPropertyModelImpl)assetTagProperty;
@@ -378,6 +382,30 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetTagProperty;
+	}
+
+	protected AssetTagProperty toUnwrappedModel(
+		AssetTagProperty assetTagProperty) {
+		if (assetTagProperty instanceof AssetTagPropertyImpl) {
+			return assetTagProperty;
+		}
+
+		AssetTagPropertyImpl assetTagPropertyImpl = new AssetTagPropertyImpl();
+
+		assetTagPropertyImpl.setNew(assetTagProperty.isNew());
+		assetTagPropertyImpl.setPrimaryKey(assetTagProperty.getPrimaryKey());
+
+		assetTagPropertyImpl.setTagPropertyId(assetTagProperty.getTagPropertyId());
+		assetTagPropertyImpl.setCompanyId(assetTagProperty.getCompanyId());
+		assetTagPropertyImpl.setUserId(assetTagProperty.getUserId());
+		assetTagPropertyImpl.setUserName(assetTagProperty.getUserName());
+		assetTagPropertyImpl.setCreateDate(assetTagProperty.getCreateDate());
+		assetTagPropertyImpl.setModifiedDate(assetTagProperty.getModifiedDate());
+		assetTagPropertyImpl.setTagId(assetTagProperty.getTagId());
+		assetTagPropertyImpl.setKey(assetTagProperty.getKey());
+		assetTagPropertyImpl.setValue(assetTagProperty.getValue());
+
+		return assetTagPropertyImpl;
 	}
 
 	public AssetTagProperty findByPrimaryKey(long tagPropertyId)

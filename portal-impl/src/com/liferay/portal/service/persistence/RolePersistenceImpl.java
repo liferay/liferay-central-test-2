@@ -238,6 +238,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Role removeImpl(Role role) throws SystemException {
+		role = toUnwrappedModel(role);
+
 		try {
 			clearGroups.clear(role.getPrimaryKey());
 		}
@@ -369,6 +371,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public Role updateImpl(com.liferay.portal.model.Role role, boolean merge)
 		throws SystemException {
+		role = toUnwrappedModel(role);
+
 		boolean isNew = role.isNew();
 
 		RoleModelImpl roleModelImpl = (RoleModelImpl)role;
@@ -439,6 +443,29 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return role;
+	}
+
+	protected Role toUnwrappedModel(Role role) {
+		if (role instanceof RoleImpl) {
+			return role;
+		}
+
+		RoleImpl roleImpl = new RoleImpl();
+
+		roleImpl.setNew(role.isNew());
+		roleImpl.setPrimaryKey(role.getPrimaryKey());
+
+		roleImpl.setRoleId(role.getRoleId());
+		roleImpl.setCompanyId(role.getCompanyId());
+		roleImpl.setClassNameId(role.getClassNameId());
+		roleImpl.setClassPK(role.getClassPK());
+		roleImpl.setName(role.getName());
+		roleImpl.setTitle(role.getTitle());
+		roleImpl.setDescription(role.getDescription());
+		roleImpl.setType(role.getType());
+		roleImpl.setSubtype(role.getSubtype());
+
+		return roleImpl;
 	}
 
 	public Role findByPrimaryKey(long roleId)

@@ -228,6 +228,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	protected MBMailingList removeImpl(MBMailingList mbMailingList)
 		throws SystemException {
+		mbMailingList = toUnwrappedModel(mbMailingList);
+
 		Session session = null;
 
 		try {
@@ -330,6 +332,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	public MBMailingList updateImpl(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList,
 		boolean merge) throws SystemException {
+		mbMailingList = toUnwrappedModel(mbMailingList);
+
 		boolean isNew = mbMailingList.isNew();
 
 		MBMailingListModelImpl mbMailingListModelImpl = (MBMailingListModelImpl)mbMailingList;
@@ -405,6 +409,45 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbMailingList;
+	}
+
+	protected MBMailingList toUnwrappedModel(MBMailingList mbMailingList) {
+		if (mbMailingList instanceof MBMailingListImpl) {
+			return mbMailingList;
+		}
+
+		MBMailingListImpl mbMailingListImpl = new MBMailingListImpl();
+
+		mbMailingListImpl.setNew(mbMailingList.isNew());
+		mbMailingListImpl.setPrimaryKey(mbMailingList.getPrimaryKey());
+
+		mbMailingListImpl.setUuid(mbMailingList.getUuid());
+		mbMailingListImpl.setMailingListId(mbMailingList.getMailingListId());
+		mbMailingListImpl.setGroupId(mbMailingList.getGroupId());
+		mbMailingListImpl.setCompanyId(mbMailingList.getCompanyId());
+		mbMailingListImpl.setUserId(mbMailingList.getUserId());
+		mbMailingListImpl.setUserName(mbMailingList.getUserName());
+		mbMailingListImpl.setCreateDate(mbMailingList.getCreateDate());
+		mbMailingListImpl.setModifiedDate(mbMailingList.getModifiedDate());
+		mbMailingListImpl.setCategoryId(mbMailingList.getCategoryId());
+		mbMailingListImpl.setEmailAddress(mbMailingList.getEmailAddress());
+		mbMailingListImpl.setInProtocol(mbMailingList.getInProtocol());
+		mbMailingListImpl.setInServerName(mbMailingList.getInServerName());
+		mbMailingListImpl.setInServerPort(mbMailingList.getInServerPort());
+		mbMailingListImpl.setInUseSSL(mbMailingList.isInUseSSL());
+		mbMailingListImpl.setInUserName(mbMailingList.getInUserName());
+		mbMailingListImpl.setInPassword(mbMailingList.getInPassword());
+		mbMailingListImpl.setInReadInterval(mbMailingList.getInReadInterval());
+		mbMailingListImpl.setOutEmailAddress(mbMailingList.getOutEmailAddress());
+		mbMailingListImpl.setOutCustom(mbMailingList.isOutCustom());
+		mbMailingListImpl.setOutServerName(mbMailingList.getOutServerName());
+		mbMailingListImpl.setOutServerPort(mbMailingList.getOutServerPort());
+		mbMailingListImpl.setOutUseSSL(mbMailingList.isOutUseSSL());
+		mbMailingListImpl.setOutUserName(mbMailingList.getOutUserName());
+		mbMailingListImpl.setOutPassword(mbMailingList.getOutPassword());
+		mbMailingListImpl.setActive(mbMailingList.isActive());
+
+		return mbMailingListImpl;
 	}
 
 	public MBMailingList findByPrimaryKey(long mailingListId)

@@ -329,6 +329,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	protected ExpandoValue removeImpl(ExpandoValue expandoValue)
 		throws SystemException {
+		expandoValue = toUnwrappedModel(expandoValue);
+
 		Session session = null;
 
 		try {
@@ -432,6 +434,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	public ExpandoValue updateImpl(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue,
 		boolean merge) throws SystemException {
+		expandoValue = toUnwrappedModel(expandoValue);
+
 		boolean isNew = expandoValue.isNew();
 
 		ExpandoValueModelImpl expandoValueModelImpl = (ExpandoValueModelImpl)expandoValue;
@@ -502,6 +506,28 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return expandoValue;
+	}
+
+	protected ExpandoValue toUnwrappedModel(ExpandoValue expandoValue) {
+		if (expandoValue instanceof ExpandoValueImpl) {
+			return expandoValue;
+		}
+
+		ExpandoValueImpl expandoValueImpl = new ExpandoValueImpl();
+
+		expandoValueImpl.setNew(expandoValue.isNew());
+		expandoValueImpl.setPrimaryKey(expandoValue.getPrimaryKey());
+
+		expandoValueImpl.setValueId(expandoValue.getValueId());
+		expandoValueImpl.setCompanyId(expandoValue.getCompanyId());
+		expandoValueImpl.setTableId(expandoValue.getTableId());
+		expandoValueImpl.setColumnId(expandoValue.getColumnId());
+		expandoValueImpl.setRowId(expandoValue.getRowId());
+		expandoValueImpl.setClassNameId(expandoValue.getClassNameId());
+		expandoValueImpl.setClassPK(expandoValue.getClassPK());
+		expandoValueImpl.setData(expandoValue.getData());
+
+		return expandoValueImpl;
 	}
 
 	public ExpandoValue findByPrimaryKey(long valueId)

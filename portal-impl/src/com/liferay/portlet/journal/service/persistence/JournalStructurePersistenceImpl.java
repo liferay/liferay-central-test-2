@@ -264,6 +264,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	protected JournalStructure removeImpl(JournalStructure journalStructure)
 		throws SystemException {
+		journalStructure = toUnwrappedModel(journalStructure);
+
 		Session session = null;
 
 		try {
@@ -368,6 +370,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	public JournalStructure updateImpl(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean merge) throws SystemException {
+		journalStructure = toUnwrappedModel(journalStructure);
+
 		boolean isNew = journalStructure.isNew();
 
 		JournalStructureModelImpl journalStructureModelImpl = (JournalStructureModelImpl)journalStructure;
@@ -447,6 +451,34 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalStructure;
+	}
+
+	protected JournalStructure toUnwrappedModel(
+		JournalStructure journalStructure) {
+		if (journalStructure instanceof JournalStructureImpl) {
+			return journalStructure;
+		}
+
+		JournalStructureImpl journalStructureImpl = new JournalStructureImpl();
+
+		journalStructureImpl.setNew(journalStructure.isNew());
+		journalStructureImpl.setPrimaryKey(journalStructure.getPrimaryKey());
+
+		journalStructureImpl.setUuid(journalStructure.getUuid());
+		journalStructureImpl.setId(journalStructure.getId());
+		journalStructureImpl.setGroupId(journalStructure.getGroupId());
+		journalStructureImpl.setCompanyId(journalStructure.getCompanyId());
+		journalStructureImpl.setUserId(journalStructure.getUserId());
+		journalStructureImpl.setUserName(journalStructure.getUserName());
+		journalStructureImpl.setCreateDate(journalStructure.getCreateDate());
+		journalStructureImpl.setModifiedDate(journalStructure.getModifiedDate());
+		journalStructureImpl.setStructureId(journalStructure.getStructureId());
+		journalStructureImpl.setParentStructureId(journalStructure.getParentStructureId());
+		journalStructureImpl.setName(journalStructure.getName());
+		journalStructureImpl.setDescription(journalStructure.getDescription());
+		journalStructureImpl.setXsd(journalStructure.getXsd());
+
+		return journalStructureImpl;
 	}
 
 	public JournalStructure findByPrimaryKey(long id)

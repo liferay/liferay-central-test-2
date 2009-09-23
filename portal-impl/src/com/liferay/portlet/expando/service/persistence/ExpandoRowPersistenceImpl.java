@@ -186,6 +186,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 	protected ExpandoRow removeImpl(ExpandoRow expandoRow)
 		throws SystemException {
+		expandoRow = toUnwrappedModel(expandoRow);
+
 		Session session = null;
 
 		try {
@@ -281,6 +283,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 	public ExpandoRow updateImpl(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow, boolean merge)
 		throws SystemException {
+		expandoRow = toUnwrappedModel(expandoRow);
+
 		boolean isNew = expandoRow.isNew();
 
 		ExpandoRowModelImpl expandoRowModelImpl = (ExpandoRowModelImpl)expandoRow;
@@ -327,6 +331,24 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return expandoRow;
+	}
+
+	protected ExpandoRow toUnwrappedModel(ExpandoRow expandoRow) {
+		if (expandoRow instanceof ExpandoRowImpl) {
+			return expandoRow;
+		}
+
+		ExpandoRowImpl expandoRowImpl = new ExpandoRowImpl();
+
+		expandoRowImpl.setNew(expandoRow.isNew());
+		expandoRowImpl.setPrimaryKey(expandoRow.getPrimaryKey());
+
+		expandoRowImpl.setRowId(expandoRow.getRowId());
+		expandoRowImpl.setCompanyId(expandoRow.getCompanyId());
+		expandoRowImpl.setTableId(expandoRow.getTableId());
+		expandoRowImpl.setClassPK(expandoRow.getClassPK());
+
+		return expandoRowImpl;
 	}
 
 	public ExpandoRow findByPrimaryKey(long rowId)

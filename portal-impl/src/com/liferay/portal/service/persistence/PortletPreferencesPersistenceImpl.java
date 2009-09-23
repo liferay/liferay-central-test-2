@@ -242,6 +242,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	protected PortletPreferences removeImpl(
 		PortletPreferences portletPreferences) throws SystemException {
+		portletPreferences = toUnwrappedModel(portletPreferences);
+
 		Session session = null;
 
 		try {
@@ -342,6 +344,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 	public PortletPreferences updateImpl(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
 		boolean merge) throws SystemException {
+		portletPreferences = toUnwrappedModel(portletPreferences);
+
 		boolean isNew = portletPreferences.isNew();
 
 		PortletPreferencesModelImpl portletPreferencesModelImpl = (PortletPreferencesModelImpl)portletPreferences;
@@ -401,6 +405,27 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return portletPreferences;
+	}
+
+	protected PortletPreferences toUnwrappedModel(
+		PortletPreferences portletPreferences) {
+		if (portletPreferences instanceof PortletPreferencesImpl) {
+			return portletPreferences;
+		}
+
+		PortletPreferencesImpl portletPreferencesImpl = new PortletPreferencesImpl();
+
+		portletPreferencesImpl.setNew(portletPreferences.isNew());
+		portletPreferencesImpl.setPrimaryKey(portletPreferences.getPrimaryKey());
+
+		portletPreferencesImpl.setPortletPreferencesId(portletPreferences.getPortletPreferencesId());
+		portletPreferencesImpl.setOwnerId(portletPreferences.getOwnerId());
+		portletPreferencesImpl.setOwnerType(portletPreferences.getOwnerType());
+		portletPreferencesImpl.setPlid(portletPreferences.getPlid());
+		portletPreferencesImpl.setPortletId(portletPreferences.getPortletId());
+		portletPreferencesImpl.setPreferences(portletPreferences.getPreferences());
+
+		return portletPreferencesImpl;
 	}
 
 	public PortletPreferences findByPrimaryKey(long portletPreferencesId)

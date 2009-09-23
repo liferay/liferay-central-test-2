@@ -179,6 +179,8 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 	protected ShoppingItemPrice removeImpl(ShoppingItemPrice shoppingItemPrice)
 		throws SystemException {
+		shoppingItemPrice = toUnwrappedModel(shoppingItemPrice);
+
 		Session session = null;
 
 		try {
@@ -268,6 +270,8 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 	public ShoppingItemPrice updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
 		boolean merge) throws SystemException {
+		shoppingItemPrice = toUnwrappedModel(shoppingItemPrice);
+
 		Session session = null;
 
 		try {
@@ -291,6 +295,31 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 			shoppingItemPrice);
 
 		return shoppingItemPrice;
+	}
+
+	protected ShoppingItemPrice toUnwrappedModel(
+		ShoppingItemPrice shoppingItemPrice) {
+		if (shoppingItemPrice instanceof ShoppingItemPriceImpl) {
+			return shoppingItemPrice;
+		}
+
+		ShoppingItemPriceImpl shoppingItemPriceImpl = new ShoppingItemPriceImpl();
+
+		shoppingItemPriceImpl.setNew(shoppingItemPrice.isNew());
+		shoppingItemPriceImpl.setPrimaryKey(shoppingItemPrice.getPrimaryKey());
+
+		shoppingItemPriceImpl.setItemPriceId(shoppingItemPrice.getItemPriceId());
+		shoppingItemPriceImpl.setItemId(shoppingItemPrice.getItemId());
+		shoppingItemPriceImpl.setMinQuantity(shoppingItemPrice.getMinQuantity());
+		shoppingItemPriceImpl.setMaxQuantity(shoppingItemPrice.getMaxQuantity());
+		shoppingItemPriceImpl.setPrice(shoppingItemPrice.getPrice());
+		shoppingItemPriceImpl.setDiscount(shoppingItemPrice.getDiscount());
+		shoppingItemPriceImpl.setTaxable(shoppingItemPrice.isTaxable());
+		shoppingItemPriceImpl.setShipping(shoppingItemPrice.getShipping());
+		shoppingItemPriceImpl.setUseShippingFormula(shoppingItemPrice.isUseShippingFormula());
+		shoppingItemPriceImpl.setStatus(shoppingItemPrice.getStatus());
+
+		return shoppingItemPriceImpl;
 	}
 
 	public ShoppingItemPrice findByPrimaryKey(long itemPriceId)

@@ -196,6 +196,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 	protected ShoppingCategory removeImpl(ShoppingCategory shoppingCategory)
 		throws SystemException {
+		shoppingCategory = toUnwrappedModel(shoppingCategory);
+
 		Session session = null;
 
 		try {
@@ -285,6 +287,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 	public ShoppingCategory updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
 		boolean merge) throws SystemException {
+		shoppingCategory = toUnwrappedModel(shoppingCategory);
+
 		Session session = null;
 
 		try {
@@ -308,6 +312,31 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 			shoppingCategory);
 
 		return shoppingCategory;
+	}
+
+	protected ShoppingCategory toUnwrappedModel(
+		ShoppingCategory shoppingCategory) {
+		if (shoppingCategory instanceof ShoppingCategoryImpl) {
+			return shoppingCategory;
+		}
+
+		ShoppingCategoryImpl shoppingCategoryImpl = new ShoppingCategoryImpl();
+
+		shoppingCategoryImpl.setNew(shoppingCategory.isNew());
+		shoppingCategoryImpl.setPrimaryKey(shoppingCategory.getPrimaryKey());
+
+		shoppingCategoryImpl.setCategoryId(shoppingCategory.getCategoryId());
+		shoppingCategoryImpl.setGroupId(shoppingCategory.getGroupId());
+		shoppingCategoryImpl.setCompanyId(shoppingCategory.getCompanyId());
+		shoppingCategoryImpl.setUserId(shoppingCategory.getUserId());
+		shoppingCategoryImpl.setUserName(shoppingCategory.getUserName());
+		shoppingCategoryImpl.setCreateDate(shoppingCategory.getCreateDate());
+		shoppingCategoryImpl.setModifiedDate(shoppingCategory.getModifiedDate());
+		shoppingCategoryImpl.setParentCategoryId(shoppingCategory.getParentCategoryId());
+		shoppingCategoryImpl.setName(shoppingCategory.getName());
+		shoppingCategoryImpl.setDescription(shoppingCategory.getDescription());
+
+		return shoppingCategoryImpl;
 	}
 
 	public ShoppingCategory findByPrimaryKey(long categoryId)

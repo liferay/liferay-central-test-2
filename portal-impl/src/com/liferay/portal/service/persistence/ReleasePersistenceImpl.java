@@ -152,6 +152,8 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Release removeImpl(Release release) throws SystemException {
+		release = toUnwrappedModel(release);
+
 		Session session = null;
 
 		try {
@@ -238,6 +240,8 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 	public Release updateImpl(com.liferay.portal.model.Release release,
 		boolean merge) throws SystemException {
+		release = toUnwrappedModel(release);
+
 		Session session = null;
 
 		try {
@@ -260,6 +264,27 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 			ReleaseImpl.class, release.getPrimaryKey(), release);
 
 		return release;
+	}
+
+	protected Release toUnwrappedModel(Release release) {
+		if (release instanceof ReleaseImpl) {
+			return release;
+		}
+
+		ReleaseImpl releaseImpl = new ReleaseImpl();
+
+		releaseImpl.setNew(release.isNew());
+		releaseImpl.setPrimaryKey(release.getPrimaryKey());
+
+		releaseImpl.setReleaseId(release.getReleaseId());
+		releaseImpl.setCreateDate(release.getCreateDate());
+		releaseImpl.setModifiedDate(release.getModifiedDate());
+		releaseImpl.setBuildNumber(release.getBuildNumber());
+		releaseImpl.setBuildDate(release.getBuildDate());
+		releaseImpl.setVerified(release.isVerified());
+		releaseImpl.setTestString(release.getTestString());
+
+		return releaseImpl;
 	}
 
 	public Release findByPrimaryKey(long releaseId)

@@ -222,6 +222,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 	protected PortletItem removeImpl(PortletItem portletItem)
 		throws SystemException {
+		portletItem = toUnwrappedModel(portletItem);
+
 		Session session = null;
 
 		try {
@@ -322,6 +324,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 	public PortletItem updateImpl(
 		com.liferay.portal.model.PortletItem portletItem, boolean merge)
 		throws SystemException {
+		portletItem = toUnwrappedModel(portletItem);
+
 		boolean isNew = portletItem.isNew();
 
 		PortletItemModelImpl portletItemModelImpl = (PortletItemModelImpl)portletItem;
@@ -384,6 +388,30 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return portletItem;
+	}
+
+	protected PortletItem toUnwrappedModel(PortletItem portletItem) {
+		if (portletItem instanceof PortletItemImpl) {
+			return portletItem;
+		}
+
+		PortletItemImpl portletItemImpl = new PortletItemImpl();
+
+		portletItemImpl.setNew(portletItem.isNew());
+		portletItemImpl.setPrimaryKey(portletItem.getPrimaryKey());
+
+		portletItemImpl.setPortletItemId(portletItem.getPortletItemId());
+		portletItemImpl.setGroupId(portletItem.getGroupId());
+		portletItemImpl.setCompanyId(portletItem.getCompanyId());
+		portletItemImpl.setUserId(portletItem.getUserId());
+		portletItemImpl.setUserName(portletItem.getUserName());
+		portletItemImpl.setCreateDate(portletItem.getCreateDate());
+		portletItemImpl.setModifiedDate(portletItem.getModifiedDate());
+		portletItemImpl.setName(portletItem.getName());
+		portletItemImpl.setPortletId(portletItem.getPortletId());
+		portletItemImpl.setClassNameId(portletItem.getClassNameId());
+
+		return portletItemImpl;
 	}
 
 	public PortletItem findByPrimaryKey(long portletItemId)

@@ -291,6 +291,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	protected MBMessageFlag removeImpl(MBMessageFlag mbMessageFlag)
 		throws SystemException {
+		mbMessageFlag = toUnwrappedModel(mbMessageFlag);
+
 		Session session = null;
 
 		try {
@@ -388,6 +390,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 	public MBMessageFlag updateImpl(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean merge) throws SystemException {
+		mbMessageFlag = toUnwrappedModel(mbMessageFlag);
+
 		boolean isNew = mbMessageFlag.isNew();
 
 		MBMessageFlagModelImpl mbMessageFlagModelImpl = (MBMessageFlagModelImpl)mbMessageFlag;
@@ -439,6 +443,26 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbMessageFlag;
+	}
+
+	protected MBMessageFlag toUnwrappedModel(MBMessageFlag mbMessageFlag) {
+		if (mbMessageFlag instanceof MBMessageFlagImpl) {
+			return mbMessageFlag;
+		}
+
+		MBMessageFlagImpl mbMessageFlagImpl = new MBMessageFlagImpl();
+
+		mbMessageFlagImpl.setNew(mbMessageFlag.isNew());
+		mbMessageFlagImpl.setPrimaryKey(mbMessageFlag.getPrimaryKey());
+
+		mbMessageFlagImpl.setMessageFlagId(mbMessageFlag.getMessageFlagId());
+		mbMessageFlagImpl.setUserId(mbMessageFlag.getUserId());
+		mbMessageFlagImpl.setModifiedDate(mbMessageFlag.getModifiedDate());
+		mbMessageFlagImpl.setThreadId(mbMessageFlag.getThreadId());
+		mbMessageFlagImpl.setMessageId(mbMessageFlag.getMessageId());
+		mbMessageFlagImpl.setFlag(mbMessageFlag.getFlag());
+
+		return mbMessageFlagImpl;
 	}
 
 	public MBMessageFlag findByPrimaryKey(long messageFlagId)

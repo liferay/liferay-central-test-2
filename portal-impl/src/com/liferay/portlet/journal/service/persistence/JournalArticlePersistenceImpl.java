@@ -402,6 +402,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	protected JournalArticle removeImpl(JournalArticle journalArticle)
 		throws SystemException {
+		journalArticle = toUnwrappedModel(journalArticle);
+
 		Session session = null;
 
 		try {
@@ -506,6 +508,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 	public JournalArticle updateImpl(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle,
 		boolean merge) throws SystemException {
+		journalArticle = toUnwrappedModel(journalArticle);
+
 		boolean isNew = journalArticle.isNew();
 
 		JournalArticleModelImpl journalArticleModelImpl = (JournalArticleModelImpl)journalArticle;
@@ -589,6 +593,49 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalArticle;
+	}
+
+	protected JournalArticle toUnwrappedModel(JournalArticle journalArticle) {
+		if (journalArticle instanceof JournalArticleImpl) {
+			return journalArticle;
+		}
+
+		JournalArticleImpl journalArticleImpl = new JournalArticleImpl();
+
+		journalArticleImpl.setNew(journalArticle.isNew());
+		journalArticleImpl.setPrimaryKey(journalArticle.getPrimaryKey());
+
+		journalArticleImpl.setUuid(journalArticle.getUuid());
+		journalArticleImpl.setId(journalArticle.getId());
+		journalArticleImpl.setResourcePrimKey(journalArticle.getResourcePrimKey());
+		journalArticleImpl.setGroupId(journalArticle.getGroupId());
+		journalArticleImpl.setCompanyId(journalArticle.getCompanyId());
+		journalArticleImpl.setUserId(journalArticle.getUserId());
+		journalArticleImpl.setUserName(journalArticle.getUserName());
+		journalArticleImpl.setCreateDate(journalArticle.getCreateDate());
+		journalArticleImpl.setModifiedDate(journalArticle.getModifiedDate());
+		journalArticleImpl.setArticleId(journalArticle.getArticleId());
+		journalArticleImpl.setVersion(journalArticle.getVersion());
+		journalArticleImpl.setTitle(journalArticle.getTitle());
+		journalArticleImpl.setUrlTitle(journalArticle.getUrlTitle());
+		journalArticleImpl.setDescription(journalArticle.getDescription());
+		journalArticleImpl.setContent(journalArticle.getContent());
+		journalArticleImpl.setType(journalArticle.getType());
+		journalArticleImpl.setStructureId(journalArticle.getStructureId());
+		journalArticleImpl.setTemplateId(journalArticle.getTemplateId());
+		journalArticleImpl.setDisplayDate(journalArticle.getDisplayDate());
+		journalArticleImpl.setStatus(journalArticle.getStatus());
+		journalArticleImpl.setStatusByUserId(journalArticle.getStatusByUserId());
+		journalArticleImpl.setStatusByUserName(journalArticle.getStatusByUserName());
+		journalArticleImpl.setStatusDate(journalArticle.getStatusDate());
+		journalArticleImpl.setExpirationDate(journalArticle.getExpirationDate());
+		journalArticleImpl.setReviewDate(journalArticle.getReviewDate());
+		journalArticleImpl.setIndexable(journalArticle.isIndexable());
+		journalArticleImpl.setSmallImage(journalArticle.isSmallImage());
+		journalArticleImpl.setSmallImageId(journalArticle.getSmallImageId());
+		journalArticleImpl.setSmallImageURL(journalArticle.getSmallImageURL());
+
+		return journalArticleImpl;
 	}
 
 	public JournalArticle findByPrimaryKey(long id)

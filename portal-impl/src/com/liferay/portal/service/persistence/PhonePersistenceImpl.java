@@ -244,6 +244,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Phone removeImpl(Phone phone) throws SystemException {
+		phone = toUnwrappedModel(phone);
+
 		Session session = null;
 
 		try {
@@ -329,6 +331,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public Phone updateImpl(com.liferay.portal.model.Phone phone, boolean merge)
 		throws SystemException {
+		phone = toUnwrappedModel(phone);
+
 		Session session = null;
 
 		try {
@@ -351,6 +355,32 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 			PhoneImpl.class, phone.getPrimaryKey(), phone);
 
 		return phone;
+	}
+
+	protected Phone toUnwrappedModel(Phone phone) {
+		if (phone instanceof PhoneImpl) {
+			return phone;
+		}
+
+		PhoneImpl phoneImpl = new PhoneImpl();
+
+		phoneImpl.setNew(phone.isNew());
+		phoneImpl.setPrimaryKey(phone.getPrimaryKey());
+
+		phoneImpl.setPhoneId(phone.getPhoneId());
+		phoneImpl.setCompanyId(phone.getCompanyId());
+		phoneImpl.setUserId(phone.getUserId());
+		phoneImpl.setUserName(phone.getUserName());
+		phoneImpl.setCreateDate(phone.getCreateDate());
+		phoneImpl.setModifiedDate(phone.getModifiedDate());
+		phoneImpl.setClassNameId(phone.getClassNameId());
+		phoneImpl.setClassPK(phone.getClassPK());
+		phoneImpl.setNumber(phone.getNumber());
+		phoneImpl.setExtension(phone.getExtension());
+		phoneImpl.setTypeId(phone.getTypeId());
+		phoneImpl.setPrimary(phone.isPrimary());
+
+		return phoneImpl;
 	}
 
 	public Phone findByPrimaryKey(long phoneId)

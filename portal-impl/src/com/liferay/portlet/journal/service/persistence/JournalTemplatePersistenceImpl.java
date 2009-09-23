@@ -275,6 +275,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	protected JournalTemplate removeImpl(JournalTemplate journalTemplate)
 		throws SystemException {
+		journalTemplate = toUnwrappedModel(journalTemplate);
+
 		Session session = null;
 
 		try {
@@ -384,6 +386,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 	public JournalTemplate updateImpl(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
 		boolean merge) throws SystemException {
+		journalTemplate = toUnwrappedModel(journalTemplate);
+
 		boolean isNew = journalTemplate.isNew();
 
 		JournalTemplateModelImpl journalTemplateModelImpl = (JournalTemplateModelImpl)journalTemplate;
@@ -478,6 +482,38 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalTemplate;
+	}
+
+	protected JournalTemplate toUnwrappedModel(JournalTemplate journalTemplate) {
+		if (journalTemplate instanceof JournalTemplateImpl) {
+			return journalTemplate;
+		}
+
+		JournalTemplateImpl journalTemplateImpl = new JournalTemplateImpl();
+
+		journalTemplateImpl.setNew(journalTemplate.isNew());
+		journalTemplateImpl.setPrimaryKey(journalTemplate.getPrimaryKey());
+
+		journalTemplateImpl.setUuid(journalTemplate.getUuid());
+		journalTemplateImpl.setId(journalTemplate.getId());
+		journalTemplateImpl.setGroupId(journalTemplate.getGroupId());
+		journalTemplateImpl.setCompanyId(journalTemplate.getCompanyId());
+		journalTemplateImpl.setUserId(journalTemplate.getUserId());
+		journalTemplateImpl.setUserName(journalTemplate.getUserName());
+		journalTemplateImpl.setCreateDate(journalTemplate.getCreateDate());
+		journalTemplateImpl.setModifiedDate(journalTemplate.getModifiedDate());
+		journalTemplateImpl.setTemplateId(journalTemplate.getTemplateId());
+		journalTemplateImpl.setStructureId(journalTemplate.getStructureId());
+		journalTemplateImpl.setName(journalTemplate.getName());
+		journalTemplateImpl.setDescription(journalTemplate.getDescription());
+		journalTemplateImpl.setXsl(journalTemplate.getXsl());
+		journalTemplateImpl.setLangType(journalTemplate.getLangType());
+		journalTemplateImpl.setCacheable(journalTemplate.isCacheable());
+		journalTemplateImpl.setSmallImage(journalTemplate.isSmallImage());
+		journalTemplateImpl.setSmallImageId(journalTemplate.getSmallImageId());
+		journalTemplateImpl.setSmallImageURL(journalTemplate.getSmallImageURL());
+
+		return journalTemplateImpl;
 	}
 
 	public JournalTemplate findByPrimaryKey(long id)

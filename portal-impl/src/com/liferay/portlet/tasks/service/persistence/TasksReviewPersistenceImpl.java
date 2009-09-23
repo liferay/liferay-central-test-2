@@ -267,6 +267,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	protected TasksReview removeImpl(TasksReview tasksReview)
 		throws SystemException {
+		tasksReview = toUnwrappedModel(tasksReview);
+
 		Session session = null;
 
 		try {
@@ -363,6 +365,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	public TasksReview updateImpl(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
 		throws SystemException {
+		tasksReview = toUnwrappedModel(tasksReview);
+
 		boolean isNew = tasksReview.isNew();
 
 		TasksReviewModelImpl tasksReviewModelImpl = (TasksReviewModelImpl)tasksReview;
@@ -409,6 +413,33 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return tasksReview;
+	}
+
+	protected TasksReview toUnwrappedModel(TasksReview tasksReview) {
+		if (tasksReview instanceof TasksReviewImpl) {
+			return tasksReview;
+		}
+
+		TasksReviewImpl tasksReviewImpl = new TasksReviewImpl();
+
+		tasksReviewImpl.setNew(tasksReview.isNew());
+		tasksReviewImpl.setPrimaryKey(tasksReview.getPrimaryKey());
+
+		tasksReviewImpl.setReviewId(tasksReview.getReviewId());
+		tasksReviewImpl.setGroupId(tasksReview.getGroupId());
+		tasksReviewImpl.setCompanyId(tasksReview.getCompanyId());
+		tasksReviewImpl.setUserId(tasksReview.getUserId());
+		tasksReviewImpl.setUserName(tasksReview.getUserName());
+		tasksReviewImpl.setCreateDate(tasksReview.getCreateDate());
+		tasksReviewImpl.setModifiedDate(tasksReview.getModifiedDate());
+		tasksReviewImpl.setProposalId(tasksReview.getProposalId());
+		tasksReviewImpl.setAssignedByUserId(tasksReview.getAssignedByUserId());
+		tasksReviewImpl.setAssignedByUserName(tasksReview.getAssignedByUserName());
+		tasksReviewImpl.setStage(tasksReview.getStage());
+		tasksReviewImpl.setCompleted(tasksReview.isCompleted());
+		tasksReviewImpl.setRejected(tasksReview.isRejected());
+
+		return tasksReviewImpl;
 	}
 
 	public TasksReview findByPrimaryKey(long reviewId)

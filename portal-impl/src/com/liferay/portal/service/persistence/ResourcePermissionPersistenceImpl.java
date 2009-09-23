@@ -253,6 +253,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 
 	protected ResourcePermission removeImpl(
 		ResourcePermission resourcePermission) throws SystemException {
+		resourcePermission = toUnwrappedModel(resourcePermission);
+
 		Session session = null;
 
 		try {
@@ -355,6 +357,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 	public ResourcePermission updateImpl(
 		com.liferay.portal.model.ResourcePermission resourcePermission,
 		boolean merge) throws SystemException {
+		resourcePermission = toUnwrappedModel(resourcePermission);
+
 		boolean isNew = resourcePermission.isNew();
 
 		ResourcePermissionModelImpl resourcePermissionModelImpl = (ResourcePermissionModelImpl)resourcePermission;
@@ -422,6 +426,28 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return resourcePermission;
+	}
+
+	protected ResourcePermission toUnwrappedModel(
+		ResourcePermission resourcePermission) {
+		if (resourcePermission instanceof ResourcePermissionImpl) {
+			return resourcePermission;
+		}
+
+		ResourcePermissionImpl resourcePermissionImpl = new ResourcePermissionImpl();
+
+		resourcePermissionImpl.setNew(resourcePermission.isNew());
+		resourcePermissionImpl.setPrimaryKey(resourcePermission.getPrimaryKey());
+
+		resourcePermissionImpl.setResourcePermissionId(resourcePermission.getResourcePermissionId());
+		resourcePermissionImpl.setCompanyId(resourcePermission.getCompanyId());
+		resourcePermissionImpl.setName(resourcePermission.getName());
+		resourcePermissionImpl.setScope(resourcePermission.getScope());
+		resourcePermissionImpl.setPrimKey(resourcePermission.getPrimKey());
+		resourcePermissionImpl.setRoleId(resourcePermission.getRoleId());
+		resourcePermissionImpl.setActionIds(resourcePermission.getActionIds());
+
+		return resourcePermissionImpl;
 	}
 
 	public ResourcePermission findByPrimaryKey(long resourcePermissionId)

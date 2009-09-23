@@ -200,6 +200,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 	protected SCLicense removeImpl(SCLicense scLicense)
 		throws SystemException {
+		scLicense = toUnwrappedModel(scLicense);
+
 		try {
 			clearSCProductEntries.clear(scLicense.getPrimaryKey());
 		}
@@ -297,6 +299,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	public SCLicense updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
 		boolean merge) throws SystemException {
+		scLicense = toUnwrappedModel(scLicense);
+
 		Session session = null;
 
 		try {
@@ -319,6 +323,26 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 			SCLicenseImpl.class, scLicense.getPrimaryKey(), scLicense);
 
 		return scLicense;
+	}
+
+	protected SCLicense toUnwrappedModel(SCLicense scLicense) {
+		if (scLicense instanceof SCLicenseImpl) {
+			return scLicense;
+		}
+
+		SCLicenseImpl scLicenseImpl = new SCLicenseImpl();
+
+		scLicenseImpl.setNew(scLicense.isNew());
+		scLicenseImpl.setPrimaryKey(scLicense.getPrimaryKey());
+
+		scLicenseImpl.setLicenseId(scLicense.getLicenseId());
+		scLicenseImpl.setName(scLicense.getName());
+		scLicenseImpl.setUrl(scLicense.getUrl());
+		scLicenseImpl.setOpenSource(scLicense.isOpenSource());
+		scLicenseImpl.setActive(scLicense.isActive());
+		scLicenseImpl.setRecommended(scLicense.isRecommended());
+
+		return scLicenseImpl;
 	}
 
 	public SCLicense findByPrimaryKey(long licenseId)

@@ -204,6 +204,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	protected UserIdMapper removeImpl(UserIdMapper userIdMapper)
 		throws SystemException {
+		userIdMapper = toUnwrappedModel(userIdMapper);
+
 		Session session = null;
 
 		try {
@@ -308,6 +310,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	public UserIdMapper updateImpl(
 		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
 		throws SystemException {
+		userIdMapper = toUnwrappedModel(userIdMapper);
+
 		boolean isNew = userIdMapper.isNew();
 
 		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapper;
@@ -384,6 +388,25 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return userIdMapper;
+	}
+
+	protected UserIdMapper toUnwrappedModel(UserIdMapper userIdMapper) {
+		if (userIdMapper instanceof UserIdMapperImpl) {
+			return userIdMapper;
+		}
+
+		UserIdMapperImpl userIdMapperImpl = new UserIdMapperImpl();
+
+		userIdMapperImpl.setNew(userIdMapper.isNew());
+		userIdMapperImpl.setPrimaryKey(userIdMapper.getPrimaryKey());
+
+		userIdMapperImpl.setUserIdMapperId(userIdMapper.getUserIdMapperId());
+		userIdMapperImpl.setUserId(userIdMapper.getUserId());
+		userIdMapperImpl.setType(userIdMapper.getType());
+		userIdMapperImpl.setDescription(userIdMapper.getDescription());
+		userIdMapperImpl.setExternalUserId(userIdMapper.getExternalUserId());
+
+		return userIdMapperImpl;
 	}
 
 	public UserIdMapper findByPrimaryKey(long userIdMapperId)

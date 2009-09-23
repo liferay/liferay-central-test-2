@@ -243,6 +243,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	protected BlogsStatsUser removeImpl(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
+		blogsStatsUser = toUnwrappedModel(blogsStatsUser);
+
 		Session session = null;
 
 		try {
@@ -339,6 +341,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	public BlogsStatsUser updateImpl(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
 		boolean merge) throws SystemException {
+		blogsStatsUser = toUnwrappedModel(blogsStatsUser);
+
 		boolean isNew = blogsStatsUser.isNew();
 
 		BlogsStatsUserModelImpl blogsStatsUserModelImpl = (BlogsStatsUserModelImpl)blogsStatsUser;
@@ -386,6 +390,29 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return blogsStatsUser;
+	}
+
+	protected BlogsStatsUser toUnwrappedModel(BlogsStatsUser blogsStatsUser) {
+		if (blogsStatsUser instanceof BlogsStatsUserImpl) {
+			return blogsStatsUser;
+		}
+
+		BlogsStatsUserImpl blogsStatsUserImpl = new BlogsStatsUserImpl();
+
+		blogsStatsUserImpl.setNew(blogsStatsUser.isNew());
+		blogsStatsUserImpl.setPrimaryKey(blogsStatsUser.getPrimaryKey());
+
+		blogsStatsUserImpl.setStatsUserId(blogsStatsUser.getStatsUserId());
+		blogsStatsUserImpl.setGroupId(blogsStatsUser.getGroupId());
+		blogsStatsUserImpl.setCompanyId(blogsStatsUser.getCompanyId());
+		blogsStatsUserImpl.setUserId(blogsStatsUser.getUserId());
+		blogsStatsUserImpl.setEntryCount(blogsStatsUser.getEntryCount());
+		blogsStatsUserImpl.setLastPostDate(blogsStatsUser.getLastPostDate());
+		blogsStatsUserImpl.setRatingsTotalEntries(blogsStatsUser.getRatingsTotalEntries());
+		blogsStatsUserImpl.setRatingsTotalScore(blogsStatsUser.getRatingsTotalScore());
+		blogsStatsUserImpl.setRatingsAverageScore(blogsStatsUser.getRatingsAverageScore());
+
+		return blogsStatsUserImpl;
 	}
 
 	public BlogsStatsUser findByPrimaryKey(long statsUserId)

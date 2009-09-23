@@ -245,6 +245,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	protected UserGroupGroupRole removeImpl(
 		UserGroupGroupRole userGroupGroupRole) throws SystemException {
+		userGroupGroupRole = toUnwrappedModel(userGroupGroupRole);
+
 		Session session = null;
 
 		try {
@@ -334,6 +336,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 	public UserGroupGroupRole updateImpl(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole,
 		boolean merge) throws SystemException {
+		userGroupGroupRole = toUnwrappedModel(userGroupGroupRole);
+
 		Session session = null;
 
 		try {
@@ -357,6 +361,24 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 			userGroupGroupRole);
 
 		return userGroupGroupRole;
+	}
+
+	protected UserGroupGroupRole toUnwrappedModel(
+		UserGroupGroupRole userGroupGroupRole) {
+		if (userGroupGroupRole instanceof UserGroupGroupRoleImpl) {
+			return userGroupGroupRole;
+		}
+
+		UserGroupGroupRoleImpl userGroupGroupRoleImpl = new UserGroupGroupRoleImpl();
+
+		userGroupGroupRoleImpl.setNew(userGroupGroupRole.isNew());
+		userGroupGroupRoleImpl.setPrimaryKey(userGroupGroupRole.getPrimaryKey());
+
+		userGroupGroupRoleImpl.setUserGroupId(userGroupGroupRole.getUserGroupId());
+		userGroupGroupRoleImpl.setGroupId(userGroupGroupRole.getGroupId());
+		userGroupGroupRoleImpl.setRoleId(userGroupGroupRole.getRoleId());
+
+		return userGroupGroupRoleImpl;
 	}
 
 	public UserGroupGroupRole findByPrimaryKey(

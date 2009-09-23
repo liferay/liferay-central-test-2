@@ -201,6 +201,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 	protected PollsVote removeImpl(PollsVote pollsVote)
 		throws SystemException {
+		pollsVote = toUnwrappedModel(pollsVote);
+
 		Session session = null;
 
 		try {
@@ -296,6 +298,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 	public PollsVote updateImpl(
 		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
 		throws SystemException {
+		pollsVote = toUnwrappedModel(pollsVote);
+
 		boolean isNew = pollsVote.isNew();
 
 		PollsVoteModelImpl pollsVoteModelImpl = (PollsVoteModelImpl)pollsVote;
@@ -342,6 +346,25 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return pollsVote;
+	}
+
+	protected PollsVote toUnwrappedModel(PollsVote pollsVote) {
+		if (pollsVote instanceof PollsVoteImpl) {
+			return pollsVote;
+		}
+
+		PollsVoteImpl pollsVoteImpl = new PollsVoteImpl();
+
+		pollsVoteImpl.setNew(pollsVote.isNew());
+		pollsVoteImpl.setPrimaryKey(pollsVote.getPrimaryKey());
+
+		pollsVoteImpl.setVoteId(pollsVote.getVoteId());
+		pollsVoteImpl.setUserId(pollsVote.getUserId());
+		pollsVoteImpl.setQuestionId(pollsVote.getQuestionId());
+		pollsVoteImpl.setChoiceId(pollsVote.getChoiceId());
+		pollsVoteImpl.setVoteDate(pollsVote.getVoteDate());
+
+		return pollsVoteImpl;
 	}
 
 	public PollsVote findByPrimaryKey(long voteId)

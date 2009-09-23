@@ -258,6 +258,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected IGFolder removeImpl(IGFolder igFolder) throws SystemException {
+		igFolder = toUnwrappedModel(igFolder);
+
 		Session session = null;
 
 		try {
@@ -361,6 +363,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 	public IGFolder updateImpl(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
 		throws SystemException {
+		igFolder = toUnwrappedModel(igFolder);
+
 		boolean isNew = igFolder.isNew();
 
 		IGFolderModelImpl igFolderModelImpl = (IGFolderModelImpl)igFolder;
@@ -441,6 +445,30 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return igFolder;
+	}
+
+	protected IGFolder toUnwrappedModel(IGFolder igFolder) {
+		if (igFolder instanceof IGFolderImpl) {
+			return igFolder;
+		}
+
+		IGFolderImpl igFolderImpl = new IGFolderImpl();
+
+		igFolderImpl.setNew(igFolder.isNew());
+		igFolderImpl.setPrimaryKey(igFolder.getPrimaryKey());
+
+		igFolderImpl.setUuid(igFolder.getUuid());
+		igFolderImpl.setFolderId(igFolder.getFolderId());
+		igFolderImpl.setGroupId(igFolder.getGroupId());
+		igFolderImpl.setCompanyId(igFolder.getCompanyId());
+		igFolderImpl.setUserId(igFolder.getUserId());
+		igFolderImpl.setCreateDate(igFolder.getCreateDate());
+		igFolderImpl.setModifiedDate(igFolder.getModifiedDate());
+		igFolderImpl.setParentFolderId(igFolder.getParentFolderId());
+		igFolderImpl.setName(igFolder.getName());
+		igFolderImpl.setDescription(igFolder.getDescription());
+
+		return igFolderImpl;
 	}
 
 	public IGFolder findByPrimaryKey(long folderId)

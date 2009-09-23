@@ -184,6 +184,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Portlet removeImpl(Portlet portlet) throws SystemException {
+		portlet = toUnwrappedModel(portlet);
+
 		Session session = null;
 
 		try {
@@ -279,6 +281,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public Portlet updateImpl(com.liferay.portal.model.Portlet portlet,
 		boolean merge) throws SystemException {
+		portlet = toUnwrappedModel(portlet);
+
 		boolean isNew = portlet.isNew();
 
 		PortletModelImpl portletModelImpl = (PortletModelImpl)portlet;
@@ -329,6 +333,25 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return portlet;
+	}
+
+	protected Portlet toUnwrappedModel(Portlet portlet) {
+		if (portlet instanceof PortletImpl) {
+			return portlet;
+		}
+
+		PortletImpl portletImpl = new PortletImpl();
+
+		portletImpl.setNew(portlet.isNew());
+		portletImpl.setPrimaryKey(portlet.getPrimaryKey());
+
+		portletImpl.setId(portlet.getId());
+		portletImpl.setCompanyId(portlet.getCompanyId());
+		portletImpl.setPortletId(portlet.getPortletId());
+		portletImpl.setRoles(portlet.getRoles());
+		portletImpl.setActive(portlet.isActive());
+
+		return portletImpl;
 	}
 
 	public Portlet findByPrimaryKey(long id)

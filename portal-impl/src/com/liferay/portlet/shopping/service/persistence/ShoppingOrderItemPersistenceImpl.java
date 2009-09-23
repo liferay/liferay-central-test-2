@@ -179,6 +179,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 
 	protected ShoppingOrderItem removeImpl(ShoppingOrderItem shoppingOrderItem)
 		throws SystemException {
+		shoppingOrderItem = toUnwrappedModel(shoppingOrderItem);
+
 		Session session = null;
 
 		try {
@@ -268,6 +270,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 	public ShoppingOrderItem updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
 		boolean merge) throws SystemException {
+		shoppingOrderItem = toUnwrappedModel(shoppingOrderItem);
+
 		Session session = null;
 
 		try {
@@ -291,6 +295,31 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 			shoppingOrderItem);
 
 		return shoppingOrderItem;
+	}
+
+	protected ShoppingOrderItem toUnwrappedModel(
+		ShoppingOrderItem shoppingOrderItem) {
+		if (shoppingOrderItem instanceof ShoppingOrderItemImpl) {
+			return shoppingOrderItem;
+		}
+
+		ShoppingOrderItemImpl shoppingOrderItemImpl = new ShoppingOrderItemImpl();
+
+		shoppingOrderItemImpl.setNew(shoppingOrderItem.isNew());
+		shoppingOrderItemImpl.setPrimaryKey(shoppingOrderItem.getPrimaryKey());
+
+		shoppingOrderItemImpl.setOrderItemId(shoppingOrderItem.getOrderItemId());
+		shoppingOrderItemImpl.setOrderId(shoppingOrderItem.getOrderId());
+		shoppingOrderItemImpl.setItemId(shoppingOrderItem.getItemId());
+		shoppingOrderItemImpl.setSku(shoppingOrderItem.getSku());
+		shoppingOrderItemImpl.setName(shoppingOrderItem.getName());
+		shoppingOrderItemImpl.setDescription(shoppingOrderItem.getDescription());
+		shoppingOrderItemImpl.setProperties(shoppingOrderItem.getProperties());
+		shoppingOrderItemImpl.setPrice(shoppingOrderItem.getPrice());
+		shoppingOrderItemImpl.setQuantity(shoppingOrderItem.getQuantity());
+		shoppingOrderItemImpl.setShippedDate(shoppingOrderItem.getShippedDate());
+
+		return shoppingOrderItemImpl;
 	}
 
 	public ShoppingOrderItem findByPrimaryKey(long orderItemId)

@@ -211,6 +211,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 	protected TasksProposal removeImpl(TasksProposal tasksProposal)
 		throws SystemException {
+		tasksProposal = toUnwrappedModel(tasksProposal);
+
 		Session session = null;
 
 		try {
@@ -308,6 +310,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 	public TasksProposal updateImpl(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal,
 		boolean merge) throws SystemException {
+		tasksProposal = toUnwrappedModel(tasksProposal);
+
 		boolean isNew = tasksProposal.isNew();
 
 		TasksProposalModelImpl tasksProposalModelImpl = (TasksProposalModelImpl)tasksProposal;
@@ -359,6 +363,33 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return tasksProposal;
+	}
+
+	protected TasksProposal toUnwrappedModel(TasksProposal tasksProposal) {
+		if (tasksProposal instanceof TasksProposalImpl) {
+			return tasksProposal;
+		}
+
+		TasksProposalImpl tasksProposalImpl = new TasksProposalImpl();
+
+		tasksProposalImpl.setNew(tasksProposal.isNew());
+		tasksProposalImpl.setPrimaryKey(tasksProposal.getPrimaryKey());
+
+		tasksProposalImpl.setProposalId(tasksProposal.getProposalId());
+		tasksProposalImpl.setGroupId(tasksProposal.getGroupId());
+		tasksProposalImpl.setCompanyId(tasksProposal.getCompanyId());
+		tasksProposalImpl.setUserId(tasksProposal.getUserId());
+		tasksProposalImpl.setUserName(tasksProposal.getUserName());
+		tasksProposalImpl.setCreateDate(tasksProposal.getCreateDate());
+		tasksProposalImpl.setModifiedDate(tasksProposal.getModifiedDate());
+		tasksProposalImpl.setClassNameId(tasksProposal.getClassNameId());
+		tasksProposalImpl.setClassPK(tasksProposal.getClassPK());
+		tasksProposalImpl.setName(tasksProposal.getName());
+		tasksProposalImpl.setDescription(tasksProposal.getDescription());
+		tasksProposalImpl.setPublishDate(tasksProposal.getPublishDate());
+		tasksProposalImpl.setDueDate(tasksProposal.getDueDate());
+
+		return tasksProposalImpl;
 	}
 
 	public TasksProposal findByPrimaryKey(long proposalId)

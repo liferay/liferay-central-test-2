@@ -247,6 +247,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	protected BookmarksEntry removeImpl(BookmarksEntry bookmarksEntry)
 		throws SystemException {
+		bookmarksEntry = toUnwrappedModel(bookmarksEntry);
+
 		Session session = null;
 
 		try {
@@ -343,6 +345,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	public BookmarksEntry updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
 		boolean merge) throws SystemException {
+		bookmarksEntry = toUnwrappedModel(bookmarksEntry);
+
 		boolean isNew = bookmarksEntry.isNew();
 
 		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntry;
@@ -398,6 +402,33 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return bookmarksEntry;
+	}
+
+	protected BookmarksEntry toUnwrappedModel(BookmarksEntry bookmarksEntry) {
+		if (bookmarksEntry instanceof BookmarksEntryImpl) {
+			return bookmarksEntry;
+		}
+
+		BookmarksEntryImpl bookmarksEntryImpl = new BookmarksEntryImpl();
+
+		bookmarksEntryImpl.setNew(bookmarksEntry.isNew());
+		bookmarksEntryImpl.setPrimaryKey(bookmarksEntry.getPrimaryKey());
+
+		bookmarksEntryImpl.setUuid(bookmarksEntry.getUuid());
+		bookmarksEntryImpl.setEntryId(bookmarksEntry.getEntryId());
+		bookmarksEntryImpl.setGroupId(bookmarksEntry.getGroupId());
+		bookmarksEntryImpl.setCompanyId(bookmarksEntry.getCompanyId());
+		bookmarksEntryImpl.setUserId(bookmarksEntry.getUserId());
+		bookmarksEntryImpl.setCreateDate(bookmarksEntry.getCreateDate());
+		bookmarksEntryImpl.setModifiedDate(bookmarksEntry.getModifiedDate());
+		bookmarksEntryImpl.setFolderId(bookmarksEntry.getFolderId());
+		bookmarksEntryImpl.setName(bookmarksEntry.getName());
+		bookmarksEntryImpl.setUrl(bookmarksEntry.getUrl());
+		bookmarksEntryImpl.setComments(bookmarksEntry.getComments());
+		bookmarksEntryImpl.setVisits(bookmarksEntry.getVisits());
+		bookmarksEntryImpl.setPriority(bookmarksEntry.getPriority());
+
+		return bookmarksEntryImpl;
 	}
 
 	public BookmarksEntry findByPrimaryKey(long entryId)
