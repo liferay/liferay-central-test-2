@@ -147,9 +147,9 @@ StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BO
 
 	<script type="text/javascript">
 		// <![CDATA[
-			<%= typeSettings.getProperty("javascript-1") %>
-			<%= typeSettings.getProperty("javascript-2") %>
-			<%= typeSettings.getProperty("javascript-3") %>
+			<%= GetterUtil.getString(typeSettings.getProperty("javascript-1")) %>
+			<%= GetterUtil.getString(typeSettings.getProperty("javascript-2")) %>
+			<%= GetterUtil.getString(typeSettings.getProperty("javascript-3")) %>
 		// ]]>
 	</script>
 
