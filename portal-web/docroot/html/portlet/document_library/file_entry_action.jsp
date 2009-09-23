@@ -79,15 +79,6 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) %>'
 					message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
 				/>
-
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewURL">
-					<portlet:param name="struts_action" value="/document_library/view_file_entry" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
-				</portlet:renderURL>
-
-				<liferay-ui:icon image="view" url="<%= viewURL %>" />
 			</c:if>
 
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">

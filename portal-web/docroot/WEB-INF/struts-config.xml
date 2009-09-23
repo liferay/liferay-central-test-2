@@ -438,11 +438,6 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
-		<action path="/document_library/view_folder" type="com.liferay.portlet.documentlibrary.action.EditFolderAction">
-			<forward name="portlet.document_library.edit_folder" path="portlet.document_library.view_folder" />
-			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
-		</action>
-
 		<!-- Document Library Display -->
 
 		<action path="/document_library_display/get_file" type="com.liferay.portlet.documentlibrary.action.GetFileAction" />

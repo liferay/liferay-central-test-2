@@ -62,16 +62,6 @@ else {
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
-	<c:if test="<%= !view && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewURL">
-			<portlet:param name="struts_action" value="/document_library/view_folder" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-		</portlet:renderURL>
-
-		<liferay-ui:icon image="view" url="<%= viewURL %>" />
-	</c:if>
-
 	<c:if test="<%= (folder != null) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
