@@ -36,7 +36,7 @@ public class WorkflowInstanceHistoryUserIdComparator extends OrderByComparator {
 	public static String ORDER_BY_ASC = "userId ASC, id ASC";
 
 	public static String ORDER_BY_DESC = "userId DESC, id DESC";
-	
+
 	public static String[] ORDER_BY_FIELDS = {"userId", "id"};
 
 	public WorkflowInstanceHistoryUserIdComparator() {

@@ -39,7 +39,7 @@ public class WorkflowInstanceHistoryCreateDateComparator
 	public static String ORDER_BY_ASC = "createDate ASC, id ASC";
 
 	public static String ORDER_BY_DESC = "createDate DESC, id DESC";
-	
+
 	public static String[] ORDER_BY_FIELDS = {"createDate", "id"};
 
 	public WorkflowInstanceHistoryCreateDateComparator() {
