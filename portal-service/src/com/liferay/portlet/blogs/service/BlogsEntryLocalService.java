@@ -103,7 +103,7 @@ public interface BlogsEntryLocalService {
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, boolean allowTrackbacks,
-		java.lang.String[] trackbacks, int status,
+		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -112,7 +112,7 @@ public interface BlogsEntryLocalService {
 		java.lang.String uuid, long userId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowTrackbacks, java.lang.String[] trackbacks, int status,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -257,7 +257,7 @@ public interface BlogsEntryLocalService {
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
-		java.lang.String[] trackbacks, int status,
+		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -271,14 +271,14 @@ public interface BlogsEntryLocalService {
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
 		long userId, com.liferay.portlet.blogs.model.BlogsEntry entry,
-		boolean pingOldTrackbaks, java.lang.String[] trackbacks, int status,
+		boolean pingOldTrackbaks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext,
 		boolean reIndex)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
-		long userId, long entryId, int status,
+		long userId, long entryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

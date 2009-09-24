@@ -48,14 +48,13 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, boolean allowTrackbacks,
-		java.lang.String[] trackbacks, int status,
+		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _blogsEntryService.addEntry(title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, allowTrackbacks, trackbacks, status,
-			serviceContext);
+			displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -137,14 +136,13 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
-		java.lang.String[] trackbacks, int status,
+		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _blogsEntryService.updateEntry(entryId, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, allowTrackbacks, trackbacks, status,
-			serviceContext);
+			displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	private BlogsEntryService _blogsEntryService;

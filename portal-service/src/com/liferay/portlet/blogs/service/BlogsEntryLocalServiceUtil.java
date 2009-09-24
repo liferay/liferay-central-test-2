@@ -112,30 +112,28 @@ public class BlogsEntryLocalServiceUtil {
 		long userId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
-		java.lang.String[] trackbacks, int status,
+		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(userId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, allowTrackbacks, trackbacks, status,
-			serviceContext);
+			displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String uuid, long userId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowTrackbacks, java.lang.String[] trackbacks, int status,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addEntry(uuid, userId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, allowTrackbacks, trackbacks, status,
-			serviceContext);
+			displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public static void addEntryResources(
@@ -329,15 +327,14 @@ public class BlogsEntryLocalServiceUtil {
 		long userId, long entryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowTrackbacks, java.lang.String[] trackbacks, int status,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEntry(userId, entryId, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, allowTrackbacks, trackbacks, status,
-			serviceContext);
+			displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public static void updateEntryResources(
@@ -352,22 +349,22 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
 		long userId, com.liferay.portlet.blogs.model.BlogsEntry entry,
-		boolean pingOldTrackbaks, java.lang.String[] trackbacks, int status,
+		boolean pingOldTrackbaks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext,
 		boolean reIndex)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateStatus(userId, entry, pingOldTrackbaks, trackbacks,
-			status, serviceContext, reIndex);
+			serviceContext, reIndex);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
-		long userId, long entryId, int status,
+		long userId, long entryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateStatus(userId, entryId, status, serviceContext);
+		return getService().updateStatus(userId, entryId, serviceContext);
 	}
 
 	public static BlogsEntryLocalService getService() {

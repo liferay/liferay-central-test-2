@@ -77,7 +77,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowTrackbacks, java.lang.String[] trackbacks, int status,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -112,12 +112,10 @@ public class BlogsEntryServiceHttp {
 				paramObj8 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj9 = new IntegerWrapper(status);
-
-			Object paramObj10 = serviceContext;
+			Object paramObj9 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj10 = new NullWrapper(
+				paramObj9 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -125,8 +123,7 @@ public class BlogsEntryServiceHttp {
 					"addEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
@@ -631,7 +628,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowTrackbacks, java.lang.String[] trackbacks, int status,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -668,12 +665,10 @@ public class BlogsEntryServiceHttp {
 				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj10 = new IntegerWrapper(status);
-
-			Object paramObj11 = serviceContext;
+			Object paramObj10 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj11 = new NullWrapper(
+				paramObj10 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -682,7 +677,7 @@ public class BlogsEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
+						paramObj10
 					});
 
 			Object returnObj = null;
