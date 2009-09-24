@@ -22,29 +22,17 @@
 
 package com.liferay.portal.spring.aop;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.InitialThreadLocal;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.reflect.MethodSignature;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ServiceVelocityAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="BeanInterceptor.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ServiceVelocityAdvice {
+public class BeanInterceptor implements MethodInterceptor {
 
-	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
+	public Object invoke(MethodInvocation invocation) throws Throwable {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -56,7 +44,7 @@ public class ServiceVelocityAdvice {
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return proceedingJoinPoint.proceed();
+			return invocation.proceed();
 		}
 		catch (Throwable t) {
 			if (_exceptionSafe) {
