@@ -177,7 +177,7 @@ public class DLFileEntryLocalServiceImpl
 
 		name = getName(name);
 		title = DLFileEntryImpl.stripExtension(name, title);
-		int status = StatusConstants.APPROVED;
+		int status = serviceContext.getStatus();
 
 		validate(groupId, folderId, name, title, is);
 
@@ -1105,7 +1105,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateStatus(
-			long userId, DLFileVersion fileVersion, int status, boolean reIndex,
+			long userId, DLFileVersion fileVersion, boolean reIndex,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -1114,7 +1114,7 @@ public class DLFileEntryLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		fileVersion.setStatus(status);
+		fileVersion.setStatus(serviceContext.getStatus());
 		fileVersion.setStatusByUserId(user.getUserId());
 		fileVersion.setStatusByUserName(user.getFullName());
 		fileVersion.setStatusDate(now);
@@ -1127,14 +1127,14 @@ public class DLFileEntryLocalServiceImpl
 			fileVersion.getGroupId(), fileVersion.getFolderId(),
 			fileVersion.getName());
 
-		if ((status == StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(fileEntry.getVersion() < fileVersion.getVersion())) {
 
 			fileEntry.setVersion(fileVersion.getVersion());
 
 			dlFileEntryPersistence.update(fileEntry, false);
 		}
-		else if ((status != StatusConstants.APPROVED) &&
+		else if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
 				 (fileEntry.getVersion() == fileVersion.getVersion())) {
 
 			double newVersion = 0;
@@ -1158,7 +1158,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Asset
 
-		if ((status == StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(fileEntry.getVersion() == fileVersion.getVersion())) {
 
 			assetEntryLocalService.updateVisible(
@@ -1181,13 +1181,14 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry updateStatus(
 			long userId, long groupId, long folderId, String name,
-			double version, int status, ServiceContext serviceContext)
+			double version, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileVersion fileVersion = dlFileVersionPersistence.findByG_F_N_V(
 			groupId, folderId, name, version);
 
-		return updateStatus(userId, fileVersion, status, true, serviceContext);
+		return updateStatus(
+			userId, fileVersion, true, serviceContext);
 
 	}
 

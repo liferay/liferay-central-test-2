@@ -309,14 +309,13 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public DLFileShortcut updateStatus(
-			long userId, long fileShortcutId, int status,
-			ServiceContext serviceContext)
+			long userId, long fileShortcutId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileShortcut fileShortcut =
 			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 
-		fileShortcut.setStatus(status);
+		fileShortcut.setStatus(serviceContext.getStatus());
 
 		dlFileShortcutPersistence.update(fileShortcut, false);
 
