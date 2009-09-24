@@ -37,4 +37,10 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>
+	<bean id="serviceHookAdvice" class="com.liferay.portal.spring.aop.ServiceHookAdvice" />
+	<aop:config>
+		<aop:aspect id="serviceHookAdvice.aspect" ref="serviceHookAdvice">
+			<aop:around pointcut="bean(*Service.impl)" method="invoke" />
+		</aop:aspect>
+	</aop:config>
 </beans>

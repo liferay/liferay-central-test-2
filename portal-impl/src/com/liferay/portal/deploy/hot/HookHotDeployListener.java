@@ -61,6 +61,7 @@ import com.liferay.portal.security.ldap.AttributesTransformerFactory;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.spring.aop.ServiceHookAdvice;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.MultiMessageResourcesFactory;
 import com.liferay.portal.util.PortalInstances;
@@ -71,6 +72,7 @@ import com.liferay.portal.util.PropsValues;
 import java.io.File;
 import java.io.InputStream;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Proxy;
 
@@ -340,6 +342,33 @@ public class HookHotDeployListener
 			}
 		}
 
+		ServicesContainer servicesContainer = new ServicesContainer();
+
+		_servicesContainerMap.put(servletContextName, servicesContainer);
+
+		List<Element> serviceEls = root.elements("service");
+
+		for (Element serviceEl : serviceEls) {
+			String serviceType = serviceEl.elementText("service-type");
+			String serviceImpl = serviceEl.elementText("service-impl");
+
+			Class serviceTypeClass = portletClassLoader.loadClass(serviceType);
+			Class serviceImplClass = portletClassLoader.loadClass(serviceImpl);
+
+			Constructor<?> serviceImplConstructor =
+				serviceImplClass.getConstructor(new Class[] {serviceTypeClass});
+
+			Object serviceImplInstance = serviceImplConstructor.newInstance(
+				PortalBeanLocatorUtil.locate(serviceType + ".impl"));
+
+			serviceImplInstance = Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {serviceTypeClass},
+				new ContextClassLoaderBeanHandler(
+					serviceImplInstance, portletClassLoader));
+
+			servicesContainer.addService(serviceType, serviceImplInstance);
+		}
+
 		// Begin backwards compatibility for 5.1.0
 
 		ModelListenersContainer modelListenersContainer =
@@ -489,6 +518,13 @@ public class HookHotDeployListener
 
 		if (portalProperties != null) {
 			destroyPortalProperties(portalProperties);
+		}
+
+		ServicesContainer servicesContainer = _servicesContainerMap.remove(
+			servletContextName);
+
+		if (servicesContainer != null) {
+			servicesContainer.unregisterServices();
 		}
 
 		unregisterClpMessageListeners(servletContext);
@@ -1162,6 +1198,8 @@ public class HookHotDeployListener
 		new HashMap<String, ModelListenersContainer>();
 	private Map<String, Properties> _portalPropertiesMap =
 		new HashMap<String, Properties>();
+	private Map<String, ServicesContainer> _servicesContainerMap =
+		new HashMap<String, ServicesContainer>();
 	private Set<String> _servletContextNames = new HashSet<String>();
 
 	private class AuthenticatorsContainer {
@@ -1368,6 +1406,24 @@ public class HookHotDeployListener
 		private Map<String, List<ModelListener<BaseModel<?>>>>
 			_modelListenersMap =
 				new HashMap<String, List<ModelListener<BaseModel<?>>>>();
+
+	}
+
+	private class ServicesContainer {
+
+		public void addService(String serviceType, Object serviceImplInstance) {
+			ServiceHookAdvice.setService(serviceType, serviceImplInstance);
+
+			_serviceTypes.add(serviceType);
+		}
+
+		public void unregisterServices() {
+			for (String serviceType : _serviceTypes) {
+				ServiceHookAdvice.setService(serviceType, null);
+			}
+		}
+
+		private List<String> _serviceTypes = new ArrayList<String>();
 
 	}
 

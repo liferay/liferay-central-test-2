@@ -6,7 +6,8 @@ This is the DTD for the Hook parameters for Liferay Portal.
 	"http://www.liferay.com/dtd/liferay-hook_5_3_0.dtd">
 -->
 
-<!ELEMENT hook (portal-properties?, language-properties*, custom-jsp-dir?)>
+<!ELEMENT hook (portal-properties?, language-properties*, custom-jsp-dir?,
+service*)>
 
 <!--
 Not all portal properties can be overridden via a hook. The supported properties
@@ -62,3 +63,9 @@ theme.images.fast.load
 <!ELEMENT language-properties (#PCDATA)>
 
 <!ELEMENT custom-jsp-dir (#PCDATA)>
+
+<!ELEMENT service (service-type, service-impl)>
+
+<!ELEMENT service-type (#PCDATA)>
+
+<!ELEMENT service-impl (#PCDATA)>
