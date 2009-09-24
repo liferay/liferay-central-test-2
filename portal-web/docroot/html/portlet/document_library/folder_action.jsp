@@ -35,6 +35,7 @@ long folderId = 0;
 String modelResource = null;
 String modelResourceDescription = null;
 String resourcePrimKey = null;
+boolean showPermissions = false;
 
 boolean view = false;
 
@@ -53,11 +54,13 @@ if (folder != null) {
 	modelResource = DLFolder.class.getName();
 	modelResourceDescription = folder.getName();
 	resourcePrimKey = String.valueOf(folderId);
+	showPermissions = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.PERMISSIONS);
 }
 else {
 	modelResource = "com.liferay.portlet.documentlibrary";
 	modelResourceDescription = themeDisplay.getScopeGroupName();
 	resourcePrimKey = String.valueOf(scopeGroupId);
+	showPermissions = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 }
 %>
 
@@ -72,7 +75,7 @@ else {
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
-	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= showPermissions %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= modelResource %>"
 			modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
