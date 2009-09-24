@@ -315,6 +315,10 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		</c:if>
 	</div>
 
+	<%
+	request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+	%>
+
 	<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 </aui:column>
 
