@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
 
 import java.io.Serializable;
@@ -32,7 +33,7 @@ import java.util.Map;
 /**
  * <a href="ServiceContext.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */
@@ -113,6 +114,10 @@ public class ServiceContext implements Serializable {
 
 	public long getScopeGroupId() {
 		return _scopeGroupId;
+	}
+
+	public int getStatus() {
+		return _status;
 	}
 
 	public String getUserDisplayURL() {
@@ -199,6 +204,10 @@ public class ServiceContext implements Serializable {
 		_scopeGroupId = scopeGroupId;
 	}
 
+	public void setStatus(int status) {
+		_status = status;
+	}
+
 	public void setUserDisplayURL(String userDisplayURL) {
 		_userDisplayURL = userDisplayURL;
 	}
@@ -225,6 +234,7 @@ public class ServiceContext implements Serializable {
 	private long _scopeGroupId;
 	private String _userDisplayURL;
 	private long _plid;
+	private int _status = StatusConstants.APPROVED;
 	private long _userId;
 
 }

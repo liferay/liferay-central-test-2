@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -45,7 +46,7 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="ServiceContextFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class ServiceContextFactory {
 
@@ -120,6 +121,13 @@ public class ServiceContextFactory {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
+
+		//Workflow
+
+		int status = ParamUtil.getInteger(
+			portletRequest, "status", StatusConstants.APPROVED);
+
+		serviceContext.setStatus(status);
 
 		return serviceContext;
 	}
