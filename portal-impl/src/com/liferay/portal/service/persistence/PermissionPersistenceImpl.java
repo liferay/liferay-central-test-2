@@ -2232,6 +2232,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl")
+	protected com.liferay.portal.service.persistence.WorkflowLinkPersistence workflowLinkPersistence;
 	protected ContainsGroup containsGroup;
 	protected AddGroup addGroup;
 	protected ClearGroups clearGroups;

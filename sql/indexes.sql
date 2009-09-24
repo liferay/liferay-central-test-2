@@ -628,3 +628,6 @@ create index IX_9C0E478F on WikiPage (uuid_);
 create unique index IX_899D3DFB on WikiPage (uuid_, groupId);
 
 create unique index IX_21277664 on WikiPageResource (nodeId, title);
+
+create index IX_2007FCC9 on WorkflowLink (companyId);
+create index IX_298C38ED on WorkflowLink (companyId, groupId, classNameId);

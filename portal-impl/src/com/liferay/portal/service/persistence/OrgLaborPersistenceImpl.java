@@ -962,5 +962,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl")
+	protected com.liferay.portal.service.persistence.WorkflowLinkPersistence workflowLinkPersistence;
 	private static Log _log = LogFactoryUtil.getLog(OrgLaborPersistenceImpl.class);
 }

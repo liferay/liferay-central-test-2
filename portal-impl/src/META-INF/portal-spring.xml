@@ -654,6 +654,17 @@
 	<bean id="com.liferay.portal.service.persistence.WebsiteUtil" class="com.liferay.portal.service.persistence.WebsiteUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.WebsitePersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.WorkflowLinkLocalService.impl" class="com.liferay.portal.service.impl.WorkflowLinkLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.WorkflowLinkLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.WorkflowLinkLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.WorkflowLinkLocalServiceUtil" class="com.liferay.portal.service.WorkflowLinkLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.WorkflowLinkLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl" class="com.liferay.portal.service.persistence.WorkflowLinkPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.WorkflowLinkUtil" class="com.liferay.portal.service.persistence.WorkflowLinkUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.velocity" class="com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil">

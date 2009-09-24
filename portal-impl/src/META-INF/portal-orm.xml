@@ -872,6 +872,22 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.WorkflowLinkModelImpl">
+		<attributes>
+			<id name="workflowLinkId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="definitionName" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl">
 		<attributes>
 			<id name="deliveryId" />
@@ -2720,6 +2736,10 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.WebsiteImpl" name="Website">
 		<table name="Website" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portal.model.impl.WorkflowLinkImpl" name="WorkflowLink">
+		<table name="WorkflowLink" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl" name="AnnouncementsDelivery">

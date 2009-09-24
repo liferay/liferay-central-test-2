@@ -698,6 +698,16 @@
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
+	<model name="com.liferay.portal.model.WorkflowLink">
+		<field name="workflowLinkId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="definitionName" type="String" />
+	</model>
 	<model name="com.liferay.portlet.announcements.model.AnnouncementsDelivery">
 		<field name="deliveryId" type="long" />
 		<field name="companyId" type="long" />

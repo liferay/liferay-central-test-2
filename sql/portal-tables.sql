@@ -1717,3 +1717,14 @@ create table WikiPageResource (
 	nodeId LONG,
 	title VARCHAR(255) null
 );
+
+create table WorkflowLink (
+	workflowLinkId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	definitionName VARCHAR(75) null
+);
