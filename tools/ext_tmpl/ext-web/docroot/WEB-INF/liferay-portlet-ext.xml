@@ -513,6 +513,11 @@
 		<struts-path>workflow_tasks</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>151</portlet-name>
+		<struts-path>workflow_admin</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

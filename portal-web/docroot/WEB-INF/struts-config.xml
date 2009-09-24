@@ -1795,6 +1795,14 @@
 			<forward name="portlet.words.view" path="portlet.words.view" />
 		</action>
 
+		<!-- Workflow Admin -->
+
+		<action path="/workflow_admin/edit_workflow_link" type="com.liferay.portal.action.EditWorkflowLinkAction">
+			<forward name="portlet.workflow_admin.error" path="portlet.workflow_admin.error" />
+		</action>
+
+		<action path="/workflow_admin/view" forward="portlet.workflow_admin.view" />
+
 		<!-- Workflow Tasks -->
 
 		<action path="/workflow_tasks/edit_task" type="com.liferay.portlet.workflowtasks.action.EditTaskAction">

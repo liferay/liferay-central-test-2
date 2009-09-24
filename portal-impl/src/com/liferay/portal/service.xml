@@ -1838,6 +1838,45 @@
 			<finder-column name="primary" />
 		</finder>
 	</entity>
+	<entity name="WorkflowLink" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="workflowLinkId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="classNameId" type="long" />
+		<column name="definitionName" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="definitionName" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="C_G_C" return-type="WorkflowLink">
+			<finder-column name="companyId" />
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+		</finder>
+	</entity>
 	<exceptions>
 		<exception>AccountName</exception>
 		<exception>AddressCity</exception>

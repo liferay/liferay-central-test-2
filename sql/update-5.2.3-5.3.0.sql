@@ -202,3 +202,14 @@ create table UserGroupGroupRole (
 	roleId LONG not null,
 	primary key (userGroupId, groupId, roleId)
 );
+
+create table WorkflowLink (
+	workflowLinkId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	definitionName VARCHAR(75) null
+);

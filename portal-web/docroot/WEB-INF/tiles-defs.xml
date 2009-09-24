@@ -1292,6 +1292,18 @@
 		<put name="portlet_content" value="/portlet/words/view.jsp" />
 	</definition>
 
+	<!-- Workflow Admin -->
+
+	<definition name="portlet.workflow_admin" extends="portlet" />
+
+	<definition name="portlet.workflow_admin.error" extends="portlet.workflow_admin">
+		<put name="portlet_content" value="/portlet/workflow_admin/error.jsp" />
+	</definition>
+
+	<definition name="portlet.workflow_admin.view" extends="portlet.workflow_admin">
+		<put name="portlet_content" value="/portlet/workflow_admin/view.jsp" />
+	</definition>
+
 	<!-- Workflow Tasks -->
 
 	<definition name="portlet.workflow_tasks" extends="portlet" />
