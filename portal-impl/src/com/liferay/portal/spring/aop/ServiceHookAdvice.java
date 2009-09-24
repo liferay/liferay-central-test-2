@@ -58,7 +58,12 @@ public class ServiceHookAdvice {
 			}
 		}
 
-		_services.put(className, service);
+		if (service == null) {
+			_services.remove(className);
+		}
+		else {
+			_services.put(className, service);
+		}
 	}
 
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
