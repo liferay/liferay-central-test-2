@@ -30,7 +30,7 @@ String randomId = StringPool.BLANK;
 String cssClassHtml = StringPool.BLANK;
 
 if (Validator.isNotNull(cssClass)) {
-	cssClassHtml = "class=\"nobr " + cssClass + "\"";
+	cssClassHtml = "class=\"" + cssClass + "\"";
 }
 
 String idHtml = StringPool.BLANK;
