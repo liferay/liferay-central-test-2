@@ -62,7 +62,7 @@ import java.util.TimeZone;
 /**
  * <a href="WordPressImporter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugŽ
+ * @author Raymond Augï¿½
  */
 public class WordPressImporter {
 
@@ -211,8 +211,7 @@ public class WordPressImporter {
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
 			defaultUser.getUserId(), commentAuthor, BlogsEntry.class.getName(),
 			entry.getEntryId(), messageDisplay.getThread().getThreadId(),
-			commentParentId, null, commentContent, StatusConstants.APPROVED,
-			serviceContext);
+			commentParentId, null, commentContent, serviceContext);
 
 		messageIdMap.put(commentId, message.getMessageId());
 	}
@@ -299,6 +298,7 @@ public class WordPressImporter {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setStatus(status);
 
 		BlogsEntry entry = null;
 
@@ -306,7 +306,7 @@ public class WordPressImporter {
 			entry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				allowTrackbacks, null, status, serviceContext);
+				allowTrackbacks, null, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error("Add entry " + title, e);

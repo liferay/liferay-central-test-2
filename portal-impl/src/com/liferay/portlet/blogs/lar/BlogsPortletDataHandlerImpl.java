@@ -231,6 +231,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setStatus(status);
 
 		BlogsEntry existingEntry = null;
 
@@ -245,22 +246,21 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 					entry.getUuid(), userId, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					allowTrackbacks, trackbacks, status, serviceContext);
+					allowTrackbacks, trackbacks, serviceContext);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					allowTrackbacks, trackbacks, status, serviceContext);
+					allowTrackbacks, trackbacks, serviceContext);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, entry.getTitle(), entry.getContent(), displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, allowTrackbacks, trackbacks, status,
-				serviceContext);
+				displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {

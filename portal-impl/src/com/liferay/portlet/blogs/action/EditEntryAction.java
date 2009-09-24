@@ -256,7 +256,6 @@ public class EditEntryAction extends PortletAction {
 			actionRequest, "allowTrackbacks");
 		String[] trackbacks = StringUtil.split(
 			ParamUtil.getString(actionRequest, "trackbacks"));
-		int status = ParamUtil.getInteger(actionRequest, "status");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			BlogsEntry.class.getName(), actionRequest);
@@ -271,9 +270,9 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.addEntry(
 				title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				allowTrackbacks, trackbacks, status, serviceContext);
+				allowTrackbacks, trackbacks, serviceContext);
 
-			if (status == StatusConstants.APPROVED) {
+			if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 				AssetPublisherUtil.addAndStoreSelection(
 					actionRequest, BlogsEntry.class.getName(),
 					entry.getEntryId(), -1);
@@ -291,14 +290,14 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				allowTrackbacks, trackbacks, status, serviceContext);
+				allowTrackbacks, trackbacks, serviceContext);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;
 			}
 
 			if ((oldStatus == StatusConstants.DRAFT) &&
-				(status == StatusConstants.APPROVED)) {
+				(serviceContext.getStatus() == StatusConstants.APPROVED)) {
 
 				AssetPublisherUtil.addAndStoreSelection(
 					actionRequest, BlogsEntry.class.getName(),

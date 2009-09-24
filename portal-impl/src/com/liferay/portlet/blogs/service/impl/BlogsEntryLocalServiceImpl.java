@@ -88,20 +88,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, boolean allowTrackbacks, String[] trackbacks,
-			int status, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			null, userId, title, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
-			allowTrackbacks, trackbacks, status, serviceContext);
+			allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public BlogsEntry addEntry(
 			String uuid, long userId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
-			String[] trackbacks, int status, ServiceContext serviceContext)
+			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -134,7 +134,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 		entry.setAllowTrackbacks(allowTrackbacks);
-		entry.setStatus(status);
+		entry.setStatus(serviceContext.getStatus());
 		entry.setStatusByUserId(user.getUserId());
 		entry.setStatusByUserName(user.getFullName());
 		entry.setStatusDate(now);
@@ -164,7 +164,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Statistics
 
-		if (status == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
 		}
 
@@ -184,7 +184,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Social
 
-		if (status == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			socialActivityLocalService.addActivity(
 				userId, groupId, BlogsEntry.class.getName(), entryId,
 				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
@@ -196,7 +196,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Ping
 
-		if (status == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			pingGoogle(entry, serviceContext);
 
 			if (allowTrackbacks) {
@@ -632,7 +632,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long entryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
-			String[] trackbacks, int status, ServiceContext serviceContext)
+			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -673,7 +673,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Status
 
-		if (oldStatus != status) {
+		if (oldStatus != serviceContext.getStatus()) {
 			boolean pingOldTrackbacks = false;
 
 			if (oldUrlTitle != entry.getUrlTitle()) {
@@ -681,13 +681,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			}
 
 			entry = updateStatus(
-				userId, entry, pingOldTrackbacks, trackbacks, status,
-				serviceContext, false);
+				userId, entry, pingOldTrackbacks, trackbacks, serviceContext,
+				false);
 		}
 
 		// Statistics
 
-		if (status == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			blogsStatsUserLocalService.updateStatsUser(
 				entry.getGroupId(), entry.getUserId(), displayDate);
 		}
@@ -724,7 +724,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry updateStatus(
 			long userId, BlogsEntry entry, boolean pingOldTrackbaks,
-			String[] trackbacks, int status, ServiceContext serviceContext,
+			String[] trackbacks, ServiceContext serviceContext,
 			boolean reIndex)
 		throws PortalException, SystemException {
 
@@ -733,7 +733,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		entry.setStatus(status);
+		entry.setStatus(serviceContext.getStatus());
 		entry.setStatusByUserId(user.getUserId());
 		entry.setStatusByUserName(user.getFullName());
 		entry.setStatusDate(now);
@@ -742,7 +742,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Asset
 
-		if ((status == StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(oldStatus != StatusConstants.APPROVED)) {
 
 			assetEntryLocalService.updateVisible(
@@ -753,7 +753,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			}
 		}
 
-		if ((status != StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
 			(oldStatus == StatusConstants.APPROVED)) {
 
 			assetEntryLocalService.updateVisible(
@@ -763,7 +763,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Social
 
 		if ((oldStatus != StatusConstants.APPROVED) &&
-			(status == StatusConstants.APPROVED)) {
+			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
 
 			socialActivityLocalService.addActivity(
 				userId, entry.getGroupId(), BlogsEntry.class.getName(),
@@ -773,7 +773,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Ping
 
-		if (status == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			pingGoogle(entry, serviceContext);
 
 			if (entry.getAllowTrackbacks()) {
@@ -786,14 +786,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry updateStatus(
-			long userId, long entryId, int status,
-			ServiceContext serviceContext)
+			long userId, long entryId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BlogsEntry entry = getEntry(entryId);
 
 		return updateStatus(
-			userId, entry, false, null, status, serviceContext, true);
+			userId, entry, false, null, serviceContext, true);
 	}
 
 	protected String getUniqueUrlTitle(

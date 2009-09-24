@@ -68,7 +68,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, boolean allowTrackbacks, String[] trackbacks,
-			int status, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BlogsPermission.check(
@@ -78,7 +78,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.addEntry(
 			getUserId(), title, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
-			allowTrackbacks, trackbacks, status, serviceContext);
+			allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -269,7 +269,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			long entryId, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, boolean allowTrackbacks, String[] trackbacks,
-			int status, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BlogsEntryPermission.check(
@@ -278,7 +278,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.updateEntry(
 			getUserId(), entryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			allowTrackbacks, trackbacks, status, serviceContext);
+			allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	protected String exportToRSS(
