@@ -431,22 +431,21 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
 		long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
-		int status, boolean reIndex,
+		boolean reIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.updateStatus(userId, fileVersion,
-			status, reIndex, serviceContext);
+			reIndex, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
 		long userId, long groupId, long folderId, java.lang.String name,
-		double version, int status,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		double version, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _dlFileEntryLocalService.updateStatus(userId, groupId, folderId,
-			name, version, status, serviceContext);
+			name, version, serviceContext);
 	}
 
 	private DLFileEntryLocalService _dlFileEntryLocalService;

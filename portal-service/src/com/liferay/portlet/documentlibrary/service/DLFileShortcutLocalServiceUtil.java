@@ -226,12 +226,11 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateStatus(
-		long userId, long fileShortcutId, int status,
+		long userId, long fileShortcutId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .updateStatus(userId, fileShortcutId, status, serviceContext);
+		return getService().updateStatus(userId, fileShortcutId, serviceContext);
 	}
 
 	public static DLFileShortcutLocalService getService() {

@@ -332,15 +332,14 @@ public interface DLFileEntryLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
 		long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
-		int status, boolean reIndex,
+		boolean reIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
 		long userId, long groupId, long folderId, java.lang.String name,
-		double version, int status,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		double version, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }
