@@ -68,11 +68,13 @@ List<String> modelResources = ListUtil.fromArray(_WORKFLOW_RESOURCES);
 			>
 
 				<%
-				ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(modelResource);
-
-				List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
-
-				buffer.append(StringUtil.merge(attributeNames, ", "));
+				buffer.append("<img align=\"left\" border=\"0\" src=\"");
+				buffer.append(themeDisplay.getPathThemeImages());
+				buffer.append(_getIconPath(modelResource));
+				buffer.append("\" style=\"margin-right: 5px\">");
+				buffer.append("<strong>");
+				buffer.append(LanguageUtil.get(pageContext, "model.resource." + modelResource));
+				buffer.append("</strong>");
 				%>
 
 			</liferay-ui:search-container-column-text>
