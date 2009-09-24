@@ -123,15 +123,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String body = subject;
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setStatus(status);
+
 		return addDiscussionMessage(
 			userId, userName, className, classPK, threadId, parentMessageId,
-			subject, body, status, serviceContext);
+			subject, body, serviceContext);
 	}
 
 	public MBMessage addDiscussionMessage(
 			long userId, String userName, String className, long classPK,
 			long threadId, long parentMessageId, String subject, String body,
-			int status, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -155,7 +157,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, status, serviceContext);
+			subject, body, files, anonymous, priority, serviceContext);
 
 		message.setClassNameId(classNameId);
 		message.setClassPK(classPK);
@@ -205,7 +207,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long groupId, long categoryId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, int status, ServiceContext serviceContext)
+			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		long threadId = 0;
@@ -213,7 +215,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return addMessage(
 			null, userId, userName, groupId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority, status,
+			parentMessageId, subject, body, files, anonymous, priority,
 			serviceContext);
 	}
 
@@ -221,12 +223,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long groupId, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, int status, ServiceContext serviceContext)
+			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addMessage(
 			null, userId, userName, groupId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority, status,
+			parentMessageId, subject, body, files, anonymous, priority,
 			serviceContext);
 	}
 
@@ -235,7 +237,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, int status, ServiceContext serviceContext)
+			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -285,7 +287,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setUserName(userName);
 		message.setCreateDate(now);
 		message.setModifiedDate(now);
-		message.setStatus(status);
+		message.setStatus(serviceContext.getStatus());
 		message.setStatusByUserId(user.getUserId());
 		message.setStatusByUserName(userName);
 		message.setStatusDate(now);
@@ -315,12 +317,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setGroupId(groupId);
 			thread.setCategoryId(categoryId);
 			thread.setRootMessageId(messageId);
-			thread.setStatus(status);
+			thread.setStatus(serviceContext.getStatus());
 			thread.setStatusByUserId(user.getUserId());
 			thread.setStatusByUserName(userName);
 			thread.setStatusDate(now);
 
-			if ((status == StatusConstants.APPROVED) &&
+			if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 				(categoryId !=
 					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
@@ -333,7 +335,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		if (status == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			thread.setMessageCount(thread.getMessageCount() + 1);
 
 			if (anonymous) {
@@ -444,7 +446,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Statistics
 
-		if (!message.isDiscussion() && (status == StatusConstants.APPROVED)) {
+		if (!message.isDiscussion() &&
+			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
 			mbStatsUserLocalService.updateStatsUser(
 				message.getGroupId(), userId, now);
 		}
@@ -453,7 +456,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Category
 
-		if ((status == StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
@@ -486,7 +489,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Social
 
 		if (!message.isDiscussion() && !message.isAnonymous() &&
-			!user.isDefaultUser() && (status == StatusConstants.APPROVED)) {
+			!user.isDefaultUser() &&
+			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
 
 			int activityType = MBActivityKeys.ADD_MESSAGE;
 			long receiverUserId = 0;
@@ -931,7 +935,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message = addDiscussionMessage(
 					userId, null, className, classPK, 0,
 					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, subject,
-					subject, StatusConstants.APPROVED, new ServiceContext());
+					subject, new ServiceContext());
 			}
 			catch (SystemException se) {
 				if (_log.isWarnEnabled()) {
@@ -1308,18 +1312,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 		List<String> existingFiles = new ArrayList<String>();
 		double priority = 0.0;
+
 		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setStatus(status);
 
 		return updateMessage(
 			userId, messageId, subject, body, files, existingFiles, priority,
-			status, serviceContext);
+			serviceContext);
 	}
 
 	public MBMessage updateMessage(
 			long userId, long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
 			List<String> existingFiles, double priority,
-			int status, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Message
@@ -1398,9 +1405,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Status
 
-		if (oldStatus != status) {
+		if (oldStatus != serviceContext.getStatus()) {
 			message = updateStatus(
-				userId, message, status, serviceContext, false);
+				userId, message, serviceContext, false);
 		}
 
 		// Thread
@@ -1420,7 +1427,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Category
 
-		if (status == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			category.setLastPostDate(now);
 
 			mbCategoryPersistence.update(category, false);
@@ -1443,7 +1450,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		boolean update = true;
 
 		if ((oldStatus != StatusConstants.APPROVED) &&
-			(status == StatusConstants.APPROVED)) {
+			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
 
 			update = false;
 		}
@@ -1524,8 +1531,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage updateStatus(
-			long userId, MBMessage message, int status,
-			ServiceContext serviceContext, boolean reIndex)
+			long userId, MBMessage message, ServiceContext serviceContext,
+			boolean reIndex)
 		throws PortalException, SystemException {
 
 		int oldStatus = message.getStatus();
@@ -1533,7 +1540,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		message.setStatus(status);
+		message.setStatus(serviceContext.getStatus());
 		message.setStatusByUserId(userId);
 		message.setStatusByUserName(user.getFullName());
 		message.setStatusDate(now);
@@ -1546,15 +1553,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message.getThreadId());
 
 		if ((thread.getRootMessageId() == message.getMessageId()) &&
-			(oldStatus != status)) {
+			(oldStatus != serviceContext.getStatus())) {
 
-			thread.setStatus(status);
+			thread.setStatus(serviceContext.getStatus());
 			thread.setStatusByUserId(userId);
 			thread.setStatusByUserName(user.getFullName());
 			thread.setStatusDate(now);
 		}
 
-		if ((status == StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(oldStatus != StatusConstants.APPROVED)) {
 
 			thread.setMessageCount(thread.getMessageCount() + 1);
@@ -1569,13 +1576,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setLastPostDate(now);
 		}
 
-		if ((status != StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
 			(oldStatus == StatusConstants.APPROVED)) {
 
 			thread.setMessageCount(thread.getMessageCount() - 1);
 		}
 
-		if (status != oldStatus) {
+		if (serviceContext.getStatus() != oldStatus) {
 			mbThreadPersistence.update(thread, false);
 		}
 
@@ -1584,7 +1591,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			thread.getCategoryId());
 
-		if ((status == StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(oldStatus != StatusConstants.APPROVED)) {
 
 			category.setMessageCount(category.getMessageCount() + 1);
@@ -1593,7 +1600,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbCategoryPersistence.update(category, false);
 		}
 
-		if ((status != StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
 			(oldStatus == StatusConstants.APPROVED)) {
 
 			category.setMessageCount(category.getMessageCount() - 1);
@@ -1603,7 +1610,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Asset
 
-		if ((status == StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(oldStatus != StatusConstants.APPROVED)) {
 
 			assetEntryLocalService.updateVisible(
@@ -1614,7 +1621,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		if ((status != StatusConstants.APPROVED) &&
+		if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
 			(oldStatus == StatusConstants.APPROVED)) {
 
 			assetEntryLocalService.updateVisible(
@@ -1623,7 +1630,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Statistics
 
-		if (!message.isDiscussion()  && (status == StatusConstants.APPROVED) &&
+		if (!message.isDiscussion()  &&
+			(serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(oldStatus != StatusConstants.APPROVED)) {
 
 			mbStatsUserLocalService.updateStatsUser(
@@ -1633,7 +1641,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Social
 
 		if (!message.isDiscussion() && !message.isAnonymous() &&
-			!user.isDefaultUser() && (status == StatusConstants.APPROVED) &&
+			!user.isDefaultUser() &&
+			(serviceContext.getStatus() == StatusConstants.APPROVED) &&
 			(oldStatus != StatusConstants.APPROVED)) {
 
 			int activityType = MBActivityKeys.ADD_MESSAGE;
@@ -1656,13 +1665,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return message;
 	}
 
-	public MBMessage updateStatus(long userId, long messageId, int status,
-			ServiceContext serviceContext)
+	public MBMessage updateStatus(
+			long userId, long messageId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBMessage message = getMessage(messageId);
 
-		return updateStatus(userId, message, status, serviceContext, true);
+		return updateStatus(userId, message, serviceContext, true);
 	}
 
 	protected void deleteDiscussionSocialActivities(

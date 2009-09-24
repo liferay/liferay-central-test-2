@@ -74,7 +74,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
 			String className, long classPK, long threadId,
-			long parentMessageId, String subject, String body, int status,
+			long parentMessageId, String subject, String body,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -87,13 +87,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addDiscussionMessage(
 			getUserId(), null, className, classPK, threadId,
-			parentMessageId, subject, body, status, serviceContext);
+			parentMessageId, subject, body, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, int status, ServiceContext serviceContext)
+			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -116,14 +116,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, subject, body, files,
-			anonymous, priority, status, serviceContext);
+			anonymous, priority, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, int status, ServiceContext serviceContext)
+			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		checkReplyToPermission(groupId, categoryId, parentMessageId);
@@ -144,7 +144,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority, status,
+			parentMessageId, subject, body, files, anonymous, priority,
 			serviceContext);
 	}
 
@@ -481,7 +481,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage updateDiscussionMessage(
 			String className, long classPK, long messageId, String subject,
-			String body, int status, ServiceContext serviceContext)
+			String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -492,14 +492,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			user.getUserId(), ActionKeys.UPDATE_DISCUSSION);
 
 		return mbMessageLocalService.updateDiscussionMessage(
-			getUserId(), messageId, subject, body, status);
+			getUserId(), messageId, subject, body, serviceContext.getStatus());
 	}
 
 	public MBMessage updateMessage(
 			long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
 			List<String> existingFiles, double priority,
-			int status, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -526,7 +526,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, subject, body, files, existingFiles,
-			priority, status, serviceContext);
+			priority, serviceContext);
 	}
 
 	protected void checkReplyToPermission(

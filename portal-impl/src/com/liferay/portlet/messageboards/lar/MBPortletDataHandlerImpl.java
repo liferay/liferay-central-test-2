@@ -630,6 +630,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setStatus(message.getStatus());
 
 		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
 			(categoryId == message.getCategoryId())) {
@@ -666,8 +667,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					MBMessageLocalServiceUtil.updateMessage(
 						userId, existingMessage.getMessageId(),
 						message.getSubject(), message.getBody(), files,
-						existingFiles, message.getPriority(),
-						message.getStatus(), serviceContext);
+						existingFiles, message.getPriority(), serviceContext);
 				}
 				catch (NoSuchMessageException nsme) {
 					existingMessage = MBMessageLocalServiceUtil.addMessage(
@@ -675,8 +675,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 						message.getGroupId(), categoryId, threadId,
 						parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
-						message.getPriority(), message.getStatus(),
-						serviceContext);
+						message.getPriority(), serviceContext);
 				}
 			}
 			else {
@@ -684,7 +683,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					userId, userName, message.getGroupId(), categoryId,
 					threadId, parentMessageId, message.getSubject(),
 					message.getBody(), files, message.getAnonymous(),
-					message.getPriority(), message.getStatus(), serviceContext);
+					message.getPriority(), serviceContext);
 			}
 
 			threadPKs.put(message.getThreadId(), existingMessage.getThreadId());

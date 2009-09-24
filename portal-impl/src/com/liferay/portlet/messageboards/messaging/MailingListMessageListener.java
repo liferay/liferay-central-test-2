@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
@@ -222,15 +221,13 @@ public class MailingListMessageListener implements MessageListener {
 		if (parentMessage == null) {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, subject, collector.getBody(),
-				collector.getFiles(), anonymous, 0.0, StatusConstants.APPROVED,
-				serviceContext);
+				collector.getFiles(), anonymous, 0.0, serviceContext);
 		}
 		else {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, parentMessage.getThreadId(),
 				parentMessage.getMessageId(), subject, collector.getBody(),
-				collector.getFiles(), anonymous, 0.0, StatusConstants.APPROVED,
-				serviceContext);
+				collector.getFiles(), anonymous, 0.0, serviceContext);
 		}
 	}
 

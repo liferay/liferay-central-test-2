@@ -591,7 +591,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 						userId, message.getUserName(), classObj.getName(),
 						newClassPK, threadId, parentMessageId,
 						message.getSubject(), message.getBody(),
-						StatusConstants.APPROVED, serviceContext);
+						serviceContext);
 
 				messagePKs.put(
 					message.getMessageId(), newMessage.getMessageId());
