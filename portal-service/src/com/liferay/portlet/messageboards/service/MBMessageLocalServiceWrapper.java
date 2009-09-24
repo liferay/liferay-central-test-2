@@ -120,25 +120,25 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String userName, java.lang.String className,
 		long classPK, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body, int status,
+		java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageLocalService.addDiscussionMessage(userId, userName,
 			className, classPK, threadId, parentMessageId, subject, body,
-			status, serviceContext);
+			serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long userId, java.lang.String userName, long groupId, long categoryId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, int status,
+		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageLocalService.addMessage(userId, userName, groupId,
-			categoryId, subject, body, files, anonymous, priority, status,
+			categoryId, subject, body, files, anonymous, priority,
 			serviceContext);
 	}
 
@@ -147,13 +147,13 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, int status,
+		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageLocalService.addMessage(userId, userName, groupId,
 			categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, status, serviceContext);
+			anonymous, priority, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -161,13 +161,13 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, int status,
+		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageLocalService.addMessage(uuid, userId, userName,
 			groupId, categoryId, threadId, parentMessageId, subject, body,
-			files, anonymous, priority, status, serviceContext);
+			files, anonymous, priority, serviceContext);
 	}
 
 	public void addMessageResources(long messageId,
@@ -454,12 +454,12 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		long userId, long messageId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		java.util.List<String> existingFiles, double priority, int status,
+		java.util.List<String> existingFiles, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageLocalService.updateMessage(userId, messageId, subject,
-			body, files, existingFiles, priority, status, serviceContext);
+			body, files, existingFiles, priority, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
@@ -479,20 +479,20 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateStatus(
 		long userId, com.liferay.portlet.messageboards.model.MBMessage message,
-		int status, com.liferay.portal.service.ServiceContext serviceContext,
+		com.liferay.portal.service.ServiceContext serviceContext,
 		boolean reIndex)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _mbMessageLocalService.updateStatus(userId, message, status,
+		return _mbMessageLocalService.updateStatus(userId, message,
 			serviceContext, reIndex);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateStatus(
-		long userId, long messageId, int status,
+		long userId, long messageId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _mbMessageLocalService.updateStatus(userId, messageId, status,
+		return _mbMessageLocalService.updateStatus(userId, messageId,
 			serviceContext);
 	}
 

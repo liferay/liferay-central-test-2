@@ -47,35 +47,35 @@ public class MBMessageServiceWrapper implements MBMessageService {
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		java.lang.String className, long classPK, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		int status, com.liferay.portal.service.ServiceContext serviceContext)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageService.addDiscussionMessage(className, classPK,
-			threadId, parentMessageId, subject, body, status, serviceContext);
+			threadId, parentMessageId, subject, body, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, int status,
+		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageService.addMessage(groupId, categoryId, subject, body,
-			files, anonymous, priority, status, serviceContext);
+			files, anonymous, priority, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, int status,
+		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageService.addMessage(groupId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority, status,
+			parentMessageId, subject, body, files, anonymous, priority,
 			serviceContext);
 	}
 
@@ -191,23 +191,23 @@ public class MBMessageServiceWrapper implements MBMessageService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String className, long classPK, long messageId,
-		java.lang.String subject, java.lang.String body, int status,
+		java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageService.updateDiscussionMessage(className, classPK,
-			messageId, subject, body, status, serviceContext);
+			messageId, subject, body, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		java.util.List<String> existingFiles, double priority, int status,
+		java.util.List<String> existingFiles, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _mbMessageService.updateMessage(messageId, subject, body, files,
-			existingFiles, priority, status, serviceContext);
+			existingFiles, priority, serviceContext);
 	}
 
 	private MBMessageService _mbMessageService;

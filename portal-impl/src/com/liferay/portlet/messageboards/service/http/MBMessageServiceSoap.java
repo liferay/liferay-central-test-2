@@ -83,11 +83,11 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addDiscussionMessage(
 		java.lang.String className, long classPK, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		int status, com.liferay.portal.service.ServiceContext serviceContext)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addDiscussionMessage(className,
-					classPK, threadId, parentMessageId, subject, body, status,
+					classPK, threadId, parentMessageId, subject, body,
 					serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
@@ -103,13 +103,13 @@ public class MBMessageServiceSoap {
 		long groupId, long categoryId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, int status,
+		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(groupId,
 					categoryId, subject, body, files, anonymous, priority,
-					status, serviceContext);
+					serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
@@ -124,13 +124,13 @@ public class MBMessageServiceSoap {
 		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, int status,
+		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(groupId,
 					categoryId, threadId, parentMessageId, subject, body,
-					files, anonymous, priority, status, serviceContext);
+					files, anonymous, priority, serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
@@ -238,12 +238,12 @@ public class MBMessageServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateDiscussionMessage(
 		java.lang.String className, long classPK, long messageId,
-		java.lang.String subject, java.lang.String body, int status,
+		java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(className,
-					classPK, messageId, subject, body, status, serviceContext);
+					classPK, messageId, subject, body, serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
@@ -257,12 +257,12 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		java.util.List<String> existingFiles, double priority, int status,
+		java.util.List<String> existingFiles, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
-					subject, body, files, existingFiles, priority, status,
+					subject, body, files, existingFiles, priority,
 					serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
