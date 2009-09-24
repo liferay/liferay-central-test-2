@@ -75,6 +75,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					dateFormat: '%m/%e/%Y',
 					dayFieldName: '<%= dayParam %>',
 					displayBoundingBox: '#<%= randomNamespace %>displayDate',
+					firstDayOfWeek: <%= firstDayOfWeek %>,
 					monthField: '#<%= monthParam %>',
 					monthFieldName: '<%= monthParam %>',
 					on: {
