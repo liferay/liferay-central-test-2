@@ -37,9 +37,15 @@ if (editPortletURL != null) {
 
 	editPortletURL.setParameter("redirect", currentURL);
 }
+
+Group stageableGroup = themeDisplay.getScopeGroup();
+
+if (themeDisplay.getScopeGroup().isLayout()) {
+	stageableGroup = layout.getGroup();
+}
 %>
 
-<c:if test="<%= (editPortletURL != null) && ((layout != null) && !layout.getGroup().hasStagingGroup()) %>">
+<c:if test="<%= (editPortletURL != null) && stageableGroup.hasStagingGroup() %>">
 	<div class="lfr-meta-actions asset-actions">
 		<liferay-ui:icon image="edit" url="<%= editPortletURL.toString() %>" label="<%= showIconLabel %>" />
 	</div>

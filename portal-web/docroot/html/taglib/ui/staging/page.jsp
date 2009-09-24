@@ -31,7 +31,11 @@
 <c:if test="<%= themeDisplay.isShowStagingIcon() %>">
 
 	<%
-	Group group = layout.getGroup();
+	Group group = themeDisplay.getScopeGroup();
+
+	if (themeDisplay.getScopeGroup().isLayout()) {
+		group = layout.getGroup();
+	}
 
 	Group liveGroup = null;
 	Group stagingGroup = null;

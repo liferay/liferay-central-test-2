@@ -36,7 +36,7 @@ else {
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
-Group group = layout.getGroup();
+Group group = themeDisplay.getScopeGroup();
 
 String keywords = ParamUtil.getString(request, "keywords");
 

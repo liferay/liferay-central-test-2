@@ -208,7 +208,13 @@ if (articleDisplay != null) {
 		</c:choose>
 
 		<%
-		boolean staged = (layout != null) && layout.getGroup().hasStagingGroup();
+		Group stageableGroup = themeDisplay.getScopeGroup();
+
+		if (themeDisplay.getScopeGroup().isLayout()) {
+			stageableGroup = layout.getGroup();
+		}
+
+		boolean staged = stageableGroup.hasStagingGroup();
 
 		boolean showEditArticleIcon = (articleDisplay != null) && JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
 		boolean showEditTemplateIcon = (articleDisplay != null) && Validator.isNotNull(articleDisplay.getTemplateId()) && JournalTemplatePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getTemplateId(), ActionKeys.UPDATE);

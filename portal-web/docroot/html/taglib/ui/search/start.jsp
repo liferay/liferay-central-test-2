@@ -27,7 +27,7 @@
 <%
 long groupId = ParamUtil.getLong(request, namespace + "groupId");
 
-Group group = layout.getGroup();
+Group group = themeDisplay.getScopeGroup();
 
 String keywords = ParamUtil.getString(request, namespace + "keywords");
 
