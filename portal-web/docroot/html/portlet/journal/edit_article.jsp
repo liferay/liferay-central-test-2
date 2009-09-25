@@ -323,484 +323,440 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 </script>
 
-<form enctype="multipart/form-data" method="post" name="<portlet:namespace />fm2">
-<input name="groupId" type="hidden" value="" />
-<input name="articleId" type="hidden" value="" />
-<input name="version" type="hidden" value="" />
-<input name="title" type="hidden" value="" />
-<input name="xml" type="hidden" value="" />
-</form>
+<aui:form enctype="multipart/form-data" method="post" name="fm2">
+	<aui:input name="groupId" type="hidden" />
+	<aui:input name="articleId" type="hidden" />
+	<aui:input name="version" type="hidden" />
+	<aui:input name="title" type="hidden" />
+	<aui:input name="xml" type="hidden" />
+</aui:form>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveArticle(); return false;">
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletResource) %>" />
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(originalRedirect) %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(referringPortletResource) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>" />
-<input name="<portlet:namespace />version" type="hidden" value="<%= version %>" />
-<input name="<portlet:namespace />content" type="hidden" value="" />
-<input id="<portlet:namespace />defaultLocale" name="<portlet:namespace />defaultLocale" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
-<input id="<portlet:namespace />parentStructureId" name="<portlet:namespace />parentStructureId" type="hidden" value="<%= parentStructureId %>" />
-<input name="<portlet:namespace />articleURL" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:renderURL>" />
-<input name="<portlet:namespace />approve" type="hidden" value="" />
-<input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
-<input name="<portlet:namespace />deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
-<input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
+<portlet:actionURL var="editArticleActionURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/journal/edit_article" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="web-content"
-	formName="fm1"
-	backURL="<%= redirect %>"
-/>
+<portlet:renderURL var="editArticleRenderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/journal/edit_article" />
+</portlet:renderURL>
 
-<table class="lfr-table" width="100%">
-<tr>
-	<td valign="top">
-		<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
-		<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
-		<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
-		<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
-		<liferay-ui:asset-tags-error />
+<aui:form action="<%= editArticleActionURL %>" enctype="multipart/form-data" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "saveArticle(); return false;" %>'>
+	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
+	<aui:input name="version" type="hidden" value="<%= version %>" />
+	<aui:input name="content" type="hidden" />
+	<aui:input name="defaultLocale" type="hidden" value="<%= defaultLanguageId %>" />
+	<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
+	<aui:input name="articleURL" type="hidden" value="<%= editArticleRenderURL %>" />
+	<aui:input name="approve" type="hidden" />
+	<aui:input name="saveAndContinue" type="hidden" />
+	<aui:input name="deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
+	<aui:input name="expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 
-		<table class="lfr-table" id="<portlet:namespace />articleHeaderEdit">
-		<tr>
-			<td>
-				<liferay-ui:message key="id" />
-			</td>
-			<td>
-				<c:choose>
-					<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
-						<c:choose>
-							<c:when test="<%= article == null %>">
-								<liferay-ui:message key="autogenerate-id" />
+	<liferay-ui:tabs
+		names="web-content"
+		formName="fm1"
+		backURL="<%= redirect %>"
+	/>
 
-								<input name="<portlet:namespace />newArticleId" type="hidden" value="" />
-								<input name="<portlet:namespace />autoArticleId" type="hidden" value="true" />
-							</c:when>
-							<c:otherwise>
-								<%= articleId %>
-							</c:otherwise>
-						</c:choose>
-					</c:when>
-					<c:otherwise>
-						<table class="lfr-table">
-						<tr>
-							<td>
-								<c:choose>
-									<c:when test="<%= article == null %>">
-										<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="articleId" fieldParam="newArticleId" defaultValue="<%= newArticleId %>" />
-									</c:when>
-									<c:otherwise>
-										<%= articleId %>
-									</c:otherwise>
-								</c:choose>
-							</td>
-							<td>
-								<c:if test="<%= article == null %>">
-									<liferay-ui:input-checkbox param="autoArticleId" />
+	<aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
+	<table class="lfr-table" width="100%">
+	<tr>
+		<td valign="top">
+			<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
+			<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
+			<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
+			<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
+			<liferay-ui:asset-tags-error />
+
+			<table class="lfr-table" id="<portlet:namespace />articleHeaderEdit">
+			<tr>
+				<td>
+					<liferay-ui:message key="id" />
+				</td>
+				<td>
+					<c:choose>
+						<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
+							<c:choose>
+								<c:when test="<%= article == null %>">
 									<liferay-ui:message key="autogenerate-id" />
-								</c:if>
-							</td>
-						</tr>
-						</table>
-					</c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="title" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="language" />
-			</td>
-			<td>
-				<input name="<portlet:namespace />lastLanguageId" type="hidden" value="<%= languageId %>" />
 
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<select <%= (article == null) ? "disabled" : "" %> id="<portlet:namespace />languageIdSelect" name="<portlet:namespace />languageId">
-
-							<%
-							Locale[] locales = LanguageUtil.getAvailableLocales();
-
-							for (int i = 0; i < locales.length; i++) {
-							%>
-
-								<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
-
-							<%
-							}
-							%>
-
-						</select>
-
-						<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-							<input name="<portlet:namespace />removeArticleLocaleButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
-						</c:if>
-					</td>
-					<td>
-						<table class="lfr-table">
-						<tr>
-							<td>
-								<liferay-ui:message key="default-language" />
-							</td>
-							<td>
-								<select
+									<input name="<portlet:namespace />newArticleId" type="hidden" value="" />
+									<input name="<portlet:namespace />autoArticleId" type="hidden" value="true" />
+								</c:when>
+								<c:otherwise>
+									<%= articleId %>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<table class="lfr-table">
+							<tr>
+								<td>
 									<c:choose>
 										<c:when test="<%= article == null %>">
-											disabled
+											<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="articleId" fieldParam="newArticleId" defaultValue="<%= newArticleId %>" />
 										</c:when>
 										<c:otherwise>
-											name="<portlet:namespace />defaultLanguageId"
+											<%= articleId %>
 										</c:otherwise>
 									</c:choose>
-									id="<portlet:namespace />defaultLanguageIdSelect"
-									onChange="<portlet:namespace />changeLanguageView();"
-								>
+								</td>
+								<td>
+									<c:if test="<%= article == null %>">
+										<liferay-ui:input-checkbox param="autoArticleId" />
 
-									<%
-									if ((availableLocales != null) && (availableLocales.length > 0)) {
-										boolean wasLanguageId = false;
+										<liferay-ui:message key="autogenerate-id" />
+									</c:if>
+								</td>
+							</tr>
+							</table>
+						</c:otherwise>
+					</c:choose>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="name" />
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="title" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="language" />
+				</td>
+				<td>
+					<input name="<portlet:namespace />lastLanguageId" type="hidden" value="<%= languageId %>" />
 
-										for (int i = 0; i < availableLocales.length; i++) {
-											if (availableLocales[i].equals(languageId)) {
-												wasLanguageId = true;
-											}
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<select <%= (article == null) ? "disabled" : "" %> id="<portlet:namespace />languageIdSelect" name="<portlet:namespace />languageId">
 
-											Locale availableLocale = LocaleUtil.fromLanguageId(availableLocales[i]);
-									%>
+								<%
+								Locale[] locales = LanguageUtil.getAvailableLocales();
 
-											<option <%= (availableLocales[i].equals(defaultLanguageId)) ? "selected" : "" %> value="<%= availableLocales[i] %>"><%= availableLocale.getDisplayName(availableLocale) %></option>
+								for (int i = 0; i < locales.length; i++) {
+								%>
 
-									<%
-										}
-
-										if (!wasLanguageId) {
-											Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
-									%>
-
-											<option value="<%= languageId %>"><%= languageLocale.getDisplayName(languageLocale) %></option>
-
-									<%
-										}
-									}
-									else {
-									%>
-
-										<option value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
-
-									<%
-									}
-									%>
-
-								</select>
-
-								<c:if test="<%= article == null %>">
-									<input name="<portlet:namespace />defaultLanguageId" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
-								</c:if>
-							</td>
-						</tr>
-						</table>
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-		</table>
-
-		<br />
-
-		<div class="journal-article-container" id="<portlet:namespace />journalArticleContainer">
-			<c:choose>
-				<c:when test="<%= structure == null %>">
-					<div id="<portlet:namespace />structureTreeWrapper">
-						<ul class="structure-tree" id="<portlet:namespace />structureTree">
-							<li class="structure-field" data-component-name="TextField" data-component-type="text">
-								<span class="journal-article-close"></span>
-
-								<span class="folder">
-									<div class="field-container">
-										<div class="journal-article-move-handler"></div>
-
-										<label class="journal-article-field-label" for="">
-											<span>TextField</span>
-										</label>
-
-										<div class="journal-article-component-container">
-											<input class="principal-field-element" size="75" type="text" value="" />
-										</div>
-
-										<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
-
-										<div class="journal-article-buttons">
-											<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />" />
-
-											<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
-										</div>
-									</div>
-
-									<ul class="folder-droppable"></ul>
-								</span>
-							</li>
-
-							<li class="structure-field" data-component-name="TextAreaField" data-component-type="text_area">
-								<span class="journal-article-close"></span>
-
-								<span class="folder">
-									<div class="field-container">
-										<div class="journal-article-move-handler"></div>
-
-										<label class="journal-article-field-label" for="">
-											<span>TextAreaField</span>
-										</label>
-
-										<div class="journal-article-component-container">
-											<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
-										</div>
-
-										<div class="journal-article-required-message portlet-msg-error">
-											<liferay-ui:message key="this-field-is-required" />
-										</div>
-
-										<div class="journal-article-buttons">
-											<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />" />
-
-											<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
-										</div>
-									</div>
-
-									<ul class="folder-droppable"></ul>
-								</span>
-							</li>
-						</ul>
-					</div>
-				</c:when>
-				<c:otherwise>
-
-					<%
-					Document xsdDoc = SAXReaderUtil.read(structure.getMergedXsd());
-
-					if (contentDoc != null) {
-					%>
-
-						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
-
-						<%
-						boolean languageFound = false;
-
-						if ((availableLocales != null) && (availableLocales.length > 0)) {
-							for (int i = 0; i < availableLocales.length ; i++) {
-								if (!availableLocales[i].equals(defaultLanguageId)) {
-						%>
-
-									<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
-
-									<script type="text/javascript">
-										document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
-									</script>
+									<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
 
 								<%
 								}
-								else{
 								%>
 
-									<script type="text/javascript">
-										document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
-									</script>
+							</select>
+
+							<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
+								<input name="<portlet:namespace />removeArticleLocaleButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
+							</c:if>
+						</td>
+						<td>
+							<table class="lfr-table">
+							<tr>
+								<td>
+									<liferay-ui:message key="default-language" />
+								</td>
+								<td>
+									<select
+										<c:choose>
+											<c:when test="<%= article == null %>">
+												disabled
+											</c:when>
+											<c:otherwise>
+												name="<portlet:namespace />defaultLanguageId"
+											</c:otherwise>
+										</c:choose>
+										id="<portlet:namespace />defaultLanguageIdSelect"
+										onChange="<portlet:namespace />changeLanguageView();"
+									>
+
+										<%
+										if ((availableLocales != null) && (availableLocales.length > 0)) {
+											boolean wasLanguageId = false;
+
+											for (int i = 0; i < availableLocales.length; i++) {
+												if (availableLocales[i].equals(languageId)) {
+													wasLanguageId = true;
+												}
+
+												Locale availableLocale = LocaleUtil.fromLanguageId(availableLocales[i]);
+										%>
+
+												<option <%= (availableLocales[i].equals(defaultLanguageId)) ? "selected" : "" %> value="<%= availableLocales[i] %>"><%= availableLocale.getDisplayName(availableLocale) %></option>
+
+										<%
+											}
+
+											if (!wasLanguageId) {
+												Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
+										%>
+
+												<option value="<%= languageId %>"><%= languageLocale.getDisplayName(languageLocale) %></option>
+
+										<%
+											}
+										}
+										else {
+										%>
+
+											<option value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
+
+										<%
+										}
+										%>
+
+									</select>
+
+									<c:if test="<%= article == null %>">
+										<input name="<portlet:namespace />defaultLanguageId" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
+									</c:if>
+								</td>
+							</tr>
+							</table>
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+
+			<br />
+
+			<div class="journal-article-container" id="<portlet:namespace />journalArticleContainer">
+				<c:choose>
+					<c:when test="<%= structure == null %>">
+						<div id="<portlet:namespace />structureTreeWrapper">
+							<ul class="structure-tree" id="<portlet:namespace />structureTree">
+								<li class="structure-field" data-component-name="TextField" data-component-type="text">
+									<span class="journal-article-close"></span>
+
+									<span class="folder">
+										<div class="field-container">
+											<div class="journal-article-move-handler"></div>
+
+											<label class="journal-article-field-label" for="">
+												<span>TextField</span>
+											</label>
+
+											<div class="journal-article-component-container">
+												<input class="principal-field-element" size="75" type="text" value="" />
+											</div>
+
+											<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
+
+											<div class="journal-article-buttons">
+												<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />" />
+
+												<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
+											</div>
+										</div>
+
+										<ul class="folder-droppable"></ul>
+									</span>
+								</li>
+
+								<li class="structure-field" data-component-name="TextAreaField" data-component-type="text_area">
+									<span class="journal-article-close"></span>
+
+									<span class="folder">
+										<div class="field-container">
+											<div class="journal-article-move-handler"></div>
+
+											<label class="journal-article-field-label" for="">
+												<span>TextAreaField</span>
+											</label>
+
+											<div class="journal-article-component-container">
+												<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
+											</div>
+
+											<div class="journal-article-required-message portlet-msg-error">
+												<liferay-ui:message key="this-field-is-required" />
+											</div>
+
+											<div class="journal-article-buttons">
+												<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />" />
+
+												<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
+											</div>
+										</div>
+
+										<ul class="folder-droppable"></ul>
+									</span>
+								</li>
+							</ul>
+						</div>
+					</c:when>
+					<c:otherwise>
 
 						<%
-								}
+						Document xsdDoc = SAXReaderUtil.read(structure.getMergedXsd());
 
-								if (availableLocales[i].equals(languageId)) {
-									languageFound = true;
-								}
-							}
-						}
-
-						if (!languageFound && !languageId.equals(defaultLanguageId)) {
+						if (contentDoc != null) {
 						%>
 
-							<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
+							<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
 
-							<script type="text/javascript">
-								document.<portlet:namespace />fm1.<portlet:namespace />removeArticleLocaleButton.disabled = true;
-							</script>
+							<%
+							boolean languageFound = false;
 
-					<%
+							if ((availableLocales != null) && (availableLocales.length > 0)) {
+								for (int i = 0; i < availableLocales.length ; i++) {
+									if (!availableLocales[i].equals(defaultLanguageId)) {
+							%>
+
+										<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
+
+										<script type="text/javascript">
+											document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
+										</script>
+
+									<%
+									}
+									else{
+									%>
+
+										<script type="text/javascript">
+											document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
+										</script>
+
+							<%
+									}
+
+									if (availableLocales[i].equals(languageId)) {
+										languageFound = true;
+									}
+								}
+							}
+
+							if (!languageFound && !languageId.equals(defaultLanguageId)) {
+							%>
+
+								<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
+
+								<script type="text/javascript">
+									document.<portlet:namespace />fm1.<portlet:namespace />removeArticleLocaleButton.disabled = true;
+								</script>
+
+						<%
+							}
 						}
-					}
-					else {
-						contentDoc = SAXReaderUtil.createDocument(SAXReaderUtil.createElement("root"));
-					%>
+						else {
+							contentDoc = SAXReaderUtil.createDocument(SAXReaderUtil.createElement("root"));
+						%>
 
-						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
+							<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
 
-					<%
-					}
-					%>
+						<%
+						}
+						%>
 
-					<div class="structure-tree-wrapper" id="<portlet:namespace />structureTreeWrapper">
-						<ul class="structure-tree" id="<portlet:namespace />structureTree">
-							<% _format(groupId, contentDoc.getRootElement(), xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request); %>
-						</ul>
-					</div>
-				</c:otherwise>
-			</c:choose>
+						<div class="structure-tree-wrapper" id="<portlet:namespace />structureTreeWrapper">
+							<ul class="structure-tree" id="<portlet:namespace />structureTree">
+								<% _format(groupId, contentDoc.getRootElement(), xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request); %>
+							</ul>
+						</div>
+					</c:otherwise>
+				</c:choose>
 
-			<c:if test="<%= article == null %>">
-				<table class="lfr-table">
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="permissions" />
-					</td>
-					<td>
+				<c:if test="<%= article == null %>">
+					<aui:field-wrapper label="permissions">
 						<liferay-ui:input-permissions
 							modelName="<%= JournalArticle.class.getName() %>"
 						/>
-					</td>
-				</tr>
-				</table>
-			</c:if>
-		</div>
+					</aui:field-wrapper>
+				</c:if>
+			</div>
 
-		<br />
-
-		<%
-		String abstractId = portletDisplay.getNamespace() + "abstract";
-		String abstractTitle = LanguageUtil.get(pageContext, "abstract");
-		%>
-
-		<liferay-ui:panel id="<%= abstractId %>" title="<%= abstractTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
-			<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
+			<br />
 
 			<%
-			String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
+			String abstractId = portletDisplay.getNamespace() + "abstract";
+			String abstractTitle = LanguageUtil.get(pageContext, "abstract");
 			%>
 
-			<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
-			</liferay-ui:error>
+			<liferay-ui:panel id="<%= abstractId %>" title="<%= abstractTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
+				<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
-			<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
+				<%
+				String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
+				%>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="description" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="description" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<br />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="small-image-url" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImageURL" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
-				</td>
-				<td>
-					<input class="lfr-input-text" name="<portlet:namespace />smallFile" type="file" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="use-small-image" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImage" />
-				</td>
-			</tr>
+				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+				</liferay-ui:error>
 
-			<liferay-ui:custom-attributes-available className="<%= JournalArticle.class.getName() %>">
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
+				<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
+
+				<aui:fieldset>
+					<aui:input name="description" />
+					<aui:input inlineLabel="left" label="use-small-image" name="smallImage" />
+					<aui:input label="small-image-url" name="smallImageURL" />
+					<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
+					<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
+
+					<liferay-ui:custom-attributes-available className="<%= JournalArticle.class.getName() %>">
 						<liferay-ui:custom-attribute-list
 							className="<%= JournalArticle.class.getName() %>"
 							classPK="<%= (article != null) ? article.getResourcePrimKey() : 0 %>"
 							editable="<%= true %>"
 							label="<%= true %>"
 						/>
-					</td>
-				</tr>
-			</liferay-ui:custom-attributes-available>
+					</liferay-ui:custom-attributes-available>
 
-			</table>
-		</liferay-ui:panel>
+				</aui:fieldset>
+			</liferay-ui:panel>
 
-		<br />
+			<br />
 
-		<div>
-			<%
-			boolean hasSavePermission = false;
+			<aui:button-row>
+				<%
+				boolean hasSavePermission = false;
 
-			if (article != null) {
-				hasSavePermission = JournalArticlePermission.contains(permissionChecker, groupId, articleId, ActionKeys.UPDATE);
-			}
-			else {
-				hasSavePermission = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
-			}
-			%>
+				if (article != null) {
+					hasSavePermission = JournalArticlePermission.contains(permissionChecker, groupId, articleId, ActionKeys.UPDATE);
+				}
+				else {
+					hasSavePermission = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
+				}
+				%>
 
-			<c:if test="<%= hasSavePermission %>">
-				<input id="<portlet:namespace />saveArticleBtn" type="button" value="<liferay-ui:message key="save" />" />
+				<c:if test="<%= hasSavePermission %>">
+					<aui:button name="saveArticleBtn" value="save" />
 
-				<input id="<portlet:namespace />saveArticleAndContinueBtn" name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" />
+					<aui:button name="saveArticleAndContinueBtn" value="save-and-continue" />
 
-				<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
-					<input id="<portlet:namespace />saveArticleAndApproveBtn"  type="button" value="<liferay-ui:message key="save-and-approve" />" />
+					<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
+						<aui:button name="saveArticleAndApproveBtn"  value="save-and-approve" />
+					</c:if>
 				</c:if>
-			</c:if>
 
-			<c:if test="<%= Validator.isNotNull(structureId) %>">
-				<input id="<portlet:namespace />previewArticleBtn" type="button" value="<liferay-ui:message key="preview" />" />
-			</c:if>
+				<c:if test="<%= Validator.isNotNull(structureId) %>">
+					<aui:button name="previewArticleBtn" value="preview" />
+				</c:if>
 
-			<c:if test="<%= structure != null %>">
-				<input id="<portlet:namespace />downloadArticleContentBtn" type="button" value="<liferay-ui:message key="download" />" />
-			</c:if>
+				<c:if test="<%= structure != null %>">
+					<aui:button name="downloadArticleContentBtn" value="download" />
+				</c:if>
 
-			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escapeAttribute(redirect) %>';" />
-		</div>
-	</td>
+				<aui:button value="cancel" onClick="<%= redirect %>" />
+			</aui:button-row>
+		</td>
 
-	<td valign="top">
-		<%@ include file="edit_article_extra.jspf" %>
-	</td>
-</tr>
-</table>
-
-</form>
+		<td valign="top">
+			<%@ include file="edit_article_extra.jspf" %>
+		</td>
+	</tr>
+	</table>
+</aui:form>
 
 <%@ include file="edit_article_structure_extra.jspf" %>
 

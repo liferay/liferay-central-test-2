@@ -47,10 +47,10 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 	<liferay-ui:panel-container id='<%= portletDisplay.getNamespace() + "journalExtras" %>' persistState="<%= true %>" extended="<%= Boolean.FALSE %>" cssClass="journal-extras">
 		<liferay-ui:panel id="<%= formStructureId %>" title="<%= formStructureTitle %>" defaultState="open" persistState="<%= true %>" extended="<%= false %>">
 			<div class="journal-form-presentation-label">
-				<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
-				<input name="<portlet:namespace />structureName" type="hidden" value="<%= structureName %>" />
-				<input name="<portlet:namespace />structureDescription" type="hidden" value="<%= structureDescription %>" />
-				<input name="<portlet:namespace />structureXSD" type="hidden" value="<%= JS.encodeURIComponent(structureXSD) %>" />
+				<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
+				<aui:input name="structureName" type="hidden" value="<%= structureName %>" />
+				<aui:input name="structureDescription" type="hidden" value="<%= structureDescription %>" />
+				<aui:input name="structureXSD" type="hidden" value="<%= JS.encodeURIComponent(structureXSD) %>" />
 
 				<liferay-ui:message key="name" />:
 
@@ -214,9 +214,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 
 		<liferay-ui:panel id="<%= workflowId %>" title="<%= workflowTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
 			<c:if test="<%= article != null %>">
-				<liferay-ui:message key="version" />
-
-				<select onChange="<portlet:namespace />changeVersionView(this.value);">
+				<aui:select name="version" onChange='<%= renderResponse.getNamespace() + "changeVersionView(this.value);" %>'>
 
 					<%
 					List<JournalArticle> articleVersions = JournalArticleLocalServiceUtil.getArticles(article.getGroupId(), article.getArticleId());
@@ -225,13 +223,13 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 
 					%>
 
-						<option <%= (curArticle.getVersion() == article.getVersion()) ? "selected" : "" %> value="<%= curArticle.getVersion() %>"><%= curArticle.getVersion() %></option>
+						<aui:option label="<%= curArticle.getVersion() %>" selected="<%= (curArticle.getVersion() == article.getVersion()) %>" />
 
 					<%
 					}
 					%>
 
-				</select>
+				</aui:select>
 
 				<br /><br />
 			</c:if>
@@ -261,23 +259,21 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 				<br /><br />
 
 				<span class="nobr">
-					<liferay-ui:message key="increment-version-on-save" />
-
-					<liferay-ui:input-checkbox param="incrementVersion" defaultValue="<%= incrementVersion %>" disabled="<%= disableIncrementVersion %>" />
+					<aui:input disabled="<%= disableIncrementVersion %>" inlineLabel="left" label="increment-version-on-save" name="incrementVersion" type="checkbox" value="<%= incrementVersion %>" />
 				</span>
 
 				<br /><br />
 
 				<c:if test="<%= !article.isApproved() && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
-					<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
+					<aui:button onClick='<%= renderResponse.getNamespace() + "approveArticle();" %>' value="approve" />
 				</c:if>
 
 				<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-					<input type="button" value="<liferay-ui:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
+					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticle();" %>' value="expire" />
 				</c:if>
 
 				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-					<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
+					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="delete" />
 				</c:if>
 			</c:if>
 		</liferay-ui:panel>
@@ -285,92 +281,49 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 		<liferay-ui:panel id="<%= categorizationId %>" title="<%= categorizationTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
 			<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
-			<liferay-ui:message key="type" /><br />
-
-			<select name="<portlet:namespace />type">
-				<option value=""></option>
+			<aui:select name="type">
+				<aui:option value="" />
 
 				<%
 				for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
 				%>
 
-					<option <%= type.equals(JournalArticleConstants.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleConstants.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleConstants.TYPES[i]) %></option>
+					<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
 
 				<%
 				}
 				%>
 
-			</select>
+			</aui:select>
 
-			<br /><br />
+			<aui:input classPK="<%= article.getResourcePrimKey() %>" name="categories" type="assetCategories" />
 
-			<%
-			long classPK = 0;
+			<aui:input classPK="<%= article.getResourcePrimKey() %>" name="tags" type="assetTags" />
 
-			if (article != null) {
-				classPK = article.getResourcePrimKey();
-			}
-			%>
-
-			<liferay-ui:message key="categories" /><br />
-
-			<liferay-ui:asset-categories-selector
-				className="<%= JournalArticle.class.getName() %>"
-				classPK="<%= classPK %>"
-			/>
-
-			<br /><br />
-
-			<liferay-ui:message key="tags" /><br />
-
-			<liferay-ui:asset-tags-selector
-				className="<%= JournalArticle.class.getName() %>"
-				classPK="<%= classPK %>"
-				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
-			/>
-
-			<br /><br />
-
-			<liferay-ui:message key="searchable" />
-
-			<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="indexable" />
+			<aui:input inlineLabel="left" label="searchable" name="indexable" />
 		</liferay-ui:panel>
 
 		<liferay-ui:panel id="<%= scheduleId %>" title="<%= scheduleTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
 			<liferay-ui:error exception="<%= ArticleDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
 			<liferay-ui:error exception="<%= ArticleExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 
-			<liferay-ui:message key="display-date" /><br />
+			<aui:input formName="fm1" name="displayDate" value="<%= displayDate %>" />
 
-			<liferay-ui:input-field formName="fm1" model="<%= JournalArticle.class %>" bean="<%= article %>" field="displayDate" defaultValue="<%= displayDate %>" />
-
-			<br /><br />
-
-			<liferay-ui:message key="expiration-date" /><br />
-
-			<liferay-ui:input-field formName="fm1" model="<%= JournalArticle.class %>" bean="<%= article %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" /><br />
-
-			<liferay-ui:message key="never-auto-expire" />
+			<aui:input disabled="<%= neverExpire %>" formName="fm1" name="expirationDate" value="<%= expirationDate %>" />
 
 			<%
 			String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
 			%>
 
-			<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" />
+			<aui:input inlineLabel="left" label="never-auto-expire" name="neverExpire" value="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" type="checkbox" />
 
-			<br /><br />
-
-			<liferay-ui:message key="review-date" /><br />
-
-			<liferay-ui:input-field formName="fm1" model="<%= JournalArticle.class %>" bean="<%= article %>" field="reviewDate" defaultValue="<%= reviewDate %>" disabled="<%= neverReview %>" /><br />
-
-			<liferay-ui:message key="never-review" />
+			<aui:input disabled="<%= neverReview %>" formName="fm1" name="reviewDate" value="<%= reviewDate %>" />
 
 			<%
 			String taglibNeverReviewOnClick = renderResponse.getNamespace() + "disableInputDate('reviewDate', this.checked);";
 			%>
 
-			<liferay-ui:input-checkbox param="neverReview" defaultValue="<%= neverReview %>" onClick="<%= taglibNeverReviewOnClick %>" />
+			<aui:input inlineLabel="left" name="neverReview" value="<%= neverReview %>" onClick="<%= taglibNeverReviewOnClick %>" type="checkbox" />
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>
 </liferay-ui:toggle-area>
