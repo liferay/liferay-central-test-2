@@ -34,7 +34,6 @@ String ldapImportUserSearchFilter = ParamUtil.getString(request, "settings(" + P
 String ldapImportGroupSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER));
 boolean ldapImportEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_IMPORT_ENABLED + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ENABLED, PropsValues.LDAP_IMPORT_ENABLED));
 boolean ldapImportOnStartup = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ON_STARTUP));
-long ldapImportInterval = ParamUtil.getLong(request, "settings(" + PropsKeys.LDAP_IMPORT_INTERVAL + ")", PrefsPropsUtil.getLong(company.getCompanyId(), PropsKeys.LDAP_IMPORT_INTERVAL));
 boolean ldapExportEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_EXPORT_ENABLED, PropsValues.LDAP_EXPORT_ENABLED));
 String ldapUsersDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USERS_DN + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USERS_DN));
 String ldapUserDefaultObjectClasses = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES));
@@ -450,16 +449,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 	<div id="<portlet:namespace />importEnabledSettings">
 		<aui:input inlineLabel="left" label="import-on-startup-enabled" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")" %>' type="checkbox" value="<%= ldapImportOnStartup %>" />
-
-		<aui:select inlineLabel="left" label="import-interval" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_INTERVAL + ")" %>'>
-			<aui:option value="0" selected="<%= (ldapImportInterval == 0) %>"><liferay-ui:message key="disabled" /></aui:option>
-			<aui:option value="5" selected="<%= (ldapImportInterval == 5) %>">5 <liferay-ui:message key="minutes" /></aui:option>
-			<aui:option value="10" selected="<%= (ldapImportInterval == 10) %>">10 <liferay-ui:message key="minutes" /></aui:option>
-			<aui:option value="30" selected="<%= (ldapImportInterval == 30) %>">30 <liferay-ui:message key="minutes" /></aui:option>
-			<aui:option value="60" selected="<%= (ldapImportInterval == 60) %>">1 <liferay-ui:message key="hour" /></aui:option>
-			<aui:option value="120" selected="<%= (ldapImportInterval == 120) %>">2 <liferay-ui:message key="hours" /></aui:option>
-			<aui:option value="180" selected="<%= (ldapImportInterval == 180) %>">3 <liferay-ui:message key="hours" /></aui:option>
-		</aui:select>
 	</div>
 
 	<aui:input id="ldapExportEnabled" inlineLabel="left" label="export-enabled" name='<%= "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")" %>' type="checkbox" value="<%= ldapExportEnabled %>" />
