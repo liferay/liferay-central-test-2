@@ -189,21 +189,71 @@ if (articleDisplay != null) {
 
 				<br />
 
-				<div class="portlet-msg-info">
-					<liferay-ui:message key="select-existing-web-content-or-add-some-web-content-to-be-displayed-in-this-portlet" />
-				</div>
+				<c:choose>
+					<c:when test="<%= Validator.isNull(articleId) %>">
+						<div class="portlet-msg-info">
+							<liferay-ui:message key="select-existing-web-content-or-add-some-web-content-to-be-displayed-in-this-portlet" />
+						</div>
+					</c:when>
+					<c:otherwise>
 
-				<br />
+						<%
+						JournalArticle article = null;
 
-				<c:if test="<%= Validator.isNotNull(articleId) %>">
-					<br />
+						try {
+							article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, StatusConstants.ANY);
 
-					<span class="portlet-msg-error">
-					<%= LanguageUtil.format(pageContext, "x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists", articleId) %>
-					</span>
+							if (article.isExpired()) {
+						%>
 
-					<br />
-				</c:if>
+								<span class="portlet-msg-alert">
+									<%= LanguageUtil.format(pageContext, "x-is-expired", article.getTitle()) %>
+								</span>
+
+						<%
+							}
+							else if (!article.isApproved()) {
+						%>
+
+							<c:choose>
+								<c:when test="<%= JournalArticlePermission.contains(permissionChecker, article.getGroupId(), article.getArticleId(), ActionKeys.UPDATE) %>">
+									<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+										<portlet:param name="struts_action" value="/journal/edit_article" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+										<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+										<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+									</liferay-portlet:renderURL>
+
+									<span class="portlet-msg-alert">
+										<a href="<%= editURL %>">
+											<%= LanguageUtil.format(pageContext, "x-is-not approved", article.getTitle()) %>
+										</a>
+									</span>
+							</c:when>
+							<c:otherwise>
+								<span class="portlet-msg-alert">
+									<%= LanguageUtil.format(pageContext, "x-is-not approved", article.getTitle()) %>
+								</span>
+							</c:otherwise>
+						</c:choose>
+
+						<%
+							}
+						}
+						catch (NoSuchArticleException nsae) {
+						%>
+
+							<span class="portlet-msg-error">
+								<%= LanguageUtil.get(pageContext, "the-selected-web-content-no-longer-exists") %>
+							</span>
+
+						<%
+						}
+						%>
+
+					</c:otherwise>
+				</c:choose>
 			</c:otherwise>
 		</c:choose>
 
