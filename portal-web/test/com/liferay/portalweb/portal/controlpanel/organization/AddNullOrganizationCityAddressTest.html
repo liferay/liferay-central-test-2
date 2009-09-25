@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddNullOrganizationCityAddressTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddNullOrganizationCityAddressTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_keywords</td>
+	<td>Nullorganization</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Nullorganization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>addressesLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_126_addressStreet1_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_addressStreet1_0</td>
+	<td>12345 Test Street</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_addressZip0</td>
+	<td>99999</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_addressCity0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a valid city.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

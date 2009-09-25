@@ -1,0 +1,124 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddNullAdditionalOrganizationEmailTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddNullAdditionalOrganizationEmailTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_keywords</td>
+	<td>Nullorganization</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Nullorganization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[3]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_126_emailAddressAddress0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_emailAddressAddress0</td>
+	<td>Nullorganization@null.com</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_keywords</td>
+	<td>Nullorganization</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Nullorganization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[3]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_emailAddressAddress0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotValue</td>
+	<td>_126_emailAddressAddress0</td>
+	<td>Nullorganization@null.com</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

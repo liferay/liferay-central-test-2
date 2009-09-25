@@ -54,6 +54,17 @@ public class OrganizationTests extends BaseTests {
 		testSuite.addTestSuite(AddOrganizationCommentsTest.class);
 		testSuite.addTestSuite(AddDuplicateOrganizationNameTest.class);
 		testSuite.addTestSuite(AddNullOrganizationNameTest.class);
+		testSuite.addTestSuite(AddNullTestOrganizationTest.class);
+		testSuite.addTestSuite(AddNullOrganizationStreetAddressTest.class);
+		testSuite.addTestSuite(AddNullOrganizationCityAddressTest.class);
+		testSuite.addTestSuite(AddNullOrganizationZipAddressTest.class);
+		testSuite.addTestSuite(AddInvalidOrganizationPhoneNumberTest.class);
+		testSuite.addTestSuite(AddNullOrganizationPhoneNumberTest.class);
+		testSuite.addTestSuite(AddNullAdditionalOrganizationEmailTest.class);
+		testSuite.addTestSuite(AddInvalidAdditionalOrganizationEmailTest.class);
+		testSuite.addTestSuite(AddInvalidOrganizationURLWebsiteTest.class);
+		testSuite.addTestSuite(AddNullOrganizationURLWebsiteTest.class);
+		testSuite.addTestSuite(DeleteNullTestOrganizationTest.class);
 		testSuite.addTestSuite(ApplyOrganizationTest.class);
 		testSuite.addTestSuite(AssertApplyOrganizationTest.class);
 		testSuite.addTestSuite(AssertCannotDeleteApplyOrganizationTest.class);

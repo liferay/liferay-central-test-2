@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddInvalidOrganizationPhoneNumberTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddInvalidOrganizationPhoneNumberTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_keywords</td>
+	<td>Nullorganization</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Nullorganization</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//a[@id='phoneNumbersLink']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_126_phoneNumber0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_phoneNumber0</td>
+	<td>!!!!!!!!!!!!!!!!!!!!!!</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a valid phone number.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

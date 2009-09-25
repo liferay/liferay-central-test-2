@@ -66,6 +66,15 @@ public class SettingsTests extends BaseTests {
 		testSuite.addTestSuite(AddSettingsEmailAddress2Test.class);
 		testSuite.addTestSuite(AddSettingsWebsitesTest.class);
 		testSuite.addTestSuite(AddSettingsWebsites2Test.class);
+		testSuite.addTestSuite(AddNullSettingsStreetAddressTest.class);
+		testSuite.addTestSuite(AddNullSettingsCityAddressTest.class);
+		testSuite.addTestSuite(AddNullSettingsZipAddressTest.class);
+		testSuite.addTestSuite(AddInvalidSettingsPhoneNumberTest.class);
+		testSuite.addTestSuite(AddNullSettingsPhoneNumberTest.class);
+		testSuite.addTestSuite(AddInvalidSettingsEmailTest.class);
+		testSuite.addTestSuite(AddNullSettingsEmailTest.class);
+		testSuite.addTestSuite(AddInvalidSettingsURLTest.class);
+		testSuite.addTestSuite(AddNullSettingsURLTest.class);
 		testSuite.addTestSuite(EditTimeZoneTest.class);
 		testSuite.addTestSuite(AssertGoogleAppsTest.class);
 		testSuite.addTestSuite(MonitoringTest.class);

@@ -74,6 +74,18 @@ public class UserTests extends BaseTests {
 		testSuite.addTestSuite(AddDifferentPasswordTest.class);
 		testSuite.addTestSuite(AddNullPassword1Test.class);
 		testSuite.addTestSuite(AddNullPassword2Test.class);
+		testSuite.addTestSuite(AddNullTestUserTest.class);
+		testSuite.addTestSuite(AddNullUserStreetAddressTest.class);
+		testSuite.addTestSuite(AddNullUserCityAddressTest.class);
+		testSuite.addTestSuite(AddNullUserZipAddressTest.class);
+		testSuite.addTestSuite(AddInvalidUserPhoneNumberTest.class);
+		testSuite.addTestSuite(AddNullUserPhoneNumberTest.class);
+		testSuite.addTestSuite(AddNullAdditionalUserEmailTest.class);
+		testSuite.addTestSuite(AddInvalidAdditionalUserEmailTest.class);
+		testSuite.addTestSuite(AddInvalidUserURLWebsiteTest.class);
+		testSuite.addTestSuite(AddNullUserURLWebsiteTest.class);
+		testSuite.addTestSuite(DeactivateNullTestUserTest.class);
+		testSuite.addTestSuite(DeleteNullTestUserTest.class);
 		testSuite.addTestSuite(SearchUserTest.class);
 		testSuite.addTestSuite(AdvancedSearchUserTest.class);
 		testSuite.addTestSuite(AddTemporaryUserTest.class);
