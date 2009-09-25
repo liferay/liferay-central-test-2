@@ -100,6 +100,14 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 					textInput.keyup(
 						function() {
 							addTagButton.attr('disabled', !this.value.length);
+
+							if (this.value.length) {
+								addTagButton.parent().removeClass('aui-input-disabled');
+							}
+							else {
+								addTagButton.parent().addClass('aui-input-disabled');
+							}
+
 						}
 					);
 
