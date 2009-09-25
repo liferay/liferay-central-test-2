@@ -269,7 +269,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<aui:button name="selectBtn" onClick="<%= taglibOnClick %>" value="select" />
 
 					<%
-					taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }'";
+					taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }";
 					%>
 
 					<aui:button name="publishBtn" onClick="<%= taglibOnClick %>" value="<%= actionKey %>" style='<%= (results.size() > 0) ? "display: none;" :"" %>' />
@@ -285,7 +285,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					</c:if>
 
 					<%
-					String taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }'";
+					String taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }";
 					%>
 
 					<aui:button name="publishBtn" value="<%= actionKey %>" onClick="<%= taglibOnClick %>" />
