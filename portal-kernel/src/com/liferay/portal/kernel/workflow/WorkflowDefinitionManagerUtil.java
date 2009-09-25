@@ -59,6 +59,16 @@ public class WorkflowDefinitionManagerUtil {
 	}
 
 	/**
+	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(OrderByComparator)
+	 */
+	public static List<WorkflowDefinition> getWorkflowDefinitions(
+		OrderByComparator orderByComparator) {
+
+		return _workflowDefinitionManager.getWorkflowDefinitions(
+			orderByComparator);
+	}
+
+	/**
 	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(int, int,
 	 *		OrderByComparator)
 	 */
@@ -67,6 +77,17 @@ public class WorkflowDefinitionManagerUtil {
 
 		return _workflowDefinitionManager.getWorkflowDefinitions(
 			start, end, orderByComparator);
+	}
+
+	/**
+	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(String,
+	 * 		OrderByComparator)
+	 */
+	public static List<WorkflowDefinition> getWorkflowDefinitions(
+		String workflowDefinitionName, OrderByComparator orderByComparator) {
+
+		return _workflowDefinitionManager.getWorkflowDefinitions(
+			workflowDefinitionName, orderByComparator);
 	}
 
 	/**

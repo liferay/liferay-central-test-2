@@ -45,7 +45,19 @@ public class WorkflowDefinitionManagerProxyBean
 	}
 
 	public List<WorkflowDefinition> getWorkflowDefinitions(
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowDefinition> getWorkflowDefinitions(
 		int start, int end, OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowDefinition> getWorkflowDefinitions(
+		String workflowDefinitionName, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

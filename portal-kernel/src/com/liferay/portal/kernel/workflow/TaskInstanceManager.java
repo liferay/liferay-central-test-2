@@ -282,6 +282,25 @@ public interface TaskInstanceManager {
 	 *
 	 * @param  userCredential the credential representing the user to return
 	 *		   tasks for
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return all tasks either be assigned to the user directly or indirectly
+	 *		   assigned to one of its roles
+	 * @throws WorkflowException is thrown if querying failed
+	 */
+	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
+			UserCredential userCredential, OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Queries for all tasks currently assigned to the user represented by the
+	 * given credential or indirectly assigned to one of the roles the user is
+	 * assigned to. So a task being returned could either be directly assigned
+	 * to the user or assigned to a role the user is a member of. If only open
+	 * tasks should be returned, use {@link
+	 * #getTaskInstanceInfosByCredential(UserCredential, boolean)} instead.
+	 *
+	 * @param  userCredential the credential representing the user to return
+	 *		   tasks for
 	 * @param  start inclusive start position for paginating the result
 	 * @param  end exclusive end position for paginating the result
 	 * @param  orderByComparator comparator for sorting the result
@@ -291,6 +310,26 @@ public interface TaskInstanceManager {
 	 */
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 			UserCredential userCredential, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Queries for all tasks currently assigned to the user represented by the
+	 * given credential or indirectly assigned to one of the roles the user is
+	 * assigned to. So a task being returned could either be directly assigned
+	 * to the user or assigned to a role the user is a member of.
+	 *
+	 * @param  userCredential the credential representing the user to return
+	 *		   tasks for
+	 * @param  completed <code>true</code>, if only completed tasks should be
+	 *		   returned, <code>false</code> for all open tasks
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return all tasks either be assigned to the user directly or indirectly
+	 *		   assigned to one of its roles
+	 * @throws WorkflowException is thrown if querying failed
+	 */
+	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
+			UserCredential userCredential, boolean completed,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
@@ -322,6 +361,20 @@ public interface TaskInstanceManager {
 	 * boolean)} instead.
 	 *
 	 * @param  roleId the id of the role to return tasks for
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return all tasks assigned to the given role
+	 * @throws WorkflowException is thrown if querying failed
+	 */
+	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
+			long roleId, OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Queries for all tasks currently assigned to the given role. If only open
+	 * tasks should be returned, use {@link #getTaskInstanceInfosByRole(long,
+	 * boolean)} instead.
+	 *
+	 * @param  roleId the id of the role to return tasks for
 	 * @param  start inclusive start position for paginating the result
 	 * @param  end exclusive end position for paginating the result
 	 * @param  orderByComparator comparator for sorting the result
@@ -331,6 +384,20 @@ public interface TaskInstanceManager {
 	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
 			long roleId, int start, int end,
 			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Queries for open or completed tasks currently assigned to the given role.
+	 *
+	 * @param  roleId the id of the role to return tasks for
+	 * @param  completed <code>true</code>, if only completed tasks should be
+	 *		   returned, <code>false</code> for all open tasks
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return all open or completed tasks assigned to the given role
+	 * @throws WorkflowException is thrown if querying failed
+	 */
+	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
+			long roleId, boolean completed, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	/**
@@ -356,6 +423,20 @@ public interface TaskInstanceManager {
 	 * boolean)} instead.
 	 *
 	 * @param  userId the id of the user to return tasks for
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return all tasks assigned to the given user
+	 * @throws WorkflowException is thrown if querying failed
+	 */
+	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
+			long userId, OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Queries for all tasks currently assigned to the given user. If only open
+	 * tasks should be returned, use {@link #getTaskInstanceInfosByUser(long,
+	 * boolean)} instead.
+	 *
+	 * @param  userId the id of the user to return tasks for
 	 * @param  start inclusive start position for paginating the result
 	 * @param  end exclusive end position for paginating the result
 	 * @param  orderByComparator comparator for sorting the result
@@ -365,6 +446,20 @@ public interface TaskInstanceManager {
 	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
 			long userId, int start, int end,
 			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Queries for open or completed tasks currently assigned to the given user.
+	 *
+	 * @param  userId the id of the user to return tasks for
+	 * @param  completed <code>true</code>, if only completed tasks should be
+	 *		   returned, <code>false</code> for all open tasks
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return all open or completed tasks assigned to the given user
+	 * @throws WorkflowException is thrown if querying failed
+	 */
+	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
+			long userId, boolean completed, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	/**
@@ -391,6 +486,21 @@ public interface TaskInstanceManager {
 	 *
 	 * @param  workflowInstanceId the id of the workflow instance to return
 	 *		   tasks for
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return all tasks related to the specified workflow instance
+	 * @throws WorkflowException is thrown if querying failed
+	 */
+	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
+			long workflowInstanceId, OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Queries for all tasks for the specified workflow instance. If only open
+	 * tasks should be returned, use {@link
+	 * #getTaskInstanceInfosByWorkflowInstance(long, boolean)} instead.
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance to return
+	 *		   tasks for
 	 * @param  start inclusive start position for paginating the result
 	 * @param  end exclusive end position for paginating the result
 	 * @param  orderByComparator comparator for sorting the result
@@ -399,6 +509,23 @@ public interface TaskInstanceManager {
 	 */
 	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
 			long workflowInstanceId, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Queries for open or completed tasks for the specified workflow instance.
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance to return
+	 *		   tasks for
+	 * @param  completed <code>true</code>, if only completed tasks should be
+	 *		   returned, <code>false</code> for all open tasks
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return all completed or open tasks related to the specified workflow
+	 *		   instance
+	 * @throws WorkflowException is thrown if querying failed
+	 */
+	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
+			long workflowInstanceId, boolean completed,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 

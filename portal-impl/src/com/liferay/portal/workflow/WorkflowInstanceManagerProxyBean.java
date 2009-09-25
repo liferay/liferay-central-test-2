@@ -53,6 +53,13 @@ public class WorkflowInstanceManagerProxyBean
 	}
 
 	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
+		long workflowInstanceId, boolean includeChildren,
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
 		long workflowInstanceId, boolean includeChildren, int start, int end,
 		OrderByComparator orderByComparator) {
 
@@ -73,6 +80,13 @@ public class WorkflowInstanceManagerProxyBean
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
+		boolean retrieveChildrenInfo, OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		boolean retrieveChildrenInfo, int start, int end,
 		OrderByComparator orderByComparator) {
 
@@ -81,8 +95,23 @@ public class WorkflowInstanceManagerProxyBean
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
+		boolean finished, boolean retrieveChildrenInfo,
+			OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		boolean finished, boolean retrieveChildrenInfo, int start, int end,
 			OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+		String relationType, long relationId, boolean retrieveChildrenInfo,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

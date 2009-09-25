@@ -93,6 +93,23 @@ public interface WorkflowDefinitionManager {
 	 * #getWorkflowDefinitions(String)} instead where all versions for a
 	 * specific workflow definition are being returned.
 	 *
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return the list of available workflow definitions, never
+	 *		   <code>null</code>
+	 */
+	public List<WorkflowDefinition> getWorkflowDefinitions(
+		OrderByComparator orderByComparator);
+
+	/**
+	 * Returns a list of all workflow definitions available within the
+	 * repository. The returned list will contain information objects about the
+	 * workflow definitions but without the definition model file actually, so
+	 * {@link WorkflowDefinition#getJar()} will always return <code>null</code>.
+	 * The list will only contain the newest (actual) version of a definition,
+	 * if you need all versions for a specific version, use the method {@link
+	 * #getWorkflowDefinitions(String)} instead where all versions for a
+	 * specific workflow definition are being returned.
+	 *
 	 * @param  start inclusive start position for paginating the result
 	 * @param  end exclusive end position for paginating the result
 	 * @param  orderByComparator comparator for sorting the result
@@ -101,6 +118,22 @@ public interface WorkflowDefinitionManager {
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		int start, int end, OrderByComparator orderByComparator);
+
+	/**
+	 * Returns a list of all versions of the specified workflow definition, if
+	 * found, an empty list otherwise or a list containing just one element, if
+	 * there is only one version available or versioning is not supported at all
+	 * by the underlying workflow engine.
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   retrieve all versions for
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return the list of all versions, if any found, an empty list otherwise
+	 *		   or a list containing just one element, must never be
+	 *		   <code>null</code>
+	 */
+	public List<WorkflowDefinition> getWorkflowDefinitions(
+		String workflowDefinitionName, OrderByComparator orderByComparator);
 
 	/**
 	 * Returns a list of all versions of the specified workflow definition, if

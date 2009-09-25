@@ -66,7 +66,20 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceHistory(long, boolean,
-	 *		start, end, OrderByComparator)
+	 *		OrderByComparator)
+	 */
+	public static List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
+			long workflowInstanceId, boolean includeChildren,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceHistory(
+			workflowInstanceId, includeChildren, orderByComparator);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceHistory(long, boolean,
+	 * 		int, int, OrderByComparator)
 	 */
 	public static List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
 			long workflowInstanceId, boolean includeChildren, int start,
@@ -102,6 +115,21 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfos(String, Integer,
+	 *		boolean, boolean, OrderByComparator)
+	 */
+	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean finished, boolean retrieveChildrenInfo,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceInfos(
+			workflowDefinitionName, workflowDefinitionVersion, finished,
+			retrieveChildrenInfo, orderByComparator);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfos(String, Integer,
 	 *		boolean, boolean, int, int, OrderByComparator)
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
@@ -117,6 +145,20 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfos(String, Integer,
+	 *		boolean, OrderByComparator)
+	 */
+	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean retrieveChildrenInfo, OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceInfos(
+			workflowDefinitionName, workflowDefinitionVersion,
+			retrieveChildrenInfo, orderByComparator);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfos(String, Integer,
 	 *		boolean, int, int, OrderByComparator)
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
@@ -128,6 +170,19 @@ public class WorkflowInstanceManagerUtil {
 		return _workflowInstanceManager.getWorkflowInstanceInfos(
 			workflowDefinitionName, workflowDefinitionVersion,
 			retrieveChildrenInfo, start, end, orderByComparator);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfos(String, long,
+	 *		boolean, OrderByComparator)
+	 */
+	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+			String relationType, long relationId, boolean retrieveChildrenInfo,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceInfos(
+			relationType, relationId, retrieveChildrenInfo,	orderByComparator);
 	}
 
 	/**
