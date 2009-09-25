@@ -45,7 +45,7 @@ if (themeDisplay.getScopeGroup().isLayout()) {
 }
 %>
 
-<c:if test="<%= (editPortletURL != null) && stageableGroup.hasStagingGroup() %>">
+<c:if test="<%= (editPortletURL != null) && !stageableGroup.hasStagingGroup() %>">
 	<div class="lfr-meta-actions asset-actions">
 		<liferay-ui:icon image="edit" url="<%= editPortletURL.toString() %>" label="<%= showIconLabel %>" />
 	</div>
