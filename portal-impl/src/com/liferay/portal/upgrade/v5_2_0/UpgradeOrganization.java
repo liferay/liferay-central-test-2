@@ -109,8 +109,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"update Resource_ set codeId = ? where codeId = ?");
 
-			ps.setLong(1, oldCodeId);
-			ps.setLong(2, newCodeId);
+			ps.setLong(1, newCodeId);
+			ps.setLong(2, oldCodeId);
 
 			ps.executeUpdate();
 
