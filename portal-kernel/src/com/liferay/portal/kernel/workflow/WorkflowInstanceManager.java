@@ -145,6 +145,25 @@ public interface WorkflowInstanceManager {
 		throws WorkflowException;
 
 	/**
+	 * Returns the total count of WorkflowInstanceHistory currently belong to
+	 * the specified WorkflowInstance(include/exclude children
+	 * WorkflowInstances). The implementation of this method should be
+	 * fast.
+	 *
+	 * @param  workflowInstanceId the id of the WorkflowInstance to count the
+	 *		   WorkflowInstanceHistory for
+	 * @param  includeChildren <code>true</code>, children WorkflowInstance's
+	 *		   history should also be counted, <code>false</code> only counts
+	 *		   the given WorkflowInstace's history, ignores its children's
+	 *		   history.
+	 * @return the total count of WorkflowInstanceHistory, for the given
+	 *		   WorkflowInstance.
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
+	public int getWorkflowInstanceHistoryCountForWorkflowInstance(
+			long workflowInstanceId, boolean includeChildren)
+		throws WorkflowException;
+	/**
 	 * <p>
 	 * Returns the history of the specified workflow instance. The history will
 	 * contain the workflow log entries being made which are workflow engine
@@ -236,6 +255,63 @@ public interface WorkflowInstanceManager {
 	 */
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
 			String relationType, long relationId, boolean retrieveChildrenInfo)
+		throws WorkflowException;
+
+	/**
+	 * Returns the total count of workflow instance related to the specified
+	 * domain object instance.
+	 *
+	 * @param  relationType the unique type representing the domain object class
+	 *		   to count the workflow instance information for
+	 * @param  relationId the identifier of the domain object instance counting
+	 *		   workflow instance information for
+	 * @return the total count of open workflow instance for the specified
+	 *		   domain object instance.
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
+	public int getWorkflowInstanceInfoCountForRelation(
+			String relationType, long relationId)
+		throws WorkflowException;
+
+	/**
+	 * Returns the total count of workflow instance for a given workflow
+	 * definition and optionally a certain version of it. By default, it only
+	 * counts open workflow instances. If ended ones should be counted as well
+	 * or even exclusively, the method
+	 * {@link getWorkflowInstanceInfoCountForWorkflowDefinition(String, Integer,
+	 * boolean)} should be used instead. The implementation of this method
+	 * should be fast.
+	 *
+	 * @param  workflowDefinitionName the name of the WorkflowDefinition to
+	 *		   count the WorkflowInstance for
+	 * @param  workflowDefinitionVersion the version of the WorkflowDefinition
+	 *		   to count the WorkflowInstance for
+	 * @return the total count of open workflow instance for the given workflow
+	 *		   definition
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
+	public int getWorkflowInstanceInfoCountForWorkflowDefinition(
+			String workflowDefinitionName, Integer workflowDefinitionVersion)
+		throws WorkflowException;
+
+	/**
+	 * Returns the total count of workflow instance for a given workflow
+	 * definition and optionally a certain version of it. The implementation of
+	 * this method should be fast.
+	 *
+	 * @param  workflowDefinitionName the name of the WorkflowDefinition to
+	 *		   count the WorkflowInstance for
+	 * @param  workflowDefinitionVersion the version of the WorkflowDefinition
+	 *		   to count the WorkflowInstance for
+	 * @param  finished if finished or open workflow instances should
+	 *		   be counted
+	 * @return the total count of open/finished workflow instance for the given
+	 *		   workflow definition
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
+	public int getWorkflowInstanceInfoCountForWorkflowDefinition(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean finished)
 		throws WorkflowException;
 
 	/**

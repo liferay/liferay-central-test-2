@@ -91,6 +91,19 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	/**
+	 * @see WorkflowInstanceManager#
+	 *		getWorkflowInstanceHistoryCountForWorkflowInstance(long, boolean)
+	 */
+	public static int getWorkflowInstanceHistoryCountForWorkflowInstance(
+			long workflowInstanceId, boolean includeChildren)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.
+			getWorkflowInstanceHistoryCountForWorkflowInstance(
+				workflowInstanceId, includeChildren);
+	}
+
+	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfo(long, boolean)
 	 */
 	public static WorkflowInstanceInfo getWorkflowInstanceInfo(
@@ -111,6 +124,42 @@ public class WorkflowInstanceManagerUtil {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfo(
 			relationType, relationId, retrieveChildrenInfo);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfoCountForRelation(
+	 *		String, long)
+	 */
+	public static int getWorkflowInstanceInfoCountForRelation(
+		String relationType, long relationId) throws WorkflowException {
+		return _workflowInstanceManager.getWorkflowInstanceInfoCountForRelation(
+			relationType, relationId);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#
+	 *		getWorkflowInstanceInfoCountForWorkflowDefinition(
+	 *		String, Integer)
+	 */
+	public static int getWorkflowInstanceInfoCountForWorkflowDefinition(
+			String workflowDefinitionName, Integer workflowDefinitionVersion)
+		throws WorkflowException {
+		return _workflowInstanceManager.
+			getWorkflowInstanceInfoCountForWorkflowDefinition(
+				workflowDefinitionName, workflowDefinitionVersion);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#
+	 *		getWorkflowInstanceInfoCountForWorkflowDefinition(
+	 *		String, Integer, boolean)
+	 */
+	public static int getWorkflowInstanceInfoCountForWorkflowDefinition(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean finished) throws WorkflowException {
+		return _workflowInstanceManager.
+			getWorkflowInstanceInfoCountForWorkflowDefinition(
+				workflowDefinitionName, workflowDefinitionVersion, finished);
 	}
 
 	/**

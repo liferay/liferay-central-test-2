@@ -117,6 +117,18 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
+	 * @see TaskInstanceManager#getTaskInstanceCountForCredential(
+	 *		UserCredential, boolean)
+	 */
+	public static int getTaskInstanceCountForCredential(
+			UserCredential userCredential, boolean completed)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceCountForCredential(
+			userCredential, completed);
+	}
+
+	/**
 	 * @see TaskInstanceManager#getTaskInstanceCountForRole(long)
 	 */
 	public static int getTaskInstanceCountForRole(long roleId)
@@ -126,12 +138,52 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
+	 * @see TaskInstanceManager#getTaskInstanceCountForRole(long, boolean)
+	 */
+	public static int getTaskInstanceCountForRole(
+		long roleId, boolean completed) throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceCountForRole(
+			roleId, completed);
+	}
+
+	/**
 	 * @see TaskInstanceManager#getTaskInstanceCountForUser(long)
 	 */
 	public static int getTaskInstanceCountForUser(long userId)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getTaskInstanceCountForUser(userId);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceCountForUser(long, boolean)
+	 */
+	public static int getTaskInstanceCountForUser(
+		long userId, boolean completed) throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceCountForUser(
+			userId, completed);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceCountForWorkflowInstance(long)
+	 */
+	public static int getTaskInstanceCountForWorkflowInstance(
+		long workflowInstanceId) throws WorkflowException {
+		return _taskInstanceManager.getTaskInstanceCountForWorkflowInstance(
+			workflowInstanceId);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceCountForWorkflowInstance(long,
+	 *		boolean)
+	 */
+	public static int getTaskInstanceCountForWorkflowInstance(
+			long workflowInstanceId, boolean completed)
+		throws WorkflowException {
+		return _taskInstanceManager.getTaskInstanceCountForWorkflowInstance(
+			workflowInstanceId, completed);
 	}
 
 	/**

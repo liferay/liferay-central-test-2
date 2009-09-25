@@ -80,11 +80,34 @@ public class TaskInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public int getTaskInstanceCountForCredential(
+			UserCredential userCredential, boolean completed) {
+		throw new UnsupportedOperationException();
+	}
+
 	public int getTaskInstanceCountForRole(long roleId) {
 		throw new UnsupportedOperationException();
 	}
 
+	public int getTaskInstanceCountForRole(long roleId, boolean completed) {
+		throw new UnsupportedOperationException();
+	}
+
 	public int getTaskInstanceCountForUser(long userId) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceCountForUser(long userId, boolean completed) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceCountForWorkflowInstance(
+		long workflowInstanceId) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceCountForWorkflowInstance(
+			long workflowInstanceId, boolean completed) {
 		throw new UnsupportedOperationException();
 	}
 

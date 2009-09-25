@@ -54,6 +54,22 @@ public class WorkflowDefinitionManagerUtil {
 			workflowDefinition, callingUserId);
 	}
 
+	/**
+	 * @see WorkflowDefinitionManager#getWorkflowDefinitionCount()
+	 */
+	public static int getWorkflowDefinitionCount() throws WorkflowException{
+		return _workflowDefinitionManager.getWorkflowDefinitionCount();
+	}
+
+	/**
+	 * @see WorkflowDefinitionManager#getWorkflowDefinitionCount(String)
+	 */
+	public static int getWorkflowDefinitionCount(String workflowDefinitionName)
+		throws WorkflowException{
+		return _workflowDefinitionManager.getWorkflowDefinitionCount(
+			workflowDefinitionName);
+	}
+
 	public static WorkflowDefinitionManager getWorkflowDefinitionManager() {
 		return _workflowDefinitionManager;
 	}

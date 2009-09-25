@@ -84,6 +84,24 @@ public interface WorkflowDefinitionManager {
 		throws WorkflowException;
 
 	/**
+	 * Returns a total count for all newest (actual) version definitions in the
+	 * repository.
+	 *
+	 * @return the total count for all newest (actual) version definitions
+	 */
+	public int getWorkflowDefinitionCount() throws WorkflowException;
+
+	/**
+	 * Returns a total count for all version definitions with the given workflow
+	 * definition name.
+	 *
+	 * @param workflowDefinitionName the workflow definition name to count for
+	 * @return the total count for all version definitions
+	 */
+	public int getWorkflowDefinitionCount(String workflowDefinitionName)
+		throws WorkflowException;
+
+	/**
 	 * Returns a list of all workflow definitions available within the
 	 * repository. The returned list will contain information objects about the
 	 * workflow definitions but without the definition model file actually, so
