@@ -32,13 +32,6 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 DLFolder folder = null;
 long folderId = 0;
 
-String modelResource = null;
-String modelResourceDescription = null;
-String resourcePrimKey = null;
-boolean showPermissions = false;
-
-boolean view = false;
-
 if (row != null) {
 	folder = (DLFolder)row.getObject();
 	folderId = folder.getFolderId();
@@ -46,21 +39,33 @@ if (row != null) {
 else {
 	folder = (DLFolder)request.getAttribute("view.jsp-folder");
 	folderId = (Long)request.getAttribute("view.jsp-folderId");
-
-	view = true;
 }
+
+String modelResource = null;
+String modelResourceDescription = null;
+String resourcePrimKey = null;
+
+boolean showPermissionsURL = false;
 
 if (folder != null) {
 	modelResource = DLFolder.class.getName();
 	modelResourceDescription = folder.getName();
 	resourcePrimKey = String.valueOf(folderId);
-	showPermissions = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.PERMISSIONS);
+
+	showPermissionsURL = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.PERMISSIONS);
 }
 else {
 	modelResource = "com.liferay.portlet.documentlibrary";
 	modelResourceDescription = themeDisplay.getScopeGroupName();
 	resourcePrimKey = String.valueOf(scopeGroupId);
-	showPermissions = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+
+	showPermissionsURL = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+}
+
+boolean view = false;
+
+if (row != null) {
+	view = true;
 }
 %>
 
@@ -75,7 +80,7 @@ else {
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
-	<c:if test="<%= showPermissions %>">
+	<c:if test="<%= showPermissionsURL %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= modelResource %>"
 			modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
