@@ -51,21 +51,21 @@ if (curTagsParam != null) {
 }
 %>
 
-<div class="lfr-asset-tags-selector" id="<%= randomNamespace %>assetTagsSelector">
-	<input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
+<div class="lfr-asset-tags-selector" id="<%= namespace + randomNamespace %>assetTagsSelector">
+	<aui:input name="<%= hiddenInput %>" type="hidden" />
 
 	<span class="ui-tags empty" id="<%= randomNamespace %>assetTagsSummary"></span>
 		<input class="ui-tags-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
 
-		<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
+		<aui:button disabled="<%= true %>" name='<%= randomNamespace + "addTag" %>' value="add-tags" />
 	</span>
 
 	<liferay-ui:message key="or" />
 
-	<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
+	<aui:button name="<%= randomNamespace + "selectTag" %>" value="select-tags" />
 
 	<c:if test="<%= suggestible %>">
-		<input id="<%= randomNamespace %>suggestions" type="button" value="<liferay-ui:message key="suggestions" />" />
+		<aui:button name="<%= randomNamespace + "suggestions" %>" value="suggestions" />
 	</c:if>
 </div>
 
@@ -74,7 +74,7 @@ if (curTagsParam != null) {
 		function() {
 			new Liferay.AssetTagsSelector(
 				{
-					instanceVar: "<%= randomNamespace %>",
+					instanceVar: "<%= namespace + randomNamespace %>",
 					hiddenInput: "<%= namespace + hiddenInput %>",
 					textInput: "<%= randomNamespace %>assetTagNames",
 					summarySpan: "<%= randomNamespace %>assetTagsSummary",
