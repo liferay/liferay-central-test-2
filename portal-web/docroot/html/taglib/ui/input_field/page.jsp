@@ -238,7 +238,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				/>
 			</c:if>
 		</c:when>
-		<c:when test='<%= type.equals("double") || type.equals("int") || type.equals("String") %>'>
+		<c:when test='<%= type.equals("double") || type.equals("int") || type.equals("long") || type.equals("String") %>'>
 
 			<%
 			String defaultString = GetterUtil.DEFAULT_STRING;
@@ -271,6 +271,16 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				}
 				else {
 					value = String.valueOf(intValue);
+				}
+			}
+			else if (type.equals("long")) {
+				long longValue = BeanParamUtil.getLong(bean, request, field, GetterUtil.getLong(defaultString));
+
+				if (format != null) {
+					value = format.format(longValue);
+				}
+				else {
+					value = String.valueOf(longValue);
 				}
 			}
 			else {
