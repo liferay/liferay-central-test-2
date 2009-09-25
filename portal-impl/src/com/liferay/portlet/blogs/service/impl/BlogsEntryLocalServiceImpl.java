@@ -762,8 +762,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Social
 
-		if ((oldStatus != StatusConstants.APPROVED) &&
-			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
+		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
+			(oldStatus != StatusConstants.APPROVED)) {
 
 			socialActivityLocalService.addActivity(
 				userId, entry.getGroupId(), BlogsEntry.class.getName(),
