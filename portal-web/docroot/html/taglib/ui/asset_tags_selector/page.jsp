@@ -62,10 +62,10 @@ if (curTagsParam != null) {
 
 	<liferay-ui:message key="or" />
 
-	<aui:button name="<%= randomNamespace + "selectTag" %>" value="select-tags" />
+	<aui:button name='<%= randomNamespace + "selectTag" %>' value="select-tags" />
 
 	<c:if test="<%= suggestible %>">
-		<aui:button name="<%= randomNamespace + "suggestions" %>" value="suggestions" />
+		<aui:button name='<%= randomNamespace + "suggestions" %>' value="suggestions" />
 	</c:if>
 </div>
 
