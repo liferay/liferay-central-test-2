@@ -1533,7 +1533,7 @@ Liferay.PortletCSS = {
 
 		// Font color
 
-		var setColor = function(obj) {
+		var changeColor = function(obj) {
 			var color = obj.value;
 
 			if (color != '') {
