@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.messaging.proxy;
 
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import java.io.Serializable;
 
 import java.lang.reflect.InvocationTargetException;
@@ -37,14 +40,24 @@ import java.lang.reflect.Method;
 public class ProxyRequest implements Serializable {
 
 	public ProxyRequest(Method method, Object[] arguments) throws Exception {
-		_method = method;
-		_arguments = arguments;
 
-		MessagingProxy messagingProxy = _method.getAnnotation(
+		Class<?>[] argumentTypes = method.getParameterTypes();
+		for(int i = 0; i<arguments.length; i++) {
+			if(arguments[i] == null) {
+				arguments[i] = new NullWrapper(argumentTypes[i].getName());
+			}
+		}
+		
+		_methodWrapper = new MethodWrapper(
+			method.getDeclaringClass().getName(), method.getName(), arguments);
+
+		_hasReturnValue = method.getReturnType() != Void.TYPE;
+		
+		MessagingProxy messagingProxy = method.getAnnotation(
 			MessagingProxy.class);
 
 		if (messagingProxy == null) {
-			messagingProxy = _method.getDeclaringClass().getAnnotation(
+			messagingProxy = method.getDeclaringClass().getAnnotation(
 				MessagingProxy.class);
 		}
 
@@ -55,17 +68,13 @@ public class ProxyRequest implements Serializable {
 		}
 	}
 
-	public Object[] getArguments() {
-		return _arguments;
-	}
-
-	public Method getMethod() {
-		return _method;
+	public MethodWrapper getMethodWrapper() {
+		return _methodWrapper;
 	}
 
 	public Object execute(Object object) throws Exception {
 		try {
-			return _method.invoke(object, _arguments);
+			return MethodInvoker.invoke(_methodWrapper, object);
 		}
 		catch (InvocationTargetException e) {
 			throw new Exception(e.getTargetException());
@@ -73,20 +82,15 @@ public class ProxyRequest implements Serializable {
 	}
 
 	public boolean hasReturnValue() {
-		if (_method.getReturnType() != Void.TYPE) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return _hasReturnValue;
 	}
 
 	public boolean isSynchronous() {
 		return _synchronous;
 	}
-
-	private Object[] _arguments;
-	private Method _method;
+	
+	private boolean _hasReturnValue;
+	private MethodWrapper _methodWrapper;
 	private boolean _synchronous;
 
 }

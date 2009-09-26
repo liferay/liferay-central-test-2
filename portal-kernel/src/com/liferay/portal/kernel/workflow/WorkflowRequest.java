@@ -36,7 +36,7 @@ public class WorkflowRequest extends ProxyRequest {
 
 	public WorkflowRequest(Method method, Object[] arguments) throws Exception {
 		super(method, arguments);
-
+		_method = method;
 		_userCredential = inspectForCallingUserCredential();
 	}
 
@@ -58,19 +58,10 @@ public class WorkflowRequest extends ProxyRequest {
 		return _userCredential;
 	}
 
-	public boolean hasReturnValue() {
-		if (getMethod().getReturnType() != Void.TYPE) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	protected UserCredential inspectForCallingUserCredential()
 		throws WorkflowException {
 
-		Annotation[][] annotationsArray = getMethod().getParameterAnnotations();
+		Annotation[][] annotationsArray = _method.getParameterAnnotations();
 
 		if ((annotationsArray == null) || (annotationsArray.length == 0)) {
 			return null;
@@ -88,7 +79,7 @@ public class WorkflowRequest extends ProxyRequest {
 						annotation.annotationType())) {
 
 					return UserCredentialFactoryUtil.createCredential(
-						(Long)getArguments()[i]);
+						(Long)getMethodWrapper().getArguments()[i]);
 				}
 			}
 		}
@@ -97,5 +88,6 @@ public class WorkflowRequest extends ProxyRequest {
 	}
 
 	private UserCredential _userCredential;
+	private Method _method;
 
 }
