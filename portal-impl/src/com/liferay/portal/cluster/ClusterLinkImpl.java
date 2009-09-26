@@ -167,7 +167,8 @@ public class ClusterLinkImpl implements ClusterLink {
 			new ReceiverAdapter() {
 
 				public void receive(org.jgroups.Message message) {
-					if (!_addresses.contains(message.getSrc())) {
+					if (!_addresses.contains(message.getSrc())
+						|| message.getDest() != null) {
 						_clusterForwardMessageListener.receive(
 							(Message)message.getObject());
 					}
