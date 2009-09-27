@@ -724,8 +724,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry updateStatus(
 			long userId, BlogsEntry entry, boolean pingOldTrackbaks,
-			String[] trackbacks, ServiceContext serviceContext,
-			boolean reIndex)
+			String[] trackbacks, ServiceContext serviceContext, boolean reIndex)
 		throws PortalException, SystemException {
 
 		int oldStatus = entry.getStatus();

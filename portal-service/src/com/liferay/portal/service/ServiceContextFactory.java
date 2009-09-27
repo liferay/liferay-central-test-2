@@ -122,7 +122,7 @@ public class ServiceContextFactory {
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
 
-		//Workflow
+		// Workflow
 
 		int status = ParamUtil.getInteger(
 			portletRequest, "status", StatusConstants.APPROVED);
