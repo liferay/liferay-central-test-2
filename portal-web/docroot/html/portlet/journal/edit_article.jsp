@@ -698,9 +698,13 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 				<aui:fieldset>
 					<aui:input name="description" />
+
 					<aui:input inlineLabel="left" label="use-small-image" name="smallImage" />
+
 					<aui:input label="small-image-url" name="smallImageURL" />
+
 					<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
+
 					<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
 
 					<liferay-ui:custom-attributes-available className="<%= JournalArticle.class.getName() %>">
@@ -718,6 +722,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<br />
 
 			<aui:button-row>
+
 				<%
 				boolean hasSavePermission = false;
 
@@ -735,7 +740,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:button name="saveArticleAndContinueBtn" value="save-and-continue" />
 
 					<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
-						<aui:button name="saveArticleAndApproveBtn"  value="save-and-approve" />
+						<aui:button name="saveArticleAndApproveBtn" value="save-and-approve" />
 					</c:if>
 				</c:if>
 
@@ -747,7 +752,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:button name="downloadArticleContentBtn" value="download" />
 				</c:if>
 
-				<aui:button value="cancel" onClick="<%= redirect %>" />
+				<aui:button onClick="<%= redirect %>" value="cancel" />
 			</aui:button-row>
 		</td>
 
