@@ -53,7 +53,7 @@ try {
 	>
 		<liferay-ui:search-container-results
 			results="<%= TaskInstanceManagerUtil.getTaskInstanceInfosByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
-			total="<%= TaskInstanceManagerUtil.getTaskInstanceInfosCountByUser(user.getUserId()) %>"
+			total="<%= TaskInstanceManagerUtil.getTaskInstanceInfoCountByUser(user.getUserId()) %>"
 		/>
 
 		<liferay-ui:search-container-row
