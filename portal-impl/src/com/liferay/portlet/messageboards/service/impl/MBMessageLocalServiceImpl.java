@@ -121,6 +121,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long parentMessageId = 0;
 		String subject = String.valueOf(classPK);
 		String body = subject;
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setStatus(status);
@@ -448,6 +449,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (!message.isDiscussion() &&
 			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
+
 			mbStatsUserLocalService.updateStatsUser(
 				message.getGroupId(), userId, now);
 		}

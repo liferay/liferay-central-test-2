@@ -1187,9 +1187,7 @@ public class DLFileEntryLocalServiceImpl
 		DLFileVersion fileVersion = dlFileVersionPersistence.findByG_F_N_V(
 			groupId, folderId, name, version);
 
-		return updateStatus(
-			userId, fileVersion, true, serviceContext);
-
+		return updateStatus(userId, fileVersion, true, serviceContext);
 	}
 
 	protected void addFileVersion(
