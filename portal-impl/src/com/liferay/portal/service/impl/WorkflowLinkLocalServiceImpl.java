@@ -55,8 +55,8 @@ public class WorkflowLinkLocalServiceImpl
 		workflowLink.setModifiedDate(now);
 		workflowLink.setUserId(userId);
 		workflowLink.setUserName(user.getFullName());
-		workflowLink.setCompanyId(companyId);
 		workflowLink.setGroupId(groupId);
+		workflowLink.setCompanyId(companyId);
 		workflowLink.setClassNameId(classNameId);
 		workflowLink.setDefinitionName(definitionName);
 
@@ -72,19 +72,19 @@ public class WorkflowLinkLocalServiceImpl
 		WorkflowLink workflowLink = null;
 
 		if (groupId > 0) {
-			workflowLink = workflowLinkPersistence.fetchByC_G_C(
-				companyId, groupId, classNameId);
+			workflowLink = workflowLinkPersistence.fetchByG_C_C(
+				groupId, companyId, classNameId);
 		}
 
 		if (workflowLink == null) {
-			workflowLink = workflowLinkPersistence.fetchByC_G_C(
-				companyId, 0, classNameId);
+			workflowLink = workflowLinkPersistence.fetchByG_C_C(
+				0, companyId, classNameId);
 		}
 
 		if (workflowLink == null) {
 			throw new NoSuchWorkflowLinkException(
-				"No workflow for companyId=" + companyId + ", groupId=" +
-					groupId + " and classNameId=" + classNameId);
+				"No workflow for groupId=" + groupId + ", companyId=" +
+					companyId + " and classNameId=" + classNameId);
 		}
 
 		return workflowLink;
@@ -98,8 +98,8 @@ public class WorkflowLinkLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		WorkflowLink workflowLink = workflowLinkPersistence.fetchByC_G_C(
-			companyId, groupId, classNameId);
+		WorkflowLink workflowLink = workflowLinkPersistence.fetchByG_C_C(
+			groupId, companyId, classNameId);
 
 		if (workflowLink == null) {
 			workflowLink = addWorkflowLink(
@@ -109,8 +109,8 @@ public class WorkflowLinkLocalServiceImpl
 		workflowLink.setModifiedDate(now);
 		workflowLink.setUserId(userId);
 		workflowLink.setUserName(user.getFullName());
-		workflowLink.setCompanyId(companyId);
 		workflowLink.setGroupId(groupId);
+		workflowLink.setCompanyId(companyId);
 		workflowLink.setClassNameId(classNameId);
 		workflowLink.setDefinitionName(definitionName);
 

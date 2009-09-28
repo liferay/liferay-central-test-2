@@ -655,9 +655,7 @@
 		<property name="persistence" ref="com.liferay.portal.service.persistence.WebsitePersistence.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.WorkflowLinkLocalService.impl" class="com.liferay.portal.service.impl.WorkflowLinkLocalServiceImpl" />
-	<bean id="com.liferay.portal.service.WorkflowLinkLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portal.service.WorkflowLinkLocalService.impl" />
-	</bean>
+	<bean id="com.liferay.portal.service.WorkflowLinkLocalService.velocity" class="com.liferay.portal.service.impl.WorkflowLinkLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.WorkflowLinkLocalServiceUtil" class="com.liferay.portal.service.WorkflowLinkLocalServiceUtil">
 		<property name="service" ref="com.liferay.portal.service.WorkflowLinkLocalService.impl" />
 	</bean>

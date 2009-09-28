@@ -152,6 +152,7 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(UserTrackerPersistenceTest.class);
 		testSuite.addTestSuite(WebDAVPropsPersistenceTest.class);
 		testSuite.addTestSuite(WebsitePersistenceTest.class);
+		testSuite.addTestSuite(WorkflowLinkPersistenceTest.class);
 
 		testSuite.addTestSuite(AnnouncementsDeliveryPersistenceTest.class);
 		testSuite.addTestSuite(AnnouncementsEntryPersistenceTest.class);

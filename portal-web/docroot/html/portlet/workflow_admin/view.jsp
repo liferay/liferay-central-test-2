@@ -32,8 +32,9 @@ List<String> headerNames = new ArrayList<String>();
 headerNames.add("resource");
 headerNames.add("custom-attributes");
 
-List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getWorkflowDefinitions(0, 100, null);
 List<String> modelResources = ListUtil.fromArray(_WORKFLOW_RESOURCES);
+
+List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getWorkflowDefinitions(0, 100, null);
 %>
 
 <portlet:actionURL var="editWorkflowLinkURL">

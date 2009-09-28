@@ -26,4 +26,5 @@
 
 <liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
 
-<liferay-ui:error exception="<%= WorkflowException.class %>" message="an-error-occurred-in-the-workflow-engine" />
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+<liferay-ui:error exception="<%= WorkflowException.class %>" message="an-unexpected-error-occurred" />

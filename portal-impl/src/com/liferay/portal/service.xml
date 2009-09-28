@@ -1871,9 +1871,9 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="C_G_C" return-type="WorkflowLink">
-			<finder-column name="companyId" />
+		<finder name="G_C_C" return-type="WorkflowLink">
 			<finder-column name="groupId" />
+			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 		</finder>
 	</entity>

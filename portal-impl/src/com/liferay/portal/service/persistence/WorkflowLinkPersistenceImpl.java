@@ -83,15 +83,15 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_G_C = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_C_C = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByC_G_C",
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_G_C = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_C = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByC_G_C",
+			"countByG_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
@@ -106,10 +106,10 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowLinkImpl.class, workflowLink.getPrimaryKey(), workflowLink);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_G_C,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
 			new Object[] {
-				new Long(workflowLink.getCompanyId()),
 				new Long(workflowLink.getGroupId()),
+				new Long(workflowLink.getCompanyId()),
 				new Long(workflowLink.getClassNameId())
 			}, workflowLink);
 	}
@@ -223,10 +223,10 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 
 		WorkflowLinkModelImpl workflowLinkModelImpl = (WorkflowLinkModelImpl)workflowLink;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_G_C,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C,
 			new Object[] {
-				new Long(workflowLinkModelImpl.getOriginalCompanyId()),
 				new Long(workflowLinkModelImpl.getOriginalGroupId()),
+				new Long(workflowLinkModelImpl.getOriginalCompanyId()),
 				new Long(workflowLinkModelImpl.getOriginalClassNameId())
 			});
 
@@ -319,25 +319,25 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 			WorkflowLinkImpl.class, workflowLink.getPrimaryKey(), workflowLink);
 
 		if (!isNew &&
-				((workflowLink.getCompanyId() != workflowLinkModelImpl.getOriginalCompanyId()) ||
-				(workflowLink.getGroupId() != workflowLinkModelImpl.getOriginalGroupId()) ||
+				((workflowLink.getGroupId() != workflowLinkModelImpl.getOriginalGroupId()) ||
+				(workflowLink.getCompanyId() != workflowLinkModelImpl.getOriginalCompanyId()) ||
 				(workflowLink.getClassNameId() != workflowLinkModelImpl.getOriginalClassNameId()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_G_C,
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C,
 				new Object[] {
-					new Long(workflowLinkModelImpl.getOriginalCompanyId()),
 					new Long(workflowLinkModelImpl.getOriginalGroupId()),
+					new Long(workflowLinkModelImpl.getOriginalCompanyId()),
 					new Long(workflowLinkModelImpl.getOriginalClassNameId())
 				});
 		}
 
 		if (isNew ||
-				((workflowLink.getCompanyId() != workflowLinkModelImpl.getOriginalCompanyId()) ||
-				(workflowLink.getGroupId() != workflowLinkModelImpl.getOriginalGroupId()) ||
+				((workflowLink.getGroupId() != workflowLinkModelImpl.getOriginalGroupId()) ||
+				(workflowLink.getCompanyId() != workflowLinkModelImpl.getOriginalCompanyId()) ||
 				(workflowLink.getClassNameId() != workflowLinkModelImpl.getOriginalClassNameId()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_G_C,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
 				new Object[] {
-					new Long(workflowLink.getCompanyId()),
 					new Long(workflowLink.getGroupId()),
+					new Long(workflowLink.getCompanyId()),
 					new Long(workflowLink.getClassNameId())
 				}, workflowLink);
 		}
@@ -675,19 +675,19 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public WorkflowLink findByC_G_C(long companyId, long groupId,
+	public WorkflowLink findByG_C_C(long groupId, long companyId,
 		long classNameId) throws NoSuchWorkflowLinkException, SystemException {
-		WorkflowLink workflowLink = fetchByC_G_C(companyId, groupId, classNameId);
+		WorkflowLink workflowLink = fetchByG_C_C(groupId, companyId, classNameId);
 
 		if (workflowLink == null) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WorkflowLink exists with the key {");
 
-			msg.append("companyId=" + companyId);
+			msg.append("groupId=" + groupId);
 
 			msg.append(", ");
-			msg.append("groupId=" + groupId);
+			msg.append("companyId=" + companyId);
 
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
@@ -704,21 +704,21 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		return workflowLink;
 	}
 
-	public WorkflowLink fetchByC_G_C(long companyId, long groupId,
+	public WorkflowLink fetchByG_C_C(long groupId, long companyId,
 		long classNameId) throws SystemException {
-		return fetchByC_G_C(companyId, groupId, classNameId, true);
+		return fetchByG_C_C(groupId, companyId, classNameId, true);
 	}
 
-	public WorkflowLink fetchByC_G_C(long companyId, long groupId,
+	public WorkflowLink fetchByG_C_C(long groupId, long companyId,
 		long classNameId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(groupId), new Long(classNameId)
+				new Long(groupId), new Long(companyId), new Long(classNameId)
 			};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_G_C,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C_C,
 					finderArgs, this);
 		}
 
@@ -733,11 +733,11 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"SELECT workflowLink FROM WorkflowLink workflowLink WHERE ");
 
-				query.append("workflowLink.companyId = ?");
+				query.append("workflowLink.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("workflowLink.groupId = ?");
+				query.append("workflowLink.companyId = ?");
 
 				query.append(" AND ");
 
@@ -753,9 +753,9 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
-
 				qPos.add(groupId);
+
+				qPos.add(companyId);
 
 				qPos.add(classNameId);
 
@@ -766,7 +766,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 				WorkflowLink workflowLink = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_G_C,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
 						finderArgs, list);
 				}
 				else {
@@ -774,10 +774,10 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 
 					cacheResult(workflowLink);
 
-					if ((workflowLink.getCompanyId() != companyId) ||
-							(workflowLink.getGroupId() != groupId) ||
+					if ((workflowLink.getGroupId() != groupId) ||
+							(workflowLink.getCompanyId() != companyId) ||
 							(workflowLink.getClassNameId() != classNameId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_G_C,
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
 							finderArgs, workflowLink);
 					}
 				}
@@ -789,7 +789,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_G_C,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
 						finderArgs, new ArrayList<WorkflowLink>());
 				}
 
@@ -941,9 +941,9 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByC_G_C(long companyId, long groupId, long classNameId)
+	public void removeByG_C_C(long groupId, long companyId, long classNameId)
 		throws NoSuchWorkflowLinkException, SystemException {
-		WorkflowLink workflowLink = findByC_G_C(companyId, groupId, classNameId);
+		WorkflowLink workflowLink = findByG_C_C(groupId, companyId, classNameId);
 
 		remove(workflowLink);
 	}
@@ -1001,13 +1001,13 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByC_G_C(long companyId, long groupId, long classNameId)
+	public int countByG_C_C(long groupId, long companyId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(groupId), new Long(classNameId)
+				new Long(groupId), new Long(companyId), new Long(classNameId)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_G_C,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_C,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1021,11 +1021,11 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 				query.append("SELECT COUNT(workflowLink) ");
 				query.append("FROM WorkflowLink workflowLink WHERE ");
 
-				query.append("workflowLink.companyId = ?");
+				query.append("workflowLink.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("workflowLink.groupId = ?");
+				query.append("workflowLink.companyId = ?");
 
 				query.append(" AND ");
 
@@ -1037,9 +1037,9 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
-
 				qPos.add(groupId);
+
+				qPos.add(companyId);
 
 				qPos.add(classNameId);
 
@@ -1053,7 +1053,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_G_C,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_C,
 					finderArgs, count);
 
 				closeSession(session);

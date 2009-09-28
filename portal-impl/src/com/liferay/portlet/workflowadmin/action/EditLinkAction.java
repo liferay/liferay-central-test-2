@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.action;
+package com.liferay.portlet.workflowadmin.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -42,11 +42,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditWorkflowLinkAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditLinkAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
-public class EditWorkflowLinkAction extends PortletAction {
+public class EditLinkAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -60,7 +60,6 @@ public class EditWorkflowLinkAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof WorkflowException) {
-
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.workflow_admin.error");
@@ -86,15 +85,15 @@ public class EditWorkflowLinkAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		for (String paramName : actionRequest.getParameterMap().keySet()) {
-			if (!paramName.startsWith(_PREFIX)) {
+		for (String name : actionRequest.getParameterNames()) {
+			if (!name.startsWith(_PREFIX)) {
 				continue;
 			}
 
 			String workflowDefinitionName = ParamUtil.getString(
-				actionRequest, paramName);
-			long classNameId = GetterUtil.getLong(paramName.substring(
-				_PREFIX.length(), paramName.length()));
+				actionRequest, name);
+			long classNameId = GetterUtil.getLong(
+				name.substring(_PREFIX.length(), name.length()));
 
 			WorkflowLinkLocalServiceUtil.updateWorkflowLink(
 				themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,

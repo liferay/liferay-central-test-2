@@ -117,17 +117,17 @@ public interface WorkflowLinkPersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchWorkflowLinkException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink findByC_G_C(long companyId,
-		long groupId, long classNameId)
+	public com.liferay.portal.model.WorkflowLink findByG_C_C(long groupId,
+		long companyId, long classNameId)
 		throws com.liferay.portal.NoSuchWorkflowLinkException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink fetchByC_G_C(long companyId,
-		long groupId, long classNameId)
+	public com.liferay.portal.model.WorkflowLink fetchByG_C_C(long groupId,
+		long companyId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink fetchByC_G_C(long companyId,
-		long groupId, long classNameId, boolean retrieveFromCache)
+	public com.liferay.portal.model.WorkflowLink fetchByG_C_C(long groupId,
+		long companyId, long classNameId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
@@ -151,7 +151,7 @@ public interface WorkflowLinkPersistence extends BasePersistence {
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByC_G_C(long companyId, long groupId, long classNameId)
+	public void removeByG_C_C(long groupId, long companyId, long classNameId)
 		throws com.liferay.portal.NoSuchWorkflowLinkException,
 			com.liferay.portal.SystemException;
 
@@ -160,7 +160,7 @@ public interface WorkflowLinkPersistence extends BasePersistence {
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByC_G_C(long companyId, long groupId, long classNameId)
+	public int countByG_C_C(long groupId, long companyId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

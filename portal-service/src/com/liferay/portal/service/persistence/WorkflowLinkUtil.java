@@ -155,24 +155,24 @@ public class WorkflowLinkUtil {
 				   .findByCompanyId_PrevAndNext(workflowLinkId, companyId, obc);
 	}
 
-	public static com.liferay.portal.model.WorkflowLink findByC_G_C(
-		long companyId, long groupId, long classNameId)
+	public static com.liferay.portal.model.WorkflowLink findByG_C_C(
+		long groupId, long companyId, long classNameId)
 		throws com.liferay.portal.NoSuchWorkflowLinkException,
 			com.liferay.portal.SystemException {
-		return getPersistence().findByC_G_C(companyId, groupId, classNameId);
+		return getPersistence().findByG_C_C(groupId, companyId, classNameId);
 	}
 
-	public static com.liferay.portal.model.WorkflowLink fetchByC_G_C(
-		long companyId, long groupId, long classNameId)
+	public static com.liferay.portal.model.WorkflowLink fetchByG_C_C(
+		long groupId, long companyId, long classNameId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_G_C(companyId, groupId, classNameId);
+		return getPersistence().fetchByG_C_C(groupId, companyId, classNameId);
 	}
 
-	public static com.liferay.portal.model.WorkflowLink fetchByC_G_C(
-		long companyId, long groupId, long classNameId,
+	public static com.liferay.portal.model.WorkflowLink fetchByG_C_C(
+		long groupId, long companyId, long classNameId,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .fetchByC_G_C(companyId, groupId, classNameId,
+				   .fetchByG_C_C(groupId, companyId, classNameId,
 			retrieveFromCache);
 	}
 
@@ -209,11 +209,11 @@ public class WorkflowLinkUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByC_G_C(long companyId, long groupId,
+	public static void removeByG_C_C(long groupId, long companyId,
 		long classNameId)
 		throws com.liferay.portal.NoSuchWorkflowLinkException,
 			com.liferay.portal.SystemException {
-		getPersistence().removeByC_G_C(companyId, groupId, classNameId);
+		getPersistence().removeByG_C_C(groupId, companyId, classNameId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -225,9 +225,9 @@ public class WorkflowLinkUtil {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countByC_G_C(long companyId, long groupId,
+	public static int countByG_C_C(long groupId, long companyId,
 		long classNameId) throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_G_C(companyId, groupId, classNameId);
+		return getPersistence().countByG_C_C(groupId, companyId, classNameId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {
