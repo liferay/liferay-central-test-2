@@ -64,7 +64,7 @@ else {
 
 boolean view = false;
 
-if (row != null) {
+if (row == null) {
 	view = true;
 }
 %>
