@@ -44,8 +44,7 @@ import org.xml.sax.SAXParseException;
  */
 public class JournalXslErrorListener implements ErrorListener {
 
-	public JournalXslErrorListener(long companyId, Locale locale) {
-		_companyId = companyId;
+	public JournalXslErrorListener(Locale locale) {
 		_locale = locale;
 	}
 
@@ -115,11 +114,11 @@ public class JournalXslErrorListener implements ErrorListener {
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append(LanguageUtil.get(_companyId, _locale, "line"));
+			sb.append(LanguageUtil.get(_locale, "line"));
 			sb.append(" #");
 			sb.append(locator.getLineNumber());
 			sb.append("; ");
-			sb.append(LanguageUtil.get(_companyId, _locale, "column"));
+			sb.append(LanguageUtil.get(_locale, "column"));
 			sb.append(" #");
 			sb.append(locator.getColumnNumber());
 			sb.append("; ");
@@ -151,7 +150,6 @@ public class JournalXslErrorListener implements ErrorListener {
 		return _columnNumber;
 	}
 
-	private long _companyId;
 	private Locale _locale;
 	private String _location;
 	private String _message;

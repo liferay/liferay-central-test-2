@@ -343,7 +343,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		double version = page.getVersion();
 		String content = page.getContent();
 		String summary = LanguageUtil.format(
-			page.getCompanyId(), ServiceContextUtil.getLocale(serviceContext),
+			ServiceContextUtil.getLocale(serviceContext),
 			"changed-parent-from-x", originalParentTitle);
 		boolean minorEdit = false;
 		String format = page.getFormat();

@@ -363,17 +363,15 @@ public class ThemeDisplay implements Serializable {
 	}
 
 	public String translate(String key) {
-		return LanguageUtil.get(getCompanyId(), getLocale(), key);
+		return LanguageUtil.get(getLocale(), key);
 	}
 
 	public String translate(String pattern, Object argument) {
-		return LanguageUtil.format(
-			getCompanyId(), getLocale(), pattern, argument);
+		return LanguageUtil.format(getLocale(), pattern, argument);
 	}
 
 	public String translate(String pattern, Object[] arguments) {
-		return LanguageUtil.format(
-			getCompanyId(), getLocale(), pattern, arguments);
+		return LanguageUtil.format(getLocale(), pattern, arguments);
 	}
 
 	public TimeZone getTimeZone() {

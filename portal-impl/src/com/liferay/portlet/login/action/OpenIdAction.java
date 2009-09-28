@@ -24,7 +24,6 @@ package com.liferay.portlet.login.action;
 
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -150,10 +149,7 @@ public class OpenIdAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		renderResponse.setTitle(
-			LanguageUtil.get(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-				"open-id"));
+		renderResponse.setTitle(themeDisplay.translate("open-id"));
 
 		return mapping.findForward("portlet.login.open_id");
 	}

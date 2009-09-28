@@ -463,15 +463,13 @@ public class AnnouncementsEntryLocalServiceImpl
 				entry.getContent(),
 				String.valueOf(entry.getEntryId()),
 				entry.getTitle(),
-				LanguageUtil.get(
-					company.getCompanyId(), company.getLocale(),
-					entry.getType()),
+				LanguageUtil.get(company.getLocale(), entry.getType()),
 				entry.getUrl(),
 				fromAddress,
 				fromName,
 				company.getVirtualHost(),
 				LanguageUtil.get(
-					company.getCompanyId(), company.getLocale(),
+					company.getLocale(),
 					(entry.isAlert() ? "alert" : "announcement")),
 				toAddress,
 				toName
@@ -496,15 +494,13 @@ public class AnnouncementsEntryLocalServiceImpl
 				entry.getContent(),
 				String.valueOf(entry.getEntryId()),
 				entry.getTitle(),
-				LanguageUtil.get(
-					company.getCompanyId(), company.getLocale(),
-					entry.getType()),
+				LanguageUtil.get(company.getLocale(), entry.getType()),
 				entry.getUrl(),
 				fromAddress,
 				fromName,
 				company.getVirtualHost(),
 				LanguageUtil.get(
-					company.getCompanyId(), company.getLocale(),
+					company.getLocale(),
 					(entry.isAlert() ? "alert" : "announcement")),
 				toAddress,
 				toName

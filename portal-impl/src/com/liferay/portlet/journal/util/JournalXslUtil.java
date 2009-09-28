@@ -71,7 +71,7 @@ public class JournalXslUtil {
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		JournalXslErrorListener errorListener = new JournalXslErrorListener(
-			companyId, locale);
+			locale);
 
 		StreamSource xmlSource = new StreamSource(new StringReader(xml));
 

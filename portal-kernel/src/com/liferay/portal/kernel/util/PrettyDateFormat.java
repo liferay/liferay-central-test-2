@@ -41,12 +41,18 @@ import java.util.TimeZone;
  */
 public class PrettyDateFormat extends DateFormat {
 
-	public PrettyDateFormat(long companyId, Locale locale, TimeZone timeZone) {
-		_companyId = companyId;
+	public PrettyDateFormat(Locale locale, TimeZone timeZone) {
 		_locale = locale;
 		_timeZone = timeZone;
-		_todayString = LanguageUtil.get(_companyId, _locale, "today");
-		_yesterdayString = LanguageUtil.get(_companyId, _locale, "yesterday");
+		_todayString = LanguageUtil.get(_locale, "today");
+		_yesterdayString = LanguageUtil.get(_locale, "yesterday");
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public PrettyDateFormat(long companyId, Locale locale, TimeZone timeZone) {
+		this(locale, timeZone);
 	}
 
 	public StringBuffer format(Date date, StringBuffer sb, FieldPosition pos) {
@@ -117,7 +123,6 @@ public class PrettyDateFormat extends DateFormat {
 		return dateFormatDateTime.parse(dateString, new ParsePosition(0));
 	}
 
-	private long _companyId;
 	private Locale _locale;
 	private TimeZone _timeZone;
 	private String _todayString;

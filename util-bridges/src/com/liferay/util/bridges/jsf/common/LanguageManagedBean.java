@@ -45,19 +45,6 @@ import javax.faces.context.FacesContext;
  */
 public class LanguageManagedBean implements Map<String, String> {
 
-	public LanguageManagedBean() {
-
-		// LEP-3275
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
-		_companyId = JSFPortletUtil.getCompanyId(facesContext);
-
-		if (_companyId == 0) {
-			_log.error("Unable to determine company id from facesContext");
-		}
-	}
-
 	public void clear() {
 		throw new UnsupportedOperationException();
 	}
@@ -90,12 +77,11 @@ public class LanguageManagedBean implements Map<String, String> {
 				locale = facesContext.getApplication().getDefaultLocale();
 			}
 
-			value = LanguageUtil.get(_companyId, locale, key.toString());
+			value = LanguageUtil.get(locale, key.toString());
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"{companyId=" + _companyId + ", locale=" + locale +
-						", key=" + key + ", value=" + value);
+					"{locale=" + locale + ", key=" + key + ", value=" + value);
 			}
 		}
 
@@ -127,7 +113,5 @@ public class LanguageManagedBean implements Map<String, String> {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LanguageManagedBean.class);
-
-	private long _companyId = 0;
 
 }

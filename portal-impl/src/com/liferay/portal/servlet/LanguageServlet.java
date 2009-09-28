@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
@@ -90,13 +89,11 @@ public class LanguageServlet extends HttpServlet {
 		String value = key;
 
 		try {
-			long companyId = PortalInstances.getCompanyId(request);
-
 			if ((arguments == null) || (arguments.length == 0)) {
-				value = LanguageUtil.get(companyId, locale, key);
+				value = LanguageUtil.get(locale, key);
 			}
 			else {
-				value = LanguageUtil.format(companyId, locale, key, arguments);
+				value = LanguageUtil.format(locale, key, arguments);
 			}
 		}
 		catch (Exception e) {
