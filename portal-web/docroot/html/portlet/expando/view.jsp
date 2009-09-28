@@ -106,21 +106,21 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 
 <%!
 private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
-		BlogsEntry.class.getName(),
-		BookmarksEntry.class.getName(),
-		BookmarksFolder.class.getName(),
-		CalEvent.class.getName(),
-		DLFileEntry.class.getName(),
-		DLFolder.class.getName(),
-		IGFolder.class.getName(),
-		IGImage.class.getName(),
-		JournalArticle.class.getName(),
-		Layout.class.getName(),
-		MBCategory.class.getName(),
-		MBMessage.class.getName(),
-		Organization.class.getName(),
-		User.class.getName(),
-		WikiPage.class.getName()
+	BlogsEntry.class.getName(),
+	BookmarksEntry.class.getName(),
+	BookmarksFolder.class.getName(),
+	CalEvent.class.getName(),
+	DLFileEntry.class.getName(),
+	DLFolder.class.getName(),
+	IGFolder.class.getName(),
+	IGImage.class.getName(),
+	JournalArticle.class.getName(),
+	Layout.class.getName(),
+	MBCategory.class.getName(),
+	MBMessage.class.getName(),
+	Organization.class.getName(),
+	User.class.getName(),
+	WikiPage.class.getName()
 };
 
 private String _getIconPath(String modelResource) {
