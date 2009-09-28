@@ -80,7 +80,7 @@ public class ServiceContextUtil {
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
 
-		//Workflow
+		// Workflow
 
 		serviceContext.setStatus(jsonObject.getInt("status"));
 
