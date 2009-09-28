@@ -74,17 +74,55 @@ public class TaskInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public int getTaskInstanceCountForCredential(
+	public int getTaskInstanceCountByCredential(UserCredential userCredential) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceCountByRole(long roleId) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceCountByUser(long userId) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceInfoCountByCredential(
 		UserCredential userCredential) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public int getTaskInstanceCountForRole(long roleId) {
+	public int getTaskInstanceInfoCountByCredential(
+		UserCredential userCredential, boolean completed) {
+
 		throw new UnsupportedOperationException();
 	}
 
-	public int getTaskInstanceCountForUser(long userId) {
+	public int getTaskInstanceInfoCountByRole(long roleId) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceInfoCountByRole(long roleId, boolean completed) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceInfoCountByUser(long userId) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceInfoCountByUser(long userId, boolean completed) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceInfoCountByWorkflowInstance(
+		long workflowInstanceId) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public int getTaskInstanceInfoCountByWorkflowInstance(
+		long workflowInstanceId, boolean completed) {
+
 		throw new UnsupportedOperationException();
 	}
 

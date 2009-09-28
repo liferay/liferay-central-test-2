@@ -105,33 +105,119 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForCredential(
-	 *		UserCredential)
+	 * @see TaskInstanceManager#getTaskInstanceCountByCredential(UserCredential)
 	 */
-	public static int getTaskInstanceCountForCredential(
+	public static int getTaskInstanceCountByCredential(
 			UserCredential userCredential)
 		throws WorkflowException {
 
-		return _taskInstanceManager.getTaskInstanceCountForCredential(
+		return _taskInstanceManager.getTaskInstanceCountByCredential(
 			userCredential);
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForRole(long)
+	 * @see TaskInstanceManager#getTaskInstanceCountByRole(long)
 	 */
-	public static int getTaskInstanceCountForRole(long roleId)
+	public static int getTaskInstanceCountByRole(long roleId)
 		throws WorkflowException {
 
-		return _taskInstanceManager.getTaskInstanceCountForRole(roleId);
+		return _taskInstanceManager.getTaskInstanceCountByRole(roleId);
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForUser(long)
+	 * @see TaskInstanceManager#getTaskInstanceCountByUser(long)
 	 */
-	public static int getTaskInstanceCountForUser(long userId)
+	public static int getTaskInstanceCountByUser(long userId)
 		throws WorkflowException {
 
-		return _taskInstanceManager.getTaskInstanceCountForUser(userId);
+		return _taskInstanceManager.getTaskInstanceCountByUser(userId);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceInfoCountByCredential(
+	 *		UserCredential)
+	 */
+	public static int getTaskInstanceInfoCountByCredential(
+			UserCredential userCredential)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceInfoCountByCredential(
+			userCredential);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceInfoCountByCredential(
+	 *		UserCredential, boolean)
+	 */
+	public static int getTaskInstanceInfoCountByCredential(
+			UserCredential userCredential, boolean completed)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceInfoCountByCredential(
+			userCredential, completed);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceInfoCountByRole(long)
+	 */
+	public static int getTaskInstanceInfoCountByRole(long roleId)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceInfoCountByRole(roleId);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceInfoCountByRole(long, boolean)
+	 */
+	public static int getTaskInstanceInfoCountByRole(
+			long roleId, boolean completed)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceInfoCountByRole(
+			roleId, completed);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceInfoCountByUser(long)
+	 */
+	public static int getTaskInstanceInfoCountByUser(long userId)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceInfoCountByUser(userId);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceInfoCountByUser(long, boolean)
+	 */
+	public static int getTaskInstanceInfoCountByUser(
+			long userId, boolean completed)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceInfoCountByUser(
+			userId, completed);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceInfoCountByWorkflowInstance(long)
+	 */
+	public static int getTaskInstanceInfoCountByWorkflowInstance(
+			long workflowInstanceId)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceInfoCountByWorkflowInstance(
+			workflowInstanceId);
+	}
+
+	/**
+	 * @see TaskInstanceManager#getTaskInstanceInfoCountByWorkflowInstance(long,
+	 *		boolean)
+	 */
+	public static int getTaskInstanceInfoCountByWorkflowInstance(
+			long workflowInstanceId, boolean completed)
+		throws WorkflowException {
+
+		return _taskInstanceManager.getTaskInstanceInfoCountByWorkflowInstance(
+			workflowInstanceId, completed);
 	}
 
 	/**

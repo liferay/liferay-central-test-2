@@ -83,6 +83,10 @@ public interface WorkflowDefinitionManager {
 			@CallingUserId long callingUserId)
 		throws WorkflowException;
 
+	public int getWorkflowDefinitionCount();
+
+	public int getWorkflowDefinitionCount(String workflowDefinitionName);
+
 	/**
 	 * Returns a list of all workflow definitions available within the
 	 * repository. The returned list will contain information objects about the

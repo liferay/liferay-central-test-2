@@ -44,6 +44,14 @@ public class WorkflowDefinitionManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public int getWorkflowDefinitionCount() {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getWorkflowDefinitionCount(String workflowDefinitionName) {
+		throw new UnsupportedOperationException();
+	}
+
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		int start, int end, OrderByComparator orderByComparator) {
 

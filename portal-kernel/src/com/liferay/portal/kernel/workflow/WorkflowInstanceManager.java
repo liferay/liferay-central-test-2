@@ -146,6 +146,10 @@ public interface WorkflowInstanceManager {
 			int end, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
+	public int getWorkflowInstanceHistoryCount(
+			long workflowInstanceId, boolean includeChildren)
+		throws WorkflowException;
+
 	/**
 	 * Returns the workflow instance information for the given identifier, if
 	 * found, otherwise an exception will be thrown.
@@ -208,6 +212,20 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
+			String relationType, long relationId, boolean retrieveChildrenInfo)
+		throws WorkflowException;
+
+	public int getWorkflowInstanceInfoCount(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean retrieveChildrenInfo)
+		throws WorkflowException;
+
+	public int getWorkflowInstanceInfoCount(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean finished, boolean retrieveChildrenInfo)
+		throws WorkflowException;
+
+	public int getWorkflowInstanceInfoCount(
 			String relationType, long relationId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
 

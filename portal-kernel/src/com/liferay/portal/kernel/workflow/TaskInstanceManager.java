@@ -243,7 +243,7 @@ public interface TaskInstanceManager {
 	 *		   credential
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
-	public int getTaskInstanceCountForCredential(UserCredential userCredential)
+	public int getTaskInstanceCountByCredential(UserCredential userCredential)
 		throws WorkflowException;
 
 	/**
@@ -254,8 +254,7 @@ public interface TaskInstanceManager {
 	 * @return the total count of open tasks of the specified role
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
-	public int getTaskInstanceCountForRole(long roleId)
-		throws WorkflowException;
+	public int getTaskInstanceCountByRole(long roleId) throws WorkflowException;
 
 	/**
 	 * Returns the total count of open tasks currently assigned to the specified
@@ -269,7 +268,35 @@ public interface TaskInstanceManager {
 	 *		   user
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
-	public int getTaskInstanceCountForUser(long userId)
+	public int getTaskInstanceCountByUser(long userId)
+		throws WorkflowException;
+
+	public int getTaskInstanceInfoCountByCredential(
+			UserCredential userCredential)
+		throws WorkflowException;
+
+	public int getTaskInstanceInfoCountByCredential(
+			UserCredential userCredential, boolean completed)
+		throws WorkflowException;
+
+	public int getTaskInstanceInfoCountByRole(long roleId)
+		throws WorkflowException;
+
+	public int getTaskInstanceInfoCountByRole(long roleId, boolean completed)
+		throws WorkflowException;
+
+	public int getTaskInstanceInfoCountByUser(long userId)
+		throws WorkflowException;
+
+	public int getTaskInstanceInfoCountByUser(long userId, boolean completed)
+		throws WorkflowException;
+
+	public int getTaskInstanceInfoCountByWorkflowInstance(
+			long workflowInstanceId)
+		throws WorkflowException;
+
+	public int getTaskInstanceInfoCountByWorkflowInstance(
+			long workflowInstanceId, boolean completed)
 		throws WorkflowException;
 
 	/**

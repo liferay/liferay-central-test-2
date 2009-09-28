@@ -78,6 +78,18 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceHistoryCount(long,
+	 *		boolean)
+	 */
+	public static int getWorkflowInstanceHistoryCount(
+			long workflowInstanceId, boolean includeChildren)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceHistoryCount(
+			workflowInstanceId, includeChildren);
+	}
+
+	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfo(long, boolean)
 	 */
 	public static WorkflowInstanceInfo getWorkflowInstanceInfo(
@@ -97,6 +109,46 @@ public class WorkflowInstanceManagerUtil {
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfo(
+			relationType, relationId, retrieveChildrenInfo);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfoCount(String,
+	 *		Integer, boolean, boolean)
+	 */
+	public static int getWorkflowInstanceInfoCount(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean finished, boolean retrieveChildrenInfo)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
+			workflowDefinitionName, workflowDefinitionVersion, finished,
+			retrieveChildrenInfo);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfoCount(String,
+	 *		Integer, boolean)
+	 */
+	public static int getWorkflowInstanceInfoCount(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean retrieveChildrenInfo)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
+			workflowDefinitionName, workflowDefinitionVersion,
+			retrieveChildrenInfo);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfoCount(String, long,
+	 *		boolean)
+	 */
+	public static int getWorkflowInstanceInfoCount(
+			String relationType, long relationId, boolean retrieveChildrenInfo)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
 			relationType, relationId, retrieveChildrenInfo);
 	}
 
