@@ -44,5 +44,9 @@ public class ContactServiceWrapper implements ContactService {
 		_contactService = contactService;
 	}
 
+	public ContactService getWrappedContactService() {
+		return _contactService;
+	}
+
 	private ContactService _contactService;
 }

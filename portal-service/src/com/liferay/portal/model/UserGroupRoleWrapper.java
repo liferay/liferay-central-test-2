@@ -165,5 +165,9 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 		return _userGroupRole.getUser();
 	}
 
+	public UserGroupRole getWrappedUserGroupRole() {
+		return _userGroupRole;
+	}
+
 	private UserGroupRole _userGroupRole;
 }

@@ -211,5 +211,9 @@ public class PortletPreferencesLocalServiceWrapper
 			ownerType, plid, portletId, xml);
 	}
 
+	public PortletPreferencesLocalService getWrappedPortletPreferencesLocalService() {
+		return _portletPreferencesLocalService;
+	}
+
 	private PortletPreferencesLocalService _portletPreferencesLocalService;
 }

@@ -251,5 +251,9 @@ public class MBCategoryWrapper implements MBCategory {
 		return _mbCategory.isRoot();
 	}
 
+	public MBCategory getWrappedMBCategory() {
+		return _mbCategory;
+	}
+
 	private MBCategory _mbCategory;
 }

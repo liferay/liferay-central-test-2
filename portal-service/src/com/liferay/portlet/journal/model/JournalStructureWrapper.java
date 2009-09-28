@@ -231,5 +231,9 @@ public class JournalStructureWrapper implements JournalStructure {
 		return _journalStructure.getMergedXsd();
 	}
 
+	public JournalStructure getWrappedJournalStructure() {
+		return _journalStructure;
+	}
+
 	private JournalStructure _journalStructure;
 }

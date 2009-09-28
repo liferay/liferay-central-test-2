@@ -150,5 +150,9 @@ public class MembershipRequestLocalServiceWrapper
 			membershipRequestId, replyComments, statusId);
 	}
 
+	public MembershipRequestLocalService getWrappedMembershipRequestLocalService() {
+		return _membershipRequestLocalService;
+	}
+
 	private MembershipRequestLocalService _membershipRequestLocalService;
 }

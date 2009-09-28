@@ -222,5 +222,9 @@ public class LockWrapper implements Lock {
 		return _lock.isExpired();
 	}
 
+	public Lock getWrappedLock() {
+		return _lock;
+	}
+
 	private Lock _lock;
 }

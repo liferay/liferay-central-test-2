@@ -115,5 +115,9 @@ public class IGImageServiceWrapper implements IGImageService {
 			description, file, contentType, serviceContext);
 	}
 
+	public IGImageService getWrappedIGImageService() {
+		return _igImageService;
+	}
+
 	private IGImageService _igImageService;
 }

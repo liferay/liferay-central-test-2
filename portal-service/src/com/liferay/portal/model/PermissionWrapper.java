@@ -169,5 +169,9 @@ public class PermissionWrapper implements Permission {
 		_permission.setScope(scope);
 	}
 
+	public Permission getWrappedPermission() {
+		return _permission;
+	}
+
 	private Permission _permission;
 }

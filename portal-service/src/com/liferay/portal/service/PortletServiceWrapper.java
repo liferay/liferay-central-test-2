@@ -55,5 +55,9 @@ public class PortletServiceWrapper implements PortletService {
 		return _portletService.updatePortlet(companyId, portletId, roles, active);
 	}
 
+	public PortletService getWrappedPortletService() {
+		return _portletService;
+	}
+
 	private PortletService _portletService;
 }

@@ -106,5 +106,9 @@ public class AssetTagServiceWrapper implements AssetTagService {
 			serviceContext);
 	}
 
+	public AssetTagService getWrappedAssetTagService() {
+		return _assetTagService;
+	}
+
 	private AssetTagService _assetTagService;
 }

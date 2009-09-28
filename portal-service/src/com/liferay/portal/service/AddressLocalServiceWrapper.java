@@ -143,5 +143,9 @@ public class AddressLocalServiceWrapper implements AddressLocalService {
 			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 
+	public AddressLocalService getWrappedAddressLocalService() {
+		return _addressLocalService;
+	}
+
 	private AddressLocalService _addressLocalService;
 }

@@ -89,5 +89,9 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService {
 		return _expandoColumnService.updateTypeSettings(columnId, typeSettings);
 	}
 
+	public ExpandoColumnService getWrappedExpandoColumnService() {
+		return _expandoColumnService;
+	}
+
 	private ExpandoColumnService _expandoColumnService;
 }

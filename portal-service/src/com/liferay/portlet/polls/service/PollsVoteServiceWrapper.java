@@ -51,5 +51,9 @@ public class PollsVoteServiceWrapper implements PollsVoteService {
 		return _pollsVoteService.addVote(questionId, choiceId);
 	}
 
+	public PollsVoteService getWrappedPollsVoteService() {
+		return _pollsVoteService;
+	}
+
 	private PollsVoteService _pollsVoteService;
 }

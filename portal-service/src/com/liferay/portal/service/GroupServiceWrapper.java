@@ -183,5 +183,9 @@ public class GroupServiceWrapper implements GroupService {
 			workflowStages, workflowRoleNames);
 	}
 
+	public GroupService getWrappedGroupService() {
+		return _groupService;
+	}
+
 	private GroupService _groupService;
 }

@@ -96,5 +96,9 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService {
 			serviceContext);
 	}
 
+	public AssetVocabularyService getWrappedAssetVocabularyService() {
+		return _assetVocabularyService;
+	}
+
 	private AssetVocabularyService _assetVocabularyService;
 }

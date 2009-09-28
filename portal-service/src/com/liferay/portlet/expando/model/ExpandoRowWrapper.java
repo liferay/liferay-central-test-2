@@ -146,5 +146,9 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		return _expandoRow.toXmlString();
 	}
 
+	public ExpandoRow getWrappedExpandoRow() {
+		return _expandoRow;
+	}
+
 	private ExpandoRow _expandoRow;
 }

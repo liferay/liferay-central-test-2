@@ -254,5 +254,9 @@ public class IGImageWrapper implements IGImage {
 		return _igImage.getImageSize();
 	}
 
+	public IGImage getWrappedIGImage() {
+		return _igImage;
+	}
+
 	private IGImage _igImage;
 }

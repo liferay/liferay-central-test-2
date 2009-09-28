@@ -166,5 +166,9 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		return _serviceComponent.getIndexesSQL();
 	}
 
+	public ServiceComponent getWrappedServiceComponent() {
+		return _serviceComponent;
+	}
+
 	private ServiceComponent _serviceComponent;
 }

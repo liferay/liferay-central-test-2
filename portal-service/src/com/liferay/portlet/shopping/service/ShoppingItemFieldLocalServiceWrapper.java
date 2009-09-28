@@ -117,5 +117,9 @@ public class ShoppingItemFieldLocalServiceWrapper
 		return _shoppingItemFieldLocalService.getItemFields(itemId);
 	}
 
+	public ShoppingItemFieldLocalService getWrappedShoppingItemFieldLocalService() {
+		return _shoppingItemFieldLocalService;
+	}
+
 	private ShoppingItemFieldLocalService _shoppingItemFieldLocalService;
 }

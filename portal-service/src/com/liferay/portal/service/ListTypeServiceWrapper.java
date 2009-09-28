@@ -67,5 +67,9 @@ public class ListTypeServiceWrapper implements ListTypeService {
 		_listTypeService.validate(listTypeId, classNameId, type);
 	}
 
+	public ListTypeService getWrappedListTypeService() {
+		return _listTypeService;
+	}
+
 	private ListTypeService _listTypeService;
 }

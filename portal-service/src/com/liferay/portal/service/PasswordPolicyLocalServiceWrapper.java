@@ -194,5 +194,9 @@ public class PasswordPolicyLocalServiceWrapper
 			lockoutDuration, resetFailureCount);
 	}
 
+	public PasswordPolicyLocalService getWrappedPasswordPolicyLocalService() {
+		return _passwordPolicyLocalService;
+	}
+
 	private PasswordPolicyLocalService _passwordPolicyLocalService;
 }

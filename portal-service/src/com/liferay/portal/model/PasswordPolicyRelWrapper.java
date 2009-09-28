@@ -150,5 +150,9 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		return _passwordPolicyRel.toXmlString();
 	}
 
+	public PasswordPolicyRel getWrappedPasswordPolicyRel() {
+		return _passwordPolicyRel;
+	}
+
 	private PasswordPolicyRel _passwordPolicyRel;
 }

@@ -119,5 +119,9 @@ public class ShoppingItemPriceLocalServiceWrapper
 		return _shoppingItemPriceLocalService.getItemPrices(itemId);
 	}
 
+	public ShoppingItemPriceLocalService getWrappedShoppingItemPriceLocalService() {
+		return _shoppingItemPriceLocalService;
+	}
+
 	private ShoppingItemPriceLocalService _shoppingItemPriceLocalService;
 }

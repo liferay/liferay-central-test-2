@@ -131,5 +131,9 @@ public class ServiceComponentLocalServiceWrapper
 			buildAutoUpgrade);
 	}
 
+	public ServiceComponentLocalService getWrappedServiceComponentLocalService() {
+		return _serviceComponentLocalService;
+	}
+
 	private ServiceComponentLocalService _serviceComponentLocalService;
 }

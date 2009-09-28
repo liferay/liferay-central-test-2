@@ -175,5 +175,9 @@ public class WikiPageServiceWrapper implements WikiPageService {
 			serviceContext);
 	}
 
+	public WikiPageService getWrappedWikiPageService() {
+		return _wikiPageService;
+	}
+
 	private WikiPageService _wikiPageService;
 }

@@ -104,5 +104,9 @@ public class ShoppingCouponServiceWrapper implements ShoppingCouponService {
 			limitSkus, minOrder, discount, discountType, serviceContext);
 	}
 
+	public ShoppingCouponService getWrappedShoppingCouponService() {
+		return _shoppingCouponService;
+	}
+
 	private ShoppingCouponService _shoppingCouponService;
 }

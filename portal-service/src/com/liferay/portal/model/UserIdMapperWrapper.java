@@ -162,5 +162,9 @@ public class UserIdMapperWrapper implements UserIdMapper {
 		return _userIdMapper.toXmlString();
 	}
 
+	public UserIdMapper getWrappedUserIdMapper() {
+		return _userIdMapper;
+	}
+
 	private UserIdMapper _userIdMapper;
 }

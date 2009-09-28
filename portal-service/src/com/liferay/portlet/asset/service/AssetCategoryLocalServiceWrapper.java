@@ -235,5 +235,9 @@ public class AssetCategoryLocalServiceWrapper
 			serviceContext);
 	}
 
+	public AssetCategoryLocalService getWrappedAssetCategoryLocalService() {
+		return _assetCategoryLocalService;
+	}
+
 	private AssetCategoryLocalService _assetCategoryLocalService;
 }

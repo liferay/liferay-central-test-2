@@ -139,5 +139,9 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		return _journalArticleResource.toXmlString();
 	}
 
+	public JournalArticleResource getWrappedJournalArticleResource() {
+		return _journalArticleResource;
+	}
+
 	private JournalArticleResource _journalArticleResource;
 }

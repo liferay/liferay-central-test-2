@@ -141,5 +141,9 @@ public class PluginSettingLocalServiceWrapper
 			pluginId, pluginType, roles, active);
 	}
 
+	public PluginSettingLocalService getWrappedPluginSettingLocalService() {
+		return _pluginSettingLocalService;
+	}
+
 	private PluginSettingLocalService _pluginSettingLocalService;
 }

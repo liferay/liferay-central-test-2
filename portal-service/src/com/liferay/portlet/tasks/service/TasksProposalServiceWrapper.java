@@ -83,5 +83,9 @@ public class TasksProposalServiceWrapper implements TasksProposalService {
 			dueDateMonth, dueDateDay, dueDateYear, dueDateHour, dueDateMinute);
 	}
 
+	public TasksProposalService getWrappedTasksProposalService() {
+		return _tasksProposalService;
+	}
+
 	private TasksProposalService _tasksProposalService;
 }

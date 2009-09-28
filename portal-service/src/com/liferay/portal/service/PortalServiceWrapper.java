@@ -61,5 +61,9 @@ public class PortalServiceWrapper implements PortalService {
 		_portalService.testCounterRollback();
 	}
 
+	public PortalService getWrappedPortalService() {
+		return _portalService;
+	}
+
 	private PortalService _portalService;
 }

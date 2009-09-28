@@ -496,5 +496,9 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 			serviceContext);
 	}
 
+	public MBMessageLocalService getWrappedMBMessageLocalService() {
+		return _mbMessageLocalService;
+	}
+
 	private MBMessageLocalService _mbMessageLocalService;
 }

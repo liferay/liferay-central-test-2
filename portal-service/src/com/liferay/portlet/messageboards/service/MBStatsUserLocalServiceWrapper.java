@@ -162,5 +162,9 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 			lastPostDate);
 	}
 
+	public MBStatsUserLocalService getWrappedMBStatsUserLocalService() {
+		return _mbStatsUserLocalService;
+	}
+
 	private MBStatsUserLocalService _mbStatsUserLocalService;
 }

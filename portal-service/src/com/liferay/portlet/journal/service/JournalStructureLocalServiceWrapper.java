@@ -288,5 +288,9 @@ public class JournalStructureLocalServiceWrapper
 			serviceContext);
 	}
 
+	public JournalStructureLocalService getWrappedJournalStructureLocalService() {
+		return _journalStructureLocalService;
+	}
+
 	private JournalStructureLocalService _journalStructureLocalService;
 }

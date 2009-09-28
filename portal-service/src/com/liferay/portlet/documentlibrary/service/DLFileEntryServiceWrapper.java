@@ -172,5 +172,9 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 			lockUuid);
 	}
 
+	public DLFileEntryService getWrappedDLFileEntryService() {
+		return _dlFileEntryService;
+	}
+
 	private DLFileEntryService _dlFileEntryService;
 }

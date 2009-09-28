@@ -448,5 +448,9 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 			name, version, serviceContext);
 	}
 
+	public DLFileEntryLocalService getWrappedDLFileEntryLocalService() {
+		return _dlFileEntryLocalService;
+	}
+
 	private DLFileEntryLocalService _dlFileEntryLocalService;
 }

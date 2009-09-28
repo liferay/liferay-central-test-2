@@ -180,5 +180,9 @@ public class AssetTagPropertyLocalServiceWrapper
 			key, value);
 	}
 
+	public AssetTagPropertyLocalService getWrappedAssetTagPropertyLocalService() {
+		return _assetTagPropertyLocalService;
+	}
+
 	private AssetTagPropertyLocalService _assetTagPropertyLocalService;
 }

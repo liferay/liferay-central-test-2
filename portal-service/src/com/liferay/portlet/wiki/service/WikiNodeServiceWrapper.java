@@ -97,5 +97,9 @@ public class WikiNodeServiceWrapper implements WikiNodeService {
 		return _wikiNodeService.updateNode(nodeId, name, description);
 	}
 
+	public WikiNodeService getWrappedWikiNodeService() {
+		return _wikiNodeService;
+	}
+
 	private WikiNodeService _wikiNodeService;
 }

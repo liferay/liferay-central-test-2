@@ -78,5 +78,9 @@ public class RegionServiceWrapper implements RegionService {
 		return _regionService.getRegion(regionId);
 	}
 
+	public RegionService getWrappedRegionService() {
+		return _regionService;
+	}
+
 	private RegionService _regionService;
 }

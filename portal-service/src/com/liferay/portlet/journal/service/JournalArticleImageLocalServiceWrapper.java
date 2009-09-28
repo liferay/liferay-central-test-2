@@ -174,5 +174,9 @@ public class JournalArticleImageLocalServiceWrapper
 		return _journalArticleImageLocalService.getArticleImages(groupId);
 	}
 
+	public JournalArticleImageLocalService getWrappedJournalArticleImageLocalService() {
+		return _journalArticleImageLocalService;
+	}
+
 	private JournalArticleImageLocalService _journalArticleImageLocalService;
 }

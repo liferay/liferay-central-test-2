@@ -55,5 +55,9 @@ public class AnnouncementsDeliveryServiceWrapper
 			email, sms, website);
 	}
 
+	public AnnouncementsDeliveryService getWrappedAnnouncementsDeliveryService() {
+		return _announcementsDeliveryService;
+	}
+
 	private AnnouncementsDeliveryService _announcementsDeliveryService;
 }

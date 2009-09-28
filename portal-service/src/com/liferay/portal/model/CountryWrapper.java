@@ -173,5 +173,9 @@ public class CountryWrapper implements Country {
 		return _country.toXmlString();
 	}
 
+	public Country getWrappedCountry() {
+		return _country;
+	}
+
 	private Country _country;
 }

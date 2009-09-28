@@ -293,5 +293,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return _pollsQuestion.getVotesCount();
 	}
 
+	public PollsQuestion getWrappedPollsQuestion() {
+		return _pollsQuestion;
+	}
+
 	private PollsQuestion _pollsQuestion;
 }

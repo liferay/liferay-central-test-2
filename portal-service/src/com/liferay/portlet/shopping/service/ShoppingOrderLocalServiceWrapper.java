@@ -288,5 +288,9 @@ public class ShoppingOrderLocalServiceWrapper
 			ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
 	}
 
+	public ShoppingOrderLocalService getWrappedShoppingOrderLocalService() {
+		return _shoppingOrderLocalService;
+	}
+
 	private ShoppingOrderLocalService _shoppingOrderLocalService;
 }

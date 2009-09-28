@@ -305,5 +305,9 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getLuceneProperties();
 	}
 
+	public DLFileEntry getWrappedDLFileEntry() {
+		return _dlFileEntry;
+	}
+
 	private DLFileEntry _dlFileEntry;
 }

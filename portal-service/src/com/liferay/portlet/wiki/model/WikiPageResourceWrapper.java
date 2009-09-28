@@ -138,5 +138,9 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		return _wikiPageResource.toXmlString();
 	}
 
+	public WikiPageResource getWrappedWikiPageResource() {
+		return _wikiPageResource;
+	}
+
 	private WikiPageResource _wikiPageResource;
 }

@@ -162,5 +162,9 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 		_shoppingItemField.setValuesArray(valuesArray);
 	}
 
+	public ShoppingItemField getWrappedShoppingItemField() {
+		return _shoppingItemField;
+	}
+
 	private ShoppingItemField _shoppingItemField;
 }

@@ -250,5 +250,9 @@ public class AccountWrapper implements Account {
 		return _account.toXmlString();
 	}
 
+	public Account getWrappedAccount() {
+		return _account;
+	}
+
 	private Account _account;
 }

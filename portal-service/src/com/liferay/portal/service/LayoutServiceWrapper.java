@@ -331,5 +331,9 @@ public class LayoutServiceWrapper implements LayoutService {
 			priority);
 	}
 
+	public LayoutService getWrappedLayoutService() {
+		return _layoutService;
+	}
+
 	private LayoutService _layoutService;
 }

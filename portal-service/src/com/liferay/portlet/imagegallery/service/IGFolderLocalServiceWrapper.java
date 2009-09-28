@@ -247,5 +247,9 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 			name, description, mergeWithParentFolder, serviceContext);
 	}
 
+	public IGFolderLocalService getWrappedIGFolderLocalService() {
+		return _igFolderLocalService;
+	}
+
 	private IGFolderLocalService _igFolderLocalService;
 }

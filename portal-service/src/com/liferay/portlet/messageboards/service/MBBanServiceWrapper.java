@@ -58,5 +58,9 @@ public class MBBanServiceWrapper implements MBBanService {
 		_mbBanService.deleteBan(banUserId, serviceContext);
 	}
 
+	public MBBanService getWrappedMBBanService() {
+		return _mbBanService;
+	}
+
 	private MBBanService _mbBanService;
 }

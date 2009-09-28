@@ -169,5 +169,9 @@ public class DLFolderServiceWrapper implements DLFolderService {
 		return _dlFolderService.verifyInheritableLock(folderId, lockUuid);
 	}
 
+	public DLFolderService getWrappedDLFolderService() {
+		return _dlFolderService;
+	}
+
 	private DLFolderService _dlFolderService;
 }

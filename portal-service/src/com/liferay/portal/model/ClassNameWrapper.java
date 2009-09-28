@@ -133,5 +133,9 @@ public class ClassNameWrapper implements ClassName {
 		return _className.toXmlString();
 	}
 
+	public ClassName getWrappedClassName() {
+		return _className;
+	}
+
 	private ClassName _className;
 }

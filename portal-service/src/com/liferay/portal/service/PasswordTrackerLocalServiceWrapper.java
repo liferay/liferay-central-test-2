@@ -138,5 +138,9 @@ public class PasswordTrackerLocalServiceWrapper
 		_passwordTrackerLocalService.trackPassword(userId, encPassword);
 	}
 
+	public PasswordTrackerLocalService getWrappedPasswordTrackerLocalService() {
+		return _passwordTrackerLocalService;
+	}
+
 	private PasswordTrackerLocalService _passwordTrackerLocalService;
 }

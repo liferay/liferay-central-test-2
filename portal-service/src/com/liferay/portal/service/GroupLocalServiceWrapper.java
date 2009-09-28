@@ -384,5 +384,9 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 			workflowStages, workflowRoleNames);
 	}
 
+	public GroupLocalService getWrappedGroupLocalService() {
+		return _groupLocalService;
+	}
+
 	private GroupLocalService _groupLocalService;
 }

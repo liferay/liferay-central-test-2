@@ -111,5 +111,9 @@ public class AccountLocalServiceWrapper implements AccountLocalService {
 		return _accountLocalService.getAccount(companyId, accountId);
 	}
 
+	public AccountLocalService getWrappedAccountLocalService() {
+		return _accountLocalService;
+	}
+
 	private AccountLocalService _accountLocalService;
 }

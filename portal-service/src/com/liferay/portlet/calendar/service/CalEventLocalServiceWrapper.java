@@ -311,5 +311,9 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 			firstReminder, secondReminder, serviceContext);
 	}
 
+	public CalEventLocalService getWrappedCalEventLocalService() {
+		return _calEventLocalService;
+	}
+
 	private CalEventLocalService _calEventLocalService;
 }

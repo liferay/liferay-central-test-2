@@ -247,5 +247,9 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 		_assetEntryLocalService.validate(className, categoryIds, tagNames);
 	}
 
+	public AssetEntryLocalService getWrappedAssetEntryLocalService() {
+		return _assetEntryLocalService;
+	}
+
 	private AssetEntryLocalService _assetEntryLocalService;
 }

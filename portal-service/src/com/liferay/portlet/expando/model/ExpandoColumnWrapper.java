@@ -183,5 +183,9 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		_expandoColumn.setTypeSettingsProperties(typeSettingsProperties);
 	}
 
+	public ExpandoColumn getWrappedExpandoColumn() {
+		return _expandoColumn;
+	}
+
 	private ExpandoColumn _expandoColumn;
 }

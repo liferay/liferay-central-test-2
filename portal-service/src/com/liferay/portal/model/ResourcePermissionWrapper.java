@@ -170,5 +170,9 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 		return _resourcePermission.toXmlString();
 	}
 
+	public ResourcePermission getWrappedResourcePermission() {
+		return _resourcePermission;
+	}
+
 	private ResourcePermission _resourcePermission;
 }

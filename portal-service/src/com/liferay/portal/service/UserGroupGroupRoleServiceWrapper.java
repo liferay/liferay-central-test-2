@@ -78,5 +78,9 @@ public class UserGroupGroupRoleServiceWrapper
 			groupId, roleId);
 	}
 
+	public UserGroupGroupRoleService getWrappedUserGroupGroupRoleService() {
+		return _userGroupGroupRoleService;
+	}
+
 	private UserGroupGroupRoleService _userGroupGroupRoleService;
 }

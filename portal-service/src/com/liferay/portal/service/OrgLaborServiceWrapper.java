@@ -85,5 +85,9 @@ public class OrgLaborServiceWrapper implements OrgLaborService {
 			thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
+	public OrgLaborService getWrappedOrgLaborService() {
+		return _orgLaborService;
+	}
+
 	private OrgLaborService _orgLaborService;
 }

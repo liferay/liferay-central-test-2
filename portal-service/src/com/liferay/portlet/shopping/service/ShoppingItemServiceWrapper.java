@@ -108,5 +108,9 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService {
 			serviceContext);
 	}
 
+	public ShoppingItemService getWrappedShoppingItemService() {
+		return _shoppingItemService;
+	}
+
 	private ShoppingItemService _shoppingItemService;
 }

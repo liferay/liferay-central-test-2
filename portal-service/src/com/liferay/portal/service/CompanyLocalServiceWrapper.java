@@ -261,5 +261,9 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 			communityLogo);
 	}
 
+	public CompanyLocalService getWrappedCompanyLocalService() {
+		return _companyLocalService;
+	}
+
 	private CompanyLocalService _companyLocalService;
 }

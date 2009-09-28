@@ -179,5 +179,9 @@ public class DLFileRankWrapper implements DLFileRank {
 		return _dlFileRank.toXmlString();
 	}
 
+	public DLFileRank getWrappedDLFileRank() {
+		return _dlFileRank;
+	}
+
 	private DLFileRank _dlFileRank;
 }

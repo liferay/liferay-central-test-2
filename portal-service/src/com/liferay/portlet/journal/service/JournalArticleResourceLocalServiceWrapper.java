@@ -138,5 +138,9 @@ public class JournalArticleResourceLocalServiceWrapper
 		return _journalArticleResourceLocalService.getArticleResources(groupId);
 	}
 
+	public JournalArticleResourceLocalService getWrappedJournalArticleResourceLocalService() {
+		return _journalArticleResourceLocalService;
+	}
+
 	private JournalArticleResourceLocalService _journalArticleResourceLocalService;
 }

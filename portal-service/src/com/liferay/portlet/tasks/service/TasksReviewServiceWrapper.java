@@ -64,5 +64,9 @@ public class TasksReviewServiceWrapper implements TasksReviewService {
 		_tasksReviewService.updateReviews(proposalId, userIdsPerStage);
 	}
 
+	public TasksReviewService getWrappedTasksReviewService() {
+		return _tasksReviewService;
+	}
+
 	private TasksReviewService _tasksReviewService;
 }

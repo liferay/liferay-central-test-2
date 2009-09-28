@@ -79,5 +79,9 @@ public class WebsiteServiceWrapper implements WebsiteService {
 		return _websiteService.updateWebsite(websiteId, url, typeId, primary);
 	}
 
+	public WebsiteService getWrappedWebsiteService() {
+		return _websiteService;
+	}
+
 	private WebsiteService _websiteService;
 }

@@ -253,5 +253,9 @@ public class OrgLaborWrapper implements OrgLabor {
 		return _orgLabor.getType();
 	}
 
+	public OrgLabor getWrappedOrgLabor() {
+		return _orgLabor;
+	}
+
 	private OrgLabor _orgLabor;
 }

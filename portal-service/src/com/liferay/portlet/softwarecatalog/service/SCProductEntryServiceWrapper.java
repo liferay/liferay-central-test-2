@@ -87,5 +87,9 @@ public class SCProductEntryServiceWrapper implements SCProductEntryService {
 			repoGroupId, repoArtifactId, licenseIds, thumbnails, fullImages);
 	}
 
+	public SCProductEntryService getWrappedSCProductEntryService() {
+		return _scProductEntryService;
+	}
+
 	private SCProductEntryService _scProductEntryService;
 }

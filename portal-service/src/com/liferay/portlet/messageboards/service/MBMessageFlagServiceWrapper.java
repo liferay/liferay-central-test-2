@@ -57,5 +57,9 @@ public class MBMessageFlagServiceWrapper implements MBMessageFlagService {
 		_mbMessageFlagService.deleteAnswerFlag(messageId);
 	}
 
+	public MBMessageFlagService getWrappedMBMessageFlagService() {
+		return _mbMessageFlagService;
+	}
+
 	private MBMessageFlagService _mbMessageFlagService;
 }

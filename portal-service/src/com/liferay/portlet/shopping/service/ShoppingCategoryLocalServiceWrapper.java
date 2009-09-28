@@ -241,5 +241,9 @@ public class ShoppingCategoryLocalServiceWrapper
 			serviceContext);
 	}
 
+	public ShoppingCategoryLocalService getWrappedShoppingCategoryLocalService() {
+		return _shoppingCategoryLocalService;
+	}
+
 	private ShoppingCategoryLocalService _shoppingCategoryLocalService;
 }

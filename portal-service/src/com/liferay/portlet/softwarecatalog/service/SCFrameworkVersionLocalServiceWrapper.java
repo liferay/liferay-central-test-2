@@ -227,5 +227,9 @@ public class SCFrameworkVersionLocalServiceWrapper
 			name, url, active, priority);
 	}
 
+	public SCFrameworkVersionLocalService getWrappedSCFrameworkVersionLocalService() {
+		return _scFrameworkVersionLocalService;
+	}
+
 	private SCFrameworkVersionLocalService _scFrameworkVersionLocalService;
 }

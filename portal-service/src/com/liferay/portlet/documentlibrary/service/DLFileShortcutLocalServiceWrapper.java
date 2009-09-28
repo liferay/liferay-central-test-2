@@ -230,5 +230,9 @@ public class DLFileShortcutLocalServiceWrapper
 			serviceContext);
 	}
 
+	public DLFileShortcutLocalService getWrappedDLFileShortcutLocalService() {
+		return _dlFileShortcutLocalService;
+	}
+
 	private DLFileShortcutLocalService _dlFileShortcutLocalService;
 }

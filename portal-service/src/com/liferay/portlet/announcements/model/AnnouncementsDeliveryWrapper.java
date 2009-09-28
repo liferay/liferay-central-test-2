@@ -192,5 +192,9 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		return _announcementsDelivery.toXmlString();
 	}
 
+	public AnnouncementsDelivery getWrappedAnnouncementsDelivery() {
+		return _announcementsDelivery;
+	}
+
 	private AnnouncementsDelivery _announcementsDelivery;
 }

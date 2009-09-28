@@ -168,5 +168,9 @@ public class MBMessageFlagLocalServiceWrapper
 		return _mbMessageFlagLocalService.hasReadFlag(userId, thread);
 	}
 
+	public MBMessageFlagLocalService getWrappedMBMessageFlagLocalService() {
+		return _mbMessageFlagLocalService;
+	}
+
 	private MBMessageFlagLocalService _mbMessageFlagLocalService;
 }

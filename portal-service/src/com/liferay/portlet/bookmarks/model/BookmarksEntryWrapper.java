@@ -231,5 +231,9 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 		return _bookmarksEntry.getFolder();
 	}
 
+	public BookmarksEntry getWrappedBookmarksEntry() {
+		return _bookmarksEntry;
+	}
+
 	private BookmarksEntry _bookmarksEntry;
 }

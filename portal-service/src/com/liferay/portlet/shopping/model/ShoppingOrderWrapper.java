@@ -551,5 +551,9 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 		return _shoppingOrder.toXmlString();
 	}
 
+	public ShoppingOrder getWrappedShoppingOrder() {
+		return _shoppingOrder;
+	}
+
 	private ShoppingOrder _shoppingOrder;
 }

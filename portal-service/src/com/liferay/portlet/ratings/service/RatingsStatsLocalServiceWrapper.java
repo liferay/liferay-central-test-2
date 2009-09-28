@@ -132,5 +132,9 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 		return _ratingsStatsLocalService.getStats(className, classPK);
 	}
 
+	public RatingsStatsLocalService getWrappedRatingsStatsLocalService() {
+		return _ratingsStatsLocalService;
+	}
+
 	private RatingsStatsLocalService _ratingsStatsLocalService;
 }

@@ -244,5 +244,9 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		return _dlFileVersion.toXmlString();
 	}
 
+	public DLFileVersion getWrappedDLFileVersion() {
+		return _dlFileVersion;
+	}
+
 	private DLFileVersion _dlFileVersion;
 }

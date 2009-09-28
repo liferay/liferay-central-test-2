@@ -143,5 +143,9 @@ public class DLFileRankLocalServiceWrapper implements DLFileRankLocalService {
 			userId, folderId, name);
 	}
 
+	public DLFileRankLocalService getWrappedDLFileRankLocalService() {
+		return _dlFileRankLocalService;
+	}
+
 	private DLFileRankLocalService _dlFileRankLocalService;
 }

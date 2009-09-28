@@ -199,5 +199,9 @@ public class RatingsEntryWrapper implements RatingsEntry {
 		return _ratingsEntry.toXmlString();
 	}
 
+	public RatingsEntry getWrappedRatingsEntry() {
+		return _ratingsEntry;
+	}
+
 	private RatingsEntry _ratingsEntry;
 }

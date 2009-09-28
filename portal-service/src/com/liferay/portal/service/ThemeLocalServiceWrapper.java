@@ -94,5 +94,9 @@ public class ThemeLocalServiceWrapper implements ThemeLocalService {
 		_themeLocalService.uninstallThemes(themeIds);
 	}
 
+	public ThemeLocalService getWrappedThemeLocalService() {
+		return _themeLocalService;
+	}
+
 	private ThemeLocalService _themeLocalService;
 }

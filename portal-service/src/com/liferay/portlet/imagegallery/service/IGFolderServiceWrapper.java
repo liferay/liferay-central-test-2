@@ -101,5 +101,9 @@ public class IGFolderServiceWrapper implements IGFolderService {
 			description, mergeWithParentFolder, serviceContext);
 	}
 
+	public IGFolderService getWrappedIGFolderService() {
+		return _igFolderService;
+	}
+
 	private IGFolderService _igFolderService;
 }

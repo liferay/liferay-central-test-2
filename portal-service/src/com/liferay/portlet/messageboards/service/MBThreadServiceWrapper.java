@@ -64,5 +64,9 @@ public class MBThreadServiceWrapper implements MBThreadService {
 		return _mbThreadService.splitThread(messageId, serviceContext);
 	}
 
+	public MBThreadService getWrappedMBThreadService() {
+		return _mbThreadService;
+	}
+
 	private MBThreadService _mbThreadService;
 }

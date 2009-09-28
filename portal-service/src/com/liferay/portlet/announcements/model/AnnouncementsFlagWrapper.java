@@ -163,5 +163,9 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		return _announcementsFlag.toXmlString();
 	}
 
+	public AnnouncementsFlag getWrappedAnnouncementsFlag() {
+		return _announcementsFlag;
+	}
+
 	private AnnouncementsFlag _announcementsFlag;
 }

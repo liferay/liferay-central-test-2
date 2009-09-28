@@ -385,5 +385,9 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 			folderId, name, description, is, contentType, serviceContext);
 	}
 
+	public IGImageLocalService getWrappedIGImageLocalService() {
+		return _igImageLocalService;
+	}
+
 	private IGImageLocalService _igImageLocalService;
 }

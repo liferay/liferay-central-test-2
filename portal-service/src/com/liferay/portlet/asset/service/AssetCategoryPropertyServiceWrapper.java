@@ -80,5 +80,9 @@ public class AssetCategoryPropertyServiceWrapper
 			key, value);
 	}
 
+	public AssetCategoryPropertyService getWrappedAssetCategoryPropertyService() {
+		return _assetCategoryPropertyService;
+	}
+
 	private AssetCategoryPropertyService _assetCategoryPropertyService;
 }

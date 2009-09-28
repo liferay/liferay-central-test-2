@@ -81,5 +81,9 @@ public class PhoneServiceWrapper implements PhoneService {
 			primary);
 	}
 
+	public PhoneService getWrappedPhoneService() {
+		return _phoneService;
+	}
+
 	private PhoneService _phoneService;
 }

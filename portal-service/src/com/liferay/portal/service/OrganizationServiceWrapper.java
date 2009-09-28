@@ -184,5 +184,9 @@ public class OrganizationServiceWrapper implements OrganizationService {
 			websites, serviceContext);
 	}
 
+	public OrganizationService getWrappedOrganizationService() {
+		return _organizationService;
+	}
+
 	private OrganizationService _organizationService;
 }

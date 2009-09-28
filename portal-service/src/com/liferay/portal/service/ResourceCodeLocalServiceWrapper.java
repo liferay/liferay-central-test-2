@@ -128,5 +128,9 @@ public class ResourceCodeLocalServiceWrapper implements ResourceCodeLocalService
 		return _resourceCodeLocalService.getResourceCode(companyId, name, scope);
 	}
 
+	public ResourceCodeLocalService getWrappedResourceCodeLocalService() {
+		return _resourceCodeLocalService;
+	}
+
 	private ResourceCodeLocalService _resourceCodeLocalService;
 }

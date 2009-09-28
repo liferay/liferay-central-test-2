@@ -240,5 +240,9 @@ public class MBThreadWrapper implements MBThread {
 		return _mbThread.getAttachmentsDir();
 	}
 
+	public MBThread getWrappedMBThread() {
+		return _mbThread;
+	}
+
 	private MBThread _mbThread;
 }

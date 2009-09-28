@@ -279,5 +279,9 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		return _blogsEntry.toXmlString();
 	}
 
+	public BlogsEntry getWrappedBlogsEntry() {
+		return _blogsEntry;
+	}
+
 	private BlogsEntry _blogsEntry;
 }

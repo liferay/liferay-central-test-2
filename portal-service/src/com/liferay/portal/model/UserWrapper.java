@@ -606,5 +606,9 @@ public class UserWrapper implements User {
 		_user.setPasswordUnencrypted(passwordUnencrypted);
 	}
 
+	public User getWrappedUser() {
+		return _user;
+	}
+
 	private User _user;
 }

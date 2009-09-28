@@ -143,5 +143,9 @@ public class PollsVoteLocalServiceWrapper implements PollsVoteLocalService {
 		return _pollsVoteLocalService.getQuestionVotesCount(questionId);
 	}
 
+	public PollsVoteLocalService getWrappedPollsVoteLocalService() {
+		return _pollsVoteLocalService;
+	}
+
 	private PollsVoteLocalService _pollsVoteLocalService;
 }

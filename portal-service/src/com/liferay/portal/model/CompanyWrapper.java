@@ -276,5 +276,9 @@ public class CompanyWrapper implements Company {
 		_company.setKeyObj(keyObj);
 	}
 
+	public Company getWrappedCompany() {
+		return _company;
+	}
+
 	private Company _company;
 }

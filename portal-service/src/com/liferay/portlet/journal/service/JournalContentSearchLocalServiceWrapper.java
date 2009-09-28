@@ -208,5 +208,9 @@ public class JournalContentSearchLocalServiceWrapper
 			privateLayout, layoutId, portletId, articleIds);
 	}
 
+	public JournalContentSearchLocalService getWrappedJournalContentSearchLocalService() {
+		return _journalContentSearchLocalService;
+	}
+
 	private JournalContentSearchLocalService _journalContentSearchLocalService;
 }

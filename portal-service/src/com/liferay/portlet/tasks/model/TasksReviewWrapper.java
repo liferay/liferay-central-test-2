@@ -244,5 +244,9 @@ public class TasksReviewWrapper implements TasksReview {
 		return _tasksReview.toXmlString();
 	}
 
+	public TasksReview getWrappedTasksReview() {
+		return _tasksReview;
+	}
+
 	private TasksReview _tasksReview;
 }

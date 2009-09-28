@@ -221,5 +221,9 @@ public class AssetCategoryWrapper implements AssetCategory {
 		return _assetCategory.isRootCategory();
 	}
 
+	public AssetCategory getWrappedAssetCategory() {
+		return _assetCategory;
+	}
+
 	private AssetCategory _assetCategory;
 }

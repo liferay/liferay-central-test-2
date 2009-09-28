@@ -406,5 +406,9 @@ public class JournalArticleWrapper implements JournalArticle {
 		_journalArticle.setSmallImageType(smallImageType);
 	}
 
+	public JournalArticle getWrappedJournalArticle() {
+		return _journalArticle;
+	}
+
 	private JournalArticle _journalArticle;
 }

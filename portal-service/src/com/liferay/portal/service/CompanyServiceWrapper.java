@@ -163,5 +163,9 @@ public class CompanyServiceWrapper implements CompanyService {
 			communityLogo);
 	}
 
+	public CompanyService getWrappedCompanyService() {
+		return _companyService;
+	}
+
 	private CompanyService _companyService;
 }

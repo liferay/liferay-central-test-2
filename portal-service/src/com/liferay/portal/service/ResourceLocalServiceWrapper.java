@@ -215,5 +215,9 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 			primKey, communityPermissions, guestPermissions);
 	}
 
+	public ResourceLocalService getWrappedResourceLocalService() {
+		return _resourceLocalService;
+	}
+
 	private ResourceLocalService _resourceLocalService;
 }

@@ -145,5 +145,9 @@ public class AssetEntryServiceWrapper implements AssetEntryService {
 			width, priority, sync);
 	}
 
+	public AssetEntryService getWrappedAssetEntryService() {
+		return _assetEntryService;
+	}
+
 	private AssetEntryService _assetEntryService;
 }

@@ -149,5 +149,9 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		return _orgGroupPermission.containsGroup(groups);
 	}
 
+	public OrgGroupPermission getWrappedOrgGroupPermission() {
+		return _orgGroupPermission;
+	}
+
 	private OrgGroupPermission _orgGroupPermission;
 }

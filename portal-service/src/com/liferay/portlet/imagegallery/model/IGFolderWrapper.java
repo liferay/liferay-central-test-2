@@ -219,5 +219,9 @@ public class IGFolderWrapper implements IGFolder {
 		return _igFolder.isRoot();
 	}
 
+	public IGFolder getWrappedIGFolder() {
+		return _igFolder;
+	}
+
 	private IGFolder _igFolder;
 }

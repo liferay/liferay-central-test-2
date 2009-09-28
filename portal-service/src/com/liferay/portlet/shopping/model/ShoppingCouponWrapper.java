@@ -283,5 +283,9 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		return _shoppingCoupon.hasValidDateRange();
 	}
 
+	public ShoppingCoupon getWrappedShoppingCoupon() {
+		return _shoppingCoupon;
+	}
+
 	private ShoppingCoupon _shoppingCoupon;
 }

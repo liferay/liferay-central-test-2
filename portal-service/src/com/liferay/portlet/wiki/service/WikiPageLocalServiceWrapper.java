@@ -415,5 +415,9 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		_wikiPageLocalService.validateTitle(title);
 	}
 
+	public WikiPageLocalService getWrappedWikiPageLocalService() {
+		return _wikiPageLocalService;
+	}
+
 	private WikiPageLocalService _wikiPageLocalService;
 }

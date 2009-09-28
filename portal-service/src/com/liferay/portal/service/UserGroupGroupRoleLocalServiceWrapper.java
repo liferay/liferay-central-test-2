@@ -200,5 +200,9 @@ public class UserGroupGroupRoleLocalServiceWrapper
 			groupId, roleName);
 	}
 
+	public UserGroupGroupRoleLocalService getWrappedUserGroupGroupRoleLocalService() {
+		return _userGroupGroupRoleLocalService;
+	}
+
 	private UserGroupGroupRoleLocalService _userGroupGroupRoleLocalService;
 }

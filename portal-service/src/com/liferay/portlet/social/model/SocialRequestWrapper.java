@@ -240,5 +240,9 @@ public class SocialRequestWrapper implements SocialRequest {
 		return _socialRequest.toXmlString();
 	}
 
+	public SocialRequest getWrappedSocialRequest() {
+		return _socialRequest;
+	}
+
 	private SocialRequest _socialRequest;
 }

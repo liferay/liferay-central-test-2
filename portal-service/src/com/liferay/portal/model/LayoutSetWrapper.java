@@ -257,5 +257,9 @@ public class LayoutSetWrapper implements LayoutSet {
 		return _layoutSet.getWapColorScheme();
 	}
 
+	public LayoutSet getWrappedLayoutSet() {
+		return _layoutSet;
+	}
+
 	private LayoutSet _layoutSet;
 }

@@ -374,5 +374,9 @@ public class ExpandoValueWrapper implements ExpandoValue {
 		_expandoValue.setStringArray(data);
 	}
 
+	public ExpandoValue getWrappedExpandoValue() {
+		return _expandoValue;
+	}
+
 	private ExpandoValue _expandoValue;
 }

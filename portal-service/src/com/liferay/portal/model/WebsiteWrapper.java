@@ -222,5 +222,9 @@ public class WebsiteWrapper implements Website {
 		return _website.getType();
 	}
 
+	public Website getWrappedWebsite() {
+		return _website;
+	}
+
 	private Website _website;
 }

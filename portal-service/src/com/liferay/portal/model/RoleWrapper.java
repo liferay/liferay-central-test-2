@@ -222,5 +222,9 @@ public class RoleWrapper implements Role {
 		return _role.getTypeLabel();
 	}
 
+	public Role getWrappedRole() {
+		return _role;
+	}
+
 	private Role _role;
 }

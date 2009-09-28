@@ -206,5 +206,9 @@ public class PortletItemWrapper implements PortletItem {
 		return _portletItem.toXmlString();
 	}
 
+	public PortletItem getWrappedPortletItem() {
+		return _portletItem;
+	}
+
 	private PortletItem _portletItem;
 }

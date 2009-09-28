@@ -224,5 +224,9 @@ public class SocialActivityWrapper implements SocialActivity {
 		return _socialActivity.toXmlString();
 	}
 
+	public SocialActivity getWrappedSocialActivity() {
+		return _socialActivity;
+	}
+
 	private SocialActivity _socialActivity;
 }

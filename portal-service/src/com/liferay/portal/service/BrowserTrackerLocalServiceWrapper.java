@@ -127,5 +127,9 @@ public class BrowserTrackerLocalServiceWrapper
 			browserKey);
 	}
 
+	public BrowserTrackerLocalService getWrappedBrowserTrackerLocalService() {
+		return _browserTrackerLocalService;
+	}
+
 	private BrowserTrackerLocalService _browserTrackerLocalService;
 }

@@ -139,5 +139,9 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 		return _userGroupGroupRole.toXmlString();
 	}
 
+	public UserGroupGroupRole getWrappedUserGroupGroupRole() {
+		return _userGroupGroupRole;
+	}
+
 	private UserGroupGroupRole _userGroupGroupRole;
 }

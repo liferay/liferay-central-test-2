@@ -104,5 +104,9 @@ public class ContactLocalServiceWrapper implements ContactLocalService {
 		return _contactLocalService.updateContact(contact, merge);
 	}
 
+	public ContactLocalService getWrappedContactLocalService() {
+		return _contactLocalService;
+	}
+
 	private ContactLocalService _contactLocalService;
 }

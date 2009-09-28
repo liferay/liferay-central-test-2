@@ -114,5 +114,9 @@ public class CalEventServiceWrapper implements CalEventService {
 			serviceContext);
 	}
 
+	public CalEventService getWrappedCalEventService() {
+		return _calEventService;
+	}
+
 	private CalEventService _calEventService;
 }

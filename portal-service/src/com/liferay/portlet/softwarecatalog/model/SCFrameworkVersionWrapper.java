@@ -215,5 +215,9 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 		return _scFrameworkVersion.toXmlString();
 	}
 
+	public SCFrameworkVersion getWrappedSCFrameworkVersion() {
+		return _scFrameworkVersion;
+	}
+
 	private SCFrameworkVersion _scFrameworkVersion;
 }

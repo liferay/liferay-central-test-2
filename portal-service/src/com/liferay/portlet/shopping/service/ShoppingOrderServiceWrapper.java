@@ -111,5 +111,9 @@ public class ShoppingOrderServiceWrapper implements ShoppingOrderService {
 			ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
 	}
 
+	public ShoppingOrderService getWrappedShoppingOrderService() {
+		return _shoppingOrderService;
+	}
+
 	private ShoppingOrderService _shoppingOrderService;
 }

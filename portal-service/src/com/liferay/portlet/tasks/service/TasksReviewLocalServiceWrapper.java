@@ -190,5 +190,9 @@ public class TasksReviewLocalServiceWrapper implements TasksReviewLocalService {
 			userIdsPerStage);
 	}
 
+	public TasksReviewLocalService getWrappedTasksReviewLocalService() {
+		return _tasksReviewLocalService;
+	}
+
 	private TasksReviewLocalService _tasksReviewLocalService;
 }

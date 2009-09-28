@@ -271,5 +271,9 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 			tagProperties, serviceContext);
 	}
 
+	public AssetTagLocalService getWrappedAssetTagLocalService() {
+		return _assetTagLocalService;
+	}
+
 	private AssetTagLocalService _assetTagLocalService;
 }

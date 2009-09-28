@@ -86,5 +86,9 @@ public class LayoutSetPrototypeServiceWrapper
 			nameMap, description, active);
 	}
 
+	public LayoutSetPrototypeService getWrappedLayoutSetPrototypeService() {
+		return _layoutSetPrototypeService;
+	}
+
 	private LayoutSetPrototypeService _layoutSetPrototypeService;
 }

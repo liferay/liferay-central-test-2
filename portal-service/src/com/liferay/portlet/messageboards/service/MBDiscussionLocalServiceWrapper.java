@@ -137,5 +137,9 @@ public class MBDiscussionLocalServiceWrapper implements MBDiscussionLocalService
 		return _mbDiscussionLocalService.getThreadDiscussion(threadId);
 	}
 
+	public MBDiscussionLocalService getWrappedMBDiscussionLocalService() {
+		return _mbDiscussionLocalService;
+	}
+
 	private MBDiscussionLocalService _mbDiscussionLocalService;
 }

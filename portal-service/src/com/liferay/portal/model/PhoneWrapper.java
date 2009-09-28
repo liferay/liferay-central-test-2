@@ -230,5 +230,9 @@ public class PhoneWrapper implements Phone {
 		return _phone.getType();
 	}
 
+	public Phone getWrappedPhone() {
+		return _phone;
+	}
+
 	private Phone _phone;
 }

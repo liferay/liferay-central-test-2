@@ -369,5 +369,9 @@ public class MBMessageWrapper implements MBMessage {
 		_mbMessage.setAttachmentsDir(attachmentsDir);
 	}
 
+	public MBMessage getWrappedMBMessage() {
+		return _mbMessage;
+	}
+
 	private MBMessage _mbMessage;
 }

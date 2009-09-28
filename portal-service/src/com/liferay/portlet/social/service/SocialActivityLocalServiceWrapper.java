@@ -353,5 +353,9 @@ public class SocialActivityLocalServiceWrapper
 		return _socialActivityLocalService.getUserOrganizationsActivitiesCount(userId);
 	}
 
+	public SocialActivityLocalService getWrappedSocialActivityLocalService() {
+		return _socialActivityLocalService;
+	}
+
 	private SocialActivityLocalService _socialActivityLocalService;
 }

@@ -181,5 +181,9 @@ public class SCProductVersionLocalServiceWrapper
 			testDirectDownloadURL, repoStoreArtifact, frameworkVersionIds);
 	}
 
+	public SCProductVersionLocalService getWrappedSCProductVersionLocalService() {
+		return _scProductVersionLocalService;
+	}
+
 	private SCProductVersionLocalService _scProductVersionLocalService;
 }

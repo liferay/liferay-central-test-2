@@ -167,5 +167,9 @@ public class ResourceWrapper implements Resource {
 		_resource.setScope(scope);
 	}
 
+	public Resource getWrappedResource() {
+		return _resource;
+	}
+
 	private Resource _resource;
 }

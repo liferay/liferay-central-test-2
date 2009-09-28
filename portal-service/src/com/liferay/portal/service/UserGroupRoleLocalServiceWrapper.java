@@ -209,5 +209,9 @@ public class UserGroupRoleLocalServiceWrapper
 			roleName, inherit);
 	}
 
+	public UserGroupRoleLocalService getWrappedUserGroupRoleLocalService() {
+		return _userGroupRoleLocalService;
+	}
+
 	private UserGroupRoleLocalService _userGroupRoleLocalService;
 }

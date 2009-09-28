@@ -205,5 +205,9 @@ public class ResourcePermissionLocalServiceWrapper
 			scope, primKey, roleId, actionIds);
 	}
 
+	public ResourcePermissionLocalService getWrappedResourcePermissionLocalService() {
+		return _resourcePermissionLocalService;
+	}
+
 	private ResourcePermissionLocalService _resourcePermissionLocalService;
 }

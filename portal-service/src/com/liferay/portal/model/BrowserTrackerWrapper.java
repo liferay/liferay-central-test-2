@@ -146,5 +146,9 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		return _browserTracker.toXmlString();
 	}
 
+	public BrowserTracker getWrappedBrowserTracker() {
+		return _browserTracker;
+	}
+
 	private BrowserTracker _browserTracker;
 }

@@ -352,5 +352,9 @@ public class GroupWrapper implements Group {
 		return _group.getWorkflowRoleNames();
 	}
 
+	public Group getWrappedGroup() {
+		return _group;
+	}
+
 	private Group _group;
 }

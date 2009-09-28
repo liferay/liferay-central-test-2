@@ -250,5 +250,9 @@ public class PollsQuestionLocalServiceWrapper
 			neverExpire, choices, serviceContext);
 	}
 
+	public PollsQuestionLocalService getWrappedPollsQuestionLocalService() {
+		return _pollsQuestionLocalService;
+	}
+
 	private PollsQuestionLocalService _pollsQuestionLocalService;
 }

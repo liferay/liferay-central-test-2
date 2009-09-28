@@ -267,5 +267,9 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		return _announcementsEntry.toXmlString();
 	}
 
+	public AnnouncementsEntry getWrappedAnnouncementsEntry() {
+		return _announcementsEntry;
+	}
+
 	private AnnouncementsEntry _announcementsEntry;
 }

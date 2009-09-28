@@ -178,5 +178,9 @@ public class LayoutSetLocalServiceWrapper implements LayoutSetLocalService {
 			virtualHost);
 	}
 
+	public LayoutSetLocalService getWrappedLayoutSetLocalService() {
+		return _layoutSetLocalService;
+	}
+
 	private LayoutSetLocalService _layoutSetLocalService;
 }

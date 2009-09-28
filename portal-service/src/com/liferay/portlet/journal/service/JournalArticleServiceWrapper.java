@@ -227,5 +227,9 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			status, articleURL, serviceContext);
 	}
 
+	public JournalArticleService getWrappedJournalArticleService() {
+		return _journalArticleService;
+	}
+
 	private JournalArticleService _journalArticleService;
 }

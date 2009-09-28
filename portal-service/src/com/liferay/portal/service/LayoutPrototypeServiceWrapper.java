@@ -85,5 +85,9 @@ public class LayoutPrototypeServiceWrapper implements LayoutPrototypeService {
 			nameMap, description, active);
 	}
 
+	public LayoutPrototypeService getWrappedLayoutPrototypeService() {
+		return _layoutPrototypeService;
+	}
+
 	private LayoutPrototypeService _layoutPrototypeService;
 }

@@ -166,5 +166,9 @@ public class RatingsStatsWrapper implements RatingsStats {
 		return _ratingsStats.toXmlString();
 	}
 
+	public RatingsStats getWrappedRatingsStats() {
+		return _ratingsStats;
+	}
+
 	private RatingsStats _ratingsStats;
 }

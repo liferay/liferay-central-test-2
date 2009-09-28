@@ -285,5 +285,9 @@ public class JournalTemplateWrapper implements JournalTemplate {
 		_journalTemplate.setSmallImageType(smallImageType);
 	}
 
+	public JournalTemplate getWrappedJournalTemplate() {
+		return _journalTemplate;
+	}
+
 	private JournalTemplate _journalTemplate;
 }

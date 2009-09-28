@@ -148,5 +148,9 @@ public class PortletItemLocalServiceWrapper implements PortletItemLocalService {
 			name, portletId, className);
 	}
 
+	public PortletItemLocalService getWrappedPortletItemLocalService() {
+		return _portletItemLocalService;
+	}
+
 	private PortletItemLocalService _portletItemLocalService;
 }

@@ -173,5 +173,9 @@ public class UserGroupWrapper implements UserGroup {
 		return _userGroup.hasPublicLayouts();
 	}
 
+	public UserGroup getWrappedUserGroup() {
+		return _userGroup;
+	}
+
 	private UserGroup _userGroup;
 }

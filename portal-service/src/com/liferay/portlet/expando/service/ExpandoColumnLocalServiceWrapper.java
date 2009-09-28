@@ -287,5 +287,9 @@ public class ExpandoColumnLocalServiceWrapper
 			typeSettings);
 	}
 
+	public ExpandoColumnLocalService getWrappedExpandoColumnLocalService() {
+		return _expandoColumnLocalService;
+	}
+
 	private ExpandoColumnLocalService _expandoColumnLocalService;
 }

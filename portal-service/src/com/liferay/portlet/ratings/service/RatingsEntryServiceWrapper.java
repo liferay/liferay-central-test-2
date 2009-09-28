@@ -57,5 +57,9 @@ public class RatingsEntryServiceWrapper implements RatingsEntryService {
 		return _ratingsEntryService.updateEntry(className, classPK, score);
 	}
 
+	public RatingsEntryService getWrappedRatingsEntryService() {
+		return _ratingsEntryService;
+	}
+
 	private RatingsEntryService _ratingsEntryService;
 }

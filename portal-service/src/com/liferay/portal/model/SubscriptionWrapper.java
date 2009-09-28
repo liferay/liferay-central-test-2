@@ -198,5 +198,9 @@ public class SubscriptionWrapper implements Subscription {
 		return _subscription.toXmlString();
 	}
 
+	public Subscription getWrappedSubscription() {
+		return _subscription;
+	}
+
 	private Subscription _subscription;
 }

@@ -265,5 +265,9 @@ public class AnnouncementsEntryLocalServiceWrapper
 			expirationDateHour, expirationDateMinute, priority);
 	}
 
+	public AnnouncementsEntryLocalService getWrappedAnnouncementsEntryLocalService() {
+		return _announcementsEntryLocalService;
+	}
+
 	private AnnouncementsEntryLocalService _announcementsEntryLocalService;
 }

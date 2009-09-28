@@ -190,5 +190,9 @@ public class PollsChoiceWrapper implements PollsChoice {
 		return _pollsChoice.getVotesCount();
 	}
 
+	public PollsChoice getWrappedPollsChoice() {
+		return _pollsChoice;
+	}
+
 	private PollsChoice _pollsChoice;
 }

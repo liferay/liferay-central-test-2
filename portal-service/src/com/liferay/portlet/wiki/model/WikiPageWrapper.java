@@ -316,5 +316,9 @@ public class WikiPageWrapper implements WikiPage {
 		_wikiPage.setAttachmentsDir(attachmentsDir);
 	}
 
+	public WikiPage getWrappedWikiPage() {
+		return _wikiPage;
+	}
+
 	private WikiPage _wikiPage;
 }

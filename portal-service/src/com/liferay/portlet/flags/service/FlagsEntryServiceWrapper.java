@@ -55,5 +55,9 @@ public class FlagsEntryServiceWrapper implements FlagsEntryService {
 			reportedUserId, contentTitle, contentURL, reason, serviceContext);
 	}
 
+	public FlagsEntryService getWrappedFlagsEntryService() {
+		return _flagsEntryService;
+	}
+
 	private FlagsEntryService _flagsEntryService;
 }

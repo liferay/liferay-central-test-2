@@ -234,5 +234,9 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		return _shoppingCart.getCoupon();
 	}
 
+	public ShoppingCart getWrappedShoppingCart() {
+		return _shoppingCart;
+	}
+
 	private ShoppingCart _shoppingCart;
 }

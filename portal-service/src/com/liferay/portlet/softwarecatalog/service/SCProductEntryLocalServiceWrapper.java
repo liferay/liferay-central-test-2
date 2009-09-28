@@ -284,5 +284,9 @@ public class SCProductEntryLocalServiceWrapper
 			fullImages);
 	}
 
+	public SCProductEntryLocalService getWrappedSCProductEntryLocalService() {
+		return _scProductEntryLocalService;
+	}
+
 	private SCProductEntryLocalService _scProductEntryLocalService;
 }

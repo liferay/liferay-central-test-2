@@ -146,5 +146,9 @@ public class EmailAddressLocalServiceWrapper implements EmailAddressLocalService
 			address, typeId, primary);
 	}
 
+	public EmailAddressLocalService getWrappedEmailAddressLocalService() {
+		return _emailAddressLocalService;
+	}
+
 	private EmailAddressLocalService _emailAddressLocalService;
 }

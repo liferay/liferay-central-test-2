@@ -201,5 +201,9 @@ public class BlogsStatsUserLocalServiceWrapper
 		_blogsStatsUserLocalService.updateStatsUser(groupId, userId, displayDate);
 	}
 
+	public BlogsStatsUserLocalService getWrappedBlogsStatsUserLocalService() {
+		return _blogsStatsUserLocalService;
+	}
+
 	private BlogsStatsUserLocalService _blogsStatsUserLocalService;
 }

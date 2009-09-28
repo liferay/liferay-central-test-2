@@ -149,5 +149,9 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 			name, description);
 	}
 
+	public PollsChoiceLocalService getWrappedPollsChoiceLocalService() {
+		return _pollsChoiceLocalService;
+	}
+
 	private PollsChoiceLocalService _pollsChoiceLocalService;
 }

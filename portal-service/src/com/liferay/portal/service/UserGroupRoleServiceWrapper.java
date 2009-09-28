@@ -69,5 +69,9 @@ public class UserGroupRoleServiceWrapper implements UserGroupRoleService {
 		_userGroupRoleService.deleteUserGroupRoles(userIds, groupId, roleId);
 	}
 
+	public UserGroupRoleService getWrappedUserGroupRoleService() {
+		return _userGroupRoleService;
+	}
+
 	private UserGroupRoleService _userGroupRoleService;
 }

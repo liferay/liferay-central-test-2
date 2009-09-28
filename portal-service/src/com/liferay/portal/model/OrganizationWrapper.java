@@ -309,5 +309,9 @@ public class OrganizationWrapper implements Organization {
 		return _organization.isRoot();
 	}
 
+	public Organization getWrappedOrganization() {
+		return _organization;
+	}
+
 	private Organization _organization;
 }

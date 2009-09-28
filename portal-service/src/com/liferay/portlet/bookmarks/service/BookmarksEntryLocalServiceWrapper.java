@@ -284,5 +284,9 @@ public class BookmarksEntryLocalServiceWrapper
 			groupId, folderId, name, url, comments, serviceContext);
 	}
 
+	public BookmarksEntryLocalService getWrappedBookmarksEntryLocalService() {
+		return _bookmarksEntryLocalService;
+	}
+
 	private BookmarksEntryLocalService _bookmarksEntryLocalService;
 }

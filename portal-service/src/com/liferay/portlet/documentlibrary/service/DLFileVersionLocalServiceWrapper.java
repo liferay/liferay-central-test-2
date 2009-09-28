@@ -126,5 +126,9 @@ public class DLFileVersionLocalServiceWrapper
 			name, status);
 	}
 
+	public DLFileVersionLocalService getWrappedDLFileVersionLocalService() {
+		return _dlFileVersionLocalService;
+	}
+
 	private DLFileVersionLocalService _dlFileVersionLocalService;
 }

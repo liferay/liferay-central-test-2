@@ -319,5 +319,9 @@ public class CalEventWrapper implements CalEvent {
 		_calEvent.setRecurrenceObj(recurrenceObj);
 	}
 
+	public CalEvent getWrappedCalEvent() {
+		return _calEvent;
+	}
+
 	private CalEvent _calEvent;
 }

@@ -173,5 +173,9 @@ public class ReleaseWrapper implements Release {
 		return _release.toXmlString();
 	}
 
+	public Release getWrappedRelease() {
+		return _release;
+	}
+
 	private Release _release;
 }

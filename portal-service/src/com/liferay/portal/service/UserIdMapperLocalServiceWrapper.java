@@ -142,5 +142,9 @@ public class UserIdMapperLocalServiceWrapper implements UserIdMapperLocalService
 			description, externalUserId);
 	}
 
+	public UserIdMapperLocalService getWrappedUserIdMapperLocalService() {
+		return _userIdMapperLocalService;
+	}
+
 	private UserIdMapperLocalService _userIdMapperLocalService;
 }

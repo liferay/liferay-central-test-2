@@ -290,5 +290,9 @@ public class AddressWrapper implements Address {
 		return _address.getType();
 	}
 
+	public Address getWrappedAddress() {
+		return _address;
+	}
+
 	private Address _address;
 }

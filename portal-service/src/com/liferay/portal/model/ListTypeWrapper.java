@@ -137,5 +137,9 @@ public class ListTypeWrapper implements ListType {
 		return _listType.toXmlString();
 	}
 
+	public ListType getWrappedListType() {
+		return _listType;
+	}
+
 	private ListType _listType;
 }

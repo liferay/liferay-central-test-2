@@ -210,5 +210,9 @@ public class MBMessageServiceWrapper implements MBMessageService {
 			existingFiles, priority, serviceContext);
 	}
 
+	public MBMessageService getWrappedMBMessageService() {
+		return _mbMessageService;
+	}
+
 	private MBMessageService _mbMessageService;
 }

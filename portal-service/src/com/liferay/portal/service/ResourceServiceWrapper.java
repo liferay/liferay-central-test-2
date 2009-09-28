@@ -51,5 +51,9 @@ public class ResourceServiceWrapper implements ResourceService {
 		return _resourceService.getResource(companyId, name, scope, primKey);
 	}
 
+	public ResourceService getWrappedResourceService() {
+		return _resourceService;
+	}
+
 	private ResourceService _resourceService;
 }

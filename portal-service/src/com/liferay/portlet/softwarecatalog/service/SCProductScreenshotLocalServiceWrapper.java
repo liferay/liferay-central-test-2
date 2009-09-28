@@ -153,5 +153,9 @@ public class SCProductScreenshotLocalServiceWrapper
 		return _scProductScreenshotLocalService.getProductScreenshotByThumbnailId(thumbnailId);
 	}
 
+	public SCProductScreenshotLocalService getWrappedSCProductScreenshotLocalService() {
+		return _scProductScreenshotLocalService;
+	}
+
 	private SCProductScreenshotLocalService _scProductScreenshotLocalService;
 }

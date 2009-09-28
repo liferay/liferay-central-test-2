@@ -182,5 +182,9 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 		return _journalArticleImage.toXmlString();
 	}
 
+	public JournalArticleImage getWrappedJournalArticleImage() {
+		return _journalArticleImage;
+	}
+
 	private JournalArticleImage _journalArticleImage;
 }

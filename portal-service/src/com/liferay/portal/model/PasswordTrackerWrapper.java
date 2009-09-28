@@ -155,5 +155,9 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		return _passwordTracker.toXmlString();
 	}
 
+	public PasswordTracker getWrappedPasswordTracker() {
+		return _passwordTracker;
+	}
+
 	private PasswordTracker _passwordTracker;
 }

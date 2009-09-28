@@ -237,5 +237,9 @@ public class TasksProposalWrapper implements TasksProposal {
 		return _tasksProposal.getStatus(locale);
 	}
 
+	public TasksProposal getWrappedTasksProposal() {
+		return _tasksProposal;
+	}
+
 	private TasksProposal _tasksProposal;
 }

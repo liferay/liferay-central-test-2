@@ -94,5 +94,9 @@ public class UserGroupServiceWrapper implements UserGroupService {
 		return _userGroupService.updateUserGroup(userGroupId, name, description);
 	}
 
+	public UserGroupService getWrappedUserGroupService() {
+		return _userGroupService;
+	}
+
 	private UserGroupService _userGroupService;
 }

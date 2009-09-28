@@ -311,5 +311,9 @@ public class PermissionLocalServiceWrapper implements PermissionLocalService {
 			resourceId);
 	}
 
+	public PermissionLocalService getWrappedPermissionLocalService() {
+		return _permissionLocalService;
+	}
+
 	private PermissionLocalService _permissionLocalService;
 }

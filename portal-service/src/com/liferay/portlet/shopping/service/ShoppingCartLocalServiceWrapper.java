@@ -141,5 +141,9 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 			couponCodes, altShipping, insure);
 	}
 
+	public ShoppingCartLocalService getWrappedShoppingCartLocalService() {
+		return _shoppingCartLocalService;
+	}
+
 	private ShoppingCartLocalService _shoppingCartLocalService;
 }

@@ -1077,5 +1077,9 @@ public class PortletWrapper implements Portlet {
 		return _portlet.equals(obj);
 	}
 
+	public Portlet getWrappedPortlet() {
+		return _portlet;
+	}
+
 	private Portlet _portlet;
 }

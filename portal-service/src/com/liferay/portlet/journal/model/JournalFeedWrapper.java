@@ -308,5 +308,9 @@ public class JournalFeedWrapper implements JournalFeed {
 		return _journalFeed.toXmlString();
 	}
 
+	public JournalFeed getWrappedJournalFeed() {
+		return _journalFeed;
+	}
+
 	private JournalFeed _journalFeed;
 }

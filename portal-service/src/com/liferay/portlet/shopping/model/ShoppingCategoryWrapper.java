@@ -207,5 +207,9 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 		return _shoppingCategory.isRoot();
 	}
 
+	public ShoppingCategory getWrappedShoppingCategory() {
+		return _shoppingCategory;
+	}
+
 	private ShoppingCategory _shoppingCategory;
 }

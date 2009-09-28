@@ -150,5 +150,9 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		return _mbDiscussion.toXmlString();
 	}
 
+	public MBDiscussion getWrappedMBDiscussion() {
+		return _mbDiscussion;
+	}
+
 	private MBDiscussion _mbDiscussion;
 }

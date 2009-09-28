@@ -117,5 +117,9 @@ public class ShoppingOrderItemLocalServiceWrapper
 		return _shoppingOrderItemLocalService.getOrderItems(orderId);
 	}
 
+	public ShoppingOrderItemLocalService getWrappedShoppingOrderItemLocalService() {
+		return _shoppingOrderItemLocalService;
+	}
+
 	private ShoppingOrderItemLocalService _shoppingOrderItemLocalService;
 }

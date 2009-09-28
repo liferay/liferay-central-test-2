@@ -78,5 +78,9 @@ public class BookmarksFolderServiceWrapper implements BookmarksFolderService {
 			name, description, mergeWithParentFolder, serviceContext);
 	}
 
+	public BookmarksFolderService getWrappedBookmarksFolderService() {
+		return _bookmarksFolderService;
+	}
+
 	private BookmarksFolderService _bookmarksFolderService;
 }

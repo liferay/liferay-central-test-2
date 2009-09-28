@@ -135,5 +135,9 @@ public class WorkflowLinkLocalServiceWrapper implements WorkflowLinkLocalService
 			groupId, classNameId, definitionName);
 	}
 
+	public WorkflowLinkLocalService getWrappedWorkflowLinkLocalService() {
+		return _workflowLinkLocalService;
+	}
+
 	private WorkflowLinkLocalService _workflowLinkLocalService;
 }

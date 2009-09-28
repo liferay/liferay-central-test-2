@@ -145,5 +145,9 @@ public class ResourceCodeWrapper implements ResourceCode {
 		return _resourceCode.toXmlString();
 	}
 
+	public ResourceCode getWrappedResourceCode() {
+		return _resourceCode;
+	}
+
 	private ResourceCode _resourceCode;
 }

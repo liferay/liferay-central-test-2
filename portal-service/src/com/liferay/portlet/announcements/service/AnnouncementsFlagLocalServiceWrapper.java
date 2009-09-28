@@ -136,5 +136,9 @@ public class AnnouncementsFlagLocalServiceWrapper
 		_announcementsFlagLocalService.deleteFlags(entryId);
 	}
 
+	public AnnouncementsFlagLocalService getWrappedAnnouncementsFlagLocalService() {
+		return _announcementsFlagLocalService;
+	}
+
 	private AnnouncementsFlagLocalService _announcementsFlagLocalService;
 }

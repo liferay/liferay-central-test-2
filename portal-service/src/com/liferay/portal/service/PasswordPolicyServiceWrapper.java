@@ -84,5 +84,9 @@ public class PasswordPolicyServiceWrapper implements PasswordPolicyService {
 			lockoutDuration, resetFailureCount);
 	}
 
+	public PasswordPolicyService getWrappedPasswordPolicyService() {
+		return _passwordPolicyService;
+	}
+
 	private PasswordPolicyService _passwordPolicyService;
 }

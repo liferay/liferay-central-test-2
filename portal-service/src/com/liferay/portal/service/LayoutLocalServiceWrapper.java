@@ -483,5 +483,9 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.updatePriority(layout, priority);
 	}
 
+	public LayoutLocalService getWrappedLayoutLocalService() {
+		return _layoutLocalService;
+	}
+
 	private LayoutLocalService _layoutLocalService;
 }

@@ -312,5 +312,9 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
 			serviceContext);
 	}
 
+	public ShoppingItemLocalService getWrappedShoppingItemLocalService() {
+		return _shoppingItemLocalService;
+	}
+
 	private ShoppingItemLocalService _shoppingItemLocalService;
 }

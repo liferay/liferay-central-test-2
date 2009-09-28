@@ -166,5 +166,9 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 			email, sms, website);
 	}
 
+	public AnnouncementsDeliveryLocalService getWrappedAnnouncementsDeliveryLocalService() {
+		return _announcementsDeliveryLocalService;
+	}
+
 	private AnnouncementsDeliveryLocalService _announcementsDeliveryLocalService;
 }

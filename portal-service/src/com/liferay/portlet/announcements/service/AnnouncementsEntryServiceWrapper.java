@@ -84,5 +84,9 @@ public class AnnouncementsEntryServiceWrapper
 			expirationDateMinute, priority);
 	}
 
+	public AnnouncementsEntryService getWrappedAnnouncementsEntryService() {
+		return _announcementsEntryService;
+	}
+
 	private AnnouncementsEntryService _announcementsEntryService;
 }

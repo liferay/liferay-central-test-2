@@ -312,5 +312,9 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		_mbCategoryLocalService.unsubscribeCategory(userId, groupId, categoryId);
 	}
 
+	public MBCategoryLocalService getWrappedMBCategoryLocalService() {
+		return _mbCategoryLocalService;
+	}
+
 	private MBCategoryLocalService _mbCategoryLocalService;
 }

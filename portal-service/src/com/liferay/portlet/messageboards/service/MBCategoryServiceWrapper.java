@@ -123,5 +123,9 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 			mergeWithParentCategory, serviceContext);
 	}
 
+	public MBCategoryService getWrappedMBCategoryService() {
+		return _mbCategoryService;
+	}
+
 	private MBCategoryService _mbCategoryService;
 }

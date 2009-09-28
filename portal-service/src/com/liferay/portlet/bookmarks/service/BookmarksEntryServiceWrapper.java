@@ -85,5 +85,9 @@ public class BookmarksEntryServiceWrapper implements BookmarksEntryService {
 			name, url, comments, serviceContext);
 	}
 
+	public BookmarksEntryService getWrappedBookmarksEntryService() {
+		return _bookmarksEntryService;
+	}
+
 	private BookmarksEntryService _bookmarksEntryService;
 }

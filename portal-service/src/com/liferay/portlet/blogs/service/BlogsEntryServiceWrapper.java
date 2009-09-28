@@ -145,5 +145,9 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 			displayDateMinute, allowTrackbacks, trackbacks, serviceContext);
 	}
 
+	public BlogsEntryService getWrappedBlogsEntryService() {
+		return _blogsEntryService;
+	}
+
 	private BlogsEntryService _blogsEntryService;
 }

@@ -229,5 +229,9 @@ public class MBThreadLocalServiceWrapper implements MBThreadLocalService {
 		return _mbThreadLocalService.updateThread(threadId, viewCount);
 	}
 
+	public MBThreadLocalService getWrappedMBThreadLocalService() {
+		return _mbThreadLocalService;
+	}
+
 	private MBThreadLocalService _mbThreadLocalService;
 }

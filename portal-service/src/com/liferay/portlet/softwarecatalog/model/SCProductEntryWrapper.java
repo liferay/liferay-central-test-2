@@ -266,5 +266,9 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		return _scProductEntry.getScreenshots();
 	}
 
+	public SCProductEntry getWrappedSCProductEntry() {
+		return _scProductEntry;
+	}
+
 	private SCProductEntry _scProductEntry;
 }

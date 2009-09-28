@@ -172,5 +172,9 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		return _mbStatsUser.toXmlString();
 	}
 
+	public MBStatsUser getWrappedMBStatsUser() {
+		return _mbStatsUser;
+	}
+
 	private MBStatsUser _mbStatsUser;
 }

@@ -63,5 +63,9 @@ public class SocialActivityInterpreterLocalServiceWrapper
 			themeDisplay);
 	}
 
+	public SocialActivityInterpreterLocalService getWrappedSocialActivityInterpreterLocalService() {
+		return _socialActivityInterpreterLocalService;
+	}
+
 	private SocialActivityInterpreterLocalService _socialActivityInterpreterLocalService;
 }

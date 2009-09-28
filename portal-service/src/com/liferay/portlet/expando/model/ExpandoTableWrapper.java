@@ -154,5 +154,9 @@ public class ExpandoTableWrapper implements ExpandoTable {
 		return _expandoTable.isDefaultTable();
 	}
 
+	public ExpandoTable getWrappedExpandoTable() {
+		return _expandoTable;
+	}
+
 	private ExpandoTable _expandoTable;
 }

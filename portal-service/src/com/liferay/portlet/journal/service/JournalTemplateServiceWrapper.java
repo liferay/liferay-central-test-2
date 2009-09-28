@@ -130,5 +130,9 @@ public class JournalTemplateServiceWrapper implements JournalTemplateService {
 			cacheable, smallImage, smallImageURL, smallFile, serviceContext);
 	}
 
+	public JournalTemplateService getWrappedJournalTemplateService() {
+		return _journalTemplateService;
+	}
+
 	private JournalTemplateService _journalTemplateService;
 }

@@ -203,5 +203,9 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		_webDAVProps.store();
 	}
 
+	public WebDAVProps getWrappedWebDAVProps() {
+		return _webDAVProps;
+	}
+
 	private WebDAVProps _webDAVProps;
 }

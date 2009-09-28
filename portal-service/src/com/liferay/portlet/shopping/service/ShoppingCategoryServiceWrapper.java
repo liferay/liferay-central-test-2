@@ -79,5 +79,9 @@ public class ShoppingCategoryServiceWrapper implements ShoppingCategoryService {
 			serviceContext);
 	}
 
+	public ShoppingCategoryService getWrappedShoppingCategoryService() {
+		return _shoppingCategoryService;
+	}
+
 	private ShoppingCategoryService _shoppingCategoryService;
 }

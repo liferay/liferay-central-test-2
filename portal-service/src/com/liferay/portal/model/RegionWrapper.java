@@ -157,5 +157,9 @@ public class RegionWrapper implements Region {
 		return _region.toXmlString();
 	}
 
+	public Region getWrappedRegion() {
+		return _region;
+	}
+
 	private Region _region;
 }

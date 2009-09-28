@@ -128,5 +128,9 @@ public class WebDAVPropsLocalServiceWrapper implements WebDAVPropsLocalService {
 		_webDAVPropsLocalService.storeWebDAVProps(webDavProps);
 	}
 
+	public WebDAVPropsLocalService getWrappedWebDAVPropsLocalService() {
+		return _webDAVPropsLocalService;
+	}
+
 	private WebDAVPropsLocalService _webDAVPropsLocalService;
 }

@@ -219,5 +219,9 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		return _bookmarksFolder.isRoot();
 	}
 
+	public BookmarksFolder getWrappedBookmarksFolder() {
+		return _bookmarksFolder;
+	}
+
 	private BookmarksFolder _bookmarksFolder;
 }

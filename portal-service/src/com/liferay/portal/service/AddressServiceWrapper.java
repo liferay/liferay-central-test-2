@@ -85,5 +85,9 @@ public class AddressServiceWrapper implements AddressService {
 			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 
+	public AddressService getWrappedAddressService() {
+		return _addressService;
+	}
+
 	private AddressService _addressService;
 }

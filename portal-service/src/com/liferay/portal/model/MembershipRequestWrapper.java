@@ -212,5 +212,9 @@ public class MembershipRequestWrapper implements MembershipRequest {
 		return _membershipRequest.toXmlString();
 	}
 
+	public MembershipRequest getWrappedMembershipRequest() {
+		return _membershipRequest;
+	}
+
 	private MembershipRequest _membershipRequest;
 }

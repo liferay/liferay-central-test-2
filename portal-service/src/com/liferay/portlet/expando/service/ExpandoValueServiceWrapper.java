@@ -61,5 +61,9 @@ public class ExpandoValueServiceWrapper implements ExpandoValueService {
 			classPK);
 	}
 
+	public ExpandoValueService getWrappedExpandoValueService() {
+		return _expandoValueService;
+	}
+
 	private ExpandoValueService _expandoValueService;
 }

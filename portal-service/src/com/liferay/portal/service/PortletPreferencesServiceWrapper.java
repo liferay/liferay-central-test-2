@@ -69,5 +69,9 @@ public class PortletPreferencesServiceWrapper
 			name, portletId, preferences);
 	}
 
+	public PortletPreferencesService getWrappedPortletPreferencesService() {
+		return _portletPreferencesService;
+	}
+
 	private PortletPreferencesService _portletPreferencesService;
 }

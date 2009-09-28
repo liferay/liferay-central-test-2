@@ -68,5 +68,9 @@ public class LayoutSetServiceWrapper implements LayoutSetService {
 			virtualHost);
 	}
 
+	public LayoutSetService getWrappedLayoutSetService() {
+		return _layoutSetService;
+	}
+
 	private LayoutSetService _layoutSetService;
 }

@@ -44,5 +44,9 @@ public class AccountServiceWrapper implements AccountService {
 		_accountService = accountService;
 	}
 
+	public AccountService getWrappedAccountService() {
+		return _accountService;
+	}
+
 	private AccountService _accountService;
 }

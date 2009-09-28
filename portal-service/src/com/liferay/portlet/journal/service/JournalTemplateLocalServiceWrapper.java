@@ -334,5 +334,9 @@ public class JournalTemplateLocalServiceWrapper
 			cacheable, smallImage, smallImageURL, smallFile, serviceContext);
 	}
 
+	public JournalTemplateLocalService getWrappedJournalTemplateLocalService() {
+		return _journalTemplateLocalService;
+	}
+
 	private JournalTemplateLocalService _journalTemplateLocalService;
 }

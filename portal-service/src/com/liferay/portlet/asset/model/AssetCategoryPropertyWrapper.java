@@ -196,5 +196,9 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 		return _assetCategoryProperty.toXmlString();
 	}
 
+	public AssetCategoryProperty getWrappedAssetCategoryProperty() {
+		return _assetCategoryProperty;
+	}
+
 	private AssetCategoryProperty _assetCategoryProperty;
 }

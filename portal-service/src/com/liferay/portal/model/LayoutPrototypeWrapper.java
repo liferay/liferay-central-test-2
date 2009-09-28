@@ -203,5 +203,9 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 		return _layoutPrototype.getLayout();
 	}
 
+	public LayoutPrototype getWrappedLayoutPrototype() {
+		return _layoutPrototype;
+	}
+
 	private LayoutPrototype _layoutPrototype;
 }

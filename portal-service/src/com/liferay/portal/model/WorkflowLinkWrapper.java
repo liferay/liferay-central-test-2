@@ -190,5 +190,9 @@ public class WorkflowLinkWrapper implements WorkflowLink {
 		return _workflowLink.toXmlString();
 	}
 
+	public WorkflowLink getWrappedWorkflowLink() {
+		return _workflowLink;
+	}
+
 	private WorkflowLink _workflowLink;
 }

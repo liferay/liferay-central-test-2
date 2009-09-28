@@ -162,5 +162,9 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 		return _portletPreferences.toXmlString();
 	}
 
+	public PortletPreferences getWrappedPortletPreferences() {
+		return _portletPreferences;
+	}
+
 	private PortletPreferences _portletPreferences;
 }

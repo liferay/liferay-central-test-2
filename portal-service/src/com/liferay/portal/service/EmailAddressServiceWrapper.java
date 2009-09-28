@@ -82,5 +82,9 @@ public class EmailAddressServiceWrapper implements EmailAddressService {
 			typeId, primary);
 	}
 
+	public EmailAddressService getWrappedEmailAddressService() {
+		return _emailAddressService;
+	}
+
 	private EmailAddressService _emailAddressService;
 }

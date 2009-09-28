@@ -150,5 +150,9 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		return _assetTagStats.toXmlString();
 	}
 
+	public AssetTagStats getWrappedAssetTagStats() {
+		return _assetTagStats;
+	}
+
 	private AssetTagStats _assetTagStats;
 }

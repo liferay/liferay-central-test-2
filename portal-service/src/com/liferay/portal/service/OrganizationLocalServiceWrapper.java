@@ -363,5 +363,9 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 			regionId, countryId, statusId, comments, serviceContext);
 	}
 
+	public OrganizationLocalService getWrappedOrganizationLocalService() {
+		return _organizationLocalService;
+	}
+
 	private OrganizationLocalService _organizationLocalService;
 }

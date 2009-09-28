@@ -394,5 +394,9 @@ public class UserServiceWrapper implements UserService {
 			phones, websites, announcementsDelivers, serviceContext);
 	}
 
+	public UserService getWrappedUserService() {
+		return _userService;
+	}
+
 	private UserService _userService;
 }

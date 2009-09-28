@@ -206,5 +206,9 @@ public class UserTrackerWrapper implements UserTracker {
 		return _userTracker.getHits();
 	}
 
+	public UserTracker getWrappedUserTracker() {
+		return _userTracker;
+	}
+
 	private UserTracker _userTracker;
 }

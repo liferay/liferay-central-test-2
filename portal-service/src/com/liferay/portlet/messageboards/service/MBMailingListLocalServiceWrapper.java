@@ -174,5 +174,9 @@ public class MBMailingListLocalServiceWrapper
 			active);
 	}
 
+	public MBMailingListLocalService getWrappedMBMailingListLocalService() {
+		return _mbMailingListLocalService;
+	}
+
 	private MBMailingListLocalService _mbMailingListLocalService;
 }

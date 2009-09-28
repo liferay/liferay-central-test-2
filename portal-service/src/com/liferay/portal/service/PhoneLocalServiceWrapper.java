@@ -138,5 +138,9 @@ public class PhoneLocalServiceWrapper implements PhoneLocalService {
 			typeId, primary);
 	}
 
+	public PhoneLocalService getWrappedPhoneLocalService() {
+		return _phoneLocalService;
+	}
+
 	private PhoneLocalService _phoneLocalService;
 }

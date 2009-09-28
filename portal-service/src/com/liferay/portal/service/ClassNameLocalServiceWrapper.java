@@ -127,5 +127,9 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService {
 		return _classNameLocalService.getClassNameId(value);
 	}
 
+	public ClassNameLocalService getWrappedClassNameLocalService() {
+		return _classNameLocalService;
+	}
+
 	private ClassNameLocalService _classNameLocalService;
 }

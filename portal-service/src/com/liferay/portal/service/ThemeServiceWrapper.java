@@ -53,5 +53,9 @@ public class ThemeServiceWrapper implements ThemeService {
 		return _themeService.getWARThemes();
 	}
 
+	public ThemeService getWrappedThemeService() {
+		return _themeService;
+	}
+
 	private ThemeService _themeService;
 }

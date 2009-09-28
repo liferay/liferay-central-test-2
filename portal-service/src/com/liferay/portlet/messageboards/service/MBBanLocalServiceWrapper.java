@@ -153,5 +153,9 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService {
 		return _mbBanLocalService.hasBan(groupId, banUserId);
 	}
 
+	public MBBanLocalService getWrappedMBBanLocalService() {
+		return _mbBanLocalService;
+	}
+
 	private MBBanLocalService _mbBanLocalService;
 }

@@ -73,5 +73,9 @@ public class MembershipRequestServiceWrapper implements MembershipRequestService
 			reviewComments, statusId);
 	}
 
+	public MembershipRequestService getWrappedMembershipRequestService() {
+		return _membershipRequestService;
+	}
+
 	private MembershipRequestService _membershipRequestService;
 }

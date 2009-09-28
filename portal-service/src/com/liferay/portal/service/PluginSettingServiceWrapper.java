@@ -54,5 +54,9 @@ public class PluginSettingServiceWrapper implements PluginSettingService {
 			pluginType, roles, active);
 	}
 
+	public PluginSettingService getWrappedPluginSettingService() {
+		return _pluginSettingService;
+	}
+
 	private PluginSettingService _pluginSettingService;
 }

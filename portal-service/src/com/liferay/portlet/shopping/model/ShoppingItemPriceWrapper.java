@@ -202,5 +202,9 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		return _shoppingItemPrice.toXmlString();
 	}
 
+	public ShoppingItemPrice getWrappedShoppingItemPrice() {
+		return _shoppingItemPrice;
+	}
+
 	private ShoppingItemPrice _shoppingItemPrice;
 }

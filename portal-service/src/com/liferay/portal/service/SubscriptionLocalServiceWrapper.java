@@ -171,5 +171,9 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 			className, classPK);
 	}
 
+	public SubscriptionLocalService getWrappedSubscriptionLocalService() {
+		return _subscriptionLocalService;
+	}
+
 	private SubscriptionLocalService _subscriptionLocalService;
 }

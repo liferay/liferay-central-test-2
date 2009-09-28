@@ -247,5 +247,9 @@ public class DLFolderWrapper implements DLFolder {
 		return _dlFolder.isRoot();
 	}
 
+	public DLFolder getWrappedDLFolder() {
+		return _dlFolder;
+	}
+
 	private DLFolder _dlFolder;
 }

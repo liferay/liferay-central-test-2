@@ -177,5 +177,9 @@ public class ImageWrapper implements Image {
 		_image.setTextObj(textObj);
 	}
 
+	public Image getWrappedImage() {
+		return _image;
+	}
+
 	private Image _image;
 }

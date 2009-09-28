@@ -146,5 +146,9 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		return _userTrackerPath.toXmlString();
 	}
 
+	public UserTrackerPath getWrappedUserTrackerPath() {
+		return _userTrackerPath;
+	}
+
 	private UserTrackerPath _userTrackerPath;
 }

@@ -209,5 +209,9 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 			active);
 	}
 
+	public PortletLocalService getWrappedPortletLocalService() {
+		return _portletLocalService;
+	}
+
 	private PortletLocalService _portletLocalService;
 }

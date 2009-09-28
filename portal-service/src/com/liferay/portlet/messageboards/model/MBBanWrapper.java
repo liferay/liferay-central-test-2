@@ -195,5 +195,9 @@ public class MBBanWrapper implements MBBan {
 		return _mbBan.toXmlString();
 	}
 
+	public MBBan getWrappedMBBan() {
+		return _mbBan;
+	}
+
 	private MBBan _mbBan;
 }

@@ -223,5 +223,9 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 		return _expandoRowLocalService.getRowsCount(className, tableName);
 	}
 
+	public ExpandoRowLocalService getWrappedExpandoRowLocalService() {
+		return _expandoRowLocalService;
+	}
+
 	private ExpandoRowLocalService _expandoRowLocalService;
 }

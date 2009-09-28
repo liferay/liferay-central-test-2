@@ -222,5 +222,9 @@ public class EmailAddressWrapper implements EmailAddress {
 		return _emailAddress.getType();
 	}
 
+	public EmailAddress getWrappedEmailAddress() {
+		return _emailAddress;
+	}
+
 	private EmailAddress _emailAddress;
 }

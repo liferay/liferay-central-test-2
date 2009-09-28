@@ -130,5 +130,9 @@ public class ReleaseLocalServiceWrapper implements ReleaseLocalService {
 		return _releaseLocalService.updateRelease(verified);
 	}
 
+	public ReleaseLocalService getWrappedReleaseLocalService() {
+		return _releaseLocalService;
+	}
+
 	private ReleaseLocalService _releaseLocalService;
 }

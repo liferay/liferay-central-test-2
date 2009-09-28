@@ -218,5 +218,9 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 		return _expandoTableLocalService.updateTable(tableId, name);
 	}
 
+	public ExpandoTableLocalService getWrappedExpandoTableLocalService() {
+		return _expandoTableLocalService;
+	}
+
 	private ExpandoTableLocalService _expandoTableLocalService;
 }

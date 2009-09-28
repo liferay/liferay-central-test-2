@@ -77,5 +77,9 @@ public class SocialRequestInterpreterLocalServiceWrapper
 			themeDisplay);
 	}
 
+	public SocialRequestInterpreterLocalService getWrappedSocialRequestInterpreterLocalService() {
+		return _socialRequestInterpreterLocalService;
+	}
+
 	private SocialRequestInterpreterLocalService _socialRequestInterpreterLocalService;
 }

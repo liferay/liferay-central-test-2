@@ -117,5 +117,9 @@ public class ShardLocalServiceWrapper implements ShardLocalService {
 		return _shardLocalService.getShard(className, classPK);
 	}
 
+	public ShardLocalService getWrappedShardLocalService() {
+		return _shardLocalService;
+	}
+
 	private ShardLocalService _shardLocalService;
 }

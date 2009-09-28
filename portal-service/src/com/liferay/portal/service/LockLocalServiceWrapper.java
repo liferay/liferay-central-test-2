@@ -182,5 +182,9 @@ public class LockLocalServiceWrapper implements LockLocalService {
 		_lockLocalService.unlock(className, key);
 	}
 
+	public LockLocalService getWrappedLockLocalService() {
+		return _lockLocalService;
+	}
+
 	private LockLocalService _lockLocalService;
 }

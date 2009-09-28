@@ -203,5 +203,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.toXmlString();
 	}
 
+	public AssetVocabulary getWrappedAssetVocabulary() {
+		return _assetVocabulary;
+	}
+
 	private AssetVocabulary _assetVocabulary;
 }

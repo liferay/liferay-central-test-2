@@ -884,5 +884,9 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			roleIds, userGroupRoles, userGroupIds, serviceContext);
 	}
 
+	public UserLocalService getWrappedUserLocalService() {
+		return _userLocalService;
+	}
+
 	private UserLocalService _userLocalService;
 }

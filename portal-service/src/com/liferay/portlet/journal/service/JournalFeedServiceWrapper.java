@@ -106,5 +106,9 @@ public class JournalFeedServiceWrapper implements JournalFeedService {
 			targetPortletId, contentField, feedType, feedVersion, serviceContext);
 	}
 
+	public JournalFeedService getWrappedJournalFeedService() {
+		return _journalFeedService;
+	}
+
 	private JournalFeedService _journalFeedService;
 }

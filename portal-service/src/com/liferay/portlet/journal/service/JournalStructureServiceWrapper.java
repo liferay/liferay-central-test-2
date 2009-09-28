@@ -90,5 +90,9 @@ public class JournalStructureServiceWrapper implements JournalStructureService {
 			parentStructureId, name, description, xsd, serviceContext);
 	}
 
+	public JournalStructureService getWrappedJournalStructureService() {
+		return _journalStructureService;
+	}
+
 	private JournalStructureService _journalStructureService;
 }

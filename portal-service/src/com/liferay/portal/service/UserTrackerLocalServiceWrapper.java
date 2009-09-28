@@ -125,5 +125,9 @@ public class UserTrackerLocalServiceWrapper implements UserTrackerLocalService {
 		return _userTrackerLocalService.getUserTrackers(companyId, start, end);
 	}
 
+	public UserTrackerLocalService getWrappedUserTrackerLocalService() {
+		return _userTrackerLocalService;
+	}
+
 	private UserTrackerLocalService _userTrackerLocalService;
 }

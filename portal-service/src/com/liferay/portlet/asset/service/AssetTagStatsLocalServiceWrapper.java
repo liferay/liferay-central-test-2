@@ -138,5 +138,9 @@ public class AssetTagStatsLocalServiceWrapper
 		return _assetTagStatsLocalService.updateTagStats(tagId, classNameId);
 	}
 
+	public AssetTagStatsLocalService getWrappedAssetTagStatsLocalService() {
+		return _assetTagStatsLocalService;
+	}
+
 	private AssetTagStatsLocalService _assetTagStatsLocalService;
 }

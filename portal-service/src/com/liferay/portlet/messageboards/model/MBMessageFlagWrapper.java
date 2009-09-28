@@ -171,5 +171,9 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		return _mbMessageFlag.toXmlString();
 	}
 
+	public MBMessageFlag getWrappedMBMessageFlag() {
+		return _mbMessageFlag;
+	}
+
 	private MBMessageFlag _mbMessageFlag;
 }

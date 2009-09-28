@@ -189,5 +189,9 @@ public class ImageLocalServiceWrapper implements ImageLocalService {
 			width, size);
 	}
 
+	public ImageLocalService getWrappedImageLocalService() {
+		return _imageLocalService;
+	}
+
 	private ImageLocalService _imageLocalService;
 }

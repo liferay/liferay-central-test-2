@@ -77,5 +77,9 @@ public class DLFileShortcutServiceWrapper implements DLFileShortcutService {
 			folderId, toFolderId, toName, serviceContext);
 	}
 
+	public DLFileShortcutService getWrappedDLFileShortcutService() {
+		return _dlFileShortcutService;
+	}
+
 	private DLFileShortcutService _dlFileShortcutService;
 }

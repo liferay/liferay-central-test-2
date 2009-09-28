@@ -131,5 +131,9 @@ public class WikiPageResourceLocalServiceWrapper
 			title);
 	}
 
+	public WikiPageResourceLocalService getWrappedWikiPageResourceLocalService() {
+		return _wikiPageResourceLocalService;
+	}
+
 	private WikiPageResourceLocalService _wikiPageResourceLocalService;
 }

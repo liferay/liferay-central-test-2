@@ -137,5 +137,9 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 			classPK, score);
 	}
 
+	public RatingsEntryLocalService getWrappedRatingsEntryLocalService() {
+		return _ratingsEntryLocalService;
+	}
+
 	private RatingsEntryLocalService _ratingsEntryLocalService;
 }

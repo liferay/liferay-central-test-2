@@ -137,5 +137,9 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 			primary);
 	}
 
+	public WebsiteLocalService getWrappedWebsiteLocalService() {
+		return _websiteLocalService;
+	}
+
 	private WebsiteLocalService _websiteLocalService;
 }

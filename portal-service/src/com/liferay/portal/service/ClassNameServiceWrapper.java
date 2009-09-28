@@ -63,5 +63,9 @@ public class ClassNameServiceWrapper implements ClassNameService {
 		return _classNameService.getClassNameId(value);
 	}
 
+	public ClassNameService getWrappedClassNameService() {
+		return _classNameService;
+	}
+
 	private ClassNameService _classNameService;
 }

@@ -339,5 +339,9 @@ public class MBMailingListWrapper implements MBMailingList {
 		return _mbMailingList.toXmlString();
 	}
 
+	public MBMailingList getWrappedMBMailingList() {
+		return _mbMailingList;
+	}
+
 	private MBMailingList _mbMailingList;
 }

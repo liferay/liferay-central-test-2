@@ -824,5 +824,9 @@ public class JournalArticleLocalServiceWrapper
 			articleId, version, status, articleURL, serviceContext);
 	}
 
+	public JournalArticleLocalService getWrappedJournalArticleLocalService() {
+		return _journalArticleLocalService;
+	}
+
 	private JournalArticleLocalService _journalArticleLocalService;
 }

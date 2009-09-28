@@ -655,5 +655,9 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			columnName, classPK);
 	}
 
+	public ExpandoValueLocalService getWrappedExpandoValueLocalService() {
+		return _expandoValueLocalService;
+	}
+
 	private ExpandoValueLocalService _expandoValueLocalService;
 }

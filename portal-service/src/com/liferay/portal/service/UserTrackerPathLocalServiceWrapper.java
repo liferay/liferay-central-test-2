@@ -119,5 +119,9 @@ public class UserTrackerPathLocalServiceWrapper
 			start, end);
 	}
 
+	public UserTrackerPathLocalService getWrappedUserTrackerPathLocalService() {
+		return _userTrackerPathLocalService;
+	}
+
 	private UserTrackerPathLocalService _userTrackerPathLocalService;
 }

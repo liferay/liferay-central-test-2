@@ -179,5 +179,9 @@ public class AssetCategoryPropertyLocalServiceWrapper
 			key, value);
 	}
 
+	public AssetCategoryPropertyLocalService getWrappedAssetCategoryPropertyLocalService() {
+		return _assetCategoryPropertyLocalService;
+	}
+
 	private AssetCategoryPropertyLocalService _assetCategoryPropertyLocalService;
 }

@@ -204,5 +204,9 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 		return _blogsStatsUser.toXmlString();
 	}
 
+	public BlogsStatsUser getWrappedBlogsStatsUser() {
+		return _blogsStatsUser;
+	}
+
 	private BlogsStatsUser _blogsStatsUser;
 }

@@ -195,5 +195,9 @@ public class AssetVocabularyLocalServiceWrapper
 			name, serviceContext);
 	}
 
+	public AssetVocabularyLocalService getWrappedAssetVocabularyLocalService() {
+		return _assetVocabularyLocalService;
+	}
+
 	private AssetVocabularyLocalService _assetVocabularyLocalService;
 }

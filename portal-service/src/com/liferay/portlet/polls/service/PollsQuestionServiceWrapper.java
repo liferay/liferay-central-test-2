@@ -88,5 +88,9 @@ public class PollsQuestionServiceWrapper implements PollsQuestionService {
 			neverExpire, choices, serviceContext);
 	}
 
+	public PollsQuestionService getWrappedPollsQuestionService() {
+		return _pollsQuestionService;
+	}
+
 	private PollsQuestionService _pollsQuestionService;
 }

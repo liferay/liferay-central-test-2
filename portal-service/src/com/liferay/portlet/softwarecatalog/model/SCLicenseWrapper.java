@@ -174,5 +174,9 @@ public class SCLicenseWrapper implements SCLicense {
 		return _scLicense.toXmlString();
 	}
 
+	public SCLicense getWrappedSCLicense() {
+		return _scLicense;
+	}
+
 	private SCLicense _scLicense;
 }

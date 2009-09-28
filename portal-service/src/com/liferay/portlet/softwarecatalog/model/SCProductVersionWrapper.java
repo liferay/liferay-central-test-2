@@ -232,5 +232,9 @@ public class SCProductVersionWrapper implements SCProductVersion {
 		return _scProductVersion.getFrameworkVersions();
 	}
 
+	public SCProductVersion getWrappedSCProductVersion() {
+		return _scProductVersion;
+	}
+
 	private SCProductVersion _scProductVersion;
 }

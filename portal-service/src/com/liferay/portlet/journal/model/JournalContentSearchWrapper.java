@@ -175,5 +175,9 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 		return _journalContentSearch.toXmlString();
 	}
 
+	public JournalContentSearch getWrappedJournalContentSearch() {
+		return _journalContentSearch;
+	}
+
 	private JournalContentSearch _journalContentSearch;
 }

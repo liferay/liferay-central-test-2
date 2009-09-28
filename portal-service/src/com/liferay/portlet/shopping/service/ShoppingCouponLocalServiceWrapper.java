@@ -190,5 +190,9 @@ public class ShoppingCouponLocalServiceWrapper
 			serviceContext);
 	}
 
+	public ShoppingCouponLocalService getWrappedShoppingCouponLocalService() {
+		return _shoppingCouponLocalService;
+	}
+
 	private ShoppingCouponLocalService _shoppingCouponLocalService;
 }

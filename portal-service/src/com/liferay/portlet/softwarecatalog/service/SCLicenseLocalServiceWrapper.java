@@ -176,5 +176,9 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 			openSource, active, recommended);
 	}
 
+	public SCLicenseLocalService getWrappedSCLicenseLocalService() {
+		return _scLicenseLocalService;
+	}
+
 	private SCLicenseLocalService _scLicenseLocalService;
 }

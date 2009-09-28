@@ -98,5 +98,9 @@ public class SCProductVersionServiceWrapper implements SCProductVersionService {
 			testDirectDownloadURL, repoStoreArtifact, frameworkVersionIds);
 	}
 
+	public SCProductVersionService getWrappedSCProductVersionService() {
+		return _scProductVersionService;
+	}
+
 	private SCProductVersionService _scProductVersionService;
 }

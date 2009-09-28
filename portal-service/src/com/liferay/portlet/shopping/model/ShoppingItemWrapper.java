@@ -450,5 +450,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		return _shoppingItem.getItemPrices();
 	}
 
+	public ShoppingItem getWrappedShoppingItem() {
+		return _shoppingItem;
+	}
+
 	private ShoppingItem _shoppingItem;
 }

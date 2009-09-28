@@ -112,5 +112,9 @@ public class LayoutTemplateLocalServiceWrapper
 		_layoutTemplateLocalService.uninstallLayoutTemplates(themeId);
 	}
 
+	public LayoutTemplateLocalService getWrappedLayoutTemplateLocalService() {
+		return _layoutTemplateLocalService;
+	}
+
 	private LayoutTemplateLocalService _layoutTemplateLocalService;
 }

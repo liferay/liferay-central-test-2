@@ -145,5 +145,9 @@ public class LayoutSetPrototypeLocalServiceWrapper
 			nameMap, description, active);
 	}
 
+	public LayoutSetPrototypeLocalService getWrappedLayoutSetPrototypeLocalService() {
+		return _layoutSetPrototypeLocalService;
+	}
+
 	private LayoutSetPrototypeLocalService _layoutSetPrototypeLocalService;
 }

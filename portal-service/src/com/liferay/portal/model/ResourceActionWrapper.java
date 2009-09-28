@@ -145,5 +145,9 @@ public class ResourceActionWrapper implements ResourceAction {
 		return _resourceAction.toXmlString();
 	}
 
+	public ResourceAction getWrappedResourceAction() {
+		return _resourceAction;
+	}
+
 	private ResourceAction _resourceAction;
 }

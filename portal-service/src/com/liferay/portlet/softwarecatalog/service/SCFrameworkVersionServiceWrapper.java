@@ -89,5 +89,9 @@ public class SCFrameworkVersionServiceWrapper
 			name, url, active, priority);
 	}
 
+	public SCFrameworkVersionService getWrappedSCFrameworkVersionService() {
+		return _scFrameworkVersionService;
+	}
+
 	private SCFrameworkVersionService _scFrameworkVersionService;
 }

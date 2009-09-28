@@ -283,5 +283,9 @@ public class JournalFeedLocalServiceWrapper implements JournalFeedLocalService {
 			targetPortletId, contentField, feedType, feedVersion, serviceContext);
 	}
 
+	public JournalFeedLocalService getWrappedJournalFeedLocalService() {
+		return _journalFeedLocalService;
+	}
+
 	private JournalFeedLocalService _journalFeedLocalService;
 }

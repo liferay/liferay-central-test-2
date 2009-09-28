@@ -64,5 +64,9 @@ public class AnnouncementsFlagServiceWrapper implements AnnouncementsFlagService
 		_announcementsFlagService.deleteFlag(flagId);
 	}
 
+	public AnnouncementsFlagService getWrappedAnnouncementsFlagService() {
+		return _announcementsFlagService;
+	}
+
 	private AnnouncementsFlagService _announcementsFlagService;
 }

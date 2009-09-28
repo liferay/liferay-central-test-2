@@ -165,5 +165,9 @@ public class PermissionServiceWrapper implements PermissionService {
 			resourceId);
 	}
 
+	public PermissionService getWrappedPermissionService() {
+		return _permissionService;
+	}
+
 	private PermissionService _permissionService;
 }

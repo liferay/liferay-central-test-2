@@ -148,5 +148,9 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		return _orgGroupRole.containsGroup(groups);
 	}
 
+	public OrgGroupRole getWrappedOrgGroupRole() {
+		return _orgGroupRole;
+	}
+
 	private OrgGroupRole _orgGroupRole;
 }

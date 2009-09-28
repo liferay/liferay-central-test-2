@@ -114,5 +114,9 @@ public class AssetCategoryServiceWrapper implements AssetCategoryService {
 			serviceContext);
 	}
 
+	public AssetCategoryService getWrappedAssetCategoryService() {
+		return _assetCategoryService;
+	}
+
 	private AssetCategoryService _assetCategoryService;
 }

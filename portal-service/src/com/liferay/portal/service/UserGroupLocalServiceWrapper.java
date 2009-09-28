@@ -182,5 +182,9 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 			name, description);
 	}
 
+	public UserGroupLocalService getWrappedUserGroupLocalService() {
+		return _userGroupLocalService;
+	}
+
 	private UserGroupLocalService _userGroupLocalService;
 }

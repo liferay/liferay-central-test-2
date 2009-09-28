@@ -210,5 +210,9 @@ public class WikiNodeWrapper implements WikiNode {
 		return _wikiNode.toXmlString();
 	}
 
+	public WikiNode getWrappedWikiNode() {
+		return _wikiNode;
+	}
+
 	private WikiNode _wikiNode;
 }

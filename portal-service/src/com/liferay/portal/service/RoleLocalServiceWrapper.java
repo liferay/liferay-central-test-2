@@ -294,5 +294,9 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 			description, subtype);
 	}
 
+	public RoleLocalService getWrappedRoleLocalService() {
+		return _roleLocalService;
+	}
+
 	private RoleLocalService _roleLocalService;
 }

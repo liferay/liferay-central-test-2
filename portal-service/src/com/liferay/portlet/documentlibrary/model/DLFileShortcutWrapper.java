@@ -260,5 +260,9 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		return _dlFileShortcut.getToTitle();
 	}
 
+	public DLFileShortcut getWrappedDLFileShortcut() {
+		return _dlFileShortcut;
+	}
+
 	private DLFileShortcut _dlFileShortcut;
 }

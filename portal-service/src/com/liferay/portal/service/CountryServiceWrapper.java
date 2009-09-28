@@ -87,5 +87,9 @@ public class CountryServiceWrapper implements CountryService {
 		return _countryService.getCountryByName(name);
 	}
 
+	public CountryService getWrappedCountryService() {
+		return _countryService;
+	}
+
 	private CountryService _countryService;
 }

@@ -81,5 +81,9 @@ public class ResourcePermissionServiceWrapper
 			companyId, name, scope, roleId, actionId);
 	}
 
+	public ResourcePermissionService getWrappedResourcePermissionService() {
+		return _resourcePermissionService;
+	}
+
 	private ResourcePermissionService _resourcePermissionService;
 }

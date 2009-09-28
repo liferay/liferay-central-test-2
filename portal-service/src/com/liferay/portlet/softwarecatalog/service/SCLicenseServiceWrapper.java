@@ -75,5 +75,9 @@ public class SCLicenseServiceWrapper implements SCLicenseService {
 			openSource, active, recommended);
 	}
 
+	public SCLicenseService getWrappedSCLicenseService() {
+		return _scLicenseService;
+	}
+
 	private SCLicenseService _scLicenseService;
 }

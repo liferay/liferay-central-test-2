@@ -365,5 +365,9 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 			serviceContext);
 	}
 
+	public BlogsEntryLocalService getWrappedBlogsEntryLocalService() {
+		return _blogsEntryLocalService;
+	}
+
 	private BlogsEntryLocalService _blogsEntryLocalService;
 }

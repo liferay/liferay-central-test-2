@@ -169,5 +169,9 @@ public class PasswordPolicyRelLocalServiceWrapper
 			className, classPK);
 	}
 
+	public PasswordPolicyRelLocalService getWrappedPasswordPolicyRelLocalService() {
+		return _passwordPolicyRelLocalService;
+	}
+
 	private PasswordPolicyRelLocalService _passwordPolicyRelLocalService;
 }

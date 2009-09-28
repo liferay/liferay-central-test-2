@@ -287,5 +287,9 @@ public class TasksProposalLocalServiceWrapper
 			dueDateMinute);
 	}
 
+	public TasksProposalLocalService getWrappedTasksProposalLocalService() {
+		return _tasksProposalLocalService;
+	}
+
 	private TasksProposalLocalService _tasksProposalLocalService;
 }

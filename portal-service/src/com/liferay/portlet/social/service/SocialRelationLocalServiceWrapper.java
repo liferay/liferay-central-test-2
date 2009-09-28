@@ -170,5 +170,9 @@ public class SocialRelationLocalServiceWrapper
 		return _socialRelationLocalService.isRelatable(userId1, userId2, type);
 	}
 
+	public SocialRelationLocalService getWrappedSocialRelationLocalService() {
+		return _socialRelationLocalService;
+	}
+
 	private SocialRelationLocalService _socialRelationLocalService;
 }

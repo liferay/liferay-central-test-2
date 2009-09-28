@@ -170,5 +170,9 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 		return _scProductScreenshot.toXmlString();
 	}
 
+	public SCProductScreenshot getWrappedSCProductScreenshot() {
+		return _scProductScreenshot;
+	}
+
 	private SCProductScreenshot _scProductScreenshot;
 }

@@ -132,5 +132,9 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService {
 			wedClose, thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
+	public OrgLaborLocalService getWrappedOrgLaborLocalService() {
+		return _orgLaborLocalService;
+	}
+
 	private OrgLaborLocalService _orgLaborLocalService;
 }

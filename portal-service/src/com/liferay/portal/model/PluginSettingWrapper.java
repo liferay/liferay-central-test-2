@@ -185,5 +185,9 @@ public class PluginSettingWrapper implements PluginSetting {
 		return _pluginSetting.hasPermission(userId);
 	}
 
+	public PluginSetting getWrappedPluginSetting() {
+		return _pluginSetting;
+	}
+
 	private PluginSetting _pluginSetting;
 }

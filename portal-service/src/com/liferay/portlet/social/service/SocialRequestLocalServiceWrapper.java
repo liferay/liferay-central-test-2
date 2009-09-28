@@ -207,5 +207,9 @@ public class SocialRequestLocalServiceWrapper
 			themeDisplay);
 	}
 
+	public SocialRequestLocalService getWrappedSocialRequestLocalService() {
+		return _socialRequestLocalService;
+	}
+
 	private SocialRequestLocalService _socialRequestLocalService;
 }

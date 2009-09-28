@@ -48,5 +48,9 @@ public class QuartzLocalServiceWrapper implements QuartzLocalService {
 		_quartzLocalService.checkQuartzTables();
 	}
 
+	public QuartzLocalService getWrappedQuartzLocalService() {
+		return _quartzLocalService;
+	}
+
 	private QuartzLocalService _quartzLocalService;
 }

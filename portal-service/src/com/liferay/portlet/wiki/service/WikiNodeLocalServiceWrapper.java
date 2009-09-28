@@ -245,5 +245,9 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.updateNode(nodeId, name, description);
 	}
 
+	public WikiNodeLocalService getWrappedWikiNodeLocalService() {
+		return _wikiNodeLocalService;
+	}
+
 	private WikiNodeLocalService _wikiNodeLocalService;
 }

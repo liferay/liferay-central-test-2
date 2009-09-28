@@ -509,5 +509,9 @@ public class LayoutWrapper implements Layout {
 		return _layout.isSelected(selectable, layout, ancestorPlid);
 	}
 
+	public Layout getWrappedLayout() {
+		return _layout;
+	}
+
 	private Layout _layout;
 }

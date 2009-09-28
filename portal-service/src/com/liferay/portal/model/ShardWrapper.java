@@ -149,5 +149,9 @@ public class ShardWrapper implements Shard {
 		return _shard.toXmlString();
 	}
 
+	public Shard getWrappedShard() {
+		return _shard;
+	}
+
 	private Shard _shard;
 }

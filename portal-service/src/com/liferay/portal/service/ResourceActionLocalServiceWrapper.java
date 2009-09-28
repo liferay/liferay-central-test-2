@@ -133,5 +133,9 @@ public class ResourceActionLocalServiceWrapper
 		return _resourceActionLocalService.getResourceActions(name);
 	}
 
+	public ResourceActionLocalService getWrappedResourceActionLocalService() {
+		return _resourceActionLocalService;
+	}
+
 	private ResourceActionLocalService _resourceActionLocalService;
 }

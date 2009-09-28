@@ -170,5 +170,9 @@ public class SocialRelationWrapper implements SocialRelation {
 		return _socialRelation.toXmlString();
 	}
 
+	public SocialRelation getWrappedSocialRelation() {
+		return _socialRelation;
+	}
+
 	private SocialRelation _socialRelation;
 }

@@ -324,5 +324,9 @@ public class AssetEntryWrapper implements AssetEntry {
 		return _assetEntry.getTags();
 	}
 
+	public AssetEntry getWrappedAssetEntry() {
+		return _assetEntry;
+	}
+
 	private AssetEntry _assetEntry;
 }

@@ -195,5 +195,9 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 		return _assetTagProperty.toXmlString();
 	}
 
+	public AssetTagProperty getWrappedAssetTagProperty() {
+		return _assetTagProperty;
+	}
+
 	private AssetTagProperty _assetTagProperty;
 }

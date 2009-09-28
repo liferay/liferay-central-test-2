@@ -247,5 +247,9 @@ public class BookmarksFolderLocalServiceWrapper
 			serviceContext);
 	}
 
+	public BookmarksFolderLocalService getWrappedBookmarksFolderLocalService() {
+		return _bookmarksFolderLocalService;
+	}
+
 	private BookmarksFolderLocalService _bookmarksFolderLocalService;
 }

@@ -366,5 +366,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		return _passwordPolicy.toXmlString();
 	}
 
+	public PasswordPolicy getWrappedPasswordPolicy() {
+		return _passwordPolicy;
+	}
+
 	private PasswordPolicy _passwordPolicy;
 }

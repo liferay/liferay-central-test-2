@@ -140,5 +140,9 @@ public class RoleServiceWrapper implements RoleService {
 			subtype);
 	}
 
+	public RoleService getWrappedRoleService() {
+		return _roleService;
+	}
+
 	private RoleService _roleService;
 }

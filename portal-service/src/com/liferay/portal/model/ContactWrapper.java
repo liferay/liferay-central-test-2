@@ -370,5 +370,9 @@ public class ContactWrapper implements Contact {
 		return _contact.getFullName();
 	}
 
+	public Contact getWrappedContact() {
+		return _contact;
+	}
+
 	private Contact _contact;
 }
