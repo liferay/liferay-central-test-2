@@ -68,6 +68,10 @@ public class ${entity.name}${sessionTypeName}ServiceWrapper implements ${entity.
 		</#if>
 	</#list>
 
+	public ${entity.name}${sessionTypeName}Service getWrapped${entity.name}${sessionTypeName}Service() {
+		return _${entity.varName}${sessionTypeName}Service;
+	}
+
 	private ${entity.name}${sessionTypeName}Service _${entity.varName}${sessionTypeName}Service;
 
 }

@@ -70,6 +70,10 @@ public class ${entity.name}Wrapper implements ${entity.name} {
 		</#if>
 	</#list>
 
+	public ${entity.name} getWrapped${entity.name}() {
+		return _${entity.varName};
+	}
+
 	private ${entity.name} _${entity.varName};
 
 }

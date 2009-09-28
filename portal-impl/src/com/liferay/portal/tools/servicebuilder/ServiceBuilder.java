@@ -2556,7 +2556,7 @@ public class ServiceBuilder {
 	private void _createRemotingXml() throws Exception {
 		StringBuilder sb = new StringBuilder();
 
-		Document doc = SAXReaderUtil.read(new File(_springFileName), true);
+		Document doc = SAXReaderUtil.read(new File(_springFileName));
 
 		Iterator<Element> itr = doc.getRootElement().elements(
 			"bean").iterator();
