@@ -36,21 +36,24 @@ import java.util.Locale;
  */
 public class ActionComparator implements Comparator<String>, Serializable {
 
-	public ActionComparator(long companyId, Locale locale) {
-		_companyId = companyId;
+	public ActionComparator(Locale locale) {
 		_locale = locale;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public ActionComparator(long companyId, Locale locale) {
+		this(locale);
+	}
+
 	public int compare(String action1, String action2) {
-		action1 = ResourceActionsUtil.getAction(
-			_companyId, _locale, action1);
-		action2 = ResourceActionsUtil.getAction(
-			_companyId, _locale, action2);
+		action1 = ResourceActionsUtil.getAction(_locale, action1);
+		action2 = ResourceActionsUtil.getAction(_locale, action2);
 
 		return action1.compareTo(action2);
 	}
 
-	private long _companyId;
 	private Locale _locale;
 
 }

@@ -41,9 +41,15 @@ import javax.servlet.ServletContext;
 public class PortletTitleComparator
 	implements Comparator<Portlet>, Serializable {
 
-	public PortletTitleComparator(long companyId, Locale locale) {
-		_companyId = companyId;
+	public PortletTitleComparator(Locale locale) {
 		_locale = locale;
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public PortletTitleComparator(long companyId, Locale locale) {
+		this(locale);
 	}
 
 	public PortletTitleComparator(
@@ -52,7 +58,7 @@ public class PortletTitleComparator
 		_servletContext = servletContext;
 		_locale = locale;
 	}
-
+	
 	public int compare(Portlet portlet1, Portlet portlet2) {
 		String portletTitle1 = StringPool.BLANK;
 		String portletTitle2 = StringPool.BLANK;
@@ -64,17 +70,14 @@ public class PortletTitleComparator
 				portlet2, _servletContext, _locale);
 		}
 		else {
-			portletTitle1 = PortalUtil.getPortletTitle(
-				portlet1, _companyId, _locale);
-			portletTitle2 = PortalUtil.getPortletTitle(
-				portlet2, _companyId, _locale);
+			portletTitle1 = PortalUtil.getPortletTitle(portlet1, _locale);
+			portletTitle2 = PortalUtil.getPortletTitle(portlet2, _locale);
 		}
 
 		return portletTitle1.compareTo(portletTitle2);
 	}
 
-	private long _companyId;
-	private ServletContext _servletContext;
 	private Locale _locale;
+	private ServletContext _servletContext;
 
 }

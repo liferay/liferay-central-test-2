@@ -38,24 +38,27 @@ import java.util.Locale;
 public class PortletCategoryComparator
 	implements Comparator<PortletCategory>, Serializable {
 
-	public PortletCategoryComparator(long companyId, Locale locale) {
-		_companyId = companyId;
+	public PortletCategoryComparator(Locale locale) {
 		_locale = locale;
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public PortletCategoryComparator(long companyId, Locale locale) {
+		this(locale);
 	}
 
 	public int compare(
 		PortletCategory portletCategory1, PortletCategory portletCategory2) {
 
-		String name1 = LanguageUtil.get(
-			_companyId, _locale, portletCategory1.getName());
+		String name1 = LanguageUtil.get(_locale, portletCategory1.getName());
 
-		String name2 = LanguageUtil.get(
-			_companyId, _locale, portletCategory2.getName());
+		String name2 = LanguageUtil.get(_locale, portletCategory2.getName());
 
 		return name1.compareTo(name2);
 	}
 
-	private long _companyId;
 	private Locale _locale;
 
 }
