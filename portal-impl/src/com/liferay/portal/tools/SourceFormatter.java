@@ -410,6 +410,15 @@ public class SourceFormatter {
 				System.out.println("Java2HTML: " + files[i]);
 			}
 
+			if (newContent.contains(" * @author Raymond Aug") && 
+				!newContent.contains(" * @author Raymond Aug\u00e9")) {
+
+				newContent = newContent.replaceFirst(
+					"Raymond Aug.++", "Raymond Aug\u00e9");
+
+				System.out.println("UTF-8: " + files[i]);
+			}
+
 			newContent = stripImports(newContent, packagePath, className);
 
 			if (newContent.indexOf(";\n/**") != -1) {
