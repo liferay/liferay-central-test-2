@@ -80,16 +80,7 @@ public class TaskInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public int getTaskInstanceCountForCredential(
-			UserCredential userCredential, boolean completed) {
-		throw new UnsupportedOperationException();
-	}
-
 	public int getTaskInstanceCountForRole(long roleId) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int getTaskInstanceCountForRole(long roleId, boolean completed) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -97,35 +88,8 @@ public class TaskInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public int getTaskInstanceCountForUser(long userId, boolean completed) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int getTaskInstanceCountForWorkflowInstance(
-		long workflowInstanceId) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int getTaskInstanceCountForWorkflowInstance(
-			long workflowInstanceId, boolean completed) {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-		UserCredential userCredential, OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 		UserCredential userCredential, int start, int end,
-		OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-		UserCredential userCredential, boolean completed,
 		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
@@ -139,19 +103,7 @@ public class TaskInstanceManagerProxyBean
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
-		long roleId, OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
 		long roleId, int start, int end, OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
-		long roleId, boolean completed, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -164,19 +116,7 @@ public class TaskInstanceManagerProxyBean
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
-		long userId, OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
 		long userId, int start, int end, OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
-		long userId, boolean completed, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -189,20 +129,7 @@ public class TaskInstanceManagerProxyBean
 	}
 
 	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
-		long workflowInstanceId, OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
 		long workflowInstanceId, int start, int end,
-		OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
-		long workflowInstanceId, boolean completed,
 		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();

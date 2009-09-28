@@ -117,18 +117,6 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForCredential(
-	 *		UserCredential, boolean)
-	 */
-	public static int getTaskInstanceCountForCredential(
-			UserCredential userCredential, boolean completed)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceCountForCredential(
-			userCredential, completed);
-	}
-
-	/**
 	 * @see TaskInstanceManager#getTaskInstanceCountForRole(long)
 	 */
 	public static int getTaskInstanceCountForRole(long roleId)
@@ -138,64 +126,12 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForRole(long, boolean)
-	 */
-	public static int getTaskInstanceCountForRole(
-		long roleId, boolean completed) throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceCountForRole(
-			roleId, completed);
-	}
-
-	/**
 	 * @see TaskInstanceManager#getTaskInstanceCountForUser(long)
 	 */
 	public static int getTaskInstanceCountForUser(long userId)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getTaskInstanceCountForUser(userId);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForUser(long, boolean)
-	 */
-	public static int getTaskInstanceCountForUser(
-		long userId, boolean completed) throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceCountForUser(
-			userId, completed);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForWorkflowInstance(long)
-	 */
-	public static int getTaskInstanceCountForWorkflowInstance(
-		long workflowInstanceId) throws WorkflowException {
-		return _taskInstanceManager.getTaskInstanceCountForWorkflowInstance(
-			workflowInstanceId);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForWorkflowInstance(long,
-	 *		boolean)
-	 */
-	public static int getTaskInstanceCountForWorkflowInstance(
-			long workflowInstanceId, boolean completed)
-		throws WorkflowException {
-		return _taskInstanceManager.getTaskInstanceCountForWorkflowInstance(
-			workflowInstanceId, completed);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential,
-	 *		OrderByComparator)
-	 */
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-			UserCredential userCredential, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByCredential(
-			userCredential, orderByComparator);
 	}
 
 	/**
@@ -213,19 +149,6 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential,
-	 *		boolean, OrderByComparator)
-	 */
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-			UserCredential userCredential, boolean completed,
-			OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByCredential(
-			userCredential, completed, orderByComparator);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential,
 	 *		boolean, int, int, OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
@@ -235,18 +158,6 @@ public class TaskInstanceManagerUtil {
 
 		return _taskInstanceManager.getTaskInstanceInfosByCredential(
 			userCredential, completed, start, end, orderByComparator);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long,
-	 *		OrderByComparator)
-	 */
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(
-			long roleId, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByRole(
-			roleId, orderByComparator);
 	}
 
 	/**
@@ -263,18 +174,6 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long, boolean,
-	 *		OrderByComparator)
-	 */
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(
-			long roleId, boolean completed, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByRole(
-			roleId, completed, orderByComparator);
-	}
-
-	/**
 	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long, boolean, int,
 	 *		int, OrderByComparator)
 	 */
@@ -288,18 +187,6 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long,
-	 *		OrderByComparator)
-	 */
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByUser(
-			long userId, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByUser(
-			userId, orderByComparator);
-	}
-
-	/**
 	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long, int, int,
 	 *		OrderByComparator)
 	 */
@@ -310,18 +197,6 @@ public class TaskInstanceManagerUtil {
 
 		return _taskInstanceManager.getTaskInstanceInfosByUser(
 			userId, start, end, orderByComparator);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long, boolean,
-	 *		OrderByComparator)
-	 */
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByUser(
-			long userId, boolean completed, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByUser(
-			userId, completed, orderByComparator);
 	}
 
 	/**
@@ -339,18 +214,6 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
-	 *		OrderByComparator)
-	 */
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
-			long workflowInstanceId, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByWorkflowInstance(
-			workflowInstanceId, orderByComparator);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
 	 *		int, int, OrderByComparator)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
@@ -360,19 +223,6 @@ public class TaskInstanceManagerUtil {
 
 		return _taskInstanceManager.getTaskInstanceInfosByWorkflowInstance(
 			workflowInstanceId, start, end, orderByComparator);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
-	 *		boolean, OrderByComparator)
-	 */
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
-			long workflowInstanceId, boolean completed,
-			OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByWorkflowInstance(
-			workflowInstanceId, completed, orderByComparator);
 	}
 
 	/**

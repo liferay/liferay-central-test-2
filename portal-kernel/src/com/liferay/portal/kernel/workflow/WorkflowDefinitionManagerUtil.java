@@ -54,34 +54,8 @@ public class WorkflowDefinitionManagerUtil {
 			workflowDefinition, callingUserId);
 	}
 
-	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitionCount()
-	 */
-	public static int getWorkflowDefinitionCount() throws WorkflowException{
-		return _workflowDefinitionManager.getWorkflowDefinitionCount();
-	}
-
-	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitionCount(String)
-	 */
-	public static int getWorkflowDefinitionCount(String workflowDefinitionName)
-		throws WorkflowException{
-		return _workflowDefinitionManager.getWorkflowDefinitionCount(
-			workflowDefinitionName);
-	}
-
 	public static WorkflowDefinitionManager getWorkflowDefinitionManager() {
 		return _workflowDefinitionManager;
-	}
-
-	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(OrderByComparator)
-	 */
-	public static List<WorkflowDefinition> getWorkflowDefinitions(
-		OrderByComparator orderByComparator) {
-
-		return _workflowDefinitionManager.getWorkflowDefinitions(
-			orderByComparator);
 	}
 
 	/**
@@ -93,17 +67,6 @@ public class WorkflowDefinitionManagerUtil {
 
 		return _workflowDefinitionManager.getWorkflowDefinitions(
 			start, end, orderByComparator);
-	}
-
-	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(String,
-	 * 		OrderByComparator)
-	 */
-	public static List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName, OrderByComparator orderByComparator) {
-
-		return _workflowDefinitionManager.getWorkflowDefinitions(
-			workflowDefinitionName, orderByComparator);
 	}
 
 	/**
