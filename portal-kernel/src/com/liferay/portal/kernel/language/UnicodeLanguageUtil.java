@@ -45,24 +45,6 @@ public class UnicodeLanguageUtil {
 		return getUnicodeLanguage().format(locale, pattern, arguments);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public static String format(
-		long companyId, Locale locale, String pattern, Object argument) {
-
-		return getUnicodeLanguage().format(locale, pattern, argument);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String format(
-		long companyId, Locale locale, String pattern, Object[] arguments) {
-
-		return getUnicodeLanguage().format(locale, pattern, arguments);
-	}
-
 	public static String format(
 		PageContext pageContext, String pattern, LanguageWrapper argument) {
 
@@ -124,22 +106,6 @@ public class UnicodeLanguageUtil {
 	}
 
 	public static String get(Locale locale, String key, String defaultValue) {
-		return getUnicodeLanguage().get(locale, key, defaultValue);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String get(long companyId, Locale locale, String key) {
-		return getUnicodeLanguage().get(locale, key);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String get(
-		long companyId, Locale locale, String key, String defaultValue) {
-
 		return getUnicodeLanguage().get(locale, key, defaultValue);
 	}
 

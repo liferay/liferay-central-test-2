@@ -65,46 +65,6 @@ public class LanguageUtil {
 			locale, pattern, arguments, translateArguments);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public static String format(
-		long companyId, Locale locale, String pattern, Object argument) {
-
-		return getLanguage().format(locale, pattern, argument);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String format(
-		long companyId, Locale locale, String pattern, Object argument,
-		boolean translateArguments) {
-
-		return getLanguage().format(
-			locale, pattern, argument, translateArguments);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String format(
-		long companyId, Locale locale, String pattern, Object[] arguments) {
-
-		return getLanguage().format(locale, pattern, arguments);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String format(
-		long companyId, Locale locale, String pattern, Object[] arguments,
-		boolean translateArguments) {
-
-		return getLanguage().format(
-			locale, pattern, arguments, translateArguments);
-	}
-
 	public static String format(
 		PageContext pageContext, String pattern, LanguageWrapper argument) {
 
@@ -166,22 +126,6 @@ public class LanguageUtil {
 	}
 
 	public static String get(Locale locale, String key, String defaultValue) {
-		return getLanguage().get(locale, key, defaultValue);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String get(long companyId, Locale locale, String key) {
-		return getLanguage().get(locale, key);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String get(
-		long companyId, Locale locale, String key, String defaultValue) {
-
 		return getLanguage().get(locale, key, defaultValue);
 	}
 

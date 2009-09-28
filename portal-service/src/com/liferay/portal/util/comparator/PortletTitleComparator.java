@@ -45,13 +45,6 @@ public class PortletTitleComparator
 		_locale = locale;
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public PortletTitleComparator(long companyId, Locale locale) {
-		this(locale);
-	}
-
 	public PortletTitleComparator(
 		ServletContext servletContext, Locale locale) {
 

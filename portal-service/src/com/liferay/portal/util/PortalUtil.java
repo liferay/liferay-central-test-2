@@ -587,24 +587,6 @@ public class PortalUtil {
 		return getPortal().getPortletDescription(portletId, locale);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public static String getPortletDescription(
-		String portletId, long companyId, Locale locale) {
-
-		return getPortal().getPortletDescription(portletId, locale);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String getPortletDescription(
-		String portletId, long companyId, String languageId) {
-
-		return getPortal().getPortletDescription(portletId, languageId);
-	}
-
 	public static String getPortletDescription(
 		String portletId, String languageId) {
 
@@ -683,24 +665,6 @@ public class PortalUtil {
 		return getPortal().getPortletTitle(portlet, locale);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public static String getPortletTitle(
-		Portlet portlet, long companyId, Locale locale) {
-
-		return getPortal().getPortletTitle(portlet, locale);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String getPortletTitle(
-		Portlet portlet, long companyId, String languageId) {
-
-		return getPortal().getPortletTitle(portlet, languageId);
-	}
-
 	public static String getPortletTitle(
 		Portlet portlet, ServletContext servletContext, Locale locale) {
 
@@ -717,24 +681,6 @@ public class PortalUtil {
 
 	public static String getPortletTitle(String portletId, Locale locale) {
 		return getPortal().getPortletTitle(portletId, locale);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String getPortletTitle(
-		String portletId, long companyId, Locale locale) {
-
-		return getPortal().getPortletTitle(portletId, locale);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static String getPortletTitle(
-		String portletId, long companyId, String languageId) {
-
-		return getPortal().getPortletTitle(portletId, languageId);
 	}
 
 	public static String getPortletTitle(String portletId, String languageId) {

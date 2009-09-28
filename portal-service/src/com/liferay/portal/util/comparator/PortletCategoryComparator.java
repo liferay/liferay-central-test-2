@@ -42,13 +42,6 @@ public class PortletCategoryComparator
 		_locale = locale;
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public PortletCategoryComparator(long companyId, Locale locale) {
-		this(locale);
-	}
-
 	public int compare(
 		PortletCategory portletCategory1, PortletCategory portletCategory2) {
 
