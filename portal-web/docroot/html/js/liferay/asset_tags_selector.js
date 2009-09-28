@@ -107,7 +107,6 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 							else {
 								addTagButton.parent().addClass('aui-input-disabled');
 							}
-
 						}
 					);
 
