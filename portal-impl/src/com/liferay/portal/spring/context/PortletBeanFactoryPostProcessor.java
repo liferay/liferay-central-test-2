@@ -47,7 +47,8 @@ public class PortletBeanFactoryPostProcessor
 			AggregateClassLoader.getAggregateClassLoader(
 				new ClassLoader[] {
 					PortletClassLoaderUtil.getClassLoader(),
-					PortalClassLoaderUtil.getClassLoader()});
+					PortalClassLoaderUtil.getClassLoader()
+				});
 
 		if (ServerDetector.isJBoss()) {
 			beanClassLoader = new JBossClassLoader(beanClassLoader);

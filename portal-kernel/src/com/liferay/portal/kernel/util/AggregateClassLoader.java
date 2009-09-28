@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -40,16 +41,6 @@ import java.util.List;
 public class AggregateClassLoader extends ClassLoader {
 
 	public static ClassLoader getAggregateClassLoader(
-		ClassLoader[] classLoaders) {
-
-		if ((classLoaders == null) || (classLoaders.length == 0)) {
-			return null;
-		}
-
-		return getAggregateClassLoader(classLoaders[0], classLoaders);
-	}
-
-	public static ClassLoader getAggregateClassLoader(
 		ClassLoader parentClassLoader, ClassLoader[] classLoaders) {
 
 		if ((classLoaders == null) || (classLoaders.length == 0)) {
@@ -60,19 +51,28 @@ public class AggregateClassLoader extends ClassLoader {
 			return classLoaders[0];
 		}
 
-		AggregateClassLoader aggregateLoader =
-			new AggregateClassLoader(parentClassLoader);
+		AggregateClassLoader aggregateClassLoader = new AggregateClassLoader(
+			parentClassLoader);
 
 		for (ClassLoader classLoader : classLoaders) {
-			aggregateLoader.addClassLoader(classLoader);
+			aggregateClassLoader.addClassLoader(classLoader);
 		}
 
-		return aggregateLoader;
+		return aggregateClassLoader;
 	}
 
-	public AggregateClassLoader(ClassLoader parentClassLoader) {
+	public static ClassLoader getAggregateClassLoader(
+		ClassLoader[] classLoaders) {
 
-		super(parentClassLoader);
+		if ((classLoaders == null) || (classLoaders.length == 0)) {
+			return null;
+		}
+
+		return getAggregateClassLoader(classLoaders[0], classLoaders);
+	}
+
+	public AggregateClassLoader(ClassLoader classLoader) {
+		super(classLoader);
 	}
 
 	public void addClassLoader(ClassLoader classLoader) {
@@ -83,11 +83,13 @@ public class AggregateClassLoader extends ClassLoader {
 		if ((classLoader instanceof AggregateClassLoader) &&
 			(classLoader.getParent().equals(getParent()))){
 
-			AggregateClassLoader toConsolidate =
+			AggregateClassLoader aggregateClassLoader =
 				(AggregateClassLoader)classLoader;
 
-			for (ClassLoader childLoader : toConsolidate.getClassLoaders()) {
-				addClassLoader(childLoader);
+			for (ClassLoader curClassLoader :
+					aggregateClassLoader.getClassLoaders()) {
+
+				addClassLoader(curClassLoader);
 			}
 		}
 		else {
@@ -106,39 +108,46 @@ public class AggregateClassLoader extends ClassLoader {
 		}
 	}
 
-
 	public void addClassLoader(Collection<ClassLoader> classLoaders) {
 		for (ClassLoader classLoader : classLoaders) {
 			addClassLoader(classLoader);
 		}
 	}
 
-	public boolean equals(Object o) {
-		if (this == o) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
-		if (!(o instanceof AggregateClassLoader)) {
+
+		if (!(obj instanceof AggregateClassLoader)) {
 			return false;
 		}
 
-		AggregateClassLoader that = (AggregateClassLoader) o;
+		AggregateClassLoader aggregateClassLoader = (AggregateClassLoader)obj;
 
-		if (_classLoaders.equals(that._classLoaders) &&
-			(((getParent() == null) && (that.getParent() == null)) ||
-				((getParent() != null) &&
-					(getParent().equals(that.getParent()))))) {
+		if (_classLoaders.equals(aggregateClassLoader._classLoaders) &&
+			(((getParent() == null) &&
+			  (aggregateClassLoader.getParent() == null)) ||
+			 ((getParent() != null) &&
+			  (getParent().equals(aggregateClassLoader.getParent()))))) {
+
 			return true;
 		}
 
 		return false;
 	}
 
-	public int hashCode() {
-		return _classLoaders != null ? _classLoaders.hashCode() : 0;
+	public List<ClassLoaderWrapper> getClassLoaders() {
+		return _classLoaders;
 	}
 
-	List<ClassLoaderWrapper> getClassLoaders() {
-		return _classLoaders;
+	public int hashCode() {
+		if (_classLoaders != null) {
+			return _classLoaders.hashCode();
+		}
+		else {
+			return 0;
+		}
 	}
 
 	protected Class<?> findClass(String name) throws ClassNotFoundException {
@@ -146,94 +155,96 @@ public class AggregateClassLoader extends ClassLoader {
 			try {
 				return classLoader.findClass(name);
 			}
-			catch (ClassNotFoundException e) {
-				//nothing to do here...
+			catch (ClassNotFoundException cnfe) {
 			}
 		}
-		throw new ClassNotFoundException("Unable to find class: " + name);
+
+		throw new ClassNotFoundException("Unable to find class " + name);
 	}
 
 	protected Class<?> loadClass(String name, boolean resolve)
 		throws ClassNotFoundException {
 
-		Class clazz = null;
+		Class<?> loadedClass = null;
 
 		for (ClassLoaderWrapper classLoader : _classLoaders) {
 			try {
-				clazz = classLoader.loadClass(name, resolve);
+				loadedClass = classLoader.loadClass(name, resolve);
 			}
-			catch (ClassNotFoundException e) {
-				//nothing to do here...
+			catch (ClassNotFoundException cnfe) {
 			}
 		}
 
-		if (clazz == null) {
-			clazz = super.loadClass(name, resolve);
+		if (loadedClass == null) {
+			loadedClass = super.loadClass(name, resolve);
 		}
 		else if (resolve) {
-			resolveClass(clazz);
+			resolveClass(loadedClass);
 		}
 
-		return clazz;
+		return loadedClass;
 	}
 
-	// the following wrapper is key since we need access to the
-	// findClass findClassMethod.  An aggregate needs to be able
-	// to call the parent's findClass findClassMethod.  However, since
-	// this findClassMethod is normally protected, we must use reflection
-	// to access. 
+	private static Log _log = LogFactoryUtil.getLog(AggregateClassLoader.class);
+
+	private List<ClassLoaderWrapper> _classLoaders =
+		new ArrayList<ClassLoaderWrapper>();
+
+	// The following wrapper is key since we need access to the findClass
+	// method. An aggregate needs to be able to call the parent's findClass
+	// method. However, since this findClass method is normally protected, we
+	// must use reflection to access.
+
 	private static class ClassLoaderWrapper extends ClassLoader {
+
 		public ClassLoaderWrapper(ClassLoader classLoader) {
 			super(classLoader);
-		}
-
-		public Class<?> loadClass(String name, boolean resolve)
-			throws ClassNotFoundException {
-			return super.loadClass(name, resolve);
-		}
-
-		public Class<?> findClass(String name) throws ClassNotFoundException {
-			try {
-				return (Class) findClassMethod.invoke(getParent(), name);
-			}
-			catch (InvocationTargetException e) {
-				throw new ClassNotFoundException(
-					"Unable to find class: " + name, e.getTargetException());
-			}
-			catch (Exception e) {
-				throw new ClassNotFoundException(
-					"Unable to find class: " + name, e);
-			}
 		}
 
 		public boolean equals(Object obj) {
 			if (!(obj instanceof ClassLoader)) {
 				return false;
 			}
+
 			return getParent().equals(obj);
 		}
 
-		private static Method findClassMethod;
+		public Class<?> findClass(String name) throws ClassNotFoundException {
+			try {
+				return (Class<?>)_findClassMethod.invoke(getParent(), name);
+			}
+			catch (InvocationTargetException ite) {
+				throw new ClassNotFoundException(
+					"Unable to find class " + name, ite.getTargetException());
+			}
+			catch (Exception e) {
+				throw new ClassNotFoundException(
+					"Unable to find class " + name, e);
+			}
+		}
+
+		public Class<?> loadClass(String name, boolean resolve)
+			throws ClassNotFoundException {
+
+			return super.loadClass(name, resolve);
+		}
+
+		private static Method _findClassMethod;
 
 		static {
 			try {
-				findClassMethod = ClassLoader.class.getDeclaredMethod(
+				_findClassMethod = ClassLoader.class.getDeclaredMethod(
 					"findClass", String.class);
-				findClassMethod.setAccessible(true);
+
+				_findClassMethod.setAccessible(true);
 			}
-			catch (NoSuchMethodException e) {
+			catch (NoSuchMethodException nsme) {
 				if (_log.isErrorEnabled()) {
-					_log.error(
-						"Unable to locate findClass method", e);
+					_log.error("Unable to locate findClass method", nsme);
 				}
 			}
 		}
+
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(AggregateClassLoader.class);
-
-	//cannot use a Set because order of class lookup matters.
-	private List<ClassLoaderWrapper> _classLoaders =
-		new ArrayList<ClassLoaderWrapper>();
 
 }

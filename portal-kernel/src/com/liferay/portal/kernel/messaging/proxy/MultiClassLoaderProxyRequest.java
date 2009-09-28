@@ -57,9 +57,10 @@ public class MultiClassLoaderProxyRequest extends ProxyRequest {
 			contextClassLoader = currentThread.getContextClassLoader();
 
 			ClassLoader invocationClassLoader =
-				AggregateClassLoader.getAggregateClassLoader(					
+				AggregateClassLoader.getAggregateClassLoader(
 					new ClassLoader[] {
-						contextClassLoader, _clientClassLoaders });
+						contextClassLoader, _clientClassLoaders
+					});
 
 			currentThread.setContextClassLoader(invocationClassLoader);
 		}
