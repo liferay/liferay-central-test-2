@@ -41,9 +41,9 @@ import java.lang.reflect.Method;
 public class ProxyRequest implements Serializable {
 
 	public ProxyRequest(Method method, Object[] arguments) throws Exception {
-
 		Class<?>[] argumentTypes = method.getParameterTypes();
-		for(int i = 0; i<arguments.length; i++) {
+
+		for (int i = 0; i < arguments.length; i++) {
 			if (arguments[i] == null) {
 				arguments[i] = new NullWrapper(argumentTypes[i].getName());
 			}
@@ -52,7 +52,11 @@ public class ProxyRequest implements Serializable {
 		_methodWrapper = new MethodWrapper(
 			method.getDeclaringClass().getName(), method.getName(), arguments);
 
-		_hasReturnValue = method.getReturnType() != Void.TYPE;
+		_hasReturnValue = false;
+
+		if (method.getReturnType() != Void.TYPE) {
+			_hasReturnValue = true;
+		}
 
 		MessagingProxy messagingProxy = method.getAnnotation(
 			MessagingProxy.class);
@@ -69,10 +73,6 @@ public class ProxyRequest implements Serializable {
 		}
 	}
 
-	public MethodWrapper getMethodWrapper() {
-		return _methodWrapper;
-	}
-
 	public Object execute(Object object) throws Exception {
 		try {
 			return MethodInvoker.invoke(_methodWrapper, object);
@@ -80,6 +80,10 @@ public class ProxyRequest implements Serializable {
 		catch (InvocationTargetException e) {
 			throw new Exception(e.getTargetException());
 		}
+	}
+
+	public MethodWrapper getMethodWrapper() {
+		return _methodWrapper;
 	}
 
 	public boolean hasReturnValue() {

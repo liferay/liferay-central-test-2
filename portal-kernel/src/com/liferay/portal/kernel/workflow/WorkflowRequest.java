@@ -36,6 +36,7 @@ public class WorkflowRequest extends ProxyRequest {
 
 	public WorkflowRequest(Method method, Object[] arguments) throws Exception {
 		super(method, arguments);
+
 		_method = method;
 		_userCredential = inspectForCallingUserCredential();
 	}
@@ -87,7 +88,7 @@ public class WorkflowRequest extends ProxyRequest {
 		return null;
 	}
 
-	private UserCredential _userCredential;
 	private Method _method;
+	private UserCredential _userCredential;
 
 }
