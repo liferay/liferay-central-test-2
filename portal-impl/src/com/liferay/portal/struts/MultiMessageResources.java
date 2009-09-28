@@ -25,6 +25,7 @@ package com.liferay.portal.struts;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.InputStream;
@@ -95,17 +96,17 @@ public class MultiMessageResources extends PropertyMessageResources {
 		}
 	}
 
-	public Properties putMessages(Properties props, String localeKey) {
-		Properties oldProps = new Properties();
+	public Properties putMessages(Properties properties, String localeKey) {
+		Properties oldProperties = new Properties();
 
-		if (props.size() < 1) {
-			return oldProps;
+		if (properties.size() < 1) {
+			return oldProperties;
 		}
 
 		_messagesWriteLock.lock();
 
 		try {
-			Enumeration<Object> names = props.keys();
+			Enumeration<Object> names = properties.keys();
 
 			while (names.hasMoreElements()) {
 				String key = (String)names.nextElement();
@@ -114,18 +115,18 @@ public class MultiMessageResources extends PropertyMessageResources {
 					LocaleUtil.fromLanguageId(localeKey), key);
 
 				if (message != null) {
-					oldProps.put(key, message);
+					oldProperties.put(key, message);
 				}
 
 				messages.put(
-					messageKey(localeKey, key), props.getProperty(key));
+					messageKey(localeKey, key), properties.getProperty(key));
 			}
 		}
 		finally {
 			_messagesWriteLock.unlock();
 		}
 
-		return oldProps;
+		return oldProperties;
 	}
 
 	public void setServletContext(ServletContext servletContext) {
@@ -157,7 +158,8 @@ public class MultiMessageResources extends PropertyMessageResources {
 			_localeWriteLock.unlock();
 		}
 
-		String[] names = StringUtil.split(config.replace('.', '/'));
+		String[] names = StringUtil.split(
+			config.replace(StringPool.PERIOD, StringPool.SLASH));
 
 		for (int i = 0; i < names.length; i++) {
 			String name = names[i];
@@ -168,7 +170,7 @@ public class MultiMessageResources extends PropertyMessageResources {
 
 			name += ".properties";
 
-			_loadProps(name, localeKey, false);
+			_loadProperties(name, localeKey, false);
 		}
 
 		for (int i = 0; i < names.length; i++) {
@@ -180,14 +182,14 @@ public class MultiMessageResources extends PropertyMessageResources {
 
 			name += ".properties";
 
-			_loadProps(name, localeKey, true);
+			_loadProperties(name, localeKey, true);
 		}
 	}
 
-	private void _loadProps(
+	private void _loadProperties(
 		String name, String localeKey, boolean useServletContext) {
 
-		Properties props = new Properties();
+		Properties properties = new Properties();
 
 		try {
 			URL url = null;
@@ -210,13 +212,14 @@ public class MultiMessageResources extends PropertyMessageResources {
 			if (url != null) {
 				InputStream is = url.openStream();
 
-				props.load(is);
+				properties.load(is);
 
 				is.close();
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Loading " + url + " with " + props.size() + " values");
+						"Loading " + url + " with " + properties.size() +
+							" values");
 				}
 			}
 		}
@@ -224,7 +227,7 @@ public class MultiMessageResources extends PropertyMessageResources {
 			_log.warn(e);
 		}
 
-		putMessages(props, localeKey);
+		putMessages(properties, localeKey);
 	}
 
 	private static Log _log =

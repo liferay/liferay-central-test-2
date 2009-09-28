@@ -22,6 +22,8 @@
 
 package com.liferay.portal.tools.deploy;
 
+import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
@@ -59,6 +61,17 @@ public class HookDeployer extends BaseDeployer {
 
 	protected HookDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
+	}
+
+	protected void copyXmls(
+			File srcFile, String displayName, PluginPackage pluginPackage)
+		throws Exception {
+
+		super.copyXmls(srcFile, displayName, pluginPackage);
+
+		if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
+			copyDependencyXml("context.xml", srcFile + "/META-INF");
+		}
 	}
 
 	protected String getExtraContent(

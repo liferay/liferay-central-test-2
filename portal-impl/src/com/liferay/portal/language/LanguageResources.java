@@ -37,18 +37,51 @@ import org.apache.struts.util.MessageResources;
  */
 public class LanguageResources {
 
-	public LanguageResources(MessageResources resources) {
-		_resources = resources;
+	public static void clearCache() {
+		_instance._clearCache();
+	}
+
+	public static String getMessage(Locale locale, String key) {
+		return _instance._getMessage(locale, key);
+	}
+
+	public static void init(MessageResources messageResources) {
+		_instance._init(messageResources);
+	}
+
+	public static boolean isInitialized() {
+		if (_instance._messageResources == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private LanguageResources() {
 		_cache = new ConcurrentHashMap<String, ResourceValue>(10000);
 	}
 
-	public String getMessage(Locale locale, String key) {
+	private void _clearCache() {
+		_cache.clear();
+	}
+
+	private String _getCacheKey(Locale locale, String key) {
+		StringBuilder sb = new StringBuilder(String.valueOf(locale));
+
+		sb.append(StringPool.POUND);
+		sb.append(key);
+
+		return sb.toString();
+	}
+
+	private String _getMessage(Locale locale, String key) {
 		String cacheKey = _getCacheKey(locale, key);
 
 		ResourceValue resourceValue = _cache.get(cacheKey);
 
 		if (resourceValue == null) {
-			String value = _resources.getMessage(locale, key);
+			String value = _messageResources.getMessage(locale, key);
 
 			resourceValue = new ResourceValue(value);
 
@@ -58,8 +91,8 @@ public class LanguageResources {
 		return resourceValue.getValue();
 	}
 
-	private String _getCacheKey(Locale locale, String key) {
-		return String.valueOf(locale) + StringPool.POUND + key;
+	private void _init(MessageResources messageResources) {
+		_messageResources = messageResources;
 	}
 
 	private class ResourceValue {
@@ -76,7 +109,9 @@ public class LanguageResources {
 
 	}
 
+	private static LanguageResources _instance = new LanguageResources();
+
 	private Map<String, ResourceValue> _cache;
-	private MessageResources _resources;
+	private MessageResources _messageResources;
 
 }

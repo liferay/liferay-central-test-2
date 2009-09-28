@@ -46,7 +46,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactory;
 
@@ -80,58 +79,29 @@ import org.apache.struts.taglib.TagUtils;
 public class LanguageImpl implements Language {
 
 	public String format(Locale locale, String pattern, Object argument) {
-		long companyId = CompanyThreadLocal.getCompanyId();
-
-		return format(
-			companyId, locale, pattern, new Object[] {argument}, true);
+		return format(locale, pattern, new Object[] {argument}, true);
 	}
 
-	public String format(Locale locale, String pattern, Object argument,
+	public String format(
+		Locale locale, String pattern, Object argument,
 		boolean translateArguments) {
 
-		long companyId = CompanyThreadLocal.getCompanyId();
-
 		return format(
-			companyId, locale, pattern, new Object[] {argument},
-			translateArguments);
+			locale, pattern, new Object[] {argument}, translateArguments);
 	}
 
 	public String format(Locale locale, String pattern, Object[] arguments) {
-		long companyId = CompanyThreadLocal.getCompanyId();
-
-		return format(companyId, locale, pattern, arguments, true);
+		return format(locale, pattern, arguments, true);
 	}
 
 	public String format(
-		long companyId, Locale locale, String pattern, Object argument) {
-
-		return format(
-			companyId, locale, pattern, new Object[] {argument}, true);
-	}
-
-	public String format(
-		long companyId, Locale locale, String pattern, Object argument,
-		boolean translateArguments) {
-
-		return format(
-			companyId, locale, pattern, new Object[] {argument},
-			translateArguments);
-	}
-
-	public String format(
-		long companyId, Locale locale, String pattern, Object[] arguments) {
-
-		return format(companyId, locale, pattern, arguments, true);
-	}
-
-	public String format(
-		long companyId, Locale locale, String pattern, Object[] arguments,
+		Locale locale, String pattern, Object[] arguments,
 		boolean translateArguments) {
 
 		String value = null;
 
 		try {
-			pattern = get(companyId, locale, pattern);
+			pattern = get(locale, pattern);
 
 			if (arguments != null) {
 				pattern = _escapePattern(pattern);
@@ -141,7 +111,7 @@ public class LanguageImpl implements Language {
 				for (int i = 0; i < arguments.length; i++) {
 					if (translateArguments) {
 						formattedArguments[i] = get(
-							companyId, locale, arguments[i].toString());
+							locale, arguments[i].toString());
 					}
 					else {
 						formattedArguments[i] = arguments[i];
@@ -293,18 +263,10 @@ public class LanguageImpl implements Language {
 	}
 
 	public String get(Locale locale, String key) {
-		long companyId = CompanyThreadLocal.getCompanyId();
-
-		return get(companyId, locale, key, key);
+		return get(locale, key, key);
 	}
 
-	public String get(long companyId, Locale locale, String key) {
-		return get(companyId, locale, key, key);
-	}
-
-	public String get(
-		long companyId, Locale locale, String key, String defaultValue) {
-
+	public String get(Locale locale, String key, String defaultValue) {
 		if (key == null) {
 			return null;
 		}
@@ -312,10 +274,7 @@ public class LanguageImpl implements Language {
 		String value = null;
 
 		try {
-			LanguageResources resources = (LanguageResources)WebAppPool.get(
-				String.valueOf(companyId), WebKeys.LANGUAGE_RESOURCES);
-
-			if (resources == null) {
+			if (LanguageResources.isInitialized()) {
 
 				// LEP-4505
 
@@ -325,7 +284,7 @@ public class LanguageImpl implements Language {
 				value = bundle.getString(key);
 			}
 			else {
-				value = resources.getMessage(locale, key);
+				value = LanguageResources.getMessage(locale, key);
 			}
 		}
 		catch (Exception e) {
@@ -373,9 +332,7 @@ public class LanguageImpl implements Language {
 				key = sb.toString();
 			}
 
-			value = get(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(), key,
-				defaultValue);
+			value = get(themeDisplay.getLocale(), key, defaultValue);
 
 			if (((value == null) || (value.equals(defaultValue))) &&
 				((key != null) && (key.endsWith(StringPool.CLOSE_BRACKET)))) {
@@ -385,9 +342,7 @@ public class LanguageImpl implements Language {
 				if (pos != -1) {
 					key = key.substring(0, pos);
 
-					value = get(
-						themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-						key, defaultValue);
+					value = get(themeDisplay.getLocale(), key, defaultValue);
 				}
 			}
 
@@ -514,7 +469,7 @@ public class LanguageImpl implements Language {
 	}
 
 	public boolean isAvailableLocale(Locale locale) {
-		return _localesSet.contains(locale);
+		return _getInstance()._localesSet.contains(locale);
 	}
 
 	public void resetAvailableLocales(long companyId) {

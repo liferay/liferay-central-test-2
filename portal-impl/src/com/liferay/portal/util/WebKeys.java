@@ -170,8 +170,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_TEMPLATE_ID = "JOURNAL_TEMPLATE_ID";
 
-	public static final String LANGUAGE_RESOURCES = "LANGUAGE_RESOURCES";
-
 	public static final String LAST_PATH = "LAST_PATH";
 
 	public static final String LAYOUT_CONTENT = "LAYOUT_CONTENT";

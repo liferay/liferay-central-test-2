@@ -49,20 +49,6 @@ public class UnicodeLanguageImpl implements UnicodeLanguage {
 	}
 
 	public String format(
-		long companyId, Locale locale, String pattern, Object argument) {
-
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			companyId, locale, pattern, argument));
-	}
-
-	public String format(
-		long companyId, Locale locale, String pattern, Object[] arguments) {
-
-		return UnicodeFormatter.toString(LanguageUtil.format(
-			companyId, locale, pattern, arguments));
-	}
-
-	public String format(
 		PageContext pageContext, String pattern, Object argument) {
 
 		return UnicodeFormatter.toString(LanguageUtil.format(
@@ -126,16 +112,9 @@ public class UnicodeLanguageImpl implements UnicodeLanguage {
 		return UnicodeFormatter.toString(LanguageUtil.get(locale, key));
 	}
 
-	public String get(long companyId, Locale locale, String key) {
-		return UnicodeFormatter.toString(
-			LanguageUtil.get(companyId, locale, key));
-	}
-
-	public String get(
-		long companyId, Locale locale, String key, String defaultValue) {
-
-		return UnicodeFormatter.toString(
-			LanguageUtil.get(companyId, locale, key, defaultValue));
+	public String get(Locale locale, String key, String defaultValue) {
+		return UnicodeFormatter.toString(LanguageUtil.get(
+			locale, key, defaultValue));
 	}
 
 	public String get(PageContext pageContext, String key) {

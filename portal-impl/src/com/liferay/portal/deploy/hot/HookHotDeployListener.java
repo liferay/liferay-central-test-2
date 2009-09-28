@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -49,6 +50,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.auth.AuthFailure;
@@ -83,6 +85,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -558,16 +561,22 @@ public class HookHotDeployListener
 	}
 
 	protected String getLocaleKey(String languagePropertiesLocation) {
-		String localeKey = null;
-
 		int x = languagePropertiesLocation.indexOf(StringPool.UNDERLINE);
 		int y = languagePropertiesLocation.indexOf(".properties");
 
 		if ((x != -1) && (y != 1)) {
-			localeKey = languagePropertiesLocation.substring(x + 1, y);
+			String localeKey = languagePropertiesLocation.substring(x + 1, y);
+
+			Locale locale = LocaleUtil.fromLanguageId(localeKey);
+
+			locale = LanguageUtil.getLocale(locale.getLanguage());
+
+			if (locale != null) {
+				return locale.toString();
+			}
 		}
 
-		return localeKey;
+		return null;
 	}
 
 	protected BasePersistence getPersistence(String modelName) {
@@ -1351,6 +1360,8 @@ public class HookHotDeployListener
 				properties, localeKey);
 
 			_languagesMap.put(localeKey, oldProperties);
+
+			LanguageResources.clearCache();
 		}
 
 		public void unregisterLanguages() {
@@ -1359,6 +1370,8 @@ public class HookHotDeployListener
 
 				_multiMessageResources.putMessages(properties, key);
 			}
+
+			LanguageResources.clearCache();
 		}
 
 		private Map<String, Properties> _languagesMap =

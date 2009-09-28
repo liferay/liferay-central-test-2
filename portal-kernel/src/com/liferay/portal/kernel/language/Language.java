@@ -46,17 +46,7 @@ public interface Language {
 	public String format(Locale locale, String pattern, Object[] arguments);
 
 	public String format(
-		long companyId, Locale locale, String pattern, Object argument);
-
-	public String format(
-		long companyId, Locale locale, String pattern, Object argument,
-		boolean translateArguments);
-
-	public String format(
-		long companyId, Locale locale, String pattern, Object[] arguments);
-
-	public String format(
-		long companyId, Locale locale, String pattern, Object[] arguments,
+		Locale locale, String pattern, Object[] arguments,
 		boolean translateArguments);
 
 	public String format(
@@ -91,10 +81,7 @@ public interface Language {
 
 	public String get(Locale locale, String key);
 
-	public String get(long companyId, Locale locale, String key);
-
-	public String get(
-		long companyId, Locale locale, String key, String defaultValue);
+	public String get(Locale locale, String key, String defaultValue);
 
 	public String get(PageContext pageContext, String key);
 

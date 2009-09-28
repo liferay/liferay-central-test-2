@@ -58,31 +58,51 @@ public class LanguageUtil {
 	}
 
 	public static String format(
-		long companyId, Locale locale, String pattern, Object argument) {
+		Locale locale, String pattern, Object[] arguments,
+		boolean translateArguments) {
 
-		return getLanguage().format(companyId, locale, pattern, argument);
+		return getLanguage().format(
+			locale, pattern, arguments, translateArguments);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public static String format(
+		long companyId, Locale locale, String pattern, Object argument) {
+
+		return getLanguage().format(locale, pattern, argument);
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public static String format(
 		long companyId, Locale locale, String pattern, Object argument,
 		boolean translateArguments) {
 
 		return getLanguage().format(
-			companyId, locale, pattern, argument, translateArguments);
+			locale, pattern, argument, translateArguments);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String format(
 		long companyId, Locale locale, String pattern, Object[] arguments) {
 
-		return getLanguage().format(companyId, locale, pattern, arguments);
+		return getLanguage().format(locale, pattern, arguments);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String format(
 		long companyId, Locale locale, String pattern, Object[] arguments,
 		boolean translateArguments) {
 
 		return getLanguage().format(
-			companyId, locale, pattern, arguments, translateArguments);
+			locale, pattern, arguments, translateArguments);
 	}
 
 	public static String format(
@@ -149,14 +169,24 @@ public class LanguageUtil {
 		return getLanguage().get(locale, key);
 	}
 
-	public static String get(long companyId, Locale locale, String key) {
-		return getLanguage().get(companyId, locale, key);
+	public static String get(Locale locale, String key, String defaultValue) {
+		return getLanguage().get(locale, key, defaultValue);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public static String get(long companyId, Locale locale, String key) {
+		return getLanguage().get(locale, key);
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public static String get(
 		long companyId, Locale locale, String key, String defaultValue) {
 
-		return getLanguage().get(companyId, locale, key, defaultValue);
+		return getLanguage().get(locale, key, defaultValue);
 	}
 
 	public static String get(PageContext pageContext, String key) {

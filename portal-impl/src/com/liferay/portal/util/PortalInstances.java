@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletCategory;
@@ -41,7 +40,6 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import java.util.ArrayList;
@@ -50,8 +48,6 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.Globals;
 
 /**
  * <a href="PortalInstances.java.html"><b><i>View Source</i></b></a>
@@ -361,25 +357,6 @@ public class PortalInstances {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		// Message resources
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Message resources");
-		}
-
-		MultiMessageResources messageResources =
-			(MultiMessageResources)servletContext.getAttribute(
-				Globals.MESSAGES_KEY);
-
-		messageResources.setServletContext(servletContext);
-
-		WebAppPool.put(
-			String.valueOf(companyId), Globals.MESSAGES_KEY, messageResources);
-
-		WebAppPool.put(
-			String.valueOf(companyId), WebKeys.LANGUAGE_RESOURCES,
-			new LanguageResources(messageResources));
 
 		// Process application startup events
 

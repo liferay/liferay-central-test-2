@@ -53,6 +53,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -77,6 +78,7 @@ import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -592,6 +594,18 @@ public class MainServlet extends ActionServlet {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+
+		// Message resources
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize message resources");
+		}
+
+		MultiMessageResources messageResources =
+			(MultiMessageResources)servletContext.getAttribute(
+				Globals.MESSAGES_KEY);
+
+		LanguageResources.init(messageResources);
 
 		// See LEP-2885. Don't flush hot deploy events until after the portal
 		// has initialized.
