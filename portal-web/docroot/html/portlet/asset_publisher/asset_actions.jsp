@@ -29,6 +29,12 @@ boolean showIconLabel = ((Boolean)request.getAttribute("view.jsp-showIconLabel")
 
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
 
+Group stageableGroup = themeDisplay.getScopeGroup();
+
+if (themeDisplay.getScopeGroup().isLayout()) {
+	stageableGroup = layout.getGroup();
+}
+
 PortletURL editPortletURL = assetRenderer.getURLEdit((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
 if (editPortletURL != null) {
@@ -37,15 +43,9 @@ if (editPortletURL != null) {
 
 	editPortletURL.setParameter("redirect", currentURL);
 }
-
-Group stageableGroup = themeDisplay.getScopeGroup();
-
-if (themeDisplay.getScopeGroup().isLayout()) {
-	stageableGroup = layout.getGroup();
-}
 %>
 
-<c:if test="<%= (editPortletURL != null) && !stageableGroup.hasStagingGroup() %>">
+<c:if test="<%= !stageableGroup.hasStagingGroup() && (editPortletURL != null) %>">
 	<div class="lfr-meta-actions asset-actions">
 		<liferay-ui:icon image="edit" url="<%= editPortletURL.toString() %>" label="<%= showIconLabel %>" />
 	</div>
