@@ -38,20 +38,6 @@ public interface UnicodeLanguage {
 	public String format(Locale locale, String pattern, Object[] arguments);
 
 	public String format(
-		PageContext pageContext, String pattern, Object argument);
-
-	public String format(
-		PageContext pageContext, String pattern, Object argument,
-		boolean translateArguments);
-
-	public String format(
-		PageContext pageContext, String pattern, Object[] arguments);
-
-	public String format(
-		PageContext pageContext, String pattern, Object[] arguments,
-		boolean translateArguments);
-
-	public String format(
 		PageContext pageContext, String pattern, LanguageWrapper argument);
 
 	public String format(
@@ -65,6 +51,20 @@ public interface UnicodeLanguage {
 		PageContext pageContext, String pattern, LanguageWrapper[] arguments,
 		boolean translateArguments);
 
+	public String format(
+		PageContext pageContext, String pattern, Object argument);
+
+	public String format(
+		PageContext pageContext, String pattern, Object argument,
+		boolean translateArguments);
+
+	public String format(
+		PageContext pageContext, String pattern, Object[] arguments);
+
+	public String format(
+		PageContext pageContext, String pattern, Object[] arguments,
+		boolean translateArguments);
+
 	public String get(Locale locale, String key);
 
 	public String get(Locale locale, String key, String defaultValue);
@@ -74,9 +74,9 @@ public interface UnicodeLanguage {
 	public String get(PageContext pageContext, String key, String defaultValue);
 
 	public String getTimeDescription(
-		PageContext pageContext, Long milliseconds);
+		PageContext pageContext, long milliseconds);
 
 	public String getTimeDescription(
-		PageContext pageContext, long milliseconds);
+		PageContext pageContext, Long milliseconds);
 
 }

@@ -64,34 +64,6 @@ public class UnicodeLanguageUtil {
 	}
 
 	public static String format(
-		PageContext pageContext, String pattern, Object argument) {
-
-		return getUnicodeLanguage().format(pageContext, pattern, argument);
-	}
-
-	public static String format(
-		PageContext pageContext, String pattern, Object argument,
-		boolean translateArguments) {
-
-		return getUnicodeLanguage().format(
-			pageContext, pattern, argument, translateArguments);
-	}
-
-	public static String format(
-		PageContext pageContext, String pattern, Object[] arguments) {
-
-		return getUnicodeLanguage().format(pageContext, pattern, arguments);
-	}
-
-	public static String format(
-		PageContext pageContext, String pattern, Object[] arguments,
-		boolean translateArguments) {
-
-		return getUnicodeLanguage().format(
-			pageContext, pattern, arguments, translateArguments);
-	}
-
-	public static String format(
 		PageContext pageContext, String pattern, LanguageWrapper argument) {
 
 		return getUnicodeLanguage().format(pageContext, pattern, argument);
@@ -113,6 +85,34 @@ public class UnicodeLanguageUtil {
 
 	public static String format(
 		PageContext pageContext, String pattern, LanguageWrapper[] arguments,
+		boolean translateArguments) {
+
+		return getUnicodeLanguage().format(
+			pageContext, pattern, arguments, translateArguments);
+	}
+
+	public static String format(
+		PageContext pageContext, String pattern, Object argument) {
+
+		return getUnicodeLanguage().format(pageContext, pattern, argument);
+	}
+
+	public static String format(
+		PageContext pageContext, String pattern, Object argument,
+		boolean translateArguments) {
+
+		return getUnicodeLanguage().format(
+			pageContext, pattern, argument, translateArguments);
+	}
+
+	public static String format(
+		PageContext pageContext, String pattern, Object[] arguments) {
+
+		return getUnicodeLanguage().format(pageContext, pattern, arguments);
+	}
+
+	public static String format(
+		PageContext pageContext, String pattern, Object[] arguments,
 		boolean translateArguments) {
 
 		return getUnicodeLanguage().format(
@@ -154,14 +154,14 @@ public class UnicodeLanguageUtil {
 	}
 
 	public static String getTimeDescription(
-		PageContext pageContext, Long milliseconds) {
+		PageContext pageContext, long milliseconds) {
 
 		return getUnicodeLanguage().getTimeDescription(
 			pageContext, milliseconds);
 	}
 
 	public static String getTimeDescription(
-		PageContext pageContext, long milliseconds) {
+		PageContext pageContext, Long milliseconds) {
 
 		return getUnicodeLanguage().getTimeDescription(
 			pageContext, milliseconds);

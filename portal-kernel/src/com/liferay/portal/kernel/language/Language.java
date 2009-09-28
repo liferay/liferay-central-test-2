@@ -50,20 +50,6 @@ public interface Language {
 		boolean translateArguments);
 
 	public String format(
-		PageContext pageContext, String pattern, Object argument);
-
-	public String format(
-		PageContext pageContext, String pattern, Object argument,
-		boolean translateArguments);
-
-	public String format(
-		PageContext pageContext, String pattern, Object[] arguments);
-
-	public String format(
-		PageContext pageContext, String pattern, Object[] arguments,
-		boolean translateArguments);
-
-	public String format(
 		PageContext pageContext, String pattern, LanguageWrapper argument);
 
 	public String format(
@@ -77,7 +63,19 @@ public interface Language {
 		PageContext pageContext, String pattern, LanguageWrapper[] arguments,
 		boolean translateArguments);
 
-	public void init();
+	public String format(
+		PageContext pageContext, String pattern, Object argument);
+
+	public String format(
+		PageContext pageContext, String pattern, Object argument,
+		boolean translateArguments);
+
+	public String format(
+		PageContext pageContext, String pattern, Object[] arguments);
+
+	public String format(
+		PageContext pageContext, String pattern, Object[] arguments,
+		boolean translateArguments);
 
 	public String get(Locale locale, String key);
 
@@ -91,19 +89,21 @@ public interface Language {
 
 	public String getCharset(Locale locale);
 
-	public String getLanguageId(PortletRequest portletRequest);
-
 	public String getLanguageId(HttpServletRequest request);
 
 	public String getLanguageId(Locale locale);
 
+	public String getLanguageId(PortletRequest portletRequest);
+
 	public Locale getLocale(String languageCode);
+
+	public String getTimeDescription(
+		PageContext pageContext, long milliseconds);
 
 	public String getTimeDescription(
 		PageContext pageContext, Long milliseconds);
 
-	public String getTimeDescription(
-		PageContext pageContext, long milliseconds);
+	public void init();
 
 	public boolean isAvailableLocale(Locale locale);
 

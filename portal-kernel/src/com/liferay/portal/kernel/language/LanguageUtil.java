@@ -106,34 +106,6 @@ public class LanguageUtil {
 	}
 
 	public static String format(
-		PageContext pageContext, String pattern, Object argument) {
-
-		return getLanguage().format(pageContext, pattern, argument);
-	}
-
-	public static String format(
-		PageContext pageContext, String pattern, Object argument,
-		boolean translateArguments) {
-
-		return getLanguage().format(
-			pageContext, pattern, argument, translateArguments);
-	}
-
-	public static String format(
-		PageContext pageContext, String pattern, Object[] arguments) {
-
-		return getLanguage().format(pageContext, pattern, arguments);
-	}
-
-	public static String format(
-		PageContext pageContext, String pattern, Object[] arguments,
-		boolean translateArguments) {
-
-		return getLanguage().format(
-			pageContext, pattern, arguments, translateArguments);
-	}
-
-	public static String format(
 		PageContext pageContext, String pattern, LanguageWrapper argument) {
 
 		return getLanguage().format(pageContext, pattern, argument);
@@ -161,8 +133,32 @@ public class LanguageUtil {
 			pageContext, pattern, arguments, translateArguments);
 	}
 
-	public static void init() {
-		getLanguage().init();
+	public static String format(
+		PageContext pageContext, String pattern, Object argument) {
+
+		return getLanguage().format(pageContext, pattern, argument);
+	}
+
+	public static String format(
+		PageContext pageContext, String pattern, Object argument,
+		boolean translateArguments) {
+
+		return getLanguage().format(
+			pageContext, pattern, argument, translateArguments);
+	}
+
+	public static String format(
+		PageContext pageContext, String pattern, Object[] arguments) {
+
+		return getLanguage().format(pageContext, pattern, arguments);
+	}
+
+	public static String format(
+		PageContext pageContext, String pattern, Object[] arguments,
+		boolean translateArguments) {
+
+		return getLanguage().format(
+			pageContext, pattern, arguments, translateArguments);
 	}
 
 	public static String get(Locale locale, String key) {
@@ -211,10 +207,6 @@ public class LanguageUtil {
 		return _language;
 	}
 
-	public static String getLanguageId(PortletRequest portletRequest) {
-		return getLanguage().getLanguageId(portletRequest);
-	}
-
 	public static String getLanguageId(HttpServletRequest request) {
 		return getLanguage().getLanguageId(request);
 	}
@@ -223,8 +215,18 @@ public class LanguageUtil {
 		return getLanguage().getLanguageId(locale);
 	}
 
+	public static String getLanguageId(PortletRequest portletRequest) {
+		return getLanguage().getLanguageId(portletRequest);
+	}
+
 	public static Locale getLocale(String languageCode) {
 		return getLanguage().getLocale(languageCode);
+	}
+
+	public static String getTimeDescription(
+		PageContext pageContext, long milliseconds) {
+
+		return getLanguage().getTimeDescription(pageContext, milliseconds);
 	}
 
 	public static String getTimeDescription(
@@ -233,10 +235,8 @@ public class LanguageUtil {
 		return getLanguage().getTimeDescription(pageContext, milliseconds);
 	}
 
-	public static String getTimeDescription(
-		PageContext pageContext, long milliseconds) {
-
-		return getLanguage().getTimeDescription(pageContext, milliseconds);
+	public static void init() {
+		getLanguage().init();
 	}
 
 	public static boolean isAvailableLocale(Locale locale) {

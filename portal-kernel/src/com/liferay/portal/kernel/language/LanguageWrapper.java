@@ -35,6 +35,10 @@ public class LanguageWrapper {
 		_after = after;
 	}
 
+	public String getAfter() {
+		return _after;
+	}
+
 	public String getBefore() {
 		return _before;
 	}
@@ -43,12 +47,8 @@ public class LanguageWrapper {
 		return _text;
 	}
 
-	public String getAfter() {
-		return _after;
-	}
-
+	private String _after;
 	private String _before;
 	private String _text;
-	private String _after;
 
 }
