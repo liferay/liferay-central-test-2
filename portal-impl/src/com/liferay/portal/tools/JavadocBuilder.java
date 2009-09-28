@@ -126,9 +126,9 @@ public class JavadocBuilder {
 			if (name.equals("author") || name.equals("see") ||
 				name.equals("since") || name.equals("version")) {
 
-				if (value.startsWith("Raymond Aug")) {
+				/*if (value.startsWith("Raymond Aug")) {
 					value = "Raymond Aug\u00c3\u00a9";
-				}
+				}*/
 
 				DocUtil.add(parentElement, name, value);
 			}

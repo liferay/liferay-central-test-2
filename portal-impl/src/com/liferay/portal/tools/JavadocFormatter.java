@@ -166,10 +166,10 @@ public class JavadocFormatter {
 			if (name.equals("author") || name.equals("see") ||
 				name.equals("since") || name.equals("version")) {
 
-				if (value.startsWith("Raymond Aug")) {
+				/*if (value.startsWith("Raymond Aug")) {
 					value = new String(
 						"Raymond Aug\u00c3\u00a9".getBytes(), StringPool.UTF8);
-				}
+				}*/
 			}
 
 			Element element = parentElement.addElement(name);
