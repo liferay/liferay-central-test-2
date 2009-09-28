@@ -33,7 +33,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
 /**
  * <a href="SearchContainerResultsTei.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class SearchContainerResultsTei extends TagExtraInfo {
 

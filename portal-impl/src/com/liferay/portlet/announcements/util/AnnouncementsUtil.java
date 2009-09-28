@@ -43,7 +43,7 @@ import java.util.List;
 /**
  * <a href="AnnouncementsUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class AnnouncementsUtil {
 

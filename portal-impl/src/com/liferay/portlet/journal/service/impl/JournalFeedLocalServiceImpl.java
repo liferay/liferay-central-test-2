@@ -54,7 +54,7 @@ import java.util.List;
 /**
  * <a href="JournalFeedLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Aug√©
  */
 public class JournalFeedLocalServiceImpl
 	extends JournalFeedLocalServiceBaseImpl {

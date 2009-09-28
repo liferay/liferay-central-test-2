@@ -53,7 +53,7 @@ import javax.servlet.http.HttpSession;
  * <a href="AutoLoginFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class AutoLoginFilter extends BasePortalFilter {
 

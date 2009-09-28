@@ -90,7 +90,7 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Jorge Ferrer
  * @author Bruno Farache
  */

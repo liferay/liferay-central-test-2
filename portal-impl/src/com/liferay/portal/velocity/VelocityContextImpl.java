@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.velocity.VelocityContext;
 /**
  * <a href="VelocityContextImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class VelocityContextImpl implements VelocityContext {
 

@@ -144,7 +144,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Scott Lee
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Julio Camarero
  * @author Wesley Gong

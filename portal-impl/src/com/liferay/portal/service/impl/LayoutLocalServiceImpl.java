@@ -93,7 +93,7 @@ import java.util.Set;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Bruno Farache
  */

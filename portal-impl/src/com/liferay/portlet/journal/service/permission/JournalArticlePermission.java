@@ -33,7 +33,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
  * <a href="JournalArticlePermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class JournalArticlePermission {
 

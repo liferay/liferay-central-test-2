@@ -37,7 +37,7 @@ import java.util.Map;
  * </p>
  *
  * @author Michael C. Han
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class MulticastClientTool {
 

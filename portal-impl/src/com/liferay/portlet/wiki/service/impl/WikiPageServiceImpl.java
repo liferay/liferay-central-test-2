@@ -74,7 +74,7 @@ import java.util.Locale;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 

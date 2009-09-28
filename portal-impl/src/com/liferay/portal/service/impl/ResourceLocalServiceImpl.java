@@ -54,7 +54,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Julio Camarero
  */
 public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {

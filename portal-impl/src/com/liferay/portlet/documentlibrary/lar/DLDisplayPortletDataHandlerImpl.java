@@ -50,7 +50,7 @@ import javax.portlet.PortletPreferences;
  * <a href="DLDisplayPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 

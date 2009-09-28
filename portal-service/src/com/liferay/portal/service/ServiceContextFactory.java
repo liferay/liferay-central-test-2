@@ -46,7 +46,7 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="ServiceContextFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class ServiceContextFactory {
 

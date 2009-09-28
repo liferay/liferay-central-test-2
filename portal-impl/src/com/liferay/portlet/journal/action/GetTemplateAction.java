@@ -49,7 +49,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="GetTemplateAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug√©
  */
 public class GetTemplateAction extends Action {
 

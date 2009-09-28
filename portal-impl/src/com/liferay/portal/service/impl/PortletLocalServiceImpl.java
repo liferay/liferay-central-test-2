@@ -94,7 +94,7 @@ import javax.servlet.ServletContext;
  * <a href="PortletLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Eduardo Lundgren
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {

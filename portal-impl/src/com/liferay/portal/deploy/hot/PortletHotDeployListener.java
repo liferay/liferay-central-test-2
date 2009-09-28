@@ -122,7 +122,7 @@ import org.apache.portals.bridges.struts.StrutsPortlet;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Ivica Cardic
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class PortletHotDeployListener extends BaseHotDeployListener {
 

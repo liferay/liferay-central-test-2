@@ -34,7 +34,7 @@ import java.util.Map;
 /**
  * <a href="ExpandoBridge.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public interface ExpandoBridge {
 

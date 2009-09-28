@@ -37,7 +37,7 @@ import java.util.Date;
 /**
  * <a href="ExpandoValueImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Brian Wing Shun Chan
  */
 public class ExpandoValueImpl

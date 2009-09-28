@@ -57,7 +57,7 @@ import javax.servlet.http.HttpSession;
 /**
  * <a href="AssetPublisherUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class AssetPublisherUtil {
 

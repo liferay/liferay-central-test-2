@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * <a href="IndexerRegistryUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class IndexerRegistryUtil {
 

@@ -41,7 +41,7 @@ import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
 /**
  * <a href="TasksActivityInterpreter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 

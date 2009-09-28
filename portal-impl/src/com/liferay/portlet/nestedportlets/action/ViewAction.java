@@ -54,7 +54,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Berentey Zsolt
  * @author Jorge Ferrer
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Jesper Weissglas
  */
 public class ViewAction extends PortletAction {

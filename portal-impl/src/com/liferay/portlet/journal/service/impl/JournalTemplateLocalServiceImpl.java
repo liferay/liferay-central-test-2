@@ -64,7 +64,7 @@ import java.util.List;
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug√©
  */
 public class JournalTemplateLocalServiceImpl
 	extends JournalTemplateLocalServiceBaseImpl {

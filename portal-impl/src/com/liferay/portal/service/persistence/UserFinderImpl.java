@@ -48,7 +48,7 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @author Jon Steer
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 

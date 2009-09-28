@@ -96,7 +96,7 @@ import java.util.Set;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Bruno Farache
  * @author Alex Chow
  */

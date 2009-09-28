@@ -66,7 +66,7 @@ import javax.servlet.ServletContext;
  * @author Ivica Cardic
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class LayoutTemplateLocalServiceImpl
 	extends LayoutTemplateLocalServiceBaseImpl {

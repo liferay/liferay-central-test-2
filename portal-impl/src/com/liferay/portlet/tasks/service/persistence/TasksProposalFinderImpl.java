@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * <a href="TasksProposalFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class TasksProposalFinderImpl
 	extends BasePersistenceImpl implements TasksProposalFinder {

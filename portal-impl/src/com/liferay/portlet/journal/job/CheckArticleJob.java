@@ -36,7 +36,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
  * <a href="CheckArticleJob.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class CheckArticleJob implements IntervalJob {
 

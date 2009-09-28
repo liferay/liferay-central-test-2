@@ -50,7 +50,7 @@ import javax.portlet.PortletPreferences;
  * </a>
  *
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 

@@ -35,7 +35,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 /**
  * <a href="SearchContainerResultsTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class SearchContainerResultsTag extends TagSupport {
 

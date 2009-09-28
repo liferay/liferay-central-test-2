@@ -35,7 +35,7 @@ import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceU
 /**
  * <a href="CheckEntryJob.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class CheckEntryJob implements IntervalJob {
 

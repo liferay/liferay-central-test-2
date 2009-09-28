@@ -65,7 +65,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ViewArticleContentAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug√©
  */
 public class ViewArticleContentAction extends Action {
 

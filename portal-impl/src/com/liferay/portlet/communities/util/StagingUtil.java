@@ -86,7 +86,7 @@ import javax.portlet.ActionRequest;
 /**
  * <a href="StagingUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Bruno Farache
  */
 public class StagingUtil {

@@ -35,7 +35,7 @@ import javax.servlet.jsp.JspTagException;
 /**
  * <a href="SearchContainerColumnJSPTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class SearchContainerColumnJSPTag extends SearchContainerColumnTag {
 

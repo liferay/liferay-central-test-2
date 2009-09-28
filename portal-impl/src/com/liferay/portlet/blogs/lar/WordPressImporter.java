@@ -62,7 +62,7 @@ import java.util.TimeZone;
 /**
  * <a href="WordPressImporter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class WordPressImporter {
 

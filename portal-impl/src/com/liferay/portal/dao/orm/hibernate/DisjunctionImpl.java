@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.dao.orm.Junction;
 /**
  * <a href="DisjunctionImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class DisjunctionImpl extends CriterionImpl implements Disjunction {
 

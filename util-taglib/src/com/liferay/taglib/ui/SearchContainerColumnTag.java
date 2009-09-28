@@ -29,7 +29,7 @@ import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 /**
  * <a href="SearchContainerColumnTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public abstract class SearchContainerColumnTag
 	extends ParamAndPropertyAncestorTagImpl {

@@ -43,7 +43,7 @@ import javax.servlet.jsp.tagext.BodyContent;
  * <a href="SearchContainerColumnTextTag.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 

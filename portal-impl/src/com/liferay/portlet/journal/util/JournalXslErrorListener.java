@@ -40,7 +40,7 @@ import org.xml.sax.SAXParseException;
 /**
  * <a href="JournalXslErrorListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class JournalXslErrorListener implements ErrorListener {
 

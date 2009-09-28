@@ -38,7 +38,7 @@ import javax.portlet.ResourceURL;
 /**
  * <a href="JournalFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 

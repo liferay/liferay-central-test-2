@@ -25,7 +25,7 @@ package com.liferay.portal.lar;
 /**
  * <a href="PortletDataHandlerBoolean.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class PortletDataHandlerBoolean extends PortletDataHandlerControl {
 

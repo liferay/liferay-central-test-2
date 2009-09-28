@@ -66,7 +66,7 @@ import org.hibernate.usertype.UserType;
  *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class Table {
 

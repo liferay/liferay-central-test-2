@@ -49,7 +49,7 @@ import javax.servlet.http.HttpSession;
  * <a href="HeaderFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Eduardo Lundgren
  */
 public class HeaderFilter extends BasePortalFilter {

@@ -64,7 +64,7 @@ import org.apache.commons.lang.time.StopWatch;
  *
  * @author Charles May
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class AdvancedPermissionChecker extends BasePermissionChecker {
 

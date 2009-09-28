@@ -32,7 +32,7 @@ import org.stringtree.factory.AbstractStringFetcher;
 /**
  * <a href="CodeBlock.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class CodeBlock extends AbstractStringFetcher {
 

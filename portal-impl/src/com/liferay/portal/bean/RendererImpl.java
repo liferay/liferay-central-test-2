@@ -59,7 +59,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 /**
  * <a href="RendererImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class RendererImpl implements Renderer {
 

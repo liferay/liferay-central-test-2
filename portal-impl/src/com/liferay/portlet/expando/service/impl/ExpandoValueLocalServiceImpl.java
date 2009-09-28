@@ -46,7 +46,7 @@ import java.util.Map;
  * <a href="ExpandoValueLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Brian Wing Shun Chan
  */
 public class ExpandoValueLocalServiceImpl

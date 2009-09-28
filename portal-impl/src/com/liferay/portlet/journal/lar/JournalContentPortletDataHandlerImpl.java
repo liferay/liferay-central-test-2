@@ -84,7 +84,7 @@ import javax.portlet.PortletPreferences;
  * </p>
  *
  * @author Joel Kozikowski
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Bruno Farache
  * @see	   com.liferay.portal.lar.PortletDataHandler
  * @see	   com.liferay.portlet.journal.lar.JournalCreationStrategy

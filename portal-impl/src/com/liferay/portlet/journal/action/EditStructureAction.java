@@ -63,7 +63,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditStructureAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class EditStructureAction extends PortletAction {
 

@@ -28,7 +28,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
  * <a href="AnnouncementsFlagImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
- * @author Raymond Augé
+ * @author Raymond Aug√©
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsFlagImpl

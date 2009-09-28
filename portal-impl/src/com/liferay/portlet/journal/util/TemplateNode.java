@@ -34,7 +34,7 @@ import java.util.Map;
  * <a href="TemplateNode.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class TemplateNode extends LinkedHashMap<String, Object> {
 

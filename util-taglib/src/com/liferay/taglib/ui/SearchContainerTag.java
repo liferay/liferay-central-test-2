@@ -45,7 +45,7 @@ import javax.servlet.jsp.JspException;
 /**
  * <a href="SearchContainerTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 

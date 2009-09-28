@@ -27,7 +27,7 @@ import com.liferay.portal.PortalException;
 /**
  * <a href="PortletDataException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class PortletDataException extends PortalException {
 

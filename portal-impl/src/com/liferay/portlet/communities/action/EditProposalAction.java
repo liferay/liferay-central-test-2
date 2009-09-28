@@ -63,7 +63,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="EditProposalAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class EditProposalAction extends EditPagesAction {
 

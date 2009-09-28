@@ -35,7 +35,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Neil Griffin
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Thiago Moreira
  */
 public class MailMessage implements Serializable {

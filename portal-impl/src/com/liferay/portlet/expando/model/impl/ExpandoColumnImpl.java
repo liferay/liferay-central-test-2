@@ -35,7 +35,7 @@ import java.io.Serializable;
 /**
  * <a href="ExpandoColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Brian Wing Shun Chan
  */
 public class ExpandoColumnImpl

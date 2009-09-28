@@ -109,7 +109,7 @@ import javax.portlet.PortletPreferences;
  * portlet in the layout set.
  * </p>
  *
- * @author Raymond Augé
+ * @author Raymond Aug√©
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache

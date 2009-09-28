@@ -53,7 +53,7 @@ import org.apache.velocity.util.SimplePool;
  *
  * @author Brian Wing Shun Chan
  * @author Steven P. Goldsmith
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class VelocityPortlet extends GenericPortlet {
 

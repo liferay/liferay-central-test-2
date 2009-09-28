@@ -32,7 +32,7 @@ import javax.portlet.PortletRequest;
 /**
  * <a href="FeedDisplayTerms.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class FeedDisplayTerms extends DisplayTerms {
 

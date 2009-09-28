@@ -64,7 +64,7 @@ import javax.mail.internet.InternetAddress;
  * </b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class AnnouncementsEntryLocalServiceImpl
 	extends AnnouncementsEntryLocalServiceBaseImpl {

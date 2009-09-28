@@ -41,7 +41,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="GetStructureAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class GetStructureAction extends Action {
 

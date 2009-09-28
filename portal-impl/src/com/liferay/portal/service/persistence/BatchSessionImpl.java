@@ -31,7 +31,7 @@ import com.liferay.portal.util.PropsValues;
 /**
  * <a href="BatchSessionImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Brian Wing Shun Chan
  */
 public class BatchSessionImpl implements BatchSession {

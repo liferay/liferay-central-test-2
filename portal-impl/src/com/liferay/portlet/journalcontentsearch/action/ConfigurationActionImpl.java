@@ -39,7 +39,7 @@ import javax.portlet.RenderResponse;
  * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Richard Beatty
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class ConfigurationActionImpl extends BaseConfigurationAction {
 

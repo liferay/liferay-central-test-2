@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.job.Scheduler;
 /**
  * <a href="AnnouncementsScheduler.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class AnnouncementsScheduler implements Scheduler {
 

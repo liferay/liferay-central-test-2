@@ -61,7 +61,7 @@ import java.util.Set;
  * </b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug√©
  */
 public class JournalStructureLocalServiceImpl
 	extends JournalStructureLocalServiceBaseImpl {

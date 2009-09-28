@@ -39,7 +39,7 @@ import org.springframework.beans.factory.annotation.InjectionMetadata;
  * <a href="BeanReferenceElement.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class BeanReferenceElement extends InjectionMetadata.InjectedElement {
 

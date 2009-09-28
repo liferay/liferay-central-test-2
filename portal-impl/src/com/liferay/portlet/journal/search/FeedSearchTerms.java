@@ -31,7 +31,7 @@ import javax.portlet.PortletRequest;
 /**
  * <a href="FeedSearchTerms.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class FeedSearchTerms extends FeedDisplayTerms {
 

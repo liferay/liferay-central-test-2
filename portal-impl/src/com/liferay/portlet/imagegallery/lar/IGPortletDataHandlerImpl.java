@@ -64,7 +64,7 @@ import javax.portlet.PortletPreferences;
  * <a href="IGPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 

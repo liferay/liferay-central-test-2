@@ -25,7 +25,7 @@ package com.liferay.portal.kernel.velocity;
 /**
  * <a href="VelocityContext.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public interface VelocityContext {
 

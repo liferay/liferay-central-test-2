@@ -31,7 +31,7 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
  *
  * @author Scott Lee
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class UserListener extends BaseModelListener<User> {
 

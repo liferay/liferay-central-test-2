@@ -28,7 +28,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 /**
  * <a href="ExpandoBridgeIndexerUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class ExpandoBridgeIndexerUtil {
 

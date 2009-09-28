@@ -38,7 +38,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="LayoutTypeArticleConfigurationUpdateAction.java.html"><b><i>View
  * Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class LayoutTypeArticleConfigurationUpdateAction extends Action {
 
