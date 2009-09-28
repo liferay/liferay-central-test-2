@@ -469,7 +469,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 						<%
 						List actions = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 
-						actions = ListUtil.sort(actions, new ActionComparator(company.getCompanyId(), locale));
+						actions = ListUtil.sort(actions, new ActionComparator(locale));
 
 						for (int i = 0; i < actions.size(); i++) {
 							String actionId = (String)actions.get(i);

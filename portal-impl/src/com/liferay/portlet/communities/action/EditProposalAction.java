@@ -261,8 +261,7 @@ public class EditProposalAction extends EditPagesAction {
 						PortletConstants.LAYOUT_SEPARATOR.length());
 
 				name = PortalUtil.getPortletTitle(
-					portletId, themeDisplay.getCompanyId(),
-					themeDisplay.getLocale());
+					portletId, themeDisplay.getLocale());
 			}
 
 			boolean addCommunityPermissions = true;

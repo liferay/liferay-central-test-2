@@ -342,11 +342,9 @@ public interface Portal {
 
 	public String getPortletDescription(Portlet portlet, User user);
 
-	public String getPortletDescription(
-		String portletId, long companyId, Locale locale);
+	public String getPortletDescription(String portletId, Locale locale);
 
-	public String getPortletDescription(
-		String portletId, long companyId, String languageId);
+	public String getPortletDescription(String portletId, String languageId);
 
 	public String getPortletDescription(String portletId, User user);
 
@@ -390,22 +388,18 @@ public interface Portal {
 
 	public String getPortletNamespace(String portletId);
 
-	public String getPortletTitle(
-		Portlet portlet, long companyId, Locale locale);
+	public String getPortletTitle(Portlet portlet, Locale locale);
 
-	public String getPortletTitle(
-		Portlet portlet, long companyId, String languageId);
+	public String getPortletTitle(Portlet portlet, String languageId);
 
 	public String getPortletTitle(
 		Portlet portlet, ServletContext servletContext, Locale locale);
 
 	public String getPortletTitle(Portlet portlet, User user);
 
-	public String getPortletTitle(
-		String portletId, long companyId, Locale locale);
+	public String getPortletTitle(String portletId, Locale locale);
 
-	public String getPortletTitle(
-		String portletId, long companyId, String languageId);
+	public String getPortletTitle(String portletId, String languageId);
 
 	public String getPortletTitle(String portletId, User user);
 

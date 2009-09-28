@@ -39,7 +39,7 @@ if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp
 		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
 	}
 	else {
-		String portletTitle = PortalUtil.getPortletTitle(ppid, company.getCompanyId(), locale);
+		String portletTitle = PortalUtil.getPortletTitle(ppid, locale);
 
 		PortletURL portletURL = new PortletURLImpl(request, ppid, plid, PortletRequest.ACTION_PHASE);
 

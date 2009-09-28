@@ -35,7 +35,7 @@ String curModelResourceName = (String)request.getAttribute("edit_role_permission
 
 List curActions = ResourceActionsUtil.getResourceActions(curPortletResource, curModelResource);
 
-curActions = ListUtil.sort(curActions, new ActionComparator(company.getCompanyId(), locale));
+curActions = ListUtil.sort(curActions, new ActionComparator(locale));
 
 List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(curPortletResource, curModelResource);
 

@@ -58,7 +58,7 @@ public class PortletTitleComparator
 		_servletContext = servletContext;
 		_locale = locale;
 	}
-	
+
 	public int compare(Portlet portlet1, Portlet portlet2) {
 		String portletTitle1 = StringPool.BLANK;
 		String portletTitle2 = StringPool.BLANK;

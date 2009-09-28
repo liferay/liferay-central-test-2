@@ -38,17 +38,8 @@ import java.util.ResourceBundle;
  */
 public class StrutsResourceBundle extends ResourceBundle {
 
-	public static ResourceBundle getBundle(
-		String portletName, long companyId, Locale locale) {
-
-		return new StrutsResourceBundle(portletName, companyId, locale);
-	}
-
-	public StrutsResourceBundle(
-		String portletName, long companyId, Locale locale) {
-
+	public StrutsResourceBundle(String portletName, Locale locale) {
 		_portletName = portletName;
-		_companyId = companyId;
 		_locale = locale;
 	}
 
@@ -76,11 +67,10 @@ public class StrutsResourceBundle extends ResourceBundle {
 			key = sb.toString();
 		}
 
-		return LanguageUtil.get(_companyId, _locale, key);
+		return LanguageUtil.get(_locale, key);
 	}
 
 	private String _portletName;
-	private long _companyId;
 	private Locale _locale;
 
 }

@@ -1900,24 +1900,20 @@ public class PortalImpl implements Portal {
 		return getPortletDescription(portlet.getPortletId(), user);
 	}
 
-	public String getPortletDescription(
-		String portletId, long companyId, Locale locale) {
-
+	public String getPortletDescription(String portletId, Locale locale) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
 		sb.append(StringPool.PERIOD);
 		sb.append(portletId);
 
-		return LanguageUtil.get(companyId, locale, sb.toString());
+		return LanguageUtil.get(locale, sb.toString());
 	}
 
-	public String getPortletDescription(
-		String portletId, long companyId, String languageId) {
-
+	public String getPortletDescription(String portletId, String languageId) {
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-		return getPortletDescription(portletId, companyId, locale);
+		return getPortletDescription(portletId, locale);
 	}
 
 	public String getPortletDescription(String portletId, User user) {
@@ -1927,8 +1923,7 @@ public class PortalImpl implements Portal {
 		sb.append(StringPool.PERIOD);
 		sb.append(portletId);
 
-		return LanguageUtil.get(
-			user.getCompanyId(), user.getLocale(), sb.toString());
+		return LanguageUtil.get(user.getLocale(), sb.toString());
 	}
 
 	public Object[] getPortletFriendlyURLMapper(
@@ -2172,16 +2167,12 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
-	public String getPortletTitle(
-		Portlet portlet, long companyId, Locale locale) {
-
-		return getPortletTitle(portlet.getPortletId(), companyId, locale);
+	public String getPortletTitle(Portlet portlet, Locale locale) {
+		return getPortletTitle(portlet.getPortletId(), locale);
 	}
 
-	public String getPortletTitle(
-		Portlet portlet, long companyId, String languageId) {
-
-		return getPortletTitle(portlet.getPortletId(), companyId, languageId);
+	public String getPortletTitle(Portlet portlet, String languageId) {
+		return getPortletTitle(portlet.getPortletId(), languageId);
 	}
 
 	public String getPortletTitle(
@@ -2199,24 +2190,20 @@ public class PortalImpl implements Portal {
 		return getPortletTitle(portlet.getPortletId(), user);
 	}
 
-	public String getPortletTitle(
-		String portletId, long companyId, Locale locale) {
-
+	public String getPortletTitle(String portletId, Locale locale) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
 		sb.append(StringPool.PERIOD);
 		sb.append(portletId);
 
-		return LanguageUtil.get(companyId, locale, sb.toString());
+		return LanguageUtil.get(locale, sb.toString());
 	}
 
-	public String getPortletTitle(
-		String portletId, long companyId, String languageId) {
-
+	public String getPortletTitle(String portletId, String languageId) {
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-		return getPortletTitle(portletId, companyId, locale);
+		return getPortletTitle(portletId, locale);
 	}
 
 	public String getPortletTitle(String portletId, User user) {
@@ -2226,8 +2213,7 @@ public class PortalImpl implements Portal {
 		sb.append(StringPool.PERIOD);
 		sb.append(portletId);
 
-		return LanguageUtil.get(
-			user.getCompanyId(), user.getLocale(), sb.toString());
+		return LanguageUtil.get(user.getLocale(), sb.toString());
 	}
 
 	public String getPortletXmlFileName() throws SystemException {

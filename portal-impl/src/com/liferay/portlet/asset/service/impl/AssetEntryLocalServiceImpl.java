@@ -637,7 +637,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			String className = PortalUtil.getClassName(entry.getClassNameId());
 			String portletId = PortalUtil.getClassNamePortletId(className);
 			String portletTitle = PortalUtil.getPortletTitle(
-				portletId, entry.getCompanyId(), languageId);
+				portletId, languageId);
 
 			List<AssetCategory> categories =
 				assetEntryPersistence.getAssetCategories(entry.getEntryId());

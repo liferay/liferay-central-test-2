@@ -92,12 +92,10 @@ public class ResourceActionsUtil {
 		User.class.getName(), UserGroup.class.getName()
 	};
 
-	public static String getAction(
-		long companyId, Locale locale, String action) {
-
+	public static String getAction(Locale locale, String action) {
 		String key = ACTION_NAME_PREFIX + action;
 
-		String value = LanguageUtil.get(companyId, locale, key, null);
+		String value = LanguageUtil.get(locale, key, null);
 
 		if ((value == null) || (value.equals(key))) {
 			value = PortletResourceBundles.getString(locale, key);
@@ -186,12 +184,10 @@ public class ResourceActionsUtil {
 		return _instance._getModelPortletResources(name);
 	}
 
-	public static String getModelResource(
-		long companyId, Locale locale, String name) {
-
+	public static String getModelResource(Locale locale, String name) {
 		String key = MODEL_RESOURCE_NAME_PREFIX + name;
 
-		String value = LanguageUtil.get(companyId, locale, key, null);
+		String value = LanguageUtil.get(locale, key, null);
 
 		if ((value == null) || (value.equals(key))) {
 			value = PortletResourceBundles.getString(locale, key);

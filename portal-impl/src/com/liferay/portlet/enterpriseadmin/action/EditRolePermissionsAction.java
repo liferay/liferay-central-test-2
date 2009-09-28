@@ -326,9 +326,7 @@ public class EditRolePermissionsAction extends PortletAction {
 			List<String> actions = entry.getValue();
 
 			actions = ListUtil.sort(
-				actions,
-				new ActionComparator(
-					themeDisplay.getCompanyId(), themeDisplay.getLocale()));
+				actions, new ActionComparator(themeDisplay.getLocale()));
 
 			for (String actionId : actions) {
 				String target = selResource + actionId;

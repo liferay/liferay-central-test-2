@@ -230,7 +230,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 				<c:when test="<%= (modelResources != null) && (modelResources.size() > 0) %>">
 
 					<%
-					modelResources = ListUtil.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
+					modelResources = ListUtil.sort(modelResources, new ModelResourceComparator(locale));
 
 					for (int i = 0; i < modelResources.size(); i++) {
 						String curModelResource = (String)modelResources.get(i);

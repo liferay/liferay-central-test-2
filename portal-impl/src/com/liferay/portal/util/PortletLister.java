@@ -99,9 +99,7 @@ public class PortletLister {
 		throws PortalException, SystemException {
 
 		categories = ListUtil.sort(
-			categories,
-			new PortletCategoryComparator(
-				_user.getCompanyId(), _user.getLocale()));
+			categories, new PortletCategoryComparator(_user.getLocale()));
 
 		Iterator<PortletCategory> itr = categories.iterator();
 
@@ -203,9 +201,7 @@ public class PortletLister {
 		}
 
 		portlets = ListUtil.sort(
-			portlets,
-			new PortletTitleComparator(
-				_user.getCompanyId(), _user.getLocale()));
+			portlets, new PortletTitleComparator(_user.getLocale()));
 
 		Iterator<Portlet> portletsItr = portlets.iterator();
 

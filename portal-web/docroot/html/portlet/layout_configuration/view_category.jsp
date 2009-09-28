@@ -49,7 +49,7 @@ if (Validator.isNotNull(oldCategoryPath)) {
 
 List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
-categories = ListUtil.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
+categories = ListUtil.sort(categories, new PortletCategoryComparator(locale));
 
 List portlets = new ArrayList();
 

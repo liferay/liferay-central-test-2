@@ -63,22 +63,22 @@ if (layout != null) {
 								<ul>
 									<li class="first">
 										<a href="javascript:;" class="app-shortcut" rel="56">
-											<%= PortalUtil.getPortletTitle("56", themeDisplay.getCompanyId(), locale) %>
+											<%= PortalUtil.getPortletTitle("56", locale) %>
 										</a>
 									</li>
 									<li>
 										<a href="javascript:;" class="app-shortcut" rel="101">
-											<%= PortalUtil.getPortletTitle("101", themeDisplay.getCompanyId(), locale) %>
+											<%= PortalUtil.getPortletTitle("101", locale) %>
 										</a>
 									</li>
 									<li>
 										<a href="javascript:;" class="app-shortcut" rel="3">
-											<%= PortalUtil.getPortletTitle("3", themeDisplay.getCompanyId(), locale) %>
+											<%= PortalUtil.getPortletTitle("3", locale) %>
 										</a>
 									</li>
 									<li>
 										<a href="javascript:;" class="app-shortcut" rel="71">
-											<%= PortalUtil.getPortletTitle("71", themeDisplay.getCompanyId(), locale) %>
+											<%= PortalUtil.getPortletTitle("71", locale) %>
 										</a>
 									</li>
 									<li class="add-application last">

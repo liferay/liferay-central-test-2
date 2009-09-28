@@ -56,7 +56,12 @@
 	</target>
 
 	<target name="compile-common-lib">
-		<unjar src="${project.dir}/portal-impl/portal-impl.jar" dest="${classpath.jsp}" />
+		<if>
+			<available file="${project.dir}/portal-impl/portal-impl.jar" />
+			<then>
+				<unjar src="${project.dir}/portal-impl/portal-impl.jar" dest="${classpath.jsp}" />
+			</then>
+		</if>
 
 		<unjar src="${project.dir}/portal-kernel/portal-kernel.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/portal-service/portal-service.jar" dest="${classpath.jsp}" />

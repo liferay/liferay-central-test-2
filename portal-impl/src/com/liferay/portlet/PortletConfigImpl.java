@@ -34,7 +34,6 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PublicRenderParameter;
-import com.liferay.portal.util.PortalInstances;
 
 import java.io.ByteArrayInputStream;
 
@@ -195,10 +194,7 @@ public class PortletConfigImpl implements PortletConfig {
 					resourceBundleClassName.equals(
 						StrutsResourceBundle.class.getName())) {
 
-					long companyId = PortalInstances.getDefaultCompanyId();
-
-					bundle = StrutsResourceBundle.getBundle(
-						_portletName, companyId, locale);
+					bundle = new StrutsResourceBundle(_portletName, locale);
 				}
 				else {
 					PortletBag portletBag = PortletBagPool.get(
