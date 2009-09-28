@@ -22,12 +22,12 @@
 
 package com.liferay.util.xml;
 
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.xml.descriptor.XMLDescriptor;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
@@ -89,18 +89,18 @@ public class XMLMergerRunner {
 	private String _documentToString(Document doc, String docType)
 		throws IOException {
 
-		ByteArrayMaker bam = new ByteArrayMaker();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 		OutputFormat format = OutputFormat.createPrettyPrint();
 
 		format.setIndent("\t");
 		format.setLineSeparator("\n");
 
-		XMLWriter writer = new XMLWriter(bam, format);
+		XMLWriter writer = new XMLWriter(baos, format);
 
 		writer.write(doc);
 
-		String xml = bam.toString();
+		String xml = baos.toString();
 
 		int pos = xml.indexOf("<?");
 

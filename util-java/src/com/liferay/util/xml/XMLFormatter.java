@@ -22,11 +22,11 @@
 
 package com.liferay.util.xml;
 
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -124,7 +124,7 @@ public class XMLFormatter {
 			Branch branch, String indent, boolean expandEmptyElements)
 		throws IOException {
 
-		ByteArrayMaker bam = new ByteArrayMaker();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 		OutputFormat format = OutputFormat.createPrettyPrint();
 
@@ -132,11 +132,11 @@ public class XMLFormatter {
 		format.setIndent(indent);
 		format.setLineSeparator("\n");
 
-		XMLWriter writer = new XMLWriter(bam, format);
+		XMLWriter writer = new XMLWriter(baos, format);
 
 		writer.write(branch);
 
-		String content = bam.toString(StringPool.UTF8);
+		String content = baos.toString(StringPool.UTF8);
 
 		// LEP-4257
 

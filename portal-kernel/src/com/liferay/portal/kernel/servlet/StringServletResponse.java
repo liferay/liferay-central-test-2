@@ -24,9 +24,9 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
@@ -52,8 +52,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		return _bufferSize;
 	}
 
-	public ByteArrayMaker getByteArrayMaker() {
-		return _bam;
+	public ByteArrayOutputStream getByteArrayOutputStream() {
+		return _baos;
 	}
 
 	public String getContentType() {
@@ -80,7 +80,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		}
 		else if (_callGetOutputStream) {
 			try {
-				return _bam.toString(StringPool.UTF8);
+				return _baos.toString(StringPool.UTF8);
 			}
 			catch (UnsupportedEncodingException uee) {
 				_log.error(uee, uee);
@@ -111,7 +111,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public void recycle() {
-		_bam.reset();
+		_baos.reset();
 		//_sos = new StringServletOutputStream(_bam);
 		_status = SC_OK;
 		_sw = new StringWriter();
@@ -123,7 +123,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	public void resetBuffer() {
 		if (_callGetOutputStream) {
-			_bam.reset();
+			_baos.reset();
 		}
 		else if (_callGetWriter) {
 			StringBuffer sb = _sw.getBuffer();
@@ -158,8 +158,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	private String _contentType;
 	private int _status = SC_OK;
-	private ByteArrayMaker _bam = new ByteArrayMaker();
-	private ServletOutputStream _sos = new StringServletOutputStream(_bam);
+	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
+	private ServletOutputStream _sos = new StringServletOutputStream(_baos);
 	private StringWriter _sw = new StringWriter();
 	private PrintWriter _pw = new PrintWriter(_sw);
 	private int _bufferSize;

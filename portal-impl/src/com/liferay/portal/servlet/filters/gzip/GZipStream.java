@@ -25,8 +25,8 @@ package com.liferay.portal.servlet.filters.gzip;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -48,7 +48,7 @@ public class GZipStream extends ServletOutputStream {
 
 		_response = response;
 		_output = response.getOutputStream();
-		_bufferedOutput = new ByteArrayMaker();
+		_bufferedOutput = new ByteArrayOutputStream();
 		_closed = false;
 	}
 
@@ -57,10 +57,11 @@ public class GZipStream extends ServletOutputStream {
 			throw new IOException();
 		}
 
-		if (_bufferedOutput instanceof ByteArrayMaker) {
-			ByteArrayMaker baos = (ByteArrayMaker)_bufferedOutput;
+		if (_bufferedOutput instanceof ByteArrayOutputStream) {
+			ByteArrayOutputStream baos = (ByteArrayOutputStream)_bufferedOutput;
 
-			ByteArrayMaker compressedContent = new ByteArrayMaker();
+			ByteArrayOutputStream compressedContent =
+				new ByteArrayOutputStream();
 
 			GZIPOutputStream gzipOutput = new GZIPOutputStream(
 				compressedContent);

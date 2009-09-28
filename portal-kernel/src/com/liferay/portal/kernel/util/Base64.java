@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -159,11 +160,11 @@ public class Base64 {
 			return null;
 		}
 
-		ByteArrayMaker bam = new ByteArrayMaker(32000);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream(32000);
 
 		try {
 			ObjectOutputStream os = new ObjectOutputStream(
-				new BufferedOutputStream(bam));
+				new BufferedOutputStream(baos));
 
 			os.flush();
 			os.writeObject(o);
@@ -173,7 +174,7 @@ public class Base64 {
 			_log.error(e.getMessage());
 		}
 
-		return encode(bam.toByteArray());
+		return encode(baos.toByteArray());
 	}
 
 	public static Object stringToObject(String s) {

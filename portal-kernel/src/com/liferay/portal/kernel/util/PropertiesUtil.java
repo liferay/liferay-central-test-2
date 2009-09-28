@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.util;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -141,12 +142,12 @@ public class PropertiesUtil {
 	public static String list(Map map) {
 		Properties props = fromMap(map);
 
-		ByteArrayMaker bam = new ByteArrayMaker();
-		PrintStream ps = new PrintStream(bam);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(baos);
 
 		props.list(ps);
 
-		return bam.toString();
+		return baos.toString();
 	}
 
 	public static void list(Map map, PrintStream out) {

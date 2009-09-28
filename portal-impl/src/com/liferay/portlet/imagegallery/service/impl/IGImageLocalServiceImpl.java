@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -63,6 +62,7 @@ import com.sun.media.jai.codec.ImageEncoder;
 
 import java.awt.image.RenderedImage;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -746,33 +746,33 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		RenderedImage thumbnail = ImageProcessorUtil.scale(
 			renderedImage, dimension, dimension);
 
-		ByteArrayMaker bam = new ByteArrayMaker();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 		if (contentType.indexOf("bmp") != -1) {
 			ImageEncoder encoder = ImageCodec.createImageEncoder(
-				"BMP", bam, null);
+				"BMP", baos, null);
 
 			encoder.encode(thumbnail);
 		}
 		else if (contentType.indexOf("gif") != -1) {
-			ImageProcessorUtil.encodeGIF(thumbnail, bam);
+			ImageProcessorUtil.encodeGIF(thumbnail, baos);
 		}
 		else if (contentType.indexOf("jpg") != -1 ||
 				 contentType.indexOf("jpeg") != -1) {
 
-			ImageIO.write(thumbnail, "jpeg", bam);
+			ImageIO.write(thumbnail, "jpeg", baos);
 		}
 		else if (contentType.indexOf("png") != -1) {
-			ImageIO.write(thumbnail, "png", bam);
+			ImageIO.write(thumbnail, "png", baos);
 		}
 		else if (contentType.indexOf("tif") != -1) {
 			ImageEncoder encoder = ImageCodec.createImageEncoder(
-				"TIFF", bam, null);
+				"TIFF", baos, null);
 
 			encoder.encode(thumbnail);
 		}
 
-		imageLocalService.updateImage(imageId, bam.toByteArray());
+		imageLocalService.updateImage(imageId, baos.toByteArray());
 	}
 
 	protected void validate(byte[] bytes)

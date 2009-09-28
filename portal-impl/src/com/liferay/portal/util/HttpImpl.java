@@ -25,7 +25,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -35,6 +34,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.SystemProperties;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -748,19 +748,19 @@ public class HttpImpl implements Http {
 
 			InputStream is = con.getInputStream();
 
-			ByteArrayMaker bam = new ByteArrayMaker();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			byte[] bytes = new byte[512];
 
 			for (int i = is.read(bytes, 0, 512); i != -1;
 					i = is.read(bytes, 0, 512)) {
 
-				bam.write(bytes, 0, i);
+				baos.write(bytes, 0, i);
 			}
 
-			xml = new String(bam.toByteArray());
+			xml = new String(baos.toByteArray());
 
 			is.close();
-			bam.close();
+			baos.close();
 		}
 
 		return xml;

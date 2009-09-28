@@ -22,9 +22,9 @@
 
 package com.liferay.portal.servlet.filters.strip;
 
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -115,14 +115,14 @@ public class StripResponse extends HttpServletResponseWrapper {
 	public byte[] getData() {
 		finishResponse();
 
-		return _bam.toByteArray();
+		return _baos.toByteArray();
 	}
 
 	protected ServletOutputStream createOutputStream() {
-		return new StripStream(_bam);
+		return new StripStream(_baos);
 	}
 
-	private ByteArrayMaker _bam = new ByteArrayMaker();
+	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
 	private ServletOutputStream _stream = null;
 	private PrintWriter _writer = null;
 	private String _contentType;

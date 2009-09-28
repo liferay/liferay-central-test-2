@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -34,6 +33,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.PwdGenerator;
 
+import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 
 import java.util.Locale;
@@ -48,7 +48,7 @@ import javax.xml.transform.stream.StreamSource;
  * <a href="JournalXslUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class JournalXslUtil {
 
@@ -57,7 +57,7 @@ public class JournalXslUtil {
 			String xml, String script)
 		throws Exception {
 
-		ByteArrayMaker bam = new ByteArrayMaker();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 		long companyId = GetterUtil.getLong(tokens.get("company_id"));
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
@@ -100,7 +100,7 @@ public class JournalXslUtil {
 				PermissionThreadLocal.getPermissionChecker());
 			transformer.setParameter("randomNamespace", randomNamespace);
 
-			transformer.transform(xmlSource, new StreamResult(bam));
+			transformer.transform(xmlSource, new StreamResult(baos));
 		}
 		catch (Exception e1) {
 			String errorTemplate = ContentUtil.get(
@@ -131,10 +131,10 @@ public class JournalXslUtil {
 					"line", new Integer(errorListener.getLineNumber()));
 			}
 
-			transformer.transform(xmlSource, new StreamResult(bam));
+			transformer.transform(xmlSource, new StreamResult(baos));
 		}
 
-		return bam.toString(StringPool.UTF8);
+		return baos.toString(StringPool.UTF8);
 	}
 
 }

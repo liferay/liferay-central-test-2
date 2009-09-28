@@ -23,9 +23,9 @@
 package com.liferay.util.servlet.filters;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.util.servlet.Header;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -149,7 +149,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	public byte[] getData() {
 		finishResponse();
 
-		return _bam.toByteArray();
+		return _baos.toByteArray();
 	}
 
 	public Map<String, List<Header>> getHeaders() {
@@ -248,11 +248,11 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	}
 
 	protected CacheResponseStream createOutputStream() {
-		return new CacheResponseStream(_bam);
+		return new CacheResponseStream(_baos);
 	}
 
 	private String _encoding;
-	private ByteArrayMaker _bam = new ByteArrayMaker();
+	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
 	private CacheResponseStream _stream;
 	private PrintWriter _writer;
 	private int _bufferSize;

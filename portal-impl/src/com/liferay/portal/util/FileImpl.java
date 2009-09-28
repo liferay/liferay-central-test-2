@@ -24,7 +24,6 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -38,6 +37,7 @@ import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -387,13 +387,13 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public byte[] getBytes(InputStream is, int bufferSize) throws IOException {
-		ByteArrayMaker bam = null;
+		ByteArrayOutputStream baos = null;
 
 		if (bufferSize <= 0) {
-			bam = new ByteArrayMaker();
+			baos = new ByteArrayOutputStream();
 		}
 		else {
-			bam = new ByteArrayMaker(bufferSize);
+			baos = new ByteArrayOutputStream(bufferSize);
 		}
 
 		boolean createBuffered = false;
@@ -408,7 +408,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			int c = is.read();
 
 			while (c != -1) {
-				bam.write(c);
+				baos.write(c);
 
 				c = is.read();
 			}
@@ -419,9 +419,9 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 		}
 
-		bam.close();
+		baos.close();
 
-		return bam.toByteArray();
+		return baos.toByteArray();
 	}
 
 	public String getExtension(String fileName) {

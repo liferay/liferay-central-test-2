@@ -783,7 +783,7 @@ public class LayoutAction extends Action {
 
 		if (stringResponse.isCalledGetOutputStream()) {
 			InputStream is = new ByteArrayInputStream(
-				stringResponse.getByteArrayMaker().toByteArray());
+				stringResponse.getByteArrayOutputStream().toByteArray());
 
 			ServletResponseUtil.sendFile(
 				response, renderResponseImpl.getResourceName(), is,

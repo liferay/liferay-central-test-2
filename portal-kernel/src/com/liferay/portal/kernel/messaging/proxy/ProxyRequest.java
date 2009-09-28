@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.messaging.proxy;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
+
 import java.io.Serializable;
 
 import java.lang.reflect.InvocationTargetException;
@@ -43,16 +44,16 @@ public class ProxyRequest implements Serializable {
 
 		Class<?>[] argumentTypes = method.getParameterTypes();
 		for(int i = 0; i<arguments.length; i++) {
-			if(arguments[i] == null) {
+			if (arguments[i] == null) {
 				arguments[i] = new NullWrapper(argumentTypes[i].getName());
 			}
 		}
-		
+
 		_methodWrapper = new MethodWrapper(
 			method.getDeclaringClass().getName(), method.getName(), arguments);
 
 		_hasReturnValue = method.getReturnType() != Void.TYPE;
-		
+
 		MessagingProxy messagingProxy = method.getAnnotation(
 			MessagingProxy.class);
 
@@ -88,7 +89,7 @@ public class ProxyRequest implements Serializable {
 	public boolean isSynchronous() {
 		return _synchronous;
 	}
-	
+
 	private boolean _hasReturnValue;
 	private MethodWrapper _methodWrapper;
 	private boolean _synchronous;

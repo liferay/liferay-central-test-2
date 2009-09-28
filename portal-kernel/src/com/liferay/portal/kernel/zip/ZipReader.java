@@ -24,11 +24,11 @@ package com.liferay.portal.kernel.zip;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -67,7 +67,7 @@ public class ZipReader implements Serializable {
 
 				String currentName = entry.getName();
 
-				ByteArrayMaker bam = new ByteArrayMaker();
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 				while (true) {
 					int count = _zis.read(_data, 0, _BUFFER);
@@ -76,10 +76,10 @@ public class ZipReader implements Serializable {
 						break;
 					}
 
-					bam.write(_data, 0, count);
+					baos.write(_data, 0, count);
 				}
 
-				byte[] bytes = bam.toByteArray();
+				byte[] bytes = baos.toByteArray();
 
 				_entries.put(currentName, bytes);
 
