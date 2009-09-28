@@ -3,19 +3,18 @@
 <beans
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="velocityUtilInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor">
+	<bean id="velocityHookAdvice" class="com.liferay.portal.spring.aop.ServiceVelocityAdvice">
 		<property name="exceptionSafe" value="true" />
 	</bean>
-	<bean id="baseVelocityUtil" abstract="true">
-		<property name="interceptorNames">
-			<list>
-				<value>velocityUtilInterceptor</value>
-			</list>
-		</property>
-	</bean>
+	<aop:config>
+		<aop:aspect ref="velocityHookAdvice">
+			<aop:around pointcut="bean(*.velocity)" method="invoke" />
+		</aop:aspect>
+	</aop:config>
 	<bean id="com.liferay.documentlibrary.util.DLIndexerUtil" class="com.liferay.documentlibrary.util.DLIndexerUtil">
 		<property name="DLIndexer">
 			<bean class="com.liferay.documentlibrary.util.DLIndexerImpl" />
@@ -30,8 +29,8 @@
 	<bean id="com.liferay.portal.kernel.bean.RendererUtil" class="com.liferay.portal.kernel.bean.RendererUtil">
 		<property name="renderer" ref="com.liferay.portal.kernel.bean.Renderer" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.bean.RendererUtil.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityUtil">
-		<property name="target" ref="com.liferay.portal.kernel.bean.Renderer" />
+	<bean id="com.liferay.portal.kernel.bean.RendererUtil.velocity" class="com.liferay.portal.kernel.bean.RendererUtil">
+		<property name="renderer" ref="com.liferay.portal.kernel.bean.Renderer" />
 	</bean>
 	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
 		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
@@ -297,8 +296,8 @@
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
 		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityUtil">
-		<property name="target" ref="com.liferay.portal.kernel.xml.SAXReader" />
+	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil.velocity" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
+		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
 	</bean>
 	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil">
 		<property name="expandoBridgeIndexer">

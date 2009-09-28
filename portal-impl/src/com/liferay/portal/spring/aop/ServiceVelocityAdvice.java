@@ -22,17 +22,18 @@
 
 package com.liferay.portal.spring.aop;
 
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="BeanInterceptor.java.html"><b><i>View Source</i></b></a>
+ * <a href="ServiceVelocityAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class BeanInterceptor implements MethodInterceptor {
+public class ServiceVelocityAdvice {
 
-	public Object invoke(MethodInvocation invocation) throws Throwable {
+	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -44,7 +45,7 @@ public class BeanInterceptor implements MethodInterceptor {
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return invocation.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 		catch (Throwable t) {
 			if (_exceptionSafe) {
