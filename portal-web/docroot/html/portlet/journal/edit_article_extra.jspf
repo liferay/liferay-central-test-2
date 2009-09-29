@@ -36,6 +36,12 @@ String categorizationTitle = LanguageUtil.get(pageContext, "categorization");
 
 String scheduleId = portletDisplay.getNamespace() + "schedule";
 String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
+
+long resourcePrimKey = 0;
+
+if (article != null) {
+	resourcePrimKey = article.getResourcePrimKey();
+}
 %>
 
 <liferay-ui:toggle-area
@@ -296,9 +302,9 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 
 			</aui:select>
 
-			<aui:input classPK="<%= article.getResourcePrimKey() %>" name="categories" type="assetCategories" />
+			<aui:input classPK="<%= resourcePrimKey %>" name="categories" type="assetCategories" />
 
-			<aui:input classPK="<%= article.getResourcePrimKey() %>" name="tags" type="assetTags" />
+			<aui:input classPK="<%= resourcePrimKey %>" name="tags" type="assetTags" />
 
 			<aui:input inlineLabel="left" label="searchable" name="indexable" />
 		</liferay-ui:panel>
