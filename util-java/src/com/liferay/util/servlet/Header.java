@@ -22,12 +22,14 @@
 
 package com.liferay.util.servlet;
 
+import java.io.Serializable;
+
 /**
  * <a href="Header.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  */
-public class Header {
+public class Header implements Serializable {
 
 	public static final int INTEGER_TYPE = 1;
 
