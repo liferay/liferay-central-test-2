@@ -957,6 +957,20 @@ public class JournalUtil {
 		return output;
 	}
 
+	private static void _addElementOptions (
+		Element curContentElement, Element newContentElement) {
+
+		List<Element> newElementOptions = newContentElement.elements("option");
+
+		for (Element newElementOption : newElementOptions) {
+			Element curElementOption = SAXReaderUtil.createElement("option");
+
+			curElementOption.addCDATA(newElementOption.getText());
+
+			curContentElement.add(curElementOption);
+		}
+	}
+
 	private static Element _getElementByInstanceId(
 		Document document, String instanceId) {
 
@@ -1091,17 +1105,7 @@ public class JournalUtil {
 				"dynamic-content");
 
 			if (newContentElement.element("option") != null) {
-				List<Element> newElementOptions = newContentElement.elements(
-					"option");
-
-				for (Element newElementOption : newElementOptions) {
-					Element curElementOption = SAXReaderUtil.createElement(
-						"option");
-
-					curElementOption.addCDATA(newElementOption.getText());
-
-					curContentElement.add(curElementOption);
-				}
+				_addElementOptions(curContentElement, newContentElement);
 			}
 			else {
 				curContentElement.addCDATA(newValue);
@@ -1120,7 +1124,14 @@ public class JournalUtil {
 					alreadyExists = true;
 
 					curContentElement.clearContent();
-					curContentElement.addCDATA(newValue);
+
+					if (newContentElement.element("option") != null) {
+						_addElementOptions(
+							curContentElement, newContentElement);
+					}
+					else {
+						curContentElement.addCDATA(newValue);
+					}
 
 					break;
 				}
