@@ -31,10 +31,10 @@
 
 		<tr>
 			<td width="50%" valign="top">
-				$languageUtil.get($companyId, $locale, "line") $sourceResult.getLineNumber()
+				$languageUtil.get($locale, "line") $sourceResult.getLineNumber()
 			</td>
 			<td width="50%" valign="top">
-				$languageUtil.get($companyId, $locale, "line") $targetResult.getLineNumber()
+				$languageUtil.get($locale, "line") $targetResult.getLineNumber()
 			</td>
 		</tr>
 		<tr>

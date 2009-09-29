@@ -19,7 +19,7 @@
 #end
 
 #macro(language $lang_key)
-$languageUtil.get($company.getCompanyId(), $locale, $lang_key)#end
+$languageUtil.get($locale, $lang_key)#end
 
 #macro(date $date_format)
 $dateUtil.getCurrentDate($date_format, $locale)#end

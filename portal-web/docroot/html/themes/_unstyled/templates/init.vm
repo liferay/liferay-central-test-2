@@ -85,24 +85,24 @@
 #set ($show_add_content = $theme_display.isShowAddContentIcon())
 
 #if ($show_add_content)
-	#set ($add_content_text = $languageUtil.get($company_id, $locale, "add-application"))
+	#set ($add_content_text = $languageUtil.get($locale, "add-application"))
 	#set ($add_content_url = $theme_display.getURLAddContent())
 
-	#set ($layout_text = $languageUtil.get($company_id, $locale, "layout-template"))
+	#set ($layout_text = $languageUtil.get($locale, "layout-template"))
 	#set ($layout_url = $theme_display.getURLLayoutTemplates())
 #end
 
 #set ($show_control_panel = $theme_display.isShowControlPanelIcon())
 
 #if ($show_control_panel)
-	#set ($control_panel_text = $languageUtil.get($company_id, $locale, "control-panel"))
+	#set ($control_panel_text = $languageUtil.get($locale, "control-panel"))
 	#set ($control_panel_url = $htmlUtil.escape($theme_display.getURLControlPanel()))
 #end
 
 #set ($show_home = $theme_display.isShowHomeIcon())
 
 #if ($show_home)
-	#set ($home_text = $languageUtil.get($company_id, $locale, "home"))
+	#set ($home_text = $languageUtil.get($locale, "home"))
 	#set ($home_url = $htmlUtil.escape($theme_display.getURLHome()))
 
 	#if (!$request.isRequestedSessionIdFromCookie())
@@ -113,35 +113,35 @@
 #set ($show_my_account = $theme_display.isShowMyAccountIcon())
 
 #if ($show_my_account)
-	#set ($my_account_text = $languageUtil.get($company_id, $locale, "my-account"))
+	#set ($my_account_text = $languageUtil.get($locale, "my-account"))
 	#set ($my_account_url = $htmlUtil.escape($theme_display.getURLMyAccount().toString()))
 #end
 
 #set ($show_page_settings = $theme_display.isShowPageSettingsIcon())
 
 #if ($show_page_settings)
-	#set ($page_settings_text = $languageUtil.get($company_id, $locale, "manage-pages"))
+	#set ($page_settings_text = $languageUtil.get($locale, "manage-pages"))
 	#set ($page_settings_url = $htmlUtil.escape($theme_display.getURLPageSettings().toString()))
 #end
 
 #set ($show_sign_in = $theme_display.isShowSignInIcon())
 
 #if ($show_sign_in)
-	#set ($sign_in_text = $languageUtil.get($company_id, $locale, "sign-in"))
+	#set ($sign_in_text = $languageUtil.get($locale, "sign-in"))
 	#set ($sign_in_url = $htmlUtil.escape($theme_display.getURLSignIn()))
 #end
 
 #set ($show_sign_out = $theme_display.isShowSignOutIcon())
 
 #if ($show_sign_out)
-	#set ($sign_out_text = $languageUtil.get($company_id, $locale, "sign-out"))
+	#set ($sign_out_text = $languageUtil.get($locale, "sign-out"))
 	#set ($sign_out_url = $htmlUtil.escape($theme_display.getURLSignOut()))
 #end
 
 #set ($show_toggle_controls = $theme_display.isSignedIn())
 
 #if ($show_toggle_controls)
-	#set ($toggle_controls_text = $languageUtil.get($company_id, $locale, "toggle-edit-controls"))
+	#set ($toggle_controls_text = $languageUtil.get($locale, "toggle-edit-controls"))
 	#set ($toggle_controls_url = "javascript:;")
 #end
 
@@ -166,7 +166,7 @@
 	#set ($is_first_child = $page.isFirstChild())
 	#set ($is_first_parent = $page.isFirstParent())
 
-	#set ($the_title = $languageUtil.get($company_id, $locale, $the_title, $page.getName($locale)))
+	#set ($the_title = $languageUtil.get($locale, $the_title, $page.getName($locale)))
 
 	#if ($page.getType().equals("portlet"))
 		#set ($is_portlet_page = true)
@@ -204,7 +204,7 @@
 	#end
 
 	#if	($page_group.isUser() && $layout.isPrivateLayout())
-		#set ($community_name = $languageUtil.get($company_id, $locale, "my-community"))
+		#set ($community_name = $languageUtil.get($locale, "my-community"))
 	#end
 
 	#set ($my_places_portlet_url = $portletURLFactory.create($request, "49", $page.getPlid(), "ACTION_PHASE"))
@@ -236,7 +236,7 @@
 #end
 
 #if ($tilesTitle != "")
-	#set ($the_title = $languageUtil.get($company_id, $locale, $tilesTitle))
+	#set ($the_title = $languageUtil.get($locale, $tilesTitle))
 #end
 
 #set ($the_title = $htmlUtil.escape($the_title))
@@ -257,7 +257,7 @@
 #set ($show_staging = $theme_display.isShowStagingIcon())
 
 #if ($show_staging)
-	#set ($staging_text = $languageUtil.get($company_id, $locale, "staging"))
+	#set ($staging_text = $languageUtil.get($locale, "staging"))
 #end
 
 ## ---------- My places ---------- ##
@@ -265,7 +265,7 @@
 #set ($show_my_places = $user.hasMyPlaces())
 
 #if ($show_my_places)
-	#set ($my_places_text = $languageUtil.get($company_id, $locale, "my-places"))
+	#set ($my_places_text = $languageUtil.get($locale, "my-places"))
 #end
 
 ## ---------- Includes ---------- ##
