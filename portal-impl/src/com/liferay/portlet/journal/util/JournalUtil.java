@@ -89,6 +89,7 @@ import javax.portlet.PortletSession;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Wesley Gong
  */
 public class JournalUtil {
 
@@ -1089,7 +1090,22 @@ public class JournalUtil {
 			Element curContentElement = SAXReaderUtil.createElement(
 				"dynamic-content");
 
-			curContentElement.addCDATA(newValue);
+			if (newContentElement.element("option") != null) {
+				List<Element> newElementOptions = newContentElement.elements(
+					"option");
+
+				for (Element newElementOption : newElementOptions) {
+					Element curElementOption = SAXReaderUtil.createElement(
+						"option");
+
+					curElementOption.addCDATA(newElementOption.getText());
+
+					curContentElement.add(curElementOption);
+				}
+			}
+			else {
+				curContentElement.addCDATA(newValue);
+			}
 
 			curElement.add(curContentElement);
 		}
