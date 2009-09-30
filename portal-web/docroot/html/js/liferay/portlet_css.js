@@ -123,7 +123,7 @@ Liferay.PortletCSS = {
 
 						var trigger = instance.get('trigger');
 
-						A.get(backgroundColorEl).insertAfter(trigger.item(0));
+						A.get(backgroundColorEl).placeAfter(trigger.item(0));
 					}
 				},
 				hex: hexValue,
@@ -404,7 +404,7 @@ Liferay.PortletCSS = {
 
 								var trigger = instance.get('trigger');
 
-								A.get(borderColorEl).insertAfter(trigger.item(0));
+								A.get(borderColorEl).placeAfter(trigger.item(0));
 							}
 						},
 						hex: hexValue,
@@ -1563,7 +1563,7 @@ Liferay.PortletCSS = {
 
 								var trigger = instance.get('trigger');
 
-								A.get(fontColorEl).insertAfter(trigger.item(0));
+								A.get(fontColorEl).placeAfter(trigger.item(0));
 							}
 						},
 						hex: hexValue,
