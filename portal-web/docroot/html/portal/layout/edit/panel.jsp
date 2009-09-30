@@ -95,6 +95,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	%>
 
 	AUI().ready(
+		'liferay-tree',
 		function() {
 			new Liferay.Tree(
 				{

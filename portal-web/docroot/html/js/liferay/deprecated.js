@@ -2,21 +2,6 @@
 
 // To be removed in Liferay 5.4
 
-// LPS-2135
-
-window.Class = Alloy.Class;
-
-// LPS-2135
-
-/*Alloy.Class.createSuper = function(previous, current) {
-	return function() {
-		this.parent = previous;
-		this._super = previous;
-
-		return current.apply(this, arguments);
-	};
-};*/
-
 // LPS-2129
 
 // NOTE: the "dragHelper" option from the previous Liferay.Popup has been
@@ -166,7 +151,3 @@ window.Class = Alloy.Class;
 		}
 	};
 })();
-
-// LPS-3059
-
-Liferay.Observable = Alloy.Observable;

@@ -33,6 +33,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-upload',
 		function() {
 			new Liferay.Upload(
 				{

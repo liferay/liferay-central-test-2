@@ -1,5 +1,6 @@
-Liferay.UndoManager = Alloy.Observable.extend(
-	{
+AUI().add(
+	'liferay-undo-manager',
+	function(A) {
 
 		/**
 		 * OPTIONS
@@ -12,8 +13,10 @@ Liferay.UndoManager = Alloy.Observable.extend(
 		 *
 		 */
 
-		initialize: function(options) {
+		var UndoManager = function(options) {
 			var instance = this;
+
+			UndoManager.superclass.constructor.apply(instance, arguments);
 
 			var defaults = {
 				container: null,
@@ -66,67 +69,79 @@ Liferay.UndoManager = Alloy.Observable.extend(
 					}
 				);
 			}
-		},
+		};
 
-		add: function(handler, stateData) {
-			var instance = this;
+		A.extend(
+			UndoManager,
+			Liferay.Observable,
+			{
+				add: function(handler, stateData) {
+					var instance = this;
 
-			if (handler && typeof handler == 'function') {
-				var undo = {
-					handler: handler,
-					stateData: stateData
-				};
+					if (handler && typeof handler == 'function') {
+						var undo = {
+							handler: handler,
+							stateData: stateData
+						};
 
-				instance._undoCache.push(undo);
+						instance._undoCache.push(undo);
 
-				instance.trigger('update');
-				instance.trigger('add');
+						instance.trigger('update');
+						instance.trigger('add');
+					}
+				},
+
+				undo: function(limit) {
+					var instance = this;
+
+					limit = limit || 1;
+
+					var i = instance._undoCache.length - 1;
+
+					while (limit > 0 && i >= 0) {
+						var undoAction = instance._undoCache.pop();
+
+						undoAction.handler.call(instance, undoAction.stateData);
+
+						limit--;
+						i--;
+					}
+
+					instance.trigger('update');
+					instance.trigger('undo');
+				},
+
+				_updateList: function() {
+					var instance = this;
+
+					var itemsLeft = instance._undoCache.length;
+					var manager = instance._manager;
+
+					if (itemsLeft == 1) {
+						manager.addClass('queue-single');
+					}
+					else {
+						manager.removeClass('queue-single');
+					}
+
+					if (itemsLeft > 0) {
+						manager.removeClass('queue-empty');
+					}
+					else {
+						manager.addClass('queue-empty');
+					}
+
+					instance._undoItemsLeft.text('(' + itemsLeft + ')');
+				},
+
+				_undoCache: []
 			}
-		},
+		);
 
-		undo: function(limit) {
-			var instance = this;
-
-			limit = limit || 1;
-
-			var i = instance._undoCache.length - 1;
-
-			while (limit > 0 && i >= 0) {
-				var undoAction = instance._undoCache.pop();
-
-				undoAction.handler.call(instance, undoAction.stateData);
-
-				limit--;
-				i--;
-			}
-
-			instance.trigger('update');
-			instance.trigger('undo');
-		},
-
-		_updateList: function() {
-			var instance = this;
-
-			var itemsLeft = instance._undoCache.length;
-			var manager = instance._manager;
-
-			if (itemsLeft == 1) {
-				manager.addClass('queue-single');
-			}
-			else {
-				manager.removeClass('queue-single');
-			}
-
-			if (itemsLeft > 0) {
-				manager.removeClass('queue-empty');
-			}
-			else {
-				manager.addClass('queue-empty');
-			}
-
-			instance._undoItemsLeft.text('(' + itemsLeft + ')');
-		},
-
-		_undoCache: []
+		Liferay.UndoManager = UndoManager;
+	},
+	'',
+	{
+		requires: ['liferay-observable']
 	}
 );

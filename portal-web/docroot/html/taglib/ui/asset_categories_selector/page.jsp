@@ -72,6 +72,7 @@ if (Validator.isNotNull(curCategoryIds)) {
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-categories-selector',
 		function() {
 			new Liferay.AssetCategoriesSelector(
 				{

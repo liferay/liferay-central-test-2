@@ -1,5 +1,6 @@
-Liferay.AutoFields = Alloy.Observable.extend(
-	{
+AUI().add(
+	'liferay-auto-fields',
+	function(A) {
 
 		/**
 		 * OPTIONS
@@ -15,8 +16,10 @@ Liferay.AutoFields = Alloy.Observable.extend(
 		 *
 		 */
 
-		initialize: function(options) {
+		var AutoFields = function(options) {
 			var instance = this;
+
+			AutoFields.superclass.constructor.apply(instance, arguments);
 
 			instance.options = options;
 
@@ -124,179 +127,191 @@ Liferay.AutoFields = Alloy.Observable.extend(
 					hiddenRows.remove();
 				}
 			);
-		},
+		};
 
-		addRow: function(el) {
-			var instance = this;
+		A.extend(
+			AutoFields,
+			Liferay.Observable,
+			{
+				addRow: function(el) {
+					var instance = this;
 
-			var currentRow = jQuery(el);
-			var clone = currentRow.clone(true);
+					var currentRow = jQuery(el);
+					var clone = currentRow.clone(true);
 
-			var newSeed = (++instance._idSeed);
+					var newSeed = (++instance._idSeed);
 
-			clone.find('input, select, textarea, span').each(
-				function() {
-					var el = jQuery(this);
-					var oldName = el.attr('name') || el.attr('id');
-					var originalName = oldName.replace(/([0-9]+)$/, '');
-					var newName = originalName + newSeed;
+					clone.find('input, select, textarea, span').each(
+						function() {
+							var el = jQuery(this);
+							var oldName = el.attr('name') || el.attr('id');
+							var originalName = oldName.replace(/([0-9]+)$/, '');
+							var newName = originalName + newSeed;
 
-					if (el.is(':radio')) {
-						oldName = el.attr('id');
+							if (el.is(':radio')) {
+								oldName = el.attr('id');
 
-						el.attr('checked', '');
-						el.attr('value', newSeed);
-						el.attr('id', newName);
-					}
-					else if (el.is(':button') || el.is('span')) {
-						if (oldName) {
-							el.attr('id', newName);
+								el.attr('checked', '');
+								el.attr('value', newSeed);
+								el.attr('id', newName);
+							}
+							else if (el.is(':button') || el.is('span')) {
+								if (oldName) {
+									el.attr('id', newName);
+								}
+							}
+							else {
+								el.attr('name', newName);
+								el.attr('id', newName);
+							}
+
+							clone.find('label[for=' + oldName + ']').attr('for', newName);
 						}
+					);
+
+					instance._clearForm(clone);
+
+					clone.find("input[type=hidden]").each(
+						function() {
+							this.value = '';
+						}
+					);
+
+					currentRow.after(clone);
+
+					if (instance.options.sortable) {
+						clone.find('.handle-sort-vertical').attr('id', '');
+
+						clone.resetId();
+
+						instance._sortable.add(clone[0]);
+					}
+
+					Liferay.Util.focusFormField(clone.find('input:text:first')[0]);
+
+					instance.trigger('addRow', {row: clone, originalRow: currentRow, idSeed: newSeed});
+				},
+
+				deleteRow: function(el) {
+					var instance = this;
+
+					var visibleRows = instance._rowContainer.find('.lfr-form-row:visible');
+
+					if (visibleRows.length == 1) {
+						instance.addRow(el);
+					}
+
+					var deletedElement = jQuery(el);
+
+					deletedElement.hide();
+
+					instance._undoManager.add(
+						function(stateData) {
+							deletedElement.show();
+						}
+					);
+
+					instance.trigger('deleteRow', {row: deletedElement});
+				},
+
+				serialize: function(filter) {
+					var instance = this;
+
+					var rows = instance._baseContainer.find('.lfr-form-row:visible');
+					var serializedData = [];
+
+					if (filter) {
+						serializedData = filter.apply(instance, [rows]) || [];
 					}
 					else {
-						el.attr('name', newName);
-						el.attr('id', newName);
+						rows.each(
+							function(i) {
+								var formField = jQuery(this).find(':input:first');
+								var fieldId = formField.attr('id');
+
+								if (!fieldId) {
+									fieldId = formField.attr('name');
+								}
+								fieldId = (fieldId || '').match(/([0-9]+)$/);
+
+								if (fieldId && fieldId[0]) {
+									serializedData.push(fieldId[0]);
+								}
+							}
+						)
 					}
 
-					clone.find('label[for=' + oldName + ']').attr('for', newName);
-				}
-			);
+					return serializedData.join(',');
+				},
 
-			instance._clearForm(clone);
+				_clearForm: function(obj) {
+					var instance = this;
 
-			clone.find("input[type=hidden]").each(
-				function() {
-					this.value = '';
-				}
-			);
+					obj.find('input, select, textarea').each(
+						function(i, n) {
+							var type = this.type;
+							var tag = this.tagName.toLowerCase();
 
-			currentRow.after(clone);
-
-			if (instance.options.sortable) {
-				clone.find('.handle-sort-vertical').attr('id', '');
-
-				clone.resetId();
-
-				instance._sortable.add(clone[0]);
-			}
-
-			Liferay.Util.focusFormField(clone.find('input:text:first')[0]);
-
-			instance.trigger('addRow', {row: clone, originalRow: currentRow, idSeed: newSeed});
-		},
-
-		deleteRow: function(el) {
-			var instance = this;
-
-			var visibleRows = instance._rowContainer.find('.lfr-form-row:visible');
-
-			if (visibleRows.length == 1) {
-				instance.addRow(el);
-			}
-
-			var deletedElement = jQuery(el);
-
-			deletedElement.hide();
-
-			instance._undoManager.add(
-				function(stateData) {
-					deletedElement.show();
-				}
-			);
-
-			instance.trigger('deleteRow', {row: deletedElement});
-		},
-
-		serialize: function(filter) {
-			var instance = this;
-
-			var rows = instance._baseContainer.find('.lfr-form-row:visible');
-			var serializedData = [];
-
-			if (filter) {
-				serializedData = filter.apply(instance, [rows]) || [];
-			}
-			else {
-				rows.each(
-					function(i) {
-						var formField = jQuery(this).find(':input:first');
-						var fieldId = formField.attr('id');
-
-						if (!fieldId) {
-							fieldId = formField.attr('name');
+							if (type == 'text' || type == 'password' || tag == 'textarea') {
+								this.value = '';
+							}
+							else if (type == 'checkbox' || type == 'radio') {
+								this.checked = false;
+							}
+							else if (tag == 'select') {
+								this.selectedIndex = -1;
+							}
 						}
-						fieldId = (fieldId || '').match(/([0-9]+)$/);
+					);
+				},
 
-						if (fieldId && fieldId[0]) {
-							serializedData.push(fieldId[0]);
+				_moveDown: function(target) {
+					var element = jQuery(target);
+
+					while (!element.is('.lfr-form-row')) {
+						element = element.parent();
+					}
+
+					element.next().after(element);
+				},
+
+				_moveUp: function(target) {
+					var element = jQuery(target);
+
+					while(!element.is('.lfr-form-row')) {
+						element = element.parent();
+					}
+
+					element.prev().before(element);
+				},
+
+				_makeSortable: function(sortableHandle) {
+					var instance = this;
+
+					var rows = instance._rowContainer.find('.lfr-form-row');
+
+					if (sortableHandle) {
+						rows.find(sortableHandle).addClass('handle-sort-vertical');
+					}
+
+					instance._sortable = new Alloy.Sortable(
+						{
+							axis: 'y',
+							container: instance._rowContainer,
+							items: rows,
+							handle: sortableHandle
 						}
-					}
-				)
+					);
+				},
+
+				_idSeed: 0
 			}
+		);
 
-			return serializedData.join(',');
-		},
-
-		_clearForm: function(obj) {
-			var instance = this;
-
-			obj.find('input, select, textarea').each(
-				function(i, n) {
-					var type = this.type;
-					var tag = this.tagName.toLowerCase();
-
-					if (type == 'text' || type == 'password' || tag == 'textarea') {
-						this.value = '';
-					}
-					else if (type == 'checkbox' || type == 'radio') {
-						this.checked = false;
-					}
-					else if (tag == 'select') {
-						this.selectedIndex = -1;
-					}
-				}
-			);
-		},
-
-		_moveDown: function(target) {
-			var element = jQuery(target);
-
-			while (!element.is('.lfr-form-row')) {
-				element = element.parent();
-			}
-
-			element.next().after(element);
-		},
-
-		_moveUp: function(target) {
-			var element = jQuery(target);
-
-			while(!element.is('.lfr-form-row')) {
-				element = element.parent();
-			}
-
-			element.prev().before(element);
-		},
-
-		_makeSortable: function(sortableHandle) {
-			var instance = this;
-
-			var rows = instance._rowContainer.find('.lfr-form-row');
-
-			if (sortableHandle) {
-				rows.find(sortableHandle).addClass('handle-sort-vertical');
-			}
-
-			instance._sortable = new Alloy.Sortable(
-				{
-					axis: 'y',
-					container: instance._rowContainer,
-					items: rows,
-					handle: sortableHandle
-				}
-			);
-		},
-
-		_idSeed: 0
+		Liferay.AutoFields = AutoFields;
+	},
+	'',
+	{
+		requires: ['liferay-observable', 'liferay-undo-manager']
 	}
 );

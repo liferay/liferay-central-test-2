@@ -539,6 +539,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<script type="text/javascript">
 							AUI().ready(
+								'liferay-auto-fields',
+								'liferay-categories-selector',
 								function () {
 									Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 									Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');

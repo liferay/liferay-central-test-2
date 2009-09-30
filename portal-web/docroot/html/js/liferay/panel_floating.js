@@ -1,5 +1,6 @@
-Liferay.PanelFloating = Liferay.Panel.extend(
-	{
+AUI().add(
+	'liferay-panel-floating',
+	function(A) {
 
 		/**
 		 * OPTIONS
@@ -15,7 +16,7 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 		 *
 		 */
 
-		initialize: function(options) {
+		var PanelFloating = function(options) {
 			var instance = this;
 
 			var defaults = {
@@ -33,7 +34,7 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 			instance._trigger = jQuery(options.trigger);
 			instance._containerWidth = options.width;
 
-			instance._super(options);
+			PanelFloating.superclass.constructor.apply(instance, arguments);
 
 			if (!instance._inContainer) {
 				instance._container = jQuery('<div class="lfr-floating-container"></div>');
@@ -75,257 +76,269 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 			);
 
 			instance.set('trigger', instance._trigger);
-		},
+		};
 
-		hide: function() {
-			var instance = this;
+		A.extend(
+			PanelFloating,
+			Liferay.Panel,
+			{
+				hide: function() {
+					var instance = this;
 
-			instance._positionHelper.hide();
+					instance._positionHelper.hide();
 
-			instance._trigger.removeClass('lfr-trigger-selected');
+					instance._trigger.removeClass('lfr-trigger-selected');
 
-			instance.trigger('hide');
-		},
+					instance.trigger('hide');
+				},
 
-		onOuterClick: function() {
-			var instance = this;
+				onOuterClick: function() {
+					var instance = this;
 
-			instance.hide();
+					instance.hide();
 
-			instance.trigger('outerClick');
-		},
+					instance.trigger('outerClick');
+				},
 
-		onTitleClick: function(el) {
-			var instance = this;
+				onTitleClick: function(el) {
+					var instance = this;
 
-			instance._super(el);
+					PanelFloating.superclass.onTitleClick.apply(instance, arguments);
 
-			var currentContainer = jQuery(el).parents('.lfr-panel');
-			var sets = currentContainer.find('ul');
+					var currentContainer = jQuery(el).parents('.lfr-panel');
+					var sets = currentContainer.find('ul');
 
-			if (!sets.filter('.current-set').length) {
-				sets.filter(':first').addClass('current-set');
-			}
+					if (!sets.filter('.current-set').length) {
+						sets.filter(':first').addClass('current-set');
+					}
 
-			instance.paginate(currentContainer);
-		},
+					instance.paginate(currentContainer);
+				},
 
-		onTriggerClick: function(trigger) {
-			var instance = this;
+				onTriggerClick: function(trigger) {
+					var instance = this;
 
-			var panelHidden = instance._positionHelper.is(':hidden');
+					var panelHidden = instance._positionHelper.is(':hidden');
 
-			if (panelHidden) {
-				instance.show(trigger);
-			}
-			else {
-				instance.hide(trigger);
-			}
+					if (panelHidden) {
+						instance.show(trigger);
+					}
+					else {
+						instance.hide(trigger);
+					}
 
-			instance.trigger('triggerClick');
-		},
+					instance.trigger('triggerClick');
+				},
 
-		paginate: function(currentPanelContent) {
-			var instance = this;
+				paginate: function(currentPanelContent) {
+					var instance = this;
 
-			if (!currentPanelContent) {
-				currentPanelContent = instance._container.find('.lfr-panel-open .lfr-panel-content');
-			}
+					if (!currentPanelContent) {
+						currentPanelContent = instance._container.find('.lfr-panel-open .lfr-panel-content');
+					}
 
-			if (instance._paging) {
-				instance._container.addClass('lfr-panel-paging');
+					if (instance._paging) {
+						instance._container.addClass('lfr-panel-paging');
 
-				currentPanelContent.each(
-					function(i, n) {
-						var currentPanelContent = jQuery(this);
+						currentPanelContent.each(
+							function(i, n) {
+								var currentPanelContent = jQuery(this);
 
-						if (currentPanelContent.data('paginated') != true) {
-							var sets = currentPanelContent.find('>' + instance._pagingElements);
-							var totalPages = sets.length;
+								if (currentPanelContent.data('paginated') != true) {
+									var sets = currentPanelContent.find('>' + instance._pagingElements);
+									var totalPages = sets.length;
 
-							var currentSet = sets.filter('.current-set');
+									var currentSet = sets.filter('.current-set');
 
-							var pageNumber = 1;
+									var pageNumber = 1;
 
-							if (!currentSet.length) {
-								currentSet = sets.eq(0);
-								currentSet.addClass('current-set');
-							}
-							else {
-								pageNumber = sets.index(currentSet[0]) + 1;
-							}
-
-							currentPanelContent.data('currentPageSet', currentSet);
-							currentPanelContent.data('currentPageNumber', pageNumber);
-
-							if (totalPages > 1) {
-								var pagingContainer = jQuery('<div class="lfr-component lfr-paging-container"><ul class="lfr-paging-pages"></ul></div>');
-
-								var pagingList = pagingContainer.find('.lfr-paging-pages');
-
-								var listItems = ['<li class="lfr-page lfr-page-previous"><a href="javascript:;">&laquo;</a></li>'];
-
-								for (var i=1; i <= totalPages; i++) {
-									var cssClass = '';
-
-									if (i == 1) {
-										cssClass = 'lfr-page-current';
+									if (!currentSet.length) {
+										currentSet = sets.eq(0);
+										currentSet.addClass('current-set');
+									}
+									else {
+										pageNumber = sets.index(currentSet[0]) + 1;
 									}
 
-									listItems.push('<li class="lfr-page ' + cssClass + '" data-page="' + i + '"><a href="javascript:;">' + i + '</a></li>');
-								}
+									currentPanelContent.data('currentPageSet', currentSet);
+									currentPanelContent.data('currentPageNumber', pageNumber);
 
-								listItems.push('<li class="lfr-page lfr-page-next"><a href="javascript:;">&raquo;</a></li>');
+									if (totalPages > 1) {
+										var pagingContainer = jQuery('<div class="lfr-component lfr-paging-container"><ul class="lfr-paging-pages"></ul></div>');
 
-								pagingList.append(listItems.join(''));
+										var pagingList = pagingContainer.find('.lfr-paging-pages');
 
-								var goToPage = function(pageNumber) {
-									var currentSet = sets.eq(pageNumber - 1);
+										var listItems = ['<li class="lfr-page lfr-page-previous"><a href="javascript:;">&laquo;</a></li>'];
 
-									if (currentSet.length) {
-										sets.removeClass('current-set');
-										currentSet.addClass('current-set');
+										for (var i=1; i <= totalPages; i++) {
+											var cssClass = '';
 
-										pagingList.find('.lfr-page').each(
-											function(i) {
-												var className = this.className || '';
+											if (i == 1) {
+												cssClass = 'lfr-page-current';
+											}
 
-												if (className.indexOf('lfr-page-current') > -1) {
-													jQuery(this).removeClass('lfr-page-current');
-												}
-												else {
-													if (className.indexOf('lfr-page-previous') < 0 &&
-														className.indexOf('lfr-page-next') < 0 &&
-														i == pageNumber) {
+											listItems.push('<li class="lfr-page ' + cssClass + '" data-page="' + i + '"><a href="javascript:;">' + i + '</a></li>');
+										}
 
-														jQuery(this).addClass('lfr-page-current');
+										listItems.push('<li class="lfr-page lfr-page-next"><a href="javascript:;">&raquo;</a></li>');
+
+										pagingList.append(listItems.join(''));
+
+										var goToPage = function(pageNumber) {
+											var currentSet = sets.eq(pageNumber - 1);
+
+											if (currentSet.length) {
+												sets.removeClass('current-set');
+												currentSet.addClass('current-set');
+
+												pagingList.find('.lfr-page').each(
+													function(i) {
+														var className = this.className || '';
+
+														if (className.indexOf('lfr-page-current') > -1) {
+															jQuery(this).removeClass('lfr-page-current');
+														}
+														else {
+															if (className.indexOf('lfr-page-previous') < 0 &&
+																className.indexOf('lfr-page-next') < 0 &&
+																i == pageNumber) {
+
+																jQuery(this).addClass('lfr-page-current');
+															}
+														}
+													}
+												);
+
+												currentPanelContent.data('currentPageSet', currentSet);
+												currentPanelContent.data('currentPageNumber', pageNumber);
+											}
+										};
+
+										pagingContainer.attr('data-currentPageNumber', 1);
+
+										pagingContainer.click(
+											function(event) {
+												var container = jQuery(this);
+												var target = jQuery(event.target);
+
+												if (target.is('.lfr-page') || (target = target.parents('.lfr-page')).length) {
+													var pageNumber = target.attr('data-page');
+
+													if (!pageNumber) {
+														var currentPageNumber = currentPanelContent.data('currentPageNumber');
+														currentPageNumber = parseInt(currentPageNumber);
+
+														if (isNaN(currentPageNumber) || currentPageNumber == 0) {
+															currentPageNumber = 1;
+														}
+
+														if (target.is('.lfr-page-next')) {
+															currentPageNumber += 1;
+														}
+														else if (target.is('.lfr-page-previous')) {
+															currentPageNumber -= 1;
+														}
+
+														pageNumber = currentPageNumber;
+													}
+
+													if (!target.is('.lfr-page-current')) {
+														goToPage(pageNumber);
 													}
 												}
 											}
 										);
 
-										currentPanelContent.data('currentPageSet', currentSet);
-										currentPanelContent.data('currentPageNumber', pageNumber);
+										currentPanelContent.append(pagingContainer);
+
+										currentPanelContent.data('paginated', true);
 									}
-								};
+								}
+							}
+						);
+					}
+				},
 
-								pagingContainer.attr('data-currentPageNumber', 1);
+				position: function(trigger) {
+					var instance = this;
 
-								pagingContainer.click(
-									function(event) {
-										var container = jQuery(this);
-										var target = jQuery(event.target);
+					trigger = jQuery(trigger);
 
-										if (target.is('.lfr-page') || (target = target.parents('.lfr-page')).length) {
-											var pageNumber = target.attr('data-page');
+					var container = instance._container;
+					var positionHelper = instance._positionHelper;
 
-											if (!pageNumber) {
-												var currentPageNumber = currentPanelContent.data('currentPageNumber');
-												currentPageNumber = parseInt(currentPageNumber);
+					var triggerHeight = trigger.outerHeight();
+					var triggerWidth = trigger.outerWidth();
 
-												if (isNaN(currentPageNumber) || currentPageNumber == 0) {
-													currentPageNumber = 1;
-												}
+					var triggerOffset = trigger.offset();
 
-												if (target.is('.lfr-page-next')) {
-													currentPageNumber += 1;
-												}
-												else if (target.is('.lfr-page-previous')) {
-													currentPageNumber -= 1;
-												}
+					if (!container.data('position-helper')) {
+						positionHelper.css(
+							{
+								height: triggerHeight,
+								width: triggerWidth
+							}
+						);
 
-												pageNumber = currentPageNumber;
-											}
+						container.data('position-helper', positionHelper);
+					}
 
-											if (!target.is('.lfr-page-current')) {
-												goToPage(pageNumber);
-											}
-										}
-									}
-								);
+					positionHelper.show();
+					container.show();
 
-								currentPanelContent.append(pagingContainer);
+					positionHelper.css(
+						{
+							left: triggerOffset.left,
+							top: triggerOffset.top + triggerHeight
+						}
+					);
+				},
 
-								currentPanelContent.data('paginated', true);
+				show: function(trigger) {
+					var instance = this;
+
+					instance._container.width(instance._containerWidth);
+
+					instance.position(trigger);
+
+					instance._trigger.addClass('lfr-trigger-selected');
+
+					if (instance._paging) {
+						instance._setMaxPageHeight();
+					}
+
+					instance.trigger('show');
+				},
+
+				_setMaxPageHeight: function() {
+					var instance = this;
+
+					var sets = instance._container.find('.lfr-panel:not(.lfr-collapsed)');
+
+					var maxHeight = 0;
+
+					var panelContent = sets.find('.lfr-panel-content');
+					var pages = panelContent.find('>' + instance._pagingElements);
+
+					pages.each(
+						function(i, n) {
+							var setHeight = jQuery(this).height();
+
+							if (setHeight > maxHeight) {
+								maxHeight = setHeight;
 							}
 						}
-					}
-				);
-			}
-		},
+					);
 
-		position: function(trigger) {
-			var instance = this;
-
-			trigger = jQuery(trigger);
-
-			var container = instance._container;
-			var positionHelper = instance._positionHelper;
-
-			var triggerHeight = trigger.outerHeight();
-			var triggerWidth = trigger.outerWidth();
-
-			var triggerOffset = trigger.offset();
-
-			if (!container.data('position-helper')) {
-				positionHelper.css(
-					{
-						height: triggerHeight,
-						width: triggerWidth
-					}
-				);
-
-				container.data('position-helper', positionHelper);
-			}
-
-			positionHelper.show();
-			container.show();
-
-			positionHelper.css(
-				{
-					left: triggerOffset.left,
-					top: triggerOffset.top + triggerHeight
+					pages.height(maxHeight);
 				}
-			);
-		},
-
-		show: function(trigger) {
-			var instance = this;
-
-			instance._container.width(instance._containerWidth);
-
-			instance.position(trigger);
-
-			instance._trigger.addClass('lfr-trigger-selected');
-
-			if (instance._paging) {
-				instance._setMaxPageHeight();
 			}
+		);
 
-			instance.trigger('show');
-		},
-
-		_setMaxPageHeight: function() {
-			var instance = this;
-
-			var sets = instance._container.find('.lfr-panel:not(.lfr-collapsed)');
-
-			var maxHeight = 0;
-
-			var panelContent = sets.find('.lfr-panel-content');
-			var pages = panelContent.find('>' + instance._pagingElements);
-
-			pages.each(
-				function(i, n) {
-					var setHeight = jQuery(this).height();
-
-					if (setHeight > maxHeight) {
-						maxHeight = setHeight;
-					}
-				}
-			);
-
-			pages.height(maxHeight);
-		}
+		Liferay.PanelFloating = PanelFloating;
+	},
+	'',
+	{
+		requires: ['liferay-panel']
 	}
 );

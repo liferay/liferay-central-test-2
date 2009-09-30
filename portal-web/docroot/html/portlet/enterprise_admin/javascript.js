@@ -1,30 +1,28 @@
-Liferay.EnterpriseAdmin = {
-}
-
-Liferay.EnterpriseAdmin.Addresses = {
-	getCountries: function(callback) {
-		Liferay.Service.Portal.Country.getCountries(
-			{
-				active: true
+AUI().add(
+	'liferay-enterprise-admin',
+	function(A) {
+		var Addresses = {
+			getCountries: function(callback) {
+				Liferay.Service.Portal.Country.getCountries(
+					{
+						active: true
+					},
+					callback
+				);
 			},
-			callback
-		);
-	},
 
-	getRegions: function(callback, selectKey) {
-		Liferay.Service.Portal.Region.getRegions(
-			{
-				countryId: Number(selectKey),
-				active: true
-			},
-			callback
-		);
-	}
-};
+			getRegions: function(callback, selectKey) {
+				Liferay.Service.Portal.Region.getRegions(
+					{
+						countryId: Number(selectKey),
+						active: true
+					},
+					callback
+				);
+			}
+		};
 
-Liferay.EnterpriseAdmin.FormNavigator = new Alloy.Class(
-	{
-		initialize: function(options) {
+		var FormNavigator = function(options) {
 			var instance = this;
 
 			instance._container = jQuery(options.container);
@@ -85,51 +83,58 @@ Liferay.EnterpriseAdmin.FormNavigator = new Alloy.Class(
 					instance._modifiedSections.val(instance._modifiedSectionsArray.join(','));
 				}
 			);
-		},
+		};
 
-		_revealSection: function(id, currentNavItem) {
-			var instance = this;
+		FormNavigator.prototype = {
+			_revealSection: function(id, currentNavItem) {
+				var instance = this;
 
-			id = id.replace(instance._hashKey, '');
+				id = id.replace(instance._hashKey, '');
 
-			var li = currentNavItem || instance._navigation.find('[href$=' + id + ']').parent();
+				var li = currentNavItem || instance._navigation.find('[href$=' + id + ']').parent();
 
-			id = id.split('#');
+				id = id.split('#');
 
-			if (!id[1]) {
-				return;
-			}
+				if (!id[1]) {
+					return;
+				}
 
-			id = '#' + id[1];
+				id = '#' + id[1];
 
-			var section = jQuery(id);
+				var section = jQuery(id);
 
-			instance._navigation.find('.selected').removeClass('selected');
-			instance._sections.removeClass('selected');
+				instance._navigation.find('.selected').removeClass('selected');
+				instance._sections.removeClass('selected');
 
-			section.addClass('selected');
-			li.addClass('selected');
-		},
+				section.addClass('selected');
+				li.addClass('selected');
+			},
 
-		_trackChanges: function(el) {
-			var instance = this;
+			_trackChanges: function(el) {
+				var instance = this;
 
-			var currentSection = jQuery(el).parents('.form-section:first').attr('id');
+				var currentSection = jQuery(el).parents('.form-section:first').attr('id');
 
-			var currentSectionLink = jQuery('#' + currentSection + 'Link');
-			currentSectionLink.parent().addClass('section-modified');
+				var currentSectionLink = jQuery('#' + currentSection + 'Link');
+				currentSectionLink.parent().addClass('section-modified');
 
-			instance._addModifiedSection(currentSection);
-		},
+				instance._addModifiedSection(currentSection);
+			},
 
-		_addModifiedSection: function (section) {
-			var instance = this;
+			_addModifiedSection: function (section) {
+				var instance = this;
 
-			if (jQuery.inArray(section, instance._modifiedSectionsArray) == -1) {
-				instance._modifiedSectionsArray.push(section);
-			}
-		},
+				if (jQuery.inArray(section, instance._modifiedSectionsArray) == -1) {
+					instance._modifiedSectionsArray.push(section);
+				}
+			},
 
-		_hashKey: '_LFR_FN_'
+			_hashKey: '_LFR_FN_'
+		};
+
+		Liferay.EnterpriseAdmin = {
+			Addresses: Addresses,
+			FormNavigator: FormNavigator
+		};
 	}
 );

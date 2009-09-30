@@ -153,6 +153,7 @@ if (image != null) {
 <c:if test="<%= image == null %>">
 	<script type="text/javascript">
 		AUI().ready(
+			'liferay-upload',
 			function() {
 				new Liferay.Upload(
 					{

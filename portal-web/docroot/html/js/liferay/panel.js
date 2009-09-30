@@ -1,5 +1,6 @@
-Liferay.Panel = Alloy.Observable.extend(
-	{
+AUI().add(
+	'liferay-panel',
+	function(A) {
 
 		/**
 		 * OPTIONS
@@ -16,8 +17,10 @@ Liferay.Panel = Alloy.Observable.extend(
 		 *
 		 */
 
-		initialize: function(options) {
+		var Panel = function(options) {
 			var instance = this;
+
+			Panel.superclass.constructor.apply(instance, arguments);
 
 			var defaults = {
 				container: null,
@@ -74,100 +77,112 @@ Liferay.Panel = Alloy.Observable.extend(
 			instance.set('panel', instance._panel);
 			instance.set('panelContent', instance._panelContent);
 			instance.set('panelTitles', instance._panelTitles);
-		},
+		};
 
-		makeCollapsible: function() {
-			var instance = this;
+		A.extend(
+			Panel,
+			Liferay.Observable,
+			{
+				makeCollapsible: function() {
+					var instance = this;
 
-			instance._panelTitles.each(
-				function(i, n) {
-					var title = jQuery(this);
-					var panel = title.parents('.lfr-panel:first');
+					instance._panelTitles.each(
+						function(i, n) {
+							var title = jQuery(this);
+							var panel = title.parents('.lfr-panel:first');
 
-					if (panel.hasClass('lfr-extended')) {
-						var toggler = title.find('.lfr-panel-button');
+							if (panel.hasClass('lfr-extended')) {
+								var toggler = title.find('.lfr-panel-button');
 
-						if (!toggler.length) {
-							title.append('<a class="lfr-panel-button" href="javascript:;"></a>');
+								if (!toggler.length) {
+									title.append('<a class="lfr-panel-button" href="javascript:;"></a>');
+								}
+							}
 						}
+					);
+
+					instance._panelTitles.mousedown(
+						function(event) {
+							instance.onTitleClick(this);
+						}
+					);
+				},
+
+				onTitleClick: function(el) {
+					var instance = this;
+
+					var currentContainer = jQuery(el).parents('.lfr-panel');
+
+					currentContainer.toggleClass('lfr-collapsed');
+
+					if (instance._accordion) {
+						var siblings = currentContainer.siblings('.lfr-panel');
+
+						siblings.each(
+							function (i, n) {
+								if (this.id) {
+									instance._saveState(this.id, 'closed');
+								}
+
+								jQuery(this).addClass('lfr-collapsed');
+							}
+						);
+					}
+
+					var panelId = currentContainer.attr('id');
+					var state = 'open';
+
+					if (currentContainer.hasClass('lfr-collapsed')) {
+						state = 'closed';
+					}
+
+					instance._saveState(panelId, state);
+
+					instance.trigger('titleClick');
+				},
+
+				_saveState: function (id, state) {
+					var instance = this;
+
+					if (instance._persistState) {
+						var data = {};
+
+						data[id] = state;
+
+						jQuery.ajax(
+							{
+								url: themeDisplay.getPathMain() + '/portal/session_click',
+								data: data
+							}
+						);
 					}
 				}
-			);
-
-			instance._panelTitles.mousedown(
-				function(event) {
-					instance.onTitleClick(this);
-				}
-			);
-		},
-
-		onTitleClick: function(el) {
-			var instance = this;
-
-			var currentContainer = jQuery(el).parents('.lfr-panel');
-
-			currentContainer.toggleClass('lfr-collapsed');
-
-			if (instance._accordion) {
-				var siblings = currentContainer.siblings('.lfr-panel');
-
-				siblings.each(
-					function (i, n) {
-						if (this.id) {
-							instance._saveState(this.id, 'closed');
-						}
-
-						jQuery(this).addClass('lfr-collapsed');
-					}
-				);
 			}
+		);
 
-			var panelId = currentContainer.attr('id');
-			var state = 'open';
+		jQuery.extend(
+			Panel,
+			{
+				get: function(id) {
+					var instance = this;
 
-			if (currentContainer.hasClass('lfr-collapsed')) {
-				state = 'closed';
+					return instance[instance._prefix + id];
+				},
+
+				register: function(id, panel) {
+					var instance = this;
+
+					instance[instance._prefix + id] = panel;
+				},
+
+				_prefix: '__'
 			}
+		);
 
-			instance._saveState(panelId, state);
-
-			instance.trigger('titleClick');
-		},
-
-		_saveState: function (id, state) {
-			var instance = this;
-
-			if (instance._persistState) {
-				var data = {};
-
-				data[id] = state;
-
-				jQuery.ajax(
-					{
-						url: themeDisplay.getPathMain() + '/portal/session_click',
-						data: data
-					}
-				);
-			}
-		}
-	}
-);
-
-jQuery.extend(
-	Liferay.Panel,
+		Liferay.Panel = Panel;
+	},
+	'',
 	{
-		get: function(id) {
-			var instance = this;
-
-			return instance[instance._prefix + id];
-		},
-
-		register: function(id, panel) {
-			var instance = this;
-
-			instance[instance._prefix + id] = panel;
-		},
-
-		_prefix: '__'
+		requires: ['liferay-observable']
 	}
 );

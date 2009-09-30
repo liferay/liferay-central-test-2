@@ -266,15 +266,18 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 			function(portletId, jQueryObj) {
 				Liferay.Util.addInputType(portletId, jQueryObj);
 
-				if (Liferay.Menu) {
-					new Liferay.Menu(
-						{
-							button: '.lfr-actions',
-							context: jQueryObj[0],
-							trigger: '.lfr-trigger'
-						}
-					);
-				}
+				AUI().use(
+					'liferay-menu',
+					function(A) {
+						new Liferay.Menu(
+							{
+								button: '.lfr-actions',
+								context: jQueryObj[0],
+								trigger: '.lfr-trigger'
+							}
+						);
+					}
+				);
 			}
 		);
 
@@ -315,6 +318,7 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 		<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 			AUI().ready(
 				'liferay-layout',
+				'liferay-navigation',
 				function(A) {
 					var layoutOptions = {};
 
@@ -337,15 +341,13 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 
 					Liferay.Layout.init(layoutOptions);
 
-					if (Liferay.Navigation) {
-						new Liferay.Navigation(
-							{
-								layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
-								navBlock: '#navigation',
-								hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>
-							}
-						);
-					}
+					new Liferay.Navigation(
+						{
+							layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
+							navBlock: '#navigation',
+							hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>
+						}
+					);
 
 					<%--/*jQuery(".journal-content-eip-text").leditable(
 						"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
@@ -390,18 +392,16 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 		</c:if>
 
 		AUI().ready(
+			'liferay-menu',
+			'liferay-notice',
 			function() {
 				if (Liferay.Dock) {
 					Liferay.Dock.init();
 				}
 
-				if (Liferay.Menu) {
-					new Liferay.Menu();
-				}
+				new Liferay.Menu();
 
-				if (Liferay.Notice) {
-					Liferay.Notice.prototype.setClosing();
-				}
+				Liferay.Notice.prototype.setClosing();
 
 				<c:if test="<%= themeDisplay.isSignedIn() %>">
 					Liferay._editControlsState = '<%= GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", null), "visible") %>';

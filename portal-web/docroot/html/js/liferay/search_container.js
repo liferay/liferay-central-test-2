@@ -1,27 +1,27 @@
-Liferay.SearchContainer = new Alloy.Class(
-	{
-		initialize: function(options) {
-			var instance = this;
+;(function() {
+	var SearchContainer = function(options) {
+		var instance = this;
 
-			instance._id = options.id || '';
-			instance._container = jQuery('#' + instance._id + 'SearchContainer');
-			instance._dataStore = jQuery('#' + instance._id + 'PrimaryKeys');
+		instance._id = options.id || '';
+		instance._container = jQuery('#' + instance._id + 'SearchContainer');
+		instance._dataStore = jQuery('#' + instance._id + 'PrimaryKeys');
 
-			instance._table = instance._container.find('table');
+		instance._table = instance._container.find('table');
 
-			instance._table.attr('data-searchContainerId', instance._id);
+		instance._table.attr('data-searchContainerId', instance._id);
 
-			Liferay.SearchContainer.register(instance._id, instance);
+		SearchContainer.register(instance._id, instance);
 
-			var initialIds = instance._dataStore.val();
+		var initialIds = instance._dataStore.val();
 
-			if (initialIds) {
-				initialIds = initialIds.split(',');
+		if (initialIds) {
+			initialIds = initialIds.split(',');
 
-				instance.updateDataStore(initialIds);
-			}
-		},
+			instance.updateDataStore(initialIds);
+		}
+	};
 
+	SearchContainer.prototype = {
 		addRow: function(arr, id) {
 			var instance = this;
 
@@ -122,37 +122,39 @@ Liferay.SearchContainer = new Alloy.Class(
 		},
 
 		_ids: []
-	}
-);
+	};
 
-jQuery.extend(
-	Liferay.SearchContainer,
-	{
-		get: function(id) {
-			var instance = this;
+	jQuery.extend(
+		SearchContainer,
+		{
+			get: function(id) {
+				var instance = this;
 
-			var searchContainer = null;
+				var searchContainer = null;
 
-			if (instance._cache[id]) {
-				searchContainer = instance._cache[id];
-			}
-			else {
-				searchContainer = new Liferay.SearchContainer(
-					{
-						id: id
-					}
-				);
-			}
+				if (instance._cache[id]) {
+					searchContainer = instance._cache[id];
+				}
+				else {
+					searchContainer = new SearchContainer(
+						{
+							id: id
+						}
+					);
+				}
 
-			return searchContainer;
-		},
+				return searchContainer;
+			},
 
-		register: function(id, obj) {
-			var instance = this;
+			register: function(id, obj) {
+				var instance = this;
 
-			instance._cache[id] = obj;
-		},
+				instance._cache[id] = obj;
+			},
 
-		_cache: {}
-	}
-);
+			_cache: {}
+		}
+	);
+
+	Liferay.SearchContainer = SearchContainer;
+})();

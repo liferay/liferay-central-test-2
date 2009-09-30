@@ -1,14 +1,15 @@
 Liferay.PortletSharing = {
 	showNetvibesInfo: function(netvibesURL) {
-		var portletURL = Liferay.PortletURL.createResourceURL();
-
-		portletURL.setPortletId(133);
-
-		portletURL.setParameter("netvibesURL", netvibesURL);
-
 		AUI().use(
 			'dialog',
+			'liferay-portlet-url',
 			function(A) {
+				var portletURL = Liferay.PortletURL.createResourceURL();
+
+				portletURL.setPortletId(133);
+
+				portletURL.setParameter("netvibesURL", netvibesURL);
+
 				var dialog = new A.Dialog(
 					{
 						centered: true,
@@ -26,15 +27,16 @@ Liferay.PortletSharing = {
 		);
 	},
 	showWidgetInfo: function(widgetURL) {
-		var portletURL = Liferay.PortletURL.createResourceURL();
-
-		portletURL.setPortletId(133);
-
-		portletURL.setParameter("widgetURL", widgetURL);
-
 		AUI().use(
 			'dialog',
+			'liferay-portlet-url',
 			function(A) {
+				var portletURL = Liferay.PortletURL.createResourceURL();
+
+				portletURL.setPortletId(133);
+
+				portletURL.setParameter("widgetURL", widgetURL);
+
 				var dialog = new A.Dialog(
 					{
 						centered: true,

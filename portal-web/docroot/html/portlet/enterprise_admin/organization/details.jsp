@@ -96,21 +96,26 @@ if (organization != null) {
 	}
 
 	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
+		AUI().use(
+			'liferay-search-container',
+			function(A) {
+				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
 
-		var rowColumns = [];
+				var rowColumns = [];
 
-		var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
+				var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
 
-		rowColumns.push(<portlet:namespace />createURL(href, name));
-		rowColumns.push(<portlet:namespace />createURL(href, Liferay.Language.get(type)));
-		rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+				rowColumns.push(<portlet:namespace />createURL(href, name));
+				rowColumns.push(<portlet:namespace />createURL(href, Liferay.Language.get(type)));
+				rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 
-		searchContainer.deleteRow(1, searchContainer.getData());
-		searchContainer.addRow(rowColumns, organizationId);
-		searchContainer.updateDataStore(organizationId);
+				searchContainer.deleteRow(1, searchContainer.getData());
+				searchContainer.addRow(rowColumns, organizationId);
+				searchContainer.updateDataStore(organizationId);
 
-		jQuery('.selected .modify-link').trigger('change');
+				jQuery('.selected .modify-link').trigger('change');
+			}
+		);
 	}
 
 	AUI().ready(
@@ -324,6 +329,7 @@ if (parentOrganization != null) {
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-dynamic-select',
 		function () {
 			new Liferay.DynamicSelect(
 				[

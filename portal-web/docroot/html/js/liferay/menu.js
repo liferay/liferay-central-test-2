@@ -1,6 +1,7 @@
-Liferay.Menu = new Alloy.Class(
-	{
-		initialize: function() {
+AUI().add(
+	'liferay-menu',
+	function(A) {
+		var Menu = function() {
 			var instance = this;
 
 			if (!arguments.callee._hasRun) {
@@ -85,94 +86,102 @@ Liferay.Menu = new Alloy.Class(
 					}
 				);
 			}
-		},
+		};
 
-		_closeActiveMenu: function() {
-			var instance = this;
+		Menu.prototype = {
+			_closeActiveMenu: function() {
+				var instance = this;
 
-			if (instance._active.menu) {
-				instance._active.menu.hide();
-				instance._active.menu = null;
+				if (instance._active.menu) {
+					instance._active.menu.hide();
+					instance._active.menu = null;
 
-				instance._active.trigger.removeClass('visible');
-				instance._active.trigger = null;
-			}
-		},
-
-		_positionActiveMenu: function() {
-			var instance = this;
-
-			var menu = instance._active.menu;
-			var trigger = instance._active.trigger;
-
-			if (menu) {
-				var offset = trigger.offset();
-				offset.position = 'absolute';
-
-				cssClass = trigger.attr('class');
-
-				var direction = 'auto';
-				var vertical = 'bottom';
-				var win = instance._window;
-
-				if (cssClass.indexOf('right') > -1) {
-					direction = 'right';
+					instance._active.trigger.removeClass('visible');
+					instance._active.trigger = null;
 				}
-				else if (cssClass.indexOf('left') > -1) {
-					direction = 'left';
-				}
+			},
 
-				var menuHeight = menu.height();
-				var menuWidth = menu.width();
+			_positionActiveMenu: function() {
+				var instance = this;
 
-				var triggerHeight = trigger.outerHeight();
-				var triggerWidth = trigger.outerWidth();
+				var menu = instance._active.menu;
+				var trigger = instance._active.trigger;
 
-				var menuTop = menuHeight + offset.top;
-				var menuLeft = menuWidth + offset.left;
-				var scrollTop = win.scrollTop();
-				var scrollLeft = win.scrollLeft();
+				if (menu) {
+					var offset = trigger.offset();
+					offset.position = 'absolute';
 
-				var windowHeight = win.height() + scrollTop;
-				var windowWidth = win.width() + scrollLeft;
+					cssClass = trigger.attr('class');
 
-				if (direction == 'auto') {
-					if (menuTop > windowHeight
-						&& !((offset.top - menuHeight) < 0)) {
+					var direction = 'auto';
+					var vertical = 'bottom';
+					var win = instance._window;
 
-						offset.top -= menuHeight;
+					if (cssClass.indexOf('right') > -1) {
+						direction = 'right';
+					}
+					else if (cssClass.indexOf('left') > -1) {
+						direction = 'left';
+					}
+
+					var menuHeight = menu.height();
+					var menuWidth = menu.width();
+
+					var triggerHeight = trigger.outerHeight();
+					var triggerWidth = trigger.outerWidth();
+
+					var menuTop = menuHeight + offset.top;
+					var menuLeft = menuWidth + offset.left;
+					var scrollTop = win.scrollTop();
+					var scrollLeft = win.scrollLeft();
+
+					var windowHeight = win.height() + scrollTop;
+					var windowWidth = win.width() + scrollLeft;
+
+					if (direction == 'auto') {
+						if (menuTop > windowHeight
+							&& !((offset.top - menuHeight) < 0)) {
+
+							offset.top -= menuHeight;
+						}
+						else {
+							offset.top += triggerHeight;
+						}
+
+						if ((menuLeft > windowWidth || ((menuWidth/2) + offset.left) > windowWidth/2)
+							&& !((offset.left - menuWidth) < 0)) {
+
+							offset.left -= (menuWidth - triggerWidth);
+						}
 					}
 					else {
-						offset.top += triggerHeight;
+						if (direction == 'right') {
+							offset.left -= (menuWidth - 2);
+						}
+						else if (direction == 'left') {
+							offset.left += (triggerWidth + 2);
+						}
+
+						offset.top -= (menuHeight - triggerHeight);
 					}
 
-					if ((menuLeft > windowWidth || ((menuWidth/2) + offset.left) > windowWidth/2)
-						&& !((offset.left - menuWidth) < 0)) {
+					menu.css(offset);
+					menu.show();
 
-						offset.left -= (menuWidth - triggerWidth);
-					}
+					trigger.addClass('visible');
+
+					instance._active = {
+						menu: menu,
+						trigger: trigger
+					};
 				}
-				else {
-					if (direction == 'right') {
-						offset.left -= (menuWidth - 2);
-					}
-					else if (direction == 'left') {
-						offset.left += (triggerWidth + 2);
-					}
-
-					offset.top -= (menuHeight - triggerHeight);
-				}
-
-				menu.css(offset);
-				menu.show();
-
-				trigger.addClass('visible');
-
-				instance._active = {
-					menu: menu,
-					trigger: trigger
-				};
 			}
-		}
+		};
+
+		Liferay.Menu = Menu;
+	},
+	'',
+	{
+		requires: []
 	}
 );

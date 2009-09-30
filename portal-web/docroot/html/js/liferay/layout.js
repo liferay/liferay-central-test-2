@@ -355,7 +355,9 @@ AUI().add(
 
 							DDM.syncActiveShims();
 						}
-						catch (e) {}
+						catch (e) {
+							console.log(e);
+						}
 					}
 				},
 

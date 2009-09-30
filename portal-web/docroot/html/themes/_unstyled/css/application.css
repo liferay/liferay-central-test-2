@@ -6,9 +6,6 @@
 .ui-wrapper input, .ui-wrapper textarea {
 }
 
-.results-grid {
-}
-
 .results-header {
 }
 
@@ -143,7 +140,7 @@
 .aui-resizable-proxy {
 }
 
-.navigation-sort-helper {
+.aui-sortable-proxy {
 }
 
 .portlet-sort-helper {

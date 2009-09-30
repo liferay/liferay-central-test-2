@@ -140,7 +140,8 @@
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
+		'liferay-tags-admin',
+		function(A) {
 			new Liferay.Portlet.AssetTagsAdmin('<%= portletDisplay.getId() %>');
 		}
 	);

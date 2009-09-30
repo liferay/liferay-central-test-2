@@ -1,5 +1,6 @@
-Liferay.Navigation = new Alloy.Class(
-	{
+AUI().add(
+	'liferay-navigation',
+	function(A) {
 
 		/**
 		 * OPTIONS
@@ -10,682 +11,679 @@ Liferay.Navigation = new Alloy.Class(
 		 * navBlock {string|object}: A jQuery selector or DOM element of the navigation.
 		 */
 
-		initialize: function(options) {
+		var Navigation = function(options) {
 			var instance = this;
 
 			instance.options = options;
 
-			instance._navBlock = jQuery(instance.options.navBlock);
+			instance._navBlock = A.get(instance.options.navBlock);
 
-			instance._hasPermission = instance.options.hasPermission;
-			instance._isModifiable = instance._navBlock.is('.modify-pages');
-			instance._isSortable = instance._navBlock.is('.sort-pages') && instance._hasPermission;
-			instance._isUseHandle = instance._navBlock.is('.use-handle');
+			if (instance._navBlock) {
+				instance._hasPermission = instance.options.hasPermission;
+				instance._isModifiable = instance._navBlock.hasClass('modify-pages');
+				instance._isSortable = instance._navBlock.hasClass('sort-pages') && instance._hasPermission;
+				instance._isUseHandle = instance._navBlock.hasClass('use-handle');
 
-			instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+				instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
-			var items = instance._navBlock.find('> ul > li');
+				var items = instance._navBlock.queryAll('> ul > li');
 
-			items.each(
-				function(i) {
-					this._LFR_layoutId = instance.options.layoutIds[i];
-				}
-			);
-
-			instance._addEvent = new Alloy.CustomEvent('add', instance);
-			instance._stopAddEvent = new Alloy.CustomEvent('stopAdd', instance);
-			instance._editEvent = new Alloy.CustomEvent('edit', instance);
-			instance._stopEditEvent = new Alloy.CustomEvent('stopEdit', instance);
-
-			instance._makeAddable();
-			instance._makeDeletable();
-			instance._makeSortable();
-			instance._makeEditable();
-
-			Liferay.bind('tree', instance._treeCallback, instance);
-		},
-
-		_addPage: function(event, obj) {
-			var instance = this;
-
-			var navItem = instance._navBlock;
-			var addBlock = jQuery('<li>' + instance._enterPage + '</li>');
-
-			var blockInput = addBlock.find('input');
-
-			navItem.find('ul:first').append(addBlock);
-
-			var editComponent = addBlock.data('editComponent');
-
-			if (!editComponent) {
-				var prototypeTemplate = instance._prototypeMenuTemplate || '';
-
-				prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + Alloy.generateId() + '_template"');
-
-				var editComponent = new Alloy.Overlay(
-					{
-						body: prototypeTemplate,
-						context: [addBlock[0], 'tl', 'bl', ['beforeShow', instance._addEvent, instance._stopAddEvent, instance._editEvent, instance._stopEditEvent]],
-						zIndex: 200
+				items.each(
+					function(item, index, collection) {
+						item._LFR_layoutId = instance.options.layoutIds[index];
 					}
 				);
 
-				editComponent._trigger = addBlock.find('.aui-options-trigger');
+				instance._addEvent = new Alloy.CustomEvent('add', instance);
+				instance._stopAddEvent = new Alloy.CustomEvent('stopAdd', instance);
+				instance._editEvent = new Alloy.CustomEvent('edit', instance);
+				instance._stopEditEvent = new Alloy.CustomEvent('stopEdit', instance);
 
-				editComponent._trigger.click(
-					function(event) {
-						var visible = editComponent.cfg.getProperty('visible');
+				instance._makeAddable();
+				instance._makeDeletable();
+				instance._makeSortable();
+				instance._makeEditable();
+			}
+		};
 
-						editComponent.cfg.setProperty('visible', !visible);
+		Navigation.prototype = {
+			_addPage: function(event, obj) {
+				var instance = this;
 
-						jQuery(this).toggleClass('aui-trigger-selected');
+				var navItem = instance._navBlock;
+				var addBlock = A.Node.create('<li>' + instance._enterPage + '</li>');
 
-						instance._optionsOpen = !visible;
+				var blockInput = addBlock.one('input');
+
+				navItem.one('ul').append(addBlock);
+
+				blockInput.focus();
+
+				var editComponent = addBlock._editComponent;
+
+				if (!editComponent) {
+					var prototypeTemplate = instance._prototypeMenuTemplate || '';
+
+					prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + Alloy.generateId() + '_template"');
+
+					var editComponent = new Alloy.Overlay(
+						{
+							body: prototypeTemplate,
+							context: [addBlock[0], 'tl', 'bl', ['beforeShow', instance._addEvent, instance._stopAddEvent, instance._editEvent, instance._stopEditEvent]],
+							zIndex: 200
+						}
+					);
+
+					editComponent._trigger = addBlock.one('.aui-options-trigger');
+
+					if (editComponent._trigger) {
+						editComponent._trigger.on(
+							'click',
+							function(event) {
+								var visible = editComponent.cfg.getProperty('visible');
+
+								editComponent.cfg.setProperty('visible', !visible);
+
+								this.toggleClass('aui-trigger-selected');
+
+								instance._optionsOpen = !visible;
+							}
+						);
 					}
-				);
 
-				editComponent.render(document.body);
+					editComponent.render(document.body);
 
-				Alloy.Dom.addClass(editComponent.element, 'lfr-menu-list lfr-component lfr-page-templates');
-				Alloy.Dom.setStyle(editComponent.element, 'min-width', addBlock.outerWidth() + 'px');
+					Alloy.Dom.addClass(editComponent.element, 'lfr-menu-list lfr-component lfr-page-templates');
+					Alloy.Dom.setStyle(editComponent.element, 'min-width', addBlock.get('offsetWidth') + 'px');
 
-				addBlock.data('editComponent', editComponent);
-			}
-
-			if (instance._optionsOpen) {
-				editComponent.show();
-			}
-			else {
-				editComponent.hide();
-				editComponent._trigger.removeClass('aui-trigger-selected');
-			}
-
-			var currentInput = addBlock.find('.enter-page input');
-
-			var savePage = addBlock.find('.save-page');
-
-			var pageParents = jQuery(document);
-
-			var cancelPage = function() {
-				instance._cancelAddingPage(addBlock);
-
-				Alloy.getDocument().unbind('click.liferay', pageBlur);
-
-				editComponent.hide();
-			}
-
-			var pageBlur = function(internalEvent) {
-				var currentEl = jQuery(internalEvent.target);
-				var liParent = currentEl.parents('ul:eq(0)');
-
-				if ((liParent.length == 0) && !currentEl.is('li') && !currentEl.parents('#add-page, #' + editComponent.id).length) {
-					cancelPage();
+					addBlock._editComponent = editComponent;
 				}
-			};
 
-			pageParents.bind('click.liferay', pageBlur);
-
-			savePage.click(
-				function(event) {
-					instance._savePage(event, this);
-
-					if (currentInput.val().length) {
-						Alloy.getDocument().unbind('click.liferay', pageBlur);
-					}
+				if (instance._optionsOpen) {
+					editComponent.show();
 				}
-			);
+				else {
+					editComponent.hide();
+					editComponent._trigger.removeClass('aui-trigger-selected');
+				}
 
-			currentInput.keypress(
-				function(event) {
-					if (event.keyCode == 13) {
-						savePage.trigger('click');
-					}
-					else if (event.keyCode == 27) {
+				var currentInput = addBlock.one('.enter-page input');
+
+				var savePage = addBlock.one('.save-page');
+
+				var pageParents = A.get(document);
+
+				var cancelPage = function() {
+					instance._cancelAddingPage(addBlock);
+
+					A.detach('click', pageBlur, pageParents);
+
+					editComponent.hide();
+				}
+
+				var pageBlur = function(internalEvent) {
+					var currentEl = internalEvent.target;
+					var liParent = currentEl.ancestor('ul');
+
+					if (!liParent &&
+						currentEl.get('tagName') != 'li' &&
+						!currentEl.ancestor('#add-page, #' + editComponent.id)
+						) {
 						cancelPage();
 					}
-					else {
-						return;
+				};
+
+				pageParents.on('click', pageBlur);
+
+				savePage.on(
+					'click',
+					function(event) {
+						instance._savePage(event, this);
+
+						if (currentInput.val().length) {
+							A.detach('click', pageBlur, pageParents);
+						}
 					}
+				);
+
+				currentInput.on(
+					'keypress',
+					function(event) {
+						if (event.keyCode == 13) {
+							savePage.simulate('click');
+						}
+						else if (event.keyCode == 27) {
+							cancelPage();
+						}
+						else {
+							return;
+						}
+					}
+				);
+			},
+
+			_stopEditing: function(previousName) {
+				var instance = this;
+
+				instance._navBlock.one('.enter-page').remove();
+
+				if (previousName) {
+					previousName.removeClass('aui-helper-hidden');
 				}
-			);
-		},
 
-		_stopEditing: function(previousName) {
-			var instance = this;
+				instance._stopEditEvent.fire();
+			},
 
-			instance._navBlock.find('.enter-page').remove();
+			_cancelAddingPage: function(obj) {
+				var instance = this;
 
-			if (previousName) {
-				previousName.show();
-			}
+				obj.remove();
 
-			instance._stopEditEvent.fire();
-		},
+				instance._stopAddEvent.fire();
+			},
 
-		_cancelAddingPage: function(obj) {
-			var instance = this;
+			_cancelPage: function(obj, oldName) {
+				var instance = this;
 
-			obj.remove();
+				var navItem = obj.ancestor('li');
 
-			instance._stopAddEvent.fire();
-		},
+				if (oldName) {
+					var enterPage = navItem.one('.enter-page');
 
-		_cancelPage: function(obj, oldName) {
-			var instance = this;
-
-			var navItem = null;
-
-			if (oldName) {
-				navItem = jQuery(obj).parents('li');
-
-				var enterPage = navItem.find('.enter-page');
-
-				enterPage.prev().show();
-				enterPage.remove();
-			}
-			else {
-				navItem = jQuery(this).parents('li');
-
-				navItem.remove();
-
-			}
-
-			instance._stopAddEvent.fire();
-		},
-
-		_deleteButton: function(obj) {
-			var instance = this;
-
-			obj.append('<span class="delete-tab">X</span>');
-
-			var deleteTab = obj.find('.delete-tab');
-
-			deleteTab.click(
-				function(event) {
-					instance._removePage(this);
+					enterPage.previous().removeClass('aui-helper-hidden');
+					enterPage.remove();
 				}
-			);
-
-			deleteTab.hide();
-
-			obj.hover(
-				function() {
-					jQuery(this).find('.delete-tab').fadeIn('fast');
-				},
-				function() {
-					jQuery(this).find('.delete-tab').fadeOut('fast');
+				else {
+					navItem.remove();
 				}
-			);
-		},
 
-		_makeAddable: function() {
-			var instance = this;
+				instance._stopAddEvent.fire();
+			},
 
-			if (instance._isModifiable) {
-				var navList = instance._navBlock.find('ul:first');
+			_deleteButton: function(obj) {
+				var instance = this;
 
-					var themeImages = themeDisplay.getPathThemeImages();
+				var deleteTab = A.Node.create('<span class="delete-tab">X</span>');
 
-					instance._prototypeMenuTemplate = Alloy.get('#layoutPrototypeTemplate').html();
+				obj.append('<span class="delete-tab aui-helper-hidden">X</span>');
+			},
 
-					instance._enterPage ='<span class="aui-form-field aui-form-text aui-form-options enter-page">' +
-						'<span><input class="lfr-auto-focus text" id="" name="" type="text" /></span>' +
-						'<span class="aui-form-triggers">' +
-							(instance._prototypeMenuTemplate ?
-								'<a class="aui-form-trigger aui-options-trigger ' + (instance._optionsOpen ? 'aui-trigger-selected' : '') + '" href="javascript:;">' +
+			_makeAddable: function() {
+				var instance = this;
+
+				if (instance._isModifiable) {
+					var navList = instance._navBlock.one('ul');
+
+						var themeImages = themeDisplay.getPathThemeImages();
+
+						var prototypeMenuTemplate = '';
+						var prototypeMenuNode = A.get('#layoutPrototypeTemplate');
+
+						if (prototypeMenuNode) {
+							prototypeMenuTemplate = prototypeMenuNode.html();
+						}
+
+						instance._prototypeMenuTemplate = prototypeMenuTemplate;
+
+						instance._enterPage ='<span class="aui-form-field aui-form-text aui-form-options enter-page">' +
+							'<span><input class="text" id="" name="" type="text" /></span>' +
+							'<span class="aui-form-triggers">' +
+								(instance._prototypeMenuTemplate ?
+									'<a class="aui-form-trigger aui-options-trigger ' + (instance._optionsOpen ? 'aui-trigger-selected' : '') + '" href="javascript:;">' +
+										'<img src="' + themeImages + '/spacer.png" />' +
+										'</a>' : '') +
+								'<a class="aui-form-trigger aui-save-trigger save-page" href="javascript:;">' +
 									'<img src="' + themeImages + '/spacer.png" />' +
-									'</a>' : '') +
-							'<a class="aui-form-trigger aui-save-trigger save-page" href="javascript:;">' +
-								'<img src="' + themeImages + '/spacer.png" />' +
-							'</a>' +
-						'</span>' +
-					'</span>';
+								'</a>' +
+							'</span>' +
+						'</span>';
 
-				if (instance._hasPermission) {
-					var addPageButton = jQuery('#addPage');
+					if (instance._hasPermission) {
+						var addPageButton = A.get('#addPage');
 
-					if (!addPageButton.length) {
-						navList.after(
-							'<div id="add-page">' +
+						if (!addPageButton) {
+							var addPageButton = A.Node.create('<div id="add-page">' +
 							'<a href="javascript:;">' +
 							'<span>' + Liferay.Language.get('add-page') + '</span>' +
 							'</a>' +
 							'</div>');
 
-						addPageButton = navList.parent().find('#add-page a');
-					}
+							navList.placeAfter(addPageButton);
+						}
 
-					addPageButton.click(
+						addPageButton.on(
+							'click',
+							function(event) {
+								if (!event.shiftKey) {
+									Liferay.Dockbar.MenuManager.hideAll();
+									Liferay.Dockbar.UnderlayManager.hideAll();
+								}
+
+								instance._addPage(event, this);
+							}
+						);
+					}
+				}
+			},
+
+			_makeDeletable: function() {
+				var instance = this;
+
+				if (instance._isModifiable && instance._hasPermission) {
+					var navItems = instance._navBlock.queryAll('> ul > li').filter(':not(.selected)');
+
+					instance._navBlock.delegate(
+						'click',
 						function(event) {
-							if (!event.shiftKey) {
-								Liferay.Dockbar.MenuManager.hideAll();
-								Liferay.Dockbar.UnderlayManager.hideAll();
+							instance._removePage(event.currentTarget);
+						},
+						'.delete-tab'
+					);
+
+					instance._navBlock.delegate(
+						'mouseenter',
+						function(event) {
+							var deleteTab = event.currentTarget.one('.delete-tab');
+
+							if (deleteTab) {
+								deleteTab.removeClass('aui-helper-hidden');
+							}
+						},
+						'li'
+					);
+
+					instance._navBlock.delegate(
+						'mouseleave',
+						function(event) {
+							var deleteTab = event.currentTarget.one('.delete-tab');
+
+							if (deleteTab) {
+								deleteTab.addClass('aui-helper-hidden');
+							}
+						},
+						'li'
+					);
+
+					instance._deleteButton(navItems);
+				}
+			},
+
+			_makeEditable: function() {
+				var instance = this;
+
+				if (instance._isModifiable) {
+					var currentItem = instance._navBlock.one('li.selected');
+					var currentLink = currentItem.one('a');
+					var currentSpan = currentLink.one('span');
+
+					var swallowEvent = function(event) {
+						event.stopPropagation();
+					};
+
+					currentLink.on(
+						'click',
+						function(event) {
+							if (event.shiftKey) {
+								event.halt();
+							}
+						}
+					);
+
+					var resetCursor = function() {
+						currentSpan.setStyle('cursor', 'pointer');
+					};
+
+					currentLink.on(
+						'mouseenter',
+						function(event) {
+							if (!themeDisplay.isStateMaximized() || event.shiftKey) {
+								currentSpan.setStyle('cursor', 'text');
+							}
+						}
+					);
+
+					currentLink.on('mouseleave', resetCursor);
+
+					currentSpan.on(
+						'click',
+						function(event) {
+							if (themeDisplay.isStateMaximized() && !event.shiftKey) {
+								return;
 							}
 
-							instance._addPage(event, this);
+							event.halt();
 
-							return false;
+							currentItem.on('click', swallowEvent);
+
+							var span = this;
+							var text = span.text();
+
+							var spanParent = span.get('parentNode');
+
+							var enterPage = A.Node.create(instance._enterPage);
+
+							spanParent.addClass('aui-helper-hidden');
+							spanParent.placeAfter(enterPage);
+
+							enterPage.addClass('edit-page');
+
+							var pageParents = A.get(document);
+
+							var enterPageInput = enterPage.one('input');
+
+							var pageBlur = function(event) {
+								event.stopPropagation();
+
+								if (event.target.get('tagName').toLowerCase() != 'li') {
+									cancelPage();
+								}
+							};
+
+							enterPageInput.val(text);
+
+							enterPageInput.invoke('select');
+
+							var savePage = enterPage.one('.save-page');
+
+							savePage.on(
+								'click',
+								function(event) {
+									instance._savePage(event, this, text);
+
+									if (enterPageInput.val().length) {
+										A.detach('blur', pageBlur, pageParents);
+										A.detach('click', pageBlur, pageParents);
+
+										A.detach('click', swallowEvent, currentItem);
+
+										instance._stopEditEvent.fire();
+									}
+								}
+							);
+
+							var cancelPage = function() {
+								instance._cancelPage(span, text);
+
+								A.detach('blur', pageBlur, pageParents);
+								A.detach('click', pageBlur, pageParents);
+
+								A.detach('click', swallowEvent, currentItem);
+
+								instance._stopEditEvent.fire();
+							};
+
+							enterPageInput.on(
+								'keypress',
+								function(event) {
+									if (event.keyCode == 13) {
+										savePage.simulate('click');
+										A.detach('blur', pageBlur, pageParents);
+										A.detach('click', pageBlur, pageParents);
+									}
+									else if (event.keyCode == 27) {
+										cancelPage();
+										A.detach('blur', pageBlur, pageParents);
+										A.detach('click', pageBlur, pageParents);
+									}
+								}
+							);
+
+							pageParents.on('click', pageBlur);
+
+							resetCursor();
+
+							instance._editEvent.fire();
 						}
 					);
 				}
-			}
-		},
+			},
 
-		_makeDeletable: function() {
-			var instance = this;
+			_makeSortable: function() {
+				var instance = this;
 
-			if (instance._isModifiable && instance._hasPermission) {
-				var navItems = instance._navBlock.find('> ul > li').not('.selected');
+				var navBlock = instance._navBlock;
+				var navList = navBlock.one('ul');
 
-				instance._deleteButton(navItems);
-			}
-		},
+				if (instance._isSortable) {
+					var items = navList.queryAll('li');
+					var anchors = navList.queryAll('a');
 
-		_makeEditable: function() {
-			var instance = this;
+					if (instance._isUseHandle) {
+						var handle = A.Node.create('<span class="sort-handle">+</span>');
 
-			if (instance._isModifiable) {
-				var currentItem = instance._navBlock.find('li.selected');
-				var currentLink = currentItem.find('a');
-				var currentSpan = currentLink.find('span');
-
-				currentLink.click(
-					function(event) {
-						if (event.shiftKey) {
-							return false;
-						}
+						items.append(handle);
 					}
-				);
+					else {
+						anchors.setStyle('cursor', 'move');
 
-				var resetCursor = function() {
-					currentSpan.css('cursor', 'pointer');
-				};
-
-				currentLink.hover(
-					function(event) {
-						if (!themeDisplay.isStateMaximized() || event.shiftKey) {
-							currentSpan.css('cursor', 'text');
-						}
-					},
-					resetCursor
-				);
-
-				currentSpan.click(
-					function(event) {
-						if (themeDisplay.isStateMaximized() && !event.shiftKey) {
-							return;
-						}
-
-						var span = jQuery(this);
-						var text = span.text();
-
-						span.parent().hide();
-						span.parent().after(instance._enterPage);
-
-						var enterPage = span.parent().next();
-
-						enterPage.addClass('edit-page');
-
-						var pageParents = enterPage.parents();
-
-						var enterPageInput = enterPage.find('input');
-
-						var pageBlur = function(event) {
-							event.stopPropagation();
-
-							if (!jQuery(this).is('li')) {
-								cancelPage();
-							}
-
-							return false;
-						};
-
-						enterPageInput.val(text);
-
-						enterPageInput.trigger('select');
-
-						var savePage = enterPage.find('.save-page');
-
-						savePage.click(
-							function(event) {
-								instance._savePage(event, this, text);
-
-								if (enterPageInput.val().length) {
-									pageParents.unbind('blur.liferay', pageBlur);
-									pageParents.unbind('click.liferay', pageBlur);
-
-									instance._stopEditEvent.fire();
-								}
+						anchors.each(
+							function(item, index, collection) {
+								item.one('span').setStyle('cursor', 'pointer');
 							}
 						);
+					}
 
-						var cancelPage = function() {
-							instance._cancelPage(span, text);
-							pageParents.unbind('blur.liferay', pageBlur);
-							pageParents.unbind('click.liferay', pageBlur);
+					var sortable = new A.Sortable(
+						{
+							nodes: items,
+							on: {
+								'drag:end': function(event) {
+									var dragNode = event.target.get('node');
 
-							instance._stopEditEvent.fire();
-						};
+									instance._saveSortables(dragNode);
 
-						enterPageInput.keypress(
-							function(event) {
-								if (event.keyCode == 13) {
-									savePage.trigger('click');
-									pageParents.unbind('blur.liferay', pageBlur);
-									pageParents.unbind('click.liferay', pageBlur);
-								}
-								else if (event.keyCode == 27) {
-									cancelPage();
-									pageParents.unbind('blur.liferay', pageBlur);
-									pageParents.unbind('click.liferay', pageBlur);
+									Liferay.trigger(
+										'navigation',
+										{
+											item: dragNode.getDOM(),
+											type: 'sort'
+										}
+									);
 								}
 							}
-						);
-
-						pageParents.bind('click.liferay', pageBlur);
-
-						resetCursor();
-
-						instance._editEvent.fire();
-
-						return false;
-					}
-				);
-			}
-		},
-
-		_makeSortable: function() {
-			var instance = this;
-
-			var navBlock = instance._navBlock;
-			var navList = navBlock.find('ul:first');
-
-			if (instance._isSortable) {
-				var items = navList.find('li');
-				var anchors = items.find('a');
-
-				if (instance._isUseHandle) {
-					items.append('<span class="sort-handle">+</span>');
+						}
+					);
 				}
-				else {
-					anchors.css('cursor', 'move');
-					anchors.find('span').css('cursor', 'pointer');
+			},
+
+			_removePage: function(obj) {
+				var instance = this;
+
+				var tab = obj.ancestor('li');
+
+				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-page'))) {
+					var data = {
+						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+						cmd: 'delete',
+						groupId: themeDisplay.getScopeGroupId(),
+						privateLayout: themeDisplay.isPrivateLayout(),
+						layoutId: tab._LFR_layoutId
+					};
+
+					jQuery.ajax(
+						{
+							data: data,
+							success: function() {
+								Liferay.trigger(
+									'navigation',
+									{
+										item: tab.getDOM(),
+										type: 'delete'
+									}
+								);
+
+								tab.remove();
+							},
+							url: instance._updateURL
+						}
+					);
+				}
+			},
+
+			_savePage: function(event, obj, oldName) {
+				var instance = this;
+
+				if ((event.type == 'keypress') && (event.keyCode !== 13)) {
+					return;
 				}
 
-				items.addClass('sortable-item');
+				var data = null;
+				var onSuccess = null;
 
-				new Alloy.Sortable(
-					{
-						container: '#navigation ul',
-						items: 'li',
-						helperClass: 'navigation-sort-helper',
-						stop: function(event, sortableInstance) {
-							var el = this.getEl();
+				var newNavItem = obj.ancestor('li');
+				var name = newNavItem.one('input').val();
+				var enterPage = newNavItem.one('.enter-page');
 
-							instance._saveSortables(el);
+				name = A.Lang.trim(name);
 
-							Liferay.trigger(
-								'navigation',
-								{
-									item: el,
-									type: 'sort'
-								}
-							);
+				if (name) {
+					if (oldName) {
+
+						// Updating an existing page
+
+						if (name != oldName) {
+							data = {
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+								cmd: 'name',
+								groupId: themeDisplay.getScopeGroupId(),
+								privateLayout: themeDisplay.isPrivateLayout(),
+								layoutId: themeDisplay.getLayoutId(),
+								name: name,
+								languageId: themeDisplay.getLanguageId()
+							};
+
+							onSuccess = function(data) {
+								var currentTab = enterPage.previous();
+								var currentSpan = currentTab.one('span');
+
+								var doc = A.get(document);
+
+								currentSpan.text(name);
+								currentTab.removeClass('aui-helper-hidden');
+
+								enterPage.remove();
+
+								var oldTitle = doc.attr('title');
+
+								var regex = new RegExp(oldName, 'g');
+
+								newTitle = oldTitle.replace(regex, name);
+
+								doc.attr('title', newTitle);
+							}
+						}
+						else {
+
+							// The new name is the same as the old one
+
+							var currentTab = enterPage.previous();
+
+							currentTab.removeClass('aui-helper-hidden');
+							enterPage.remove();
+
+							event.halt();
 						}
 					}
-				);
-			}
-		},
+					else {
 
-		_removePage: function(obj) {
-			var instance = this;
+						// Adding a new page
 
-			var tab = jQuery(obj).parents('li:first');
-			var tabText = tab.find('a span').html();
+						var editComponent = newNavItem._editComponent;
 
-			if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-page'))) {
-				var data = {
-					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-					cmd: 'delete',
-					groupId: themeDisplay.getScopeGroupId(),
-					privateLayout: themeDisplay.isPrivateLayout(),
-					layoutId: tab[0]._LFR_layoutId
-				};
+						var layoutPrototypeId = null;
 
-				jQuery.ajax(
-					{
-						data: data,
-						success: function() {
-							Liferay.trigger(
-								'navigation',
-								{
-									item: tab,
-									type: 'delete'
-								}
-							);
+						if (editComponent.element) {
+							var selectedInput = A.get(editComponent.element).one('input:checked');
 
-							tab.remove();
-						},
-						url: instance._updateURL
-					}
-				);
-			}
-		},
+							if (selectedInput) {
+								layoutPrototypeId = selectedInput.val();
+							}
+						}
 
-		_savePage: function(event, obj, oldName) {
-			var instance = this;
-
-			if ((event.type == 'keypress') && (event.keyCode !== 13)) {
-				return;
-			}
-
-			var data = null;
-			var onSuccess = null;
-
-			var newNavItem = jQuery(obj).parents('li');
-			var name = newNavItem.find('input').val();
-			var enterPage = newNavItem.find('.enter-page');
-
-			name = jQuery.trim(name);
-
-			if (name) {
-				if (oldName) {
-
-					// Updating an existing page
-
-					if (name != oldName) {
 						data = {
+							mainPath: themeDisplay.getPathMain(),
 							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-							cmd: 'name',
+							cmd: 'add',
 							groupId: themeDisplay.getScopeGroupId(),
 							privateLayout: themeDisplay.isPrivateLayout(),
-							layoutId: themeDisplay.getLayoutId(),
+							parentLayoutId: themeDisplay.getParentLayoutId(),
 							name: name,
-							languageId: themeDisplay.getLanguageId()
+							layoutPrototypeId: layoutPrototypeId
 						};
 
 						onSuccess = function(data) {
-							var currentTab = enterPage.prev();
-							var currentSpan = currentTab.find('span');
+							var newTab = A.Node.create('<a href="' + data.url + '"><span>' + Liferay.Util.escapeHTML(name) + '</span></a>');
 
-							currentSpan.text(name);
-							currentTab.show();
+							if (instance._isUseHandle) {
+								enterPage.before('<span class="sort-handle">+</span>');
+							}
+							else {
+								newTab.setStyle('cursor', 'move');
+							}
 
+							newNavItem._LFR_layoutId = data.layoutId;
+
+							enterPage.before(newTab);
 							enterPage.remove();
 
-							var oldTitle = jQuery(document).attr('title');
+							newNavItem.addClass('sortable-item');
 
-							var regex = new RegExp(oldName, 'g');
+							instance._deleteButton(newNavItem);
 
-							newTitle = oldTitle.replace(regex, name);
+							Liferay.trigger(
+								'navigation',
+								{
+									item: newNavItem,
+									type: 'add'
+								}
+							);
 
-							jQuery(document).attr('title', newTitle);
+							editComponent.hide();
 						}
 					}
-					else {
 
-						// The new name is the same as the old one
-
-						var currentTab = enterPage.prev();
-
-						currentTab.show();
-						enterPage.remove();
-
-						return false;
-					}
+					jQuery.ajax(
+						{
+							data: data,
+							dataType: 'json',
+							success: onSuccess,
+							url: instance._updateURL
+						}
+					);
 				}
-				else {
+			},
 
-					// Adding a new page
+			_saveSortables: function(node) {
+				var instance = this;
 
-					var editComponent = newNavItem.data('editComponent');
+				var priority = instance._navBlock.queryAll('li').indexOf(node);
 
-					var layoutPrototypeId = jQuery('input:checked', editComponent.element).val() || null;
-
-					data = {
-						mainPath: themeDisplay.getPathMain(),
-						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-						cmd: 'add',
-						groupId: themeDisplay.getScopeGroupId(),
-						privateLayout: themeDisplay.isPrivateLayout(),
-						parentLayoutId: themeDisplay.getParentLayoutId(),
-						name: name,
-						layoutPrototypeId: layoutPrototypeId
-					};
-
-					onSuccess = function(data) {
-						var newTab = jQuery('<a href="' + data.url + '"><span>' + Liferay.Util.escapeHTML(name) + '</span></a>');
-
-						if (instance._isUseHandle) {
-							enterPage.before('<span class="sort-handle">+</span>');
-						}
-						else {
-							newTab.css('cursor', 'move');
-						}
-
-						newNavItem[0]._LFR_layoutId = data.layoutId;
-
-						enterPage.before(newTab);
-						enterPage.remove();
-
-						newNavItem.addClass('sortable-item');
-
-						instance._deleteButton(newNavItem);
-
-						Liferay.trigger(
-							'navigation',
-							{
-								item: newNavItem,
-								type: 'add'
-							}
-						);
-
-						editComponent.hide();
-					}
-				}
+				var data = {
+					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+					cmd: 'priority',
+					groupId: themeDisplay.getScopeGroupId(),
+					privateLayout: themeDisplay.isPrivateLayout(),
+					layoutId: node._LFR_layoutId,
+					priority: priority
+				};
 
 				jQuery.ajax(
 					{
 						data: data,
-						dataType: 'json',
-						success: onSuccess,
 						url: instance._updateURL
 					}
 				);
-			}
-		},
+			},
 
-		_saveSortables: function(obj) {
-			var instance = this;
+			_enterPage: '',
+			_optionsOpen: true,
+			_updateURL: ''
+		};
 
-			var tabs = jQuery('li', instance._navBlock);
-
-			var data = {
-				doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-				cmd: 'priority',
-				groupId: themeDisplay.getScopeGroupId(),
-				privateLayout: themeDisplay.isPrivateLayout(),
-				layoutId: obj._LFR_layoutId,
-				priority: tabs.index(obj)
-			};
-
-			jQuery.ajax(
-				{
-					data: data,
-					url: instance._updateURL
-				}
-			);
-		},
-
-		_treeCallback: function(event, data) {
-			var instance = this;
-
-			var navigation = instance._navBlock.find('> ul');
-			var droppedItem = jQuery(data.droppedItem);
-			var dropTarget = jQuery(data.dropTarget);
-
-			if (instance._isSortable) {
-				var liItems = navigation.find('> li');
-
-				var tree = droppedItem.parent();
-				var droppedName = droppedItem.find('span:first').text();
-				var newParent = dropTarget.parents('li:first');
-
-				var liChild = liItems.find('span').not('.delete-tab');
-
-				liChild = liChild.filter(
-					function() {
-						var currentItem = jQuery(this);
-
-						if (currentItem.text() == droppedName) {
-							return true;
-						}
-						else {
-							return false;
-						}
-					}
-				);
-
-				var treeItems = tree.find('> li');
-
-				var newIndex = treeItems.index(droppedItem);
-
-				if (liChild.length > 0) {
-					var newSibling = liItems.eq(newIndex);
-					var parentLi = liChild.parents('li:first');
-
-					if (!newParent.is('.tree-item')) {
-						newSibling.after(parentLi);
-
-						if (parentLi.is(':hidden')) {
-							parentLi.show();
-						}
-					}
-					else {
-
-						//TODO: add parsing to move child elements around by their layoutId
-
-						parentLi.hide();
-					}
-				}
-				else if (!newParent.is('.tree-item')) {
-					var newTab = liItems.slice(0, 1).clone();
-
-					newTab.removeClass('selected');
-					newTab.find('.child-menu').remove();
-
-					var newTabLink = newTab.find('a span');
-
-					newTabLink.text(droppedName);
-					newTabLink.css('cursor', 'pointer');
-
-					liItems.parent().append(newTab);
-				}
-			}
-		},
-
-		_enterPage: '',
-		_optionsOpen: true,
-		_updateURL: ''
+		Liferay.Navigation = Navigation;
+	},
+	'',
+	{
+		requires: ['overlay', 'selector-css3', 'sortable', 'node-event-simulate', 'editable']
 	}
 );

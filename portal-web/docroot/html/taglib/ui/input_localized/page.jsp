@@ -161,6 +161,8 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-auto-fields',
+		'liferay-panel-floating',
 		function () {
 			<c:if test="<%= !disabled %>">
 				new Liferay.AutoFields(

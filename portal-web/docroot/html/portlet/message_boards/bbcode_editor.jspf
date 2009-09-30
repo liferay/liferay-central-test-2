@@ -30,6 +30,7 @@
 	}
 
 	AUI().ready(
+		'liferay-bbcode-editor',
 		function() {
 			<portlet:namespace />bbCode = new Liferay.Editor.bbCode(
 				{

@@ -148,6 +148,7 @@ renderTreeURL.setParameter("portletURL", portletURL.toString());
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-tree',
 		function() {
 			new Liferay.Tree(
 				{

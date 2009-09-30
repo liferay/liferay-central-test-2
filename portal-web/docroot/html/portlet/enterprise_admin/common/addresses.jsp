@@ -124,6 +124,7 @@ else {
 
 		<script type="text/javascript">
 			AUI().ready(
+				'liferay-dynamic-select',
 				function () {
 					new Liferay.DynamicSelect(
 						[
@@ -155,6 +156,8 @@ else {
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-auto-fields',
+		'liferay-dynamic-select',
 		function () {
 			var addresses = new Liferay.AutoFields(
 				{

@@ -244,7 +244,7 @@
 	visibility: hidden;
 }
 
-.navigation-sort-helper {
+.aui-sortable-proxy {
 	background: #727C81;
 	margin-top: 1px;
 }

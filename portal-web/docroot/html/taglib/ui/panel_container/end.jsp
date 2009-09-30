@@ -27,19 +27,18 @@
 </div>
 
 <script type="text/javascript">
-	if (Liferay.Panel) {
-		AUI().ready(
-			function () {
-				var panel = new Liferay.Panel(
-					{
-						container: '#<%= id %>',
-						accordion: <%= accordion %>,
-						persistState: <%= persistState %>
-					}
-				);
+	AUI().ready(
+		'liferay-panel',
+		function () {
+			var panel = new Liferay.Panel(
+				{
+					container: '#<%= id %>',
+					accordion: <%= accordion %>,
+					persistState: <%= persistState %>
+				}
+			);
 
-				Liferay.Panel.register('<%= id %>', panel);
-			}
-		);
-	}
+			Liferay.Panel.register('<%= id %>', panel);
+		}
+	);
 </script>

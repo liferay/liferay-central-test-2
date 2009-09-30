@@ -44,12 +44,17 @@
 			%>
 
 			<c:if test="<%= sessionTimeoutWarning > 0 %>">
-				Liferay.Session.init(
-					{
-						autoExtend: <%= PropsValues.SESSION_TIMEOUT_AUTO_EXTEND %>,
-						timeout: <%= sessionTimeout %>,
-						timeoutWarning: <%= sessionTimeoutWarning %>,
-						redirectOnExpire: <%= PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE %>
+				AUI().use(
+					'liferay-session',
+					function(A) {
+						Liferay.Session.init(
+							{
+								autoExtend: <%= PropsValues.SESSION_TIMEOUT_AUTO_EXTEND %>,
+								timeout: <%= sessionTimeout %>,
+								timeoutWarning: <%= sessionTimeoutWarning %>,
+								redirectOnExpire: <%= PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE %>
+							}
+						);
 					}
 				);
 			</c:if>

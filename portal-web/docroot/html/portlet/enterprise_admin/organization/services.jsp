@@ -262,6 +262,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 <script type="text/javascript">
 	AUI().ready(
 		function () {
+			'liferay-auto-fields',
 			new Liferay.AutoFields(
 				{
 					container: '#services > fieldset',

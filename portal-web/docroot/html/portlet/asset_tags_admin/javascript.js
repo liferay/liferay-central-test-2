@@ -1,151 +1,147 @@
-(function() {
-	var Dom = Alloy.Dom;
-	var Event = Alloy.Event;
-	var DDM = Alloy.DragDrop;
+AUI().add(
+	'liferay-tags-admin',
+	function(A) {
+		var Dom = Alloy.Dom;
+		var Event = Alloy.Event;
+		var DDM = Alloy.DragDrop;
 
-	var AssetTagsAdmin = new Alloy.Class(
-		{
-			initialize: function(portletId) {
-				var instance = this;
+		var AssetTagsAdmin = function(portletId) {
+			var instance = this;
 
-				var tagsContainer = jQuery(instance._tagsContainerSelector);
+			var tagsContainer = jQuery(instance._tagsContainerSelector);
 
-				instance.portletId = portletId;
-				instance._tagsAdminContainer = jQuery('.tags-admin-container');
+			instance.portletId = portletId;
+			instance._tagsAdminContainer = jQuery('.tags-admin-container');
 
-				jQuery('.tag-close').click(
-					function() {
-						instance._unselectAllTags();
-						instance._closeEditSection();
+			jQuery('.tag-close').click(
+				function() {
+					instance._unselectAllTags();
+					instance._closeEditSection();
+				}
+			);
+
+			jQuery('.tag-save-properties').click(
+				function() {
+					instance._saveProperties();
+				}
+			);
+
+			instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="tag-portlet-messages" />');
+			instance._tagMessageContainer = jQuery('<div class="lfr-message-response" id="tag-messages" />');
+
+			instance._portletMessageContainer.hide();
+			instance._tagMessageContainer.hide();
+
+			instance._tagsAdminContainer.before(instance._portletMessageContainer);
+			tagsContainer.before(instance._tagMessageContainer);
+
+			var toolbar = jQuery('.tags-admin-toolbar');
+
+			var addTagButton = jQuery('.add-tag-button');
+
+			instance._addTagOverlay = new A.ContextPanel(
+				{
+					bodyContent: A.get('.add-tag-layer'),
+					trigger: '.add-tag-button',
+					align: {
+						points: ['tr', 'br']
 					}
-				);
+				}
+			)
+			.render();
 
-				jQuery('.tag-save-properties').click(
-					function() {
-						instance._saveProperties();
+			jQuery('.tag-permissions-button').click(
+				function() {
+					var tagName = instance._selectedTagName;
+					var tagId = instance._selectedTagId;
+
+					if (tagName && tagId) {
+						var portletURL = instance._createPermissionURL(
+							'com.liferay.portlet.asset.model.AssetTag',
+							tagName, tagId);
+
+						submitForm(document.hrefFm, portletURL.toString());
 					}
-				);
+					else {
+						alert(Liferay.Language.get('please-first-select-a-tag'));
+					}
+				}
+			);
 
-				instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="tag-portlet-messages" />');
-				instance._tagMessageContainer = jQuery('<div class="lfr-message-response" id="tag-messages" />');
+			jQuery('#tag-search-bar').change(
+				function(event) {
+					jQuery('#tags-admin-search-input').focus();
+					instance._reloadSearch();
+				}
+			);
 
-				instance._portletMessageContainer.hide();
-				instance._tagMessageContainer.hide();
+			var addTag = function() {
+				var addTagLayer = jQuery('.add-tag-layer');
+				var tagName = addTagLayer.find('.new-tag-name').val();
 
-				instance._tagsAdminContainer.before(instance._portletMessageContainer);
-				tagsContainer.before(instance._tagMessageContainer);
+				instance._hideAllMessages();
+				instance._addTag(tagName);
+			};
 
-				var toolbar = jQuery('.tags-admin-toolbar');
+			jQuery('input.tag-save-button').click(addTag);
 
-				var addTagButton = jQuery('.add-tag-button');
+			jQuery('.tags-admin-actions input').keyup(
+				function(event) {
+					if (event.keyCode == 13) {
+						var input = jQuery(this);
 
-				AUI().use(
-					'context-panel',
-					function(A) {
-						instance._addTagOverlay = new A.ContextPanel(
-							{
-								bodyContent: A.get('.add-tag-layer'),
-								trigger: '.add-tag-button',
-								align: {
-									points: ['tr', 'br']
+						addTag();
+
+						return false;
+					}
+				}
+			);
+
+			jQuery('input.tag-delete-button').click(
+				function() {
+					if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag'))) {
+						instance._deleteTag(
+							instance._selectedTagId,
+							function(message) {
+								var exception = message.exception;
+
+								if (!exception) {
+									instance._closeEditSection();
+									instance._hideToolbarOverlays();
+									instance._displayTags();
+								}
+								else {
+									if (exception.indexOf('auth.PrincipalException') > -1) {
+										instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+									}
 								}
 							}
-						)
-						.render();
+						);
 					}
-				);
+				}
+			);
 
-				jQuery('.tag-permissions-button').click(
-					function() {
-						var tagName = instance._selectedTagName;
-						var tagId = instance._selectedTagId;
+			jQuery('.close-panel').click(
+				function() {
+					instance._hideToolbarOverlays();
+				}
+			);
 
-						if (tagName && tagId) {
-							var portletURL = instance._createPermissionURL(
-								'com.liferay.portlet.asset.model.AssetTag',
-								tagName, tagId);
+			jQuery('.aui-overlay input:text').keyup(
+				function(event) {
+					var ESC_KEY_CODE = 27;
+					var keyCode = event.keyCode;
 
-							submitForm(document.hrefFm, portletURL.toString());
-						}
-						else {
-							alert(Liferay.Language.get('please-first-select-a-tag'));
-						}
-					}
-				);
-
-				jQuery('#tag-search-bar').change(
-					function(event) {
-						jQuery('#tags-admin-search-input').focus();
-						instance._reloadSearch();
-					}
-				);
-
-				var addTag = function() {
-					var addTagLayer = jQuery('.add-tag-layer');
-					var tagName = addTagLayer.find('.new-tag-name').val();
-
-					instance._hideAllMessages();
-					instance._addTag(tagName);
-				};
-
-				jQuery('input.tag-save-button').click(addTag);
-
-				jQuery('.tags-admin-actions input').keyup(
-					function(event) {
-						if (event.keyCode == 13) {
-							var input = jQuery(this);
-
-							addTag();
-
-							return false;
-						}
-					}
-				);
-
-				jQuery('input.tag-delete-button').click(
-					function() {
-						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag'))) {
-							instance._deleteTag(
-								instance._selectedTagId,
-								function(message) {
-									var exception = message.exception;
-
-									if (!exception) {
-										instance._closeEditSection();
-										instance._hideToolbarOverlays();
-										instance._displayTags();
-									}
-									else {
-										if (exception.indexOf('auth.PrincipalException') > -1) {
-											instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
-										}
-									}
-								}
-							);
-						}
-					}
-				);
-
-				jQuery('.close-panel').click(
-					function() {
+					if (keyCode == ESC_KEY_CODE) {
 						instance._hideToolbarOverlays();
 					}
-				);
+				}
+			);
 
-				jQuery('.aui-overlay input:text').keyup(
-					function(event) {
-						var ESC_KEY_CODE = 27;
-						var keyCode = event.keyCode;
+			instance._loadData();
+		};
 
-						if (keyCode == ESC_KEY_CODE) {
-							instance._hideToolbarOverlays();
-						}
-					}
-				);
-
-				instance._loadData();
-			},
-
+		AssetTagsAdmin.prototype = {
 			_addTag: function(tagName, callback) {
 				var instance = this;
 				var communityPermission = instance._getPermissionsEnabled('community');
@@ -735,173 +731,177 @@
 			_tagsContainerCellsSelector: '.portlet-tags-admin .tags-admin-content td',
 			_tagsContainerSelector: '.tags',
 			_tagsItemsSelector: '.tags li'
-		}
-	);
+		};
 
-	var droppableTag = Alloy.Droppable;
+		var droppableTag = Alloy.Droppable;
 
-	var scrollParent = jQuery('.tags')[0];
+		var scrollParent = jQuery('.tags')[0];
 
-	var draggableTag = Alloy.DragProxy.extend(
-		{
-			initialize: function() {
-				var instance = this;
+		var draggableTag = Alloy.DragProxy.extend(
+			{
+				initialize: function() {
+					var instance = this;
 
-				instance._super.apply(instance, arguments);
+					instance._super.apply(instance, arguments);
 
-				instance.removeInvalidHandleType('a');
+					instance.removeInvalidHandleType('a');
 
-				instance.goingUp = false;
-				instance.lastY = 0;
-
-				instance._scrollParent = scrollParent;
-
-	            instance._scrollHeight = scrollParent.scrollHeight;
-	            instance._clientHeight = scrollParent.clientHeight;
-	            instance._xy = Dom.getXY(scrollParent);
-			},
-
-			endDrag: function(event) {
-				var instance = this;
-
-				var proxy = instance.getDragEl();
-
-				Dom.setStyle(proxy, 'top', 0);
-				Dom.setStyle(proxy, 'left', 0);
-
-				instance._removeScrollInterval();
-			},
-
-			onDrag: function(event) {
-				var instance = this;
-
-				instance._super.apply(instance, arguments);
-
-				var y = Event.getPageY(event);
-
-				if (y < instance.lastY) {
-					instance.goingUp = true;
-				}
-				else if (y > instance.lastY) {
 					instance.goingUp = false;
-				}
+					instance.lastY = 0;
 
-				instance.lastY = y;
+					instance._scrollParent = scrollParent;
 
-				var pageY = Event.getPageY(event);
-				var clientHeight = instance.getEl().clientHeight;
-				var scrollTop = false;
+		            instance._scrollHeight = scrollParent.scrollHeight;
+		            instance._clientHeight = scrollParent.clientHeight;
+		            instance._xy = Dom.getXY(scrollParent);
+				},
 
-				instance._scrollBy = (clientHeight * 2) + instance._overflow;
+				endDrag: function(event) {
+					var instance = this;
 
-				if (instance.goingUp) {
-					var deltaTop = instance._xy[1] + (clientHeight + instance._overflow);
+					var proxy = instance.getDragEl();
 
-					if (pageY < deltaTop) {
-						scrollTop = instance._scrollParent.scrollTop - instance._scrollBy;
+					Dom.setStyle(proxy, 'top', 0);
+					Dom.setStyle(proxy, 'left', 0);
+
+					instance._removeScrollInterval();
+				},
+
+				onDrag: function(event) {
+					var instance = this;
+
+					instance._super.apply(instance, arguments);
+
+					var y = Event.getPageY(event);
+
+					if (y < instance.lastY) {
+						instance.goingUp = true;
 					}
-				}
-				else {
-					var deltaBottom = instance._clientHeight + instance._xy[1] - (clientHeight + instance._overflow);
-
-					if (pageY > deltaBottom) {
-						scrollTop = instance._scrollParent.scrollTop + instance._scrollBy;
+					else if (y > instance.lastY) {
+						instance.goingUp = false;
 					}
-				}
 
-				instance._scrollTo(scrollTop);
-			},
+					instance.lastY = y;
 
-			onDragDrop: function() {
-				var instance = this;
+					var pageY = Event.getPageY(event);
+					var clientHeight = instance.getEl().clientHeight;
+					var scrollTop = false;
 
-				instance._super.apply(this, arguments);
+					instance._scrollBy = (clientHeight * 2) + instance._overflow;
 
-				instance._removeScrollInterval();
-			},
+					if (instance.goingUp) {
+						var deltaTop = instance._xy[1] + (clientHeight + instance._overflow);
 
-			onDragEnter: function(event, id) {
-				var instance = this;
+						if (pageY < deltaTop) {
+							scrollTop = instance._scrollParent.scrollTop - instance._scrollBy;
+						}
+					}
+					else {
+						var deltaBottom = instance._clientHeight + instance._xy[1] - (clientHeight + instance._overflow);
 
-				var target = Dom.get(id);
-				var src = instance.getEl();
+						if (pageY > deltaBottom) {
+							scrollTop = instance._scrollParent.scrollTop + instance._scrollBy;
+						}
+					}
 
-				if (target != src) {
-					Dom.addClass(target, 'active-area');
-				}
-			},
+					instance._scrollTo(scrollTop);
+				},
 
-			onDragOut: function(event, id) {
-				var instance = this;
+				onDragDrop: function() {
+					var instance = this;
 
-				var target = Dom.get(id);
-				var src = instance.getEl();
+					instance._super.apply(this, arguments);
 
-				if (target != src) {
-					Dom.removeClass(target, 'active-area');
-				}
-			},
+					instance._removeScrollInterval();
+				},
 
-			startDrag: function(x, y) {
-				var instance = this;
+				onDragEnter: function(event, id) {
+					var instance = this;
 
-				var proxy = instance.getDragEl();
-				var src = instance.getEl();
+					var target = Dom.get(id);
+					var src = instance.getEl();
 
-				proxy.innerHTML = '';
+					if (target != src) {
+						Dom.addClass(target, 'active-area');
+					}
+				},
 
-				var clone = src.cloneNode(true);
-				clone.id = '';
+				onDragOut: function(event, id) {
+					var instance = this;
 
-				proxy.appendChild(clone);
+					var target = Dom.get(id);
+					var src = instance.getEl();
 
-				Dom.setStyle(proxy, 'border-width', 0);
-				Dom.addClass(clone, 'portlet-tags-admin-helper');
-			},
+					if (target != src) {
+						Dom.removeClass(target, 'active-area');
+					}
+				},
 
-			_removeScrollInterval: function() {
-				var instance = this;
+				startDrag: function(x, y) {
+					var instance = this;
 
-				if (instance._scrollInterval) {
-					clearInterval(instance._scrollInterval);
-				}
-			},
+					var proxy = instance.getDragEl();
+					var src = instance.getEl();
 
-			_scrollTo: function(scrollTop) {
-				var instance = this;
+					proxy.innerHTML = '';
 
-				instance._currentScrollTop = scrollTop;
+					var clone = src.cloneNode(true);
+					clone.id = '';
 
-				instance._removeScrollInterval();
+					proxy.appendChild(clone);
 
-				if (scrollTop) {
-					instance._scrollInterval = setInterval(
-						function() {
-							if ((instance._currentScrollTop < 0) || (instance._currentScrollTop > instance._scrollHeight)) {
-								instance._removeScrollInterval();
-							}
+					Dom.setStyle(proxy, 'border-width', 0);
+					Dom.addClass(clone, 'portlet-tags-admin-helper');
+				},
 
-							instance._scrollParent.scrollTop = instance._currentScrollTop;
+				_removeScrollInterval: function() {
+					var instance = this;
 
-							DDM.refreshCache();
+					if (instance._scrollInterval) {
+						clearInterval(instance._scrollInterval);
+					}
+				},
 
-							if (instance.goingUp) {
-								instance._currentScrollTop -= instance._scrollBy;
-							}
-							else {
-								instance._currentScrollTop += instance._scrollBy;
-							}
-						},
-						10
-					);
-				}
-			},
+				_scrollTo: function(scrollTop) {
+					var instance = this;
 
-			_overflow: 5,
-			_scrollBy: 0,
-			_scrollInterval: null
-		}
-	);
+					instance._currentScrollTop = scrollTop;
 
-	Liferay.Portlet.AssetTagsAdmin = AssetTagsAdmin;
-})();
+					instance._removeScrollInterval();
+
+					if (scrollTop) {
+						instance._scrollInterval = setInterval(
+							function() {
+								if ((instance._currentScrollTop < 0) || (instance._currentScrollTop > instance._scrollHeight)) {
+									instance._removeScrollInterval();
+								}
+
+								instance._scrollParent.scrollTop = instance._currentScrollTop;
+
+								DDM.refreshCache();
+
+								if (instance.goingUp) {
+									instance._currentScrollTop -= instance._scrollBy;
+								}
+								else {
+									instance._currentScrollTop += instance._scrollBy;
+								}
+							},
+							10
+						);
+					}
+				},
+
+				_overflow: 5,
+				_scrollBy: 0,
+				_scrollInterval: null
+			}
+		);
+
+		Liferay.Portlet.AssetTagsAdmin = AssetTagsAdmin;
+	},
+	'',
+	{
+		requires: ['context-panel']
+	}
+);

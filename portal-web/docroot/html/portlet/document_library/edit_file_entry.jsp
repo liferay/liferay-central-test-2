@@ -149,6 +149,7 @@ portletURL.setParameter("name", name);
 <c:if test="<%= fileEntry == null %>">
 	<script type="text/javascript">
 		AUI().ready(
+			'liferay-upload',
 			function() {
 				new Liferay.Upload(
 					{

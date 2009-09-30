@@ -108,6 +108,7 @@ else {
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-auto-fields',
 		function () {
 			new Liferay.AutoFields(
 				{

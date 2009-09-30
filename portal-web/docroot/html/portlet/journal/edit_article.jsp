@@ -776,6 +776,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	%>
 
 	AUI().ready(
+		'liferay-portlet-journal',
 		function() {
 			Liferay.Portlet.Journal.PROXY = {};
 			Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';

@@ -196,6 +196,7 @@
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-category-admin',
 		function() {
 			new Liferay.Portlet.AssetCategoryAdmin('<%= portletDisplay.getId() %>');
 		}

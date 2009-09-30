@@ -130,6 +130,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-dynamic-select',
 		function () {
 			new Liferay.DynamicSelect(
 				[

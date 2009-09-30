@@ -4,8 +4,6 @@ Liferay = Liferay || {};
 
 Liferay.namespace = AUI().namespace;
 
-Liferay.Editor = {};
-
 if (!Liferay._ajaxOld) {
 	Liferay._ajaxOld = jQuery.ajax;
 }

@@ -28,6 +28,7 @@
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-panel-floating',
 		function () {
 			var panel = new Liferay.PanelFloating(
 				{

@@ -1,243 +1,239 @@
-(function() {
-	var Dom = Alloy.Dom;
-	var Event = Alloy.Event;
-	var DDM = Alloy.DragDrop;
+AUI().add(
+	'liferay-category-admin',
+	function(A) {
+		var Dom = Alloy.Dom;
+		var Event = Alloy.Event;
+		var DDM = Alloy.DragDrop;
 
-	var AssetCategoryAdmin = new Alloy.Class(
-		{
-			initialize: function(portletId) {
-				var instance = this;
+		AssetCategoryAdmin = function(portletId) {
+			var instance = this;
 
-				var childrenContainer = jQuery(instance._categoryContainerSelector);
+			var childrenContainer = jQuery(instance._categoryContainerSelector);
 
-				instance.portletId = portletId;
-				instance._container = jQuery('.vocabulary-container');
+			instance.portletId = portletId;
+			instance._container = jQuery('.vocabulary-container');
 
-				jQuery('.vocabulary-close').click(
-					function() {
-						instance._unselectAllCategories();
-						instance._closeEditSection();
+			jQuery('.vocabulary-close').click(
+				function() {
+					instance._unselectAllCategories();
+					instance._closeEditSection();
+				}
+			);
+
+			jQuery('.vocabulary-save-category-properties').click(
+				function() {
+					instance._saveCategoryProperties();
+				}
+			);
+
+			instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-messages" />');
+			instance._categoryMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-category-messages" />');
+
+			instance._portletMessageContainer.hide();
+			instance._categoryMessageContainer.hide();
+
+			instance._container.before(instance._portletMessageContainer);
+			childrenContainer.before(instance._categoryMessageContainer);
+
+			var buttons = jQuery('.vocabulary-buttons')
+			var toolbar = jQuery('.vocabulary-toolbar');
+
+			var addCategoryLayer = jQuery('.add-category-layer');
+			var addVocabularyLayer = jQuery('.add-vocabulary-layer');
+
+			var addCategoryButton = jQuery('.add-category-button');
+			var addVocabularyButton = jQuery('.add-vocabulary-button');
+
+			instance._toolbarCategoryPanel = new A.ContextPanel(
+				{
+					bodyContent: A.get('.add-category-layer'),
+					trigger: '.add-category-button',
+					align: {
+						points: ['tr', 'br']
 					}
-				);
+				}
+			)
+			.render();
 
-				jQuery('.vocabulary-save-category-properties').click(
-					function() {
-						instance._saveCategoryProperties();
+			instance._vocabularyCategoryPanel = new A.ContextPanel(
+				{
+					bodyContent: A.get('.add-vocabulary-layer'),
+					trigger: '.add-vocabulary-button',
+					align: {
+						points: ['tr', 'br']
 					}
-				);
+				}
+			)
+			.render();
 
-				instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-messages" />');
-				instance._categoryMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-category-messages" />');
+			var selectButton = function(button) {
+				buttons.find('.button').removeClass('selected');
+				jQuery(button).addClass('selected');
+			};
 
-				instance._portletMessageContainer.hide();
-				instance._categoryMessageContainer.hide();
+			toolbar.find('.add-vocabulary-button').click(
+				function (event) {
+					instance._showToolBarVocabularySection();
+				}
+			);
 
-				instance._container.before(instance._portletMessageContainer);
-				childrenContainer.before(instance._categoryMessageContainer);
+			toolbar.find('.add-category-button').click(
+				function (event) {
+					instance._showToolBarCategorySection();
+				}
+			);
 
-				var buttons = jQuery('.vocabulary-buttons')
-				var toolbar = jQuery('.vocabulary-toolbar');
+			jQuery('.permissions-categories-button').click(
+				function() {
+					var categoryName = instance._selectedCategoryName;
+					var categoryId = instance._selectedCategoryId;
 
-				var addCategoryLayer = jQuery('.add-category-layer');
-				var addVocabularyLayer = jQuery('.add-vocabulary-layer');
+					if (categoryName && categoryId) {
+						var portletURL = instance._createPermissionURL(
+							'com.liferay.portlet.asset.model.AssetCategory',
+							categoryName,
+							categoryId);
 
-				var addCategoryButton = jQuery('.add-category-button');
-				var addVocabularyButton = jQuery('.add-vocabulary-button');
-
-				AUI().use(
-					'context-panel',
-					function(A) {
-						instance._toolbarCategoryPanel = new A.ContextPanel(
-							{
-								bodyContent: A.get('.add-category-layer'),
-								trigger: '.add-category-button',
-								align: {
-									points: ['tr', 'br']
-								}
-							}
-						)
-						.render();
-
-						instance._vocabularyCategoryPanel = new A.ContextPanel(
-							{
-								bodyContent: A.get('.add-vocabulary-layer'),
-								trigger: '.add-vocabulary-button',
-								align: {
-									points: ['tr', 'br']
-								}
-							}
-						)
-						.render();
+						submitForm(document.hrefFm, portletURL.toString());
 					}
-				);
-
-				var selectButton = function(button) {
-					buttons.find('.button').removeClass('selected');
-					jQuery(button).addClass('selected');
-				};
-
-				toolbar.find('.add-vocabulary-button').click(
-					function (event) {
-						instance._showToolBarVocabularySection();
-					}
-				);
-
-				toolbar.find('.add-category-button').click(
-					function (event) {
+					else {
 						instance._showToolBarCategorySection();
 					}
-				);
+				}
+			);
 
-				jQuery('.permissions-categories-button').click(
-					function() {
-						var categoryName = instance._selectedCategoryName;
-						var categoryId = instance._selectedCategoryId;
+			jQuery('.permissions-vocabulary-button').click(
+				function() {
+					var vocabularyName = instance._selectedVocabularyName;
+					var vocabularyId = instance._selectedVocabularyId;
 
-						if (categoryName && categoryId) {
-							var portletURL = instance._createPermissionURL(
-								'com.liferay.portlet.asset.model.AssetCategory',
-								categoryName,
-								categoryId);
+					if (vocabularyName && vocabularyId) {
+						var portletURL = instance._createPermissionURL(
+							'com.liferay.portlet.asset.model.AssetVocabulary',
+							vocabularyName,
+							vocabularyId);
 
-							submitForm(document.hrefFm, portletURL.toString());
-						}
-						else {
-							instance._showToolBarCategorySection();
-						}
+						submitForm(document.hrefFm, portletURL.toString());
 					}
-				);
-
-				jQuery('.permissions-vocabulary-button').click(
-					function() {
-						var vocabularyName = instance._selectedVocabularyName;
-						var vocabularyId = instance._selectedVocabularyId;
-
-						if (vocabularyName && vocabularyId) {
-							var portletURL = instance._createPermissionURL(
-								'com.liferay.portlet.asset.model.AssetVocabulary',
-								vocabularyName,
-								vocabularyId);
-
-							submitForm(document.hrefFm, portletURL.toString());
-						}
-						else {
-							instance._showToolBarVocabularySection();
-						}
+					else {
+						instance._showToolBarVocabularySection();
 					}
-				);
+				}
+			);
 
-				jQuery('#vocabulary-search-bar').change(
-					function(event) {
-						jQuery('#vocabulary-search-input').focus();
-						instance._reloadSearch();
-					}
-				);
+			jQuery('#vocabulary-search-bar').change(
+				function(event) {
+					jQuery('#vocabulary-search-input').focus();
+					instance._reloadSearch();
+				}
+			);
 
-				var addCategory = function() {
-					var categoryLayer = jQuery('.add-category-layer');
-					var categoryName = categoryLayer.find('.vocabulary-category-name').val();
-					var vocabularyId = categoryLayer.find('.vocabulary-select-list option:selected').attr('value');
+			var addCategory = function() {
+				var categoryLayer = jQuery('.add-category-layer');
+				var categoryName = categoryLayer.find('.vocabulary-category-name').val();
+				var vocabularyId = categoryLayer.find('.vocabulary-select-list option:selected').attr('value');
 
-					instance._hideAllMessages();
-					instance._addCategory(categoryName, vocabularyId);
-				};
+				instance._hideAllMessages();
+				instance._addCategory(categoryName, vocabularyId);
+			};
 
-				var addVocabulary = function() {
-					var vocabularyLayer = jQuery('.add-vocabulary-layer');
-					var inputVocabularyName = vocabularyLayer.find('.vocabulary-name');
-					var newVocabularyName = inputVocabularyName.val();
+			var addVocabulary = function() {
+				var vocabularyLayer = jQuery('.add-vocabulary-layer');
+				var inputVocabularyName = vocabularyLayer.find('.vocabulary-name');
+				var newVocabularyName = inputVocabularyName.val();
 
-					instance._hideAllMessages();
-					instance._addVocabulary(newVocabularyName);
-				};
+				instance._hideAllMessages();
+				instance._addVocabulary(newVocabularyName);
+			};
 
-				jQuery('input.category-save-button').click(addCategory);
-				jQuery('input.vocabulary-save-button').click(addVocabulary);
+			jQuery('input.category-save-button').click(addCategory);
+			jQuery('input.vocabulary-save-button').click(addVocabulary);
 
-				jQuery('.vocabulary-actions input').keyup(
-					function(event) {
-						if (event.keyCode == 13) {
-							var input = jQuery(this);
+			jQuery('.vocabulary-actions input').keyup(
+				function(event) {
+					if (event.keyCode == 13) {
+						var input = jQuery(this);
 
-							if (input.is('.vocabulary-category-name')) {
-								addCategory();
-							}
-							else if (input.is('.vocabulary-name')) {
-								addVocabulary();
-							}
-
-							return false;
+						if (input.is('.vocabulary-category-name')) {
+							addCategory();
 						}
+						else if (input.is('.vocabulary-name')) {
+							addVocabulary();
+						}
+
+						return false;
 					}
-				);
+				}
+			);
 
-				jQuery('input.vocabulary-delete-categories-button').click(
-					function() {
-						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-category'))) {
-							instance._deleteCategory(
-								instance._selectedCategoryId,
-								function(message) {
-									var exception = message.exception;
+			jQuery('input.vocabulary-delete-categories-button').click(
+				function() {
+					if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-category'))) {
+						instance._deleteCategory(
+							instance._selectedCategoryId,
+							function(message) {
+								var exception = message.exception;
 
-									if (!exception) {
-										instance._closeEditSection();
-										instance._hideToolbarSections();
-										instance._displayVocabularyCategories(instance._selectedVocabularyId);
-									}
-									else {
-										if (exception.indexOf('auth.PrincipalException') > -1) {
-											instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
-										}
+								if (!exception) {
+									instance._closeEditSection();
+									instance._hideToolbarSections();
+									instance._displayVocabularyCategories(instance._selectedVocabularyId);
+								}
+								else {
+									if (exception.indexOf('auth.PrincipalException') > -1) {
+										instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
 									}
 								}
-							);
-						}
+							}
+						);
 					}
-				);
+				}
+			);
 
-				jQuery('input.vocabulary-delete-list-button').click(
-					function() {
-						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
-							instance._deleteVocabulary(
-								instance._selectedVocabularyId,
-								function(message) {
-									var exception = message.exception;
-									if (!exception) {
-										instance._closeEditSection();
-										instance._hideToolbarSections();
-										instance._loadData();
-									}
-									else {
-										if (exception.indexOf('auth.PrincipalException') > -1) {
-											instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
-										}
+			jQuery('input.vocabulary-delete-list-button').click(
+				function() {
+					if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
+						instance._deleteVocabulary(
+							instance._selectedVocabularyId,
+							function(message) {
+								var exception = message.exception;
+								if (!exception) {
+									instance._closeEditSection();
+									instance._hideToolbarSections();
+									instance._loadData();
+								}
+								else {
+									if (exception.indexOf('auth.PrincipalException') > -1) {
+										instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
 									}
 								}
-							);
-						}
+							}
+						);
 					}
-				);
+				}
+			);
 
-				jQuery('.close-panel').click(
-					function() {
+			jQuery('.close-panel').click(
+				function() {
+					instance._hideToolbarSections();
+				}
+			);
+
+			jQuery('.aui-overlay input:text').keyup(
+				function(event) {
+					var ESC_KEY_CODE = 27;
+					var keyCode = event.keyCode;
+
+					if (keyCode == ESC_KEY_CODE) {
 						instance._hideToolbarSections();
 					}
-				);
+				}
+			);
 
-				jQuery('.aui-overlay input:text').keyup(
-					function(event) {
-						var ESC_KEY_CODE = 27;
-						var keyCode = event.keyCode;
+			instance._loadData();
+		};
 
-						if (keyCode == ESC_KEY_CODE) {
-							instance._hideToolbarSections();
-						}
-					}
-				);
-
-				instance._loadData();
-			},
-
+		AssetCategoryAdmin.prototype = {
 			_createPermissionURL: function(modelResource, modelResourceDescription, resourcePrimKey) {
 				var instance = this;
 
@@ -1253,173 +1249,177 @@
 			_selectedVocabularyName: null,
 			_vocabularyItemSelector: '.vocabulary-list li',
 			_vocabularyContainerSelector: '.vocabulary-list'
-		}
-	);
+		};
 
-	var droppableCategory = Alloy.Droppable;
+		var droppableCategory = Alloy.Droppable;
 
-	var scrollParent = jQuery('.vocabulary-categories')[0];
+		var scrollParent = jQuery('.vocabulary-categories')[0];
 
-	var draggableCategory = Alloy.DragProxy.extend(
-		{
-			initialize: function() {
-				var instance = this;
+		var draggableCategory = Alloy.DragProxy.extend(
+			{
+				initialize: function() {
+					var instance = this;
 
-				instance._super.apply(instance, arguments);
+					instance._super.apply(instance, arguments);
 
-				instance.removeInvalidHandleType('a');
+					instance.removeInvalidHandleType('a');
 
-				instance.goingUp = false;
-				instance.lastY = 0;
-
-				instance._scrollParent = scrollParent;
-
-	            instance._scrollHeight = scrollParent.scrollHeight;
-	            instance._clientHeight = scrollParent.clientHeight;
-	            instance._xy = Dom.getXY(scrollParent);
-			},
-
-			endDrag: function(event) {
-				var instance = this;
-
-				var proxy = instance.getDragEl();
-
-				Dom.setStyle(proxy, 'top', 0);
-				Dom.setStyle(proxy, 'left', 0);
-
-				instance._removeScrollInterval();
-			},
-
-			onDrag: function(event) {
-				var instance = this;
-
-				instance._super.apply(instance, arguments);
-
-				var y = Event.getPageY(event);
-
-				if (y < instance.lastY) {
-					instance.goingUp = true;
-				}
-				else if (y > instance.lastY) {
 					instance.goingUp = false;
-				}
+					instance.lastY = 0;
 
-				instance.lastY = y;
+					instance._scrollParent = scrollParent;
 
-				var pageY = Event.getPageY(event);
-				var clientHeight = instance.getEl().clientHeight;
-				var scrollTop = false;
+		            instance._scrollHeight = scrollParent.scrollHeight;
+		            instance._clientHeight = scrollParent.clientHeight;
+		            instance._xy = Dom.getXY(scrollParent);
+				},
 
-				instance._scrollBy = (clientHeight * 2) + instance._overflow;
+				endDrag: function(event) {
+					var instance = this;
 
-				if (instance.goingUp) {
-					var deltaTop = instance._xy[1] + (clientHeight + instance._overflow);
+					var proxy = instance.getDragEl();
 
-					if (pageY < deltaTop) {
-						scrollTop = instance._scrollParent.scrollTop - instance._scrollBy;
+					Dom.setStyle(proxy, 'top', 0);
+					Dom.setStyle(proxy, 'left', 0);
+
+					instance._removeScrollInterval();
+				},
+
+				onDrag: function(event) {
+					var instance = this;
+
+					instance._super.apply(instance, arguments);
+
+					var y = Event.getPageY(event);
+
+					if (y < instance.lastY) {
+						instance.goingUp = true;
 					}
-				}
-				else {
-					var deltaBottom = instance._clientHeight + instance._xy[1] - (clientHeight + instance._overflow);
-
-					if (pageY > deltaBottom) {
-						scrollTop = instance._scrollParent.scrollTop + instance._scrollBy;
+					else if (y > instance.lastY) {
+						instance.goingUp = false;
 					}
-				}
 
-				instance._scrollTo(scrollTop);
-			},
+					instance.lastY = y;
 
-			onDragDrop: function() {
-				var instance = this;
+					var pageY = Event.getPageY(event);
+					var clientHeight = instance.getEl().clientHeight;
+					var scrollTop = false;
 
-				instance._super.apply(this, arguments);
+					instance._scrollBy = (clientHeight * 2) + instance._overflow;
 
-				instance._removeScrollInterval();
-			},
+					if (instance.goingUp) {
+						var deltaTop = instance._xy[1] + (clientHeight + instance._overflow);
 
-			onDragEnter: function(event, id) {
-				var instance = this;
+						if (pageY < deltaTop) {
+							scrollTop = instance._scrollParent.scrollTop - instance._scrollBy;
+						}
+					}
+					else {
+						var deltaBottom = instance._clientHeight + instance._xy[1] - (clientHeight + instance._overflow);
 
-				var target = Dom.get(id);
-				var src = instance.getEl();
+						if (pageY > deltaBottom) {
+							scrollTop = instance._scrollParent.scrollTop + instance._scrollBy;
+						}
+					}
 
-				if (target != src) {
-					Dom.addClass(target, 'active-area');
-				}
-			},
+					instance._scrollTo(scrollTop);
+				},
 
-			onDragOut: function(event, id) {
-				var instance = this;
+				onDragDrop: function() {
+					var instance = this;
 
-				var target = Dom.get(id);
-				var src = instance.getEl();
+					instance._super.apply(this, arguments);
 
-				if (target != src) {
-					Dom.removeClass(target, 'active-area');
-				}
-			},
+					instance._removeScrollInterval();
+				},
 
-			startDrag: function(x, y) {
-				var instance = this;
+				onDragEnter: function(event, id) {
+					var instance = this;
 
-				var proxy = instance.getDragEl();
-				var src = instance.getEl();
+					var target = Dom.get(id);
+					var src = instance.getEl();
 
-				proxy.innerHTML = '';
+					if (target != src) {
+						Dom.addClass(target, 'active-area');
+					}
+				},
 
-				var clone = src.cloneNode(true);
-				clone.id = '';
+				onDragOut: function(event, id) {
+					var instance = this;
 
-				proxy.appendChild(clone);
+					var target = Dom.get(id);
+					var src = instance.getEl();
 
-				Dom.setStyle(proxy, 'border-width', 0);
-				Dom.addClass(clone, 'portlet-categories-admin-helper');
-			},
+					if (target != src) {
+						Dom.removeClass(target, 'active-area');
+					}
+				},
 
-			_removeScrollInterval: function() {
-				var instance = this;
+				startDrag: function(x, y) {
+					var instance = this;
 
-				if (instance._scrollInterval) {
-					clearInterval(instance._scrollInterval);
-				}
-			},
+					var proxy = instance.getDragEl();
+					var src = instance.getEl();
 
-			_scrollTo: function(scrollTop) {
-				var instance = this;
+					proxy.innerHTML = '';
 
-				instance._currentScrollTop = scrollTop;
+					var clone = src.cloneNode(true);
+					clone.id = '';
 
-				instance._removeScrollInterval();
+					proxy.appendChild(clone);
 
-				if (scrollTop) {
-					instance._scrollInterval = setInterval(
-						function() {
-							if ((instance._currentScrollTop < 0) || (instance._currentScrollTop > instance._scrollHeight)) {
-								instance._removeScrollInterval();
-							}
+					Dom.setStyle(proxy, 'border-width', 0);
+					Dom.addClass(clone, 'portlet-categories-admin-helper');
+				},
 
-							instance._scrollParent.scrollTop = instance._currentScrollTop;
+				_removeScrollInterval: function() {
+					var instance = this;
 
-							DDM.refreshCache();
+					if (instance._scrollInterval) {
+						clearInterval(instance._scrollInterval);
+					}
+				},
 
-							if (instance.goingUp) {
-								instance._currentScrollTop -= instance._scrollBy;
-							}
-							else {
-								instance._currentScrollTop += instance._scrollBy;
-							}
-						},
-						10
-					);
-				}
-			},
+				_scrollTo: function(scrollTop) {
+					var instance = this;
 
-			_overflow: 5,
-			_scrollBy: 0,
-			_scrollInterval: null
-		}
-	);
+					instance._currentScrollTop = scrollTop;
 
-	Liferay.Portlet.AssetCategoryAdmin = AssetCategoryAdmin;
-})();
+					instance._removeScrollInterval();
+
+					if (scrollTop) {
+						instance._scrollInterval = setInterval(
+							function() {
+								if ((instance._currentScrollTop < 0) || (instance._currentScrollTop > instance._scrollHeight)) {
+									instance._removeScrollInterval();
+								}
+
+								instance._scrollParent.scrollTop = instance._currentScrollTop;
+
+								DDM.refreshCache();
+
+								if (instance.goingUp) {
+									instance._currentScrollTop -= instance._scrollBy;
+								}
+								else {
+									instance._currentScrollTop += instance._scrollBy;
+								}
+							},
+							10
+						);
+					}
+				},
+
+				_overflow: 5,
+				_scrollBy: 0,
+				_scrollInterval: null
+			}
+		);
+
+		Liferay.Portlet.AssetCategoryAdmin = AssetCategoryAdmin;
+	},
+	'',
+	{
+		requires: ['context-panel']
+	}
+);

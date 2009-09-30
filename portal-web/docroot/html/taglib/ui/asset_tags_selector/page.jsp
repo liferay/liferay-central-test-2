@@ -71,6 +71,7 @@ if (curTagsParam != null) {
 
 <script type="text/javascript">
 	AUI().ready(
+		'liferay-tags-selector',
 		function() {
 			new Liferay.AssetTagsSelector(
 				{

@@ -1,5 +1,6 @@
-Liferay.DynamicSelect = new Alloy.Class(
-	{
+AUI().add(
+	'liferay-dynamic-select',
+	function(A) {
 
 		/**
 		 * OPTIONS
@@ -15,7 +16,7 @@ Liferay.DynamicSelect = new Alloy.Class(
 		 * array[i].selectData {function}: Returns a JSON array to populate the next select box.
 		 */
 
-		initialize: function(array) {
+		var DynamicSelect = function(array) {
 			var instance = this;
 
 			instance.array = array;
@@ -52,61 +53,69 @@ Liferay.DynamicSelect = new Alloy.Class(
 					);
 				}
 			);
-		},
+		};
 
-		_callSelectData: function(i) {
-			var instance = this;
+		DynamicSelect.prototype = {
+			_callSelectData: function(i) {
+				var instance = this;
 
-			var array = instance.array;
+				var array = instance.array;
 
-			if ((i + 1) < array.length) {
-				var curSelect = jQuery('#' + array[i].select);
-				var nextSelectData = array[i + 1].selectData;
+				if ((i + 1) < array.length) {
+					var curSelect = jQuery('#' + array[i].select);
+					var nextSelectData = array[i + 1].selectData;
 
-				nextSelectData(
-					function(list) {
-						instance._updateSelect(i + 1, list);
-					},
-					curSelect.val()
-				);
-			}
-		},
-
-		_updateSelect: function(i, list) {
-			var instance = this;
-
-			var options = instance.array[i];
-
-			var select = jQuery('#' + options.select);
-			var selectId = options.selectId;
-			var selectDesc = options.selectDesc;
-			var selectVal = options.selectVal;
-			var selectNullable = options.selectNullable || true;
-
-			var selectOptions = [];
-
-			if (selectNullable) {
-				selectOptions.push('<option value="0"></option>');
-			}
-
-			jQuery.each(
-				list,
-				function(i, obj) {
-					var key = obj[selectId];
-					var value = obj[selectDesc];
-
-					selectOptions.push('<option value="' + key + '">' + value + '</option>');
+					nextSelectData(
+						function(list) {
+							instance._updateSelect(i + 1, list);
+						},
+						curSelect.val()
+					);
 				}
-			);
+			},
 
-			selectOptions = selectOptions.join('');
+			_updateSelect: function(i, list) {
+				var instance = this;
 
-			select.html(selectOptions);
-			select.find('option[value=' + selectVal + ']').attr('selected', 'selected');
+				var options = instance.array[i];
 
-			if (Liferay.Browser.isIe()) {
-				select.css('width', 'auto');
+				var select = jQuery('#' + options.select);
+				var selectId = options.selectId;
+				var selectDesc = options.selectDesc;
+				var selectVal = options.selectVal;
+				var selectNullable = options.selectNullable || true;
+
+				var selectOptions = [];
+
+				if (selectNullable) {
+					selectOptions.push('<option value="0"></option>');
+				}
+
+				jQuery.each(
+					list,
+					function(i, obj) {
+						var key = obj[selectId];
+						var value = obj[selectDesc];
+
+						selectOptions.push('<option value="' + key + '">' + value + '</option>');
+					}
+				);
+
+				selectOptions = selectOptions.join('');
+
+				select.html(selectOptions);
+				select.find('option[value=' + selectVal + ']').attr('selected', 'selected');
+
+				if (Liferay.Browser.isIe()) {
+					select.css('width', 'auto');
+				}
 			}
-		}
+		};
+
+		Liferay.DynamicSelect = DynamicSelect;
+	},
+	'',
+	{
+		requires: []
 	}
 );

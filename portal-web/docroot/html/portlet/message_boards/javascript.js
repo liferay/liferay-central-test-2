@@ -1,21 +1,22 @@
-if (!Liferay.Editor.bbCode) {
-	Liferay.Editor.bbCode = new Alloy.Class(
-		{
-			initialize: function(options) {
-				var instance = this;
-				options = options || {};
+AUI().add(
+	'liferay-bbcode-editor',
+	function(A) {
+		var bbCode = function(options) {
+			var instance = this;
+			options = options || {};
 
-				instance._textarea = jQuery(options.textarea);
-				instance._location = jQuery(options.location || []);
+			instance._textarea = jQuery(options.textarea);
+			instance._location = jQuery(options.location || []);
 
-				instance._createEmoticons();
-				instance._createToolbar();
+			instance._createEmoticons();
+			instance._createToolbar();
 
-				if (options.onLoad) {
-					options.onLoad();
-				}
-			},
+			if (options.onLoad) {
+				options.onLoad();
+			}
+		};
 
+		bbCode.prototype = {
 			getHTML: function(content) {
 				var instance = this;
 
@@ -527,6 +528,14 @@ if (!Liferay.Editor.bbCode) {
 					instance._selectionRange = document.selection.createRange();
 				}
 			}
-		}
-	);
-}
+		};
+
+		Liferay.namespace('Editor');
+
+		Liferay.Editor.bbCode = bbCode;
+	},
+	'',
+	{
+		requires: []
+	}
+);
