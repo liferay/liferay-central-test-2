@@ -86,9 +86,80 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("name", name);
 
 request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
+
+String fileUrl = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name);
+String webDavUrl = StringPool.BLANK;
+
+if (portletDisplay.isWebDAVEnabled()) {
+	StringBuffer sbf = new StringBuffer();
+
+	if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+		DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+		while (true) {
+			sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+			sbf.insert(0, StringPool.SLASH);
+
+			if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				break;
+			}
+			else {
+				curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+			}
+		}
+	}
+
+	sbf.append(StringPool.SLASH);
+	sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
+
+	Group group = themeDisplay.getScopeGroup();
+
+	webDavUrl =  themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sbf.toString();
+}
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />accessDocument() {
+		var fileUrl = "<%= fileUrl %>";
+		var webDavUrl = "<%= webDavUrl %>";
+
+		<%
+		String officeDoc = null;
+
+		if (portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIe(request)) {
+			if (extension.equalsIgnoreCase("doc") ||
+				extension.equalsIgnoreCase("dot") ||
+				extension.equalsIgnoreCase("ppt") ||
+				extension.equalsIgnoreCase("xls")) {
+
+				officeDoc = "SharePoint.OpenDocuments.1";
+			}
+			else if (extension.equalsIgnoreCase("docx") ||
+					extension.equalsIgnoreCase("pptx") ||
+					extension.equalsIgnoreCase("xlsx")) {
+
+				officeDoc = "SharePoint.OpenDocuments.2";
+			}
+		}
+		%>
+
+		<c:choose>
+			<c:when test="<%= officeDoc != null %>">
+				var officeDoc = new ActiveXObject("<%= officeDoc %>");
+
+				if (officeDoc) {
+					officeDoc.EditDocument(webDavUrl);
+				}
+				else {
+					window.location.href = fileUrl;
+				}
+			</c:when>
+			<c:otherwise>
+				window.location.href = fileUrl;
+			</c:otherwise>
+		</c:choose>
+	}
+
 	function <portlet:namespace />compare() {
 		var rowIds = jQuery('input[name=<portlet:namespace />rowIds]:checked');
 		var sourceVersion = jQuery('input[name="<portlet:namespace />sourceVersion"]');
@@ -238,35 +309,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<div class="file-entry-field">
 			<aui:field-wrapper helpMessage='<%= LanguageUtil.format(pageContext, "webdav-help", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/Accessing+the+Document+Library+with+WebDAV") %>' label="webdav-url">
-
-				<%
-				StringBuffer sbf = new StringBuffer();
-
-				if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-					DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
-
-					while (true) {
-						sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-						sbf.insert(0, StringPool.SLASH);
-
-						if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-							break;
-						}
-						else {
-							curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-						}
-					}
-				}
-
-				sbf.append(StringPool.SLASH);
-				sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
-
-				Group group = themeDisplay.getScopeGroup();
-				%>
-
-				<liferay-ui:input-resource
-					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sbf.toString() %>'
-				/>
+				<liferay-ui:input-resource url='<%= webDavUrl %>' />
 			</aui:field-wrapper>
 		</div>
 	</c:if>
@@ -281,12 +324,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<liferay-ui:icon
 			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
 			message='download'
-			url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
+			url='<%= "javascript:" + renderResponse.getNamespace() + "accessDocument();" %>'
 			cssClass="file-entry-avatar"
 		/>
 
 		<div class="file-entry-name">
-			<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>">
+			<a href="javascript:<portlet:namespace />accessDocument();">
 				<%= titleWithExtension %>
 			</a>
 		</div>
@@ -303,7 +346,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<liferay-ui:icon
 						image='<%= "../document_library/" + conversion %>'
 						message="<%= conversion.toUpperCase() %>"
-						url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) + "&targetExtension=" + conversion %>'
+						url='<%= fileUrl + "&targetExtension=" + conversion %>'
 						label="<%= true %>"
 					/>
 
