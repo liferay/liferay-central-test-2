@@ -615,7 +615,7 @@ AUI().add(
 							var newTab = A.Node.create('<a href="' + data.url + '"><span>' + Liferay.Util.escapeHTML(name) + '</span></a>');
 
 							if (instance._isUseHandle) {
-								enterPage.before('<span class="sort-handle">+</span>');
+								enterPage.placeBefore('<span class="sort-handle">+</span>');
 							}
 							else {
 								newTab.setStyle('cursor', 'move');
@@ -623,7 +623,7 @@ AUI().add(
 
 							newNavItem._LFR_layoutId = data.layoutId;
 
-							enterPage.before(newTab);
+							enterPage.placeBefore(newTab);
 							enterPage.remove();
 
 							newNavItem.addClass('sortable-item');

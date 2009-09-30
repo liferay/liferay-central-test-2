@@ -347,9 +347,9 @@ AUI().add(
 						var currentSection = instance.getCurrentSection(event);
 
 						if (currentSection == 1) {
-							dropNode.before(dragNode);
+							dropNode.placeBefore(dragNode);
 						} else if (currentSection == 2) {
-							dropNode.after(dragNode);
+							dropNode.placeAfter(dragNode);
 						}
 
 						DDM.syncActiveShims();
