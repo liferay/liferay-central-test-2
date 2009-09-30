@@ -27,13 +27,20 @@ import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.RequiredGroupException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.MembershipRequestConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
+import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
@@ -41,6 +48,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
+
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -180,6 +189,26 @@ public class EditGroupAction extends PortletAction {
 			group = GroupServiceUtil.updateGroup(
 				groupId, name, description, type, friendlyURL, active,
 				serviceContext);
+
+			if (type == GroupConstants.TYPE_COMMUNITY_OPEN) {
+				List<MembershipRequest> membershipRequests =
+					MembershipRequestLocalServiceUtil.search(
+						groupId, MembershipRequestConstants.STATUS_PENDING,
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+				for (MembershipRequest membershipRequest : membershipRequests) {
+					MembershipRequestServiceUtil.updateStatus(
+						membershipRequest.getMembershipRequestId(),
+						LanguageUtil.get(themeDisplay.getLocale(),
+							"your-membership-has-been-approved"),
+						MembershipRequestConstants.STATUS_APPROVED);
+
+					LiveUsers.joinGroup(
+						themeDisplay.getCompanyId(),
+						membershipRequest.getGroupId(),
+						new long[] {membershipRequest.getUserId()});
+				}
+			}
 		}
 
 		// Layout set prototypes
