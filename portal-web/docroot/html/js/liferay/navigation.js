@@ -458,7 +458,11 @@ AUI().add(
 
 						anchors.each(
 							function(item, index, collection) {
-								item.one('span').setStyle('cursor', 'pointer');
+								var span = item.one('span');
+
+								if (span) {
+									span.setStyle('cursor', 'pointer');
+								}
 							}
 						);
 					}
