@@ -344,20 +344,15 @@ AUI().add(
 					var dropNode = drop.get('node');
 
 					if (dropNode.get('className').indexOf('portlet-boundary') > -1 && !instance._insideNested) {
-						try {
-							var currentSection = instance.getCurrentSection(event);
+						var currentSection = instance.getCurrentSection(event);
 
-							if (currentSection == 1) {
-								dropNode.before(dragNode);
-							} else if (currentSection == 2) {
-								dropNode.after(dragNode);
-							}
+						if (currentSection == 1) {
+							dropNode.before(dragNode);
+						} else if (currentSection == 2) {
+							dropNode.after(dragNode);
+						}
 
-							DDM.syncActiveShims();
-						}
-						catch (e) {
-							console.log(e);
-						}
+						DDM.syncActiveShims();
 					}
 				},
 
