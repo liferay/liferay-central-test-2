@@ -67,6 +67,8 @@ public class GetMethodImpl implements Method {
 
 			if (is != null) {
 				try {
+					response.setContentType(resource.getContentType());
+
 					ServletResponseUtil.write(response, is);
 				}
 				catch (Exception e) {
