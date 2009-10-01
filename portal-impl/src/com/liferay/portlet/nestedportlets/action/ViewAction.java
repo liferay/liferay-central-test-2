@@ -22,12 +22,20 @@
 
 package com.liferay.portlet.nestedportlets.action;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTemplateConstants;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -35,6 +43,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -120,6 +129,8 @@ public class ViewAction extends PortletAction {
 				"$1" + renderResponse.getNamespace() + "$2$3");
 		}
 
+		checkLayout(themeDisplay.getLayout(), columnIds.values());
+
 		renderRequest.setAttribute(
 			WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_ID, velocityTemplateId);
 		renderRequest.setAttribute(
@@ -140,9 +151,50 @@ public class ViewAction extends PortletAction {
 		return mapping.findForward("portlet.nested_portlets.view");
 	}
 
+	protected void checkLayout(Layout layout, Collection<String> columnIds) {
+		UnicodeProperties props = layout.getTypeSettingsProperties();
+
+		String[] layoutColumnIds = StringUtil.split(
+			props.get(LayoutTypePortletConstants.NESTED_COLUMN_IDS));
+
+		boolean updateColumnIds = false;
+
+		for (String columnId : columnIds) {
+			String portletIds = props.getProperty(columnId);
+
+			if (Validator.isNotNull(portletIds) &&
+				!ArrayUtil.contains(layoutColumnIds, columnId)) {
+
+				layoutColumnIds = ArrayUtil.append(layoutColumnIds, columnId);
+
+				updateColumnIds = true;
+			}
+		}
+
+		if (updateColumnIds) {
+			props.setProperty(
+				LayoutTypePortletConstants.NESTED_COLUMN_IDS,
+				StringUtil.merge(layoutColumnIds));
+
+			layout.setTypeSettingsProperties(props);
+
+			try {
+				LayoutLocalServiceUtil.updateLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getLayoutId(), layout.getTypeSettings());
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Error updating the nested columns");
+				}
+			}
+		}
+	}
+
 	private static Pattern _columnIdPattern = Pattern.compile(
 		"([<].*?id=[\"'])([^ ]*?)([\"'].*?[>])", Pattern.DOTALL);
 	private static Pattern _processColumnPattern = Pattern.compile(
 		"(processColumn[(]\")(.*?)(\"[)])", Pattern.DOTALL);
+	private static Log _log = LogFactoryUtil.getLog(ViewAction.class);
 
 }

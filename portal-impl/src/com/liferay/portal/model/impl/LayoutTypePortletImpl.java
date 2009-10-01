@@ -49,6 +49,7 @@ import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -343,7 +344,7 @@ public class LayoutTypePortletImpl
 				columnId);
 
 			if ((columnValue == null) &&
-				(columnId.startsWith(PortletKeys.NESTED_PORTLETS))) {
+				(columnId.startsWith(_NESTED_PORTLETS_PREFIX))) {
 
 				addNestedColumn(columnId);
 			}
@@ -1205,6 +1206,9 @@ public class LayoutTypePortletImpl
 
 	private static Log _log =
 		LogFactoryUtil.getLog(LayoutTypePortletImpl.class);
+
+	private static final String _NESTED_PORTLETS_PREFIX =
+		PortalUtil.getPortletNamespace(PortletKeys.NESTED_PORTLETS);
 
 	private boolean _enablePortletLayoutListener = true;
 
