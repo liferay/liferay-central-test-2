@@ -63,9 +63,9 @@ public class SourceFormatter {
 			Thread thread1 = new Thread () {
 				public void run() {
 					try {
-						//_checkPersistenceTestSuite();
+						_checkPersistenceTestSuite();
 						_checkWebXML();
-						//_formatJSP();
+						_formatJSP();
 					}
 					catch (Exception e) {
 						e.printStackTrace();
@@ -76,8 +76,7 @@ public class SourceFormatter {
 			Thread thread2 = new Thread () {
 				public void run() {
 					try {
-						//_formatJava();
-						System.out.println("#test");
+						_formatJava();
 					}
 					catch (Exception e) {
 						e.printStackTrace();
