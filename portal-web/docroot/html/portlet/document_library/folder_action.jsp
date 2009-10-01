@@ -147,7 +147,7 @@ if (row == null) {
 			<label><liferay-ui:message key="webdav-url" /></label>
 
 			<%
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 
 			if (folder != null) {
 				DLFolder curFolder = folder;

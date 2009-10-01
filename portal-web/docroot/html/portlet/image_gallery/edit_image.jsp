@@ -119,7 +119,7 @@ if (image != null) {
 			<td>
 
 				<%
-				StringBuffer sb = new StringBuffer();
+				StringBuilder sb = new StringBuilder();
 
 				while (true) {
 					sb.insert(0, WebDAVUtil.encodeURL(folder.getName()));

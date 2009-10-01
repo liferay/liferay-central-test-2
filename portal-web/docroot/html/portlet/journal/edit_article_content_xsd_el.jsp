@@ -65,7 +65,7 @@ if (Validator.isNull(elPredefinedValue)) {
 	elPredefinedValue = StringPool.BLANK;
 }
 
-StringBuffer css = new StringBuffer();
+StringBuilder css = new StringBuilder();
 
 if (Validator.isNull(elParentStructureId)) {
 	css.append("structure-field");
@@ -75,7 +75,7 @@ if (elRepeatable && !elRepeatablePrototype) {
 	css.append(" repeated-field ");
 }
 
-StringBuffer parentStructureData = new StringBuffer();
+StringBuilder parentStructureData = new StringBuilder();
 
 if (Validator.isNotNull(elParentStructureId)) {
 	parentStructureData.append("data-component-parentStructureId='");
@@ -339,7 +339,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content_xsd_el.jsp";
 
 private String _buildMetaDataHTMLAttributes(Map<String, String> elMetaData, String elName) {
-	StringBuffer sb = new StringBuffer();
+	StringBuilder sb = new StringBuilder();
 
 	Iterator<String> keys = elMetaData.keySet().iterator();
 

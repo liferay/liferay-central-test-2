@@ -335,7 +335,7 @@ tabs1Names += ",recent-images";
 		<br />
 
 		<%
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		IGFolder curFolder = folder;
 
