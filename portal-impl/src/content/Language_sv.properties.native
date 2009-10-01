@@ -4015,6 +4015,7 @@ web-content=Artiklar
 web-id=Webb-id
 web-plugin=Webbtillägg
 web-plugins=Webbtillägg
+webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=WebDAV-URL
 website=Webbsida
 websites=Webbsidor

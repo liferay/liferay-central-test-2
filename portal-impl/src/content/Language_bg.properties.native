@@ -3863,6 +3863,7 @@ web-content=Уеб съдържание
 web-id=Интернет ID
 web-plugin=Интернет плъгин
 web-plugins=Интернет плъгини
+webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=WebDAV URL
 website=Интернет страница
 websites=Интернет страници

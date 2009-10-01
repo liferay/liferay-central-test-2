@@ -4289,6 +4289,7 @@ web-content=Webový obsah
 web-id=ID Webu
 web-plugin=Zásuvný modul pro web
 web-plugins=Zásuvné moduly pro web
+webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=URL pro WEBdav přístup
 website=Web
 websites=Weby
