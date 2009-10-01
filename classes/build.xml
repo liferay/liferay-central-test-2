@@ -27,8 +27,8 @@
 			classpathref="project.classpath"
 			fork="true"
 		>
-			<!--
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<!--
 			<jvmarg value="-Duser.language=pt" />
 			<jvmarg value="-Duser.country=BR" />
 			<jvmarg value="-Duser.timezone=GMT" />
