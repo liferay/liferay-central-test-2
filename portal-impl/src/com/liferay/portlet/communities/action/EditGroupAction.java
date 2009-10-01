@@ -28,7 +28,6 @@ import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -199,7 +198,7 @@ public class EditGroupAction extends PortletAction {
 				for (MembershipRequest membershipRequest : membershipRequests) {
 					MembershipRequestServiceUtil.updateStatus(
 						membershipRequest.getMembershipRequestId(),
-						LanguageUtil.get(themeDisplay.getLocale(),
+						themeDisplay.translate(
 							"your-membership-has-been-approved"),
 						MembershipRequestConstants.STATUS_APPROVED);
 
