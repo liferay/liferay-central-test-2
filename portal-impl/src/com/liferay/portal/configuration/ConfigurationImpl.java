@@ -31,6 +31,7 @@ import com.germinus.easyconf.EasyConf;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -48,7 +49,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -261,28 +261,10 @@ public class ConfigurationImpl
 	}
 
 	public Properties getProperties(String prefix, boolean removePrefix) {
-		Properties subProperties = new Properties();
-
 		Properties allProperties = getProperties();
 
-		Enumeration<String> enu =
-			(Enumeration<String>)allProperties.propertyNames();
-
-		while (enu.hasMoreElements()) {
-			String key = enu.nextElement();
-
-			if (key.startsWith(prefix)) {
-				String value = allProperties.getProperty(key);
-
-				if (removePrefix) {
-					key = key.substring(prefix.length());
-				}
-
-				subProperties.setProperty(key, value);
-			}
-		}
-
-		return subProperties;
+		return PropertiesUtil.getProperties(
+			allProperties, prefix, removePrefix);
 	}
 
 	public void removeProperties(Properties properties) {

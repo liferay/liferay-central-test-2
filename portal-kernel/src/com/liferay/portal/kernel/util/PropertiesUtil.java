@@ -87,6 +87,30 @@ public class PropertiesUtil {
 		}
 	}
 
+	public static Properties getProperties(
+			Properties properties, String prefix, boolean removePrefix) {
+		Properties subProperties = new Properties();
+
+		Enumeration<String> enu =
+			(Enumeration<String>)properties.propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String key = enu.nextElement();
+
+			if (key.startsWith(prefix)) {
+				String value = properties.getProperty(key);
+
+				if (removePrefix) {
+					key = key.substring(prefix.length());
+				}
+
+				subProperties.setProperty(key, value);
+			}
+		}
+
+		return subProperties;
+	}
+
 	public static Properties load(String s) throws IOException {
 		Properties p = new Properties();
 
