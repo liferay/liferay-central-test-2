@@ -67,8 +67,8 @@ public class ConvertDatabase extends ConvertProcess {
 
 		try {
 			MaintenanceUtil.appendStatus(
-				"Converting " + modelNames.size() +
-					" Wiki pages from Classic Wiki to Creole format.");
+				"Migrating " + modelNames.size() + 
+					" database tables to new schema.");
 
 			for (int i = 0; i < modelNames.size(); i++) {
 				if ((i > 0) && (i % (modelNames.size() / 4) == 0)) {
