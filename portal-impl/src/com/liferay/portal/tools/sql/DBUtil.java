@@ -137,55 +137,6 @@ public abstract class DBUtil implements DB {
 		return _dbUtil;
 	}
 
-	public static DBUtil getInstance(String type) {
-		DBUtil dbUtil = null;
-
-		if (type.equals(TYPE_DB2)) {
-			dbUtil = DB2Util.getInstance();
-		}
-		else if (type.equals(TYPE_DERBY)) {
-			dbUtil = DerbyUtil.getInstance();
-		}
-		else if (type.equals(TYPE_FIREBIRD)) {
-			dbUtil = FirebirdUtil.getInstance();
-		}
-		else if (type.equals(TYPE_HYPERSONIC)) {
-			dbUtil = HypersonicUtil.getInstance();
-		}
-		else if (type.equals(TYPE_INFORMIX)) {
-			dbUtil = InformixUtil.getInstance();
-		}
-		else if (type.equals(TYPE_INGRES)) {
-			dbUtil = IngresUtil.getInstance();
-		}
-		else if (type.equals(TYPE_INTERBASE)) {
-			dbUtil = InterBaseUtil.getInstance();
-		}
-		else if (type.equals(TYPE_JDATASTORE)) {
-			dbUtil = JDataStoreUtil.getInstance();
-		}
-		else if (type.equals(TYPE_MYSQL)) {
-			dbUtil = MySQLUtil.getInstance();
-		}
-		else if (type.equals(TYPE_ORACLE)) {
-			dbUtil = OracleUtil.getInstance();
-		}
-		else if (type.equals(TYPE_POSTGRESQL)) {
-			dbUtil = PostgreSQLUtil.getInstance();
-		}
-		else if (type.equals(TYPE_SAP)) {
-			dbUtil = SAPUtil.getInstance();
-		}
-		else if (type.equals(TYPE_SQLSERVER)) {
-			dbUtil = SQLServerUtil.getInstance();
-		}
-		else if (type.equals(TYPE_SYBASE)) {
-			dbUtil = SybaseUtil.getInstance();
-		}
-
-		return dbUtil;
-	}
-
 	public static DBUtil getInstance(Dialect dialect) {
 		DBUtil dbUtil = null;
 
@@ -241,6 +192,55 @@ public abstract class DBUtil implements DB {
 			else {
 				dbUtil = SybaseUtil.getInstance();
 			}
+		}
+
+		return dbUtil;
+	}
+
+	public static DBUtil getInstance(String type) {
+		DBUtil dbUtil = null;
+
+		if (type.equals(TYPE_DB2)) {
+			dbUtil = DB2Util.getInstance();
+		}
+		else if (type.equals(TYPE_DERBY)) {
+			dbUtil = DerbyUtil.getInstance();
+		}
+		else if (type.equals(TYPE_FIREBIRD)) {
+			dbUtil = FirebirdUtil.getInstance();
+		}
+		else if (type.equals(TYPE_HYPERSONIC)) {
+			dbUtil = HypersonicUtil.getInstance();
+		}
+		else if (type.equals(TYPE_INFORMIX)) {
+			dbUtil = InformixUtil.getInstance();
+		}
+		else if (type.equals(TYPE_INGRES)) {
+			dbUtil = IngresUtil.getInstance();
+		}
+		else if (type.equals(TYPE_INTERBASE)) {
+			dbUtil = InterBaseUtil.getInstance();
+		}
+		else if (type.equals(TYPE_JDATASTORE)) {
+			dbUtil = JDataStoreUtil.getInstance();
+		}
+		else if (type.equals(TYPE_MYSQL)) {
+			dbUtil = MySQLUtil.getInstance();
+		}
+		else if (type.equals(TYPE_ORACLE)) {
+			dbUtil = OracleUtil.getInstance();
+		}
+		else if (type.equals(TYPE_POSTGRESQL)) {
+			dbUtil = PostgreSQLUtil.getInstance();
+		}
+		else if (type.equals(TYPE_SAP)) {
+			dbUtil = SAPUtil.getInstance();
+		}
+		else if (type.equals(TYPE_SQLSERVER)) {
+			dbUtil = SQLServerUtil.getInstance();
+		}
+		else if (type.equals(TYPE_SYBASE)) {
+			dbUtil = SybaseUtil.getInstance();
 		}
 
 		return dbUtil;

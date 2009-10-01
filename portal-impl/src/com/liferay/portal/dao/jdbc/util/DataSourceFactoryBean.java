@@ -54,6 +54,58 @@ import uk.org.primrose.pool.datasource.GenericDataSourceFactory;
  */
 public class DataSourceFactoryBean extends AbstractFactoryBean {
 
+	public Object createInstance() throws Exception {
+		Properties properties = _properties;
+
+		if (properties == null) {
+			properties = PropsUtil.getProperties(_propertyPrefix, true);
+		}
+		else {
+			properties = PropertiesUtil.getProperties(
+				properties, _propertyPrefix, true);
+		}
+
+		String jndiName = properties.getProperty("jndi.name");
+
+		if (Validator.isNotNull(jndiName)) {
+			try {
+				return JNDIUtil.lookup(new InitialContext(), jndiName);
+			}
+			catch (Exception e) {
+				_log.error("Unable to lookup " + jndiName, e);
+			}
+		}
+
+		DataSource dataSource = null;
+
+		String liferayPoolProvider =
+			PropsValues.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER;
+
+		if (liferayPoolProvider.equals("c3po")) {
+			dataSource = createDataSourceC3PO(properties);
+		}
+		else if (liferayPoolProvider.equals("dbcp")) {
+			dataSource = createDataSourceDBCP(properties);
+		}
+		else {
+			dataSource = createDataSourcePrimrose(properties);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Creating data source " + dataSource.getClass().getName());
+
+			SortedProperties sortedProperties = new SortedProperties(
+				properties);
+
+			_log.debug("Properties for prefix " + _propertyPrefix);
+
+			sortedProperties.list(System.out);
+		}
+
+		return dataSource;
+	}
+
 	public Class<?> getObjectType() {
 		return DataSource.class;
 	}
@@ -141,63 +193,10 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 		return genericDataSourceFactory.loadPool(_propertyPrefix, properties);
 	}
 
-	public Object createInstance() throws Exception {
-		Properties properties = _properties;
-
-		if (properties == null) {
-			properties = PropsUtil.getProperties(_propertyPrefix, true);
-		}
-		else {
-			properties = PropertiesUtil.getProperties(
-				properties, _propertyPrefix, true);
-		}
-
-		String jndiName = properties.getProperty("jndi.name");
-
-		if (Validator.isNotNull(jndiName)) {
-			try {
-				return JNDIUtil.lookup(new InitialContext(), jndiName);
-			}
-			catch (Exception e) {
-				_log.error("Unable to lookup " + jndiName, e);
-			}
-		}
-
-		DataSource dataSource = null;
-
-		String liferayPoolProvider =
-			PropsValues.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER;
-
-		if (liferayPoolProvider.equals("c3po")) {
-			dataSource = createDataSourceC3PO(properties);
-		}
-		else if (liferayPoolProvider.equals("dbcp")) {
-			dataSource = createDataSourceDBCP(properties);
-		}
-		else {
-			dataSource = createDataSourcePrimrose(properties);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Creating data source " + dataSource.getClass().getName());
-
-			SortedProperties sortedProperties = new SortedProperties(
-				properties);
-
-			_log.debug("Properties for prefix " + _propertyPrefix);
-
-			sortedProperties.list(System.out);
-		}
-
-		return dataSource;
-	}
-
 	private static Log _log =
 		LogFactoryUtil.getLog(DataSourceFactoryBean.class);
 
-	private String _propertyPrefix;
-
 	private Properties _properties;
+	private String _propertyPrefix;
 
 }
