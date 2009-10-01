@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FileImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,10 +38,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,9 +63,9 @@ public class SourceFormatter {
 			Thread thread1 = new Thread () {
 				public void run() {
 					try {
-						_checkPersistenceTestSuite();
+						//_checkPersistenceTestSuite();
 						_checkWebXML();
-						_formatJSP();
+						//_formatJSP();
 					}
 					catch (Exception e) {
 						e.printStackTrace();
@@ -73,7 +76,8 @@ public class SourceFormatter {
 			Thread thread2 = new Thread () {
 				public void run() {
 					try {
-						_formatJava();
+						//_formatJava();
+						System.out.println("#test");
 					}
 					catch (Exception e) {
 						e.printStackTrace();
@@ -205,26 +209,77 @@ public class SourceFormatter {
 		String basedir = "./";
 
 		if (_fileUtil.exists(basedir + "portal-impl")) {
-			return;
-		}
+			String[] locales = (String[])PropsValues.LOCALES.clone();
 
-		String webXML = ContentUtil.get(
-			"com/liferay/portal/deploy/dependencies/web.xml");
+			Arrays.sort(locales);
 
-		DirectoryScanner ds = new DirectoryScanner();
+			String previousLanguageCode = null;
 
-		ds.setBasedir(basedir);
-		ds.setIncludes(new String[] {"**\\web.xml"});
+			Set<String> urlPatterns = new TreeSet<String>();
 
-		ds.scan();
+			for (String locale : locales) {
+				int pos = locale.indexOf(StringPool.UNDERLINE);
 
-		String[] files = ds.getIncludedFiles();
+				String languageCode = locale.substring(0, pos);
 
-		for (String file : files) {
-			String content = _fileUtil.read(basedir + file);
+				urlPatterns.add(languageCode);
+				urlPatterns.add(locale);
+			}
 
-			if (content.equals(webXML)) {
+			StringBuilder sb = new StringBuilder();
+
+			for (String urlPattern : urlPatterns) {
+				sb.append("\t<servlet-mapping>\n");
+				sb.append("\t\t<servlet-name>I18n Servlet</servlet-name>\n");
+				sb.append(
+					"\t\t<url-pattern>" + urlPattern +"/*</url-pattern>\n");
+				sb.append("\t</servlet-mapping>\n");
+			}
+
+			File file = new File(
+				basedir + "portal-web/docroot/WEB-INF/web.xml");
+
+			String content = _fileUtil.read(file);
+
+			int x = content.indexOf("<servlet-mapping>");
+
+			x = content.indexOf("<servlet-name>I18n Servlet</servlet-name>", x);
+
+			x = content.lastIndexOf("<servlet-mapping>", x) - 1;
+
+			int y = content.lastIndexOf(
+				"<servlet-name>I18n Servlet</servlet-name>");
+
+			y = content.indexOf("</servlet-mapping>", y) + 19;
+
+			String newContent =
+				content.substring(0, x) + sb.toString() + content.substring(y);
+
+			if ((newContent != null) && !content.equals(newContent)) {
+				_fileUtil.write(file, newContent);
+
 				System.out.println(file);
+			}
+		}
+		else {
+			String webXML = ContentUtil.get(
+				"com/liferay/portal/deploy/dependencies/web.xml");
+
+			DirectoryScanner ds = new DirectoryScanner();
+
+			ds.setBasedir(basedir);
+			ds.setIncludes(new String[] {"**\\web.xml"});
+
+			ds.scan();
+
+			String[] files = ds.getIncludedFiles();
+
+			for (String file : files) {
+				String content = _fileUtil.read(basedir + file);
+
+				if (content.equals(webXML)) {
+					System.out.println(file);
+				}
 			}
 		}
 	}
