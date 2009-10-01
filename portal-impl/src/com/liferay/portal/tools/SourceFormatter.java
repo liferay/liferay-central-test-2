@@ -231,7 +231,7 @@ public class SourceFormatter {
 				sb.append("\t<servlet-mapping>\n");
 				sb.append("\t\t<servlet-name>I18n Servlet</servlet-name>\n");
 				sb.append(
-					"\t\t<url-pattern>" + urlPattern +"/*</url-pattern>\n");
+					"\t\t<url-pattern>/" + urlPattern +"/*</url-pattern>\n");
 				sb.append("\t</servlet-mapping>\n");
 			}
 
