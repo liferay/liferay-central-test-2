@@ -47,6 +47,7 @@ public class WikiTests extends BaseTests {
 		testSuite.addTestSuite(AddDuplicateTitleChildPageTest.class);
 		testSuite.addTestSuite(PreviewChildPageTest.class);
 		testSuite.addTestSuite(CancelAddChildPageTest.class);
+		testSuite.addTestSuite(MoveChildPageSameNameTest.class);
 		testSuite.addTestSuite(MoveChangeParentTest.class);
 		testSuite.addTestSuite(AddCommentTest.class);
 		testSuite.addTestSuite(AddNullCommentTest.class);
