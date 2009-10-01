@@ -52,6 +52,25 @@ import org.hibernate.dialect.Dialect;
  */
 public class ConvertDatabase extends ConvertProcess {
 
+	public String getDescription() {
+		return "migrate-data-from-one-database-to-another";
+	}
+
+	public String getParameterDescription() {
+		return "please-enter-jdbc-information-for-new-database";
+	}
+
+	public String[] getParameterNames() {
+		return new String[] {
+			"jdbc-driver-class-name", "jdbc-url", "jdbc-user-name",
+			"jdbc-password"
+		};
+	}
+
+	public boolean isEnabled() {
+		return true;
+	}
+
 	protected void doConvert() throws Exception {
 		DataSource dataSource = _getDataSource();
 
@@ -67,7 +86,7 @@ public class ConvertDatabase extends ConvertProcess {
 
 		try {
 			MaintenanceUtil.appendStatus(
-				"Migrating " + modelNames.size() + 
+				"Migrating " + modelNames.size() +
 					" database tables to new schema.");
 
 			for (int i = 0; i < modelNames.size(); i++) {
@@ -81,7 +100,7 @@ public class ConvertDatabase extends ConvertProcess {
 				name = name.replaceFirst(
 					"(\\.model\\.)(\\p{Upper}.*)", "$1impl.$2Impl");
 
-				Class implClass = InstancePool.get(name).getClass();
+				Class<?> implClass = InstancePool.get(name).getClass();
 
 				String createSql =
 					(String)implClass.getField("TABLE_SQL_CREATE").get(
@@ -123,17 +142,17 @@ public class ConvertDatabase extends ConvertProcess {
 	private DataSource _getDataSource() throws Exception {
 		String[] values = getParameterValues();
 
-		String jdbcDriverClassname = values[0];
-		String jdbcUrl = values[1];
-		String jdbcUsername = values[2];
+		String jdbcDriverClassName = values[0];
+		String jdbcURL = values[1];
+		String jdbcUserName = values[2];
 		String jdbcPassword = values[3];
 
 		Properties properties = new Properties();
 
 		properties.setProperty(
-			_JDBC_PREFIX + "driverClassName", jdbcDriverClassname);
-		properties.setProperty(_JDBC_PREFIX + "url", jdbcUrl);
-		properties.setProperty(_JDBC_PREFIX + "username", jdbcUsername);
+			_JDBC_PREFIX + "driverClassName", jdbcDriverClassName);
+		properties.setProperty(_JDBC_PREFIX + "url", jdbcURL);
+		properties.setProperty(_JDBC_PREFIX + "username", jdbcUserName);
 		properties.setProperty(_JDBC_PREFIX + "password", jdbcPassword);
 
 		DataSourceFactoryBean dataSourceFactory = new DataSourceFactoryBean();
@@ -142,29 +161,6 @@ public class ConvertDatabase extends ConvertProcess {
 		dataSourceFactory.setPropertyPrefix(_JDBC_PREFIX);
 
 		return (DataSource)dataSourceFactory.createInstance();
-	}
-
-	public String getParameterDescription() {
-		return "please-enter-jdbc-information-for-new-database";
-	}
-
-	public String[] getParameterNames() {
-		final String[] parameters = new String[] {
-			"jdbc-driver-classname",
-			"jdbc-url",
-			"jdbc-username",
-			"jdbc-password"
-		};
-
-		return parameters;
-	}
-
-	public String getDescription() {
-		return "migrate-data-from-one-database-to-another";
-	}
-
-	public boolean isEnabled() {
-		return true;
 	}
 
 	private static final String _JDBC_PREFIX = "jdbc.upgrade.";
