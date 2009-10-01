@@ -81,6 +81,8 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				/>
 			</c:if>
 
+			<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
+
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
@@ -126,6 +128,8 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) %>'
 				message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
 			/>
+
+			<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
 
 			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewShortcutURL">

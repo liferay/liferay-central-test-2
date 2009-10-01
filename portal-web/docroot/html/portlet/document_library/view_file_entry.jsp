@@ -150,47 +150,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		}
 	}
 
-	function <portlet:namespace />openDocument() {
-		var fileUrl = "<%= fileUrl %>";
-		var webDavUrl = "<%= webDavUrl %>";
-
-		<%
-		String officeDoc = null;
-
-		if (portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIe(request)) {
-			if (extension.equalsIgnoreCase("doc") ||
-				extension.equalsIgnoreCase("dot") ||
-				extension.equalsIgnoreCase("ppt") ||
-				extension.equalsIgnoreCase("xls")) {
-
-				officeDoc = "SharePoint.OpenDocuments.1";
-			}
-			else if (extension.equalsIgnoreCase("docx") ||
-					 extension.equalsIgnoreCase("pptx") ||
-					 extension.equalsIgnoreCase("xlsx")) {
-
-				officeDoc = "SharePoint.OpenDocuments.2";
-			}
-		}
-		%>
-
-		<c:choose>
-			<c:when test="<%= officeDoc != null %>">
-				var officeDoc = new ActiveXObject("<%= officeDoc %>");
-
-				if (officeDoc) {
-					officeDoc.EditDocument(webDavUrl);
-				}
-				else {
-					window.location.href = fileUrl;
-				}
-			</c:when>
-			<c:otherwise>
-				window.location.href = fileUrl;
-			</c:otherwise>
-		</c:choose>
-	}
-
 	function <portlet:namespace />updateRowsChecked(element) {
 		var rowsChecked = jQuery('input[name=<portlet:namespace />rowIds]:checked');
 
@@ -324,12 +283,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<liferay-ui:icon
 			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
 			message='download'
-			url='<%= "javascript:" + renderResponse.getNamespace() + "openDocument();" %>'
+			url='<%= fileUrl %>'
 			cssClass="file-entry-avatar"
 		/>
 
 		<div class="file-entry-name">
-			<a href="javascript:<portlet:namespace />openDocument();">
+			<a href="<%= fileUrl %>">
 				<%= titleWithExtension %>
 			</a>
 		</div>
