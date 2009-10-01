@@ -288,18 +288,23 @@ AUI().add(
 				_makeSortable: function(sortableHandle) {
 					var instance = this;
 
-					var rows = instance._rowContainer.find('.lfr-form-row');
+					var rowContainer = A.get(instance._rowContainer[0]);
+
+					var rows = rowContainer.queryAll('.lfr-form-row');
 
 					if (sortableHandle) {
-						rows.find(sortableHandle).addClass('handle-sort-vertical');
+						rowContainer.queryAll(sortableHandle).addClass('handle-sort-vertical');
 					}
 
-					instance._sortable = new Alloy.Sortable(
+					instance._sortable = new A.Sortable(
 						{
-							axis: 'y',
-							container: instance._rowContainer,
-							items: rows,
-							handle: sortableHandle
+							constrain: {
+								stickY: true
+							},
+							dd: {
+								handles: [sortableHandle]
+							},
+							nodes: rows
 						}
 					);
 				},
@@ -312,6 +317,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['liferay-observable', 'liferay-undo-manager']
+		requires: ['liferay-observable', 'sortable', 'liferay-undo-manager']
 	}
 );
