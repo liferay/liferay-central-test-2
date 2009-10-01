@@ -88,7 +88,8 @@ public class PropertiesUtil {
 	}
 
 	public static Properties getProperties(
-			Properties properties, String prefix, boolean removePrefix) {
+		Properties properties, String prefix, boolean removePrefix) {
+
 		Properties subProperties = new Properties();
 
 		Enumeration<String> enu =
