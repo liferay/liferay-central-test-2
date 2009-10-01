@@ -55,10 +55,6 @@ public abstract class ConvertProcess {
 		}
 	}
 
-	public String[] getParameterValues() {
-		return _paramValues;
-	}
-
 	public abstract String getDescription();
 
 	public String getParameterDescription() {
@@ -69,20 +65,24 @@ public abstract class ConvertProcess {
 		return null;
 	}
 
+	public String[] getParameterValues() {
+		return _paramValues;
+	}
+
 	public String getPath() {
 		return null;
 	}
+
+	public abstract boolean isEnabled();
 
 	public void setParameterValues(String[] values) {
 		_paramValues = values;
 	}
 
-	public abstract boolean isEnabled();
-
 	protected abstract void doConvert() throws Exception;
 
-	private String[] _paramValues = null;
-
 	private static Log _log = LogFactoryUtil.getLog(ConvertProcess.class);
+
+	private String[] _paramValues = null;
 
 }

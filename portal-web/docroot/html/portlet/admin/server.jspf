@@ -339,20 +339,24 @@ numberFormat.setMinimumIntegerDigits(2);
 														<liferay-ui:message key="<%= convertProcess.getParameterDescription() %>" />
 													</td>
 												</tr>
+
 												<%
 												for (String parameter : convertProcess.getParameterNames()) {
 												%>
-												<tr>
-													<td>
-														<liferay-ui:message key="<%= parameter %>" />
-													</td>
-													<td>
-														<input name="<%= convertProcess.getClass().getName() + "." + parameter %>" />
-													</td>
-												</tr>
+
+													<tr>
+														<td>
+															<liferay-ui:message key="<%= parameter %>" />
+														</td>
+														<td>
+															<input name="<%= convertProcess.getClass().getName() + "." + parameter %>" />
+														</td>
+													</tr>
+
 												<%
 												}
 												%>
+
 												<tr>
 													<td colspan="2">
 														<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
