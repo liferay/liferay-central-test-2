@@ -187,6 +187,20 @@ public class EditServerAction extends PortletAction {
 		ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(
 			className);
 
+		String[] parameters = convertProcess.getParameterNames();
+
+		if (parameters != null) {
+			String[] values = new String[parameters.length];
+
+			for (int i = 0; i < parameters.length; i++) {
+				String parameter = className + "." + parameters[i];
+
+				values[i] = ParamUtil.getString(actionRequest, parameter);
+			}
+
+			convertProcess.setParameterValues(values);
+		}
+
 		String path = convertProcess.getPath();
 
 		if (path != null) {

@@ -331,7 +331,39 @@ numberFormat.setMinimumIntegerDigits(2);
 									<liferay-ui:message key="<%= convertProcess.getDescription() %>" />
 								</td>
 								<td>
-									<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
+									<c:choose>
+										<c:when test="<%= convertProcess.getParameterNames() != null %>">
+											<table class="lfr-table">
+												<tr>
+													<td colspan="2">
+														<liferay-ui:message key="<%= convertProcess.getParameterDescription() %>" />
+													</td>
+												</tr>
+												<%
+												for (String parameter : convertProcess.getParameterNames()) {
+												%>
+												<tr>
+													<td>
+														<liferay-ui:message key="<%= parameter %>" />
+													</td>
+													<td>
+														<input name="<%= convertProcess.getClass().getName() + "." + parameter %>" />
+													</td>
+												</tr>
+												<%
+												}
+												%>
+												<tr>
+													<td colspan="2">
+														<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
+													</td>
+												</tr>
+											</table>
+										</c:when>
+										<c:otherwise>
+											<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcess.getClass().getName() %>');" />
+										</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 

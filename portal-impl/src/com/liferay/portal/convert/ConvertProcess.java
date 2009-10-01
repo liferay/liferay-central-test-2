@@ -49,19 +49,39 @@ public abstract class ConvertProcess {
 			throw new ConvertException(e);
 		}
 		finally {
+			setParameterValues(null);
+
 			MaintenanceUtil.cancel();
 		}
 	}
 
+	public String[] getParameterValues() {
+		return _paramValues;
+	}
+
 	public abstract String getDescription();
+
+	public String getParameterDescription() {
+		return null;
+	}
+
+	public String[] getParameterNames() {
+		return null;
+	}
 
 	public String getPath() {
 		return null;
 	}
 
+	public void setParameterValues(String[] values) {
+		_paramValues = values;
+	}
+
 	public abstract boolean isEnabled();
 
 	protected abstract void doConvert() throws Exception;
+
+	private String[] _paramValues = null;
 
 	private static Log _log = LogFactoryUtil.getLog(ConvertProcess.class);
 
