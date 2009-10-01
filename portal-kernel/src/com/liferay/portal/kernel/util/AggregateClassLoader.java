@@ -170,6 +170,7 @@ public class AggregateClassLoader extends ClassLoader {
 		for (ClassLoaderWrapper classLoader : _classLoaders) {
 			try {
 				loadedClass = classLoader.loadClass(name, resolve);
+
 				break;
 			}
 			catch (ClassNotFoundException cnfe) {
