@@ -186,41 +186,39 @@ public abstract class DBUtil implements DB {
 		return dbUtil;
 	}
 
-	public static void setInstance(Dialect dialect) {
-		if (_dbUtil != null) {
-			return;
-		}
+	public static DBUtil getInstance(Dialect dialect) {
+		DBUtil dbUtil = null;
 
 		if (dialect instanceof DB2Dialect) {
 			if (dialect instanceof DerbyDialect) {
-				_dbUtil = DerbyUtil.getInstance();
+				dbUtil = DerbyUtil.getInstance();
 			}
 			else {
-				_dbUtil = DB2Util.getInstance();
+				dbUtil = DB2Util.getInstance();
 			}
 		}
 		else if (dialect instanceof HSQLDialect) {
-			_dbUtil = HypersonicUtil.getInstance();
+			dbUtil = HypersonicUtil.getInstance();
 		}
 		else if (dialect instanceof InformixDialect) {
-			_dbUtil = InformixUtil.getInstance();
+			dbUtil = InformixUtil.getInstance();
 		}
 		else if (dialect instanceof IngresDialect) {
-			_dbUtil = IngresUtil.getInstance();
+			dbUtil = IngresUtil.getInstance();
 		}
 		else if (dialect instanceof InterbaseDialect) {
 			if (dialect instanceof FirebirdDialect) {
-				_dbUtil = FirebirdUtil.getInstance();
+				dbUtil = FirebirdUtil.getInstance();
 			}
 			else {
-				_dbUtil = InterBaseUtil.getInstance();
+				dbUtil = InterBaseUtil.getInstance();
 			}
 		}
 		else if (dialect instanceof JDataStoreDialect) {
-			_dbUtil = JDataStoreUtil.getInstance();
+			dbUtil = JDataStoreUtil.getInstance();
 		}
 		else if (dialect instanceof MySQLDialect) {
-			_dbUtil = MySQLUtil.getInstance();
+			dbUtil = MySQLUtil.getInstance();
 		}
 		else if (dialect instanceof OracleDialect ||
 				 dialect instanceof Oracle8iDialect ||
@@ -228,22 +226,28 @@ public abstract class DBUtil implements DB {
 				 dialect instanceof Oracle9iDialect ||
 				 dialect instanceof Oracle10gDialect) {
 
-			_dbUtil = OracleUtil.getInstance();
+			dbUtil = OracleUtil.getInstance();
 		}
 		else if (dialect instanceof PostgreSQLDialect) {
-			_dbUtil = PostgreSQLUtil.getInstance();
+			dbUtil = PostgreSQLUtil.getInstance();
 		}
 		else if (dialect instanceof SAPDBDialect) {
-			_dbUtil = SAPUtil.getInstance();
+			dbUtil = SAPUtil.getInstance();
 		}
 		else if (dialect instanceof SybaseDialect) {
 			if (dialect instanceof SQLServerDialect) {
-				_dbUtil = SQLServerUtil.getInstance();
+				dbUtil = SQLServerUtil.getInstance();
 			}
 			else {
-				_dbUtil = SybaseUtil.getInstance();
+				dbUtil = SybaseUtil.getInstance();
 			}
 		}
+
+		return dbUtil;
+	}
+
+	public static void setInstance(Dialect dialect) {
+		_dbUtil = getInstance(dialect);
 	}
 
 	public static void setInstance(String type) {

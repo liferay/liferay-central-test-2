@@ -348,7 +348,17 @@ public class Table {
 	}
 
 	public String generateTempFile() throws Exception {
-		Connection con = null;
+		Connection con = DataAccess.getConnection();
+
+		try {
+			return generateTempFile(con);
+		}
+		finally {
+			DataAccess.cleanUp(con);
+		}
+	}
+
+	public String generateTempFile(Connection con) throws Exception {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -363,8 +373,6 @@ public class Table {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(tempFileName));
 
 		try {
-			con = DataAccess.getConnection();
-
 			ps = con.prepareStatement(selectSQL);
 
 			rs = ps.executeQuery();
@@ -401,7 +409,7 @@ public class Table {
 			throw e;
 		}
 		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			DataAccess.cleanUp(null, ps, rs);
 
 			bw.close();
 		}
@@ -417,7 +425,19 @@ public class Table {
 	}
 
 	public void populateTable(String tempFileName) throws Exception {
-		Connection con = null;
+		Connection con = DataAccess.getConnection();
+
+		try {
+			populateTable(tempFileName, con);
+		}
+		finally {
+			DataAccess.cleanUp(con);
+		}
+	}
+
+	public void populateTable(String tempFileName, Connection con)
+		throws Exception {
+
 		PreparedStatement ps = null;
 
 		String insertSQL = getInsertSQL();
@@ -427,8 +447,6 @@ public class Table {
 		String line = null;
 
 		try {
-			con = DataAccess.getConnection();
-
 			boolean useBatch = con.getMetaData().supportsBatchUpdates();
 
 			if (!useBatch) {
@@ -486,7 +504,7 @@ public class Table {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con, ps);
+			DataAccess.cleanUp(null, ps);
 
 			br.close();
 		}

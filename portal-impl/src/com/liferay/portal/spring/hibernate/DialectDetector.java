@@ -47,6 +47,18 @@ import org.hibernate.dialect.SybaseDialect;
 public class DialectDetector {
 
 	public static String determineDialect(DataSource dataSource) {
+		Dialect dialect = getDialect(dataSource);
+
+		DBUtil.setInstance(dialect);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Using dialect " + dialect.getClass().getName());
+		}
+
+		return dialect.getClass().getName();
+	}
+
+	public static Dialect getDialect(DataSource dataSource) {
 		Dialect dialect = null;
 
 		Connection connection = null;
@@ -89,12 +101,6 @@ public class DialectDetector {
 				dialect = DialectFactory.determineDialect(
 					dbName, dbMajorVersion);
 			}
-
-			DBUtil.setInstance(dialect);
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Using dialect " + dialect.getClass().getName());
-			}
 		}
 		catch (Exception e) {
 			String msg = GetterUtil.getString(e.getMessage());
@@ -121,7 +127,7 @@ public class DialectDetector {
 			throw new RuntimeException("No dialect found");
 		}
 
-		return dialect.getClass().getName();
+		return dialect;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DialectDetector.class);

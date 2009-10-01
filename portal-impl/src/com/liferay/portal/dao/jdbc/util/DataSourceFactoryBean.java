@@ -25,6 +25,7 @@ package com.liferay.portal.dao.jdbc.util;
 import com.liferay.portal.kernel.jndi.JNDIUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
@@ -55,6 +56,10 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 
 	public Class<?> getObjectType() {
 		return DataSource.class;
+	}
+
+	public void setProperties(Properties properties) {
+		_properties = properties;
 	}
 
 	public void setPropertyPrefix(String propertyPrefix) {
@@ -136,8 +141,16 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 		return genericDataSourceFactory.loadPool(_propertyPrefix, properties);
 	}
 
-	protected Object createInstance() throws Exception {
-		Properties properties = PropsUtil.getProperties(_propertyPrefix, true);
+	public Object createInstance() throws Exception {
+		Properties properties = _properties;
+
+		if (properties == null) {
+			properties = PropsUtil.getProperties(_propertyPrefix, true);
+		}
+		else {
+			properties = PropertiesUtil.getProperties(
+				properties, _propertyPrefix, true);
+		}
 
 		String jndiName = properties.getProperty("jndi.name");
 
@@ -184,5 +197,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 		LogFactoryUtil.getLog(DataSourceFactoryBean.class);
 
 	private String _propertyPrefix;
+
+	private Properties _properties;
 
 }
