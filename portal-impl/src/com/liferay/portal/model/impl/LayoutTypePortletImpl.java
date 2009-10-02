@@ -344,7 +344,7 @@ public class LayoutTypePortletImpl
 				columnId);
 
 			if ((columnValue == null) &&
-				(columnId.startsWith(_NESTED_PORTLETS_PREFIX))) {
+				(columnId.startsWith(_NESTED_PORTLETS_NAMESPACE))) {
 
 				addNestedColumn(columnId);
 			}
@@ -1204,11 +1204,11 @@ public class LayoutTypePortletImpl
 		}
 	}
 
+	private static final String _NESTED_PORTLETS_NAMESPACE =
+		PortalUtil.getPortletNamespace(PortletKeys.NESTED_PORTLETS);
+
 	private static Log _log =
 		LogFactoryUtil.getLog(LayoutTypePortletImpl.class);
-
-	private static final String _NESTED_PORTLETS_PREFIX =
-		PortalUtil.getPortletNamespace(PortletKeys.NESTED_PORTLETS);
 
 	private boolean _enablePortletLayoutListener = true;
 

@@ -152,15 +152,15 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected void checkLayout(Layout layout, Collection<String> columnIds) {
-		UnicodeProperties props = layout.getTypeSettingsProperties();
+		UnicodeProperties properties = layout.getTypeSettingsProperties();
 
 		String[] layoutColumnIds = StringUtil.split(
-			props.get(LayoutTypePortletConstants.NESTED_COLUMN_IDS));
+			properties.get(LayoutTypePortletConstants.NESTED_COLUMN_IDS));
 
 		boolean updateColumnIds = false;
 
 		for (String columnId : columnIds) {
-			String portletIds = props.getProperty(columnId);
+			String portletIds = properties.getProperty(columnId);
 
 			if (Validator.isNotNull(portletIds) &&
 				!ArrayUtil.contains(layoutColumnIds, columnId)) {
@@ -172,11 +172,11 @@ public class ViewAction extends PortletAction {
 		}
 
 		if (updateColumnIds) {
-			props.setProperty(
+			properties.setProperty(
 				LayoutTypePortletConstants.NESTED_COLUMN_IDS,
 				StringUtil.merge(layoutColumnIds));
 
-			layout.setTypeSettingsProperties(props);
+			layout.setTypeSettingsProperties(properties);
 
 			try {
 				LayoutLocalServiceUtil.updateLayout(
@@ -185,16 +185,17 @@ public class ViewAction extends PortletAction {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Error updating the nested columns");
+					_log.warn(e, e);
 				}
 			}
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(ViewAction.class);
+
 	private static Pattern _columnIdPattern = Pattern.compile(
 		"([<].*?id=[\"'])([^ ]*?)([\"'].*?[>])", Pattern.DOTALL);
 	private static Pattern _processColumnPattern = Pattern.compile(
 		"(processColumn[(]\")(.*?)(\"[)])", Pattern.DOTALL);
-	private static Log _log = LogFactoryUtil.getLog(ViewAction.class);
 
 }
