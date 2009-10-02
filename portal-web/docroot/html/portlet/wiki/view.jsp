@@ -62,6 +62,7 @@ PortletURL addPageURL = renderResponse.createRenderURL();
 addPageURL.setParameter("struts_action", "/wiki/edit_page");
 addPageURL.setParameter("redirect", currentURL);
 addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+addPageURL.setParameter("title", StringPool.BLANK);
 addPageURL.setParameter("editTitle", "1");
 
 if (wikiPage != null) {
