@@ -8,6 +8,7 @@
 >
 	<bean class="com.liferay.portal.spring.context.PortletBeanFactoryPostProcessor" />
 	<bean class="com.liferay.portal.spring.annotation.BeanReferenceAnnotationBeanPostProcessor" />
+	<bean id="portletClassLoader" class="com.liferay.portal.kernel.portlet.PortletClassLoaderUtil" factory-method="getClassLoader" />
 	<bean id="basePersistence" abstract="true">
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
@@ -27,9 +28,7 @@
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionOperation" />
 	</aop:config>
 	<bean id="velocityHookAdvice" class="com.liferay.portal.spring.aop.ServiceVelocityAdvice">
-		<property name="classLoader">
-			<bean class="com.liferay.portal.kernel.portlet.PortletClassLoaderUtil" factory-method="getClassLoader" />
-		</property>
+		<property name="classLoader" ref="portletClassLoader" />
 		<property name="exceptionSafe" value="true" />
 	</bean>
 	<aop:config>
