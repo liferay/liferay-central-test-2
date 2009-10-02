@@ -122,8 +122,7 @@ public class WorkflowInstanceManagerUtil {
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
-			workflowDefinitionName, workflowDefinitionVersion, finished,
-			retrieveChildrenInfo);
+			workflowDefinitionName, workflowDefinitionVersion, finished);
 	}
 
 	/**
@@ -149,7 +148,7 @@ public class WorkflowInstanceManagerUtil {
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
-			relationType, relationId, retrieveChildrenInfo);
+			relationType, relationId);
 	}
 
 	/**
