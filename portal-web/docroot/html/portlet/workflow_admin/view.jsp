@@ -128,14 +128,14 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 
 <%!
 private static final String[] _WORKFLOW_RESOURCES = {
-		BlogsEntry.class.getName(),
-		BookmarksEntry.class.getName(),
-		CalEvent.class.getName(),
-		DLFileEntry.class.getName(),
-		IGImage.class.getName(),
-		JournalArticle.class.getName(),
-		MBMessage.class.getName(),
-		WikiPage.class.getName()
+	BlogsEntry.class.getName(),
+	BookmarksEntry.class.getName(),
+	CalEvent.class.getName(),
+	DLFileEntry.class.getName(),
+	IGImage.class.getName(),
+	JournalArticle.class.getName(),
+	MBMessage.class.getName(),
+	WikiPage.class.getName()
 };
 
 private String _getIconPath(String modelResource) {

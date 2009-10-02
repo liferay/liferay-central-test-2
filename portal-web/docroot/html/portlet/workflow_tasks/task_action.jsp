@@ -25,10 +25,6 @@
 <%@ include file="/html/portlet/workflow_tasks/init.jsp" %>
 
 <%
-SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
-
-String redirect = searchContainer.getIteratorURL().toString();
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 TaskInstanceInfo taskInstanceInfo = (TaskInstanceInfo)row.getParameter("taskInstanceInfo");
@@ -49,7 +45,7 @@ List<String> activityNames = TaskInstanceManagerUtil.getPossibleNextActivityName
 
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_task" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="taskIntanceId" value="<%= StringUtil.valueOf(taskInstanceInfo.getTaskInstanceId()) %>" />
 
 			<c:if test="<%= activityName != null %>">
