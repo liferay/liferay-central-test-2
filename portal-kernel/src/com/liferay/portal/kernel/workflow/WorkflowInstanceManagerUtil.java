@@ -114,15 +114,14 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfoCount(String,
-	 *		Integer, boolean, boolean)
+	 *		Integer, boolean)
 	 */
 	public static int getWorkflowInstanceInfoCount(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished, boolean retrieveChildrenInfo)
+			String workflowDefinitionName, Integer workflowDefinitionVersion)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
-			workflowDefinitionName, workflowDefinitionVersion, finished);
+			workflowDefinitionName, workflowDefinitionVersion);
 	}
 
 	/**
@@ -131,20 +130,18 @@ public class WorkflowInstanceManagerUtil {
 	 */
 	public static int getWorkflowInstanceInfoCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean retrieveChildrenInfo)
+			boolean finished)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
-			workflowDefinitionName, workflowDefinitionVersion,
-			retrieveChildrenInfo);
+			workflowDefinitionName, workflowDefinitionVersion, finished);
 	}
 
 	/**
-	 * @see WorkflowInstanceManager#getWorkflowInstanceInfoCount(String, long,
-	 *		boolean)
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfoCount(String, long)
 	 */
 	public static int getWorkflowInstanceInfoCount(
-			String relationType, long relationId, boolean retrieveChildrenInfo)
+			String relationType, long relationId)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
@@ -235,21 +232,6 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer, Map,
-	 *		long, String)
-	 */
-	public static WorkflowInstanceInfo startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId,
-			String activityName)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.startWorkflowInstance(
-			workflowDefinitionName, workflowDefinitionVersion, context,
-			callingUserId, activityName);
-	}
-
-	/**
-	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer, Map,
 	 *		long)
 	 */
 	public static WorkflowInstanceInfo startWorkflowInstance(
@@ -263,18 +245,18 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	/**
-	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer,
-	 *		String, long, Map, long, String)
+	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer, Map,
+	 *		long, String)
 	 */
 	public static WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			String relationType, long relationId, Map<String, Object> context,
-			long callingUserId, String activityName)
+			Map<String, Object> context, long callingUserId,
+			String activityName)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(
-			workflowDefinitionName, workflowDefinitionVersion, relationType,
-			relationId, context, callingUserId, activityName);
+			workflowDefinitionName, workflowDefinitionVersion, context,
+			callingUserId, activityName);
 	}
 
 	/**
@@ -290,6 +272,21 @@ public class WorkflowInstanceManagerUtil {
 		return _workflowInstanceManager.startWorkflowInstance(
 			workflowDefinitionName, workflowDefinitionVersion, relationType,
 			relationId, context, callingUserId);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer,
+	 *		String, long, Map, long, String)
+	 */
+	public static WorkflowInstanceInfo startWorkflowInstance(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			String relationType, long relationId, Map<String, Object> context,
+			long callingUserId, String activityName)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.startWorkflowInstance(
+			workflowDefinitionName, workflowDefinitionVersion, relationType,
+			relationId, context, callingUserId, activityName);
 	}
 
 	public void setWorkflowInstanceManager(

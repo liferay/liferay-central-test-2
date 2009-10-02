@@ -98,7 +98,7 @@ public class WorkflowInstanceManagerProxyBean
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean retrieveChildrenInfo, int start, int end,
+		boolean finished, boolean retrieveChildrenInfo, int start, int end,
 		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
@@ -106,7 +106,7 @@ public class WorkflowInstanceManagerProxyBean
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean finished, boolean retrieveChildrenInfo, int start, int end,
+		boolean retrieveChildrenInfo, int start, int end,
 		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
