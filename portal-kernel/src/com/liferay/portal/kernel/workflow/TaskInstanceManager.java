@@ -243,7 +243,26 @@ public interface TaskInstanceManager {
 	 *		   credential
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
-	public int getTaskInstanceCountByCredential(UserCredential userCredential)
+	public int getTaskInstanceInfoCountByCredential(
+			UserCredential userCredential)
+		throws WorkflowException;
+
+	/**
+	 * Returns the total count of tasks currently assigned to the user
+	 * represented by the given credential or indirectly assigned to one of its
+	 * roles. The implementation of this method should be fast.
+	 *
+	 * @param  userCredential the credential representing the user and its role
+	 *		   set to return the count of tasks assigned to either the user or
+	 *		   one of its roles
+	 * @param  completed the flag for whether to return the completed tasks or
+	 * 		   incomplete tasks
+	 * @return the total count of open tasks of the user represented by the
+	 *		   credential
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
+	public int getTaskInstanceInfoCountByCredential(
+			UserCredential userCredential, boolean completed)
 		throws WorkflowException;
 
 	/**
@@ -254,7 +273,21 @@ public interface TaskInstanceManager {
 	 * @return the total count of open tasks of the specified role
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
-	public int getTaskInstanceCountByRole(long roleId) throws WorkflowException;
+	public int getTaskInstanceInfoCountByRole(long roleId)
+		throws WorkflowException;
+
+	/**
+	 * Returns the total count of tasks currently assigned to the specified
+	 * role. The implementation of this method should be fast.
+	 *
+	 * @param  roleId the id of the role to count the assigned, open tasks for
+	 * @param  completed the flag for whether to return the completed tasks or
+	 * 		   incomplete tasks
+	 * @return the total count of open tasks of the specified role
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
+	public int getTaskInstanceInfoCountByRole(long roleId, boolean completed)
+		throws WorkflowException;
 
 	/**
 	 * Returns the total count of open tasks currently assigned to the specified
@@ -268,33 +301,52 @@ public interface TaskInstanceManager {
 	 *		   user
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
-	public int getTaskInstanceCountByUser(long userId)
-		throws WorkflowException;
-
-	public int getTaskInstanceInfoCountByCredential(
-			UserCredential userCredential)
-		throws WorkflowException;
-
-	public int getTaskInstanceInfoCountByCredential(
-			UserCredential userCredential, boolean completed)
-		throws WorkflowException;
-
-	public int getTaskInstanceInfoCountByRole(long roleId)
-		throws WorkflowException;
-
-	public int getTaskInstanceInfoCountByRole(long roleId, boolean completed)
-		throws WorkflowException;
-
 	public int getTaskInstanceInfoCountByUser(long userId)
 		throws WorkflowException;
 
+	/**
+	 * Returns the total count of tasks currently assigned to the specified
+	 * user and only to ones directly assigned to the user, not the ones
+	 * assigned to one of its roles. The implementation of this method should be
+	 * fast.
+	 *
+	 * @param  userId the id of the user to count the directly assigned, open
+	 *		   tasks for
+	 * @param  completed the flag for whether to return the completed tasks or
+	 * 		   incomplete tasks
+	 * @return the total count of open, directly assigned tasks of the specified
+	 *		   user
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
 	public int getTaskInstanceInfoCountByUser(long userId, boolean completed)
 		throws WorkflowException;
 
+	/**
+	 * Returns the total count of open tasks currently assigned to the specified
+	 * workflow instance. The implementation of this method should be fast.
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance to return
+	 *		   tasks for
+	 * @return the total count of open, directly assigned tasks of the specified
+	 *		   user
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
 	public int getTaskInstanceInfoCountByWorkflowInstance(
 			long workflowInstanceId)
 		throws WorkflowException;
 
+	/**
+	 * Returns the total count of open tasks currently assigned to the specified
+	 * workflow instance. The implementation of this method should be fast.
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance to return
+	 *		   tasks for
+	 * @param  completed the flag for whether to return the completed tasks or
+	 * 		   incomplete tasks
+	 * @return the total count of open, directly assigned tasks of the specified
+	 *		   user
+	 * @throws WorkflowException is thrown if the querying failed
+	 */
 	public int getTaskInstanceInfoCountByWorkflowInstance(
 			long workflowInstanceId, boolean completed)
 		throws WorkflowException;
