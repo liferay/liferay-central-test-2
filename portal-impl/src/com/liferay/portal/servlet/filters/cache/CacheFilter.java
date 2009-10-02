@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.cache;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -39,6 +40,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -249,6 +251,25 @@ public class CacheFilter extends BasePortalFilter {
 		}
 	}
 
+	protected boolean isCacheableColumn(String columnSettings, long companyId)
+		throws SystemException {
+
+		String[] portlets = StringUtil.split(columnSettings);
+
+		for (int j = 0; j < portlets.length; j++) {
+			String portletId = StringUtil.extractFirst(
+				portlets[j], PortletConstants.INSTANCE_SEPARATOR);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, portletId);
+
+			if (!portlet.isLayoutCacheable()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	protected boolean isCacheableData(
 		long companyId, HttpServletRequest request) {
 
@@ -278,16 +299,22 @@ public class CacheFilter extends BasePortalFilter {
 
 				String settings = props.getProperty(columnId, StringPool.BLANK);
 
-				String[] portlets = StringUtil.split(settings);
+				if (!isCacheableColumn(settings, companyId)) {
+					return false;
+				}
+			}
 
-				for (int j = 0; j < portlets.length; j++) {
-					String portletId = StringUtil.extractFirst(
-						portlets[j], PortletConstants.INSTANCE_SEPARATOR);
+			if (props.containsKey(
+					LayoutTypePortletConstants.NESTED_COLUMN_IDS)) {
 
-					Portlet portlet = PortletLocalServiceUtil.getPortletById(
-						companyId, portletId);
+				String columnIds[] = StringUtil.split(
+					props.get(LayoutTypePortletConstants.NESTED_COLUMN_IDS));
 
-					if (!portlet.isLayoutCacheable()) {
+				for (String columnId : columnIds) {
+					String settings = props.getProperty(
+						columnId, StringPool.BLANK);
+
+					if (!isCacheableColumn(settings, companyId)) {
 						return false;
 					}
 				}
