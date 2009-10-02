@@ -2275,6 +2275,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>servletContext</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>stringKey</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

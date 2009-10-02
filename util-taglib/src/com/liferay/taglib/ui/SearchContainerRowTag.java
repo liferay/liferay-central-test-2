@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.log.Log;
@@ -38,6 +39,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.jsp.JspException;
 
 /**
@@ -247,6 +249,10 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		_rowVar = rowVar;
 	}
 
+	public void setServletContext(ServletContext servletContext) {
+		_servletContext = servletContext;
+	}
+
 	public void setStringKey(boolean stringKey) {
 		_stringKey = stringKey;
 	}
@@ -256,12 +262,21 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 
 		if (isEscapedModel()) {
 			try {
-				Thread currentThread = Thread.currentThread();
+				ClassLoader classLoader = null;
 
-				ClassLoader contextClassLoader =
-					currentThread.getContextClassLoader();
+				if (_servletContext != null) {
+					classLoader = (ClassLoader)PortletBeanLocatorUtil.locate(
+						_servletContext.getServletContextName(),
+						"portletClassLoader");
+				}
 
-				Class<?> classObj = contextClassLoader.loadClass(_className);
+				if (classLoader == null) {
+					Thread currentThread = Thread.currentThread();
+
+					classLoader = currentThread.getContextClassLoader();
+				}
+
+				Class<?> classObj = classLoader.loadClass(_className);
 
 				Method method = classObj.getMethod(
 					"toEscapedModel", new Class[0]);
@@ -316,6 +331,7 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	private int _rowIndex;
 	private String _rowVar = DEFAULT_ROW_VAR;
 	private ResultRow _row;
+	private ServletContext _servletContext;
 	private boolean _stringKey = false;
 
 }
