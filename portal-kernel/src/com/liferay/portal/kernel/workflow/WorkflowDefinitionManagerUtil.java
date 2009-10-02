@@ -57,7 +57,7 @@ public class WorkflowDefinitionManagerUtil {
 	/**
 	 * @see WorkflowDefinitionManager#getWorkflowDefinitionCount()
 	 */
-	public static int getWorkflowDefinitionCount() {
+	public static int getWorkflowDefinitionCount() throws WorkflowException {
 		return _workflowDefinitionManager.getWorkflowDefinitionCount();
 	}
 
@@ -65,7 +65,7 @@ public class WorkflowDefinitionManagerUtil {
 	 * @see WorkflowDefinitionManager#getWorkflowDefinitionCount(String)
 	 */
 	public static int getWorkflowDefinitionCount(
-		String workflowDefinitionName) {
+		String workflowDefinitionName) throws WorkflowException {
 
 		return _workflowDefinitionManager.getWorkflowDefinitionCount(
 			workflowDefinitionName);

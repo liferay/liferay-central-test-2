@@ -216,17 +216,16 @@ public interface WorkflowInstanceManager {
 		throws WorkflowException;
 
 	public int getWorkflowInstanceInfoCount(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean retrieveChildrenInfo)
+			String workflowDefinitionName, Integer workflowDefinitionVersion)
 		throws WorkflowException;
 
 	public int getWorkflowInstanceInfoCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished, boolean retrieveChildrenInfo)
+			boolean finished)
 		throws WorkflowException;
 
 	public int getWorkflowInstanceInfoCount(
-			String relationType, long relationId, boolean retrieveChildrenInfo)
+			String relationType, long relationId)
 		throws WorkflowException;
 
 	/**

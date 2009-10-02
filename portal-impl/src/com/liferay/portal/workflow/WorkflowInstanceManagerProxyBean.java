@@ -78,21 +78,20 @@ public class WorkflowInstanceManagerProxyBean
 	}
 
 	public int getWorkflowInstanceInfoCount(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean retrieveChildrenInfo) {
+		String workflowDefinitionName, Integer workflowDefinitionVersion) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public int getWorkflowInstanceInfoCount(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean finished, boolean retrieveChildrenInfo) {
+		boolean finished) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public int getWorkflowInstanceInfoCount(
-		String relationType, long relationId, boolean retrieveChildrenInfo) {
+		String relationType, long relationId) {
 
 		throw new UnsupportedOperationException();
 	}
