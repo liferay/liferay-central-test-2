@@ -741,7 +741,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 			String[] newValues = dynamicRequest.getParameterValues(name);
 
-			if (Validator.isNotNull(newValues)) {
+			if (newValues != null) {
 				values = ArrayUtil.append(newValues, values);
 			}
 
