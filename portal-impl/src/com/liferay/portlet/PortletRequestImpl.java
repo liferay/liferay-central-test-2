@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletSession;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -736,6 +737,12 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 			if ((values) == null || (values.length == 0)) {
 				continue;
+			}
+
+			String[] newValues = dynamicRequest.getParameterValues(name);
+
+			if (Validator.isNotNull(newValues)) {
+				values = ArrayUtil.append(newValues, values);
 			}
 
 			dynamicRequest.setParameterValues(name, values);
