@@ -105,35 +105,6 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountByCredential(UserCredential)
-	 */
-	public static int getTaskInstanceCountByCredential(
-			UserCredential userCredential)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceCountByCredential(
-			userCredential);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountByRole(long)
-	 */
-	public static int getTaskInstanceCountByRole(long roleId)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceCountByRole(roleId);
-	}
-
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountByUser(long)
-	 */
-	public static int getTaskInstanceCountByUser(long userId)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceCountByUser(userId);
-	}
-
-	/**
 	 * @see TaskInstanceManager#getTaskInstanceInfoCountByCredential(
 	 *		UserCredential)
 	 */

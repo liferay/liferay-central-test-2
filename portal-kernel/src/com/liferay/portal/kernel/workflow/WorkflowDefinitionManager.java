@@ -83,8 +83,7 @@ public interface WorkflowDefinitionManager {
 			@CallingUserId long callingUserId)
 		throws WorkflowException;
 
-	public int getWorkflowDefinitionCount()
-		throws WorkflowException;
+	public int getWorkflowDefinitionCount() throws WorkflowException;
 
 	public int getWorkflowDefinitionCount(String workflowDefinitionName)
 		throws WorkflowException;

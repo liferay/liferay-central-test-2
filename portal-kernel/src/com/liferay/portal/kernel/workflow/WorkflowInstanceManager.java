@@ -231,35 +231,6 @@ public interface WorkflowInstanceManager {
 
 	/**
 	 * Returns a list of workflow instance information for a given workflow
-	 * definition and optionally a certain version of it. By default, it only
-	 * returns open workflow instances. If ended ones should be returned as well
-	 * or even exclusively, the method {@link #getWorkflowInstanceInfos(String,
-	 * Integer, boolean)} should be used instead.
-	 *
-	 * @param  workflowDefinitionName the name of the workflow definition to
-	 *		   return instance information for
-	 * @param  workflowDefinitionVersion the optional version of the definition,
-	 *		   if querying for a particular version, otherwise <code>null</code>
-	 *		   has to be provided
-	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *		   children's information should be returned as well or if only the
-	 *		   root workflow instance should be returned, without the children
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
-	 * @return a list of workflow instance information for the given definition,
-	 *		   will return an empty list rather than <code>null</code> if no
-	 *		   instances found
-	 * @throws WorkflowException is thrown, if querying failed
-	 */
-	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean retrieveChildrenInfo, int start, int end,
-			OrderByComparator orderByComparator)
-		throws WorkflowException;
-
-	/**
-	 * Returns a list of workflow instance information for a given workflow
 	 * definition and optionally a certain version of it. If the parameter
 	 * <code>finished</code> is provided (not <code>null</code>), only
 	 * appropriate instances are returned.
@@ -286,6 +257,35 @@ public interface WorkflowInstanceManager {
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean finished, boolean retrieveChildrenInfo, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	/**
+	 * Returns a list of workflow instance information for a given workflow
+	 * definition and optionally a certain version of it. By default, it only
+	 * returns open workflow instances. If ended ones should be returned as well
+	 * or even exclusively, the method {@link #getWorkflowInstanceInfos(String,
+	 * Integer, boolean)} should be used instead.
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   return instance information for
+	 * @param  workflowDefinitionVersion the optional version of the definition,
+	 *		   if querying for a particular version, otherwise <code>null</code>
+	 *		   has to be provided
+	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
+	 *		   children's information should be returned as well or if only the
+	 *		   root workflow instance should be returned, without the children
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
+	 * @return a list of workflow instance information for the given definition,
+	 *		   will return an empty list rather than <code>null</code> if no
+	 *		   instances found
+	 * @throws WorkflowException is thrown, if querying failed
+	 */
+	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			boolean retrieveChildrenInfo, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
