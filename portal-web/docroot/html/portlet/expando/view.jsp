@@ -30,13 +30,13 @@ PortletURL portletURL = renderResponse.createRenderURL();
 List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("resource");
-headerNames.add("custom-attributes");
+headerNames.add("custom-fields");
 
 List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 %>
 
 <liferay-ui:search-container
-	emptyResultsMessage='<%= LanguageUtil.get(pageContext, "custom-attributes-are-not-enabled-for-any-resource") %>'
+	emptyResultsMessage='<%= LanguageUtil.get(pageContext, "custom-fields-are-not-enabled-for-any-resource") %>'
 	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results
@@ -82,7 +82,7 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 		<liferay-ui:search-container-column-text
 			buffer="buffer"
 			href="<%= rowURL %>"
-			name="custom-attributes"
+			name="custom-fields"
 		>
 
 			<%

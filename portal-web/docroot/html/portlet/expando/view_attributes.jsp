@@ -44,13 +44,13 @@ portletURL.setParameter("modelResource", modelResource);
 </script>
 
 <div>
-	<liferay-ui:message key="edit-custom-attributes-for" />: <aui:a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></aui:a>
+	<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></aui:a>
 </div>
 
 <br />
 
 <liferay-ui:tabs
-	names="custom-attributes"
+	names="custom-fields"
 	backURL="<%= redirect %>"
 />
 
@@ -61,7 +61,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 %>
 
 <liferay-ui:search-container
-	emptyResultsMessage='<%= LanguageUtil.format(pageContext, "no-custom-attributes-are-defined-for-x", modelResourceName) %>'
+	emptyResultsMessage='<%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %>'
 	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results
@@ -203,7 +203,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_EXPANDO) %>">
 		<aui:button-row>
-			<aui:button onClick='<%= renderResponse.getNamespace() + "addExpando();" %>' value="add-custom-attribute" />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addExpando();" %>' value="add-custom-field" />
 		</aui:button-row>
 
 		<br />

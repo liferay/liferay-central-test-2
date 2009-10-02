@@ -64,6 +64,6 @@ for (String attributeName : attributeNames) {
 
 <c:if test="<%= attributeNames.isEmpty() %>">
 	<div class="aui-ctrl-holder">
-		<label><%= LanguageUtil.format(pageContext, "no-custom-attributes-are-defined-for-x", modelResourceName) %></label>
+		<label><%= LanguageUtil.format(pageContext, "no-custom-fields-are-defined-for-x", modelResourceName) %></label>
 	</div>
 </c:if>
