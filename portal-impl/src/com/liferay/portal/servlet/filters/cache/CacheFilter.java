@@ -251,14 +251,13 @@ public class CacheFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isCacheableColumn(String columnSettings, long companyId)
+	protected boolean isCacheableColumn(long companyId, String columnSettings)
 		throws SystemException {
 
-		String[] portlets = StringUtil.split(columnSettings);
+		String[] portletIds = StringUtil.split(columnSettings);
 
-		for (int j = 0; j < portlets.length; j++) {
-			String portletId = StringUtil.extractFirst(
-				portlets[j], PortletConstants.INSTANCE_SEPARATOR);
+		for (String portletId : portletIds) {
+			portletId = PortletConstants.getRootPortletId(portletId);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				companyId, portletId);
@@ -267,6 +266,7 @@ public class CacheFilter extends BasePortalFilter {
 				return false;
 			}
 		}
+
 		return true;
 	}
 
@@ -292,29 +292,31 @@ public class CacheFilter extends BasePortalFilter {
 				return false;
 			}
 
-			UnicodeProperties props = layout.getTypeSettingsProperties();
+			UnicodeProperties properties = layout.getTypeSettingsProperties();
 
 			for (int i = 0; i < 10; i++) {
 				String columnId = "column-" + i;
 
-				String settings = props.getProperty(columnId, StringPool.BLANK);
+				String settings = properties.getProperty(
+					columnId, StringPool.BLANK);
 
-				if (!isCacheableColumn(settings, companyId)) {
+				if (!isCacheableColumn(companyId, settings)) {
 					return false;
 				}
 			}
 
-			if (props.containsKey(
+			if (properties.containsKey(
 					LayoutTypePortletConstants.NESTED_COLUMN_IDS)) {
 
-				String columnIds[] = StringUtil.split(
-					props.get(LayoutTypePortletConstants.NESTED_COLUMN_IDS));
+				String[] columnIds = StringUtil.split(
+					properties.get(
+						LayoutTypePortletConstants.NESTED_COLUMN_IDS));
 
 				for (String columnId : columnIds) {
-					String settings = props.getProperty(
+					String settings = properties.getProperty(
 						columnId, StringPool.BLANK);
 
-					if (!isCacheableColumn(settings, companyId)) {
+					if (!isCacheableColumn(companyId, settings)) {
 						return false;
 					}
 				}
