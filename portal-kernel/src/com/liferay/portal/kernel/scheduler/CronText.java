@@ -101,7 +101,7 @@ public class CronText {
 			dayOfWeek = StringPool.QUESTION;
 		}
 		else if (_frequency == CronText.MINUTELY_FREQUENCY) {
-			minute += StringPool.FORWARD_SLASH + _interval;
+			minute = StringPool.STAR + StringPool.FORWARD_SLASH + _interval;
 			hour = StringPool.STAR;
 			dayOfMonth = StringPool.STAR;
 			month = StringPool.STAR;
