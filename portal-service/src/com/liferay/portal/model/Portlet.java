@@ -212,6 +212,13 @@ public interface Portlet extends PortletModel {
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstances();
 
+	public java.util.List<String> getCustomAttributesDisplayClasses();
+
+	public void setCustomAttributesDisplayClasses(
+		java.util.List<String> customAttributesDisplayClasses);
+
+	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplayInstances();
+
 	public java.lang.String getDefaultPreferences();
 
 	public void setDefaultPreferences(java.lang.String defaultPreferences);

@@ -124,6 +124,10 @@ public class PortletLocalServiceUtil {
 		return getService().getAssetRendererFactories();
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplays() {
+		return getService().getCustomAttributesDisplays();
+	}
+
 	public static com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException {
 		return getService().getEARDisplay(xml);

@@ -2575,6 +2575,7 @@
 			<transient name="controlPanelEntryClass" />
 			<transient name="controlPanelEntryWeight" />
 			<transient name="cssClassWrapper" />
+			<transient name="customAttributesDisplayClasses" />
 			<transient name="defaultPluginSetting" />
 			<transient name="defaultPreferences" />
 			<transient name="displayName" />

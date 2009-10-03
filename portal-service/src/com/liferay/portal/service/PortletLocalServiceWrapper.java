@@ -122,6 +122,10 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		return _portletLocalService.getAssetRendererFactories();
 	}
 
+	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplays() {
+		return _portletLocalService.getCustomAttributesDisplays();
+	}
+
 	public com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException {
 		return _portletLocalService.getEARDisplay(xml);

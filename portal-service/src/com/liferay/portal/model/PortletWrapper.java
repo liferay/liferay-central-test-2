@@ -473,6 +473,19 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getAssetRendererFactoryInstances();
 	}
 
+	public java.util.List<String> getCustomAttributesDisplayClasses() {
+		return _portlet.getCustomAttributesDisplayClasses();
+	}
+
+	public void setCustomAttributesDisplayClasses(
+		java.util.List<String> customAttributesDisplayClasses) {
+		_portlet.setCustomAttributesDisplayClasses(customAttributesDisplayClasses);
+	}
+
+	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplayInstances() {
+		return _portlet.getCustomAttributesDisplayInstances();
+	}
+
 	public java.lang.String getDefaultPreferences() {
 		return _portlet.getDefaultPreferences();
 	}
