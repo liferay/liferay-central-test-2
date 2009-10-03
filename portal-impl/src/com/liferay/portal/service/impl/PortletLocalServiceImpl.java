@@ -69,6 +69,7 @@ import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
+import com.liferay.portlet.expando.model.CustomAttributesDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.File;
@@ -190,6 +191,33 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		return assetRendererFactories;
+	}
+
+	public List<CustomAttributesDisplay> getCustomAttributesDisplays() {
+		List<CustomAttributesDisplay> customAttributesDisplays =
+			new ArrayList<CustomAttributesDisplay>(
+				_customAttributesDisplayPortlets.size());
+
+		Iterator<Map.Entry<String, Portlet>> itr =
+			_customAttributesDisplayPortlets.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, Portlet> entry = itr.next();
+
+			Portlet portlet = entry.getValue();
+
+			List<CustomAttributesDisplay> portletCustomAttributesDisplays =
+				portlet.getCustomAttributesDisplayInstances();
+
+			if ((portletCustomAttributesDisplays != null) &&
+				(!portletCustomAttributesDisplays.isEmpty())) {
+
+				customAttributesDisplays.addAll(
+					portletCustomAttributesDisplays);
+			}
+		}
+
+		return customAttributesDisplays;
 	}
 
 	public PortletCategory getEARDisplay(String xml) throws SystemException {
@@ -1131,6 +1159,29 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					_assetRendererFactoryPortlets.put(portletId, portletModel);
 				}
 
+				List<String> customAttributesDisplayClasses =
+					portletModel.getCustomAttributesDisplayClasses();
+
+				Iterator<Element> itr3 = portlet.elements(
+					"custom-attributes-display").iterator();
+
+				while (itr3.hasNext()) {
+					Element customAttributesDisplayClassEl = itr3.next();
+
+					customAttributesDisplayClasses.add(
+						customAttributesDisplayClassEl.getText());
+				}
+
+				if (portletModel.getCustomAttributesDisplayClasses().
+					isEmpty()) {
+
+					_customAttributesDisplayPortlets.remove(portletId);
+				}
+				else {
+					_customAttributesDisplayPortlets.put(
+						portletId, portletModel);
+				}
+
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));
@@ -1193,10 +1244,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> headerPortalCssList =
 					portletModel.getHeaderPortalCss();
 
-				itr2 = portlet.elements("header-portal-css").iterator();
+				itr3 = portlet.elements("header-portal-css").iterator();
 
-				while (itr2.hasNext()) {
-					Element headerPortalCssEl = itr2.next();
+				while (itr3.hasNext()) {
+					Element headerPortalCssEl = itr3.next();
 
 					headerPortalCssList.add(headerPortalCssEl.getText());
 				}
@@ -1209,10 +1260,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				list.addAll(portlet.elements("header-css"));
 				list.addAll(portlet.elements("header-portlet-css"));
 
-				itr2 = list.iterator();
+				itr3 = list.iterator();
 
-				while (itr2.hasNext()) {
-					Element headerPortletCssEl = itr2.next();
+				while (itr3.hasNext()) {
+					Element headerPortletCssEl = itr3.next();
 
 					headerPortletCssList.add(headerPortletCssEl.getText());
 				}
@@ -1220,10 +1271,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> headerPortalJavaScriptList =
 					portletModel.getHeaderPortalJavaScript();
 
-				itr2 = portlet.elements("header-portal-javascript").iterator();
+				itr3 = portlet.elements("header-portal-javascript").iterator();
 
-				while (itr2.hasNext()) {
-					Element headerPortalJavaScriptEl = itr2.next();
+				while (itr3.hasNext()) {
+					Element headerPortalJavaScriptEl = itr3.next();
 
 					headerPortalJavaScriptList.add(
 						headerPortalJavaScriptEl.getText());
@@ -1237,10 +1288,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				list.addAll(portlet.elements("header-javascript"));
 				list.addAll(portlet.elements("header-portlet-javascript"));
 
-				itr2 = list.iterator();
+				itr3 = list.iterator();
 
-				while (itr2.hasNext()) {
-					Element headerPortletJavaScriptEl = itr2.next();
+				while (itr3.hasNext()) {
+					Element headerPortletJavaScriptEl = itr3.next();
 
 					headerPortletJavaScriptList.add(
 						headerPortletJavaScriptEl.getText());
@@ -1249,10 +1300,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> footerPortalCssList =
 					portletModel.getFooterPortalCss();
 
-				itr2 = portlet.elements("footer-portal-css").iterator();
+				itr3 = portlet.elements("footer-portal-css").iterator();
 
-				while (itr2.hasNext()) {
-					Element footerPortalCssEl = itr2.next();
+				while (itr3.hasNext()) {
+					Element footerPortalCssEl = itr3.next();
 
 					footerPortalCssList.add(footerPortalCssEl.getText());
 				}
@@ -1260,10 +1311,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> footerPortletCssList =
 					portletModel.getFooterPortletCss();
 
-				itr2 = portlet.elements("footer-portlet-css").iterator();
+				itr3 = portlet.elements("footer-portlet-css").iterator();
 
-				while (itr2.hasNext()) {
-					Element footerPortletCssEl = itr2.next();
+				while (itr3.hasNext()) {
+					Element footerPortletCssEl = itr3.next();
 
 					footerPortletCssList.add(footerPortletCssEl.getText());
 				}
@@ -1271,10 +1322,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> footerPortalJavaScriptList =
 					portletModel.getFooterPortalJavaScript();
 
-				itr2 = portlet.elements("footer-portal-javascript").iterator();
+				itr3 = portlet.elements("footer-portal-javascript").iterator();
 
-				while (itr2.hasNext()) {
-					Element footerPortalJavaScriptEl = itr2.next();
+				while (itr3.hasNext()) {
+					Element footerPortalJavaScriptEl = itr3.next();
 
 					footerPortalJavaScriptList.add(
 						footerPortalJavaScriptEl.getText());
@@ -1283,10 +1334,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> footerPortletJavaScriptList =
 					portletModel.getFooterPortletJavaScript();
 
-				itr2 = portlet.elements("footer-portlet-javascript").iterator();
+				itr3 = portlet.elements("footer-portlet-javascript").iterator();
 
-				while (itr2.hasNext()) {
-					Element footerPortletJavaScriptEl = itr2.next();
+				while (itr3.hasNext()) {
+					Element footerPortletJavaScriptEl = itr3.next();
 
 					footerPortletJavaScriptList.add(
 						footerPortletJavaScriptEl.getText());
@@ -1894,6 +1945,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private static Map<String, String> _portletIdsByStrutsPath =
 		new ConcurrentHashMap<String, String>();
 	private static Map<String, Portlet> _assetRendererFactoryPortlets =
+		new ConcurrentHashMap<String, Portlet>();
+	private static Map<String, Portlet> _customAttributesDisplayPortlets =
 		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =
 		new ConcurrentHashMap<String, Portlet>();

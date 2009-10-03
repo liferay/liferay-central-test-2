@@ -24,12 +24,12 @@ portlet-layout-listener-class?, poller-processor-class?,
 pop-message-listener-class?, social-activity-interpreter-class?,
 social-request-interpreter-class?, webdav-storage-token?, webdav-storage-class?,
 control-panel-entry-category?, control-panel-entry-weight?,
-control-panel-entry-class?, asset-renderer-factory*, preferences-company-wide?,
-preferences-unique-per-layout?, preferences-owned-by-group?,
-use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
-action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
-pop-up-print?, layout-cacheable?, instanceable?, scopeable?,
-user-principal-strategy?, private-request-attributes?,
+control-panel-entry-class?, asset-renderer-factory*, custom-attributes-display*,
+preferences-company-wide?, preferences-unique-per-layout?,
+preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
+show-portlet-inactive?, action-url-redirect?, restore-current-view?,
+maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
+scopeable?, user-principal-strategy?, private-request-attributes?,
 private-session-attributes?, render-weight?, ajaxable?, header-portal-css*,
 header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
 footer-portal-css*, footer-portlet-css*, footer-portal-javascript*,
@@ -286,6 +286,17 @@ See:
 http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/asset/model/AssetRendererFactory.html
 -->
 <!ELEMENT asset-renderer-factory (#PCDATA)>
+
+<!--
+The custom-attributes-display value must be a class that extends
+com.liferay.portlet.expando.model.CustomAttributesDisplay and is called by the
+custom fields administration UI.
+
+See:
+
+http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/expando/model/CustomAttributesDisplay.html
+-->
+<!ELEMENT custom-attributes-display (#PCDATA)>
 
 <!--
 Set the preferences-company-wide value to true if the preferences for the

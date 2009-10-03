@@ -86,6 +86,7 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
+import com.liferay.portlet.expando.model.CustomAttributesDisplay;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
@@ -643,6 +644,33 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			assetRendererFactoryInstances.add(assetRendererFactoryInstance);
 		}
 
+		List<CustomAttributesDisplay> customAttributesDisplayInstances =
+			new ArrayList<CustomAttributesDisplay>();
+
+		for (String customAttributesDisplayClass :
+				portlet.getCustomAttributesDisplayClasses()) {
+
+			CustomAttributesDisplay customAttributesDisplayInstance =
+				(CustomAttributesDisplay)portletClassLoader.loadClass(
+					customAttributesDisplayClass).newInstance();
+
+			customAttributesDisplayInstance =
+				(CustomAttributesDisplay)Proxy.newProxyInstance(
+					portletClassLoader,
+				new Class[] {CustomAttributesDisplay.class},
+					new ContextClassLoaderBeanHandler(
+						customAttributesDisplayInstance, portletClassLoader));
+
+			customAttributesDisplayInstance.setClassNameId(
+				PortalUtil.getClassNameId(
+					customAttributesDisplayInstance.getClassName()));
+			customAttributesDisplayInstance.setPortletId(
+				portlet.getPortletId());
+
+			customAttributesDisplayInstances.add(
+				customAttributesDisplayInstance);
+		}
+
 		PreferencesValidator preferencesValidatorInstance = null;
 
 		if (Validator.isNotNull(portlet.getPreferencesValidator())) {
@@ -694,8 +722,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			pollerProcessorInstance, popMessageListenerInstance,
 			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
 			webDAVStorageInstance, controlPanelEntryInstance,
-			assetRendererFactoryInstances, preferencesValidatorInstance,
-			resourceBundles);
+			assetRendererFactoryInstances, customAttributesDisplayInstances,
+			preferencesValidatorInstance, resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 

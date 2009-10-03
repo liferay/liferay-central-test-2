@@ -62,6 +62,7 @@ import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
+import com.liferay.portlet.expando.model.CustomAttributesDisplay;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
@@ -102,6 +103,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setStrutsPath(portletId);
 		setActive(true);
 		_assetRendererFactoryClasses = new ArrayList<String>();
+		_customAttributesDisplayClasses = new ArrayList<String>();
 		_headerPortalCss = new ArrayList<String>();
 		_headerPortletCss = new ArrayList<String>();
 		_headerPortalJavaScript = new ArrayList<String>();
@@ -139,7 +141,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String controlPanelEntryCategory,
 		double controlPanelEntryWeight, String controlPanelClass,
-		List<String> assetRendererFactoryClasses, String defaultPreferences,
+		List<String> assetRendererFactoryClasses,
+		List<String> customAttributesDisplayClasses, String defaultPreferences,
 		String preferencesValidator, boolean preferencesCompanyWide,
 		boolean preferencesUniquePerLayout, boolean preferencesOwnedByGroup,
 		boolean useDefaultTemplate, boolean showPortletAccessDenied,
@@ -195,6 +198,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_controlPanelEntryWeight = controlPanelEntryWeight;
 		_controlPanelEntryClass = controlPanelClass;
 		_assetRendererFactoryClasses = assetRendererFactoryClasses;
+		_customAttributesDisplayClasses = customAttributesDisplayClasses;
 		_defaultPreferences = defaultPreferences;
 		_preferencesValidator = preferencesValidator;
 		_preferencesCompanyWide = preferencesCompanyWide;
@@ -1162,6 +1166,69 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		return assetRendererFactoryInstances;
+	}
+
+	/**
+	 * Gets the names of the classes that represent custom attribute displays
+	 * associated to the portlet.
+	 *
+	 * @return the names of the classes that represent asset types associated to
+	 *		   the portlet
+	 */
+	public List<String> getCustomAttributesDisplayClasses() {
+		return _customAttributesDisplayClasses;
+	}
+
+	/**
+	 * Sets the name of the classes that represent custom attribute displays
+	 * associated to the portlet.
+	 *
+	 * @param customAttributesDisplayClasses the names of the classes that
+	 *		  represent custom attribute displays associated to the portlet
+	 */
+	public void setCustomAttributesDisplayClasses(
+		List<String> customAttributesDisplayClasses) {
+
+		_customAttributesDisplayClasses = customAttributesDisplayClasses;
+	}
+
+	/**
+	 * Gets the custom attribute display instances of the portlet.
+	 *
+	 * @return the custom attribute display instances of the portlet.
+	 */
+	public List<CustomAttributesDisplay> getCustomAttributesDisplayInstances() {
+		if (getCustomAttributesDisplayClasses().isEmpty()) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getCustomAttributesDisplayInstances();
+		}
+
+		List<CustomAttributesDisplay> customAttributesDisplayInstances =
+			new ArrayList<CustomAttributesDisplay>();
+
+		for (String customAttributesDisplayClass :
+				getCustomAttributesDisplayClasses()) {
+
+			CustomAttributesDisplay customAttributesDisplayInstance =
+				(CustomAttributesDisplay)InstancePool.get(
+					customAttributesDisplayClass);
+
+			customAttributesDisplayInstance.setClassNameId(
+				PortalUtil.getClassNameId(
+					customAttributesDisplayInstance.getClassName()));
+			customAttributesDisplayInstance.setPortletId(getPortletId());
+
+			customAttributesDisplayInstances.add(
+				customAttributesDisplayInstance);
+		}
+
+		return customAttributesDisplayInstances;
 	}
 
 	/**
@@ -2873,7 +2940,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getControlPanelEntryCategory(),
 			getControlPanelEntryWeight(), getControlPanelEntryClass(),
-			getAssetRendererFactoryClasses(), getDefaultPreferences(),
+			getAssetRendererFactoryClasses(),
+			getCustomAttributesDisplayClasses(), getDefaultPreferences(),
 			getPreferencesValidator(), isPreferencesCompanyWide(),
 			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
 			isUseDefaultTemplate(), isShowPortletAccessDenied(),
@@ -3099,6 +3167,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * portlet.
 	 */
 	private List<String> _assetRendererFactoryClasses;
+
+	/**
+	 * The names of the classes that represents custom attribute displays
+	 * associated with the portlet.
+	 */
+	private List<String> _customAttributesDisplayClasses;
 
 	/**
 	 * True if the portlet uses the default template.

@@ -32,7 +32,7 @@ List<String> headerNames = new ArrayList<String>();
 headerNames.add("resource");
 headerNames.add("custom-fields");
 
-List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
+List<CustomAttributesDisplay> modelResources = PortletLocalServiceUtil.getCustomAttributesDisplays();
 %>
 
 <liferay-ui:search-container
@@ -45,20 +45,20 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 	/>
 
 	<liferay-ui:search-container-row
-		className="java.lang.String"
-		modelVar="modelResource"
+		className="com.liferay.portlet.expando.model.CustomAttributesDisplay"
+		modelVar="customAttributesDisplay"
 		stringKey="<%= true %>"
 	>
 
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
 			<portlet:param name="struts_action" value="/expando/view_attributes" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="modelResource" value="<%= modelResource %>" />
+			<portlet:param name="modelResource" value="<%= customAttributesDisplay.getClassName() %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:search-container-row-parameter
-			name="modelResource"
-			value="<%= modelResource %>"
+			name="customAttributesDisplay"
+			value="<%= customAttributesDisplay %>"
 		/>
 
 		<liferay-ui:search-container-column-text
@@ -69,11 +69,10 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 
 			<%
 			buffer.append("<img align=\"left\" border=\"0\" src=\"");
-			buffer.append(themeDisplay.getPathThemeImages());
-			buffer.append(_getIconPath(modelResource));
+			buffer.append(customAttributesDisplay.getIconPath(themeDisplay));
 			buffer.append("\" style=\"margin-right: 5px\">");
 			buffer.append("<strong>");
-			buffer.append(LanguageUtil.get(pageContext, "model.resource." + modelResource));
+			buffer.append(LanguageUtil.get(pageContext, "model.resource." + customAttributesDisplay.getClassName()));
 			buffer.append("</strong>");
 			%>
 
@@ -86,7 +85,7 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 		>
 
 			<%
-			ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(modelResource);
+			ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(customAttributesDisplay.getClassName());
 
 			List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 
@@ -123,54 +122,4 @@ private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 	WikiPage.class.getName()
 };
 
-private String _getIconPath(String modelResource) {
-	if (modelResource.equals(BlogsEntry.class.getName())) {
-		return "/common/page.png";
-	}
-	else if (modelResource.equals(BookmarksEntry.class.getName())) {
-		return "/ratings/star_hover.png";
-	}
-	else if (modelResource.equals(BookmarksFolder.class.getName())) {
-		return "/common/folder.png";
-	}
-	else if (modelResource.equals(CalEvent.class.getName())) {
-		return "/common/date.png";
-	}
-	else if (modelResource.equals(DLFileEntry.class.getName())) {
-		return "/document_library/page.png";
-	}
-	else if (modelResource.equals(DLFolder.class.getName())) {
-		return "/common/folder.png";
-	}
-	else if (modelResource.equals(IGFolder.class.getName())) {
-		return "/common/folder.png";
-	}
-	else if (modelResource.equals(IGImage.class.getName())) {
-		return "/document_library/bmp.png";
-	}
-	else if (modelResource.equals(JournalArticle.class.getName())) {
-		return "/common/history.png";
-	}
-	else if (modelResource.equals(Layout.class.getName())) {
-		return "/common/page.png";
-	}
-	else if (modelResource.equals(MBCategory.class.getName())) {
-		return "/common/folder.png";
-	}
-	else if (modelResource.equals(MBMessage.class.getName())) {
-		return "/common/conversation.png";
-	}
-	else if (modelResource.equals(Organization.class.getName())) {
-		return "/common/organization_icon.png";
-	}
-	else if (modelResource.equals(User.class.getName())) {
-		return "/common/user_icon.png";
-	}
-	else if (modelResource.equals(WikiPage.class.getName())) {
-		return "/common/pages.png";
-	}
-	else {
-		return "/common/page.png";
-	}
-}
 %>

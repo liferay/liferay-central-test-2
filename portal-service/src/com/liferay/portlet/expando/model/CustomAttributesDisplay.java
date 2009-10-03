@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,28 +19,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/expando/init.jsp" %>
+package com.liferay.portlet.expando.model;
 
-<%
-SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
+import com.liferay.portal.theme.ThemeDisplay;
 
-String redirect = searchContainer.getIteratorURL().toString();
+/**
+ * <a href="CustomAttributesDisplay.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public interface CustomAttributesDisplay {
 
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+	public String getClassName();
 
-CustomAttributesDisplay customAttributesDisplay = (CustomAttributesDisplay)row.getParameter("customAttributesDisplay");
-%>
+	public String getIconPath(ThemeDisplay themeDisplay);
 
-<liferay-ui:icon-menu>
-	<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-			<portlet:param name="struts_action" value="/expando/view_attributes" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="modelResource" value="<%= customAttributesDisplay.getClassName() %>" />
-		</portlet:renderURL>
+	public String getPortletId();
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
-	</c:if>
-</liferay-ui:icon-menu>
+	public void setClassNameId(long classNameId);
+
+	public void setPortletId(String portletId);
+
+}
