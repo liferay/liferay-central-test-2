@@ -32,7 +32,7 @@ List<String> headerNames = new ArrayList<String>();
 headerNames.add("resource");
 headerNames.add("custom-fields");
 
-List<CustomAttributesDisplay> modelResources = PortletLocalServiceUtil.getCustomAttributesDisplays();
+List<CustomAttributesDisplay> customAttributesDisplays = PortletLocalServiceUtil.getCustomAttributesDisplays();
 %>
 
 <liferay-ui:search-container
@@ -40,8 +40,8 @@ List<CustomAttributesDisplay> modelResources = PortletLocalServiceUtil.getCustom
 	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= ListUtil.subList(modelResources, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= modelResources.size() %>"
+		results="<%= ListUtil.subList(customAttributesDisplays, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= customAttributesDisplays.size() %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -49,7 +49,6 @@ List<CustomAttributesDisplay> modelResources = PortletLocalServiceUtil.getCustom
 		modelVar="customAttributesDisplay"
 		stringKey="<%= true %>"
 	>
-
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
 			<portlet:param name="struts_action" value="/expando/view_attributes" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -121,5 +120,4 @@ private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 	User.class.getName(),
 	WikiPage.class.getName()
 };
-
 %>

@@ -277,7 +277,7 @@ http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/C
 <!ELEMENT control-panel-entry-class (#PCDATA)>
 
 <!--
-The asset-renderer-factory value must be a class that extends
+The asset-renderer-factory value must be a class that implements
 com.liferay.portlet.asset.model.AssetRendererFactory and is called by the Asset
 Publisher.
 
@@ -288,7 +288,7 @@ http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/a
 <!ELEMENT asset-renderer-factory (#PCDATA)>
 
 <!--
-The custom-attributes-display value must be a class that extends
+The custom-attributes-display value must be a class that implements
 com.liferay.portlet.expando.model.CustomAttributesDisplay and is called by the
 custom fields administration UI.
 

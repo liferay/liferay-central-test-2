@@ -1133,7 +1133,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Gets the asset type instances of the portlet.
 	 *
-	 * @return the asset type instances of the portlet.
+	 * @return the asset type instances of the portlet
 	 */
 	public List<AssetRendererFactory> getAssetRendererFactoryInstances() {
 		if (getAssetRendererFactoryClasses().isEmpty()) {
@@ -1195,7 +1195,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Gets the custom attribute display instances of the portlet.
 	 *
-	 * @return the custom attribute display instances of the portlet.
+	 * @return the custom attribute display instances of the portlet
 	 */
 	public List<CustomAttributesDisplay> getCustomAttributesDisplayInstances() {
 		if (getCustomAttributesDisplayClasses().isEmpty()) {
