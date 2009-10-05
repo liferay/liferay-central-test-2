@@ -125,7 +125,6 @@ public class MulticastClientTool {
 		return argsMap;
 	}
 
-	private static final Log _log = LogFactory.getLog(
-		MulticastClientTool.class);
+	private static Log _log = LogFactory.getLog(MulticastClientTool.class);
 
 }
