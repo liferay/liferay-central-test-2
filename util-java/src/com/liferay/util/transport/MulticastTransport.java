@@ -22,14 +22,14 @@
 
 package com.liferay.util.transport;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import java.io.IOException;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MulticastTransport.java.html"><b><i>View Source</i></b></a>
@@ -121,7 +121,7 @@ public class MulticastTransport extends Thread implements Transport {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MulticastTransport.class);
+	private static Log _log = LogFactory.getLog(MulticastTransport.class);
 
 	private byte[] _inboundBuffer = new byte[4096];
 	private DatagramPacket _inboundPacket =

@@ -22,9 +22,6 @@
 
 package com.liferay.util.transport;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -32,6 +29,9 @@ import java.io.InputStream;
 import java.net.DatagramPacket;
 
 import java.util.zip.GZIPInputStream;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MulticastDatagramHandler.java.html"><b><i>View Source</i></b></a>
@@ -110,7 +110,7 @@ public class MulticastDatagramHandler implements DatagramHandler {
 		return baos.toByteArray();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static final Log _log = LogFactory.getLog(
 		MulticastDatagramHandler.class);
 
 	private boolean _gzipData;
