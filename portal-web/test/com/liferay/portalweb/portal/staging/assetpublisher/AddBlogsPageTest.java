@@ -20,26 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.staging.controlpanel;
+package com.liferay.portalweb.portal.staging.assetpublisher;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DefineContentAdministratorRolesTest.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AddBlogsPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DefineContentAdministratorRolesTest extends BaseTestCase {
-	public void testDefineContentAdministratorRoles() throws Exception {
+public class AddBlogsPageTest extends BaseTestCase {
+	public void testAddBlogsPage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Roles")) {
+				if (selenium.isElementPresent("//li[5]/a/span")) {
 					break;
 				}
 			}
@@ -49,9 +48,10 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
+		selenium.clickAt("//li[5]/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		selenium.clickAt("//a[@id='addPage']", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +59,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[7]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//input")) {
 					break;
 				}
 			}
@@ -69,28 +69,28 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[7]/td[4]/ul/li/strong/span",
+		selenium.type("//input",
+			RuntimeVariables.replace("AP Blogs Staging Test Page"));
+		selenium.clickAt("//span[2]/a/img", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=AP Blogs Staging Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=AP Blogs Staging Test Page",
 			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Content Administrator"));
-		assertTrue(selenium.isTextPresent("Add Permissions"));
 	}
 }

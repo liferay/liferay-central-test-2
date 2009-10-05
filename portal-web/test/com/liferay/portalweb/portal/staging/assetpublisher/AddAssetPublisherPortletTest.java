@@ -20,26 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.staging.controlpanel;
+package com.liferay.portalweb.portal.staging.assetpublisher;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DefineContentAdministratorRolesTest.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AddAssetPublisherPortletTest.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DefineContentAdministratorRolesTest extends BaseTestCase {
-	public void testDefineContentAdministratorRoles() throws Exception {
+public class AddAssetPublisherPortletTest extends BaseTestCase {
+	public void testAddAssetPublisherPortlet() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Roles")) {
+				if (selenium.isElementPresent(
+							"link=Asset Publisher Staging Test Page")) {
 					break;
 				}
 			}
@@ -49,9 +50,11 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Asset Publisher Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +62,8 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[7]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent(
+							"//div[@id='ContentManagement-AssetPublisher']/p/a")) {
 					break;
 				}
 			}
@@ -69,7 +73,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[7]/td[4]/ul/li/strong/span",
+		selenium.clickAt("//div[@id='ContentManagement-AssetPublisher']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -78,7 +82,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("//td[1]/div/div/div")) {
 					break;
 				}
 			}
@@ -88,9 +92,6 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Content Administrator"));
-		assertTrue(selenium.isTextPresent("Add Permissions"));
+		assertTrue(selenium.isElementPresent("//td[1]/div/div/div"));
 	}
 }

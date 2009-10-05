@@ -20,26 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.staging.controlpanel;
+package com.liferay.portalweb.portal.staging.assetpublisher;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DefineContentAdministratorRolesTest.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="DeactivateStagingTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DefineContentAdministratorRolesTest extends BaseTestCase {
-	public void testDefineContentAdministratorRoles() throws Exception {
+public class DeactivateStagingTest extends BaseTestCase {
+	public void testDeactivateStaging() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Roles")) {
+				if (selenium.isElementPresent("link=Communities")) {
 					break;
 				}
 			}
@@ -49,9 +48,14 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_134_name", RuntimeVariables.replace("Guest"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +63,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[7]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("link=Manage Pages")) {
 					break;
 				}
 			}
@@ -69,28 +73,19 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[7]/td[4]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Content Administrator"));
-		assertTrue(selenium.isTextPresent("Add Permissions"));
+		selenium.clickAt("//form/ul[1]/li[3]/span/a",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Staging", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("_134_stagingEnabled", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete the staging public and private pages[\\s\\S]$"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertFalse(selenium.isChecked("_134_stagingEnabled"));
 	}
 }

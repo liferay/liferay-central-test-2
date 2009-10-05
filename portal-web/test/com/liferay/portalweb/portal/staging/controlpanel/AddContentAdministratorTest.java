@@ -69,6 +69,7 @@ public class AddContentAdministratorTest extends BaseTestCase {
 
 		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -106,6 +107,7 @@ public class AddContentAdministratorTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("passwordLink", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -113,7 +115,7 @@ public class AddContentAdministratorTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_125_password1")) {
+				if (selenium.isVisible("_125_password1")) {
 					break;
 				}
 			}
@@ -128,6 +130,7 @@ public class AddContentAdministratorTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("rolesLink", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -135,7 +138,7 @@ public class AddContentAdministratorTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id='roles']/span/a[2]")) {
+				if (selenium.isVisible("//div[@id='roles']/span/a[2]")) {
 					break;
 				}
 			}

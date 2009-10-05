@@ -20,26 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.staging.controlpanel;
+package com.liferay.portalweb.portal.staging.assetpublisher;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DefineContentAdministratorRolesTest.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AddBlogsEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DefineContentAdministratorRolesTest extends BaseTestCase {
-	public void testDefineContentAdministratorRoles() throws Exception {
+public class AddBlogsEntryTest extends BaseTestCase {
+	public void testAddBlogsEntry() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Roles")) {
+				if (selenium.isElementPresent("link=AP Blogs Staging Test Page")) {
 					break;
 				}
 			}
@@ -49,8 +48,30 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
+		selenium.clickAt("link=AP Blogs Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("_33_addEntryButton", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_33_title")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_33_title",
+			RuntimeVariables.replace("AP Staging Entry Test"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -59,7 +80,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[7]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("_33_editor")) {
 					break;
 				}
 			}
@@ -68,9 +89,6 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		selenium.clickAt("//tr[7]/td[4]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +96,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("FCKeditor1___Frame")) {
 					break;
 				}
 			}
@@ -88,9 +106,35 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//textarea")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
+		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
+		selenium.selectFrame("//iframe");
+		selenium.type("//body",
+			RuntimeVariables.replace("This is an AP staging entry test."));
+		selenium.selectFrame("relative=top");
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Content Administrator"));
-		assertTrue(selenium.isTextPresent("Add Permissions"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace("AP Staging Entry Test"),
+			selenium.getText("//div[2]/div[1]/div[1]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"This is an AP staging entry test."), selenium.getText("//p"));
 	}
 }

@@ -20,20 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.staging.controlpanel;
+package com.liferay.portalweb.portal.staging.assetpublisher;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ControlPanelTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertEditAssetPublisherEntryTest.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ControlPanelTest extends BaseTestCase {
-	public void testControlPanel() throws Exception {
-		selenium.open("/web/guest/home");
-		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+public class AssertEditAssetPublisherEntryTest extends BaseTestCase {
+	public void testAssertEditAssetPublisherEntry() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Asset Publisher Staging Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Asset Publisher Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//img[@alt='Edit']"));
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText("//div/span/a[2]"));
 	}
 }

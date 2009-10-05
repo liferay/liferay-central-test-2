@@ -20,34 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.staging.assetpublisher;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.staging.assetpublisher.AssetPublisherTests;
-import com.liferay.portalweb.portal.staging.blogs.BlogsTests;
-import com.liferay.portalweb.portal.staging.controlpanel.ControlPanelTests;
-import com.liferay.portalweb.portal.staging.webcontentdisplay.WebContentDisplayTests;
+import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="StagingTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetPublisherTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class StagingTestSuite extends BaseTests {
+public class AssetPublisherTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(ControlPanelTests.suite());
-		testSuite.addTest(AssetPublisherTests.suite());
-		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(WebContentDisplayTests.suite());
-
-		testSuite.addTestSuite(StopSeleniumTest.class);
+		testSuite.addTestSuite(LoginTest.class);
+		testSuite.addTestSuite(AddAssetPublisherPageTest.class);
+		testSuite.addTestSuite(AddAssetPublisherPortletTest.class);
+		testSuite.addTestSuite(AddBlogsPageTest.class);
+		testSuite.addTestSuite(AddBlogsPortletTest.class);
+		testSuite.addTestSuite(AddBlogsEntryTest.class);
+		testSuite.addTestSuite(AssertEditAssetPublisherEntryTest.class);
+		testSuite.addTestSuite(ControlPanelTest.class);
+		testSuite.addTestSuite(ActivateStagingTest.class);
+		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(AssertCannotEditAssetPublisherEntryTest.class);
+		testSuite.addTestSuite(ControlPanelTest.class);
+		testSuite.addTestSuite(DeactivateStagingTest.class);
+		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(AssertEditAssetPublisherEntryTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(LogoutTest.class);
 
 		return testSuite;
 	}

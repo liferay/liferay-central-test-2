@@ -78,7 +78,7 @@ public class DefineContentPublisherRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -88,7 +88,7 @@ public class DefineContentPublisherRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[4]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Content Publisher"));
 		assertTrue(selenium.isTextPresent("Add Permissions"));
