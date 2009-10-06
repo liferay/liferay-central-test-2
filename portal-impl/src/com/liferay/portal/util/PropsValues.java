@@ -604,6 +604,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.HOT_UNDEPLOY_ON_REDEPLOY));
 
+	public static final String IFRAME_PASSWORD_PASSWORD_TOKEN_ROLE =
+		PropsUtil.get(PropsKeys.IFRAME_PASSWORD_PASSWORD_TOKEN_ROLE);
+
 	public static final int IG_IMAGE_CUSTOM_1_MAX_DIMENSION =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.IG_IMAGE_CUSTOM_1_MAX_DIMENSION));

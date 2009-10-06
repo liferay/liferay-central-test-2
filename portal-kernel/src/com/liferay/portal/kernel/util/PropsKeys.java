@@ -479,6 +479,8 @@ public interface PropsKeys {
 
 	public static final String ICQ_PASSWORD = "icq.password";
 
+	public static final String IFRAME_PASSWORD_PASSWORD_TOKEN_ROLE = "iframe.password.token.role";
+
 	public static final String IG_IMAGE_CUSTOM_1_MAX_DIMENSION = "ig.image.custom1.max.dimension";
 
 	public static final String IG_IMAGE_CUSTOM_2_MAX_DIMENSION = "ig.image.custom2.max.dimension";

@@ -24,9 +24,19 @@ package com.liferay.portlet.iframe.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
 
@@ -39,6 +49,10 @@ public class IFrameUtil {
 
 	public static String getPassword(
 		PortletRequest portletRequest, String password) {
+
+		if (!isPasswordTokenEnabled(portletRequest)) {
+			return StringPool.BLANK;
+		}
 
 		if (Validator.isNull(password) || password.equals("@password@")) {
 			password = PortalUtil.getUserPassword(portletRequest);
@@ -69,5 +83,48 @@ public class IFrameUtil {
 
 		return userName;
 	}
+
+	public static boolean isPasswordTokenEnabled(
+		PortletRequest portletRequest) {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		boolean userPrivatePages =
+			layout.getGroup().isUser() && layout.isPrivateLayout();
+
+		String roleName = PropsValues.IFRAME_PASSWORD_PASSWORD_TOKEN_ROLE;
+
+		boolean passwordTokenEnabled = true;
+
+		if (!userPrivatePages && Validator.isNotNull(roleName)) {
+
+			try {
+				Role role = RoleLocalServiceUtil.getRole(
+					themeDisplay.getCompanyId(), roleName);
+
+				if (!UserLocalServiceUtil.hasRoleUser(
+						role.getRoleId(), themeDisplay.getUserId())) {
+
+					passwordTokenEnabled = false;
+				}
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Error checking role " + roleName + ". The password " +
+							"token will be disabled");
+				}
+
+				passwordTokenEnabled = false;
+			}
+		}
+
+		return passwordTokenEnabled;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(IFrameUtil.class);
 
 }

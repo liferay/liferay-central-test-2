@@ -37,6 +37,8 @@ String htmlAttributes =
 	"scrolling=" + scrolling + "\n" +
 	"vspace=" + vspace + "\n" +
 	"width=" + width + "\n";
+
+boolean passwordTokenEnabled = IFrameUtil.isPasswordTokenEnabled(renderRequest);
 %>
 
 <style type="text/css">
@@ -140,7 +142,14 @@ String htmlAttributes =
 	<legend><liferay-ui:message key="authentication" /></legend>
 
 	<div class="portlet-msg-info" id="<portlet:namespace />currentLoginMsg">
-		<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid-and-password" />
+		<c:choose>
+			<c:when test="<%= passwordTokenEnabled %>">
+				<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid-and-password" />
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid" />
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 	<table class="lfr-table">
