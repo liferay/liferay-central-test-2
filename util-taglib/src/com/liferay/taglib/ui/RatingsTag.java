@@ -40,6 +40,8 @@ public class RatingsTag extends IncludeTag {
 		request.setAttribute("liferay-ui:ratings:className", _className);
 		request.setAttribute(
 			"liferay-ui:ratings:classPK", String.valueOf(_classPK));
+		request.setAttribute(
+			"liferay-ui:ratings:numberOfStars", String.valueOf(_numberOfStars));
 		request.setAttribute("liferay-ui:ratings:type", _type);
 		request.setAttribute("liferay-ui:ratings:url", _url);
 
@@ -52,6 +54,10 @@ public class RatingsTag extends IncludeTag {
 
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
+	}
+
+	public void setNumberOfStars(int numberOfStars) {
+		_numberOfStars = numberOfStars;
 	}
 
 	public void setType(String type) {
@@ -70,6 +76,7 @@ public class RatingsTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
+	private int _numberOfStars = 5;
 	private String _type = "stars";
 	private String _url;
 

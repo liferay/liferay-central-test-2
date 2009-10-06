@@ -35,8 +35,13 @@ String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + String
 
 String className = (String)request.getAttribute("liferay-ui:ratings:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:ratings:classPK"));
+int numberOfStars = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:ratings:numberOfStars"));
 String type = GetterUtil.getString((String)request.getAttribute("liferay-ui:ratings:type"));
 String url = (String)request.getAttribute("liferay-ui:ratings:url");
+
+if (numberOfStars < 1) {
+	numberOfStars = 1;
+}
 
 if (Validator.isNull(url)) {
 	url = themeDisplay.getPathMain() + "/ratings/rate_entry";
@@ -180,7 +185,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 										sendVoteRequest(url, score, saveCallback);
 									}
-								}
+								},
+								size: <%= numberOfStars %>
 							}
 						);
 
@@ -191,7 +197,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 								canReset: false,
 								defaultSelected: <%= stats.getAverageScore() %>,
 								disabled: true,
-								label: getLabel('<liferay-ui:message key="average" />', <%= stats.getTotalEntries() %>)
+								label: getLabel('<liferay-ui:message key="average" />', <%= stats.getTotalEntries() %>),
+								size: <%= numberOfStars %>
 							}
 						);
 
