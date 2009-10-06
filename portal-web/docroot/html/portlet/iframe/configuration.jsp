@@ -37,8 +37,6 @@ String htmlAttributes =
 	"scrolling=" + scrolling + "\n" +
 	"vspace=" + vspace + "\n" +
 	"width=" + width + "\n";
-
-boolean passwordTokenEnabled = IFrameUtil.isPasswordTokenEnabled(renderRequest);
 %>
 
 <style type="text/css">
@@ -143,7 +141,7 @@ boolean passwordTokenEnabled = IFrameUtil.isPasswordTokenEnabled(renderRequest);
 
 	<div class="portlet-msg-info" id="<portlet:namespace />currentLoginMsg">
 		<c:choose>
-			<c:when test="<%= passwordTokenEnabled %>">
+			<c:when test="<%= IFrameUtil.isPasswordTokenEnabled(renderRequest) %>">
 				<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid-and-password" />
 			</c:when>
 			<c:otherwise>

@@ -87,42 +87,40 @@ public class IFrameUtil {
 	public static boolean isPasswordTokenEnabled(
 		PortletRequest portletRequest) {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
-		boolean userPrivatePages =
-			layout.getGroup().isUser() && layout.isPrivateLayout();
-
 		String roleName = PropsValues.IFRAME_PASSWORD_PASSWORD_TOKEN_ROLE;
 
-		boolean passwordTokenEnabled = true;
+		if (Validator.isNull(roleName)) {
+			return true;
+		}
 
-		if (!userPrivatePages && Validator.isNotNull(roleName)) {
+		if (!layout.isPrivateLayout() || !layout.getGroup().isUser()) {
+			return true;
+		}
 
-			try {
-				Role role = RoleLocalServiceUtil.getRole(
-					themeDisplay.getCompanyId(), roleName);
+		try {
+			Role role = RoleLocalServiceUtil.getRole(
+				themeDisplay.getCompanyId(), roleName);
 
-				if (!UserLocalServiceUtil.hasRoleUser(
-						role.getRoleId(), themeDisplay.getUserId())) {
+			if (UserLocalServiceUtil.hasRoleUser(
+					role.getRoleId(), themeDisplay.getUserId())) {
 
-					passwordTokenEnabled = false;
-				}
+				return true;
 			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Error checking role " + roleName + ". The password " +
-							"token will be disabled");
-				}
-
-				passwordTokenEnabled = false;
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Error getting role " + roleName + ". The password token " +
+						"will be disabled.");
 			}
 		}
 
-		return passwordTokenEnabled;
+		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(IFrameUtil.class);
