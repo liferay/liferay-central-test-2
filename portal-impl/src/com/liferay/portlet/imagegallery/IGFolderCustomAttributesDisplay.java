@@ -24,7 +24,6 @@ package com.liferay.portlet.imagegallery;
 
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.BaseCustomAttributesDisplay;
-import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 
 /**
