@@ -243,7 +243,11 @@ request.setAttribute("view.jsp-folderId", folderId);
 			>
 
 				<%
-				String rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
+				String rowHREF = null;
+				
+				if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW)) {
+					rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
+				}
 				%>
 
 				<%@ include file="/html/portlet/document_library/file_entry_columns.jspf" %>
