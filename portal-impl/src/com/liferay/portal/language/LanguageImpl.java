@@ -472,6 +472,10 @@ public class LanguageImpl implements Language {
 		return _getInstance()._localesSet.contains(locale);
 	}
 
+	public boolean isDuplicateLanguageCode(String languageCode) {
+		return _getInstance()._duplicateLanguageCodes.contains(languageCode);
+	}
+
 	public void resetAvailableLocales(long companyId) {
 		 _resetAvailableLocales(companyId);
 	}
@@ -523,10 +527,11 @@ public class LanguageImpl implements Language {
 			}
 		}
 
-		_locales = new Locale[localesArray.length];
-		_localesSet = new HashSet<Locale>(localesArray.length);
-		_localesMap = new HashMap<String, Locale>(localesArray.length);
 		_charEncodings = new HashMap<String, String>();
+		_duplicateLanguageCodes = new HashSet<String>();
+		_locales = new Locale[localesArray.length];
+		_localesMap = new HashMap<String, Locale>(localesArray.length);
+		_localesSet = new HashSet<Locale>(localesArray.length);
 
 		for (int i = 0; i < localesArray.length; i++) {
 			String languageId = localesArray[i];
@@ -538,10 +543,19 @@ public class LanguageImpl implements Language {
 
 			Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-			_locales[i] = locale;
-			_localesSet.add(locale);
-			_localesMap.put(language, locale);
 			_charEncodings.put(locale.toString(), StringPool.UTF8);
+
+			if (_localesMap.containsKey(language)) {
+				_duplicateLanguageCodes.add(language);
+			}
+
+			_locales[i] = locale;
+
+			if (!_localesMap.containsKey(language)) {
+				_localesMap.put(language, locale);
+			}
+
+			_localesSet.add(locale);
 		}
 	}
 
@@ -602,9 +616,10 @@ public class LanguageImpl implements Language {
 	private static Map<Long, LanguageImpl> _instances =
 		new ConcurrentHashMap<Long, LanguageImpl>();
 
-	private Locale[] _locales;
-	private Set<Locale> _localesSet;
-	private Map<String, Locale> _localesMap;
 	private Map<String, String> _charEncodings;
+	private Set<String> _duplicateLanguageCodes;
+	private Locale[] _locales;
+	private Map<String, Locale> _localesMap;
+	private Set<Locale> _localesSet;
 
 }

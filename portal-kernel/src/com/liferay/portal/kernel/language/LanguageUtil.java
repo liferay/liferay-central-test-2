@@ -187,6 +187,10 @@ public class LanguageUtil {
 		return getLanguage().isAvailableLocale(locale);
 	}
 
+	public static boolean isDuplicateLanguageCode(String languageCode) {
+		return getLanguage().isDuplicateLanguageCode(languageCode);
+	}
+
 	public static void resetAvailableLocales(long companyId) {
 		getLanguage().resetAvailableLocales(companyId);
 	}
