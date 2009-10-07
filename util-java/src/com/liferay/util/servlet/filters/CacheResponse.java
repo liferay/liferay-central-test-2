@@ -107,22 +107,6 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 	}
 
-	public int getBufferSize() {
-		return _bufferSize;
-	}
-
-	public String getHeader(String name) {
-		List<Header> values = _headers.get(name);
-
-		if ((values == null) || values.isEmpty()) {
-			return null;
-		}
-
-		Header header = values.get(0);
-
-		return header.toString();
-	}
-
 	public void finishResponse() {
 		try {
 			if (_writer != null) {
@@ -142,6 +126,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	public int getBufferSize() {
+		return _bufferSize;
+	}
+
 	public String getContentType() {
 		return _contentType;
 	}
@@ -150,6 +138,18 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		finishResponse();
 
 		return _baos.toByteArray();
+	}
+
+	public String getHeader(String name) {
+		List<Header> values = _headers.get(name);
+
+		if ((values == null) || values.isEmpty()) {
+			return null;
+		}
+
+		Header header = values.get(0);
+
+		return header.toString();
 	}
 
 	public Map<String, List<Header>> getHeaders() {
@@ -166,6 +166,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		}
 
 		return _stream;
+	}
+
+	public int getStatus() {
+		return _status;
 	}
 
 	public PrintWriter getWriter() throws IOException {
@@ -196,6 +200,18 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		}
 
 		return super.isCommitted();
+	}
+
+	public void sendError(int status) throws IOException {
+		_status = status;
+
+		super.sendError(status);
+	}
+
+	public void sendError(int status, String msg) throws IOException {
+		_status = status;
+
+		super.sendError(status, msg);
 	}
 
 	public void setBufferSize(int bufferSize) {
@@ -247,17 +263,24 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 	}
 
+	public void setStatus(int status) {
+		_status = status;
+
+		super.setStatus(status);
+	}
+
 	protected CacheResponseStream createOutputStream() {
 		return new CacheResponseStream(_baos);
 	}
 
-	private String _encoding;
 	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
-	private CacheResponseStream _stream;
-	private PrintWriter _writer;
 	private int _bufferSize;
 	private String _contentType;
+	private String _encoding;
 	private Map<String, List<Header>> _headers =
 		new HashMap<String, List<Header>>();
+	private int _status = HttpServletResponse.SC_OK;
+	private CacheResponseStream _stream;
+	private PrintWriter _writer;
 
 }

@@ -356,6 +356,15 @@ public class CacheFilter extends BasePortalFilter {
 		return true;
 	}
 
+	protected boolean isCacheableResponse(CacheResponse cacheResponse) {
+		if (cacheResponse.getStatus() == HttpServletResponse.SC_OK) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected boolean isInclude(HttpServletRequest request) {
 		String uri = (String)request.getAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
@@ -423,8 +432,8 @@ public class CacheFilter extends BasePortalFilter {
 				// request twice because the user could have been authenticated
 				// after the initial test.
 
-				if ((cacheResponseData.getData().length > 0) &&
-					(isCacheableRequest(request))) {
+				if (isCacheableRequest(request) &&
+					isCacheableResponse(cacheResponse)) {
 
 					CacheUtil.putCacheResponseData(
 						companyId, key, cacheResponseData);
