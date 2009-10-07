@@ -60,21 +60,29 @@ public class GZipStream extends ServletOutputStream {
 		if (_bufferedOutput instanceof ByteArrayOutputStream) {
 			ByteArrayOutputStream baos = (ByteArrayOutputStream)_bufferedOutput;
 
-			ByteArrayOutputStream compressedContent =
-				new ByteArrayOutputStream();
+			if (baos.size() > 20) {
+				ByteArrayOutputStream compressedContent =
+					new ByteArrayOutputStream();
 
-			GZIPOutputStream gzipOutput = new GZIPOutputStream(
-				compressedContent);
+				GZIPOutputStream gzipOutput = new GZIPOutputStream(
+					compressedContent);
 
-			gzipOutput.write(baos.toByteArray());
-			gzipOutput.finish();
+				gzipOutput.write(baos.toByteArray());
+				gzipOutput.finish();
 
-			byte[] compressedBytes = compressedContent.toByteArray();
+				byte[] compressedBytes = compressedContent.toByteArray();
 
-			_response.setContentLength(compressedBytes.length);
-			_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
+				_response.setContentLength(compressedBytes.length);
+				_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 
-			_output.write(compressedBytes);
+				_output.write(compressedBytes);
+			}
+			else {
+				_response.setContentLength(baos.size());
+
+				_output.write(baos.toByteArray());
+			}
+
 			_output.flush();
 			_output.close();
 
