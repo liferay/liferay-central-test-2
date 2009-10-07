@@ -348,6 +348,9 @@ public class ThemeDisplay implements Serializable {
 		if (Validator.isNotNull(i18nLanguageId)) {
 			_i18n = true;
 		}
+		else {
+			_i18n = false;
+		}
 	}
 
 	public String getI18nPath() {
@@ -359,6 +362,9 @@ public class ThemeDisplay implements Serializable {
 
 		if (Validator.isNotNull(i18nPath)) {
 			_i18n = true;
+		}
+		else {
+			_i18n = false;
 		}
 	}
 
