@@ -217,10 +217,10 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	public void sendError(int sc) {
+	public void sendError(int status) {
 	}
 
-	public void sendError(int sc, String msg) {
+	public void sendError(int status, String msg) {
 	}
 
 	public void sendRedirect(String location) throws IOException {
@@ -295,16 +295,16 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	public void setStatus(int sc) {
+	public void setStatus(int status) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_response.setStatus(sc);
+				_response.setStatus(status);
 			}
 		}
 	}
 
-	public void setStatus(int sc, String msg) {
-		setStatus(sc);
+	public void setStatus(int status, String msg) {
+		setStatus(status);
 	}
 
 	private HttpServletResponse _response;
