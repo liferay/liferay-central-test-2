@@ -42,6 +42,12 @@ public class WikiTests extends BaseTests {
 		testSuite.addTestSuite(AddArticleTest.class);
 		testSuite.addTestSuite(AddChildPageTest.class);
 		testSuite.addTestSuite(AddSecondChildPageTest.class);
+		testSuite.addTestSuite(AddMaxCharacterArticleTest.class);
+		testSuite.addTestSuite(AddChildPageMaxCharacterArticleTest.class);
+		testSuite.addTestSuite(DeleteChildPageMaxCharacterArticleTest.class);
+		testSuite.addTestSuite(MoveMaxCharacterArticleTest.class);
+		testSuite.addTestSuite(RemoveMaxCharacterArticleParentTest.class);
+		testSuite.addTestSuite(DeleteMaxCharacterArticleTest.class);
 		testSuite.addTestSuite(AddNullTitleChildPageTest.class);
 		testSuite.addTestSuite(AddSymbolTitleChildPageTest.class);
 		testSuite.addTestSuite(AddDuplicateTitleChildPageTest.class);
