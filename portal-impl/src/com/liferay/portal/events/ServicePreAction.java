@@ -1079,7 +1079,7 @@ public class ServicePreAction extends Action {
 
 				if (Validator.isNull(locale.getCountry())) {
 
-					// Locales must contain the country code
+					// Locales must contain a country code
 
 					locale = LanguageUtil.getLocale(locale.getLanguage());
 				}
