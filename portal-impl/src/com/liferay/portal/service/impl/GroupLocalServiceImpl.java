@@ -1254,6 +1254,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					GroupFriendlyURLException.DUPLICATE);
 			}
 		}
+
+		if (StringUtil.count(friendlyURL, StringPool.SLASH) > 1) {
+			throw new GroupFriendlyURLException(
+				GroupFriendlyURLException.TOO_DEEP);
+		}
 	}
 
 	protected void validateName(long groupId, long companyId, String name)
