@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>EditConfigurationTest</title>
+<title>RemoveHeaderArticleTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">EditConfigurationTest</td></tr>
+<tr><td rowspan="1" colspan="3">RemoveHeaderArticleTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -29,28 +29,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//td[3]/a/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//tr[5]/td[2]/input</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//tr[5]/td[2]/input</td>
-	<td>http://sitening.com/digg/rss/</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_86_entriesPerFeed</td>
-	<td>label=4</td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>//input[@value='Remove']</td>
 	<td></td>
 </tr>
 <tr>
@@ -59,18 +39,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>link=RSS Test Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Sitening Digg Feed</td>
+	<td>waitForElementPresent</td>
+	<td>//td[1]/div/div/div/div[1]/span</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Sitening Digg Feed</td>
+	<td>assertTextNotPresent</td>
+	<td>This is a header article.</td>
 	<td></td>
 </tr>
 

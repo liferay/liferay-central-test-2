@@ -22,38 +22,15 @@
 
 package com.liferay.portalweb.portlet.rss;
 
-import com.liferay.portalweb.portal.BaseTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="RSSTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EndControlPanelTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class RSSTests extends BaseTests {
-
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
-
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(EditConfigurationTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
-		testSuite.addTestSuite(AddHeaderArticleTest.class);
-		testSuite.addTestSuite(AddFooterArticleTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
-		testSuite.addTestSuite(SelectHeaderArticleTest.class);
-		testSuite.addTestSuite(RemoveHeaderArticleTest.class);
-		testSuite.addTestSuite(SelectFooterArticleTest.class);
-		testSuite.addTestSuite(RemoveFooterArticleTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
-		testSuite.addTestSuite(DeleteArticlesTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-
-		return testSuite;
+public class EndControlPanelTest extends BaseTestCase {
+	public void testEndControlPanel() throws Exception {
+		selenium.open("/user/joebloggs/home");
 	}
-
 }
