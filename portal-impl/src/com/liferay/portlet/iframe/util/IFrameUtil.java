@@ -98,7 +98,7 @@ public class IFrameUtil {
 			return true;
 		}
 
-		if (!layout.isPrivateLayout() || !layout.getGroup().isUser()) {
+		if (layout.isPrivateLayout() && layout.getGroup().isUser()) {
 			return true;
 		}
 
