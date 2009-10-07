@@ -3742,6 +3742,7 @@ the-form-information-was-sent-successfully=Οι πληροφορίες μορφ�
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=Το σχήμα αυτού του ηλεκτρονικού ταχυδρομείου είναι ελλιπές και δεν μπορεί να επιδειχθεί κατάλληλα.
 the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=Το σχήμα αυτής της σελίδας δεν υποστηρίζεται. Το περιεχόμενο σελίδων θα παρουσιαστεί unformatted.
 the-framework-version-could-not-be-found=Η έκδοση πλαισίου δεν θα μπορούσε να βρεθεί.
+the-friendly-url-has-too-many-slashes=Το φιλικό url έχει πάρα πολλές κάθετους. (Automatic Translation)
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <strong>{0}</strong> for public pages and <strong>{1}</strong> for private pages.
 the-friendly-url-may-conflict-with-another-page=Το φιλικό url μπορεί να συγκρουστεί με μια άλλη σελίδα.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=Η ομάδα δεν μπορεί να διαγραφεί επειδή είναι απαραίτητη ομάδα συστημάτων.

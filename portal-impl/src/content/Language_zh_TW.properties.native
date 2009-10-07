@@ -3742,6 +3742,7 @@ the-form-information-was-sent-successfully=順利地送了表格信息。
 the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=這電子郵件格式不完整, 無法適當地被顯示。
 the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=這頁格式不支持。頁內容將被顯示未編排。
 the-framework-version-could-not-be-found=框架版本不能被發現。
+the-friendly-url-has-too-many-slashes=友好的URL有許多深砍。 (Automatic Translation)
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <strong>{0}</strong> for public pages and <strong>{1}</strong> for private pages.
 the-friendly-url-may-conflict-with-another-page=友好的url 也許相衝突與其它頁。
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=小組無法被刪除因為這是一個必需的系統小組。
