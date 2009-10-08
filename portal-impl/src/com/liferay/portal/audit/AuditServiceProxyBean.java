@@ -20,18 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.audit;
+package com.liferay.portal.audit;
 
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+import com.liferay.portal.kernel.audit.AuditService;
+import com.liferay.portal.kernel.audit.AuditMessage;
+import com.liferay.portal.kernel.audit.AuditServiceException;
+import com.liferay.portal.kernel.audit.AuditMessageProcessor;
+import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 
-@MessagingProxy(mode = ProxyMode.ASYNC)
+import java.util.Map;
+
 /**
- * <a href="AuditService.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuditServiceProxyBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public interface AuditService {
+public class AuditServiceProxyBean
+	extends BaseProxyBean implements AuditService {
+
 	public void receiveAuditMessage(AuditMessage auditMessage)
-		throws AuditServiceException;
+		throws AuditServiceException {
+		throw new UnsupportedOperationException();
+	}
 }

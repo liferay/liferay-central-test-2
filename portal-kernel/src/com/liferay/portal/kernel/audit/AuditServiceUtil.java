@@ -22,16 +22,21 @@
 
 package com.liferay.portal.kernel.audit;
 
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
-
-@MessagingProxy(mode = ProxyMode.ASYNC)
 /**
- * <a href="AuditService.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuditServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public interface AuditService {
-	public void receiveAuditMessage(AuditMessage auditMessage)
-		throws AuditServiceException;
+public class AuditServiceUtil {
+
+	public static void receiveAuditMessage(AuditMessage auditMessage)
+		throws AuditServiceException {
+		_auditService.receiveAuditMessage(auditMessage);
+	}
+
+	public void setAuditService(AuditService auditService) {
+		_auditService = auditService;
+	}
+
+	private static AuditService _auditService;
 }
