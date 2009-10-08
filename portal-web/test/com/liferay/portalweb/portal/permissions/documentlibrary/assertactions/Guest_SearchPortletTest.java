@@ -60,6 +60,7 @@ public class Guest_SearchPortletTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Edited Test Document"));
 		assertFalse(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document"));
+				"link=Admin Permissions Upload Edited 1"));
+		assertFalse(selenium.isTextPresent("Admin Permissions Upload Edited 1"));
 	}
 }

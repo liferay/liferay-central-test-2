@@ -24,23 +24,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Portlet1 Temporary1 Document1.txt</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[2]/h3</td>
-	<td>Forbidden</td>
+	<td>assertTextPresent</td>
+	<td>Portlet1 Temporary1 Document1.txt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Portlet1 Temporary1 Document1.txt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Recent Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Portlet1 Temporary1 Document1.txt</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>You do not have permission to access the requested resource.</td>
+	<td>Portlet1 Temporary1 Document1.txt</td>
 	<td></td>
 </tr>
 
