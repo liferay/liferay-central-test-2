@@ -46,6 +46,7 @@ long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discu
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
 boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:discussion:ratingsEnabled"));
+int paginationDelta = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:discussion:paginationDelta"));
 
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
 
@@ -250,7 +251,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			else {
 				PortletURL currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
 
-				searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, currentURLObj, null, null);
+				searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, paginationDelta, currentURLObj, null, null);
 
 				searchContainer.setTotal(messagesCount - 1);
 

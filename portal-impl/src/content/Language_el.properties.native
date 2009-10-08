@@ -2196,6 +2196,7 @@ maximized=Μεγιστοποιημένος
 maximum-age-help=Αυτό καθορίζει πόσο καιρό πολύ ένας κωδικός πρόσβασης είναι καλός για προτού να πρέπει να αλλαχτεί.
 maximum-age=Μέγιστη ηλικία
 maximum-bloggers-to-display=Μέγιστο Bloggers στην επίδειξη
+maximum-comments-to-display=Μέγιστα σχόλια της επίδειξης (Automatic Translation)
 maximum-failure-help=Αυτό καθορίζει το μέγιστο αριθμό χρόνων που ένας χρήστης μπορεί να προσπαθήσει στη σύνδεση με το λανθασμένο κωδικό πρόσβασης.
 maximum-failure=Μέγιστη αποτυχία
 maximum-file-size=Μέγιστο μέγεθος αρχείων

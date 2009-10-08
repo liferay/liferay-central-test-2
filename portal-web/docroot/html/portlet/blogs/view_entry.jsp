@@ -121,6 +121,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(BlogsEntry.cla
 		subject="<%= entry.getTitle() %>"
 		redirect="<%= currentURL %>"
 		ratingsEnabled="<%= enableCommentRatings %>"
+		paginationDelta="<%= commentsPageDelta %>"
 	/>
 </c:if>
 

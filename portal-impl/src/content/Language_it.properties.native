@@ -2195,6 +2195,7 @@ maximized=Ingrandita
 maximum-age-help=Definisce per quanto tempo la password rimane valida prima che sia necessario cambiarla.
 maximum-age=Durata massima
 maximum-bloggers-to-display=Numero massimo di bloggers da visualizzare
+maximum-comments-to-display=Il massimo commenta per visualizzare (Automatic Translation)
 maximum-failure-help=Determina il massimo numero di volte che un utente può provare il login con la password sbagliata.
 maximum-failure=Numero massimo di tentativi falliti
 maximum-file-size=Formato di lima massimo

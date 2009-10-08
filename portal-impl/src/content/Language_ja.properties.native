@@ -2196,6 +2196,7 @@ maximized=最大化
 maximum-age-help=パスワードの有効期限を設定します。
 maximum-age=有効期限
 maximum-bloggers-to-display=ブロガを表示する件数
+maximum-comments-to-display=最高は表示するためにコメントする (Automatic Translation)
 maximum-failure-help=ロックアウトするまでの誤ったパスワードの回数を設定します。
 maximum-failure=失敗回数
 maximum-file-size=最高のファイルサイズ

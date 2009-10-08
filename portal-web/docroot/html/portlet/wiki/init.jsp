@@ -91,6 +91,7 @@ if (Validator.isNotNull(portletResource)) {
 boolean enablePageRatings = PropsValues.WIKI_PAGE_RATINGS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-page-ratings", null), true);
 boolean enableComments = PropsValues.WIKI_PAGE_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
+int commentsPageDelta = GetterUtil.getInteger(preferences.getValue("comments-page-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 
 String allNodes = ListUtil.toString(WikiNodeLocalServiceUtil.getNodes(scopeGroupId), "name");
 

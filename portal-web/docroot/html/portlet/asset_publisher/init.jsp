@@ -281,6 +281,7 @@ boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
+int commentsPageDelta = GetterUtil.getInteger(preferences.getValue("comments-page-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 boolean enableTagBasedNavigation = GetterUtil.getBoolean(preferences.getValue("enable-tag-based-navigation", null));
 
 String[] conversions = DocumentConversionUtil.getConversions("html");

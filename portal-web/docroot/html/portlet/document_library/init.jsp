@@ -135,6 +135,7 @@ if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 }
 
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
+int commentsPageDelta = GetterUtil.getInteger(preferences.getValue("comments-page-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 
 boolean mergedView = false;
 

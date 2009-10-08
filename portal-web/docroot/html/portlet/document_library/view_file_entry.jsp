@@ -489,6 +489,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 					subject="<%= fileEntry.getTitle() %>"
 					redirect="<%= currentURL %>"
 					ratingsEnabled="<%= enableCommentRatings %>"
+					paginationDelta="<%= commentsPageDelta %>"
 				/>
 			</c:if>
 		</liferay-ui:panel>

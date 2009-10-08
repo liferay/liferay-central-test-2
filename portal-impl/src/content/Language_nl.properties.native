@@ -2196,6 +2196,7 @@ maximized=Vergroot
 maximum-age-help=Dit bepaalt hoe lang een wachtwoord geldig is totdat het moet worden veranderd.
 maximum-age=Maximum leeftijd
 maximum-bloggers-to-display=Maximum weer te geven bloggers
+maximum-comments-to-display=Maximum Commentaren aan Vertoning (Automatic Translation)
 maximum-failure-help=Dit bepaalt het maximum aantal keren dat een gebruiker een login met het verkeerde wachtwoord kan opgeven.
 maximum-failure=Maximum mislukkingen
 maximum-file-size=De maximum Grootte van het Dossier

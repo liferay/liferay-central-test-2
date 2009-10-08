@@ -153,6 +153,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				subject="<%= assetRenderer.getTitle() %>"
 				redirect="<%= currentURL %>"
 				ratingsEnabled="<%= enableCommentRatings %>"
+				paginationDelta="<%= commentsPageDelta %>"
 			/>
 		</c:if>
 	</div>

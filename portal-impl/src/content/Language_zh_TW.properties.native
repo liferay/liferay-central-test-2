@@ -2196,6 +2196,7 @@ maximized=_ 最大化
 maximum-age-help=這確定多久密碼是好的為在它需要被改變之前。
 maximum-age=最大年齡
 maximum-bloggers-to-display=最大Bloggers 顯示
+maximum-comments-to-display=最大值評論顯示 (Automatic Translation)
 maximum-failure-help=這確定用戶能試圖登錄以錯誤密碼時期的最大數字。
 maximum-failure=最大失敗
 maximum-file-size=最大文件大小

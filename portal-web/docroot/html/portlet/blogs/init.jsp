@@ -65,6 +65,7 @@ boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags",
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null), true);
 boolean enableComments = PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
+int commentsPageDelta = GetterUtil.getInteger(preferences.getValue("comments-page-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);

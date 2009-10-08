@@ -475,6 +475,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>paginationDelta</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>ratingsEnabled</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

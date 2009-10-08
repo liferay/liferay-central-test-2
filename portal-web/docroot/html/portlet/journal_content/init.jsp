@@ -65,6 +65,7 @@ boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enable-print",
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
 boolean enableComments = PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
+int commentsPageDelta = GetterUtil.getInteger(preferences.getValue("comments-page-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 
 String[] conversions = DocumentConversionUtil.getConversions("html");
 
