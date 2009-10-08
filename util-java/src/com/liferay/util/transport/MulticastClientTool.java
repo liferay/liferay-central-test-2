@@ -25,9 +25,6 @@ package com.liferay.util.transport;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MulticastClientTool.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,7 +43,7 @@ public class MulticastClientTool {
 			new MulticastClientTool(args);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			e.printStackTrace();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -75,13 +72,12 @@ public class MulticastClientTool {
 		MulticastTransport transport = new MulticastTransport(
 			handler, host, port);
 
-		if (_log.isInfoEnabled()) {
-			if (shortData.booleanValue()) {
-				_log.info("Truncating to 96 bytes.");
-			}
-
-			_log.info("Started up and waiting...");
+		if (shortData.booleanValue()) {
+			System.out.println("Truncating to 96 bytes.");
 		}
+
+		System.out.println("Started up and waiting...");
+
 
 		transport.connect();
 
@@ -124,7 +120,5 @@ public class MulticastClientTool {
 
 		return argsMap;
 	}
-
-	private static Log _log = LogFactory.getLog(MulticastClientTool.class);
 
 }

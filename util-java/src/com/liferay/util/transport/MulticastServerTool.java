@@ -22,8 +22,6 @@
 
 package com.liferay.util.transport;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 
@@ -41,8 +39,8 @@ public class MulticastServerTool {
 
 	public static void main(String[] args) {
 		try {
-			int port = GetterUtil.getInteger(args[1]);
-			long interval = GetterUtil.getLong(args[2]);
+			int port = Integer.parseInt(args[1]);
+			long interval = Long.parseLong(args[2]);
 
 			DatagramHandler handler = new DatagramHandler() {
 
