@@ -29,6 +29,8 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface DestinationNames {
 
+	public static final String AUDIT = "liferay/audit";
+
 	public static final String CONVERT_PROCESS = "liferay/convert_process";
 
 	/**

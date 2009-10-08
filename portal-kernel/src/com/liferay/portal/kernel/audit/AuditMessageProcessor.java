@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,6 +28,7 @@ package com.liferay.portal.kernel.audit;
  * @author Michael C. Han
  */
 public interface AuditMessageProcessor {
-	public void processAuditMessage(AuditMessage auditMessage)
-		throws AuditServiceException;
+
+	public void process(AuditMessage auditMessage) throws AuditException;
+
 }

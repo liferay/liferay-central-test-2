@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,26 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.audit;
+package com.liferay.portal.kernel.audit;
 
-import com.liferay.portal.kernel.audit.AuditService;
-import com.liferay.portal.kernel.audit.AuditMessage;
-import com.liferay.portal.kernel.audit.AuditServiceException;
-import com.liferay.portal.kernel.audit.AuditMessageProcessor;
-import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
-
-import java.util.Map;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="AuditServiceProxyBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuditException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class AuditServiceProxyBean
-	extends BaseProxyBean implements AuditService {
+public class AuditException extends PortalException {
 
-	public void receiveAuditMessage(AuditMessage auditMessage)
-		throws AuditServiceException {
-		throw new UnsupportedOperationException();
+	public AuditException() {
+		super();
 	}
+
+	public AuditException(String msg) {
+		super(msg);
+	}
+
+	public AuditException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public AuditException(Throwable cause) {
+		super(cause);
+	}
+
 }

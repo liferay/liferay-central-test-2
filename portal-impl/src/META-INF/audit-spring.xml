@@ -9,16 +9,16 @@
 
 	<!-- Proxy -->
 
-	<bean id="com.liferay.portal.audit.AuditServiceProxyBean" class="com.liferay.portal.audit.AuditServiceProxyBean">
+	<bean id="com.liferay.portal.audit.AuditRouterProxyBean" class="com.liferay.portal.audit.AuditRouterProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<property name="destinationName" value="liferay/auditing" />
+				<property name="destinationName" value="liferay/audit" />
 				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
 			</bean>
 		</property>
 		<property name="singleDestinationMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
-				<property name="destinationName" value="liferay/auditing" />
+				<property name="destinationName" value="liferay/audit" />
 				<property name="messageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 			</bean>
 		</property>
@@ -26,8 +26,8 @@
 
 	<!-- Util -->
 
-	<bean class="com.liferay.portal.kernel.audit.AuditServiceUtil">
-		<property name="auditService">
+	<bean class="com.liferay.portal.kernel.audit.AuditRouterUtil">
+		<property name="auditRouter">
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
 				<property name="interceptorNames">
 					<list>
@@ -35,23 +35,22 @@
 					</list>
 				</property>
 				<property name="proxyInterfaces">
-					<value>com.liferay.portal.kernel.audit.AuditService</value>
+					<value>com.liferay.portal.kernel.audit.AuditRouter</value>
 				</property>
-				<property name="target" ref="com.liferay.portal.audit.AuditServiceProxyBean" />
+				<property name="target" ref="com.liferay.portal.audit.AuditRouterProxyBean" />
 			</bean>
 		</property>
 	</bean>
 
 	<!-- Messaging -->
 
-	<bean id="destination.auditing" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/auditing" />
+	<bean id="destination.audit" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/audit" />
 	</bean>
-	
-	<bean id="messagingConfigurator.auditing" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+	<bean id="messagingConfigurator.audit" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
 			<list>
-				<ref bean="destination.auditing" />
+				<ref bean="destination.audit" />
 			</list>
 		</property>
 		<property name="messageBus">

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
 package com.liferay.portal.kernel.audit;
 
 /**
- * <a href="AuditThreadLocal.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuditRequestThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
@@ -34,14 +34,15 @@ public class AuditRequestThreadLocal {
 
 		if (auditRequestThreadLocal == null) {
 			auditRequestThreadLocal = new AuditRequestThreadLocal();
+
 			_threadLocal.set(auditRequestThreadLocal);
 		}
 
 		return auditRequestThreadLocal;
 	}
 
-	public static void clear() {
-		_threadLocal.set(null);
+	public static void removeAuditThreadLocal() {
+		_threadLocal.remove();
 	}
 
 	public String getClientHost() {
@@ -59,7 +60,7 @@ public class AuditRequestThreadLocal {
 	public String getRequestURL() {
 		return _requestURL;
 	}
-	
+
 	public String getServerName() {
 		return _serverName;
 	}
@@ -103,11 +104,12 @@ public class AuditRequestThreadLocal {
 	private static ThreadLocal<AuditRequestThreadLocal> _threadLocal =
 		new ThreadLocal<AuditRequestThreadLocal>();
 
-	private String _clientIP;
 	private String _clientHost;
+	private String _clientIP;
 	private String _queryString;
+	private String _requestURL;
 	private String _serverName;
 	private int _serverPort;
-	private String _requestURL;
 	private String _sessionID;
+
 }

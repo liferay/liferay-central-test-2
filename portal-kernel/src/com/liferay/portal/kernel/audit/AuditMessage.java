@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,17 +22,17 @@
 
 package com.liferay.portal.kernel.audit;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
+import java.text.DateFormat;
+
+import java.util.Date;
 
 /**
  * <a href="AuditMessage.java.html"><b><i>View Source</i></b></a>
@@ -43,102 +43,86 @@ import java.text.SimpleDateFormat;
  */
 public class AuditMessage implements Serializable {
 
-	public static final String TIMESTAMP_FORMAT = "yyyyMMddkkmmssSSS";
-
 	public AuditMessage(
-			long companyId, long userId, String userName,
-			String classPK, String className, String type)
-		throws JSONException {
+		long companyId, long userId, String userName, String className,
+		String classPK, String type) {
 
 		this(
-			companyId, userId, userName, classPK, className, type,
-			new Date(), JSONFactoryUtil.createJSONObject());
+			companyId, userId, userName, classPK, className, type, new Date(),
+			JSONFactoryUtil.createJSONObject());
 	}
 
 	public AuditMessage(
-			long companyId, long userId, String userName,
-			String classPK, String className, String type,
-			JSONObject additionalInfo)
-		throws JSONException {
-
-		this(
-			companyId, userId, userName, classPK, className, type,
-			new Date(), additionalInfo);
-	}
-
-	public AuditMessage(
-			long companyId, long userId, String userName,
-			String classPK, String className, String type,
-			Date timestamp, JSONObject additionalInfo)
-		throws JSONException {
+		long companyId, long userId, String userName, String classPK,
+		String className, String type, Date timestamp,
+		JSONObject additionalInfo) {
 
 		_companyId = companyId;
 		_userId = userId;
 		_userName = userName;
-		_classPK = classPK;
 		_className = className;
+		_classPK = classPK;
 		_type = type;
-		_timestamp = timestamp;
-		_additionalInfo = additionalInfo;
-		_originalMessage = toJSONObject().toString();
 
 		AuditRequestThreadLocal auditRequestThreadLocal =
 			AuditRequestThreadLocal.getAuditThreadLocal();
+
 		_clientHost = auditRequestThreadLocal.getClientHost();
 		_clientIP = auditRequestThreadLocal.getClientIP();
 		_serverName = auditRequestThreadLocal.getServerName();
 		_serverPort = auditRequestThreadLocal.getServerPort();
 		_sessionID = auditRequestThreadLocal.getSessionID();
+
+		_timestamp = timestamp;
+		_additionalInfo = additionalInfo;
+
+		_message = toJSONObject().toString();
 	}
 
-	public AuditMessage(String message) throws JSONException, ParseException {
+	public AuditMessage(
+		long companyId, long userId, String userName, String className,
+		String classPK, String type, JSONObject additionalInfo) {
+
+		this(
+			companyId, userId, userName, classPK, className, type, new Date(),
+			additionalInfo);
+	}
+
+	public AuditMessage(String message) throws JSONException {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
 		_companyId = jsonObj.getLong(_COMPANY_ID);
 		_userId = jsonObj.getLong(_USER_ID);
 		_userName = jsonObj.getString(_USER_NAME);
-		_classPK = jsonObj.getString(_CLASS_PK);
 		_className = jsonObj.getString(_CLASS_NAME);
+		_classPK = jsonObj.getString(_CLASS_PK);
 		_type = jsonObj.getString(_TYPE);
-		if (jsonObj.has(_SESSION_ID)) {
-			_sessionID = jsonObj.getString(_SESSION_ID);
-		}
+
 		if (jsonObj.has(_CLIENT_HOST)) {
 			_clientHost = jsonObj.getString(_CLIENT_HOST);
 		}
+
 		if (jsonObj.has(_CLIENT_IP)) {
 			_clientIP = jsonObj.getString(_CLIENT_IP);
 		}
+
 		if (jsonObj.has(_SERVER_NAME)) {
 			_serverName = jsonObj.getString(_SERVER_NAME);
 		}
+
 		if (jsonObj.has(_SERVER_PORT)) {
 			_serverPort = jsonObj.getInt(_SERVER_PORT);
 		}
+
+		if (jsonObj.has(_SESSION_ID)) {
+			_sessionID = jsonObj.getString(_SESSION_ID);
+		}
+
 		_timestamp = GetterUtil.getDate(
 			jsonObj.getString(_TIMESTAMP), _getDateFormat());
 		_additionalInfo = jsonObj.getJSONObject(_ADDITIONAL_INFO);
-		_originalMessage = message;
-	}
 
-	public JSONObject toJSONObject() throws JSONException {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
-
-		jsonObj.put(_ADDITIONAL_INFO, _additionalInfo);
-		jsonObj.put(_COMPANY_ID, _companyId);
-		jsonObj.put(_CLASS_PK, _classPK);
-		jsonObj.put(_CLASS_NAME, _className);
-		jsonObj.put(_CLIENT_IP, _clientIP);
-		jsonObj.put(_clientHost, _clientHost);
-		jsonObj.put(_SERVER_PORT, _serverPort);
-		jsonObj.put(_SERVER_NAME, _serverName);
-		jsonObj.put(_SESSION_ID, _sessionID);
-		jsonObj.put(_TIMESTAMP, _getTimestampString());
-		jsonObj.put(_TYPE, _type);
-		jsonObj.put(_USER_ID, _userId);
-		jsonObj.put(_USER_NAME, _userName);
-
-		return jsonObj;
+		_message = message;
 	}
 
 	public JSONObject getAdditionalInfo() {
@@ -153,12 +137,12 @@ public class AuditMessage implements Serializable {
 		return _classPK;
 	}
 
-	public String getClientIP() {
-		return _clientIP;
-	}
-
 	public String getClientHost() {
 		return _clientHost;
+	}
+
+	public String getClientIP() {
+		return _clientIP;
 	}
 
 	public long getCompanyId() {
@@ -166,7 +150,7 @@ public class AuditMessage implements Serializable {
 	}
 
 	public String getOriginalMessage() {
-		return _originalMessage;
+		return _message;
 	}
 
 	public String getServerName() {
@@ -201,12 +185,12 @@ public class AuditMessage implements Serializable {
 		_additionalInfo = additionalInfo;
 	}
 
-	public void setClassPK(String classPK) {
-		_classPK = classPK;
-	}
-
 	public void setClassName(String className) {
 		_className = className;
+	}
+
+	public void setClassPK(String classPK) {
+		_classPK = classPK;
 	}
 
 	public void setClientHost(String clientHost) {
@@ -222,7 +206,7 @@ public class AuditMessage implements Serializable {
 	}
 
 	public void setOriginalMessage(String originalMessage) {
-		_originalMessage = originalMessage;
+		_message = originalMessage;
 	}
 
 	public void setServerName(String serverName) {
@@ -245,36 +229,65 @@ public class AuditMessage implements Serializable {
 		_type = type;
 	}
 
-	public void setUserName(String userName) {
-		_userName = userName;
-	}
-
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
-	private String _getTimestampString() {
-		return _getDateFormat().format(new Date());
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+	public JSONObject toJSONObject() {
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+		jsonObj.put(_ADDITIONAL_INFO, _additionalInfo);
+		jsonObj.put(_COMPANY_ID, _companyId);
+		jsonObj.put(_CLASS_PK, _classPK);
+		jsonObj.put(_CLASS_NAME, _className);
+		jsonObj.put(_CLIENT_IP, _clientIP);
+		jsonObj.put(_clientHost, _clientHost);
+		jsonObj.put(_SERVER_PORT, _serverPort);
+		jsonObj.put(_SERVER_NAME, _serverName);
+		jsonObj.put(_SESSION_ID, _sessionID);
+		jsonObj.put(_TIMESTAMP, _getDateFormat().format(new Date()));
+		jsonObj.put(_TYPE, _type);
+		jsonObj.put(_USER_ID, _userId);
+		jsonObj.put(_USER_NAME, _userName);
+
+		return jsonObj;
 	}
 
 	private DateFormat _getDateFormat() {
-		return new SimpleDateFormat(TIMESTAMP_FORMAT);
+		return DateFormatFactoryUtil.getSimpleDateFormat(_DATE_FORMAT);
 	}
 
-	private static final String _COMPANY_ID = "companyId";
-	private static final String _USER_ID = "userId";
-	private static final String _USER_NAME = "userName";
-	private static final String _CLASS_PK = "classPK";
-	private static final String _CLASS_NAME = "className";
-	private static final String _TYPE = "type";
-	private static final String _SESSION_ID = "sessionID";
-	private static final String _CLIENT_IP = "clientIP";
-	private static final String _CLIENT_HOST = "clientHost";
-	private static final String _SERVER_PORT = "serverPort";
-	private static final String _SERVER_NAME = "serverName";
-	private static final String _TIMESTAMP = "timestamp";
 	private static final String _ADDITIONAL_INFO = "additionalInfo";
 
+	private static final String _CLASS_NAME = "className";
+
+	private static final String _CLASS_PK = "classPK";
+
+	private static final String _CLIENT_HOST = "clientHost";
+
+	private static final String _CLIENT_IP = "clientIP";
+
+	private static final String _COMPANY_ID = "companyId";
+
+	private static final String _DATE_FORMAT = "yyyyMMddkkmmssSSS";
+
+	private static final String _SERVER_NAME = "serverName";
+
+	private static final String _SERVER_PORT = "serverPort";
+
+	private static final String _SESSION_ID = "sessionID";
+
+	private static final String _TIMESTAMP = "timestamp";
+
+	private static final String _TYPE = "type";
+
+	private static final String _USER_ID = "userId";
+
+	private static final String _USER_NAME = "userName";
 
 	private JSONObject _additionalInfo;
 	private String _className;
@@ -282,7 +295,7 @@ public class AuditMessage implements Serializable {
 	private String _clientHost;
 	private String _clientIP;
 	private long _companyId;
-	private String _originalMessage;
+	private String _message;
 	private String _serverName;
 	private int _serverPort;
 	private String _sessionID;
@@ -290,4 +303,5 @@ public class AuditMessage implements Serializable {
 	private String _type;
 	private long _userId;
 	private String _userName;
+
 }

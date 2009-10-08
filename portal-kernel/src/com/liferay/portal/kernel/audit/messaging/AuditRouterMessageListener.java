@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,19 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.audit;
+package com.liferay.portal.kernel.audit.messaging;
+
+import com.liferay.portal.kernel.audit.AuditMessage;
+import com.liferay.portal.kernel.audit.AuditRouter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="AuditServiceException.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuditRouterMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Mika Koivisto
  */
-public class AuditServiceException extends Exception {
-	public AuditServiceException(String message) {
-		super(message);
+public class AuditRouterMessageListener implements MessageListener {
+
+	public void receive(Message message) {
+		try {
+			doReceive(message);
+		}
+		catch (Exception e) {
+			_log.error("Unable to process message " + message, e);
+		}
 	}
 
-	public AuditServiceException(String message, Throwable cause) {
-		super(message, cause);
+	public void setAuditRouter(AuditRouter auditRouter) {
+		_auditRouter = auditRouter;
 	}
+
+	protected void doReceive(Message message) throws Exception {
+		_auditRouter.route(new AuditMessage((String)message.getPayload()));
+	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(AuditRouterMessageListener.class);
+
+	private AuditRouter _auditRouter;
+
 }

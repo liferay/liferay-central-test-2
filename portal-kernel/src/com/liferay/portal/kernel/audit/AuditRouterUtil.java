@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,46 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.audit.messaging;
-
-import com.liferay.portal.kernel.audit.AuditMessage;
-import com.liferay.portal.kernel.audit.AuditService;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
+package com.liferay.portal.kernel.audit;
 
 /**
- * <a href="AuditServiceMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuditRouterUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
- * @author Mika Koivisto
  */
-public class AuditServiceMessageListener implements MessageListener {
+public class AuditRouterUtil {
 
-	public void receive(Message message) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Received message: " + message);
-		}
-
-		try {
-			_auditService.receiveAuditMessage(
-				new AuditMessage((String)message.getPayload()));
-		}
-		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to process audit message: " + message, e);
-			}
-		}
+	public static void route(AuditMessage auditMessage) throws AuditException {
+		_auditRouter.route(auditMessage);
 	}
 
-    public void setAuditService(AuditService audit) {
-        _auditService = audit;
-    }
+	public void setAuditRouter(AuditRouter auditRouter) {
+		_auditRouter = auditRouter;
+	}
 
-    private static Log _log = LogFactoryUtil.getLog(
-		AuditServiceMessageListener.class);
+	private static AuditRouter _auditRouter;
 
-    private AuditService _auditService;
 }

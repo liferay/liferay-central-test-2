@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="AuditingFilter.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuditFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
@@ -44,21 +44,20 @@ public class AuditFilter extends BasePortalFilter {
 		AuditRequestThreadLocal auditRequestThreadLocal =
 			AuditRequestThreadLocal.getAuditThreadLocal();
 
-		auditRequestThreadLocal.setClientIP(request.getRemoteAddr());
 		auditRequestThreadLocal.setClientHost(request.getRemoteHost());
-		auditRequestThreadLocal.setServerName(request.getServerName());
-		auditRequestThreadLocal.setServerPort(request.getServerPort());
+		auditRequestThreadLocal.setClientIP(request.getRemoteAddr());
+		auditRequestThreadLocal.setQueryString(request.getQueryString());
 		auditRequestThreadLocal.setRequestURL(
 			request.getRequestURL().toString());
-		auditRequestThreadLocal.setQueryString(request.getQueryString());
+		auditRequestThreadLocal.setServerName(request.getServerName());
+		auditRequestThreadLocal.setServerPort(request.getServerPort());
 		auditRequestThreadLocal.setSessionID(request.getSession().getId());
 
 		try {
-			processFilter(
-				AuditFilter.class, request, response, filterChain);
+			processFilter(AuditFilter.class, request, response, filterChain);
 		}
 		finally {
-			AuditRequestThreadLocal.clear();
+			AuditRequestThreadLocal.removeAuditThreadLocal();
 		}
 	}
 

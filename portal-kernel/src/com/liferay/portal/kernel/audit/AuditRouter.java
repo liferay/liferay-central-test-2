@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,11 +27,12 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 
 @MessagingProxy(mode = ProxyMode.ASYNC)
 /**
- * <a href="AuditService.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuditRouter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public interface AuditService {
-	public void receiveAuditMessage(AuditMessage auditMessage)
-		throws AuditServiceException;
+public interface AuditRouter {
+
+	public void route(AuditMessage auditMessage) throws AuditException;
+
 }
