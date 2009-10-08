@@ -59,7 +59,7 @@ public class WikiMessageListener implements MessageListener {
 		}
 	}
 
-	public void doReceive(Message message) throws Exception {
+	protected void doReceive(Message message) throws Exception {
 		long companyId = message.getLong("companyId");
 		long userId = message.getLong("userId");
 		long nodeId = message.getLong("nodeId");

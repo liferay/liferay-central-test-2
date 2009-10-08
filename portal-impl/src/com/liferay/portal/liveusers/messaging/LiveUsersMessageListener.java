@@ -45,19 +45,6 @@ public class LiveUsersMessageListener implements MessageListener {
 		}
 	}
 
-	public void doReceive(Message message) throws Exception {
-		JSONObject jsonObj = (JSONObject)message.getPayload();
-
-		String command = jsonObj.getString("command");
-
-		if (command.equals("signIn")) {
-			doCommandSignIn(jsonObj);
-		}
-		else if (command.equals("signOut")) {
-			doCommandSignOut(jsonObj);
-		}
-	}
-
 	protected void doCommandSignIn(JSONObject jsonObj) throws Exception {
 		long companyId = jsonObj.getLong("companyId");
 		long userId = jsonObj.getLong("userId");
@@ -76,6 +63,19 @@ public class LiveUsersMessageListener implements MessageListener {
 		String sessionId = jsonObj.getString("sessionId");
 
 		LiveUsers.signOut(companyId, userId, sessionId);
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		JSONObject jsonObj = (JSONObject)message.getPayload();
+
+		String command = jsonObj.getString("command");
+
+		if (command.equals("signIn")) {
+			doCommandSignIn(jsonObj);
+		}
+		else if (command.equals("signOut")) {
+			doCommandSignOut(jsonObj);
+		}
 	}
 
 	private static Log _log =

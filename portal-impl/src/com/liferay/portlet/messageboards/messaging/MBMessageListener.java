@@ -68,7 +68,8 @@ public class MBMessageListener implements MessageListener {
 		}
 	}
 
-	public void doReceive(com.liferay.portal.kernel.messaging.Message message)
+	protected void doReceive(
+			com.liferay.portal.kernel.messaging.Message message)
 		throws Exception {
 
 		long companyId = message.getLong("companyId");
