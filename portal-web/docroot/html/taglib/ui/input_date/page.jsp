@@ -90,7 +90,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					},
 					populateMonth: false,
 					yearFieldName: '<%= yearParam %>',
-					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>],
+					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
 				}
 			)
 			.render();
