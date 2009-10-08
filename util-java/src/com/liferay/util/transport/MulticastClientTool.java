@@ -78,7 +78,6 @@ public class MulticastClientTool {
 
 		System.out.println("Started up and waiting...");
 
-
 		transport.connect();
 
 		synchronized (transport) {
