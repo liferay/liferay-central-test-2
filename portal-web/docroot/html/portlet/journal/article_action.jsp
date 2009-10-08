@@ -69,18 +69,18 @@ JournalArticle article = (JournalArticle)row.getObject();
 		%>
 
 		<liferay-ui:icon image="preview" url="<%= sb.toString() %>" target="_blank" />
-	</c:if>
 
-	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
-		<portlet:renderURL var="copyURL">
-			<portlet:param name="struts_action" value="/journal/copy_article" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
-			<portlet:param name="oldArticleId" value="<%= article.getArticleId() %>" />
-			<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
-		</portlet:renderURL>
+		<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) %>">
+			<portlet:renderURL var="copyURL">
+				<portlet:param name="struts_action" value="/journal/copy_article" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+				<portlet:param name="oldArticleId" value="<%= article.getArticleId() %>" />
+				<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+			</portlet:renderURL>
 
-		<liferay-ui:icon image="copy" url="<%= copyURL.toString() %>" />
+			<liferay-ui:icon image="copy" url="<%= copyURL.toString() %>" />
+		</c:if>
 	</c:if>
 
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
