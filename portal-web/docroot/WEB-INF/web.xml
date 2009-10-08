@@ -14,6 +14,10 @@
 		<param-value>false</param-value>
 	</context-param>
 	<filter>
+		<filter-name>Audit Filter</filter-name>
+		<filter-class>com.liferay.portal.servlet.filters.audit.AuditFilter</filter-class>
+	</filter>
+	<filter>
 		<filter-name>Auto Login Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.autologin.AutoLoginFilter</filter-class>
 	</filter>
@@ -264,6 +268,12 @@
 	<filter-mapping>
 		<filter-name>SSO Open SSO Filter</filter-name>
 		<url-pattern>/web/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Audit Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
