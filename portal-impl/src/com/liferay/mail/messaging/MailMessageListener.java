@@ -58,7 +58,7 @@ public class MailMessageListener implements MessageListener {
 		}
 	}
 
-	public void doMailMessage(MailMessage mailMessage) throws Exception {
+	protected void doMailMessage(MailMessage mailMessage) throws Exception {
 		InternetAddress[] auditTrail = InternetAddress.parse(
 			PropsValues.MAIL_AUDIT_TRAIL);
 
@@ -113,11 +113,13 @@ public class MailMessageListener implements MessageListener {
 		}
 	}
 
-	public void doMethodWrapper(MethodWrapper methodWrapper) throws Exception {
+	protected void doMethodWrapper(MethodWrapper methodWrapper)
+		throws Exception {
+
 		MethodInvoker.invoke(methodWrapper, HookFactory.getInstance());
 	}
 
-	public void doReceive(Message message) throws Exception {
+	protected void doReceive(Message message) throws Exception {
 		Object payload = message.getPayload();
 
 		if (payload instanceof MailMessage) {
