@@ -2196,7 +2196,6 @@ maximized=Maximisé
 maximum-age-help=Cette option détermine le temps pendant lequel un mot de passe est valide avant qu'il ne doive être changé.
 maximum-age=Âge Maximum
 maximum-bloggers-to-display=Nombre maximum de bloggers à montrer
-maximum-comments-to-display=Le maximum commente pour montrer (Automatic Translation)
 maximum-failure-help=Cette option détermine le nombre maximum de tentatives de connexion avec un mauvais mot de passe.
 maximum-failure=Échec Maximum
 maximum-file-size=Taille de fichier maximum

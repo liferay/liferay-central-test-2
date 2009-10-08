@@ -459,29 +459,6 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 						<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
 					</td>
 				</tr>
-				<tr>
-					<td class="lfr-label">
-						<liferay-ui:message key="maximum-comments-to-display" />
-					</td>
-					<td>
-						<select name="<portlet:namespace />commentsPageDelta">
-		
-							<%
-							for (int curDelta : PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) {
-								if (curDelta > SearchContainer.MAX_DELTA) {
-									continue;
-								}
-							%>
-		
-								<option <%= ((commentsPageDelta == curDelta) ? "selected=\"selected\"" : "") %> value="<%= curDelta %>"><%= curDelta %></option>
-		
-							<%
-							}
-							%>
-
-						</select>
-					</td>
-				</tr>
 			</c:if>
 
 			</table>

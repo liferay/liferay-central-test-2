@@ -106,8 +106,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
-		int commentsPageDelta = ParamUtil.getInteger(
-			actionRequest, "commentsPageDelta");
 		String visibleNodes = ParamUtil.getString(
 			actionRequest, "visibleNodes");
 		String hiddenNodes = ParamUtil.getString(actionRequest, "hiddenNodes");
@@ -122,8 +120,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				"enable-comments", String.valueOf(enableComments));
 			preferences.setValue(
 				"enable-comment-ratings", String.valueOf(enableCommentRatings));
-			preferences.setValue(
-				"comments-page-delta", String.valueOf(commentsPageDelta));
 			preferences.setValue("visible-nodes", visibleNodes);
 			preferences.setValue("hidden-nodes", hiddenNodes);
 		}

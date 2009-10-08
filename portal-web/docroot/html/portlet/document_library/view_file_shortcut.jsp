@@ -340,7 +340,6 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 					subject="<%= toFileEntry.getTitle() %>"
 					redirect="<%= currentURL %>"
 					ratingsEnabled="<%= enableCommentRatings %>"
-					paginationDelta="<%= commentsPageDelta %>"
 				/>
 			</c:if>
 		</c:when>

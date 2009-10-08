@@ -348,7 +348,6 @@ if (articleDisplay != null) {
 					subject="<%= articleDisplay.getTitle() %>"
 					redirect="<%= currentURL %>"
 					ratingsEnabled="<%= enableCommentRatings %>"
-					paginationDelta="<%= commentsPageDelta %>"
 				/>
 			</c:if>
 		</c:if>

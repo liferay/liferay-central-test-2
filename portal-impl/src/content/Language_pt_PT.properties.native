@@ -2196,7 +2196,6 @@ maximized=Maximized
 maximum-age-help=Isto determina quanto tempo uma senha é boa para antes que necessite ser mudada.
 maximum-age=Idade Máxima
 maximum-bloggers-to-display=Bloggers máximo a indicar
-maximum-comments-to-display=O máximo comenta para indicar (Automatic Translation)
 maximum-failure-help=Isto determina o número máximo das épocas que um usuário pode tentar ao início de uma sessão com a senha errada.
 maximum-failure=Falha Máxima
 maximum-file-size=Tamanho de lima máximo

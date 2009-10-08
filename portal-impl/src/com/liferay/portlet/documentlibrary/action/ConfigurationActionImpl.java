@@ -79,8 +79,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
-		int commentsPageDelta = ParamUtil.getInteger(
-			actionRequest, "commentsPageDelta");
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -116,8 +114,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		preferences.setValue(
-			"comments-page-delta", String.valueOf(commentsPageDelta));
 
 		if (SessionErrors.isEmpty(actionRequest)) {
 			preferences.store();

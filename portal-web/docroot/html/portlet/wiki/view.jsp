@@ -294,7 +294,6 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 			subject="<%= wikiPage.getTitle() %>"
 			redirect="<%= currentURL %>"
 			ratingsEnabled="<%= enableCommentRatings %>"
-			paginationDelta="<%= commentsPageDelta %>"
 		/>
 	</c:if>
 </c:if>

@@ -22,7 +22,6 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,9 +49,6 @@ public class DiscussionTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:discussion:ratingsEnabled",
 			String.valueOf(_ratingsEnabled));
-		request.setAttribute(
-			"liferay-ui:discussion:paginationDelta", 
-			String.valueOf(_paginationDelta));
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -89,10 +85,6 @@ public class DiscussionTag extends IncludeTag {
 		_ratingsEnabled = ratingsEnabled;
 	}
 
-	public void setPaginationDelta(int paginationDelta) {
-		_paginationDelta = paginationDelta;
-	}
-
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -107,6 +99,5 @@ public class DiscussionTag extends IncludeTag {
 	private String _subject;
 	private String _redirect;
 	private boolean _ratingsEnabled = true;
-	private int _paginationDelta = SearchContainer.DEFAULT_DELTA;
 
 }

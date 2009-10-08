@@ -2196,7 +2196,6 @@ maximized=最大化的
 maximum-age-help=这决定密码多长时间需要更改一次。
 maximum-age=最大时间
 maximum-bloggers-to-display=最多可显示的博客作者
-maximum-comments-to-display=最大值评论显示 (Automatic Translation)
 maximum-failure-help=这决定用户可以使用错误密码尝试登录的最多次数。
 maximum-failure=最多的失败次数
 maximum-file-size=最大文件大小

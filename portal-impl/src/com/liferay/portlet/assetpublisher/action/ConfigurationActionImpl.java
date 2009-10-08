@@ -272,8 +272,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
-		int commentsPageDelta = ParamUtil.getInteger(
-			actionRequest, "commentsPageDelta");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
 		String medatadaFields = ParamUtil.getString(
@@ -315,8 +313,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		preferences.setValue(
-			"comments-page-delta", String.valueOf(commentsPageDelta));
 		preferences.setValue("metadata-fields", medatadaFields);
 	}
 
