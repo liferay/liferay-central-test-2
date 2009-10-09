@@ -22,16 +22,6 @@
 
 package com.liferay.portlet.workflowtasks.action;
 
-import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.TaskInstanceManagerUtil;
-import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.model.User;
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -42,6 +32,16 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.TaskInstanceManagerUtil;
+import com.liferay.portal.kernel.workflow.WorkflowException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
+
 /**
  * <a href="EditTaskAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -49,6 +49,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditTaskAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -72,6 +73,7 @@ public class EditTaskAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -93,11 +95,12 @@ public class EditTaskAction extends PortletAction {
 
 		if (Validator.isNull(activityName)) {
 			TaskInstanceManagerUtil.completeTaskInstance(
-				taskIntanceId, user.getUserId(), comment, null);
+				taskIntanceId, user.getUserId(), comment, null, null);
 		}
 		else {
 			TaskInstanceManagerUtil.completeTaskInstance(
-				taskIntanceId, user.getUserId(), activityName, comment, null);
+				taskIntanceId, user.getUserId(), activityName, comment, null,
+				null);
 		}
 	}
 

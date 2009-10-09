@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.util.Map;
+
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 /**
@@ -43,6 +45,18 @@ import com.liferay.portal.kernel.resource.ResourceRetriever;
 public interface WorkflowDefinition {
 
 	/**
+	 * Returns an optional array of any kind of attributes needed to describe
+	 * this workflow definition besides the name and version. If the
+	 * implementation does not provide or support attributes, <code>null</code>
+	 * is returned. If it does support attributes, but none have been set yet,
+	 * an empty map must be returned, never <code>null</code>.
+	 * 
+	 * @return the map of any additional attributes to the workflow definition,
+	 *         if supported, <code>null</code> otherwise
+	 */
+	public Map<String, Object> getAttributes();
+
+	/**
 	 * <p>
 	 * A workflow definition is being deployed as an archive, having the
 	 * definition file (usually an XML file) within a folder called META-INF and
@@ -50,14 +64,14 @@ public interface WorkflowDefinition {
 	 * any actions and activities. The jar being returned as the resource will
 	 * be deployed within the lib folder of the workflow plugin.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * This method returns <code>null</code>, if this definition has been
 	 * queried through the {@link WorkflowDefinitionManager}.
 	 * </p>
-	 *
+	 * 
 	 * @return the resource representing the workflow definition jar to be
-	 *		   deployed
+	 *         deployed
 	 */
 	public ResourceRetriever getJar();
 
@@ -78,5 +92,4 @@ public interface WorkflowDefinition {
 	 * @return the version of this definition
 	 */
 	public int getWorkflowDefinitionVersion();
-
 }

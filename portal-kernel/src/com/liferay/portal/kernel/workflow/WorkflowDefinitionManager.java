@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.util.List;
+import java.util.Map;
 
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
@@ -51,7 +52,7 @@ public interface WorkflowDefinitionManager {
 	 * <p>
 	 * Deploys the given workflow definition within the engine.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * If the workflow definition already exists and versioning is not supported
 	 * or it is the same version as already existing, the definition is
@@ -59,7 +60,7 @@ public interface WorkflowDefinitionManager {
 	 * complete new definition or as a new version of an already existing
 	 * definition.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * If you deploy a workflow definition by overwriting an existing one, make
 	 * sure it is compatible with already existing workflow instances to not
@@ -69,18 +70,21 @@ public interface WorkflowDefinitionManager {
 	 * old definition, and newly created workflow instances are created by using
 	 * the new version.
 	 * </p>
-	 *
-	 * @param  workflowDefinition the workflow definition to be deployed
-	 * @param  callingUserId the id of the user deploying the workflow
-	 *		   definition (see {@link
-	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
-	 *		   information)
+	 * 
+	 * @param workflowDefinition the workflow definition to be deployed
+	 * @param callingUserId the id of the user deploying the workflow definition
+	 *            (see {@link UserCredentialFactoryUtil#createCredential(long)}
+	 *            for more information)
+	 * @param parameters any additional parameters the underlying engine would
+	 *            need to deploy the given definition (like the name of the
+	 *            repository or anything similar), if nothing is needed, this
+	 *            parameter can be left <code>null</code>
 	 * @throws WorkflowException is thrown, if deployment of the definition
-	 *		   failed
+	 *             failed
 	 */
 	public void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition,
-			@CallingUserId long callingUserId)
+			@CallingUserId long callingUserId, Map<String, Object> parameters)
 		throws WorkflowException;
 
 	/**

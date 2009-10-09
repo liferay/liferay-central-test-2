@@ -22,42 +22,73 @@
 
 package com.liferay.portal.workflow;
 
+import java.util.List;
+import java.util.Map;
+
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
-
-import java.util.List;
+import com.liferay.portal.kernel.workflow.WorkflowRequest;
 
 /**
  * <a href="WorkflowDefinitionManagerProxyBean.java.html"><b><i>View Source</i>
  * </b></a>
- *
+ * 
+ * <p>
+ * The default implementation for the {@link WorkflowDefinitionManager} to be
+ * instrumented by Spring where every method of the interface is going to be
+ * injected using a generic advice ({@link WorkflowProxyAdvice}) to wrap the
+ * method and its arguments into a {@link WorkflowRequest}. So actually this
+ * implementation does nothing but throwing
+ * {@link UnsupportedOperationException} to make sure the advice has been
+ * injected by Spring.
+ * </p>
+ * 
  * @author Micha Kiener
  */
 public class WorkflowDefinitionManagerProxyBean
 	extends BaseProxyBean implements WorkflowDefinitionManager {
 
+	/**
+	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionManager#deployWorkflowDefinition(com.liferay.portal.kernel.workflow.WorkflowDefinition,
+	 *      long, java.util.Map)
+	 */
 	public void deployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition, long callingUserId) {
+		WorkflowDefinition workflowDefinition, long callingUserId,
+		Map<String, Object> parameters) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionManager#getWorkflowDefinitionCount()
+	 */
 	public int getWorkflowDefinitionCount() {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionManager#getWorkflowDefinitionCount(java.lang.String)
+	 */
 	public int getWorkflowDefinitionCount(String workflowDefinitionName) {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionManager#getWorkflowDefinitions(int,
+	 *      int, com.liferay.portal.kernel.util.OrderByComparator)
+	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		int start, int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionManager#getWorkflowDefinitions(java.lang.String,
+	 *      int, int, com.liferay.portal.kernel.util.OrderByComparator)
+	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		String workflowDefinitionName, int start, int end,
 		OrderByComparator orderByComparator) {
@@ -65,6 +96,9 @@ public class WorkflowDefinitionManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionManager#isSupportsVersioning()
+	 */
 	public boolean isSupportsVersioning() {
 		throw new UnsupportedOperationException();
 	}

@@ -22,10 +22,10 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.util.OrderByComparator;
-
 import java.util.List;
 import java.util.Map;
+
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**
  * <a href="TaskInstanceManagerUtil.java.html"><b><i>View Source</i></b></a>
@@ -44,64 +44,71 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#assignTaskInstanceToRole(long, long, String,
-	 *		Map, long)
+	 *      Map, long, Map)
 	 */
 	public static TaskInstanceInfo assignTaskInstanceToRole(
 			long taskInstanceId, long roleId, String comment,
-			Map<String, Object> attributes, long callingUserId)
+			Map<String, Object> attributes, long callingUserId,
+		Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.assignTaskInstanceToRole(
-			taskInstanceId, roleId, comment, attributes, callingUserId);
+			taskInstanceId, roleId, comment, attributes, callingUserId,
+			parameters);
 	}
 
 	/**
 	 * @see TaskInstanceManager#assignTaskInstanceToUser(long, UserCredential,
-	 *		String, Map, long)
+	 *      String, Map, long, Map)
 	 */
 	public static TaskInstanceInfo assignTaskInstanceToUser(
 			long taskInstanceId, UserCredential userCredential, String comment,
-			Map<String, Object> attributes, long callingUserId)
+			Map<String, Object> attributes, long callingUserId,
+		Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.assignTaskInstanceToUser(
-			taskInstanceId, userCredential, comment, attributes, callingUserId);
+			taskInstanceId, userCredential, comment, attributes, callingUserId,
+			parameters);
 	}
 
 	/**
-	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, Map)
+	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, Map,
+	 *      Map)
 	 */
 	public static TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String comment,
-			Map<String, Object> attributes)
+			Map<String, Object> attributes, Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.completeTaskInstance(
-			taskInstanceId, userId, comment, attributes);
+			taskInstanceId, userId, comment, attributes, parameters);
 	}
 
 	/**
 	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, String,
-	 *		Map)
+	 *      Map, Map)
 	 */
 	public static TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String activityName,
-			String comment, Map<String, Object> attributes)
+			String comment,
+		Map<String, Object> attributes, Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.completeTaskInstance(
-			taskInstanceId, userId, activityName, comment, attributes);
+			taskInstanceId, userId, activityName, comment, attributes,
+			parameters);
 	}
 
 	/**
-	 * @see TaskInstanceManager#getPossibleNextActivityNames(long, long)
+	 * @see TaskInstanceManager#getPossibleNextActivityNames(long, long, Map)
 	 */
 	public static List<String> getPossibleNextActivityNames(
-			long taskInstanceId, long userId)
+			long taskInstanceId, long userId, Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getPossibleNextActivityNames(
-			taskInstanceId, userId);
+			taskInstanceId, userId, parameters);
 	}
 
 	/**

@@ -23,7 +23,9 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -49,6 +51,39 @@ public class UserCredential implements Serializable {
 	 * construction.
 	 */
 	public UserCredential() {
+	}
+
+	/**
+	 * Adds any additional attribute to this user credential. Make sure the
+	 * value of the attribute is serializable as the user credential might get
+	 * serialized through the message bus, if needed.
+	 * 
+	 * @param key the name of the attribute for later retrieval
+	 * @param value the value of the attribute to be stored within this user
+	 *            credential
+	 */
+	public void addAttribute(String key, Object value) {
+		if (_attributes == null) {
+			_attributes = new HashMap<String, Object>();
+		}
+		_attributes.put(key, value);
+	}
+
+	/**
+	 * Returns the attribute with the given key from the internal map of
+	 * additional attributes, if available, <code>null</code> otherwise.
+	 * 
+	 * @param key the key of the attribute to be returned
+	 * @return the value of the attribute, if available, <code>null</code>
+	 *         otherwise
+	 * @param <T> the expected type of the attribute
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T getAttribute(String key) {
+		if (_attributes == null) {
+			return null;
+		}
+		return (T) _attributes.get(key);
 	}
 
 	/**
@@ -154,6 +189,7 @@ public class UserCredential implements Serializable {
 		_userId = userId;
 	}
 
+	private Map<String, Object> _attributes;
 	private long _companyId;
 	private String _emailAddress;
 	private Locale _locale;
