@@ -27,158 +27,348 @@
 <%
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
-boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
-
-List layoutList = (List)request.getAttribute("edit_pages.jsp-layoutList");
 
 boolean selectableTree = ParamUtil.getBoolean(request, "selectableTree");
 String treeId = ParamUtil.getString(request, "treeId");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 %>
-
-<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/tree.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-	var <portlet:namespace />layoutIcons = {
-		checkbox: '<%= themeDisplay.getPathThemeImages() %>/trees/checkbox.png',
-		checked: '<%= themeDisplay.getPathThemeImages() %>/trees/checked.png',
-		childChecked: '<%= themeDisplay.getPathThemeImages() %>/trees/child_checked.png',
-		minus: '<%= themeDisplay.getPathThemeImages() %>/trees/minus.png',
-		page: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
-		plus: '<%= themeDisplay.getPathThemeImages() %>/trees/plus.png',
-		root: '<%= themeDisplay.getPathThemeImages() %>/trees/root.png',
-		spacer: '<%= themeDisplay.getPathThemeImages() %>/trees/spacer.png'
-	};
-
-	var <portlet:namespace />layoutArray = [];
-	var <portlet:namespace />nodeIds = '';
-
-	<%
-	StringBuilder nodeIds = new StringBuilder();
-
-	for (int i = 0; i < layoutList.size(); i++) {
-		String layoutDesc = (String)layoutList.get(i);
-
-		String[] nodeValues = StringUtil.split(layoutDesc, "|");
-
-		long objId = GetterUtil.getLong(nodeValues[3]);
-		String name = UnicodeFormatter.toString(nodeValues[4]);
-
-		// Set a better name and remove depth because href should be in the 5th
-		// position
-
-		if (selPlid == objId) {
-			name = "<strong>" + name + "</strong>";
-		}
-
-		nodeValues[4] = name;
-
-		int depth = 0;
-
-		if (i != 0) {
-			depth = GetterUtil.getInteger(nodeValues[6]);
-			nodeValues[6] = "";
-		}
-
-		layoutDesc = StringUtil.merge(nodeValues, "|");
-
-		if (i != 0) {
-			layoutDesc = layoutDesc.substring(0, layoutDesc.length() - 1);
-		}
-
-		if (nodeValues[0] != "0") {
-			nodeIds.append(nodeValues[0]);
-			nodeIds.append(StringPool.COMMA);
-		}
-	%>
-
-		<portlet:namespace />layoutArray[<%= i %>] = {
-			depth: '<%= depth %>',
-			id: '<%= nodeValues[0]  %>',
-			img: '<%= nodeValues[4] %>',
-			ls: '<%= nodeValues[2] %>',
-			href: 'javascript:location.href = \'<%= HttpUtil.encodeURL(portletURL.toString()) %>&<portlet:namespace />selPlid=<%= objId %>\';',
-			parentId: '<%= nodeValues[1] %>',
-			objId: '<%= nodeValues[3] %>',
-			name: '<%= nodeValues[4] %>'
-		};
-
-	<%
-	}
-	%>
-
-	var <portlet:namespace />nodeIds = '<%= nodeIds %>';
-</script>
-
-<%
-long[] openNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId), 0L);
-
-Arrays.sort(openNodes);
-
-long[] selectedNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId + "Selected"), 0L);
-
-Arrays.sort(selectedNodes);
-
-ResourceURL renderTreeURL = renderResponse.createResourceURL();
-
-renderTreeURL.setResourceID("/html/portlet/communities/tree_js_node.jsp");
-
-renderTreeURL.setParameter("struts_action", "/communities/edit_pages");
-renderTreeURL.setParameter("selectableTree", Boolean.toString(selectableTree));
-renderTreeURL.setParameter("selectedNodes", StringUtil.merge(selectedNodes));
-renderTreeURL.setParameter("openNodes", StringUtil.merge(openNodes));
-renderTreeURL.setParameter("portletURL", portletURL.toString());
-%>
-
-<div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output">
-	<ul class="lfr-component">
-		<li class="root-container">
-			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= HtmlUtil.escape(rootNodeName) %></span></a>
-
-			<%
-			_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 1, openNodes, selectableTree, selectedNodes, portletURL.toString(), themeDisplay, false, pageContext, request);
-			%>
-
-		</li>
-	</ul>
+<div class="lfr-tree-control aui-helper-clearfix">
+	<div class="lfr-tree-control-item" id="<portlet:namespace />treeExpandAll">
+		<div class="aui-icon lfr-tree-control-icon-expandAll"></div>
+		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="expand-all" /></a>
+	</div>
+	<div class="lfr-tree-control-item" id="<portlet:namespace />treeCollapseAll">
+		<div class="aui-icon lfr-tree-control-icon-collapseAll"></div>
+		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="collapse-all" /></a>
+	</div>
 </div>
+
+<div class="lfr-tree-loading" id="<portlet:namespace />treeLoading">
+	<span class="aui-icon aui-icon-loading lfr-tree-loading-icon"></span>
+</div>
+
+<div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output"></div>
 
 <script type="text/javascript">
 	AUI().ready(
-		'liferay-tree',
-		function() {
-			new Liferay.Tree(
-				{
-					url: '<%= renderTreeURL %>',
-					icons: <portlet:namespace />layoutIcons,
-					nodes: <portlet:namespace />layoutArray,
-					nodeIds: <portlet:namespace />nodeIds,
-					openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>',
-					outputId: '#<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output',
-					preRendered: true,
-					selectable: <%= selectableTree %>,
-					treeId: '<%= HtmlUtil.escape(treeId) %>'
+		'tree-view', 'datatype-xml', 'dataschema-xml',
+		function(A) {
+			var childrenCountCache = {};
+
+			var TreeUtil = {
+				DEFAULT_PARENT_LAYOUT_ID: <%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>,
+				OPEN_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>'.split(','),
+				SELECTED_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId + "Selected") %>'.split(','),
+				PREFIX_LAYOUT_ID: '_layoutId_',
+				PREFIX_PLID: '_plid_',
+
+				afterRenderTree: function(event) {
+					var treeInstance = event.target;
+					var rootNode = treeInstance.item(0);
+					var loadingEL = A.get('#<portlet:namespace />treeLoading');
+
+					loadingEL.hide();
+					TreeUtil.restoreNodeState(rootNode);
+				},
+
+				countByG_P_P: function(parentLayoutId, callback) {
+					var parameters = TreeUtil.getParameters(parentLayoutId);
+					var cached = (parentLayoutId in childrenCountCache);
+
+					if (cached) {
+						callback(childrenCountCache[parentLayoutId]);
+					}
+					else {
+						Liferay.Service.Portal.Layout.countByG_P_P(
+							parameters,
+							function(message) {
+								childrenCountCache[parentLayoutId] = message;
+
+								callback.apply(this, arguments);
+							}
+						);
+					}
+				},
+
+				createId: function(layoutId, plid) {
+					return '<%= HtmlUtil.escape(treeId) %>' + TreeUtil.PREFIX_LAYOUT_ID + layoutId + TreeUtil.PREFIX_PLID + plid;
+				},
+
+				createLink: function(label, plid) {
+					return '<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ label +'</a>';
+				},
+
+				extractLayoutId: function(node) {
+					return node.get('id').match(/\d+/g)[0];
+				},
+
+				extractPlid: function(node) {
+					return node.get('id').match(/\d+/g)[1];
+				},
+
+				formatJSONResults: function(json) {
+					var output = [];
+
+					A.each(
+						json,
+						function(node) {
+							var nameXML = A.DataType.XML.parse(node.name);
+
+							var schema = {
+								resultListLocator: 'root',
+								resultFields: [
+									{
+										key: 'label',
+										locator: 'name[@language-id="<%= themeDisplay.getLocale() %>"]'
+									}
+								]
+							};
+
+							var nodeBase = A.DataSchema.XML.apply(schema, nameXML).results[0];
+
+							var newNode = A.mix(
+								nodeBase,
+								{
+									alwaysShowHitArea: false,
+									type: '<%= selectableTree ? "task" : "io" %>',
+									id: TreeUtil.createId(node.layoutId, node.plid),
+									after: {
+										check: function(event) {
+											var plid = TreeUtil.extractPlid(event.target);
+
+											TreeUtil.updateSessionTreeClick(plid, true, '<%= HtmlUtil.escape(treeId) %>Selected');
+										},
+										uncheck: function(event) {
+											var plid = TreeUtil.extractPlid(event.target);
+
+											TreeUtil.updateSessionTreeClick(plid, false, '<%= HtmlUtil.escape(treeId) %>Selected');
+										}
+									}
+								}
+							);
+
+							if (!<%= selectableTree %>) {
+								newNode.label = TreeUtil.createLink(newNode.label, node.plid);
+							}
+
+							output.push(newNode);
+						}
+					);
+
+					return output;
+				},
+
+				getLayouts: function(parentLayoutId, callback) {
+					var parameters = TreeUtil.getParameters(parentLayoutId);
+
+					Liferay.Service.Portal.Layout.getLayouts(parameters, callback);
+				},
+
+				getParameters: function(parentLayoutId) {
+					var serviceParameterTypes = [
+					    'long',
+					    'boolean',
+					    'long'
+					];
+
+					return {
+					    groupId: <%= groupId %>,
+					    privateLayout: false,
+					    parentLayoutId: parentLayoutId,
+					    serviceParameterTypes: jQuery.toJSON(serviceParameterTypes)
+					};
+				},
+
+				updateLayout: function(data) {
+					var updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+
+					A.io(
+						updateURL,
+						{
+							method: 'POST',
+							data: A.toQueryString(data)
+						}
+					);
+				},
+
+				updateLayoutParent: function(dragPlid, dropPlid) {
+					var data = {
+						cmd: 'parent_layout_id',
+						parentPlid: dropPlid,
+						plid: dragPlid
+					};
+
+					TreeUtil.updateLayout(data);
+				},
+
+				updateLayoutPriority: function(dragPlid, index) {
+					var data = {
+						cmd: 'priority',
+						plid: dragPlid,
+						priority: index
+					};
+
+					TreeUtil.updateLayout(data);
+				},
+
+				restoreNodeState: function(node) {
+					var instance = this;
+					var id = node.get('id');
+					var plid = TreeUtil.extractPlid(node);
+
+					if (plid == '<%= selPlid %>') {
+						node.select();
+					}
+
+					if (A.Array.indexOf(TreeUtil.OPEN_NODES, id) > -1) {
+						node.expand();
+					}
+
+					if (A.Array.indexOf(TreeUtil.SELECTED_NODES, plid) > -1) {
+						if (node.check) {
+							node.check();
+						}
+					}
+				},
+
+				updateSessionTreeClick: function(id, open, treeId) {
+					var sessionClickURL = themeDisplay.getPathMain() + '/portal/session_tree_js_click';
+
+					var data = {
+						nodeId: id,
+						openNode: open || false,
+						treeId: treeId
+					};
+
+					A.io(
+						sessionClickURL,
+						{
+							method: 'POST',
+							data: A.toQueryString(data)
+						}
+					);
 				}
-			);
+			};
+
+			var rootId = TreeUtil.createId(TreeUtil.DEFAULT_PARENT_LAYOUT_ID, 0);
+			var rootLabel = '<%= HtmlUtil.escape(rootNodeName) %>';
+			var treeElId = '<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output';
+
+			if (!<%= selectableTree %>) {
+				rootLabel = TreeUtil.createLink(rootLabel, TreeUtil.DEFAULT_PARENT_LAYOUT_ID);
+			}
+
+			var RootNodeType = <%= selectableTree ? "A.TreeNodeTask" : "A.TreeNodeIO" %>;
+			var TreeViewType = <%= selectableTree ? "A.TreeView" : "A.TreeViewDD" %>;
+			var rootNode = new RootNodeType({
+				alwaysShowHitArea: false,
+				draggable: false,
+				id: rootId,
+				label: rootLabel,
+				leaf: false
+			});
+
+			rootNode.get('contentBox').addClass('lfr-root-node');
+
+			var treeview = new TreeViewType({
+				after: {
+					collapse: function(event) {
+						var layoutId = TreeUtil.extractLayoutId(event.tree.node);
+
+						TreeUtil.updateSessionTreeClick(layoutId, false, '<%= HtmlUtil.escape(treeId) %>');
+					},
+					expand: function(event) {
+						var layoutId = TreeUtil.extractLayoutId(event.tree.node);
+
+						TreeUtil.updateSessionTreeClick(layoutId, true, '<%= HtmlUtil.escape(treeId) %>');
+					},
+					render: TreeUtil.afterRenderTree
+				},
+				boundingBox: '#'+treeElId,
+				children: [ rootNode ],
+				height: 500,
+				io: {
+					formatter: TreeUtil.formatJSONResults,
+					loader: function(url, config, node) {
+						var parentLayoutId = TreeUtil.extractLayoutId(node);
+
+						config.on.start();
+
+						TreeUtil.getLayouts(
+							parentLayoutId,
+							function(message) {
+								if (message) {
+									config.on.complete();
+									config.on.success(message);
+								}
+								else {
+									config.on.failure();
+								}
+							}
+						);
+					}
+				},
+				on: {
+					append: function(event) {
+						var node = event.tree.node;
+						var parentLayoutId = TreeUtil.extractLayoutId(node);
+
+						// check if the node has children and show the hitarea
+						TreeUtil.countByG_P_P(
+							parentLayoutId,
+							function(message) {
+								if (message.returnValue > 0) {
+									node.showHitArea();
+								}
+							}
+						);
+
+						TreeUtil.restoreNodeState(node);
+					},
+					drop: function(event) {
+						var tree = event.tree;
+						var index = tree.dragNode.get('parentNode').indexOf(tree.dragNode);
+
+						TreeUtil.updateLayoutPriority(
+							TreeUtil.extractPlid(tree.dragNode),
+							index
+						);
+					},
+					dropAppend: function(event) {
+						var tree = event.tree;
+
+						TreeUtil.updateLayoutParent(
+							TreeUtil.extractPlid(tree.dragNode),
+							TreeUtil.extractPlid(tree.dropNode)
+						);
+					},
+					dropInsert: function(event) {
+						var tree = event.tree;
+
+						TreeUtil.updateLayoutParent(
+							TreeUtil.extractPlid(tree.dragNode),
+							TreeUtil.extractPlid(tree.dropNode.get('parentNode'))
+						);
+					}
+				},
+				type: 'pages'
+			})
+			.render();
+
+			var collapseAll = function(event) {
+				treeview.collapseAll();
+				event.halt();
+			};
+			var expandAll = function(event) {
+				treeview.expandAll();
+				event.halt();
+			};
+
+			A.on('click', collapseAll, '#<portlet:namespace />treeCollapseAll');
+			A.on('click', expandAll, '#<portlet:namespace />treeExpandAll');
 		}
 	);
 </script>
-
-<%!
-private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, long nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, String portletURL, ThemeDisplay themeDisplay, boolean renderChildrenOnly, PageContext pageContext, HttpServletRequest request) throws Exception {
-	request.setAttribute(WebKeys.TREE_GROUP_ID, groupId);
-	request.setAttribute(WebKeys.TREE_PRIVATE_LAYOUT, privateLayout);
-	request.setAttribute(WebKeys.TREE_PARENT_LAYOUT_ID, parentLayoutId);
-	request.setAttribute(WebKeys.TREE_NODE_ID, nodeId);
-	request.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
-	request.setAttribute(WebKeys.TREE_SELECTABLE_TREE, selectableTree);
-	request.setAttribute(WebKeys.TREE_SELECTED_NODES, selectedNodes);
-	request.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
-	request.setAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY, renderChildrenOnly);
-
-	pageContext.include("/html/portlet/communities/tree_js_node.jsp");
-}
-%>
