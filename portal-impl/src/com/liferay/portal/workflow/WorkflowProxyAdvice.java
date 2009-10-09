@@ -22,20 +22,27 @@
 
 package com.liferay.portal.workflow;
 
+import org.aopalliance.intercept.MethodInvocation;
+
 import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowRequest;
 import com.liferay.portal.messaging.proxy.BaseProxyAdvice;
 
-import org.aopalliance.intercept.MethodInvocation;
-
 /**
  * <a href="WorkflowProxyAdvice.java.html"><b><i>View Source</i></b></a>
- *
+ * 
+ * <p>
+ * The advice being injected (weaved) into the generic proxies to generically
+ * wrap the method being invoked into a {@link WorkflowRequest} to be sent
+ * through the message bus.
+ * </p>
+ * 
  * @author Micha Kiener
  */
 public class WorkflowProxyAdvice extends BaseProxyAdvice {
 
+	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		try {
 			return super.invoke(methodInvocation);
@@ -45,6 +52,7 @@ public class WorkflowProxyAdvice extends BaseProxyAdvice {
 		}
 	}
 
+	@Override
 	protected ProxyRequest createProxyRequest(MethodInvocation methodInvocation)
 		throws Exception {
 
