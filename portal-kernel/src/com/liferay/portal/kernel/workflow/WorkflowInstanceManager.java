@@ -253,20 +253,20 @@ public interface WorkflowInstanceManager {
 	/**
 	 * Returns the count of all workflow instances for a certain definition name
 	 * and optional version or all versions of that workflow definition.
-	 * Additionally, only finished or open instances are being returned.
+	 * Additionally, only completed or open instances are being returned.
 	 * 
 	 * @param workflowDefinitionName the name of the workflow definition
 	 * @param workflowDefinitionVersion the specific version or
 	 *            <code>null</code>, if all versions should be considered
-	 * @param finished flag indicating whether the count of finished instances
+	 * @param completed flag indicating whether the count of completed instances
 	 *            should be returned or just open instances
-	 * @return the count of finished or open instances for the specific workflow
-	 *         definition
+	 * @return the count of completed or open instances for the specific
+	 *         workflow definition
 	 * @throws WorkflowException is thrown if querying failed
 	 */
 	public int getWorkflowInstanceInfoCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished)
+			boolean completed)
 		throws WorkflowException;
 
 	/**
@@ -285,31 +285,32 @@ public interface WorkflowInstanceManager {
 	/**
 	 * Returns a list of workflow instance information for a given workflow
 	 * definition and optionally a certain version of it. If the parameter
-	 * <code>finished</code> is provided (not <code>null</code>), only
+	 * <code>completed</code> is provided (not <code>null</code>), only
 	 * appropriate instances are returned.
-	 *
-	 * @param  workflowDefinitionName the name of the workflow definition to
-	 *		   return instance information for
-	 * @param  workflowDefinitionVersion the optional version of the definition,
-	 *		   if querying for a particular version, otherwise <code>null</code>
-	 *		   has to be provided
-	 * @param  finished defines, if finished or open workflow instances should
-	 *		   be returned or if <code>null</code>, all instances should be
-	 *		   returned
-	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *		   children's information should be returned as well or if only the
-	 *		   root workflow instance should be returned, without the children
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
+	 * 
+	 * @param workflowDefinitionName the name of the workflow definition to
+	 *            return instance information for
+	 * @param workflowDefinitionVersion the optional version of the definition,
+	 *            if querying for a particular version, otherwise
+	 *            <code>null</code> has to be provided
+	 * @param completed defines, if completed or open workflow instances should
+	 *            be returned or if <code>null</code>, all instances should be
+	 *            returned
+	 * @param retrieveChildrenInfo flag, indicating whether the hierarchy of
+	 *            children's information should be returned as well or if only
+	 *            the root workflow instance should be returned, without the
+	 *            children
+	 * @param start inclusive start position for paginating the result
+	 * @param end exclusive end position for paginating the result
+	 * @param orderByComparator comparator for sorting the result
 	 * @return a list of workflow instance information for the given definition,
-	 *		   will return an empty list rather than <code>null</code> if no
-	 *		   instances found
+	 *         will return an empty list rather than <code>null</code> if no
+	 *         instances found
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished, boolean retrieveChildrenInfo, int start, int end,
+			boolean completed, boolean retrieveChildrenInfo, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
