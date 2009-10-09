@@ -70,6 +70,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("//img[@alt='Manage Wikis']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 				selenium.clickAt("//td[4]/ul/li/strong/span",
 					RuntimeVariables.replace(""));
 
@@ -79,7 +80,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[6]/a")) {
+						if (selenium.isElementPresent("//div[6]/ul/li[6]/a")) {
 							break;
 						}
 					}
@@ -89,10 +90,11 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
+				selenium.click(RuntimeVariables.replace("//div[6]/ul/li[6]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				Thread.sleep(5000);
 
 				boolean WikiNodePresent = selenium.isElementPresent(
 						"//td[4]/ul/li/strong/span");
@@ -112,7 +114,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[6]/a")) {
+						if (selenium.isElementPresent("//div[6]/ul/li[6]/a")) {
 							break;
 						}
 					}
@@ -122,7 +124,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
+				selenium.click(RuntimeVariables.replace("//div[6]/ul/li[6]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -131,9 +133,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("link=Wiki Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("//img[@alt='Remove']");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
 			case 3:
 
@@ -155,7 +154,8 @@ public class TearDownTest extends BaseTestCase {
 
 				selenium.clickAt("link=Home", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Manage Pages",
+				Thread.sleep(5000);
+				selenium.clickAt("//div[3]/ul/li[1]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
@@ -179,7 +179,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/a",
+				selenium.clickAt("//ul[2]/li[1]/span/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(

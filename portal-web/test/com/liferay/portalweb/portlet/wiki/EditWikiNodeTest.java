@@ -53,6 +53,9 @@ public class EditWikiNodeTest extends BaseTestCase {
 		selenium.clickAt("//img[@alt='Manage Wikis']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +63,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//div[6]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -70,9 +73,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
-		selenium.clickAt("//div[5]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[6]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

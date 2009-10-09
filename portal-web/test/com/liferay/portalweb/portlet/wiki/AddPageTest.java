@@ -52,7 +52,8 @@ public class AddPageTest extends BaseTestCase {
 		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//div[3]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -62,7 +63,7 @@ public class AddPageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span")) {
+							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
 					break;
 				}
 			}
@@ -72,7 +73,7 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span",
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
