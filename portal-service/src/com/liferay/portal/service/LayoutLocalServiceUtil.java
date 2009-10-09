@@ -162,11 +162,6 @@ public class LayoutLocalServiceUtil {
 			friendlyURL, dlFolderId, serviceContext);
 	}
 
-	public static int countByG_P_P(long groupId, boolean privateLayout,
-		long parentLayoutId) throws com.liferay.portal.SystemException {
-		return getService().countByG_P_P(groupId, privateLayout, parentLayoutId);
-	}
-
 	public static void deleteLayout(long groupId, boolean privateLayout,
 		long layoutId)
 		throws com.liferay.portal.PortalException,

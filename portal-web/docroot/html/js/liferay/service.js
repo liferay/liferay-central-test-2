@@ -86,12 +86,9 @@ Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Layout",
 	{
 		addLayout: true,
-		countByG_P_P: true,
 		deleteLayout: true,
 		getLayoutName: true,
 		getLayoutReferences: true,
-		getLayout: true,
-		getLayouts: true,
 		setLayouts: true,
 		unschedulePublishToLive: true,
 		unschedulePublishToRemote: true,

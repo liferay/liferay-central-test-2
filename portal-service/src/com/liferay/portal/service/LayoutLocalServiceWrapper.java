@@ -157,12 +157,6 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 			hidden, friendlyURL, dlFolderId, serviceContext);
 	}
 
-	public int countByG_P_P(long groupId, boolean privateLayout,
-		long parentLayoutId) throws com.liferay.portal.SystemException {
-		return _layoutLocalService.countByG_P_P(groupId, privateLayout,
-			parentLayoutId);
-	}
-
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

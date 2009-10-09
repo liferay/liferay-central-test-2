@@ -69,12 +69,6 @@ public class LayoutServiceWrapper implements LayoutService {
 			friendlyURL, serviceContext);
 	}
 
-	public int countByG_P_P(long groupId, boolean privateLayout,
-		long parentLayoutId) throws com.liferay.portal.SystemException {
-		return _layoutService.countByG_P_P(groupId, privateLayout,
-			parentLayoutId);
-	}
-
 	public void deleteLayout(long plid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -101,51 +95,6 @@ public class LayoutServiceWrapper implements LayoutService {
 		throws com.liferay.portal.SystemException {
 		return _layoutService.getLayoutReferences(companyId, portletId,
 			preferencesKey, preferencesValue);
-	}
-
-	public com.liferay.portal.model.Layout getLayout(long plid)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _layoutService.getLayout(plid);
-	}
-
-	public com.liferay.portal.model.Layout getLayout(long groupId,
-		boolean privateLayout, long layoutId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _layoutService.getLayout(groupId, privateLayout, layoutId);
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
-		long groupId, boolean privateLayout)
-		throws com.liferay.portal.SystemException {
-		return _layoutService.getLayouts(groupId, privateLayout);
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
-		long groupId, boolean privateLayout, long parentLayoutId)
-		throws com.liferay.portal.SystemException {
-		return _layoutService.getLayouts(groupId, privateLayout, parentLayoutId);
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
-		long groupId, boolean privateLayout, java.lang.String type)
-		throws com.liferay.portal.SystemException {
-		return _layoutService.getLayouts(groupId, privateLayout, type);
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
-		long groupId, boolean privateLayout, long parentLayoutId, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return _layoutService.getLayouts(groupId, privateLayout,
-			parentLayoutId, start, end);
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
-		long groupId, boolean privateLayout, long[] layoutIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _layoutService.getLayouts(groupId, privateLayout, layoutIds);
 	}
 
 	public byte[] exportLayouts(long groupId, boolean privateLayout,
