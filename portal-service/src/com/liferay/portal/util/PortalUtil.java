@@ -129,6 +129,10 @@ public class PortalUtil {
 		getPortal().copyRequestParameters(actionRequest, actionResponse);
 	}
 
+	public static String escapeRedirect(String url) {
+		return getPortal().escapeRedirect(url);
+	}
+
 	public static long getBasicAuthUserId(HttpServletRequest request)
 		throws PortalException, SystemException {
 

@@ -540,6 +540,53 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public String escapeRedirect(String url) {
+		if (Validator.isNull(url) || !HttpUtil.hasDomain(url)) {
+			return url;
+		}
+
+		try {
+			String securityMode = PropsValues.REFERER_URL_SECURITY_MODE;
+
+			String domain = StringUtil.split(
+				HttpUtil.getDomain(url), StringPool.COLON)[0];
+
+			if (securityMode.equals("domain")) {
+				String[] allowedDomains =
+					PropsValues.REFERER_URL_DOMAINS_ALLOWED;
+
+				if ((allowedDomains.length > 0) &&
+					!ArrayUtil.contains(allowedDomains, domain)) {
+
+					url = null;
+				}
+			}
+			else if (securityMode.equals("ip")) {
+				String[] allowedIps = PropsValues.REFERER_URL_IPS_ALLOWED;
+
+				InetAddress inetAddress = InetAddress.getByName(domain);
+
+				if ((allowedIps.length > 0) &&
+					!ArrayUtil.contains(
+						allowedIps, inetAddress.getHostAddress())) {
+
+					String serverIp = getComputerAddress();
+
+					if (!serverIp.equals(inetAddress.getHostAddress()) ||
+						!ArrayUtil.contains(allowedIps, "SERVER_IP")) {
+
+						url = null;
+					}
+				}
+			}
+		}
+		catch (UnknownHostException uhe) {
+			url = null;
+		}
+
+		return url;
+	}
+
 	public long getBasicAuthUserId(HttpServletRequest request)
 		throws PortalException, SystemException {
 

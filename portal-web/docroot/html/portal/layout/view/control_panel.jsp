@@ -362,7 +362,7 @@ if (Validator.isNotNull(ppid)) {
 							%>
 
 							<span class="nobr">
-								<a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName)) %></a>
+								<a class="portlet-icon-back" href="<%= PortalUtil.escapeRedirect(backURL) %>"><%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName)) %></a>
 							</span>
 						</aui:column>
 					</aui:layout>

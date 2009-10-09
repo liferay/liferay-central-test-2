@@ -27,40 +27,7 @@
 <%
 String referer = null;
 
-String refererParam = request.getParameter(WebKeys.REFERER);
-
-if (Validator.isNotNull(refererParam) && HttpUtil.hasDomain(refererParam)) {
-	try {
-		String securityMode = PropsValues.REFERER_URL_SECURITY_MODE;
-
-		String domain = StringUtil.split(HttpUtil.getDomain(refererParam), StringPool.COLON)[0];
-
-		if (securityMode.equals("domain")) {
-			String[] allowedDomains = PropsValues.REFERER_URL_DOMAINS_ALLOWED;
-
-			if ((allowedDomains.length > 0) && !ArrayUtil.contains(allowedDomains, domain)) {
-				refererParam = null;
-			}
-		}
-		else if (securityMode.equals("ip")) {
-			String[] allowedIps = PropsValues.REFERER_URL_IPS_ALLOWED;
-
-			String serverIp = request.getServerName();
-
-			InetAddress inetAddress = InetAddress.getByName(domain);
-
-			if ((allowedIps.length > 0) && !ArrayUtil.contains(allowedIps, inetAddress.getHostAddress())) {
-				if (!serverIp.equals(inetAddress.getHostAddress()) || !ArrayUtil.contains(allowedIps, "SERVER_IP")) {
-					refererParam = null;
-				}
-			}
-		}
-	}
-	catch (UnknownHostException uhe) {
-		refererParam = null;
-	}
-}
-
+String refererParam = HtmlUtil.escape(PortalUtil.escapeRedirect(request.getParameter(WebKeys.REFERER)));
 String refererRequest = (String)request.getAttribute(WebKeys.REFERER);
 String refererSession = (String)session.getAttribute(WebKeys.REFERER);
 

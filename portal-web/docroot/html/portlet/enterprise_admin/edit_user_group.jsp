@@ -47,7 +47,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 	<liferay-util:include page="/html/portlet/enterprise_admin/user_group/toolbar.jsp">
 		<liferay-util:param name="toolbarItem" value='<%= (userGroup == null) ? "add" : "view-all" %>' />
-		<liferay-util:param name="backURL" value="<%= backURL %>" />
+		<liferay-util:param name="backURL" value="<%= PortalUtil.escapeRedirect(backURL) %>" />
 	</liferay-util:include>
 
 	<liferay-ui:error exception="<%= DuplicateUserGroupException.class %>" message="please-enter-a-unique-name" />
@@ -71,7 +71,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

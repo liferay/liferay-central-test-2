@@ -121,6 +121,8 @@ public interface Portal {
 	public void copyRequestParameters(
 		ActionRequest actionRequest, ActionResponse actionResponse);
 
+	public String escapeRedirect(String url);
+
 	public long getBasicAuthUserId(HttpServletRequest request)
 		throws PortalException, SystemException;
 
