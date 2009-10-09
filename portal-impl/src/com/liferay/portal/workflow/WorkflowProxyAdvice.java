@@ -42,6 +42,12 @@ import com.liferay.portal.messaging.proxy.BaseProxyAdvice;
  */
 public class WorkflowProxyAdvice extends BaseProxyAdvice {
 
+	/**
+	 * Overwritten in order to wrap a possible {@link Exception} being thrown
+	 * into a {@link WorkflowException}.
+	 * 
+	 * @see com.liferay.portal.messaging.proxy.BaseProxyAdvice#invoke(org.aopalliance.intercept.MethodInvocation)
+	 */
 	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		try {
@@ -52,6 +58,12 @@ public class WorkflowProxyAdvice extends BaseProxyAdvice {
 		}
 	}
 
+	/**
+	 * Overwritten in order to create a new {@link WorkflowRequest} wrapping the
+	 * method being adviced into a workflow request.
+	 * 
+	 * @see com.liferay.portal.messaging.proxy.BaseProxyAdvice#createProxyRequest(org.aopalliance.intercept.MethodInvocation)
+	 */
 	@Override
 	protected ProxyRequest createProxyRequest(MethodInvocation methodInvocation)
 		throws Exception {
