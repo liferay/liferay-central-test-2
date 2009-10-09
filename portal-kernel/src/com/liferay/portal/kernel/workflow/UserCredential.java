@@ -23,24 +23,23 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
-
 import java.util.Locale;
 import java.util.Set;
 
 /**
  * <a href="UserCredential.java.html"><b><i>View Source</i></b></a>
- *
+ * 
  * <p>
  * The user credential is a container for a user's id and its roles and is used
  * as the credential towards the workflow engine. For convenience, it is just
- * added automatically through the request by creating it using the {@link
- * WorkflowUtil#createUserCredential(long)} as the API just takes the user id,
- * the role set and additional information is being added by the {@link
- * UserCredentialFactory} invoked by the proxy (most likely the request builder)
- * in order to avoid the implementation or adapter having to call back the
- * portal for the set of roles of a user's id.
+ * added automatically through the request by creating it using the
+ * {@link UserCredentialFactoryUtil#createCredential(long)} as the API just
+ * takes the user id, the role set and additional information is being added by
+ * the {@link UserCredentialFactory} invoked by the proxy (most likely the
+ * request builder) in order to avoid the implementation or adapter having to
+ * call back the portal for the set of roles of a user's id.
  * </p>
- *
+ * 
  * @author Micha Kiener
  */
 public class UserCredential implements Serializable {

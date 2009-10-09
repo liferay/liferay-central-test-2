@@ -22,13 +22,12 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.util.List;
+
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import java.util.List;
-
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowDefinitionManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,6 +44,7 @@ import java.util.List;
  *
  * @author Micha Kiener
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowDefinitionManager {
 
 	/**
@@ -83,8 +83,28 @@ public interface WorkflowDefinitionManager {
 			@CallingUserId long callingUserId)
 		throws WorkflowException;
 
+	/**
+	 * Returns the count of workflow definitions being deployed within the
+	 * repository.
+	 * 
+	 * @return the count of available workflow definitions
+	 * @throws WorkflowException is thrown, if requesting the information is not
+	 *             possible
+	 */
 	public int getWorkflowDefinitionCount() throws WorkflowException;
 
+	/**
+	 * Returns the count of workflow definition versions for a specific workflow
+	 * definition name. If the workflow definition specified is not available,
+	 * this method just returns 0.
+	 * 
+	 * @param workflowDefinitionName the name of the workflow definition to
+	 *            return its count of versions
+	 * @return the number of deployed versions for the specified workflow
+	 *         definition
+	 * @throws WorkflowException is thrown on any exception while requesting the
+	 *             information
+	 */
 	public int getWorkflowDefinitionCount(String workflowDefinitionName)
 		throws WorkflowException;
 
@@ -94,15 +114,16 @@ public interface WorkflowDefinitionManager {
 	 * workflow definitions but without the definition model file actually, so
 	 * {@link WorkflowDefinition#getJar()} will always return <code>null</code>.
 	 * The list will only contain the newest (actual) version of a definition,
-	 * if you need all versions for a specific version, use the method {@link
-	 * #getWorkflowDefinitions(String)} instead where all versions for a
-	 * specific workflow definition are being returned.
-	 *
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
+	 * if you need all versions for a specific version, use the method
+	 * {@link #getWorkflowDefinitions(String, int, int, OrderByComparator)}
+	 * instead where all versions for a specific workflow definition are being
+	 * returned.
+	 * 
+	 * @param start inclusive start position for paginating the result
+	 * @param end exclusive end position for paginating the result
+	 * @param orderByComparator comparator for sorting the result
 	 * @return the list of available workflow definitions, never
-	 *		   <code>null</code>
+	 *         <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		int start, int end, OrderByComparator orderByComparator);

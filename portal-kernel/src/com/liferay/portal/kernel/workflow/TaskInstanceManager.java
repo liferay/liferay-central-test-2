@@ -22,14 +22,13 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.util.List;
+import java.util.Map;
+
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import java.util.List;
-import java.util.Map;
-
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="TaskInstanceManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -59,6 +58,7 @@ import java.util.Map;
  *
  * @author Micha Kiener
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface TaskInstanceManager {
 
 	/**
@@ -378,7 +378,7 @@ public interface TaskInstanceManager {
 	 * assigned to. So a task being returned could either be directly assigned
 	 * to the user or assigned to a role the user is a member of. If only open
 	 * tasks should be returned, use {@link
-	 * #getTaskInstanceInfosByCredential(UserCredential, boolean)} instead.
+	 * #getTaskInstanceInfosByCredential(UserCredential, boolean, int, int, OrderByComparator)} instead.
 	 *
 	 * @param  userCredential the credential representing the user to return
 	 *		   tasks for
@@ -413,13 +413,14 @@ public interface TaskInstanceManager {
 
 	/**
 	 * Queries for all tasks currently assigned to the given role. If only open
-	 * tasks should be returned, use {@link #getTaskInstanceInfosByRole(long,
-	 * boolean)} instead.
-	 *
-	 * @param  roleId the id of the role to return tasks for
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
+	 * tasks should be returned, use
+	 * {@link #getTaskInstanceInfosByRole(long, boolean, int, int, OrderByComparator)}
+	 * instead.
+	 * 
+	 * @param roleId the id of the role to return tasks for
+	 * @param start inclusive start position for paginating the result
+	 * @param end exclusive end position for paginating the result
+	 * @param orderByComparator comparator for sorting the result
 	 * @return all tasks assigned to the given role
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -447,13 +448,14 @@ public interface TaskInstanceManager {
 
 	/**
 	 * Queries for all tasks currently assigned to the given user. If only open
-	 * tasks should be returned, use {@link #getTaskInstanceInfosByUser(long,
-	 * boolean)} instead.
-	 *
-	 * @param  userId the id of the user to return tasks for
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
+	 * tasks should be returned, use
+	 * {@link #getTaskInstanceInfosByUser(long, boolean, int, int, OrderByComparator)}
+	 * instead.
+	 * 
+	 * @param userId the id of the user to return tasks for
+	 * @param start inclusive start position for paginating the result
+	 * @param end exclusive end position for paginating the result
+	 * @param orderByComparator comparator for sorting the result
 	 * @return all tasks assigned to the given user
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -483,14 +485,15 @@ public interface TaskInstanceManager {
 
 	/**
 	 * Queries for all tasks for the specified workflow instance. If only open
-	 * tasks should be returned, use {@link
-	 * #getTaskInstanceInfosByWorkflowInstance(long, boolean)} instead.
-	 *
-	 * @param  workflowInstanceId the id of the workflow instance to return
-	 *		   tasks for
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
+	 * tasks should be returned, use
+	 * {@link #getTaskInstanceInfosByWorkflowInstance(long, boolean, int, int, OrderByComparator)}
+	 * instead.
+	 * 
+	 * @param workflowInstanceId the id of the workflow instance to return tasks
+	 *            for
+	 * @param start inclusive start position for paginating the result
+	 * @param end exclusive end position for paginating the result
+	 * @param orderByComparator comparator for sorting the result
 	 * @return all tasks related to the specified workflow instance
 	 * @throws WorkflowException is thrown if querying failed
 	 */

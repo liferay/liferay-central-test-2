@@ -29,10 +29,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-@Inherited
-@Documented
 /**
  * <a href="CallingUserId.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,6 +42,10 @@ import java.lang.annotation.Target;
  *
  * @author Micha Kiener
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.PARAMETER)
+@Inherited
+@Documented
 public @interface CallingUserId {
 
 	/**

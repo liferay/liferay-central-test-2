@@ -22,14 +22,13 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.util.List;
+import java.util.Map;
+
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import java.util.List;
-import java.util.Map;
-
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowInstanceManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -74,6 +73,7 @@ import java.util.Map;
  *
  * @author Micha Kiener
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowInstanceManager {
 
 	/**
@@ -146,6 +146,18 @@ public interface WorkflowInstanceManager {
 			int end, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
+	/**
+	 * Returns the count of the workflow instance history entries for the given
+	 * workflow instance, optionally including the count of entries from the
+	 * children too.
+	 * 
+	 * @param workflowInstanceId the id of the workflow instance to retrieve the
+	 *            count of history entries
+	 * @param includeChildren flag, whether to include the entries from the
+	 *            children as well
+	 * @return the count of history entries
+	 * @throws WorkflowException is thrown, if the count could not be queried
+	 */
 	public int getWorkflowInstanceHistoryCount(
 			long workflowInstanceId, boolean includeChildren)
 		throws WorkflowException;
@@ -179,51 +191,88 @@ public interface WorkflowInstanceManager {
 	 * useful to run a workflow related to a domain object and request its
 	 * current state of the workflow afterwards.
 	 * </p>
-	 *
+	 * 
 	 * <p>
-	 * Unlike the {@link #getWorkflowInstanceInfos(String, long, boolean)}, this
-	 * method assumes there is only one workflow instance per domain object. If
-	 * this is not the case, the method {@link #getWorkflowInstanceInfos(String,
-	 * long, boolean)} should be used instead where a list of workflow instances
-	 * will be returned rather than one instance only.
+	 * Unlike the
+	 * {@link #getWorkflowInstanceInfos(String, long, boolean, int, int, OrderByComparator)}
+	 * , this method assumes there is only one workflow instance per domain
+	 * object. If this is not the case, the method
+	 * {@link #getWorkflowInstanceInfos(String, long, boolean, int, int, OrderByComparator)}
+	 * should be used instead where a list of workflow instances will be
+	 * returned rather than one instance only.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * This method returns a workflow instance regardless if it is still open or
 	 * already finished, but it will return <code>null</code> rather than
 	 * throwing an exception, if no such instance found in relation to the
 	 * specified domain object instance.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * <b><i>Note</i></b> The support of a related domain object however is
 	 * optional and might not be supported by the underlying engine.
 	 * </p>
-	 *
-	 * @param  relationType the unique type representing the domain object class
-	 *		   to return a workflow instance information for
-	 * @param  relationId the identifier of the domain object instance returning
-	 *		   a workflow instance information for
-	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *		   children's information should be returned as well or if only the
-	 *		   root workflow instance should be returned, without the children
+	 * 
+	 * @param relationType the unique type representing the domain object class
+	 *            to return a workflow instance information for
+	 * @param relationId the identifier of the domain object instance returning
+	 *            a workflow instance information for
+	 * @param retrieveChildrenInfo flag, indicating whether the hierarchy of
+	 *            children's information should be returned as well or if only
+	 *            the root workflow instance should be returned, without the
+	 *            children
 	 * @return the workflow instance related to the specified domain object
-	 *		   instance, if found, <code>null</code> otherwise
+	 *         instance, if found, <code>null</code> otherwise
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
 			String relationType, long relationId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
 
+	/**
+	 * Returns the count of all workflow instances for a certain definition name
+	 * and optional version or all versions of that workflow definition.
+	 * 
+	 * @param workflowDefinitionName the name of the workflow definition
+	 * @param workflowDefinitionVersion the specific version or
+	 *            <code>null</code>, if all versions should be considered
+	 * @return the count of process instances, whether they have been finished
+	 *         or not
+	 * @throws WorkflowException is thrown if querying failed
+	 */
 	public int getWorkflowInstanceInfoCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion)
 		throws WorkflowException;
 
+	/**
+	 * Returns the count of all workflow instances for a certain definition name
+	 * and optional version or all versions of that workflow definition.
+	 * Additionally, only finished or open instances are being returned.
+	 * 
+	 * @param workflowDefinitionName the name of the workflow definition
+	 * @param workflowDefinitionVersion the specific version or
+	 *            <code>null</code>, if all versions should be considered
+	 * @param finished flag indicating whether the count of finished instances
+	 *            should be returned or just open instances
+	 * @return the count of finished or open instances for the specific workflow
+	 *         definition
+	 * @throws WorkflowException is thrown if querying failed
+	 */
 	public int getWorkflowInstanceInfoCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean finished)
 		throws WorkflowException;
 
+	/**
+	 * Returns the count of all workflow instances related to a specific
+	 * relation type and id (relation object the process instance is linked to).
+	 * 
+	 * @param relationType the type of relation the count is estimated for
+	 * @param relationId the id of the relation object
+	 * @return the count of process instances for the specified relation object
+	 * @throws WorkflowException is thrown if querying failed
+	 */
 	public int getWorkflowInstanceInfoCount(
 			String relationType, long relationId)
 		throws WorkflowException;
@@ -263,23 +312,25 @@ public interface WorkflowInstanceManager {
 	 * Returns a list of workflow instance information for a given workflow
 	 * definition and optionally a certain version of it. By default, it only
 	 * returns open workflow instances. If ended ones should be returned as well
-	 * or even exclusively, the method {@link #getWorkflowInstanceInfos(String,
-	 * Integer, boolean)} should be used instead.
-	 *
-	 * @param  workflowDefinitionName the name of the workflow definition to
-	 *		   return instance information for
-	 * @param  workflowDefinitionVersion the optional version of the definition,
-	 *		   if querying for a particular version, otherwise <code>null</code>
-	 *		   has to be provided
-	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *		   children's information should be returned as well or if only the
-	 *		   root workflow instance should be returned, without the children
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
+	 * or even exclusively, the method
+	 * {@link #getWorkflowInstanceInfos(String, Integer, boolean, int, int, OrderByComparator)}
+	 * should be used instead.
+	 * 
+	 * @param workflowDefinitionName the name of the workflow definition to
+	 *            return instance information for
+	 * @param workflowDefinitionVersion the optional version of the definition,
+	 *            if querying for a particular version, otherwise
+	 *            <code>null</code> has to be provided
+	 * @param retrieveChildrenInfo flag, indicating whether the hierarchy of
+	 *            children's information should be returned as well or if only
+	 *            the root workflow instance should be returned, without the
+	 *            children
+	 * @param start inclusive start position for paginating the result
+	 * @param end exclusive end position for paginating the result
+	 * @param orderByComparator comparator for sorting the result
 	 * @return a list of workflow instance information for the given definition,
-	 *		   will return an empty list rather than <code>null</code> if no
-	 *		   instances found
+	 *         will return an empty list rather than <code>null</code> if no
+	 *         instances found
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(

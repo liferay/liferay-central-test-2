@@ -24,18 +24,18 @@ package com.liferay.portal.kernel.workflow;
 
 /**
  * <a href="UserCredentialFactory.java.html"><b><i>View Source</i></b></a>
- *
+ * 
  * <p>
- * This service provider interface is going to be injected into the {@link
- * WorkflowUtil} to create {@link UserCredential} objects based on the id of the
- * user to be represented.
+ * This service provider interface is going to be injected into the
+ * {@link UserCredentialFactoryUtil} to create {@link UserCredential} objects
+ * based on the id of the user to be represented.
  * </p>
- *
+ * 
  * <p>
  * The portal kernel is not able to invoke the service layer, so the
  * implementation of the factory goes into the portal impl.
  * </p>
- *
+ * 
  * @author Micha Kiener
  */
 public interface UserCredentialFactory {
