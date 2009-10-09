@@ -210,6 +210,34 @@ public class LangBuilder {
 					else if (key.equals("lang.line.end")) {
 						translatedText = "right";
 					}
+					else if (translationId.equals("en_el") &&
+							 (key.equals("enabled") || key.equals("on") ||
+							  key.equals("on-date"))) {
+
+						translatedText = "";
+					}
+					else if (translationId.equals("en_es") &&
+							 key.equals("am")) {
+
+						translatedText = "";
+					}
+					else if (translationId.equals("en_it") &&
+							 key.equals("am")) {
+
+						translatedText = "";
+					}
+					else if (translationId.equals("en_ja") &&
+							 (key.equals("any") || key.equals("anytime") ||
+							  key.equals("down") || key.equals("on") ||
+							  key.equals("the"))) {
+
+						translatedText = "";
+					}
+					else if (translationId.equals("en_ko") &&
+							 key.equals("the")) {
+
+						translatedText = "";
+					}
 					else {
 						translatedText = _translate(translationId, value, 0);
 					}
