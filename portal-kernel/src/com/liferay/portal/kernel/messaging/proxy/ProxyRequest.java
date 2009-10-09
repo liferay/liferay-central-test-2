@@ -22,24 +22,40 @@
 
 package com.liferay.portal.kernel.messaging.proxy;
 
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 
-import java.io.Serializable;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 /**
  * <a href="ProxyRequest.java.html"><b><i>View Source</i></b></a>
- *
+ * 
+ * <p>
+ * The proxy request is used to wrap a method and its arguments to be sent over
+ * the message bus. Its execution method ({@link #execute(Object)}) uses the
+ * wrapped method and arguments and returns back the return value.
+ * </p>
+ * 
  * @author Micha Kiener
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
 public class ProxyRequest implements Serializable {
 
+	/**
+	 * Constructor for a proxy request taking the method and an array of
+	 * arguments needed to execute the method.
+	 * 
+	 * @param method the reflected method to be wrapped by this proxy
+	 * @param arguments the arguments needed to execute the method on the target
+	 *            object, can be <code>null</code>, if the method does not need
+	 *            any arguments
+	 * @throws Exception is thrown, if inspecting the method or initializing the
+	 *             proxy failed
+	 */
 	public ProxyRequest(Method method, Object[] arguments) throws Exception {
 		Class<?>[] argumentTypes = method.getParameterTypes();
 
@@ -68,11 +84,19 @@ public class ProxyRequest implements Serializable {
 
 		if ((messagingProxy != null) &&
 			(messagingProxy.mode().equals(ProxyMode.SYNC))) {
-
 			_synchronous = true;
 		}
 	}
 
+	/**
+	 * Executes the method wrapped by this proxy on the given target object and
+	 * returns the value being returned by the method.
+	 * 
+	 * @param object the target object to execute the method on
+	 * @return the value returned by executing the method on the target object
+	 * @throws Exception is thrown if either the execution failed or if the
+	 *             method being invoked threw an exception
+	 */
 	public Object execute(Object object) throws Exception {
 		try {
 			return MethodInvoker.invoke(_methodWrapper, object);
