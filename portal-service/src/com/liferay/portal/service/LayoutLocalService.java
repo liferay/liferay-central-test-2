@@ -133,6 +133,9 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public int countByG_P_P(long groupId, boolean privateLayout,
+		long parentLayoutId) throws com.liferay.portal.SystemException;
+
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

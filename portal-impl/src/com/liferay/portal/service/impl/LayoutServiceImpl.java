@@ -50,6 +50,7 @@ import java.io.InputStream;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -95,6 +96,13 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			serviceContext);
 	}
 
+	public int countByG_P_P(long groupId, boolean privateLayout,
+			long parentLayoutId) throws com.liferay.portal.SystemException {
+
+			return layoutLocalService
+					   .countByG_P_P(groupId, privateLayout, parentLayoutId);
+	}
+
 	public void deleteLayout(long plid)
 		throws PortalException, SystemException {
 
@@ -112,6 +120,18 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.DELETE);
 
 		layoutLocalService.deleteLayout(groupId, privateLayout, layoutId);
+	}
+
+	public Layout getLayout(long plid)
+		throws PortalException, SystemException {
+
+		return layoutLocalService.getLayout(plid);
+	}
+
+	public Layout getLayout(long groupId, boolean privateLayout, long layoutId)
+		throws PortalException, SystemException {
+
+		return layoutLocalService.getLayout(groupId, privateLayout, layoutId);
 	}
 
 	public String getLayoutName(
@@ -132,6 +152,43 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.getLayouts(
 			companyId, portletId, preferencesKey, preferencesValue);
+	}
+
+	public List<Layout> getLayouts(long groupId, boolean privateLayout)
+		throws SystemException {
+
+		return layoutLocalService.getLayouts(groupId, privateLayout);
+	}
+
+	public List<Layout> getLayouts(
+			long groupId, boolean privateLayout, long parentLayoutId)
+		throws SystemException {
+
+		return layoutLocalService.getLayouts(
+			groupId, privateLayout, parentLayoutId);
+	}
+
+	public List<Layout> getLayouts(
+			long groupId, boolean privateLayout, String type)
+		throws SystemException {
+
+		return layoutLocalService.getLayouts(groupId, privateLayout, type);
+	}
+
+	public List<Layout> getLayouts(
+			long groupId, boolean privateLayout, long parentLayoutId, int start,
+			int end)
+		throws SystemException {
+
+		return layoutLocalService.getLayouts(
+			groupId, privateLayout, parentLayoutId, start, end);
+	}
+
+	public List<Layout> getLayouts(
+			long groupId, boolean privateLayout, long[] layoutIds)
+		throws PortalException, SystemException {
+
+		return layoutLocalService.getLayouts(groupId, privateLayout, layoutIds);
 	}
 
 	public byte[] exportLayouts(

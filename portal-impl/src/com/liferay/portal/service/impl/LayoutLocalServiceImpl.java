@@ -229,6 +229,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layout;
 	}
 
+	public int countByG_P_P(long groupId, boolean privateLayout,
+			long parentLayoutId) throws com.liferay.portal.SystemException {
+
+			return layoutPersistence
+					   .countByG_P_P(groupId, privateLayout, parentLayoutId);
+	}
+
 	public void deleteLayout(long plid)
 		throws PortalException, SystemException {
 
