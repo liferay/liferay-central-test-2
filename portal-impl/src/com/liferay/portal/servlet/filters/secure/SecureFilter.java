@@ -86,7 +86,7 @@ public class SecureFilter extends BasePortalFilter {
 
 	protected boolean isAccessAllowed(HttpServletRequest request) {
 		String remoteAddr = request.getRemoteAddr();
-		String serverIp = request.getServerName();
+		String serverIp = PortalUtil.getComputerAddress();
 
 		if ((_hostsAllowed.size() > 0) &&
 			(!_hostsAllowed.contains(remoteAddr))) {
