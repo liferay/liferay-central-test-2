@@ -262,9 +262,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 							return A.toQueryString(
 								{
-							    	groupId: <%= groupId %>,
-							    	privateLayout: false,
-							    	parentLayoutId: parentLayoutId
+									groupId: <%= groupId %>,
+									privateLayout: false,
+									parentLayoutId: parentLayoutId
 								}
 							);
 						}
