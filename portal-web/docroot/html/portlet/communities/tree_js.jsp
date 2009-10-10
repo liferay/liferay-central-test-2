@@ -35,13 +35,17 @@ String treeId = ParamUtil.getString(request, "treeId");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 %>
+
 <div class="lfr-tree-control aui-helper-clearfix">
 	<div class="lfr-tree-control-item" id="<portlet:namespace />treeExpandAll">
 		<div class="aui-icon lfr-tree-control-icon-expandAll"></div>
+
 		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="expand-all" /></a>
 	</div>
+
 	<div class="lfr-tree-control-item" id="<portlet:namespace />treeCollapseAll">
 		<div class="aui-icon lfr-tree-control-icon-collapseAll"></div>
+
 		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="collapse-all" /></a>
 	</div>
 </div>
@@ -304,6 +308,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				treeview.collapseAll();
 				event.halt();
 			};
+
 			var expandAll = function(event) {
 				treeview.expandAll();
 				event.halt();

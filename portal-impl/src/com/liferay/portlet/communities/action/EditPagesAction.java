@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -269,11 +268,9 @@ public class EditPagesAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		String resourceId =
-			"/html/portlet/communities/scheduled_publishing_events.jsp";
-
 		PortletRequestDispatcher portletRequestDispatcher =
-			portletConfig.getPortletContext().getRequestDispatcher(resourceId);
+			portletConfig.getPortletContext().getRequestDispatcher(
+				"/html/portlet/communities/scheduled_publishing_events.jsp");
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
