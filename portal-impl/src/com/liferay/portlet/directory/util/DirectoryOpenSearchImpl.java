@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.BaseOpenSearchImpl;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -101,9 +100,8 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 			//String portletTitle = PortalUtil.getPortletTitle(
 			//	portletId, themeDisplay.getUser());
 
-			Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 			PortletURL portletURL = getPortletURL(
-				request, portletId, layout.getGroupId());
+				request, portletId, themeDisplay.getScopeGroupId());
 
 			portletURL.setParameter("struts_action", "/directory/view_user");
 			portletURL.setParameter(
