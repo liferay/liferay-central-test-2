@@ -184,6 +184,10 @@
 
 /* TreeView */
 
+.lfr-tree-control {
+	width: 165px;
+}
+
 .aui-tree-node-selected {
 	background: #eee;
 }
