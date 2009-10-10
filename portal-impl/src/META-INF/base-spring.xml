@@ -39,4 +39,10 @@
 			<aop:around pointcut="bean(*.velocity)" method="invoke" />
 		</aop:aspect>
 	</aop:config>
+	<bean id="messagingProxyAdvice" class="com.liferay.portal.spring.aop.MessagingProxyAdvice" />
+	<aop:config>
+		<aop:aspect ref="messagingProxyAdvice">
+			<aop:around pointcut="bean(*ProxyBean) &amp;&amp; !within(com.liferay.portal.workflow..*)" method="invoke" />
+		</aop:aspect>
+	</aop:config>
 </beans>

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.messaging.proxy;
+package com.liferay.portal.spring.aop;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
@@ -28,34 +28,21 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyResponse;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
 
 /**
- * <a href="BaseProxyAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="MessagingProxyAdvice.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
-public class BaseProxyAdvice implements MethodInterceptor {
+public class MessagingProxyAdvice {
 
-	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-		return doInvoke(methodInvocation);
-	}
-
-	protected ProxyRequest createProxyRequest(MethodInvocation methodInvocation)
-		throws Exception {
-
-		return new ProxyRequest(
-			methodInvocation.getMethod(), methodInvocation.getArguments());
-	}
-
-	protected Object doInvoke(MethodInvocation methodInvocation)
-		throws Exception {
-
-		ProxyRequest proxyRequest = createProxyRequest(methodInvocation);
-
-		BaseProxyBean baseProxyBean = (BaseProxyBean)methodInvocation.getThis();
+	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+		ProxyRequest proxyRequest = createProxyRequest(proceedingJoinPoint);
+		BaseProxyBean baseProxyBean =
+			(BaseProxyBean)proceedingJoinPoint.getTarget();
 
 		if (proxyRequest.isSynchronous()) {
 			return doInvokeSynchronous(proxyRequest, baseProxyBean);
@@ -65,6 +52,15 @@ public class BaseProxyAdvice implements MethodInterceptor {
 
 			return null;
 		}
+	}
+
+	protected ProxyRequest createProxyRequest(
+		ProceedingJoinPoint proceedingJoinPoint) throws Exception {
+
+		MethodSignature methodSignature =
+			(MethodSignature)proceedingJoinPoint.getSignature();
+		return new ProxyRequest(
+			methodSignature.getMethod(), proceedingJoinPoint.getArgs());
 	}
 
 	protected void doInvokeAsynchronous(

@@ -27,19 +27,7 @@
 	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.audit.AuditRouterUtil">
-		<property name="auditRouter">
-			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
-				<property name="interceptorNames">
-					<list>
-						<value>baseMessagingProxyAdvice</value>
-					</list>
-				</property>
-				<property name="proxyInterfaces">
-					<value>com.liferay.portal.kernel.audit.AuditRouter</value>
-				</property>
-				<property name="target" ref="com.liferay.portal.audit.AuditRouterProxyBean" />
-			</bean>
-		</property>
+		<property name="auditRouter" ref="com.liferay.portal.audit.AuditRouterProxyBean" />
 	</bean>
 
 	<!-- Messaging -->
