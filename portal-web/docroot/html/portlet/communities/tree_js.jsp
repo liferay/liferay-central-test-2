@@ -176,6 +176,24 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 					TreeUtil.updateLayout(data);
 				},
 
+				updateSessionTreeClick: function(id, open, treeId) {
+					var sessionClickURL = themeDisplay.getPathMain() + '/portal/session_tree_js_click';
+
+					var data = {
+						nodeId: id,
+						openNode: open || false,
+						treeId: treeId
+					};
+
+					A.io(
+						sessionClickURL,
+						{
+							method: 'POST',
+							data: A.toQueryString(data)
+						}
+					);
+				},
+
 				restoreNodeState: function(node) {
 					var instance = this;
 					var id = node.get('id');
@@ -194,24 +212,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 							node.check();
 						}
 					}
-				},
-
-				updateSessionTreeClick: function(id, open, treeId) {
-					var sessionClickURL = themeDisplay.getPathMain() + '/portal/session_tree_js_click';
-
-					var data = {
-						nodeId: id,
-						openNode: open || false,
-						treeId: treeId
-					};
-
-					A.io(
-						sessionClickURL,
-						{
-							method: 'POST',
-							data: A.toQueryString(data)
-						}
-					);
 				}
 			};
 
@@ -239,24 +239,21 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			var treeview = new TreeViewType({
 				after: {
 					collapse: function(event) {
-						var layoutId = TreeUtil.extractLayoutId(event.tree.node);
+						var id = event.tree.node.get('id');
 
-						TreeUtil.updateSessionTreeClick(layoutId, false, '<%= HtmlUtil.escape(treeId) %>');
+						TreeUtil.updateSessionTreeClick(id, false, '<%= HtmlUtil.escape(treeId) %>');
 					},
 					expand: function(event) {
-						var layoutId = TreeUtil.extractLayoutId(event.tree.node);
+						var id = event.tree.node.get('id');
 
-						TreeUtil.updateSessionTreeClick(layoutId, true, '<%= HtmlUtil.escape(treeId) %>');
+						TreeUtil.updateSessionTreeClick(id, true, '<%= HtmlUtil.escape(treeId) %>');
 					},
 					render: TreeUtil.afterRenderTree
 				},
 				boundingBox: '#'+treeElId,
 				children: [ rootNode ],
 				io: {
-					formatter: TreeUtil.formatJSONResults,
-					url: getLayoutsURL,
 					cfg: {
-						method: 'POST',
 						data: function(node) {
 							var parentLayoutId = TreeUtil.extractLayoutId(node);
 
@@ -267,8 +264,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 									parentLayoutId: parentLayoutId
 								}
 							);
-						}
-					}
+						},
+						method: 'POST'
+					},
+					formatter: TreeUtil.formatJSONResults,
+					url: getLayoutsURL
 				},
 				on: {
 					append: function(event) {
