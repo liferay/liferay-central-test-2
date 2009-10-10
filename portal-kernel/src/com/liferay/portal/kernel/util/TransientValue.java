@@ -39,6 +39,19 @@ public class TransientValue<V> implements Serializable {
 		return _value;
 	}
 
+	public boolean isNotNull() {
+		return !isNull();
+	}
+
+	public boolean isNull() {
+		if (_value == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public void setValue(V value) {
 		_value = value;
 	}
