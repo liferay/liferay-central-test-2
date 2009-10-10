@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.InitUtil;
@@ -126,6 +127,11 @@ public class PluginsEnvironmentBuilder {
 			File libDir, File projectDir, List<String> dependencyJars)
 		throws Exception {
 
+		String libDirPath = libDir.getPath();
+
+		libDirPath = StringUtil.replace(
+			libDirPath, StringPool.BACK_SLASH, StringPool.SLASH);
+
 		String projectDirName = projectDir.getCanonicalPath();
 		String projectName = StringUtil.extractLast(
 			projectDirName, File.separator);
@@ -226,7 +232,12 @@ public class PluginsEnvironmentBuilder {
 		_addClasspathEntry(sb, "/portal/util-taglib/util-taglib.jar");
 
 		for (String jar : customJars) {
-			_addClasspathEntry(sb, "docroot/WEB-INF/lib/" + jar);
+			if (libDirPath.contains("/tmp/WEB-INF/lib")) {
+				_addClasspathEntry(sb, "tmp/WEB-INF/lib/" + jar);
+			}
+			else {
+				_addClasspathEntry(sb, "docroot/WEB-INF/lib/" + jar);
+			}
 		}
 
 		sb.append("\t<classpathentry kind=\"output\" path=\"bin\" />\n");
