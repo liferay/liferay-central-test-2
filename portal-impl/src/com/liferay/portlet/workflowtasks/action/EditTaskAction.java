@@ -22,16 +22,6 @@
 
 package com.liferay.portlet.workflowtasks.action;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -42,6 +32,16 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
 /**
  * <a href="EditTaskAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -49,7 +49,6 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class EditTaskAction extends PortletAction {
 
-	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -73,7 +72,6 @@ public class EditTaskAction extends PortletAction {
 		}
 	}
 
-	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)

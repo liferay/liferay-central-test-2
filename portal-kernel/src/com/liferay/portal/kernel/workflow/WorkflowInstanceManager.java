@@ -22,13 +22,14 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import java.util.List;
-import java.util.Map;
-
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.util.List;
+import java.util.Map;
+
+@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowInstanceManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -73,7 +74,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  *
  * @author Micha Kiener
  */
-@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowInstanceManager {
 
 	/**
@@ -99,21 +99,21 @@ public interface WorkflowInstanceManager {
 	 * Returns a list of activity names to be possible next activities to signal
 	 * the given workflow instance with.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * The list of possible next activities is checked with the role set of the
 	 * specified user to only return activity names the user is allowed to
 	 * execute.
 	 * </p>
-	 * 
-	 * @param workflowInstanceId the id of the workflow instance to return a
-	 *            list of possible next activities for
-	 * @param userId the id of the user requesting the list to check the
-	 *            activities being executable by the user
-	 * @param parameters an optional map of additional parameters to further
-	 *            restrict the result (only used, if the underlying engine needs
-	 *            or supports additional parameters), may be left
-	 *            <code>null</code>, if not needed
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance to return a
+	 *		   list of possible next activities for
+	 * @param  userId the id of the user requesting the list to check the
+	 *		   activities being executable by the user
+	 * @param  parameters an optional map of additional parameters to further
+	 *		   restrict the result (only used, if the underlying engine needs or
+	 *		   supports additional parameters), may be left <code>null</code>,
+	 *		   if not needed
 	 * @return the list of activity names possible to be signaled
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
@@ -155,11 +155,11 @@ public interface WorkflowInstanceManager {
 	 * Returns the count of the workflow instance history entries for the given
 	 * workflow instance, optionally including the count of entries from the
 	 * children too.
-	 * 
-	 * @param workflowInstanceId the id of the workflow instance to retrieve the
-	 *            count of history entries
-	 * @param includeChildren flag, whether to include the entries from the
-	 *            children as well
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance to retrieve
+	 *		   the count of history entries
+	 * @param  includeChildren flag, whether to include the entries from the
+	 *		   children as well
 	 * @return the count of history entries
 	 * @throws WorkflowException is thrown, if the count could not be queried
 	 */
@@ -196,39 +196,37 @@ public interface WorkflowInstanceManager {
 	 * useful to run a workflow related to a domain object and request its
 	 * current state of the workflow afterwards.
 	 * </p>
-	 * 
+	 *
 	 * <p>
-	 * Unlike the
-	 * {@link #getWorkflowInstanceInfos(String, long, boolean, int, int, OrderByComparator)}
-	 * , this method assumes there is only one workflow instance per domain
-	 * object. If this is not the case, the method
-	 * {@link #getWorkflowInstanceInfos(String, long, boolean, int, int, OrderByComparator)}
-	 * should be used instead where a list of workflow instances will be
-	 * returned rather than one instance only.
+	 * Unlike the {@link #getWorkflowInstanceInfos(String, long, boolean, int,
+	 * int, OrderByComparator)} , this method assumes there is only one workflow
+	 * instance per domain object. If this is not the case, the method {@link
+	 * #getWorkflowInstanceInfos(String, long, boolean, int, int,
+	 * OrderByComparator)} should be used instead where a list of workflow
+	 * instances will be returned rather than one instance only.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * This method returns a workflow instance regardless if it is still open or
 	 * already finished, but it will return <code>null</code> rather than
 	 * throwing an exception, if no such instance found in relation to the
 	 * specified domain object instance.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * <b><i>Note</i></b> The support of a related domain object however is
 	 * optional and might not be supported by the underlying engine.
 	 * </p>
-	 * 
-	 * @param relationType the unique type representing the domain object class
-	 *            to return a workflow instance information for
-	 * @param relationId the identifier of the domain object instance returning
-	 *            a workflow instance information for
-	 * @param retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *            children's information should be returned as well or if only
-	 *            the root workflow instance should be returned, without the
-	 *            children
+	 *
+	 * @param  relationType the unique type representing the domain object class
+	 *		   to return a workflow instance information for
+	 * @param  relationId the identifier of the domain object instance returning
+	 *		   a workflow instance information for
+	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
+	 *		   children's information should be returned as well or if only the
+	 *		   root workflow instance should be returned, without the children
 	 * @return the workflow instance related to the specified domain object
-	 *         instance, if found, <code>null</code> otherwise
+	 *		   instance, if found, <code>null</code> otherwise
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
@@ -238,12 +236,12 @@ public interface WorkflowInstanceManager {
 	/**
 	 * Returns the count of all workflow instances for a certain definition name
 	 * and optional version or all versions of that workflow definition.
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition
-	 * @param workflowDefinitionVersion the specific version or
-	 *            <code>null</code>, if all versions should be considered
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition
+	 * @param  workflowDefinitionVersion the specific version or
+	 *		   <code>null</code>, if all versions should be considered
 	 * @return the count of process instances, whether they have been finished
-	 *         or not
+	 *		   or not
 	 * @throws WorkflowException is thrown if querying failed
 	 */
 	public int getWorkflowInstanceInfoCount(
@@ -254,14 +252,14 @@ public interface WorkflowInstanceManager {
 	 * Returns the count of all workflow instances for a certain definition name
 	 * and optional version or all versions of that workflow definition.
 	 * Additionally, only completed or open instances are being returned.
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition
-	 * @param workflowDefinitionVersion the specific version or
-	 *            <code>null</code>, if all versions should be considered
-	 * @param completed flag indicating whether the count of completed instances
-	 *            should be returned or just open instances
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition
+	 * @param  workflowDefinitionVersion the specific version or
+	 *		   <code>null</code>, if all versions should be considered
+	 * @param  completed flag indicating whether the count of completed
+	 *		   instances should be returned or just open instances
 	 * @return the count of completed or open instances for the specific
-	 *         workflow definition
+	 *		   workflow definition
 	 * @throws WorkflowException is thrown if querying failed
 	 */
 	public int getWorkflowInstanceInfoCount(
@@ -272,9 +270,9 @@ public interface WorkflowInstanceManager {
 	/**
 	 * Returns the count of all workflow instances related to a specific
 	 * relation type and id (relation object the process instance is linked to).
-	 * 
-	 * @param relationType the type of relation the count is estimated for
-	 * @param relationId the id of the relation object
+	 *
+	 * @param  relationType the type of relation the count is estimated for
+	 * @param  relationId the id of the relation object
 	 * @return the count of process instances for the specified relation object
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -287,25 +285,24 @@ public interface WorkflowInstanceManager {
 	 * definition and optionally a certain version of it. If the parameter
 	 * <code>completed</code> is provided (not <code>null</code>), only
 	 * appropriate instances are returned.
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            return instance information for
-	 * @param workflowDefinitionVersion the optional version of the definition,
-	 *            if querying for a particular version, otherwise
-	 *            <code>null</code> has to be provided
-	 * @param completed defines, if completed or open workflow instances should
-	 *            be returned or if <code>null</code>, all instances should be
-	 *            returned
-	 * @param retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *            children's information should be returned as well or if only
-	 *            the root workflow instance should be returned, without the
-	 *            children
-	 * @param start inclusive start position for paginating the result
-	 * @param end exclusive end position for paginating the result
-	 * @param orderByComparator comparator for sorting the result
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   return instance information for
+	 * @param  workflowDefinitionVersion the optional version of the definition,
+	 *		   if querying for a particular version, otherwise <code>null</code>
+	 *		   has to be provided
+	 * @param  completed defines, if completed or open workflow instances should
+	 *		   be returned or if <code>null</code>, all instances should be
+	 *		   returned
+	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
+	 *		   children's information should be returned as well or if only the
+	 *		   root workflow instance should be returned, without the children
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return a list of workflow instance information for the given definition,
-	 *         will return an empty list rather than <code>null</code> if no
-	 *         instances found
+	 *		   will return an empty list rather than <code>null</code> if no
+	 *		   instances found
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
@@ -318,25 +315,23 @@ public interface WorkflowInstanceManager {
 	 * Returns a list of workflow instance information for a given workflow
 	 * definition and optionally a certain version of it. By default, it only
 	 * returns open workflow instances. If ended ones should be returned as well
-	 * or even exclusively, the method
-	 * {@link #getWorkflowInstanceInfos(String, Integer, boolean, int, int, OrderByComparator)}
-	 * should be used instead.
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            return instance information for
-	 * @param workflowDefinitionVersion the optional version of the definition,
-	 *            if querying for a particular version, otherwise
-	 *            <code>null</code> has to be provided
-	 * @param retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *            children's information should be returned as well or if only
-	 *            the root workflow instance should be returned, without the
-	 *            children
-	 * @param start inclusive start position for paginating the result
-	 * @param end exclusive end position for paginating the result
-	 * @param orderByComparator comparator for sorting the result
+	 * or even exclusively, the method {@link #getWorkflowInstanceInfos(String,
+	 * Integer, boolean, int, int, OrderByComparator)} should be used instead.
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   return instance information for
+	 * @param  workflowDefinitionVersion the optional version of the definition,
+	 *		   if querying for a particular version, otherwise <code>null</code>
+	 *		   has to be provided
+	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
+	 *		   children's information should be returned as well or if only the
+	 *		   root workflow instance should be returned, without the children
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return a list of workflow instance information for the given definition,
-	 *         will return an empty list rather than <code>null</code> if no
-	 *         instances found
+	 *		   will return an empty list rather than <code>null</code> if no
+	 *		   instances found
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
@@ -409,7 +404,7 @@ public interface WorkflowInstanceManager {
 	 * engines do not allow to attach context information to the instance itself
 	 * but rather use them on a per method basis.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Triggering the next activity could eventually execute some following
 	 * activities as well, if they are to be executed automatically (depending
@@ -417,24 +412,24 @@ public interface WorkflowInstanceManager {
 	 * next node or state which is not executable without user interaction or
 	 * any other signaling invocation.
 	 * </p>
-	 * 
-	 * @param workflowInstanceId the id of the workflow instance being triggered
-	 * @param attributes the optional context information to be passed on to the
-	 *            engine in order to execute the next default activity, they
-	 *            will be merged into the existing context information map
-	 * @param callingUserId the id of the calling user (see
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)} for
-	 *            more information)
-	 * @param parameters any optional parameters the process engine would need
-	 *            in order to signal the workflow instance, unlike the
-	 *            attributes, this map is transient and only passed on to the
-	 *            engine, its not merged into the existing attributes of the
-	 *            process instance
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance being
+	 *		   triggered
+	 * @param  attributes the optional context information to be passed on to
+	 *		   the engine in order to execute the next default activity, they
+	 *		   will be merged into the existing context information map
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
+	 * @param  parameters any optional parameters the process engine would need
+	 *		   in order to signal the workflow instance, unlike the attributes,
+	 *		   this map is transient and only passed on to the engine, its not
+	 *		   merged into the existing attributes of the process instance
 	 * @return the updated workflow instance information reflecting the current
-	 *         node (state) of the process after the next default activity has
-	 *         been executed
+	 *		   node (state) of the process after the next default activity has
+	 *		   been executed
 	 * @throws WorkflowException is thrown, if triggering the next activity
-	 *             failed
+	 *		   failed
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, Map<String, Object> attributes,
@@ -449,7 +444,7 @@ public interface WorkflowInstanceManager {
 	 * info map. Some engines do not allow to attach context information to the
 	 * instance itself but rather use them on a per method basis.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Triggering this activity could eventually execute some following
 	 * activities as well, if they are to be executed automatically (depending
@@ -457,35 +452,35 @@ public interface WorkflowInstanceManager {
 	 * next node or state which is not executable without user interaction or
 	 * any other signaling invocation.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * This method is usually used to execute a global activity which does not
 	 * depend on the current state nor does the activity change it afterwards.
 	 * </p>
-	 * 
-	 * @param workflowInstanceId the id of the workflow instance being triggered
-	 * @param activityName the name of the activity to be triggered
-	 * @param attributes the optional context information to be passed on to the
-	 *            engine in order to execute the next default activity, they
-	 *            will be merged into the existing context information map
-	 * @param callingUserId the id of the calling user (see
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)} for
-	 *            more information)
-	 * @param parameters any optional parameters the process engine would need
-	 *            in order to signal the workflow instance, unlike the
-	 *            attributes, this map is transient and only passed on to the
-	 *            engine, its not merged into the existing attributes of the
-	 *            process instance
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance being
+	 *		   triggered
+	 * @param  activityName the name of the activity to be triggered
+	 * @param  attributes the optional context information to be passed on to
+	 *		   the engine in order to execute the next default activity, they
+	 *		   will be merged into the existing context information map
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
+	 * @param  parameters any optional parameters the process engine would need
+	 *		   in order to signal the workflow instance, unlike the attributes,
+	 *		   this map is transient and only passed on to the engine, its not
+	 *		   merged into the existing attributes of the process instance
 	 * @return the updated workflow instance information reflecting the current
-	 *         node (state) of the process after the activity has been executed
+	 *		   node (state) of the process after the activity has been executed
 	 * @throws WorkflowException is thrown, if triggering the activity failed or
-	 *             the activity was not found or is not executable due to the
-	 *             current state of the instance
+	 *		   the activity was not found or is not executable due to the
+	 *		   current state of the instance
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, String activityName,
 			Map<String, Object> attributes, @CallingUserId long callingUserId,
-		Map<String, Object> parameters)
+			Map<String, Object> parameters)
 		throws WorkflowException;
 
 	/**
@@ -494,63 +489,61 @@ public interface WorkflowInstanceManager {
 	 * instance is running after the specified workflow definition and is
 	 * initialized with the given map of context information, if provided
 	 * (optional).
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            create a new workflow instance for
-	 * @param workflowDefinitionVersion the optional, specific version of the
-	 *            workflow definition, if not provided (<code>null</code>), the
-	 *            newest version is used automatically
-	 * @param context the optional map of context information being attached to
-	 *            the process instance, the objects contained in the map must be
-	 *            serializable in order to be persisted along the workflow
-	 *            instance
-	 * @param callingUserId the user creating this new workflow instance
-	 * @param parameters any optional parameters the process engine would need
-	 *            in order to start the new workflow instance, unlike the
-	 *            attributes, this map is transient and only passed on to the
-	 *            engine, its not merged into the existing attributes of the
-	 *            process instance
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   create a new workflow instance for
+	 * @param  workflowDefinitionVersion the optional, specific version of the
+	 *		   workflow definition, if not provided (<code>null</code>), the
+	 *		   newest version is used automatically
+	 * @param  context the optional map of context information being attached to
+	 *		   the process instance, the objects contained in the map must be
+	 *		   serializable in order to be persisted along the workflow instance
+	 * @param  callingUserId the user creating this new workflow instance
+	 * @param  parameters any optional parameters the process engine would need
+	 *		   in order to start the new workflow instance, unlike the
+	 *		   attributes, this map is transient and only passed on to the
+	 *		   engine, its not merged into the existing attributes of the
+	 *		   process instance
 	 * @return the workflow instance information after being successfully
-	 *         created
+	 *		   created
 	 * @throws WorkflowException is thrown, if the new instance could not be
-	 *             created or the workflow could not be started
+	 *		   created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, @CallingUserId long callingUserId,
-		Map<String, Object> parameters)
+			Map<String, Object> parameters)
 		throws WorkflowException;
 
 	/**
-	 * In addition to the
-	 * {@link #startWorkflowInstance(String, Integer, Map, long, Map)} this
-	 * method also supports the starting activity name to be provided to tell
-	 * the engine how to start the new workflow. This method depends on the
-	 * workflow definition and engine actually, if a specific starting activity
-	 * is provided, the activity name provided might be ignored, if the engine
-	 * does not support it or if the workflow definition only has one starting
-	 * point.
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            create a new workflow instance for
-	 * @param workflowDefinitionVersion the optional, specific version of the
-	 *            workflow definition, if not provided (<code>null</code>), the
-	 *            newest version is used automatically
-	 * @param context the optional map of context information being attached to
-	 *            the process instance, the objects contained in the map must be
-	 *            serializable in order to be persisted along the workflow
-	 *            instance
-	 * @param callingUserId the user creating this new workflow instance
-	 * @param activityName the optional activity name to initialize the workflow
-	 * @param parameters any optional parameters the process engine would need
-	 *            in order to start the new workflow instance, unlike the
-	 *            attributes, this map is transient and only passed on to the
-	 *            engine, its not merged into the existing attributes of the
-	 *            process instance
+	 * In addition to the {@link #startWorkflowInstance(String, Integer, Map,
+	 * long, Map)} this method also supports the starting activity name to be
+	 * provided to tell the engine how to start the new workflow. This method
+	 * depends on the workflow definition and engine actually, if a specific
+	 * starting activity is provided, the activity name provided might be
+	 * ignored, if the engine does not support it or if the workflow definition
+	 * only has one starting point.
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   create a new workflow instance for
+	 * @param  workflowDefinitionVersion the optional, specific version of the
+	 *		   workflow definition, if not provided (<code>null</code>), the
+	 *		   newest version is used automatically
+	 * @param  context the optional map of context information being attached to
+	 *		   the process instance, the objects contained in the map must be
+	 *		   serializable in order to be persisted along the workflow instance
+	 * @param  callingUserId the user creating this new workflow instance
+	 * @param  activityName the optional activity name to initialize the
+	 *		   workflow
+	 * @param  parameters any optional parameters the process engine would need
+	 *		   in order to start the new workflow instance, unlike the
+	 *		   attributes, this map is transient and only passed on to the
+	 *		   engine, its not merged into the existing attributes of the
+	 *		   process instance
 	 * @return the workflow instance information after being successfully
-	 *         created
+	 *		   created
 	 * @throws WorkflowException is thrown, if the new instance could not be
-	 *             created or the workflow could not be started
+	 *		   created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
@@ -565,39 +558,38 @@ public interface WorkflowInstanceManager {
 	 * instance is running after the specified workflow definition and is
 	 * initialized with the given map of context information, if provided
 	 * (optional). The newly created instance is related to the specified domain
-	 * object instance and hence can be retrieved later using the
-	 * {@link #getWorkflowInstanceInfo(String, long, boolean)} (see its comment
-	 * for more information about relations to domain objects).
+	 * object instance and hence can be retrieved later using the {@link
+	 * #getWorkflowInstanceInfo(String, long, boolean)} (see its comment for
+	 * more information about relations to domain objects).
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * <b><i>Note</i></b> The support of a related domain object however is
 	 * optional and might not be supported by the underlying engine.
 	 * </p>
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            create a new workflow instance for
-	 * @param workflowDefinitionVersion the optional, specific version of the
-	 *            workflow definition, if not provided (<code>null</code>), the
-	 *            newest version is used automatically.
-	 * @param relationType the unique type identifier of the domain object class
-	 *            to create a new workflow instance in relation to
-	 * @param relationId the identifier of the domain object instance to create
-	 *            a new workflow instance in relation to
-	 * @param context the optional map of context information being attached to
-	 *            the process instance, the objects contained in the map must be
-	 *            serializable in order to be persisted along the workflow
-	 *            instance
-	 * @param callingUserId the user creating this new workflow instance
-	 * @param parameters any optional parameters the process engine would need
-	 *            in order to start the new workflow instance, unlike the
-	 *            attributes, this map is transient and only passed on to the
-	 *            engine, its not merged into the existing attributes of the
-	 *            process instance
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   create a new workflow instance for
+	 * @param  workflowDefinitionVersion the optional, specific version of the
+	 *		   workflow definition, if not provided (<code>null</code>), the
+	 *		   newest version is used automatically.
+	 * @param  relationType the unique type identifier of the domain object
+	 *		   class to create a new workflow instance in relation to
+	 * @param  relationId the identifier of the domain object instance to create
+	 *		   a new workflow instance in relation to
+	 * @param  context the optional map of context information being attached to
+	 *		   the process instance, the objects contained in the map must be
+	 *		   serializable in order to be persisted along the workflow instance
+	 * @param  callingUserId the user creating this new workflow instance
+	 * @param  parameters any optional parameters the process engine would need
+	 *		   in order to start the new workflow instance, unlike the
+	 *		   attributes, this map is transient and only passed on to the
+	 *		   engine, its not merged into the existing attributes of the
+	 *		   process instance
 	 * @return the workflow instance information after being successfully
-	 *         created
+	 *		   created
 	 * @throws WorkflowException is thrown, if the new instance could not be
-	 *             created or the workflow could not be started
+	 *		   created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
@@ -607,45 +599,44 @@ public interface WorkflowInstanceManager {
 
 	/**
 	 * <p>
-	 * In addition to the
-	 * {@link #startWorkflowInstance(String, Integer, String, long, Map, long, Map)}
-	 * this method also supports the starting activity name to be provided to
-	 * tell the engine how to start the new workflow. This method depends on the
-	 * workflow definition and engine actually, if a specific starting activity
-	 * is provided, the activity name provided might be ignored, if the engine
-	 * does not support it or if the workflow definition only has one starting
-	 * point.
+	 * In addition to the {@link #startWorkflowInstance(String, Integer, String,
+	 * long, Map, long, Map)} this method also supports the starting activity
+	 * name to be provided to tell the engine how to start the new workflow.
+	 * This method depends on the workflow definition and engine actually, if a
+	 * specific starting activity is provided, the activity name provided might
+	 * be ignored, if the engine does not support it or if the workflow
+	 * definition only has one starting point.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * <b><i>Note</i></b> The support of a related domain object however is
 	 * optional and might not be supported by the underlying engine.
 	 * </p>
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            create a new workflow instance for
-	 * @param workflowDefinitionVersion the optional, specific version of the
-	 *            workflow definition, if not provided (<code>null</code>), the
-	 *            newest version is used automatically
-	 * @param relationType the unique type identifier of the domain object class
-	 *            to create a new workflow instance in relation to
-	 * @param relationId the identifier of the domain object instance to create
-	 *            a new workflow instance in relation to
-	 * @param context the optional map of context information being attached to
-	 *            the process instance, the objects contained in the map must be
-	 *            serializable in order to be persisted along the workflow
-	 *            instance
-	 * @param callingUserId the user creating this new workflow instance
-	 * @param activityName the optional activity name to initialize the workflow
-	 * @param parameters any optional parameters the process engine would need
-	 *            in order to start the new workflow instance, unlike the
-	 *            attributes, this map is transient and only passed on to the
-	 *            engine, its not merged into the existing attributes of the
-	 *            process instance
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   create a new workflow instance for
+	 * @param  workflowDefinitionVersion the optional, specific version of the
+	 *		   workflow definition, if not provided (<code>null</code>), the
+	 *		   newest version is used automatically
+	 * @param  relationType the unique type identifier of the domain object
+	 *		   class to create a new workflow instance in relation to
+	 * @param  relationId the identifier of the domain object instance to create
+	 *		   a new workflow instance in relation to
+	 * @param  context the optional map of context information being attached to
+	 *		   the process instance, the objects contained in the map must be
+	 *		   serializable in order to be persisted along the workflow instance
+	 * @param  callingUserId the user creating this new workflow instance
+	 * @param  activityName the optional activity name to initialize the
+	 *		   workflow
+	 * @param  parameters any optional parameters the process engine would need
+	 *		   in order to start the new workflow instance, unlike the
+	 *		   attributes, this map is transient and only passed on to the
+	 *		   engine, its not merged into the existing attributes of the
+	 *		   process instance
 	 * @return the workflow instance information after being successfully
-	 *         created
+	 *		   created
 	 * @throws WorkflowException is thrown, if the new instance could not be
-	 *             created or the workflow could not be started
+	 *		   created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,

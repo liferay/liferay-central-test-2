@@ -22,13 +22,14 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import java.util.List;
-import java.util.Map;
-
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.util.List;
+import java.util.Map;
+
+@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowDefinitionManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,14 +46,13 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  *
  * @author Micha Kiener
  */
-@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowDefinitionManager {
 
 	/**
 	 * <p>
 	 * Deploys the given workflow definition within the engine.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the workflow definition already exists and versioning is not supported
 	 * or it is the same version as already existing, the definition is
@@ -60,7 +60,7 @@ public interface WorkflowDefinitionManager {
 	 * complete new definition or as a new version of an already existing
 	 * definition.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If you deploy a workflow definition by overwriting an existing one, make
 	 * sure it is compatible with already existing workflow instances to not
@@ -70,17 +70,18 @@ public interface WorkflowDefinitionManager {
 	 * old definition, and newly created workflow instances are created by using
 	 * the new version.
 	 * </p>
-	 * 
-	 * @param workflowDefinition the workflow definition to be deployed
-	 * @param callingUserId the id of the user deploying the workflow definition
-	 *            (see {@link UserCredentialFactoryUtil#createCredential(long)}
-	 *            for more information)
-	 * @param parameters any additional parameters the underlying engine would
-	 *            need to deploy the given definition (like the name of the
-	 *            repository or anything similar), if nothing is needed, this
-	 *            parameter can be left <code>null</code>
+	 *
+	 * @param  workflowDefinition the workflow definition to be deployed
+	 * @param  callingUserId the id of the user deploying the workflow
+	 *		   definition (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
+	 * @param  parameters any additional parameters the underlying engine would
+	 *		   need to deploy the given definition (like the name of the
+	 *		   repository or anything similar), if nothing is needed, this
+	 *		   parameter can be left <code>null</code>
 	 * @throws WorkflowException is thrown, if deployment of the definition
-	 *             failed
+	 *		   failed
 	 */
 	public void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition,
@@ -90,10 +91,10 @@ public interface WorkflowDefinitionManager {
 	/**
 	 * Returns the count of workflow definitions being deployed within the
 	 * repository.
-	 * 
+	 *
 	 * @return the count of available workflow definitions
 	 * @throws WorkflowException is thrown, if requesting the information is not
-	 *             possible
+	 *		   possible
 	 */
 	public int getWorkflowDefinitionCount() throws WorkflowException;
 
@@ -101,13 +102,13 @@ public interface WorkflowDefinitionManager {
 	 * Returns the count of workflow definition versions for a specific workflow
 	 * definition name. If the workflow definition specified is not available,
 	 * this method just returns 0.
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            return its count of versions
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   return its count of versions
 	 * @return the number of deployed versions for the specified workflow
-	 *         definition
+	 *		   definition
 	 * @throws WorkflowException is thrown on any exception while requesting the
-	 *             information
+	 *		   information
 	 */
 	public int getWorkflowDefinitionCount(String workflowDefinitionName)
 		throws WorkflowException;
@@ -118,16 +119,15 @@ public interface WorkflowDefinitionManager {
 	 * workflow definitions but without the definition model file actually, so
 	 * {@link WorkflowDefinition#getJar()} will always return <code>null</code>.
 	 * The list will only contain the newest (actual) version of a definition,
-	 * if you need all versions for a specific version, use the method
-	 * {@link #getWorkflowDefinitions(String, int, int, OrderByComparator)}
-	 * instead where all versions for a specific workflow definition are being
-	 * returned.
-	 * 
-	 * @param start inclusive start position for paginating the result
-	 * @param end exclusive end position for paginating the result
-	 * @param orderByComparator comparator for sorting the result
+	 * if you need all versions for a specific version, use the method {@link
+	 * #getWorkflowDefinitions(String, int, int, OrderByComparator)} instead
+	 * where all versions for a specific workflow definition are being returned.
+	 *
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return the list of available workflow definitions, never
-	 *         <code>null</code>
+	 *		   <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		int start, int end, OrderByComparator orderByComparator);

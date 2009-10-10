@@ -22,10 +22,10 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+
 import java.util.List;
 import java.util.Map;
-
-import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**
  * <a href="WorkflowInstanceManagerUtil.java.html"><b><i>View Source</i></b></a>
@@ -55,10 +55,11 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#getPossibleNextActivityNames(long, long,
-	 *      Map)
+	 *		Map)
 	 */
 	public static List<String> getPossibleNextActivityNames(
-			long workflowInstanceId, long userId, Map<String, Object> parameters)
+			long workflowInstanceId, long userId,
+			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getPossibleNextActivityNames(
@@ -131,11 +132,11 @@ public class WorkflowInstanceManagerUtil {
 	 */
 	public static int getWorkflowInstanceInfoCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished)
+			boolean completed)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
-			workflowDefinitionName, workflowDefinitionVersion, finished);
+			workflowDefinitionName, workflowDefinitionVersion, completed);
 	}
 
 	/**
@@ -155,12 +156,12 @@ public class WorkflowInstanceManagerUtil {
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished, boolean retrieveChildrenInfo, int start, int end,
+			boolean completed, boolean retrieveChildrenInfo, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfos(
-			workflowDefinitionName, workflowDefinitionVersion, finished,
+			workflowDefinitionName, workflowDefinitionVersion, completed,
 			retrieveChildrenInfo, start, end, orderByComparator);
 	}
 
@@ -220,12 +221,12 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#signalWorkflowInstance(long, String, Map,
-	 *      long, Map)
+	 *		long, Map)
 	 */
 	public static WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, String activityName,
 			Map<String, Object> attributes, long callingUserId,
-		Map<String, Object> parameters)
+			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.signalWorkflowInstance(
@@ -235,12 +236,12 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer, Map,
-	 *      long, Map)
+	 *		long, Map)
 	 */
 	public static WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, long callingUserId,
-		Map<String, Object> parameters)
+			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(
@@ -250,13 +251,12 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer, Map,
-	 *      long, String, Map)
+	 *		long, String, Map)
 	 */
 	public static WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, long callingUserId,
-			String activityName,
-		Map<String, Object> parameters)
+			String activityName, Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(
@@ -266,7 +266,7 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer,
-	 *      String, long, Map, long, Map)
+	 *		String, long, Map, long, Map)
 	 */
 	public static WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
@@ -281,12 +281,13 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#startWorkflowInstance(String, Integer,
-	 *      String, long, Map, long, String, Map)
+	 *		String, long, Map, long, String, Map)
 	 */
 	public static WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			String relationType, long relationId, Map<String, Object> context,
-			long callingUserId, String activityName, Map<String, Object> parameters)
+			long callingUserId, String activityName,
+			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(

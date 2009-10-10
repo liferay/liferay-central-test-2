@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -30,18 +31,18 @@ import java.util.Set;
 
 /**
  * <a href="UserCredential.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The user credential is a container for a user's id and its roles and is used
  * as the credential towards the workflow engine. For convenience, it is just
- * added automatically through the request by creating it using the
- * {@link UserCredentialFactoryUtil#createCredential(long)} as the API just
- * takes the user id, the role set and additional information is being added by
- * the {@link UserCredentialFactory} invoked by the proxy (most likely the
- * request builder) in order to avoid the implementation or adapter having to
- * call back the portal for the set of roles of a user's id.
+ * added automatically through the request by creating it using the {@link
+ * UserCredentialFactoryUtil#createCredential(long)} as the API just takes the
+ * user id, the role set and additional information is being added by the {@link
+ * UserCredentialFactory} invoked by the proxy (most likely the request builder)
+ * in order to avoid the implementation or adapter having to call back the
+ * portal for the set of roles of a user's id.
  * </p>
- * 
+ *
  * @author Micha Kiener
  */
 public class UserCredential implements Serializable {
@@ -57,33 +58,26 @@ public class UserCredential implements Serializable {
 	 * Adds any additional attribute to this user credential. Make sure the
 	 * value of the attribute is serializable as the user credential might get
 	 * serialized through the message bus, if needed.
-	 * 
+	 *
 	 * @param key the name of the attribute for later retrieval
 	 * @param value the value of the attribute to be stored within this user
-	 *            credential
+	 *		  credential
 	 */
 	public void addAttribute(String key, Object value) {
 		if (_attributes == null) {
 			_attributes = new HashMap<String, Object>();
 		}
+
 		_attributes.put(key, value);
 	}
 
-	/**
-	 * Returns the attribute with the given key from the internal map of
-	 * additional attributes, if available, <code>null</code> otherwise.
-	 * 
-	 * @param key the key of the attribute to be returned
-	 * @return the value of the attribute, if available, <code>null</code>
-	 *         otherwise
-	 * @param <T> the expected type of the attribute
-	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getAttribute(String key) {
 		if (_attributes == null) {
 			return null;
 		}
-		return (T) _attributes.get(key);
+
+		return (T)_attributes.get(key);
 	}
 
 	/**

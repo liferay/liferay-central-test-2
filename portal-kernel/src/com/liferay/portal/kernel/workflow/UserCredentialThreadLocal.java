@@ -24,16 +24,16 @@ package com.liferay.portal.kernel.workflow;
 
 /**
  * <a href="UserCredentialThreadLocal.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
- * The {@link ThreadLocal} to be used to attach the current
- * {@link UserCredential} to the thread before invoking a proxied method. If
- * using it, make sure the the credential being attached to the thread is going
- * to be removed after the method invocation in a finally block as it is
- * dangerous, if the credential would stick on the thread and could lead into
- * unpredictable behavior.
+ * The {@link ThreadLocal} to be used to attach the current {@link
+ * UserCredential} to the thread before invoking a proxied method. If using it,
+ * make sure the the credential being attached to the thread is going to be
+ * removed after the method invocation in a finally block as it is dangerous, if
+ * the credential would stick on the thread and could lead into unpredictable
+ * behavior.
  * </p>
- * 
+ *
  * @author Brian Wing Shun Chan
  * @author Micha Kiener
  */

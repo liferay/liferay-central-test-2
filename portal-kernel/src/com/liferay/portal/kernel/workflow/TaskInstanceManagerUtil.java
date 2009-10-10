@@ -22,10 +22,10 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+
 import java.util.List;
 import java.util.Map;
-
-import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**
  * <a href="TaskInstanceManagerUtil.java.html"><b><i>View Source</i></b></a>
@@ -44,12 +44,12 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#assignTaskInstanceToRole(long, long, String,
-	 *      Map, long, Map)
+	 *		Map, long, Map)
 	 */
 	public static TaskInstanceInfo assignTaskInstanceToRole(
 			long taskInstanceId, long roleId, String comment,
 			Map<String, Object> attributes, long callingUserId,
-		Map<String, Object> parameters)
+			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.assignTaskInstanceToRole(
@@ -59,12 +59,12 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#assignTaskInstanceToUser(long, UserCredential,
-	 *      String, Map, long, Map)
+	 *		String, Map, long, Map)
 	 */
 	public static TaskInstanceInfo assignTaskInstanceToUser(
 			long taskInstanceId, UserCredential userCredential, String comment,
 			Map<String, Object> attributes, long callingUserId,
-		Map<String, Object> parameters)
+			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.assignTaskInstanceToUser(
@@ -74,7 +74,7 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, Map,
-	 *      Map)
+	 *		Map)
 	 */
 	public static TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String comment,
@@ -87,12 +87,12 @@ public class TaskInstanceManagerUtil {
 
 	/**
 	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, String,
-	 *      Map, Map)
+	 *		Map, Map)
 	 */
 	public static TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String activityName,
-			String comment,
-		Map<String, Object> attributes, Map<String, Object> parameters)
+			String comment, Map<String, Object> attributes,
+			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.completeTaskInstance(

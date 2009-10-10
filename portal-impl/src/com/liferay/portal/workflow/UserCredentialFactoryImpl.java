@@ -27,23 +27,15 @@ import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.UserCredentialFactory;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 /**
  * <a href="UserCredentialFactoryImpl.java.html"><b><i>View Source</i></b></a>
- * 
- * The default implementation for the user credential factory. It uses the
- * {@link UserLocalService} to retrieve a user object by its id and creates a
- * new {@link UserCredential} based on it.
- * 
+ *
  * @author Micha Kiener
  */
 public class UserCredentialFactoryImpl implements UserCredentialFactory {
 
-	/**
-	 * @see com.liferay.portal.kernel.workflow.UserCredentialFactory#createCredential(long)
-	 */
 	public UserCredential createCredential(long userId)
 		throws WorkflowException {
 

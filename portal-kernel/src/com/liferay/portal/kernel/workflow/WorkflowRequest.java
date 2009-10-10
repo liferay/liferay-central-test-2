@@ -22,14 +22,14 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
-
 /**
  * <a href="WorkflowRequest.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * This proxy extends the generic {@link ProxyRequest} by adding an optional
  * {@link UserCredential} to the request being attached to the current thread
@@ -39,7 +39,7 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
  * calling user id to request a user credential for it and pass it along with
  * the request to be attached to the thread before invoking the method.
  * </p>
- * 
+ *
  * @author Micha Kiener
  */
 public class WorkflowRequest extends ProxyRequest {
@@ -53,10 +53,9 @@ public class WorkflowRequest extends ProxyRequest {
 
 	/**
 	 * Overwritten to attach the user credential passed along, if any available.
-	 * 
-	 * @see com.liferay.portal.kernel.messaging.proxy.ProxyRequest#execute(java.lang.Object)
+	 *
+	 * @see ProxyRequest#execute(Object)
 	 */
-	@Override
 	public Object execute(Object object) throws WorkflowException {
 		try {
 			UserCredentialThreadLocal.setUserCredential(_userCredential);
@@ -75,16 +74,16 @@ public class WorkflowRequest extends ProxyRequest {
 	}
 
 	/**
-	 * Inspects the parameter list of the given method for having the
-	 * {@link CallingUserId} annotation on it to mark it as the id of the
-	 * calling user which might be used to create a user credential for it which
-	 * is passed along with this proxy to be attached to the current thread
-	 * before invoking the method on the target object.
-	 * 
+	 * Inspects the parameter list of the given method for having the {@link
+	 * CallingUserId} annotation on it to mark it as the id of the calling user
+	 * which might be used to create a user credential for it which is passed
+	 * along with this proxy to be attached to the current thread before
+	 * invoking the method on the target object.
+	 *
 	 * @return the user credential according to the calling user id, if
-	 *         available
+	 *		   available
 	 * @throws WorkflowException is thrown, if initialization of the credential
-	 *             failed
+	 *		   failed
 	 */
 	protected UserCredential inspectForCallingUserCredential()
 		throws WorkflowException {

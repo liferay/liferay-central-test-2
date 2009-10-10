@@ -22,10 +22,10 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+
 import java.util.List;
 import java.util.Map;
-
-import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**
  * <a href="WorkflowDefinitionManagerUtil.java.html"><b><i>View Source</i></b>
@@ -44,12 +44,12 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 public class WorkflowDefinitionManagerUtil {
 
 	/**
-	 * @see WorkflowDefinitionManager#deployWorkflowDefinition(WorkflowDefinition,
-	 *      long, java.util.Map)
+	 * @see WorkflowDefinitionManager#deployWorkflowDefinition(
+	 *		WorkflowDefinition, long, Map)
 	 */
 	public static void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition, long callingUserId,
-		Map<String, Object> parameters)
+			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		_workflowDefinitionManager.deployWorkflowDefinition(
