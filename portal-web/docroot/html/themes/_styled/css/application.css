@@ -199,7 +199,7 @@
 	background: #FFC;
 }
 
-.yui-dd-dragging {
+.portlet-boundary.yui-dd-dragging {
 	background: #000;
 	visibility: hidden;
 }

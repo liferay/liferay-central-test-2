@@ -769,16 +769,8 @@
 	padding-left: 0;
 }
 
-.lfr-tree img {
-	vertical-align: middle;
-}
-
 .lfr-tree li.tree-item {
 	padding-left: 5px;
-}
-
-.lfr-tree li.tree-item a img {
-	cursor: move;
 }
 
 .lfr-tree li.tree-item li {
@@ -788,31 +780,6 @@
 .lfr-tree li.tree-item ul {
 	margin-left: 0;
 	margin-top: 5px;
-}
-
-.lfr-tree li.tree-item a, .lfr-tree li.tree-item .expand-image {
-	cursor: pointer;
-}
-
-.lfr-tree .tree-item-hover {
-	background: #7D93C1;
-	padding: 5px;
-}
-
-li.toggle-expand {
-	padding-bottom: 10px;
-}
-
-li.toggle-expand a {
-	padding: 2px 0 2px 20px;
-}
-
-.lfr-expand {
-	background: url(<%= themeImagesPath %>/trees/expand_all.png) no-repeat 0 50%;
-}
-
-.lfr-collapse {
-	background: url(<%= themeImagesPath %>/trees/collapse_all.png) no-repeat 0 50%;
 }
 
 /* ---------- Uploader ---------- */

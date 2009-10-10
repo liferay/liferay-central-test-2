@@ -269,44 +269,8 @@ public class EditPagesAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		String resourceId = GetterUtil.getString(
-			resourceRequest.getResourceID());
-
-		if (resourceId.equals("/html/portlet/communities/tree_js_node.jsp")) {
-			long groupId = ParamUtil.getLong(resourceRequest, "groupId");
-			boolean privateLayout = ParamUtil.getBoolean(
-				resourceRequest, "privateLayout");
-			long parentLayoutId = ParamUtil.getLong(
-				resourceRequest, "parentLayoutId");
-			long nodeId = ParamUtil.getLong(resourceRequest, "nodeId");
-			long[] openNodes = StringUtil.split(
-				ParamUtil.getString(resourceRequest, "openNodes"), 0L);
-			boolean selectableTree = ParamUtil.getBoolean(
-				resourceRequest, "selectableTree");
-			long[] selectedNodes = StringUtil.split(
-				ParamUtil.getString(resourceRequest, "selectedNodes"), 0L);
-			String portletURL = ParamUtil.getString(
-				resourceRequest, "portletURL");
-
-			resourceRequest.setAttribute(WebKeys.TREE_GROUP_ID, groupId);
-			resourceRequest.setAttribute(
-				WebKeys.TREE_PRIVATE_LAYOUT, privateLayout);
-			resourceRequest.setAttribute(
-				WebKeys.TREE_PARENT_LAYOUT_ID, parentLayoutId);
-			resourceRequest.setAttribute(WebKeys.TREE_NODE_ID, nodeId);
-			resourceRequest.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
-			resourceRequest.setAttribute(
-				WebKeys.TREE_SELECTABLE_TREE, selectableTree);
-			resourceRequest.setAttribute(
-				WebKeys.TREE_SELECTED_NODES, selectedNodes);
-			resourceRequest.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
-			resourceRequest.setAttribute(
-				WebKeys.TREE_RENDER_CHILDREN_ONLY, true);
-		}
-		else {
-			resourceId =
-				"/html/portlet/communities/scheduled_publishing_events.jsp";
-		}
+		String resourceId =
+			"/html/portlet/communities/scheduled_publishing_events.jsp";
 
 		PortletRequestDispatcher portletRequestDispatcher =
 			portletConfig.getPortletContext().getRequestDispatcher(resourceId);

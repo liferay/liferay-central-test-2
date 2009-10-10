@@ -42,88 +42,112 @@
 	<liferay-ui:message key="select-the-applications-that-will-be-available-in-the-panel" />
 </div>
 
-<input name="TypeSettingsProperties(panelSelectedPortlets)" type="hidden" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />" />
+<input name="TypeSettingsProperties(panelSelectedPortlets)" id="<portlet:namespace />panelSelectedPortlets" type="hidden" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />" />
 
 <%
 String panelTreeKey = "panelSelectedPortletsPanelTree";
 %>
+<div class="lfr-tree-control aui-helper-clearfix">
+	<div class="lfr-tree-control-item" id="<portlet:namespace />panelTreeExpandAll">
+		<div class="aui-icon lfr-tree-control-icon-expandAll"></div>
+		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="expand-all" /></a>
+	</div>
+	<div class="lfr-tree-control-item" id="<portlet:namespace />panelTreeCollapseAll">
+		<div class="aui-icon lfr-tree-control-icon-collapseAll"></div>
+		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="collapse-all" /></a>
+	</div>
+</div>
 
-<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/tree.js" type="text/javascript"></script>
-
-<div id="<portlet:namespace />panel-select-portlets-output" style="margin: 4px;"></div>
+<div id="<portlet:namespace />panelSelectPortletsOutput" style="margin: 4px;"></div>
 
 <script type="text/javascript">
-	var <portlet:namespace />treeIcons = {
-		checkbox: '<%= themeDisplay.getPathThemeImages() %>/trees/checkbox.png',
-		checked: '<%= themeDisplay.getPathThemeImages() %>/trees/checked.png',
-		childChecked: '<%= themeDisplay.getPathThemeImages() %>/trees/child_checked.png',
-		minus: '<%= themeDisplay.getPathThemeImages() %>/trees/minus.png',
-		page: '<%= themeDisplay.getPathThemeImages() %>/trees/page.png',
-		plus: '<%= themeDisplay.getPathThemeImages() %>/trees/plus.png',
-		root: '<%= themeDisplay.getPathThemeImages() %>/trees/root.png',
-		spacer: '<%= themeDisplay.getPathThemeImages() %>/trees/spacer.png'
-	};
+AUI().ready(
+	'tree-view',
+	function(A) {
+		var indexOf = A.Array.indexOf;
+		var panelSelectedPortletsEl = A.get('#<portlet:namespace />panelSelectedPortlets');
+		var selectedPortlets = panelSelectedPortletsEl.val().split(',');
 
-	var <portlet:namespace />panelPortletsArray = [];
+		var onCheck = function(event, plid) {
+			var node = event.target;
+			var add = indexOf(selectedPortlets, plid) == -1;
 
-	<%
-	PortletLister portletLister = new PortletLister();
+			if (plid && add) {
+				selectedPortlets.push(plid);
 
-	portletLister.setIncludeInstanceablePortlets(false);
-
-	TreeView treeView = portletLister.getTreeView(layoutTypePortlet, LanguageUtil.get(pageContext, "application"), user, application);
-
-	Iterator itr = treeView.getList().iterator();
-
-	for (int i = 0; itr.hasNext(); i++) {
-		TreeNodeView treeNodeView = (TreeNodeView)itr.next();
-	%>
-
- 		<portlet:namespace />panelPortletsArray[<%= i %>] = {
-			depth: '<%= treeNodeView.getDepth() %>',
-			id: '<%= treeNodeView.getId() %>',
-			img: '<%= treeNodeView.getImg() %>',
-			ls: '<%= treeNodeView.getLs() %>',
-			href: '<%= treeNodeView.getHref() %>',
-			parentId: '<%= treeNodeView.getParentId() %>',
-			objId: '<%= treeNodeView.getObjId() %>',
-			name: '<%= UnicodeFormatter.toString(treeNodeView.getName()) %>'
+				panelSelectedPortletsEl.val( selectedPortlets.join(',') );
+			}
 		};
 
-	<%
-	}
-	%>
+		var onUncheck = function(event, plid) {
+			var node = event.target;
 
-	AUI().ready(
-		'liferay-tree',
-		function() {
-			new Liferay.Tree(
-				{
-					className: "lfr-tree",
-					icons: <portlet:namespace />treeIcons,
-					nodes: <portlet:namespace />panelPortletsArray,
-					openNodes: '<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />',
-					outputId: '#<portlet:namespace />panel-select-portlets-output',
-					selectable: true,
-					selectedNodes: '<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />',
-					treeId: '<%= panelTreeKey %>',
-					onSelect: function(params) {
-						var portletId = params.branchId;
-						var selectedNode = params.selectedNode;
+			if (plid) {
+				if (selectedPortlets.length) {
+					A.Array.removeItem(selectedPortlets, plid);
+				}
 
-						var panelSelectedPortletsEl = document.<portlet:namespace />fm['TypeSettingsProperties(panelSelectedPortlets)'];
+				panelSelectedPortletsEl.val( selectedPortlets.join(',') );
+			}
+		};
 
-						if (portletId) {
-							if (selectedNode) {
-								panelSelectedPortletsEl.value += portletId + ',';
-							}
-							else {
-								panelSelectedPortletsEl.value = panelSelectedPortletsEl.value.replace(portletId + ',', '');
+		var treeView = new A.TreeView(
+			{
+				boundingBox: '#<portlet:namespace />panelSelectPortletsOutput'
+			}
+		)
+		.render();
+
+		<%
+		PortletLister portletLister = new PortletLister();
+
+		portletLister.setIncludeInstanceablePortlets(false);
+
+		TreeView treeView = portletLister.getTreeView(layoutTypePortlet, LanguageUtil.get(pageContext, "application"), user, application);
+
+		Iterator itr = treeView.getList().iterator();
+
+		for (int i = 0; itr.hasNext(); i++) {
+			TreeNodeView treeNodeView = (TreeNodeView)itr.next();
+		%>
+			var parentNode<%= i %> = treeView.getNodeById('treePanel<%= treeNodeView.getParentId() %>') || treeView;
+			var objId<%= i %> = '<%= treeNodeView.getObjId() %>';
+			var checked<%= i %> = objId<%= i %> ? (indexOf(selectedPortlets, objId<%= i %>) > -1) : false;
+
+			parentNode<%= i %>.appendChild(
+				new A.TreeNodeTask(
+					{
+						checked: checked<%= i %>,
+						expanded: <%= treeNodeView.getDepth() == 0 %>,
+						id: 'treePanel<%= treeNodeView.getId() %>',
+						label: '<%= UnicodeFormatter.toString(treeNodeView.getName()) %>',
+						leaf: <%= treeNodeView.getDepth() > 1 %>,
+						on: {
+							check: function(event) {
+								onCheck(event, objId<%= i %>);
+							},
+							uncheck: function(event) {
+								onUncheck(event, objId<%= i %>);
 							}
 						}
 					}
-				}
+				)
 			);
+		<%
 		}
-	);
+		%>
+
+		var collapseAll = function(event) {
+			treeView.collapseAll();
+			event.halt();
+		};
+		var expandAll = function(event) {
+			treeView.expandAll();
+			event.halt();
+		};
+
+		A.on('click', collapseAll, '#<portlet:namespace />panelTreeCollapseAll');
+		A.on('click', expandAll, '#<portlet:namespace />panelTreeExpandAll');
+	}
+);
 </script>
