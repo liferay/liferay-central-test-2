@@ -51,7 +51,7 @@ public class PortletServiceImpl extends PortletServiceBaseImpl {
 			PortletApp portletApp = portlet.getPortletApp();
 
 			if (portletApp.isWARFile()) {
-				JSONObject jsonObject= JSONFactoryUtil.createJSONObject();
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 				jsonObject.put("portlet_name", portlet.getPortletName());
 				jsonObject.put(
