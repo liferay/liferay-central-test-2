@@ -135,6 +135,10 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 		</#if>
 	</#list>
 
+	public ClassLoaderProxy getClassLoaderProxy() {
+		return _classLoaderProxy;
+	}
+
 	private ClassLoaderProxy _classLoaderProxy;
 
 }
