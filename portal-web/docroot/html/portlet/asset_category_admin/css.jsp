@@ -35,8 +35,8 @@
 	padding: 5px 10px;
 }
 
-.portlet-asset-category-admin .vocabulary-list-container {
-	width: 200px;
+.portlet-asset-category-admin .vocabulary-categories-container {
+	min-width: 250px;
 }
 
 .ie6 .portlet-asset-category-admin .vocabulary-categories-container {
@@ -269,42 +269,4 @@
 
 .portlet-asset-category-admin #vocabulary-search-input {
 	width: 250px;
-}
-
-/* ---------- Treeview ---------- */
-
-.portlet-asset-category-admin .treeview {
-	cursor: pointer;
-	font-size: 13px;
-}
-
-.portlet-asset-category-admin .treeview .hover {
-	cursor: pointer;
-}
-
-.portlet-asset-category-admin .treeview .placeholder {
-	background: url(<%= themeImagesPath %>/application/loading_indicator.gif) 0 0 no-repeat;
-	display: block;
-	height: 16px;
-	width: 16px;
-}
-
-.portlet-asset-category-admin .filetree li {
-	padding: 4px 0 5px 16px;
-}
-
-.portlet-asset-category-admin .treeview .hover-up {
-	border-bottom: 1px dotted #333;
-}
-
-.portlet-asset-category-admin .treeview .hover-down {
-	border-top: 1px dotted #333;
-}
-
-.portlet-asset-category-admin .treeview .hover-folder {
-	background: #ffc url(<%= themeImagesPath %>/trees/folder.png) no-repeat scroll 0 0;
-}
-
-.portlet-asset-category-admin .vocabulary-select-list {
-	width: 100px;
 }

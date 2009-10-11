@@ -133,7 +133,7 @@
 
 		<div class="lfr-message-response" id="vocabulary-category-messages" style="display: none;"></div>
 
-		<div class="vocabulary-categories lfr-component"></div>
+		<div class="vocabulary-categories"></div>
 	</td>
 	<td class="vocabulary-edit-category">
 		<div class="results-header"><liferay-ui:message key="edit-category" /></div>
