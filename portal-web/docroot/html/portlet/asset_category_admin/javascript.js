@@ -229,42 +229,41 @@ AUI().add(
 				}
 			);
 
-			AUI().ready(
-				'dd',
-				function(A) {
-					A.DD.DDM.on(
-						'drop:enter',
-						function(event) {
-							var dropNode = event.drop.get('node');
+			A.DD.DDM.on(
+				'drop:enter',
+				function(event) {
+					var dropNode = event.drop.get('node');
 
-							dropNode.addClass('active-area');
-						}
-					);
-					A.DD.DDM.on(
-						'drop:exit',
-						function(event) {
-							var dropNode = event.target.get('node');
+					dropNode.addClass('active-area');
+				}
+			);
 
-							dropNode.removeClass('active-area');
-						}
-					);
-					A.DD.DDM.on(
-						'drop:hit',
-						function(event) {
-							var dragNode = event.drag.get('node');
-							var dropNode = event.drop.get('node');
-							var node = A.Widget.getByNode(dragNode);
-							var vocabularyId = dropNode.attr('data-vocabularyid');
-							var fromCategoryId = instance._getCategoryId(node);
-							var fromCategoryName = instance._getCategoryName(node);
+			A.DD.DDM.on(
+				'drop:exit',
+				function(event) {
+					var dropNode = event.target.get('node');
 
-							instance._merge(fromCategoryId, fromCategoryName, 0, vocabularyId);
+					dropNode.removeClass('active-area');
+				}
+			);
 
-							instance._selectVocabulary(vocabularyId);
+			A.DD.DDM.on(
+				'drop:hit',
+				function(event) {
+					var dragNode = event.drag.get('node');
+					var dropNode = event.drop.get('node');
 
-							dropNode.removeClass('active-area');
-						}
-					);
+					var node = A.Widget.getByNode(dragNode);
+
+					var vocabularyId = dropNode.attr('data-vocabularyid');
+					var fromCategoryId = instance._getCategoryId(node);
+					var fromCategoryName = instance._getCategoryName(node);
+
+					instance._merge(fromCategoryId, fromCategoryName, 0, vocabularyId);
+
+					instance._selectVocabulary(vocabularyId);
+
+					dropNode.removeClass('active-area');
 				}
 			);
 
@@ -286,69 +285,51 @@ AUI().add(
 
 				var buffer = [];
 
-				AUI().ready(
-					'tree-view',
-					function(A) {
-						var childrenList = A.get(instance._categoryContainerSelector);
-						var boundingBox = A.Node.create('<div class="vocabulary-treeview-container" id="vocabularyTreeContainer"></div>');
+				var childrenList = A.get(instance._categoryContainerSelector);
+				var boundingBox = A.Node.create('<div class="vocabulary-treeview-container" id="vocabularyTreeContainer"></div>');
 
-						childrenList.empty();
-						childrenList.append(boundingBox);
+				childrenList.empty();
+				childrenList.append(boundingBox);
 
-						instance.treeView = new A.TreeViewDD(
-							{
-								boundingBox: boundingBox,
-								type: 'normal',
-								on: {
-									dropAppend: function(event) {
-										var tree = event.tree;
-										var fromCategoryId = instance._getCategoryId(tree.dragNode);
-										var fromCategoryName = instance._getCategoryName(tree.dragNode);
-										var toCategoryId = instance._getCategoryId(tree.dropNode);
-										var toCategoryName = instance._getCategoryName(tree.dropNode);
-										var vocabularyId = instance._selectedVocabularyId;
+				instance.treeView = new A.TreeViewDD(
+					{
+						boundingBox: boundingBox,
+						on: {
+							dropAppend: function(event) {
+								var tree = event.tree;
+								var fromCategoryId = instance._getCategoryId(tree.dragNode);
+								var fromCategoryName = instance._getCategoryName(tree.dragNode);
+								var toCategoryId = instance._getCategoryId(tree.dropNode);
+								var toCategoryName = instance._getCategoryName(tree.dropNode);
+								var vocabularyId = instance._selectedVocabularyId;
 
-										instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
-									},
-									dropInsert: function(event) {
-										var tree = event.tree;
-										var parentNode = tree.dropNode.get('parentNode');
-										var fromCategoryId = instance._getCategoryId(tree.dragNode);
-										var fromCategoryName = instance._getCategoryName(tree.dragNode);
-										var toCategoryId = instance._getCategoryId(parentNode);
-										var toCategoryName = instance._getCategoryName(parentNode);
-										var vocabularyId = instance._selectedVocabularyId;
+								instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
+							},
+							dropInsert: function(event) {
+								var tree = event.tree;
+								var parentNode = tree.dropNode.get('parentNode');
+								var fromCategoryId = instance._getCategoryId(tree.dragNode);
+								var fromCategoryName = instance._getCategoryName(tree.dragNode);
+								var toCategoryId = instance._getCategoryId(parentNode);
+								var toCategoryName = instance._getCategoryName(parentNode);
+								var vocabularyId = instance._selectedVocabularyId;
 
-										instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
-									}
-								}
+								instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
 							}
-						)
-						.render();
-
-						instance._buildCategoryTreeview(A, categories, 0);
+						},
+						type: 'normal'
 					}
-				);
+				)
+				.render();
+
+				instance._buildCategoryTreeview(categories, 0);
 
 				instance._reloadSearch();
 
-				var vocabularyContainer = jQuery(instance._vocabularyContainerSelector);
-				var listLinks = jQuery('li', vocabularyContainer);
+				var vocabularyContainer = A.get(instance._vocabularyContainerSelector);
+				var listLinks = vocabularyContainer.all('li');
 
-				AUI().ready(
-					'dd',
-					function(A) {
-						listLinks.each(
-							function(i, node) {
-								new A.DD.Drop(
-									{
-										node: node
-									}
-								);
-							}
-						);
-					}
-				);
+				listLinks.plug(A.Plugin.Drop);
 
 				if (callback) {
 					callback();
@@ -513,6 +494,7 @@ AUI().add(
 
 			_addCategory: function(categoryName, vocabularyId, callback) {
 				var instance = this;
+
 				var communityPermission = instance._getPermissionsEnabled('category', 'community');
 				var guestPermission = instance._getPermissionsEnabled('category', 'guest');
 
@@ -695,8 +677,9 @@ AUI().add(
 				);
 			},
 
-			_buildCategoryTreeview: function(A, categories, parentCategoryId) {
+			_buildCategoryTreeview: function(categories, parentCategoryId) {
 				var instance = this;
+
 				var children = instance._filterCategory(categories, parentCategoryId);
 
 				jQuery.each(
@@ -730,7 +713,7 @@ AUI().add(
 						parentNode.appendChild(node);
 
 						if (hasChild) {
-							instance._buildCategoryTreeview(A, categories, categoryId);
+							instance._buildCategoryTreeview(categories, categoryId);
 						}
 					}
 				);
@@ -761,6 +744,7 @@ AUI().add(
 				var instance = this;
 
 				instance._hideSection('.vocabulary-edit');
+
 				jQuery(instance._categoryContainerCellsSelector).width('auto');
 			},
 
@@ -823,13 +807,13 @@ AUI().add(
 
 			_getCategory: function(categoryId) {
 				var instance = this;
-				var categoryNode = A.get('#categoryNode' + categoryId);
 
-				return A.Widget.getByNode(categoryNode);
+				return A.Widget.getByNode('#categoryNode' + categoryId);
 			},
 
 			_getCategoryId: function(node) {
 				var instance = this;
+
 				var nodeId = node.get('id') || '';
 				var categoryId = nodeId.replace('categoryNode', '');
 
@@ -844,6 +828,7 @@ AUI().add(
 
 			_getParentCategoryId: function(node) {
 				var instance = this;
+
 				var parentNode = node.get('parentNode');
 
 				return instance._getCategoryId(parentNode);
@@ -955,6 +940,7 @@ AUI().add(
 
 			_merge: function(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId) {
 				var instance = this;
+
 				var categoryProperties = instance._buildCategoryProperties();
 
 				vocabularyId = vocabularyId || instance._selectedVocabularyId;
@@ -964,6 +950,7 @@ AUI().add(
 
 			_reloadSearch: function() {
 				var	instance = this;
+
 				var options = {};
 				var selected = jQuery('#vocabulary-select-search').val();
 				var input = jQuery('#vocabulary-search-input');
@@ -1050,6 +1037,7 @@ AUI().add(
 
 				categoryNameField.val(categoryName);
 				instance._displayCategoryProperties(categoryId);
+
 				instance._selectedCategory = category;
 
 				return category;
@@ -1233,6 +1221,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['context-panel']
+		requires: ['context-panel', 'dd', 'tree-view']
 	}
 );

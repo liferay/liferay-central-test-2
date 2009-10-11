@@ -182,12 +182,6 @@
 	background: #1E2529;
 }
 
-/* TreeView */
-
-.lfr-tree-control {
-	width: 165px;
-}
-
 .aui-tree-node-selected {
 	background: #eee;
 }
@@ -201,24 +195,21 @@
 }
 
 .aui-tree-pages .aui-tree-icon {
+	background: transparent url() no-repeat 50% 50%;
 	height: 18px;
 	width: 18px;
 }
 
-.aui-tree-pages .lfr-root-node.aui-tree-expanded .aui-tree-icon {
-	background: transparent url(<%= themeImagesPath %>/trees/root.png) no-repeat 50% 50%;
+.aui-tree-expanded .aui-tree-icon {
+	background-image: url(<%= themeImagesPath %>/trees/page_copy.png);
 }
 
-.aui-tree-pages .lfr-root-node.aui-tree-collapsed .aui-tree-icon {
-	background: transparent url(<%= themeImagesPath %>/trees/root.png) no-repeat 50% 50%;
+.aui-tree-collapsed .aui-tree-icon {
+	background-image: url(<%= themeImagesPath %>/trees/page.png);
 }
 
-.aui-tree-pages .aui-tree-expanded .aui-tree-icon {
-	background: transparent url(<%= themeImagesPath %>/trees/page_copy.png) no-repeat 50% 50%;
-}
-
-.aui-tree-pages .aui-tree-collapsed .aui-tree-icon {
-	background: transparent url(<%= themeImagesPath %>/trees/page.png) no-repeat 50% 50%;
+.lfr-root-node .aui-tree-icon {
+	background-image: url(<%= themeImagesPath %>/trees/root.png);
 }
 
 .lfr-tree-loading-icon {
@@ -226,24 +217,29 @@
 	padding-top: 5px;
 }
 
-.lfr-tree-control div, .lfr-tree-control a {
+.lfr-tree-controls {
+	width: 165px;
+}
+
+.lfr-tree-controls div,
+.lfr-tree-controls a {
 	float: left;
 }
 
-.lfr-tree-control-label {
+.lfr-tree-controls-label {
 	line-height: 17px;
 	padding: 0 2px;
 	text-decoration: none;
 }
 
-.lfr-tree-control-item {
+.lfr-tree-controls-item {
 	padding: 0 0 6px 6px;
 }
 
-.lfr-tree-control-icon-expandAll {
+.lfr-tree-controls-expand {
 	background-image: url(<%= themeImagesPath %>/trees/expand_all.png);
 }
 
-.lfr-tree-control-icon-collapseAll {
+.lfr-tree-controls-collapse {
 	background-image: url(<%= themeImagesPath %>/trees/collapse_all.png);
 }

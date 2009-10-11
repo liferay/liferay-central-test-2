@@ -36,17 +36,17 @@ String treeId = ParamUtil.getString(request, "treeId");
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 %>
 
-<div class="lfr-tree-control aui-helper-clearfix">
-	<div class="lfr-tree-control-item" id="<portlet:namespace />treeExpandAll">
-		<div class="aui-icon lfr-tree-control-icon-expandAll"></div>
+<div class="lfr-tree-controls aui-helper-clearfix">
+	<div class="lfr-tree-controls-item" id="<portlet:namespace />treeExpandAll">
+		<div class="aui-icon lfr-tree-controls-expand"></div>
 
-		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="expand-all" /></a>
+		<a href="javascript:;" class="lfr-tree-controls-label"><liferay-ui:message key="expand-all" /></a>
 	</div>
 
-	<div class="lfr-tree-control-item" id="<portlet:namespace />treeCollapseAll">
-		<div class="aui-icon lfr-tree-control-icon-collapseAll"></div>
+	<div class="lfr-tree-controls-item" id="<portlet:namespace />treeCollapseAll">
+		<div class="aui-icon lfr-tree-controls-collapse"></div>
 
-		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="collapse-all" /></a>
+		<a href="javascript:;" class="lfr-tree-controls-label"><liferay-ui:message key="collapse-all" /></a>
 	</div>
 </div>
 
@@ -58,7 +58,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 <script type="text/javascript">
 	AUI().ready(
-		'tree-view', 'datatype-xml', 'dataschema-xml',
+		'dataschema-xml',
+		'datatype-xml',
+		'tree-view',
 		function(A) {
 			var TreeUtil = {
 				DEFAULT_PARENT_LAYOUT_ID: <%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>,
@@ -69,10 +71,12 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 				afterRenderTree: function(event) {
 					var treeInstance = event.target;
-					var rootNode = treeInstance.item(0);
-					var loadingEL = A.get('#<portlet:namespace />treeLoading');
 
-					loadingEL.hide();
+					var rootNode = treeInstance.item(0);
+					var loadingEl = A.get('#<portlet:namespace />treeLoading');
+
+					loadingEl.hide();
+
 					TreeUtil.restoreNodeState(rootNode);
 				},
 
@@ -115,9 +119,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 							var newNode = A.mix(
 								nodeBase,
 								{
-									alwaysShowHitArea: node.hasChildren,
-									type: '<%= selectableTree ? "task" : "io" %>',
-									id: TreeUtil.createId(node.layoutId, node.plid),
 									after: {
 										check: function(event) {
 											var plid = TreeUtil.extractPlid(event.target);
@@ -129,7 +130,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 											TreeUtil.updateSessionTreeClick(plid, false, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
 										}
-									}
+									},
+									alwaysShowHitArea: node.hasChildren,
+									id: TreeUtil.createId(node.layoutId, node.plid),
+									type: '<%= selectableTree ? "task" : "io" %>'
 								}
 							);
 
@@ -142,6 +146,27 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 					);
 
 					return output;
+				},
+
+				restoreNodeState: function(node) {
+					var instance = this;
+
+					var id = node.get('id');
+					var plid = TreeUtil.extractPlid(node);
+
+					if (plid == '<%= selPlid %>') {
+						node.select();
+					}
+
+					if (A.Array.indexOf(TreeUtil.OPEN_NODES, id) > -1) {
+						node.expand();
+					}
+
+					if (A.Array.indexOf(TreeUtil.SELECTED_NODES, plid) > -1) {
+						if (node.check) {
+							node.check();
+						}
+					}
 				},
 
 				updateLayout: function(data) {
@@ -157,23 +182,23 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				},
 
 				updateLayoutParent: function(dragPlid, dropPlid) {
-					var data = {
-						cmd: 'parent_layout_id',
-						parentPlid: dropPlid,
-						plid: dragPlid
-					};
-
-					TreeUtil.updateLayout(data);
+					TreeUtil.updateLayout(
+						{
+							cmd: 'parent_layout_id',
+							parentPlid: dropPlid,
+							plid: dragPlid
+						}
+					);
 				},
 
 				updateLayoutPriority: function(dragPlid, index) {
-					var data = {
-						cmd: 'priority',
-						plid: dragPlid,
-						priority: index
-					};
-
-					TreeUtil.updateLayout(data);
+					TreeUtil.updateLayout(
+						{
+							cmd: 'priority',
+							plid: dragPlid,
+							priority: index
+						}
+					);
 				},
 
 				updateSessionTreeClick: function(id, open, treeId) {
@@ -192,26 +217,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 							data: A.toQueryString(data)
 						}
 					);
-				},
-
-				restoreNodeState: function(node) {
-					var instance = this;
-					var id = node.get('id');
-					var plid = TreeUtil.extractPlid(node);
-
-					if (plid == '<%= selPlid %>') {
-						node.select();
-					}
-
-					if (A.Array.indexOf(TreeUtil.OPEN_NODES, id) > -1) {
-						node.expand();
-					}
-
-					if (A.Array.indexOf(TreeUtil.SELECTED_NODES, plid) > -1) {
-						if (node.check) {
-							node.check();
-						}
-					}
 				}
 			};
 
@@ -220,102 +225,112 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			var rootLabel = '<%= HtmlUtil.escape(rootNodeName) %>';
 			var treeElId = '<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output';
 
+			var RootNodeType = A.TreeNodeTask;
+			var TreeViewType = A.TreeView;
+
 			if (!<%= selectableTree %>) {
+				RootNodeType = A.TreeNodeIO;
+				TreeViewType = A.TreeViewDD;
+
 				rootLabel = TreeUtil.createLink(rootLabel, TreeUtil.DEFAULT_PARENT_LAYOUT_ID);
 			}
 
-			var RootNodeType = <%= selectableTree ? "A.TreeNodeTask" : "A.TreeNodeIO" %>;
-			var TreeViewType = <%= selectableTree ? "A.TreeView" : "A.TreeViewDD" %>;
-			var rootNode = new RootNodeType({
-				alwaysShowHitArea: false,
-				draggable: false,
-				id: rootId,
-				label: rootLabel,
-				leaf: false
-			});
+			var rootNode = new RootNodeType(
+				{
+					alwaysShowHitArea: false,
+					draggable: false,
+					id: rootId,
+					label: rootLabel,
+					leaf: false
+				}
+			);
 
 			rootNode.get('contentBox').addClass('lfr-root-node');
 
-			var treeview = new TreeViewType({
-				after: {
-					collapse: function(event) {
-						var id = event.tree.node.get('id');
+			var treeview = new TreeViewType(
+				{
+					after: {
+						collapse: function(event) {
+							var id = event.tree.node.get('id');
 
-						TreeUtil.updateSessionTreeClick(id, false, '<%= HtmlUtil.escape(treeId) %>');
+							TreeUtil.updateSessionTreeClick(id, false, '<%= HtmlUtil.escape(treeId) %>');
+						},
+						expand: function(event) {
+							var id = event.tree.node.get('id');
+
+							TreeUtil.updateSessionTreeClick(id, true, '<%= HtmlUtil.escape(treeId) %>');
+						},
+						render: TreeUtil.afterRenderTree
 					},
-					expand: function(event) {
-						var id = event.tree.node.get('id');
+					boundingBox: '#' + treeElId,
+					children: [rootNode],
+					io: {
+						cfg: {
+							data: function(node) {
+								var parentLayoutId = TreeUtil.extractLayoutId(node);
 
-						TreeUtil.updateSessionTreeClick(id, true, '<%= HtmlUtil.escape(treeId) %>');
+								return A.toQueryString(
+									{
+										groupId: <%= groupId %>,
+										privateLayout: false,
+										parentLayoutId: parentLayoutId
+									}
+								);
+							},
+							method: 'POST'
+						},
+						formatter: TreeUtil.formatJSONResults,
+						url: getLayoutsURL
 					},
-					render: TreeUtil.afterRenderTree
-				},
-				boundingBox: '#'+treeElId,
-				children: [ rootNode ],
-				io: {
-					cfg: {
-						data: function(node) {
-							var parentLayoutId = TreeUtil.extractLayoutId(node);
+					on: {
+						append: function(event) {
+							TreeUtil.restoreNodeState(event.tree.node);
+						},
+						drop: function(event) {
+							var tree = event.tree;
 
-							return A.toQueryString(
-								{
-									groupId: <%= groupId %>,
-									privateLayout: false,
-									parentLayoutId: parentLayoutId
-								}
+							var index = tree.dragNode.get('parentNode').indexOf(tree.dragNode);
+
+							TreeUtil.updateLayoutPriority(
+								TreeUtil.extractPlid(tree.dragNode),
+								index
 							);
 						},
-						method: 'POST'
-					},
-					formatter: TreeUtil.formatJSONResults,
-					url: getLayoutsURL
-				},
-				on: {
-					append: function(event) {
-						TreeUtil.restoreNodeState(event.tree.node);
-					},
-					drop: function(event) {
-						var tree = event.tree;
-						var index = tree.dragNode.get('parentNode').indexOf(tree.dragNode);
+						dropAppend: function(event) {
+							var tree = event.tree;
 
-						TreeUtil.updateLayoutPriority(
-							TreeUtil.extractPlid(tree.dragNode),
-							index
-						);
-					},
-					dropAppend: function(event) {
-						var tree = event.tree;
+							TreeUtil.updateLayoutParent(
+								TreeUtil.extractPlid(tree.dragNode),
+								TreeUtil.extractPlid(tree.dropNode)
+							);
+						},
+						dropInsert: function(event) {
+							var tree = event.tree;
 
-						TreeUtil.updateLayoutParent(
-							TreeUtil.extractPlid(tree.dragNode),
-							TreeUtil.extractPlid(tree.dropNode)
-						);
+							TreeUtil.updateLayoutParent(
+								TreeUtil.extractPlid(tree.dragNode),
+								TreeUtil.extractPlid(tree.dropNode.get('parentNode'))
+							);
+						}
 					},
-					dropInsert: function(event) {
-						var tree = event.tree;
-
-						TreeUtil.updateLayoutParent(
-							TreeUtil.extractPlid(tree.dragNode),
-							TreeUtil.extractPlid(tree.dropNode.get('parentNode'))
-						);
-					}
-				},
-				type: 'pages'
-			})
+					type: 'pages'
+				}
+			)
 			.render();
 
-			var collapseAll = function(event) {
-				treeview.collapseAll();
-				event.halt();
-			};
+			A.on(
+				'click',
+				treeview.collapseAll,
+				'#<portlet:namespace />treeCollapseAll',
+				treeview
+			);
 
-			var expandAll = function(event) {
-				treeview.expandAll();
-				event.halt();
-			};
-
-			A.on('click', collapseAll, '#<portlet:namespace />treeCollapseAll');
-			A.on('click', expandAll, '#<portlet:namespace />treeExpandAll');
+			A.on(
+				'click',
+				treeview.expandAll,
+				'#<portlet:namespace />treeExpandAll',
+				treeview
+			);
 		}
 	);
 </script>

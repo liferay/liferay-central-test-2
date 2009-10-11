@@ -48,17 +48,17 @@
 String panelTreeKey = "panelSelectedPortletsPanelTree";
 %>
 
-<div class="lfr-tree-control aui-helper-clearfix">
-	<div class="lfr-tree-control-item" id="<portlet:namespace />panelTreeExpandAll">
-		<div class="aui-icon lfr-tree-control-icon-expandAll"></div>
+<div class="lfr-tree-controls aui-helper-clearfix">
+	<div class="lfr-tree-controls-item" id="<portlet:namespace />panelTreeExpandAll">
+		<div class="aui-icon lfr-tree-controls-expand"></div>
 
-		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="expand-all" /></a>
+		<a href="javascript:;" class="lfr-tree-controls-label"><liferay-ui:message key="expand-all" /></a>
 	</div>
 
-	<div class="lfr-tree-control-item" id="<portlet:namespace />panelTreeCollapseAll">
-		<div class="aui-icon lfr-tree-control-icon-collapseAll"></div>
+	<div class="lfr-tree-controls-item" id="<portlet:namespace />panelTreeCollapseAll">
+		<div class="aui-icon lfr-tree-controls-collapse"></div>
 
-		<a href="javascript:void(0);" class="lfr-tree-control-label"><liferay-ui:message key="collapse-all" /></a>
+		<a href="javascript:;" class="lfr-tree-controls-label"><liferay-ui:message key="collapse-all" /></a>
 	</div>
 </div>
 
@@ -68,13 +68,12 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	AUI().ready(
 		'tree-view',
 		function(A) {
-			var indexOf = A.Array.indexOf;
 			var panelSelectedPortletsEl = A.get('#<portlet:namespace />panelSelectedPortlets');
 			var selectedPortlets = panelSelectedPortletsEl.val().split(',');
 
 			var onCheck = function(event, plid) {
 				var node = event.target;
-				var add = indexOf(selectedPortlets, plid) == -1;
+				var add = A.Array.indexOf(selectedPortlets, plid) == -1;
 
 				if (plid && add) {
 					selectedPortlets.push(plid);
@@ -117,7 +116,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 
 				var parentNode<%= i %> = treeView.getNodeById('treePanel<%= treeNodeView.getParentId() %>') || treeView;
 				var objId<%= i %> = '<%= treeNodeView.getObjId() %>';
-				var checked<%= i %> = objId<%= i %> ? (indexOf(selectedPortlets, objId<%= i %>) > -1) : false;
+				var checked<%= i %> = objId<%= i %> ? (A.Array.indexOf(selectedPortlets, objId<%= i %>) > -1) : false;
 
 				parentNode<%= i %>.appendChild(
 					new A.TreeNodeTask(
@@ -128,12 +127,8 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 							label: '<%= UnicodeFormatter.toString(treeNodeView.getName()) %>',
 							leaf: <%= treeNodeView.getDepth() > 1 %>,
 							on: {
-								check: function(event) {
-									onCheck(event, objId<%= i %>);
-								},
-								uncheck: function(event) {
-									onUncheck(event, objId<%= i %>);
-								}
+								check: A.rbind(onCheck, window, objId<%= i %>),
+								uncheck: A.rbind(onUncheck, window, objId<%= i %>)
 							}
 						}
 					)
@@ -143,18 +138,19 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 			}
 			%>
 
-			var collapseAll = function(event) {
-				treeView.collapseAll();
-				event.halt();
-			};
+			A.on(
+				'click',
+				treeView.collapseAll,
+				'#<portlet:namespace />panelTreeCollapseAll',
+				treeView
+			);
 
-			var expandAll = function(event) {
-				treeView.expandAll();
-				event.halt();
-			};
-
-			A.on('click', collapseAll, '#<portlet:namespace />panelTreeCollapseAll');
-			A.on('click', expandAll, '#<portlet:namespace />panelTreeExpandAll');
+			A.on(
+				'click',
+				treeView.expandAll,
+				'#<portlet:namespace />panelTreeExpandAll',
+				treeView
+			);
 		}
 	);
 </script>
