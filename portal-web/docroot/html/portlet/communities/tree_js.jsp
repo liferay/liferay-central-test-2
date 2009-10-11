@@ -63,7 +63,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			var TreeUtil = {
 				DEFAULT_PARENT_LAYOUT_ID: <%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>,
 				OPEN_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>'.split(','),
-				SELECTED_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId + "Selected") %>'.split(','),
+				SELECTED_NODES: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode") %>'.split(','),
 				PREFIX_LAYOUT_ID: '_layoutId_',
 				PREFIX_PLID: '_plid_',
 
@@ -122,12 +122,12 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 										check: function(event) {
 											var plid = TreeUtil.extractPlid(event.target);
 
-											TreeUtil.updateSessionTreeClick(plid, true, '<%= HtmlUtil.escape(treeId) %>Selected');
+											TreeUtil.updateSessionTreeClick(plid, true, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
 										},
 										uncheck: function(event) {
 											var plid = TreeUtil.extractPlid(event.target);
 
-											TreeUtil.updateSessionTreeClick(plid, false, '<%= HtmlUtil.escape(treeId) %>Selected');
+											TreeUtil.updateSessionTreeClick(plid, false, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
 										}
 									}
 								}
