@@ -29,7 +29,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 TaskInstanceInfo taskInstanceInfo = (TaskInstanceInfo)row.getParameter("taskInstanceInfo");
 
-List<String> activityNames = TaskInstanceManagerUtil.getPossibleNextActivityNames(taskInstanceInfo.getTaskInstanceId(), user.getUserId());
+List<String> activityNames = TaskInstanceManagerUtil.getPossibleNextActivityNames(taskInstanceInfo.getTaskInstanceId(), user.getUserId(), null);
 %>
 
 <liferay-ui:icon-menu>
