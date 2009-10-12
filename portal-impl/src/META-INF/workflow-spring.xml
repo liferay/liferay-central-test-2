@@ -3,13 +3,19 @@
 <beans
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
 
 	<!-- Advice -->
 
 	<bean id="com.liferay.portal.workflow.WorkflowProxyAdvice" class="com.liferay.portal.workflow.WorkflowProxyAdvice" />
+	<aop:config>
+		<aop:aspect ref="com.liferay.portal.workflow.WorkflowProxyAdvice">
+			<aop:around pointcut="bean(com.liferay.portal.workflow.*ProxyBean)" method="invoke" />
+		</aop:aspect>
+	</aop:config>
 
 	<!-- Proxy -->
 
@@ -41,49 +47,13 @@
 	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil">
-		<property name="workflowDefinitionManager">
-			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
-				<property name="interceptorNames">
-					<list>
-						<value>com.liferay.portal.workflow.WorkflowProxyAdvice</value>
-					</list>
-				</property>
-				<property name="proxyInterfaces">
-					<value>com.liferay.portal.kernel.workflow.WorkflowDefinitionManager</value>
-				</property>
-				<property name="target" ref="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" />
-			</bean>
-		</property>
+		<property name="workflowDefinitionManager" ref="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" />
 	</bean>
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil">
-		<property name="workflowInstanceManager">
-			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
-				<property name="interceptorNames">
-					<list>
-						<value>com.liferay.portal.workflow.WorkflowProxyAdvice</value>
-					</list>
-				</property>
-				<property name="proxyInterfaces">
-					<value>com.liferay.portal.kernel.workflow.WorkflowInstanceManager</value>
-				</property>
-				<property name="target" ref="com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean" />
-			</bean>
-		</property>
+		<property name="workflowInstanceManager" ref="com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean" />
 	</bean>
 	<bean class="com.liferay.portal.kernel.workflow.TaskInstanceManagerUtil">
-		<property name="taskInstanceManager">
-			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
-				<property name="interceptorNames">
-					<list>
-						<value>com.liferay.portal.workflow.WorkflowProxyAdvice</value>
-					</list>
-				</property>
-				<property name="proxyInterfaces">
-					<value>com.liferay.portal.kernel.workflow.TaskInstanceManager</value>
-				</property>
-				<property name="target" ref="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" />
-			</bean>
-		</property>
+		<property name="taskInstanceManager" ref="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" />
 	</bean>
 	<bean class="com.liferay.portal.kernel.workflow.UserCredentialFactoryUtil">
 		<property name="userCredentialFactory">

@@ -25,31 +25,38 @@ package com.liferay.portal.workflow;
 import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowRequest;
-import com.liferay.portal.messaging.proxy.BaseProxyAdvice;
+import com.liferay.portal.messaging.proxy.MessagingProxyAdvice;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
 
 /**
  * <a href="WorkflowProxyAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  */
-public class WorkflowProxyAdvice extends BaseProxyAdvice {
+public class WorkflowProxyAdvice extends MessagingProxyAdvice {
 
-	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
 		try {
-			return super.invoke(methodInvocation);
+			return super.invoke(proceedingJoinPoint);
 		}
 		catch (Exception e) {
 			throw new WorkflowException(e);
 		}
 	}
 
-	protected ProxyRequest createProxyRequest(MethodInvocation methodInvocation)
+	protected ProxyRequest createProxyRequest(
+			ProceedingJoinPoint proceedingJoinPoint)
 		throws Exception {
 
+		MethodSignature methodSignature =
+			(MethodSignature)proceedingJoinPoint.getSignature();
+
 		return new WorkflowRequest(
-			methodInvocation.getMethod(), methodInvocation.getArguments());
+			methodSignature.getMethod(), proceedingJoinPoint.getArgs());
 	}
 
 }

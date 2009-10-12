@@ -3,9 +3,18 @@
 <beans
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
+
+	<!-- Advice -->
+
+	<aop:config>
+		<aop:aspect ref="messagingProxyAdvice">
+			<aop:around pointcut="bean(com.liferay.portal.bi.rules.RulesEngineProxyBean)" method="invoke" />
+		</aop:aspect>
+	</aop:config>
 
 	<!-- Proxy -->
 
@@ -27,19 +36,7 @@
 	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.bi.rules.RulesEngineUtil">
-		<property name="rulesEngine">
-			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
-				<property name="interceptorNames">
-					<list>
-						<value>baseMessagingProxyAdvice</value>
-					</list>
-				</property>
-				<property name="proxyInterfaces">
-					<value>com.liferay.portal.kernel.bi.rules.RulesEngine</value>
-				</property>
-				<property name="target" ref="com.liferay.portal.bi.rules.RulesEngineProxyBean" />
-			</bean>
-		</property>
+		<property name="rulesEngine" ref="com.liferay.portal.bi.rules.RulesEngineProxyBean" />
 	</bean>
 
 	<!-- Messaging -->

@@ -3,10 +3,19 @@
 <beans
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
 >
+
+	<!-- Advice -->
+
+	<aop:config>
+		<aop:aspect ref="messagingProxyAdvice">
+			<aop:around pointcut="bean(com.liferay.portal.scripting.ScriptingProxyBean)" method="invoke" />
+		</aop:aspect>
+	</aop:config>
 
 	<!-- Proxy -->
 
@@ -28,19 +37,7 @@
 	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.scripting.ScriptingUtil">
-		<property name="scripting">
-			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
-				<property name="interceptorNames">
-					<list>
-						<value>baseMessagingProxyAdvice</value>
-					</list>
-				</property>
-				<property name="proxyInterfaces">
-					<value>com.liferay.portal.kernel.scripting.Scripting</value>
-				</property>
-				<property name="target" ref="com.liferay.portal.scripting.ScriptingProxyBean" />
-			</bean>
-		</property>
+		<property name="scripting" ref="com.liferay.portal.scripting.ScriptingProxyBean" />
 	</bean>
 
 	<!-- Implementation  -->
