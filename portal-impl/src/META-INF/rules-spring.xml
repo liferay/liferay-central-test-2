@@ -27,7 +27,19 @@
 	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.bi.rules.RulesEngineUtil">
-		<property name="rulesEngine" ref="com.liferay.portal.bi.rules.RulesEngineProxyBean" />
+		<property name="rulesEngine">
+			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="interceptorNames">
+					<list>
+						<value>baseMessagingProxyAdvice</value>
+					</list>
+				</property>
+				<property name="proxyInterfaces">
+					<value>com.liferay.portal.kernel.bi.rules.RulesEngine</value>
+				</property>
+				<property name="target" ref="com.liferay.portal.bi.rules.RulesEngineProxyBean" />
+			</bean>
+		</property>
 	</bean>
 
 	<!-- Messaging -->

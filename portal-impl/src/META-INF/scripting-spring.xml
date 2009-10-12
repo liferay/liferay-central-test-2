@@ -26,8 +26,21 @@
 	</bean>
 
 	<!-- Util -->
+
 	<bean class="com.liferay.portal.kernel.scripting.ScriptingUtil">
-		<property name="scripting" ref="com.liferay.portal.scripting.ScriptingProxyBean" />
+		<property name="scripting">
+			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="interceptorNames">
+					<list>
+						<value>baseMessagingProxyAdvice</value>
+					</list>
+				</property>
+				<property name="proxyInterfaces">
+					<value>com.liferay.portal.kernel.scripting.Scripting</value>
+				</property>
+				<property name="target" ref="com.liferay.portal.scripting.ScriptingProxyBean" />
+			</bean>
+		</property>
 	</bean>
 
 	<!-- Implementation  -->
