@@ -49,8 +49,7 @@ public class ProxyRequest implements Serializable {
 			}
 		}
 
-		_methodWrapper = new MethodWrapper(
-			method.getDeclaringClass().getName(), method.getName(), arguments);
+		_methodWrapper = new MethodWrapper(method, arguments);
 
 		_hasReturnValue = false;
 

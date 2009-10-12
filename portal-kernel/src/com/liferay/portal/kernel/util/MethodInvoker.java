@@ -30,7 +30,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="MethodInvoker.java.html"><b><i>View Source</i></b></a>
@@ -118,6 +120,7 @@ public class MethodInvoker {
 		String className = methodWrapper.getClassName();
 		String methodName = methodWrapper.getMethodName();
 		Object[] arguments = methodWrapper.getArguments();
+		String[] argumentClassNames = methodWrapper.getArgumentClassNames();
 
 		List<Class<?>> parameterTypes = new ArrayList<Class<?>>();
 
@@ -128,7 +131,15 @@ public class MethodInvoker {
 						" on position " + i + " because it is null");
 			}
 
-			Class<?> argClass = arguments[i].getClass();
+			Class<?> argClass = _primitiveTypeMap.get(argumentClassNames[i]);
+			if (argClass == null) {
+				if (argumentClassNames == null){
+					argClass = arguments[i].getClass();
+				}
+				else {
+					argClass = Class.forName(argumentClassNames[i]);
+				}
+			}
 
 			if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
 				parameterTypes.add(
@@ -233,5 +244,18 @@ public class MethodInvoker {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MethodInvoker.class);
+
+	private static Map<String,Class<?>> _primitiveTypeMap =
+		new HashMap<String,Class<?>>();
+
+	static {
+		_primitiveTypeMap.put("boolean", boolean.class);
+		_primitiveTypeMap.put("byte", byte.class);
+		_primitiveTypeMap.put("double", double.class);
+		_primitiveTypeMap.put("float", float.class);
+		_primitiveTypeMap.put("int", int.class);
+		_primitiveTypeMap.put("long", long.class);
+		_primitiveTypeMap.put("short", short.class);
+	}
 
 }

@@ -24,6 +24,8 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Method;
+
 /**
  * <a href="MethodWrapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,6 +47,22 @@ public class MethodWrapper implements Serializable {
 		_className = className;
 		_methodName = methodName;
 		_arguments = arguments;
+		_argumentClassNames = null;
+	}
+
+	public MethodWrapper(Method method, Object[] arguments) {
+		String className = method.getDeclaringClass().getName();
+		String methodName = method.getName();
+		Class<?>[] argumentsTypes = method.getParameterTypes();
+		String[] argumentClassNames = new String[arguments.length];
+		for(int i = 0; i < argumentsTypes.length; i++) {
+			argumentClassNames[i] = argumentsTypes[i].getName();
+		}
+
+		_className = className;
+		_methodName = methodName;
+		_arguments = arguments;
+		_argumentClassNames = argumentClassNames;
 	}
 
 	public String getClassName() {
@@ -70,8 +88,13 @@ public class MethodWrapper implements Serializable {
 		return arguments;
 	}
 
+	public String[] getArgumentClassNames() {
+		return _argumentClassNames;
+	}
+
 	private String _className;
 	private String _methodName;
 	private Object[] _arguments;
+	private String[] _argumentClassNames;
 
 }
