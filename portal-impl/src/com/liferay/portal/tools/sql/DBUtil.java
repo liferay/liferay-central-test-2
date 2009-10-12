@@ -77,46 +77,6 @@ import org.hibernate.dialect.SybaseDialect;
  */
 public abstract class DBUtil implements DB {
 
-	public static final int MINIMAL = 1;
-
-	public static final int POPULATED = 0;
-
-	public static final int SHARDED = 2;
-
-	public static final String TYPE_DB2 = "db2";
-
-	public static final String TYPE_DERBY = "derby";
-
-	public static final String TYPE_FIREBIRD = "firebird";
-
-	public static final String TYPE_HYPERSONIC = "hypersonic";
-
-	public static final String TYPE_INFORMIX = "informix";
-
-	public static final String TYPE_INGRES = "ingres";
-
-	public static final String TYPE_INTERBASE = "interbase";
-
-	public static final String TYPE_JDATASTORE = "jdatastore";
-
-	public static final String TYPE_MYSQL = "mysql";
-
-	public static final String TYPE_ORACLE = "oracle";
-
-	public static final String TYPE_POSTGRESQL = "postgresql";
-
-	public static final String TYPE_SAP = "sap";
-
-	public static final String TYPE_SQLSERVER = "sqlserver";
-
-	public static final String TYPE_SYBASE = "sybase";
-
-	public static final String[] TYPE_ALL = {
-		TYPE_DB2, TYPE_DERBY, TYPE_FIREBIRD, TYPE_HYPERSONIC, TYPE_INFORMIX,
-		TYPE_INGRES, TYPE_INTERBASE, TYPE_JDATASTORE, TYPE_MYSQL, TYPE_ORACLE,
-		TYPE_POSTGRESQL, TYPE_SAP, TYPE_SQLSERVER, TYPE_SYBASE
-	};
-
 	public static DBUtil getInstance() {
 		if (_dbUtil == null) {
 			try {
