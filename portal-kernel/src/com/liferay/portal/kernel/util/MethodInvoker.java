@@ -132,12 +132,14 @@ public class MethodInvoker {
 			}
 
 			Class<?> argClass = _primitiveTypeMap.get(argumentClassNames[i]);
+
 			if (argClass == null) {
 				if (argumentClassNames == null){
 					argClass = arguments[i].getClass();
 				}
 				else {
-					argClass = Class.forName(argumentClassNames[i]);
+					argClass = contextClassLoader.loadClass(
+						argumentClassNames[i]);
 				}
 			}
 
@@ -245,10 +247,11 @@ public class MethodInvoker {
 
 	private static Log _log = LogFactoryUtil.getLog(MethodInvoker.class);
 
-	private static Map<String,Class<?>> _primitiveTypeMap =
-		new HashMap<String,Class<?>>();
+	private static Map<String, Class<?>> _primitiveTypeMap =
+		new HashMap<String, Class<?>>();
 
 	static {
+		_primitiveTypeMap.put("char", char.class);
 		_primitiveTypeMap.put("boolean", boolean.class);
 		_primitiveTypeMap.put("byte", byte.class);
 		_primitiveTypeMap.put("double", double.class);
