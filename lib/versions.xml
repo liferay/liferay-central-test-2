@@ -976,6 +976,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/bsh.jar</file-name>
+		<version>2.0 B4</version>
+		<project-name>BeanShell</project-name>
+		<project-url>http://www.beanshell.org</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/bsf.jar</file-name>
 		<version>2.4.0</version>
 		<project-name>Bean Scripting Framework</project-name>
@@ -1689,6 +1700,17 @@
 		<version>1.0.5</version>
 		<project-name>Java Diff</project-name>
 		<project-url>http://www.incava.org/projects/java/java-diff</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/javassist.jar</file-name>
+		<version>3.11.0</version>
+		<project-name>Javassist</project-name>
+		<project-url>http://www.csg.is.titech.ac.jp/~chiba/javassist</project-url>
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
