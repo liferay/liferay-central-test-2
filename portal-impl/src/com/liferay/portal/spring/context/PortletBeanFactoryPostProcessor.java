@@ -25,8 +25,7 @@ package com.liferay.portal.spring.context;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.spring.util.JBossClassLoader;
+import com.liferay.portal.spring.util.FilterClassLoader;
 
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -50,9 +49,7 @@ public class PortletBeanFactoryPostProcessor
 					PortalClassLoaderUtil.getClassLoader()
 				});
 
-		if (ServerDetector.isJBoss()) {
-			beanClassLoader = new JBossClassLoader(beanClassLoader);
-		}
+		beanClassLoader = new FilterClassLoader(beanClassLoader);
 
 		beanFactory.setBeanClassLoader(beanClassLoader);
 	}

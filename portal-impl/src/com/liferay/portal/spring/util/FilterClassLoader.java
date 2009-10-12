@@ -25,13 +25,13 @@ package com.liferay.portal.spring.util;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
- * <a href="JBossClassLoader.java.html"><b><i>View Source</i></b></a>
+ * <a href="FilterClassLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class JBossClassLoader extends ClassLoader {
+public class FilterClassLoader extends ClassLoader {
 
-	public JBossClassLoader(ClassLoader classLoader) {
+	public FilterClassLoader(ClassLoader classLoader) {
 		super(classLoader);
 	}
 

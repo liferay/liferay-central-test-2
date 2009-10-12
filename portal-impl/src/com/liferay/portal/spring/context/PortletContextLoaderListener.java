@@ -37,6 +37,7 @@ import javax.servlet.ServletContextEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
@@ -44,6 +45,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @see	   PortletApplicationContext
+ * @see	   PortletContextLoader
  */
 public class PortletContextLoaderListener extends ContextLoaderListener {
 
@@ -76,9 +79,12 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
-		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
-
 		ServletContext servletContext = event.getServletContext();
+
+		servletContext.removeAttribute(
+			WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+
+		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
 		ApplicationContext applicationContext =
 			WebApplicationContextUtils.getWebApplicationContext(servletContext);

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.spring.util.FilterClassLoader;
 
 import java.io.FileNotFoundException;
 
@@ -42,20 +43,28 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  *
  * <p>
  * This web application context will first load bean definitions in the
- * contextConfigLocation parameter in web.xml. Then, the context will load bean
- * definitions specified by the property "spring.configs" in service.properties.
+ * portalContextConfigLocation parameter in web.xml. Then, the context will load
+ * bean definitions specified by the property "spring.configs" in
+ * service.properties.
  * </p>
  *
  * @author Brian Wing Shun Chan
+ * @see	   PortletContextLoader
+ * @see	   PortletContextLoaderListener
  */
 public class PortletApplicationContext extends XmlWebApplicationContext {
 
 	protected void initBeanDefinitionReader(XmlBeanDefinitionReader reader) {
-		reader.setBeanClassLoader(
+		ClassLoader beanClassLoader =
 			AggregateClassLoader.getAggregateClassLoader(
 				new ClassLoader[] {
 					PortletClassLoaderUtil.getClassLoader(),
-					PortalClassLoaderUtil.getClassLoader()}));
+					PortalClassLoaderUtil.getClassLoader()
+				});
+
+		beanClassLoader = new FilterClassLoader(beanClassLoader);
+
+		reader.setBeanClassLoader(beanClassLoader);
 	}
 
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
