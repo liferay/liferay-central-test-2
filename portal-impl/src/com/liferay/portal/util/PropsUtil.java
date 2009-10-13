@@ -94,6 +94,8 @@ public class PropsUtil {
 
 		String liferayHome = _get(PropsKeys.LIFERAY_HOME);
 
+		SystemProperties.set(PropsKeys.LIFERAY_HOME, liferayHome);
+
 		SystemProperties.set(
 			"ehcache.disk.store.dir", liferayHome + "/data/ehcache");
 
