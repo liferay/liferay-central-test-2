@@ -456,12 +456,6 @@
 .treeview ul {
 }
 
-.treeview .hitarea {
-}
-
-.ie6 .hitarea {
-}
-
 .treeview li {
 }
 
@@ -471,49 +465,7 @@
 .treeview-control {
 }
 
-.treeview .hover {
-}
-
-.treeview li.collapsable, .treeview li.expandable {
-}
-
-.treeview .expandable-hitarea {
-}
-
-.treeview li.last {
-}
-
-.treeview li.lastCollapsable, .treeview li.lastExpandable {
-}
-
-.treeview li.lastCollapsable {
-}
-
-.treeview li.lastExpandable {
-}
-
-.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea {
-}
-
-.treeview .placeholder {
-}
-
 .treeview span {
-}
-
-.filetree li {
-}
-
-.filetree span.folder, .filetree span.file {
-}
-
-.filetree span.folder {
-}
-
-.filetree li.expandable span.folder {
-}
-
-.filetree span.file {
 }
 
 /* ---------- Rounded corners ---------- */

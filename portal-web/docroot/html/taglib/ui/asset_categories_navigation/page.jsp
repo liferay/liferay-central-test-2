@@ -74,18 +74,26 @@ if (hidePortletWhenEmpty) {
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			var treeview = jQuery('#<%= namespace %>taglibAssetCategoriesNavigation .treeview');
+		'tree-view',
+		function(A) {
+			var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigation .treeview-wrapper');
 
-			if (treeview.treeview) {
-				treeview.treeview(
-					{
-						animated: 'fast'
-					}
-				);
+			treeViews.each(
+				function(treeEl) {
+					var boundingBox = treeEl;
+					var contentBox = treeEl.one('.treeview');
 
-				Liferay.Util.disableSelection(treeview);
-			}
+					new A.TreeView(
+						{
+							boundingBox: boundingBox,
+							contentBox: contentBox,
+							type: 'normal'
+						}
+					)
+					.render();
+				}
+			);
+
 		}
 	);
 </script>
@@ -138,11 +146,11 @@ private String _buildVocabularyNavigation(AssetVocabulary vocabulary, long categ
 
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("<ul class=\"treeview\">");
+	sb.append("<div class=\"treeview-wrapper\"><ul class=\"treeview\">");
 
 	_buildCategoriesNavigation(categories, categoryId, portletURL, sb);
 
-	sb.append("</ul><br style=\"clear: both;\" />");
+	sb.append("</ul></div><br style=\"clear: both;\" />");
 
 	return sb.toString();
 }
