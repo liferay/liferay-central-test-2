@@ -57,7 +57,8 @@ public abstract class BaseSocialActivityInterpreter
 	}
 
 	protected String cleanContent(String content) {
-		return StringUtil.shorten(HtmlUtil.extractText(content), 200);
+		return HtmlUtil.escape(
+			StringUtil.shorten(HtmlUtil.extractText(content), 200));
 	}
 
 	protected abstract SocialActivityFeedEntry doInterpret(
@@ -72,7 +73,7 @@ public abstract class BaseSocialActivityInterpreter
 
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			String groupName = group.getDescriptiveName();
+			String groupName = HtmlUtil.escape(group.getDescriptiveName());
 
 			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
 				return groupName;
