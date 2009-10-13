@@ -73,7 +73,7 @@
 	padding-left: 20px;
 }
 
-.portlet-asset-tags-admin .tag-item.selected, .tag-item.portlet-tags-admin-helper.selected {
+.portlet-asset-tags-admin .tag-item.selected, .tag-item.portlet-tags-admin-helper {
 	background: #aeb9be;
 }
 
@@ -88,6 +88,10 @@
 
 .portlet-asset-tags-admin .tags .active-area {
 	background: #ffc;
+}
+
+.portlet-asset-tags-admin .tags .yui-dd-dragging {
+	visibility: hidden;
 }
 
 .portlet-asset-tags-admin .tag-container {
