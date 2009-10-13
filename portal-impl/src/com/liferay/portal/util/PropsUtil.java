@@ -87,7 +87,8 @@ public class PropsUtil {
 	}
 
 	private PropsUtil() {
-		SystemProperties.set("default.liferay.home", _getDefaultLiferayHome());
+		SystemProperties.set(
+			PropsKeys.DEFAULT_LIFERAY_HOME, _getDefaultLiferayHome());
 
 		_configuration = new ConfigurationImpl(
 			PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
