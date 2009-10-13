@@ -42,6 +42,16 @@ public class SimplePojoClp<T> {
 
 	public SimplePojoClp(
 			Class<? extends T> localImplementationClass,
+			ClassLoader remoteClassLoader)
+		throws ClassNotFoundException {
+
+		this(
+			localImplementationClass, remoteClassLoader,
+			localImplementationClass.getName());
+	}
+
+	public SimplePojoClp(
+			Class<? extends T> localImplementationClass,
 			ClassLoader remoteClassLoader, String remoteImplementationClassName)
 		throws ClassNotFoundException {
 
