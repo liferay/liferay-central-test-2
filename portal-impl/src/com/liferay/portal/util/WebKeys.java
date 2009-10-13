@@ -60,8 +60,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String CAPTCHA_TEXT = "CAPTCHA_TEXT";
 
-	public static final String CLP_MESSAGE_LISTENERS = "CLP_MESSAGE_LISTENERS";
-
 	public static final String COLOR_SCHEME = "COLOR_SCHEME";
 
 	public static final String COMIC_ENTRY = "COMIC_ENTRY";

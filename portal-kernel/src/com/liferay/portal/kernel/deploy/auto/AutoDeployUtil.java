@@ -33,6 +33,10 @@ import java.util.Map;
  */
 public class AutoDeployUtil {
 
+	public static AutoDeployDir getDir(String name) {
+		return _instance._getDir(name);
+	}
+
 	public static void registerDir(AutoDeployDir dir) {
 		_instance._registerDir(dir);
 	}
@@ -43,6 +47,10 @@ public class AutoDeployUtil {
 
 	private AutoDeployUtil() {
 		_dirs = new HashMap<String, AutoDeployDir>();
+	}
+
+	private AutoDeployDir _getDir(String name) {
+		return _dirs.get(name);
 	}
 
 	private void _registerDir(AutoDeployDir dir) {

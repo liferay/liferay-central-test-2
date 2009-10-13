@@ -26,6 +26,7 @@ Not all portal properties can be overridden via a hook. The supported properties
 are:
 
 auth.forward.by.last.path
+auto.deploy.listeners
 application.startup.events
 auth.failure
 auth.max.failures
@@ -38,7 +39,8 @@ dl.hook.impl
 field.enable.com.liferay.portal.model.Contact.birthday
 field.enable.com.liferay.portal.model.Contact.male
 field.enable.com.liferay.portal.model.Organization.status
-image.hook.impl=
+hot.deploy.listeners
+image.hook.impl
 javascript.fast.load
 layout.static.portlets.all
 layout.template.cache.enabled

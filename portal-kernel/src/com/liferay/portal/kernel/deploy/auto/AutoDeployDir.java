@@ -33,6 +33,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <a href="AutoDeployDir.java.html"><b><i>View Source</i></b></a>
@@ -41,6 +42,8 @@ import java.util.Set;
  * @author Brian Wing Shun Chan
  */
 public class AutoDeployDir {
+
+	public static final String DEFAULT_NAME = "defaultAutoDeployDir";
 
 	public AutoDeployDir(
 		String name, File deployDir, File destDir, long interval,
@@ -51,13 +54,13 @@ public class AutoDeployDir {
 		_destDir = destDir;
 		_interval = interval;
 		_blacklistThreshold = blacklistThreshold;
-		_listeners = listeners;
+		_listeners = new CopyOnWriteArrayList<AutoDeployListener>(listeners);
 		_inProcessFiles = new HashMap<String, IntegerWrapper>();
 		_blacklistFiles = new HashSet<String>();
 	}
 
-	public String getName() {
-		return _name;
+	public int getBlacklistThreshold() {
+		return _blacklistThreshold;
 	}
 
 	public File getDeployDir() {
@@ -72,12 +75,16 @@ public class AutoDeployDir {
 		return _interval;
 	}
 
-	public int getBlacklistThreshold() {
-		return _blacklistThreshold;
-	}
-
 	public List<AutoDeployListener> getListeners() {
 		return _listeners;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public void registerListener(AutoDeployListener listener) {
+		_listeners.add(listener);
 	}
 
 	public void start() {
@@ -128,21 +135,8 @@ public class AutoDeployDir {
 		}
 	}
 
-	protected void scanDirectory() {
-		File[] files = _deployDir.listFiles();
-
-		for (int i = 0; i < files.length; i++) {
-			File file = files[i];
-
-			String fileName = file.getName().toLowerCase();
-
-			if ((file.isFile()) &&
-				(fileName.endsWith(".war") || fileName.endsWith(".zip") ||
-				 fileName.endsWith(".xml"))) {
-
-				processFile(file);
-			}
-		}
+	public void unregisterListener(AutoDeployListener listener) {
+		_listeners.add(listener);
 	}
 
 	protected void processFile(File file) {
@@ -223,16 +217,33 @@ public class AutoDeployDir {
 		}
 	}
 
+	protected void scanDirectory() {
+		File[] files = _deployDir.listFiles();
+
+		for (int i = 0; i < files.length; i++) {
+			File file = files[i];
+
+			String fileName = file.getName().toLowerCase();
+
+			if ((file.isFile()) &&
+				(fileName.endsWith(".war") || fileName.endsWith(".zip") ||
+				 fileName.endsWith(".xml"))) {
+
+				processFile(file);
+			}
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(AutoDeployDir.class);
 
-	private String _name;
+	private Set<String> _blacklistFiles;
+	private int _blacklistThreshold;
 	private File _deployDir;
 	private File _destDir;
-	private long _interval;
-	private int _blacklistThreshold;
-	private List<AutoDeployListener> _listeners;
 	private Map<String, IntegerWrapper> _inProcessFiles;
-	private Set<String> _blacklistFiles;
+	private long _interval;
+	private List<AutoDeployListener> _listeners;
+	private String _name;
 	private AutoDeployScanner _scanner;
 
 }

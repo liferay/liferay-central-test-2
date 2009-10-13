@@ -145,7 +145,7 @@ public class GlobalStartupAction extends SimpleAction {
 					getAutoDeployListeners();
 
 				AutoDeployDir autoDeployDir = new AutoDeployDir(
-					"defaultAutoDeployDir", deployDir, destDir, interval,
+					AutoDeployDir.DEFAULT_NAME, deployDir, destDir, interval,
 					blacklistThreshold, autoDeployListeners);
 
 				AutoDeployUtil.registerDir(autoDeployDir);

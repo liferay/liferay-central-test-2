@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <a href="HotDeployUtil.java.html"><b><i>View Source</i></b></a>
@@ -54,6 +55,10 @@ public class HotDeployUtil {
 		_instance._registerListener(listener);
 	}
 
+	public static void unregisterListener(HotDeployListener listener) {
+		_instance._unregisterListener(listener);
+	}
+
 	public static void unregisterListeners() {
 		_instance._unregisterListeners();
 	}
@@ -65,7 +70,7 @@ public class HotDeployUtil {
 
 		_dependentEvents = new ArrayList<HotDeployEvent>();
 		_deployedServletContextNames = new HashSet<String>();
-		_listeners = new ArrayList<HotDeployListener>();
+		_listeners = new CopyOnWriteArrayList<HotDeployListener>();
 		_prematureEvents = new ArrayList<HotDeployEvent>();
 	}
 
@@ -175,6 +180,10 @@ public class HotDeployUtil {
 
 	private void _registerListener(HotDeployListener listener) {
 		_listeners.add(listener);
+	}
+
+	private void _unregisterListener(HotDeployListener listener) {
+		_listeners.remove(listener);
 	}
 
 	private void _unregisterListeners() {

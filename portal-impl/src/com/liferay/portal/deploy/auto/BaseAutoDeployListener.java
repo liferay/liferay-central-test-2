@@ -22,121 +22,13 @@
 
 package com.liferay.portal.deploy.auto;
 
-import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
-import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.io.File;
-import java.io.IOException;
-
-import java.util.zip.ZipFile;
-
 /**
  * <a href="BaseAutoDeployListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
+ * @deprecated This class has been repackaged at
+ *			   <code>com.liferay.portal.kernel.deploy.auto</code>.
  */
-public abstract class BaseAutoDeployListener implements AutoDeployListener {
-
-	public boolean isHookPlugin(File file) throws AutoDeployException {
-		if ((isMatchingFile(
-				file, "WEB-INF/liferay-plugin-package.properties")) &&
-			(file.getName().indexOf("-hook") != -1) &&
-			(file.getName().indexOf("-portlet") == -1)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean isMatchingFile(File file, String checkXmlFile)
-		throws AutoDeployException {
-
-		if (!isMatchingFileExtension(file)) {
-			return false;
-		}
-
-		ZipFile zipFile = null;
-
-		try {
-			zipFile = new ZipFile(file);
-
-			if (zipFile.getEntry(checkXmlFile) == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						file.getPath() + " does not have " + checkXmlFile);
-				}
-
-				return false;
-			}
-			else {
-				return true;
-			}
-		}
-		catch (IOException ioe) {
-			throw new AutoDeployException(ioe);
-		}
-		finally {
-			if (zipFile != null) {
-				try {
-					zipFile.close();
-				}
-				catch (IOException ioe) {
-				}
-			}
-		}
-	}
-
-	public boolean isMatchingFileExtension(File file) {
-		String fileName = file.getName().toLowerCase();
-
-		if (fileName.endsWith(".war") || fileName.endsWith(".zip")) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(file.getPath() + " has a matching extension");
-			}
-
-			return true;
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					file.getPath() + " does not have a matching extension");
-			}
-
-			return false;
-		}
-	}
-
-	public boolean isThemePlugin(File file) throws AutoDeployException {
-		if (isMatchingFile(file, "WEB-INF/liferay-look-and-feel.xml")) {
-			return true;
-		}
-
-		if ((isMatchingFile(
-				file, "WEB-INF/liferay-plugin-package.properties")) &&
-			(file.getName().indexOf("-theme") != -1)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean isWebPlugin(File file) throws AutoDeployException {
-		if ((isMatchingFile(
-				file, "WEB-INF/liferay-plugin-package.properties")) &&
-			(file.getName().indexOf("-web") != -1)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(BaseAutoDeployListener.class);
-
+public abstract class BaseAutoDeployListener
+	extends com.liferay.portal.kernel.deploy.auto.BaseAutoDeployListener {
 }

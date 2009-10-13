@@ -27,8 +27,14 @@ import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
+import com.liferay.portal.kernel.deploy.hot.BaseHotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
+import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
+import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.InvokerAction;
 import com.liferay.portal.kernel.events.InvokerSessionAction;
@@ -355,8 +361,10 @@ public class HookHotDeployListener
 			String serviceType = serviceEl.elementText("service-type");
 			String serviceImpl = serviceEl.elementText("service-impl");
 
-			Class serviceTypeClass = portletClassLoader.loadClass(serviceType);
-			Class serviceImplClass = portletClassLoader.loadClass(serviceImpl);
+			Class<?> serviceTypeClass = portletClassLoader.loadClass(
+				serviceType);
+			Class<?> serviceImplClass = portletClassLoader.loadClass(
+				serviceImpl);
 
 			Constructor<?> serviceImplConstructor =
 				serviceImplClass.getConstructor(new Class[] {serviceTypeClass});
@@ -460,6 +468,13 @@ public class HookHotDeployListener
 			authFailuresContainer.unregisterAuthFailures();
 		}
 
+		AutoDeployListenersContainer autoDeployListenersContainer =
+			_autoDeployListenersContainerMap.remove(servletContextName);
+
+		if (autoDeployListenersContainer != null) {
+			autoDeployListenersContainer.unregisterAutoDeployListeners();
+		}
+
 		AutoLoginsContainer autoLoginsContainer =
 			_autoLoginsContainerMap.remove(servletContextName);
 
@@ -486,6 +501,13 @@ public class HookHotDeployListener
 
 		if (eventsContainer != null) {
 			eventsContainer.unregisterEvents();
+		}
+
+		HotDeployListenersContainer hotDeployListenersContainer =
+			_hotDeployListenersContainerMap.remove(servletContextName);
+
+		if (hotDeployListenersContainer != null) {
+			hotDeployListenersContainer.unregisterHotDeployListeners();
 		}
 
 		com.liferay.portal.image.Hook imageHook = _imageHooksMap.remove(
@@ -691,6 +713,41 @@ public class HookHotDeployListener
 			authFailuresContainer);
 	}
 
+	protected void initAutoDeployListeners(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		String[] autoDeployListenerClassNames = StringUtil.split(
+			portalProperties.getProperty(PropsKeys.AUTO_DEPLOY_LISTENERS));
+
+		if (autoDeployListenerClassNames.length == 0) {
+			return;
+		}
+
+		AutoDeployListenersContainer autoDeployListenersContainer =
+			new AutoDeployListenersContainer();
+
+		_autoDeployListenersContainerMap.put(
+			servletContextName, autoDeployListenersContainer);
+
+		for (String autoDeployListenerClassName :
+				autoDeployListenerClassNames) {
+
+			AutoDeployListener autoDeployListener =
+				(AutoDeployListener)portletClassLoader.loadClass(
+					autoDeployListenerClassName).newInstance();
+
+			autoDeployListener = (AutoDeployListener)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {AutoDeployListener.class},
+				new ContextClassLoaderBeanHandler(
+					autoDeployListener, portletClassLoader));
+
+			autoDeployListenersContainer.registerAutoDeployListener(
+				autoDeployListener);
+		}
+	}
+
 	protected void initAutoLogins(
 			String servletContextName, ClassLoader portletClassLoader,
 			Properties portalProperties)
@@ -860,6 +917,39 @@ public class HookHotDeployListener
 
 				eventsContainer.registerEvent(eventName, obj);
 			}
+		}
+	}
+
+	protected void initHotDeployListeners(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		String[] hotDeployListenerClassNames = StringUtil.split(
+			portalProperties.getProperty(PropsKeys.HOT_DEPLOY_LISTENERS));
+
+		if (hotDeployListenerClassNames.length == 0) {
+			return;
+		}
+
+		HotDeployListenersContainer hotDeployListenersContainer =
+			new HotDeployListenersContainer();
+
+		_hotDeployListenersContainerMap.put(
+			servletContextName, hotDeployListenersContainer);
+
+		for (String hotDeployListenerClassName : hotDeployListenerClassNames) {
+			HotDeployListener hotDeployListener =
+				(HotDeployListener)portletClassLoader.loadClass(
+					hotDeployListenerClassName).newInstance();
+
+			hotDeployListener = (HotDeployListener)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {HotDeployListener.class},
+				new ContextClassLoaderBeanHandler(
+					hotDeployListener, portletClassLoader));
+
+			hotDeployListenersContainer.registerHotDeployListener(
+				hotDeployListener);
 		}
 	}
 
@@ -1189,6 +1279,9 @@ public class HookHotDeployListener
 		new HashMap<String, AuthenticatorsContainer>();
 	private Map<String, AuthFailuresContainer> _authFailuresContainerMap =
 		new HashMap<String, AuthFailuresContainer>();
+	private Map<String, AutoDeployListenersContainer>
+		_autoDeployListenersContainerMap =
+			new HashMap<String, AutoDeployListenersContainer>();
 	private Map<String, AutoLoginsContainer> _autoLoginsContainerMap =
 		new HashMap<String, AutoLoginsContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
@@ -1197,6 +1290,9 @@ public class HookHotDeployListener
 		new HashMap<String, com.liferay.documentlibrary.util.Hook>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
+	private Map<String, HotDeployListenersContainer>
+		_hotDeployListenersContainerMap =
+			new HashMap<String, HotDeployListenersContainer>();
 	private Map<String, com.liferay.portal.image.Hook> _imageHooksMap =
 		new HashMap<String, com.liferay.portal.image.Hook>();
 	private Map<String, LanguagesContainer> _languagesContainerMap =
@@ -1281,6 +1377,41 @@ public class HookHotDeployListener
 
 	}
 
+	private class AutoDeployListenersContainer {
+
+		public void registerAutoDeployListener(
+			AutoDeployListener autoDeployListener) {
+
+			AutoDeployDir autoDeployDir = AutoDeployUtil.getDir(
+				AutoDeployDir.DEFAULT_NAME);
+
+			if (autoDeployDir == null) {
+				return;
+			}
+
+			autoDeployDir.registerListener(autoDeployListener);
+
+			_autoDeployListeners.add(autoDeployListener);
+		}
+
+		public void unregisterAutoDeployListeners() {
+			AutoDeployDir autoDeployDir = AutoDeployUtil.getDir(
+				AutoDeployDir.DEFAULT_NAME);
+
+			if (autoDeployDir == null) {
+				return;
+			}
+
+			for (AutoDeployListener autoDeployListener : _autoDeployListeners) {
+				autoDeployDir.unregisterListener(autoDeployListener);
+			}
+		}
+
+		private List<AutoDeployListener> _autoDeployListeners =
+			new ArrayList<AutoDeployListener>();
+
+	}
+
 	private class AutoLoginsContainer {
 
 		public void registerAutoLogin(AutoLogin autoLogin) {
@@ -1348,6 +1479,27 @@ public class HookHotDeployListener
 
 		private Map<String, List<Object>> _eventsMap =
 			new HashMap<String, List<Object>>();
+
+	}
+
+	private class HotDeployListenersContainer {
+
+		public void registerHotDeployListener(
+			HotDeployListener hotDeployListener) {
+
+			HotDeployUtil.registerListener(hotDeployListener);
+
+			_hotDeployListeners.add(hotDeployListener);
+		}
+
+		public void unregisterHotDeployListeners() {
+			for (HotDeployListener hotDeployListener : _hotDeployListeners) {
+				HotDeployUtil.unregisterListener(hotDeployListener);
+			}
+		}
+
+		private List<HotDeployListener> _hotDeployListeners =
+			new ArrayList<HotDeployListener>();
 
 	}
 
