@@ -33,6 +33,7 @@ import com.liferay.portal.util.PortletKeys;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 /**
@@ -44,6 +45,10 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURL = null;
+
+		if (!portletURL.getLifecycle().equals(PortletRequest.RENDER_PHASE)) {
+			 return friendlyURL;
+		}
 
 		String tabs1 = portletURL.getParameter("tabs1");
 
