@@ -36,11 +36,12 @@ public enum ReportFormat {
 	TEXT("text"), XML("xml");
 
 	public static ReportFormat parse(String value) {
-		ReportFormat format = _reportFormats.get(value);
+		ReportFormat reportFormat = _reportFormats.get(value);
 
-		if (format != null) {
-			return format;
+		if (reportFormat != null) {
+			return reportFormat;
 		}
+
 		if (EXCEL.toString().equalsIgnoreCase(value)) {
 			return EXCEL;
 		}
