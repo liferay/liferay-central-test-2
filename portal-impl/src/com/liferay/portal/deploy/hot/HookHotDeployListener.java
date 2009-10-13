@@ -249,10 +249,16 @@ public class HookHotDeployListener
 					initAuthFailures(
 						servletContextName, portletClassLoader,
 						portalProperties);
+					initAutoDeployListeners(
+						servletContextName, portletClassLoader,
+						portalProperties);
 					initAutoLogins(
 						servletContextName, portletClassLoader,
 						portalProperties);
 					initDLHook(
+						servletContextName, portletClassLoader,
+						portalProperties);
+					initHotDeployListeners(
 						servletContextName, portletClassLoader,
 						portalProperties);
 					initImageHook(
