@@ -132,9 +132,11 @@ public class MethodInvoker {
 			}
 
 			Class<?> argClass = null;
-			if(argumentClassNames != null) {
+
+			if (argumentClassNames != null) {
 				argClass = _primitiveTypeMap.get(argumentClassNames[i]);
-				if(argClass == null) {
+
+				if (argClass == null) {
 					argClass = contextClassLoader.loadClass(
 						argumentClassNames[i]);
 				}
