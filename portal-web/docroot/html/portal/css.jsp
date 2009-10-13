@@ -929,10 +929,6 @@
 
 /* ---------- Asset categories selector styling ---------- */
 
-.ui-dialog.lfr-asset-category-selector .ui-dialog-container .ui-dialog-content {
-	padding: 0;
-}
-
 .lfr-asset-category-container {
 	height: 260px;
 	margin-bottom: 0.5em;
@@ -987,7 +983,7 @@
 }
 
 
-.lfr-asset-vocabulary-container .lfr-asset-category-message, .lfr-asset-vocabulary-container.no-matches .treeview {
+.lfr-asset-vocabulary-container .lfr-asset-category-message, .lfr-asset-vocabulary-container.no-matches .lfr-asset-category-list {
 	display: none;
 }
 
@@ -995,11 +991,31 @@
 	display: block;
 }
 
-/* ---------- Tag selector styling ---------- */
+.lfr-asset-category-list-container {
+	cursor: pointer;
+}
 
-.ui-dialog.lfr-tag-selector .ui-dialog-container .ui-dialog-content {
+.lfr-asset-category-list ul {
+	list-style: none;
+	margin-top: 4px;
 	padding: 0;
 }
+
+.lfr-asset-category-list li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0 0 3px 16px;
+}
+
+.lfr-asset-category-list a.selected {
+	background-color: #EEE;
+}
+
+.lfr-asset-category-list span {
+	padding-left: 3px;
+}
+
+/* ---------- Tag selector styling ---------- */
 
 .lfr-tag-container {
 	margin-bottom: 0.5em;

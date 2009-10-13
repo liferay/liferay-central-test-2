@@ -76,24 +76,20 @@ if (hidePortletWhenEmpty) {
 	AUI().ready(
 		'tree-view',
 		function(A) {
-			var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigation .treeview-wrapper');
+			var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigation .lfr-asset-category-list-container');
 
 			treeViews.each(
 				function(treeEl) {
-					var boundingBox = treeEl;
-					var contentBox = treeEl.one('.treeview');
-
 					new A.TreeView(
 						{
-							boundingBox: boundingBox,
-							contentBox: contentBox,
+							boundingBox: treeEl,
+							contentBox: treeEl.one('.lfr-asset-category-list'),
 							type: 'normal'
 						}
 					)
 					.render();
 				}
 			);
-
 		}
 	);
 </script>
@@ -146,11 +142,11 @@ private String _buildVocabularyNavigation(AssetVocabulary vocabulary, long categ
 
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("<div class=\"treeview-wrapper\"><ul class=\"treeview\">");
+	sb.append("<div class=\"lfr-asset-category-list-container\"><ul class=\"lfr-asset-category-list\">");
 
 	_buildCategoriesNavigation(categories, categoryId, portletURL, sb);
 
-	sb.append("</ul></div><br style=\"clear: both;\" />");
+	sb.append("</ul></div>");
 
 	return sb.toString();
 }

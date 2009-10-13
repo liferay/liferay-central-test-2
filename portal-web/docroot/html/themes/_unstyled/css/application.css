@@ -116,7 +116,7 @@
 .active-area {
 }
 
-.yui-dd-dragging {
+.portlet-boundary.yui-dd-dragging {
 }
 
 .aui-proxy {
@@ -443,29 +443,6 @@
 }
 
 .tag-cloud .tag-popularity-6 {
-}
-
-/* ---------- Treeview ---------- */
-
-.treeview {
-}
-
-.treeview, .treeview ul {
-}
-
-.treeview ul {
-}
-
-.treeview li {
-}
-
-.treeview a.selected {
-}
-
-.treeview-control {
-}
-
-.treeview span {
 }
 
 /* ---------- Rounded corners ---------- */

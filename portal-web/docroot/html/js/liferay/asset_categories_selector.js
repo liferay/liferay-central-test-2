@@ -335,7 +335,7 @@ AUI().add(
 									buffer.push(' (' + globalMessage + ')');
 								}
 
-								buffer.push('</legend><div class="treeview">');
+								buffer.push('</legend><div class="lfr-asset-category-list">');
 
 								instance._categoryIterator(categories, buffer, 0);
 

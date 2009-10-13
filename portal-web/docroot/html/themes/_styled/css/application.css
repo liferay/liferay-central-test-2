@@ -783,41 +783,6 @@
 	font-size: 2.5em;
 }
 
-/* ---------- Treeview ---------- */
-
-.treeview {
-	cursor: pointer;
-}
-
-.treeview, .treeview ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.treeview ul {
-	margin-top: 4px;
-}
-
-.treeview li {
-	list-style-type: none;
-	margin: 0;
-	padding: 0 0 3px 16px;
-}
-
-.treeview a.selected {
-	background-color: #EEE;
-}
-
-.treeview-control {
-	display: none;
-	margin: 1em 0;
-}
-
-.treeview span {
-	padding-left: 3px;
-}
-
 /* ---------- Rounded corners ---------- */
 
 .aui-context-panel {
