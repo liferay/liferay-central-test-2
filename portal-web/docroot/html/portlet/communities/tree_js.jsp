@@ -237,7 +237,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 			var rootNode = new RootNodeType(
 				{
-					alwaysShowHitArea: false,
+					alwaysShowHitArea: true,
 					draggable: false,
 					id: rootId,
 					label: rootLabel,
