@@ -29,12 +29,30 @@ import com.liferay.portal.kernel.util.GetterUtil;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
+import org.springframework.beans.BeanUtils;
+
 /**
  * <a href="BeanPropertiesImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
 public class BeanPropertiesImpl implements BeanProperties {
+
+	public void copyProperties(Object source, Object target) {
+		BeanUtils.copyProperties(source, target);
+	}
+
+	public void copyProperties(
+		Object source, Object target, Class<?> editable) {
+
+		BeanUtils.copyProperties(source, target, editable);
+	}
+
+	public void copyProperties(
+		Object source, Object target, String[] ignoreProperties) {
+
+		BeanUtils.copyProperties(source, target, ignoreProperties);
+	}
 
 	public boolean getBoolean(Object bean, String param) {
 		return getBoolean(bean, param, GetterUtil.DEFAULT_BOOLEAN);

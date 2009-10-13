@@ -29,6 +29,13 @@ package com.liferay.portal.kernel.bean;
  */
 public interface BeanProperties {
 
+	public void copyProperties(Object source, Object target);
+
+	public void copyProperties(Object source, Object target, Class<?> editable);
+
+	public void copyProperties(
+		Object source, Object target, String[] ignoreProperties);
+
 	public boolean getBoolean(Object bean, String param);
 
 	public boolean getBoolean(Object bean, String param, boolean defaultValue);

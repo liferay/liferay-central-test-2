@@ -29,6 +29,22 @@ package com.liferay.portal.kernel.bean;
  */
 public class BeanPropertiesUtil {
 
+	public static void copyProperties(Object source, Object target) {
+		getBeanProperties().copyProperties(source, target);
+	}
+
+	public static void copyProperties(
+		Object source, Object target, Class<?> editable) {
+
+		getBeanProperties().copyProperties(source, target, editable);
+	}
+
+	public static void copyProperties(
+		Object source, Object target, String[] ignoreProperties) {
+
+		getBeanProperties().copyProperties(source, target, ignoreProperties);
+	}
+
 	public static BeanProperties getBeanProperties() {
 		return _beanProperties;
 	}
