@@ -131,16 +131,16 @@ public class MethodInvoker {
 						" on position " + i + " because it is null");
 			}
 
-			Class<?> argClass = _primitiveTypeMap.get(argumentClassNames[i]);
-
-			if (argClass == null) {
-				if (argumentClassNames == null){
-					argClass = arguments[i].getClass();
-				}
-				else {
+			Class<?> argClass = null;
+			if(argumentClassNames != null) {
+				argClass = _primitiveTypeMap.get(argumentClassNames[i]);
+				if(argClass == null) {
 					argClass = contextClassLoader.loadClass(
 						argumentClassNames[i]);
 				}
+			}
+			else {
+				argClass = arguments[i].getClass();
 			}
 
 			if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
