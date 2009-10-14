@@ -312,7 +312,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSelectBoxes();" />
 
-				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 			</c:when>
 			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
 				<liferay-ui:panel-container id='assetPublisherConfiguration' extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
@@ -714,7 +714,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSelectBoxes();" />
 
-				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 			</c:when>
 		</c:choose>
 	</c:when>

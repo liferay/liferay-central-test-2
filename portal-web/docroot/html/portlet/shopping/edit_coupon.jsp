@@ -87,7 +87,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <liferay-ui:tabs
 	names="coupon"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= CouponCodeException.class %>" message="please-enter-a-valid-code" />
@@ -207,7 +207,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 <br /><br />
 

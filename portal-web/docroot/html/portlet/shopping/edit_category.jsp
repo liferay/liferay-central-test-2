@@ -74,7 +74,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 <liferay-ui:tabs
 	names="category"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
@@ -179,7 +179,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 </form>
 

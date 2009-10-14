@@ -68,7 +68,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 <liferay-ui:tabs
 	names="product"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <h3><%= productEntry.getName() %> <%= (latestProductVersion == null) ? "" : latestProductVersion.getVersion() %></h3>

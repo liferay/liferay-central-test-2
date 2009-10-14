@@ -78,7 +78,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 <liferay-ui:tabs
 	names="entry"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= EntryContentException.class %>" message="please-enter-valid-content" />
@@ -225,7 +225,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 <input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewEntry();" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 </form>
 

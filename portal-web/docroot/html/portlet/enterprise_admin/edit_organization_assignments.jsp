@@ -104,7 +104,7 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 		names="<%= tabs2Names %>"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<c:choose>

@@ -77,14 +77,14 @@ portletURL.setParameter("modelResource", modelResource);
 	<aui:input name="modelResource" type="hidden" value="<%= modelResource %>" />
 
 	<div>
-		<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></aui:a>
+		<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= modelResourceName %></aui:a>
 	</div>
 
 	<br />
 
 	<liferay-ui:tabs
 		names="custom-field"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<liferay-ui:error exception="<%= ColumnNameException.class %>" message="please-enter-a-valid-name" />
@@ -291,7 +291,7 @@ portletURL.setParameter("modelResource", modelResource);
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

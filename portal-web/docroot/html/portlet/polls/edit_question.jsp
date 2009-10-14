@@ -117,7 +117,7 @@ if (choiceName > 0) {
 
 	<liferay-ui:tabs
 		names="question"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<liferay-ui:error exception="<%= QuestionChoiceException.class %>" message="please-enter-valid-choices" />
@@ -192,7 +192,7 @@ if (choiceName > 0) {
 		<aui:button-row>
 			<aui:button type="submit" value="save" />
 
-			<aui:button onClick="<%= redirect %>" value="cancel" />
+			<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

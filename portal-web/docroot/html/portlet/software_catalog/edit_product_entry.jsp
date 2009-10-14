@@ -82,7 +82,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 
 <liferay-ui:tabs
 	names="product"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= DuplicateProductEntryModuleIdException.class %>" message="please-enter-a-unique-group-id-and-artifact-id-combination" />
@@ -230,7 +230,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 <br /><br />
 

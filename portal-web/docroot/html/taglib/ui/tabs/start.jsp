@@ -215,7 +215,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			<c:when test="<%= themeDisplay.isFacebook() %>">
 				<fb:tab_item
 					align="left"
-					href="<%= HtmlUtil.escape(backURL) %>"
+					href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(backURL)) %>"
 					selected="<%= false %>"
 					title="&laquo; <%= LanguageUtil.get(pageContext, "back") %>"
 				/>
@@ -223,7 +223,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			<c:otherwise>
 				<li class="aui-tab toggle last">
 					<span class="aui-tab-content">
-						<a href="<%= HtmlUtil.escape(backURL) %>" id="<%= namespace %><%= param %>TabsBack">&laquo; <liferay-ui:message key="back" /></a>
+						<a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(backURL)) %>" id="<%= namespace %><%= param %>TabsBack">&laquo; <liferay-ui:message key="back" /></a>
 					</span>
 				</li>
 			</c:otherwise>

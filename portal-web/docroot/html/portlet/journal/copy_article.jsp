@@ -42,7 +42,7 @@ double version = ParamUtil.getDouble(request, "version");
 
 <liferay-ui:tabs
 	names="web-content"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
@@ -81,7 +81,7 @@ double version = ParamUtil.getDouble(request, "version");
 
 <input type="submit" value="<liferay-ui:message key="copy" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 </form>
 

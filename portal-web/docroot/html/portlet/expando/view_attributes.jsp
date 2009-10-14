@@ -44,14 +44,14 @@ portletURL.setParameter("modelResource", modelResource);
 </script>
 
 <div>
-	<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></aui:a>
+	<liferay-ui:message key="edit-custom-fields-for" />: <aui:a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= modelResourceName %></aui:a>
 </div>
 
 <br />
 
 <liferay-ui:tabs
 	names="custom-fields"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <%

@@ -40,7 +40,7 @@ String newStructureId = ParamUtil.getString(request, "newStructureId");
 
 <liferay-ui:tabs
 	names="structure"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
@@ -79,7 +79,7 @@ String newStructureId = ParamUtil.getString(request, "newStructureId");
 
 <input type="submit" value="<liferay-ui:message key="copy" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 </form>
 

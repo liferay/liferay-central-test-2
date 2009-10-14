@@ -312,7 +312,7 @@ portletURL.setParameter("name", name);
 				</c:choose>
 			</c:if>
 
-			<aui:button onClick="<%= redirect %>" value="cancel" />
+			<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

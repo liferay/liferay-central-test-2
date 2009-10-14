@@ -46,7 +46,7 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 
 <liferay-ui:tabs
 	names="framework-version"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= FrameworkVersionNameException.class %>" message="please-enter-a-valid-name" />
@@ -101,7 +101,7 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 </form>
 

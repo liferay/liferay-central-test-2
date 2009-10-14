@@ -86,7 +86,7 @@ try {
 
 	<c:if test="<%= !print %>">
 		<div align="right">
-			&laquo; <a href="<%= HtmlUtil.escape(redirect) %>"><liferay-ui:message key="back" /></a>
+			&laquo; <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><liferay-ui:message key="back" /></a>
 		</div>
 	</c:if>
 

@@ -62,7 +62,7 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 
 	<liferay-ui:tabs
 		names="import-pages"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<liferay-ui:tabs
@@ -79,18 +79,18 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	<aui:button-row>
 		<aui:button name="saveButton" onClick='<%= uploadProgressId + ".startProgress(); " +  importProgressId + ".startProgress(); return true;" %>' type="submit" value="import" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+		<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
 	</aui:button-row>
 </aui:form>
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"
 	message="uploading"
-	redirect="<%= HtmlUtil.escape(redirect) %>"
+	redirect="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
 />
 
 <liferay-ui:upload-progress
 	id="<%= importProgressId %>"
 	message="importing"
-	redirect="<%= HtmlUtil.escape(redirect) %>"
+	redirect="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"
 />

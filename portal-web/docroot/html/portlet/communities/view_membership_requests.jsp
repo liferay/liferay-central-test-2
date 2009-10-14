@@ -53,7 +53,7 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 <liferay-ui:tabs
 	names="pending,approved,denied"
 	url="<%= currentURL %>"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <%

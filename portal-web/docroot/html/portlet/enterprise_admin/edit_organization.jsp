@@ -139,7 +139,7 @@ String curSection = mainSections[0];
 					<aui:button-row>
 						<aui:button onClick='<%= renderResponse.getNamespace() + "saveOrganization();" %>' value="save" />
 
-						<aui:button onClick="<%= backURL %>" value="cancel" />
+						<aui:button onClick="<%= PortalUtil.escapeRedirect(backURL) %>" value="cancel" />
 					</aui:button-row>
 				</div>
 			</td>

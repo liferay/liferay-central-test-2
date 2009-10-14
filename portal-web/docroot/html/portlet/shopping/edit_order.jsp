@@ -76,7 +76,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 	<c:otherwise>
 		<liferay-ui:tabs
 			names="order"
-			backURL="<%= redirect %>"
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 		/>
 	</c:otherwise>
 </c:choose>
@@ -608,7 +608,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrder();" />
 	</c:if>
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 </c:if>
 
 </form>

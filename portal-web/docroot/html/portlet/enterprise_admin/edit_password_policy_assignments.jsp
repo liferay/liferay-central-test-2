@@ -91,7 +91,7 @@ portletURL.setParameter("tabs3", tabs3);
 		names="users,organizations"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<c:choose>

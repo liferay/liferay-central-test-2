@@ -259,7 +259,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 		</c:when>
 		<c:otherwise>
 			<div>
-				<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(redirect) %>"><%= selResourceDescription %></a>
+				<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= selResourceDescription %></a>
 			</div>
 
 			<br />
@@ -317,7 +317,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 				names="<%= tabs2Names %>"
 				param="tabs2"
 				url="<%= portletURL.toString() %>"
-				backURL="<%= redirect %>"
+				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 			/>
 		</c:otherwise>
 	</c:choose>

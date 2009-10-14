@@ -47,7 +47,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 
 	<liferay-ui:tabs
 		names="community"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<liferay-ui:error exception="<%= MembershipRequestCommentsException.class %>" message="please-enter-valid-comments" />
@@ -71,7 +71,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

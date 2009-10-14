@@ -112,13 +112,13 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 				names="users,organizations,user-groups"
 				param="tabs1"
 				url="<%= portletURL.toString() %>"
-				backURL="<%= redirect %>"
+				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 			/>
 		</c:when>
 		<c:otherwise>
 			<liferay-ui:tabs
 				names="roles"
-				backURL="<%= redirect %>"
+				backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 			/>
 		</c:otherwise>
 	</c:choose>

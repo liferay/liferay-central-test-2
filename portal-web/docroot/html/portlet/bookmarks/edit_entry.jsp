@@ -74,7 +74,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 	<liferay-ui:tabs
 		names="entry"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
@@ -158,7 +158,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

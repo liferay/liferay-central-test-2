@@ -137,7 +137,7 @@
 					names="<%= tabs1Names %>"
 					param="tabs1"
 					url="<%= portletURLString %>"
-					backURL="<%= backURL %>"
+					backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
 				/>
 
 				<c:choose>

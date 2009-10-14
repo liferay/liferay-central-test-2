@@ -341,7 +341,7 @@ if ((message != null) && message.isAttachments()) {
 
 		<aui:button onClick="<%= taglibOnClick %>" value="preview" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 	</aui:button-row>
 
 	<c:if test="<%= curParentMessage != null %>">

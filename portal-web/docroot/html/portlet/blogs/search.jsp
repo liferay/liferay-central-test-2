@@ -38,7 +38,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 	<liferay-ui:tabs
 		names="search"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<%

@@ -66,5 +66,5 @@ String backURL = ParamUtil.getString(request, "backURL");
 	names="<%= tabs1Names %>"
 	url="<%= viewURL.toString() %>"
 	url1="<%= cartURL.toString() %>"
-	backURL="<%= backURL %>"
+	backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
 />

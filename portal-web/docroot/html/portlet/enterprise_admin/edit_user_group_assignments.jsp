@@ -73,7 +73,7 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 		names="current,available"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<aui:input name="addUserIds" type="hidden" />

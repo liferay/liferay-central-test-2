@@ -127,7 +127,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	<liferay-ui:tabs
 		names="proposal"
 		url="<%= portletURL.toString() %>"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateReviewUserIdException.class %>" message="users-cannot-be-assigned-to-more-than-one-stage" />
@@ -350,7 +350,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 		</c:when>
 	</c:choose>
 
-	<aui:button onClick="<%= redirect %>" value="cancel" />
+	<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 </aui:form>
 
 <br />

@@ -34,7 +34,7 @@ List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
 
 <liferay-ui:tabs
 	names="compare-versions"
-	backURL="<%= backURL %>"
+	backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
 />
 
 <liferay-ui:diff

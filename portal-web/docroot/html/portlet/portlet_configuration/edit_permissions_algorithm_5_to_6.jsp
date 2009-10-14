@@ -146,7 +146,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 		</c:when>
 		<c:otherwise>
 			<div>
-				<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(redirect) %>"><%= selResourceDescription %></a>
+				<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>"><%= selResourceDescription %></a>
 			</div>
 
 			<br />
@@ -159,7 +159,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			names="permissions"
 			param="tabs2"
 			url="<%= renderPortletURL.toString() %>"
-			backURL="<%= redirect %>"
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 		/>
 	</c:if>
 

@@ -167,7 +167,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	<c:when test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
 		<liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">
 			<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
-			<liferay-util:param name="backURL" value="<%= backURL %>" />
+			<liferay-util:param name="backURL" value="<%= PortalUtil.escapeRedirect(backURL) %>" />
 		</liferay-util:include>
 
 		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_tabs.jsp">
@@ -199,7 +199,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		<c:if test="<%= portletName.equals(PortletKeys.ADMIN_SERVER) %>">
 			<br />
 
-			<aui:button onClick="<%= redirect %>" value="cancel" />
+			<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 		</c:if>
 	</c:when>
 	<c:otherwise>
@@ -258,7 +258,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			<aui:button-row>
 				<aui:button onClick='<%= renderResponse.getNamespace() + "updateActions();" %>' value="save" />
 
-				<aui:button onClick="<%= redirect %>" value="cancel" />
+				<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 			</aui:button-row>
 		</aui:form>
 

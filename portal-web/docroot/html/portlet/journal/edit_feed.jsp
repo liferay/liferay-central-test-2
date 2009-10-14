@@ -156,7 +156,7 @@ if (feed != null) {
 
 <liferay-ui:tabs
 	names="feed"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= DuplicateFeedIdException.class %>" message="please-enter-a-unique-id" />
@@ -558,7 +558,7 @@ if (feed != null) {
 	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= feedURL %>', 'feed');" />
 </c:if>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 </form>
 

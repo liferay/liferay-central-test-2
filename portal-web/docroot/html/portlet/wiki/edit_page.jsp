@@ -252,7 +252,7 @@ if (Validator.isNull(redirect)) {
 					<liferay-ui:message key="this-page-does-not-exist-yet-and-the-title-is-not-valid" />
 				</div>
 
-				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.location = '<%= HtmlUtil.escape(redirect) %>'" />
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.location = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>'" />
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -378,7 +378,7 @@ if (Validator.isNull(redirect)) {
 
 				<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
 
-				<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+				<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
 			</aui:button-row>
 		</aui:fieldset>
 	</c:if>

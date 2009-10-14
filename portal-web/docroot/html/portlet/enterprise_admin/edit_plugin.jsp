@@ -63,7 +63,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 
 	<liferay-ui:tabs
 		names="plugin"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<aui:fieldset>
@@ -83,6 +83,6 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 	</aui:button-row>
 </aui:form>

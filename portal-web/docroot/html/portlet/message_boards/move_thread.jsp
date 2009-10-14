@@ -76,7 +76,7 @@ boolean quote = false;
 
 	<liferay-ui:tabs
 		names="message"
-		backURL="<%= redirect %>"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 	/>
 
 	<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
@@ -135,7 +135,7 @@ boolean quote = false;
 	<aui:button-row>
 		<aui:button type="submit" value="move-thread" />
 
-		<aui:button onClick="<%= redirect %>" value="cancel" />
+		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

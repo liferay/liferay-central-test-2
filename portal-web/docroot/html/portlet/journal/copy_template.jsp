@@ -40,7 +40,7 @@ String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 
 <liferay-ui:tabs
 	names="template"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />
@@ -79,7 +79,7 @@ String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 
 <input type="submit" value="<liferay-ui:message key="copy" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
 </form>
 

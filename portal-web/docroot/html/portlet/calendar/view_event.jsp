@@ -179,7 +179,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 <liferay-ui:tabs
 	names="event"
-	backURL="<%= redirect %>"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
 />
 
 <div class="vevent">
