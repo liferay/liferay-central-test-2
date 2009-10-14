@@ -28,10 +28,10 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.poller.PollerHeader;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.poller.PollerRequest;
-import com.liferay.portal.kernel.poller.PollerResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -43,6 +43,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.service.BrowserTrackerLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -53,6 +54,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +66,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  */
 public class PollerServlet extends HttpServlet {
+
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+
+		_timeout = PropsValues.POLLER_RESPONSE_TIMEOUT;
+	}
 
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
@@ -147,6 +155,11 @@ public class PollerServlet extends HttpServlet {
 			pollerResponseChunksJSON.put(pollerResponseChunkJSON);
 		}
 
+		PollerRequestManager pollerRequestManager =
+			new PollerRequestManager(
+				pollerResponseChunksJSON, DestinationNames.POLLER,
+				DestinationNames.POLLER_RESPONSE, _timeout);
+		
 		for (int i = 1; i < pollerRequestChunks.length; i++) {
 			Map<String, Object> pollerRequestChunk = pollerRequestChunks[i];
 
@@ -155,18 +168,24 @@ public class PollerServlet extends HttpServlet {
 			String chunkId = (String)pollerRequestChunk.get("chunkId");
 
 			try {
-				process(
-					doReceive, pollerResponseChunksJSON, portletIdsWithChunks,
+				PollerRequest pollerRequestObj = process(
+					doReceive, portletIdsWithChunks,
 					pollerHeader, portletId, parameterMap, chunkId);
+
+				pollerRequestManager.addPollerRequest(pollerRequestObj);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 		}
 
+		pollerRequestManager.processRequests();
+		
 		if (!doReceive) {
 			return StringPool.BLANK;
 		}
+
+		pollerRequestManager.clearRequests();
 
 		for (String portletId : pollerHeader.getPortletIds()) {
 			if (portletIdsWithChunks.contains(portletId)) {
@@ -174,15 +193,21 @@ public class PollerServlet extends HttpServlet {
 			}
 
 			try {
-				process(
-					doReceive, pollerResponseChunksJSON, portletIdsWithChunks,
+				PollerRequest pollerRequestObj = process(
+					doReceive, portletIdsWithChunks,
 					pollerHeader, portletId, new HashMap<String, String>(),
 					null);
+
+				pollerRequestManager.addPollerRequest(pollerRequestObj);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 		}
+
+		pollerRequestManager.processRequests();
+
+		pollerResponseChunksJSON = pollerRequestManager.getPollerResponse();
 
 		return pollerResponseChunksJSON.toString();
 	}
@@ -297,10 +322,10 @@ public class PollerServlet extends HttpServlet {
 		}
 	}
 
-	protected void process(
-			boolean doReceive, JSONArray pollerResponseChunksJSON,
-			Set<String> portletIdsWithChunks, PollerHeader pollerHeader,
-			String portletId, Map<String, String> parameterMap, String chunkId)
+	protected PollerRequest process(
+			boolean doReceive, Set<String> portletIdsWithChunks,
+			PollerHeader pollerHeader, String portletId,
+			Map<String, String> parameterMap, String chunkId)
 		throws Exception {
 
 		PollerProcessor pollerProcessor =
@@ -309,24 +334,17 @@ public class PollerServlet extends HttpServlet {
 		if (pollerProcessor == null) {
 			_log.error("Poller processor not found for portlet " + portletId);
 
-			return;
+			return null;
 		}
 
 		PollerRequest pollerRequest = new PollerRequest(
-			pollerHeader, portletId, parameterMap, chunkId);
+			pollerHeader, portletId, parameterMap, chunkId, doReceive);
 
 		if (doReceive) {
-			PollerResponse pollerResponse = new PollerResponse(
-				portletId, chunkId);
-
-			pollerProcessor.receive(pollerRequest, pollerResponse);
-
-			pollerResponseChunksJSON.put(pollerResponse.toJSONObject());
 			portletIdsWithChunks.add(portletId);
 		}
-		else {
-			pollerProcessor.send(pollerRequest);
-		}
+
+		return pollerRequest;
 	}
 
 	private static final String _ESCAPED_CLOSE_CURLY_BRACE =
@@ -340,4 +358,5 @@ public class PollerServlet extends HttpServlet {
 
 	private static Log _log = LogFactoryUtil.getLog(PollerServlet.class);
 
+	private long _timeout;
 }
