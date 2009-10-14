@@ -105,7 +105,24 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		node.setName(name);
 		node.setDescription(description);
 
-		wikiNodePersistence.update(node, false);
+		try {
+			wikiNodePersistence.update(node, false);
+		}
+		catch (SystemException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Add failed, fetch {groupId=" + groupId + ", name=" +
+						name + "}");
+			}
+
+			node = wikiNodePersistence.fetchByG_N(groupId, name, false);
+
+			if (node == null) {
+				throw se;
+			}
+
+			return node;
+		}
 
 		// Resources
 
