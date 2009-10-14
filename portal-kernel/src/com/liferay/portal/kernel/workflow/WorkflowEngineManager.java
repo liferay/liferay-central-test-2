@@ -26,11 +26,12 @@ import java.util.Map;
 
 /**
  * <a href="WorkflowEngineManager.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
- * This manager is supporting information about the engine currently running.
+ * This manager gives support information about the workflow engine
+ * implementation.
  * </p>
- * 
+ *
  * @author Micha Kiener
  */
 public interface WorkflowEngineManager {
@@ -39,9 +40,9 @@ public interface WorkflowEngineManager {
 	 * Returns a map containing engine specific information. Make sure the
 	 * <code>toString</code> method of the objects within the map return a human
 	 * readable string representing the information in that object.
-	 * 
+	 *
 	 * @return any optional information about the engine (could be an empty map
-	 *         but must never be <code>null</code>)
+	 *		   but must never be <code>null</code>)
 	 */
 	public Map<String, Object> getAdditionalInformation();
 
@@ -53,9 +54,9 @@ public interface WorkflowEngineManager {
 	 * entry point into the workflow system. If the engine is not running within
 	 * the same VM, this method could possibly return a proxy object or
 	 * <code>null</code> if not supported.
-	 * 
+	 *
 	 * @return the underlying workflow engine provider or <code>null</code> if
-	 *         not supported
+	 *		   not supported
 	 */
 	public Object getDelegate();
 
@@ -67,7 +68,7 @@ public interface WorkflowEngineManager {
 	/**
 	 * Returns the name of the workflow engine which should be unique (e.g.
 	 * edoras, jBPM, etc).
-	 * 
+	 *
 	 * @return the name of the underlying engine
 	 */
 	public String getWorkflowEngineName();
@@ -77,9 +78,9 @@ public interface WorkflowEngineManager {
 	 * versioning of workflow definitions. If versioning is not supported, the
 	 * version number of a workflow definition is most likely ignored by the
 	 * engine.
-	 * 
+	 *
 	 * @return <code>true</code>, if the workflow engine supports versioning
 	 */
 	public boolean isSupportsWorkflowDefinitionVersioning();
-	
+
 }

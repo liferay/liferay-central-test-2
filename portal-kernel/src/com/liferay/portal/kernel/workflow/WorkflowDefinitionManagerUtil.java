@@ -101,7 +101,6 @@ public class WorkflowDefinitionManagerUtil {
 			workflowDefinitionName, start, end, orderByComparator);
 	}
 
-
 	public void setWorkflowDefinitionManager(
 		WorkflowDefinitionManager workflowDefinitionManager) {
 

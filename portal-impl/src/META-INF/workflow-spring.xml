@@ -19,10 +19,26 @@
 
 	<!-- Proxy -->
 
+	<bean id="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" class="com.liferay.portal.workflow.TaskInstanceManagerProxyBean">
+		<property name="singleDestinationSynchronousMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<property name="destinationName" value="liferay/workflow_task" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+			</bean>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" class="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
 				<property name="destinationName" value="liferay/workflow_definition" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.workflow.WorkflowEngineManagerProxyBean" class="com.liferay.portal.workflow.WorkflowEngineManagerProxyBean">
+		<property name="singleDestinationSynchronousMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<property name="destinationName" value="liferay/workflow_engine" />
 				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
 			</bean>
 		</property>
@@ -35,23 +51,9 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" class="com.liferay.portal.workflow.TaskInstanceManagerProxyBean">
-		<property name="singleDestinationSynchronousMessageSender">
-			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<property name="destinationName" value="liferay/workflow_task" />
-				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
-			</bean>
-		</property>
-	</bean>
 
 	<!-- Util -->
 
-	<bean class="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil">
-		<property name="workflowDefinitionManager" ref="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" />
-	</bean>
-	<bean class="com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil">
-		<property name="workflowInstanceManager" ref="com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean" />
-	</bean>
 	<bean class="com.liferay.portal.kernel.workflow.TaskInstanceManagerUtil">
 		<property name="taskInstanceManager" ref="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" />
 	</bean>
@@ -60,11 +62,23 @@
 			<bean class="com.liferay.portal.workflow.UserCredentialFactoryImpl" />
 		</property>
 	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil">
+		<property name="workflowDefinitionManager" ref="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" />
+	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil">
+		<property name="workflowEngineManager" ref="com.liferay.portal.workflow.WorkflowEngineManagerProxyBean" />
+	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil">
+		<property name="workflowInstanceManager" ref="com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean" />
+	</bean>
 
 	<!-- Messaging -->
 
 	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/workflow_definition" />
+	</bean>
+	<bean id="destination.workflow_engine" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/workflow_engine" />
 	</bean>
 	<bean id="destination.workflow_instance" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/workflow_instance" />
@@ -76,6 +90,7 @@
 		<property name="destinations">
 			<list>
 				<ref bean="destination.workflow_definition" />
+				<ref bean="destination.workflow_engine" />
 				<ref bean="destination.workflow_instance" />
 				<ref bean="destination.workflow_task" />
 			</list>

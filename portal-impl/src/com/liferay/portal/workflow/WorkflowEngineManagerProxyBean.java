@@ -23,47 +23,36 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowDefinition;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
+import com.liferay.portal.kernel.workflow.WorkflowEngineManager;
 
-import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="WorkflowDefinitionManagerProxyBean.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="WorkflowEngineManagerProxyBean.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Micha Kiener
+ * @author Brian Wing Shun Chan
  */
-public class WorkflowDefinitionManagerProxyBean
-	extends BaseProxyBean implements WorkflowDefinitionManager {
+public class WorkflowEngineManagerProxyBean
+	extends BaseProxyBean implements WorkflowEngineManager {
 
-	public void deployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition, long callingUserId,
-		Map<String, Object> parameters) {
-
+	public Map<String, Object> getAdditionalInformation() {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowDefinitionCount() {
+	public Object getDelegate() {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowDefinitionCount(String workflowDefinitionName) {
+	public String getVersion() {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		int start, int end, OrderByComparator orderByComparator) {
-
+	public String getWorkflowEngineName() {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName, int start, int end,
-		OrderByComparator orderByComparator) {
-
+	public boolean isSupportsWorkflowDefinitionVersioning() {
 		throw new UnsupportedOperationException();
 	}
 
