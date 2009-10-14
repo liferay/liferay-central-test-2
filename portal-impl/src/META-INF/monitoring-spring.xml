@@ -135,7 +135,6 @@
 		<property name="messageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 	</bean>
 	<bean id="com.liferay.portlet.MonitoringPortlet" class="com.liferay.portlet.MonitoringPortlet">
-		<!--<property name="invokerPortlet" ref="com.liferay.portlet.RulesAwareInvokerPortletrtlet" />-->
 		<property name="invokerPortlet" ref="com.liferay.portlet.InvokerPortletImpl" />
 		<property name="singleDestinationMessageSender" ref="messageSender.monitoring" />
 	</bean>

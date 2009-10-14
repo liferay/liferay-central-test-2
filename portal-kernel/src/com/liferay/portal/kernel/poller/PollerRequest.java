@@ -33,31 +33,12 @@ public class PollerRequest {
 
 	public PollerRequest(
 		PollerHeader pollerHeader, String portletId,
-		Map<String, String> parameterMap, String chunkId, boolean doReceive) {
+		Map<String, String> parameterMap, String chunkId) {
 
 		_pollerHeader = pollerHeader;
 		_portletId = portletId;
 		_parameterMap = parameterMap;
 		_chunkId = chunkId;
-		_doReceive = doReceive;
-	}
-
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (!(o instanceof PollerRequest)) {
-			return false;
-		}
-
-		PollerRequest that = (PollerRequest) o;
-
-		if (_portletId != null ? !_portletId.equals(that._portletId) :
-			that._portletId != null) {
-			return false;
-		}
-
-		return true;
 	}
 
 	public long getBrowserKey() {
@@ -92,10 +73,6 @@ public class PollerRequest {
 		return _pollerHeader.getUserId();
 	}
 
-	public int hashCode() {
-		return _portletId != null ? _portletId.hashCode() : 0;
-	}
-
 	public boolean isInitialRequest() {
 		return _pollerHeader.isInitialRequest();
 	}
@@ -104,22 +81,7 @@ public class PollerRequest {
 		return _pollerHeader.isStartPolling();
 	}
 
-	public boolean isDoReceive() {
-		return _doReceive;
-	}
-
-	public String toString() {
-		return "PollerRequest{" +
-			"_chunkId='" + _chunkId + '\'' +
-			", _parameterMap=" + _parameterMap +
-			", _pollerHeader=" + _pollerHeader +
-			", _portletId='" + _portletId + '\'' +
-			", _doReceive=" + _doReceive +
-			'}';
-	}
-
 	private String _chunkId;
-	private boolean _doReceive;
 	private Map<String, String> _parameterMap;
 	private PollerHeader _pollerHeader;
 	private String _portletId;

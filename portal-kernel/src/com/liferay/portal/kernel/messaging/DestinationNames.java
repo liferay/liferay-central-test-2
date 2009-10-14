@@ -71,10 +71,6 @@ public interface DestinationNames {
 
 	public static final String MONITORING = "liferay/monitoring";
 
-	public static final String POLLER = "liferay/poller";
-
-	public static final String POLLER_RESPONSE = "liferay/poller_response";
-
 	public static final String SCHEDULER_ENGINE = "liferay/scheduler_engine";
 
 	public static final String SCHEDULER_ENGINE_RESPONSE =

@@ -1206,10 +1206,6 @@ public class PropsValues {
 	public static final String[] PLUGIN_TYPES =
 		PropsUtil.getArray(PropsKeys.PLUGIN_TYPES);
 
-	public static final long POLLER_RESPONSE_TIMEOUT =
-		GetterUtil.getLong(
-			PropsUtil.get(PropsKeys.POLLER_RESPONSE_TIMEOUT), 1000);
-
 	public static final boolean POP_SERVER_NOTIFICATIONS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.POP_SERVER_NOTIFICATIONS_ENABLED));
