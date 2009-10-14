@@ -88,7 +88,7 @@
 				<entry key="liferay/scripting">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.scripting" />
-						<ref bean="messageListener.scripting_cluster" />
+						<!--<ref bean="messageListener.scripting_cluster" />-->
 					</list>
 				</entry>
 			</map>
