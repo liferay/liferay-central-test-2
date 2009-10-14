@@ -23,8 +23,8 @@
 
     #
     # Input a list of comma delimited Spring configurations. These will be
-    # loaded after the bean definitions specified in the contextConfigLocation
-    # parameter in web.xml.
+    # loaded after the bean definitions specified in the
+	# portalContextConfigLocation parameter in web.xml.
     #
     spring.configs=\
         WEB-INF/classes/META-INF/base-spring.xml,\
