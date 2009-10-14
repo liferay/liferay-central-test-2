@@ -139,8 +139,19 @@ if (row == null) {
 
 <div id="<portlet:namespace />webDav" style="display: none;">
 	<div class="portlet-document-library">
-		<liferay-ui:message key='<%= LanguageUtil.format(pageContext, "webdav-help", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/Accessing+the+Document+Library+with+WebDAV") %>' />
+		<%
+		String webDavHelpMessage;
+		
+		if (BrowserSnifferUtil.isWindows(request)) {
+			webDavHelpMessage = LanguageUtil.format(pageContext, "webdav-help-windows", new Object[] {"http://www.microsoft.com/downloads/details.aspx?FamilyId=17C36612-632E-4C04-9382-987622ED1D64", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/WebDAV"});
+		}
+		else {
+			webDavHelpMessage = LanguageUtil.format(pageContext, "webdav-help", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/WebDAV");
+		}
+		%>
 
+		<liferay-ui:message key='<%= webDavHelpMessage %>' />
+		
 		<br /><br />
 
 		<div class="file-entry-field">
