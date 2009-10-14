@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.util.Map;
+
 /**
  * <a href="WorkflowEngineManager.java.html"><b><i>View Source</i></b></a>
  * 
@@ -32,6 +34,17 @@ package com.liferay.portal.kernel.workflow;
  * @author Micha Kiener
  */
 public interface WorkflowEngineManager {
+
+	/**
+	 * Returns a map containing engine specific information. Make sure the
+	 * <code>toString</code> method of the objects within the map return a human
+	 * readable string representing the information in that object.
+	 * 
+	 * @return any optional information about the engine (could be an empty map
+	 *         but must never be <code>null</code>)
+	 */
+	public Map<String, Object> getAdditionalInformation();
+
 	/**
 	 * Returns the underlying provider object for the workflow engine to get
 	 * access to its API, if available. The result of this method, however, is
@@ -45,7 +58,12 @@ public interface WorkflowEngineManager {
 	 *         not supported
 	 */
 	public Object getDelegate();
-	
+
+	/**
+	 * @return the version of the underlying workflow engine
+	 */
+	public String getVersion();
+
 	/**
 	 * Returns the name of the workflow engine which should be unique (e.g.
 	 * edoras, jBPM, etc).
