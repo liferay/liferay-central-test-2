@@ -36,6 +36,10 @@ import java.util.Map;
  * <a href="HibernateConfigurationConverter.java.html"><b><i>View Source</i></b>
  * </a>
  *
+ * <p>
+ * See http://issues.liferay.com/browse/LPS-5363.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  */
 public class HibernateConfigurationConverter implements Converter<String> {
