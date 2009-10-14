@@ -24,6 +24,8 @@
 		<!-- Other fields -->
 
 		<column name="parentCategoryId" type="long" />
+		<column name="leftCategoryId" type="long" />
+		<column name="rightCategoryId" type="long" />
 		<column name="name" type="String" />
 		<column name="vocabularyId" type="long" />
 
