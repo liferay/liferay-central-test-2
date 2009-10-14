@@ -28,8 +28,22 @@ package com.liferay.portlet.messageboards.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface MBThreadFinder {
+	public int countByG_U_S(long groupId, long userId, int status)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_U_A_S(long groupId, long userId, boolean anonymous,
+		int status) throws com.liferay.portal.SystemException;
+
 	public int countByS_G_U_S(long groupId, long userId, int status)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U_S(
+		long groupId, long userId, int status, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U_A_S(
+		long groupId, long userId, boolean anonymous, int status, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U_S(
 		long groupId, long userId, int status, int start, int end)

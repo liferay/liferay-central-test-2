@@ -48,11 +48,127 @@ import java.util.List;
 public class MBThreadFinderImpl
 	extends BasePersistenceImpl implements MBThreadFinder {
 
+	public static String COUNT_BY_G_U_S =
+		MBThreadFinder.class.getName() + ".countByG_U_S";
+
+	public static String COUNT_BY_G_U_A_S =
+		MBThreadFinder.class.getName() + ".countByG_U_A_S";
+
 	public static String COUNT_BY_S_G_U_S =
 		MBThreadFinder.class.getName() + ".countByS_G_U_S";
 
+	public static String FIND_BY_G_U_S =
+		MBThreadFinder.class.getName() + ".findByG_U_S";
+
+	public static String FIND_BY_G_U_A_S =
+		MBThreadFinder.class.getName() + ".findByG_U_A_S";
+
 	public static String FIND_BY_S_G_U_S =
 		MBThreadFinder.class.getName() + ".findByS_G_U_S";
+
+	public int countByG_U_S(long groupId, long userId, int status)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_S);
+
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
+			}
+			else {
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByG_U_A_S(
+			long groupId, long userId, boolean anonymous, int status)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
+
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
+			}
+			else {
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+			qPos.add(anonymous);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	public int countByS_G_U_S(long groupId, long userId, int status)
 		throws SystemException {
@@ -98,6 +214,92 @@ public class MBThreadFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<MBThread> findByG_U_S(
+			long groupId, long userId, int status, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_S);
+
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
+			}
+			else {
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("MBThread", MBThreadImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
+
+			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<MBThread> findByG_U_A_S(
+			long groupId, long userId, boolean anonymous, int status,
+			int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
+
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
+			}
+			else {
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("MBThread", MBThreadImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+			qPos.add(anonymous);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
+
+			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

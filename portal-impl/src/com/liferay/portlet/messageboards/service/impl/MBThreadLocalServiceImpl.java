@@ -44,7 +44,6 @@ import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -224,28 +223,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					groupId, userId, status, start, end);
 			}
 			else {
-				List<Long> threadIds = null;
-
 				if (includeAnonymous) {
-					threadIds = mbMessageFinder.findByG_U_S(
+					return mbThreadFinder.findByG_U_S(
 						groupId, userId, status, start, end);
 				}
 				else {
-					threadIds = mbMessageFinder.findByG_U_A_S(
+					return mbThreadFinder.findByG_U_A_S(
 						groupId, userId, false, status, start, end);
 				}
-
-				List<MBThread> threads = new ArrayList<MBThread>(
-					threadIds.size());
-
-				for (long threadId : threadIds) {
-					MBThread thread = mbThreadPersistence.findByPrimaryKey(
-						threadId);
-
-					threads.add(thread);
-				}
-
-				return threads;
 			}
 		}
 	}
@@ -293,11 +278,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			}
 			else {
 				if (includeAnonymous) {
-					return mbMessageFinder.countByG_U_S(
-						groupId, userId, status);
+					return mbThreadFinder.countByG_U_S(groupId, userId, status);
 				}
 				else {
-					return mbMessageFinder.countByG_U_A_S(
+					return mbThreadFinder.countByG_U_A_S(
 						groupId, userId, false, status);
 				}
 			}
