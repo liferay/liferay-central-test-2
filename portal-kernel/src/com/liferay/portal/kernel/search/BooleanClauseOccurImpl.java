@@ -37,6 +37,19 @@ public class BooleanClauseOccurImpl implements BooleanClauseOccur {
 		return _name;
 	}
 
+	public boolean equals(Object obj) {
+		BooleanClauseOccur occur = (BooleanClauseOccur)obj;
+
+		String name = occur.getName();
+
+		if (_name.equals(name)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	private String _name;
 
 }

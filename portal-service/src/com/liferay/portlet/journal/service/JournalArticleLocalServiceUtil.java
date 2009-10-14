@@ -673,6 +673,17 @@ public class JournalArticleLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, java.lang.String keywords,
+		java.lang.String type,
+		java.util.List<com.liferay.portal.kernel.search.BooleanClause> clauses,
+		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .search(companyId, groupId, userId, keywords, type, clauses,
+			sorts, start, end);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
 		long companyId, long groupId, java.lang.String keywords,
 		java.lang.Double version, java.lang.String type,

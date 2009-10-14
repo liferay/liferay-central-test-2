@@ -170,9 +170,14 @@ public class JournalContentImpl implements JournalContent {
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
+		boolean secure = false;
+
+		if (themeDisplay != null) {
+			secure = themeDisplay.isSecure();
+		}
+
 		String key = encodeKey(
-			groupId, articleId, templateId, viewMode, languageId, page,
-			themeDisplay.isSecure());
+			groupId, articleId, templateId, viewMode, languageId, page, secure);
 
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(cache, key);

@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -1496,6 +1497,19 @@ public class JournalArticleLocalServiceImpl
 			String type, Sort[] sorts, int start, int end)
 		throws SystemException {
 
+		List<BooleanClause> clauses = null;
+
+		return search(
+			companyId, groupId, userId, keywords, type, clauses, sorts, start,
+			end);
+	}
+
+	public Hits search(
+			long companyId, long groupId, long userId, String keywords,
+			String type, List<BooleanClause> clauses, Sort[] sorts, int start,
+			int end)
+		throws SystemException {
+
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
@@ -1527,6 +1541,13 @@ public class JournalArticleLocalServiceImpl
 
 			if (searchQuery.clauses().size() > 0) {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+			}
+
+			if (clauses != null) {
+				for (BooleanClause clause : clauses) {
+					fullQuery.add(
+						clause.getQuery(), clause.getBooleanClauseOccur());
+				}
 			}
 
 			return SearchEngineUtil.search(

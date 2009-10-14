@@ -45,6 +45,16 @@
 			<bean class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil" class="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil">
+		<property name="booleanClauseFactory">
+			<bean class="com.liferay.portal.search.generic.BooleanClauseFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil.velocity" class="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil">
+		<property name="booleanClauseFactory">
+			<bean class="com.liferay.portal.search.generic.BooleanClauseFactoryImpl" />
+		</property>
+	</bean>
 
 	<!-- Messaging -->
 

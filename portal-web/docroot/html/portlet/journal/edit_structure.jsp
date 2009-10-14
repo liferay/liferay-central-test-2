@@ -106,6 +106,7 @@ int tabIndex = 1;
 			var elMetadataXML = document.getElementById("<portlet:namespace />structure_el" + i + "_metadata_xml");
 			var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
 			var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
+			var elIndexType = document.getElementById("<portlet:namespace />structure_el" + i + "_index_type");
 			var elRepeatable = document.getElementById("<portlet:namespace />structure_el" + i + "_repeatable");
 
 			if ((elDepth != null) && (elName != null) && (elType != null)) {
@@ -113,13 +114,14 @@ int tabIndex = 1;
 				var elNameValue = encodeURIComponent(elName.value);
 				var elTypeValue = encodeURIComponent(elType.value);
 				var elRepeatableValue = (elRepeatable != null) ? elRepeatable.checked : false;
+				var elIndexTypeValue = (elIndexType != null) ? elIndexType.value : "";
 
 				if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
 					for (var j = 0; j <= elDepthValue; j++) {
 						xsd += xmlIndent;
 					}
 
-					xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "' repeatable='" + elRepeatableValue + "'>";
+					xsd += "<dynamic-element name='" + elNameValue + "' type='" + elTypeValue + "' index-type='" + elIndexTypeValue + "' repeatable='" + elRepeatableValue + "'>";
 
 					if ((cmd == "add") && (elCount == i)) {
 						xsd += "<dynamic-element name='' type='' repeatable='false'></dynamic-element>\n";

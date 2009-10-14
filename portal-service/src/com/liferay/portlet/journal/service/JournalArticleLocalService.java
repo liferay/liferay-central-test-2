@@ -511,6 +511,14 @@ public interface JournalArticleLocalService {
 		int start, int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, java.lang.String keywords,
+		java.lang.String type,
+		java.util.List<com.liferay.portal.kernel.search.BooleanClause> clauses,
+		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
 		long companyId, long groupId, java.lang.String keywords,
 		java.lang.Double version, java.lang.String type,

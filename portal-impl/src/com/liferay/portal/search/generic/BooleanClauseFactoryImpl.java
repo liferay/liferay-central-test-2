@@ -20,24 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.search;
+package com.liferay.portal.search.generic;
+
+import com.liferay.portal.kernel.search.BooleanClause;
+import com.liferay.portal.kernel.search.BooleanClauseFactory;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanClauseOccurImpl;
+import com.liferay.portal.kernel.search.TermQuery;
+import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 
 /**
- * <a href="BooleanClauseOccur.java.html"><b><i>View Source</i></b></a>
+ * <a href="BooleanClauseFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  */
-public interface BooleanClauseOccur {
+public class BooleanClauseFactoryImpl implements BooleanClauseFactory {
 
-	public static final BooleanClauseOccur MUST = new BooleanClauseOccurImpl(
-		"MUST");
+	public BooleanClause create(String field, String value, String occur) {
+		TermQuery query = TermQueryFactoryUtil.create(field, value);
 
-	public static final BooleanClauseOccur MUST_NOT =
-		new BooleanClauseOccurImpl("MUST_NOT");
+		BooleanClauseOccur booleanClauseOccur =
+			new BooleanClauseOccurImpl(occur);
 
-	public static final BooleanClauseOccur SHOULD = new BooleanClauseOccurImpl(
-		"SHOULD");
-
-	public String getName();
+		return new BooleanClauseImpl(query, booleanClauseOccur);
+	}
 
 }

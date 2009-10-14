@@ -36,6 +36,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 String elInstanceId = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INSTANCE_ID);
 String elName = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME);
 String elType = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE);
+String elIndexType = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INDEX_TYPE);
 boolean elRepeatable = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE));
 boolean elRepeatablePrototype = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE));
 String elContent = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_CONTENT);
@@ -92,7 +93,7 @@ if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {
 Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL);
 %>
 
-<li class="<%= css.toString().trim() %>" <%= parentStructureData.toString() %> data-component-instanceId='<%= elInstanceId %>' data-component-name='<%= elName %>' data-component-repeatable='<%= elRepeatable %>' data-component-type='<%= elType %>' <%= metaData %>>
+<li class="<%= css.toString().trim() %>" <%= parentStructureData.toString() %> data-component-instanceId='<%= elInstanceId %>' data-component-name='<%= elName %>' data-component-repeatable='<%= elRepeatable %>' data-component-type='<%= elType %>' data-component-index-type='<%= elIndexType %>' <%= metaData %>>
 	<span class="journal-article-close"></span>
 
 	<span class="folder">

@@ -41,6 +41,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -86,11 +87,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		String type, Date displayDate, long[] assetCategoryIds,
 		String[] assetTagNames, ExpandoBridge expandoBridge) {
 
+		Document doc = new DocumentImpl();
+
 		if ((content != null) &&
 			((content.indexOf("<dynamic-content") != -1) ||
 			 (content.indexOf("<static-content") != -1))) {
 
-			content = _getIndexableContent(content);
+			content = _getIndexableContent(doc, content);
 
 			content = StringUtil.replace(
 				content, "<![CDATA[", StringPool.BLANK);
@@ -102,8 +105,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		content = StringUtil.replace(content, "&gt;", ">");
 
 		content = HtmlUtil.extractText(content);
-
-		Document doc = new DocumentImpl();
 
 		doc.addUID(PORTLET_ID, groupId, articleId);
 
@@ -205,16 +206,16 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	private static String _getIndexableContent(String content) {
+	private static String _getIndexableContent(Document doc, String content) {
 		try {
 			StringBuilder sb = new StringBuilder();
 
-			com.liferay.portal.kernel.xml.Document doc = SAXReaderUtil.read(
-				content);
+			com.liferay.portal.kernel.xml.Document contentDoc =
+				SAXReaderUtil.read(content);
 
-			Element root = doc.getRootElement();
+			Element root = contentDoc.getRootElement();
 
-			_getIndexableContent(sb, root);
+			_getIndexableContent(doc, sb, root);
 
 			return sb.toString();
 		}
@@ -225,11 +226,16 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	private static void _getIndexableContent(StringBuilder sb, Element root)
+	private static void _getIndexableContent(
+			Document doc, StringBuilder sb, Element root)
 		throws Exception {
 
 		for (Element el : root.elements()) {
 			String elType = el.attributeValue("type", StringPool.BLANK);
+			String elIndexType = el.attributeValue(
+				"index-type", StringPool.BLANK);
+
+			_indexField(doc, el, elType, elIndexType);
 
 			if (elType.equals("text") || elType.equals("text_box") ||
 				elType.equals("text_area")) {
@@ -248,7 +254,37 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				sb.append(StringPool.SPACE);
 			}
 
-			_getIndexableContent(sb, el);
+			_getIndexableContent(doc, sb, el);
+		}
+	}
+
+	private static void _indexField(
+			Document doc, Element el, String elType, String elIndexType) {
+
+		if (Validator.isNull(elIndexType)) {
+			return;
+		}
+
+		Element dynamicContent = el.element("dynamic-content");
+
+		String name = el.attributeValue("name", StringPool.BLANK);
+		String[] value = new String[] {dynamicContent.getText()};
+
+		if (elType.equals("multi-list")) {
+			List<Element> options = dynamicContent.elements();
+
+			value = new String[options.size()];
+
+			for (int i = 0; i < options.size(); i++) {
+				value[i] = options.get(i).getText();
+			}
+		}
+
+		if (elIndexType.equals("keyword")) {
+			doc.addKeyword(name, value);
+		}
+		else if (elIndexType.equals("text")) {
+			doc.addText(name, StringUtil.merge(value, StringPool.SPACE));
 		}
 	}
 

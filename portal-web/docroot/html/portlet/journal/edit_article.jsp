@@ -819,6 +819,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 
 		String elName = xsdElement.attributeValue("name", StringPool.BLANK);
 		String elType = xsdElement.attributeValue("type", StringPool.BLANK);
+		String elIndexType = xsdElement.attributeValue("index-type", StringPool.BLANK);
 		String repeatable = xsdElement.attributeValue("repeatable");
 		boolean elRepeatable = GetterUtil.getBoolean(repeatable);
 		String elParentStructureId = xsdElement.attributeValue("parent-structure-id");
@@ -845,6 +846,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			contentElement.addAttribute("instance-id", PwdGenerator.getPassword());
 			contentElement.addAttribute("name", elName);
 			contentElement.addAttribute("type", elType);
+			contentElement.addAttribute("index-type", elIndexType);
 
 			contentElement.add(SAXReaderUtil.createElement("dynamic-content"));
 
@@ -888,6 +890,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE, String.valueOf(elRepeatable));
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE, (i == 0) ? "1" : "0");
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE, elType);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INDEX_TYPE, elIndexType);
 
 			pageContext.include("/html/portlet/journal/edit_article_content_xsd_el.jsp");
 

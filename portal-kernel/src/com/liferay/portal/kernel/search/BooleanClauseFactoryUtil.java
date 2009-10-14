@@ -23,21 +23,29 @@
 package com.liferay.portal.kernel.search;
 
 /**
- * <a href="BooleanClauseOccur.java.html"><b><i>View Source</i></b></a>
+ * <a href="BooleanClauseFactoryUtil.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  */
-public interface BooleanClauseOccur {
+public class BooleanClauseFactoryUtil {
 
-	public static final BooleanClauseOccur MUST = new BooleanClauseOccurImpl(
-		"MUST");
+	public static BooleanClause create(
+			String field, String value, String occur) {
 
-	public static final BooleanClauseOccur MUST_NOT =
-		new BooleanClauseOccurImpl("MUST_NOT");
+		return getBooleanClauseFactory().create(field, value, occur);
+	}
 
-	public static final BooleanClauseOccur SHOULD = new BooleanClauseOccurImpl(
-		"SHOULD");
+	public static BooleanClauseFactory getBooleanClauseFactory() {
+		return _booleanClauseFactory;
+	}
 
-	public String getName();
+	public void setBooleanClauseFactory(
+		BooleanClauseFactory booleanClauseFactory) {
+
+		_booleanClauseFactory = booleanClauseFactory;
+	}
+
+	private static BooleanClauseFactory _booleanClauseFactory;
 
 }

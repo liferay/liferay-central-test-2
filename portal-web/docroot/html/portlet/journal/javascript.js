@@ -826,6 +826,7 @@ AUI().add(
 				if (fieldInstance) {
 					var dynamicElement;
 					var type = fieldInstance.get('fieldType');
+					var indexType = fieldInstance.get('indexType');
 
 					if (generateArticleContent) {
 						var instanceId = fieldInstance.get('instanceId');
@@ -840,7 +841,8 @@ AUI().add(
 							{
 								'instance-id': instanceId,
 								name: encodeURI(fieldInstance.get('variableName')),
-								type: type
+								type: type,
+								'index-type': indexType
 							}
 						);
 					}
@@ -850,6 +852,7 @@ AUI().add(
 							{
 								name: encodeURI(fieldInstance.get('variableName')),
 								type: type,
+								'index-type': indexType,
 								repeatable: fieldInstance.get('repeatable')
 							}
 						);
@@ -2171,6 +2174,7 @@ AUI().add(
 							var fieldLabel = field.attr('data-component-label');
 							var componentName = field.attr('data-component-name');
 							var componentType = field.attr('data-component-type');
+							var indexType = field.attr('data-component-index-type');
 							var instructions = field.attr('data-component-instructions');
 							var required = field.attr('data-component-required');
 							var displayAsTooltip = field.attr('data-component-displayAsTooltip');
@@ -2196,6 +2200,7 @@ AUI().add(
 									required: required,
 									source: field,
 									type: componentType,
+									indexType: indexType,
 									variableName: componentName
 								}
 							);

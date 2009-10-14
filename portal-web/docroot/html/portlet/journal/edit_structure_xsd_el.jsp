@@ -29,6 +29,7 @@ Element el = (Element)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL);
 
 String elName = JS.decodeURIComponent(el.attributeValue("name", StringPool.BLANK));
 String elType = JS.decodeURIComponent(el.attributeValue("type", StringPool.BLANK));
+String elIndexType = JS.decodeURIComponent(el.attributeValue("index-type", StringPool.BLANK));
 boolean repeatable = GetterUtil.getBoolean(el.attributeValue("repeatable"));
 
 String elMetadataXML = StringPool.BLANK;
@@ -85,6 +86,12 @@ if (MathUtil.isEven(count.getValue())) {
 							<option <%= elType.equals("list") ? "selected" : "" %> value="list"><liferay-ui:message key="selection-list" /></option>
 							<option <%= elType.equals("multi-list") ? "selected" : "" %> value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
 							<option <%= elType.equals("link_to_layout") ? "selected" : "" %> value="link_to_layout"><liferay-ui:message key="link-to-layout" /></option>
+						</select>
+
+						<select id="<portlet:namespace />structure_el<%= count.getValue() %>_index_type">
+							<option value=""><liferay-ui:message key="not-searchable" /></option>
+							<option <%= elIndexType.equals("keyword") ? "selected" : "" %> value="keyword"><liferay-ui:message key="searchable-keyword" /></option>
+							<option <%= elIndexType.equals("text") ? "selected" : "" %> value="text"><liferay-ui:message key="searchable-text" /></option>
 						</select>
 					</c:otherwise>
 				</c:choose>
