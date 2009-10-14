@@ -24,11 +24,14 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Converter;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import org.hibernate.cfg.Configuration;
@@ -42,6 +45,12 @@ import org.hibernate.cfg.Environment;
  */
 public class PortalHibernateConfiguration
 	extends TransactionAwareConfiguration {
+
+	public void setHibernateConfigurationConverter(
+		Converter hibernateConfigurationConverter) {
+
+		_hibernateConfigurationConverter = hibernateConfigurationConverter;
+	}
 
 	protected String determineDialect() {
 		return DialectDetector.determineDialect(getDataSource());
@@ -59,19 +68,11 @@ public class PortalHibernateConfiguration
 		Configuration configuration = new Configuration();
 
 		try {
-			ClassLoader classLoader = getConfigurationClassLoader();
-
 			String[] resources = getConfigurationResources();
 
 			for (String resource : resources) {
 				try {
-					InputStream is = classLoader.getResourceAsStream(resource);
-
-					if (is != null) {
-						configuration = configuration.addInputStream(is);
-
-						is.close();
-					}
+					readResource(configuration, resource);
 				}
 				catch (Exception e2) {
 					if (_log.isWarnEnabled()) {
@@ -111,7 +112,37 @@ public class PortalHibernateConfiguration
 		}
 	}
 
+	protected void readResource(Configuration configuration, String resource)
+		throws Exception {
+
+		ClassLoader classLoader = getConfigurationClassLoader();
+
+		InputStream is = classLoader.getResourceAsStream(resource);
+
+		if (is == null) {
+			return;
+		}
+
+		if (_hibernateConfigurationConverter != null) {
+			String configurationString = StringUtil.read(is);
+
+			is.close();
+
+			configurationString = _hibernateConfigurationConverter.convert(
+				configurationString);
+
+			is = new ByteArrayInputStream(
+				configurationString.getBytes());
+		}
+
+		configuration = configuration.addInputStream(is);
+
+		is.close();
+	}
+
 	private static Log _log =
 		LogFactoryUtil.getLog(PortalHibernateConfiguration.class);
+
+	private Converter<String> _hibernateConfigurationConverter;
 
 }

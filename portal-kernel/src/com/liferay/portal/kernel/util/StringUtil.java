@@ -591,7 +591,8 @@ public class StringUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			sb.append(line).append('\n');
+			sb.append(line);
+			sb.append(CharPool.NEW_LINE);
 		}
 
 		br.close();

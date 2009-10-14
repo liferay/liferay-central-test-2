@@ -27,8 +27,8 @@ package com.liferay.portal.kernel.util;
  *
  * @author Brian Wing Shun Chan
  */
-public interface Converter {
+public interface Converter<T> {
 
-	public Object convert(Object input);
+	public T convert(T input);
 
 }
