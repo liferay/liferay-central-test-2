@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,15 +23,15 @@
 package com.liferay.portal.poller;
 
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.poller.PollerRequest;
 import com.liferay.portal.kernel.poller.PollerResponse;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="PollerRequestManager.java.html"><b><i>View Source</i></b></a>
@@ -42,11 +42,11 @@ public class PollerRequestManager implements MessageListener {
 
 	public PollerRequestManager(
 		JSONArray pollerResponseChunksJSON, String destinationName,
-		String responseDestination, long timeout) {
+		String responseDestinationName, long timeout) {
 
 		_pollerResponseChunksJSON = pollerResponseChunksJSON;
 		_destinationName = destinationName;
-		_responseDestination = responseDestination;
+		_responseDestinationName = responseDestinationName;
 		_timeout = timeout;
 	}
 
@@ -54,8 +54,14 @@ public class PollerRequestManager implements MessageListener {
 		if (pollerRequest == null) {
 			return;
 		}
-		
+
 		_pollerRequests.put(pollerRequest.getPortletId(), pollerRequest);
+	}
+
+	public void clearRequests() {
+		_pollerRequests.clear();
+		_responseIds.clear();
+		_responseCount = 0;
 	}
 
 	public JSONArray getPollerResponse() {
@@ -63,15 +69,17 @@ public class PollerRequestManager implements MessageListener {
 	}
 
 	public void processRequests() {
-		MessageBusUtil.registerMessageListener(_responseDestination, this);
+		MessageBusUtil.registerMessageListener(_responseDestinationName, this);
 
 		try {
 			for (PollerRequest pollerRequest : _pollerRequests.values()) {
 				Message message = new Message();
 
 				message.setPayload(pollerRequest);
-				message.setResponseDestinationName(_responseDestination);
+				message.setResponseDestinationName(_responseDestinationName);
+
 				String responseId = PortalUUIDUtil.generate();
+
 				message.setResponseId(responseId);
 
 				_responseIds.put(responseId, responseId);
@@ -84,15 +92,14 @@ public class PollerRequestManager implements MessageListener {
 					try {
 						this.wait(_timeout);
 					}
-					catch (InterruptedException e) {
-						//nothing to do here...
+					catch (InterruptedException ie) {
 					}
 				}
 			}
 		}
 		finally {
 			MessageBusUtil.unregisterMessageListener(
-				_responseDestination, this);
+				_responseDestinationName, this);
 		}
 	}
 
@@ -109,28 +116,23 @@ public class PollerRequestManager implements MessageListener {
 				_pollerResponseChunksJSON.put(pollerResponse.toJSONObject());
 			}
 		}
-		
+
 		synchronized (this) {
 			_responseCount++;
 
 			if (_responseCount == _pollerRequests.size()) {
-				this.notify();
+				notify();
 			}
 		}
 	}
 
-	public void clearRequests() {
-		_pollerRequests.clear();
-		_responseIds.clear();
-		_responseCount = 0;
-	}
-
+	private String _destinationName;
 	private Map<String, PollerRequest> _pollerRequests =
 		new HashMap<String, PollerRequest>();
-	private Map<String, String> _responseIds = new HashMap<String, String>();
 	private JSONArray _pollerResponseChunksJSON;
-	private String _responseDestination;
-	private String _destinationName;
 	private int _responseCount;
+	private String _responseDestinationName;
+	private Map<String, String> _responseIds = new HashMap<String, String>();
 	private long _timeout;
+
 }

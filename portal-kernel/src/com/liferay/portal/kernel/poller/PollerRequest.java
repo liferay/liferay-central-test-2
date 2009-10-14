@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.poller;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import java.util.Map;
 
 /**
@@ -33,31 +35,32 @@ public class PollerRequest {
 
 	public PollerRequest(
 		PollerHeader pollerHeader, String portletId,
-		Map<String, String> parameterMap, String chunkId, boolean doReceive) {
+		Map<String, String> parameterMap, String chunkId,
+		boolean receiveRequest) {
 
 		_pollerHeader = pollerHeader;
 		_portletId = portletId;
 		_parameterMap = parameterMap;
 		_chunkId = chunkId;
-		_doReceive = doReceive;
+		_receiveRequest = receiveRequest;
 	}
 
-	public boolean equals(Object o) {
-		if (this == o) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
-		if (!(o instanceof PollerRequest)) {
+
+		if (!(obj instanceof PollerRequest)) {
 			return false;
 		}
 
-		PollerRequest that = (PollerRequest) o;
+		PollerRequest portletRequest = (PollerRequest)obj;
 
-		if (_portletId != null ? !_portletId.equals(that._portletId) :
-			that._portletId != null) {
-			return false;
+		if (Validator.equals(_portletId, portletRequest._portletId)) {
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public long getBrowserKey() {
@@ -93,35 +96,48 @@ public class PollerRequest {
 	}
 
 	public int hashCode() {
-		return _portletId != null ? _portletId.hashCode() : 0;
+		if (_portletId != null) {
+			return _portletId.hashCode();
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean isInitialRequest() {
 		return _pollerHeader.isInitialRequest();
 	}
 
+	public boolean isReceiveRequest() {
+		return _receiveRequest;
+	}
+
 	public boolean isStartPolling() {
 		return _pollerHeader.isStartPolling();
 	}
 
-	public boolean isDoReceive() {
-		return _doReceive;
-	}
-
 	public String toString() {
-		return "PollerRequest{" +
-			"_chunkId='" + _chunkId + '\'' +
-			", _parameterMap=" + _parameterMap +
-			", _pollerHeader=" + _pollerHeader +
-			", _portletId='" + _portletId + '\'' +
-			", _doReceive=" + _doReceive +
-			'}';
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{chunkId=");
+		sb.append(_chunkId);
+		sb.append(", parameterMap=");
+		sb.append(_parameterMap);
+		sb.append(", pollerHeader=");
+		sb.append(_pollerHeader);
+		sb.append(", portletId=");
+		sb.append(_portletId);
+		sb.append(", receiveRequest=");
+		sb.append(_receiveRequest);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private String _chunkId;
-	private boolean _doReceive;
 	private Map<String, String> _parameterMap;
 	private PollerHeader _pollerHeader;
 	private String _portletId;
+	private boolean _receiveRequest;
 
 }

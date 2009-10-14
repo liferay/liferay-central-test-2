@@ -64,6 +64,26 @@ public class PollerHeader {
 		return _startPolling;
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{_browserKey=");
+		sb.append(_browserKey);
+		sb.append(", initialRequest=");
+		sb.append(_initialRequest);
+		sb.append(", portletIds=");
+		sb.append(_portletIds);
+		sb.append(", startPolling=");
+		sb.append(_startPolling);
+		sb.append(", timestamp=");
+		sb.append(_timestamp);
+		sb.append(", userId=");
+		sb.append(_userId);
+		sb.append("}");
+
+		return sb.toString();
+	}
+
 	private long _browserKey;
 	private boolean _initialRequest;
 	private String[] _portletIds;

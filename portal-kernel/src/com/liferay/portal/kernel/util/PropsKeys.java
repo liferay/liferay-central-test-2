@@ -1067,7 +1067,7 @@ public interface PropsKeys {
 
 	public static final String PLUGIN_TYPES = "plugin.types";
 
-	public static final String POLLER_RESPONSE_TIMEOUT="poller.request.timeout";
+	public static final String POLLER_REQUEST_TIMEOUT = "poller.request.timeout";
 
 	public static final String POP_SERVER_NOTIFICATIONS_ENABLED = "pop.server.notifications.enabled";
 

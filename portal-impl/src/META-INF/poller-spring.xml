@@ -3,26 +3,20 @@
 <beans
 	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
-	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-
-	<!-- Messaging -->
-
 	<bean id="destination.poller" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/poller" />
-		<property name="workersCoreSize" value="25"/>
-		<property name="workersMaxSize" value="25"/>
+		<property name="workersCoreSize" value="25" />
+		<property name="workersMaxSize" value="25" />
 	</bean>
 	<bean id="destination.poller_response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/poller_response" />
-		<property name="workersCoreSize" value="10"/>
-		<property name="workersMaxSize" value="10"/>
+		<property name="workersCoreSize" value="10" />
+		<property name="workersMaxSize" value="10" />
 	</bean>
-
-	<bean id="messageListener.poller" class="com.liferay.portal.poller.messaging.PollerRequestMessageListener"/>
-
+	<bean id="messageListener.poller" class="com.liferay.portal.poller.messaging.PollerMessageListener" />
 	<bean id="messagingConfigurator.poller" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
 			<list>

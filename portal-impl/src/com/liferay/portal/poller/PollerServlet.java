@@ -54,7 +54,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -66,12 +65,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  */
 public class PollerServlet extends HttpServlet {
-
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-
-		_timeout = PropsValues.POLLER_RESPONSE_TIMEOUT;
-	}
 
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
@@ -102,14 +95,15 @@ public class PollerServlet extends HttpServlet {
 	}
 
 	protected String getContent(HttpServletRequest request) throws Exception {
-		String pollerRequest = getPollerRequest(request);
+		String pollerRequestString = getPollerRequestString(request);
 
-		if (Validator.isNull(pollerRequest)) {
+		if (Validator.isNull(pollerRequestString)) {
 			return null;
 		}
 
 		Map<String, Object>[] pollerRequestChunks =
-			(Map<String, Object>[])JSONFactoryUtil.deserialize(pollerRequest);
+			(Map<String, Object>[])JSONFactoryUtil.deserialize(
+				pollerRequestString);
 
 		PollerHeader pollerHeader = getPollerHeader(pollerRequestChunks);
 
@@ -117,12 +111,12 @@ public class PollerServlet extends HttpServlet {
 			return null;
 		}
 
-		boolean doReceive = isDoReceive(request);
+		boolean receiveRequest = isReceiveRequest(request);
 
 		JSONArray pollerResponseChunksJSON = null;
 		Set<String> portletIdsWithChunks = null;
 
-		if (doReceive) {
+		if (receiveRequest) {
 			pollerResponseChunksJSON = JSONFactoryUtil.createJSONArray();
 			portletIdsWithChunks = new HashSet<String>();
 
@@ -155,11 +149,11 @@ public class PollerServlet extends HttpServlet {
 			pollerResponseChunksJSON.put(pollerResponseChunkJSON);
 		}
 
-		PollerRequestManager pollerRequestManager =
-			new PollerRequestManager(
-				pollerResponseChunksJSON, DestinationNames.POLLER,
-				DestinationNames.POLLER_RESPONSE, _timeout);
-		
+		PollerRequestManager pollerRequestManager = new PollerRequestManager(
+			pollerResponseChunksJSON, DestinationNames.POLLER,
+			DestinationNames.POLLER_RESPONSE,
+			PropsValues.POLLER_REQUEST_TIMEOUT);
+
 		for (int i = 1; i < pollerRequestChunks.length; i++) {
 			Map<String, Object> pollerRequestChunk = pollerRequestChunks[i];
 
@@ -168,11 +162,11 @@ public class PollerServlet extends HttpServlet {
 			String chunkId = (String)pollerRequestChunk.get("chunkId");
 
 			try {
-				PollerRequest pollerRequestObj = process(
-					doReceive, portletIdsWithChunks,
-					pollerHeader, portletId, parameterMap, chunkId);
+				PollerRequest pollerRequest = process(
+					portletIdsWithChunks, pollerHeader, portletId, parameterMap,
+					chunkId, receiveRequest);
 
-				pollerRequestManager.addPollerRequest(pollerRequestObj);
+				pollerRequestManager.addPollerRequest(pollerRequest);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -180,8 +174,8 @@ public class PollerServlet extends HttpServlet {
 		}
 
 		pollerRequestManager.processRequests();
-		
-		if (!doReceive) {
+
+		if (!receiveRequest) {
 			return StringPool.BLANK;
 		}
 
@@ -193,12 +187,11 @@ public class PollerServlet extends HttpServlet {
 			}
 
 			try {
-				PollerRequest pollerRequestObj = process(
-					doReceive, portletIdsWithChunks,
-					pollerHeader, portletId, new HashMap<String, String>(),
-					null);
+				PollerRequest pollerRequest = process(
+					portletIdsWithChunks, pollerHeader, portletId,
+					new HashMap<String, String>(), null, receiveRequest);
 
-				pollerRequestManager.addPollerRequest(pollerRequestObj);
+				pollerRequestManager.addPollerRequest(pollerRequest);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -266,17 +259,18 @@ public class PollerServlet extends HttpServlet {
 			userId, browserKey, portletIds, initialRequest, startPolling);
 	}
 
-	protected String getPollerRequest(HttpServletRequest request)
+	protected String getPollerRequestString(HttpServletRequest request)
 		throws Exception {
 
-		String pollerRequest = ParamUtil.getString(request, "pollerRequest");
+		String pollerRequestString = ParamUtil.getString(
+			request, "pollerRequest");
 
-		if (Validator.isNull(pollerRequest)) {
+		if (Validator.isNull(pollerRequestString)) {
 			return null;
 		}
 
 		return StringUtil.replace(
-			pollerRequest,
+			pollerRequestString,
 			new String[] {
 				StringPool.OPEN_CURLY_BRACE,
 				StringPool.CLOSE_CURLY_BRACE,
@@ -309,12 +303,12 @@ public class PollerServlet extends HttpServlet {
 		return userId;
 	}
 
-	protected boolean isDoReceive(HttpServletRequest request)
+	protected boolean isReceiveRequest(HttpServletRequest request)
 		throws Exception {
 
 		String path = GetterUtil.getString(request.getPathInfo());
 
-		if (path.endsWith("/receive")) {
+		if (path.endsWith(_PATH_RECEIVE)) {
 			return true;
 		}
 		else {
@@ -323,9 +317,9 @@ public class PollerServlet extends HttpServlet {
 	}
 
 	protected PollerRequest process(
-			boolean doReceive, Set<String> portletIdsWithChunks,
-			PollerHeader pollerHeader, String portletId,
-			Map<String, String> parameterMap, String chunkId)
+			Set<String> portletIdsWithChunks, PollerHeader pollerHeader,
+			String portletId, Map<String, String> parameterMap, String chunkId,
+			boolean receiveRequest)
 		throws Exception {
 
 		PollerProcessor pollerProcessor =
@@ -338,9 +332,9 @@ public class PollerServlet extends HttpServlet {
 		}
 
 		PollerRequest pollerRequest = new PollerRequest(
-			pollerHeader, portletId, parameterMap, chunkId, doReceive);
+			pollerHeader, portletId, parameterMap, chunkId, receiveRequest);
 
-		if (doReceive) {
+		if (receiveRequest) {
 			portletIdsWithChunks.add(portletId);
 		}
 
@@ -356,7 +350,8 @@ public class PollerServlet extends HttpServlet {
 	private static final String _OPEN_HASH_MAP_WRAPPER =
 		"{\"javaClass\":\"java.util.HashMap\",\"map\":{";
 
+	private static final String _PATH_RECEIVE = "/receive";
+
 	private static Log _log = LogFactoryUtil.getLog(PollerServlet.class);
 
-	private long _timeout;
 }
