@@ -79,6 +79,8 @@ public class AssetCategoryJSONSerializer {
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("parentCategoryId", model.getParentCategoryId());
+		jsonObj.put("leftCategoryId", model.getLeftCategoryId());
+		jsonObj.put("rightCategoryId", model.getRightCategoryId());
 		jsonObj.put("name", model.getName());
 		jsonObj.put("vocabularyId", model.getVocabularyId());
 

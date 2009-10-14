@@ -79,7 +79,8 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		newAssetCategory.setUserName(randomString());
 		newAssetCategory.setCreateDate(nextDate());
 		newAssetCategory.setModifiedDate(nextDate());
-		newAssetCategory.setParentCategoryId(nextLong());
+		newAssetCategory.setLeftCategoryId(nextLong());
+		newAssetCategory.setRightCategoryId(nextLong());
 		newAssetCategory.setName(randomString());
 		newAssetCategory.setVocabularyId(nextLong());
 
@@ -106,6 +107,10 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newAssetCategory.getModifiedDate()));
 		assertEquals(existingAssetCategory.getParentCategoryId(),
 			newAssetCategory.getParentCategoryId());
+		assertEquals(existingAssetCategory.getLeftCategoryId(),
+			newAssetCategory.getLeftCategoryId());
+		assertEquals(existingAssetCategory.getRightCategoryId(),
+			newAssetCategory.getRightCategoryId());
 		assertEquals(existingAssetCategory.getName(), newAssetCategory.getName());
 		assertEquals(existingAssetCategory.getVocabularyId(),
 			newAssetCategory.getVocabularyId());
@@ -159,7 +164,8 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		assetCategory.setUserName(randomString());
 		assetCategory.setCreateDate(nextDate());
 		assetCategory.setModifiedDate(nextDate());
-		assetCategory.setParentCategoryId(nextLong());
+		assetCategory.setLeftCategoryId(nextLong());
+		assetCategory.setRightCategoryId(nextLong());
 		assetCategory.setName(randomString());
 		assetCategory.setVocabularyId(nextLong());
 

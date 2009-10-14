@@ -76,10 +76,12 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "parentCategoryId", new Integer(Types.BIGINT) },
+			{ "leftCategoryId", new Integer(Types.BIGINT) },
+			{ "rightCategoryId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "vocabularyId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,vocabularyId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table AssetCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,leftCategoryId LONG,rightCategoryId LONG,name VARCHAR(75) null,vocabularyId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table AssetCategory";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -103,6 +105,8 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setParentCategoryId(soapModel.getParentCategoryId());
+		model.setLeftCategoryId(soapModel.getLeftCategoryId());
+		model.setRightCategoryId(soapModel.getRightCategoryId());
 		model.setName(soapModel.getName());
 		model.setVocabularyId(soapModel.getVocabularyId());
 
@@ -235,6 +239,32 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 
 	public void setParentCategoryId(long parentCategoryId) {
 		_parentCategoryId = parentCategoryId;
+
+		if (!_setOriginalParentCategoryId) {
+			_setOriginalParentCategoryId = true;
+
+			_originalParentCategoryId = parentCategoryId;
+		}
+	}
+
+	public long getOriginalParentCategoryId() {
+		return _originalParentCategoryId;
+	}
+
+	public long getLeftCategoryId() {
+		return _leftCategoryId;
+	}
+
+	public void setLeftCategoryId(long leftCategoryId) {
+		_leftCategoryId = leftCategoryId;
+	}
+
+	public long getRightCategoryId() {
+		return _rightCategoryId;
+	}
+
+	public void setRightCategoryId(long rightCategoryId) {
+		_rightCategoryId = rightCategoryId;
 	}
 
 	public String getName() {
@@ -272,6 +302,8 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setParentCategoryId(getParentCategoryId());
+			model.setLeftCategoryId(getLeftCategoryId());
+			model.setRightCategoryId(getRightCategoryId());
 			model.setName(HtmlUtil.escape(getName()));
 			model.setVocabularyId(getVocabularyId());
 
@@ -308,6 +340,8 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setParentCategoryId(getParentCategoryId());
+		clone.setLeftCategoryId(getLeftCategoryId());
+		clone.setRightCategoryId(getRightCategoryId());
 		clone.setName(getName());
 		clone.setVocabularyId(getVocabularyId());
 
@@ -375,6 +409,10 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		sb.append(getModifiedDate());
 		sb.append(", parentCategoryId=");
 		sb.append(getParentCategoryId());
+		sb.append(", leftCategoryId=");
+		sb.append(getLeftCategoryId());
+		sb.append(", rightCategoryId=");
+		sb.append(getRightCategoryId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", vocabularyId=");
@@ -428,6 +466,14 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 		sb.append(getParentCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>leftCategoryId</column-name><column-value><![CDATA[");
+		sb.append(getLeftCategoryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rightCategoryId</column-name><column-value><![CDATA[");
+		sb.append(getRightCategoryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
@@ -454,6 +500,10 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _parentCategoryId;
+	private long _originalParentCategoryId;
+	private boolean _setOriginalParentCategoryId;
+	private long _leftCategoryId;
+	private long _rightCategoryId;
 	private String _name;
 	private long _vocabularyId;
 	private transient ExpandoBridge _expandoBridge;

@@ -96,6 +96,14 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory> {
 
 	public void setParentCategoryId(long parentCategoryId);
 
+	public long getLeftCategoryId();
+
+	public void setLeftCategoryId(long leftCategoryId);
+
+	public long getRightCategoryId();
+
+	public void setRightCategoryId(long rightCategoryId);
+
 	public String getName();
 
 	public void setName(String name);

@@ -305,6 +305,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
 		}
 
+		shrinkTree(assetCategory);
+
 		Session session = null;
 
 		try {
@@ -413,6 +415,16 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 			assetCategory.setUuid(uuid);
 		}
 
+		if (isNew) {
+			expandTree(assetCategory);
+		}
+		else {
+			if (assetCategory.getParentCategoryId() != assetCategoryModelImpl.getOriginalParentCategoryId()) {
+				shrinkTree(assetCategory);
+				expandTree(assetCategory);
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -479,6 +491,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		assetCategoryImpl.setCreateDate(assetCategory.getCreateDate());
 		assetCategoryImpl.setModifiedDate(assetCategory.getModifiedDate());
 		assetCategoryImpl.setParentCategoryId(assetCategory.getParentCategoryId());
+		assetCategoryImpl.setLeftCategoryId(assetCategory.getLeftCategoryId());
+		assetCategoryImpl.setRightCategoryId(assetCategory.getRightCategoryId());
 		assetCategoryImpl.setName(assetCategory.getName());
 		assetCategoryImpl.setVocabularyId(assetCategory.getVocabularyId());
 
@@ -3305,6 +3319,168 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void rebuildTree(long groupId, boolean force)
+		throws SystemException {
+		if (force || (countOrphanTreeNodes(groupId) > 0)) {
+			rebuildTree(groupId, 0, 1);
+
+			CacheRegistry.clear(AssetCategoryImpl.class.getName());
+			EntityCacheUtil.clearCache(AssetCategoryImpl.class.getName());
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+		}
+	}
+
+	protected long countOrphanTreeNodes(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(
+					"SELECT COUNT(*) AS COUNT_VALUE FROM AssetCategory WHERE groupId = ? AND (leftCategoryId = 0 OR leftCategoryId IS NULL OR rightCategoryId = 0 OR rightCategoryId IS NULL)");
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (Long)q.uniqueResult();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected void expandTree(AssetCategory assetCategory)
+		throws SystemException {
+		long groupId = assetCategory.getGroupId();
+
+		long lastRightCategoryId = getLastRightCategoryId(groupId,
+				assetCategory.getParentCategoryId());
+
+		long leftCategoryId = 2;
+		long rightCategoryId = 3;
+
+		if (lastRightCategoryId > 0) {
+			leftCategoryId = lastRightCategoryId + 1;
+			rightCategoryId = lastRightCategoryId + 2;
+
+			expandTreeLeftCategoryId.expand(groupId, lastRightCategoryId);
+			expandTreeRightCategoryId.expand(groupId, lastRightCategoryId);
+
+			CacheRegistry.clear(AssetCategoryImpl.class.getName());
+			EntityCacheUtil.clearCache(AssetCategoryImpl.class.getName());
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+		}
+
+		assetCategory.setLeftCategoryId(leftCategoryId);
+		assetCategory.setRightCategoryId(rightCategoryId);
+	}
+
+	protected long getLastRightCategoryId(long groupId, long parentCategoryId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(
+					"SELECT rightCategoryId FROM AssetCategory WHERE (groupId = ?) AND (parentCategoryId = ?) ORDER BY rightCategoryId DESC");
+
+			q.addScalar("rightCategoryId", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(parentCategoryId);
+
+			List<Long> list = (List<Long>)QueryUtil.list(q, getDialect(), 0, 1);
+
+			if (list.isEmpty()) {
+				if (parentCategoryId > 0) {
+					AssetCategory parentAssetCategory = findByPrimaryKey(parentCategoryId);
+
+					return parentAssetCategory.getLeftCategoryId();
+				}
+
+				return 0;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected long rebuildTree(long groupId, long parentCategoryId,
+		long leftCategoryId) throws SystemException {
+		List<Long> categoryIds = null;
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(
+					"SELECT categoryId FROM AssetCategory WHERE groupId = ? AND parentCategoryId = ? ORDER BY categoryId ASC");
+
+			q.addScalar("categoryId", Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(parentCategoryId);
+
+			categoryIds = q.list();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		long rightCategoryId = leftCategoryId + 1;
+
+		for (long categoryId : categoryIds) {
+			rightCategoryId = rebuildTree(groupId, categoryId, rightCategoryId);
+		}
+
+		if (parentCategoryId > 0) {
+			updateTree.update(parentCategoryId, leftCategoryId, rightCategoryId);
+		}
+
+		return rightCategoryId + 1;
+	}
+
+	protected void shrinkTree(AssetCategory assetCategory) {
+		long groupId = assetCategory.getGroupId();
+
+		long leftCategoryId = assetCategory.getLeftCategoryId();
+		long rightCategoryId = assetCategory.getRightCategoryId();
+
+		long delta = (rightCategoryId - leftCategoryId) + 1;
+
+		shrinkTreeLeftCategoryId.shrink(groupId, rightCategoryId, delta);
+		shrinkTreeRightCategoryId.shrink(groupId, rightCategoryId, delta);
+
+		CacheRegistry.clear(AssetCategoryImpl.class.getName());
+		EntityCacheUtil.clearCache(AssetCategoryImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -3331,6 +3507,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		addAssetEntry = new AddAssetEntry(this);
 		clearAssetEntries = new ClearAssetEntries(this);
 		removeAssetEntry = new RemoveAssetEntry(this);
+
+		expandTreeLeftCategoryId = new ExpandTreeLeftCategoryId();
+		expandTreeRightCategoryId = new ExpandTreeRightCategoryId();
+		shrinkTreeLeftCategoryId = new ShrinkTreeLeftCategoryId();
+		shrinkTreeRightCategoryId = new ShrinkTreeRightCategoryId();
+		updateTree = new UpdateTree();
 	}
 
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence.impl")
@@ -3528,6 +3710,85 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 
 		private SqlUpdate _sqlUpdate;
 		private AssetCategoryPersistenceImpl _persistenceImpl;
+	}
+
+	protected ExpandTreeLeftCategoryId expandTreeLeftCategoryId;
+	protected ExpandTreeRightCategoryId expandTreeRightCategoryId;
+	protected ShrinkTreeLeftCategoryId shrinkTreeLeftCategoryId;
+	protected ShrinkTreeRightCategoryId shrinkTreeRightCategoryId;
+	protected UpdateTree updateTree;
+
+	protected class ExpandTreeLeftCategoryId {
+		protected ExpandTreeLeftCategoryId() {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE AssetCategory SET leftCategoryId = (leftCategoryId + 2) WHERE (groupId = ?) AND (leftCategoryId > ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
+		}
+
+		protected void expand(long groupId, long leftCategoryId) {
+			_sqlUpdate.update(new Object[] { groupId, leftCategoryId });
+		}
+
+		private SqlUpdate _sqlUpdate;
+	}
+
+	protected class ExpandTreeRightCategoryId {
+		protected ExpandTreeRightCategoryId() {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE AssetCategory SET rightCategoryId = (rightCategoryId + 2) WHERE (groupId = ?) AND (rightCategoryId > ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
+		}
+
+		protected void expand(long groupId, long rightCategoryId) {
+			_sqlUpdate.update(new Object[] { groupId, rightCategoryId });
+		}
+
+		private SqlUpdate _sqlUpdate;
+	}
+
+	protected class ShrinkTreeLeftCategoryId {
+		protected ShrinkTreeLeftCategoryId() {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE AssetCategory SET leftCategoryId = (leftCategoryId - ?) WHERE (groupId = ?) AND (leftCategoryId > ?)",
+					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+		}
+
+		protected void shrink(long groupId, long leftCategoryId, long delta) {
+			_sqlUpdate.update(new Object[] { delta, groupId, leftCategoryId });
+		}
+
+		private SqlUpdate _sqlUpdate;
+	}
+
+	protected class ShrinkTreeRightCategoryId {
+		protected ShrinkTreeRightCategoryId() {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE AssetCategory SET rightCategoryId = (rightCategoryId - ?) WHERE (groupId = ?) AND (rightCategoryId > ?)",
+					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+		}
+
+		protected void shrink(long groupId, long rightCategoryId, long delta) {
+			_sqlUpdate.update(new Object[] { delta, groupId, rightCategoryId });
+		}
+
+		private SqlUpdate _sqlUpdate;
+	}
+
+	protected class UpdateTree {
+		protected UpdateTree() {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"UPDATE AssetCategory SET leftCategoryId = ?, rightCategoryId = ? WHERE categoryId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT, Types.BIGINT });
+		}
+
+		protected void update(long categoryId, long leftCategoryId,
+			long rightCategoryId) {
+			_sqlUpdate.update(new Object[] {
+					leftCategoryId, rightCategoryId, categoryId
+				});
+		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
 	private static final String _SQL_GETASSETENTRIES = "SELECT {AssetEntry.*} FROM AssetEntry INNER JOIN AssetEntries_AssetCategories ON (AssetEntries_AssetCategories.entryId = AssetEntry.entryId) WHERE (AssetEntries_AssetCategories.categoryId = ?)";

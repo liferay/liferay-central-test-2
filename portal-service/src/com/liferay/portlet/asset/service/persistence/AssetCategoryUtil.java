@@ -602,6 +602,11 @@ public class AssetCategoryUtil {
 		getPersistence().setAssetEntries(pk, assetEntries);
 	}
 
+	public static void rebuildTree(long groupId, boolean force)
+		throws com.liferay.portal.SystemException {
+		getPersistence().rebuildTree(groupId, force);
+	}
+
 	public static AssetCategoryPersistence getPersistence() {
 		return _persistence;
 	}

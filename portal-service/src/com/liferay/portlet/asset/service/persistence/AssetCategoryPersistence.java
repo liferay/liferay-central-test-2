@@ -407,4 +407,7 @@ public interface AssetCategoryPersistence extends BasePersistence {
 	public void setAssetEntries(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetEntry> assetEntries)
 		throws com.liferay.portal.SystemException;
+
+	public void rebuildTree(long groupId, boolean force)
+		throws com.liferay.portal.SystemException;
 }

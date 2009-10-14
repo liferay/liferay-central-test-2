@@ -86,6 +86,8 @@ create table AssetCategory (
 	createDate DATE null,
 	modifiedDate DATE null,
 	parentCategoryId LONG,
+	leftCategoryId LONG,
+	rightCategoryId LONG,
 	name VARCHAR(75) null,
 	vocabularyId LONG
 );

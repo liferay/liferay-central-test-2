@@ -133,6 +133,22 @@ public class AssetCategoryWrapper implements AssetCategory {
 		_assetCategory.setParentCategoryId(parentCategoryId);
 	}
 
+	public long getLeftCategoryId() {
+		return _assetCategory.getLeftCategoryId();
+	}
+
+	public void setLeftCategoryId(long leftCategoryId) {
+		_assetCategory.setLeftCategoryId(leftCategoryId);
+	}
+
+	public long getRightCategoryId() {
+		return _assetCategory.getRightCategoryId();
+	}
+
+	public void setRightCategoryId(long rightCategoryId) {
+		_assetCategory.setRightCategoryId(rightCategoryId);
+	}
+
 	public java.lang.String getName() {
 		return _assetCategory.getName();
 	}

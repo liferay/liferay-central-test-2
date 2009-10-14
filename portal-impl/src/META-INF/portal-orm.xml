@@ -968,6 +968,8 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="parentCategoryId" />
+			<basic name="leftCategoryId" />
+			<basic name="rightCategoryId" />
 			<basic name="name" />
 			<basic name="vocabularyId" />
 			<transient name="primaryKey" />
