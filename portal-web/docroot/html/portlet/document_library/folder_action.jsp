@@ -67,6 +67,8 @@ boolean view = false;
 if (row == null) {
 	view = true;
 }
+
+String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
@@ -133,11 +135,11 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-		<liferay-ui:icon cssClass="webdav-action" image="desktop" message="access-from-my-desktop" url="javascript:;" />
+		<liferay-ui:icon cssClass="<%= randomId + "-webdav-action" %>" image="desktop" message="access-from-my-desktop" url="javascript:;" />
 	</c:if>
 </liferay-ui:icon-menu>
 
-<div id="<portlet:namespace />webDav" style="display: none;">
+<div id="<%= randomId %><portlet:namespace />webDav" style="display: none;">
 	<div class="portlet-document-library">
 		<%
 		String webDavHelpMessage;
@@ -195,7 +197,7 @@ if (row == null) {
 				function(event) {
 					var popup = new A.Dialog(
 						{
-							bodyContent: A.get('#<portlet:namespace />webDav').html(),
+							bodyContent: A.get('#<%= randomId %><portlet:namespace />webDav').html(),
 							centered: true,
 							destroyOnClose: true,
 							modal: true,
@@ -207,7 +209,7 @@ if (row == null) {
 
 					event.preventDefault();
 				},
-				'.webdav-action'
+				'.<%= randomId %>-webdav-action'
 			);
 		}
 	);
