@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.calendar.social;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -96,7 +97,8 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		String eventTitle = wrapLink(link, cleanContent(event.getTitle()));
+		String eventTitle = wrapLink(
+			link, HtmlUtil.escape(cleanContent(event.getTitle())));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, eventTitle

@@ -24,6 +24,7 @@ package com.liferay.portlet.tasks.social;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -96,7 +97,9 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 				titlePattern += "-in";
 			}
 
-			titleArguments = new Object[] {creatorUserName, groupName};
+			titleArguments = new Object[] {
+				creatorUserName, HtmlUtil.escape(groupName)
+			};
 		}
 		else if (activityType == TasksActivityKeys.ASSIGN_PROPOSAL) {
 			titlePattern = "activity-tasks-assign-proposal";
@@ -106,7 +109,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 			}
 
 			titleArguments = new Object[] {
-				creatorUserName, receiverUserName, groupName
+				creatorUserName, receiverUserName, HtmlUtil.escape(groupName)
 			};
 		}
 		else if (activityType == TasksActivityKeys.REVIEW_PROPOSAL) {
@@ -117,7 +120,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 			}
 
 			titleArguments = new Object[] {
-				creatorUserName, receiverUserName, groupName
+				creatorUserName, receiverUserName, HtmlUtil.escape(groupName)
 			};
 		}
 
@@ -131,7 +134,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<b>");
-		sb.append(proposal.getName());
+		sb.append(HtmlUtil.escape(proposal.getName()));
 		sb.append("</b> (");
 		sb.append(
 			themeDisplay.translate(
@@ -139,7 +142,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 		sb.append(")<br />");
 		sb.append(themeDisplay.translate("description"));
 		sb.append(": ");
-		sb.append(proposal.getDescription());
+		sb.append(HtmlUtil.escape(proposal.getDescription()));
 
 		if (activityType != TasksActivityKeys.ADD_PROPOSAL) {
 			int stage = extraData.getInt("stage");

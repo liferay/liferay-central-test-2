@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.social;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -97,7 +98,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		}
 
 		String pageTitle = wrapLink(
-			link, cleanContent(pageResource.getTitle()));
+			link, HtmlUtil.escape(cleanContent(pageResource.getTitle())));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, pageTitle

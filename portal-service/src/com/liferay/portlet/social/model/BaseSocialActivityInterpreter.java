@@ -75,7 +75,7 @@ public abstract class BaseSocialActivityInterpreter
 			String groupName = group.getDescriptiveName();
 
 			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
-				return groupName;
+				return HtmlUtil.escape(groupName);
 			}
 
 			String groupDisplayURL =
@@ -89,12 +89,12 @@ public abstract class BaseSocialActivityInterpreter
 				groupDisplayURL = groupDisplayURL + "&privateLayout=1";
 			}
 			else {
-				return groupName;
+				return HtmlUtil.escape(groupName);
 			}
 
 			groupName =
 				"<a class=\"group\" href=\"" + groupDisplayURL + "\">" +
-					groupName + "</a>";
+					HtmlUtil.escape(groupName) + "</a>";
 
 			return groupName;
 		}
@@ -112,7 +112,7 @@ public abstract class BaseSocialActivityInterpreter
 			User user = UserLocalServiceUtil.getUserById(userId);
 
 			if (user.getUserId() == themeDisplay.getUserId()) {
-				return user.getFirstName();
+				return HtmlUtil.escape(user.getFirstName());
 			}
 
 			String userName = user.getFullName();
@@ -120,14 +120,14 @@ public abstract class BaseSocialActivityInterpreter
 			Group group = user.getGroup();
 
 			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
-				return userName;
+				return HtmlUtil.escape(userName);
 			}
 
 			String userDisplayURL = user.getDisplayURL(themeDisplay);
 
 			userName =
 				"<a class=\"user\" href=\"" + userDisplayURL + "\">" +
-					userName + "</a>";
+					HtmlUtil.escape(userName) + "</a>";
 
 			return userName;
 		}

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.social;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -93,7 +94,8 @@ public class IGActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		String imageName = wrapLink(link, cleanContent(image.getName()));
+		String imageName = wrapLink(
+			link, HtmlUtil.escape(cleanContent(image.getName())));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, imageName

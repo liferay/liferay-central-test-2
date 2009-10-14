@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.social;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -94,7 +95,8 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		String fileTitle = wrapLink(link, cleanContent(fileEntry.getTitle()));
+		String fileTitle = wrapLink(
+			link, HtmlUtil.escape(cleanContent(fileEntry.getTitle())));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, fileTitle
