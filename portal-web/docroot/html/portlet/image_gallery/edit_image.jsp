@@ -122,7 +122,7 @@ if (image != null) {
 				StringBuilder sb = new StringBuilder();
 
 				while (true) {
-					sb.insert(0, WebDAVUtil.encodeURL(folder.getName()));
+					sb.insert(0, HttpUtil.encodeURL(folder.getName(), true));
 					sb.insert(0, StringPool.SLASH);
 
 					if (folder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -134,7 +134,7 @@ if (image != null) {
 				}
 
 				sb.append(StringPool.SLASH);
-				sb.append(WebDAVUtil.encodeURL(image.getNameWithExtension()));
+				sb.append(HttpUtil.encodeURL(image.getNameWithExtension(), true));
 
 				Group group = themeDisplay.getScopeGroup();
 				%>

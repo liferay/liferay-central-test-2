@@ -70,13 +70,6 @@ public class WebDAVUtil {
 		_instance._deleteStorage(storage);
 	}
 
-	public static String encodeURL(String url) {
-		url = HttpUtil.encodeURL(url);
-		url = StringUtil.replace(url, StringPool.PLUS, StringPool.SPACE);
-
-		return url;
-	}
-
 	public static String fixPath(String path) {
 		if (path.endsWith(StringPool.SLASH)) {
 			path = path.substring(0, path.length() - 1);

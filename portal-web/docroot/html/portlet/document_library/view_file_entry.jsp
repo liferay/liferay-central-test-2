@@ -85,7 +85,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 		DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 		while (true) {
-			sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+			sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
 			sb.insert(0, StringPool.SLASH);
 
 			if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -98,7 +98,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	}
 
 	sb.append(StringPool.SLASH);
-	sb.append(WebDAVUtil.encodeURL(titleWithExtension));
+	sb.append(HttpUtil.encodeURL(titleWithExtension, true));
 
 	Group group = themeDisplay.getScopeGroup();
 
