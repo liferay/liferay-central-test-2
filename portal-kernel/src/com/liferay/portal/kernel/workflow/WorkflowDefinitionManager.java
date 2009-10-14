@@ -151,14 +151,4 @@ public interface WorkflowDefinitionManager {
 		String workflowDefinitionName, int start, int end,
 		OrderByComparator orderByComparator);
 
-	/**
-	 * Returns <code>true</code>, if the underlying workflow system supports
-	 * versioning of workflow definitions. If versioning is not supported, the
-	 * version number of a workflow definition is most likely ignored by the
-	 * engine.
-	 *
-	 * @return <code>true</code>, if the workflow engine supports versioning
-	 */
-	public boolean isSupportsVersioning();
-
 }

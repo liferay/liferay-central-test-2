@@ -101,12 +101,6 @@ public class WorkflowDefinitionManagerUtil {
 			workflowDefinitionName, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see WorkflowDefinitionManager#isSupportsVersioning()
-	 */
-	public static boolean isSupportsVersioning() {
-		return _workflowDefinitionManager.isSupportsVersioning();
-	}
 
 	public void setWorkflowDefinitionManager(
 		WorkflowDefinitionManager workflowDefinitionManager) {
