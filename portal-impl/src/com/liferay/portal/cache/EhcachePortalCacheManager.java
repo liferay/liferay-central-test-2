@@ -24,7 +24,10 @@ package com.liferay.portal.cache;
 
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.net.URL;
 
@@ -82,8 +85,14 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 			cache = _cacheManager.getEhcache(name);
 
-			if (blocking) {
+			if (PropsValues.EHCACHE_BLOCKING_CACHE_ALLOWED && blocking) {
 				cache = replaceCacheWithDecoratedCache(cache);
+			}
+
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Cache name " + name + " is using implementation " +
+						cache.getClass().getName());
 			}
 		}
 
@@ -128,6 +137,9 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 		return decoratedCache;
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(EhcachePortalCacheManager.class);
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;

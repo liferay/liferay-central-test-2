@@ -534,6 +534,10 @@ public class PropsValues {
 	public static final String EDITOR_WYSIWYG_DEFAULT =
 		PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
+	public static final boolean EHCACHE_BLOCKING_CACHE_ALLOWED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.EHCACHE_BLOCKING_CACHE_ALLOWED));
+
 	public static final String
 		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS =
 			PropsUtil.get(PropsKeys.

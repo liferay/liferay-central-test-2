@@ -68,6 +68,14 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.cache">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.cache.EhcachePortalCacheManager">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.cluster">
 		<priority value="INFO" />
 	</category>
