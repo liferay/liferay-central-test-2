@@ -4125,6 +4125,7 @@ web-plugin=Weeb plugina
 web-plugins=Web pluginak
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=WebDAV URLa
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 website=Webgunea
 websites=Webguneak
 wedding=Ezkontza

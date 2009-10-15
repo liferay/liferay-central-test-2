@@ -3854,6 +3854,7 @@ web-plugin=Интернет плъгин
 web-plugins=Интернет плъгини
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=WebDAV URL
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 website=Интернет страница
 websites=Интернет страници
 wedding=Сватба

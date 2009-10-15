@@ -2454,6 +2454,7 @@ not-installed=Nicht installiert
 not-required=Nicht erforderlich
 not-resolved=Nicht geklärt
 not-reviewed=Nicht geprüft.
+not-searchable=Nicht auffindbar (Automatic Translation)
 not-supported=Nicht unterstützt
 note=Notiz
 notes=Notizen
@@ -3271,6 +3272,8 @@ search-users=Benutzer durchsuchen
 search-web-content=Web Content durchsuchen
 search-x={0} suchen
 search=Suchen
+searchable-keyword=Auffindbar - Schlüsselwort (Automatic Translation)
+searchable-text=Auffindbar - Text (Automatic Translation)
 searchable=Suchbar
 searched-for-pages-similar-to=Nach ähnlichen Seiten gesucht
 searched-the-portal-for=Portal durchsucht nach
@@ -4329,6 +4332,7 @@ web-plugin=Web Plugin
 web-plugins=Web Plugins
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=WebDAV URL
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 website=Webseite
 websites=Webseiten
 wedding=Hochzeit

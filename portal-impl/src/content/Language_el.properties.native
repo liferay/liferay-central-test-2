@@ -2454,6 +2454,7 @@ not-installed=Εγκατεστημένος
 not-required=Μην απαιτημένος
 not-resolved=Μην επιλυμένος
 not-reviewed=Μην αναθεωρημένος
+not-searchable=Μη εξερευνήσιμος (Automatic Translation)
 not-supported=Μην υποστηριγμένος
 note=Σημείωση
 notes=Σημειώσεις
@@ -3271,6 +3272,8 @@ search-users=Χρήστες αναζήτησης
 search-web-content=Περιεχόμενο Ιστού αναζήτησης
 search-x=Search {0}
 search=Αναζήτηση
+searchable-keyword=Εξερευνήσιμος - λέξη κλειδί (Automatic Translation)
+searchable-text=Εξερευνήσιμος - κείμενο (Automatic Translation)
 searchable=Εξερευνήσιμος
 searched-for-pages-similar-to=Αναζήτηση σελίδων παρόμοιες με
 searched-the-portal-for=Έγινε αναζήτηση στην πύλη για
@@ -4329,6 +4332,7 @@ web-plugin=Ιστός Plugin
 web-plugins=Ιστός Plugins
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=WebDAV URL
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 website=Δικτυακός Τόπος
 websites=Ιστοχώροι
 wedding=Γάμος

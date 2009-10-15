@@ -275,6 +275,7 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 warning-due-to-inactivity-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0} minute(s) on {1} {2}. Would you like to extend your session another {3} minute(s)?
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the <em>Extend</em> button.
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 welcome-x=Welcome{0}!
 where-are-the-x-members=Where are the {0} members?
 where-are-x's-friends=Where are {0}'s friends?

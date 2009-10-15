@@ -2454,6 +2454,7 @@ not-installed=沒安裝
 not-required=不必需
 not-resolved=不解決
 not-reviewed=沒回顧
+not-searchable=不搜查 (Automatic Translation)
 not-supported=不支持
 note=筆記
 notes=筆記
@@ -3271,6 +3272,8 @@ search-users=查尋用戶
 search-web-content=查尋网络内容
 search-x=Search {0}
 search=搜尋
+searchable-keyword=搜查-主題詞 (Automatic Translation)
+searchable-text=搜查-文本 (Automatic Translation)
 searchable=搜查
 searched-for-pages-similar-to=搜尋相似之頁
 searched-the-portal-for=搜尋本入口網
@@ -4329,6 +4332,7 @@ web-plugin=網插入式
 web-plugins=網Plugins
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=WebDAV URL
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 website=網站
 websites=網站
 wedding=婚禮

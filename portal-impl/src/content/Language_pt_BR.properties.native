@@ -2454,6 +2454,7 @@ not-installed=Não instalado
 not-required=Não exigido
 not-resolved=Nao resolved
 not-reviewed=Não revisto
+not-searchable=Nao procurado (Automatic Translation)
 not-supported=Não suportado
 note=Nota
 notes=Notas
@@ -3271,6 +3272,8 @@ search-users=Usuários Da Busca
 search-web-content=Procurar conteúdo
 search-x=Search {0}
 search=Busca
+searchable-keyword=Procurado - palavra-chave (Automatic Translation)
+searchable-text=Procurado - texto (Automatic Translation)
 searchable=Searchable
 searched-for-pages-similar-to=Procurarado pelas páginas similares a
 searched-the-portal-for=Procurarou o portal por
@@ -4329,6 +4332,7 @@ web-plugin=Correia fotorreceptora Plugin
 web-plugins=Correia fotorreceptora Plugins
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=URL De WebDAV
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 website=Web site
 websites=Web site
 wedding=Casamento

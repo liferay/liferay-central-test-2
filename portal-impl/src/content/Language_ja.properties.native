@@ -2454,6 +2454,7 @@ not-installed=インストールしていない
 not-required=必須ではありません
 not-resolved=解決していません
 not-reviewed=レビューされていない
+not-searchable=捜せない (Automatic Translation)
 not-supported=サポートされません
 note=ノート
 notes=ノート
@@ -3271,6 +3272,8 @@ search-users=ユーザーの検索
 search-web-content=Web コンテンツの検索
 search-x=Search {0}
 search=検索
+searchable-keyword=捜せる-キーワード (Automatic Translation)
+searchable-text=捜せる-テキスト (Automatic Translation)
 searchable=検索対象にする
 searched-for-pages-similar-to=似ているページの検索:
 searched-the-portal-for=ポータルの検索:
@@ -4329,6 +4332,7 @@ web-plugin=Webプラグイン
 web-plugins=Webプラグイン
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 webdav-url=WebDAV URL
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 website=ウェブサイト
 websites=ウェブサイト
 wedding=結婚式

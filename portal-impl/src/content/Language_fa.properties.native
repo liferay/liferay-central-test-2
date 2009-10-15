@@ -2140,6 +2140,7 @@ warning-due-to-inactivity-your-session-has-expired=اخطار! به دليل ع�
 warning-due-to-inactivity-your-session-will-expire=اخطار! به دليل عدم فعاليت، session شما در  {0} دقيقه ديگر روی(s)  {1} {2} منقضی می شود.آيا تمايل داريد که {3} دقيقه ديگر تمديد کنيد؟
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the <em>Extend</em> button.
 webdav-help=Files and folders can be managed directly from the file explorer of your desktop operating system. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
+webdav-windows-help=Files and folders can be managed directly from the file explorer of your desktop operating system. Before accessing from Windows, please ensure you have installed the <a href="{0}" target="_blank">patch</a> from Microsoft. <a href="{1}" target="_blank">Read more.</a> (Automatic Copy)
 website=وب سايت
 websites=وب سايت ها
 wedding=ازدواج
