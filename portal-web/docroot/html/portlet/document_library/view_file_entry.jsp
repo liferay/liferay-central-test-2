@@ -267,19 +267,20 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<div class="file-entry-field">
+
 			<%
-			String webDavHelpMessage;
-			
+			String webDavHelpMessage = null;
+
 			if (BrowserSnifferUtil.isWindows(request)) {
-				webDavHelpMessage = LanguageUtil.format(pageContext, "webdav-help-windows", new Object[] {"http://www.microsoft.com/downloads/details.aspx?FamilyId=17C36612-632E-4C04-9382-987622ED1D64", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/WebDAV"});
+				webDavHelpMessage = LanguageUtil.format(pageContext, "webdav-windows-help", new Object[] {"http://www.microsoft.com/downloads/details.aspx?FamilyId=17C36612-632E-4C04-9382-987622ED1D64", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/WebDAV"});
 			}
 			else {
 				webDavHelpMessage = LanguageUtil.format(pageContext, "webdav-help", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/WebDAV");
 			}
 			%>
-		
-			<aui:field-wrapper helpMessage='<%= webDavHelpMessage %>' label="webdav-url">
-				<liferay-ui:input-resource url='<%= webDavUrl %>' />
+
+			<aui:field-wrapper helpMessage="<%= webDavHelpMessage %>" label="webdav-url">
+				<liferay-ui:input-resource url="<%= webDavUrl %>" />
 			</aui:field-wrapper>
 		</div>
 	</c:if>

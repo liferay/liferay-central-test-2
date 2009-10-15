@@ -141,19 +141,20 @@ String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
 <div id="<%= randomId %><portlet:namespace />webDav" style="display: none;">
 	<div class="portlet-document-library">
+
 		<%
-		String webDavHelpMessage;
-		
+		String webDavHelpMessage = null;
+
 		if (BrowserSnifferUtil.isWindows(request)) {
-			webDavHelpMessage = LanguageUtil.format(pageContext, "webdav-help-windows", new Object[] {"http://www.microsoft.com/downloads/details.aspx?FamilyId=17C36612-632E-4C04-9382-987622ED1D64", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/WebDAV"});
+			webDavHelpMessage = LanguageUtil.format(pageContext, "webdav-windows-help", new Object[] {"http://www.microsoft.com/downloads/details.aspx?FamilyId=17C36612-632E-4C04-9382-987622ED1D64", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/WebDAV"});
 		}
 		else {
 			webDavHelpMessage = LanguageUtil.format(pageContext, "webdav-help", "http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/WebDAV");
 		}
 		%>
 
-		<liferay-ui:message key='<%= webDavHelpMessage %>' />
-		
+		<liferay-ui:message key="<%= webDavHelpMessage %>" />
+
 		<br /><br />
 
 		<div class="file-entry-field">
