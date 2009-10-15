@@ -33,14 +33,10 @@ public class BooleanClauseOccurImpl implements BooleanClauseOccur {
 		_name = name;
 	}
 
-	public String getName() {
-		return _name;
-	}
-
 	public boolean equals(Object obj) {
-		BooleanClauseOccur occur = (BooleanClauseOccur)obj;
+		BooleanClauseOccur booleanClauseOccur = (BooleanClauseOccur)obj;
 
-		String name = occur.getName();
+		String name = booleanClauseOccur.getName();
 
 		if (_name.equals(name)) {
 			return true;
@@ -48,6 +44,10 @@ public class BooleanClauseOccurImpl implements BooleanClauseOccur {
 		else {
 			return false;
 		}
+	}
+
+	public String getName() {
+		return _name;
 	}
 
 	private String _name;

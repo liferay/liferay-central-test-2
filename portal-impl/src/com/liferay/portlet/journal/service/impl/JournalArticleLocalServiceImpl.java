@@ -1497,17 +1497,17 @@ public class JournalArticleLocalServiceImpl
 			String type, Sort[] sorts, int start, int end)
 		throws SystemException {
 
-		List<BooleanClause> clauses = null;
+		List<BooleanClause> booleanClauses = null;
 
 		return search(
-			companyId, groupId, userId, keywords, type, clauses, sorts, start,
-			end);
+			companyId, groupId, userId, keywords, type, booleanClauses, sorts,
+			start, end);
 	}
 
 	public Hits search(
 			long companyId, long groupId, long userId, String keywords,
-			String type, List<BooleanClause> clauses, Sort[] sorts, int start,
-			int end)
+			String type, List<BooleanClause> booleanClauses, Sort[] sorts,
+			int start, int end)
 		throws SystemException {
 
 		try {
@@ -1543,10 +1543,11 @@ public class JournalArticleLocalServiceImpl
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			if (clauses != null) {
-				for (BooleanClause clause : clauses) {
+			if (booleanClauses != null) {
+				for (BooleanClause booleanClause : booleanClauses) {
 					fullQuery.add(
-						clause.getQuery(), clause.getBooleanClauseOccur());
+						booleanClause.getQuery(),
+						booleanClause.getBooleanClauseOccur());
 				}
 			}
 

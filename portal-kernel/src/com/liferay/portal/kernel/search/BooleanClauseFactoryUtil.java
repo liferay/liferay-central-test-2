@@ -31,7 +31,7 @@ package com.liferay.portal.kernel.search;
 public class BooleanClauseFactoryUtil {
 
 	public static BooleanClause create(
-			String field, String value, String occur) {
+		String field, String value, String occur) {
 
 		return getBooleanClauseFactory().create(field, value, occur);
 	}

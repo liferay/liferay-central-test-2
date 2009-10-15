@@ -215,7 +215,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 			Element root = contentDoc.getRootElement();
 
-			_getIndexableContent(doc, sb, root);
+			_getIndexableContent(sb, doc, root);
 
 			return sb.toString();
 		}
@@ -227,7 +227,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	private static void _getIndexableContent(
-			Document doc, StringBuilder sb, Element root)
+			StringBuilder sb, Document doc, Element root)
 		throws Exception {
 
 		for (Element el : root.elements()) {
@@ -254,12 +254,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				sb.append(StringPool.SPACE);
 			}
 
-			_getIndexableContent(doc, sb, el);
+			_getIndexableContent(sb, doc, el);
 		}
 	}
 
 	private static void _indexField(
-			Document doc, Element el, String elType, String elIndexType) {
+		Document doc, Element el, String elType, String elIndexType) {
 
 		if (Validator.isNull(elIndexType)) {
 			return;

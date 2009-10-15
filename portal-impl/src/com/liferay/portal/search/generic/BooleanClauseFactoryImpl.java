@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseFactory;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanClauseOccurImpl;
-import com.liferay.portal.kernel.search.TermQuery;
+import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 
 /**
@@ -37,10 +37,10 @@ import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 public class BooleanClauseFactoryImpl implements BooleanClauseFactory {
 
 	public BooleanClause create(String field, String value, String occur) {
-		TermQuery query = TermQueryFactoryUtil.create(field, value);
+		Query query = TermQueryFactoryUtil.create(field, value);
 
-		BooleanClauseOccur booleanClauseOccur =
-			new BooleanClauseOccurImpl(occur);
+		BooleanClauseOccur booleanClauseOccur = new BooleanClauseOccurImpl(
+			occur);
 
 		return new BooleanClauseImpl(query, booleanClauseOccur);
 	}
