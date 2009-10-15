@@ -113,8 +113,8 @@ int tabIndex = 1;
 				var elDepthValue = elDepth.value;
 				var elNameValue = encodeURIComponent(elName.value);
 				var elTypeValue = encodeURIComponent(elType.value);
-				var elRepeatableValue = (elRepeatable != null) ? elRepeatable.checked : false;
 				var elIndexTypeValue = (elIndexType != null) ? elIndexType.value : "";
+				var elRepeatableValue = (elRepeatable != null) ? elRepeatable.checked : false;
 
 				if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
 					for (var j = 0; j <= elDepthValue; j++) {
