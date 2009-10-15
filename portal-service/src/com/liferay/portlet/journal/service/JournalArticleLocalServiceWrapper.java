@@ -668,11 +668,11 @@ public class JournalArticleLocalServiceWrapper
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long userId, java.lang.String keywords,
 		java.lang.String type,
-		java.util.List<com.liferay.portal.kernel.search.BooleanClause> clauses,
+		java.util.List<com.liferay.portal.kernel.search.BooleanClause> booleanClauses,
 		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return _journalArticleLocalService.search(companyId, groupId, userId,
-			keywords, type, clauses, sorts, start, end);
+			keywords, type, booleanClauses, sorts, start, end);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
