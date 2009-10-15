@@ -72,6 +72,10 @@ public class I18nFilter extends BasePortalFilter {
 	}
 
 	protected String[] getI18nData(HttpServletRequest request) {
+		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
+			return null;
+		}
+
 		String contextPath = PortalUtil.getPathContext();
 
 		String requestURI = request.getRequestURI();
