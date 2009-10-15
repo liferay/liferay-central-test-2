@@ -208,8 +208,6 @@
 	<filter-mapping>
 		<filter-name>Audit Filter</filter-name>
 		<url-pattern>/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Thread Local Cache Filter</filter-name>
