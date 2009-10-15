@@ -256,6 +256,9 @@ public interface Portal {
 	public String getLayoutFriendlyURL(
 		Layout layout, ThemeDisplay themeDisplay);
 
+	public String getLayoutFriendlyURL(
+		Layout layout, ThemeDisplay themeDisplay, Locale locale);
+
 	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay);
 
 	public String getLayoutFullURL(

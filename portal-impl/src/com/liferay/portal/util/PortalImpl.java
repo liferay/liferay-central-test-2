@@ -104,6 +104,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.servlet.filters.i18n.I18nFilter;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.sql.DB;
@@ -1385,6 +1386,54 @@ public class PortalImpl implements Portal {
 
 		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL() +
 			layoutFriendlyURL;
+	}
+
+	public String getLayoutFriendlyURL(
+		Layout layout, ThemeDisplay themeDisplay, Locale locale) {
+
+		String i18nLanguageId = themeDisplay.getI18nLanguageId();
+		String i18nPath = themeDisplay.getI18nPath();
+
+		try {
+			String tempI18nLanguageId = null;
+
+			if ((I18nFilter.getLanguageIds().contains(locale.toString())) &&
+				((PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 1) &&
+				 (!locale.equals(LocaleUtil.getDefault()))) ||
+				(PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 2)) {
+
+				tempI18nLanguageId = locale.toString();
+			}
+
+			String tempI18nPath = null;
+
+			if (Validator.isNotNull(tempI18nLanguageId)) {
+				tempI18nPath = StringPool.SLASH + tempI18nLanguageId;
+
+				if (!LanguageUtil.isDuplicateLanguageCode(
+						locale.getLanguage())) {
+
+					tempI18nPath = StringPool.SLASH + locale.getLanguage();
+				}
+				else {
+					Locale priorityLocale = LanguageUtil.getLocale(
+						locale.getLanguage());
+
+					if (locale.equals(priorityLocale)) {
+						tempI18nPath = StringPool.SLASH + locale.getLanguage();
+					}
+				}
+			}
+
+			themeDisplay.setI18nLanguageId(tempI18nLanguageId);
+			themeDisplay.setI18nPath(tempI18nPath);
+
+			return getLayoutFriendlyURL(layout, themeDisplay);
+		}
+		finally {
+			themeDisplay.setI18nLanguageId(i18nLanguageId);
+			themeDisplay.setI18nPath(i18nPath);
+		}
 	}
 
 	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay) {

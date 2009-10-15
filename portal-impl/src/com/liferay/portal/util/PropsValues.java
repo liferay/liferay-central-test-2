@@ -858,6 +858,10 @@ public class PropsValues {
 	public static final boolean LOCALE_DEFAULT_REQUEST = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LOCALE_DEFAULT_REQUEST));
 
+	public static final int LOCALE_PREPEND_FRIENDLY_URL_STYLE =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.LOCALE_PREPEND_FRIENDLY_URL_STYLE));
+
 	public static String[] LOCALES = PropsUtil.getArray(PropsKeys.LOCALES);
 
 	public static boolean LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD =
