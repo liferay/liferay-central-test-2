@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+
 import java.util.Map;
 
 @MessagingProxy(mode = ProxyMode.SYNC)
