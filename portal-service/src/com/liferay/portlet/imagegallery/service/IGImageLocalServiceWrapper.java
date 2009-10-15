@@ -257,6 +257,11 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.getGroupImagesCount(groupId, userId);
 	}
 
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages()
+		throws com.liferay.portal.SystemException {
+		return _igImageLocalService.getImages();
+	}
+
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -383,6 +388,12 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 			com.liferay.portal.SystemException {
 		return _igImageLocalService.updateImage(userId, imageId, groupId,
 			folderId, name, description, is, contentType, serviceContext);
+	}
+
+	public void updateSmallImage(long largeImageId, long smallImageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_igImageLocalService.updateSmallImage(largeImageId, smallImageId);
 	}
 
 	public IGImageLocalService getWrappedIGImageLocalService() {

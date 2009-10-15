@@ -266,6 +266,11 @@ public class IGImageLocalServiceUtil {
 		return getService().getGroupImagesCount(groupId, userId);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages()
+		throws com.liferay.portal.SystemException {
+		return getService().getImages();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
 		long imageId)
 		throws com.liferay.portal.PortalException,
@@ -398,6 +403,12 @@ public class IGImageLocalServiceUtil {
 		return getService()
 				   .updateImage(userId, imageId, groupId, folderId, name,
 			description, is, contentType, serviceContext);
+	}
+
+	public static void updateSmallImage(long largeImageId, long smallImageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateSmallImage(largeImageId, smallImageId);
 	}
 
 	public static IGImageLocalService getService() {

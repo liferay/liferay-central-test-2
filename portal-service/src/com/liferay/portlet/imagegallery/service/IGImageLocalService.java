@@ -209,6 +209,10 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages()
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -306,6 +310,10 @@ public interface IGImageLocalService {
 		java.lang.String name, java.lang.String description,
 		java.io.InputStream is, java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void updateSmallImage(long largeImageId, long smallImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

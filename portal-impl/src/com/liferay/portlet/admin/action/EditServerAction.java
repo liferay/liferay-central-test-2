@@ -56,9 +56,12 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.util.log4j.Log4JUtil;
 
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -343,6 +346,9 @@ public class EditServerAction extends PortletAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
+		String oldIGThumbnailMaxDimension = preferences.getValue(
+			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION, StringPool.BLANK);
+
 		String dlFileExtensions = getFileExtensions(
 			actionRequest, "dlFileExtensions");
 		long dlFileMaxSize = ParamUtil.getLong(actionRequest, "dlFileMaxSize");
@@ -426,6 +432,17 @@ public class EditServerAction extends PortletAction {
 			PropsKeys.USERS_IMAGE_MAX_SIZE, String.valueOf(usersImageMaxSize));
 
 		preferences.store();
+
+		if (!oldIGThumbnailMaxDimension.equals(String.valueOf(
+				igThumbnailMaxDimension))) {
+
+			List<IGImage> images = IGImageLocalServiceUtil.getImages();
+
+			for (IGImage image : images) {
+				IGImageLocalServiceUtil.updateSmallImage(
+					image.getLargeImageId(), image.getSmallImageId());
+			}
+		}
 	}
 
 	protected void updateLogLevels(ActionRequest actionRequest)

@@ -78,6 +78,7 @@ import javax.imageio.ImageIO;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Alexander Chow
+ * @author Wesley Gong
  */
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
@@ -406,6 +407,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
+	public List<IGImage> getImages() throws SystemException {
+		return igImagePersistence.findAll();
+	}
+
 	public IGImage getImage(long imageId)
 		throws PortalException, SystemException {
 
@@ -680,6 +685,36 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
+		}
+	}
+
+	public void updateSmallImage(long largeImageId, long smallImageId)
+		throws PortalException, SystemException {
+
+		try {
+			RenderedImage renderedImage = null;
+
+			Image largeImage = imageLocalService.getImage(largeImageId);
+
+			byte[] bytes = largeImage.getTextObj();
+			String contentType = largeImage.getType();
+
+			if (bytes != null) {
+				renderedImage = ImageProcessorUtil.read(
+					bytes).getRenderedImage();
+
+				validate(bytes);
+			}
+
+			if (renderedImage != null) {
+				saveScaledImage(
+					renderedImage, smallImageId, contentType,
+					PrefsPropsUtil.getInteger(
+						PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
+			}
+		}
+		catch (IOException ioe) {
+			throw new ImageSizeException(ioe);
 		}
 	}
 
