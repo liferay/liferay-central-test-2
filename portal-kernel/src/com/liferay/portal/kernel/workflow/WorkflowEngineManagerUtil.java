@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.util.OrderByComparator;
-
 import java.util.Map;
 
 /**
@@ -67,11 +65,16 @@ public class WorkflowEngineManagerUtil {
 	}
 
 	/**
+	 * @see WorkflowEngineManager#getWorkflowEngineKey()
+	 */
+	public static String getWorkflowEngineKey() {
+		return _workflowEngineManager.getWorkflowEngineKey();
+	}
+
+	/**
 	 * @see WorkflowEngineManager#getWorkflowEngineName()
 	 */
-	public static String getWorkflowEngineName(
-		int start, int end, OrderByComparator orderByComparator) {
-
+	public static String getWorkflowEngineName() {
 		return _workflowEngineManager.getWorkflowEngineName();
 	}
 
@@ -79,13 +82,11 @@ public class WorkflowEngineManagerUtil {
 	 * @see WorkflowEngineManager#isSupportsWorkflowDefinitionVersioning()
 	 */
 	public static boolean isSupportsWorkflowDefinitionVersioning() {
-
 		return _workflowEngineManager.isSupportsWorkflowDefinitionVersioning();
 	}
 
 	public void setWorkflowEngineManager(
 		WorkflowEngineManager workflowEngineManager) {
-
 		_workflowEngineManager = workflowEngineManager;
 	}
 
