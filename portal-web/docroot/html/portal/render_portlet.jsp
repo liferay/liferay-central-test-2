@@ -705,7 +705,7 @@ else if (portletDisplay.isStateMax()) {
 
 if (urlBack != null) {
 	portletDisplay.setShowBackIcon(true);
-	portletDisplay.setURLBack(urlBack);
+	portletDisplay.setURLBack(PortalUtil.escapeRedirect(urlBack));
 }
 
 if (themeDisplay.isWidget()) {
