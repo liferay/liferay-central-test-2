@@ -28,33 +28,9 @@ package com.liferay.portlet.messageboards.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public class MBThreadFinderUtil {
-	public static int countByG_U_S(long groupId, long userId, int status)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_U_S(groupId, userId, status);
-	}
-
-	public static int countByG_U_A_S(long groupId, long userId,
-		boolean anonymous, int status)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_U_A_S(groupId, userId, anonymous, status);
-	}
-
 	public static int countByS_G_U_S(long groupId, long userId, int status)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByS_G_U_S(groupId, userId, status);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U_S(
-		long groupId, long userId, int status, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U_S(groupId, userId, status, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U_A_S(
-		long groupId, long userId, boolean anonymous, int status, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getFinder()
-				   .findByG_U_A_S(groupId, userId, anonymous, status, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U_S(
