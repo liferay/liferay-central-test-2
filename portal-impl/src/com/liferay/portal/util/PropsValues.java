@@ -1170,6 +1170,10 @@ public class PropsValues {
 	public static final String PERMISSIONS_CHECKER =
 		PropsUtil.get(PropsKeys.PERMISSIONS_CHECKER);
 
+	public static final boolean PERMISSIONS_OBJECT_BLOCKING_CACHE =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			PERMISSIONS_OBJECT_BLOCKING_CACHE));
+
 	public static final int PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));

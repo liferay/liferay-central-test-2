@@ -172,7 +172,7 @@ public class PermissionCacheUtil {
 	}
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(
-		CACHE_NAME, true);
+		CACHE_NAME, PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
 
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
