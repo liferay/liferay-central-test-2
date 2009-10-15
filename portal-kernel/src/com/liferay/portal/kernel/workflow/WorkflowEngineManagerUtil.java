@@ -87,6 +87,7 @@ public class WorkflowEngineManagerUtil {
 
 	public void setWorkflowEngineManager(
 		WorkflowEngineManager workflowEngineManager) {
+
 		_workflowEngineManager = workflowEngineManager;
 	}
 
