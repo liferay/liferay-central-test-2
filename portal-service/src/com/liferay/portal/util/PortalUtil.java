@@ -392,12 +392,6 @@ public class PortalUtil {
 		return getPortal().getLayoutFriendlyURL(layout, themeDisplay);
 	}
 
-	public static String getLayoutFriendlyURL(
-		Layout layout, ThemeDisplay themeDisplay, Locale locale) {
-
-		return getPortal().getLayoutFriendlyURL(layout, themeDisplay, locale);
-	}
-
 	public static String getLayoutFullURL(
 		Layout layout, ThemeDisplay themeDisplay) {
 
