@@ -91,10 +91,10 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_HTML) ||
 			friendlyURL.startsWith(_PATH_IMAGE) ||
 			friendlyURL.startsWith(_PATH_LANGUAGE) ||
+			friendlyURL.startsWith(_PATH_POLLER) ||
 			friendlyURL.startsWith(_PATH_SITEMAP_XML) ||
 			friendlyURL.startsWith(_PATH_SOFTWARE_CATALOG) ||
-			friendlyURL.startsWith(_PATH_WAP) ||
-			friendlyURL.startsWith(_PATH_WSRP)) {
+			friendlyURL.startsWith(_PATH_WAP)) {
 
 			return false;
 		}
@@ -309,34 +309,34 @@ public class VirtualHostFilter extends BasePortalFilter {
 		processFilter(VirtualHostFilter.class, request, response, filterChain);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);
+	private static final String _PATH_C = "/c/";
 
-	private static String _PATH_C = "/c/";
+	private static final String _PATH_DELEGATE = "/delegate/";
 
-	private static String _PATH_DELEGATE = "/delegate/";
+	private static final String _PATH_HTML = "/html/";
 
-	private static String _PATH_HTML = "/html/";
+	private static final String _PATH_IMAGE = "/image/";
 
-	private static String _PATH_IMAGE = "/image/";
+	private static final String _PATH_LANGUAGE = "/language/";
 
-	private static String _PATH_LANGUAGE = "/language/";
+	private static final String _PATH_POLLER = "/poller/";
 
-	private static String _PATH_SITEMAP_XML = "/sitemap.xml";
+	private static final String _PATH_SITEMAP_XML = "/sitemap.xml";
 
-	private static String _PATH_SOFTWARE_CATALOG = "/software_catalog/";
+	private static final String _PATH_SOFTWARE_CATALOG = "/software_catalog/";
 
-	private static String _PATH_WAP = "/wap/";
+	private static final String _PATH_WAP = "/wap/";
 
-	private static String _PATH_WSRP = "/wsrp/";
-
-	private static String _PRIVATE_GROUP_SERVLET_MAPPING =
+	private static final String _PRIVATE_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
 
-	private static String _PRIVATE_USER_SERVLET_MAPPING =
+	private static final String _PRIVATE_USER_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
 
-	private static String _PUBLIC_GROUP_SERVLET_MAPPING =
+	private static final String _PUBLIC_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
+
+	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);
 
 	private ServletContext _servletContext;
 

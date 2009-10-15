@@ -1076,12 +1076,12 @@
 		<url-pattern>/language/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Poller Servlet</servlet-name>
-		<url-pattern>/poller/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
 		<servlet-name>Netvibes Servlet</servlet-name>
 		<url-pattern>/netvibes/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Poller Servlet</servlet-name>
+		<url-pattern>/poller/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Portal Delegator Servlet</servlet-name>
