@@ -53,7 +53,7 @@ public class WorkflowDefinitionManagerUtil {
 		throws WorkflowException {
 
 		_workflowDefinitionManager.deployWorkflowDefinition(
-			workflowDefinition, callingUserId, createNextVersionNumberByEngine,
+			workflowDefinition, callingUserId, autoIncrementVersionNumber,
 			parameters);
 	}
 
