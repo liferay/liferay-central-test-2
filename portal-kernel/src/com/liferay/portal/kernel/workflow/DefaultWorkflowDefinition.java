@@ -28,8 +28,9 @@ import java.util.Map;
 
 /**
  * <a href="DefaultWorkflowDefinition.java.html"><b><i>View Source</i></b></a>
+ *
  * <p>
- * This is a simple default implementation for {@link WorkflowDefinition}
+ * This is the default implementation for {@link WorkflowDefinition}.
  * </p>
  *
  * @author Shuyang Zhou
@@ -39,10 +40,11 @@ public class DefaultWorkflowDefinition implements WorkflowDefinition {
 	public DefaultWorkflowDefinition(
 		ResourceRetriever resourceRetriever, String workflowDefinitionName,
 		int workflowDefinitionVersion, Map<String, Object> attributes) {
-		_attributes = attributes;
+
 		_resourceRetriever = resourceRetriever;
 		_workflowDefinitionName = workflowDefinitionName;
 		_workflowDefinitionVersion = workflowDefinitionVersion;
+		_attributes = attributes;
 	}
 
 	/**
@@ -53,21 +55,21 @@ public class DefaultWorkflowDefinition implements WorkflowDefinition {
 	}
 
 	/**
-	 * @see WorkflowDefinition#getJar() ()
+	 * @see WorkflowDefinition#getJar()
 	 */
 	public ResourceRetriever getJar() {
 		return _resourceRetriever;
 	}
 
 	/**
-	 * @see WorkflowDefinition#getWorkflowDefinitionName() ()
+	 * @see WorkflowDefinition#getWorkflowDefinitionName()
 	 */
 	public String getWorkflowDefinitionName() {
 		return _workflowDefinitionName;
 	}
 
 	/**
-	 * @see WorkflowDefinition#getWorkflowDefinitionVersion() ()
+	 * @see WorkflowDefinition#getWorkflowDefinitionVersion()
 	 */
 	public int getWorkflowDefinitionVersion() {
 		return _workflowDefinitionVersion;
