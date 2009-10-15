@@ -66,9 +66,19 @@ public interface WorkflowEngineManager {
 	public String getVersion();
 
 	/**
-	 * Returns the name of the workflow engine which should be unique (e.g.
+	 * Returns the unique key of the workflow engine which could by used to
+	 * create related names based on conventions (e.g. xxx-test.jar). This is a
+	 * technical name rather than a human readable name. The key must only
+	 * contain lower case letters without spaces and numbers.
+	 * 
+	 * @return the technical name of the underlying engine
+	 */
+	public String getWorkflowEngineKey();
+
+	/**
+	 * Returns the name of the workflow engine in a human readable fashion (e.g.
 	 * edoras, jBPM, etc).
-	 *
+	 * 
 	 * @return the name of the underlying engine
 	 */
 	public String getWorkflowEngineName();
@@ -78,7 +88,7 @@ public interface WorkflowEngineManager {
 	 * versioning of workflow definitions. If versioning is not supported, the
 	 * version number of a workflow definition is most likely ignored by the
 	 * engine.
-	 *
+	 * 
 	 * @return <code>true</code>, if the workflow engine supports versioning
 	 */
 	public boolean isSupportsWorkflowDefinitionVersioning();
