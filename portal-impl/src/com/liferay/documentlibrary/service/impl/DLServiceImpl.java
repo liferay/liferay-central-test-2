@@ -187,6 +187,28 @@ public class DLServiceImpl implements DLService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName)
+		throws PortalException, SystemException {
+
+		updateFile(
+			companyId, portletId, groupId, repositoryId, fileName, newFileName,
+			true);
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
+
+		hook.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName, newFileName,
+			reindex);
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 

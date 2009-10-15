@@ -50,6 +50,18 @@ public class DLLocalServiceUtil {
 			properties, modifiedDate, serviceContext, is);
 	}
 
+	public static void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, InputStream is,
+			boolean checkExtension)
+		throws PortalException, SystemException {
+
+		_service.addFile(
+			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
+			properties, modifiedDate, serviceContext, is, checkExtension);
+	}
+
 	public static void checkRoot(long companyId) throws SystemException {
 		_service.checkRoot(companyId);
 	}
@@ -107,6 +119,20 @@ public class DLLocalServiceUtil {
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
 			modifiedDate, serviceContext, is);
+	}
+
+	public static void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is,
+			boolean checkExtension)
+		throws PortalException, SystemException {
+
+		_service.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			versionNumber, sourceFileName, fileEntryId, properties,
+			modifiedDate, serviceContext, is, checkExtension);
 	}
 
 	public static void validate(String fileName, byte[] bytes)

@@ -55,7 +55,7 @@ List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(scopeGroupId, user.getU
 
 				<tr>
 					<td>
-						<a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileRank.getName()) %>.png" /><%= fileEntry.getTitleWithExtension() %></a>
+						<a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileRank.getTitle()) %>.png" /><%= fileEntry.getTitle() %></a>
 					</td>
 				</tr>
 

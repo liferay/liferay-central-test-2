@@ -157,6 +157,8 @@ public class GetFileAction extends PortletAction {
 			long companyId = themeDisplay.getCompanyId();
 			long userId = themeDisplay.getUserId();
 
+			name = FileUtil.stripExtension(name);
+
 			DLFileEntry fileEntry = null;
 
 			if (Validator.isNotNull(uuid) && (groupId > 0)) {
@@ -204,13 +206,13 @@ public class GetFileAction extends PortletAction {
 
 			boolean converted = false;
 
-			String fileName = fileEntry.getTitleWithExtension();
+			String fileName = fileEntry.getTitle();
 
 			if (Validator.isNotNull(targetExtension)) {
 				String id = DocumentConversionUtil.getTempFileId(
 					fileEntry.getFileEntryId(), version);
 
-				String sourceExtension = FileUtil.getExtension(name);
+				String sourceExtension = FileUtil.getExtension(fileName);
 
 				InputStream convertedIS = DocumentConversionUtil.convert(
 					id, is, sourceExtension, targetExtension);
@@ -218,7 +220,7 @@ public class GetFileAction extends PortletAction {
 				if ((convertedIS != null) && (convertedIS != is)) {
 					StringBuilder sb = new StringBuilder();
 
-					sb.append(fileEntry.getTitle());
+					sb.append(FileUtil.stripExtension(fileEntry.getTitle()));
 					sb.append(StringPool.PERIOD);
 					sb.append(targetExtension);
 

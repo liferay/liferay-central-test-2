@@ -24,7 +24,6 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
@@ -48,23 +47,6 @@ import java.util.Properties;
 public class DLFileEntryImpl
 	extends DLFileEntryModelImpl implements DLFileEntry {
 
-	public static String stripExtension(String name, String title) {
-		String extension = FileUtil.getExtension(name);
-
-		if (extension == null) {
-			return title;
-		}
-
-		int pos = title.toLowerCase().lastIndexOf(
-			StringPool.PERIOD + extension);
-
-		if (pos > 0) {
-			title = title.substring(0, pos);
-		}
-
-		return title;
-	}
-
 	public DLFileEntryImpl() {
 	}
 
@@ -86,16 +68,6 @@ public class DLFileEntryImpl
 		}
 
 		return folder;
-	}
-
-	public String getTitleWithExtension() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(getTitle());
-		sb.append(StringPool.PERIOD);
-		sb.append(FileUtil.getExtension(getName()));
-
-		return sb.toString();
 	}
 
 	public String getExtraSettings() {

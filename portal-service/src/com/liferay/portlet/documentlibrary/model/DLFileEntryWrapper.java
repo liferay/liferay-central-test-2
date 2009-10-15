@@ -288,10 +288,6 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getFolder();
 	}
 
-	public java.lang.String getTitleWithExtension() {
-		return _dlFileEntry.getTitleWithExtension();
-	}
-
 	public java.util.Properties getExtraSettingsProperties() {
 		return _dlFileEntry.getExtraSettingsProperties();
 	}

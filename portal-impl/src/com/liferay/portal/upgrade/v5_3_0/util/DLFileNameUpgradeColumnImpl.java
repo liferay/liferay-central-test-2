@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,23 +19,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/document_library/init.jsp" %>
+package com.liferay.portal.upgrade.v5_3_0.util;
 
-<%
-int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH);
-AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_RENDERER);
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
-DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
-%>
+/**
+ * <a href="DLFileEntryNameUpgradeColumnImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Alexander Chow
+ */
+public class DLFileNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-<div class="asset-resource-info">
-	<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>">
-		<img align="left" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getTitle()) %>.png">
+	public DLFileNameUpgradeColumnImpl(String name) {
+		super(name);
+	}
 
-		<%= fileEntry.getTitle() %>
-	</a>
-</div>
+	public Object getNewValue(Object oldValue) throws Exception {
+		String value = (String)oldValue;
 
-<p class="asset-description"><%= StringUtil.shorten(fileEntry.getDescription(), abstractLength) %></p>
+		return FileUtil.stripExtension(value);
+	}
+
+}

@@ -154,7 +154,7 @@ if (folder != null) {
 		sb.append("', '");
 		sb.append(UnicodeFormatter.toString(fileEntry.getName()));
 		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(fileEntry.getTitleWithExtension()));
+		sb.append(UnicodeFormatter.toString(fileEntry.getTitle()));
 		sb.append("'); window.close();");
 
 		String rowHREF = sb.toString();
@@ -164,7 +164,7 @@ if (folder != null) {
 		sb = new StringBuilder();
 
 		sb.append(_getFileEntryImage(fileEntry, themeDisplay));
-		sb.append(fileEntry.getTitleWithExtension());
+		sb.append(fileEntry.getTitle());
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {
 			sb.append("<br />");

@@ -130,6 +130,25 @@ public class DLServiceUtil {
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName)
+		throws PortalException, SystemException {
+
+		_service.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName, newFileName);
+	}
+
+	public static void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException {
+
+		_service.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName, newFileName,
+			reindex);
+	}
+
+	public static void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 

@@ -308,6 +308,14 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 
 	public void setTitle(String title) {
 		_title = title;
+
+		if (_originalTitle == null) {
+			_originalTitle = title;
+		}
+	}
+
+	public String getOriginalTitle() {
+		return GetterUtil.getString(_originalTitle);
 	}
 
 	public String getDescription() {
@@ -645,6 +653,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	private String _name;
 	private String _originalName;
 	private String _title;
+	private String _originalTitle;
 	private String _description;
 	private double _version;
 	private double _pendingVersion;

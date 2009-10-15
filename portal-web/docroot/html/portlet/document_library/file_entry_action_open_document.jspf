@@ -48,7 +48,7 @@
 		}
 
 		sb.append(StringPool.SLASH);
-		sb.append(HttpUtil.encodeURL(fileEntry.getTitleWithExtension(), true));
+		sb.append(HttpUtil.encodeURL(fileEntry.getTitle(), true));
 
 		Group group = themeDisplay.getScopeGroup();
 

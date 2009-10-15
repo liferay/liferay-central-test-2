@@ -73,7 +73,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		if (pos == -1) {
 			StringBuilder sb = new StringBuilder();
 
-			String fileNameFragment = removeExtension(fileName);
+			String fileNameFragment = FileUtil.stripExtension(fileName);
 
 			if (fileNameFragment.startsWith("DLFE-")) {
 				fileNameFragment = fileNameFragment.substring(5);
@@ -94,24 +94,13 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		else {
 			File fileNameDir = getDirNameDir(companyId, repositoryId, fileName);
 
-			String fileNameFragment = removeExtension(
+			String fileNameFragment = FileUtil.stripExtension(
 				fileName.substring(pos + 1));
 
 			return new File(
 				fileNameDir + StringPool.SLASH + fileNameFragment +
 					StringPool.UNDERLINE + version + ext);
 		}
-	}
-
-	protected String removeExtension(String fileName) {
-		String ext = FileUtil.getExtension(fileName);
-
-		if (ext != null) {
-			fileName = fileName.substring(
-				0, fileName.length() - ext.length() - 1);
-		}
-
-		return fileName;
 	}
 
 }

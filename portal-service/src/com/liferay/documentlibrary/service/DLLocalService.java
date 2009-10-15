@@ -47,6 +47,13 @@ public interface DLLocalService {
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException;
 
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, InputStream is,
+			boolean checkExtension)
+		throws PortalException, SystemException;
+
 	public void checkRoot(long companyId) throws SystemException;
 
 	public InputStream getFileAsStream(
@@ -76,6 +83,14 @@ public interface DLLocalService {
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
+		throws PortalException, SystemException;
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is,
+			boolean checkExtension)
 		throws PortalException, SystemException;
 
 	public void validate(String fileName, byte[] bytes)

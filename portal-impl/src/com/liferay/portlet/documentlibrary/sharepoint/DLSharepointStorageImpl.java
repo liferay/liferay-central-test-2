@@ -75,7 +75,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			sb.append(parentFolderPath);
 			sb.append(StringPool.SLASH);
-			sb.append(fileEntry.getTitleWithExtension());
+			sb.append(fileEntry.getTitle());
 
 			addDocumentElement(
 				element, sb.toString(), fileEntry.getCreateDate(),
@@ -459,7 +459,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		sb.append(parentFolderPath);
 		sb.append(StringPool.SLASH);
-		sb.append(fileEntry.getTitleWithExtension());
+		sb.append(fileEntry.getTitle());
 
 		return getDocumentTree(
 			sb.toString(), fileEntry.getCreateDate(),

@@ -431,11 +431,11 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		int pos = fileName.lastIndexOf(StringPool.PERIOD);
 
-		if (pos != -1) {
+		if (pos > 0) {
 			return fileName.substring(pos + 1, fileName.length()).toLowerCase();
 		}
 		else {
-			return null;
+			return StringPool.BLANK;
 		}
 	}
 
@@ -617,10 +617,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			return null;
 		}
 
-		int pos = fileName.lastIndexOf(StringPool.PERIOD);
+		String ext = getExtension(fileName);
 
-		if (pos != -1) {
-			return fileName.substring(0, pos);
+		if (ext.length() > 0) {
+			return fileName.substring(0, fileName.length() - ext.length() - 1);
 		}
 		else {
 			return fileName;

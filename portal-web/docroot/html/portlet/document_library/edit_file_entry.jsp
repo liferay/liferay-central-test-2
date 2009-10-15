@@ -41,14 +41,14 @@ long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
+String title = BeanParamUtil.getString(fileEntry, request, "title");
 
 String extension = StringPool.BLANK;
 
-if (Validator.isNotNull(name)) {
-	extension = FileUtil.getExtension(name);
+if (Validator.isNotNull(title)) {
+	extension = FileUtil.getExtension(title);
 }
 
-String titleWithExtension = BeanParamUtil.getString(fileEntry, request, "titleWithExtension");
 
 String assetTagNames = ParamUtil.getString(request, "assetTagNames");
 
@@ -257,7 +257,7 @@ portletURL.setParameter("name", name);
 
 		<aui:input name="file" type="file" />
 
-		<aui:input name="title" suffix="<%= extension %>" />
+		<aui:input name="title" />
 
 		<aui:input name="description" />
 

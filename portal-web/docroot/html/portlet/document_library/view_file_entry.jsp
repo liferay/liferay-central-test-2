@@ -49,7 +49,7 @@ if (Validator.isNotNull(name)) {
 	extension = FileUtil.getExtension(name);
 }
 
-String titleWithExtension = fileEntry.getTitleWithExtension();
+String title = fileEntry.getTitle();
 
 String[] conversions = new String[0];
 
@@ -98,7 +98,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	}
 
 	sb.append(StringPool.SLASH);
-	sb.append(HttpUtil.encodeURL(titleWithExtension, true));
+	sb.append(HttpUtil.encodeURL(title, true));
 
 	Group group = themeDisplay.getScopeGroup();
 
@@ -301,7 +301,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 		<div class="file-entry-name">
 			<a href="<%= fileUrl %>">
-				<%= titleWithExtension %>
+				<%= title %>
 			</a>
 		</div>
 
@@ -472,7 +472,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
 				<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 				<aui:input name="name" type="hidden" value="<%= name %>" />
-				<aui:input name="titleWithExtension" type="hidden" value="<%= titleWithExtension %>" />
+				<aui:input name="title" type="hidden" value="<%= title %>" />
 				<aui:input name="sourceVersion" type="hidden" value="<%= fileVersion.getVersion() %>" />
 				<aui:input name="targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
 

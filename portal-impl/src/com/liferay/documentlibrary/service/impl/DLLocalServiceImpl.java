@@ -76,7 +76,19 @@ public class DLLocalServiceImpl implements DLLocalService {
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
-		validate(fileName, is);
+		addFile(
+			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
+			properties, modifiedDate, serviceContext, is, true);
+	}
+
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, InputStream is,
+			boolean checkExtension)
+		throws PortalException, SystemException {
+
+		validate(fileName, is, checkExtension);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -216,7 +228,23 @@ public class DLLocalServiceImpl implements DLLocalService {
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
-		validate(fileName, sourceFileName, is);
+		updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			versionNumber, sourceFileName, fileEntryId, properties,
+			modifiedDate, serviceContext, is, true);
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is,
+			boolean checkExtension)
+		throws PortalException, SystemException {
+
+		if (checkExtension) {
+			validate(fileName, sourceFileName, is);
+		}
 
 		Hook hook = HookFactory.getInstance();
 
@@ -227,6 +255,47 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public void validate(String fileName)
+		throws PortalException, SystemException {
+
+		validate(fileName, true);
+	}
+
+	public void validate(String fileName, byte[] bytes)
+		throws PortalException, SystemException {
+
+		validate(fileName, bytes, true);
+	}
+
+	public void validate(String fileName, File file)
+		throws PortalException, SystemException {
+
+		validate(fileName, file, true);
+	}
+
+	public void validate(String fileName, InputStream is)
+		throws PortalException, SystemException {
+
+		validate(fileName, is, true);
+	}
+
+	public void validate(String fileName, String sourceFileName, InputStream is)
+		throws PortalException {
+
+		String fileNameExtension = FileUtil.getExtension(fileName);
+		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
+
+		if (!PropsValues.WEBDAV_LITMUS) {
+			if (!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
+				throw new SourceFileNameException(sourceFileName);
+			}
+		}
+
+		if (is == null) {
+			throw new FileSizeException(fileName);
+		}
+	}
+
+	protected void validate(String fileName, boolean checkExtension)
 		throws PortalException, SystemException {
 
 		if ((fileName.indexOf("\\\\") != -1) ||
@@ -245,6 +314,68 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 			throw new FileNameException(fileName);
 		}
+
+		if (checkExtension) {
+			validateExtension(fileName);
+		}
+	}
+
+	protected void validate(
+			String fileName, byte[] bytes, boolean checkExtension)
+		throws PortalException, SystemException {
+
+		validate(fileName, checkExtension);
+
+		if (((PropsValues.WEBDAV_LITMUS) ||
+			(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+			((bytes == null) ||
+			(bytes.length >
+				 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+
+			throw new FileSizeException(fileName);
+		}
+	}
+
+	protected void validate(String fileName, File file, boolean checkExtension)
+		throws PortalException, SystemException {
+
+		validate(fileName, true);
+
+		if (((PropsValues.WEBDAV_LITMUS) ||
+			 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+			((file == null) ||
+			 (file.length() >
+				PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+
+			throw new FileSizeException(fileName);
+		}
+	}
+
+	protected void validate(
+			String fileName, InputStream is, boolean checkExtension)
+		throws PortalException, SystemException {
+
+		validate(fileName, checkExtension);
+
+		// LEP-4851
+
+		try {
+			if (((PropsValues.WEBDAV_LITMUS) ||
+				(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
+				((is == null) ||
+				(is.available() >
+					 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+
+				throw new FileSizeException(fileName);
+			}
+		}
+		catch (IOException ioe) {
+			throw new FileSizeException(ioe.getMessage());
+		}
+	}
+
+	protected void validateExtension(String fileName)
+		throws PortalException, SystemException {
 
 		boolean validFileExtension = false;
 
@@ -265,77 +396,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 			if (!validFileExtension) {
 				throw new FileNameException(fileName);
 			}
-		}
-	}
-
-	public void validate(String fileName, byte[] bytes)
-		throws PortalException, SystemException {
-
-		validate(fileName);
-
-		if (((PropsValues.WEBDAV_LITMUS) ||
-			(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
-			((bytes == null) ||
-			(bytes.length >
-				 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
-
-			throw new FileSizeException(fileName);
-		}
-	}
-
-	public void validate(String fileName, File file)
-		throws PortalException, SystemException {
-
-		validate(fileName);
-
-		if (((PropsValues.WEBDAV_LITMUS) ||
-			 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
-			((file == null) ||
-			 (file.length() >
-				PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
-
-			throw new FileSizeException(fileName);
-		}
-	}
-
-	public void validate(String fileName, InputStream is)
-		throws PortalException, SystemException {
-
-		validate(fileName);
-
-		// LEP-4851
-
-		try {
-			if (((PropsValues.WEBDAV_LITMUS) ||
-				(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
-				((is == null) ||
-				(is.available() >
-					 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
-
-				throw new FileSizeException(fileName);
-			}
-		}
-		catch (IOException ioe) {
-			throw new FileSizeException(ioe.getMessage());
-		}
-	}
-
-	public void validate(String fileName, String sourceFileName, InputStream is)
-		throws PortalException {
-
-		String fileNameExtension = FileUtil.getExtension(fileName);
-		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
-
-		if (!PropsValues.WEBDAV_LITMUS) {
-			if (Validator.isNull(fileNameExtension) ||
-				!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
-
-				throw new SourceFileNameException(sourceFileName);
-			}
-		}
-
-		if (is == null) {
-			throw new FileSizeException(fileName);
 		}
 	}
 

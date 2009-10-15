@@ -650,7 +650,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getVersion());
 		sb.append(StringPool.SLASH);
-		sb.append(fileEntry.getTitleWithExtension());
+		sb.append(fileEntry.getTitle());
 
 		return sb.toString();
 	}

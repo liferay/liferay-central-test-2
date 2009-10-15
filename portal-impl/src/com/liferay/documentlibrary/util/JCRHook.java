@@ -576,6 +576,94 @@ public class JCRHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException {
+
+		Session session = null;
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			Node rootNode = getRootNode(session, companyId);
+			Node repositoryNode = getFolderNode(rootNode, repositoryId);
+			Node fileNode = repositoryNode.getNode(fileName);
+			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+
+			Node newFileNode = repositoryNode.addNode(
+				newFileName, JCRConstants.NT_FILE);
+
+			Node newContentNode = newFileNode.addNode(
+				JCRConstants.JCR_CONTENT, JCRConstants.NT_RESOURCE);
+
+			VersionHistory versionHistory = contentNode.getVersionHistory();
+
+			String[] versionLabels = versionHistory.getVersionLabels();
+
+			for (int i = (versionLabels.length - 1); i >= 0; i--) {
+				Version version = versionHistory.getVersionByLabel(
+					versionLabels[i]);
+
+				Node frozenContentNode = version.getNode(
+					JCRConstants.JCR_FROZEN_NODE);
+
+				if (i == (versionLabels.length - 1)) {
+					newContentNode.addMixin(JCRConstants.MIX_VERSIONABLE);
+				}
+				else {
+					newContentNode.checkout();
+				}
+
+				newContentNode.setProperty(
+					JCRConstants.JCR_MIME_TYPE, "text/plain");
+				newContentNode.setProperty(
+					JCRConstants.JCR_DATA,
+					frozenContentNode.getProperty(
+						JCRConstants.JCR_DATA).getStream());
+				newContentNode.setProperty(
+					JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
+
+				session.save();
+
+				Version newVersion = newContentNode.checkin();
+
+				newContentNode.getVersionHistory().addVersionLabel(
+					newVersion.getName(), versionLabels[i], false);
+			}
+
+			fileNode.remove();
+
+			session.save();
+
+			if (reindex) {
+				try {
+					DLIndexerUtil.deleteFile(
+						companyId, portletId, repositoryId, fileName);
+				}
+				catch (SearchException se) {
+				}
+
+				DLIndexerUtil.addFile(
+					companyId, portletId, groupId, repositoryId, newFileName);
+			}
+		}
+		catch (PathNotFoundException pnfe) {
+			throw new NoSuchFileException(fileName);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 

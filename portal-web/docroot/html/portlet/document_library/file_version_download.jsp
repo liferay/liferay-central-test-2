@@ -36,7 +36,7 @@ PortletURL redirectURL = (PortletURL)objArray[3];
 Boolean isLocked = (Boolean)objArray[4];
 Boolean hasLock = (Boolean)objArray[5];
 
-String extension = FileUtil.getExtension(fileEntry.getName());
+String extension = FileUtil.getExtension(fileEntry.getTitle());
 %>
 
 <liferay-ui:icon

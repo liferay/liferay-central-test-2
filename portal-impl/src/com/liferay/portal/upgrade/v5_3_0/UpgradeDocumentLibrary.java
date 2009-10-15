@@ -23,16 +23,28 @@
 package com.liferay.portal.upgrade.v5_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v5_3_0.util.DLFileEntryTitleUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v5_3_0.util.DLFileNameUpgradeColumnImpl;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 
@@ -46,14 +58,11 @@ import java.util.Date;
  * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Alexander Chow
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		updateFileVersions();
-	}
-
-	protected void updateFileVersions() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -66,6 +75,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
 				long groupId = rs.getLong("groupId");
 				long userId = rs.getLong("userId");
 				long folderId = rs.getLong("folderId");
@@ -73,53 +83,107 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				double version = rs.getDouble("version");
 				int size = rs.getInt("size_");
 
-				try {
-					addFileVersion(
-						userId, groupId, folderId, name, version, size);
+				String portletId = PortletKeys.DOCUMENT_LIBRARY;
+				long repositoryId = folderId;
+
+				if (repositoryId ==
+						DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+					repositoryId = groupId;
 				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Version " + version + " for " + name +
-								" was not " + "created: " + e.getMessage());
-					}
-				}
+
+				DLServiceUtil.updateFile(
+					companyId, portletId, groupId, repositoryId, name,
+					FileUtil.stripExtension(name), false);
+
+				addFileVersion(
+					userId, groupId, folderId, name, version, size);
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		// Update DLFileEntry
+
+		UpgradeColumn nameColumn =
+			new DLFileNameUpgradeColumnImpl("name");
+
+		UpgradeColumn titleColumn =
+			new DLFileEntryTitleUpgradeColumnImpl(nameColumn, "title");
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
+			nameColumn, titleColumn);
+
+		upgradeTable.updateTable();
+
+		// Update DLFileVersion
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS,
+			nameColumn);
+
+		upgradeTable.updateTable();
+
+		// Update DLFileRank
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS,
+			nameColumn);
+
+		upgradeTable.updateTable();
+
+		// Update DLFileShortcut
+
+		nameColumn = new DLFileNameUpgradeColumnImpl("toName");
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
+			nameColumn);
+
+		upgradeTable.updateTable();
+
+		PropsUtil.set(PropsKeys.INDEX_ON_STARTUP, "true");
 	}
 
 	protected void addFileVersion(
-			long userId, long groupId, long folderId, String fileName,
-			double version, int size)
-		throws PortalException, SystemException {
+		long userId, long groupId, long folderId, String fileName,
+		double version, int size) {
 
-		User user = UserLocalServiceUtil.getUser(userId);
-		Date now = new Date();
+		try {
+			User user = UserLocalServiceUtil.getUser(userId);
+			Date now = new Date();
 
-		long fileVersionId = CounterLocalServiceUtil.increment();
+			long fileVersionId = CounterLocalServiceUtil.increment();
 
-		DLFileVersion fileVersion = new DLFileVersionImpl();
+			DLFileVersion fileVersion = new DLFileVersionImpl();
 
-		fileVersion.setNew(true);
-		fileVersion.setPrimaryKey(fileVersionId);
-		fileVersion.setGroupId(groupId);
-		fileVersion.setCompanyId(user.getCompanyId());
-		fileVersion.setUserId(user.getUserId());
-		fileVersion.setUserName(user.getFullName());
-		fileVersion.setCreateDate(now);
-		fileVersion.setFolderId(folderId);
-		fileVersion.setName(fileName);
-		fileVersion.setVersion(version);
-		fileVersion.setSize(size);
-		fileVersion.setStatus(StatusConstants.APPROVED);
-		fileVersion.setStatusByUserId(user.getUserId());
-		fileVersion.setStatusByUserName(user.getFullName());
-		fileVersion.setStatusDate(now);
+			fileVersion.setNew(true);
+			fileVersion.setPrimaryKey(fileVersionId);
+			fileVersion.setGroupId(groupId);
+			fileVersion.setCompanyId(user.getCompanyId());
+			fileVersion.setUserId(user.getUserId());
+			fileVersion.setUserName(user.getFullName());
+			fileVersion.setCreateDate(now);
+			fileVersion.setFolderId(folderId);
+			fileVersion.setName(fileName);
+			fileVersion.setVersion(version);
+			fileVersion.setSize(size);
+			fileVersion.setStatus(StatusConstants.APPROVED);
+			fileVersion.setStatusByUserId(user.getUserId());
+			fileVersion.setStatusByUserName(user.getFullName());
+			fileVersion.setStatusDate(now);
 
-		DLFileVersionLocalServiceUtil.addDLFileVersion(fileVersion);
+			DLFileVersionLocalServiceUtil.addDLFileVersion(fileVersion);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Version " + version + " for " + fileName +
+						" was not created: " + e.getMessage());
+			}
+		}
 	}
 
 	private static Log _log =

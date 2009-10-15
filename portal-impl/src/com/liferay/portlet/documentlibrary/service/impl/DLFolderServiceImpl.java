@@ -403,14 +403,14 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		for (DLFileEntry srcFileEntry : srcFileEntries) {
 			String name = srcFileEntry.getName();
-			String title = srcFileEntry.getTitleWithExtension();
+			String title = srcFileEntry.getTitle();
 			String description = srcFileEntry.getDescription();
 			String extraSettings = srcFileEntry.getExtraSettings();
 
 			File file = null;
 
 			try {
-				file = FileUtil.createTempFile(FileUtil.getExtension(name));
+				file = FileUtil.createTempFile(FileUtil.getExtension(title));
 
 				InputStream is = dlLocalService.getFileAsStream(
 					srcFolder.getCompanyId(), srcFolder.getFolderId(), name);

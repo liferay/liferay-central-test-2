@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 
 import java.util.Set;
 
@@ -56,7 +55,7 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 		String name = (String)_nameColumn.getOldValue();
 		String extension = FileUtil.getExtension(name);
 
-		newTitle = DLFileEntryImpl.stripExtension(name, newTitle);
+		newTitle = _stripExtension(name, newTitle);
 
 		while (_distinctTitles.contains(_getKey(newTitle, extension))) {
 			_counter++;
@@ -90,6 +89,23 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 		}
 
 		return sb.toString();
+	}
+
+	private String _stripExtension(String name, String title) {
+		String extension = FileUtil.getExtension(name);
+
+		if (Validator.isNull(extension)) {
+			return title;
+		}
+
+		int pos = title.toLowerCase().lastIndexOf(
+			StringPool.PERIOD + extension);
+
+		if (pos > 0) {
+			title = title.substring(0, pos);
+		}
+
+		return title;
 	}
 
 	private UpgradeColumn _groupIdColumn;

@@ -72,7 +72,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 
 				<%
 				buffer.append(_getFileEntryImage(fileEntry, themeDisplay));
-				buffer.append(fileEntry.getTitleWithExtension());
+				buffer.append(fileEntry.getTitle());
 
 				if (Validator.isNotNull(fileEntry.getDescription())) {
 					buffer.append("<br />");

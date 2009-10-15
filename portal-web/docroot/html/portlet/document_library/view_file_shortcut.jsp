@@ -73,7 +73,7 @@ toFileEntry = toFileEntry.toEscapedModel();
 String extension = null;
 
 if (Validator.isNotNull(toFileEntry.getName())) {
-	extension = FileUtil.getExtension(toFileEntry.getName());
+	extension = FileUtil.getExtension(toFileEntry.getTitle());
 }
 
 String[] conversions = new String[0];
@@ -203,7 +203,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 		<div class="file-entry-name">
 			<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>">
-				<%= toFileEntry.getTitleWithExtension() %>
+				<%= toFileEntry.getTitle() %>
 			</a>
 		</div>
 

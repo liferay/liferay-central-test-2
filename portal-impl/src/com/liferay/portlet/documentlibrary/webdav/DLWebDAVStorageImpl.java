@@ -852,7 +852,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
-			name = fileEntry.getTitleWithExtension();
+			name = fileEntry.getTitle();
 		}
 
 		return new DLFileEntryResourceImpl(

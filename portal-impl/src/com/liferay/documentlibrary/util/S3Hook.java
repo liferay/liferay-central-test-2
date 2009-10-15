@@ -321,6 +321,79 @@ public class S3Hook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException {
+
+		try {
+			S3Object[] s3Objects = _s3Service.listObjects(
+				_s3Bucket, getKey(companyId, repositoryId, fileName), null);
+
+			for (int i = 0; i < s3Objects.length; i++) {
+				S3Object oldS3Object = s3Objects[i];
+
+				String oldKey = oldS3Object.getKey();
+
+				oldS3Object = _s3Service.getObject(_s3Bucket, oldKey);
+
+				File tempFile = new File(
+					SystemProperties.get(SystemProperties.TMP_DIR) +
+						File.separator + UUID.timeUUID());
+
+				InputStream is = null;
+
+				try {
+					is = oldS3Object.getDataInputStream();
+
+					FileUtil.write(tempFile, is);
+				}
+				catch (Exception e) {
+				}
+				finally {
+					ServletResponseUtil.cleanUp(is);
+				}
+
+				is = new FileInputStream(tempFile);
+
+				String newPrefix = getKey(companyId, repositoryId, newFileName);
+
+				int x = oldKey.indexOf(StringPool.SLASH);
+
+				x = oldKey.indexOf(StringPool.SLASH, x + 1);
+
+				x = oldKey.indexOf(StringPool.SLASH, x + 1);
+
+				String newKey =
+					newPrefix + oldKey.substring(x + 1, oldKey.length());
+
+				S3Object newS3Object = new S3Object(
+					_s3Bucket, newKey);
+
+				newS3Object.setDataInputStream(is);
+
+				_s3Service.putObject(_s3Bucket, newS3Object);
+				_s3Service.deleteObject(_s3Bucket, oldKey);
+
+				FileUtil.delete(tempFile);
+			}
+
+			if (reindex) {
+				DLIndexerUtil.deleteFile(
+					companyId, portletId, repositoryId, fileName);
+
+				DLIndexerUtil.addFile(
+					companyId, portletId, groupId, repositoryId, newFileName);
+			}
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+		catch (S3ServiceException s3se) {
+			throw new SystemException(s3se);
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 

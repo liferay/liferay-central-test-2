@@ -50,8 +50,6 @@ package com.liferay.portlet.documentlibrary.model;
 public interface DLFileEntry extends DLFileEntryModel {
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 
-	public java.lang.String getTitleWithExtension();
-
 	public java.lang.String getExtraSettings();
 
 	public void setExtraSettings(java.lang.String extraSettings);

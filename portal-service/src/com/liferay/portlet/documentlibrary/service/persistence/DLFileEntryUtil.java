@@ -363,50 +363,24 @@ public class DLFileEntryUtil {
 				   .fetchByG_F_N(groupId, folderId, name, retrieveFromCache);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_T(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_T(
 		long groupId, long folderId, java.lang.String title)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getPersistence().findByG_F_T(groupId, folderId, title);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_T(
-		long groupId, long folderId, java.lang.String title, int start, int end)
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_T(
+		long groupId, long folderId, java.lang.String title)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_F_T(groupId, folderId, title, start, end);
+		return getPersistence().fetchByG_F_T(groupId, folderId, title);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F_T(
-		long groupId, long folderId, java.lang.String title, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .findByG_F_T(groupId, folderId, title, start, end, obc);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_T_First(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_T(
 		long groupId, long folderId, java.lang.String title,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
-		return getPersistence().findByG_F_T_First(groupId, folderId, title, obc);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_T_Last(
-		long groupId, long folderId, java.lang.String title,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
-		return getPersistence().findByG_F_T_Last(groupId, folderId, title, obc);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByG_F_T_PrevAndNext(
-		long fileEntryId, long groupId, long folderId, java.lang.String title,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_F_T_PrevAndNext(fileEntryId, groupId, folderId,
-			title, obc);
+				   .fetchByG_F_T(groupId, folderId, title, retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(
@@ -476,7 +450,9 @@ public class DLFileEntryUtil {
 	}
 
 	public static void removeByG_F_T(long groupId, long folderId,
-		java.lang.String title) throws com.liferay.portal.SystemException {
+		java.lang.String title)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		getPersistence().removeByG_F_T(groupId, folderId, title);
 	}
 

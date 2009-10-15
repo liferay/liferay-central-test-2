@@ -254,6 +254,49 @@ public class CMISHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException {
+
+		try {
+			Entry oldVersioningFolderEntry = getVersioningFolderEntry(
+				companyId, repositoryId, fileName, true);
+			Entry newVersioningFolderEntry = getVersioningFolderEntry(
+				companyId, repositoryId, newFileName, true);
+
+			List<String> fileNames = CMISUtil.getFolders(
+				oldVersioningFolderEntry);
+
+			for (String curFileName : fileNames) {
+				Entry entry = CMISUtil.getDocument(
+					oldVersioningFolderEntry, curFileName);
+
+				InputStream is = CMISUtil.getInputStream(entry);
+
+				CMISUtil.createDocument(
+					newVersioningFolderEntry, curFileName, is);
+			}
+
+			CMISUtil.delete(oldVersioningFolderEntry);
+
+			if (reindex) {
+				try {
+					DLIndexerUtil.deleteFile(
+						companyId, portletId, repositoryId, fileName);
+				}
+				catch (SearchException se) {
+				}
+
+				DLIndexerUtil.addFile(
+					companyId, portletId, groupId, repositoryId, newFileName);
+			}
+		}
+		catch (SearchException se) {
+			throw new SystemException();
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 
