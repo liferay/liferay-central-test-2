@@ -44,16 +44,18 @@ import java.util.Map;
 public class WorkflowDefinitionManagerUtil {
 
 	/**
-	 * @see WorkflowDefinitionManager#deployWorkflowDefinition(
-	 *		WorkflowDefinition, long, Map)
+	 * @see WorkflowDefinitionManager#deployWorkflowDefinition(WorkflowDefinition,
+	 *      long, boolean, Map)
 	 */
 	public static void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition, long callingUserId,
+			boolean createNextVersionNumberByEngine,
 			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		_workflowDefinitionManager.deployWorkflowDefinition(
-			workflowDefinition, callingUserId, parameters);
+			workflowDefinition, callingUserId, createNextVersionNumberByEngine,
+			parameters);
 	}
 
 	/**

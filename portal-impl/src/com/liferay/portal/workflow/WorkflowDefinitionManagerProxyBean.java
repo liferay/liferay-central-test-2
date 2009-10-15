@@ -41,6 +41,7 @@ public class WorkflowDefinitionManagerProxyBean
 
 	public void deployWorkflowDefinition(
 		WorkflowDefinition workflowDefinition, long callingUserId,
+		boolean createNextVersionNumberByEngine,
 		Map<String, Object> parameters) {
 
 		throw new UnsupportedOperationException();
