@@ -52,7 +52,7 @@ public interface WorkflowDefinitionManager {
 	 * <p>
 	 * Deploys the given workflow definition within the engine.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the workflow definition already exists and versioning is not supported
 	 * or it is the same version as already existing, the definition is
@@ -60,7 +60,7 @@ public interface WorkflowDefinitionManager {
 	 * complete new definition or as a new version of an already existing
 	 * definition.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If you deploy a workflow definition by overwriting an existing one, make
 	 * sure it is compatible with already existing workflow instances to not
@@ -70,7 +70,7 @@ public interface WorkflowDefinitionManager {
 	 * old definition, and newly created workflow instances are created by using
 	 * the new version.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * You can actually choose whether the engine should create a new version
 	 * number automatically, or if the one provided by the
@@ -78,28 +78,29 @@ public interface WorkflowDefinitionManager {
 	 * sure in this case, that the version number is valid (a positive integer
 	 * value), otherwise this method will throw an exception.
 	 * </p>
-	 * 
-	 * @param workflowDefinition the workflow definition to be deployed
-	 * @param callingUserId the id of the user deploying the workflow definition
-	 *            (see {@link UserCredentialFactoryUtil#createCredential(long)}
-	 *            for more information)
-	 * @param createNextVersionNumberByEngine <code>true</code>, if the workflow
-	 *            engine should automatically create the next version number for
-	 *            the definition being deployed or <code>false</code>, if the
-	 *            version number is provided within the
-	 *            <code>workflowDefinition</code> parameter
-	 * @param parameters any additional parameters the underlying engine would
-	 *            need to deploy the given definition (like the name of the
-	 *            repository or anything similar), if nothing is needed, this
-	 *            parameter can be left <code>null</code>
+	 *
+	 * @param  workflowDefinition the workflow definition to be deployed
+	 * @param  callingUserId the id of the user deploying the workflow
+	 *		   definition (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
+	 * @param  autoIncrementVersionNumber <code>true</code>, if the workflow
+	 *		   engine should automatically create the next version number for
+	 *		   the definition being deployed or <code>false</code>, if the
+	 *		   version number is provided within the
+	 *		   <code>workflowDefinition</code> parameter
+	 * @param  parameters any additional parameters the underlying engine would
+	 *		   need to deploy the given definition (like the name of the
+	 *		   repository or anything similar), if nothing is needed, this
+	 *		   parameter can be left <code>null</code>
 	 * @throws WorkflowException is thrown, if deployment of the definition
-	 *             failed or if the provided workflow definition version number
-	 *             was wrong
+	 *		   failed or if the provided workflow definition version number was
+	 *		   wrong
 	 */
 	public void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition,
 			@CallingUserId long callingUserId,
-		boolean createNextVersionNumberByEngine, Map<String, Object> parameters)
+			boolean autoIncrementVersionNumber, Map<String, Object> parameters)
 		throws WorkflowException;
 
 	/**

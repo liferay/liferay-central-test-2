@@ -47,7 +47,7 @@ public class WorkflowEngineManagerProxyBean
 	public String getVersion() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public String getWorkflowEngineKey() {
 		throw new UnsupportedOperationException();
 	}
