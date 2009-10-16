@@ -22,14 +22,13 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.concurrent.ReadWriteLockKey;
-import com.liferay.portal.kernel.concurrent.ReadWriteLockRegistry;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
-
-import java.util.concurrent.locks.Lock;
+import com.liferay.portal.kernel.workflow.WorkflowException;
+import com.liferay.portal.service.LockLocalServiceUtil;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.reflect.MethodSignature;
 
 /**
  * <a href="WorkflowLockingAdvice.java.html"><b><i>View Source</i></b></a>
@@ -40,49 +39,81 @@ public class WorkflowLockingAdvice {
 
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
-		MethodSignature methodSignature =
-			(MethodSignature) proceedingJoinPoint.getSignature();
-		String methodName = methodSignature.getMethod().getName();
+
+		String methodName = proceedingJoinPoint.getSignature().getName();
 		Object[] arguments = proceedingJoinPoint.getArgs();
-		String workflowDefinitionName = null;
-		int workflowDefinitionVersion = -1;
-		boolean writeLock = false;
-		if (methodName.equals(UNDEPLOY_METHOD_NAME)) {
-			WorkflowDefinition workflowDefinition =
-				(WorkflowDefinition) arguments[0];
-			workflowDefinitionName =
-				workflowDefinition.getWorkflowDefinitionName();
-			workflowDefinitionVersion =
-				workflowDefinition.getWorkflowDefinitionVersion();
-			writeLock = true;
+
+		if (methodName.equals(_START_WORKFLOW_INSTANCE_METHOD_NAME)) {
+			String workflowDefinitionName = (String)arguments[0];
+			Integer workflowDefinitionVersion = (Integer)arguments[1];
+
+			String className = WorkflowDefinition.class.getName();
+			String key = _encodeKey(
+				workflowDefinitionName, workflowDefinitionVersion);
+
+			if (LockLocalServiceUtil.isLocked(className, key)) {
+				throw new WorkflowException(
+					"Workflow definition name " + workflowDefinitionName +
+						" and version " + workflowDefinitionVersion +
+							" is being undeployed");
+			}
+
+			return proceedingJoinPoint.proceed();
 		}
-		else if (methodName.equals(START_METHOD_NAME)) {
-			workflowDefinitionName = (String) arguments[0];
-			workflowDefinitionVersion = (Integer) arguments[1];
+		else if (!methodName.equals(
+					_UNDEPLOY_WORKFLOW_DEFINITION_METHOD_NAME)) {
+
+			return proceedingJoinPoint.proceed();
 		}
 
-		WorkflowDefinitionKey workflowDefinitionKey =
-			new WorkflowDefinitionKey(
+		WorkflowDefinition workflowDefinition =
+			(WorkflowDefinition)arguments[0];
+		long userId = (Long)arguments[2];
+
+		String workflowDefinitionName =
+			workflowDefinition.getWorkflowDefinitionName();
+		Integer workflowDefinitionVersion =
+			workflowDefinition.getWorkflowDefinitionVersion();
+
+		String className = WorkflowDefinition.class.getName();
+		String key = _encodeKey(
 			workflowDefinitionName, workflowDefinitionVersion);
-		ReadWriteLockKey<WorkflowDefinitionKey> readWriteLockKey =
-			new ReadWriteLockKey<WorkflowDefinitionKey>(
-				workflowDefinitionKey, writeLock);
-		Lock lock = _readWriteLockRegistry.acquireLock(readWriteLockKey);
+
+		if (LockLocalServiceUtil.isLocked(className, key)) {
+			throw new WorkflowException(
+				"Workflow definition name " + workflowDefinitionName +
+					" and version " + workflowDefinitionVersion +
+						" is being undeployed");
+		}
+
 		try {
-			lock.lock();
+			LockLocalServiceUtil.lock(
+				userId, className, key, String.valueOf(userId), false,
+				Time.HOUR);
+
 			return proceedingJoinPoint.proceed();
 		}
 		finally {
-			lock.unlock();
-			_readWriteLockRegistry.releaseLock(readWriteLockKey);
+			LockLocalServiceUtil.unlock(className, key);
 		}
 	}
 
-	public static final String UNDEPLOY_METHOD_NAME =
-		"undeployWorkflowDefinition";
-	public static final String START_METHOD_NAME = "startWorkflowInstance";
+	private String _encodeKey(
+		String workflowDefinitionName, Integer workflowDefinitionVersion) {
 
-	private final ReadWriteLockRegistry _readWriteLockRegistry =
-		new ReadWriteLockRegistry();
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(workflowDefinitionName);
+		sb.append(StringPool.POUND);
+		sb.append(workflowDefinitionVersion);
+
+		return sb.toString();
+	}
+
+	private static final String _START_WORKFLOW_INSTANCE_METHOD_NAME =
+		"startWorkflowInstance";
+
+	private static final String _UNDEPLOY_WORKFLOW_DEFINITION_METHOD_NAME =
+		"undeployWorkflowDefinition";
 
 }

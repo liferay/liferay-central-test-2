@@ -10,9 +10,8 @@
 
 	<!-- Advice -->
 
-	<bean id="com.liferay.portal.workflow.WorkflowProxyAdvice" class="com.liferay.portal.workflow.WorkflowProxyAdvice" />
 	<bean id="com.liferay.portal.workflow.WorkflowLockingAdvice" class="com.liferay.portal.workflow.WorkflowLockingAdvice" />
-	
+	<bean id="com.liferay.portal.workflow.WorkflowProxyAdvice" class="com.liferay.portal.workflow.WorkflowProxyAdvice" />	
 	<aop:config>
 		<aop:aspect ref="com.liferay.portal.workflow.WorkflowLockingAdvice" order="1">
 			<aop:around pointcut="execution (public void com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean.undeployWorkflowDefinition(..)) || execution (public com.liferay.portal.kernel.workflow.WorkflowInstanceInfo com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean.startWorkflowInstance(..))" method="invoke" />
