@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -38,6 +39,7 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_3_0.util.DLFileEntryNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v5_3_0.util.DLFileEntryTitleUpgradeColumnImpl;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -123,11 +125,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileShortcut
 
-		nameColumn = new DLFileEntryNameUpgradeColumnImpl("toName");
+		UpgradeColumn toNameColumn = new DLFileEntryNameUpgradeColumnImpl(
+			"toName");
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
-			nameColumn);
+			toNameColumn);
 
 		upgradeTable.updateTable();
 
@@ -138,6 +141,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			nameColumn);
 
 		upgradeTable.updateTable();
+		
+		// Lucene
+		
+		PropsUtil.set(PropsKeys.INDEX_ON_STARTUP, "true");
 	}
 
 	protected void addFileVersion(
