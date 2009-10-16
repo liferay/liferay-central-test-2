@@ -106,6 +106,10 @@
 		</init-param>
 	</filter>
 	<filter>
+		<filter-name>I18n Filter</filter-name>
+		<filter-class>com.liferay.portal.servlet.filters.i18n.I18nFilter</filter-class>
+	</filter>
+	<filter>
 		<filter-name>Minifier Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.minifier.MinifierFilter</filter-class>
 	</filter>
@@ -427,6 +431,24 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Double Click Filter</filter-name>
+		<url-pattern>/web/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>I18n Filter</filter-name>
+		<url-pattern>/group/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>I18n Filter</filter-name>
+		<url-pattern>/user/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>I18n Filter</filter-name>
 		<url-pattern>/web/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>

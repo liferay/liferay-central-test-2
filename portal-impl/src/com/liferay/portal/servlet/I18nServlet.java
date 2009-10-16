@@ -36,6 +36,7 @@ import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
@@ -76,6 +77,8 @@ public class I18nServlet extends HttpServlet {
 				_languageIds.add(languageId);
 			}
 		}
+
+		_languageIds = Collections.unmodifiableSet(_languageIds);
 	}
 
 	public void service(
