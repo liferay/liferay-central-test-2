@@ -108,6 +108,7 @@ searchContainer.setResults(results);
 					<portlet:renderURL var="addNodeURL">
 						<portlet:param name="struts_action" value="/wiki/edit_node" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="nodeId" value="0" />
 					</portlet:renderURL>
 
 					<aui:button name="addNodeButton" onClick="<%= addNodeURL %>" type="button" value="add-wiki" />
