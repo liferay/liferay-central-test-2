@@ -67,4 +67,11 @@ public class WorkflowDefinitionManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public void undeployWorkflowDefinition(
+		WorkflowDefinition workflowDefinition, long callingUserId,
+		Map<String, Object> parameters) {
+
+		throw new UnsupportedOperationException();
+	}
+	
 }
