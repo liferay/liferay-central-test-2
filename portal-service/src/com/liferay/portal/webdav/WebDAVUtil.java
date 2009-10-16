@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -119,6 +120,12 @@ public class WebDAVUtil {
 
 		String destination = pathSegments[pathSegments.length - 1];
 
+		destination = 
+			StringUtil.replace(destination, StringPool.SLASH, _TEMP_SLASH);
+		destination = HttpUtil.decodeURL(destination, true);
+		destination = 
+			StringUtil.replace(destination, _TEMP_SLASH, StringPool.SLASH);
+		
 		if (_log.isDebugEnabled()) {
 			_log.debug("Destination " + destination);
 		}
@@ -315,6 +322,8 @@ public class WebDAVUtil {
 			return true;
 		}
 	}
+
+	private static final String _TEMP_SLASH = "_LIFERAY_TEMP_SLASH_";
 
 	private static Log _log = LogFactoryUtil.getLog(WebDAVUtil.class);
 
