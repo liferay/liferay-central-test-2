@@ -696,6 +696,7 @@ else if (portletDisplay.isStateMax()) {
 	else {
 		urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
 		urlBack = HtmlUtil.stripHtml(urlBack);
+		urlBack = PortalUtil.escapeRedirect(urlBack);
 	}
 
 	if (Validator.isNull(urlBack)) {
@@ -705,7 +706,7 @@ else if (portletDisplay.isStateMax()) {
 
 if (urlBack != null) {
 	portletDisplay.setShowBackIcon(true);
-	portletDisplay.setURLBack(PortalUtil.escapeRedirect(urlBack));
+	portletDisplay.setURLBack(urlBack);
 }
 
 if (themeDisplay.isWidget()) {
