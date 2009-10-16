@@ -514,6 +514,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			long groupId = WebDAVUtil.getGroupId(destinationArray);
+			long userId = webDavRequest.getUserId();
 			long parentFolderId = getParentFolderId(destinationArray);
 			String name = fileEntry.getName();
 			String sourceFileName = null;
@@ -537,6 +538,40 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 						webDavRequest.getLockUuid())) {
 
 					status = HttpServletResponse.SC_NO_CONTENT;
+				}
+			}
+
+			// LPS-5415
+
+			if (webDavRequest.isMac()) {
+				try {
+					DLFileEntry destFileEntry =
+						DLFileEntryServiceUtil.getFileEntryByTitle(
+							groupId, parentFolderId, title);
+
+					InputStream is =
+						DLFileEntryLocalServiceUtil.getFileAsStream(
+							fileEntry.getCompanyId(), userId,
+							fileEntry.getGroupId(), fileEntry.getFolderId(),
+							fileEntry.getName());
+
+					bytes = FileUtil.getBytes(is);
+
+					DLFileEntryServiceUtil.updateFileEntry(
+						groupId, parentFolderId, parentFolderId,
+						destFileEntry.getName(), destFileEntry.getTitle(),
+						destFileEntry.getTitle(),
+						destFileEntry.getDescription(),
+						destFileEntry.getExtraSettings(), bytes,
+						serviceContext);
+
+					DLFileEntryServiceUtil.deleteFileEntry(
+						fileEntry.getGroupId(), fileEntry.getFolderId(),
+						fileEntry.getName());
+
+					return status;
+				}
+				catch (NoSuchFileEntryException nsfee) {
 				}
 			}
 
