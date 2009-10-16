@@ -183,8 +183,11 @@ public interface WorkflowDefinitionManager {
 	 *            need to un-deploy the given definition (like the name of the
 	 *            repository or anything similar), if nothing is needed, this
 	 *            parameter can be left <code>null</code>
+	 * @throws WorkflowException is thrown on there are still workflow instances
+	 *			  running based on the given definition
 	 */
 	public void undeployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition,
-		@CallingUserId long callingUserId, Map<String, Object> parameters);
+			WorkflowDefinition workflowDefinition,
+			@CallingUserId long callingUserId, Map<String, Object> parameters)
+		throws WorkflowException;
 }

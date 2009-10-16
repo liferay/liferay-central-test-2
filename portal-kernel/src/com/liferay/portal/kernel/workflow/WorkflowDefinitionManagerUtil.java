@@ -108,8 +108,9 @@ public class WorkflowDefinitionManagerUtil {
 	 *		java.util.Map)
 	 */
 	public static void undeployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition,
-		long callingUserId, Map<String, Object> parameters) {
+			WorkflowDefinition workflowDefinition,
+			long callingUserId, Map<String, Object> parameters)
+		throws WorkflowException{
 
 		_workflowDefinitionManager.undeployWorkflowDefinition(
 			workflowDefinition, callingUserId, parameters);
