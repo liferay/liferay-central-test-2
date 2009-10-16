@@ -148,6 +148,10 @@ public class SessionImpl implements Session {
 		}
 	}
 
+	public Object getWrappedSession() throws ORMException {
+		return _entityManager;
+	}
+
 	public Object load(Class<?> clazz, Serializable id) throws ORMException {
 		try {
 			return _entityManager.getReference(clazz, id);

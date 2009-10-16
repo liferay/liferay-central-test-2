@@ -143,7 +143,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public org.hibernate.Session getWrappedSession() {
+	public Object getWrappedSession() {
 		return _session;
 	}
 

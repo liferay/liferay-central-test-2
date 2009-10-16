@@ -54,6 +54,8 @@ public interface Session {
 	public Object get(Class<?> clazz, Serializable id, LockMode lockMode)
 		throws ORMException;
 
+	public Object getWrappedSession() throws ORMException;
+
 	public Object load(Class<?> clazz, Serializable id) throws ORMException;
 
 	public Object merge(Object object) throws ORMException;
