@@ -104,18 +104,17 @@ public class WorkflowDefinitionManagerUtil {
 
 	/**
 	 * @see WorkflowDefinitionManager#undeployWorkflowDefinition(
-	 *		com.liferay.portal.kernel.workflow.WorkflowDefinition, long,
-	 *		java.util.Map)
+	 *		WorkflowDefinition, long, Map)
 	 */
 	public static void undeployWorkflowDefinition(
-			WorkflowDefinition workflowDefinition,
-			long callingUserId, Map<String, Object> parameters)
-		throws WorkflowException{
+			WorkflowDefinition workflowDefinition, long callingUserId,
+			Map<String, Object> parameters)
+		throws WorkflowException {
 
 		_workflowDefinitionManager.undeployWorkflowDefinition(
 			workflowDefinition, callingUserId, parameters);
 	}
-	
+
 	public void setWorkflowDefinitionManager(
 		WorkflowDefinitionManager workflowDefinitionManager) {
 

@@ -172,22 +172,23 @@ public interface WorkflowDefinitionManager {
 	 * on that definition, in this case, this method will throw an exception.
 	 * During the un-deployment, it is also not possible to start a new workflow
 	 * instance based on that definition.
-	 * 
-	 * @param workflowDefinition the definition to be removed from the
-	 *            underlying engine
-	 * @param callingUserId the id of the user un-deploying the workflow
-	 *            definition (see
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)} for
-	 *            more information)
-	 * @param parameters any additional parameters the underlying engine would
-	 *            need to un-deploy the given definition (like the name of the
-	 *            repository or anything similar), if nothing is needed, this
-	 *            parameter can be left <code>null</code>
-	 * @throws WorkflowException is thrown on there are still workflow instances
-	 *			  running based on the given definition
+	 *
+	 * @param  workflowDefinition the definition to be removed from the
+	 *		   underlying engine
+	 * @param  callingUserId the id of the user un-deploying the workflow
+	 *		   definition (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
+	 * @param  parameters any additional parameters the underlying engine would
+	 *		   need to un-deploy the given definition (like the name of the
+	 *		   repository or anything similar), if nothing is needed, this
+	 *		   parameter can be left <code>null</code>
+	 * @throws WorkflowException is thrown if there are still workflow instances
+	 *		   running based on the given definition
 	 */
 	public void undeployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition,
 			@CallingUserId long callingUserId, Map<String, Object> parameters)
 		throws WorkflowException;
+
 }
