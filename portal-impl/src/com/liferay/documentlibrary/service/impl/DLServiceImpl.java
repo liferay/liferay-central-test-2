@@ -84,7 +84,7 @@ public class DLServiceImpl implements DLService {
 			Date modifiedDate, ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, bytes);
+		dlLocalService.validate(fileName, true, bytes);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -99,7 +99,7 @@ public class DLServiceImpl implements DLService {
 			Date modifiedDate, ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, file);
+		dlLocalService.validate(fileName, true, file);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -187,28 +187,6 @@ public class DLServiceImpl implements DLService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName)
-		throws PortalException, SystemException {
-
-		updateFile(
-			companyId, portletId, groupId, repositoryId, fileName, newFileName,
-			true);
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reindex)
-		throws PortalException, SystemException {
-
-		Hook hook = HookFactory.getInstance();
-
-		hook.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName, newFileName,
-			reindex);
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 
@@ -226,7 +204,7 @@ public class DLServiceImpl implements DLService {
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, bytes);
+		dlLocalService.validate(fileName, true, bytes);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -243,7 +221,7 @@ public class DLServiceImpl implements DLService {
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, file);
+		dlLocalService.validate(fileName, true, file);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -251,6 +229,18 @@ public class DLServiceImpl implements DLService {
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
 			modifiedDate, serviceContext, file);
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reIndex)
+		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
+
+		hook.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName, newFileName,
+			reIndex);
 	}
 
 	@BeanReference(name = _DL_LOCAL_SERVICE)

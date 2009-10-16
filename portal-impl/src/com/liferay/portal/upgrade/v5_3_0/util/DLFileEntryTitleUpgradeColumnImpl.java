@@ -28,7 +28,7 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 /**
- * <a href="DLFileEntryNameUpgradeColumnImpl.java.html"><b><i>View Source</i>
+ * <a href="DLFileEntryTitleUpgradeColumnImpl.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Alexander Chow
@@ -36,21 +36,22 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 public class DLFileEntryTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public DLFileEntryTitleUpgradeColumnImpl(
-		UpgradeColumn filenameColumn, String name) {
+		UpgradeColumn nameColumn, String title) {
 
-		super(name);
+		super(title);
 
-		_filenameColumn = filenameColumn;
+		_nameColumn = nameColumn;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		String title = (String)oldValue;
-		String name = (String)_filenameColumn.getOldValue();
+
+		String name = (String)_nameColumn.getOldValue();
 		String extension = FileUtil.getExtension(name);
 
 		return title + StringPool.PERIOD + extension;
 	}
 
-	private UpgradeColumn _filenameColumn;
+	private UpgradeColumn _nameColumn;
 
 }

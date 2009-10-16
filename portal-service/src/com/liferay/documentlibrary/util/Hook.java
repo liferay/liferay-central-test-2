@@ -114,11 +114,6 @@ public interface Hook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reindex)
-		throws PortalException, SystemException;
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException;
 
@@ -141,6 +136,11 @@ public interface Hook {
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
+		throws PortalException, SystemException;
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException;
 
 }

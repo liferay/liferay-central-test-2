@@ -31,9 +31,9 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
  *
  * @author Alexander Chow
  */
-public class DLFileNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class DLFileEntryNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public DLFileNameUpgradeColumnImpl(String name) {
+	public DLFileEntryNameUpgradeColumnImpl(String name) {
 		super(name);
 	}
 

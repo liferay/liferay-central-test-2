@@ -41,25 +41,15 @@ public class DLLocalServiceUtil {
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is)
+			String fileName, boolean validateFileExtension, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		_service.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, serviceContext, is);
-	}
-
-	public static void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is,
-			boolean checkExtension)
-		throws PortalException, SystemException {
-
-		_service.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, serviceContext, is, checkExtension);
+			companyId, portletId, groupId, repositoryId, fileName,
+			validateFileExtension, fileEntryId, properties, modifiedDate,
+			serviceContext, is);
 	}
 
 	public static void checkRoot(long companyId) throws SystemException {
@@ -110,47 +100,37 @@ public class DLLocalServiceUtil {
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
+			String fileName, boolean validateFileExtension,
+			double versionNumber, String sourceFileName, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		_service.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, is);
+			validateFileExtension, versionNumber, sourceFileName, fileEntryId,
+			properties, modifiedDate, serviceContext, is);
 	}
 
-	public static void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is,
-			boolean checkExtension)
+	public static void validate(
+			String fileName, boolean validateFileExtension, byte[] bytes)
 		throws PortalException, SystemException {
 
-		_service.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, is, checkExtension);
+		_service.validate(fileName, validateFileExtension, bytes);
 	}
 
-	public static void validate(String fileName, byte[] bytes)
+	public static void validate(
+			String fileName, boolean validateFileExtension, File file)
 		throws PortalException, SystemException {
 
-		_service.validate(fileName, bytes);
+		_service.validate(fileName, validateFileExtension, file);
 	}
 
-	public static void validate(String fileName, File file)
+	public static void validate(
+			String fileName, boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException {
 
-		_service.validate(fileName, file);
-	}
-
-	public static void validate(String fileName, InputStream is)
-		throws PortalException, SystemException {
-
-		_service.validate(fileName, is);
+		_service.validate(fileName, validateFileExtension, is);
 	}
 
 	public static void validate(

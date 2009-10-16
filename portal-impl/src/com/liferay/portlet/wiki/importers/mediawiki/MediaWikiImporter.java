@@ -230,7 +230,7 @@ public class MediaWikiImporter implements WikiImporter {
 		String fileName = paths[paths.length - 1];
 
 		try {
-			DLLocalServiceUtil.validate(fileName, bytes);
+			DLLocalServiceUtil.validate(fileName, true, bytes);
 		}
 		catch (PortalException pe) {
 			return false;

@@ -105,7 +105,7 @@ public class DLHook extends BaseHook {
 		}
 
 		DLLocalServiceUtil.addFile(
-			_COMPANY_ID, _PORTLET_ID, _GROUP_ID, _REPOSITORY_ID, fileName,
+			_COMPANY_ID, _PORTLET_ID, _GROUP_ID, _REPOSITORY_ID, fileName, true,
 			_FILE_ENTRY_ID, _PROPERTIES, now, new ServiceContext(), is);
 	}
 

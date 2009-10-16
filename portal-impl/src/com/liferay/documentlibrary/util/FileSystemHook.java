@@ -270,38 +270,6 @@ public class FileSystemHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reindex)
-		throws SystemException {
-
-		try {
-			File fileNameDir = getFileNameDir(
-				companyId, repositoryId, fileName);
-			File newFileNameDir = getFileNameDir(
-				companyId, repositoryId, newFileName);
-
-			FileUtil.copyDirectory(fileNameDir, newFileNameDir);
-
-			FileUtil.deltree(fileNameDir);
-
-			if (reindex) {
-				try {
-					DLIndexerUtil.deleteFile(
-						companyId, portletId, repositoryId, fileName);
-				}
-				catch (SearchException se) {
-				}
-
-				DLIndexerUtil.addFile(
-					companyId, portletId, groupId, repositoryId, newFileName);
-			}
-		}
-		catch (SearchException se) {
-			throw new SystemException();
-		}
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws SystemException {
 
@@ -354,6 +322,38 @@ public class FileSystemHook extends BaseHook {
 				serviceContext.getAssetTagNames());
 		}
 		catch (IOException ioe) {
+			throw new SystemException();
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reIndex)
+		throws SystemException {
+
+		try {
+			File fileNameDir = getFileNameDir(
+				companyId, repositoryId, fileName);
+			File newFileNameDir = getFileNameDir(
+				companyId, repositoryId, newFileName);
+
+			FileUtil.copyDirectory(fileNameDir, newFileNameDir);
+
+			FileUtil.deltree(fileNameDir);
+
+			if (reIndex) {
+				try {
+					DLIndexerUtil.deleteFile(
+						companyId, portletId, repositoryId, fileName);
+				}
+				catch (SearchException se) {
+				}
+
+				DLIndexerUtil.addFile(
+					companyId, portletId, groupId, repositoryId, newFileName);
+			}
+		}
+		catch (SearchException se) {
 			throw new SystemException();
 		}
 	}

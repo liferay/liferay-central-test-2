@@ -43,15 +43,9 @@ public interface DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException;
-
-	public void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is,
-			boolean checkExtension)
+			String fileName, boolean validateFileExtension, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
+			InputStream is)
 		throws PortalException, SystemException;
 
 	public void checkRoot(long companyId) throws SystemException;
@@ -80,26 +74,22 @@ public interface DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
+			String fileName, boolean validateFileExtension,
+			double versionNumber, String sourceFileName, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
+			InputStream is)
 		throws PortalException, SystemException;
 
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is,
-			boolean checkExtension)
+	public void validate(
+			String fileName, boolean validateFileExtension, byte[] bytes)
 		throws PortalException, SystemException;
 
-	public void validate(String fileName, byte[] bytes)
+	public void validate(
+			String fileName, boolean validateFileExtension, File file)
 		throws PortalException, SystemException;
 
-	public void validate(String fileName, File file)
-		throws PortalException, SystemException;
-
-	public void validate(String fileName, InputStream is)
+	public void validate(
+			String fileName, boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException;
 
 	public void validate(String fileName, String sourceFileName, InputStream is)

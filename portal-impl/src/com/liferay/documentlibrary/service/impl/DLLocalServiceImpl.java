@@ -72,23 +72,12 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is)
+			String fileName, boolean validateFileExtension, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
+			InputStream is)
 		throws PortalException, SystemException {
 
-		addFile(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, serviceContext, is, true);
-	}
-
-	public void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is,
-			boolean checkExtension)
-		throws PortalException, SystemException {
-
-		validate(fileName, is, checkExtension);
+		validate(fileName, validateFileExtension, is);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -223,26 +212,13 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
+			String fileName, boolean validateFileExtension,
+			double versionNumber, String sourceFileName, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
+			InputStream is)
 		throws PortalException, SystemException {
 
-		updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, is, true);
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is,
-			boolean checkExtension)
-		throws PortalException, SystemException {
-
-		if (checkExtension) {
+		if (validateFileExtension) {
 			validate(fileName, sourceFileName, is);
 		}
 
@@ -254,48 +230,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			modifiedDate, serviceContext, is);
 	}
 
-	public void validate(String fileName)
-		throws PortalException, SystemException {
-
-		validate(fileName, true);
-	}
-
-	public void validate(String fileName, byte[] bytes)
-		throws PortalException, SystemException {
-
-		validate(fileName, bytes, true);
-	}
-
-	public void validate(String fileName, File file)
-		throws PortalException, SystemException {
-
-		validate(fileName, file, true);
-	}
-
-	public void validate(String fileName, InputStream is)
-		throws PortalException, SystemException {
-
-		validate(fileName, is, true);
-	}
-
-	public void validate(String fileName, String sourceFileName, InputStream is)
-		throws PortalException {
-
-		String fileNameExtension = FileUtil.getExtension(fileName);
-		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
-
-		if (!PropsValues.WEBDAV_LITMUS) {
-			if (!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
-				throw new SourceFileNameException(sourceFileName);
-			}
-		}
-
-		if (is == null) {
-			throw new FileSizeException(fileName);
-		}
-	}
-
-	protected void validate(String fileName, boolean checkExtension)
+	public void validate(String fileName, boolean validateFileExtension)
 		throws PortalException, SystemException {
 
 		if ((fileName.indexOf("\\\\") != -1) ||
@@ -315,16 +250,35 @@ public class DLLocalServiceImpl implements DLLocalService {
 			throw new FileNameException(fileName);
 		}
 
-		if (checkExtension) {
-			validateExtension(fileName);
+		if (validateFileExtension) {
+			boolean validFileExtension = false;
+
+			String[] fileExtensions = PrefsPropsUtil.getStringArray(
+				PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA);
+
+			if (!PropsValues.WEBDAV_LITMUS) {
+				for (int i = 0; i < fileExtensions.length; i++) {
+					if (StringPool.STAR.equals(fileExtensions[i]) ||
+						StringUtil.endsWith(fileName, fileExtensions[i])) {
+
+						validFileExtension = true;
+
+						break;
+					}
+				}
+
+				if (!validFileExtension) {
+					throw new FileNameException(fileName);
+				}
+			}
 		}
 	}
 
-	protected void validate(
-			String fileName, byte[] bytes, boolean checkExtension)
+	public void validate(
+			String fileName, boolean validateFileExtension, byte[] bytes)
 		throws PortalException, SystemException {
 
-		validate(fileName, checkExtension);
+		validate(fileName, validateFileExtension);
 
 		if (((PropsValues.WEBDAV_LITMUS) ||
 			(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
@@ -336,10 +290,11 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	protected void validate(String fileName, File file, boolean checkExtension)
+	public void validate(
+			String fileName, boolean validateFileExtension, File file)
 		throws PortalException, SystemException {
 
-		validate(fileName, true);
+		validate(fileName, validateFileExtension);
 
 		if (((PropsValues.WEBDAV_LITMUS) ||
 			 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
@@ -351,11 +306,11 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	protected void validate(
-			String fileName, InputStream is, boolean checkExtension)
+	public void validate(
+			String fileName, boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException {
 
-		validate(fileName, checkExtension);
+		validate(fileName, validateFileExtension);
 
 		// LEP-4851
 
@@ -374,28 +329,22 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	protected void validateExtension(String fileName)
-		throws PortalException, SystemException {
+	public void validate(String fileName, String sourceFileName, InputStream is)
+		throws PortalException {
 
-		boolean validFileExtension = false;
-
-		String[] fileExtensions = PrefsPropsUtil.getStringArray(
-			PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA);
+		String fileNameExtension = FileUtil.getExtension(fileName);
+		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
 
 		if (!PropsValues.WEBDAV_LITMUS) {
-			for (int i = 0; i < fileExtensions.length; i++) {
-				if (StringPool.STAR.equals(fileExtensions[i]) ||
-					StringUtil.endsWith(fileName, fileExtensions[i])) {
+			if (Validator.isNull(fileNameExtension) ||
+				!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
 
-					validFileExtension = true;
-
-					break;
-				}
+				throw new SourceFileNameException(sourceFileName);
 			}
+		}
 
-			if (!validFileExtension) {
-				throw new FileNameException(fileName);
-			}
+		if (is == null) {
+			throw new FileSizeException(fileName);
 		}
 	}
 

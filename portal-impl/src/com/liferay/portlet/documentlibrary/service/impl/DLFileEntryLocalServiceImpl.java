@@ -82,8 +82,8 @@ import java.util.List;
  * For DLFileEntries, the naming convention for some of the variables is not
  * very informative, due to legacy code. Each DLFileEntry has a corresponding
  * name and title. The "name" is a unique identifier for a given file and
- * usually follows the format "DLFE-1234" whereas the "title" is the actual
- * name specified by the user (e.g., "Budget.xls").
+ * usually follows the format "DLFE-1234" whereas the "title" is the actual name
+ * specified by the user (e.g., "Budget.xls").
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -245,9 +245,9 @@ public class DLFileEntryLocalServiceImpl
 
 		dlLocalService.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			fileEntry.getGroupId(), repositoryId, name, fileEntryId,
+			fileEntry.getGroupId(), repositoryId, name, false, fileEntryId,
 			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
-			serviceContext, is, false);
+			serviceContext, is);
 
 		// Message boards
 
@@ -1013,9 +1013,10 @@ public class DLFileEntryLocalServiceImpl
 
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				fileEntry.getGroupId(), repositoryId, name, newVersion, name,
-				fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
-				fileEntry.getModifiedDate(), serviceContext, is, false);
+				fileEntry.getGroupId(), repositoryId, name, false, newVersion,
+				name, fileEntry.getFileEntryId(),
+				fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
+				serviceContext, is);
 
 			return fileEntry;
 		}
@@ -1038,10 +1039,10 @@ public class DLFileEntryLocalServiceImpl
 
 		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			fileEntry.getGroupId(), repositoryId, name, newVersion,
+			fileEntry.getGroupId(), repositoryId, name, false, newVersion,
 			sourceFileName, fileEntry.getFileEntryId(),
 			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
-			serviceContext, is, false);
+			serviceContext, is);
 
 		// Folder
 
@@ -1194,8 +1195,8 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected String getName(String name) throws SystemException {
-		return "DLFE-" + counterLocalService.increment(
-			DLFileEntry.class.getName());
+		return "DLFE-" +
+			counterLocalService.increment(DLFileEntry.class.getName());
 	}
 
 	protected long getRepositoryId(long groupId, long folderId) {
@@ -1215,6 +1216,31 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return title;
+	}
+
+	protected void validate(
+			long groupId, long folderId, long newFolderId, String name,
+			String title, String sourceFileName, InputStream is)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(sourceFileName)) {
+			dlLocalService.validate(title, sourceFileName, is);
+		}
+
+		if (folderId != newFolderId) {
+			folderId = newFolderId;
+		}
+
+		validate(groupId, folderId, name, title);
+	}
+
+	protected void validate(
+			long groupId, long folderId, String title, InputStream is)
+		throws PortalException, SystemException {
+
+		dlLocalService.validate(title, true, is);
+
+		validate(groupId, folderId, null, title);
 	}
 
 	protected void validate(
@@ -1239,31 +1265,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 		catch (NoSuchFileEntryException nsfee) {
 		}
-	}
-
-	protected void validate(
-			long groupId, long folderId, long newFolderId, String name,
-			String title, String sourceFileName, InputStream is)
-		throws PortalException, SystemException {
-
-		if (Validator.isNotNull(sourceFileName)) {
-			dlLocalService.validate(title, sourceFileName, is);
-		}
-
-		if (folderId != newFolderId) {
-			folderId = newFolderId;
-		}
-
-		validate(groupId, folderId, name, title);
-	}
-
-	protected void validate(
-			long groupId, long folderId, String title, InputStream is)
-		throws PortalException, SystemException {
-
-		dlLocalService.validate(title, is);
-
-		validate(groupId, folderId, null, title);
 	}
 
 	private static Log _log =
