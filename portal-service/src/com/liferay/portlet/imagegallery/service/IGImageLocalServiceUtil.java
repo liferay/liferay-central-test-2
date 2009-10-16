@@ -400,6 +400,12 @@ public class IGImageLocalServiceUtil {
 			description, is, contentType, serviceContext);
 	}
 
+	public static void updateSmallImage(long smallImageId, long largeImageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateSmallImage(smallImageId, largeImageId);
+	}
+
 	public static IGImageLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("IGImageLocalService is not set");

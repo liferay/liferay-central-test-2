@@ -683,6 +683,36 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
+	public void updateSmallImage(long smallImageId, long largeImageId)
+		throws PortalException, SystemException {
+
+		try {
+			RenderedImage renderedImage = null;
+
+			Image largeImage = imageLocalService.getImage(largeImageId);
+
+			byte[] bytes = largeImage.getTextObj();
+			String contentType = largeImage.getType();
+
+			if (bytes != null) {
+				renderedImage = ImageProcessorUtil.read(
+					bytes).getRenderedImage();
+
+				//validate(bytes);
+			}
+
+			if (renderedImage != null) {
+				saveScaledImage(
+					renderedImage, smallImageId, contentType,
+					PrefsPropsUtil.getInteger(
+						PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
+			}
+		}
+		catch (IOException ioe) {
+			throw new ImageSizeException(ioe);
+		}
+	}
+
 	protected long getFolder(IGImage image, long folderId)
 		throws SystemException {
 

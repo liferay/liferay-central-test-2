@@ -385,6 +385,12 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 			folderId, name, description, is, contentType, serviceContext);
 	}
 
+	public void updateSmallImage(long smallImageId, long largeImageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_igImageLocalService.updateSmallImage(smallImageId, largeImageId);
+	}
+
 	public IGImageLocalService getWrappedIGImageLocalService() {
 		return _igImageLocalService;
 	}

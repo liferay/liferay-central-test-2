@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ImageConstants;
@@ -38,6 +39,7 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -45,6 +47,8 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.IOException;
 
 import java.util.Date;
+
+import javax.portlet.PortletPreferences;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -101,6 +105,31 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
+	protected boolean checkIGImageThumbnailMaxDimensions(
+			Image image, long igImageId)
+		throws PortalException, SystemException {
+
+		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
+
+		long igThumbnailMaxDimension = GetterUtil.getLong(
+			preferences.getValue(
+				PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION, null));
+
+		if ((image.getHeight() > igThumbnailMaxDimension) ||
+			(image.getWidth() > igThumbnailMaxDimension)) {
+
+			IGImage igImage = IGImageLocalServiceUtil.getImage(
+				igImageId);
+
+			IGImageLocalServiceUtil.updateSmallImage(
+				igImage.getSmallImageId(), igImage.getLargeImageId());
+
+			return true;
+		}
+
+		return false;
+	}
+
 	protected Image getDefaultImage(HttpServletRequest request, long imageId)
 		throws NoSuchImageException {
 
@@ -136,6 +165,16 @@ public class ImageServlet extends HttpServlet {
 
 		if (imageId > 0) {
 			image = ImageLocalServiceUtil.getImage(imageId);
+
+			long igImageId = ParamUtil.getLong(request, "igImageId");
+			boolean igSmallImage = ParamUtil.getBoolean(
+				request, "igSmallImage");
+
+			if ((igImageId > 0) && igSmallImage) {
+				if (checkIGImageThumbnailMaxDimensions(image, igImageId)) {
+					image = ImageLocalServiceUtil.getImage(imageId);
+				}
+			}
 		}
 		else {
 			String uuid = ParamUtil.getString(request, "uuid");

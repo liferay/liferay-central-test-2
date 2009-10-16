@@ -308,4 +308,8 @@ public interface IGImageLocalService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public void updateSmallImage(long smallImageId, long largeImageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }
