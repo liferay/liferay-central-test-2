@@ -105,8 +105,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		for (char c : friendlyURL.toCharArray()) {
 			if ((!Validator.isChar(c)) && (!Validator.isDigit(c)) &&
 				(c != CharPool.DASH) && (c != CharPool.PERCENT) &&
-				(c != CharPool.PERIOD) && (c != CharPool.SLASH) &&
-				(c != CharPool.UNDERLINE) && (c != CharPool.PLUS)) {
+				(c != CharPool.PERIOD)  && (c != CharPool.PLUS) &&
+				(c != CharPool.SLASH) && (c != CharPool.UNDERLINE)) {
 
 				return LayoutFriendlyURLException.INVALID_CHARACTERS;
 			}
