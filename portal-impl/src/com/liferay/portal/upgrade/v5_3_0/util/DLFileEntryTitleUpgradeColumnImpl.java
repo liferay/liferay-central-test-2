@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.v5_3_0.util;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 
@@ -49,7 +50,12 @@ public class DLFileEntryTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		String name = (String)_nameColumn.getOldValue();
 		String extension = FileUtil.getExtension(name);
 
-		return title + StringPool.PERIOD + extension;
+		if (Validator.isNotNull(extension)) { 
+			return title + StringPool.PERIOD + extension;
+		}
+		else {
+			return title;
+		}
 	}
 
 	private UpgradeColumn _nameColumn;
