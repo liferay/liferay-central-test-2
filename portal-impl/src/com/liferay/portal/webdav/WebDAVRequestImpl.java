@@ -38,12 +38,14 @@ public class WebDAVRequestImpl implements WebDAVRequest {
 
 	public WebDAVRequestImpl(
 			WebDAVStorage storage, HttpServletRequest request,
-			HttpServletResponse response, PermissionChecker permissionChecker)
+			HttpServletResponse response, String userAgent,
+			PermissionChecker permissionChecker)
 		throws WebDAVException {
 
 		_storage = storage;
 		_request = request;
 		_response = response;
+		_userAgent = userAgent;
 		_lockUuid = WebDAVUtil.getLockUuid(request);
 		_path = WebDAVUtil.fixPath(_request.getPathInfo());
 		_companyId = WebDAVUtil.getCompanyId(_path);
@@ -95,10 +97,24 @@ public class WebDAVRequestImpl implements WebDAVRequest {
 	public PermissionChecker getPermissionChecker() {
 		return _permissionChecker;
 	}
+	
+	public boolean isLitmus() {
+		return _userAgent.contains("litmus");
+	}
+	
+	public boolean isMac() {
+		return _userAgent.contains("WebDAVFS");
+	}
+	
+	public boolean isWindows() {
+		return _userAgent.contains(
+			"Microsoft Data Access Internet Publishing Provider");
+	}
 
 	private WebDAVStorage _storage;
 	private HttpServletRequest _request;
 	private HttpServletResponse _response;
+	private String _userAgent;
 	private String _path = StringPool.BLANK;
 	private long _companyId;
 	private long _groupId;

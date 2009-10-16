@@ -57,8 +57,10 @@ public class WebDAVServlet extends HttpServlet {
 			_log.info(request.getMethod() + " " + request.getRequestURI());
 		}
 
+		String userAgent = request.getHeader("User-agent");
+		
 		if (_log.isDebugEnabled()) {
-			_log.debug("User agent " + request.getHeader("User-agent"));
+			_log.debug("User agent " + userAgent);
 		}
 
 		try {
@@ -103,7 +105,7 @@ public class WebDAVServlet extends HttpServlet {
 			// Process the method
 
 			WebDAVRequest webDavRequest = new WebDAVRequestImpl(
-				storage, request, response, permissionChecker);
+				storage, request, response, userAgent, permissionChecker);
 
 			status = method.process(webDavRequest);
 		}
