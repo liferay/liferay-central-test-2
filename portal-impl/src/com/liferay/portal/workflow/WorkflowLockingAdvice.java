@@ -68,7 +68,7 @@ public class WorkflowLockingAdvice {
 
 		WorkflowDefinition workflowDefinition =
 			(WorkflowDefinition)arguments[0];
-		long userId = (Long)arguments[2];
+		long userId = (Long)arguments[1];
 
 		String workflowDefinitionName =
 			workflowDefinition.getWorkflowDefinitionName();
