@@ -63,7 +63,6 @@ public class DynamicQueryImpl implements DynamicQuery {
 	}
 
 	public void compile(Session session) {
-
 		org.hibernate.Session hibernateSession =
 			(org.hibernate.Session)session.getWrappedSession();
 
