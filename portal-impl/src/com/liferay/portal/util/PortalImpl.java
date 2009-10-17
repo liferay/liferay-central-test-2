@@ -547,14 +547,14 @@ public class PortalImpl implements Portal {
 		}
 
 		try {
-			String securityMode = PropsValues.REFERER_URL_SECURITY_MODE;
+			String securityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
 
 			String domain = StringUtil.split(
 				HttpUtil.getDomain(url), StringPool.COLON)[0];
 
 			if (securityMode.equals("domain")) {
 				String[] allowedDomains =
-					PropsValues.REFERER_URL_DOMAINS_ALLOWED;
+					PropsValues.REDIRECT_URL_DOMAINS_ALLOWED;
 
 				if ((allowedDomains.length > 0) &&
 					!ArrayUtil.contains(allowedDomains, domain)) {
@@ -563,7 +563,7 @@ public class PortalImpl implements Portal {
 				}
 			}
 			else if (securityMode.equals("ip")) {
-				String[] allowedIps = PropsValues.REFERER_URL_IPS_ALLOWED;
+				String[] allowedIps = PropsValues.REDIRECT_URL_IPS_ALLOWED;
 
 				InetAddress inetAddress = InetAddress.getByName(domain);
 

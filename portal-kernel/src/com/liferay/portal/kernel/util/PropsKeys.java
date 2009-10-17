@@ -1111,11 +1111,11 @@ public interface PropsKeys {
 
 	public static final String PREFERENCE_VALIDATE_ON_STARTUP = "preference.validate.on.startup";
 
-	public static final String REFERER_URL_DOMAINS_ALLOWED = "referer.url.domains.allowed";
+	public static final String REDIRECT_URL_DOMAINS_ALLOWED = "redirect.url.domains.allowed";
 
-	public static final String REFERER_URL_IPS_ALLOWED = "referer.url.ips.allowed";
+	public static final String REDIRECT_URL_IPS_ALLOWED = "redirect.url.ips.allowed";
 
-	public static final String REFERER_URL_SECURITY_MODE = "referer.url.security.mode";
+	public static final String REDIRECT_URL_SECURITY_MODE = "redirect.url.security.mode";
 
 	public static final String REQUEST_SHARED_ATTRIBUTES = "request.shared.attributes";
 
