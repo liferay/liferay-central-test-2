@@ -120,12 +120,12 @@ public class WebDAVUtil {
 
 		String destination = pathSegments[pathSegments.length - 1];
 
-		destination = 
-			StringUtil.replace(destination, StringPool.SLASH, _TEMP_SLASH);
+		destination =  StringUtil.replace(
+			destination, StringPool.SLASH, _TEMP_SLASH);
 		destination = HttpUtil.decodeURL(destination, true);
-		destination = 
-			StringUtil.replace(destination, _TEMP_SLASH, StringPool.SLASH);
-		
+		destination =  StringUtil.replace(
+			destination, _TEMP_SLASH, StringPool.SLASH);
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Destination " + destination);
 		}
