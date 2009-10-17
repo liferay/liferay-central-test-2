@@ -151,7 +151,7 @@ public class StartupHelper {
 			((verifyFrequency == VerifyProcess.ONCE) && !verified) ||
 			(_upgraded)) {
 
-			if (!_upgraded) {
+			if (_upgraded) {
 				PropsUtil.set(PropsKeys.INDEX_ON_STARTUP, "true");
 			}
 
