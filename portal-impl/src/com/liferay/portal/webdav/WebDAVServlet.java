@@ -24,6 +24,7 @@ package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.User;
@@ -57,8 +58,8 @@ public class WebDAVServlet extends HttpServlet {
 			_log.info(request.getMethod() + " " + request.getRequestURI());
 		}
 
-		String userAgent = request.getHeader("User-agent");
-		
+		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("User agent " + userAgent);
 		}

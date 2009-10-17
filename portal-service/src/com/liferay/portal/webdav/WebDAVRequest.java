@@ -55,11 +55,11 @@ public interface WebDAVRequest {
 	public String getLockUuid();
 
 	public PermissionChecker getPermissionChecker();
-	
+
 	public boolean isLitmus();
-	
+
 	public boolean isMac();
-	
+
 	public boolean isWindows();
 
 }

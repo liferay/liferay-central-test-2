@@ -97,15 +97,15 @@ public class WebDAVRequestImpl implements WebDAVRequest {
 	public PermissionChecker getPermissionChecker() {
 		return _permissionChecker;
 	}
-	
+
 	public boolean isLitmus() {
 		return _userAgent.contains("litmus");
 	}
-	
+
 	public boolean isMac() {
 		return _userAgent.contains("WebDAVFS");
 	}
-	
+
 	public boolean isWindows() {
 		return _userAgent.contains(
 			"Microsoft Data Access Internet Publishing Provider");
