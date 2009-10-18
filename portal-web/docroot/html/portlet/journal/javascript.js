@@ -26,28 +26,32 @@ AUI().add(
 
 			instance.acceptChildren = true;
 
+			var placeholder = A.Node.create('<div class="aui-tree-placeholder aui-tree-sub-placeholder"></div>');
 			var fields = jQuery(structureTreeId + instance._fieldRowsClass + '.structure-field');
 
 			instance.nestedListOptions = {
-				centerFrame: false,
-				dropOn: 'span.folder > ul.folder-droppable',
-				forcePlaceholderSize: false,
-				handle: instance._handleMoveFiledClass,
-				placeholder: 'aui-tree-placeholder aui-tree-sub-placeholder',
-				resizeFrame: true,
-				sortOn: structureTree,
+				dd: {
+					handles: [ instance._handleMoveFiledClass ]
+				},
 				dropCondition: function() {
 					var destEl = jQuery(this);
 
 					return instance._canDropChildren(destEl);
-				}
+				},
+				dropOn: 'span.folder > ul.folder-droppable',
+				helper: A.get(instance._helperCachedObject[0]),
+				placeholder: placeholder,
+				sortCondition: function(event) {
+					var dropNode = event.drop.get('node');
+
+					return dropNode.ancestor(structureTreeId);
+				},
+				sortOn: structureTreeId
 			};
 
 			instance.nestedListEvents = {
-				b4StartDragEvent: function(event) {
-					var placeholderEl = this.placeholderEl;
-
-					var placeholderWidth = placeholderEl.outerWidth();
+				'drag:start': function(event) {
+					var placeholderWidth = placeholder.get('offsetWidth');
 
 					instance._helperCachedObject.css(
 						{
@@ -60,7 +64,7 @@ AUI().add(
 					Liferay.Util.disableSelection(document.body);
 				},
 
-				endDragEvent: function() {
+				'drag:end': function(event) {
 					instance._dropField();
 
 					instance._getTextAreaFields().css('visibility', 'visible');
@@ -68,16 +72,19 @@ AUI().add(
 					Liferay.Util.enableSelection(document.body);
 				},
 
-				dragOutEvent: function(event, id) {
+				'drag:out': function(event) {
 					if (!instance.acceptChildren) {
 						instance._helperIntersecting();
 						instance.acceptChildren = true;
 					}
 				},
 
-				dragOverEvent: function(event, id) {
-					var destId = event.info;
-					var destEl = jQuery('#' + destId);
+				'drag:over': function(event) {
+					var drag = event.target;
+					var drop = event.drop;
+					var source = jQuery( drag.get('node').getDOM() );
+					var proxy = jQuery( drag.get('dragNode').getDOM() );
+					var destEl = jQuery( drop.get('node').getDOM() );
 
 					instance.acceptChildren = instance._canDropChildren(destEl);
 
@@ -96,29 +103,34 @@ AUI().add(
 			var componentFields = jQuery(journalComponentListId + instance._componentFields);
 
 			instance.componentFieldsOptions = {
-				centerFrame: false,
-				dropOn: 'span.folder > ul.folder-droppable',
-				forcePlaceholderSize: false,
-				placeholder: 'aui-tree-placeholder aui-tree-sub-placeholder',
-				resizeFrame: true,
-				sortOn: structureTree,
 				dropCondition: function() {
 					var destEl = jQuery(this);
 
 					return instance._canDropChildren(destEl);
+				},
+				dropOn: 'span.folder > ul.folder-droppable',
+				helper: A.get(instance._helperCachedObject[0]),
+				placeholder: placeholder,
+				sortCondition: function(event) {
+					var dropNode = event.drop.get('node');
+
+					return dropNode.ancestor(structureTreeId);
 				}
 			};
 
 			instance.componentFieldsEvents = {
-				startDragEvent: function() {
-					var source = jQuery(this.getEl());
-					var proxy = jQuery(this.getDragEl());
+				'drag:start': function(event) {
+					var drag = event.target;
+					var source = jQuery( drag.get('node').getDOM() );
+					var proxy = jQuery( drag.get('dragNode').getDOM() );
 
 					var languageName = source.text();
 					var componentType = instance._getComponentType(source);
 					var className = 'journal-component-' + instance._stripComponentType(componentType);
 
 					var helperComponentIcon = instance._helperCachedObject.find('div.journal-component');
+
+					instance._helperCachedObject.width(200);
 
 					helperComponentIcon.addClass(className).html(languageName);
 
@@ -136,14 +148,16 @@ AUI().add(
 					instance.clonedSource.generateId();
 
 					instance.clonedSource.css('visibility', 'visible').show();
+					instance.clonedSource.removeClass('aui-helper-hidden');
 					instance.clonedSource.addClass('dragging');
 
-					instance._createNestedList(instance.clonedSource, instance.componentFieldsOptions, instance.componentFieldsEvents);
+					instance._createNestedList(instance.clonedSource, instance.componentFieldsOptions, instance.componentFieldsEvents, true);
 				},
 
-				endDragEvent: function() {
-					var source = jQuery(this.getEl());
-					var proxy = jQuery(this.getDragEl());
+				'drag:end': function(event) {
+					var drag = event.target;
+					var source = jQuery( drag.get('node').getDOM() );
+					var proxy = jQuery( drag.get('dragNode').getDOM() );
 
 					proxy.removeClass('component-dragging');
 
@@ -204,12 +218,12 @@ AUI().add(
 					}
 				},
 
-				dragOutEvent: instance.nestedListEvents.dragOutEvent,
+				'drag:out': instance.nestedListEvents['drag:out'],
 
-				dragOverEvent: instance.nestedListEvents.dragOverEvent
+				'drag:over': instance.nestedListEvents['drag:over']
 			};
 
-			instance._createNestedList(componentFields, instance.componentFieldsOptions, instance.componentFieldsEvents);
+			instance._createNestedList(componentFields, instance.componentFieldsOptions, instance.componentFieldsEvents, true);
 
 			var editContainerWrapper = instance._getById(instance._editFieldWrapperClass);
 
@@ -305,31 +319,48 @@ AUI().add(
 				return canDrop;
 			},
 
-			_createNestedList: function(selector, options, events) {
+			_createNestedList: function(selector, options, events, components) {
 				var instance = this;
+
+				var applyEvents = function(nestedList) {
+					jQuery.each(
+						events,
+						function(key, value) {
+							if (key && jQuery.isFunction(value)) {
+								nestedList.on(key, value);
+							}
+						}
+					);
+				};
+
+				var defaults = {
+					dropOn: '.folder'
+				};
+
+				options = jQuery.extend(defaults, options);
+
+				if (!instance._nestedList) {
+					instance._nestedList = new A.NestedList(options);
+
+					applyEvents(instance._nestedList);
+				}
+
+				if (components && !instance._nestedListComponents) {
+					instance._nestedListComponents = new A.NestedList(options);
+
+					applyEvents(instance._nestedListComponents);
+				}
 
 				jQuery(selector).each(
 					function() {
 						var element = this;
+						var nestedList = instance._nestedList;
 
-						var defaults = {
-							centerFrame: false,
-							dropOn: '.folder'
-						};
+						if (components) {
+							nestedList = instance._nestedListComponents;
+						}
 
-						options = jQuery.extend(defaults, options);
-
-						var nestedList = new Alloy.NestedList(element, null, options);
-						nestedList.setDragElId(instance._helperCachedObjectId);
-
-						jQuery.each(
-							events,
-							function(key, value) {
-								if (key && jQuery.isFunction(value)) {
-									nestedList.on(key, value);
-								}
-							}
-						);
+						nestedList.add(element);
 					}
 				);
 			},
@@ -2839,6 +2870,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'context-panel', 'dialog', 'liferay-observable']
+		requires: ['aui-base', 'context-panel', 'dialog', 'liferay-observable', 'nested-list']
 	}
 );

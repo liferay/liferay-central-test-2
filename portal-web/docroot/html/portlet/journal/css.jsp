@@ -135,6 +135,10 @@
 	display: none;
 }
 
+.portlet-journal .component-group .aui-tree-placeholder {
+	display: none;
+}
+
 .portlet-journal .journal-edit-mode .structure-tree .aui-placeholder, .portlet-journal .journal-edit-mode .structure-tree .aui-tree-placeholder, .portlet-journal .journal-edit-mode .structure-tree .aui-tree-sub-placeholder {
 	-ms-filter: alpha(opacity=75);
 	background: #fff;
