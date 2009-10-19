@@ -14,8 +14,13 @@ import ${packagePath}.${noSuchEntity}Exception;
 import ${packagePath}.model.${entity.name};
 
 import ${beanLocatorUtil};
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
@@ -251,6 +256,70 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 		${entity.name} missing${entity.name} = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missing${entity.name});
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		${entity.name} new${entity.name} = add${entity.name}();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(${entity.name}.class, ${entity.name}.class.getClassLoader());
+
+		<#if entity.hasCompoundPK()>
+			<#list entity.PKList as column>
+				dynamicQuery.add(RestrictionsFactoryUtil.eq("id.${column.name}", new${entity.name}.get${column.methodName}()));
+			</#list>
+		<#else>
+			<#assign column = entity.PKList[0]>
+
+			dynamicQuery.add(RestrictionsFactoryUtil.eq("${column.name}", new${entity.name}.get${column.methodName}()));
+		</#if>
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		${entity.name} existing${entity.name} = (${entity.name})result.get(0);
+
+		assertEquals(existing${entity.name}, new${entity.name});
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		${entity.name} new${entity.name} = add${entity.name}();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(${entity.name}.class, ${entity.name}.class.getClassLoader());
+
+		<#if entity.hasCompoundPK()>
+			<#list entity.PKList as column>
+				dynamicQuery.add(RestrictionsFactoryUtil.eq("id.${column.name}",
+
+				<#if column.type == "int">
+					nextInt()
+				<#elseif column.type == "long">
+					nextLong()
+				<#elseif column.type == "String">
+					randomString()
+				</#if>
+
+				));
+			</#list>
+		<#else>
+			<#assign column = entity.PKList[0]>
+
+			dynamicQuery.add(RestrictionsFactoryUtil.eq("${column.name}",
+
+			<#if column.type == "int">
+				nextInt()
+			<#elseif column.type == "long">
+				nextLong()
+			<#elseif column.type == "String">
+				randomString()
+			</#if>
+
+			));
+		</#if>
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ${entity.name} add${entity.name}() throws Exception {
