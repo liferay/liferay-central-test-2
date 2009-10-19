@@ -252,6 +252,14 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.security.auth.ScreenNameGeneratorFactory">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.security.auth.ScreenNameValidatorFactory">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.security.auth.SiteMinderAutoLogin">
 		<priority value="WARN" />
 	</category>

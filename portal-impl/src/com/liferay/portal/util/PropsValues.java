@@ -1549,7 +1549,7 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.USERS_REMINDER_QUERIES_REQUIRED));
 
-	public static final boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE =
+	public static boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE));
 

@@ -64,6 +64,10 @@ import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.auth.ScreenNameGenerator;
+import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
+import com.liferay.portal.security.auth.ScreenNameValidator;
+import com.liferay.portal.security.auth.ScreenNameValidatorFactory;
 import com.liferay.portal.security.ldap.AttributesTransformer;
 import com.liferay.portal.security.ldap.AttributesTransformerFactory;
 import com.liferay.portal.service.persistence.BasePersistence;
@@ -179,6 +183,14 @@ public class HookHotDeployListener
 
 		if (portalProperties.contains(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
 			AttributesTransformerFactory.setInstance(null);
+		}
+
+		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_GENERATOR)) {
+			ScreenNameGeneratorFactory.setInstance(null);
+		}
+
+		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_VALIDATOR)) {
+			ScreenNameValidatorFactory.setInstance(null);
 		}
 	}
 
@@ -1099,6 +1111,38 @@ public class HookHotDeployListener
 
 			AttributesTransformerFactory.setInstance(attributesTransformer);
 		}
+
+		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_GENERATOR)) {
+			String screenNameGeneratorClassName = portalProperties.getProperty(
+				PropsKeys.USERS_SCREEN_NAME_GENERATOR);
+
+			ScreenNameGenerator screenNameGenerator =
+				(ScreenNameGenerator)portletClassLoader.loadClass(
+					screenNameGeneratorClassName).newInstance();
+
+			screenNameGenerator = (ScreenNameGenerator)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {ScreenNameGenerator.class},
+				new ContextClassLoaderBeanHandler(
+					screenNameGenerator, portletClassLoader));
+
+			ScreenNameGeneratorFactory.setInstance(screenNameGenerator);
+		}
+
+		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_VALIDATOR)) {
+			String screenNameValidatorClassName = portalProperties.getProperty(
+				PropsKeys.USERS_SCREEN_NAME_VALIDATOR);
+
+			ScreenNameValidator screenNameValidator =
+				(ScreenNameValidator)portletClassLoader.loadClass(
+					screenNameValidatorClassName).newInstance();
+
+			screenNameValidator = (ScreenNameValidator)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {ScreenNameValidator.class},
+				new ContextClassLoaderBeanHandler(
+					screenNameValidator, portletClassLoader));
+
+			ScreenNameValidatorFactory.setInstance(screenNameValidator);
+		}
 	}
 
 	protected void resetPortalProperties(Properties portalProperties)
@@ -1258,7 +1302,9 @@ public class HookHotDeployListener
 		"my.places.show.user.public.sites.with.no.layouts",
 		"terms.of.use.required",
 		"theme.css.fast.load",
-		"theme.images.fast.load"
+		"theme.images.fast.load",
+		"users.email.address.required",
+		"users.screen.name.always.autogenerate"
 	};
 
 	private static final String[] _PROPS_VALUES_INTEGER = new String[] {

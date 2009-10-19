@@ -61,6 +61,9 @@ session.phishing.protected.attributes
 terms.of.use.required
 theme.css.fast.load
 theme.images.fast.load
+users.screen.name.always.autogenerate
+users.screen.name.generator
+users.screen.name.validator
 value.object.listener.*
 -->
 <!ELEMENT portal-properties (#PCDATA)>

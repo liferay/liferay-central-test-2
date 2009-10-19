@@ -99,7 +99,9 @@ import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
+import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.security.auth.ScreenNameValidator;
+import com.liferay.portal.security.auth.ScreenNameValidatorFactory;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
@@ -307,8 +309,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (autoScreenName) {
 			ScreenNameGenerator screenNameGenerator =
-				(ScreenNameGenerator)InstancePool.get(
-					PropsValues.USERS_SCREEN_NAME_GENERATOR);
+				ScreenNameGeneratorFactory.getInstance();
 
 			try {
 				screenName = screenNameGenerator.generate(
@@ -3418,13 +3419,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		ScreenNameValidator screenNameValidator =
-			(ScreenNameValidator)InstancePool.get(
-				PropsValues.USERS_SCREEN_NAME_VALIDATOR);
+			ScreenNameValidatorFactory.getInstance();
 
-		if (screenNameValidator != null) {
-			if (!screenNameValidator.validate(companyId, screenName)) {
-				throw new UserScreenNameException();
-			}
+		if (!screenNameValidator.validate(companyId, screenName)) {
+			throw new UserScreenNameException();
 		}
 
 		if (Validator.isNumber(screenName) &&
