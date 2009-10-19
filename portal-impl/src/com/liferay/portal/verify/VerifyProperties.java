@@ -264,6 +264,18 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"default.user.public.layout.lar",
 			"default.user.public.layouts.lar"
+		},
+		new String[] {
+			"referer.url.domains.allowed",
+			"redirect.url.domains.allowed"
+		},
+		new String[] {
+			"referer.url.ips.allowed",
+			"redirect.url.ips.allowed"
+		},
+		new String[] {
+			"referer.url.security.mode",
+			"redirect.url.security.mode"
 		}
 	};
 
