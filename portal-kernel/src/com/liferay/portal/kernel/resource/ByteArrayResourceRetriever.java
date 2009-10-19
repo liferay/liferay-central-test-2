@@ -32,8 +32,8 @@ import java.io.InputStream;
  */
 public class ByteArrayResourceRetriever implements ResourceRetriever {
 
-	public ByteArrayResourceRetriever(byte[] resource) {
-		_inputStream = new ByteArrayInputStream(resource);
+	public ByteArrayResourceRetriever(byte[] bytes) {
+		_inputStream = new ByteArrayInputStream(bytes);
 	}
 
 	public InputStream getInputStream() {
