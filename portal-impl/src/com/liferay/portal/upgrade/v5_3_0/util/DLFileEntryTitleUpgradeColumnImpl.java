@@ -50,7 +50,7 @@ public class DLFileEntryTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		String name = (String)_nameColumn.getOldValue();
 		String extension = FileUtil.getExtension(name);
 
-		if (Validator.isNotNull(extension)) { 
+		if (Validator.isNotNull(extension)) {
 			return title + StringPool.PERIOD + extension;
 		}
 		else {
