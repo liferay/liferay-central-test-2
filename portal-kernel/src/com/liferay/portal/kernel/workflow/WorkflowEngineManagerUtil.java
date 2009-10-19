@@ -79,6 +79,13 @@ public class WorkflowEngineManagerUtil {
 	}
 
 	/**
+	 * @see WorkflowEngineManager#isSupportsGlobalActivities()
+	 */
+	public static boolean isSupportsGlobalActivities() {
+		return _workflowEngineManager.isSupportsGlobalActivities();
+	}
+
+	/**
 	 * @see WorkflowEngineManager#isSupportsWorkflowDefinitionVersioning()
 	 */
 	public static boolean isSupportsWorkflowDefinitionVersioning() {

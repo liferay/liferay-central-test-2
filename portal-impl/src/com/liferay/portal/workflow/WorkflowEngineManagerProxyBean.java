@@ -56,10 +56,10 @@ public class WorkflowEngineManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean isSupportGlobalActivities() {
+	public boolean isSupportsGlobalActivities() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public boolean isSupportsWorkflowDefinitionVersioning() {
 		throw new UnsupportedOperationException();
 	}

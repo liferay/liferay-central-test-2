@@ -93,20 +93,20 @@ public interface WorkflowEngineManager {
 	 * triggered at any time, regardless the current state and it will actually
 	 * not alter the current state. If the engine does not support such global
 	 * activities, it must throw an exception if attempting to execute one using
-	 * the method
-	 * {@link WorkflowInstanceManager#signalWorkflowInstanceByActivity(long, String, Map, long, Map)}
-	 * .
-	 * 
+	 * the method {@link
+	 * WorkflowInstanceManager#signalWorkflowInstanceByActivity(long, String,
+	 * Map, long, Map)}.
+	 *
 	 * @return <code>true</code>, if the engine supports global activities
 	 */
-	public boolean isSupportGlobalActivities();
+	public boolean isSupportsGlobalActivities();
 
 	/**
 	 * Returns <code>true</code>, if the underlying workflow system supports
 	 * versioning of workflow definitions. If versioning is not supported, the
 	 * version number of a workflow definition is most likely ignored by the
 	 * engine.
-	 * 
+	 *
 	 * @return <code>true</code>, if the workflow engine supports versioning
 	 */
 	public boolean isSupportsWorkflowDefinitionVersioning();
