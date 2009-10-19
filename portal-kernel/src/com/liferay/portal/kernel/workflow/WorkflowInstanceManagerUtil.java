@@ -67,8 +67,7 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	/**
-	 * @see WorkflowInstanceManager#getPossibleNextPathNames(long, long,
-	 *		Map)
+	 * @see WorkflowInstanceManager#getPossibleNextPathNames(long, long, Map)
 	 */
 	public static List<String> getPossibleNextPathNames(
 			long workflowInstanceId, long userId,
@@ -234,7 +233,7 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#signalWorkflowInstanceByActivity(long,
-	 *      String, Map, long, Map)
+	 *		String, Map, long, Map)
 	 */
 	public static WorkflowInstanceInfo signalWorkflowInstanceByActivity(
 			long workflowInstanceId, String activityName,
@@ -249,7 +248,7 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#signalWorkflowInstanceByPath(long, String,
-	 *      Map, long, Map)
+	 *		Map, long, Map)
 	 */
 	public static WorkflowInstanceInfo signalWorkflowInstanceByPath(
 			long workflowInstanceId, String pathName,

@@ -100,31 +100,31 @@ public interface WorkflowInstanceManager {
 	 * the given workflow instance with. Usually, this method just returns
 	 * global activity names which can be executed which is a optional feature
 	 * and might not be supported by the underlying engine. If this is the case,
-	 * this method must return an empty list and the method
-	 * {@link #signalWorkflowInstanceByActivity(long, String, Map, long, Map)}
-	 * must throw an exception.
+	 * this method must return an empty list and the method {@link
+	 * #signalWorkflowInstanceByActivity(long, String, Map, long, Map)} must
+	 * throw an exception.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * The list of possible next activities is checked with the role set of the
 	 * specified user to only return activity names the user is allowed to
 	 * execute.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Any of the returned activity name can be used to signal the workflow
-	 * instance with using the method
-	 * {@link #signalWorkflowInstanceByActivity(long, String, Map, long, Map)}.
+	 * instance with using the method {@link
+	 * #signalWorkflowInstanceByActivity(long, String, Map, long, Map)}.
 	 * </p>
-	 * 
-	 * @param workflowInstanceId the id of the workflow instance to return a
-	 *            list of possible next activities for
-	 * @param userId the id of the user requesting the list to check the
-	 *            activities being executable by the user
-	 * @param parameters an optional map of additional parameters to further
-	 *            restrict the result (only used, if the underlying engine needs
-	 *            or supports additional parameters), may be left
-	 *            <code>null</code>, if not needed
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance to return a
+	 *		   list of possible next activities for
+	 * @param  userId the id of the user requesting the list to check the
+	 *		   activities being executable by the user
+	 * @param  parameters an optional map of additional parameters to further
+	 *		   restrict the result (only used, if the underlying engine needs or
+	 *		   supports additional parameters), may be left <code>null</code>,
+	 *		   if not needed
 	 * @return the list of activity names possible to be signaled
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
@@ -139,14 +139,14 @@ public interface WorkflowInstanceManager {
 	 * instance with. If there is just one path leaving the current state, it
 	 * most likely named <code>"default"</code>.
 	 * </p>
-	 * 
-	 * @param workflowInstanceId the id of the workflow instance to return a
-	 *            list of possible next path names for
-	 * @param userId the id of the user requesting the list
-	 * @param parameters an optional map of additional parameters to further
-	 *            restrict the result (only used, if the underlying engine needs
-	 *            or supports additional parameters), may be left
-	 *            <code>null</code>, if not needed
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance to return a
+	 *		   list of possible next path names for
+	 * @param  userId the id of the user requesting the list
+	 * @param  parameters an optional map of additional parameters to further
+	 *		   restrict the result (only used, if the underlying engine needs or
+	 *		   supports additional parameters), may be left <code>null</code>,
+	 *		   if not needed
 	 * @return the list of path names possible to be signaled
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
@@ -524,7 +524,7 @@ public interface WorkflowInstanceManager {
 	 * not allow to attach context information to the instance itself but rather
 	 * use them on a per method basis.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Following this path could eventually execute some following activities
 	 * (nodes) as well, if they are to be executed automatically (depending on
@@ -532,25 +532,25 @@ public interface WorkflowInstanceManager {
 	 * node or state which is not executable without user interaction or any
 	 * other signaling invocation.
 	 * </p>
-	 * 
-	 * @param workflowInstanceId the id of the workflow instance being triggered
-	 * @param pathName the name of the path (transition) to be followed
-	 * @param attributes the optional context information to be passed on to the
-	 *            engine in order to execute the next activity, they will be
-	 *            merged into the existing context information map
-	 * @param callingUserId the id of the calling user (see
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)} for
-	 *            more information)
-	 * @param parameters any optional parameters the process engine would need
-	 *            in order to signal the workflow instance, unlike the
-	 *            attributes, this map is transient and only passed on to the
-	 *            engine, its not merged into the existing attributes of the
-	 *            process instance
+	 *
+	 * @param  workflowInstanceId the id of the workflow instance being
+	 *		   triggered
+	 * @param  pathName the name of the path (transition) to be followed
+	 * @param  attributes the optional context information to be passed on to
+	 *		   the engine in order to execute the next activity, they will be
+	 *		   merged into the existing context information map
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
+	 * @param  parameters any optional parameters the process engine would need
+	 *		   in order to signal the workflow instance, unlike the attributes,
+	 *		   this map is transient and only passed on to the engine, its not
+	 *		   merged into the existing attributes of the process instance
 	 * @return the updated workflow instance information reflecting the current
-	 *         node (state) of the process after the activity has been executed
+	 *		   node (state) of the process after the activity has been executed
 	 * @throws WorkflowException is thrown, if triggering the path failed or it
-	 *             was not found or is not executable due to the current state
-	 *             of the instance
+	 *		   was not found or is not executable due to the current state of
+	 *		   the instance
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstanceByPath(
 			long workflowInstanceId, String pathName,
@@ -564,26 +564,25 @@ public interface WorkflowInstanceManager {
 	 * instance is running after the specified workflow definition and is
 	 * initialized with the given map of context information, if provided
 	 * (optional).
-	 * 
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            create a new workflow instance for
-	 * @param workflowDefinitionVersion the optional, specific version of the
-	 *            workflow definition, if not provided (<code>null</code>), the
-	 *            newest version is used automatically
-	 * @param context the optional map of context information being attached to
-	 *            the process instance, the objects contained in the map must be
-	 *            serializable in order to be persisted along the workflow
-	 *            instance
-	 * @param callingUserId the user creating this new workflow instance
-	 * @param parameters any optional parameters the process engine would need
-	 *            in order to start the new workflow instance, unlike the
-	 *            attributes, this map is transient and only passed on to the
-	 *            engine, its not merged into the existing attributes of the
-	 *            process instance
+	 *
+	 * @param  workflowDefinitionName the name of the workflow definition to
+	 *		   create a new workflow instance for
+	 * @param  workflowDefinitionVersion the optional, specific version of the
+	 *		   workflow definition, if not provided (<code>null</code>), the
+	 *		   newest version is used automatically
+	 * @param  context the optional map of context information being attached to
+	 *		   the process instance, the objects contained in the map must be
+	 *		   serializable in order to be persisted along the workflow instance
+	 * @param  callingUserId the user creating this new workflow instance
+	 * @param  parameters any optional parameters the process engine would need
+	 *		   in order to start the new workflow instance, unlike the
+	 *		   attributes, this map is transient and only passed on to the
+	 *		   engine, its not merged into the existing attributes of the
+	 *		   process instance
 	 * @return the workflow instance information after being successfully
-	 *         created
+	 *		   created
 	 * @throws WorkflowException is thrown, if the new instance could not be
-	 *             created or the workflow could not be started
+	 *		   created or the workflow could not be started
 	 */
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,

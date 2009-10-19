@@ -56,8 +56,7 @@ public class WorkflowInstanceManagerProxyBean
 		long workflowInstanceId, long userId, Map<String, Object> parameters) {
 
 		throw new UnsupportedOperationException();
-	}	
-	
+	}
 
 	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
 		long workflowInstanceId, boolean includeChildren, int start, int end,
@@ -152,7 +151,7 @@ public class WorkflowInstanceManagerProxyBean
 
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public WorkflowInstanceInfo startWorkflowInstance(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		Map<String, Object> context, long callingUserId,
