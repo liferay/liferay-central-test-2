@@ -181,8 +181,20 @@ public class HookHotDeployListener
 
 		resetPortalProperties(portalProperties);
 
+		if (portalProperties.contains(PropsKeys.DL_HOOK_IMPL)) {
+			com.liferay.documentlibrary.util.HookFactory.setInstance(null);
+		}
+
+		if (portalProperties.contains(PropsKeys.IMAGE_HOOK_IMPL)) {
+			com.liferay.portal.image.HookFactory.setInstance(null);
+		}
+
 		if (portalProperties.contains(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
 			AttributesTransformerFactory.setInstance(null);
+		}
+
+		if (portalProperties.contains(PropsKeys.MAIL_HOOK_IMPL)) {
+			com.liferay.mail.util.HookFactory.setInstance(null);
 		}
 
 		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_GENERATOR)) {
@@ -267,16 +279,7 @@ public class HookHotDeployListener
 					initAutoLogins(
 						servletContextName, portletClassLoader,
 						portalProperties);
-					initDLHook(
-						servletContextName, portletClassLoader,
-						portalProperties);
 					initHotDeployListeners(
-						servletContextName, portletClassLoader,
-						portalProperties);
-					initImageHook(
-						servletContextName, portletClassLoader,
-						portalProperties);
-					initMailHook(
 						servletContextName, portletClassLoader,
 						portalProperties);
 					initModelListeners(
@@ -507,13 +510,6 @@ public class HookHotDeployListener
 			destroyCustomJspBag(customJspBag);
 		}
 
-		com.liferay.documentlibrary.util.Hook dlHook = _dlHooksMap.remove(
-			servletContextName);
-
-		if (dlHook != null) {
-			com.liferay.documentlibrary.util.HookFactory.setInstance(null);
-		}
-
 		EventsContainer eventsContainer = _eventsContainerMap.remove(
 			servletContextName);
 
@@ -528,25 +524,11 @@ public class HookHotDeployListener
 			hotDeployListenersContainer.unregisterHotDeployListeners();
 		}
 
-		com.liferay.portal.image.Hook imageHook = _imageHooksMap.remove(
-			servletContextName);
-
-		if (imageHook != null) {
-			com.liferay.portal.image.HookFactory.setInstance(null);
-		}
-
 		LanguagesContainer languagesContainer = _languagesContainerMap.remove(
 			servletContextName);
 
 		if (languagesContainer != null) {
 			languagesContainer.unregisterLanguages();
-		}
-
-		com.liferay.mail.util.Hook mailHook = _mailHooksMap.remove(
-			servletContextName);
-
-		if (mailHook != null) {
-			com.liferay.mail.util.HookFactory.setInstance(null);
 		}
 
 		ModelListenersContainer modelListenersContainer =
@@ -819,32 +801,6 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected void initDLHook(
-			String servletContextName, ClassLoader portletClassLoader,
-			Properties portalProperties)
-		throws Exception {
-
-		String dlHookClassName = portalProperties.getProperty(
-			PropsKeys.DL_HOOK_IMPL);
-
-		if (Validator.isNull(dlHookClassName)) {
-			return;
-		}
-
-		com.liferay.documentlibrary.util.Hook dlHook =
-			(com.liferay.documentlibrary.util.Hook)portletClassLoader.loadClass(
-				dlHookClassName).newInstance();
-
-		dlHook = (com.liferay.documentlibrary.util.Hook)Proxy.newProxyInstance(
-			portletClassLoader,
-			new Class[] {com.liferay.documentlibrary.util.Hook.class},
-			new ContextClassLoaderBeanHandler(dlHook, portletClassLoader));
-
-		com.liferay.documentlibrary.util.HookFactory.setInstance(dlHook);
-
-		_dlHooksMap.put(servletContextName, dlHook);
-	}
-
 	protected Object initEvent(
 			String eventName, String eventClassName,
 			ClassLoader portletClassLoader)
@@ -971,57 +927,6 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected void initImageHook(
-			String servletContextName, ClassLoader portletClassLoader,
-			Properties portalProperties)
-		throws Exception {
-
-		String imageHookClassName = portalProperties.getProperty(
-			PropsKeys.IMAGE_HOOK_IMPL);
-
-		if (Validator.isNull(imageHookClassName)) {
-			return;
-		}
-
-		com.liferay.portal.image.Hook imageHook =
-			(com.liferay.portal.image.Hook)portletClassLoader.loadClass(
-				imageHookClassName).newInstance();
-
-		imageHook = (com.liferay.portal.image.Hook)Proxy.newProxyInstance(
-			portletClassLoader,
-			new Class[] {com.liferay.portal.image.Hook.class},
-			new ContextClassLoaderBeanHandler(imageHook, portletClassLoader));
-
-		com.liferay.portal.image.HookFactory.setInstance(imageHook);
-
-		_imageHooksMap.put(servletContextName, imageHook);
-	}
-
-	protected void initMailHook(
-			String servletContextName, ClassLoader portletClassLoader,
-			Properties portalProperties)
-		throws Exception {
-
-		String mailHookClassName = portalProperties.getProperty(
-			PropsKeys.MAIL_HOOK_IMPL);
-
-		if (Validator.isNull(mailHookClassName)) {
-			return;
-		}
-
-		com.liferay.mail.util.Hook mailHook =
-			(com.liferay.mail.util.Hook)portletClassLoader.loadClass(
-				mailHookClassName).newInstance();
-
-		mailHook = (com.liferay.mail.util.Hook)Proxy.newProxyInstance(
-			portletClassLoader, new Class[] {com.liferay.mail.util.Hook.class},
-			new ContextClassLoaderBeanHandler(mailHook, portletClassLoader));
-
-		com.liferay.mail.util.HookFactory.setInstance(mailHook);
-
-		_mailHooksMap.put(servletContextName, mailHook);
-	}
-
 	protected ModelListener<BaseModel<?>> initModelListener(
 			String modelName, String modelListenerClassName,
 			ClassLoader portletClassLoader)
@@ -1093,6 +998,42 @@ public class HookHotDeployListener
 
 		resetPortalProperties(portalProperties);
 
+		if (portalProperties.contains(PropsKeys.DL_HOOK_IMPL)) {
+			String dlHookClassName = portalProperties.getProperty(
+				PropsKeys.DL_HOOK_IMPL);
+
+			com.liferay.documentlibrary.util.Hook dlHook =
+				(com.liferay.documentlibrary.util.Hook)
+					portletClassLoader.loadClass(dlHookClassName).newInstance();
+
+			dlHook =
+				(com.liferay.documentlibrary.util.Hook)Proxy.newProxyInstance(
+					portletClassLoader,
+					new Class[] {com.liferay.documentlibrary.util.Hook.class},
+					new ContextClassLoaderBeanHandler(
+						dlHook, portletClassLoader));
+
+			com.liferay.documentlibrary.util.HookFactory.setInstance(dlHook);
+		}
+
+		if (portalProperties.contains(PropsKeys.IMAGE_HOOK_IMPL)) {
+			String imageHookClassName = portalProperties.getProperty(
+				PropsKeys.IMAGE_HOOK_IMPL);
+
+			com.liferay.portal.image.Hook imageHook =
+				(com.liferay.portal.image.Hook)portletClassLoader.loadClass(
+					imageHookClassName).newInstance();
+
+			imageHook =
+				(com.liferay.portal.image.Hook)Proxy.newProxyInstance(
+					portletClassLoader,
+					new Class[] {com.liferay.portal.image.Hook.class},
+					new ContextClassLoaderBeanHandler(
+						imageHook, portletClassLoader));
+
+			com.liferay.portal.image.HookFactory.setInstance(imageHook);
+		}
+
 		if (portalProperties.contains(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
 			String attributesTransformerClassName =
 				portalProperties.getProperty(
@@ -1110,6 +1051,24 @@ public class HookHotDeployListener
 						attributesTransformer, portletClassLoader));
 
 			AttributesTransformerFactory.setInstance(attributesTransformer);
+		}
+
+		if (portalProperties.contains(PropsKeys.MAIL_HOOK_IMPL)) {
+			String mailHookClassName = portalProperties.getProperty(
+				PropsKeys.MAIL_HOOK_IMPL);
+
+			com.liferay.mail.util.Hook mailHook =
+				(com.liferay.mail.util.Hook)portletClassLoader.loadClass(
+					mailHookClassName).newInstance();
+
+			mailHook =
+				(com.liferay.mail.util.Hook)Proxy.newProxyInstance(
+					portletClassLoader,
+					new Class[] {com.liferay.mail.util.Hook.class},
+					new ContextClassLoaderBeanHandler(
+						mailHook, portletClassLoader));
+
+			com.liferay.mail.util.HookFactory.setInstance(mailHook);
 		}
 
 		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_GENERATOR)) {
@@ -1338,19 +1297,13 @@ public class HookHotDeployListener
 		new HashMap<String, AutoLoginsContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
-	private Map<String, com.liferay.documentlibrary.util.Hook> _dlHooksMap =
-		new HashMap<String, com.liferay.documentlibrary.util.Hook>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
 	private Map<String, HotDeployListenersContainer>
 		_hotDeployListenersContainerMap =
 			new HashMap<String, HotDeployListenersContainer>();
-	private Map<String, com.liferay.portal.image.Hook> _imageHooksMap =
-		new HashMap<String, com.liferay.portal.image.Hook>();
 	private Map<String, LanguagesContainer> _languagesContainerMap =
 		new HashMap<String, LanguagesContainer>();
-	private Map<String, com.liferay.mail.util.Hook> _mailHooksMap =
-		new HashMap<String, com.liferay.mail.util.Hook>();
 	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
 		new HashMap<String, ModelListenersContainer>();
 	private Map<String, Properties> _portalPropertiesMap =
