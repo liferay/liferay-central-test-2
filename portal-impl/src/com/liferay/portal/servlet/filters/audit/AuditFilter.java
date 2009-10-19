@@ -23,7 +23,9 @@
 package com.liferay.portal.servlet.filters.audit;
 
 import com.liferay.portal.kernel.audit.AuditRequestThreadLocal;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -52,6 +54,13 @@ public class AuditFilter extends BasePortalFilter {
 		auditRequestThreadLocal.setServerName(request.getServerName());
 		auditRequestThreadLocal.setServerPort(request.getServerPort());
 		auditRequestThreadLocal.setSessionID(request.getSession().getId());
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		if (themeDisplay != null) {
+			long realUserId = themeDisplay.getRealUserId();
+			auditRequestThreadLocal.setRealUserId(realUserId);
+		}
 
 		try {
 			processFilter(AuditFilter.class, request, response, filterChain);

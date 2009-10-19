@@ -57,6 +57,10 @@ public class AuditRequestThreadLocal {
 		return _queryString;
 	}
 
+	public long getRealUserId() {
+		return _realUserId;
+	}
+	
 	public String getRequestURL() {
 		return _requestURL;
 	}
@@ -85,6 +89,10 @@ public class AuditRequestThreadLocal {
 		_queryString = queryString;
 	}
 
+	public void setRealUserId(long realUserId) {
+		_realUserId = realUserId;
+	}
+
 	public void setRequestURL(String requestURL) {
 		_requestURL = requestURL;
 	}
@@ -107,6 +115,7 @@ public class AuditRequestThreadLocal {
 	private String _clientHost;
 	private String _clientIP;
 	private String _queryString;
+	private long _realUserId;
 	private String _requestURL;
 	private String _serverName;
 	private int _serverPort;
