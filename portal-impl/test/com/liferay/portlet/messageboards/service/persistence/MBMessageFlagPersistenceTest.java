@@ -23,11 +23,16 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+
+import java.util.List;
 
 /**
  * <a href="MBMessageFlagPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -130,6 +135,38 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		MBMessageFlag missingMBMessageFlag = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingMBMessageFlag);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		MBMessageFlag newMBMessageFlag = addMBMessageFlag();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMessageFlag.class,
+				MBMessageFlag.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("messageFlagId",
+				newMBMessageFlag.getMessageFlagId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		MBMessageFlag existingMBMessageFlag = (MBMessageFlag)result.get(0);
+
+		assertEquals(existingMBMessageFlag, newMBMessageFlag);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		MBMessageFlag newMBMessageFlag = addMBMessageFlag();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMessageFlag.class,
+				MBMessageFlag.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("messageFlagId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected MBMessageFlag addMBMessageFlag() throws Exception {

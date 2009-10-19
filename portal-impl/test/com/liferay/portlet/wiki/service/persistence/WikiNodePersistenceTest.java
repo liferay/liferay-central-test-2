@@ -23,11 +23,16 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
+
+import java.util.List;
 
 /**
  * <a href="WikiNodePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -137,6 +142,38 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		WikiNode missingWikiNode = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingWikiNode);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		WikiNode newWikiNode = addWikiNode();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiNode.class,
+				WikiNode.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("nodeId",
+				newWikiNode.getNodeId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		WikiNode existingWikiNode = (WikiNode)result.get(0);
+
+		assertEquals(existingWikiNode, newWikiNode);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		WikiNode newWikiNode = addWikiNode();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiNode.class,
+				WikiNode.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("nodeId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected WikiNode addWikiNode() throws Exception {

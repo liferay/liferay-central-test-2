@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="UserPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -197,6 +202,38 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		User missingUser = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingUser);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		User newUser = addUser();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(User.class,
+				User.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("userId",
+				newUser.getUserId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		User existingUser = (User)result.get(0);
+
+		assertEquals(existingUser, newUser);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		User newUser = addUser();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(User.class,
+				User.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("userId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected User addUser() throws Exception {

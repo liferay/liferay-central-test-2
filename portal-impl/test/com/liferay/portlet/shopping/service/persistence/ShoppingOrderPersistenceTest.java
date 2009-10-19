@@ -23,11 +23,16 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
+
+import java.util.List;
 
 /**
  * <a href="ShoppingOrderPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -266,6 +271,38 @@ public class ShoppingOrderPersistenceTest extends BasePersistenceTestCase {
 		ShoppingOrder missingShoppingOrder = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingShoppingOrder);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ShoppingOrder newShoppingOrder = addShoppingOrder();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingOrder.class,
+				ShoppingOrder.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("orderId",
+				newShoppingOrder.getOrderId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ShoppingOrder existingShoppingOrder = (ShoppingOrder)result.get(0);
+
+		assertEquals(existingShoppingOrder, newShoppingOrder);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ShoppingOrder newShoppingOrder = addShoppingOrder();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingOrder.class,
+				ShoppingOrder.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("orderId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ShoppingOrder addShoppingOrder() throws Exception {

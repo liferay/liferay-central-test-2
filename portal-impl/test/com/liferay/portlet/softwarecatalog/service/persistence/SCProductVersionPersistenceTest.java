@@ -23,11 +23,16 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
+
+import java.util.List;
 
 /**
  * <a href="SCProductVersionPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -150,6 +155,39 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 		SCProductVersion missingSCProductVersion = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingSCProductVersion);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		SCProductVersion newSCProductVersion = addSCProductVersion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCProductVersion.class,
+				SCProductVersion.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("productVersionId",
+				newSCProductVersion.getProductVersionId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		SCProductVersion existingSCProductVersion = (SCProductVersion)result.get(0);
+
+		assertEquals(existingSCProductVersion, newSCProductVersion);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		SCProductVersion newSCProductVersion = addSCProductVersion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCProductVersion.class,
+				SCProductVersion.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("productVersionId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected SCProductVersion addSCProductVersion() throws Exception {

@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="PermissionPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -121,6 +126,38 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 		Permission missingPermission = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingPermission);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Permission newPermission = addPermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Permission.class,
+				Permission.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("permissionId",
+				newPermission.getPermissionId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Permission existingPermission = (Permission)result.get(0);
+
+		assertEquals(existingPermission, newPermission);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Permission newPermission = addPermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Permission.class,
+				Permission.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("permissionId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Permission addPermission() throws Exception {

@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="SubscriptionPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -139,6 +144,38 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		Subscription missingSubscription = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingSubscription);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Subscription newSubscription = addSubscription();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Subscription.class,
+				Subscription.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("subscriptionId",
+				newSubscription.getSubscriptionId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Subscription existingSubscription = (Subscription)result.get(0);
+
+		assertEquals(existingSubscription, newSubscription);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Subscription newSubscription = addSubscription();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Subscription.class,
+				Subscription.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("subscriptionId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Subscription addSubscription() throws Exception {

@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="LayoutSetPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -146,6 +151,38 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		LayoutSet missingLayoutSet = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingLayoutSet);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		LayoutSet newLayoutSet = addLayoutSet();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSet.class,
+				LayoutSet.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutSetId",
+				newLayoutSet.getLayoutSetId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		LayoutSet existingLayoutSet = (LayoutSet)result.get(0);
+
+		assertEquals(existingLayoutSet, newLayoutSet);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		LayoutSet newLayoutSet = addLayoutSet();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSet.class,
+				LayoutSet.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutSetId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected LayoutSet addLayoutSet() throws Exception {

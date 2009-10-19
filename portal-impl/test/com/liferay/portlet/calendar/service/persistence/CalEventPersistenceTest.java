@@ -23,11 +23,16 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.model.CalEvent;
+
+import java.util.List;
 
 /**
  * <a href="CalEventPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -166,6 +171,38 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		CalEvent missingCalEvent = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingCalEvent);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		CalEvent newCalEvent = addCalEvent();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CalEvent.class,
+				CalEvent.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("eventId",
+				newCalEvent.getEventId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		CalEvent existingCalEvent = (CalEvent)result.get(0);
+
+		assertEquals(existingCalEvent, newCalEvent);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		CalEvent newCalEvent = addCalEvent();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CalEvent.class,
+				CalEvent.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("eventId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected CalEvent addCalEvent() throws Exception {

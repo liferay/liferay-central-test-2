@@ -23,11 +23,16 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+
+import java.util.List;
 
 /**
  * <a href="DLFolderPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -140,6 +145,38 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		DLFolder missingDLFolder = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingDLFolder);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		DLFolder newDLFolder = addDLFolder();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFolder.class,
+				DLFolder.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId",
+				newDLFolder.getFolderId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		DLFolder existingDLFolder = (DLFolder)result.get(0);
+
+		assertEquals(existingDLFolder, newDLFolder);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		DLFolder newDLFolder = addDLFolder();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFolder.class,
+				DLFolder.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected DLFolder addDLFolder() throws Exception {

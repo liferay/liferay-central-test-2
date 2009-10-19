@@ -23,11 +23,16 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+
+import java.util.List;
 
 /**
  * <a href="BookmarksEntryPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -152,6 +157,38 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		BookmarksEntry missingBookmarksEntry = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingBookmarksEntry);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		BookmarksEntry newBookmarksEntry = addBookmarksEntry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BookmarksEntry.class,
+				BookmarksEntry.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId",
+				newBookmarksEntry.getEntryId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		BookmarksEntry existingBookmarksEntry = (BookmarksEntry)result.get(0);
+
+		assertEquals(existingBookmarksEntry, newBookmarksEntry);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		BookmarksEntry newBookmarksEntry = addBookmarksEntry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BookmarksEntry.class,
+				BookmarksEntry.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected BookmarksEntry addBookmarksEntry() throws Exception {

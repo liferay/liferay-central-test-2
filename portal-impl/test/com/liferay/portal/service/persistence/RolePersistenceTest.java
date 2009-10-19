@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="RolePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -127,6 +132,38 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		Role missingRole = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingRole);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Role newRole = addRole();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Role.class,
+				Role.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("roleId",
+				newRole.getRoleId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Role existingRole = (Role)result.get(0);
+
+		assertEquals(existingRole, newRole);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Role newRole = addRole();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Role.class,
+				Role.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("roleId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Role addRole() throws Exception {

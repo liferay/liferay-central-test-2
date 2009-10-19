@@ -23,11 +23,16 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+
+import java.util.List;
 
 /**
  * <a href="IGFolderPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -135,6 +140,38 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		IGFolder missingIGFolder = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingIGFolder);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		IGFolder newIGFolder = addIGFolder();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGFolder.class,
+				IGFolder.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId",
+				newIGFolder.getFolderId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		IGFolder existingIGFolder = (IGFolder)result.get(0);
+
+		assertEquals(existingIGFolder, newIGFolder);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		IGFolder newIGFolder = addIGFolder();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGFolder.class,
+				IGFolder.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected IGFolder addIGFolder() throws Exception {

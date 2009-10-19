@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ContactPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -177,6 +182,38 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		Contact missingContact = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingContact);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Contact newContact = addContact();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Contact.class,
+				Contact.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("contactId",
+				newContact.getContactId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Contact existingContact = (Contact)result.get(0);
+
+		assertEquals(existingContact, newContact);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Contact newContact = addContact();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Contact.class,
+				Contact.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("contactId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Contact addContact() throws Exception {

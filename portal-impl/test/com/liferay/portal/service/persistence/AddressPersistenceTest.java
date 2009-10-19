@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAddressException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="AddressPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -149,6 +154,38 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 		Address missingAddress = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingAddress);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Address newAddress = addAddress();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Address.class,
+				Address.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("addressId",
+				newAddress.getAddressId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Address existingAddress = (Address)result.get(0);
+
+		assertEquals(existingAddress, newAddress);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Address newAddress = addAddress();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Address.class,
+				Address.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("addressId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Address addAddress() throws Exception {

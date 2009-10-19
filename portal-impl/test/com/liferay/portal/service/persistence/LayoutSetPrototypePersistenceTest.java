@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutSetPrototypeException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="LayoutSetPrototypePersistenceTest.java.html"><b><i>View Source</i>
@@ -129,6 +134,39 @@ public class LayoutSetPrototypePersistenceTest extends BasePersistenceTestCase {
 		LayoutSetPrototype missingLayoutSetPrototype = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingLayoutSetPrototype);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		LayoutSetPrototype newLayoutSetPrototype = addLayoutSetPrototype();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSetPrototype.class,
+				LayoutSetPrototype.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutSetPrototypeId",
+				newLayoutSetPrototype.getLayoutSetPrototypeId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		LayoutSetPrototype existingLayoutSetPrototype = (LayoutSetPrototype)result.get(0);
+
+		assertEquals(existingLayoutSetPrototype, newLayoutSetPrototype);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		LayoutSetPrototype newLayoutSetPrototype = addLayoutSetPrototype();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSetPrototype.class,
+				LayoutSetPrototype.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutSetPrototypeId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected LayoutSetPrototype addLayoutSetPrototype()

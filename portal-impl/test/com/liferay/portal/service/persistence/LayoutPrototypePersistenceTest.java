@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutPrototypeException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="LayoutPrototypePersistenceTest.java.html"><b><i>View Source</i></b>
@@ -128,6 +133,39 @@ public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
 		LayoutPrototype missingLayoutPrototype = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingLayoutPrototype);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		LayoutPrototype newLayoutPrototype = addLayoutPrototype();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutPrototype.class,
+				LayoutPrototype.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutPrototypeId",
+				newLayoutPrototype.getLayoutPrototypeId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		LayoutPrototype existingLayoutPrototype = (LayoutPrototype)result.get(0);
+
+		assertEquals(existingLayoutPrototype, newLayoutPrototype);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		LayoutPrototype newLayoutPrototype = addLayoutPrototype();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutPrototype.class,
+				LayoutPrototype.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutPrototypeId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected LayoutPrototype addLayoutPrototype() throws Exception {

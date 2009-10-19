@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ReleasePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -128,6 +133,38 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		Release missingRelease = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingRelease);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Release newRelease = addRelease();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Release.class,
+				Release.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("releaseId",
+				newRelease.getReleaseId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Release existingRelease = (Release)result.get(0);
+
+		assertEquals(existingRelease, newRelease);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Release newRelease = addRelease();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Release.class,
+				Release.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("releaseId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Release addRelease() throws Exception {

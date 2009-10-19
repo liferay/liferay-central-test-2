@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="PortletPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -119,6 +124,37 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 		Portlet missingPortlet = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingPortlet);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Portlet newPortlet = addPortlet();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Portlet.class,
+				Portlet.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id", newPortlet.getId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Portlet existingPortlet = (Portlet)result.get(0);
+
+		assertEquals(existingPortlet, newPortlet);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Portlet newPortlet = addPortlet();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Portlet.class,
+				Portlet.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Portlet addPortlet() throws Exception {

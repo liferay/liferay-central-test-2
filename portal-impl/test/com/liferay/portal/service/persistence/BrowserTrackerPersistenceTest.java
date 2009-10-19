@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchBrowserTrackerException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.BrowserTracker;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="BrowserTrackerPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -119,6 +124,39 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		BrowserTracker missingBrowserTracker = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingBrowserTracker);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		BrowserTracker newBrowserTracker = addBrowserTracker();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BrowserTracker.class,
+				BrowserTracker.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("browserTrackerId",
+				newBrowserTracker.getBrowserTrackerId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		BrowserTracker existingBrowserTracker = (BrowserTracker)result.get(0);
+
+		assertEquals(existingBrowserTracker, newBrowserTracker);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		BrowserTracker newBrowserTracker = addBrowserTracker();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BrowserTracker.class,
+				BrowserTracker.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("browserTrackerId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected BrowserTracker addBrowserTracker() throws Exception {

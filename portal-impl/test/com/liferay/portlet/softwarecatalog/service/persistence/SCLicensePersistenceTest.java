@@ -23,10 +23,15 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
+
+import java.util.List;
 
 /**
  * <a href="SCLicensePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -125,6 +130,38 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		SCLicense missingSCLicense = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingSCLicense);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		SCLicense newSCLicense = addSCLicense();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCLicense.class,
+				SCLicense.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("licenseId",
+				newSCLicense.getLicenseId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		SCLicense existingSCLicense = (SCLicense)result.get(0);
+
+		assertEquals(existingSCLicense, newSCLicense);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		SCLicense newSCLicense = addSCLicense();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCLicense.class,
+				SCLicense.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("licenseId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected SCLicense addSCLicense() throws Exception {

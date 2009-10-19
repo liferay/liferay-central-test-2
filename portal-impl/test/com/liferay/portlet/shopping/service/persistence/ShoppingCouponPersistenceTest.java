@@ -23,11 +23,16 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
+
+import java.util.List;
 
 /**
  * <a href="ShoppingCouponPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -169,6 +174,38 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 		ShoppingCoupon missingShoppingCoupon = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingShoppingCoupon);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ShoppingCoupon newShoppingCoupon = addShoppingCoupon();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingCoupon.class,
+				ShoppingCoupon.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("couponId",
+				newShoppingCoupon.getCouponId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ShoppingCoupon existingShoppingCoupon = (ShoppingCoupon)result.get(0);
+
+		assertEquals(existingShoppingCoupon, newShoppingCoupon);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ShoppingCoupon newShoppingCoupon = addShoppingCoupon();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingCoupon.class,
+				ShoppingCoupon.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("couponId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ShoppingCoupon addShoppingCoupon() throws Exception {

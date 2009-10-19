@@ -23,11 +23,16 @@
 package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.asset.NoSuchTagPropertyException;
 import com.liferay.portlet.asset.model.AssetTagProperty;
+
+import java.util.List;
 
 /**
  * <a href="AssetTagPropertyPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -141,6 +146,38 @@ public class AssetTagPropertyPersistenceTest extends BasePersistenceTestCase {
 		AssetTagProperty missingAssetTagProperty = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingAssetTagProperty);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		AssetTagProperty newAssetTagProperty = addAssetTagProperty();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetTagProperty.class,
+				AssetTagProperty.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("tagPropertyId",
+				newAssetTagProperty.getTagPropertyId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		AssetTagProperty existingAssetTagProperty = (AssetTagProperty)result.get(0);
+
+		assertEquals(existingAssetTagProperty, newAssetTagProperty);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		AssetTagProperty newAssetTagProperty = addAssetTagProperty();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetTagProperty.class,
+				AssetTagProperty.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("tagPropertyId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected AssetTagProperty addAssetTagProperty() throws Exception {

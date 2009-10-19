@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="UserGroupPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -123,6 +128,38 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		UserGroup missingUserGroup = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingUserGroup);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		UserGroup newUserGroup = addUserGroup();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroup.class,
+				UserGroup.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("userGroupId",
+				newUserGroup.getUserGroupId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		UserGroup existingUserGroup = (UserGroup)result.get(0);
+
+		assertEquals(existingUserGroup, newUserGroup);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		UserGroup newUserGroup = addUserGroup();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroup.class,
+				UserGroup.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("userGroupId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected UserGroup addUserGroup() throws Exception {

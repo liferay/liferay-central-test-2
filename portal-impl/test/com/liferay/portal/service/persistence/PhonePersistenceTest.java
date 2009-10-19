@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="PhonePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -136,6 +141,38 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 		Phone missingPhone = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingPhone);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Phone newPhone = addPhone();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Phone.class,
+				Phone.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("phoneId",
+				newPhone.getPhoneId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Phone existingPhone = (Phone)result.get(0);
+
+		assertEquals(existingPhone, newPhone);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Phone newPhone = addPhone();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Phone.class,
+				Phone.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("phoneId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Phone addPhone() throws Exception {

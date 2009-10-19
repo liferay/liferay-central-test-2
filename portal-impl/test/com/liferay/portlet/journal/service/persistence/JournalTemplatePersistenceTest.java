@@ -23,11 +23,16 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
+
+import java.util.List;
 
 /**
  * <a href="JournalTemplatePersistenceTest.java.html"><b><i>View Source</i></b>
@@ -167,6 +172,38 @@ public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
 		JournalTemplate missingJournalTemplate = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingJournalTemplate);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		JournalTemplate newJournalTemplate = addJournalTemplate();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalTemplate.class,
+				JournalTemplate.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id",
+				newJournalTemplate.getId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		JournalTemplate existingJournalTemplate = (JournalTemplate)result.get(0);
+
+		assertEquals(existingJournalTemplate, newJournalTemplate);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		JournalTemplate newJournalTemplate = addJournalTemplate();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalTemplate.class,
+				JournalTemplate.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected JournalTemplate addJournalTemplate() throws Exception {

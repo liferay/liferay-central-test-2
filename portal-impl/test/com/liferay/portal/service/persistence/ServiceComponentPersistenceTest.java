@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchServiceComponentException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ServiceComponentPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -125,6 +130,39 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		ServiceComponent missingServiceComponent = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingServiceComponent);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ServiceComponent newServiceComponent = addServiceComponent();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ServiceComponent.class,
+				ServiceComponent.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("serviceComponentId",
+				newServiceComponent.getServiceComponentId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ServiceComponent existingServiceComponent = (ServiceComponent)result.get(0);
+
+		assertEquals(existingServiceComponent, newServiceComponent);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ServiceComponent newServiceComponent = addServiceComponent();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ServiceComponent.class,
+				ServiceComponent.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("serviceComponentId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ServiceComponent addServiceComponent() throws Exception {

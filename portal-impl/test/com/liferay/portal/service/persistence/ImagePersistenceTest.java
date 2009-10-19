@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ImagePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -125,6 +130,38 @@ public class ImagePersistenceTest extends BasePersistenceTestCase {
 		Image missingImage = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingImage);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Image newImage = addImage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Image.class,
+				Image.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("imageId",
+				newImage.getImageId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Image existingImage = (Image)result.get(0);
+
+		assertEquals(existingImage, newImage);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Image newImage = addImage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Image.class,
+				Image.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("imageId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Image addImage() throws Exception {

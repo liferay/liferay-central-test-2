@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ResourcePermissionPersistenceTest.java.html"><b><i>View Source</i>
@@ -132,6 +137,39 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 		ResourcePermission missingResourcePermission = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingResourcePermission);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ResourcePermission newResourcePermission = addResourcePermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourcePermission.class,
+				ResourcePermission.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("resourcePermissionId",
+				newResourcePermission.getResourcePermissionId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ResourcePermission existingResourcePermission = (ResourcePermission)result.get(0);
+
+		assertEquals(existingResourcePermission, newResourcePermission);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ResourcePermission newResourcePermission = addResourcePermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourcePermission.class,
+				ResourcePermission.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("resourcePermissionId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ResourcePermission addResourcePermission()

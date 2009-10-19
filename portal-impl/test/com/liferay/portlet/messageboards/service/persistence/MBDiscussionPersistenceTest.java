@@ -23,10 +23,15 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
+
+import java.util.List;
 
 /**
  * <a href="MBDiscussionPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -122,6 +127,38 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		MBDiscussion missingMBDiscussion = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingMBDiscussion);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		MBDiscussion newMBDiscussion = addMBDiscussion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBDiscussion.class,
+				MBDiscussion.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("discussionId",
+				newMBDiscussion.getDiscussionId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		MBDiscussion existingMBDiscussion = (MBDiscussion)result.get(0);
+
+		assertEquals(existingMBDiscussion, newMBDiscussion);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		MBDiscussion newMBDiscussion = addMBDiscussion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBDiscussion.class,
+				MBDiscussion.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("discussionId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected MBDiscussion addMBDiscussion() throws Exception {

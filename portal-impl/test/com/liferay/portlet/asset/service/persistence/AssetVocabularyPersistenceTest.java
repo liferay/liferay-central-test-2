@@ -23,11 +23,16 @@
 package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.asset.NoSuchVocabularyException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
+
+import java.util.List;
 
 /**
  * <a href="AssetVocabularyPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -144,6 +149,38 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		AssetVocabulary missingAssetVocabulary = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingAssetVocabulary);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		AssetVocabulary newAssetVocabulary = addAssetVocabulary();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetVocabulary.class,
+				AssetVocabulary.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("vocabularyId",
+				newAssetVocabulary.getVocabularyId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		AssetVocabulary existingAssetVocabulary = (AssetVocabulary)result.get(0);
+
+		assertEquals(existingAssetVocabulary, newAssetVocabulary);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		AssetVocabulary newAssetVocabulary = addAssetVocabulary();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetVocabulary.class,
+				AssetVocabulary.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("vocabularyId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected AssetVocabulary addAssetVocabulary() throws Exception {

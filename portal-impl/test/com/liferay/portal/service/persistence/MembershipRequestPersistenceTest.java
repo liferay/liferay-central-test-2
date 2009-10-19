@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchMembershipRequestException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="MembershipRequestPersistenceTest.java.html"><b><i>View Source</i>
@@ -144,6 +149,39 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		MembershipRequest missingMembershipRequest = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingMembershipRequest);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		MembershipRequest newMembershipRequest = addMembershipRequest();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MembershipRequest.class,
+				MembershipRequest.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("membershipRequestId",
+				newMembershipRequest.getMembershipRequestId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		MembershipRequest existingMembershipRequest = (MembershipRequest)result.get(0);
+
+		assertEquals(existingMembershipRequest, newMembershipRequest);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		MembershipRequest newMembershipRequest = addMembershipRequest();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MembershipRequest.class,
+				MembershipRequest.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("membershipRequestId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected MembershipRequest addMembershipRequest()

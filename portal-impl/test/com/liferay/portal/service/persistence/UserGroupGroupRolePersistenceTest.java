@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupGroupRoleException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.UserGroupGroupRole;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="UserGroupGroupRolePersistenceTest.java.html"><b><i>View Source</i>
@@ -121,6 +126,44 @@ public class UserGroupGroupRolePersistenceTest extends BasePersistenceTestCase {
 		UserGroupGroupRole missingUserGroupGroupRole = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingUserGroupGroupRole);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		UserGroupGroupRole newUserGroupGroupRole = addUserGroupGroupRole();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroupGroupRole.class,
+				UserGroupGroupRole.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.userGroupId",
+				newUserGroupGroupRole.getUserGroupId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.groupId",
+				newUserGroupGroupRole.getGroupId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.roleId",
+				newUserGroupGroupRole.getRoleId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		UserGroupGroupRole existingUserGroupGroupRole = (UserGroupGroupRole)result.get(0);
+
+		assertEquals(existingUserGroupGroupRole, newUserGroupGroupRole);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		UserGroupGroupRole newUserGroupGroupRole = addUserGroupGroupRole();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroupGroupRole.class,
+				UserGroupGroupRole.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.userGroupId", nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.groupId", nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.roleId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected UserGroupGroupRole addUserGroupGroupRole()

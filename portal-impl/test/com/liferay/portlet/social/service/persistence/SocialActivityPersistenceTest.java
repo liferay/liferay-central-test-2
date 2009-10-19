@@ -23,10 +23,15 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.social.NoSuchActivityException;
 import com.liferay.portlet.social.model.SocialActivity;
+
+import java.util.List;
 
 /**
  * <a href="SocialActivityPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -144,6 +149,38 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		SocialActivity missingSocialActivity = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingSocialActivity);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		SocialActivity newSocialActivity = addSocialActivity();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialActivity.class,
+				SocialActivity.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("activityId",
+				newSocialActivity.getActivityId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		SocialActivity existingSocialActivity = (SocialActivity)result.get(0);
+
+		assertEquals(existingSocialActivity, newSocialActivity);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		SocialActivity newSocialActivity = addSocialActivity();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialActivity.class,
+				SocialActivity.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("activityId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected SocialActivity addSocialActivity() throws Exception {

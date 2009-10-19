@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchWorkflowLinkException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.WorkflowLink;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="WorkflowLinkPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -135,6 +140,38 @@ public class WorkflowLinkPersistenceTest extends BasePersistenceTestCase {
 		WorkflowLink missingWorkflowLink = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingWorkflowLink);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		WorkflowLink newWorkflowLink = addWorkflowLink();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WorkflowLink.class,
+				WorkflowLink.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("workflowLinkId",
+				newWorkflowLink.getWorkflowLinkId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		WorkflowLink existingWorkflowLink = (WorkflowLink)result.get(0);
+
+		assertEquals(existingWorkflowLink, newWorkflowLink);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		WorkflowLink newWorkflowLink = addWorkflowLink();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WorkflowLink.class,
+				WorkflowLink.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("workflowLinkId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected WorkflowLink addWorkflowLink() throws Exception {

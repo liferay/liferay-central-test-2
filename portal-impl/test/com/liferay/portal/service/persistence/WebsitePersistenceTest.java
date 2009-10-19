@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchWebsiteException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="WebsitePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -135,6 +140,38 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 		Website missingWebsite = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingWebsite);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Website newWebsite = addWebsite();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Website.class,
+				Website.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("websiteId",
+				newWebsite.getWebsiteId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Website existingWebsite = (Website)result.get(0);
+
+		assertEquals(existingWebsite, newWebsite);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Website newWebsite = addWebsite();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Website.class,
+				Website.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("websiteId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Website addWebsite() throws Exception {

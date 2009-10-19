@@ -23,11 +23,16 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchFeedException;
 import com.liferay.portlet.journal.model.JournalFeed;
+
+import java.util.List;
 
 /**
  * <a href="JournalFeedPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -174,6 +179,37 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 		JournalFeed missingJournalFeed = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingJournalFeed);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		JournalFeed newJournalFeed = addJournalFeed();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalFeed.class,
+				JournalFeed.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id", newJournalFeed.getId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		JournalFeed existingJournalFeed = (JournalFeed)result.get(0);
+
+		assertEquals(existingJournalFeed, newJournalFeed);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		JournalFeed newJournalFeed = addJournalFeed();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalFeed.class,
+				JournalFeed.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected JournalFeed addJournalFeed() throws Exception {

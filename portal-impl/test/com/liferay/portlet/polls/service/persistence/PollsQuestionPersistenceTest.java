@@ -23,11 +23,16 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.model.PollsQuestion;
+
+import java.util.List;
 
 /**
  * <a href="PollsQuestionPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -151,6 +156,38 @@ public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
 		PollsQuestion missingPollsQuestion = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingPollsQuestion);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		PollsQuestion newPollsQuestion = addPollsQuestion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PollsQuestion.class,
+				PollsQuestion.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("questionId",
+				newPollsQuestion.getQuestionId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		PollsQuestion existingPollsQuestion = (PollsQuestion)result.get(0);
+
+		assertEquals(existingPollsQuestion, newPollsQuestion);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		PollsQuestion newPollsQuestion = addPollsQuestion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PollsQuestion.class,
+				PollsQuestion.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("questionId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected PollsQuestion addPollsQuestion() throws Exception {

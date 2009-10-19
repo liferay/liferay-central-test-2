@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPluginSettingException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="PluginSettingPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -128,6 +133,39 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		PluginSetting missingPluginSetting = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingPluginSetting);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		PluginSetting newPluginSetting = addPluginSetting();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PluginSetting.class,
+				PluginSetting.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("pluginSettingId",
+				newPluginSetting.getPluginSettingId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		PluginSetting existingPluginSetting = (PluginSetting)result.get(0);
+
+		assertEquals(existingPluginSetting, newPluginSetting);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		PluginSetting newPluginSetting = addPluginSetting();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PluginSetting.class,
+				PluginSetting.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("pluginSettingId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected PluginSetting addPluginSetting() throws Exception {

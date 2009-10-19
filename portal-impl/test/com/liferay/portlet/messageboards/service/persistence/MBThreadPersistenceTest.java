@@ -23,11 +23,16 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.model.MBThread;
+
+import java.util.List;
 
 /**
  * <a href="MBThreadPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -145,6 +150,38 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		MBThread missingMBThread = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingMBThread);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		MBThread newMBThread = addMBThread();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBThread.class,
+				MBThread.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("threadId",
+				newMBThread.getThreadId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		MBThread existingMBThread = (MBThread)result.get(0);
+
+		assertEquals(existingMBThread, newMBThread);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		MBThread newMBThread = addMBThread();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBThread.class,
+				MBThread.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("threadId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected MBThread addMBThread() throws Exception {

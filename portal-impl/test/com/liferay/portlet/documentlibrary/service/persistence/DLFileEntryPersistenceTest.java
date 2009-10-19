@@ -23,11 +23,16 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+
+import java.util.List;
 
 /**
  * <a href="DLFileEntryPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -164,6 +169,38 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		DLFileEntry missingDLFileEntry = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingDLFileEntry);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		DLFileEntry newDLFileEntry = addDLFileEntry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileEntry.class,
+				DLFileEntry.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileEntryId",
+				newDLFileEntry.getFileEntryId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		DLFileEntry existingDLFileEntry = (DLFileEntry)result.get(0);
+
+		assertEquals(existingDLFileEntry, newDLFileEntry);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		DLFileEntry newDLFileEntry = addDLFileEntry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileEntry.class,
+				DLFileEntry.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileEntryId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected DLFileEntry addDLFileEntry() throws Exception {

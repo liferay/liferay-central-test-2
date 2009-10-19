@@ -23,10 +23,15 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.model.JournalArticleImage;
+
+import java.util.List;
 
 /**
  * <a href="JournalArticleImagePersistenceTest.java.html"><b><i>View Source</i>
@@ -135,6 +140,38 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		JournalArticleImage missingJournalArticleImage = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingJournalArticleImage);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		JournalArticleImage newJournalArticleImage = addJournalArticleImage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalArticleImage.class,
+				JournalArticleImage.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("articleImageId",
+				newJournalArticleImage.getArticleImageId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		JournalArticleImage existingJournalArticleImage = (JournalArticleImage)result.get(0);
+
+		assertEquals(existingJournalArticleImage, newJournalArticleImage);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		JournalArticleImage newJournalArticleImage = addJournalArticleImage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalArticleImage.class,
+				JournalArticleImage.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("articleImageId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected JournalArticleImage addJournalArticleImage()

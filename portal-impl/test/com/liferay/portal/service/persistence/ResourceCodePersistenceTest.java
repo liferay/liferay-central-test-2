@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchResourceCodeException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ResourceCodePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -119,6 +124,38 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		ResourceCode missingResourceCode = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingResourceCode);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ResourceCode newResourceCode = addResourceCode();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceCode.class,
+				ResourceCode.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("codeId",
+				newResourceCode.getCodeId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ResourceCode existingResourceCode = (ResourceCode)result.get(0);
+
+		assertEquals(existingResourceCode, newResourceCode);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ResourceCode newResourceCode = addResourceCode();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceCode.class,
+				ResourceCode.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("codeId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ResourceCode addResourceCode() throws Exception {

@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="CountryPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -123,6 +128,38 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 		Country missingCountry = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingCountry);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Country newCountry = addCountry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Country.class,
+				Country.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("countryId",
+				newCountry.getCountryId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Country existingCountry = (Country)result.get(0);
+
+		assertEquals(existingCountry, newCountry);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Country newCountry = addCountry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Country.class,
+				Country.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("countryId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Country addCountry() throws Exception {

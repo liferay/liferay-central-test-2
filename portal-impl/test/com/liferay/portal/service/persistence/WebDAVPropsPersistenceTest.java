@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchWebDAVPropsException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="WebDAVPropsPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -131,6 +136,38 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		WebDAVProps missingWebDAVProps = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingWebDAVProps);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		WebDAVProps newWebDAVProps = addWebDAVProps();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WebDAVProps.class,
+				WebDAVProps.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("webDavPropsId",
+				newWebDAVProps.getWebDavPropsId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		WebDAVProps existingWebDAVProps = (WebDAVProps)result.get(0);
+
+		assertEquals(existingWebDAVProps, newWebDAVProps);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		WebDAVProps newWebDAVProps = addWebDAVProps();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WebDAVProps.class,
+				WebDAVProps.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("webDavPropsId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected WebDAVProps addWebDAVProps() throws Exception {

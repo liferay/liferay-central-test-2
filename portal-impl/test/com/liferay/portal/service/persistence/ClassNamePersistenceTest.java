@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchClassNameException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ClassNamePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -114,6 +119,38 @@ public class ClassNamePersistenceTest extends BasePersistenceTestCase {
 		ClassName missingClassName = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingClassName);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ClassName newClassName = addClassName();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClassName.class,
+				ClassName.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("classNameId",
+				newClassName.getClassNameId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ClassName existingClassName = (ClassName)result.get(0);
+
+		assertEquals(existingClassName, newClassName);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ClassName newClassName = addClassName();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClassName.class,
+				ClassName.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("classNameId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ClassName addClassName() throws Exception {

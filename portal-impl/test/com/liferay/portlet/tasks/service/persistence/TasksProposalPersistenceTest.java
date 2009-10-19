@@ -23,11 +23,16 @@
 package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.model.TasksProposal;
+
+import java.util.List;
 
 /**
  * <a href="TasksProposalPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -153,6 +158,38 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 		TasksProposal missingTasksProposal = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingTasksProposal);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		TasksProposal newTasksProposal = addTasksProposal();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(TasksProposal.class,
+				TasksProposal.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("proposalId",
+				newTasksProposal.getProposalId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		TasksProposal existingTasksProposal = (TasksProposal)result.get(0);
+
+		assertEquals(existingTasksProposal, newTasksProposal);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		TasksProposal newTasksProposal = addTasksProposal();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(TasksProposal.class,
+				TasksProposal.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("proposalId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected TasksProposal addTasksProposal() throws Exception {

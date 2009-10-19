@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="OrgGroupPermissionPersistenceTest.java.html"><b><i>View Source</i>
@@ -121,6 +126,46 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 		OrgGroupPermission missingOrgGroupPermission = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingOrgGroupPermission);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		OrgGroupPermission newOrgGroupPermission = addOrgGroupPermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgGroupPermission.class,
+				OrgGroupPermission.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.organizationId",
+				newOrgGroupPermission.getOrganizationId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.groupId",
+				newOrgGroupPermission.getGroupId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.permissionId",
+				newOrgGroupPermission.getPermissionId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		OrgGroupPermission existingOrgGroupPermission = (OrgGroupPermission)result.get(0);
+
+		assertEquals(existingOrgGroupPermission, newOrgGroupPermission);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		OrgGroupPermission newOrgGroupPermission = addOrgGroupPermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgGroupPermission.class,
+				OrgGroupPermission.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.organizationId",
+				nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.groupId", nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.permissionId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected OrgGroupPermission addOrgGroupPermission()

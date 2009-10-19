@@ -23,11 +23,16 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalStructure;
+
+import java.util.List;
 
 /**
  * <a href="JournalStructurePersistenceTest.java.html"><b><i>View Source</i></b>
@@ -153,6 +158,38 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		JournalStructure missingJournalStructure = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingJournalStructure);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		JournalStructure newJournalStructure = addJournalStructure();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalStructure.class,
+				JournalStructure.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id",
+				newJournalStructure.getId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		JournalStructure existingJournalStructure = (JournalStructure)result.get(0);
+
+		assertEquals(existingJournalStructure, newJournalStructure);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		JournalStructure newJournalStructure = addJournalStructure();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalStructure.class,
+				JournalStructure.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("id", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected JournalStructure addJournalStructure() throws Exception {

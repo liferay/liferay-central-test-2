@@ -23,11 +23,16 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.blogs.NoSuchStatsUserException;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
+
+import java.util.List;
 
 /**
  * <a href="BlogsStatsUserPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -140,6 +145,38 @@ public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
 		BlogsStatsUser missingBlogsStatsUser = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingBlogsStatsUser);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		BlogsStatsUser newBlogsStatsUser = addBlogsStatsUser();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BlogsStatsUser.class,
+				BlogsStatsUser.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("statsUserId",
+				newBlogsStatsUser.getStatsUserId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		BlogsStatsUser existingBlogsStatsUser = (BlogsStatsUser)result.get(0);
+
+		assertEquals(existingBlogsStatsUser, newBlogsStatsUser);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		BlogsStatsUser newBlogsStatsUser = addBlogsStatsUser();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BlogsStatsUser.class,
+				BlogsStatsUser.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("statsUserId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected BlogsStatsUser addBlogsStatsUser() throws Exception {

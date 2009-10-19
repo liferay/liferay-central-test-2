@@ -23,10 +23,15 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.model.SocialRelation;
+
+import java.util.List;
 
 /**
  * <a href="SocialRelationPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -132,6 +137,38 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 		SocialRelation missingSocialRelation = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingSocialRelation);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		SocialRelation newSocialRelation = addSocialRelation();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialRelation.class,
+				SocialRelation.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("relationId",
+				newSocialRelation.getRelationId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		SocialRelation existingSocialRelation = (SocialRelation)result.get(0);
+
+		assertEquals(existingSocialRelation, newSocialRelation);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		SocialRelation newSocialRelation = addSocialRelation();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialRelation.class,
+				SocialRelation.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("relationId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected SocialRelation addSocialRelation() throws Exception {

@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="CompanyPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -128,6 +133,38 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		Company missingCompany = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingCompany);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Company newCompany = addCompany();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Company.class,
+				Company.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("companyId",
+				newCompany.getCompanyId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Company existingCompany = (Company)result.get(0);
+
+		assertEquals(existingCompany, newCompany);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Company newCompany = addCompany();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Company.class,
+				Company.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("companyId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Company addCompany() throws Exception {

@@ -23,10 +23,15 @@
 package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoTable;
+
+import java.util.List;
 
 /**
  * <a href="ExpandoTablePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -121,6 +126,38 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 		ExpandoTable missingExpandoTable = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingExpandoTable);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ExpandoTable newExpandoTable = addExpandoTable();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoTable.class,
+				ExpandoTable.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("tableId",
+				newExpandoTable.getTableId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ExpandoTable existingExpandoTable = (ExpandoTable)result.get(0);
+
+		assertEquals(existingExpandoTable, newExpandoTable);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ExpandoTable newExpandoTable = addExpandoTable();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoTable.class,
+				ExpandoTable.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("tableId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ExpandoTable addExpandoTable() throws Exception {

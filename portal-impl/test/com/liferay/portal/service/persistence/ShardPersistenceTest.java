@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchShardException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Shard;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ShardPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -117,6 +122,38 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 		Shard missingShard = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingShard);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Shard newShard = addShard();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Shard.class,
+				Shard.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("shardId",
+				newShard.getShardId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Shard existingShard = (Shard)result.get(0);
+
+		assertEquals(existingShard, newShard);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		Shard newShard = addShard();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Shard.class,
+				Shard.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("shardId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected Shard addShard() throws Exception {

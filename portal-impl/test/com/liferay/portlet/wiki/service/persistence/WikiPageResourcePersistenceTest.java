@@ -23,10 +23,15 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.wiki.NoSuchPageResourceException;
 import com.liferay.portlet.wiki.model.WikiPageResource;
+
+import java.util.List;
 
 /**
  * <a href="WikiPageResourcePersistenceTest.java.html"><b><i>View Source</i></b>
@@ -120,6 +125,39 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 		WikiPageResource missingWikiPageResource = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingWikiPageResource);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		WikiPageResource newWikiPageResource = addWikiPageResource();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiPageResource.class,
+				WikiPageResource.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("resourcePrimKey",
+				newWikiPageResource.getResourcePrimKey()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		WikiPageResource existingWikiPageResource = (WikiPageResource)result.get(0);
+
+		assertEquals(existingWikiPageResource, newWikiPageResource);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		WikiPageResource newWikiPageResource = addWikiPageResource();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiPageResource.class,
+				WikiPageResource.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("resourcePrimKey",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected WikiPageResource addWikiPageResource() throws Exception {

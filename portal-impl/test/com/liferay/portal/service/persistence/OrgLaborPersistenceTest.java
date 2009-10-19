@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgLaborException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="OrgLaborPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -145,6 +150,38 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		OrgLabor missingOrgLabor = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingOrgLabor);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		OrgLabor newOrgLabor = addOrgLabor();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgLabor.class,
+				OrgLabor.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("orgLaborId",
+				newOrgLabor.getOrgLaborId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		OrgLabor existingOrgLabor = (OrgLabor)result.get(0);
+
+		assertEquals(existingOrgLabor, newOrgLabor);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		OrgLabor newOrgLabor = addOrgLabor();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgLabor.class,
+				OrgLabor.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("orgLaborId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected OrgLabor addOrgLabor() throws Exception {

@@ -23,11 +23,16 @@
 package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.asset.NoSuchCategoryPropertyException;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
+
+import java.util.List;
 
 /**
  * <a href="AssetCategoryPropertyPersistenceTest.java.html"><b><i>View Source
@@ -142,6 +147,39 @@ public class AssetCategoryPropertyPersistenceTest
 		AssetCategoryProperty missingAssetCategoryProperty = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingAssetCategoryProperty);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		AssetCategoryProperty newAssetCategoryProperty = addAssetCategoryProperty();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetCategoryProperty.class,
+				AssetCategoryProperty.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("categoryPropertyId",
+				newAssetCategoryProperty.getCategoryPropertyId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		AssetCategoryProperty existingAssetCategoryProperty = (AssetCategoryProperty)result.get(0);
+
+		assertEquals(existingAssetCategoryProperty, newAssetCategoryProperty);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		AssetCategoryProperty newAssetCategoryProperty = addAssetCategoryProperty();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetCategoryProperty.class,
+				AssetCategoryProperty.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("categoryPropertyId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected AssetCategoryProperty addAssetCategoryProperty()

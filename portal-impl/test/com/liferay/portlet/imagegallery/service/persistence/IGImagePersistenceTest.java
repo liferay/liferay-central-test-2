@@ -23,11 +23,16 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
+
+import java.util.List;
 
 /**
  * <a href="IGImagePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -146,6 +151,38 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		IGImage missingIGImage = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingIGImage);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		IGImage newIGImage = addIGImage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGImage.class,
+				IGImage.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("imageId",
+				newIGImage.getImageId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		IGImage existingIGImage = (IGImage)result.get(0);
+
+		assertEquals(existingIGImage, newIGImage);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		IGImage newIGImage = addIGImage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGImage.class,
+				IGImage.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("imageId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected IGImage addIGImage() throws Exception {

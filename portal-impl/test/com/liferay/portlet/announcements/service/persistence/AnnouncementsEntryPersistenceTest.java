@@ -23,11 +23,16 @@
 package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.announcements.NoSuchEntryException;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+
+import java.util.List;
 
 /**
  * <a href="AnnouncementsEntryPersistenceTest.java.html"><b><i>View Source</i>
@@ -167,6 +172,38 @@ public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
 		AnnouncementsEntry missingAnnouncementsEntry = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingAnnouncementsEntry);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		AnnouncementsEntry newAnnouncementsEntry = addAnnouncementsEntry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnnouncementsEntry.class,
+				AnnouncementsEntry.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId",
+				newAnnouncementsEntry.getEntryId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		AnnouncementsEntry existingAnnouncementsEntry = (AnnouncementsEntry)result.get(0);
+
+		assertEquals(existingAnnouncementsEntry, newAnnouncementsEntry);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		AnnouncementsEntry newAnnouncementsEntry = addAnnouncementsEntry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnnouncementsEntry.class,
+				AnnouncementsEntry.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected AnnouncementsEntry addAnnouncementsEntry()

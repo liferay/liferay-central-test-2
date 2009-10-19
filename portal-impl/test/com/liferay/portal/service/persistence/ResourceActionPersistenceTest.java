@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ResourceActionPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -122,6 +127,39 @@ public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
 		ResourceAction missingResourceAction = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingResourceAction);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ResourceAction newResourceAction = addResourceAction();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceAction.class,
+				ResourceAction.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("resourceActionId",
+				newResourceAction.getResourceActionId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ResourceAction existingResourceAction = (ResourceAction)result.get(0);
+
+		assertEquals(existingResourceAction, newResourceAction);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ResourceAction newResourceAction = addResourceAction();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceAction.class,
+				ResourceAction.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("resourceActionId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ResourceAction addResourceAction() throws Exception {

@@ -23,11 +23,16 @@
 package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portlet.asset.model.AssetTag;
+
+import java.util.List;
 
 /**
  * <a href="AssetTagPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -132,6 +137,38 @@ public class AssetTagPersistenceTest extends BasePersistenceTestCase {
 		AssetTag missingAssetTag = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingAssetTag);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		AssetTag newAssetTag = addAssetTag();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetTag.class,
+				AssetTag.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("tagId",
+				newAssetTag.getTagId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		AssetTag existingAssetTag = (AssetTag)result.get(0);
+
+		assertEquals(existingAssetTag, newAssetTag);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		AssetTag newAssetTag = addAssetTag();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetTag.class,
+				AssetTag.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("tagId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected AssetTag addAssetTag() throws Exception {

@@ -23,11 +23,16 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
+
+import java.util.List;
 
 /**
  * <a href="WikiPagePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -154,6 +159,38 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		WikiPage missingWikiPage = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingWikiPage);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		WikiPage newWikiPage = addWikiPage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiPage.class,
+				WikiPage.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("pageId",
+				newWikiPage.getPageId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		WikiPage existingWikiPage = (WikiPage)result.get(0);
+
+		assertEquals(existingWikiPage, newWikiPage);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		WikiPage newWikiPage = addWikiPage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiPage.class,
+				WikiPage.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("pageId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected WikiPage addWikiPage() throws Exception {

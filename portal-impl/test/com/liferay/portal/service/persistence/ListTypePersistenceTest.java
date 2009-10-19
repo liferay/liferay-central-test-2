@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="ListTypePersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -116,6 +121,38 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 		ListType missingListType = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingListType);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ListType newListType = addListType();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ListType.class,
+				ListType.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("listTypeId",
+				newListType.getListTypeId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ListType existingListType = (ListType)result.get(0);
+
+		assertEquals(existingListType, newListType);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ListType newListType = addListType();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ListType.class,
+				ListType.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("listTypeId", nextInt()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ListType addListType() throws Exception {

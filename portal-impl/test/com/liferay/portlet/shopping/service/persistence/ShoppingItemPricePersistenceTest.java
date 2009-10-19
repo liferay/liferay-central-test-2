@@ -23,10 +23,15 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchItemPriceException;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+
+import java.util.List;
 
 /**
  * <a href="ShoppingItemPricePersistenceTest.java.html"><b><i>View Source</i>
@@ -141,6 +146,38 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 		ShoppingItemPrice missingShoppingItemPrice = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingShoppingItemPrice);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		ShoppingItemPrice newShoppingItemPrice = addShoppingItemPrice();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingItemPrice.class,
+				ShoppingItemPrice.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("itemPriceId",
+				newShoppingItemPrice.getItemPriceId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		ShoppingItemPrice existingShoppingItemPrice = (ShoppingItemPrice)result.get(0);
+
+		assertEquals(existingShoppingItemPrice, newShoppingItemPrice);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		ShoppingItemPrice newShoppingItemPrice = addShoppingItemPrice();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingItemPrice.class,
+				ShoppingItemPrice.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("itemPriceId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected ShoppingItemPrice addShoppingItemPrice()

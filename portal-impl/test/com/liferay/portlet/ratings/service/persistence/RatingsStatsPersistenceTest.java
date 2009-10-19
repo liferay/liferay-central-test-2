@@ -23,10 +23,15 @@
 package com.liferay.portlet.ratings.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
+
+import java.util.List;
 
 /**
  * <a href="RatingsStatsPersistenceTest.java.html"><b><i>View Source</i></b></a>
@@ -128,6 +133,38 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 		RatingsStats missingRatingsStats = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingRatingsStats);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		RatingsStats newRatingsStats = addRatingsStats();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RatingsStats.class,
+				RatingsStats.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("statsId",
+				newRatingsStats.getStatsId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		RatingsStats existingRatingsStats = (RatingsStats)result.get(0);
+
+		assertEquals(existingRatingsStats, newRatingsStats);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		RatingsStats newRatingsStats = addRatingsStats();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RatingsStats.class,
+				RatingsStats.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("statsId", nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected RatingsStats addRatingsStats() throws Exception {

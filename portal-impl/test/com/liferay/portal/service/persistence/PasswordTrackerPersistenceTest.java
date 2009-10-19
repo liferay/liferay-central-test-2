@@ -24,9 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPasswordTrackerException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
 
 /**
  * <a href="PasswordTrackerPersistenceTest.java.html"><b><i>View Source</i></b>
@@ -124,6 +129,39 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 		PasswordTracker missingPasswordTracker = _persistence.fetchByPrimaryKey(pk);
 
 		assertNull(missingPasswordTracker);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		PasswordTracker newPasswordTracker = addPasswordTracker();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordTracker.class,
+				PasswordTracker.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("passwordTrackerId",
+				newPasswordTracker.getPasswordTrackerId()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		PasswordTracker existingPasswordTracker = (PasswordTracker)result.get(0);
+
+		assertEquals(existingPasswordTracker, newPasswordTracker);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		PasswordTracker newPasswordTracker = addPasswordTracker();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordTracker.class,
+				PasswordTracker.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("passwordTrackerId",
+				nextLong()));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
 	}
 
 	protected PasswordTracker addPasswordTracker() throws Exception {
