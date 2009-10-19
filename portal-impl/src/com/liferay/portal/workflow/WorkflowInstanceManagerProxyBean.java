@@ -52,6 +52,13 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public List<String> getPossibleNextPathNames(
+		long workflowInstanceId, long userId, Map<String, Object> parameters) {
+
+		throw new UnsupportedOperationException();
+	}	
+	
+
 	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
 		long workflowInstanceId, boolean includeChildren, int start, int end,
 		OrderByComparator orderByComparator) {
@@ -130,7 +137,7 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstanceInfo signalWorkflowInstance(
+	public WorkflowInstanceInfo signalWorkflowInstanceByActivity(
 		long workflowInstanceId, String activityName,
 		Map<String, Object> attributes, long callingUserId,
 		Map<String, Object> parameters) {
@@ -138,6 +145,14 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public WorkflowInstanceInfo signalWorkflowInstanceByPath(
+		long workflowInstanceId, String pathName,
+		Map<String, Object> attributes, long callingUserId,
+		Map<String, Object> parameters) {
+
+		throw new UnsupportedOperationException();
+	}
+	
 	public WorkflowInstanceInfo startWorkflowInstance(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		Map<String, Object> context, long callingUserId,
