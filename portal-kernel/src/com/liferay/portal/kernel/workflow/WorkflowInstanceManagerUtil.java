@@ -67,6 +67,19 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	/**
+	 * @see WorkflowInstanceManager#getPossibleNextPathNames(long, long,
+	 *		Map)
+	 */
+	public static List<String> getPossibleNextPathNames(
+			long workflowInstanceId, long userId,
+			Map<String, Object> parameters)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.getPossibleNextPathNames(
+			workflowInstanceId, userId, parameters);
+	}
+
+	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceHistory(long, boolean,
 	 *		start, end, OrderByComparator)
 	 */
@@ -220,17 +233,32 @@ public class WorkflowInstanceManagerUtil {
 	}
 
 	/**
-	 * @see WorkflowInstanceManager#signalWorkflowInstance(long, String, Map,
-	 *		long, Map)
+	 * @see WorkflowInstanceManager#signalWorkflowInstanceByActivity(long,
+	 *      String, Map, long, Map)
 	 */
-	public static WorkflowInstanceInfo signalWorkflowInstance(
+	public static WorkflowInstanceInfo signalWorkflowInstanceByActivity(
 			long workflowInstanceId, String activityName,
 			Map<String, Object> attributes, long callingUserId,
 			Map<String, Object> parameters)
 		throws WorkflowException {
 
-		return _workflowInstanceManager.signalWorkflowInstance(
+		return _workflowInstanceManager.signalWorkflowInstanceByActivity(
 			workflowInstanceId, activityName, attributes, callingUserId,
+			parameters);
+	}
+
+	/**
+	 * @see WorkflowInstanceManager#signalWorkflowInstanceByPath(long, String,
+	 *      Map, long, Map)
+	 */
+	public static WorkflowInstanceInfo signalWorkflowInstanceByPath(
+			long workflowInstanceId, String pathName,
+			Map<String, Object> attributes, long callingUserId,
+			Map<String, Object> parameters)
+		throws WorkflowException {
+
+		return _workflowInstanceManager.signalWorkflowInstanceByPath(
+			workflowInstanceId, pathName, attributes, callingUserId,
 			parameters);
 	}
 
