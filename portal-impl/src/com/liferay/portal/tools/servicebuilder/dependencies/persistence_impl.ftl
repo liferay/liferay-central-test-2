@@ -736,7 +736,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#assign orderList = entity.getOrder().getColumns()>
 
 							<#list orderList as order>
-								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								<#if entity.hasCompoundPK() && order.isPrimary()>
+									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								<#else>
+									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								</#if>
 							</#list>
 						</#if>
 
@@ -928,7 +932,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 								<#assign orderList = entity.getOrder().getColumns()>
 
 								<#list orderList as order>
-									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+									<#if entity.hasCompoundPK() && order.isPrimary()>
+										query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+									<#else>
+										query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+									</#if>
 								</#list>
 							}
 						</#if>
@@ -1180,7 +1188,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#assign orderList = entity.getOrder().getColumns()>
 
 							<#list orderList as order>
-								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								<#if entity.hasCompoundPK() && order.isPrimary()>
+									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								<#else>
+									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								</#if>
 							</#list>
 						}
 					</#if>
@@ -1407,7 +1419,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							<#assign orderList = entity.getOrder().getColumns()>
 
 							<#list orderList as order>
-								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								<#if entity.hasCompoundPK() && order.isPrimary()>
+									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								<#else>
+									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								</#if>
 							</#list>
 						</#if>
 
@@ -1588,7 +1604,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						<#assign orderList = entity.getOrder().getColumns()>
 
 						<#list orderList as order>
-							query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+							<#if entity.hasCompoundPK() && order.isPrimary()>
+								query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+							<#else>
+								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+							</#if>
 						</#list>
 					}
 				</#if>
