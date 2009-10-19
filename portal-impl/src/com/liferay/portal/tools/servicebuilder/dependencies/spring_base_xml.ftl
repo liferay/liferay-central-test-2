@@ -24,9 +24,7 @@
 		</property>
 	</bean>
 	<bean id="velocityHookAdvice" class="com.liferay.portal.spring.aop.ServiceVelocityAdvice">
-		<property name="classLoader">
-			<property name="classLoader" ref="portletClassLoader" />
-		</property>
+		<property name="classLoader" ref="portletClassLoader" />
 		<property name="exceptionSafe" value="true" />
 	</bean>
 	<aop:config>
