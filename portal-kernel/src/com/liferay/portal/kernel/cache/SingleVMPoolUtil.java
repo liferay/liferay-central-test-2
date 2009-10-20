@@ -44,6 +44,7 @@ public class SingleVMPoolUtil {
 		return getSingleVMPool().get(name, key);
 	}
 
+	@Deprecated
 	public static Object get(PortalCache portalCache, String key) {
 		return getSingleVMPool().get(portalCache, key);
 	}
@@ -64,10 +65,12 @@ public class SingleVMPoolUtil {
 		getSingleVMPool().put(name, key, obj);
 	}
 
+	@Deprecated
 	public static void put(PortalCache portalCache, String key, Object obj) {
 		getSingleVMPool().put(portalCache, key, obj);
 	}
 
+	@Deprecated
 	public static void put(
 		PortalCache portalCache, String key, Object obj, int timeToLive) {
 
@@ -78,12 +81,14 @@ public class SingleVMPoolUtil {
 		getSingleVMPool().put(name, key, obj);
 	}
 
+	@Deprecated
 	public static void put(
 		PortalCache portalCache, String key, Serializable obj) {
 
 		getSingleVMPool().put(portalCache, key, obj);
 	}
 
+	@Deprecated
 	public static void put(
 		PortalCache portalCache, String key, Serializable obj, int timeToLive) {
 
@@ -94,6 +99,7 @@ public class SingleVMPoolUtil {
 		getSingleVMPool().remove(name, key);
 	}
 
+	@Deprecated
 	public static void remove(PortalCache portalCache, String key) {
 		getSingleVMPool().remove(portalCache, key);
 	}
