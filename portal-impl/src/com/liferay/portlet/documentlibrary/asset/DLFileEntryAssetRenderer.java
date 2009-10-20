@@ -115,7 +115,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			"groupId", String.valueOf(_entry.getGroupId()));
 		exportPortletURL.setParameter(
 			"folderId", String.valueOf(_entry.getFolderId()));
-		exportPortletURL.setParameter("name", String.valueOf(_entry.getName()));
+		exportPortletURL.setParameter(
+			"title", String.valueOf(_entry.getTitle()));
 
 		return exportPortletURL;
 	}
@@ -131,8 +132,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 		return themeDisplay.getPathMain() +
 			"/document_library/get_file?p_l_id=" + themeDisplay.getPlid() +
-				"&folderId=" + _entry.getFolderId() + "&name=" +
-					HttpUtil.encodeURL(_entry.getName());
+				"&folderId=" + _entry.getFolderId() + "&title=" +
+					HttpUtil.encodeURL(_entry.getTitle());
 	}
 
 	public long getUserId() {
