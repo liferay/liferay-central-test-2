@@ -146,7 +146,7 @@ AUI().add(
 					},
 
 					b: {
-						text: 'bold',
+						text: Liferay.Language.get('bold'),
 						image: 'message_boards/bold.png',
 						onClick: function(event) {
 							instance.insertTag('b');
@@ -154,7 +154,7 @@ AUI().add(
 					},
 
 					i: {
-						text: 'italic',
+						text: Liferay.Language.get('italic'),
 						image: 'message_boards/italic.png',
 						onClick: function(event) {
 							instance.insertTag('i');
@@ -162,7 +162,7 @@ AUI().add(
 					},
 
 					u: {
-						text: 'underline',
+						text: Liferay.Language.get('underline'),
 						image: 'message_boards/underline.png',
 						onClick: function(event) {
 							instance.insertTag('u');
@@ -170,7 +170,7 @@ AUI().add(
 					},
 
 					s: {
-						text: 'strikethrough',
+						text: Liferay.Language.get('strikethrough'),
 						image: 'message_boards/strike.png',
 						onClick: function(event) {
 							instance.insertTag('s');
@@ -179,13 +179,13 @@ AUI().add(
 
 					fontColor: {
 						className: 'use-colorpicker',
-						text: 'font-color',
+						text: Liferay.Language.get('font-color'),
 						image: 'message_boards/color.png',
 						groupEnd: true
 					},
 
 					url: {
-						text: 'url',
+						text: Liferay.Language.get('url'),
 						image: 'message_boards/hyperlink.png',
 						onClick: function(event) {
 							instance._insertURL();
@@ -193,7 +193,7 @@ AUI().add(
 					},
 
 					email: {
-						text: 'email-address',
+						text: Liferay.Language.get('email-address'),
 						image: 'message_boards/email.png',
 						onClick: function(event) {
 							instance._insertEmail();
@@ -201,7 +201,7 @@ AUI().add(
 					},
 
 					image: {
-						text: 'image',
+						text: Liferay.Language.get('image'),
 						image: 'message_boards/image.png',
 						onClick: function(event) {
 							instance._insertImage();
@@ -209,7 +209,7 @@ AUI().add(
 					},
 
 					ol: {
-						text: 'ordered-list',
+						text: Liferay.Language.get('ordered-list'),
 						image: 'message_boards/ordered_list.png',
 						onClick: function(event) {
 							instance._insertList('1');
@@ -217,7 +217,7 @@ AUI().add(
 					},
 
 					ul: {
-						text: 'unordered-list',
+						text: Liferay.Language.get('unordered-list'),
 						image: 'message_boards/unordered_list.png',
 						onClick: function(event) {
 							instance._insertList('');
@@ -225,7 +225,7 @@ AUI().add(
 					},
 
 					left: {
-						text: 'left',
+						text: Liferay.Language.get('left'),
 						image: 'message_boards/justify_left.png',
 						onClick: function(event) {
 							instance.insertTag('left');
@@ -233,7 +233,7 @@ AUI().add(
 					},
 
 					center: {
-						text: 'center',
+						text: Liferay.Language.get('center'),
 						image: 'message_boards/justify_center.png',
 						onClick: function(event) {
 							instance.insertTag('center');
@@ -241,7 +241,7 @@ AUI().add(
 					},
 
 					right: {
-						text: 'right',
+						text: Liferay.Language.get('right'),
 						image: 'message_boards/justify_right.png',
 						onClick: function(event) {
 							instance.insertTag('right');
@@ -249,7 +249,7 @@ AUI().add(
 					},
 
 					indent: {
-						text: 'indent',
+						text: Liferay.Language.get('indent'),
 						image: 'message_boards/indent.png',
 						onClick: function(event) {
 							instance.insertTag('indent');
@@ -257,7 +257,7 @@ AUI().add(
 					},
 
 					quote: {
-						text: 'quote',
+						text: Liferay.Language.get('quote'),
 						image: 'message_boards/quote.png',
 						onClick: function(event) {
 							instance.insertTag('quote');
@@ -265,7 +265,7 @@ AUI().add(
 					},
 
 					code: {
-						text: 'code',
+						text: Liferay.Language.get('code'),
 						image: 'message_boards/code.png',
 						onClick: function(event) {
 							instance.insertTag('code');
@@ -273,7 +273,7 @@ AUI().add(
 					},
 
 					emoticons: {
-						text: 'emoticons',
+						text: Liferay.Language.get('emoticons'),
 						image: 'emoticons/smile.gif'
 					}
 				};
@@ -282,7 +282,7 @@ AUI().add(
 					instance._buttons,
 					function(i, n) {
 						var buttonClass = ' ' + (this.className || '');
-						var buttonText = Liferay.Language.get(this.text) || '';
+						var buttonText = this.text || '';
 
 						if (i != 'insert' && !this.options) {
 							var imagePath = themeDisplay.getPathThemeImages() + '/' + this.image;
