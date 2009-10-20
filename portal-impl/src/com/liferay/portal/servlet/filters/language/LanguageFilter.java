@@ -22,11 +22,17 @@
 
 package com.liferay.portal.servlet.filters.language;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
+
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -50,14 +56,43 @@ public class LanguageFilter extends BasePortalFilter {
 		processFilter(
 			LanguageFilter.class, request, cacheResponse, filterChain);
 
-			String content = LanguageFilterUtil.replaceLanguage(
-				request, cacheResponse, cacheResponse.getData());
+		byte[] bytes = translateResponse(
+			request, cacheResponse, cacheResponse.getData());
 
-			CacheResponseData cacheResponseData = new CacheResponseData(
-					content.getBytes(), cacheResponse.getContentType(),
-					cacheResponse.getHeaders());
+		CacheResponseData cacheResponseData = new CacheResponseData(
+			bytes, cacheResponse.getContentType(), cacheResponse.getHeaders());
 
 		CacheResponseUtil.write(response, cacheResponseData);
 	}
+
+	protected byte[] translateResponse(
+		HttpServletRequest request, HttpServletResponse response,
+		byte[] bytes) {
+
+		String languageId = LanguageUtil.getLanguageId(request);
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
+
+		String content = new String(bytes);
+
+		Matcher matcher = _pattern.matcher(content);
+
+		while (matcher.find()) {
+			String match = matcher.group(0);
+			String key = matcher.group(1);
+
+			StringBuffer sb = new StringBuffer();
+
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(LanguageUtil.get(locale, key));
+			sb.append(StringPool.APOSTROPHE);
+
+			content = content.replace(match, sb.toString());
+		}
+
+		return content.getBytes();
+	}
+
+	private static Pattern _pattern = Pattern.compile(
+		"Liferay\\.Language\\.get\\([\"']([^)]+)[\"']\\)");
 
 }

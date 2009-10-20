@@ -2616,6 +2616,11 @@ public class PortalImpl implements Portal {
 			sb.append(queryString);
 		}
 
+		// Language id
+
+		sb.append("&languageId=");
+		sb.append(themeDisplay.getLanguageId());
+
 		// Timestamp
 
 		boolean appendedTimestamp = false;
