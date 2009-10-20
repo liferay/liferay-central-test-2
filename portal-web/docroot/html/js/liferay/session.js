@@ -41,12 +41,6 @@ AUI().add(
 					},
 					instance._timeoutDiff);
 
-				var timeoutMinutes = instance._timeout;
-				var timeLeft = instance._warning;
-
-				instance._warningText = Liferay.Language.get('warning-your-session-will-expire', ['[$SPAN$]', timeoutMinutes]);
-				instance._warningText = instance._warningText.replace(/\[\$SPAN\$\]/, '<span class="countdown-timer"></span>');
-
 				instance._toggleText = {
 					hide: Liferay.Language.get('hide'),
 					show: Liferay.Language.get('show')
@@ -173,6 +167,11 @@ AUI().add(
 
 			warn: function() {
 				var instance = this;
+
+				var timeoutMinutes = instance._timeout;
+
+				instance._warningText = Liferay.Language.get('warning-your-session-will-expire', ['[$SPAN$]', timeoutMinutes]);
+				instance._warningText = instance._warningText.replace(/\[\$SPAN\$\]/, '<span class="countdown-timer"></span>');
 
 				instance.banner = new Liferay.Notice(
 					{
