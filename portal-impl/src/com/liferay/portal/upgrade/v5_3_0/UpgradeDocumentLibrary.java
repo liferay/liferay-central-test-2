@@ -89,9 +89,14 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					repositoryId = groupId;
 				}
 
-				DLServiceUtil.updateFile(
-					companyId, portletId, groupId, repositoryId, name,
-					DLFileEntryNameUpgradeColumnImpl.getNewName(name), false);
+				String newName =
+					DLFileEntryNameUpgradeColumnImpl.getNewName(name);
+
+				if (!newName.equals(name)) {
+					DLServiceUtil.updateFile(
+						companyId, portletId, groupId, repositoryId, name,
+						newName, false);
+				}
 
 				addFileVersion(userId, groupId, folderId, name, version, size);
 			}
