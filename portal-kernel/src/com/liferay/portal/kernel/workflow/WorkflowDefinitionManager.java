@@ -143,9 +143,12 @@ public interface WorkflowDefinitionManager {
 	 * @param  orderByComparator comparator for sorting the result
 	 * @return the list of available workflow definitions, never
 	 *		   <code>null</code>
+	 * @throws WorkflowException is thrown on any exception while requesting the
+	 *		   information
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-		int start, int end, OrderByComparator orderByComparator);
+			int start, int end, OrderByComparator orderByComparator)
+		throws WorkflowException;
 
 	/**
 	 * Returns a list of all versions of the specified workflow definition, if
@@ -161,10 +164,13 @@ public interface WorkflowDefinitionManager {
 	 * @return the list of all versions, if any found, an empty list otherwise
 	 *		   or a list containing just one element, must never be
 	 *		   <code>null</code>
+	 * @throws WorkflowException is thrown on any exception while requesting the
+	 *		   information
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName, int start, int end,
-		OrderByComparator orderByComparator);
+			String workflowDefinitionName, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException;
 
 	/**
 	 * Removes the specified workflow definition from the underlying engine.
