@@ -60,7 +60,7 @@ public class AuditRequestThreadLocal {
 	public long getRealUserId() {
 		return _realUserId;
 	}
-	
+
 	public String getRequestURL() {
 		return _requestURL;
 	}
