@@ -40,7 +40,17 @@ public class DLFileEntryNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		String value = (String)oldValue;
 
-		return FileUtil.stripExtension(value);
+		return getNewName(value);
+	}
+
+	public static String getNewName(String name) throws Exception {
+		name = FileUtil.stripExtension(name);
+
+		if (name.startsWith("DLFE-")) {
+			name = name.substring("DLFE-".length());
+		}
+
+		return name;
 	}
 
 }

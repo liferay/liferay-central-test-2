@@ -82,7 +82,7 @@ import java.util.List;
  * For DLFileEntries, the naming convention for some of the variables is not
  * very informative, due to legacy code. Each DLFileEntry has a corresponding
  * name and title. The "name" is a unique identifier for a given file and
- * usually follows the format "DLFE-1234" whereas the "title" is the actual name
+ * usually follows the format "1234" whereas the "title" is the actual name
  * specified by the user (e.g., "Budget.xls").
  * </p>
  *
@@ -175,7 +175,8 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		title = getTitle(name, title);
-		name = getName(name);
+		name = String.valueOf(
+			counterLocalService.increment(DLFileEntry.class.getName()));
 
 		int status = serviceContext.getStatus();
 
@@ -1192,11 +1193,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return folderId;
-	}
-
-	protected String getName(String name) throws SystemException {
-		return "DLFE-" +
-			counterLocalService.increment(DLFileEntry.class.getName());
 	}
 
 	protected long getRepositoryId(long groupId, long folderId) {

@@ -27,7 +27,6 @@ import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -92,7 +91,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				DLServiceUtil.updateFile(
 					companyId, portletId, groupId, repositoryId, name,
-					FileUtil.stripExtension(name), false);
+					DLFileEntryNameUpgradeColumnImpl.getNewName(name), false);
 
 				addFileVersion(userId, groupId, folderId, name, version, size);
 			}

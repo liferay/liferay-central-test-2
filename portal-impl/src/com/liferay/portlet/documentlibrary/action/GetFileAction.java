@@ -158,6 +158,10 @@ public class GetFileAction extends PortletAction {
 			long userId = themeDisplay.getUserId();
 
 			name = FileUtil.stripExtension(name);
+			
+			if (name.startsWith("DLFE-")) {
+				name = name.substring("DLFE-".length());
+			}
 
 			DLFileEntry fileEntry = null;
 
