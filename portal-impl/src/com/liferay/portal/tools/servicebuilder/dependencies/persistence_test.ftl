@@ -283,8 +283,6 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		${entity.name} new${entity.name} = add${entity.name}();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(${entity.name}.class, ${entity.name}.class.getClassLoader());
 
 		<#if entity.hasCompoundPK()>
