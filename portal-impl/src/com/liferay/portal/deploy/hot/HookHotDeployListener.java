@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -80,6 +81,7 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.UniqueList;
 
 import java.io.File;
 import java.io.InputStream;
@@ -110,6 +112,12 @@ import javax.servlet.ServletContext;
  */
 public class HookHotDeployListener
 	extends BaseHotDeployListener implements PropsKeys {
+
+	public HookHotDeployListener() {
+		for (String key : _PROPS_VALUES_STRING_ARRAY) {
+			_stringArraysContainerMap.put(key, new StringArraysContainer(key));
+		}
+	}
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
 		try {
@@ -165,7 +173,8 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected void destroyPortalProperties(Properties portalProperties)
+	protected void destroyPortalProperties(
+			String servletContextName, Properties portalProperties)
 		throws Exception {
 
 		PropsUtil.removeProperties(portalProperties);
@@ -179,7 +188,7 @@ public class HookHotDeployListener
 					PropsUtil.getArray(LOCALES).length);
 		}
 
-		resetPortalProperties(portalProperties);
+		resetPortalProperties(servletContextName, portalProperties, false);
 
 		if (portalProperties.contains(PropsKeys.DL_HOOK_IMPL)) {
 			com.liferay.documentlibrary.util.HookFactory.setInstance(null);
@@ -269,7 +278,9 @@ public class HookHotDeployListener
 					// last because they may require model listeners to have
 					// been registered.
 
-					initPortalProperties(portletClassLoader, portalProperties);
+					initPortalProperties(
+						servletContextName, portletClassLoader,
+						portalProperties);
 					initAuthFailures(
 						servletContextName, portletClassLoader,
 						portalProperties);
@@ -542,7 +553,7 @@ public class HookHotDeployListener
 			servletContextName);
 
 		if (portalProperties != null) {
-			destroyPortalProperties(portalProperties);
+			destroyPortalProperties(servletContextName, portalProperties);
 		}
 
 		ServicesContainer servicesContainer = _servicesContainerMap.remove(
@@ -982,7 +993,8 @@ public class HookHotDeployListener
 	}
 
 	protected void initPortalProperties(
-			ClassLoader portletClassLoader, Properties portalProperties)
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
 		throws Exception {
 
 		PropsUtil.addProperties(portalProperties);
@@ -996,7 +1008,7 @@ public class HookHotDeployListener
 					PropsUtil.getArray(LOCALES).length);
 		}
 
-		resetPortalProperties(portalProperties);
+		resetPortalProperties(servletContextName, portalProperties, true);
 
 		if (portalProperties.contains(PropsKeys.DL_HOOK_IMPL)) {
 			String dlHookClassName = portalProperties.getProperty(
@@ -1104,7 +1116,9 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected void resetPortalProperties(Properties portalProperties)
+	protected void resetPortalProperties(
+			String servletContextName, Properties portalProperties,
+			boolean initPhase)
 		throws Exception {
 
 		for (String key : _PROPS_VALUES_BOOLEAN) {
@@ -1205,7 +1219,19 @@ public class HookHotDeployListener
 			try {
 				Field field = PropsValues.class.getField(fieldName);
 
-				String[] value = PropsUtil.getArray(key);
+				StringArraysContainer stringArraysContainer =
+					_stringArraysContainerMap.get(key);
+
+				String[] value = null;
+
+				if (initPhase) {
+					value = PropsUtil.getArray(key);
+				}
+
+				stringArraysContainer.setPluginStringArray(
+					servletContextName, value);
+
+				value = stringArraysContainer.getMergedStringArray();
 
 				field.set(null, value);
 			}
@@ -1311,6 +1337,8 @@ public class HookHotDeployListener
 	private Map<String, ServicesContainer> _servicesContainerMap =
 		new HashMap<String, ServicesContainer>();
 	private Set<String> _servletContextNames = new HashSet<String>();
+	private Map<String, StringArraysContainer> _stringArraysContainerMap =
+		new HashMap<String, StringArraysContainer>();
 
 	private class AuthenticatorsContainer {
 
@@ -1594,6 +1622,49 @@ public class HookHotDeployListener
 		}
 
 		private List<String> _serviceTypes = new ArrayList<String>();
+
+	}
+
+	private class StringArraysContainer {
+
+		private StringArraysContainer(String key) {
+			_key = key;
+			_portalStringArray = PropsUtil.getArray(key);
+		}
+
+		public String[] getMergedStringArray() {
+			List<String> mergedStringList = new UniqueList<String>();
+
+			mergedStringList.addAll(ListUtil.fromArray(_portalStringArray));
+
+			for (Map.Entry<String, String[]> entry :
+					_pluginStringArrayMap.entrySet()) {
+
+				String[] pluginStringArray = entry.getValue();
+
+				mergedStringList.addAll(ListUtil.fromArray(pluginStringArray));
+			}
+
+			return mergedStringList.toArray(
+				new String[mergedStringList.size()]);
+		}
+
+		public void setPluginStringArray(
+			String servletContextName, String[] pluginStringArray) {
+
+			if (pluginStringArray != null) {
+				_pluginStringArrayMap.put(
+					servletContextName, pluginStringArray);
+			}
+			else {
+				_pluginStringArrayMap.remove(servletContextName);
+			}
+		}
+
+		private String _key;
+		private String[] _portalStringArray;
+		private Map<String, String[]> _pluginStringArrayMap =
+			new HashMap<String, String[]>();
 
 	}
 
