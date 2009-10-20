@@ -45,12 +45,12 @@ public class ImageServletTokenImpl implements ImageServletToken {
 	public String getToken(long imageId) {
 		String key = _encodeKey(imageId);
 
-		String token = (String)_multiVMPool.get(_cache, key);
+		String token = (String)_cache.get(key);
 
 		if (token == null) {
 			token = _createToken(imageId);
 
-			_multiVMPool.put(_cache, key, token);
+			_cache.put(key, token);
 		}
 
 		return token;

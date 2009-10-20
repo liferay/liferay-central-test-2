@@ -121,7 +121,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			String cacheKey = _encodeCacheKey(
 				finderPath.getMethodName(), finderPath.getParams(), args);
 
-			primaryKey = _multiVMPool.get(portalCache, cacheKey);
+			primaryKey = portalCache.get(cacheKey);
 
 			if (primaryKey != null) {
 				if (_localCacheEnabled.get().booleanValue()) {
@@ -167,7 +167,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		String cacheKey = _encodeCacheKey(
 			finderPath.getMethodName(), finderPath.getParams(), args);
 
-		_multiVMPool.put(portalCache, cacheKey, primaryKey);
+		portalCache.put(cacheKey, primaryKey);
 	}
 
 	public void removeResult(FinderPath finderPath, Object[] args) {
@@ -192,7 +192,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		String cacheKey = _encodeCacheKey(
 			finderPath.getMethodName(), finderPath.getParams(), args);
 
-		_multiVMPool.remove(portalCache, cacheKey);
+		portalCache.remove(cacheKey);
 	}
 
 	public void setLocalCacheEnabled(boolean localCacheEnabled) {

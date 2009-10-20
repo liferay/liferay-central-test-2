@@ -180,7 +180,7 @@ public class JournalContentImpl implements JournalContent {
 			groupId, articleId, templateId, viewMode, languageId, page, secure);
 
 		JournalArticleDisplay articleDisplay =
-			(JournalArticleDisplay)MultiVMPoolUtil.get(cache, key);
+			(JournalArticleDisplay)cache.get(key);
 
 		boolean lifecycleRender = isLifecycleRender(themeDisplay, xmlRequest);
 
@@ -192,7 +192,7 @@ public class JournalContentImpl implements JournalContent {
 			if ((articleDisplay != null) && (articleDisplay.isCacheable()) &&
 				(lifecycleRender)) {
 
-				MultiVMPoolUtil.put(cache, key, articleDisplay);
+				cache.put(key, articleDisplay);
 			}
 		}
 

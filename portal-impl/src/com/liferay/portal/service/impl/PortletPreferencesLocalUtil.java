@@ -56,14 +56,13 @@ public class PortletPreferencesLocalUtil {
 		String key = _encodeKey(ownerId, ownerType);
 
 		Map<String, PortletPreferencesImpl> preferencesPool =
-			(Map<String, PortletPreferencesImpl>)MultiVMPoolUtil.get(
-				_cache, key);
+			(Map<String, PortletPreferencesImpl>)_cache.get(key);
 
 		if (preferencesPool == null) {
 			preferencesPool =
 				new ConcurrentHashMap<String, PortletPreferencesImpl>();
 
-			MultiVMPoolUtil.put(_cache, key, preferencesPool);
+			_cache.put(key, preferencesPool);
 		}
 
 		return preferencesPool;

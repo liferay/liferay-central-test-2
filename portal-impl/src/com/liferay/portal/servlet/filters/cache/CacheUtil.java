@@ -56,7 +56,7 @@ public class CacheUtil {
 		key = _encodeKey(companyId, key);
 
 		CacheResponseData data =
-			(CacheResponseData)MultiVMPoolUtil.get(_cache, key);
+			(CacheResponseData)_cache.get(key);
 
 		return data;
 	}
@@ -67,7 +67,7 @@ public class CacheUtil {
 		if (data != null) {
 			key = _encodeKey(companyId, key);
 
-			MultiVMPoolUtil.put(_cache, key, data);
+			_cache.put(key, data);
 		}
 	}
 

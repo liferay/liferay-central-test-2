@@ -49,7 +49,7 @@ public class WebCachePoolImpl implements WebCachePool {
 	}
 
 	public Object get(String key, WebCacheItem wci) {
-		Object obj = _singleVMPool.get(_cache, key);
+		Object obj = _cache.get(key);
 
 		if (obj == null) {
 			try {
@@ -77,7 +77,7 @@ public class WebCachePoolImpl implements WebCachePool {
 	}
 
 	public void remove(String key) {
-		_singleVMPool.remove(_cache, key);
+		_cache.remove(key);
 	}
 
 	public void setSingleVMPool(SingleVMPool singleVMPool) {

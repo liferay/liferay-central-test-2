@@ -116,12 +116,12 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 			String cacheKey = _encodeCacheKey(primaryKeyObj);
 
-			result = _multiVMPool.get(portalCache, cacheKey);
+			result = portalCache.get(cacheKey);
 
 			if (result == null) {
 				result = StringPool.BLANK;
 
-				_multiVMPool.put(portalCache, cacheKey, result);
+				portalCache.put(cacheKey, result);
 			}
 
 			if (_localCacheEnabled.get().booleanValue()) {
@@ -178,7 +178,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 			String cacheKey = _encodeCacheKey(primaryKeyObj);
 
-			result = _multiVMPool.get(portalCache, cacheKey);
+			result = portalCache.get(cacheKey);
 
 			if (result == null) {
 				if (_log.isDebugEnabled()) {
@@ -201,7 +201,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 					result = _objectToResult(result);
 
-					_multiVMPool.put(portalCache, cacheKey, result);
+					portalCache.put(cacheKey, result);
 
 					sessionFactory.closeSession(session);
 				}
@@ -243,7 +243,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		String cacheKey = _encodeCacheKey(primaryKeyObj);
 
-		_multiVMPool.put(portalCache, cacheKey, result);
+		portalCache.put(cacheKey, result);
 	}
 
 	public void removeResult(
@@ -269,7 +269,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		String cacheKey = _encodeCacheKey(primaryKeyObj);
 
-		_multiVMPool.remove(portalCache, cacheKey);
+		portalCache.remove(cacheKey);
 	}
 
 	public void setLocalCacheEnabled(boolean localCacheEnabled) {

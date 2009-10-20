@@ -69,14 +69,13 @@ public class WikiCacheUtil {
 
 		String key = _encodeKey(nodeId, title, viewPageURL.toString());
 
-		WikiPageDisplay pageDisplay = (WikiPageDisplay)MultiVMPoolUtil.get(
-			_cache, key);
+		WikiPageDisplay pageDisplay = (WikiPageDisplay)_cache.get(key);
 
 		if (pageDisplay == null) {
 			pageDisplay = _getPageDisplay(
 				nodeId, title, viewPageURL, editPageURL, attachmentURLPrefix);
 
-			MultiVMPoolUtil.put(_cache, key, pageDisplay);
+			_cache.put(key, pageDisplay);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -95,13 +94,12 @@ public class WikiCacheUtil {
 		String key = _encodeKey(
 			page.getNodeId(), page.getTitle(), _OUTGOING_LINKS);
 
-		Map<String, Boolean> links = (Map<String, Boolean>)MultiVMPoolUtil.get(
-			_cache, key);
+		Map<String, Boolean> links = (Map<String, Boolean>)_cache.get(key);
 
 		if (links == null) {
 			links = WikiUtil.getLinks(page);
 
-			MultiVMPoolUtil.put(_cache, key, links);
+			_cache.put(key, links);
 		}
 
 		return links;

@@ -68,7 +68,7 @@ public class PermissionCacheUtil {
 		}
 
 		if (bag == null) {
-			bag = (PermissionCheckerBag)MultiVMPoolUtil.get(_cache, key);
+			bag = (PermissionCheckerBag)_cache.get(key);
 		}
 
 		return bag;
@@ -89,7 +89,7 @@ public class PermissionCacheUtil {
 		}
 
 		if (value == null) {
-			value = (Boolean)MultiVMPoolUtil.get(_cache, key);
+			value = (Boolean)_cache.get(key);
 		}
 
 		return value;
@@ -107,7 +107,7 @@ public class PermissionCacheUtil {
 				localCache.put(key, bag);
 			}
 
-			MultiVMPoolUtil.put(_cache, key, bag);
+			_cache.put(key, bag);
 		}
 
 		return bag;
@@ -126,7 +126,7 @@ public class PermissionCacheUtil {
 				localCache.put(key, value);
 			}
 
-			MultiVMPoolUtil.put(_cache, key, value);
+			_cache.put(key, value);
 		}
 
 		return value;

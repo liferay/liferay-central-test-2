@@ -42,15 +42,15 @@ public class LiferayResourceCacheUtil {
 	}
 
 	public static Resource get(String key) {
-		return (Resource)SingleVMPoolUtil.get(_cache, key);
+		return (Resource)_cache.get(key);
 	}
 
 	public static void put(String key, Resource resource) {
-		SingleVMPoolUtil.put(_cache, key, resource);
+		_cache.put(key, resource);
 	}
 
 	public static void remove(String key) {
-		SingleVMPoolUtil.remove(_cache, key);
+		_cache.remove(key);
 	}
 
 	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);

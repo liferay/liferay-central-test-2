@@ -51,12 +51,12 @@ public class CalEventLocalUtil {
 		String key = _encodeKey(groupId);
 
 		Map <String, List<CalEvent>> eventsPool =
-			(Map<String, List<CalEvent>>)MultiVMPoolUtil.get(_cache, key);
+			(Map<String, List<CalEvent>>)_cache.get(key);
 
 		if (eventsPool == null) {
 			eventsPool = new ConcurrentHashMap<String, List<CalEvent>>();
 
-			MultiVMPoolUtil.put(_cache, key, eventsPool);
+			_cache.put(key, eventsPool);
 		}
 
 		return eventsPool;
