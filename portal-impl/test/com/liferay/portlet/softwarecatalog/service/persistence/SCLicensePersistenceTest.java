@@ -152,8 +152,6 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		SCLicense newSCLicense = addSCLicense();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCLicense.class,
 				SCLicense.class.getClassLoader());
 

@@ -144,8 +144,6 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Shard newShard = addShard();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Shard.class,
 				Shard.class.getClassLoader());
 

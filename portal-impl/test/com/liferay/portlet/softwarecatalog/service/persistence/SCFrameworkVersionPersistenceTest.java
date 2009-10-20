@@ -174,8 +174,6 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		SCFrameworkVersion newSCFrameworkVersion = addSCFrameworkVersion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCFrameworkVersion.class,
 				SCFrameworkVersion.class.getClassLoader());
 

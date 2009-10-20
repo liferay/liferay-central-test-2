@@ -149,8 +149,6 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		MBDiscussion newMBDiscussion = addMBDiscussion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBDiscussion.class,
 				MBDiscussion.class.getClassLoader());
 

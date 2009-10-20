@@ -146,8 +146,6 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		BrowserTracker newBrowserTracker = addBrowserTracker();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BrowserTracker.class,
 				BrowserTracker.class.getClassLoader());
 

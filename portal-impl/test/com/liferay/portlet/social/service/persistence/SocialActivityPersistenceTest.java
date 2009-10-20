@@ -171,8 +171,6 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		SocialActivity newSocialActivity = addSocialActivity();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialActivity.class,
 				SocialActivity.class.getClassLoader());
 

@@ -150,8 +150,6 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Country newCountry = addCountry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Country.class,
 				Country.class.getClassLoader());
 

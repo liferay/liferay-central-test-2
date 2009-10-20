@@ -181,8 +181,6 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DLFileVersion newDLFileVersion = addDLFileVersion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileVersion.class,
 				DLFileVersion.class.getClassLoader());
 

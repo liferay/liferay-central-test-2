@@ -169,8 +169,6 @@ public class AssetCategoryPropertyPersistenceTest
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		AssetCategoryProperty newAssetCategoryProperty = addAssetCategoryProperty();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetCategoryProperty.class,
 				AssetCategoryProperty.class.getClassLoader());
 

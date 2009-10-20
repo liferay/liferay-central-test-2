@@ -153,8 +153,6 @@ public class ShoppingItemFieldPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ShoppingItemField newShoppingItemField = addShoppingItemField();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingItemField.class,
 				ShoppingItemField.class.getClassLoader());
 

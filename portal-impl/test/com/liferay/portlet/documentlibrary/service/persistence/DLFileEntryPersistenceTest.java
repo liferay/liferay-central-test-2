@@ -191,8 +191,6 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DLFileEntry newDLFileEntry = addDLFileEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileEntry.class,
 				DLFileEntry.class.getClassLoader());
 

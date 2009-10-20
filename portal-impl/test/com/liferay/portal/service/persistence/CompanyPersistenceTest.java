@@ -155,8 +155,6 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Company newCompany = addCompany();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Company.class,
 				Company.class.getClassLoader());
 

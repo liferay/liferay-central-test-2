@@ -169,8 +169,6 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Organization newOrganization = addOrganization();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Organization.class,
 				Organization.class.getClassLoader());
 

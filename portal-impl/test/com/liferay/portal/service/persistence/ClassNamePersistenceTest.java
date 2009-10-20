@@ -141,8 +141,6 @@ public class ClassNamePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ClassName newClassName = addClassName();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClassName.class,
 				ClassName.class.getClassLoader());
 

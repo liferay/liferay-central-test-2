@@ -151,8 +151,6 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		PasswordTracker newPasswordTracker = addPasswordTracker();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordTracker.class,
 				PasswordTracker.class.getClassLoader());
 

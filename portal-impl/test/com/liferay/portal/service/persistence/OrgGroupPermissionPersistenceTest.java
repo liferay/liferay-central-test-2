@@ -152,8 +152,6 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		OrgGroupPermission newOrgGroupPermission = addOrgGroupPermission();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgGroupPermission.class,
 				OrgGroupPermission.class.getClassLoader());
 

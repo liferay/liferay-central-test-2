@@ -161,8 +161,6 @@ public class LockPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Lock newLock = addLock();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Lock.class,
 				Lock.class.getClassLoader());
 

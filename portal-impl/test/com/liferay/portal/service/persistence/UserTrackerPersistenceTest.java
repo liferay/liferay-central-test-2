@@ -161,8 +161,6 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		UserTracker newUserTracker = addUserTracker();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserTracker.class,
 				UserTracker.class.getClassLoader());
 

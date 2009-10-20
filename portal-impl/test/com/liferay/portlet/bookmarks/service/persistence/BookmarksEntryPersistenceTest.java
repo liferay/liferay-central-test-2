@@ -179,8 +179,6 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		BookmarksEntry newBookmarksEntry = addBookmarksEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BookmarksEntry.class,
 				BookmarksEntry.class.getClassLoader());
 

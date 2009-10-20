@@ -159,8 +159,6 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ExpandoValue newExpandoValue = addExpandoValue();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoValue.class,
 				ExpandoValue.class.getClassLoader());
 

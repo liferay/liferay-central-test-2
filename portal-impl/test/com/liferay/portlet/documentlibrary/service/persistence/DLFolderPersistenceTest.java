@@ -167,8 +167,6 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DLFolder newDLFolder = addDLFolder();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFolder.class,
 				DLFolder.class.getClassLoader());
 

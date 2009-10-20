@@ -180,8 +180,6 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		TasksProposal newTasksProposal = addTasksProposal();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(TasksProposal.class,
 				TasksProposal.class.getClassLoader());
 

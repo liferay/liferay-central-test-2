@@ -172,8 +172,6 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		MBThread newMBThread = addMBThread();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBThread.class,
 				MBThread.class.getClassLoader());
 

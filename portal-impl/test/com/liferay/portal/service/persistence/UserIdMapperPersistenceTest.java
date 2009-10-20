@@ -150,8 +150,6 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		UserIdMapper newUserIdMapper = addUserIdMapper();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserIdMapper.class,
 				UserIdMapper.class.getClassLoader());
 

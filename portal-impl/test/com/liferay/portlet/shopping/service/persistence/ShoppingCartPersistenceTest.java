@@ -173,8 +173,6 @@ public class ShoppingCartPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ShoppingCart newShoppingCart = addShoppingCart();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingCart.class,
 				ShoppingCart.class.getClassLoader());
 

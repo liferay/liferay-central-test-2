@@ -199,8 +199,6 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		AssetEntry newAssetEntry = addAssetEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetEntry.class,
 				AssetEntry.class.getClassLoader());
 

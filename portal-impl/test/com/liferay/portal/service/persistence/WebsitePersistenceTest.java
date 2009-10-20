@@ -162,8 +162,6 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Website newWebsite = addWebsite();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Website.class,
 				Website.class.getClassLoader());
 

@@ -147,8 +147,6 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		WikiPageResource newWikiPageResource = addWikiPageResource();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiPageResource.class,
 				WikiPageResource.class.getClassLoader());
 

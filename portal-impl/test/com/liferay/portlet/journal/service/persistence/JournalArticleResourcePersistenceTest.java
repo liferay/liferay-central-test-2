@@ -148,8 +148,6 @@ public class JournalArticleResourcePersistenceTest
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		JournalArticleResource newJournalArticleResource = addJournalArticleResource();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalArticleResource.class,
 				JournalArticleResource.class.getClassLoader());
 

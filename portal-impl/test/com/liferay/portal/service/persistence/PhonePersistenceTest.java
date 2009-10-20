@@ -163,8 +163,6 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Phone newPhone = addPhone();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Phone.class,
 				Phone.class.getClassLoader());
 

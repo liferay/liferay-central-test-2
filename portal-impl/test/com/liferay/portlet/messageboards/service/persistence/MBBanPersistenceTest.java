@@ -155,8 +155,6 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		MBBan newMBBan = addMBBan();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBBan.class,
 				MBBan.class.getClassLoader());
 

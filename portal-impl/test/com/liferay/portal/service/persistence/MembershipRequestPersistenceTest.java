@@ -171,8 +171,6 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		MembershipRequest newMembershipRequest = addMembershipRequest();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MembershipRequest.class,
 				MembershipRequest.class.getClassLoader());
 

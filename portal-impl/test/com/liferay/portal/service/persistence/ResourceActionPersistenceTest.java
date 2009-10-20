@@ -149,8 +149,6 @@ public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ResourceAction newResourceAction = addResourceAction();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceAction.class,
 				ResourceAction.class.getClassLoader());
 

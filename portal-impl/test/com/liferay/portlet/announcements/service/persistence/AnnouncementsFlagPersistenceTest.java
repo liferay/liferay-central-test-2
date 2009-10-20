@@ -155,8 +155,6 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		AnnouncementsFlag newAnnouncementsFlag = addAnnouncementsFlag();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnnouncementsFlag.class,
 				AnnouncementsFlag.class.getClassLoader());
 

@@ -171,8 +171,6 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		AssetVocabulary newAssetVocabulary = addAssetVocabulary();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetVocabulary.class,
 				AssetVocabulary.class.getClassLoader());
 

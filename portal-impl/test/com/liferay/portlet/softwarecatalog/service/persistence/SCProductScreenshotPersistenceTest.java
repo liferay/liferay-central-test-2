@@ -160,8 +160,6 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		SCProductScreenshot newSCProductScreenshot = addSCProductScreenshot();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCProductScreenshot.class,
 				SCProductScreenshot.class.getClassLoader());
 

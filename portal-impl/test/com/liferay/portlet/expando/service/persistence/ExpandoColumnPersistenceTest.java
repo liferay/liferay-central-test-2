@@ -157,8 +157,6 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ExpandoColumn newExpandoColumn = addExpandoColumn();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoColumn.class,
 				ExpandoColumn.class.getClassLoader());
 

@@ -204,8 +204,6 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Contact newContact = addContact();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Contact.class,
 				Contact.class.getClassLoader());
 

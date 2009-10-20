@@ -164,8 +164,6 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Group newGroup = addGroup();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Group.class,
 				Group.class.getClassLoader());
 

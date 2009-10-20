@@ -189,8 +189,6 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		SCProductEntry newSCProductEntry = addSCProductEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCProductEntry.class,
 				SCProductEntry.class.getClassLoader());
 

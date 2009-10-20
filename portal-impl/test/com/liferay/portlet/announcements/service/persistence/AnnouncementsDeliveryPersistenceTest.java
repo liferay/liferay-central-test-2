@@ -160,8 +160,6 @@ public class AnnouncementsDeliveryPersistenceTest
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		AnnouncementsDelivery newAnnouncementsDelivery = addAnnouncementsDelivery();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnnouncementsDelivery.class,
 				AnnouncementsDelivery.class.getClassLoader());
 

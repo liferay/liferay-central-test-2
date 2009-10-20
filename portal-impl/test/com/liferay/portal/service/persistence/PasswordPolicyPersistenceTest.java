@@ -218,8 +218,6 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		PasswordPolicy newPasswordPolicy = addPasswordPolicy();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordPolicy.class,
 				PasswordPolicy.class.getClassLoader());
 

@@ -173,8 +173,6 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		LayoutSet newLayoutSet = addLayoutSet();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSet.class,
 				LayoutSet.class.getClassLoader());
 

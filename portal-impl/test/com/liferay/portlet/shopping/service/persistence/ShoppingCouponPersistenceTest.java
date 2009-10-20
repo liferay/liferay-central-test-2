@@ -196,8 +196,6 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ShoppingCoupon newShoppingCoupon = addShoppingCoupon();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingCoupon.class,
 				ShoppingCoupon.class.getClassLoader());
 

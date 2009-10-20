@@ -164,8 +164,6 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		WikiNode newWikiNode = addWikiNode();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiNode.class,
 				WikiNode.class.getClassLoader());
 

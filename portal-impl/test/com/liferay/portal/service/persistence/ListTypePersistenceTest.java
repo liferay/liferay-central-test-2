@@ -143,8 +143,6 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ListType newListType = addListType();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ListType.class,
 				ListType.class.getClassLoader());
 

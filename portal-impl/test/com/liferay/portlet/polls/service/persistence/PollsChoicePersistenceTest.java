@@ -150,8 +150,6 @@ public class PollsChoicePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		PollsChoice newPollsChoice = addPollsChoice();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PollsChoice.class,
 				PollsChoice.class.getClassLoader());
 

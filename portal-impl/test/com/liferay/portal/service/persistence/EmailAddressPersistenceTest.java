@@ -172,8 +172,6 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		EmailAddress newEmailAddress = addEmailAddress();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(EmailAddress.class,
 				EmailAddress.class.getClassLoader());
 

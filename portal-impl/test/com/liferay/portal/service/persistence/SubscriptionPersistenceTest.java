@@ -166,8 +166,6 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Subscription newSubscription = addSubscription();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Subscription.class,
 				Subscription.class.getClassLoader());
 

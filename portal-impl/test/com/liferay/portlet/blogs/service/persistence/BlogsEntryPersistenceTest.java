@@ -186,8 +186,6 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		BlogsEntry newBlogsEntry = addBlogsEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BlogsEntry.class,
 				BlogsEntry.class.getClassLoader());
 

@@ -155,8 +155,6 @@ public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		LayoutPrototype newLayoutPrototype = addLayoutPrototype();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutPrototype.class,
 				LayoutPrototype.class.getClassLoader());
 

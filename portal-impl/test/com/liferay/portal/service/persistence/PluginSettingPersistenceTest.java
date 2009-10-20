@@ -155,8 +155,6 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		PluginSetting newPluginSetting = addPluginSetting();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PluginSetting.class,
 				PluginSetting.class.getClassLoader());
 

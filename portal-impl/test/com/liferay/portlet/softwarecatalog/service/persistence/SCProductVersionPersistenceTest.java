@@ -177,8 +177,6 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		SCProductVersion newSCProductVersion = addSCProductVersion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCProductVersion.class,
 				SCProductVersion.class.getClassLoader());
 

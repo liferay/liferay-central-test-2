@@ -168,8 +168,6 @@ public class AssetTagPropertyPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		AssetTagProperty newAssetTagProperty = addAssetTagProperty();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetTagProperty.class,
 				AssetTagProperty.class.getClassLoader());
 

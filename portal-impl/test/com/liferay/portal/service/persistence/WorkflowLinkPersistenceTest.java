@@ -162,8 +162,6 @@ public class WorkflowLinkPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		WorkflowLink newWorkflowLink = addWorkflowLink();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WorkflowLink.class,
 				WorkflowLink.class.getClassLoader());
 

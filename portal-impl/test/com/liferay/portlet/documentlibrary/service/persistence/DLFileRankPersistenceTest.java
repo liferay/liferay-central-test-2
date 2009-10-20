@@ -156,8 +156,6 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DLFileRank newDLFileRank = addDLFileRank();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileRank.class,
 				DLFileRank.class.getClassLoader());
 

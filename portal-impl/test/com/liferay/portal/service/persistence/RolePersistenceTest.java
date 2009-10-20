@@ -154,8 +154,6 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Role newRole = addRole();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Role.class,
 				Role.class.getClassLoader());
 

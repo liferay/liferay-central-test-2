@@ -151,8 +151,6 @@ public class UserGroupRolePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		UserGroupRole newUserGroupRole = addUserGroupRole();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroupRole.class,
 				UserGroupRole.class.getClassLoader());
 

@@ -166,8 +166,6 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		PortletItem newPortletItem = addPortletItem();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PortletItem.class,
 				PortletItem.class.getClassLoader());
 

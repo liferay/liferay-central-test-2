@@ -175,8 +175,6 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		SocialRequest newSocialRequest = addSocialRequest();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialRequest.class,
 				SocialRequest.class.getClassLoader());
 

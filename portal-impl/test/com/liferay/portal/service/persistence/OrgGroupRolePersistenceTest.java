@@ -150,8 +150,6 @@ public class OrgGroupRolePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		OrgGroupRole newOrgGroupRole = addOrgGroupRole();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgGroupRole.class,
 				OrgGroupRole.class.getClassLoader());
 

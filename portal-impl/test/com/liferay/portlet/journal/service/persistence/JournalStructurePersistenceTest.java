@@ -180,8 +180,6 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		JournalStructure newJournalStructure = addJournalStructure();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalStructure.class,
 				JournalStructure.class.getClassLoader());
 

@@ -162,8 +162,6 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		IGFolder newIGFolder = addIGFolder();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGFolder.class,
 				IGFolder.class.getClassLoader());
 

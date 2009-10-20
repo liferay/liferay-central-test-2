@@ -155,8 +155,6 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		RatingsStats newRatingsStats = addRatingsStats();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RatingsStats.class,
 				RatingsStats.class.getClassLoader());
 

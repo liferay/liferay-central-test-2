@@ -159,8 +159,6 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		ResourcePermission newResourcePermission = addResourcePermission();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourcePermission.class,
 				ResourcePermission.class.getClassLoader());
 

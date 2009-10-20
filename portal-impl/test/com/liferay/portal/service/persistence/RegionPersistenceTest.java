@@ -146,8 +146,6 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		Region newRegion = addRegion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Region.class,
 				Region.class.getClassLoader());
 

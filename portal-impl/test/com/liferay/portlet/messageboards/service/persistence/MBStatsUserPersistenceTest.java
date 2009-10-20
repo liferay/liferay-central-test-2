@@ -153,8 +153,6 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		MBStatsUser newMBStatsUser = addMBStatsUser();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBStatsUser.class,
 				MBStatsUser.class.getClassLoader());
 
