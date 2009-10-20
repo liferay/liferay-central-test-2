@@ -113,10 +113,6 @@ Liferay.LayoutExporter = {
 				var url = options.url;
 				var title = options.title;
 
-				if (!title) {
-					title = Liferay.Language.get(messageId);
-				}
-
 				new A.Dialog(
 					{
 						centered: true,

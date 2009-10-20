@@ -1324,7 +1324,11 @@ AUI().add(
 					var saveCallback = function() {
 						var dialogFields = instance._saveDialog.fields;
 
-						instance._showMessage(dialogFields.messageElement, 'info', 'waiting-for-an-answer');
+						instance._showMessage(
+							dialogFields.messageElement,
+							'info',
+							Liferay.Language.get('waiting-for-an-answer')
+						);
 
 						var form = instance._getPrincipalForm();
 						var structureIdInput = instance._getInputByName(form, 'structureId');
@@ -1415,7 +1419,11 @@ AUI().add(
 							dialogFields.loadDefaultStructure.show();
 							dialogFields.dialogStructureId.attr('disabled', 'disabled');
 
-							instance._showMessage(dialogFields.messageElement, 'success', 'your-request-processed-successfully');
+							instance._showMessage(
+								dialogFields.messageElement,
+								'success',
+								Liferay.Language.get('your-request-processed-successfully')
+							);
 
 							var structureMessage = instance._getById('structureMessage');
 
@@ -1424,7 +1432,11 @@ AUI().add(
 						else {
 							var errorMessage = instance._translateErrorMessage(exception);
 
-							instance._showMessage(dialogFields.messageElement, 'error', errorMessage);
+							instance._showMessage(
+								dialogFields.messageElement,
+								'error',
+								errorMessage
+							);
 						}
 					};
 
@@ -1545,7 +1557,13 @@ AUI().add(
 
 				if (instance._hasStructureChanged()) {
 					var structureMessage = instance._getById('structureMessage');
-					instance._showMessage(structureMessage, 'alert', null, 10000);
+
+					instance._showMessage(
+						structureMessage,
+						'alert',
+						null,
+						10000
+					);
 				}
 			},
 
@@ -2157,7 +2175,11 @@ AUI().add(
 						instance._updateFieldVariableName(fieldInstance, variableNameValue);
 						instance._updateFieldLabelName(fieldInstance, fieldLabel.val());
 
-						instance._showMessage(journalMessage, 'success', 'your-request-processed-successfully');
+						instance._showMessage(
+							journalMessage,
+							'success',
+							Liferay.Language.get('your-request-processed-successfully')
+						);
 
 						instance._editContainerNormalMode();
 
@@ -2167,7 +2189,11 @@ AUI().add(
 					}
 					else {
 						variableName.focus();
-						instance._showMessage(journalMessage, 'error', 'duplicated-variable-name');
+						instance._showMessage(
+							journalMessage,
+							'error',
+							Liferay.Language.get('duplicated-variable-name')
+						);
 					}
 				}
 			},
@@ -2177,43 +2203,43 @@ AUI().add(
 			},
 
 			_translateErrorMessage: function(exception) {
-				var errorKey = '';
+				var errorText = '';
 
 				if (exception.indexOf('StructureXsdException') > -1) {
-					errorKey = 'please-enter-a-valid-xsd';
+					errorText = Liferay.Language.get('please-enter-a-valid-xsd');
 				}
 				else if (exception.indexOf('DuplicateStructureIdException') > -1) {
-					errorKey = 'please-enter-a-unique-id';
+					errorText = Liferay.Language.get('please-enter-a-unique-id');
 				}
 				else if (exception.indexOf('StructureDescriptionException') > -1) {
-					errorKey = 'please-enter-a-valid-description';
+					errorText = Liferay.Language.get('please-enter-a-valid-description');
 				}
 				else if (exception.indexOf('StructureIdException') > -1) {
-					errorKey = 'please-enter-a-valid-id';
+					errorText = Liferay.Language.get('please-enter-a-valid-id');
 				}
 				else if (exception.indexOf('StructureInheritanceException') > -1) {
-					errorKey = 'this-structure-is-already-within-the-inheritance-path-of-the-selected-parent-please-select-another-parent-structure';
+					errorText = Liferay.Language.get('this-structure-is-already-within-the-inheritance-path-of-the-selected-parent-please-select-another-parent-structure');
 				}
 				else if (exception.indexOf('StructureNameException') > -1) {
-					errorKey = 'please-enter-a-valid-name';
+					errorText = Liferay.Language.get('please-enter-a-valid-name');
 				}
 				else if (exception.indexOf('NoSuchStructureException') > -1) {
-					errorKey = 'please-enter-a-valid-id';
+					errorText = Liferay.Language.get('please-enter-a-valid-id');
 				}
 				else if (exception.indexOf('ArticleContentException') > -1) {
-					errorKey = 'please-enter-valid-content';
+					errorText = Liferay.Language.get('please-enter-valid-content');
 				}
 				else if (exception.indexOf('ArticleIdException') > -1) {
-					errorKey = 'please-enter-a-valid-id';
+					errorText = Liferay.Language.get('please-enter-a-valid-id');
 				}
 				else if (exception.indexOf('ArticleTitleException') > -1) {
-					errorKey = 'please-enter-a-valid-name';
+					errorText = Liferay.Language.get('please-enter-a-valid-name');
 				}
 				else if (exception.indexOf('DuplicateArticleIdException') > -1) {
-					errorKey = 'please-enter-a-unique-id';
+					errorText = Liferay.Language.get('please-enter-a-unique-id');
 				}
 
-				return Liferay.Language.get(errorKey);
+				return errorText;
 			},
 
 			_initializePageLoadFieldInstances: function() {
@@ -2267,6 +2293,7 @@ AUI().add(
 
 			_showMessage: function(selector, type, message, delay) {
 				var instance = this;
+
 				var journalMessage = selector;
 
 				if (!selector) {
@@ -2282,8 +2309,7 @@ AUI().add(
 				instance.editContainerContextPanel.refreshAlign();
 
 				if (message) {
-					var messageLang = Liferay.Language.get(message);
-					journalMessage.html(messageLang);
+					journalMessage.html(message);
 				}
 
 				clearTimeout(instance.messageDelay[selector]);

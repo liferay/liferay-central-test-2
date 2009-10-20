@@ -118,7 +118,9 @@ AUI().add(
 										}
 										else {
 											if (exception.indexOf('auth.PrincipalException') > -1) {
-												instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+												var errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
+
+												instance._sendMessage('error', errorText);
 											}
 										}
 									}
@@ -181,7 +183,7 @@ AUI().add(
 							var exception = message.exception;
 
 							if (!exception && message.tagId) {
-								instance._sendMessage('success', 'your-request-processed-successfully');
+								instance._sendMessage('success', Liferay.Language.get('your-request-processed-successfully'));
 
 								instance._displayTags(
 									function() {
@@ -203,22 +205,22 @@ AUI().add(
 								}
 							}
 							else {
-								var errorKey = '';
+								var errorText = '';
 
 								if (exception.indexOf('DuplicateTagException') > -1) {
-									errorKey = 'that-tag-already-exists';
+									errorText = Liferay.Language.get('that-tag-already-exists');
 								}
 								else if ((exception.indexOf('TagNameException') > -1) ||
 										 (exception.indexOf('AssetTagException') > -1)) {
 
-									errorKey = 'one-of-your-fields-contains-invalid-characters';
+									errorText = Liferay.Language.get('one-of-your-fields-contains-invalid-characters');
 								}
 								else if (exception.indexOf('auth.PrincipalException') > -1) {
-									errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
+									errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
 								}
 
-								if (errorKey) {
-									instance._sendMessage('error', errorKey);
+								if (errorText) {
+									instance._sendMessage('error', errorText);
 								}
 							}
 						}
@@ -438,7 +440,7 @@ AUI().add(
 
 					if (!tags.length) {
 						buffer = [];
-						instance._sendMessage('info', 'no-tags-were-found', '#tag-messages', true);
+						instance._sendMessage('info', Liferay.Language.get('no-tags-were-found'), '#tag-messages', true);
 					}
 
 					tagsContainer.html(buffer.join(''));
@@ -712,11 +714,10 @@ AUI().add(
 					return tag;
 				},
 
-				_sendMessage: function(type, key, output, noAutoHide) {
+				_sendMessage: function(type, message, output, noAutoHide) {
 					var instance = this;
 
 					var output = jQuery(output || '#tag-messages');
-					var message = Liferay.Language.get(key);
 					var typeClass = 'portlet-msg-' + type;
 
 					clearTimeout(instance._messageTimeout);
@@ -787,11 +788,17 @@ AUI().add(
 								instance._closeEditSection();
 							}
 							else {
+								var errorText = '';
+
 								if (exception.indexOf('auth.PrincipalException') > -1) {
-									instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+									errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
 								}
 								else if (exception.indexOf('Exception') > -1) {
-									instance._sendMessage('error', 'one-of-your-fields-contains-invalid-characters');
+									errorText = Liferay.Language.get('one-of-your-fields-contains-invalid-characters');
+								}
+
+								if (errorText) {
+									instance._sendMessage('error', errorText);
 								}
 							}
 

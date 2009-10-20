@@ -92,7 +92,7 @@
 			sb.append("', '");
 			sb.append(UnicodeFormatter.toString(organization.getName()));
 			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(organization.getType()));
+			sb.append(UnicodeLanguageUtil.get(pageContext, organization.getType()));
 			sb.append("');");
 			sb.append("window.close();");
 

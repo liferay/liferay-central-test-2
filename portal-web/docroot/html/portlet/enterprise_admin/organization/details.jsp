@@ -106,7 +106,7 @@ if (organization != null) {
 				var href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
 
 				rowColumns.push(<portlet:namespace />createURL(href, name));
-				rowColumns.push(<portlet:namespace />createURL(href, Liferay.Language.get(type)));
+				rowColumns.push(<portlet:namespace />createURL(href, type));
 				rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 
 				searchContainer.deleteRow(1, searchContainer.getData());

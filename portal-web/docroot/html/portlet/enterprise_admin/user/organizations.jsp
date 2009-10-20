@@ -47,7 +47,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		var rowColumns = [];
 
 		rowColumns.push(name);
-		rowColumns.push(Liferay.Language.get(type));
+		rowColumns.push(type);
 		rowColumns.push('<%= RoleConstants.ORGANIZATION_MEMBER %>');
 		rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />organizationsSearchContainer\').deleteRow(this, ' + organizationId + ')'));
 

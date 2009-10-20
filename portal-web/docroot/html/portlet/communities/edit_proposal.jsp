@@ -325,7 +325,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	<c:choose>
 		<c:when test="<%= review != null %>">
 			<c:if test="<%= ((review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
-				<aui:button onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL.toString() %>', messageId: 'publish-to-live'});" value="publish-to-live" />
+				<aui:button onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL.toString() %>', title: '<liferay-ui:message key="publish-to-live" />'});" value="publish-to-live" />
 			</c:if>
 
 			<c:choose>
@@ -346,7 +346,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 			</c:choose>
 		</c:when>
 		<c:when test="<%= (review == null) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
-			<aui:button onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL.toString() %>', messageId: 'publish-to-live'});" value="publish-to-live" />
+			<aui:button onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL.toString() %>', title: '<liferay-ui:message key="publish-to-live" />'});" value="publish-to-live" />
 		</c:when>
 	</c:choose>
 

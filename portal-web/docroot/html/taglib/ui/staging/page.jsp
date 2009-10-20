@@ -154,7 +154,7 @@
 						</c:when>
 						<c:when test="<%= themeDisplay.getURLPublishToLive() != null %>">
 							<li class="page-settings">
-								<a href="javascript:Liferay.LayoutExporter.publishToLive({url: '<%= themeDisplay.getURLPublishToLive().toString() %>', messageId: 'publish-to-live'});"><liferay-ui:message key="publish-to-live" /></a>
+								<a href="javascript:Liferay.LayoutExporter.publishToLive({url: '<%= themeDisplay.getURLPublishToLive().toString() %>', title: '<liferay-ui:message key="publish-to-live" />'});"><liferay-ui:message key="publish-to-live" /></a>
 							</li>
 						</c:when>
 					</c:choose>
