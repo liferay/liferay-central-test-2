@@ -220,7 +220,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 					<liferay-ui:icon
 						image='<%= "../document_library/" + conversion %>'
 						message="<%= conversion.toUpperCase() %>"
-						url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + toFolder.getFolderId() + "&name=" + HttpUtil.encodeURL(toFileEntry.getName()) + "&targetExtension=" + conversion %>'
+						url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + toFolder.getFolderId() + "&title=" + HttpUtil.encodeURL(toFileEntry.getTitle()) + "&targetExtension=" + conversion %>'
 						label="<%= true %>"
 					/>
 

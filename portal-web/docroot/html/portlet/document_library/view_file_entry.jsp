@@ -75,7 +75,7 @@ try {
 catch (Exception e) {
 }
 
-String fileUrl = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name);
+String fileUrl = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&title=" + HttpUtil.encodeURL(title);
 String webDavUrl = StringPool.BLANK;
 
 if (portletDisplay.isWebDAVEnabled()) {
@@ -419,8 +419,8 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				sb.append(themeDisplay.getScopeGroupId());
 				sb.append("&folderId=");
 				sb.append(folderId);
-				sb.append("&name=");
-				sb.append(HttpUtil.encodeURL(name));
+				sb.append("&title=");
+				sb.append(HttpUtil.encodeURL(title));
 				sb.append("&version=");
 				sb.append(String.valueOf(fileVersion.getVersion()));
 

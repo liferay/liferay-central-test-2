@@ -148,8 +148,8 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append(themeDisplay.getPlid());
 	sb.append("&folderId=");
 	sb.append(folderId);
-	sb.append("&name=");
-	sb.append(HttpUtil.encodeURL(fileEntry.getName()));
+	sb.append("&title=");
+	sb.append(HttpUtil.encodeURL(fileEntry.getTitle()));
 
 	String rowHREF = sb.toString();
 

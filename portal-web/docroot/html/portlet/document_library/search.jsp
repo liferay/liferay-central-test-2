@@ -138,7 +138,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 			rowURL.setParameter("struts_action", "/document_library/get_file");
 			rowURL.setParameter("groupId", String.valueOf(scopeGroupId));
 			rowURL.setParameter("folderId", String.valueOf(folderId));
-			rowURL.setParameter("name", fileName);
+			rowURL.setParameter("title", fileEntry.getTitle());
 
 			row.addText(folder.getName(), rowURL);
 			row.addText(fileEntry.getTitle(), rowURL);

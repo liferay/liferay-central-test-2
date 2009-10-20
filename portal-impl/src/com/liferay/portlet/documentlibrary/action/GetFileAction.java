@@ -75,6 +75,7 @@ public class GetFileAction extends PortletAction {
 		try {
 			long folderId = ParamUtil.getLong(request, "folderId");
 			String name = ParamUtil.getString(request, "name");
+			String title = ParamUtil.getString(request, "title");
 			double version = ParamUtil.getDouble(request, "version");
 
 			long fileShortcutId = ParamUtil.getLong(request, "fileShortcutId");
@@ -91,7 +92,7 @@ public class GetFileAction extends PortletAction {
 				request, "groupId", themeDisplay.getScopeGroupId());
 
 			getFile(
-				folderId, name, version, fileShortcutId, uuid, groupId,
+				folderId, name, title, version, fileShortcutId, uuid, groupId,
 				targetExtension, themeDisplay, request, response);
 
 			return null;
@@ -111,6 +112,7 @@ public class GetFileAction extends PortletAction {
 		try {
 			long folderId = ParamUtil.getLong(actionRequest, "folderId");
 			String name = ParamUtil.getString(actionRequest, "name");
+			String title = ParamUtil.getString(actionRequest, "title");
 			double version = ParamUtil.getDouble(actionRequest, "version");
 
 			long fileShortcutId = ParamUtil.getLong(
@@ -131,7 +133,7 @@ public class GetFileAction extends PortletAction {
 				actionResponse);
 
 			getFile(
-				folderId, name, version, fileShortcutId, uuid, groupId,
+				folderId, name, title, version, fileShortcutId, uuid, groupId,
 				targetExtension, themeDisplay, request, response);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
@@ -145,10 +147,10 @@ public class GetFileAction extends PortletAction {
 	}
 
 	protected void getFile(
-			long folderId, String name, double version, long fileShortcutId,
-			String uuid, long groupId, String targetExtension,
-			ThemeDisplay themeDisplay, HttpServletRequest request,
-			HttpServletResponse response)
+			long folderId, String name, String title, double version,
+			long fileShortcutId, String uuid, long groupId,
+			String targetExtension, ThemeDisplay themeDisplay,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		InputStream is = null;
@@ -158,7 +160,7 @@ public class GetFileAction extends PortletAction {
 			long userId = themeDisplay.getUserId();
 
 			name = FileUtil.stripExtension(name);
-			
+
 			if (name.startsWith("DLFE-")) {
 				name = name.substring("DLFE-".length());
 			}
@@ -178,9 +180,22 @@ public class GetFileAction extends PortletAction {
 			}
 
 			if (fileShortcutId <= 0) {
+				if (Validator.isNotNull(name)) {
+					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+						groupId, folderId, name);
+
+					title = fileEntry.getTitle();
+				}
+				else if (Validator.isNotNull(title)){
+					fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByTitle(
+						groupId, folderId, title);
+
+					name = fileEntry.getName();
+				}
+
 				DLFileEntryPermission.check(
-					themeDisplay.getPermissionChecker(), groupId, folderId,
-					name, ActionKeys.VIEW);
+					themeDisplay.getPermissionChecker(), fileEntry,
+					ActionKeys.VIEW);
 			}
 			else {
 				DLFileShortcut fileShortcut =
@@ -188,9 +203,7 @@ public class GetFileAction extends PortletAction {
 
 				folderId = fileShortcut.getToFolderId();
 				name = fileShortcut.getToName();
-			}
 
-			if (fileEntry == null) {
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 					groupId, folderId, name);
 			}
