@@ -222,11 +222,12 @@ AUI().add(
 
 					if (instance.clonedSource) {
 						var journalComponentList = instance._getById(instance._journalComponentListClass);
+						var journalComponentListNode = A.get(journalComponentList[0]);
 
 						instance.clonedSource.removeClass('dragging');
 
-						if (Alloy.Dom.contains(journalComponentList[0], source[0]) &&
-							Alloy.Dom.contains(journalComponentList[0], instance.clonedSource[0])) {
+						if (journalComponentListNode.contains(source[0]) &&
+							journalComponentListNode.contains(instance.clonedSource[0])) {
 
 							source.remove();
 						}
