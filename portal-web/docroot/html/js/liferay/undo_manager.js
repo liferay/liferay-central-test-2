@@ -26,8 +26,9 @@ AUI().add(
 			options = jQuery.extend(defaults, options);
 
 			if (options.container) {
-				var undoText = Liferay.Language.get('undo-x', ['[$SPAN$]']);
-				undoText = undoText.replace(/\[\$SPAN\$\]/, '<span class="items-left">(0)</span>');
+				var undoText = Liferay.Language.get('undo-x');
+
+				undoText = A.substitute(undoText, ['<span class="items-left">(0)</span>']);
 
 				instance._container = jQuery(options.container);
 				instance._manager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript:;">' + undoText + '</a><a class="clear-undos" href="javascript:;">' + Liferay.Language.get('clear-history') + '</a></div>');
@@ -142,6 +143,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['liferay-observable']
+		requires: ['liferay-observable', 'substitute']
 	}
 );

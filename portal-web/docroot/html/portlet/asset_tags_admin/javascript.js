@@ -608,17 +608,9 @@ AUI().add(
 
 					var destination = toTagName;
 
-					var tagText = {
-						SOURCE: instance._getTagName(nodeEl),
-						DESTINATION: destination
-					};
+					var mergeText = Liferay.Language.get('are-you-sure-you-want-to-merge-x-into-x');
 
-					var mergeText = Liferay.Language.get('are-you-sure-you-want-to-merge-x-into-x', ['[$SOURCE$]', '[$DESTINATION$]']).replace(
-						/\[\$(SOURCE|DESTINATION)\$\]/gm,
-						function(completeMatch, match, index, str) {
-							return tagText[match];
-						}
-					);
+					mergeText = A.substitute(mergeText, [instance._getTagName(nodeEl), destination]);
 
 					if (confirm(mergeText)) {
 						instance._mergeTags(
@@ -821,6 +813,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base', 'context-panel', 'dd']
+		requires: ['base', 'context-panel', 'dd', 'substitute']
 	}
 );

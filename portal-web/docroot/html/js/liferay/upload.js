@@ -78,12 +78,12 @@ AUI().add(
 			instance._cancelUploadsText = Liferay.Language.get('cancel-all-uploads');
 			instance._cancelFileText = Liferay.Language.get('cancel-upload');
 			instance._clearRecentUploadsText = Liferay.Language.get('clear-recent-uploads');
-			instance._fileListPendingText = Liferay.Language.get('x-files-ready-to-be-uploaded', '0');
+			instance._fileListPendingText = Liferay.Language.get('x-files-ready-to-be-uploaded');
 			instance._fileListText = Liferay.Language.get('file-list');
 			instance._fileTypesDescriptionText = options.fileDescription || instance._allowedFileTypes;
 			instance._invalidFileSizeText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-size');
 			instance._uploadsCompleteText = Liferay.Language.get('all-uploads-complete');
-			instance._uploadStatusText = Liferay.Language.get('uploading-file-x-of-x', ['[$POS$]','[$TOTAL$]']);
+			instance._uploadStatusText = Liferay.Language.get('uploading-file-x-of-x');
 			instance._uploadFilesText = Liferay.Language.get('upload-files');
 
 			if (instance._fallbackContainer.length) {
@@ -327,7 +327,7 @@ AUI().add(
 				var listLength = (stats.successful_uploads + stats.upload_errors + stats.files_queued);
 				var position = (stats.successful_uploads + stats.upload_errors + 1);
 
-				var currentListText = instance._uploadStatusText.replace('[$POS$]', position).replace('[$TOTAL$]', listLength);
+				var currentListText = A.substitute(instance._uploadStatusText, [position, listLength]);
 				var fileId = instance._namespace(file.id);
 
 				instance._updateList(listLength, currentListText);
@@ -638,8 +638,7 @@ AUI().add(
 				var listText = '';
 
 				if (!message) {
-					listText = instance._fileListPendingText;
-					listText = listText.replace(/\d+/g, listLength);
+					listText = A.substitute(instance._fileListPendingText, [listLength]);
 				}
 				else {
 					listText = message;
@@ -653,6 +652,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: []
+		requires: ['substitute']
 	}
 );

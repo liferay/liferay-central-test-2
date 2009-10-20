@@ -49,6 +49,10 @@ AUI().add(
 				instance._expiredText = Liferay.Language.get('warning-your-session-has-expired');
 				instance._extendText = Liferay.Language.get('extend');
 
+				instance._warningText = Liferay.Language.get('warning-your-session-will-expire');
+
+				instance._warningText = A.substitute(instance._warningText, ['<span class="countdown-timer"></span>']);
+
 				instance.setCookie();
 			},
 
@@ -170,9 +174,6 @@ AUI().add(
 
 				var timeoutMinutes = instance._timeout;
 
-				instance._warningText = Liferay.Language.get('warning-your-session-will-expire', ['[$SPAN$]', timeoutMinutes]);
-				instance._warningText = instance._warningText.replace(/\[\$SPAN\$\]/, '<span class="countdown-timer"></span>');
-
 				instance.banner = new Liferay.Notice(
 					{
 						content: instance._warningText,
@@ -282,6 +283,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['cookie', 'liferay-notice']
+		requires: ['cookie', 'liferay-notice', 'substitute']
 	}
 );
