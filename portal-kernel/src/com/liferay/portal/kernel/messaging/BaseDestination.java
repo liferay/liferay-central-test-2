@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 import java.util.Set;
@@ -71,6 +72,10 @@ public abstract class BaseDestination implements Destination {
 	}
 
 	public void afterPropertiesSet() {
+        if (Validator.isNull(_name)) {
+            throw new IllegalStateException(
+                    "Must specify a name for the destination");
+        }
 		open();
 	}
 
@@ -128,11 +133,15 @@ public abstract class BaseDestination implements Destination {
 		return _messageListeners.size();
 	}
 
-	public String getName() {
+    public String getName() {
 		return _name;
 	}
 
-	public int getWorkersCoreSize() {
+    public int getPendingRequestCount() {
+        return _threadPoolExecutor.getQueue().size();
+    }
+
+    public int getWorkersCoreSize() {
 		return _workersCoreSize;
 	}
 

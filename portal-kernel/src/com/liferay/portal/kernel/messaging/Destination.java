@@ -44,9 +44,11 @@ public interface Destination {
 
 	public int getMessageListenerCount();
 
-	public String getName();
+    public String getName();
 
-	public boolean isRegistered();
+    public int getPendingRequestCount();
+
+    public boolean isRegistered();
 
 	public void open();
 
