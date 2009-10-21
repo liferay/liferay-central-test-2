@@ -179,7 +179,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 		else if (type.equals("search")) {
 			addParam(params, "struts_action", "/message_boards/search");
-			addParam(params, "tabs1", "category");
+			addParam(params, "tabs1", "categories");
 		}
 
 		if (friendlyURLPath.indexOf("maximized", x) != -1) {
