@@ -37,6 +37,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import java.io.Serializable;
+
 import java.sql.Connection;
 
 import java.util.List;

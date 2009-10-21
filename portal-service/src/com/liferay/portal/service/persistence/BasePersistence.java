@@ -22,14 +22,15 @@
 
 package com.liferay.portal.service.persistence;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
+
+import java.io.Serializable;
+
+import java.util.List;
 
 /**
  * <a href="BasePersistence.java.html"><b><i>View Source</i></b></a>
