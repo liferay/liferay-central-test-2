@@ -33,8 +33,6 @@ import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageStatus;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -67,8 +65,6 @@ import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
-import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1020,7 +1016,7 @@ public class StagingUtil {
 				actionRequest, "recurrenceType");
 
 			Calendar startCal = _getDate(
-				actionRequest, "schedulerStartDate", false);
+				actionRequest, "schedulerStartDate", true);
 
 			String cronText = _getCronText(
 				actionRequest, startCal, false, recurrenceType);
@@ -1032,7 +1028,7 @@ public class StagingUtil {
 
 			if (endDateType == 1) {
 				Calendar endCal = _getDate(
-					actionRequest, "schedulerEndDate", false);
+					actionRequest, "schedulerEndDate", true);
 
 				schedulerEndDate = endCal.getTime();
 			}
@@ -1046,45 +1042,15 @@ public class StagingUtil {
 				startCal.getTime(), schedulerEndDate, description);
 		}
 		else {
-			MessageStatus messageStatus = new MessageStatus();
-
-			messageStatus.startTimer();
-
-			String command =
-				LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES;
-
-			try {
-				if (scope.equals("all-pages")) {
-					command = LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES;
-
-					publishLayouts(
-						sourceGroupId, targetGroupId, privateLayout,
-						parameterMap, startDate, endDate);
-				}
-				else {
-					publishLayouts(
-						sourceGroupId, targetGroupId, privateLayout,
-						layoutIdMap, parameterMap, startDate, endDate);
-				}
+			if (scope.equals("all-pages")) {
+				publishLayouts(
+					sourceGroupId, targetGroupId, privateLayout,
+					parameterMap, startDate, endDate);
 			}
-			catch (Exception e) {
-				messageStatus.setException(e);
-
-				throw e;
-			}
-			finally {
-				messageStatus.stopTimer();
-
-				LayoutsLocalPublisherRequest publisherRequest =
-					new LayoutsLocalPublisherRequest(
-						command, themeDisplay.getUserId(), sourceGroupId,
-						targetGroupId, privateLayout, layoutIdMap, parameterMap,
-						startDate, endDate);
-
-				messageStatus.setPayload(publisherRequest);
-
-				MessageBusUtil.sendMessage(
-					DestinationNames.MESSAGE_BUS_MESSAGE_STATUS, messageStatus);
+			else {
+				publishLayouts(
+					sourceGroupId, targetGroupId, privateLayout,
+					layoutIdMap, parameterMap, startDate, endDate);
 			}
 		}
 	}
@@ -1194,37 +1160,11 @@ public class StagingUtil {
 				schedulerEndDate, description);
 		}
 		else {
-			MessageStatus messageStatus = new MessageStatus();
-
-			messageStatus.startTimer();
-
-			try {
-				copyRemoteLayouts(
-					groupId, privateLayout, layoutIdMap, parameterMap,
-					remoteAddress, remotePort, secureConnection, remoteGroupId,
-					remotePrivateLayout, getStagingParameters(actionRequest),
-					startDate, endDate);
-			}
-			catch (Exception e) {
-				messageStatus.setException(e);
-
-				throw e;
-			}
-			finally {
-				messageStatus.stopTimer();
-
-				LayoutsRemotePublisherRequest publisherRequest =
-					new LayoutsRemotePublisherRequest(
-						themeDisplay.getUserId(), groupId, privateLayout,
-						layoutIdMap, parameterMap, remoteAddress, remotePort,
-						secureConnection, remoteGroupId, remotePrivateLayout,
-						startDate, endDate);
-
-				messageStatus.setPayload(publisherRequest);
-
-				MessageBusUtil.sendMessage(
-					DestinationNames.MESSAGE_BUS_MESSAGE_STATUS, messageStatus);
-			}
+			copyRemoteLayouts(
+				groupId, privateLayout, layoutIdMap, parameterMap,
+				remoteAddress, remotePort, secureConnection, remoteGroupId,
+				remotePrivateLayout, getStagingParameters(actionRequest),
+				startDate, endDate);
 		}
 	}
 
