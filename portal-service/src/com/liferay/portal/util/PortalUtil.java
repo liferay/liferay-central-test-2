@@ -135,6 +135,12 @@ public class PortalUtil {
 	}
 
 	public static BasePersistence<?> getBasePersistence(
+		BaseModel<?> baseModel) {
+
+		return getPortal().getBasePersistence(baseModel);
+	}
+
+	public static BasePersistence<?> getBasePersistence(
 		String servletContextName, String className) {
 
 		return getPortal().getBasePersistence(servletContextName, className);

@@ -148,6 +148,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import java.net.InetAddress;
@@ -589,6 +590,43 @@ public class PortalImpl implements Portal {
 		}
 
 		return url;
+	}
+
+	public BasePersistence<?> getBasePersistence(BaseModel<?> baseModel) {
+		Class baseModelClass = baseModel.getClass();
+
+		String className = baseModelClass.getName();
+
+		int pos = className.indexOf(".model.impl.");
+
+		String packagePath = className.substring(0, pos);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(packagePath);
+		sb.append(".service.ClpSerializer");
+
+		String servletContextName = null;
+
+		try {
+			ClassLoader classLoader = baseModelClass.getClassLoader();
+
+			Class<?> clpSerializerClass = classLoader.loadClass(
+				className.toString());
+
+			Field field = clpSerializerClass.getField(
+				"SERVLET_CONTEXT_NAME");
+
+			servletContextName = (String)field.get(null);
+		}
+		catch (ClassNotFoundException cnfe) {
+		}
+		catch (Exception e) {
+			throw new IllegalArgumentException(
+				"Cannot retrieve the servlet context name from ClpSerializer");
+		}
+
+		return getBasePersistence(servletContextName, className);
 	}
 
 	public BasePersistence<?> getBasePersistence(
