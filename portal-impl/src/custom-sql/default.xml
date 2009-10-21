@@ -12,7 +12,6 @@
 	<sql file="custom-sql/imagegallery.xml" />
 	<sql file="custom-sql/journal.xml" />
 	<sql file="custom-sql/messageboards.xml" />
-	<sql file="custom-sql/permission.xml" />
 	<sql file="custom-sql/polls.xml" />
 	<sql file="custom-sql/shopping.xml" />
 	<sql file="custom-sql/social.xml" />
