@@ -38,7 +38,8 @@ public class ThrottleAwareDestination implements Destination {
         super();
     }
 
-	public ThrottleAwareDestination(Destination delegateDestination, int maximumQueueSize) {
+	@Deprecated
+    public ThrottleAwareDestination(Destination delegateDestination, int maximumQueueSize) {
         _delegateDestination = delegateDestination;
         _maximumQueueSize = maximumQueueSize;
 	}
