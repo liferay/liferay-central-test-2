@@ -22,6 +22,7 @@
 
 package com.liferay.portal.cache;
 
+import com.liferay.portal.kernel.cache.BlockingPortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.kernel.log.Log;
@@ -36,7 +37,6 @@ import javax.management.MBeanServer;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.ObjectExistsException;
-import net.sf.ehcache.constructs.blocking.BlockingCache;
 import net.sf.ehcache.management.ManagementService;
 
 /**
@@ -84,10 +84,16 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 			}
 
 			cache = _cacheManager.getEhcache(name);
+
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Cache name " + name + " is using implementation " +
+						cache.getClass().getName());
+			}
 		}
 
 		PortalCache portalCache = new EhcachePortalCache(cache);
-		
+
 		if (PropsValues.EHCACHE_BLOCKING_CACHE_ALLOWED && blocking) {
 			portalCache = new BlockingPortalCache(portalCache);
 		}
@@ -119,19 +125,6 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void setRegisterCacheStatistics(boolean registerCacheStatistics) {
 		_registerCacheStatistics = registerCacheStatistics;
-	}
-
-	protected Ehcache replaceCacheWithDecoratedCache(Ehcache cache) {
-		if (cache instanceof BlockingCache) {
-			return cache;
-		}
-
-		Ehcache decoratedCache = new BlockingCache(cache);
-
-		_cacheManager.replaceCacheWithDecoratedCache(
-			cache, decoratedCache);
-
-		return decoratedCache;
 	}
 
 	private static Log _log =
