@@ -64,13 +64,13 @@ public class TaskInstanceManagerProxyBean
 	}
 
 	public TaskInstanceInfo completeTaskInstance(
-		long taskInstanceId, long userId, String activityName, String comment,
+		long taskInstanceId, long userId, String pathName, String comment,
 		Map<String, Object> attributes, Map<String, Object> parameters) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<String> getPossibleNextActivityNames(
+	public List<String> getPossibleNextPathNames(
 		long taskInstanceId, long userId, Map<String, Object> parameters) {
 
 		throw new UnsupportedOperationException();

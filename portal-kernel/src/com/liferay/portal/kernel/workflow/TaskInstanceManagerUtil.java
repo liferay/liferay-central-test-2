@@ -90,24 +90,24 @@ public class TaskInstanceManagerUtil {
 	 *		Map, Map)
 	 */
 	public static TaskInstanceInfo completeTaskInstance(
-			long taskInstanceId, long userId, String activityName,
+			long taskInstanceId, long userId, String pathName,
 			String comment, Map<String, Object> attributes,
 			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.completeTaskInstance(
-			taskInstanceId, userId, activityName, comment, attributes,
+			taskInstanceId, userId, pathName, comment, attributes,
 			parameters);
 	}
 
 	/**
-	 * @see TaskInstanceManager#getPossibleNextActivityNames(long, long, Map)
+	 * @see TaskInstanceManager#getPossibleNextPathNames(long, long, Map)
 	 */
-	public static List<String> getPossibleNextActivityNames(
+	public static List<String> getPossibleNextPathNames(
 			long taskInstanceId, long userId, Map<String, Object> parameters)
 		throws WorkflowException {
 
-		return _taskInstanceManager.getPossibleNextActivityNames(
+		return _taskInstanceManager.getPossibleNextPathNames(
 			taskInstanceId, userId, parameters);
 	}
 
