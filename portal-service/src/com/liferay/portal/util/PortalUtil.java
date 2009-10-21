@@ -134,6 +134,25 @@ public class PortalUtil {
 		return getPortal().escapeRedirect(url);
 	}
 
+	public static BaseModel<?> getBaseModel(Resource resource)
+		throws PortalException, SystemException {
+
+		return getPortal().getBaseModel(resource);
+	}
+
+	public static BaseModel<?> getBaseModel(
+			ResourcePermission resourcePermission)
+		throws PortalException, SystemException {
+
+		return getPortal().getBaseModel(resourcePermission);
+	}
+
+	public static BaseModel<?> getBaseModel(String modelName, String primKey)
+		throws PortalException, SystemException {
+
+		return getPortal().getBaseModel(modelName, primKey);
+	}
+
 	public static BasePersistence<?> getBasePersistence(
 		BaseModel<?> baseModel) {
 
@@ -466,22 +485,31 @@ public class PortalUtil {
 		return getPortal().getLocale(renderRequest);
 	}
 
+	/**
+	 * @deprecated {@link #getBaseModel(Resource)}
+	 */
 	public static BaseModel<?> getModel(Resource resource)
 		throws PortalException, SystemException {
 
-		return getPortal().getModel(resource);
+		return getPortal().getBaseModel(resource);
 	}
 
+	/**
+	 * @deprecated {@link #getBaseModel(ResourcePermission)}
+	 */
 	public static BaseModel<?> getModel(ResourcePermission resourcePermission)
 		throws PortalException, SystemException {
 
-		return getPortal().getModel(resourcePermission);
+		return getPortal().getBaseModel(resourcePermission);
 	}
 
+	/**
+	 * @deprecated {@link #getBaseModel(String, String)}
+	 */
 	public static BaseModel<?> getModel(String modelName, String primKey)
 		throws PortalException, SystemException {
 
-		return getPortal().getModel(modelName, primKey);
+		return getPortal().getBaseModel(modelName, primKey);
 	}
 
 	public static String getNetvibesURL(

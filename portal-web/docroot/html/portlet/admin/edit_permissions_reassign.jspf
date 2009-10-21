@@ -98,7 +98,7 @@ while (rolesItr.hasNext()) {
 		BaseModel model = null;
 
 		try {
-			model = PortalUtil.getModel(resourcePermission);
+			model = PortalUtil.getBaseModel(resourcePermission);
 
 			if (model == null) {
 				continue;

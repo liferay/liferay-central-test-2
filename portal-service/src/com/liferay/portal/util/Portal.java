@@ -124,6 +124,15 @@ public interface Portal {
 
 	public String escapeRedirect(String url);
 
+	public BaseModel<?> getBaseModel(Resource resource)
+		throws PortalException, SystemException;
+
+	public BaseModel<?> getBaseModel(ResourcePermission resourcePermission)
+		throws PortalException, SystemException;
+
+	public BaseModel<?> getBaseModel(String modelName, String primKey)
+		throws PortalException, SystemException;
+
 	public BasePersistence<?> getBasePersistence(BaseModel<?> baseModel);
 
 	public BasePersistence<?> getBasePersistence(
@@ -290,15 +299,6 @@ public interface Portal {
 	public Locale getLocale(HttpServletRequest request);
 
 	public Locale getLocale(RenderRequest renderRequest);
-
-	public BaseModel<?> getModel(Resource resource)
-		throws PortalException, SystemException;
-
-	public BaseModel<?> getModel(ResourcePermission resourcePermission)
-		throws PortalException, SystemException;
-
-	public BaseModel<?> getModel(String modelName, String primKey)
-		throws PortalException, SystemException;
 
 	public String getNetvibesURL(Portlet portlet, ThemeDisplay themeDisplay);
 

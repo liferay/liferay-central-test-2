@@ -592,6 +592,79 @@ public class PortalImpl implements Portal {
 		return url;
 	}
 
+	public BaseModel<?> getBaseModel(Resource resource)
+		throws PortalException, SystemException {
+
+		ResourceCode resourceCode =
+			ResourceCodeLocalServiceUtil.getResourceCode(resource.getCodeId());
+
+		String modelName = resourceCode.getName();
+		String primKey = resource.getPrimKey();
+
+		return getBaseModel(modelName, primKey);
+	}
+
+	public BaseModel<?> getBaseModel(ResourcePermission resourcePermission)
+		throws PortalException, SystemException {
+
+		String modelName = resourcePermission.getName();
+		String primKey = resourcePermission.getPrimKey();
+
+		return getBaseModel(modelName, primKey);
+	}
+
+	public BaseModel<?> getBaseModel(String modelName, String primKey)
+		throws PortalException, SystemException {
+
+		if (!modelName.contains(".model.")) {
+			return null;
+		}
+
+		String[] parts = StringUtil.split(modelName, StringPool.PERIOD);
+
+		if ((parts.length <= 2) || !parts[parts.length - 2].equals("model")) {
+			return null;
+		}
+
+		parts[parts.length - 2] = "service";
+
+		String serviceName =
+			StringUtil.merge(parts, StringPool.PERIOD) + "LocalServiceUtil";
+		String methodName = "get" + parts[parts.length - 1];
+
+		Method method = null;
+
+		try {
+			Class<?> serviceUtil = Class.forName(serviceName);
+
+			if (Validator.isNumber(primKey)) {
+				method = serviceUtil.getMethod(
+					methodName, new Class[] {Long.TYPE});
+
+				return (BaseModel<?>)method.invoke(null, new Long(primKey));
+			}
+			else {
+				method = serviceUtil.getMethod(
+					methodName, new Class[] {String.class});
+
+				return (BaseModel<?>)method.invoke(null, primKey);
+			}
+		}
+		catch (Exception e) {
+			Throwable cause = e.getCause();
+
+			if (cause instanceof PortalException) {
+				throw (PortalException)cause;
+			}
+			else if (cause instanceof SystemException) {
+				throw (SystemException)cause;
+			}
+			else {
+				throw new SystemException(cause);
+			}
+		}
+	}
+
 	public BasePersistence<?> getBasePersistence(BaseModel<?> baseModel) {
 		String servletContextName = getServletContextName(baseModel);
 		String className = baseModel.getClass().getName();
@@ -1645,79 +1718,6 @@ public class PortalImpl implements Portal {
 
 	public Locale getLocale(RenderRequest renderRequest) {
 		return getLocale(getHttpServletRequest(renderRequest));
-	}
-
-	public BaseModel<?> getModel(Resource resource)
-		throws PortalException, SystemException {
-
-		ResourceCode resourceCode =
-			ResourceCodeLocalServiceUtil.getResourceCode(resource.getCodeId());
-
-		String modelName = resourceCode.getName();
-		String primKey = resource.getPrimKey();
-
-		return getModel(modelName, primKey);
-	}
-
-	public BaseModel<?> getModel(ResourcePermission resourcePermission)
-		throws PortalException, SystemException {
-
-		String modelName = resourcePermission.getName();
-		String primKey = resourcePermission.getPrimKey();
-
-		return getModel(modelName, primKey);
-	}
-
-	public BaseModel<?> getModel(String modelName, String primKey)
-		throws PortalException, SystemException {
-
-		if (!modelName.contains(".model.")) {
-			return null;
-		}
-
-		String[] parts = StringUtil.split(modelName, StringPool.PERIOD);
-
-		if ((parts.length <= 2) || !parts[parts.length - 2].equals("model")) {
-			return null;
-		}
-
-		parts[parts.length - 2] = "service";
-
-		String serviceName =
-			StringUtil.merge(parts, StringPool.PERIOD) + "LocalServiceUtil";
-		String methodName = "get" + parts[parts.length - 1];
-
-		Method method = null;
-
-		try {
-			Class<?> serviceUtil = Class.forName(serviceName);
-
-			if (Validator.isNumber(primKey)) {
-				method = serviceUtil.getMethod(
-					methodName, new Class[] {Long.TYPE});
-
-				return (BaseModel<?>)method.invoke(null, new Long(primKey));
-			}
-			else {
-				method = serviceUtil.getMethod(
-					methodName, new Class[] {String.class});
-
-				return (BaseModel<?>)method.invoke(null, primKey);
-			}
-		}
-		catch (Exception e) {
-			Throwable cause = e.getCause();
-
-			if (cause instanceof PortalException) {
-				throw (PortalException)cause;
-			}
-			else if (cause instanceof SystemException) {
-				throw (SystemException)cause;
-			}
-			else {
-				throw new SystemException(cause);
-			}
-		}
 	}
 
 	public String getNetvibesURL(

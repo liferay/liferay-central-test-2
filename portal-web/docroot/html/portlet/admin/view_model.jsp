@@ -37,7 +37,7 @@ try {
 
 	sb.append("<table class=\"lfr-table\">\n");
 
-	BaseModel model = PortalUtil.getModel(resourcePermission);
+	BaseModel model = PortalUtil.getBaseModel(resourcePermission);
 
 	Document doc = SAXReaderUtil.read(new StringReader(model.toXmlString()));
 
