@@ -207,7 +207,10 @@ public abstract class BaseDestination implements Destination {
         if ((_maximumQueueSize > -1) &&
 			(threadPoolExecutor.getQueue().size() > _maximumQueueSize)) {
 			throw new IllegalStateException(
-					"Maximum queue size exceeded.  Configured test");
+					"Maximum queue size exceeded for " + getName() + "." +
+                    "  Configured for max of " + _maximumQueueSize + " messages; " +
+                    "currently at " + threadPoolExecutor.getQueue().size() +
+                    " messages in queue.");
         }
 
 		dispatch(_messageListeners, message);
