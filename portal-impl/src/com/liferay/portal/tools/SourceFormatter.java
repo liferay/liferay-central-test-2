@@ -208,11 +208,9 @@ public class SourceFormatter {
 		String basedir = "./";
 
 		if (_fileUtil.exists(basedir + "portal-impl")) {
-			String[] locales = (String[])PropsValues.LOCALES.clone();
+			String[] locales = PropsValues.LOCALES.clone();
 
 			Arrays.sort(locales);
-
-			String previousLanguageCode = null;
 
 			Set<String> urlPatterns = new TreeSet<String>();
 
