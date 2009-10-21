@@ -179,8 +179,8 @@ public class JournalContentImpl implements JournalContent {
 		String key = encodeKey(
 			groupId, articleId, templateId, viewMode, languageId, page, secure);
 
-		JournalArticleDisplay articleDisplay =
-			(JournalArticleDisplay)cache.get(key);
+		JournalArticleDisplay articleDisplay = (JournalArticleDisplay)cache.get(
+			key);
 
 		boolean lifecycleRender = isLifecycleRender(themeDisplay, xmlRequest);
 

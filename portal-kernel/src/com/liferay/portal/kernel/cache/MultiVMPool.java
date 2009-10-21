@@ -38,7 +38,9 @@ public interface MultiVMPool {
 
 	public Object get(String name, String key);
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public Object get(PortalCache portalCache, String key);
 
 	public PortalCache getCache(String name);
@@ -47,17 +49,23 @@ public interface MultiVMPool {
 
 	public void put(String name, String key, Object obj);
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public void put(PortalCache portalCache, String key, Object obj);
 
 	public void put(String name, String key, Serializable obj);
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public void put(PortalCache portalCache, String key, Serializable obj);
 
 	public void remove(String name, String key);
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public void remove(PortalCache portalCache, String key);
 
 }

@@ -55,8 +55,7 @@ public class CacheUtil {
 
 		key = _encodeKey(companyId, key);
 
-		CacheResponseData data =
-			(CacheResponseData)_cache.get(key);
+		CacheResponseData data = (CacheResponseData)_cache.get(key);
 
 		return data;
 	}
