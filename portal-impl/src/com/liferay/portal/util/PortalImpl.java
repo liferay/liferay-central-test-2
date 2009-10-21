@@ -593,38 +593,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public BasePersistence<?> getBasePersistence(BaseModel<?> baseModel) {
-		Class baseModelClass = baseModel.getClass();
-
-		String className = baseModelClass.getName();
-
-		int pos = className.indexOf(".model.impl.");
-
-		String packagePath = className.substring(0, pos);
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(packagePath);
-		sb.append(".service.ClpSerializer");
-
-		String servletContextName = null;
-
-		try {
-			ClassLoader classLoader = baseModelClass.getClassLoader();
-
-			Class<?> clpSerializerClass = classLoader.loadClass(
-				className.toString());
-
-			Field field = clpSerializerClass.getField(
-				"SERVLET_CONTEXT_NAME");
-
-			servletContextName = (String)field.get(null);
-		}
-		catch (ClassNotFoundException cnfe) {
-		}
-		catch (Exception e) {
-			throw new IllegalArgumentException(
-				"Cannot retrieve the servlet context name from ClpSerializer");
-		}
+		String servletContextName = getServletContextName(baseModel);
+		String className = baseModel.getClass().getName();
 
 		return getBasePersistence(servletContextName, className);
 	}
@@ -2579,6 +2549,40 @@ public class PortalImpl implements Portal {
 
 		return getSelectedUser(
 			getHttpServletRequest(portletRequest), checkPermission);
+	}
+
+	public String getServletContextName(BaseModel<?> baseModel) {
+		Class<?> baseModelClass = baseModel.getClass();
+
+		String className = baseModelClass.getName();
+
+		int pos = className.indexOf(".model.impl.");
+
+		String packagePath = className.substring(0, pos);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(packagePath);
+		sb.append(".service.ClpSerializer");
+
+		try {
+			ClassLoader classLoader = baseModelClass.getClassLoader();
+
+			Class<?> clpSerializerClass = classLoader.loadClass(
+				className.toString());
+
+			Field field = clpSerializerClass.getField(
+				"SERVLET_CONTEXT_NAME");
+
+			return (String)field.get(null);
+		}
+		catch (ClassNotFoundException cnfe) {
+			return null;
+		}
+		catch (Exception e) {
+			throw new IllegalArgumentException(
+				"Cannot retrieve the servlet context name from ClpSerializer");
+		}
 	}
 
 	public String getStaticResourceURL(

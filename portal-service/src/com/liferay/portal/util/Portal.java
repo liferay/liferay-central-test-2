@@ -447,6 +447,8 @@ public interface Portal {
 			PortletRequest portletRequest, boolean checkPermission)
 		throws PortalException, SystemException;
 
+	public String getServletContextName(BaseModel<?> baseModel);
+
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri);
 

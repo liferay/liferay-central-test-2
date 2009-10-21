@@ -782,6 +782,10 @@ public class PortalUtil {
 		return getPortal().getSelectedUser(portletRequest, checkPermission);
 	}
 
+	public static String getServletContextName(BaseModel<?> baseModel) {
+		return getPortal().getServletContextName(baseModel);
+	}
+
 	public static String getStaticResourceURL(
 		HttpServletRequest request, String uri) {
 
