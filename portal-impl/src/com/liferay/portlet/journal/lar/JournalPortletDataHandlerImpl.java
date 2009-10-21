@@ -333,6 +333,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 
 				if (fileEntry == null) {
+					beginPos--;
+
 					continue;
 				}
 
