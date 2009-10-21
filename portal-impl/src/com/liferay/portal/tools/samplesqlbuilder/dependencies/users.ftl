@@ -42,6 +42,8 @@
 		</#if>
 
 		<#if (userCounter.value >= maxUserCount)>
+			${usersCsvWriter.write("\n")}
+
 			<#break>
 		</#if>
 	</#list>
