@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchDiscussionException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchDiscussionException extends PortalException {
+public class NoSuchDiscussionException extends NoSuchModelException {
 
 	public NoSuchDiscussionException() {
 		super();

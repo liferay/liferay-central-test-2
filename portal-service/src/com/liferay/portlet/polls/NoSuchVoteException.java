@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.polls;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchVoteException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchVoteException extends PortalException {
+public class NoSuchVoteException extends NoSuchModelException {
 
 	public NoSuchVoteException() {
 		super();

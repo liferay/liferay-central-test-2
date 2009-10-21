@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchPhoneException extends PortalException {
+public class NoSuchPhoneException extends NoSuchModelException {
 
 	public NoSuchPhoneException() {
 		super();

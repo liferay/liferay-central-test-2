@@ -28,7 +28,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchBrowserTrackerException extends PortalException {
+public class NoSuchBrowserTrackerException extends NoSuchModelException {
 
 	public NoSuchBrowserTrackerException() {
 		super();

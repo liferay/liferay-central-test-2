@@ -28,7 +28,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchResourceActionException extends PortalException {
+public class NoSuchResourceActionException extends NoSuchModelException {
 
 	public NoSuchResourceActionException() {
 		super();

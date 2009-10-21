@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.shopping;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchItemPriceException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchItemPriceException extends PortalException {
+public class NoSuchItemPriceException extends NoSuchModelException {
 
 	public NoSuchItemPriceException() {
 		super();

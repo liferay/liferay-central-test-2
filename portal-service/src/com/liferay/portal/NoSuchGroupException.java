@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchGroupException extends PortalException {
+public class NoSuchGroupException extends NoSuchModelException {
 
 	public NoSuchGroupException() {
 		super();

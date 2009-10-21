@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchOrgLaborException extends PortalException {
+public class NoSuchOrgLaborException extends NoSuchModelException {
 
 	public NoSuchOrgLaborException() {
 		super();

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchProductVersionException.java.html"><b><i>View Source</i></b>
@@ -30,7 +30,7 @@ import com.liferay.portal.PortalException;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchProductVersionException extends PortalException {
+public class NoSuchProductVersionException extends NoSuchModelException {
 
 	public NoSuchProductVersionException() {
 		super();

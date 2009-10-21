@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchContactException extends PortalException {
+public class NoSuchContactException extends NoSuchModelException {
 
 	public NoSuchContactException() {
 		super();

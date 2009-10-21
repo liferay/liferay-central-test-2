@@ -28,7 +28,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchPluginSettingException extends PortalException {
+public class NoSuchPluginSettingException extends NoSuchModelException {
 
 	public NoSuchPluginSettingException() {
 		super();

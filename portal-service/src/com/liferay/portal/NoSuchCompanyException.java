@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchCompanyException extends PortalException {
+public class NoSuchCompanyException extends NoSuchModelException {
 
 	public NoSuchCompanyException() {
 		super();

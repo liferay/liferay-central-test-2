@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.calendar;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchEventException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchEventException extends PortalException {
+public class NoSuchEventException extends NoSuchModelException {
 
 	public NoSuchEventException() {
 		super();

@@ -28,7 +28,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchPortletPreferencesException extends PortalException {
+public class NoSuchPortletPreferencesException extends NoSuchModelException {
 
 	public NoSuchPortletPreferencesException() {
 		super();

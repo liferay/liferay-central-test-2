@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchMailingListException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchMailingListException extends PortalException {
+public class NoSuchMailingListException extends NoSuchModelException {
 
 	public NoSuchMailingListException() {
 		super();

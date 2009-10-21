@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.expando;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchTableException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchTableException extends PortalException {
+public class NoSuchTableException extends NoSuchModelException {
 
 	public NoSuchTableException() {
 		super();

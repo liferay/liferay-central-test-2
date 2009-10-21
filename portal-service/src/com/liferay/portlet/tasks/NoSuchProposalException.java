@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.tasks;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchProposalException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchProposalException extends PortalException {
+public class NoSuchProposalException extends NoSuchModelException {
 
 	public NoSuchProposalException() {
 		super();

@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchWebDAVPropsException extends PortalException {
+public class NoSuchWebDAVPropsException extends NoSuchModelException {
 
 	public NoSuchWebDAVPropsException() {
 		super();

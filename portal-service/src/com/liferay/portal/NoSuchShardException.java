@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchShardException extends PortalException {
+public class NoSuchShardException extends NoSuchModelException {
 
 	public NoSuchShardException() {
 		super();

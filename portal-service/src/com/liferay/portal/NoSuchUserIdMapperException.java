@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchUserIdMapperException extends PortalException {
+public class NoSuchUserIdMapperException extends NoSuchModelException {
 
 	public NoSuchUserIdMapperException() {
 		super();

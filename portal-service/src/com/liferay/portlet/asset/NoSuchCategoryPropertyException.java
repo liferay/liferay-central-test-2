@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.asset;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchCategoryPropertyException.java.html"><b><i>View Source</i></b>
@@ -30,7 +30,7 @@ import com.liferay.portal.PortalException;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchCategoryPropertyException extends PortalException {
+public class NoSuchCategoryPropertyException extends NoSuchModelException {
 
 	public NoSuchCategoryPropertyException() {
 		super();

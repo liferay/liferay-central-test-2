@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchLayoutException extends PortalException {
+public class NoSuchLayoutException extends NoSuchModelException {
 
 	public NoSuchLayoutException() {
 		super();

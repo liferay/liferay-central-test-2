@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.ratings;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchStatsException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchStatsException extends PortalException {
+public class NoSuchStatsException extends NoSuchModelException {
 
 	public NoSuchStatsException() {
 		super();

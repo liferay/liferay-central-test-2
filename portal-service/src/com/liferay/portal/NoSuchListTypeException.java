@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchListTypeException extends PortalException {
+public class NoSuchListTypeException extends NoSuchModelException {
 
 	public NoSuchListTypeException() {
 		super();

@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchWorkflowLinkException extends PortalException {
+public class NoSuchWorkflowLinkException extends NoSuchModelException {
 
 	public NoSuchWorkflowLinkException() {
 		super();

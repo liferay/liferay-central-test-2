@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.announcements;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchFlagException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchFlagException extends PortalException {
+public class NoSuchFlagException extends NoSuchModelException {
 
 	public NoSuchFlagException() {
 		super();

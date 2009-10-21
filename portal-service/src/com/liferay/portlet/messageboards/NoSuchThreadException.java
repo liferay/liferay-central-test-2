@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchThreadException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchThreadException extends PortalException {
+public class NoSuchThreadException extends NoSuchModelException {
 
 	public NoSuchThreadException() {
 		super();

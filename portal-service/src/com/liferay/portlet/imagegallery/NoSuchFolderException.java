@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.imagegallery;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchFolderException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchFolderException extends PortalException {
+public class NoSuchFolderException extends NoSuchModelException {
 
 	public NoSuchFolderException() {
 		super();

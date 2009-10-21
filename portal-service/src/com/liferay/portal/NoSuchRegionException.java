@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchRegionException extends PortalException {
+public class NoSuchRegionException extends NoSuchModelException {
 
 	public NoSuchRegionException() {
 		super();

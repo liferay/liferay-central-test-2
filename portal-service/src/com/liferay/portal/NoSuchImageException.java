@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchImageException extends PortalException {
+public class NoSuchImageException extends NoSuchModelException {
 
 	public NoSuchImageException() {
 		super();

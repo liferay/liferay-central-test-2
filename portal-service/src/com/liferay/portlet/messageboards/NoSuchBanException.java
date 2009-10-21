@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchBanException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchBanException extends PortalException {
+public class NoSuchBanException extends NoSuchModelException {
 
 	public NoSuchBanException() {
 		super();

@@ -28,7 +28,7 @@ package com.liferay.portal;
  *
  * @author Scott Lee
  */
-public class NoSuchPasswordPolicyRelException extends PortalException {
+public class NoSuchPasswordPolicyRelException extends NoSuchModelException {
 
 	public NoSuchPasswordPolicyRelException() {
 		super();

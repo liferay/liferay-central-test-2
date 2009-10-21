@@ -27,7 +27,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchPermissionException extends PortalException {
+public class NoSuchPermissionException extends NoSuchModelException {
 
 	public NoSuchPermissionException() {
 		super();

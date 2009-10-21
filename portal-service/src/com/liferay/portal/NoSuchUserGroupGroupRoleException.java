@@ -28,7 +28,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchUserGroupGroupRoleException extends PortalException {
+public class NoSuchUserGroupGroupRoleException extends NoSuchModelException {
 
 	public NoSuchUserGroupGroupRoleException() {
 		super();

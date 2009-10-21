@@ -28,7 +28,7 @@ package com.liferay.portal;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchServiceComponentException extends PortalException {
+public class NoSuchServiceComponentException extends NoSuchModelException {
 
 	public NoSuchServiceComponentException() {
 		super();

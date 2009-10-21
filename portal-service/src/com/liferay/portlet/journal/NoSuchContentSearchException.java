@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * <a href="NoSuchContentSearchException.java.html"><b><i>View Source</i></b>
@@ -30,7 +30,7 @@ import com.liferay.portal.PortalException;
  *
  * @author Brian Wing Shun Chan
  */
-public class NoSuchContentSearchException extends PortalException {
+public class NoSuchContentSearchException extends NoSuchModelException {
 
 	public NoSuchContentSearchException() {
 		super();
