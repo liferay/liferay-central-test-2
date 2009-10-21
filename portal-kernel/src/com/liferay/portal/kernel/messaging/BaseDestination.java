@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 import java.util.Set;
@@ -71,6 +72,9 @@ public abstract class BaseDestination implements Destination {
 	}
 
 	public void afterPropertiesSet() {
+		if (Validator.isNull(_name)) {
+			throw new IllegalArgumentException("No name specified for destination");
+		}
 		open();
 	}
 
@@ -124,7 +128,11 @@ public abstract class BaseDestination implements Destination {
 		return destinationStatistics;
 	}
 
-	public int getMessageListenerCount() {
+    public int getMaximumQueueSize() {
+        return _maximumQueueSize;
+    }
+
+    public int getMessageListenerCount() {
 		return _messageListeners.size();
 	}
 
@@ -196,10 +204,20 @@ public abstract class BaseDestination implements Destination {
 					"receive more messages");
 		}
 
+        if ((_maximumQueueSize > -1) &&
+			(threadPoolExecutor.getQueue().size() > _maximumQueueSize)) {
+			throw new IllegalStateException(
+					"Maximum queue size exceeded.  Configured test");
+        }
+
 		dispatch(_messageListeners, message);
 	}
 
-	public void setName(String name) {
+    public void setMaximumQueueSize(int maximumQueueSize) {
+        _maximumQueueSize = maximumQueueSize;
+    }
+
+    public void setName(String name) {
 		_name = name;
 	}
 
@@ -322,11 +340,12 @@ public abstract class BaseDestination implements Destination {
 
 	private Set<DestinationEventListener> _destinationEventListeners =
 		new ConcurrentHashSet<DestinationEventListener>();
-	private Set<MessageListener> _messageListeners =
+    private int _maximumQueueSize = -1;
+    private Set<MessageListener> _messageListeners =
 		new ConcurrentHashSet<MessageListener>();
-	private String _name = StringPool.BLANK;
-	private ThreadPoolExecutor _threadPoolExecutor;
-	private int _workersCoreSize = _WORKERS_CORE_SIZE;
-	private int _workersMaxSize = _WORKERS_MAX_SIZE;
+    private String _name = StringPool.BLANK;
+    private ThreadPoolExecutor _threadPoolExecutor;
+    private int _workersCoreSize = _WORKERS_CORE_SIZE;
+    private int _workersMaxSize = _WORKERS_MAX_SIZE;
 
 }
