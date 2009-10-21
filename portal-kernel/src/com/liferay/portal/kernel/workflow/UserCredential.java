@@ -71,7 +71,6 @@ public class UserCredential implements Serializable {
 		_attributes.put(key, value);
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T> T getAttribute(String key) {
 		if (_attributes == null) {
 			return null;
