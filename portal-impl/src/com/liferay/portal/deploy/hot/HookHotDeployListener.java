@@ -612,7 +612,7 @@ public class HookHotDeployListener
 		return null;
 	}
 
-	protected BasePersistence getPersistence(String modelName) {
+	protected BasePersistence<?> getPersistence(String modelName) {
 		int pos = modelName.lastIndexOf(StringPool.PERIOD);
 
 		String entityName = modelName.substring(pos + 1);
@@ -621,7 +621,7 @@ public class HookHotDeployListener
 
 		String packagePath = modelName.substring(0, pos);
 
-		return (BasePersistence)PortalBeanLocatorUtil.locate(
+		return (BasePersistence<?>)PortalBeanLocatorUtil.locate(
 			packagePath + ".service.persistence." + entityName +
 				"Persistence.impl");
 	}
@@ -938,6 +938,7 @@ public class HookHotDeployListener
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	protected ModelListener<BaseModel<?>> initModelListener(
 			String modelName, String modelListenerClassName,
 			ClassLoader portletClassLoader)
@@ -1583,6 +1584,7 @@ public class HookHotDeployListener
 			modelListeners.add(modelListener);
 		}
 
+		@SuppressWarnings("unchecked")
 		public void unregisterModelListeners() {
 			for (Map.Entry<String, List<ModelListener<BaseModel<?>>>> entry :
 					_modelListenersMap.entrySet()) {
