@@ -73,7 +73,8 @@ public abstract class BaseDestination implements Destination {
 
 	public void afterPropertiesSet() {
 		if (Validator.isNull(_name)) {
-			throw new IllegalArgumentException("No name specified for destination");
+			throw new IllegalArgumentException(
+				"No name specified for destination");
 		}
 		open();
 	}
@@ -208,8 +209,9 @@ public abstract class BaseDestination implements Destination {
 			(threadPoolExecutor.getQueue().size() > _maximumQueueSize)) {
 			throw new IllegalStateException(
 					"Maximum queue size exceeded for " + getName() + "." +
-                    "  Configured for max of " + _maximumQueueSize + " messages; " +
-                    "currently at " + threadPoolExecutor.getQueue().size() +
+                    "  Configured for max of " + _maximumQueueSize +
+					" messages; currently at " +
+					threadPoolExecutor.getQueue().size() +
                     " messages in queue.");
         }
 
