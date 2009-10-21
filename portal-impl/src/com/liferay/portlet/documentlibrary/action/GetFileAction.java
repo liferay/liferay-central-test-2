@@ -186,7 +186,7 @@ public class GetFileAction extends PortletAction {
 
 					title = fileEntry.getTitle();
 				}
-				else if (Validator.isNotNull(title)){
+				else if (Validator.isNotNull(title)) {
 					fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByTitle(
 						groupId, folderId, title);
 
