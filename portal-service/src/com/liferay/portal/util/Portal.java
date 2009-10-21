@@ -124,7 +124,7 @@ public interface Portal {
 
 	public String escapeRedirect(String url);
 
-	public BasePersistence getBasePersistence(
+	public BasePersistence<?> getBasePersistence(
 		String servletContextName, String className);
 
 	public long getBasicAuthUserId(HttpServletRequest request)

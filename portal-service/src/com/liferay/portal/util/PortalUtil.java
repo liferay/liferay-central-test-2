@@ -134,7 +134,7 @@ public class PortalUtil {
 		return getPortal().escapeRedirect(url);
 	}
 
-	public static BasePersistence getBasePersistence(
+	public static BasePersistence<?> getBasePersistence(
 		String servletContextName, String className) {
 
 		return getPortal().getBasePersistence(servletContextName, className);

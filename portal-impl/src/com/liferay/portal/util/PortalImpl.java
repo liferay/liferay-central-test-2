@@ -591,7 +591,7 @@ public class PortalImpl implements Portal {
 		return url;
 	}
 
-	public BasePersistence getBasePersistence(
+	public BasePersistence<?> getBasePersistence(
 		String servletContextName, String className) {
 
 		int pos = className.indexOf(".model.impl.");
@@ -610,11 +610,11 @@ public class PortalImpl implements Portal {
 		String beanName = sb.toString();
 
 		if (Validator.isNull(servletContextName)) {
-			return (BasePersistence)PortalBeanLocatorUtil.locate(
+			return (BasePersistence<?>)PortalBeanLocatorUtil.locate(
 				beanName);
 		}
 		else {
-			return (BasePersistence)PortletBeanLocatorUtil.locate(
+			return (BasePersistence<?>)PortletBeanLocatorUtil.locate(
 				servletContextName, beanName);
 		}
 	}
