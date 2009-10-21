@@ -55,57 +55,66 @@ AUI().add(
 					instance.categories = menu.find('.lfr-content-category');
 					instance.categoryContainers = menu.find('.lfr-add-content');
 
-					var data = function() {
-						var value = jQuery(this).attr('id');
+					var data = function(node) {
+						var value = node.attr('id');
 
 						return Liferay.Util.uncamelize(value).toLowerCase();
 					};
 
 					var searchField = jQuery('#layout_configuration_content');
 
-					searchField.liveSearch(
+					new A.LiveSearch(
 						{
-							list: instance.portlets,
 							data: data,
-							show: function() {
-								var portlet = jQuery(this);
+							hide: function(node) {
+								var portlet = jQuery(node.getDOM());
+
+								portlet.hide();
+							},
+							input: '#layout_configuration_content',
+							nodes: '#portal_add_content .lfr-portlet-item',
+							show: function(node) {
+								var portlet = jQuery(node.getDOM());
 
 								portlet.show();
 								portlet.parents('.lfr-content-category').addClass('visible').removeClass('hidden').show();
 								portlet.parents('.lfr-add-content').addClass('expanded').removeClass('collapsed').show();
-							},
-							hide: function() {
-								var portlet = jQuery(this);
-
-								portlet.hide();
 							}
 						}
 					);
 
-					searchField.liveSearch(
+					new A.LiveSearch(
 						{
-							list: instance.categoryContainers,
-							data: data,
-							after: function() {
-								if (!this.term) {
-									instance.categories.addClass('hidden').removeClass('visible').css('display', '');
-									instance.categoryContainers.addClass('collapsed').removeClass('expanded').css('display', '');
-									instance.portlets.css('display', '');
-								}
+							after: {
+								search: function(event) {
+									if (!this.query) {
+										instance.categories.addClass('hidden').removeClass('visible').removeClass('aui-helper-hidden');
+										instance.categoryContainers.addClass('collapsed').removeClass('expanded').removeClass('aui-helper-hidden');
+										instance.portlets.css('display', '');
+									}
 
-								if (this.term == "*") {
-									instance.categories.addClass('visible').removeClass('hidden');
-									instance.categoryContainers.addClass('expanded').removeClass('collapsed');
-									instance.portlets.show();
+									if (this.query == "*") {
+										instance.categories.addClass('visible').removeClass('hidden').removeClass('aui-helper-hidden');
+										instance.categoryContainers.addClass('expanded').removeClass('collapsed').removeClass('aui-helper-hidden');
+										instance.portlets.show();
+									}
 								}
 							},
-							exclude: function() {
-								var categoryContent = jQuery('.lfr-content-category', this);
-
+							data: data,
+							hide: function(node) {
+								var instance = this;
+								var categoryContent = jQuery('.lfr-content-category', node.getDOM());
 								var totalVisibleChildren = categoryContent.find('> div:visible').length;
 
-								return totalVisibleChildren > 0;
-							}
+								if (totalVisibleChildren <= 0) {
+									node.hide();
+								}
+								else {
+									node.show();
+								}
+							},
+							input: '#layout_configuration_content',
+							nodes: '#portal_add_content .lfr-add-content'
 						}
 					);
 				}
@@ -552,7 +561,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['dd', 'liferay-layout'],
+		requires: ['dd', 'liferay-layout', 'live-search'],
 		use: []
 	}
 );

@@ -641,16 +641,19 @@ AUI().add(
 					var input = jQuery('#tags-admin-search-input');
 					var tagList = jQuery(instance._tagsItemsSelector);
 
-					input.unbind('keyup');
-
-					var filter = 'span a';
-
 					options = {
-						list: tagList,
-						filter: jQuery(filter, tagList)
+						data: function(node) {
+							return node.one('span a').html();
+						},
+						input: '#tags-admin-search-input',
+						nodes: instance._tagsItemsSelector
 					};
 
-					input.liveSearch(options);
+					if (instance.liveSearch) {
+						instance.liveSearch.destroy();
+					}
+
+					instance.liveSearch = new A.LiveSearch(options);
 				},
 
 				_removeProperty: function(property) {
@@ -813,6 +816,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base', 'context-panel', 'dd', 'substitute']
+		requires: ['base', 'context-panel', 'dd', 'substitute', 'live-search']
 	}
 );

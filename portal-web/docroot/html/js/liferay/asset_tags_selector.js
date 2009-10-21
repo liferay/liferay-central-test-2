@@ -282,8 +282,8 @@ AUI().add(
 			},
 
 			_initializeSearch: function(container) {
-				var data = function() {
-					var value = jQuery(this).attr('title');
+				var data = function(node) {
+					var value = node.attr('title');
 
 					return value.toLowerCase();
 				};
@@ -293,27 +293,30 @@ AUI().add(
 				Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
 
 				var options = {
+					after: {
+						search: function() {
+							jQuery('fieldset', container).each(
+								function() {
+									var fieldset = jQuery(this);
+
+									var visibleTags = fieldset.find('label:visible');
+
+									if (visibleTags.length == 0) {
+										fieldset.addClass('no-matches');
+									}
+									else {
+										fieldset.removeClass('no-matches');
+									}
+								}
+							);
+						}
+					},
 					data: data,
-					list: '.lfr-tag-container label',
-					after: function() {
-						jQuery('fieldset', container).each(
-							function() {
-								var fieldset = jQuery(this);
-
-								var visibleTags = fieldset.find('label:visible');
-
-								if (visibleTags.length == 0) {
-									fieldset.addClass('no-matches');
-								}
-								else {
-									fieldset.removeClass('no-matches');
-								}
-							}
-						);
-					}
+					input: '.lfr-tag-search-input',
+					nodes: '.lfr-tag-container label'
 				};
 
-				inputSearch.liveSearch(options);
+				new A.LiveSearch(options);
 			},
 
 			_namespace: function(name) {
@@ -553,6 +556,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['autocomplete', 'dialog']
+		requires: ['autocomplete', 'dialog', 'live-search']
 	}
 );

@@ -226,8 +226,8 @@ AUI().add(
 			},
 
 			_initializeSearch: function(container) {
-				var data = function() {
-					var value = jQuery(this).attr('title');
+				var data = function(node) {
+					var value = node.attr('title');
 
 					return value.toLowerCase();
 				};
@@ -237,27 +237,30 @@ AUI().add(
 				Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
 
 				var options = {
+					after: {
+						search: function() {
+							jQuery('fieldset', container).each(
+								function() {
+									var fieldset = jQuery(this);
+
+									var visibleCategories = fieldset.find('label:visible');
+
+									if (visibleCategories.length == 0) {
+										fieldset.addClass('no-matches');
+									}
+									else {
+										fieldset.removeClass('no-matches');
+									}
+								}
+							);
+						}
+					},
 					data: data,
-					list: '.lfr-asset-category-container label',
-					after: function() {
-						jQuery('fieldset', container).each(
-							function() {
-								var fieldset = jQuery(this);
-
-								var visibleCategories = fieldset.find('label:visible');
-
-								if (visibleCategories.length == 0) {
-									fieldset.addClass('no-matches');
-								}
-								else {
-									fieldset.removeClass('no-matches');
-								}
-							}
-						);
-					}
+					input: '.lfr-asset-category-search-input',
+					nodes: '.lfr-asset-category-container label'
 				};
 
-				inputSearch.liveSearch(options);
+				new A.LiveSearch(options);
 			},
 
 			_namespace: function(name) {
@@ -404,6 +407,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['dialog']
+		requires: ['dialog', 'live-search']
 	}
 );

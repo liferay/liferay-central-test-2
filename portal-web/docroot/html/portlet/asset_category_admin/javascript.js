@@ -956,31 +956,60 @@ AUI().add(
 
 				_reloadSearch: function() {
 					var	instance = this;
-
-					var options = {};
+					var options = {
+						input: '#vocabulary-search-input'
+					};
 					var selected = jQuery('#vocabulary-select-search').val();
 					var input = jQuery('#vocabulary-search-input');
-					var categoryList = jQuery(instance._categoryItemSelector);
 					var vocabularyList = jQuery(instance._vocabularyItemSelector);
 
-					input.unbind('keyup');
-
 					if (/vocabularies/.test(selected)) {
-						options = {
-							list: vocabularyList,
-							filter: jQuery('a', vocabularyList)
-						};
+						options = jQuery.extend(
+							options,
+							{
+								data: function(node) {
+									return node.one('a').html();
+								},
+								nodes: instance._vocabularyItemSelector
+							}
+						);
 					}
 					else {
-						var filter = 'span';
+						options = jQuery.extend(
+							options,
+							{
+								after: {
+									search: function(event) {
+										A.each(
+											event.liveSearch.results,
+											function(search) {
+												var nodeWidget = A.Widget.getByNode(search.node);
+												var nodeVisible = nodeWidget.get('boundingBox').hasClass('aui-helper-hidden');
 
-						options = {
-							list: categoryList,
-							filter: jQuery(filter, categoryList)
-						};
+												if (!nodeVisible) {
+													nodeWidget.eachParent(
+														function(p) {
+															p.get('boundingBox').show();
+														}
+													);
+												}
+											}
+										);
+									}
+								},
+								data: function(node) {
+									return node.one('.aui-tree-label').html();
+								},
+								nodes: instance._categoryItemSelector
+							}
+						);
 					}
 
-					input.liveSearch(options);
+					if (instance.liveSearch) {
+						instance.liveSearch.destroy();
+					}
+
+					instance.liveSearch = new A.LiveSearch(options);
 				},
 
 				_removeCategoryProperty: function(categoryProperty) {
@@ -1217,7 +1246,7 @@ AUI().add(
 					);
 				},
 
-				_categoryItemSelector: '.vocabulary-categories li',
+				_categoryItemSelector: '.vocabulary-categories .aui-tree-node',
 				_categoryContainerCellsSelector: '.portlet-categories-admin .vocabulary-content td',
 				_categoryContainerSelector: '.vocabulary-categories',
 				_selectedCategoryName: null,
@@ -1233,6 +1262,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['context-panel', 'dd', 'editable', 'tree-view']
+		requires: ['context-panel', 'dd', 'editable', 'tree-view', 'live-search']
 	}
 );
