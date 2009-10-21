@@ -1765,9 +1765,25 @@ public class ServiceBuilder {
 
 				String content = _processTemplate(_tplException, context);
 
+				if (exception.startsWith("NoSuch")) {
+					content = StringUtil.replace(
+						content, "PortalException", "NoSuchModelException");
+				}
+
 				content = StringUtil.replace(content, "\r\n", "\n");
 
 				FileUtil.write(exceptionFile, content);
+			}
+
+			if (exception.startsWith("NoSuch")) {
+				String content = FileUtil.read(exceptionFile);
+
+				if (!content.contains("NoSuchModelException")) {
+					content = StringUtil.replace(
+						content, "PortalException", "NoSuchModelException");
+
+					FileUtil.write(exceptionFile, content);
+				}
 			}
 
 			if (!_serviceOutputPath.equals(_outputPath)) {
@@ -2316,7 +2332,7 @@ public class ServiceBuilder {
 
 			content = content.substring(lastMappedClassEnd + 1);
 		}
-		
+
 		File xmlFile = new File(_ormFileName);
 
 		if (!xmlFile.exists()) {
