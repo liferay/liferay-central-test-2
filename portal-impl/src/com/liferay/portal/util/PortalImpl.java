@@ -28,6 +28,8 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -104,6 +106,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -586,6 +589,34 @@ public class PortalImpl implements Portal {
 		}
 
 		return url;
+	}
+
+	public BasePersistence getBasePersistence(
+		String servletContextName, String className) {
+
+		int pos = className.indexOf(".model.impl.");
+
+		String packagePath = className.substring(0, pos);
+		String modelName = className.substring(
+			pos + 12, className.length() - 9);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(packagePath);
+		sb.append(".service.persistence.");
+		sb.append(modelName);
+		sb.append("Persistence.impl");
+
+		String beanName = sb.toString();
+
+		if (Validator.isNull(servletContextName)) {
+			return (BasePersistence)PortalBeanLocatorUtil.locate(
+				beanName);
+		}
+		else {
+			return (BasePersistence)PortletBeanLocatorUtil.locate(
+				servletContextName, beanName);
+		}
 	}
 
 	public long getBasicAuthUserId(HttpServletRequest request)

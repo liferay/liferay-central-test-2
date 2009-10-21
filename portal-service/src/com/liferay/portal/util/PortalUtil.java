@@ -35,6 +35,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.sql.DB;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -131,6 +132,12 @@ public class PortalUtil {
 
 	public static String escapeRedirect(String url) {
 		return getPortal().escapeRedirect(url);
+	}
+
+	public static BasePersistence getBasePersistence(
+		String servletContextName, String className) {
+
+		return getPortal().getBasePersistence(servletContextName, className);
 	}
 
 	public static long getBasicAuthUserId(HttpServletRequest request)
