@@ -1628,7 +1628,6 @@ public class HookHotDeployListener
 	private class StringArraysContainer {
 
 		private StringArraysContainer(String key) {
-			_key = key;
 			_portalStringArray = PropsUtil.getArray(key);
 		}
 
@@ -1661,7 +1660,6 @@ public class HookHotDeployListener
 			}
 		}
 
-		private String _key;
 		private String[] _portalStringArray;
 		private Map<String, String[]> _pluginStringArrayMap =
 			new HashMap<String, String[]>();

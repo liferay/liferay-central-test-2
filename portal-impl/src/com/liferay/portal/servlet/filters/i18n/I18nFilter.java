@@ -43,7 +43,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -71,7 +70,7 @@ public class I18nFilter extends BasePortalFilter {
 		_languageIds = Collections.unmodifiableSet(_languageIds);
 	}
 
-	protected String[] getI18nData(HttpServletRequest request) {
+	protected String getRedirect(HttpServletRequest request) {
 		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
 			return null;
 		}
@@ -190,7 +189,7 @@ public class I18nFilter extends BasePortalFilter {
 			redirect += StringPool.QUESTION + request.getQueryString();
 		}
 
-		return new String[] {i18nLanguageId, i18nPath, redirect};
+		return redirect;
 	}
 
 	protected boolean isAlreadyFiltered(HttpServletRequest request) {
@@ -226,20 +225,15 @@ public class I18nFilter extends BasePortalFilter {
 
 		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-		String[] i18nData = getI18nData(request);
+		String redirect = getRedirect(request);
 
-		if (i18nData == null) {
+		if (redirect == null) {
 			processFilter(I18nFilter.class, request, response, filterChain);
 
 			return;
 		}
 
-		String i18nLanguageId = i18nData[0];
-		String i18nPath = i18nData[1];
-		String redirect = i18nData[2];
-
 		if (_log.isDebugEnabled()) {
-			_log.debug("Language ID " + i18nLanguageId);
 			_log.debug("Redirect " + redirect);
 		}
 
@@ -258,7 +252,5 @@ public class I18nFilter extends BasePortalFilter {
 		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 
 	private static Set<String> _languageIds = new HashSet<String>();
-
-	private ServletContext _servletContext;
 
 }
