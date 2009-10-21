@@ -341,29 +341,6 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			active);
 	}
 
-	public java.util.List<com.liferay.portal.model.User> getPermissionUsers(
-		long companyId, long groupId, java.lang.String name,
-		java.lang.String primKey, java.lang.String actionId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return _userLocalService.getPermissionUsers(companyId, groupId, name,
-			primKey, actionId, firstName, middleName, lastName, emailAddress,
-			andOperator, start, end);
-	}
-
-	public int getPermissionUsersCount(long companyId, long groupId,
-		java.lang.String name, java.lang.String primKey,
-		java.lang.String actionId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator)
-		throws com.liferay.portal.SystemException {
-		return _userLocalService.getPermissionUsersCount(companyId, groupId,
-			name, primKey, actionId, firstName, middleName, lastName,
-			emailAddress, andOperator);
-	}
-
 	public long[] getRoleUserIds(long roleId)
 		throws com.liferay.portal.SystemException {
 		return _userLocalService.getRoleUserIds(roleId);

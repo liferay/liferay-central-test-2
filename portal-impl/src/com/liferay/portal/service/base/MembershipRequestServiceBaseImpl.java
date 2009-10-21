@@ -142,7 +142,6 @@ import com.liferay.portal.service.persistence.PasswordPolicyRelPersistence;
 import com.liferay.portal.service.persistence.PasswordTrackerPersistence;
 import com.liferay.portal.service.persistence.PermissionFinder;
 import com.liferay.portal.service.persistence.PermissionPersistence;
-import com.liferay.portal.service.persistence.PermissionUserFinder;
 import com.liferay.portal.service.persistence.PhonePersistence;
 import com.liferay.portal.service.persistence.PluginSettingPersistence;
 import com.liferay.portal.service.persistence.PortletItemPersistence;
@@ -784,15 +783,6 @@ public abstract class MembershipRequestServiceBaseImpl extends PrincipalBean
 
 	public void setPermissionFinder(PermissionFinder permissionFinder) {
 		this.permissionFinder = permissionFinder;
-	}
-
-	public PermissionUserFinder getPermissionUserFinder() {
-		return permissionUserFinder;
-	}
-
-	public void setPermissionUserFinder(
-		PermissionUserFinder permissionUserFinder) {
-		this.permissionUserFinder = permissionUserFinder;
 	}
 
 	public PhoneLocalService getPhoneLocalService() {
@@ -1593,8 +1583,6 @@ public abstract class MembershipRequestServiceBaseImpl extends PrincipalBean
 	protected PermissionPersistence permissionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PermissionFinder.impl")
 	protected PermissionFinder permissionFinder;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PermissionUserFinder.impl")
-	protected PermissionUserFinder permissionUserFinder;
 	@BeanReference(name = "com.liferay.portal.service.PhoneLocalService.impl")
 	protected PhoneLocalService phoneLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PhoneService.impl")

@@ -262,23 +262,6 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.User> getPermissionUsers(
-		long companyId, long groupId, java.lang.String name,
-		java.lang.String primKey, java.lang.String actionId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getPermissionUsersCount(long companyId, long groupId,
-		java.lang.String name, java.lang.String primKey,
-		java.lang.String actionId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long[] getRoleUserIds(long roleId)
 		throws com.liferay.portal.SystemException;
 

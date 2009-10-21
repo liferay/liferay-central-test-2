@@ -1122,51 +1122,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return searchCount(organization.getCompanyId(), null, active, params);
 	}
 
-	public List<User> getPermissionUsers(
-			long companyId, long groupId, String name, String primKey,
-			String actionId, String firstName, String middleName,
-			String lastName, String emailAddress, boolean andOperator,
-			int start, int end)
-		throws SystemException {
-
-		int orgGroupPermissionsCount =
-			permissionUserFinder.countByOrgGroupPermissions(
-				companyId, name, primKey, actionId);
-
-		if (orgGroupPermissionsCount > 0) {
-			return permissionUserFinder.findByUserAndOrgGroupPermission(
-				companyId, name, primKey, actionId, firstName, middleName,
-				lastName, emailAddress, andOperator, start, end);
-		}
-		else {
-			return permissionUserFinder.findByPermissionAndRole(
-				companyId, groupId, name, primKey, actionId, firstName,
-				middleName, lastName, emailAddress, andOperator, start, end);
-		}
-	}
-
-	public int getPermissionUsersCount(
-			long companyId, long groupId, String name, String primKey,
-			String actionId, String firstName, String middleName,
-			String lastName, String emailAddress, boolean andOperator)
-		throws SystemException {
-
-		int orgGroupPermissionsCount =
-			permissionUserFinder.countByOrgGroupPermissions(
-				companyId, name, primKey, actionId);
-
-		if (orgGroupPermissionsCount > 0) {
-			return permissionUserFinder.countByUserAndOrgGroupPermission(
-				companyId, name, primKey, actionId, firstName, middleName,
-				lastName, emailAddress, andOperator);
-		}
-		else {
-			return permissionUserFinder.countByPermissionAndRole(
-				companyId, groupId, name, primKey, actionId, firstName,
-				middleName, lastName, emailAddress, andOperator);
-		}
-	}
-
 	public long[] getRoleUserIds(long roleId) throws SystemException {
 		return getUserIds(getRoleUsers(roleId));
 	}

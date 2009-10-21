@@ -325,10 +325,6 @@
 	<bean id="com.liferay.portal.service.persistence.PermissionFinderUtil" class="com.liferay.portal.service.persistence.PermissionFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.PermissionFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PermissionUserFinder.impl" class="com.liferay.portal.service.persistence.PermissionUserFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portal.service.persistence.PermissionUserFinderUtil" class="com.liferay.portal.service.persistence.PermissionUserFinderUtil">
-		<property name="finder" ref="com.liferay.portal.service.persistence.PermissionUserFinder.impl" />
-	</bean>
 	<bean id="com.liferay.portal.service.PhoneLocalService.impl" class="com.liferay.portal.service.impl.PhoneLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.PhoneLocalService.velocity" class="com.liferay.portal.service.impl.PhoneLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.PhoneLocalServiceUtil" class="com.liferay.portal.service.PhoneLocalServiceUtil">

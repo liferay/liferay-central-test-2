@@ -345,30 +345,6 @@ public class UserLocalServiceUtil {
 		return getService().getOrganizationUsersCount(organizationId, active);
 	}
 
-	public static java.util.List<com.liferay.portal.model.User> getPermissionUsers(
-		long companyId, long groupId, java.lang.String name,
-		java.lang.String primKey, java.lang.String actionId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .getPermissionUsers(companyId, groupId, name, primKey,
-			actionId, firstName, middleName, lastName, emailAddress,
-			andOperator, start, end);
-	}
-
-	public static int getPermissionUsersCount(long companyId, long groupId,
-		java.lang.String name, java.lang.String primKey,
-		java.lang.String actionId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .getPermissionUsersCount(companyId, groupId, name, primKey,
-			actionId, firstName, middleName, lastName, emailAddress, andOperator);
-	}
-
 	public static long[] getRoleUserIds(long roleId)
 		throws com.liferay.portal.SystemException {
 		return getService().getRoleUserIds(roleId);
