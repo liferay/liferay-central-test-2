@@ -31,6 +31,9 @@ public class JournalStructureConstants {
 
 	public static final String RESERVED = "reserved";
 
+	public static final String RESERVED_ARTICLE_ASSET_TAGS =
+		"reserved-article-asset-tags";
+
 	public static final String RESERVED_ARTICLE_AUTHOR_COMMENTS =
 		"reserved-article-author-comments";
 

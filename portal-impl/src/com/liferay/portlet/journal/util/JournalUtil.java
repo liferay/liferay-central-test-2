@@ -53,6 +53,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
@@ -221,6 +222,22 @@ public class JournalUtil {
 			root, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_SMALL_IMAGE_URL,
 			article.getSmallImageURL());
+
+		// Tags
+
+		String[] tagsEntries = new String[0];
+
+		try {
+			tagsEntries = AssetTagLocalServiceUtil.getTagNames(
+				JournalArticle.class.getName(),
+				article.getResourcePrimKey());
+		}
+		catch (SystemException e) {
+		}
+
+		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_ASSET_TAGS,
+			StringUtil.merge(tagsEntries));
 
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_ID,
