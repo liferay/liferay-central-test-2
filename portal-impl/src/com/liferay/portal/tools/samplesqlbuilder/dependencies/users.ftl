@@ -31,7 +31,7 @@
 
 		${sampleSQLBuilder.insertMBStatsUser(mbStatsUser)}
 
-		${usersCsvWriter.write(stringUtil.lowerCase(firstName + lastName) + "," + userGroup.groupId + ",")}
+		${usersCsvWriter.write(user.getScreenName() + "," + userGroup.groupId + ",")}
 
 		<#if (userCounter.value < maxUserCount)>
 			${usersCsvWriter.write("\n")}
