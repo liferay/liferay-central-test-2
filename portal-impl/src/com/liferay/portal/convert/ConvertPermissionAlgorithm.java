@@ -535,6 +535,10 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 							Group group = _groupsMap.get(groupId);
 
+							if (group == null) {
+								continue;
+							}
+
 							if (group.isCommunity()) {
 								defaultRole = defaultRoles[0];
 							}
