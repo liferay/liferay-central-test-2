@@ -66,6 +66,7 @@ import com.liferay.portlet.journal.util.comparator.ArticleIDComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleReviewDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
+import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.xml.XMLFormatter;
@@ -319,7 +320,7 @@ public class JournalUtil {
 			orderByComparator = new ArticleTitleComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("version")) {
-			orderByComparator = new ArticleModifiedDateComparator(orderByAsc);
+			orderByComparator = new ArticleVersionComparator(orderByAsc);
 		}
 
 		return orderByComparator;
