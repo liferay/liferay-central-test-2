@@ -22,6 +22,13 @@
 
 package com.liferay.portal.service.persistence;
 
+import java.io.Serializable;
+import java.util.List;
+
+import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 
 /**
@@ -29,14 +36,33 @@ import com.liferay.portal.model.ModelListener;
  *
  * @author Brian Wing Shun Chan
  */
-public interface BasePersistence {
+public interface BasePersistence<T extends BaseModel<T>> {
 
 	public void clearCache();
 
-	public ModelListener[] getListeners();
+	public T findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException;
 
-	public void registerListener(ModelListener listener);
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException;
 
-	public void unregisterListener(ModelListener listener);
+	public List<Object> findWithDynamicQuery(
+			DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException;
+
+	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException;
+
+	public ModelListener<T>[] getListeners();
+
+	public void registerListener(ModelListener<T> listener);
+
+	public T remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException;
+
+	public T remove(T model) throws SystemException;
+
+	public void unregisterListener(ModelListener<T> listener);
+
+	public T update(T model, boolean merge) throws SystemException;
 
 }

@@ -22,17 +22,21 @@
 
 package com.liferay.portal.service.persistence.impl;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.Dialect;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 
 import java.util.List;
@@ -44,7 +48,8 @@ import javax.sql.DataSource;
  *
  * @author Brian Wing Shun Chan
  */
-public class BasePersistenceImpl implements BasePersistence, SessionFactory {
+public class BasePersistenceImpl<T extends BaseModel<T>>
+	implements BasePersistence<T>, SessionFactory {
 
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
 
@@ -55,6 +60,33 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 		_sessionFactory.closeSession(session);
 	}
 
+	@SuppressWarnings("unused")
+	public T findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+
+		throw new UnsupportedOperationException();
+	}
+
+	@SuppressWarnings("unused")
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+
+		throw new UnsupportedOperationException();
+	}
+
+	@SuppressWarnings("unused")
+	public List<Object> findWithDynamicQuery(
+			DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
+
+		throw new UnsupportedOperationException();
+	}
+
+	@SuppressWarnings("unused")
+	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
+		throw new UnsupportedOperationException();
+	}
+
 	public DataSource getDataSource() {
 		return _dataSource;
 	}
@@ -63,25 +95,16 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 		return _dialect;
 	}
 
-	public ModelListener[] getListeners() {
+	public ModelListener<T>[] getListeners() {
 		return listeners;
-	}
-
-	public Session openSession() throws ORMException {
-		return _sessionFactory.openSession();
 	}
 
 	public Session openNewSession(Connection connection) throws ORMException {
 		return _sessionFactory.openNewSession(connection);
 	}
 
-	public void registerListener(ModelListener listener) {
-		List<ModelListener> listenersList = ListUtil.fromArray(listeners);
-
-		listenersList.add(listener);
-
-		listeners = listenersList.toArray(
-			new ModelListener[listenersList.size()]);
+	public Session openSession() throws ORMException {
+		return _sessionFactory.openSession();
 	}
 
 	public SystemException processException(Exception e) {
@@ -96,6 +119,27 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 		return new SystemException(e);
 	}
 
+	public void registerListener(ModelListener<T> listener) {
+		List<ModelListener<T>> listenersList = ListUtil.fromArray(listeners);
+
+		listenersList.add(listener);
+
+		listeners = listenersList.toArray(
+			new ModelListener[listenersList.size()]);
+	}
+
+	@SuppressWarnings("unused")
+	public T remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+
+		throw new UnsupportedOperationException();
+	}
+
+	@SuppressWarnings("unused")
+	public T remove(T model) throws SystemException {
+		throw new UnsupportedOperationException();
+	}
+
 	public void setDataSource(DataSource dataSource) {
 		_dataSource = dataSource;
 	}
@@ -105,8 +149,8 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 		_dialect = _sessionFactory.getDialect();
 	}
 
-	public void unregisterListener(ModelListener listener) {
-		List<ModelListener> listenersList = ListUtil.fromArray(listeners);
+	public void unregisterListener(ModelListener<T> listener) {
+		List<ModelListener<T>> listenersList = ListUtil.fromArray(listeners);
 
 		listenersList.remove(listener);
 
@@ -114,12 +158,55 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 			new ModelListener[listenersList.size()]);
 	}
 
-	protected ModelListener[] listeners = new ModelListener[0];
+	/**
+	 * Add, update, or merge, the model. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating a model.
+	 *
+	 * @param  model the model to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *		   value is false. Setting merge to true is more expensive and
+	 *		   should only be true when model is transient. See LEP-5473 for a
+	 *		   detailed discussion of this method.
+	 * @return the model that was added, updated, or merged
+	 */
+	public T update(T model, boolean merge) throws SystemException {
+		boolean isNew = model.isNew();
+
+		for (ModelListener<T> listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(model);
+			}
+			else {
+				listener.onBeforeUpdate(model);
+			}
+		}
+
+		model = updateImpl(model, merge);
+
+		for (ModelListener<T> listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(model);
+			}
+			else {
+				listener.onAfterUpdate(model);
+			}
+		}
+
+		return model;
+	}
+
+	@SuppressWarnings("unused")
+	public T updateImpl(T model, boolean merge) throws SystemException {
+		throw new UnsupportedOperationException();
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(BasePersistenceImpl.class);
 
+	protected ModelListener<T>[] listeners = new ModelListener[0];
+
 	private DataSource _dataSource;
-	private SessionFactory _sessionFactory;
 	private Dialect _dialect;
+	private SessionFactory _sessionFactory;
 
 }

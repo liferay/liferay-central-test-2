@@ -1533,6 +1533,44 @@ public class ServiceBuilder {
 		}
 	}
 
+	public boolean isBasePersistenceMethod(JavaMethod method) {
+		String methodName = method.getName();
+
+		if (methodName.equals("clearCache") ||
+			methodName.equals("findWithDynamicQuery")) {
+
+			return true;
+		}
+		else if (methodName.equals("findByPrimaryKey") ||
+				 methodName.equals("fetchByPrimaryKey") ||
+				 methodName.equals("remove")) {
+
+			JavaParameter[] parameters = method.getParameters();
+
+			if ((parameters.length == 1) &&
+				(parameters[0].getName().equals("primaryKey"))) {
+
+				return true;
+			}
+
+			if (methodName.equals("remove")) {
+				Type[] methodExceptions = method.getExceptions();
+
+				for (Type methodException : methodExceptions) {
+					String exception = methodException.getValue();
+
+					if (exception.contains("NoSuch")) {
+						return false;
+					}
+				}
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean isCustomMethod(JavaMethod method) {
 		String methodName = method.getName();
 

@@ -17,6 +17,7 @@ import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.impl.${entity.name}Impl;
 import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -73,7 +76,7 @@ import java.util.Set;
  * @see       ${entity.name}Util
  * @generated
  */
-public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {
+public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.name}> implements ${entity.name}Persistence {
 
 	public static final String FINDER_CLASS_NAME_ENTITY = ${entity.name}Impl.class.getName();
 
@@ -220,6 +223,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		return ${entity.varName};
 	}
 
+	public ${entity.name} remove(Serializable primaryKey) throws NoSuchModelException, SystemException {
+		<#if entity.hasPrimitivePK()>
+			return remove(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
+		<#else>
+			return remove((${entity.PKClassName})primaryKey);
+		</#if>
+	}
+
 	public ${entity.name} remove(${entity.PKClassName} ${entity.PKVarName}) throws ${noSuchEntity}Exception, SystemException {
 		Session session = null;
 
@@ -359,55 +370,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		</#list>
 
 		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
-
-		return ${entity.varName};
-	}
-
-	/**
-	 * @deprecated Use {@link #update(${entity.name}, boolean merge)}.
-	 */
-	public ${entity.name} update(${entity.name} ${entity.varName}) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn("Using the deprecated update(${entity.name} ${entity.varName}) method. Use update(${entity.name} ${entity.varName}, boolean merge) instead.");
-		}
-
-		return update(${entity.varName}, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  ${entity.varName} the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when ${entity.varName} is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ${entity.name} update(${entity.name} ${entity.varName}, boolean merge) throws SystemException {
-		boolean isNew = ${entity.varName}.isNew();
-
-		for (ModelListener<${entity.name}> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(${entity.varName});
-			}
-			else {
-				listener.onBeforeUpdate(${entity.varName});
-			}
-		}
-
-		${entity.varName} = updateImpl(${entity.varName}, merge);
-
-		for (ModelListener<${entity.name}> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(${entity.varName});
-			}
-			else {
-				listener.onAfterUpdate(${entity.varName});
-			}
-		}
 
 		return ${entity.varName};
 	}
@@ -576,6 +538,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		return ${entity.varName}Impl;
 	}
 
+	public ${entity.name} findByPrimaryKey(Serializable primaryKey) throws NoSuchModelException, SystemException {
+		<#if entity.hasPrimitivePK()>
+			return findByPrimaryKey(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
+		<#else>
+			return findByPrimaryKey((${entity.PKClassName})primaryKey);
+		</#if>
+	}
+
 	public ${entity.name} findByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws ${noSuchEntity}Exception, SystemException {
 		${entity.name} ${entity.varName} = fetchByPrimaryKey(${entity.PKVarName});
 
@@ -588,6 +558,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		}
 
 		return ${entity.varName};
+	}
+
+	public ${entity.name} fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
+		<#if entity.hasPrimitivePK()>
+			return fetchByPrimaryKey(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
+		<#else>
+			return fetchByPrimaryKey((${entity.PKClassName})primaryKey);
+		</#if>
 	}
 
 	public ${entity.name} fetchByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {

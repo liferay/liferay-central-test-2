@@ -1,6 +1,12 @@
 package ${packagePath}.service.persistence;
 
+import ${packagePath}.model.${entity.name};
+
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="${entity.name}Util.java.html"><b><i>View Source</i></b></a>
@@ -17,29 +23,43 @@ import java.util.Date;
  */
 public class ${entity.name}Util {
 
-	<#list methods as method>
-		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
-			<#if method.name == "update">
-				<#if arrayUtil.getLength(method.parameters) == 1>
 	/**
-	 * @deprecated Use {@link #update(${entity.name}, boolean merge)}.
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
 	 */
-				<#else>
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  ${entity.varName} the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when ${entity.varName} is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-				</#if>
-			</#if>
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
 
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static ${entity.name} remove(${entity.name} ${entity.varName}) throws SystemException {
+		return getPersistence().remove(${entity.varName});
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static ${entity.name} update(${entity.name} ${entity.varName}, boolean merge) throws SystemException {
+		return getPersistence().update(${entity.varName}, merge);
+	}
+
+	<#list methods as method>
+		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isBasePersistenceMethod(method)>
 			public static ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
 
 			<#list method.parameters as parameter>
