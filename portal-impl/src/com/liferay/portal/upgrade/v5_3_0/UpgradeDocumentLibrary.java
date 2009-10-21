@@ -89,8 +89,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					repositoryId = groupId;
 				}
 
-				String newName =
-					DLFileEntryNameUpgradeColumnImpl.getNewName(name);
+				String newName = DLFileEntryNameUpgradeColumnImpl.getNewName(
+					name);
 
 				if (!newName.equals(name)) {
 					DLServiceUtil.updateFile(

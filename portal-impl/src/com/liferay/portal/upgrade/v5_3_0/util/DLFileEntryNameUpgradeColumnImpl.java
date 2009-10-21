@@ -33,24 +33,24 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
  */
 public class DLFileEntryNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
+	public static String getNewName(String name) throws Exception {
+		if (name.startsWith("DLFE-")) {
+			name = name.substring("DLFE-".length());
+		}
+
+		name = FileUtil.stripExtension(name);
+
+		return name;
+	}
+
 	public DLFileEntryNameUpgradeColumnImpl(String name) {
 		super(name);
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String value = (String)oldValue;
+		String name = (String)oldValue;
 
-		return getNewName(value);
-	}
-
-	public static String getNewName(String name) throws Exception {
-		name = FileUtil.stripExtension(name);
-
-		if (name.startsWith("DLFE-")) {
-			name = name.substring("DLFE-".length());
-		}
-
-		return name;
+		return getNewName(name);
 	}
 
 }

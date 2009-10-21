@@ -159,11 +159,11 @@ public class GetFileAction extends PortletAction {
 			long companyId = themeDisplay.getCompanyId();
 			long userId = themeDisplay.getUserId();
 
-			name = FileUtil.stripExtension(name);
-
 			if (name.startsWith("DLFE-")) {
 				name = name.substring("DLFE-".length());
 			}
+
+			name = FileUtil.stripExtension(name);
 
 			DLFileEntry fileEntry = null;
 
