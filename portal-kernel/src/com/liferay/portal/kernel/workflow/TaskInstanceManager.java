@@ -174,13 +174,12 @@ public interface TaskInstanceManager {
 
 	/**
 	 * <p>
-	 * In addition to the method
-	 * {@link #completeTaskInstance(long, long, String, Map, Map)}, this one
-	 * accepts the name of the path to be signaled by completing the given task.
-	 * The possible next path names can be requested through
-	 * {@link #getPossibleNextPathNames(long, long, Map)}.
+	 * In addition to the method {@link #completeTaskInstance(long, long,
+	 * String, Map, Map)}, this one accepts the name of the path to be signaled
+	 * by completing the given task. The possible next path names can be
+	 * requested through {@link #getPossibleNextPathNames(long, long, Map)}.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * There are two possible strategies to model around tasks:
 	 * <li>
@@ -188,8 +187,9 @@ public interface TaskInstanceManager {
 	 * decision and hence the information needed for the engine to execute the
 	 * decision would have been made by the user completing the task, adding
 	 * those information to the context of the workflow instance or to the
-	 * domain object related to it.</li>
-	 * 
+	 * domain object related to it.
+	 * </li>
+	 *
 	 * <li>
 	 * Completing the task could list possible next path' to the user he has to
 	 * choose one from, so completing the task would be done using this method
@@ -197,27 +197,28 @@ public interface TaskInstanceManager {
 	 * information has to be stored within the context to achieve the same goal,
 	 * however, the documentation of the decision is only available through the
 	 * history not through structured information within the workflow instance
-	 * or its domain object instance.</li>
-	 * 
+	 * or its domain object instance.
+	 * </li>
+	 *
 	 * </p>
-	 * 
-	 * @param taskInstanceId the id of the task instance to be completed
-	 * @param userId the id of the user completing the task
-	 * @param pathName the name of the path to continue the workflow by
-	 *            completing this task
-	 * @param comment an optional comment made by completing the task (just as a
-	 *            comment, not a structured information)
-	 * @param attributes the optional attributes to be passed on to the context
-	 *            information of the workflow instance (they can be empty or
-	 *            even <code>null</code>)
-	 * @param parameters any additional parameters the engine or task handler
-	 *            might use, they are depending on the underlying engine and
-	 *            thus optional and might even be <code>null</code>, unlike the
-	 *            attributes, they are transient and not merged into the process
-	 *            context
+	 *
+	 * @param  taskInstanceId the id of the task instance to be completed
+	 * @param  userId the id of the user completing the task
+	 * @param  pathName the name of the path to continue the workflow by
+	 *		   completing this task
+	 * @param  comment an optional comment made by completing the task (just as
+	 *		   a comment, not a structured information)
+	 * @param  attributes the optional attributes to be passed on to the context
+	 *		   information of the workflow instance (they can be empty or even
+	 *		   <code>null</code>)
+	 * @param  parameters any additional parameters the engine or task handler
+	 *		   might use, they are depending on the underlying engine and thus
+	 *		   optional and might even be <code>null</code>, unlike the
+	 *		   attributes, they are transient and not merged into the process
+	 *		   context
 	 * @return the task information reflecting the changes
 	 * @throws WorkflowException is thrown, if completing the task failed or the
-	 *             workflow could not be continued
+	 *		   workflow could not be continued
 	 */
 	public TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, @CallingUserId long userId,
@@ -228,29 +229,28 @@ public interface TaskInstanceManager {
 	/**
 	 * <p>
 	 * Returns a list of path names to be possible next path for the given task
-	 * to be passed on through the method
-	 * {@link #completeTaskInstance(long, long, String, Map, Map)}. The method
-	 * should return the same as if invoking
-	 * {@link WorkflowInstanceManager#getPossibleNextPathNames(long, long, Map)}
-	 * using the workflow instance id the task is attached to.
+	 * to be passed on through the method {@link #completeTaskInstance(long,
+	 * long, String, Map, Map)}. The method should return the same as if
+	 * invoking {@link WorkflowInstanceManager#getPossibleNextPathNames(long,
+	 * long, Map)} using the workflow instance id the task is attached to.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * The list of possible next path is checked with the role set of the
 	 * specified user to only return path names the user is allowed to execute.
 	 * </p>
-	 * 
-	 * @param taskInstanceId the id of the task instance to return a list of
-	 *            possible next path names for
-	 * @param userId the id of the user requesting the list to check the
-	 *            activities being executable by the user
-	 * @param parameters any additional parameters the engine or task handler
-	 *            might use, they are depending on the underlying engine and
-	 *            thus optional and might even be <code>null</code>, unlike the
-	 *            attributes, they are transient and not merged into the process
-	 *            context
+	 *
+	 * @param  taskInstanceId the id of the task instance to return a list of
+	 *		   possible next path names for
+	 * @param  userId the id of the user requesting the list to check the
+	 *		   activities being executable by the user
+	 * @param  parameters any additional parameters the engine or task handler
+	 *		   might use, they are depending on the underlying engine and thus
+	 *		   optional and might even be <code>null</code>, unlike the
+	 *		   attributes, they are transient and not merged into the process
+	 *		   context
 	 * @return the list of path names possible to follow on by completing the
-	 *         given task
+	 *		   given task
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
 	public List<String> getPossibleNextPathNames(
