@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.impl.ExpandoColumnImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       ExpandoColumnUtil
  * @generated
  */
-public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
+public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoColumn>
 	implements ExpandoColumnPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoColumnImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -141,6 +144,11 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		expandoColumn.setPrimaryKey(columnId);
 
 		return expandoColumn;
+	}
+
+	public ExpandoColumn remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ExpandoColumn remove(long columnId)
@@ -237,58 +245,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		return expandoColumn;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ExpandoColumn, boolean merge)}.
-	 */
-	public ExpandoColumn update(ExpandoColumn expandoColumn)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ExpandoColumn expandoColumn) method. Use update(ExpandoColumn expandoColumn, boolean merge) instead.");
-		}
-
-		return update(expandoColumn, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  expandoColumn the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when expandoColumn is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ExpandoColumn update(ExpandoColumn expandoColumn, boolean merge)
-		throws SystemException {
-		boolean isNew = expandoColumn.isNew();
-
-		for (ModelListener<ExpandoColumn> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(expandoColumn);
-			}
-			else {
-				listener.onBeforeUpdate(expandoColumn);
-			}
-		}
-
-		expandoColumn = updateImpl(expandoColumn, merge);
-
-		for (ModelListener<ExpandoColumn> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(expandoColumn);
-			}
-			else {
-				listener.onAfterUpdate(expandoColumn);
-			}
-		}
-
-		return expandoColumn;
-	}
-
 	public ExpandoColumn updateImpl(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn,
 		boolean merge) throws SystemException {
@@ -368,6 +324,11 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		return expandoColumnImpl;
 	}
 
+	public ExpandoColumn findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ExpandoColumn findByPrimaryKey(long columnId)
 		throws NoSuchColumnException, SystemException {
 		ExpandoColumn expandoColumn = fetchByPrimaryKey(columnId);
@@ -383,6 +344,11 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return expandoColumn;
+	}
+
+	public ExpandoColumn fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ExpandoColumn fetchByPrimaryKey(long columnId)

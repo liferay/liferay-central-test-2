@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.UserGroup;
+
+import java.util.List;
 
 /**
  * <a href="UserGroupUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,45 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class UserGroupUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static UserGroup remove(UserGroup userGroup)
+		throws SystemException {
+		return getPersistence().remove(userGroup);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static UserGroup update(UserGroup userGroup, boolean merge)
+		throws SystemException {
+		return getPersistence().update(userGroup, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.UserGroup userGroup) {
 		getPersistence().cacheResult(userGroup);
 	}
@@ -44,10 +88,6 @@ public class UserGroupUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups) {
 		getPersistence().cacheResult(userGroups);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.UserGroup create(long userGroupId) {
@@ -58,39 +98,6 @@ public class UserGroupUtil {
 		throws com.liferay.portal.NoSuchUserGroupException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(userGroupId);
-	}
-
-	public static com.liferay.portal.model.UserGroup remove(
-		com.liferay.portal.model.UserGroup userGroup)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(userGroup);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(UserGroup, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.UserGroup update(
-		com.liferay.portal.model.UserGroup userGroup)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(userGroup);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userGroup the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userGroup is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.UserGroup update(
-		com.liferay.portal.model.UserGroup userGroup, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(userGroup, merge);
 	}
 
 	public static com.liferay.portal.model.UserGroup updateImpl(
@@ -217,18 +224,6 @@ public class UserGroupUtil {
 		long companyId, java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_N(companyId, name, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findAll()

@@ -24,6 +24,8 @@ package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.calendar.model.CalEvent;
+
 /**
  * <a href="CalEventPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       CalEventUtil
  * @generated
  */
-public interface CalEventPersistence extends BasePersistence {
+public interface CalEventPersistence extends BasePersistence<CalEvent> {
 	public void cacheResult(
 		com.liferay.portlet.calendar.model.CalEvent calEvent);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.calendar.model.CalEvent> calEvents);
 
-	public void clearCache();
-
 	public com.liferay.portlet.calendar.model.CalEvent create(long eventId);
 
 	public com.liferay.portlet.calendar.model.CalEvent remove(long eventId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
-
-	public com.liferay.portlet.calendar.model.CalEvent remove(
-		com.liferay.portlet.calendar.model.CalEvent calEvent)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(CalEvent, boolean merge)}.
-	 */
-	public com.liferay.portlet.calendar.model.CalEvent update(
-		com.liferay.portlet.calendar.model.CalEvent calEvent)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  calEvent the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when calEvent is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.calendar.model.CalEvent update(
-		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateImpl(
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
@@ -279,14 +252,6 @@ public interface CalEventPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findAll()
 		throws com.liferay.portal.SystemException;

@@ -24,6 +24,8 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.asset.model.AssetCategoryProperty;
+
 /**
  * <a href="AssetCategoryPropertyPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       AssetCategoryPropertyUtil
  * @generated
  */
-public interface AssetCategoryPropertyPersistence extends BasePersistence {
+public interface AssetCategoryPropertyPersistence extends BasePersistence<AssetCategoryProperty> {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> assetCategoryProperties);
-
-	public void clearCache();
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty create(
 		long categoryPropertyId);
@@ -53,33 +53,6 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence {
 		long categoryPropertyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryPropertyException;
-
-	public com.liferay.portlet.asset.model.AssetCategoryProperty remove(
-		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(AssetCategoryProperty, boolean merge)}.
-	 */
-	public com.liferay.portlet.asset.model.AssetCategoryProperty update(
-		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetCategoryProperty the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetCategoryProperty is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.asset.model.AssetCategoryProperty update(
-		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty updateImpl(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty,
@@ -192,14 +165,6 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence {
 	public com.liferay.portlet.asset.model.AssetCategoryProperty fetchByCA_K(
 		long categoryId, java.lang.String key, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> findAll()
 		throws com.liferay.portal.SystemException;

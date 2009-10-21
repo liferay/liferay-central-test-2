@@ -24,6 +24,8 @@ package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.tasks.model.TasksReview;
+
 /**
  * <a href="TasksReviewPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       TasksReviewUtil
  * @generated
  */
-public interface TasksReviewPersistence extends BasePersistence {
+public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	public void cacheResult(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.tasks.model.TasksReview> tasksReviews);
 
-	public void clearCache();
-
 	public com.liferay.portlet.tasks.model.TasksReview create(long reviewId);
 
 	public com.liferay.portlet.tasks.model.TasksReview remove(long reviewId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public com.liferay.portlet.tasks.model.TasksReview remove(
-		com.liferay.portlet.tasks.model.TasksReview tasksReview)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(TasksReview, boolean merge)}.
-	 */
-	public com.liferay.portlet.tasks.model.TasksReview update(
-		com.liferay.portlet.tasks.model.TasksReview tasksReview)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  tasksReview the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when tasksReview is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.tasks.model.TasksReview update(
-		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksReview updateImpl(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
@@ -250,14 +223,6 @@ public interface TasksReviewPersistence extends BasePersistence {
 		boolean rejected, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll()
 		throws com.liferay.portal.SystemException;

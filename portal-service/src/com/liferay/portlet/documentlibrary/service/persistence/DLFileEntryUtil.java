@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+
+import java.util.List;
 
 /**
  * <a href="DLFileEntryUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @generated
  */
 public class DLFileEntryUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static DLFileEntry remove(DLFileEntry dlFileEntry)
+		throws SystemException {
+		return getPersistence().remove(dlFileEntry);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static DLFileEntry update(DLFileEntry dlFileEntry, boolean merge)
+		throws SystemException {
+		return getPersistence().update(dlFileEntry, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry) {
 		getPersistence().cacheResult(dlFileEntry);
@@ -45,10 +90,6 @@ public class DLFileEntryUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> dlFileEntries) {
 		getPersistence().cacheResult(dlFileEntries);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry create(
@@ -61,39 +102,6 @@ public class DLFileEntryUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getPersistence().remove(fileEntryId);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry remove(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(dlFileEntry);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(DLFileEntry, boolean merge)}.
-	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry update(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(dlFileEntry);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry update(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(dlFileEntry, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateImpl(
@@ -381,18 +389,6 @@ public class DLFileEntryUtil {
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .fetchByG_F_T(groupId, folderId, title, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findAll()

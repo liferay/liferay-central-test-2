@@ -24,6 +24,8 @@ package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.wiki.model.WikiPageResource;
+
 /**
  * <a href="WikiPageResourcePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       WikiPageResourceUtil
  * @generated
  */
-public interface WikiPageResourcePersistence extends BasePersistence {
+public interface WikiPageResourcePersistence extends BasePersistence<WikiPageResource> {
 	public void cacheResult(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> wikiPageResources);
-
-	public void clearCache();
 
 	public com.liferay.portlet.wiki.model.WikiPageResource create(
 		long resourcePrimKey);
@@ -53,33 +53,6 @@ public interface WikiPageResourcePersistence extends BasePersistence {
 		long resourcePrimKey)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException;
-
-	public com.liferay.portlet.wiki.model.WikiPageResource remove(
-		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(WikiPageResource, boolean merge)}.
-	 */
-	public com.liferay.portlet.wiki.model.WikiPageResource update(
-		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  wikiPageResource the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when wikiPageResource is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.wiki.model.WikiPageResource update(
-		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource updateImpl(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
@@ -105,14 +78,6 @@ public interface WikiPageResourcePersistence extends BasePersistence {
 	public com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
 		long nodeId, java.lang.String title, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll()
 		throws com.liferay.portal.SystemException;

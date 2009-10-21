@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.Region;
+
+import java.util.List;
 
 /**
  * <a href="RegionUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,44 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class RegionUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static Region remove(Region region) throws SystemException {
+		return getPersistence().remove(region);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static Region update(Region region, boolean merge)
+		throws SystemException {
+		return getPersistence().update(region, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.Region region) {
 		getPersistence().cacheResult(region);
 	}
@@ -44,10 +87,6 @@ public class RegionUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Region> regions) {
 		getPersistence().cacheResult(regions);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.Region create(long regionId) {
@@ -58,39 +97,6 @@ public class RegionUtil {
 		throws com.liferay.portal.NoSuchRegionException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(regionId);
-	}
-
-	public static com.liferay.portal.model.Region remove(
-		com.liferay.portal.model.Region region)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(region);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Region, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.Region update(
-		com.liferay.portal.model.Region region)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(region);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  region the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when region is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.Region update(
-		com.liferay.portal.model.Region region, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(region, merge);
 	}
 
 	public static com.liferay.portal.model.Region updateImpl(
@@ -234,18 +240,6 @@ public class RegionUtil {
 			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_A_PrevAndNext(regionId, countryId, active, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> findAll()

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       DLFolderUtil
  * @generated
  */
-public class DLFolderPersistenceImpl extends BasePersistenceImpl
+public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	implements DLFolderPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFolderImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -227,6 +230,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		return dlFolder;
 	}
 
+	public DLFolder remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public DLFolder remove(long folderId)
 		throws NoSuchFolderException, SystemException {
 		Session session = null;
@@ -322,57 +330,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
 			DLFolderImpl.class, dlFolder.getPrimaryKey());
-
-		return dlFolder;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(DLFolder, boolean merge)}.
-	 */
-	public DLFolder update(DLFolder dlFolder) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(DLFolder dlFolder) method. Use update(DLFolder dlFolder, boolean merge) instead.");
-		}
-
-		return update(dlFolder, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFolder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFolder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public DLFolder update(DLFolder dlFolder, boolean merge)
-		throws SystemException {
-		boolean isNew = dlFolder.isNew();
-
-		for (ModelListener<DLFolder> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFolder);
-			}
-			else {
-				listener.onBeforeUpdate(dlFolder);
-			}
-		}
-
-		dlFolder = updateImpl(dlFolder, merge);
-
-		for (ModelListener<DLFolder> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(dlFolder);
-			}
-			else {
-				listener.onAfterUpdate(dlFolder);
-			}
-		}
 
 		return dlFolder;
 	}
@@ -490,6 +447,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		return dlFolderImpl;
 	}
 
+	public DLFolder findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public DLFolder findByPrimaryKey(long folderId)
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = fetchByPrimaryKey(folderId);
@@ -505,6 +467,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFolder;
+	}
+
+	public DLFolder fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public DLFolder fetchByPrimaryKey(long folderId) throws SystemException {

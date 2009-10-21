@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       MBMessageUtil
  * @generated
  */
-public class MBMessagePersistenceImpl extends BasePersistenceImpl
+public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	implements MBMessagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBMessageImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -454,6 +457,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		return mbMessage;
 	}
 
+	public MBMessage remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public MBMessage remove(long messageId)
 		throws NoSuchMessageException, SystemException {
 		Session session = null;
@@ -542,57 +550,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageImpl.class, mbMessage.getPrimaryKey());
-
-		return mbMessage;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(MBMessage, boolean merge)}.
-	 */
-	public MBMessage update(MBMessage mbMessage) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MBMessage mbMessage) method. Use update(MBMessage mbMessage, boolean merge) instead.");
-		}
-
-		return update(mbMessage, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbMessage the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbMessage is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MBMessage update(MBMessage mbMessage, boolean merge)
-		throws SystemException {
-		boolean isNew = mbMessage.isNew();
-
-		for (ModelListener<MBMessage> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(mbMessage);
-			}
-			else {
-				listener.onBeforeUpdate(mbMessage);
-			}
-		}
-
-		mbMessage = updateImpl(mbMessage, merge);
-
-		for (ModelListener<MBMessage> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(mbMessage);
-			}
-			else {
-				listener.onAfterUpdate(mbMessage);
-			}
-		}
 
 		return mbMessage;
 	}
@@ -693,6 +650,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		return mbMessageImpl;
 	}
 
+	public MBMessage findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MBMessage findByPrimaryKey(long messageId)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = fetchByPrimaryKey(messageId);
@@ -708,6 +670,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbMessage;
+	}
+
+	public MBMessage fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MBMessage fetchByPrimaryKey(long messageId)

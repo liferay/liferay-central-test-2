@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.MembershipRequest;
 
 /**
  * <a href="MembershipRequestPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,14 +37,12 @@ package com.liferay.portal.service.persistence;
  * @see       MembershipRequestUtil
  * @generated
  */
-public interface MembershipRequestPersistence extends BasePersistence {
+public interface MembershipRequestPersistence extends BasePersistence<MembershipRequest> {
 	public void cacheResult(
 		com.liferay.portal.model.MembershipRequest membershipRequest);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.MembershipRequest> membershipRequests);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.MembershipRequest create(
 		long membershipRequestId);
@@ -52,33 +51,6 @@ public interface MembershipRequestPersistence extends BasePersistence {
 		long membershipRequestId)
 		throws com.liferay.portal.NoSuchMembershipRequestException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.MembershipRequest remove(
-		com.liferay.portal.model.MembershipRequest membershipRequest)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(MembershipRequest, boolean merge)}.
-	 */
-	public com.liferay.portal.model.MembershipRequest update(
-		com.liferay.portal.model.MembershipRequest membershipRequest)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  membershipRequest the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when membershipRequest is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.MembershipRequest update(
-		com.liferay.portal.model.MembershipRequest membershipRequest,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest updateImpl(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
@@ -177,14 +149,6 @@ public interface MembershipRequestPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchMembershipRequestException,
 			com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> findAll()
 		throws com.liferay.portal.SystemException;

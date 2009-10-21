@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       MBDiscussionUtil
  * @generated
  */
-public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
+public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussion>
 	implements MBDiscussionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBDiscussionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -146,6 +149,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		mbDiscussion.setPrimaryKey(discussionId);
 
 		return mbDiscussion;
+	}
+
+	public MBDiscussion remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public MBDiscussion remove(long discussionId)
@@ -245,58 +253,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		return mbDiscussion;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(MBDiscussion, boolean merge)}.
-	 */
-	public MBDiscussion update(MBDiscussion mbDiscussion)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MBDiscussion mbDiscussion) method. Use update(MBDiscussion mbDiscussion, boolean merge) instead.");
-		}
-
-		return update(mbDiscussion, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbDiscussion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbDiscussion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MBDiscussion update(MBDiscussion mbDiscussion, boolean merge)
-		throws SystemException {
-		boolean isNew = mbDiscussion.isNew();
-
-		for (ModelListener<MBDiscussion> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(mbDiscussion);
-			}
-			else {
-				listener.onBeforeUpdate(mbDiscussion);
-			}
-		}
-
-		mbDiscussion = updateImpl(mbDiscussion, merge);
-
-		for (ModelListener<MBDiscussion> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(mbDiscussion);
-			}
-			else {
-				listener.onAfterUpdate(mbDiscussion);
-			}
-		}
-
-		return mbDiscussion;
-	}
-
 	public MBDiscussion updateImpl(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean merge) throws SystemException {
@@ -383,6 +339,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		return mbDiscussionImpl;
 	}
 
+	public MBDiscussion findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MBDiscussion findByPrimaryKey(long discussionId)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = fetchByPrimaryKey(discussionId);
@@ -398,6 +359,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbDiscussion;
+	}
+
+	public MBDiscussion fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MBDiscussion fetchByPrimaryKey(long discussionId)

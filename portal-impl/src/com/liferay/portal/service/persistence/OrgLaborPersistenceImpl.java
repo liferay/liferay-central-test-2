@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchOrgLaborException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.OrgLaborModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       OrgLaborUtil
  * @generated
  */
-public class OrgLaborPersistenceImpl extends BasePersistenceImpl
+public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	implements OrgLaborPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgLaborImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -119,6 +122,11 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		orgLabor.setPrimaryKey(orgLaborId);
 
 		return orgLabor;
+	}
+
+	public OrgLabor remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public OrgLabor remove(long orgLaborId)
@@ -204,57 +212,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		return orgLabor;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(OrgLabor, boolean merge)}.
-	 */
-	public OrgLabor update(OrgLabor orgLabor) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(OrgLabor orgLabor) method. Use update(OrgLabor orgLabor, boolean merge) instead.");
-		}
-
-		return update(orgLabor, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  orgLabor the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when orgLabor is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public OrgLabor update(OrgLabor orgLabor, boolean merge)
-		throws SystemException {
-		boolean isNew = orgLabor.isNew();
-
-		for (ModelListener<OrgLabor> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(orgLabor);
-			}
-			else {
-				listener.onBeforeUpdate(orgLabor);
-			}
-		}
-
-		orgLabor = updateImpl(orgLabor, merge);
-
-		for (ModelListener<OrgLabor> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(orgLabor);
-			}
-			else {
-				listener.onAfterUpdate(orgLabor);
-			}
-		}
-
-		return orgLabor;
-	}
-
 	public OrgLabor updateImpl(com.liferay.portal.model.OrgLabor orgLabor,
 		boolean merge) throws SystemException {
 		orgLabor = toUnwrappedModel(orgLabor);
@@ -314,6 +271,11 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		return orgLaborImpl;
 	}
 
+	public OrgLabor findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public OrgLabor findByPrimaryKey(long orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		OrgLabor orgLabor = fetchByPrimaryKey(orgLaborId);
@@ -329,6 +291,11 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return orgLabor;
+	}
+
+	public OrgLabor fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public OrgLabor fetchByPrimaryKey(long orgLaborId)

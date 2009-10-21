@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.shopping.model.ShoppingCart;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       ShoppingCartUtil
  * @generated
  */
-public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
+public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCart>
 	implements ShoppingCartPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCartImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -151,6 +154,11 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 		shoppingCart.setPrimaryKey(cartId);
 
 		return shoppingCart;
+	}
+
+	public ShoppingCart remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingCart remove(long cartId)
@@ -246,58 +254,6 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 		return shoppingCart;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ShoppingCart, boolean merge)}.
-	 */
-	public ShoppingCart update(ShoppingCart shoppingCart)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ShoppingCart shoppingCart) method. Use update(ShoppingCart shoppingCart, boolean merge) instead.");
-		}
-
-		return update(shoppingCart, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingCart the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingCart is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ShoppingCart update(ShoppingCart shoppingCart, boolean merge)
-		throws SystemException {
-		boolean isNew = shoppingCart.isNew();
-
-		for (ModelListener<ShoppingCart> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingCart);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingCart);
-			}
-		}
-
-		shoppingCart = updateImpl(shoppingCart, merge);
-
-		for (ModelListener<ShoppingCart> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingCart);
-			}
-			else {
-				listener.onAfterUpdate(shoppingCart);
-			}
-		}
-
-		return shoppingCart;
-	}
-
 	public ShoppingCart updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
 		boolean merge) throws SystemException {
@@ -376,6 +332,11 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 		return shoppingCartImpl;
 	}
 
+	public ShoppingCart findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ShoppingCart findByPrimaryKey(long cartId)
 		throws NoSuchCartException, SystemException {
 		ShoppingCart shoppingCart = fetchByPrimaryKey(cartId);
@@ -391,6 +352,11 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shoppingCart;
+	}
+
+	public ShoppingCart fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingCart fetchByPrimaryKey(long cartId)

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       WikiPageResourceUtil
  * @generated
  */
-public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
+public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPageResource>
 	implements WikiPageResourcePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageResourceImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -124,6 +127,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		wikiPageResource.setPrimaryKey(resourcePrimKey);
 
 		return wikiPageResource;
+	}
+
+	public WikiPageResource remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public WikiPageResource remove(long resourcePrimKey)
@@ -223,58 +231,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		return wikiPageResource;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(WikiPageResource, boolean merge)}.
-	 */
-	public WikiPageResource update(WikiPageResource wikiPageResource)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(WikiPageResource wikiPageResource) method. Use update(WikiPageResource wikiPageResource, boolean merge) instead.");
-		}
-
-		return update(wikiPageResource, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  wikiPageResource the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when wikiPageResource is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public WikiPageResource update(WikiPageResource wikiPageResource,
-		boolean merge) throws SystemException {
-		boolean isNew = wikiPageResource.isNew();
-
-		for (ModelListener<WikiPageResource> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiPageResource);
-			}
-			else {
-				listener.onBeforeUpdate(wikiPageResource);
-			}
-		}
-
-		wikiPageResource = updateImpl(wikiPageResource, merge);
-
-		for (ModelListener<WikiPageResource> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(wikiPageResource);
-			}
-			else {
-				listener.onAfterUpdate(wikiPageResource);
-			}
-		}
-
-		return wikiPageResource;
-	}
-
 	public WikiPageResource updateImpl(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean merge) throws SystemException {
@@ -351,6 +307,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		return wikiPageResourceImpl;
 	}
 
+	public WikiPageResource findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public WikiPageResource findByPrimaryKey(long resourcePrimKey)
 		throws NoSuchPageResourceException, SystemException {
 		WikiPageResource wikiPageResource = fetchByPrimaryKey(resourcePrimKey);
@@ -367,6 +328,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return wikiPageResource;
+	}
+
+	public WikiPageResource fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public WikiPageResource fetchByPrimaryKey(long resourcePrimKey)

@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.asset.model.AssetCategory;
+
+import java.util.List;
 
 /**
  * <a href="AssetCategoryUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.asset.service.persistence;
  * @generated
  */
 public class AssetCategoryUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static AssetCategory remove(AssetCategory assetCategory)
+		throws SystemException {
+		return getPersistence().remove(assetCategory);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static AssetCategory update(AssetCategory assetCategory,
+		boolean merge) throws SystemException {
+		return getPersistence().update(assetCategory, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory) {
 		getPersistence().cacheResult(assetCategory);
@@ -45,10 +90,6 @@ public class AssetCategoryUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetCategory> assetCategories) {
 		getPersistence().cacheResult(assetCategories);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategory create(
@@ -61,39 +102,6 @@ public class AssetCategoryUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException {
 		return getPersistence().remove(categoryId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetCategory remove(
-		com.liferay.portlet.asset.model.AssetCategory assetCategory)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(assetCategory);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(AssetCategory, boolean merge)}.
-	 */
-	public static com.liferay.portlet.asset.model.AssetCategory update(
-		com.liferay.portlet.asset.model.AssetCategory assetCategory)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(assetCategory);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetCategory the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetCategory is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.asset.model.AssetCategory update(
-		com.liferay.portlet.asset.model.AssetCategory assetCategory,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(assetCategory, merge);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateImpl(
@@ -401,18 +409,6 @@ public class AssetCategoryUtil {
 			com.liferay.portlet.asset.NoSuchCategoryException {
 		return getPersistence()
 				   .findByN_V_PrevAndNext(categoryId, name, vocabularyId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> findAll()

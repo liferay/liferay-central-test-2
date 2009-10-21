@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.asset.model.AssetTagProperty;
+
+import java.util.List;
 
 /**
  * <a href="AssetTagPropertyUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.asset.service.persistence;
  * @generated
  */
 public class AssetTagPropertyUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static AssetTagProperty remove(AssetTagProperty assetTagProperty)
+		throws SystemException {
+		return getPersistence().remove(assetTagProperty);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static AssetTagProperty update(AssetTagProperty assetTagProperty,
+		boolean merge) throws SystemException {
+		return getPersistence().update(assetTagProperty, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty) {
 		getPersistence().cacheResult(assetTagProperty);
@@ -45,10 +90,6 @@ public class AssetTagPropertyUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> assetTagProperties) {
 		getPersistence().cacheResult(assetTagProperties);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty create(
@@ -61,39 +102,6 @@ public class AssetTagPropertyUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException {
 		return getPersistence().remove(tagPropertyId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetTagProperty remove(
-		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(assetTagProperty);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(AssetTagProperty, boolean merge)}.
-	 */
-	public static com.liferay.portlet.asset.model.AssetTagProperty update(
-		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(assetTagProperty);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetTagProperty the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetTagProperty is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.asset.model.AssetTagProperty update(
-		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(assetTagProperty, merge);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTagProperty updateImpl(
@@ -257,18 +265,6 @@ public class AssetTagPropertyUtil {
 		long tagId, java.lang.String key, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByT_K(tagId, key, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findAll()

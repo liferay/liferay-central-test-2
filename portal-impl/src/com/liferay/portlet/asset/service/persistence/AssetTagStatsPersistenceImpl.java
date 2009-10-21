@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.asset.model.AssetTagStats;
 import com.liferay.portlet.asset.model.impl.AssetTagStatsImpl;
 import com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       AssetTagStatsUtil
  * @generated
  */
-public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
+public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagStats>
 	implements AssetTagStatsPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetTagStatsImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -156,6 +159,11 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 		assetTagStats.setPrimaryKey(tagStatsId);
 
 		return assetTagStats;
+	}
+
+	public AssetTagStats remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public AssetTagStats remove(long tagStatsId)
@@ -252,58 +260,6 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 		return assetTagStats;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(AssetTagStats, boolean merge)}.
-	 */
-	public AssetTagStats update(AssetTagStats assetTagStats)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AssetTagStats assetTagStats) method. Use update(AssetTagStats assetTagStats, boolean merge) instead.");
-		}
-
-		return update(assetTagStats, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetTagStats the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetTagStats is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AssetTagStats update(AssetTagStats assetTagStats, boolean merge)
-		throws SystemException {
-		boolean isNew = assetTagStats.isNew();
-
-		for (ModelListener<AssetTagStats> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(assetTagStats);
-			}
-			else {
-				listener.onBeforeUpdate(assetTagStats);
-			}
-		}
-
-		assetTagStats = updateImpl(assetTagStats, merge);
-
-		for (ModelListener<AssetTagStats> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(assetTagStats);
-			}
-			else {
-				listener.onAfterUpdate(assetTagStats);
-			}
-		}
-
-		return assetTagStats;
-	}
-
 	public AssetTagStats updateImpl(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats,
 		boolean merge) throws SystemException {
@@ -376,6 +332,11 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 		return assetTagStatsImpl;
 	}
 
+	public AssetTagStats findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AssetTagStats findByPrimaryKey(long tagStatsId)
 		throws NoSuchTagStatsException, SystemException {
 		AssetTagStats assetTagStats = fetchByPrimaryKey(tagStatsId);
@@ -391,6 +352,11 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetTagStats;
+	}
+
+	public AssetTagStats fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AssetTagStats fetchByPrimaryKey(long tagStatsId)

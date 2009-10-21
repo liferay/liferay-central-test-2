@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.Shard;
+
+import java.util.List;
 
 /**
  * <a href="ShardUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,44 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class ShardUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static Shard remove(Shard shard) throws SystemException {
+		return getPersistence().remove(shard);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static Shard update(Shard shard, boolean merge)
+		throws SystemException {
+		return getPersistence().update(shard, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.Shard shard) {
 		getPersistence().cacheResult(shard);
 	}
@@ -44,10 +87,6 @@ public class ShardUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Shard> shards) {
 		getPersistence().cacheResult(shards);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.Shard create(long shardId) {
@@ -58,39 +97,6 @@ public class ShardUtil {
 		throws com.liferay.portal.NoSuchShardException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(shardId);
-	}
-
-	public static com.liferay.portal.model.Shard remove(
-		com.liferay.portal.model.Shard shard)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(shard);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Shard, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.Shard update(
-		com.liferay.portal.model.Shard shard)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(shard);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shard the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shard is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.Shard update(
-		com.liferay.portal.model.Shard shard, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(shard, merge);
 	}
 
 	public static com.liferay.portal.model.Shard updateImpl(
@@ -145,18 +151,6 @@ public class ShardUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Shard> findAll()

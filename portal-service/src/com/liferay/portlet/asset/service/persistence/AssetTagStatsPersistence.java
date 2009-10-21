@@ -24,6 +24,8 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.asset.model.AssetTagStats;
+
 /**
  * <a href="AssetTagStatsPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       AssetTagStatsUtil
  * @generated
  */
-public interface AssetTagStatsPersistence extends BasePersistence {
+public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats> {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetTagStats> assetTagStatses);
 
-	public void clearCache();
-
 	public com.liferay.portlet.asset.model.AssetTagStats create(long tagStatsId);
 
 	public com.liferay.portlet.asset.model.AssetTagStats remove(long tagStatsId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchTagStatsException;
-
-	public com.liferay.portlet.asset.model.AssetTagStats remove(
-		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(AssetTagStats, boolean merge)}.
-	 */
-	public com.liferay.portlet.asset.model.AssetTagStats update(
-		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetTagStats the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetTagStats is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.asset.model.AssetTagStats update(
-		com.liferay.portlet.asset.model.AssetTagStats assetTagStats,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetTagStats updateImpl(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats,
@@ -158,14 +131,6 @@ public interface AssetTagStatsPersistence extends BasePersistence {
 	public com.liferay.portlet.asset.model.AssetTagStats fetchByT_C(
 		long tagId, long classNameId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTagStats> findAll()
 		throws com.liferay.portal.SystemException;

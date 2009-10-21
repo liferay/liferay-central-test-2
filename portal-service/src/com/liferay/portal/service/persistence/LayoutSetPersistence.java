@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.LayoutSet;
 
 /**
  * <a href="LayoutSetPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       LayoutSetUtil
  * @generated
  */
-public interface LayoutSetPersistence extends BasePersistence {
+public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 	public void cacheResult(com.liferay.portal.model.LayoutSet layoutSet);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.LayoutSet> layoutSets);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.LayoutSet create(long layoutSetId);
 
 	public com.liferay.portal.model.LayoutSet remove(long layoutSetId)
 		throws com.liferay.portal.NoSuchLayoutSetException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.LayoutSet remove(
-		com.liferay.portal.model.LayoutSet layoutSet)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(LayoutSet, boolean merge)}.
-	 */
-	public com.liferay.portal.model.LayoutSet update(
-		com.liferay.portal.model.LayoutSet layoutSet)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  layoutSet the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when layoutSet is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.LayoutSet update(
-		com.liferay.portal.model.LayoutSet layoutSet, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutSet updateImpl(
 		com.liferay.portal.model.LayoutSet layoutSet, boolean merge)
@@ -139,14 +111,6 @@ public interface LayoutSetPersistence extends BasePersistence {
 	public com.liferay.portal.model.LayoutSet fetchByG_P(long groupId,
 		boolean privateLayout, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.LayoutSet> findAll()
 		throws com.liferay.portal.SystemException;

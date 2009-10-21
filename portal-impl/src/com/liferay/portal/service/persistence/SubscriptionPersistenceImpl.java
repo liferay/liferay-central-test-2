@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.model.impl.SubscriptionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       SubscriptionUtil
  * @generated
  */
-public class SubscriptionPersistenceImpl extends BasePersistenceImpl
+public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscription>
 	implements SubscriptionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SubscriptionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -182,6 +185,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		return subscription;
 	}
 
+	public Subscription remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public Subscription remove(long subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
 		Session session = null;
@@ -278,58 +286,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		return subscription;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Subscription, boolean merge)}.
-	 */
-	public Subscription update(Subscription subscription)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Subscription subscription) method. Use update(Subscription subscription, boolean merge) instead.");
-		}
-
-		return update(subscription, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  subscription the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when subscription is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Subscription update(Subscription subscription, boolean merge)
-		throws SystemException {
-		boolean isNew = subscription.isNew();
-
-		for (ModelListener<Subscription> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(subscription);
-			}
-			else {
-				listener.onBeforeUpdate(subscription);
-			}
-		}
-
-		subscription = updateImpl(subscription, merge);
-
-		for (ModelListener<Subscription> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(subscription);
-			}
-			else {
-				listener.onAfterUpdate(subscription);
-			}
-		}
-
-		return subscription;
-	}
-
 	public Subscription updateImpl(
 		com.liferay.portal.model.Subscription subscription, boolean merge)
 		throws SystemException {
@@ -414,6 +370,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		return subscriptionImpl;
 	}
 
+	public Subscription findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Subscription findByPrimaryKey(long subscriptionId)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = fetchByPrimaryKey(subscriptionId);
@@ -430,6 +391,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return subscription;
+	}
+
+	public Subscription fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Subscription fetchByPrimaryKey(long subscriptionId)

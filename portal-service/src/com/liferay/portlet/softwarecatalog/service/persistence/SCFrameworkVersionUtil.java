@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
+
+import java.util.List;
 
 /**
  * <a href="SCFrameworkVersionUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,46 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  * @generated
  */
 public class SCFrameworkVersionUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static SCFrameworkVersion remove(
+		SCFrameworkVersion scFrameworkVersion) throws SystemException {
+		return getPersistence().remove(scFrameworkVersion);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static SCFrameworkVersion update(
+		SCFrameworkVersion scFrameworkVersion, boolean merge)
+		throws SystemException {
+		return getPersistence().update(scFrameworkVersion, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion) {
 		getPersistence().cacheResult(scFrameworkVersion);
@@ -45,10 +91,6 @@ public class SCFrameworkVersionUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions) {
 		getPersistence().cacheResult(scFrameworkVersions);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion create(
@@ -61,39 +103,6 @@ public class SCFrameworkVersionUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException {
 		return getPersistence().remove(frameworkVersionId);
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion remove(
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(scFrameworkVersion);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(SCFrameworkVersion, boolean merge)}.
-	 */
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(scFrameworkVersion);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scFrameworkVersion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scFrameworkVersion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(scFrameworkVersion, merge);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateImpl(
@@ -239,18 +248,6 @@ public class SCFrameworkVersionUtil {
 		return getPersistence()
 				   .findByG_A_PrevAndNext(frameworkVersionId, groupId, active,
 			obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findAll()

@@ -24,6 +24,8 @@ package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.shopping.model.ShoppingCategory;
+
 /**
  * <a href="ShoppingCategoryPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       ShoppingCategoryUtil
  * @generated
  */
-public interface ShoppingCategoryPersistence extends BasePersistence {
+public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCategory> {
 	public void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> shoppingCategories);
-
-	public void clearCache();
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory create(
 		long categoryId);
@@ -53,33 +53,6 @@ public interface ShoppingCategoryPersistence extends BasePersistence {
 		long categoryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
-
-	public com.liferay.portlet.shopping.model.ShoppingCategory remove(
-		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(ShoppingCategory, boolean merge)}.
-	 */
-	public com.liferay.portlet.shopping.model.ShoppingCategory update(
-		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingCategory the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingCategory is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.shopping.model.ShoppingCategory update(
-		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
@@ -151,14 +124,6 @@ public interface ShoppingCategoryPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findAll()
 		throws com.liferay.portal.SystemException;

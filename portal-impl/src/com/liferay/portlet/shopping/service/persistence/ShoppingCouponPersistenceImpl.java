@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       ShoppingCouponUtil
  * @generated
  */
-public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
+public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingCoupon>
 	implements ShoppingCouponPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCouponImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -137,6 +140,11 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		shoppingCoupon.setPrimaryKey(couponId);
 
 		return shoppingCoupon;
+	}
+
+	public ShoppingCoupon remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingCoupon remove(long couponId)
@@ -230,58 +238,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		return shoppingCoupon;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ShoppingCoupon, boolean merge)}.
-	 */
-	public ShoppingCoupon update(ShoppingCoupon shoppingCoupon)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ShoppingCoupon shoppingCoupon) method. Use update(ShoppingCoupon shoppingCoupon, boolean merge) instead.");
-		}
-
-		return update(shoppingCoupon, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingCoupon the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingCoupon is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ShoppingCoupon update(ShoppingCoupon shoppingCoupon, boolean merge)
-		throws SystemException {
-		boolean isNew = shoppingCoupon.isNew();
-
-		for (ModelListener<ShoppingCoupon> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingCoupon);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingCoupon);
-			}
-		}
-
-		shoppingCoupon = updateImpl(shoppingCoupon, merge);
-
-		for (ModelListener<ShoppingCoupon> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingCoupon);
-			}
-			else {
-				listener.onAfterUpdate(shoppingCoupon);
-			}
-		}
-
-		return shoppingCoupon;
-	}
-
 	public ShoppingCoupon updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
 		boolean merge) throws SystemException {
@@ -362,6 +318,11 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		return shoppingCouponImpl;
 	}
 
+	public ShoppingCoupon findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ShoppingCoupon findByPrimaryKey(long couponId)
 		throws NoSuchCouponException, SystemException {
 		ShoppingCoupon shoppingCoupon = fetchByPrimaryKey(couponId);
@@ -377,6 +338,11 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shoppingCoupon;
+	}
+
+	public ShoppingCoupon fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingCoupon fetchByPrimaryKey(long couponId)

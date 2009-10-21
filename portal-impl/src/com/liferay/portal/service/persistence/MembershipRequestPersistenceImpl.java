@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchMembershipRequestException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.model.impl.MembershipRequestModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       MembershipRequestUtil
  * @generated
  */
-public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
+public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<MembershipRequest>
 	implements MembershipRequestPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MembershipRequestImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -159,6 +162,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		return membershipRequest;
 	}
 
+	public MembershipRequest remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public MembershipRequest remove(long membershipRequestId)
 		throws NoSuchMembershipRequestException, SystemException {
 		Session session = null;
@@ -247,58 +255,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		return membershipRequest;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(MembershipRequest, boolean merge)}.
-	 */
-	public MembershipRequest update(MembershipRequest membershipRequest)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MembershipRequest membershipRequest) method. Use update(MembershipRequest membershipRequest, boolean merge) instead.");
-		}
-
-		return update(membershipRequest, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  membershipRequest the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when membershipRequest is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MembershipRequest update(MembershipRequest membershipRequest,
-		boolean merge) throws SystemException {
-		boolean isNew = membershipRequest.isNew();
-
-		for (ModelListener<MembershipRequest> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(membershipRequest);
-			}
-			else {
-				listener.onBeforeUpdate(membershipRequest);
-			}
-		}
-
-		membershipRequest = updateImpl(membershipRequest, merge);
-
-		for (ModelListener<MembershipRequest> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(membershipRequest);
-			}
-			else {
-				listener.onAfterUpdate(membershipRequest);
-			}
-		}
-
-		return membershipRequest;
-	}
-
 	public MembershipRequest updateImpl(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
 		boolean merge) throws SystemException {
@@ -354,6 +310,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		return membershipRequestImpl;
 	}
 
+	public MembershipRequest findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MembershipRequest findByPrimaryKey(long membershipRequestId)
 		throws NoSuchMembershipRequestException, SystemException {
 		MembershipRequest membershipRequest = fetchByPrimaryKey(membershipRequestId);
@@ -370,6 +331,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return membershipRequest;
+	}
+
+	public MembershipRequest fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MembershipRequest fetchByPrimaryKey(long membershipRequestId)

@@ -24,6 +24,8 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.journal.model.JournalArticle;
+
 /**
  * <a href="JournalArticlePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       JournalArticleUtil
  * @generated
  */
-public interface JournalArticlePersistence extends BasePersistence {
+public interface JournalArticlePersistence extends BasePersistence<JournalArticle> {
 	public void cacheResult(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalArticle> journalArticles);
 
-	public void clearCache();
-
 	public com.liferay.portlet.journal.model.JournalArticle create(long id);
 
 	public com.liferay.portlet.journal.model.JournalArticle remove(long id)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
-
-	public com.liferay.portlet.journal.model.JournalArticle remove(
-		com.liferay.portlet.journal.model.JournalArticle journalArticle)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(JournalArticle, boolean merge)}.
-	 */
-	public com.liferay.portlet.journal.model.JournalArticle update(
-		com.liferay.portlet.journal.model.JournalArticle journalArticle)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalArticle the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalArticle is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.journal.model.JournalArticle update(
-		com.liferay.portlet.journal.model.JournalArticle journalArticle,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateImpl(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle,
@@ -447,14 +420,6 @@ public interface JournalArticlePersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findAll()
 		throws com.liferay.portal.SystemException;

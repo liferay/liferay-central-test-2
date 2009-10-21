@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.announcements.model.AnnouncementsFlag;
+
+import java.util.List;
 
 /**
  * <a href="AnnouncementsFlagUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,46 @@ package com.liferay.portlet.announcements.service.persistence;
  * @generated
  */
 public class AnnouncementsFlagUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static AnnouncementsFlag remove(AnnouncementsFlag announcementsFlag)
+		throws SystemException {
+		return getPersistence().remove(announcementsFlag);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static AnnouncementsFlag update(
+		AnnouncementsFlag announcementsFlag, boolean merge)
+		throws SystemException {
+		return getPersistence().update(announcementsFlag, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag) {
 		getPersistence().cacheResult(announcementsFlag);
@@ -45,10 +91,6 @@ public class AnnouncementsFlagUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> announcementsFlags) {
 		getPersistence().cacheResult(announcementsFlags);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag create(
@@ -61,39 +103,6 @@ public class AnnouncementsFlagUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		return getPersistence().remove(flagId);
-	}
-
-	public static com.liferay.portlet.announcements.model.AnnouncementsFlag remove(
-		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(announcementsFlag);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(AnnouncementsFlag, boolean merge)}.
-	 */
-	public static com.liferay.portlet.announcements.model.AnnouncementsFlag update(
-		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(announcementsFlag);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  announcementsFlag the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when announcementsFlag is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.announcements.model.AnnouncementsFlag update(
-		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(announcementsFlag, merge);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag updateImpl(
@@ -172,18 +181,6 @@ public class AnnouncementsFlagUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .fetchByU_E_V(userId, entryId, value, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll()

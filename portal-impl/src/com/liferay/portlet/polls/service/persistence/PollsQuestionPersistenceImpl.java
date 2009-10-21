@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       PollsQuestionUtil
  * @generated
  */
-public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
+public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuestion>
 	implements PollsQuestionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PollsQuestionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -161,6 +164,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		pollsQuestion.setUuid(uuid);
 
 		return pollsQuestion;
+	}
+
+	public PollsQuestion remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public PollsQuestion remove(long questionId)
@@ -257,58 +265,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		return pollsQuestion;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(PollsQuestion, boolean merge)}.
-	 */
-	public PollsQuestion update(PollsQuestion pollsQuestion)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(PollsQuestion pollsQuestion) method. Use update(PollsQuestion pollsQuestion, boolean merge) instead.");
-		}
-
-		return update(pollsQuestion, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  pollsQuestion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when pollsQuestion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public PollsQuestion update(PollsQuestion pollsQuestion, boolean merge)
-		throws SystemException {
-		boolean isNew = pollsQuestion.isNew();
-
-		for (ModelListener<PollsQuestion> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(pollsQuestion);
-			}
-			else {
-				listener.onBeforeUpdate(pollsQuestion);
-			}
-		}
-
-		pollsQuestion = updateImpl(pollsQuestion, merge);
-
-		for (ModelListener<PollsQuestion> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(pollsQuestion);
-			}
-			else {
-				listener.onAfterUpdate(pollsQuestion);
-			}
-		}
-
-		return pollsQuestion;
-	}
-
 	public PollsQuestion updateImpl(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
 		boolean merge) throws SystemException {
@@ -397,6 +353,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		return pollsQuestionImpl;
 	}
 
+	public PollsQuestion findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public PollsQuestion findByPrimaryKey(long questionId)
 		throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = fetchByPrimaryKey(questionId);
@@ -412,6 +373,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return pollsQuestion;
+	}
+
+	public PollsQuestion fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public PollsQuestion fetchByPrimaryKey(long questionId)

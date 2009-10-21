@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.impl.JournalArticleImageImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImageModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       JournalArticleImageUtil
  * @generated
  */
-public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
+public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<JournalArticleImage>
 	implements JournalArticleImagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleImageImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -199,6 +202,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		return journalArticleImage;
 	}
 
+	public JournalArticleImage remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public JournalArticleImage remove(long articleImageId)
 		throws NoSuchArticleImageException, SystemException {
 		Session session = null;
@@ -299,58 +307,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey());
-
-		return journalArticleImage;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(JournalArticleImage, boolean merge)}.
-	 */
-	public JournalArticleImage update(JournalArticleImage journalArticleImage)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(JournalArticleImage journalArticleImage) method. Use update(JournalArticleImage journalArticleImage, boolean merge) instead.");
-		}
-
-		return update(journalArticleImage, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalArticleImage the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalArticleImage is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public JournalArticleImage update(JournalArticleImage journalArticleImage,
-		boolean merge) throws SystemException {
-		boolean isNew = journalArticleImage.isNew();
-
-		for (ModelListener<JournalArticleImage> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticleImage);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticleImage);
-			}
-		}
-
-		journalArticleImage = updateImpl(journalArticleImage, merge);
-
-		for (ModelListener<JournalArticleImage> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticleImage);
-			}
-			else {
-				listener.onAfterUpdate(journalArticleImage);
-			}
-		}
 
 		return journalArticleImage;
 	}
@@ -464,6 +420,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		return journalArticleImageImpl;
 	}
 
+	public JournalArticleImage findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public JournalArticleImage findByPrimaryKey(long articleImageId)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = fetchByPrimaryKey(articleImageId);
@@ -480,6 +441,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalArticleImage;
+	}
+
+	public JournalArticleImage fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public JournalArticleImage fetchByPrimaryKey(long articleImageId)

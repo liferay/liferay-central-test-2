@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.ResourcePermissionImpl;
 import com.liferay.portal.model.impl.ResourcePermissionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       ResourcePermissionUtil
  * @generated
  */
-public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
+public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<ResourcePermission>
 	implements ResourcePermissionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ResourcePermissionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -201,6 +204,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 		return resourcePermission;
 	}
 
+	public ResourcePermission remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public ResourcePermission remove(long resourcePermissionId)
 		throws NoSuchResourcePermissionException, SystemException {
 		Session session = null;
@@ -302,58 +310,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 		return resourcePermission;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ResourcePermission, boolean merge)}.
-	 */
-	public ResourcePermission update(ResourcePermission resourcePermission)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ResourcePermission resourcePermission) method. Use update(ResourcePermission resourcePermission, boolean merge) instead.");
-		}
-
-		return update(resourcePermission, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  resourcePermission the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when resourcePermission is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ResourcePermission update(ResourcePermission resourcePermission,
-		boolean merge) throws SystemException {
-		boolean isNew = resourcePermission.isNew();
-
-		for (ModelListener<ResourcePermission> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(resourcePermission);
-			}
-			else {
-				listener.onBeforeUpdate(resourcePermission);
-			}
-		}
-
-		resourcePermission = updateImpl(resourcePermission, merge);
-
-		for (ModelListener<ResourcePermission> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(resourcePermission);
-			}
-			else {
-				listener.onAfterUpdate(resourcePermission);
-			}
-		}
-
-		return resourcePermission;
-	}
-
 	public ResourcePermission updateImpl(
 		com.liferay.portal.model.ResourcePermission resourcePermission,
 		boolean merge) throws SystemException {
@@ -450,6 +406,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 		return resourcePermissionImpl;
 	}
 
+	public ResourcePermission findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ResourcePermission findByPrimaryKey(long resourcePermissionId)
 		throws NoSuchResourcePermissionException, SystemException {
 		ResourcePermission resourcePermission = fetchByPrimaryKey(resourcePermissionId);
@@ -466,6 +427,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return resourcePermission;
+	}
+
+	public ResourcePermission fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ResourcePermission fetchByPrimaryKey(long resourcePermissionId)

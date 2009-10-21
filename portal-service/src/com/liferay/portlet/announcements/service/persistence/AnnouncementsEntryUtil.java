@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+
+import java.util.List;
 
 /**
  * <a href="AnnouncementsEntryUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,46 @@ package com.liferay.portlet.announcements.service.persistence;
  * @generated
  */
 public class AnnouncementsEntryUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static AnnouncementsEntry remove(
+		AnnouncementsEntry announcementsEntry) throws SystemException {
+		return getPersistence().remove(announcementsEntry);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static AnnouncementsEntry update(
+		AnnouncementsEntry announcementsEntry, boolean merge)
+		throws SystemException {
+		return getPersistence().update(announcementsEntry, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry) {
 		getPersistence().cacheResult(announcementsEntry);
@@ -45,10 +91,6 @@ public class AnnouncementsEntryUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> announcementsEntries) {
 		getPersistence().cacheResult(announcementsEntries);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry create(
@@ -61,39 +103,6 @@ public class AnnouncementsEntryUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
 		return getPersistence().remove(entryId);
-	}
-
-	public static com.liferay.portlet.announcements.model.AnnouncementsEntry remove(
-		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(announcementsEntry);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(AnnouncementsEntry, boolean merge)}.
-	 */
-	public static com.liferay.portlet.announcements.model.AnnouncementsEntry update(
-		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(announcementsEntry);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  announcementsEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when announcementsEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.announcements.model.AnnouncementsEntry update(
-		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(announcementsEntry, merge);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry updateImpl(
@@ -287,18 +296,6 @@ public class AnnouncementsEntryUtil {
 		return getPersistence()
 				   .findByC_C_A_PrevAndNext(entryId, classNameId, classPK,
 			alert, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll()

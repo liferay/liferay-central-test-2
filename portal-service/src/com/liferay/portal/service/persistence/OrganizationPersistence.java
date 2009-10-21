@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Organization;
 
 /**
  * <a href="OrganizationPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       OrganizationUtil
  * @generated
  */
-public interface OrganizationPersistence extends BasePersistence {
+public interface OrganizationPersistence extends BasePersistence<Organization> {
 	public void cacheResult(com.liferay.portal.model.Organization organization);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Organization> organizations);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Organization create(long organizationId);
 
 	public com.liferay.portal.model.Organization remove(long organizationId)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Organization remove(
-		com.liferay.portal.model.Organization organization)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Organization, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Organization update(
-		com.liferay.portal.model.Organization organization)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  organization the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when organization is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Organization update(
-		com.liferay.portal.model.Organization organization, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization updateImpl(
 		com.liferay.portal.model.Organization organization, boolean merge)
@@ -187,14 +159,6 @@ public interface OrganizationPersistence extends BasePersistence {
 	public com.liferay.portal.model.Organization fetchByC_N(long companyId,
 		java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> findAll()
 		throws com.liferay.portal.SystemException;

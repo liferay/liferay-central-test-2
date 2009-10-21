@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.UserTracker;
+
+import java.util.List;
 
 /**
  * <a href="UserTrackerUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,45 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class UserTrackerUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static UserTracker remove(UserTracker userTracker)
+		throws SystemException {
+		return getPersistence().remove(userTracker);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static UserTracker update(UserTracker userTracker, boolean merge)
+		throws SystemException {
+		return getPersistence().update(userTracker, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.UserTracker userTracker) {
 		getPersistence().cacheResult(userTracker);
@@ -45,10 +89,6 @@ public class UserTrackerUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.UserTracker> userTrackers) {
 		getPersistence().cacheResult(userTrackers);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.UserTracker create(
@@ -61,39 +101,6 @@ public class UserTrackerUtil {
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(userTrackerId);
-	}
-
-	public static com.liferay.portal.model.UserTracker remove(
-		com.liferay.portal.model.UserTracker userTracker)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(userTracker);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(UserTracker, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.UserTracker update(
-		com.liferay.portal.model.UserTracker userTracker)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(userTracker);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userTracker the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userTracker is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.UserTracker update(
-		com.liferay.portal.model.UserTracker userTracker, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(userTracker, merge);
 	}
 
 	public static com.liferay.portal.model.UserTracker updateImpl(
@@ -237,18 +244,6 @@ public class UserTrackerUtil {
 			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findBySessionId_PrevAndNext(userTrackerId, sessionId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTracker> findAll()

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.impl.ExpandoRowImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       ExpandoRowUtil
  * @generated
  */
-public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
+public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 	implements ExpandoRowPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoRowImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -135,6 +138,11 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		expandoRow.setPrimaryKey(rowId);
 
 		return expandoRow;
+	}
+
+	public ExpandoRow remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ExpandoRow remove(long rowId)
@@ -229,57 +237,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		return expandoRow;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ExpandoRow, boolean merge)}.
-	 */
-	public ExpandoRow update(ExpandoRow expandoRow) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ExpandoRow expandoRow) method. Use update(ExpandoRow expandoRow, boolean merge) instead.");
-		}
-
-		return update(expandoRow, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  expandoRow the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when expandoRow is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ExpandoRow update(ExpandoRow expandoRow, boolean merge)
-		throws SystemException {
-		boolean isNew = expandoRow.isNew();
-
-		for (ModelListener<ExpandoRow> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(expandoRow);
-			}
-			else {
-				listener.onBeforeUpdate(expandoRow);
-			}
-		}
-
-		expandoRow = updateImpl(expandoRow, merge);
-
-		for (ModelListener<ExpandoRow> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(expandoRow);
-			}
-			else {
-				listener.onAfterUpdate(expandoRow);
-			}
-		}
-
-		return expandoRow;
-	}
-
 	public ExpandoRow updateImpl(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow, boolean merge)
 		throws SystemException {
@@ -351,6 +308,11 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		return expandoRowImpl;
 	}
 
+	public ExpandoRow findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ExpandoRow findByPrimaryKey(long rowId)
 		throws NoSuchRowException, SystemException {
 		ExpandoRow expandoRow = fetchByPrimaryKey(rowId);
@@ -365,6 +327,11 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return expandoRow;
+	}
+
+	public ExpandoRow fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ExpandoRow fetchByPrimaryKey(long rowId) throws SystemException {

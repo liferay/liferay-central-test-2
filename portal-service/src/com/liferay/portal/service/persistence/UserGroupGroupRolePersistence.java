@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.UserGroupGroupRole;
 
 /**
  * <a href="UserGroupGroupRolePersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,14 +37,12 @@ package com.liferay.portal.service.persistence;
  * @see       UserGroupGroupRoleUtil
  * @generated
  */
-public interface UserGroupGroupRolePersistence extends BasePersistence {
+public interface UserGroupGroupRolePersistence extends BasePersistence<UserGroupGroupRole> {
 	public void cacheResult(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.UserGroupGroupRole> userGroupGroupRoles);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.UserGroupGroupRole create(
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK userGroupGroupRolePK);
@@ -52,33 +51,6 @@ public interface UserGroupGroupRolePersistence extends BasePersistence {
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK userGroupGroupRolePK)
 		throws com.liferay.portal.NoSuchUserGroupGroupRoleException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.UserGroupGroupRole remove(
-		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(UserGroupGroupRole, boolean merge)}.
-	 */
-	public com.liferay.portal.model.UserGroupGroupRole update(
-		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userGroupGroupRole the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userGroupGroupRole is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.UserGroupGroupRole update(
-		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroupGroupRole updateImpl(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole,
@@ -239,14 +211,6 @@ public interface UserGroupGroupRolePersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchUserGroupGroupRoleException,
 			com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroupGroupRole> findAll()
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.OrgLabor;
 
 /**
  * <a href="OrgLaborPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       OrgLaborUtil
  * @generated
  */
-public interface OrgLaborPersistence extends BasePersistence {
+public interface OrgLaborPersistence extends BasePersistence<OrgLabor> {
 	public void cacheResult(com.liferay.portal.model.OrgLabor orgLabor);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.OrgLabor create(long orgLaborId);
 
 	public com.liferay.portal.model.OrgLabor remove(long orgLaborId)
 		throws com.liferay.portal.NoSuchOrgLaborException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.OrgLabor remove(
-		com.liferay.portal.model.OrgLabor orgLabor)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(OrgLabor, boolean merge)}.
-	 */
-	public com.liferay.portal.model.OrgLabor update(
-		com.liferay.portal.model.OrgLabor orgLabor)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  orgLabor the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when orgLabor is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.OrgLabor update(
-		com.liferay.portal.model.OrgLabor orgLabor, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor updateImpl(
 		com.liferay.portal.model.OrgLabor orgLabor, boolean merge)
@@ -117,14 +89,6 @@ public interface OrgLaborPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchOrgLaborException,
 			com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.OrgLabor> findAll()
 		throws com.liferay.portal.SystemException;

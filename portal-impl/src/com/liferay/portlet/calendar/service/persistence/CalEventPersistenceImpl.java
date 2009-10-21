@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.calendar.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       CalEventUtil
  * @generated
  */
-public class CalEventPersistenceImpl extends BasePersistenceImpl
+public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	implements CalEventPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = CalEventImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -220,6 +223,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		return calEvent;
 	}
 
+	public CalEvent remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public CalEvent remove(long eventId)
 		throws NoSuchEventException, SystemException {
 		Session session = null;
@@ -307,57 +315,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventImpl.class, calEvent.getPrimaryKey());
-
-		return calEvent;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(CalEvent, boolean merge)}.
-	 */
-	public CalEvent update(CalEvent calEvent) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(CalEvent calEvent) method. Use update(CalEvent calEvent, boolean merge) instead.");
-		}
-
-		return update(calEvent, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  calEvent the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when calEvent is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public CalEvent update(CalEvent calEvent, boolean merge)
-		throws SystemException {
-		boolean isNew = calEvent.isNew();
-
-		for (ModelListener<CalEvent> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(calEvent);
-			}
-			else {
-				listener.onBeforeUpdate(calEvent);
-			}
-		}
-
-		calEvent = updateImpl(calEvent, merge);
-
-		for (ModelListener<CalEvent> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(calEvent);
-			}
-			else {
-				listener.onAfterUpdate(calEvent);
-			}
-		}
 
 		return calEvent;
 	}
@@ -457,6 +414,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		return calEventImpl;
 	}
 
+	public CalEvent findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public CalEvent findByPrimaryKey(long eventId)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = fetchByPrimaryKey(eventId);
@@ -471,6 +433,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return calEvent;
+	}
+
+	public CalEvent fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public CalEvent fetchByPrimaryKey(long eventId) throws SystemException {

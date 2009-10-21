@@ -24,6 +24,8 @@ package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.tasks.model.TasksProposal;
+
 /**
  * <a href="TasksProposalPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       TasksProposalUtil
  * @generated
  */
-public interface TasksProposalPersistence extends BasePersistence {
+public interface TasksProposalPersistence extends BasePersistence<TasksProposal> {
 	public void cacheResult(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.tasks.model.TasksProposal> tasksProposals);
 
-	public void clearCache();
-
 	public com.liferay.portlet.tasks.model.TasksProposal create(long proposalId);
 
 	public com.liferay.portlet.tasks.model.TasksProposal remove(long proposalId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal remove(
-		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(TasksProposal, boolean merge)}.
-	 */
-	public com.liferay.portlet.tasks.model.TasksProposal update(
-		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  tasksProposal the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when tasksProposal is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.tasks.model.TasksProposal update(
-		com.liferay.portlet.tasks.model.TasksProposal tasksProposal,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal updateImpl(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal,
@@ -161,14 +134,6 @@ public interface TasksProposalPersistence extends BasePersistence {
 	public com.liferay.portlet.tasks.model.TasksProposal fetchByC_C(
 		long classNameId, java.lang.String classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findAll()
 		throws com.liferay.portal.SystemException;

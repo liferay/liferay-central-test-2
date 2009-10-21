@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchContactException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.ContactModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       ContactUtil
  * @generated
  */
-public class ContactPersistenceImpl extends BasePersistenceImpl
+public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	implements ContactPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ContactImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -119,6 +122,11 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		contact.setPrimaryKey(contactId);
 
 		return contact;
+	}
+
+	public Contact remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Contact remove(long contactId)
@@ -204,57 +212,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		return contact;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Contact, boolean merge)}.
-	 */
-	public Contact update(Contact contact) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Contact contact) method. Use update(Contact contact, boolean merge) instead.");
-		}
-
-		return update(contact, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  contact the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when contact is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Contact update(Contact contact, boolean merge)
-		throws SystemException {
-		boolean isNew = contact.isNew();
-
-		for (ModelListener<Contact> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(contact);
-			}
-			else {
-				listener.onBeforeUpdate(contact);
-			}
-		}
-
-		contact = updateImpl(contact, merge);
-
-		for (ModelListener<Contact> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(contact);
-			}
-			else {
-				listener.onAfterUpdate(contact);
-			}
-		}
-
-		return contact;
-	}
-
 	public Contact updateImpl(com.liferay.portal.model.Contact contact,
 		boolean merge) throws SystemException {
 		contact = toUnwrappedModel(contact);
@@ -327,6 +284,11 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		return contactImpl;
 	}
 
+	public Contact findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Contact findByPrimaryKey(long contactId)
 		throws NoSuchContactException, SystemException {
 		Contact contact = fetchByPrimaryKey(contactId);
@@ -342,6 +304,11 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return contact;
+	}
+
+	public Contact fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Contact fetchByPrimaryKey(long contactId) throws SystemException {

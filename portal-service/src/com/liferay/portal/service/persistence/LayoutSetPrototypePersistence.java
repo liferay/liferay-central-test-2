@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.LayoutSetPrototype;
 
 /**
  * <a href="LayoutSetPrototypePersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,14 +37,12 @@ package com.liferay.portal.service.persistence;
  * @see       LayoutSetPrototypeUtil
  * @generated
  */
-public interface LayoutSetPrototypePersistence extends BasePersistence {
+public interface LayoutSetPrototypePersistence extends BasePersistence<LayoutSetPrototype> {
 	public void cacheResult(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.LayoutSetPrototype> layoutSetPrototypes);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.LayoutSetPrototype create(
 		long layoutSetPrototypeId);
@@ -52,33 +51,6 @@ public interface LayoutSetPrototypePersistence extends BasePersistence {
 		long layoutSetPrototypeId)
 		throws com.liferay.portal.NoSuchLayoutSetPrototypeException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.LayoutSetPrototype remove(
-		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(LayoutSetPrototype, boolean merge)}.
-	 */
-	public com.liferay.portal.model.LayoutSetPrototype update(
-		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  layoutSetPrototype the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when layoutSetPrototype is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.LayoutSetPrototype update(
-		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutSetPrototype updateImpl(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype,
@@ -150,14 +122,6 @@ public interface LayoutSetPrototypePersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutSetPrototypeException,
 			com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> findAll()
 		throws com.liferay.portal.SystemException;

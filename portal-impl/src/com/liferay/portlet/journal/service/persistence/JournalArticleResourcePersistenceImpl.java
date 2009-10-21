@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       JournalArticleResourceUtil
  * @generated
  */
-public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
+public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<JournalArticleResource>
 	implements JournalArticleResourcePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleResourceImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -142,6 +145,11 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		journalArticleResource.setPrimaryKey(resourcePrimKey);
 
 		return journalArticleResource;
+	}
+
+	public JournalArticleResource remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public JournalArticleResource remove(long resourcePrimKey)
@@ -244,60 +252,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		return journalArticleResource;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(JournalArticleResource, boolean merge)}.
-	 */
-	public JournalArticleResource update(
-		JournalArticleResource journalArticleResource)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(JournalArticleResource journalArticleResource) method. Use update(JournalArticleResource journalArticleResource, boolean merge) instead.");
-		}
-
-		return update(journalArticleResource, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalArticleResource the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalArticleResource is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public JournalArticleResource update(
-		JournalArticleResource journalArticleResource, boolean merge)
-		throws SystemException {
-		boolean isNew = journalArticleResource.isNew();
-
-		for (ModelListener<JournalArticleResource> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticleResource);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticleResource);
-			}
-		}
-
-		journalArticleResource = updateImpl(journalArticleResource, merge);
-
-		for (ModelListener<JournalArticleResource> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticleResource);
-			}
-			else {
-				listener.onAfterUpdate(journalArticleResource);
-			}
-		}
-
-		return journalArticleResource;
-	}
-
 	public JournalArticleResource updateImpl(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
 		boolean merge) throws SystemException {
@@ -374,6 +328,11 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		return journalArticleResourceImpl;
 	}
 
+	public JournalArticleResource findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public JournalArticleResource findByPrimaryKey(long resourcePrimKey)
 		throws NoSuchArticleResourceException, SystemException {
 		JournalArticleResource journalArticleResource = fetchByPrimaryKey(resourcePrimKey);
@@ -391,6 +350,11 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalArticleResource;
+	}
+
+	public JournalArticleResource fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public JournalArticleResource fetchByPrimaryKey(long resourcePrimKey)

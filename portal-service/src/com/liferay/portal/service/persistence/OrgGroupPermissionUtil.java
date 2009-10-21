@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.OrgGroupPermission;
+
+import java.util.List;
 
 /**
  * <a href="OrgGroupPermissionUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,46 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class OrgGroupPermissionUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static OrgGroupPermission remove(
+		OrgGroupPermission orgGroupPermission) throws SystemException {
+		return getPersistence().remove(orgGroupPermission);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static OrgGroupPermission update(
+		OrgGroupPermission orgGroupPermission, boolean merge)
+		throws SystemException {
+		return getPersistence().update(orgGroupPermission, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission) {
 		getPersistence().cacheResult(orgGroupPermission);
@@ -45,10 +90,6 @@ public class OrgGroupPermissionUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.OrgGroupPermission> orgGroupPermissions) {
 		getPersistence().cacheResult(orgGroupPermissions);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission create(
@@ -61,39 +102,6 @@ public class OrgGroupPermissionUtil {
 		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(orgGroupPermissionPK);
-	}
-
-	public static com.liferay.portal.model.OrgGroupPermission remove(
-		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(orgGroupPermission);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(OrgGroupPermission, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.OrgGroupPermission update(
-		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(orgGroupPermission);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  orgGroupPermission the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when orgGroupPermission is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.OrgGroupPermission update(
-		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(orgGroupPermission, merge);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission updateImpl(
@@ -196,18 +204,6 @@ public class OrgGroupPermissionUtil {
 		return getPersistence()
 				   .findByPermissionId_PrevAndNext(orgGroupPermissionPK,
 			permissionId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findAll()

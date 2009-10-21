@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserTrackerException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.UserTrackerImpl;
 import com.liferay.portal.model.impl.UserTrackerModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       UserTrackerUtil
  * @generated
  */
-public class UserTrackerPersistenceImpl extends BasePersistenceImpl
+public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	implements UserTrackerPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserTrackerImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -149,6 +152,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		userTracker.setPrimaryKey(userTrackerId);
 
 		return userTracker;
+	}
+
+	public UserTracker remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public UserTracker remove(long userTrackerId)
@@ -237,58 +245,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		return userTracker;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(UserTracker, boolean merge)}.
-	 */
-	public UserTracker update(UserTracker userTracker)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(UserTracker userTracker) method. Use update(UserTracker userTracker, boolean merge) instead.");
-		}
-
-		return update(userTracker, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userTracker the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userTracker is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public UserTracker update(UserTracker userTracker, boolean merge)
-		throws SystemException {
-		boolean isNew = userTracker.isNew();
-
-		for (ModelListener<UserTracker> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(userTracker);
-			}
-			else {
-				listener.onBeforeUpdate(userTracker);
-			}
-		}
-
-		userTracker = updateImpl(userTracker, merge);
-
-		for (ModelListener<UserTracker> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(userTracker);
-			}
-			else {
-				listener.onAfterUpdate(userTracker);
-			}
-		}
-
-		return userTracker;
-	}
-
 	public UserTracker updateImpl(
 		com.liferay.portal.model.UserTracker userTracker, boolean merge)
 		throws SystemException {
@@ -340,6 +296,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		return userTrackerImpl;
 	}
 
+	public UserTracker findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public UserTracker findByPrimaryKey(long userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = fetchByPrimaryKey(userTrackerId);
@@ -355,6 +316,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return userTracker;
+	}
+
+	public UserTracker fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public UserTracker fetchByPrimaryKey(long userTrackerId)

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.impl.ExpandoTableImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       ExpandoTableUtil
  * @generated
  */
-public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
+public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTable>
 	implements ExpandoTablePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoTableImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -147,6 +150,11 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		expandoTable.setPrimaryKey(tableId);
 
 		return expandoTable;
+	}
+
+	public ExpandoTable remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ExpandoTable remove(long tableId)
@@ -244,58 +252,6 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		return expandoTable;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ExpandoTable, boolean merge)}.
-	 */
-	public ExpandoTable update(ExpandoTable expandoTable)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ExpandoTable expandoTable) method. Use update(ExpandoTable expandoTable, boolean merge) instead.");
-		}
-
-		return update(expandoTable, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  expandoTable the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when expandoTable is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ExpandoTable update(ExpandoTable expandoTable, boolean merge)
-		throws SystemException {
-		boolean isNew = expandoTable.isNew();
-
-		for (ModelListener<ExpandoTable> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(expandoTable);
-			}
-			else {
-				listener.onBeforeUpdate(expandoTable);
-			}
-		}
-
-		expandoTable = updateImpl(expandoTable, merge);
-
-		for (ModelListener<ExpandoTable> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(expandoTable);
-			}
-			else {
-				listener.onAfterUpdate(expandoTable);
-			}
-		}
-
-		return expandoTable;
-	}
-
 	public ExpandoTable updateImpl(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
 		boolean merge) throws SystemException {
@@ -375,6 +331,11 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		return expandoTableImpl;
 	}
 
+	public ExpandoTable findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ExpandoTable findByPrimaryKey(long tableId)
 		throws NoSuchTableException, SystemException {
 		ExpandoTable expandoTable = fetchByPrimaryKey(tableId);
@@ -390,6 +351,11 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return expandoTable;
+	}
+
+	public ExpandoTable fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ExpandoTable fetchByPrimaryKey(long tableId)

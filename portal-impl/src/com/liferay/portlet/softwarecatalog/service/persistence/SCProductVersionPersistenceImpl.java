@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -57,6 +58,8 @@ import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -77,7 +80,7 @@ import java.util.Set;
  * @see       SCProductVersionUtil
  * @generated
  */
-public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
+public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProductVersion>
 	implements SCProductVersionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCProductVersionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -149,6 +152,11 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		scProductVersion.setPrimaryKey(productVersionId);
 
 		return scProductVersion;
+	}
+
+	public SCProductVersion remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public SCProductVersion remove(long productVersionId)
@@ -256,58 +264,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		return scProductVersion;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(SCProductVersion, boolean merge)}.
-	 */
-	public SCProductVersion update(SCProductVersion scProductVersion)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(SCProductVersion scProductVersion) method. Use update(SCProductVersion scProductVersion, boolean merge) instead.");
-		}
-
-		return update(scProductVersion, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scProductVersion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scProductVersion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public SCProductVersion update(SCProductVersion scProductVersion,
-		boolean merge) throws SystemException {
-		boolean isNew = scProductVersion.isNew();
-
-		for (ModelListener<SCProductVersion> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductVersion);
-			}
-			else {
-				listener.onBeforeUpdate(scProductVersion);
-			}
-		}
-
-		scProductVersion = updateImpl(scProductVersion, merge);
-
-		for (ModelListener<SCProductVersion> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(scProductVersion);
-			}
-			else {
-				listener.onAfterUpdate(scProductVersion);
-			}
-		}
-
-		return scProductVersion;
-	}
-
 	public SCProductVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean merge) throws SystemException {
@@ -386,6 +342,11 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		return scProductVersionImpl;
 	}
 
+	public SCProductVersion findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public SCProductVersion findByPrimaryKey(long productVersionId)
 		throws NoSuchProductVersionException, SystemException {
 		SCProductVersion scProductVersion = fetchByPrimaryKey(productVersionId);
@@ -402,6 +363,11 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return scProductVersion;
+	}
+
+	public SCProductVersion fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public SCProductVersion fetchByPrimaryKey(long productVersionId)

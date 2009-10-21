@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.messageboards.model.MBDiscussion;
+
 /**
  * <a href="MBDiscussionPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       MBDiscussionUtil
  * @generated
  */
-public interface MBDiscussionPersistence extends BasePersistence {
+public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> mbDiscussions);
-
-	public void clearCache();
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion create(
 		long discussionId);
@@ -53,33 +53,6 @@ public interface MBDiscussionPersistence extends BasePersistence {
 		long discussionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException;
-
-	public com.liferay.portlet.messageboards.model.MBDiscussion remove(
-		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(MBDiscussion, boolean merge)}.
-	 */
-	public com.liferay.portlet.messageboards.model.MBDiscussion update(
-		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbDiscussion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbDiscussion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.messageboards.model.MBDiscussion update(
-		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion updateImpl(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
@@ -145,14 +118,6 @@ public interface MBDiscussionPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBDiscussion fetchByC_C(
 		long classNameId, long classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findAll()
 		throws com.liferay.portal.SystemException;

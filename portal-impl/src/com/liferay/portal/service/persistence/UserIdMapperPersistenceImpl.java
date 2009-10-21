@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.UserIdMapperImpl;
 import com.liferay.portal.model.impl.UserIdMapperModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       UserIdMapperUtil
  * @generated
  */
-public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
+public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMapper>
 	implements UserIdMapperPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserIdMapperImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -151,6 +154,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		userIdMapper.setPrimaryKey(userIdMapperId);
 
 		return userIdMapper;
+	}
+
+	public UserIdMapper remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public UserIdMapper remove(long userIdMapperId)
@@ -251,58 +259,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
 			UserIdMapperImpl.class, userIdMapper.getPrimaryKey());
-
-		return userIdMapper;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(UserIdMapper, boolean merge)}.
-	 */
-	public UserIdMapper update(UserIdMapper userIdMapper)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(UserIdMapper userIdMapper) method. Use update(UserIdMapper userIdMapper, boolean merge) instead.");
-		}
-
-		return update(userIdMapper, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userIdMapper the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userIdMapper is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public UserIdMapper update(UserIdMapper userIdMapper, boolean merge)
-		throws SystemException {
-		boolean isNew = userIdMapper.isNew();
-
-		for (ModelListener<UserIdMapper> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(userIdMapper);
-			}
-			else {
-				listener.onBeforeUpdate(userIdMapper);
-			}
-		}
-
-		userIdMapper = updateImpl(userIdMapper, merge);
-
-		for (ModelListener<UserIdMapper> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(userIdMapper);
-			}
-			else {
-				listener.onAfterUpdate(userIdMapper);
-			}
-		}
 
 		return userIdMapper;
 	}
@@ -409,6 +365,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		return userIdMapperImpl;
 	}
 
+	public UserIdMapper findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public UserIdMapper findByPrimaryKey(long userIdMapperId)
 		throws NoSuchUserIdMapperException, SystemException {
 		UserIdMapper userIdMapper = fetchByPrimaryKey(userIdMapperId);
@@ -425,6 +386,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return userIdMapper;
+	}
+
+	public UserIdMapper fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public UserIdMapper fetchByPrimaryKey(long userIdMapperId)

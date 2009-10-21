@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       IGFolderUtil
  * @generated
  */
-public class IGFolderPersistenceImpl extends BasePersistenceImpl
+public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	implements IGFolderPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = IGFolderImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -210,6 +213,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		return igFolder;
 	}
 
+	public IGFolder remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public IGFolder remove(long folderId)
 		throws NoSuchFolderException, SystemException {
 		Session session = null;
@@ -305,57 +313,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
 			IGFolderImpl.class, igFolder.getPrimaryKey());
-
-		return igFolder;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(IGFolder, boolean merge)}.
-	 */
-	public IGFolder update(IGFolder igFolder) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(IGFolder igFolder) method. Use update(IGFolder igFolder, boolean merge) instead.");
-		}
-
-		return update(igFolder, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  igFolder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when igFolder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public IGFolder update(IGFolder igFolder, boolean merge)
-		throws SystemException {
-		boolean isNew = igFolder.isNew();
-
-		for (ModelListener<IGFolder> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(igFolder);
-			}
-			else {
-				listener.onBeforeUpdate(igFolder);
-			}
-		}
-
-		igFolder = updateImpl(igFolder, merge);
-
-		for (ModelListener<IGFolder> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(igFolder);
-			}
-			else {
-				listener.onAfterUpdate(igFolder);
-			}
-		}
 
 		return igFolder;
 	}
@@ -471,6 +428,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		return igFolderImpl;
 	}
 
+	public IGFolder findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public IGFolder findByPrimaryKey(long folderId)
 		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = fetchByPrimaryKey(folderId);
@@ -486,6 +448,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return igFolder;
+	}
+
+	public IGFolder fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public IGFolder fetchByPrimaryKey(long folderId) throws SystemException {

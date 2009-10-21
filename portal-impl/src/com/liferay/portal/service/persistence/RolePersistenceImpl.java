@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -55,6 +56,8 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -75,7 +78,7 @@ import java.util.Set;
  * @see       RoleUtil
  * @generated
  */
-public class RolePersistenceImpl extends BasePersistenceImpl
+public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	implements RolePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = RoleImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -191,6 +194,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		role.setPrimaryKey(roleId);
 
 		return role;
+	}
+
+	public Role remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Role remove(long roleId) throws NoSuchRoleException, SystemException {
@@ -319,56 +327,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		return role;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Role, boolean merge)}.
-	 */
-	public Role update(Role role) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Role role) method. Use update(Role role, boolean merge) instead.");
-		}
-
-		return update(role, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  role the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when role is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Role update(Role role, boolean merge) throws SystemException {
-		boolean isNew = role.isNew();
-
-		for (ModelListener<Role> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(role);
-			}
-			else {
-				listener.onBeforeUpdate(role);
-			}
-		}
-
-		role = updateImpl(role, merge);
-
-		for (ModelListener<Role> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(role);
-			}
-			else {
-				listener.onAfterUpdate(role);
-			}
-		}
-
-		return role;
-	}
-
 	public Role updateImpl(com.liferay.portal.model.Role role, boolean merge)
 		throws SystemException {
 		role = toUnwrappedModel(role);
@@ -468,6 +426,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		return roleImpl;
 	}
 
+	public Role findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Role findByPrimaryKey(long roleId)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByPrimaryKey(roleId);
@@ -482,6 +445,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return role;
+	}
+
+	public Role fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Role fetchByPrimaryKey(long roleId) throws SystemException {

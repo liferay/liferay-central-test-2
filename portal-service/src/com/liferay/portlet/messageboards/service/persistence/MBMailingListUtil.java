@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.messageboards.model.MBMailingList;
+
+import java.util.List;
 
 /**
  * <a href="MBMailingListUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.messageboards.service.persistence;
  * @generated
  */
 public class MBMailingListUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static MBMailingList remove(MBMailingList mbMailingList)
+		throws SystemException {
+		return getPersistence().remove(mbMailingList);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static MBMailingList update(MBMailingList mbMailingList,
+		boolean merge) throws SystemException {
+		return getPersistence().update(mbMailingList, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList) {
 		getPersistence().cacheResult(mbMailingList);
@@ -45,10 +90,6 @@ public class MBMailingListUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> mbMailingLists) {
 		getPersistence().cacheResult(mbMailingLists);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMailingList create(
@@ -61,39 +102,6 @@ public class MBMailingListUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMailingListException {
 		return getPersistence().remove(mailingListId);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMailingList remove(
-		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(mbMailingList);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(MBMailingList, boolean merge)}.
-	 */
-	public static com.liferay.portlet.messageboards.model.MBMailingList update(
-		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(mbMailingList);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbMailingList the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbMailingList is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.messageboards.model.MBMailingList update(
-		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(mbMailingList, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMailingList updateImpl(
@@ -234,18 +242,6 @@ public class MBMailingListUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .fetchByG_C(groupId, categoryId, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> findAll()

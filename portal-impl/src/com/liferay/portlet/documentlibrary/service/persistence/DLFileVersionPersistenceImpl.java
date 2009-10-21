@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       DLFileVersionUtil
  * @generated
  */
-public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
+public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVersion>
 	implements DLFileVersionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileVersionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -181,6 +184,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return dlFileVersion;
 	}
 
+	public DLFileVersion remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public DLFileVersion remove(long fileVersionId)
 		throws NoSuchFileVersionException, SystemException {
 		Session session = null;
@@ -278,58 +286,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return dlFileVersion;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(DLFileVersion, boolean merge)}.
-	 */
-	public DLFileVersion update(DLFileVersion dlFileVersion)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(DLFileVersion dlFileVersion) method. Use update(DLFileVersion dlFileVersion, boolean merge) instead.");
-		}
-
-		return update(dlFileVersion, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileVersion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileVersion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public DLFileVersion update(DLFileVersion dlFileVersion, boolean merge)
-		throws SystemException {
-		boolean isNew = dlFileVersion.isNew();
-
-		for (ModelListener<DLFileVersion> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileVersion);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileVersion);
-			}
-		}
-
-		dlFileVersion = updateImpl(dlFileVersion, merge);
-
-		for (ModelListener<DLFileVersion> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileVersion);
-			}
-			else {
-				listener.onAfterUpdate(dlFileVersion);
-			}
-		}
-
-		return dlFileVersion;
-	}
-
 	public DLFileVersion updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		boolean merge) throws SystemException {
@@ -423,6 +379,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return dlFileVersionImpl;
 	}
 
+	public DLFileVersion findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public DLFileVersion findByPrimaryKey(long fileVersionId)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = fetchByPrimaryKey(fileVersionId);
@@ -439,6 +400,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFileVersion;
+	}
+
+	public DLFileVersion fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public DLFileVersion fetchByPrimaryKey(long fileVersionId)

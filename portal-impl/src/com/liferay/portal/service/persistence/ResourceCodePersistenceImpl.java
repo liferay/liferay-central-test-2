@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchResourceCodeException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.ResourceCodeImpl;
 import com.liferay.portal.model.impl.ResourceCodeModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       ResourceCodeUtil
  * @generated
  */
-public class ResourceCodePersistenceImpl extends BasePersistenceImpl
+public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCode>
 	implements ResourceCodePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ResourceCodeImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -157,6 +160,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		resourceCode.setPrimaryKey(codeId);
 
 		return resourceCode;
+	}
+
+	public ResourceCode remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ResourceCode remove(long codeId)
@@ -254,58 +262,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		return resourceCode;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ResourceCode, boolean merge)}.
-	 */
-	public ResourceCode update(ResourceCode resourceCode)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ResourceCode resourceCode) method. Use update(ResourceCode resourceCode, boolean merge) instead.");
-		}
-
-		return update(resourceCode, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  resourceCode the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when resourceCode is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ResourceCode update(ResourceCode resourceCode, boolean merge)
-		throws SystemException {
-		boolean isNew = resourceCode.isNew();
-
-		for (ModelListener<ResourceCode> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(resourceCode);
-			}
-			else {
-				listener.onBeforeUpdate(resourceCode);
-			}
-		}
-
-		resourceCode = updateImpl(resourceCode, merge);
-
-		for (ModelListener<ResourceCode> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(resourceCode);
-			}
-			else {
-				listener.onAfterUpdate(resourceCode);
-			}
-		}
-
-		return resourceCode;
-	}
-
 	public ResourceCode updateImpl(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws SystemException {
@@ -384,6 +340,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		return resourceCodeImpl;
 	}
 
+	public ResourceCode findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ResourceCode findByPrimaryKey(long codeId)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = fetchByPrimaryKey(codeId);
@@ -399,6 +360,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return resourceCode;
+	}
+
+	public ResourceCode fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ResourceCode fetchByPrimaryKey(long codeId)

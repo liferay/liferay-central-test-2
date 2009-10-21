@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       IGImageUtil
  * @generated
  */
-public class IGImagePersistenceImpl extends BasePersistenceImpl
+public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	implements IGImagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = IGImageImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -250,6 +253,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		return igImage;
 	}
 
+	public IGImage remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public IGImage remove(long imageId)
 		throws NoSuchImageException, SystemException {
 		Session session = null;
@@ -349,57 +357,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageImpl.class, igImage.getPrimaryKey());
-
-		return igImage;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(IGImage, boolean merge)}.
-	 */
-	public IGImage update(IGImage igImage) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(IGImage igImage) method. Use update(IGImage igImage, boolean merge) instead.");
-		}
-
-		return update(igImage, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  igImage the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when igImage is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public IGImage update(IGImage igImage, boolean merge)
-		throws SystemException {
-		boolean isNew = igImage.isNew();
-
-		for (ModelListener<IGImage> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(igImage);
-			}
-			else {
-				listener.onBeforeUpdate(igImage);
-			}
-		}
-
-		igImage = updateImpl(igImage, merge);
-
-		for (ModelListener<IGImage> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(igImage);
-			}
-			else {
-				listener.onAfterUpdate(igImage);
-			}
-		}
 
 		return igImage;
 	}
@@ -547,6 +504,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		return igImageImpl;
 	}
 
+	public IGImage findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public IGImage findByPrimaryKey(long imageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = fetchByPrimaryKey(imageId);
@@ -561,6 +523,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return igImage;
+	}
+
+	public IGImage fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public IGImage fetchByPrimaryKey(long imageId) throws SystemException {

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.ListType;
+
+import java.util.List;
 
 /**
  * <a href="ListTypeUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,44 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class ListTypeUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static ListType remove(ListType listType) throws SystemException {
+		return getPersistence().remove(listType);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static ListType update(ListType listType, boolean merge)
+		throws SystemException {
+		return getPersistence().update(listType, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.ListType listType) {
 		getPersistence().cacheResult(listType);
 	}
@@ -44,10 +87,6 @@ public class ListTypeUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.ListType> listTypes) {
 		getPersistence().cacheResult(listTypes);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.ListType create(int listTypeId) {
@@ -58,39 +97,6 @@ public class ListTypeUtil {
 		throws com.liferay.portal.NoSuchListTypeException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(listTypeId);
-	}
-
-	public static com.liferay.portal.model.ListType remove(
-		com.liferay.portal.model.ListType listType)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(listType);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(ListType, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.ListType update(
-		com.liferay.portal.model.ListType listType)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(listType);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  listType the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when listType is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.ListType update(
-		com.liferay.portal.model.ListType listType, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(listType, merge);
 	}
 
 	public static com.liferay.portal.model.ListType updateImpl(
@@ -151,18 +157,6 @@ public class ListTypeUtil {
 		throws com.liferay.portal.NoSuchListTypeException,
 			com.liferay.portal.SystemException {
 		return getPersistence().findByType_PrevAndNext(listTypeId, type, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ListType> findAll()

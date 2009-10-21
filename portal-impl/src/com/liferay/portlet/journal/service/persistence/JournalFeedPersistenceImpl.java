@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.portlet.journal.model.impl.JournalFeedModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       JournalFeedUtil
  * @generated
  */
-public class JournalFeedPersistenceImpl extends BasePersistenceImpl
+public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	implements JournalFeedPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalFeedImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -172,6 +175,11 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 		return journalFeed;
 	}
 
+	public JournalFeed remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public JournalFeed remove(long id)
 		throws NoSuchFeedException, SystemException {
 		Session session = null;
@@ -268,58 +276,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,
 			JournalFeedImpl.class, journalFeed.getPrimaryKey());
-
-		return journalFeed;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(JournalFeed, boolean merge)}.
-	 */
-	public JournalFeed update(JournalFeed journalFeed)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(JournalFeed journalFeed) method. Use update(JournalFeed journalFeed, boolean merge) instead.");
-		}
-
-		return update(journalFeed, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalFeed the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalFeed is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public JournalFeed update(JournalFeed journalFeed, boolean merge)
-		throws SystemException {
-		boolean isNew = journalFeed.isNew();
-
-		for (ModelListener<JournalFeed> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(journalFeed);
-			}
-			else {
-				listener.onBeforeUpdate(journalFeed);
-			}
-		}
-
-		journalFeed = updateImpl(journalFeed, merge);
-
-		for (ModelListener<JournalFeed> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(journalFeed);
-			}
-			else {
-				listener.onAfterUpdate(journalFeed);
-			}
-		}
 
 		return journalFeed;
 	}
@@ -445,6 +401,11 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 		return journalFeedImpl;
 	}
 
+	public JournalFeed findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public JournalFeed findByPrimaryKey(long id)
 		throws NoSuchFeedException, SystemException {
 		JournalFeed journalFeed = fetchByPrimaryKey(id);
@@ -459,6 +420,11 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalFeed;
+	}
+
+	public JournalFeed fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public JournalFeed fetchByPrimaryKey(long id) throws SystemException {

@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+
+import java.util.List;
 
 /**
  * <a href="DLFileVersionUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @generated
  */
 public class DLFileVersionUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static DLFileVersion remove(DLFileVersion dlFileVersion)
+		throws SystemException {
+		return getPersistence().remove(dlFileVersion);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static DLFileVersion update(DLFileVersion dlFileVersion,
+		boolean merge) throws SystemException {
+		return getPersistence().update(dlFileVersion, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion) {
 		getPersistence().cacheResult(dlFileVersion);
@@ -45,10 +90,6 @@ public class DLFileVersionUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> dlFileVersions) {
 		getPersistence().cacheResult(dlFileVersions);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion create(
@@ -61,39 +102,6 @@ public class DLFileVersionUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
 		return getPersistence().remove(fileVersionId);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion remove(
-		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(dlFileVersion);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(DLFileVersion, boolean merge)}.
-	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion update(
-		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(dlFileVersion);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileVersion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileVersion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion update(
-		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(dlFileVersion, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateImpl(
@@ -229,18 +237,6 @@ public class DLFileVersionUtil {
 		return getPersistence()
 				   .findByG_F_N_S_PrevAndNext(fileVersionId, groupId, folderId,
 			name, status, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findAll()

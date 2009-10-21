@@ -24,6 +24,8 @@ package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.polls.model.PollsQuestion;
+
 /**
  * <a href="PollsQuestionPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       PollsQuestionUtil
  * @generated
  */
-public interface PollsQuestionPersistence extends BasePersistence {
+public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion> {
 	public void cacheResult(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.polls.model.PollsQuestion> pollsQuestions);
 
-	public void clearCache();
-
 	public com.liferay.portlet.polls.model.PollsQuestion create(long questionId);
 
 	public com.liferay.portlet.polls.model.PollsQuestion remove(long questionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
-
-	public com.liferay.portlet.polls.model.PollsQuestion remove(
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(PollsQuestion, boolean merge)}.
-	 */
-	public com.liferay.portlet.polls.model.PollsQuestion update(
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  pollsQuestion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when pollsQuestion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.polls.model.PollsQuestion update(
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateImpl(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
@@ -161,14 +134,6 @@ public interface PollsQuestionPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> findAll()
 		throws com.liferay.portal.SystemException;

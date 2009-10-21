@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Permission;
 
 /**
  * <a href="PermissionPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       PermissionUtil
  * @generated
  */
-public interface PermissionPersistence extends BasePersistence {
+public interface PermissionPersistence extends BasePersistence<Permission> {
 	public void cacheResult(com.liferay.portal.model.Permission permission);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Permission> permissions);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Permission create(long permissionId);
 
 	public com.liferay.portal.model.Permission remove(long permissionId)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Permission remove(
-		com.liferay.portal.model.Permission permission)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Permission, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Permission update(
-		com.liferay.portal.model.Permission permission)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  permission the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when permission is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Permission update(
-		com.liferay.portal.model.Permission permission, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission updateImpl(
 		com.liferay.portal.model.Permission permission, boolean merge)
@@ -129,14 +101,6 @@ public interface PermissionPersistence extends BasePersistence {
 	public com.liferay.portal.model.Permission fetchByA_R(
 		java.lang.String actionId, long resourceId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findAll()
 		throws com.liferay.portal.SystemException;

@@ -24,6 +24,8 @@ package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.expando.model.ExpandoTable;
+
 /**
  * <a href="ExpandoTablePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       ExpandoTableUtil
  * @generated
  */
-public interface ExpandoTablePersistence extends BasePersistence {
+public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	public void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.expando.model.ExpandoTable> expandoTables);
 
-	public void clearCache();
-
 	public com.liferay.portlet.expando.model.ExpandoTable create(long tableId);
 
 	public com.liferay.portlet.expando.model.ExpandoTable remove(long tableId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchTableException;
-
-	public com.liferay.portlet.expando.model.ExpandoTable remove(
-		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(ExpandoTable, boolean merge)}.
-	 */
-	public com.liferay.portlet.expando.model.ExpandoTable update(
-		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  expandoTable the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when expandoTable is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.expando.model.ExpandoTable update(
-		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoTable updateImpl(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
@@ -134,14 +107,6 @@ public interface ExpandoTablePersistence extends BasePersistence {
 	public com.liferay.portlet.expando.model.ExpandoTable fetchByC_C_N(
 		long companyId, long classNameId, java.lang.String name,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findAll()
 		throws com.liferay.portal.SystemException;

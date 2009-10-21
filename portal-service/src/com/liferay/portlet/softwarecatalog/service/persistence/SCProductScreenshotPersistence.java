@@ -24,6 +24,8 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
+
 /**
  * <a href="SCProductScreenshotPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       SCProductScreenshotUtil
  * @generated
  */
-public interface SCProductScreenshotPersistence extends BasePersistence {
+public interface SCProductScreenshotPersistence extends BasePersistence<SCProductScreenshot> {
 	public void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> scProductScreenshots);
-
-	public void clearCache();
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot create(
 		long productScreenshotId);
@@ -53,33 +53,6 @@ public interface SCProductScreenshotPersistence extends BasePersistence {
 		long productScreenshotId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
-
-	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot remove(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(SCProductScreenshot, boolean merge)}.
-	 */
-	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot update(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scProductScreenshot the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scProductScreenshot is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot update(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
@@ -159,14 +132,6 @@ public interface SCProductScreenshotPersistence extends BasePersistence {
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByP_P(
 		long productEntryId, int priority, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll()
 		throws com.liferay.portal.SystemException;

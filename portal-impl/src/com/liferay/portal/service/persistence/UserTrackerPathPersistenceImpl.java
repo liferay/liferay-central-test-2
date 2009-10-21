@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserTrackerPathException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.model.impl.UserTrackerPathModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       UserTrackerPathUtil
  * @generated
  */
-public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
+public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrackerPath>
 	implements UserTrackerPathPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserTrackerPathImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -123,6 +126,11 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		userTrackerPath.setPrimaryKey(userTrackerPathId);
 
 		return userTrackerPath;
+	}
+
+	public UserTrackerPath remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public UserTrackerPath remove(long userTrackerPathId)
@@ -212,58 +220,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		return userTrackerPath;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(UserTrackerPath, boolean merge)}.
-	 */
-	public UserTrackerPath update(UserTrackerPath userTrackerPath)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(UserTrackerPath userTrackerPath) method. Use update(UserTrackerPath userTrackerPath, boolean merge) instead.");
-		}
-
-		return update(userTrackerPath, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userTrackerPath the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userTrackerPath is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public UserTrackerPath update(UserTrackerPath userTrackerPath, boolean merge)
-		throws SystemException {
-		boolean isNew = userTrackerPath.isNew();
-
-		for (ModelListener<UserTrackerPath> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(userTrackerPath);
-			}
-			else {
-				listener.onBeforeUpdate(userTrackerPath);
-			}
-		}
-
-		userTrackerPath = updateImpl(userTrackerPath, merge);
-
-		for (ModelListener<UserTrackerPath> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(userTrackerPath);
-			}
-			else {
-				listener.onAfterUpdate(userTrackerPath);
-			}
-		}
-
-		return userTrackerPath;
-	}
-
 	public UserTrackerPath updateImpl(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
 		throws SystemException {
@@ -312,6 +268,11 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		return userTrackerPathImpl;
 	}
 
+	public UserTrackerPath findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public UserTrackerPath findByPrimaryKey(long userTrackerPathId)
 		throws NoSuchUserTrackerPathException, SystemException {
 		UserTrackerPath userTrackerPath = fetchByPrimaryKey(userTrackerPathId);
@@ -328,6 +289,11 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return userTrackerPath;
+	}
+
+	public UserTrackerPath fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public UserTrackerPath fetchByPrimaryKey(long userTrackerPathId)

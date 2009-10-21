@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.model.impl.LayoutSetModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       LayoutSetUtil
  * @generated
  */
-public class LayoutSetPersistenceImpl extends BasePersistenceImpl
+public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	implements LayoutSetPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = LayoutSetImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -143,6 +146,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		layoutSet.setPrimaryKey(layoutSetId);
 
 		return layoutSet;
+	}
+
+	public LayoutSet remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public LayoutSet remove(long layoutSetId)
@@ -236,57 +244,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetImpl.class, layoutSet.getPrimaryKey());
-
-		return layoutSet;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(LayoutSet, boolean merge)}.
-	 */
-	public LayoutSet update(LayoutSet layoutSet) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(LayoutSet layoutSet) method. Use update(LayoutSet layoutSet, boolean merge) instead.");
-		}
-
-		return update(layoutSet, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  layoutSet the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when layoutSet is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public LayoutSet update(LayoutSet layoutSet, boolean merge)
-		throws SystemException {
-		boolean isNew = layoutSet.isNew();
-
-		for (ModelListener<LayoutSet> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(layoutSet);
-			}
-			else {
-				listener.onBeforeUpdate(layoutSet);
-			}
-		}
-
-		layoutSet = updateImpl(layoutSet, merge);
-
-		for (ModelListener<LayoutSet> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(layoutSet);
-			}
-			else {
-				listener.onAfterUpdate(layoutSet);
-			}
-		}
 
 		return layoutSet;
 	}
@@ -386,6 +343,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		return layoutSetImpl;
 	}
 
+	public LayoutSet findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public LayoutSet findByPrimaryKey(long layoutSetId)
 		throws NoSuchLayoutSetException, SystemException {
 		LayoutSet layoutSet = fetchByPrimaryKey(layoutSetId);
@@ -401,6 +363,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return layoutSet;
+	}
+
+	public LayoutSet fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public LayoutSet fetchByPrimaryKey(long layoutSetId)

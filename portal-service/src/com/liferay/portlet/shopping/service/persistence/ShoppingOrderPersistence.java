@@ -24,6 +24,8 @@ package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.shopping.model.ShoppingOrder;
+
 /**
  * <a href="ShoppingOrderPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       ShoppingOrderUtil
  * @generated
  */
-public interface ShoppingOrderPersistence extends BasePersistence {
+public interface ShoppingOrderPersistence extends BasePersistence<ShoppingOrder> {
 	public void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> shoppingOrders);
 
-	public void clearCache();
-
 	public com.liferay.portlet.shopping.model.ShoppingOrder create(long orderId);
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder remove(long orderId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
-
-	public com.liferay.portlet.shopping.model.ShoppingOrder remove(
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(ShoppingOrder, boolean merge)}.
-	 */
-	public com.liferay.portlet.shopping.model.ShoppingOrder update(
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingOrder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingOrder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.shopping.model.ShoppingOrder update(
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
@@ -174,14 +147,6 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll()
 		throws com.liferay.portal.SystemException;

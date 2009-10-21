@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -56,6 +57,8 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -76,7 +79,7 @@ import java.util.Set;
  * @see       SCFrameworkVersionUtil
  * @generated
  */
-public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
+public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFrameworkVersion>
 	implements SCFrameworkVersionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCFrameworkVersionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -170,6 +173,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		scFrameworkVersion.setPrimaryKey(frameworkVersionId);
 
 		return scFrameworkVersion;
+	}
+
+	public SCFrameworkVersion remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public SCFrameworkVersion remove(long frameworkVersionId)
@@ -270,58 +278,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		return scFrameworkVersion;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(SCFrameworkVersion, boolean merge)}.
-	 */
-	public SCFrameworkVersion update(SCFrameworkVersion scFrameworkVersion)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(SCFrameworkVersion scFrameworkVersion) method. Use update(SCFrameworkVersion scFrameworkVersion, boolean merge) instead.");
-		}
-
-		return update(scFrameworkVersion, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scFrameworkVersion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scFrameworkVersion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public SCFrameworkVersion update(SCFrameworkVersion scFrameworkVersion,
-		boolean merge) throws SystemException {
-		boolean isNew = scFrameworkVersion.isNew();
-
-		for (ModelListener<SCFrameworkVersion> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(scFrameworkVersion);
-			}
-			else {
-				listener.onBeforeUpdate(scFrameworkVersion);
-			}
-		}
-
-		scFrameworkVersion = updateImpl(scFrameworkVersion, merge);
-
-		for (ModelListener<SCFrameworkVersion> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(scFrameworkVersion);
-			}
-			else {
-				listener.onAfterUpdate(scFrameworkVersion);
-			}
-		}
-
-		return scFrameworkVersion;
-	}
-
 	public SCFrameworkVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
 		boolean merge) throws SystemException {
@@ -378,6 +334,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		return scFrameworkVersionImpl;
 	}
 
+	public SCFrameworkVersion findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public SCFrameworkVersion findByPrimaryKey(long frameworkVersionId)
 		throws NoSuchFrameworkVersionException, SystemException {
 		SCFrameworkVersion scFrameworkVersion = fetchByPrimaryKey(frameworkVersionId);
@@ -394,6 +355,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return scFrameworkVersion;
+	}
+
+	public SCFrameworkVersion fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public SCFrameworkVersion fetchByPrimaryKey(long frameworkVersionId)

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPasswordTrackerException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.PasswordTrackerImpl;
 import com.liferay.portal.model.impl.PasswordTrackerModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       PasswordTrackerUtil
  * @generated
  */
-public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
+public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<PasswordTracker>
 	implements PasswordTrackerPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PasswordTrackerImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -123,6 +126,11 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		passwordTracker.setPrimaryKey(passwordTrackerId);
 
 		return passwordTracker;
+	}
+
+	public PasswordTracker remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public PasswordTracker remove(long passwordTrackerId)
@@ -212,58 +220,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		return passwordTracker;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(PasswordTracker, boolean merge)}.
-	 */
-	public PasswordTracker update(PasswordTracker passwordTracker)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(PasswordTracker passwordTracker) method. Use update(PasswordTracker passwordTracker, boolean merge) instead.");
-		}
-
-		return update(passwordTracker, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  passwordTracker the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when passwordTracker is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public PasswordTracker update(PasswordTracker passwordTracker, boolean merge)
-		throws SystemException {
-		boolean isNew = passwordTracker.isNew();
-
-		for (ModelListener<PasswordTracker> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(passwordTracker);
-			}
-			else {
-				listener.onBeforeUpdate(passwordTracker);
-			}
-		}
-
-		passwordTracker = updateImpl(passwordTracker, merge);
-
-		for (ModelListener<PasswordTracker> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(passwordTracker);
-			}
-			else {
-				listener.onAfterUpdate(passwordTracker);
-			}
-		}
-
-		return passwordTracker;
-	}
-
 	public PasswordTracker updateImpl(
 		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
 		throws SystemException {
@@ -312,6 +268,11 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		return passwordTrackerImpl;
 	}
 
+	public PasswordTracker findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public PasswordTracker findByPrimaryKey(long passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		PasswordTracker passwordTracker = fetchByPrimaryKey(passwordTrackerId);
@@ -328,6 +289,11 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return passwordTracker;
+	}
+
+	public PasswordTracker fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public PasswordTracker fetchByPrimaryKey(long passwordTrackerId)

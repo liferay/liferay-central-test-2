@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.ResourceActionImpl;
 import com.liferay.portal.model.impl.ResourceActionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       ResourceActionUtil
  * @generated
  */
-public class ResourceActionPersistenceImpl extends BasePersistenceImpl
+public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceAction>
 	implements ResourceActionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ResourceActionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -136,6 +139,11 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 		resourceAction.setPrimaryKey(resourceActionId);
 
 		return resourceAction;
+	}
+
+	public ResourceAction remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ResourceAction remove(long resourceActionId)
@@ -233,58 +241,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 		return resourceAction;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ResourceAction, boolean merge)}.
-	 */
-	public ResourceAction update(ResourceAction resourceAction)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ResourceAction resourceAction) method. Use update(ResourceAction resourceAction, boolean merge) instead.");
-		}
-
-		return update(resourceAction, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  resourceAction the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when resourceAction is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ResourceAction update(ResourceAction resourceAction, boolean merge)
-		throws SystemException {
-		boolean isNew = resourceAction.isNew();
-
-		for (ModelListener<ResourceAction> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(resourceAction);
-			}
-			else {
-				listener.onBeforeUpdate(resourceAction);
-			}
-		}
-
-		resourceAction = updateImpl(resourceAction, merge);
-
-		for (ModelListener<ResourceAction> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(resourceAction);
-			}
-			else {
-				listener.onAfterUpdate(resourceAction);
-			}
-		}
-
-		return resourceAction;
-	}
-
 	public ResourceAction updateImpl(
 		com.liferay.portal.model.ResourceAction resourceAction, boolean merge)
 		throws SystemException {
@@ -363,6 +319,11 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 		return resourceActionImpl;
 	}
 
+	public ResourceAction findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ResourceAction findByPrimaryKey(long resourceActionId)
 		throws NoSuchResourceActionException, SystemException {
 		ResourceAction resourceAction = fetchByPrimaryKey(resourceActionId);
@@ -379,6 +340,11 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return resourceAction;
+	}
+
+	public ResourceAction fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ResourceAction fetchByPrimaryKey(long resourceActionId)

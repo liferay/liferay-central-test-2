@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       JournalArticleUtil
  * @generated
  */
-public class JournalArticlePersistenceImpl extends BasePersistenceImpl
+public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalArticle>
 	implements JournalArticlePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -352,6 +355,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		return journalArticle;
 	}
 
+	public JournalArticle remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public JournalArticle remove(long id)
 		throws NoSuchArticleException, SystemException {
 		Session session = null;
@@ -449,58 +457,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImpl.class, journalArticle.getPrimaryKey());
-
-		return journalArticle;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(JournalArticle, boolean merge)}.
-	 */
-	public JournalArticle update(JournalArticle journalArticle)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(JournalArticle journalArticle) method. Use update(JournalArticle journalArticle, boolean merge) instead.");
-		}
-
-		return update(journalArticle, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalArticle the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalArticle is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public JournalArticle update(JournalArticle journalArticle, boolean merge)
-		throws SystemException {
-		boolean isNew = journalArticle.isNew();
-
-		for (ModelListener<JournalArticle> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticle);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticle);
-			}
-		}
-
-		journalArticle = updateImpl(journalArticle, merge);
-
-		for (ModelListener<JournalArticle> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticle);
-			}
-			else {
-				listener.onAfterUpdate(journalArticle);
-			}
-		}
 
 		return journalArticle;
 	}
@@ -638,6 +594,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		return journalArticleImpl;
 	}
 
+	public JournalArticle findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public JournalArticle findByPrimaryKey(long id)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = fetchByPrimaryKey(id);
@@ -653,6 +614,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalArticle;
+	}
+
+	public JournalArticle fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public JournalArticle fetchByPrimaryKey(long id) throws SystemException {

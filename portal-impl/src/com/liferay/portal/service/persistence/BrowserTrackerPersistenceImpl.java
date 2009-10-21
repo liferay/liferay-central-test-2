@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchBrowserTrackerException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.BrowserTrackerImpl;
 import com.liferay.portal.model.impl.BrowserTrackerModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       BrowserTrackerUtil
  * @generated
  */
-public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
+public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTracker>
 	implements BrowserTrackerPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BrowserTrackerImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -118,6 +121,11 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		browserTracker.setPrimaryKey(browserTrackerId);
 
 		return browserTracker;
+	}
+
+	public BrowserTracker remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public BrowserTracker remove(long browserTrackerId)
@@ -211,58 +219,6 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		return browserTracker;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(BrowserTracker, boolean merge)}.
-	 */
-	public BrowserTracker update(BrowserTracker browserTracker)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(BrowserTracker browserTracker) method. Use update(BrowserTracker browserTracker, boolean merge) instead.");
-		}
-
-		return update(browserTracker, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  browserTracker the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when browserTracker is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public BrowserTracker update(BrowserTracker browserTracker, boolean merge)
-		throws SystemException {
-		boolean isNew = browserTracker.isNew();
-
-		for (ModelListener<BrowserTracker> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(browserTracker);
-			}
-			else {
-				listener.onBeforeUpdate(browserTracker);
-			}
-		}
-
-		browserTracker = updateImpl(browserTracker, merge);
-
-		for (ModelListener<BrowserTracker> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(browserTracker);
-			}
-			else {
-				listener.onAfterUpdate(browserTracker);
-			}
-		}
-
-		return browserTracker;
-	}
-
 	public BrowserTracker updateImpl(
 		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
 		throws SystemException {
@@ -329,6 +285,11 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		return browserTrackerImpl;
 	}
 
+	public BrowserTracker findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public BrowserTracker findByPrimaryKey(long browserTrackerId)
 		throws NoSuchBrowserTrackerException, SystemException {
 		BrowserTracker browserTracker = fetchByPrimaryKey(browserTrackerId);
@@ -345,6 +306,11 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return browserTracker;
+	}
+
+	public BrowserTracker fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public BrowserTracker fetchByPrimaryKey(long browserTrackerId)

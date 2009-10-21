@@ -24,6 +24,8 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.softwarecatalog.model.SCLicense;
+
 /**
  * <a href="SCLicensePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       SCLicenseUtil
  * @generated
  */
-public interface SCLicensePersistence extends BasePersistence {
+public interface SCLicensePersistence extends BasePersistence<SCLicense> {
 	public void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses);
-
-	public void clearCache();
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense create(
 		long licenseId);
@@ -53,33 +53,6 @@ public interface SCLicensePersistence extends BasePersistence {
 		long licenseId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
-
-	public com.liferay.portlet.softwarecatalog.model.SCLicense remove(
-		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(SCLicense, boolean merge)}.
-	 */
-	public com.liferay.portlet.softwarecatalog.model.SCLicense update(
-		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scLicense the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scLicense is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.softwarecatalog.model.SCLicense update(
-		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
@@ -151,14 +124,6 @@ public interface SCLicensePersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findAll()
 		throws com.liferay.portal.SystemException;

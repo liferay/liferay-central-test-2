@@ -24,6 +24,8 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
+
 /**
  * <a href="SCProductVersionPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       SCProductVersionUtil
  * @generated
  */
-public interface SCProductVersionPersistence extends BasePersistence {
+public interface SCProductVersionPersistence extends BasePersistence<SCProductVersion> {
 	public void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions);
-
-	public void clearCache();
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion create(
 		long productVersionId);
@@ -53,33 +53,6 @@ public interface SCProductVersionPersistence extends BasePersistence {
 		long productVersionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
-
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion remove(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(SCProductVersion, boolean merge)}.
-	 */
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scProductVersion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scProductVersion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
@@ -135,14 +108,6 @@ public interface SCProductVersionPersistence extends BasePersistence {
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion fetchByDirectDownloadURL(
 		java.lang.String directDownloadURL, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findAll()
 		throws com.liferay.portal.SystemException;

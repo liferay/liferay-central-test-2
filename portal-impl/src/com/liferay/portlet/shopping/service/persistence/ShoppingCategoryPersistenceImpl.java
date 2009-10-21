@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       ShoppingCategoryUtil
  * @generated
  */
-public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
+public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<ShoppingCategory>
 	implements ShoppingCategoryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCategoryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -142,6 +145,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		shoppingCategory.setPrimaryKey(categoryId);
 
 		return shoppingCategory;
+	}
+
+	public ShoppingCategory remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingCategory remove(long categoryId)
@@ -232,58 +240,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		return shoppingCategory;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ShoppingCategory, boolean merge)}.
-	 */
-	public ShoppingCategory update(ShoppingCategory shoppingCategory)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ShoppingCategory shoppingCategory) method. Use update(ShoppingCategory shoppingCategory, boolean merge) instead.");
-		}
-
-		return update(shoppingCategory, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingCategory the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingCategory is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ShoppingCategory update(ShoppingCategory shoppingCategory,
-		boolean merge) throws SystemException {
-		boolean isNew = shoppingCategory.isNew();
-
-		for (ModelListener<ShoppingCategory> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingCategory);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingCategory);
-			}
-		}
-
-		shoppingCategory = updateImpl(shoppingCategory, merge);
-
-		for (ModelListener<ShoppingCategory> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingCategory);
-			}
-			else {
-				listener.onAfterUpdate(shoppingCategory);
-			}
-		}
-
-		return shoppingCategory;
-	}
-
 	public ShoppingCategory updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
 		boolean merge) throws SystemException {
@@ -339,6 +295,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		return shoppingCategoryImpl;
 	}
 
+	public ShoppingCategory findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ShoppingCategory findByPrimaryKey(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		ShoppingCategory shoppingCategory = fetchByPrimaryKey(categoryId);
@@ -355,6 +316,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shoppingCategory;
+	}
+
+	public ShoppingCategory fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingCategory fetchByPrimaryKey(long categoryId)

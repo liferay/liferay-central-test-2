@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.model.impl.SocialRequestImpl;
 import com.liferay.portlet.social.model.impl.SocialRequestModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       SocialRequestUtil
  * @generated
  */
-public class SocialRequestPersistenceImpl extends BasePersistenceImpl
+public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequest>
 	implements SocialRequestPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialRequestImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -305,6 +308,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		return socialRequest;
 	}
 
+	public SocialRequest remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public SocialRequest remove(long requestId)
 		throws NoSuchRequestException, SystemException {
 		Session session = null;
@@ -404,58 +412,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRequestImpl.class, socialRequest.getPrimaryKey());
-
-		return socialRequest;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(SocialRequest, boolean merge)}.
-	 */
-	public SocialRequest update(SocialRequest socialRequest)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(SocialRequest socialRequest) method. Use update(SocialRequest socialRequest, boolean merge) instead.");
-		}
-
-		return update(socialRequest, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  socialRequest the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when socialRequest is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public SocialRequest update(SocialRequest socialRequest, boolean merge)
-		throws SystemException {
-		boolean isNew = socialRequest.isNew();
-
-		for (ModelListener<SocialRequest> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(socialRequest);
-			}
-			else {
-				listener.onBeforeUpdate(socialRequest);
-			}
-		}
-
-		socialRequest = updateImpl(socialRequest, merge);
-
-		for (ModelListener<SocialRequest> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(socialRequest);
-			}
-			else {
-				listener.onAfterUpdate(socialRequest);
-			}
-		}
 
 		return socialRequest;
 	}
@@ -581,6 +537,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		return socialRequestImpl;
 	}
 
+	public SocialRequest findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public SocialRequest findByPrimaryKey(long requestId)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = fetchByPrimaryKey(requestId);
@@ -596,6 +557,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return socialRequest;
+	}
+
+	public SocialRequest fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public SocialRequest fetchByPrimaryKey(long requestId)

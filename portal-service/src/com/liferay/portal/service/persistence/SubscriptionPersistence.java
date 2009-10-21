@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Subscription;
 
 /**
  * <a href="SubscriptionPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       SubscriptionUtil
  * @generated
  */
-public interface SubscriptionPersistence extends BasePersistence {
+public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	public void cacheResult(com.liferay.portal.model.Subscription subscription);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Subscription> subscriptions);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Subscription create(long subscriptionId);
 
 	public com.liferay.portal.model.Subscription remove(long subscriptionId)
 		throws com.liferay.portal.NoSuchSubscriptionException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Subscription remove(
-		com.liferay.portal.model.Subscription subscription)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Subscription, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Subscription update(
-		com.liferay.portal.model.Subscription subscription)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  subscription the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when subscription is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Subscription update(
-		com.liferay.portal.model.Subscription subscription, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Subscription updateImpl(
 		com.liferay.portal.model.Subscription subscription, boolean merge)
@@ -189,14 +161,6 @@ public interface SubscriptionPersistence extends BasePersistence {
 	public com.liferay.portal.model.Subscription fetchByC_U_C_C(
 		long companyId, long userId, long classNameId, long classPK,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Subscription> findAll()
 		throws com.liferay.portal.SystemException;

@@ -24,6 +24,8 @@ package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.blogs.model.BlogsStatsUser;
+
 /**
  * <a href="BlogsStatsUserPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       BlogsStatsUserUtil
  * @generated
  */
-public interface BlogsStatsUserPersistence extends BasePersistence {
+public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUser> {
 	public void cacheResult(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> blogsStatsUsers);
-
-	public void clearCache();
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser create(
 		long statsUserId);
@@ -53,33 +53,6 @@ public interface BlogsStatsUserPersistence extends BasePersistence {
 		long statsUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
-
-	public com.liferay.portlet.blogs.model.BlogsStatsUser remove(
-		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(BlogsStatsUser, boolean merge)}.
-	 */
-	public com.liferay.portlet.blogs.model.BlogsStatsUser update(
-		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  blogsStatsUser the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when blogsStatsUser is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.blogs.model.BlogsStatsUser update(
-		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser updateImpl(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
@@ -221,14 +194,6 @@ public interface BlogsStatsUserPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchStatsUserException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findAll()
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.model.impl.TasksReviewImpl;
 import com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       TasksReviewUtil
  * @generated
  */
-public class TasksReviewPersistenceImpl extends BasePersistenceImpl
+public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	implements TasksReviewPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = TasksReviewImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -217,6 +220,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		return tasksReview;
 	}
 
+	public TasksReview remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public TasksReview remove(long reviewId)
 		throws NoSuchReviewException, SystemException {
 		Session session = null;
@@ -310,58 +318,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		return tasksReview;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(TasksReview, boolean merge)}.
-	 */
-	public TasksReview update(TasksReview tasksReview)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(TasksReview tasksReview) method. Use update(TasksReview tasksReview, boolean merge) instead.");
-		}
-
-		return update(tasksReview, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  tasksReview the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when tasksReview is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public TasksReview update(TasksReview tasksReview, boolean merge)
-		throws SystemException {
-		boolean isNew = tasksReview.isNew();
-
-		for (ModelListener<TasksReview> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(tasksReview);
-			}
-			else {
-				listener.onBeforeUpdate(tasksReview);
-			}
-		}
-
-		tasksReview = updateImpl(tasksReview, merge);
-
-		for (ModelListener<TasksReview> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(tasksReview);
-			}
-			else {
-				listener.onAfterUpdate(tasksReview);
-			}
-		}
-
-		return tasksReview;
-	}
-
 	public TasksReview updateImpl(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
 		throws SystemException {
@@ -442,6 +398,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		return tasksReviewImpl;
 	}
 
+	public TasksReview findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public TasksReview findByPrimaryKey(long reviewId)
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = fetchByPrimaryKey(reviewId);
@@ -457,6 +418,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return tasksReview;
+	}
+
+	public TasksReview fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public TasksReview fetchByPrimaryKey(long reviewId)

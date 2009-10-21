@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.PortletItem;
+
+import java.util.List;
 
 /**
  * <a href="PortletItemUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,45 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class PortletItemUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static PortletItem remove(PortletItem portletItem)
+		throws SystemException {
+		return getPersistence().remove(portletItem);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static PortletItem update(PortletItem portletItem, boolean merge)
+		throws SystemException {
+		return getPersistence().update(portletItem, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.PortletItem portletItem) {
 		getPersistence().cacheResult(portletItem);
@@ -45,10 +89,6 @@ public class PortletItemUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.PortletItem> portletItems) {
 		getPersistence().cacheResult(portletItems);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.PortletItem create(
@@ -61,39 +101,6 @@ public class PortletItemUtil {
 		throws com.liferay.portal.NoSuchPortletItemException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(portletItemId);
-	}
-
-	public static com.liferay.portal.model.PortletItem remove(
-		com.liferay.portal.model.PortletItem portletItem)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(portletItem);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(PortletItem, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.PortletItem update(
-		com.liferay.portal.model.PortletItem portletItem)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(portletItem);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  portletItem the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when portletItem is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.PortletItem update(
-		com.liferay.portal.model.PortletItem portletItem, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(portletItem, merge);
 	}
 
 	public static com.liferay.portal.model.PortletItem updateImpl(
@@ -231,18 +238,6 @@ public class PortletItemUtil {
 		return getPersistence()
 				   .fetchByG_N_P_C(groupId, name, portletId, classNameId,
 			retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findAll()

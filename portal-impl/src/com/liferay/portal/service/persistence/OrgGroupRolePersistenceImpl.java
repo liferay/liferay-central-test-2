@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchOrgGroupRoleException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.model.impl.OrgGroupRoleModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       OrgGroupRoleUtil
  * @generated
  */
-public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
+public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRole>
 	implements OrgGroupRolePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupRoleImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -135,6 +138,11 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		orgGroupRole.setPrimaryKey(orgGroupRolePK);
 
 		return orgGroupRole;
+	}
+
+	public OrgGroupRole remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove((OrgGroupRolePK)primaryKey);
 	}
 
 	public OrgGroupRole remove(OrgGroupRolePK orgGroupRolePK)
@@ -223,58 +231,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		return orgGroupRole;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(OrgGroupRole, boolean merge)}.
-	 */
-	public OrgGroupRole update(OrgGroupRole orgGroupRole)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(OrgGroupRole orgGroupRole) method. Use update(OrgGroupRole orgGroupRole, boolean merge) instead.");
-		}
-
-		return update(orgGroupRole, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  orgGroupRole the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when orgGroupRole is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public OrgGroupRole update(OrgGroupRole orgGroupRole, boolean merge)
-		throws SystemException {
-		boolean isNew = orgGroupRole.isNew();
-
-		for (ModelListener<OrgGroupRole> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(orgGroupRole);
-			}
-			else {
-				listener.onBeforeUpdate(orgGroupRole);
-			}
-		}
-
-		orgGroupRole = updateImpl(orgGroupRole, merge);
-
-		for (ModelListener<OrgGroupRole> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(orgGroupRole);
-			}
-			else {
-				listener.onAfterUpdate(orgGroupRole);
-			}
-		}
-
-		return orgGroupRole;
-	}
-
 	public OrgGroupRole updateImpl(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
 		throws SystemException {
@@ -321,6 +277,11 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		return orgGroupRoleImpl;
 	}
 
+	public OrgGroupRole findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey((OrgGroupRolePK)primaryKey);
+	}
+
 	public OrgGroupRole findByPrimaryKey(OrgGroupRolePK orgGroupRolePK)
 		throws NoSuchOrgGroupRoleException, SystemException {
 		OrgGroupRole orgGroupRole = fetchByPrimaryKey(orgGroupRolePK);
@@ -337,6 +298,11 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return orgGroupRole;
+	}
+
+	public OrgGroupRole fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey((OrgGroupRolePK)primaryKey);
 	}
 
 	public OrgGroupRole fetchByPrimaryKey(OrgGroupRolePK orgGroupRolePK)

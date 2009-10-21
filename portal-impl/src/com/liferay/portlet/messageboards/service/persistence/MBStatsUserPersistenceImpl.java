@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       MBStatsUserUtil
  * @generated
  */
-public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
+public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	implements MBStatsUserPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBStatsUserImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -169,6 +172,11 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		return mbStatsUser;
 	}
 
+	public MBStatsUser remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public MBStatsUser remove(long statsUserId)
 		throws NoSuchStatsUserException, SystemException {
 		Session session = null;
@@ -263,58 +271,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		return mbStatsUser;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(MBStatsUser, boolean merge)}.
-	 */
-	public MBStatsUser update(MBStatsUser mbStatsUser)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MBStatsUser mbStatsUser) method. Use update(MBStatsUser mbStatsUser, boolean merge) instead.");
-		}
-
-		return update(mbStatsUser, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbStatsUser the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbStatsUser is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MBStatsUser update(MBStatsUser mbStatsUser, boolean merge)
-		throws SystemException {
-		boolean isNew = mbStatsUser.isNew();
-
-		for (ModelListener<MBStatsUser> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(mbStatsUser);
-			}
-			else {
-				listener.onBeforeUpdate(mbStatsUser);
-			}
-		}
-
-		mbStatsUser = updateImpl(mbStatsUser, merge);
-
-		for (ModelListener<MBStatsUser> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(mbStatsUser);
-			}
-			else {
-				listener.onAfterUpdate(mbStatsUser);
-			}
-		}
-
-		return mbStatsUser;
-	}
-
 	public MBStatsUser updateImpl(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
 		boolean merge) throws SystemException {
@@ -387,6 +343,11 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		return mbStatsUserImpl;
 	}
 
+	public MBStatsUser findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MBStatsUser findByPrimaryKey(long statsUserId)
 		throws NoSuchStatsUserException, SystemException {
 		MBStatsUser mbStatsUser = fetchByPrimaryKey(statsUserId);
@@ -402,6 +363,11 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbStatsUser;
+	}
+
+	public MBStatsUser fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MBStatsUser fetchByPrimaryKey(long statsUserId)

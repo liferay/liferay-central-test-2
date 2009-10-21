@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
 import com.liferay.portlet.messageboards.model.impl.MBBanModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       MBBanUtil
  * @generated
  */
-public class MBBanPersistenceImpl extends BasePersistenceImpl
+public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	implements MBBanPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBBanImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -165,6 +168,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		return mbBan;
 	}
 
+	public MBBan remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public MBBan remove(long banId) throws NoSuchBanException, SystemException {
 		Session session = null;
 
@@ -253,56 +261,6 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		return mbBan;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(MBBan, boolean merge)}.
-	 */
-	public MBBan update(MBBan mbBan) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MBBan mbBan) method. Use update(MBBan mbBan, boolean merge) instead.");
-		}
-
-		return update(mbBan, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbBan the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbBan is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MBBan update(MBBan mbBan, boolean merge) throws SystemException {
-		boolean isNew = mbBan.isNew();
-
-		for (ModelListener<MBBan> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(mbBan);
-			}
-			else {
-				listener.onBeforeUpdate(mbBan);
-			}
-		}
-
-		mbBan = updateImpl(mbBan, merge);
-
-		for (ModelListener<MBBan> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(mbBan);
-			}
-			else {
-				listener.onAfterUpdate(mbBan);
-			}
-		}
-
-		return mbBan;
-	}
-
 	public MBBan updateImpl(
 		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
 		throws SystemException {
@@ -377,6 +335,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		return mbBanImpl;
 	}
 
+	public MBBan findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MBBan findByPrimaryKey(long banId)
 		throws NoSuchBanException, SystemException {
 		MBBan mbBan = fetchByPrimaryKey(banId);
@@ -391,6 +354,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbBan;
+	}
+
+	public MBBan fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MBBan fetchByPrimaryKey(long banId) throws SystemException {

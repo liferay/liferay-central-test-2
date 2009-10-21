@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       BookmarksFolderUtil
  * @generated
  */
-public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
+public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<BookmarksFolder>
 	implements BookmarksFolderPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BookmarksFolderImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -198,6 +201,11 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		return bookmarksFolder;
 	}
 
+	public BookmarksFolder remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public BookmarksFolder remove(long folderId)
 		throws NoSuchFolderException, SystemException {
 		Session session = null;
@@ -293,58 +301,6 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		return bookmarksFolder;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(BookmarksFolder, boolean merge)}.
-	 */
-	public BookmarksFolder update(BookmarksFolder bookmarksFolder)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(BookmarksFolder bookmarksFolder) method. Use update(BookmarksFolder bookmarksFolder, boolean merge) instead.");
-		}
-
-		return update(bookmarksFolder, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  bookmarksFolder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when bookmarksFolder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public BookmarksFolder update(BookmarksFolder bookmarksFolder, boolean merge)
-		throws SystemException {
-		boolean isNew = bookmarksFolder.isNew();
-
-		for (ModelListener<BookmarksFolder> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(bookmarksFolder);
-			}
-			else {
-				listener.onBeforeUpdate(bookmarksFolder);
-			}
-		}
-
-		bookmarksFolder = updateImpl(bookmarksFolder, merge);
-
-		for (ModelListener<BookmarksFolder> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(bookmarksFolder);
-			}
-			else {
-				listener.onAfterUpdate(bookmarksFolder);
-			}
-		}
-
-		return bookmarksFolder;
-	}
-
 	public BookmarksFolder updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
 		boolean merge) throws SystemException {
@@ -431,6 +387,11 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		return bookmarksFolderImpl;
 	}
 
+	public BookmarksFolder findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public BookmarksFolder findByPrimaryKey(long folderId)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = fetchByPrimaryKey(folderId);
@@ -446,6 +407,11 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return bookmarksFolder;
+	}
+
+	public BookmarksFolder fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public BookmarksFolder fetchByPrimaryKey(long folderId)

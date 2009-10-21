@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.polls.model.PollsQuestion;
+
+import java.util.List;
 
 /**
  * <a href="PollsQuestionUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.polls.service.persistence;
  * @generated
  */
 public class PollsQuestionUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static PollsQuestion remove(PollsQuestion pollsQuestion)
+		throws SystemException {
+		return getPersistence().remove(pollsQuestion);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static PollsQuestion update(PollsQuestion pollsQuestion,
+		boolean merge) throws SystemException {
+		return getPersistence().update(pollsQuestion, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion) {
 		getPersistence().cacheResult(pollsQuestion);
@@ -45,10 +90,6 @@ public class PollsQuestionUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.polls.model.PollsQuestion> pollsQuestions) {
 		getPersistence().cacheResult(pollsQuestions);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion create(
@@ -61,39 +102,6 @@ public class PollsQuestionUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().remove(questionId);
-	}
-
-	public static com.liferay.portlet.polls.model.PollsQuestion remove(
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(pollsQuestion);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(PollsQuestion, boolean merge)}.
-	 */
-	public static com.liferay.portlet.polls.model.PollsQuestion update(
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(pollsQuestion);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  pollsQuestion the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when pollsQuestion is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.polls.model.PollsQuestion update(
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(pollsQuestion, merge);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateImpl(
@@ -214,18 +222,6 @@ public class PollsQuestionUtil {
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence()
 				   .findByGroupId_PrevAndNext(questionId, groupId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> findAll()

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchEmailAddressException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.model.impl.EmailAddressModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       EmailAddressUtil
  * @generated
  */
-public class EmailAddressPersistenceImpl extends BasePersistenceImpl
+public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddress>
 	implements EmailAddressPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = EmailAddressImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -199,6 +202,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		return emailAddress;
 	}
 
+	public EmailAddress remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public EmailAddress remove(long emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
 		Session session = null;
@@ -285,58 +293,6 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		return emailAddress;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(EmailAddress, boolean merge)}.
-	 */
-	public EmailAddress update(EmailAddress emailAddress)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(EmailAddress emailAddress) method. Use update(EmailAddress emailAddress, boolean merge) instead.");
-		}
-
-		return update(emailAddress, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  emailAddress the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when emailAddress is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public EmailAddress update(EmailAddress emailAddress, boolean merge)
-		throws SystemException {
-		boolean isNew = emailAddress.isNew();
-
-		for (ModelListener<EmailAddress> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(emailAddress);
-			}
-			else {
-				listener.onBeforeUpdate(emailAddress);
-			}
-		}
-
-		emailAddress = updateImpl(emailAddress, merge);
-
-		for (ModelListener<EmailAddress> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(emailAddress);
-			}
-			else {
-				listener.onAfterUpdate(emailAddress);
-			}
-		}
-
-		return emailAddress;
-	}
-
 	public EmailAddress updateImpl(
 		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
 		throws SystemException {
@@ -391,6 +347,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		return emailAddressImpl;
 	}
 
+	public EmailAddress findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public EmailAddress findByPrimaryKey(long emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = fetchByPrimaryKey(emailAddressId);
@@ -407,6 +368,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return emailAddress;
+	}
+
+	public EmailAddress fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public EmailAddress fetchByPrimaryKey(long emailAddressId)

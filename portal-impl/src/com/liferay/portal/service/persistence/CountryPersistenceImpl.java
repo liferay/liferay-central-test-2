@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchCountryException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.model.impl.CountryModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       CountryUtil
  * @generated
  */
-public class CountryPersistenceImpl extends BasePersistenceImpl
+public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	implements CountryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = CountryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -147,6 +150,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		country.setPrimaryKey(countryId);
 
 		return country;
+	}
+
+	public Country remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Country remove(long countryId)
@@ -239,57 +247,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
 			CountryImpl.class, country.getPrimaryKey());
-
-		return country;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Country, boolean merge)}.
-	 */
-	public Country update(Country country) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Country country) method. Use update(Country country, boolean merge) instead.");
-		}
-
-		return update(country, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  country the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when country is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Country update(Country country, boolean merge)
-		throws SystemException {
-		boolean isNew = country.isNew();
-
-		for (ModelListener<Country> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(country);
-			}
-			else {
-				listener.onBeforeUpdate(country);
-			}
-		}
-
-		country = updateImpl(country, merge);
-
-		for (ModelListener<Country> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(country);
-			}
-			else {
-				listener.onAfterUpdate(country);
-			}
-		}
 
 		return country;
 	}
@@ -389,6 +346,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		return countryImpl;
 	}
 
+	public Country findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Country findByPrimaryKey(long countryId)
 		throws NoSuchCountryException, SystemException {
 		Country country = fetchByPrimaryKey(countryId);
@@ -404,6 +366,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return country;
+	}
+
+	public Country fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Country fetchByPrimaryKey(long countryId) throws SystemException {

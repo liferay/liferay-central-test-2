@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       SCProductScreenshotUtil
  * @generated
  */
-public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
+public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCProductScreenshot>
 	implements SCProductScreenshotPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCProductScreenshotImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -163,6 +166,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		scProductScreenshot.setPrimaryKey(productScreenshotId);
 
 		return scProductScreenshot;
+	}
+
+	public SCProductScreenshot remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public SCProductScreenshot remove(long productScreenshotId)
@@ -267,58 +275,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductScreenshotImpl.class, scProductScreenshot.getPrimaryKey());
-
-		return scProductScreenshot;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(SCProductScreenshot, boolean merge)}.
-	 */
-	public SCProductScreenshot update(SCProductScreenshot scProductScreenshot)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(SCProductScreenshot scProductScreenshot) method. Use update(SCProductScreenshot scProductScreenshot, boolean merge) instead.");
-		}
-
-		return update(scProductScreenshot, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scProductScreenshot the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scProductScreenshot is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public SCProductScreenshot update(SCProductScreenshot scProductScreenshot,
-		boolean merge) throws SystemException {
-		boolean isNew = scProductScreenshot.isNew();
-
-		for (ModelListener<SCProductScreenshot> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductScreenshot);
-			}
-			else {
-				listener.onBeforeUpdate(scProductScreenshot);
-			}
-		}
-
-		scProductScreenshot = updateImpl(scProductScreenshot, merge);
-
-		for (ModelListener<SCProductScreenshot> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(scProductScreenshot);
-			}
-			else {
-				listener.onAfterUpdate(scProductScreenshot);
-			}
-		}
 
 		return scProductScreenshot;
 	}
@@ -429,6 +385,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		return scProductScreenshotImpl;
 	}
 
+	public SCProductScreenshot findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public SCProductScreenshot findByPrimaryKey(long productScreenshotId)
 		throws NoSuchProductScreenshotException, SystemException {
 		SCProductScreenshot scProductScreenshot = fetchByPrimaryKey(productScreenshotId);
@@ -445,6 +406,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return scProductScreenshot;
+	}
+
+	public SCProductScreenshot fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public SCProductScreenshot fetchByPrimaryKey(long productScreenshotId)

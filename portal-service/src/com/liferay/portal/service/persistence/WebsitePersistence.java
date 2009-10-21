@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Website;
 
 /**
  * <a href="WebsitePersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       WebsiteUtil
  * @generated
  */
-public interface WebsitePersistence extends BasePersistence {
+public interface WebsitePersistence extends BasePersistence<Website> {
 	public void cacheResult(com.liferay.portal.model.Website website);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Website> websites);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Website create(long websiteId);
 
 	public com.liferay.portal.model.Website remove(long websiteId)
 		throws com.liferay.portal.NoSuchWebsiteException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Website remove(
-		com.liferay.portal.model.Website website)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Website, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Website update(
-		com.liferay.portal.model.Website website)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  website the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when website is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Website update(
-		com.liferay.portal.model.Website website, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website updateImpl(
 		com.liferay.portal.model.Website website, boolean merge)
@@ -234,14 +206,6 @@ public interface WebsitePersistence extends BasePersistence {
 		boolean primary, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchWebsiteException,
 			com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findAll()
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       WikiPageUtil
  * @generated
  */
-public class WikiPagePersistenceImpl extends BasePersistenceImpl
+public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	implements WikiPagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -308,6 +311,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		return wikiPage;
 	}
 
+	public WikiPage remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public WikiPage remove(long pageId)
 		throws NoSuchPageException, SystemException {
 		Session session = null;
@@ -403,57 +411,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageImpl.class, wikiPage.getPrimaryKey());
-
-		return wikiPage;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(WikiPage, boolean merge)}.
-	 */
-	public WikiPage update(WikiPage wikiPage) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(WikiPage wikiPage) method. Use update(WikiPage wikiPage, boolean merge) instead.");
-		}
-
-		return update(wikiPage, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  wikiPage the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when wikiPage is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public WikiPage update(WikiPage wikiPage, boolean merge)
-		throws SystemException {
-		boolean isNew = wikiPage.isNew();
-
-		for (ModelListener<WikiPage> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiPage);
-			}
-			else {
-				listener.onBeforeUpdate(wikiPage);
-			}
-		}
-
-		wikiPage = updateImpl(wikiPage, merge);
-
-		for (ModelListener<WikiPage> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(wikiPage);
-			}
-			else {
-				listener.onAfterUpdate(wikiPage);
-			}
-		}
 
 		return wikiPage;
 	}
@@ -577,6 +534,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		return wikiPageImpl;
 	}
 
+	public WikiPage findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public WikiPage findByPrimaryKey(long pageId)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = fetchByPrimaryKey(pageId);
@@ -591,6 +553,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return wikiPage;
+	}
+
+	public WikiPage fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public WikiPage fetchByPrimaryKey(long pageId) throws SystemException {

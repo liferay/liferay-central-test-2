@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.BrowserTracker;
 
 /**
  * <a href="BrowserTrackerPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,47 +37,18 @@ package com.liferay.portal.service.persistence;
  * @see       BrowserTrackerUtil
  * @generated
  */
-public interface BrowserTrackerPersistence extends BasePersistence {
+public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracker> {
 	public void cacheResult(
 		com.liferay.portal.model.BrowserTracker browserTracker);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.BrowserTracker> browserTrackers);
 
-	public void clearCache();
-
 	public com.liferay.portal.model.BrowserTracker create(long browserTrackerId);
 
 	public com.liferay.portal.model.BrowserTracker remove(long browserTrackerId)
 		throws com.liferay.portal.NoSuchBrowserTrackerException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.BrowserTracker remove(
-		com.liferay.portal.model.BrowserTracker browserTracker)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(BrowserTracker, boolean merge)}.
-	 */
-	public com.liferay.portal.model.BrowserTracker update(
-		com.liferay.portal.model.BrowserTracker browserTracker)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  browserTracker the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when browserTracker is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.BrowserTracker update(
-		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.BrowserTracker updateImpl(
 		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
@@ -99,14 +71,6 @@ public interface BrowserTrackerPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.BrowserTracker fetchByUserId(long userId,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.BrowserTracker> findAll()
 		throws com.liferay.portal.SystemException;

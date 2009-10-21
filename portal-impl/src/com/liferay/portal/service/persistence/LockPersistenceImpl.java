@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLockException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portal.model.impl.LockImpl;
 import com.liferay.portal.model.impl.LockModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       LockUtil
  * @generated
  */
-public class LockPersistenceImpl extends BasePersistenceImpl
+public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	implements LockPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = LockImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -152,6 +155,11 @@ public class LockPersistenceImpl extends BasePersistenceImpl
 		lock.setUuid(uuid);
 
 		return lock;
+	}
+
+	public Lock remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Lock remove(long lockId) throws NoSuchLockException, SystemException {
@@ -243,56 +251,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl
 		return lock;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Lock, boolean merge)}.
-	 */
-	public Lock update(Lock lock) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Lock lock) method. Use update(Lock lock, boolean merge) instead.");
-		}
-
-		return update(lock, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  lock the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when lock is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Lock update(Lock lock, boolean merge) throws SystemException {
-		boolean isNew = lock.isNew();
-
-		for (ModelListener<Lock> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(lock);
-			}
-			else {
-				listener.onBeforeUpdate(lock);
-			}
-		}
-
-		lock = updateImpl(lock, merge);
-
-		for (ModelListener<Lock> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(lock);
-			}
-			else {
-				listener.onAfterUpdate(lock);
-			}
-		}
-
-		return lock;
-	}
-
 	public Lock updateImpl(com.liferay.portal.model.Lock lock, boolean merge)
 		throws SystemException {
 		lock = toUnwrappedModel(lock);
@@ -376,6 +334,11 @@ public class LockPersistenceImpl extends BasePersistenceImpl
 		return lockImpl;
 	}
 
+	public Lock findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Lock findByPrimaryKey(long lockId)
 		throws NoSuchLockException, SystemException {
 		Lock lock = fetchByPrimaryKey(lockId);
@@ -390,6 +353,11 @@ public class LockPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return lock;
+	}
+
+	public Lock fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Lock fetchByPrimaryKey(long lockId) throws SystemException {

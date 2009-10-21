@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.OrgGroupPermission;
 
 /**
  * <a href="OrgGroupPermissionPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,14 +37,12 @@ package com.liferay.portal.service.persistence;
  * @see       OrgGroupPermissionUtil
  * @generated
  */
-public interface OrgGroupPermissionPersistence extends BasePersistence {
+public interface OrgGroupPermissionPersistence extends BasePersistence<OrgGroupPermission> {
 	public void cacheResult(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.OrgGroupPermission> orgGroupPermissions);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.OrgGroupPermission create(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK);
@@ -52,33 +51,6 @@ public interface OrgGroupPermissionPersistence extends BasePersistence {
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
 		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.OrgGroupPermission remove(
-		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(OrgGroupPermission, boolean merge)}.
-	 */
-	public com.liferay.portal.model.OrgGroupPermission update(
-		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  orgGroupPermission the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when orgGroupPermission is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.OrgGroupPermission update(
-		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgGroupPermission updateImpl(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
@@ -148,14 +120,6 @@ public interface OrgGroupPermissionPersistence extends BasePersistence {
 		long permissionId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
 			com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.OrgGroupPermission> findAll()
 		throws com.liferay.portal.SystemException;

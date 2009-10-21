@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Role;
 
 /**
  * <a href="RolePersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,45 +37,16 @@ package com.liferay.portal.service.persistence;
  * @see       RoleUtil
  * @generated
  */
-public interface RolePersistence extends BasePersistence {
+public interface RolePersistence extends BasePersistence<Role> {
 	public void cacheResult(com.liferay.portal.model.Role role);
 
 	public void cacheResult(java.util.List<com.liferay.portal.model.Role> roles);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Role create(long roleId);
 
 	public com.liferay.portal.model.Role remove(long roleId)
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Role remove(
-		com.liferay.portal.model.Role role)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Role, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Role update(
-		com.liferay.portal.model.Role role)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  role the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when role is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Role update(
-		com.liferay.portal.model.Role role, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role updateImpl(
 		com.liferay.portal.model.Role role, boolean merge)
@@ -199,14 +171,6 @@ public interface RolePersistence extends BasePersistence {
 	public com.liferay.portal.model.Role fetchByC_C_C(long companyId,
 		long classNameId, long classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> findAll()
 		throws com.liferay.portal.SystemException;

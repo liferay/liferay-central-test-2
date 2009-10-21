@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.impl.MBMailingListImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       MBMailingListUtil
  * @generated
  */
-public class MBMailingListPersistenceImpl extends BasePersistenceImpl
+public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingList>
 	implements MBMailingListPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBMailingListImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -177,6 +180,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		return mbMailingList;
 	}
 
+	public MBMailingList remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public MBMailingList remove(long mailingListId)
 		throws NoSuchMailingListException, SystemException {
 		Session session = null;
@@ -273,58 +281,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
 			MBMailingListImpl.class, mbMailingList.getPrimaryKey());
-
-		return mbMailingList;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(MBMailingList, boolean merge)}.
-	 */
-	public MBMailingList update(MBMailingList mbMailingList)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MBMailingList mbMailingList) method. Use update(MBMailingList mbMailingList, boolean merge) instead.");
-		}
-
-		return update(mbMailingList, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbMailingList the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbMailingList is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MBMailingList update(MBMailingList mbMailingList, boolean merge)
-		throws SystemException {
-		boolean isNew = mbMailingList.isNew();
-
-		for (ModelListener<MBMailingList> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(mbMailingList);
-			}
-			else {
-				listener.onBeforeUpdate(mbMailingList);
-			}
-		}
-
-		mbMailingList = updateImpl(mbMailingList, merge);
-
-		for (ModelListener<MBMailingList> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(mbMailingList);
-			}
-			else {
-				listener.onAfterUpdate(mbMailingList);
-			}
-		}
 
 		return mbMailingList;
 	}
@@ -450,6 +406,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		return mbMailingListImpl;
 	}
 
+	public MBMailingList findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MBMailingList findByPrimaryKey(long mailingListId)
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = fetchByPrimaryKey(mailingListId);
@@ -466,6 +427,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbMailingList;
+	}
+
+	public MBMailingList fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MBMailingList fetchByPrimaryKey(long mailingListId)

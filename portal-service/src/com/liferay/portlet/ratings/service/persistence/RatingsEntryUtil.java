@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.ratings.model.RatingsEntry;
+
+import java.util.List;
 
 /**
  * <a href="RatingsEntryUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.ratings.service.persistence;
  * @generated
  */
 public class RatingsEntryUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static RatingsEntry remove(RatingsEntry ratingsEntry)
+		throws SystemException {
+		return getPersistence().remove(ratingsEntry);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static RatingsEntry update(RatingsEntry ratingsEntry, boolean merge)
+		throws SystemException {
+		return getPersistence().update(ratingsEntry, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry) {
 		getPersistence().cacheResult(ratingsEntry);
@@ -45,10 +90,6 @@ public class RatingsEntryUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> ratingsEntries) {
 		getPersistence().cacheResult(ratingsEntries);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry create(
@@ -61,39 +102,6 @@ public class RatingsEntryUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().remove(entryId);
-	}
-
-	public static com.liferay.portlet.ratings.model.RatingsEntry remove(
-		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(ratingsEntry);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(RatingsEntry, boolean merge)}.
-	 */
-	public static com.liferay.portlet.ratings.model.RatingsEntry update(
-		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(ratingsEntry);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  ratingsEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when ratingsEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.ratings.model.RatingsEntry update(
-		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(ratingsEntry, merge);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateImpl(
@@ -176,18 +184,6 @@ public class RatingsEntryUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .fetchByU_C_C(userId, classNameId, classPK, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll()

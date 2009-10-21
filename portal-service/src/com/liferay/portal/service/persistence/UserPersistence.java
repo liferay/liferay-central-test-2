@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.User;
 
 /**
  * <a href="UserPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,45 +37,16 @@ package com.liferay.portal.service.persistence;
  * @see       UserUtil
  * @generated
  */
-public interface UserPersistence extends BasePersistence {
+public interface UserPersistence extends BasePersistence<User> {
 	public void cacheResult(com.liferay.portal.model.User user);
 
 	public void cacheResult(java.util.List<com.liferay.portal.model.User> users);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.User create(long userId);
 
 	public com.liferay.portal.model.User remove(long userId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.User remove(
-		com.liferay.portal.model.User user)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(User, boolean merge)}.
-	 */
-	public com.liferay.portal.model.User update(
-		com.liferay.portal.model.User user)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  user the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when user is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.User update(
-		com.liferay.portal.model.User user, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User updateImpl(
 		com.liferay.portal.model.User user, boolean merge)
@@ -254,14 +226,6 @@ public interface UserPersistence extends BasePersistence {
 	public com.liferay.portal.model.User fetchByC_EA(long companyId,
 		java.lang.String emailAddress, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findAll()
 		throws com.liferay.portal.SystemException;

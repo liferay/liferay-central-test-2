@@ -24,6 +24,8 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.asset.model.AssetEntry;
+
 /**
  * <a href="AssetEntryPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       AssetEntryUtil
  * @generated
  */
-public interface AssetEntryPersistence extends BasePersistence {
+public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetEntry> assetEntries);
 
-	public void clearCache();
-
 	public com.liferay.portlet.asset.model.AssetEntry create(long entryId);
 
 	public com.liferay.portlet.asset.model.AssetEntry remove(long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchEntryException;
-
-	public com.liferay.portlet.asset.model.AssetEntry remove(
-		com.liferay.portlet.asset.model.AssetEntry assetEntry)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(AssetEntry, boolean merge)}.
-	 */
-	public com.liferay.portlet.asset.model.AssetEntry update(
-		com.liferay.portlet.asset.model.AssetEntry assetEntry)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.asset.model.AssetEntry update(
-		com.liferay.portlet.asset.model.AssetEntry assetEntry, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetEntry updateImpl(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry, boolean merge)
@@ -131,14 +104,6 @@ public interface AssetEntryPersistence extends BasePersistence {
 	public com.liferay.portlet.asset.model.AssetEntry fetchByC_C(
 		long classNameId, long classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> findAll()
 		throws com.liferay.portal.SystemException;

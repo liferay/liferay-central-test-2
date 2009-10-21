@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.messageboards.model.MBMessageFlag;
+
+import java.util.List;
 
 /**
  * <a href="MBMessageFlagUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.messageboards.service.persistence;
  * @generated
  */
 public class MBMessageFlagUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static MBMessageFlag remove(MBMessageFlag mbMessageFlag)
+		throws SystemException {
+		return getPersistence().remove(mbMessageFlag);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static MBMessageFlag update(MBMessageFlag mbMessageFlag,
+		boolean merge) throws SystemException {
+		return getPersistence().update(mbMessageFlag, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag) {
 		getPersistence().cacheResult(mbMessageFlag);
@@ -45,10 +90,6 @@ public class MBMessageFlagUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> mbMessageFlags) {
 		getPersistence().cacheResult(mbMessageFlags);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag create(
@@ -61,39 +102,6 @@ public class MBMessageFlagUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
 		return getPersistence().remove(messageFlagId);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag remove(
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(mbMessageFlag);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(MBMessageFlag, boolean merge)}.
-	 */
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(mbMessageFlag);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbMessageFlag the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbMessageFlag is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(mbMessageFlag, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag updateImpl(
@@ -387,18 +395,6 @@ public class MBMessageFlagUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .fetchByU_M_F(userId, messageId, flag, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findAll()

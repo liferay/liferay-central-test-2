@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       DLFileEntryUtil
  * @generated
  */
-public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
+public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	implements DLFileEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -250,6 +253,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		return dlFileEntry;
 	}
 
+	public DLFileEntry remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public DLFileEntry remove(long fileEntryId)
 		throws NoSuchFileEntryException, SystemException {
 		Session session = null;
@@ -356,58 +364,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey());
-
-		return dlFileEntry;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(DLFileEntry, boolean merge)}.
-	 */
-	public DLFileEntry update(DLFileEntry dlFileEntry)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(DLFileEntry dlFileEntry) method. Use update(DLFileEntry dlFileEntry, boolean merge) instead.");
-		}
-
-		return update(dlFileEntry, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public DLFileEntry update(DLFileEntry dlFileEntry, boolean merge)
-		throws SystemException {
-		boolean isNew = dlFileEntry.isNew();
-
-		for (ModelListener<DLFileEntry> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileEntry);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileEntry);
-			}
-		}
-
-		dlFileEntry = updateImpl(dlFileEntry, merge);
-
-		for (ModelListener<DLFileEntry> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileEntry);
-			}
-			else {
-				listener.onAfterUpdate(dlFileEntry);
-			}
-		}
 
 		return dlFileEntry;
 	}
@@ -561,6 +517,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		return dlFileEntryImpl;
 	}
 
+	public DLFileEntry findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public DLFileEntry findByPrimaryKey(long fileEntryId)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = fetchByPrimaryKey(fileEntryId);
@@ -576,6 +537,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFileEntry;
+	}
+
+	public DLFileEntry fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public DLFileEntry fetchByPrimaryKey(long fileEntryId)

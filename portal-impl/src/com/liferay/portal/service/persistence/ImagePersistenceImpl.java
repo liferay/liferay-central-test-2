@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchImageException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.model.impl.ImageModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       ImageUtil
  * @generated
  */
-public class ImagePersistenceImpl extends BasePersistenceImpl
+public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	implements ImagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ImageImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -118,6 +121,11 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		image.setPrimaryKey(imageId);
 
 		return image;
+	}
+
+	public Image remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Image remove(long imageId)
@@ -202,56 +210,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		return image;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Image, boolean merge)}.
-	 */
-	public Image update(Image image) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Image image) method. Use update(Image image, boolean merge) instead.");
-		}
-
-		return update(image, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  image the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when image is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Image update(Image image, boolean merge) throws SystemException {
-		boolean isNew = image.isNew();
-
-		for (ModelListener<Image> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(image);
-			}
-			else {
-				listener.onBeforeUpdate(image);
-			}
-		}
-
-		image = updateImpl(image, merge);
-
-		for (ModelListener<Image> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(image);
-			}
-			else {
-				listener.onAfterUpdate(image);
-			}
-		}
-
-		return image;
-	}
-
 	public Image updateImpl(com.liferay.portal.model.Image image, boolean merge)
 		throws SystemException {
 		image = toUnwrappedModel(image);
@@ -301,6 +259,11 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		return imageImpl;
 	}
 
+	public Image findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Image findByPrimaryKey(long imageId)
 		throws NoSuchImageException, SystemException {
 		Image image = fetchByPrimaryKey(imageId);
@@ -315,6 +278,11 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return image;
+	}
+
+	public Image fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Image fetchByPrimaryKey(long imageId) throws SystemException {

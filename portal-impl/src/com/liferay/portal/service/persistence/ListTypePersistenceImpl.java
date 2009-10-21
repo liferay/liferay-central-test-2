@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchListTypeException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.ListTypeModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       ListTypeUtil
  * @generated
  */
-public class ListTypePersistenceImpl extends BasePersistenceImpl
+public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	implements ListTypePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ListTypeImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -119,6 +122,11 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		listType.setPrimaryKey(listTypeId);
 
 		return listType;
+	}
+
+	public ListType remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Integer)primaryKey).intValue());
 	}
 
 	public ListType remove(int listTypeId)
@@ -204,57 +212,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		return listType;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ListType, boolean merge)}.
-	 */
-	public ListType update(ListType listType) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ListType listType) method. Use update(ListType listType, boolean merge) instead.");
-		}
-
-		return update(listType, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  listType the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when listType is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ListType update(ListType listType, boolean merge)
-		throws SystemException {
-		boolean isNew = listType.isNew();
-
-		for (ModelListener<ListType> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(listType);
-			}
-			else {
-				listener.onBeforeUpdate(listType);
-			}
-		}
-
-		listType = updateImpl(listType, merge);
-
-		for (ModelListener<ListType> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(listType);
-			}
-			else {
-				listener.onAfterUpdate(listType);
-			}
-		}
-
-		return listType;
-	}
-
 	public ListType updateImpl(com.liferay.portal.model.ListType listType,
 		boolean merge) throws SystemException {
 		listType = toUnwrappedModel(listType);
@@ -300,6 +257,11 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		return listTypeImpl;
 	}
 
+	public ListType findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Integer)primaryKey).intValue());
+	}
+
 	public ListType findByPrimaryKey(int listTypeId)
 		throws NoSuchListTypeException, SystemException {
 		ListType listType = fetchByPrimaryKey(listTypeId);
@@ -315,6 +277,11 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return listType;
+	}
+
+	public ListType fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Integer)primaryKey).intValue());
 	}
 
 	public ListType fetchByPrimaryKey(int listTypeId) throws SystemException {

@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.messageboards.model.MBMessage;
+
+import java.util.List;
 
 /**
  * <a href="MBMessageUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.messageboards.service.persistence;
  * @generated
  */
 public class MBMessageUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static MBMessage remove(MBMessage mbMessage)
+		throws SystemException {
+		return getPersistence().remove(mbMessage);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static MBMessage update(MBMessage mbMessage, boolean merge)
+		throws SystemException {
+		return getPersistence().update(mbMessage, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage) {
 		getPersistence().cacheResult(mbMessage);
@@ -45,10 +90,6 @@ public class MBMessageUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> mbMessages) {
 		getPersistence().cacheResult(mbMessages);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage create(
@@ -61,39 +102,6 @@ public class MBMessageUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence().remove(messageId);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage remove(
-		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(mbMessage);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(MBMessage, boolean merge)}.
-	 */
-	public static com.liferay.portlet.messageboards.model.MBMessage update(
-		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(mbMessage);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbMessage the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbMessage is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.messageboards.model.MBMessage update(
-		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(mbMessage, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateImpl(
@@ -933,18 +941,6 @@ public class MBMessageUtil {
 		return getPersistence()
 				   .findByG_C_T_S_PrevAndNext(messageId, groupId, categoryId,
 			threadId, status, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findAll()

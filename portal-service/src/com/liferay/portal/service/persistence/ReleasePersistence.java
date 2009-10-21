@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Release;
 
 /**
  * <a href="ReleasePersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       ReleaseUtil
  * @generated
  */
-public interface ReleasePersistence extends BasePersistence {
+public interface ReleasePersistence extends BasePersistence<Release> {
 	public void cacheResult(com.liferay.portal.model.Release release);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Release> releases);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Release create(long releaseId);
 
 	public com.liferay.portal.model.Release remove(long releaseId)
 		throws com.liferay.portal.NoSuchReleaseException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Release remove(
-		com.liferay.portal.model.Release release)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Release, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Release update(
-		com.liferay.portal.model.Release release)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  release the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when release is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Release update(
-		com.liferay.portal.model.Release release, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Release updateImpl(
 		com.liferay.portal.model.Release release, boolean merge)
@@ -87,14 +59,6 @@ public interface ReleasePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Release fetchByPrimaryKey(long releaseId)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Release> findAll()
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.PasswordPolicy;
+
+import java.util.List;
 
 /**
  * <a href="PasswordPolicyUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,45 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class PasswordPolicyUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static PasswordPolicy remove(PasswordPolicy passwordPolicy)
+		throws SystemException {
+		return getPersistence().remove(passwordPolicy);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static PasswordPolicy update(PasswordPolicy passwordPolicy,
+		boolean merge) throws SystemException {
+		return getPersistence().update(passwordPolicy, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy) {
 		getPersistence().cacheResult(passwordPolicy);
@@ -45,10 +89,6 @@ public class PasswordPolicyUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.PasswordPolicy> passwordPolicies) {
 		getPersistence().cacheResult(passwordPolicies);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy create(
@@ -61,39 +101,6 @@ public class PasswordPolicyUtil {
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(passwordPolicyId);
-	}
-
-	public static com.liferay.portal.model.PasswordPolicy remove(
-		com.liferay.portal.model.PasswordPolicy passwordPolicy)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(passwordPolicy);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(PasswordPolicy, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.PasswordPolicy update(
-		com.liferay.portal.model.PasswordPolicy passwordPolicy)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(passwordPolicy);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  passwordPolicy the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when passwordPolicy is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.PasswordPolicy update(
-		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(passwordPolicy, merge);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy updateImpl(
@@ -151,18 +158,6 @@ public class PasswordPolicyUtil {
 		long companyId, java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_N(companyId, name, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicy> findAll()

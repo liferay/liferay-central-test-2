@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -51,6 +52,8 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -69,7 +72,7 @@ import java.util.List;
  * @see       BlogsEntryUtil
  * @generated
  */
-public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
+public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	implements BlogsEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BlogsEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -414,6 +417,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return blogsEntry;
 	}
 
+	public BlogsEntry remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public BlogsEntry remove(long entryId)
 		throws NoSuchEntryException, SystemException {
 		Session session = null;
@@ -509,57 +517,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryImpl.class, blogsEntry.getPrimaryKey());
-
-		return blogsEntry;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(BlogsEntry, boolean merge)}.
-	 */
-	public BlogsEntry update(BlogsEntry blogsEntry) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(BlogsEntry blogsEntry) method. Use update(BlogsEntry blogsEntry, boolean merge) instead.");
-		}
-
-		return update(blogsEntry, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  blogsEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when blogsEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public BlogsEntry update(BlogsEntry blogsEntry, boolean merge)
-		throws SystemException {
-		boolean isNew = blogsEntry.isNew();
-
-		for (ModelListener<BlogsEntry> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(blogsEntry);
-			}
-			else {
-				listener.onBeforeUpdate(blogsEntry);
-			}
-		}
-
-		blogsEntry = updateImpl(blogsEntry, merge);
-
-		for (ModelListener<BlogsEntry> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(blogsEntry);
-			}
-			else {
-				listener.onAfterUpdate(blogsEntry);
-			}
-		}
 
 		return blogsEntry;
 	}
@@ -680,6 +637,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return blogsEntryImpl;
 	}
 
+	public BlogsEntry findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public BlogsEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = fetchByPrimaryKey(entryId);
@@ -695,6 +657,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return blogsEntry;
+	}
+
+	public BlogsEntry fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public BlogsEntry fetchByPrimaryKey(long entryId) throws SystemException {

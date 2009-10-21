@@ -24,6 +24,8 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+
 /**
  * <a href="DLFolderPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       DLFolderUtil
  * @generated
  */
-public interface DLFolderPersistence extends BasePersistence {
+public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	public void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> dlFolders);
-
-	public void clearCache();
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder create(
 		long folderId);
@@ -53,33 +53,6 @@ public interface DLFolderPersistence extends BasePersistence {
 		long folderId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFolder remove(
-		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(DLFolder, boolean merge)}.
-	 */
-	public com.liferay.portlet.documentlibrary.model.DLFolder update(
-		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFolder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFolder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.documentlibrary.model.DLFolder update(
-		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
@@ -266,14 +239,6 @@ public interface DLFolderPersistence extends BasePersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> findAll()
 		throws com.liferay.portal.SystemException;

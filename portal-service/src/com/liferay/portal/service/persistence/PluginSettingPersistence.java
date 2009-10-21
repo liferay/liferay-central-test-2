@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.PluginSetting;
 
 /**
  * <a href="PluginSettingPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,47 +37,18 @@ package com.liferay.portal.service.persistence;
  * @see       PluginSettingUtil
  * @generated
  */
-public interface PluginSettingPersistence extends BasePersistence {
+public interface PluginSettingPersistence extends BasePersistence<PluginSetting> {
 	public void cacheResult(
 		com.liferay.portal.model.PluginSetting pluginSetting);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.PluginSetting> pluginSettings);
 
-	public void clearCache();
-
 	public com.liferay.portal.model.PluginSetting create(long pluginSettingId);
 
 	public com.liferay.portal.model.PluginSetting remove(long pluginSettingId)
 		throws com.liferay.portal.NoSuchPluginSettingException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.PluginSetting remove(
-		com.liferay.portal.model.PluginSetting pluginSetting)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(PluginSetting, boolean merge)}.
-	 */
-	public com.liferay.portal.model.PluginSetting update(
-		com.liferay.portal.model.PluginSetting pluginSetting)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  pluginSetting the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when pluginSetting is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.PluginSetting update(
-		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PluginSetting updateImpl(
 		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
@@ -130,14 +102,6 @@ public interface PluginSettingPersistence extends BasePersistence {
 	public com.liferay.portal.model.PluginSetting fetchByC_I_T(long companyId,
 		java.lang.String pluginId, java.lang.String pluginType,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PluginSetting> findAll()
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.impl.SocialActivityImpl;
 import com.liferay.portlet.social.model.impl.SocialActivityModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       SocialActivityUtil
  * @generated
  */
-public class SocialActivityPersistenceImpl extends BasePersistenceImpl
+public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialActivity>
 	implements SocialActivityPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialActivityImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -272,6 +275,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		return socialActivity;
 	}
 
+	public SocialActivity remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public SocialActivity remove(long activityId)
 		throws NoSuchActivityException, SystemException {
 		Session session = null;
@@ -372,58 +380,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(SocialActivityModelImpl.ENTITY_CACHE_ENABLED,
 			SocialActivityImpl.class, socialActivity.getPrimaryKey());
-
-		return socialActivity;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(SocialActivity, boolean merge)}.
-	 */
-	public SocialActivity update(SocialActivity socialActivity)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(SocialActivity socialActivity) method. Use update(SocialActivity socialActivity, boolean merge) instead.");
-		}
-
-		return update(socialActivity, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  socialActivity the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when socialActivity is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public SocialActivity update(SocialActivity socialActivity, boolean merge)
-		throws SystemException {
-		boolean isNew = socialActivity.isNew();
-
-		for (ModelListener<SocialActivity> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(socialActivity);
-			}
-			else {
-				listener.onBeforeUpdate(socialActivity);
-			}
-		}
-
-		socialActivity = updateImpl(socialActivity, merge);
-
-		for (ModelListener<SocialActivity> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(socialActivity);
-			}
-			else {
-				listener.onAfterUpdate(socialActivity);
-			}
-		}
 
 		return socialActivity;
 	}
@@ -542,6 +498,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		return socialActivityImpl;
 	}
 
+	public SocialActivity findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public SocialActivity findByPrimaryKey(long activityId)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = fetchByPrimaryKey(activityId);
@@ -557,6 +518,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return socialActivity;
+	}
+
+	public SocialActivity fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public SocialActivity fetchByPrimaryKey(long activityId)

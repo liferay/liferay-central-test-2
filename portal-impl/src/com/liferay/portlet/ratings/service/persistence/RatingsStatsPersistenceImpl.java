@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
 import com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       RatingsStatsUtil
  * @generated
  */
-public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
+public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStats>
 	implements RatingsStatsPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = RatingsStatsImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -121,6 +124,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		ratingsStats.setPrimaryKey(statsId);
 
 		return ratingsStats;
+	}
+
+	public RatingsStats remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public RatingsStats remove(long statsId)
@@ -216,58 +224,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		return ratingsStats;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(RatingsStats, boolean merge)}.
-	 */
-	public RatingsStats update(RatingsStats ratingsStats)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(RatingsStats ratingsStats) method. Use update(RatingsStats ratingsStats, boolean merge) instead.");
-		}
-
-		return update(ratingsStats, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  ratingsStats the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when ratingsStats is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public RatingsStats update(RatingsStats ratingsStats, boolean merge)
-		throws SystemException {
-		boolean isNew = ratingsStats.isNew();
-
-		for (ModelListener<RatingsStats> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(ratingsStats);
-			}
-			else {
-				listener.onBeforeUpdate(ratingsStats);
-			}
-		}
-
-		ratingsStats = updateImpl(ratingsStats, merge);
-
-		for (ModelListener<RatingsStats> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(ratingsStats);
-			}
-			else {
-				listener.onAfterUpdate(ratingsStats);
-			}
-		}
-
-		return ratingsStats;
-	}
-
 	public RatingsStats updateImpl(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
 		boolean merge) throws SystemException {
@@ -341,6 +297,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		return ratingsStatsImpl;
 	}
 
+	public RatingsStats findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public RatingsStats findByPrimaryKey(long statsId)
 		throws NoSuchStatsException, SystemException {
 		RatingsStats ratingsStats = fetchByPrimaryKey(statsId);
@@ -356,6 +317,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return ratingsStats;
+	}
+
+	public RatingsStats fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public RatingsStats fetchByPrimaryKey(long statsId)

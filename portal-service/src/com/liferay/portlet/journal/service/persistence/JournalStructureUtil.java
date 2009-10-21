@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.journal.model.JournalStructure;
+
+import java.util.List;
 
 /**
  * <a href="JournalStructureUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.journal.service.persistence;
  * @generated
  */
 public class JournalStructureUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static JournalStructure remove(JournalStructure journalStructure)
+		throws SystemException {
+		return getPersistence().remove(journalStructure);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static JournalStructure update(JournalStructure journalStructure,
+		boolean merge) throws SystemException {
+		return getPersistence().update(journalStructure, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure) {
 		getPersistence().cacheResult(journalStructure);
@@ -45,10 +90,6 @@ public class JournalStructureUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalStructure> journalStructures) {
 		getPersistence().cacheResult(journalStructures);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure create(
@@ -61,39 +102,6 @@ public class JournalStructureUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().remove(id);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalStructure remove(
-		com.liferay.portlet.journal.model.JournalStructure journalStructure)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(journalStructure);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(JournalStructure, boolean merge)}.
-	 */
-	public static com.liferay.portlet.journal.model.JournalStructure update(
-		com.liferay.portlet.journal.model.JournalStructure journalStructure)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(journalStructure);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalStructure the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalStructure is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.journal.model.JournalStructure update(
-		com.liferay.portlet.journal.model.JournalStructure journalStructure,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(journalStructure, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateImpl(
@@ -321,18 +329,6 @@ public class JournalStructureUtil {
 			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence()
 				   .findByG_P_PrevAndNext(id, groupId, parentStructureId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findAll()

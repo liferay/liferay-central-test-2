@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       AnnouncementsFlagUtil
  * @generated
  */
-public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
+public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<AnnouncementsFlag>
 	implements AnnouncementsFlagPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsFlagImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -146,6 +149,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		announcementsFlag.setPrimaryKey(flagId);
 
 		return announcementsFlag;
+	}
+
+	public AnnouncementsFlag remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public AnnouncementsFlag remove(long flagId)
@@ -245,58 +253,6 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		return announcementsFlag;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(AnnouncementsFlag, boolean merge)}.
-	 */
-	public AnnouncementsFlag update(AnnouncementsFlag announcementsFlag)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AnnouncementsFlag announcementsFlag) method. Use update(AnnouncementsFlag announcementsFlag, boolean merge) instead.");
-		}
-
-		return update(announcementsFlag, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  announcementsFlag the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when announcementsFlag is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AnnouncementsFlag update(AnnouncementsFlag announcementsFlag,
-		boolean merge) throws SystemException {
-		boolean isNew = announcementsFlag.isNew();
-
-		for (ModelListener<AnnouncementsFlag> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(announcementsFlag);
-			}
-			else {
-				listener.onBeforeUpdate(announcementsFlag);
-			}
-		}
-
-		announcementsFlag = updateImpl(announcementsFlag, merge);
-
-		for (ModelListener<AnnouncementsFlag> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(announcementsFlag);
-			}
-			else {
-				listener.onAfterUpdate(announcementsFlag);
-			}
-		}
-
-		return announcementsFlag;
-	}
-
 	public AnnouncementsFlag updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
 		boolean merge) throws SystemException {
@@ -375,6 +331,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		return announcementsFlagImpl;
 	}
 
+	public AnnouncementsFlag findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AnnouncementsFlag findByPrimaryKey(long flagId)
 		throws NoSuchFlagException, SystemException {
 		AnnouncementsFlag announcementsFlag = fetchByPrimaryKey(flagId);
@@ -390,6 +351,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return announcementsFlag;
+	}
+
+	public AnnouncementsFlag fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AnnouncementsFlag fetchByPrimaryKey(long flagId)

@@ -24,6 +24,8 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.journal.model.JournalFeed;
+
 /**
  * <a href="JournalFeedPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       JournalFeedUtil
  * @generated
  */
-public interface JournalFeedPersistence extends BasePersistence {
+public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	public void cacheResult(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalFeed> journalFeeds);
 
-	public void clearCache();
-
 	public com.liferay.portlet.journal.model.JournalFeed create(long id);
 
 	public com.liferay.portlet.journal.model.JournalFeed remove(long id)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
-
-	public com.liferay.portlet.journal.model.JournalFeed remove(
-		com.liferay.portlet.journal.model.JournalFeed journalFeed)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(JournalFeed, boolean merge)}.
-	 */
-	public com.liferay.portlet.journal.model.JournalFeed update(
-		com.liferay.portlet.journal.model.JournalFeed journalFeed)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalFeed the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalFeed is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.journal.model.JournalFeed update(
-		com.liferay.portlet.journal.model.JournalFeed journalFeed, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalFeed updateImpl(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed, boolean merge)
@@ -174,14 +147,6 @@ public interface JournalFeedPersistence extends BasePersistence {
 	public com.liferay.portlet.journal.model.JournalFeed fetchByG_F(
 		long groupId, java.lang.String feedId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> findAll()
 		throws com.liferay.portal.SystemException;

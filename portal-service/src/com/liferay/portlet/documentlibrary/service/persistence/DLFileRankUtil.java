@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.documentlibrary.model.DLFileRank;
+
+import java.util.List;
 
 /**
  * <a href="DLFileRankUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @generated
  */
 public class DLFileRankUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static DLFileRank remove(DLFileRank dlFileRank)
+		throws SystemException {
+		return getPersistence().remove(dlFileRank);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static DLFileRank update(DLFileRank dlFileRank, boolean merge)
+		throws SystemException {
+		return getPersistence().update(dlFileRank, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank) {
 		getPersistence().cacheResult(dlFileRank);
@@ -45,10 +90,6 @@ public class DLFileRankUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> dlFileRanks) {
 		getPersistence().cacheResult(dlFileRanks);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank create(
@@ -61,39 +102,6 @@ public class DLFileRankUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
 		return getPersistence().remove(fileRankId);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileRank remove(
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(dlFileRank);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(DLFileRank, boolean merge)}.
-	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileRank update(
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(dlFileRank);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileRank the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileRank is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileRank update(
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(dlFileRank, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateImpl(
@@ -260,18 +268,6 @@ public class DLFileRankUtil {
 		return getPersistence()
 				   .fetchByC_U_F_N(companyId, userId, folderId, name,
 			retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findAll()

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -56,6 +57,8 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -76,7 +79,7 @@ import java.util.Set;
  * @see       SCLicenseUtil
  * @generated
  */
-public class SCLicensePersistenceImpl extends BasePersistenceImpl
+public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	implements SCLicensePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCLicenseImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -149,6 +152,11 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		scLicense.setPrimaryKey(licenseId);
 
 		return scLicense;
+	}
+
+	public SCLicense remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public SCLicense remove(long licenseId)
@@ -245,57 +253,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		return scLicense;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(SCLicense, boolean merge)}.
-	 */
-	public SCLicense update(SCLicense scLicense) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(SCLicense scLicense) method. Use update(SCLicense scLicense, boolean merge) instead.");
-		}
-
-		return update(scLicense, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scLicense the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scLicense is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public SCLicense update(SCLicense scLicense, boolean merge)
-		throws SystemException {
-		boolean isNew = scLicense.isNew();
-
-		for (ModelListener<SCLicense> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(scLicense);
-			}
-			else {
-				listener.onBeforeUpdate(scLicense);
-			}
-		}
-
-		scLicense = updateImpl(scLicense, merge);
-
-		for (ModelListener<SCLicense> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(scLicense);
-			}
-			else {
-				listener.onAfterUpdate(scLicense);
-			}
-		}
-
-		return scLicense;
-	}
-
 	public SCLicense updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
 		boolean merge) throws SystemException {
@@ -345,6 +302,11 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		return scLicenseImpl;
 	}
 
+	public SCLicense findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public SCLicense findByPrimaryKey(long licenseId)
 		throws NoSuchLicenseException, SystemException {
 		SCLicense scLicense = fetchByPrimaryKey(licenseId);
@@ -360,6 +322,11 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return scLicense;
+	}
+
+	public SCLicense fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public SCLicense fetchByPrimaryKey(long licenseId)

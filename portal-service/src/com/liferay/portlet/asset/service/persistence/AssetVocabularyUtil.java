@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.asset.model.AssetVocabulary;
+
+import java.util.List;
 
 /**
  * <a href="AssetVocabularyUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.asset.service.persistence;
  * @generated
  */
 public class AssetVocabularyUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static AssetVocabulary remove(AssetVocabulary assetVocabulary)
+		throws SystemException {
+		return getPersistence().remove(assetVocabulary);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static AssetVocabulary update(AssetVocabulary assetVocabulary,
+		boolean merge) throws SystemException {
+		return getPersistence().update(assetVocabulary, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary) {
 		getPersistence().cacheResult(assetVocabulary);
@@ -45,10 +90,6 @@ public class AssetVocabularyUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> assetVocabularies) {
 		getPersistence().cacheResult(assetVocabularies);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary create(
@@ -61,39 +102,6 @@ public class AssetVocabularyUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchVocabularyException {
 		return getPersistence().remove(vocabularyId);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetVocabulary remove(
-		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(assetVocabulary);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(AssetVocabulary, boolean merge)}.
-	 */
-	public static com.liferay.portlet.asset.model.AssetVocabulary update(
-		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(assetVocabulary);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetVocabulary the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetVocabulary is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.asset.model.AssetVocabulary update(
-		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(assetVocabulary, merge);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateImpl(
@@ -274,18 +282,6 @@ public class AssetVocabularyUtil {
 		long groupId, java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_N(groupId, name, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findAll()

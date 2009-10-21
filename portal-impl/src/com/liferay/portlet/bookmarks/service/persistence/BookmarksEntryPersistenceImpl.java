@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       BookmarksEntryUtil
  * @generated
  */
-public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
+public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<BookmarksEntry>
 	implements BookmarksEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BookmarksEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -197,6 +200,11 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		return bookmarksEntry;
 	}
 
+	public BookmarksEntry remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public BookmarksEntry remove(long entryId)
 		throws NoSuchEntryException, SystemException {
 		Session session = null;
@@ -290,58 +298,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		return bookmarksEntry;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(BookmarksEntry, boolean merge)}.
-	 */
-	public BookmarksEntry update(BookmarksEntry bookmarksEntry)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(BookmarksEntry bookmarksEntry) method. Use update(BookmarksEntry bookmarksEntry, boolean merge) instead.");
-		}
-
-		return update(bookmarksEntry, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  bookmarksEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when bookmarksEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public BookmarksEntry update(BookmarksEntry bookmarksEntry, boolean merge)
-		throws SystemException {
-		boolean isNew = bookmarksEntry.isNew();
-
-		for (ModelListener<BookmarksEntry> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(bookmarksEntry);
-			}
-			else {
-				listener.onBeforeUpdate(bookmarksEntry);
-			}
-		}
-
-		bookmarksEntry = updateImpl(bookmarksEntry, merge);
-
-		for (ModelListener<BookmarksEntry> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(bookmarksEntry);
-			}
-			else {
-				listener.onAfterUpdate(bookmarksEntry);
-			}
-		}
-
-		return bookmarksEntry;
-	}
-
 	public BookmarksEntry updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
 		boolean merge) throws SystemException {
@@ -431,6 +387,11 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		return bookmarksEntryImpl;
 	}
 
+	public BookmarksEntry findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public BookmarksEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		BookmarksEntry bookmarksEntry = fetchByPrimaryKey(entryId);
@@ -446,6 +407,11 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return bookmarksEntry;
+	}
+
+	public BookmarksEntry fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public BookmarksEntry fetchByPrimaryKey(long entryId)

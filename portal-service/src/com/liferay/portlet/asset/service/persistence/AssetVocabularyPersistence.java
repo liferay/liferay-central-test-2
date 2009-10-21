@@ -24,6 +24,8 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.asset.model.AssetVocabulary;
+
 /**
  * <a href="AssetVocabularyPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       AssetVocabularyUtil
  * @generated
  */
-public interface AssetVocabularyPersistence extends BasePersistence {
+public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabulary> {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> assetVocabularies);
-
-	public void clearCache();
 
 	public com.liferay.portlet.asset.model.AssetVocabulary create(
 		long vocabularyId);
@@ -53,33 +53,6 @@ public interface AssetVocabularyPersistence extends BasePersistence {
 		long vocabularyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchVocabularyException;
-
-	public com.liferay.portlet.asset.model.AssetVocabulary remove(
-		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(AssetVocabulary, boolean merge)}.
-	 */
-	public com.liferay.portlet.asset.model.AssetVocabulary update(
-		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetVocabulary the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetVocabulary is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.asset.model.AssetVocabulary update(
-		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetVocabulary updateImpl(
 		com.liferay.portlet.asset.model.AssetVocabulary assetVocabulary,
@@ -204,14 +177,6 @@ public interface AssetVocabularyPersistence extends BasePersistence {
 	public com.liferay.portlet.asset.model.AssetVocabulary fetchByG_N(
 		long groupId, java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findAll()
 		throws com.liferay.portal.SystemException;

@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.messageboards.model.MBStatsUser;
+
 /**
  * <a href="MBStatsUserPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       MBStatsUserUtil
  * @generated
  */
-public interface MBStatsUserPersistence extends BasePersistence {
+public interface MBStatsUserPersistence extends BasePersistence<MBStatsUser> {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> mbStatsUsers);
-
-	public void clearCache();
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser create(
 		long statsUserId);
@@ -53,33 +53,6 @@ public interface MBStatsUserPersistence extends BasePersistence {
 		long statsUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException;
-
-	public com.liferay.portlet.messageboards.model.MBStatsUser remove(
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(MBStatsUser, boolean merge)}.
-	 */
-	public com.liferay.portlet.messageboards.model.MBStatsUser update(
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbStatsUser the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbStatsUser is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.messageboards.model.MBStatsUser update(
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateImpl(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
@@ -191,14 +164,6 @@ public interface MBStatsUserPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchStatsUserException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findAll()
 		throws com.liferay.portal.SystemException;

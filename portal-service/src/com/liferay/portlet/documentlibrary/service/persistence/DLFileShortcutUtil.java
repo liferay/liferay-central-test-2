@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+
+import java.util.List;
 
 /**
  * <a href="DLFileShortcutUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @generated
  */
 public class DLFileShortcutUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static DLFileShortcut remove(DLFileShortcut dlFileShortcut)
+		throws SystemException {
+		return getPersistence().remove(dlFileShortcut);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static DLFileShortcut update(DLFileShortcut dlFileShortcut,
+		boolean merge) throws SystemException {
+		return getPersistence().update(dlFileShortcut, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut) {
 		getPersistence().cacheResult(dlFileShortcut);
@@ -45,10 +90,6 @@ public class DLFileShortcutUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> dlFileShortcuts) {
 		getPersistence().cacheResult(dlFileShortcuts);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut create(
@@ -61,39 +102,6 @@ public class DLFileShortcutUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence().remove(fileShortcutId);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut remove(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(dlFileShortcut);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(DLFileShortcut, boolean merge)}.
-	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(dlFileShortcut);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileShortcut the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileShortcut is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(dlFileShortcut, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateImpl(
@@ -368,18 +376,6 @@ public class DLFileShortcutUtil {
 		return getPersistence()
 				   .findByG_TF_TN_S_PrevAndNext(fileShortcutId, groupId,
 			toFolderId, toName, status, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findAll()

@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
+
+import java.util.List;
 
 /**
  * <a href="SCProductScreenshotUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,46 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  * @generated
  */
 public class SCProductScreenshotUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static SCProductScreenshot remove(
+		SCProductScreenshot scProductScreenshot) throws SystemException {
+		return getPersistence().remove(scProductScreenshot);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static SCProductScreenshot update(
+		SCProductScreenshot scProductScreenshot, boolean merge)
+		throws SystemException {
+		return getPersistence().update(scProductScreenshot, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot) {
 		getPersistence().cacheResult(scProductScreenshot);
@@ -45,10 +91,6 @@ public class SCProductScreenshotUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> scProductScreenshots) {
 		getPersistence().cacheResult(scProductScreenshots);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot create(
@@ -61,39 +103,6 @@ public class SCProductScreenshotUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
 		return getPersistence().remove(productScreenshotId);
-	}
-
-	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot remove(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(scProductScreenshot);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(SCProductScreenshot, boolean merge)}.
-	 */
-	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot update(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(scProductScreenshot);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scProductScreenshot the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scProductScreenshot is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot update(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(scProductScreenshot, merge);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateImpl(
@@ -215,18 +224,6 @@ public class SCProductScreenshotUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .fetchByP_P(productEntryId, priority, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll()

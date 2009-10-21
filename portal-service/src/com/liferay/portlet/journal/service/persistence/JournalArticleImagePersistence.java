@@ -24,6 +24,8 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.journal.model.JournalArticleImage;
+
 /**
  * <a href="JournalArticleImagePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       JournalArticleImageUtil
  * @generated
  */
-public interface JournalArticleImagePersistence extends BasePersistence {
+public interface JournalArticleImagePersistence extends BasePersistence<JournalArticleImage> {
 	public void cacheResult(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> journalArticleImages);
-
-	public void clearCache();
 
 	public com.liferay.portlet.journal.model.JournalArticleImage create(
 		long articleImageId);
@@ -53,33 +53,6 @@ public interface JournalArticleImagePersistence extends BasePersistence {
 		long articleImageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
-
-	public com.liferay.portlet.journal.model.JournalArticleImage remove(
-		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(JournalArticleImage, boolean merge)}.
-	 */
-	public com.liferay.portlet.journal.model.JournalArticleImage update(
-		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalArticleImage the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalArticleImage is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.journal.model.JournalArticleImage update(
-		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage updateImpl(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
@@ -197,14 +170,6 @@ public interface JournalArticleImagePersistence extends BasePersistence {
 		java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findAll()
 		throws com.liferay.portal.SystemException;

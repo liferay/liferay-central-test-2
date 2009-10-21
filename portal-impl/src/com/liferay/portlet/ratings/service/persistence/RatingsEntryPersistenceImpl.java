@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       RatingsEntryUtil
  * @generated
  */
-public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
+public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntry>
 	implements RatingsEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = RatingsEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -143,6 +146,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		ratingsEntry.setPrimaryKey(entryId);
 
 		return ratingsEntry;
+	}
+
+	public RatingsEntry remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public RatingsEntry remove(long entryId)
@@ -239,58 +247,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		return ratingsEntry;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(RatingsEntry, boolean merge)}.
-	 */
-	public RatingsEntry update(RatingsEntry ratingsEntry)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(RatingsEntry ratingsEntry) method. Use update(RatingsEntry ratingsEntry, boolean merge) instead.");
-		}
-
-		return update(ratingsEntry, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  ratingsEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when ratingsEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public RatingsEntry update(RatingsEntry ratingsEntry, boolean merge)
-		throws SystemException {
-		boolean isNew = ratingsEntry.isNew();
-
-		for (ModelListener<RatingsEntry> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(ratingsEntry);
-			}
-			else {
-				listener.onBeforeUpdate(ratingsEntry);
-			}
-		}
-
-		ratingsEntry = updateImpl(ratingsEntry, merge);
-
-		for (ModelListener<RatingsEntry> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(ratingsEntry);
-			}
-			else {
-				listener.onAfterUpdate(ratingsEntry);
-			}
-		}
-
-		return ratingsEntry;
-	}
-
 	public RatingsEntry updateImpl(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
 		boolean merge) throws SystemException {
@@ -371,6 +327,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		return ratingsEntryImpl;
 	}
 
+	public RatingsEntry findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public RatingsEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		RatingsEntry ratingsEntry = fetchByPrimaryKey(entryId);
@@ -386,6 +347,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return ratingsEntry;
+	}
+
+	public RatingsEntry fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public RatingsEntry fetchByPrimaryKey(long entryId)

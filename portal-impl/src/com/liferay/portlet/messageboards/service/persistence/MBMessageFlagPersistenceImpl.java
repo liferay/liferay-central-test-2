@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       MBMessageFlagUtil
  * @generated
  */
-public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
+public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageFlag>
 	implements MBMessageFlagPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBMessageFlagImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -240,6 +243,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		return mbMessageFlag;
 	}
 
+	public MBMessageFlag remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public MBMessageFlag remove(long messageFlagId)
 		throws NoSuchMessageFlagException, SystemException {
 		Session session = null;
@@ -335,58 +343,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		return mbMessageFlag;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(MBMessageFlag, boolean merge)}.
-	 */
-	public MBMessageFlag update(MBMessageFlag mbMessageFlag)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MBMessageFlag mbMessageFlag) method. Use update(MBMessageFlag mbMessageFlag, boolean merge) instead.");
-		}
-
-		return update(mbMessageFlag, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbMessageFlag the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbMessageFlag is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MBMessageFlag update(MBMessageFlag mbMessageFlag, boolean merge)
-		throws SystemException {
-		boolean isNew = mbMessageFlag.isNew();
-
-		for (ModelListener<MBMessageFlag> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(mbMessageFlag);
-			}
-			else {
-				listener.onBeforeUpdate(mbMessageFlag);
-			}
-		}
-
-		mbMessageFlag = updateImpl(mbMessageFlag, merge);
-
-		for (ModelListener<MBMessageFlag> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(mbMessageFlag);
-			}
-			else {
-				listener.onAfterUpdate(mbMessageFlag);
-			}
-		}
-
-		return mbMessageFlag;
-	}
-
 	public MBMessageFlag updateImpl(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean merge) throws SystemException {
@@ -465,6 +421,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		return mbMessageFlagImpl;
 	}
 
+	public MBMessageFlag findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MBMessageFlag findByPrimaryKey(long messageFlagId)
 		throws NoSuchMessageFlagException, SystemException {
 		MBMessageFlag mbMessageFlag = fetchByPrimaryKey(messageFlagId);
@@ -481,6 +442,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbMessageFlag;
+	}
+
+	public MBMessageFlag fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MBMessageFlag fetchByPrimaryKey(long messageFlagId)

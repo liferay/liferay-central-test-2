@@ -24,6 +24,8 @@ package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.social.model.SocialActivity;
+
 /**
  * <a href="SocialActivityPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       SocialActivityUtil
  * @generated
  */
-public interface SocialActivityPersistence extends BasePersistence {
+public interface SocialActivityPersistence extends BasePersistence<SocialActivity> {
 	public void cacheResult(
 		com.liferay.portlet.social.model.SocialActivity socialActivity);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialActivity> socialActivities);
-
-	public void clearCache();
 
 	public com.liferay.portlet.social.model.SocialActivity create(
 		long activityId);
@@ -53,33 +53,6 @@ public interface SocialActivityPersistence extends BasePersistence {
 		long activityId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
-
-	public com.liferay.portlet.social.model.SocialActivity remove(
-		com.liferay.portlet.social.model.SocialActivity socialActivity)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(SocialActivity, boolean merge)}.
-	 */
-	public com.liferay.portlet.social.model.SocialActivity update(
-		com.liferay.portlet.social.model.SocialActivity socialActivity)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  socialActivity the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when socialActivity is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.social.model.SocialActivity update(
-		com.liferay.portlet.social.model.SocialActivity socialActivity,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.social.model.SocialActivity updateImpl(
 		com.liferay.portlet.social.model.SocialActivity socialActivity,
@@ -324,14 +297,6 @@ public interface SocialActivityPersistence extends BasePersistence {
 		long groupId, long userId, long createDate, long classNameId,
 		long classPK, int type, long receiverUserId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findAll()
 		throws com.liferay.portal.SystemException;

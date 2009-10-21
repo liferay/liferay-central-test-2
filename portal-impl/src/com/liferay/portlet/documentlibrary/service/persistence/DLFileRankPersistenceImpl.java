@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       DLFileRankUtil
  * @generated
  */
-public class DLFileRankPersistenceImpl extends BasePersistenceImpl
+public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	implements DLFileRankPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileRankImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -181,6 +184,11 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		return dlFileRank;
 	}
 
+	public DLFileRank remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public DLFileRank remove(long fileRankId)
 		throws NoSuchFileRankException, SystemException {
 		Session session = null;
@@ -276,57 +284,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		return dlFileRank;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(DLFileRank, boolean merge)}.
-	 */
-	public DLFileRank update(DLFileRank dlFileRank) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(DLFileRank dlFileRank) method. Use update(DLFileRank dlFileRank, boolean merge) instead.");
-		}
-
-		return update(dlFileRank, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileRank the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileRank is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public DLFileRank update(DLFileRank dlFileRank, boolean merge)
-		throws SystemException {
-		boolean isNew = dlFileRank.isNew();
-
-		for (ModelListener<DLFileRank> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileRank);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileRank);
-			}
-		}
-
-		dlFileRank = updateImpl(dlFileRank, merge);
-
-		for (ModelListener<DLFileRank> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileRank);
-			}
-			else {
-				listener.onAfterUpdate(dlFileRank);
-			}
-		}
-
-		return dlFileRank;
-	}
-
 	public DLFileRank updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
 		boolean merge) throws SystemException {
@@ -413,6 +370,11 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		return dlFileRankImpl;
 	}
 
+	public DLFileRank findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public DLFileRank findByPrimaryKey(long fileRankId)
 		throws NoSuchFileRankException, SystemException {
 		DLFileRank dlFileRank = fetchByPrimaryKey(fileRankId);
@@ -428,6 +390,11 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFileRank;
+	}
+
+	public DLFileRank fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public DLFileRank fetchByPrimaryKey(long fileRankId)

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutPrototypeException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.LayoutPrototypeImpl;
 import com.liferay.portal.model.impl.LayoutPrototypeModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       LayoutPrototypeUtil
  * @generated
  */
-public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
+public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPrototype>
 	implements LayoutPrototypePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = LayoutPrototypeImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -140,6 +143,11 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 		layoutPrototype.setPrimaryKey(layoutPrototypeId);
 
 		return layoutPrototype;
+	}
+
+	public LayoutPrototype remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public LayoutPrototype remove(long layoutPrototypeId)
@@ -229,58 +237,6 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 		return layoutPrototype;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(LayoutPrototype, boolean merge)}.
-	 */
-	public LayoutPrototype update(LayoutPrototype layoutPrototype)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(LayoutPrototype layoutPrototype) method. Use update(LayoutPrototype layoutPrototype, boolean merge) instead.");
-		}
-
-		return update(layoutPrototype, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  layoutPrototype the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when layoutPrototype is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public LayoutPrototype update(LayoutPrototype layoutPrototype, boolean merge)
-		throws SystemException {
-		boolean isNew = layoutPrototype.isNew();
-
-		for (ModelListener<LayoutPrototype> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(layoutPrototype);
-			}
-			else {
-				listener.onBeforeUpdate(layoutPrototype);
-			}
-		}
-
-		layoutPrototype = updateImpl(layoutPrototype, merge);
-
-		for (ModelListener<LayoutPrototype> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(layoutPrototype);
-			}
-			else {
-				listener.onAfterUpdate(layoutPrototype);
-			}
-		}
-
-		return layoutPrototype;
-	}
-
 	public LayoutPrototype updateImpl(
 		com.liferay.portal.model.LayoutPrototype layoutPrototype, boolean merge)
 		throws SystemException {
@@ -331,6 +287,11 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 		return layoutPrototypeImpl;
 	}
 
+	public LayoutPrototype findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public LayoutPrototype findByPrimaryKey(long layoutPrototypeId)
 		throws NoSuchLayoutPrototypeException, SystemException {
 		LayoutPrototype layoutPrototype = fetchByPrimaryKey(layoutPrototypeId);
@@ -347,6 +308,11 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return layoutPrototype;
+	}
+
+	public LayoutPrototype fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public LayoutPrototype fetchByPrimaryKey(long layoutPrototypeId)

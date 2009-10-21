@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.messageboards.model.MBMessageFlag;
+
 /**
  * <a href="MBMessageFlagPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       MBMessageFlagUtil
  * @generated
  */
-public interface MBMessageFlagPersistence extends BasePersistence {
+public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag> {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> mbMessageFlags);
-
-	public void clearCache();
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag create(
 		long messageFlagId);
@@ -53,33 +53,6 @@ public interface MBMessageFlagPersistence extends BasePersistence {
 		long messageFlagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
-
-	public com.liferay.portlet.messageboards.model.MBMessageFlag remove(
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(MBMessageFlag, boolean merge)}.
-	 */
-	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbMessageFlag the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbMessageFlag is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag updateImpl(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
@@ -280,14 +253,6 @@ public interface MBMessageFlagPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M_F(
 		long userId, long messageId, int flag, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findAll()
 		throws com.liferay.portal.SystemException;

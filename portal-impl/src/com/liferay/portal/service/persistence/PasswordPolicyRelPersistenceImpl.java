@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.PasswordPolicyRelImpl;
 import com.liferay.portal.model.impl.PasswordPolicyRelModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       PasswordPolicyRelUtil
  * @generated
  */
-public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
+public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<PasswordPolicyRel>
 	implements PasswordPolicyRelPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PasswordPolicyRelImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -139,6 +142,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		passwordPolicyRel.setPrimaryKey(passwordPolicyRelId);
 
 		return passwordPolicyRel;
+	}
+
+	public PasswordPolicyRel remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public PasswordPolicyRel remove(long passwordPolicyRelId)
@@ -244,58 +252,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		return passwordPolicyRel;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(PasswordPolicyRel, boolean merge)}.
-	 */
-	public PasswordPolicyRel update(PasswordPolicyRel passwordPolicyRel)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(PasswordPolicyRel passwordPolicyRel) method. Use update(PasswordPolicyRel passwordPolicyRel, boolean merge) instead.");
-		}
-
-		return update(passwordPolicyRel, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  passwordPolicyRel the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when passwordPolicyRel is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public PasswordPolicyRel update(PasswordPolicyRel passwordPolicyRel,
-		boolean merge) throws SystemException {
-		boolean isNew = passwordPolicyRel.isNew();
-
-		for (ModelListener<PasswordPolicyRel> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(passwordPolicyRel);
-			}
-			else {
-				listener.onBeforeUpdate(passwordPolicyRel);
-			}
-		}
-
-		passwordPolicyRel = updateImpl(passwordPolicyRel, merge);
-
-		for (ModelListener<PasswordPolicyRel> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(passwordPolicyRel);
-			}
-			else {
-				listener.onAfterUpdate(passwordPolicyRel);
-			}
-		}
-
-		return passwordPolicyRel;
-	}
-
 	public PasswordPolicyRel updateImpl(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
 		boolean merge) throws SystemException {
@@ -393,6 +349,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		return passwordPolicyRelImpl;
 	}
 
+	public PasswordPolicyRel findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public PasswordPolicyRel findByPrimaryKey(long passwordPolicyRelId)
 		throws NoSuchPasswordPolicyRelException, SystemException {
 		PasswordPolicyRel passwordPolicyRel = fetchByPrimaryKey(passwordPolicyRelId);
@@ -409,6 +370,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return passwordPolicyRel;
+	}
+
+	public PasswordPolicyRel fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public PasswordPolicyRel fetchByPrimaryKey(long passwordPolicyRelId)

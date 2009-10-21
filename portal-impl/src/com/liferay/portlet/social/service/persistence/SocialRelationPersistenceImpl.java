@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.model.impl.SocialRelationImpl;
 import com.liferay.portlet.social.model.impl.SocialRelationModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       SocialRelationUtil
  * @generated
  */
-public class SocialRelationPersistenceImpl extends BasePersistenceImpl
+public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRelation>
 	implements SocialRelationPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialRelationImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -273,6 +276,11 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		return socialRelation;
 	}
 
+	public SocialRelation remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public SocialRelation remove(long relationId)
 		throws NoSuchRelationException, SystemException {
 		Session session = null;
@@ -368,58 +376,6 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		return socialRelation;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(SocialRelation, boolean merge)}.
-	 */
-	public SocialRelation update(SocialRelation socialRelation)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(SocialRelation socialRelation) method. Use update(SocialRelation socialRelation, boolean merge) instead.");
-		}
-
-		return update(socialRelation, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  socialRelation the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when socialRelation is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public SocialRelation update(SocialRelation socialRelation, boolean merge)
-		throws SystemException {
-		boolean isNew = socialRelation.isNew();
-
-		for (ModelListener<SocialRelation> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(socialRelation);
-			}
-			else {
-				listener.onBeforeUpdate(socialRelation);
-			}
-		}
-
-		socialRelation = updateImpl(socialRelation, merge);
-
-		for (ModelListener<SocialRelation> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(socialRelation);
-			}
-			else {
-				listener.onAfterUpdate(socialRelation);
-			}
-		}
-
-		return socialRelation;
-	}
-
 	public SocialRelation updateImpl(
 		com.liferay.portlet.social.model.SocialRelation socialRelation,
 		boolean merge) throws SystemException {
@@ -505,6 +461,11 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		return socialRelationImpl;
 	}
 
+	public SocialRelation findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public SocialRelation findByPrimaryKey(long relationId)
 		throws NoSuchRelationException, SystemException {
 		SocialRelation socialRelation = fetchByPrimaryKey(relationId);
@@ -520,6 +481,11 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return socialRelation;
+	}
+
+	public SocialRelation fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public SocialRelation fetchByPrimaryKey(long relationId)

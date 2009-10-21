@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchClassNameException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.model.impl.ClassNameModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       ClassNameUtil
  * @generated
  */
-public class ClassNamePersistenceImpl extends BasePersistenceImpl
+public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	implements ClassNamePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ClassNameImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -114,6 +117,11 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		className.setPrimaryKey(classNameId);
 
 		return className;
+	}
+
+	public ClassName remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ClassName remove(long classNameId)
@@ -205,57 +213,6 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		return className;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ClassName, boolean merge)}.
-	 */
-	public ClassName update(ClassName className) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ClassName className) method. Use update(ClassName className, boolean merge) instead.");
-		}
-
-		return update(className, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  className the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when className is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ClassName update(ClassName className, boolean merge)
-		throws SystemException {
-		boolean isNew = className.isNew();
-
-		for (ModelListener<ClassName> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(className);
-			}
-			else {
-				listener.onBeforeUpdate(className);
-			}
-		}
-
-		className = updateImpl(className, merge);
-
-		for (ModelListener<ClassName> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(className);
-			}
-			else {
-				listener.onAfterUpdate(className);
-			}
-		}
-
-		return className;
-	}
-
 	public ClassName updateImpl(com.liferay.portal.model.ClassName className,
 		boolean merge) throws SystemException {
 		className = toUnwrappedModel(className);
@@ -318,6 +275,11 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		return classNameImpl;
 	}
 
+	public ClassName findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ClassName findByPrimaryKey(long classNameId)
 		throws NoSuchClassNameException, SystemException {
 		ClassName className = fetchByPrimaryKey(classNameId);
@@ -333,6 +295,11 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return className;
+	}
+
+	public ClassName fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ClassName fetchByPrimaryKey(long classNameId)

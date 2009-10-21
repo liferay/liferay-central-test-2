@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       PortletUtil
  * @generated
  */
-public class PortletPersistenceImpl extends BasePersistenceImpl
+public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	implements PortletPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PortletImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -135,6 +138,11 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 		portlet.setPrimaryKey(id);
 
 		return portlet;
+	}
+
+	public Portlet remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Portlet remove(long id)
@@ -228,57 +236,6 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 		return portlet;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Portlet, boolean merge)}.
-	 */
-	public Portlet update(Portlet portlet) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Portlet portlet) method. Use update(Portlet portlet, boolean merge) instead.");
-		}
-
-		return update(portlet, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  portlet the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when portlet is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Portlet update(Portlet portlet, boolean merge)
-		throws SystemException {
-		boolean isNew = portlet.isNew();
-
-		for (ModelListener<Portlet> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(portlet);
-			}
-			else {
-				listener.onBeforeUpdate(portlet);
-			}
-		}
-
-		portlet = updateImpl(portlet, merge);
-
-		for (ModelListener<Portlet> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(portlet);
-			}
-			else {
-				listener.onAfterUpdate(portlet);
-			}
-		}
-
-		return portlet;
-	}
-
 	public Portlet updateImpl(com.liferay.portal.model.Portlet portlet,
 		boolean merge) throws SystemException {
 		portlet = toUnwrappedModel(portlet);
@@ -354,6 +311,11 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 		return portletImpl;
 	}
 
+	public Portlet findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Portlet findByPrimaryKey(long id)
 		throws NoSuchPortletException, SystemException {
 		Portlet portlet = fetchByPrimaryKey(id);
@@ -368,6 +330,11 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return portlet;
+	}
+
+	public Portlet fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Portlet fetchByPrimaryKey(long id) throws SystemException {

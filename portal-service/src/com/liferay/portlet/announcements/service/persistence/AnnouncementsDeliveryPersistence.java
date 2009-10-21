@@ -24,6 +24,8 @@ package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
+
 /**
  * <a href="AnnouncementsDeliveryPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       AnnouncementsDeliveryUtil
  * @generated
  */
-public interface AnnouncementsDeliveryPersistence extends BasePersistence {
+public interface AnnouncementsDeliveryPersistence extends BasePersistence<AnnouncementsDelivery> {
 	public void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDeliveries);
-
-	public void clearCache();
 
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery create(
 		long deliveryId);
@@ -53,33 +53,6 @@ public interface AnnouncementsDeliveryPersistence extends BasePersistence {
 		long deliveryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.announcements.NoSuchDeliveryException;
-
-	public com.liferay.portlet.announcements.model.AnnouncementsDelivery remove(
-		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(AnnouncementsDelivery, boolean merge)}.
-	 */
-	public com.liferay.portlet.announcements.model.AnnouncementsDelivery update(
-		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  announcementsDelivery the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when announcementsDelivery is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.announcements.model.AnnouncementsDelivery update(
-		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery,
@@ -133,14 +106,6 @@ public interface AnnouncementsDeliveryPersistence extends BasePersistence {
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchByU_T(
 		long userId, java.lang.String type, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findAll()
 		throws com.liferay.portal.SystemException;

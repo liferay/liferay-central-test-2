@@ -24,6 +24,8 @@ package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.imagegallery.model.IGImage;
+
 /**
  * <a href="IGImagePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       IGImageUtil
  * @generated
  */
-public interface IGImagePersistence extends BasePersistence {
+public interface IGImagePersistence extends BasePersistence<IGImage> {
 	public void cacheResult(
 		com.liferay.portlet.imagegallery.model.IGImage igImage);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> igImages);
 
-	public void clearCache();
-
 	public com.liferay.portlet.imagegallery.model.IGImage create(long imageId);
 
 	public com.liferay.portlet.imagegallery.model.IGImage remove(long imageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
-
-	public com.liferay.portlet.imagegallery.model.IGImage remove(
-		com.liferay.portlet.imagegallery.model.IGImage igImage)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(IGImage, boolean merge)}.
-	 */
-	public com.liferay.portlet.imagegallery.model.IGImage update(
-		com.liferay.portlet.imagegallery.model.IGImage igImage)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  igImage the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when igImage is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.imagegallery.model.IGImage update(
-		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImpl(
 		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
@@ -300,14 +273,6 @@ public interface IGImagePersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll()
 		throws com.liferay.portal.SystemException;

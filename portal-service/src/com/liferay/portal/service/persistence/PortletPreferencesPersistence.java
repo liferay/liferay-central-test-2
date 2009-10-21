@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.PortletPreferences;
 
 /**
  * <a href="PortletPreferencesPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,14 +37,12 @@ package com.liferay.portal.service.persistence;
  * @see       PortletPreferencesUtil
  * @generated
  */
-public interface PortletPreferencesPersistence extends BasePersistence {
+public interface PortletPreferencesPersistence extends BasePersistence<PortletPreferences> {
 	public void cacheResult(
 		com.liferay.portal.model.PortletPreferences portletPreferences);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.PortletPreferences> portletPreferenceses);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.PortletPreferences create(
 		long portletPreferencesId);
@@ -52,33 +51,6 @@ public interface PortletPreferencesPersistence extends BasePersistence {
 		long portletPreferencesId)
 		throws com.liferay.portal.NoSuchPortletPreferencesException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.PortletPreferences remove(
-		com.liferay.portal.model.PortletPreferences portletPreferences)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(PortletPreferences, boolean merge)}.
-	 */
-	public com.liferay.portal.model.PortletPreferences update(
-		com.liferay.portal.model.PortletPreferences portletPreferences)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  portletPreferences the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when portletPreferences is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.PortletPreferences update(
-		com.liferay.portal.model.PortletPreferences portletPreferences,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences updateImpl(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
@@ -194,14 +166,6 @@ public interface PortletPreferencesPersistence extends BasePersistence {
 	public com.liferay.portal.model.PortletPreferences fetchByO_O_P_P(
 		long ownerId, int ownerType, long plid, java.lang.String portletId,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletPreferences> findAll()
 		throws com.liferay.portal.SystemException;

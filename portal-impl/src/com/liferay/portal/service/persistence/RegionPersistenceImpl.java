@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.model.impl.RegionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       RegionUtil
  * @generated
  */
-public class RegionPersistenceImpl extends BasePersistenceImpl
+public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	implements RegionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = RegionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -153,6 +156,11 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		return region;
 	}
 
+	public Region remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public Region remove(long regionId)
 		throws NoSuchRegionException, SystemException {
 		Session session = null;
@@ -236,57 +244,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		return region;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Region, boolean merge)}.
-	 */
-	public Region update(Region region) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Region region) method. Use update(Region region, boolean merge) instead.");
-		}
-
-		return update(region, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  region the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when region is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Region update(Region region, boolean merge)
-		throws SystemException {
-		boolean isNew = region.isNew();
-
-		for (ModelListener<Region> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(region);
-			}
-			else {
-				listener.onBeforeUpdate(region);
-			}
-		}
-
-		region = updateImpl(region, merge);
-
-		for (ModelListener<Region> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(region);
-			}
-			else {
-				listener.onAfterUpdate(region);
-			}
-		}
-
-		return region;
-	}
-
 	public Region updateImpl(com.liferay.portal.model.Region region,
 		boolean merge) throws SystemException {
 		region = toUnwrappedModel(region);
@@ -334,6 +291,11 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		return regionImpl;
 	}
 
+	public Region findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Region findByPrimaryKey(long regionId)
 		throws NoSuchRegionException, SystemException {
 		Region region = fetchByPrimaryKey(regionId);
@@ -348,6 +310,11 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return region;
+	}
+
+	public Region fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Region fetchByPrimaryKey(long regionId) throws SystemException {

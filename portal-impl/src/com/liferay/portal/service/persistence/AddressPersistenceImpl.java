@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAddressException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.model.impl.AddressModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       AddressUtil
  * @generated
  */
-public class AddressPersistenceImpl extends BasePersistenceImpl
+public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	implements AddressPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AddressImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -222,6 +225,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		return address;
 	}
 
+	public Address remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public Address remove(long addressId)
 		throws NoSuchAddressException, SystemException {
 		Session session = null;
@@ -305,57 +313,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		return address;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Address, boolean merge)}.
-	 */
-	public Address update(Address address) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Address address) method. Use update(Address address, boolean merge) instead.");
-		}
-
-		return update(address, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  address the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when address is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Address update(Address address, boolean merge)
-		throws SystemException {
-		boolean isNew = address.isNew();
-
-		for (ModelListener<Address> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(address);
-			}
-			else {
-				listener.onBeforeUpdate(address);
-			}
-		}
-
-		address = updateImpl(address, merge);
-
-		for (ModelListener<Address> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(address);
-			}
-			else {
-				listener.onAfterUpdate(address);
-			}
-		}
-
-		return address;
-	}
-
 	public Address updateImpl(com.liferay.portal.model.Address address,
 		boolean merge) throws SystemException {
 		address = toUnwrappedModel(address);
@@ -416,6 +373,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		return addressImpl;
 	}
 
+	public Address findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Address findByPrimaryKey(long addressId)
 		throws NoSuchAddressException, SystemException {
 		Address address = fetchByPrimaryKey(addressId);
@@ -431,6 +393,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return address;
+	}
+
+	public Address fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Address fetchByPrimaryKey(long addressId) throws SystemException {

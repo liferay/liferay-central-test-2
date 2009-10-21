@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.Release;
+
+import java.util.List;
 
 /**
  * <a href="ReleaseUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,44 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class ReleaseUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static Release remove(Release release) throws SystemException {
+		return getPersistence().remove(release);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static Release update(Release release, boolean merge)
+		throws SystemException {
+		return getPersistence().update(release, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.Release release) {
 		getPersistence().cacheResult(release);
 	}
@@ -44,10 +87,6 @@ public class ReleaseUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Release> releases) {
 		getPersistence().cacheResult(releases);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.Release create(long releaseId) {
@@ -58,39 +97,6 @@ public class ReleaseUtil {
 		throws com.liferay.portal.NoSuchReleaseException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(releaseId);
-	}
-
-	public static com.liferay.portal.model.Release remove(
-		com.liferay.portal.model.Release release)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(release);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Release, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.Release update(
-		com.liferay.portal.model.Release release)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(release);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  release the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when release is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.Release update(
-		com.liferay.portal.model.Release release, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(release, merge);
 	}
 
 	public static com.liferay.portal.model.Release updateImpl(
@@ -109,18 +115,6 @@ public class ReleaseUtil {
 	public static com.liferay.portal.model.Release fetchByPrimaryKey(
 		long releaseId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(releaseId);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> findAll()

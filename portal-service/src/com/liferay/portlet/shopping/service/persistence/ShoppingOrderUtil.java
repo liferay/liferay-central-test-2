@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.shopping.model.ShoppingOrder;
+
+import java.util.List;
 
 /**
  * <a href="ShoppingOrderUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.shopping.service.persistence;
  * @generated
  */
 public class ShoppingOrderUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static ShoppingOrder remove(ShoppingOrder shoppingOrder)
+		throws SystemException {
+		return getPersistence().remove(shoppingOrder);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static ShoppingOrder update(ShoppingOrder shoppingOrder,
+		boolean merge) throws SystemException {
+		return getPersistence().update(shoppingOrder, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder) {
 		getPersistence().cacheResult(shoppingOrder);
@@ -45,10 +90,6 @@ public class ShoppingOrderUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> shoppingOrders) {
 		getPersistence().cacheResult(shoppingOrders);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder create(
@@ -61,39 +102,6 @@ public class ShoppingOrderUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException {
 		return getPersistence().remove(orderId);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder remove(
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(shoppingOrder);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(ShoppingOrder, boolean merge)}.
-	 */
-	public static com.liferay.portlet.shopping.model.ShoppingOrder update(
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(shoppingOrder);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingOrder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingOrder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.shopping.model.ShoppingOrder update(
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(shoppingOrder, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateImpl(
@@ -239,18 +247,6 @@ public class ShoppingOrderUtil {
 		return getPersistence()
 				   .findByG_U_PPPS_PrevAndNext(orderId, groupId, userId,
 			ppPaymentStatus, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll()

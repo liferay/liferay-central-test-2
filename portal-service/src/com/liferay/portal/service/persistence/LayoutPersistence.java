@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Layout;
 
 /**
  * <a href="LayoutPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       LayoutUtil
  * @generated
  */
-public interface LayoutPersistence extends BasePersistence {
+public interface LayoutPersistence extends BasePersistence<Layout> {
 	public void cacheResult(com.liferay.portal.model.Layout layout);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Layout> layouts);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Layout create(long plid);
 
 	public com.liferay.portal.model.Layout remove(long plid)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Layout remove(
-		com.liferay.portal.model.Layout layout)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Layout, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Layout update(
-		com.liferay.portal.model.Layout layout)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  layout the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when layout is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Layout update(
-		com.liferay.portal.model.Layout layout, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Layout updateImpl(
 		com.liferay.portal.model.Layout layout, boolean merge)
@@ -283,14 +255,6 @@ public interface LayoutPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findAll()
 		throws com.liferay.portal.SystemException;

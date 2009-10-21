@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       MBThreadUtil
  * @generated
  */
-public class MBThreadPersistenceImpl extends BasePersistenceImpl
+public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	implements MBThreadPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBThreadImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -204,6 +207,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return mbThread;
 	}
 
+	public MBThread remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public MBThread remove(long threadId)
 		throws NoSuchThreadException, SystemException {
 		Session session = null;
@@ -287,57 +295,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return mbThread;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(MBThread, boolean merge)}.
-	 */
-	public MBThread update(MBThread mbThread) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MBThread mbThread) method. Use update(MBThread mbThread, boolean merge) instead.");
-		}
-
-		return update(mbThread, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbThread the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbThread is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MBThread update(MBThread mbThread, boolean merge)
-		throws SystemException {
-		boolean isNew = mbThread.isNew();
-
-		for (ModelListener<MBThread> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(mbThread);
-			}
-			else {
-				listener.onBeforeUpdate(mbThread);
-			}
-		}
-
-		mbThread = updateImpl(mbThread, merge);
-
-		for (ModelListener<MBThread> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(mbThread);
-			}
-			else {
-				listener.onAfterUpdate(mbThread);
-			}
-		}
-
-		return mbThread;
-	}
-
 	public MBThread updateImpl(
 		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
 		throws SystemException {
@@ -394,6 +351,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return mbThreadImpl;
 	}
 
+	public MBThread findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MBThread findByPrimaryKey(long threadId)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = fetchByPrimaryKey(threadId);
@@ -409,6 +371,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbThread;
+	}
+
+	public MBThread fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MBThread fetchByPrimaryKey(long threadId) throws SystemException {

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -56,6 +57,8 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
 import com.liferay.portlet.asset.model.impl.AssetEntryModelImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -76,7 +79,7 @@ import java.util.Set;
  * @see       AssetEntryUtil
  * @generated
  */
-public class AssetEntryPersistenceImpl extends BasePersistenceImpl
+public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	implements AssetEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -146,6 +149,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 		assetEntry.setPrimaryKey(entryId);
 
 		return assetEntry;
+	}
+
+	public AssetEntry remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public AssetEntry remove(long entryId)
@@ -260,57 +268,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 		return assetEntry;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(AssetEntry, boolean merge)}.
-	 */
-	public AssetEntry update(AssetEntry assetEntry) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AssetEntry assetEntry) method. Use update(AssetEntry assetEntry, boolean merge) instead.");
-		}
-
-		return update(assetEntry, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AssetEntry update(AssetEntry assetEntry, boolean merge)
-		throws SystemException {
-		boolean isNew = assetEntry.isNew();
-
-		for (ModelListener<AssetEntry> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(assetEntry);
-			}
-			else {
-				listener.onBeforeUpdate(assetEntry);
-			}
-		}
-
-		assetEntry = updateImpl(assetEntry, merge);
-
-		for (ModelListener<AssetEntry> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(assetEntry);
-			}
-			else {
-				listener.onAfterUpdate(assetEntry);
-			}
-		}
-
-		return assetEntry;
-	}
-
 	public AssetEntry updateImpl(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry, boolean merge)
 		throws SystemException {
@@ -401,6 +358,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 		return assetEntryImpl;
 	}
 
+	public AssetEntry findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AssetEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = fetchByPrimaryKey(entryId);
@@ -416,6 +378,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetEntry;
+	}
+
+	public AssetEntry fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AssetEntry fetchByPrimaryKey(long entryId) throws SystemException {

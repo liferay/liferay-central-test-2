@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -56,6 +57,8 @@ import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -76,7 +79,7 @@ import java.util.Set;
  * @see       UserUtil
  * @generated
  */
-public class UserPersistenceImpl extends BasePersistenceImpl
+public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	implements UserPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -245,6 +248,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		return user;
 	}
 
+	public User remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public User remove(long userId) throws NoSuchUserException, SystemException {
 		Session session = null;
 
@@ -408,56 +416,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserImpl.class, user.getPrimaryKey());
-
-		return user;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(User, boolean merge)}.
-	 */
-	public User update(User user) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(User user) method. Use update(User user, boolean merge) instead.");
-		}
-
-		return update(user, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  user the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when user is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public User update(User user, boolean merge) throws SystemException {
-		boolean isNew = user.isNew();
-
-		for (ModelListener<User> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(user);
-			}
-			else {
-				listener.onBeforeUpdate(user);
-			}
-		}
-
-		user = updateImpl(user, merge);
-
-		for (ModelListener<User> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(user);
-			}
-			else {
-				listener.onAfterUpdate(user);
-			}
-		}
 
 		return user;
 	}
@@ -672,6 +630,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		return userImpl;
 	}
 
+	public User findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public User findByPrimaryKey(long userId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByPrimaryKey(userId);
@@ -686,6 +649,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return user;
+	}
+
+	public User fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public User fetchByPrimaryKey(long userId) throws SystemException {

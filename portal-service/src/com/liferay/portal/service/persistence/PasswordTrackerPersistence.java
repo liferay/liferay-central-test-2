@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.PasswordTracker;
 
 /**
  * <a href="PasswordTrackerPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,14 +37,12 @@ package com.liferay.portal.service.persistence;
  * @see       PasswordTrackerUtil
  * @generated
  */
-public interface PasswordTrackerPersistence extends BasePersistence {
+public interface PasswordTrackerPersistence extends BasePersistence<PasswordTracker> {
 	public void cacheResult(
 		com.liferay.portal.model.PasswordTracker passwordTracker);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.PasswordTracker> passwordTrackers);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.PasswordTracker create(
 		long passwordTrackerId);
@@ -52,33 +51,6 @@ public interface PasswordTrackerPersistence extends BasePersistence {
 		long passwordTrackerId)
 		throws com.liferay.portal.NoSuchPasswordTrackerException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.PasswordTracker remove(
-		com.liferay.portal.model.PasswordTracker passwordTracker)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(PasswordTracker, boolean merge)}.
-	 */
-	public com.liferay.portal.model.PasswordTracker update(
-		com.liferay.portal.model.PasswordTracker passwordTracker)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  passwordTracker the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when passwordTracker is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.PasswordTracker update(
-		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker updateImpl(
 		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
@@ -119,14 +91,6 @@ public interface PasswordTrackerPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchPasswordTrackerException,
 			com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PasswordTracker> findAll()
 		throws com.liferay.portal.SystemException;

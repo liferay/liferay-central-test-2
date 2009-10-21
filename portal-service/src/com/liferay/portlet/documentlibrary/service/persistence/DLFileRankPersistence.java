@@ -24,6 +24,8 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.documentlibrary.model.DLFileRank;
+
 /**
  * <a href="DLFileRankPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       DLFileRankUtil
  * @generated
  */
-public interface DLFileRankPersistence extends BasePersistence {
+public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	public void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> dlFileRanks);
-
-	public void clearCache();
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank create(
 		long fileRankId);
@@ -53,33 +53,6 @@ public interface DLFileRankPersistence extends BasePersistence {
 		long fileRankId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFileRank remove(
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(DLFileRank, boolean merge)}.
-	 */
-	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileRank the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileRank is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
@@ -194,14 +167,6 @@ public interface DLFileRankPersistence extends BasePersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileRank fetchByC_U_F_N(
 		long companyId, long userId, long folderId, java.lang.String name,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findAll()
 		throws com.liferay.portal.SystemException;

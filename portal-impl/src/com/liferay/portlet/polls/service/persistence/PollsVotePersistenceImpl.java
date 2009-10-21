@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 import com.liferay.portlet.polls.model.impl.PollsVoteModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       PollsVoteUtil
  * @generated
  */
-public class PollsVotePersistenceImpl extends BasePersistenceImpl
+public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	implements PollsVotePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PollsVoteImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -150,6 +153,11 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		pollsVote.setPrimaryKey(voteId);
 
 		return pollsVote;
+	}
+
+	public PollsVote remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public PollsVote remove(long voteId)
@@ -244,57 +252,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		return pollsVote;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(PollsVote, boolean merge)}.
-	 */
-	public PollsVote update(PollsVote pollsVote) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(PollsVote pollsVote) method. Use update(PollsVote pollsVote, boolean merge) instead.");
-		}
-
-		return update(pollsVote, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  pollsVote the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when pollsVote is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public PollsVote update(PollsVote pollsVote, boolean merge)
-		throws SystemException {
-		boolean isNew = pollsVote.isNew();
-
-		for (ModelListener<PollsVote> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(pollsVote);
-			}
-			else {
-				listener.onBeforeUpdate(pollsVote);
-			}
-		}
-
-		pollsVote = updateImpl(pollsVote, merge);
-
-		for (ModelListener<PollsVote> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(pollsVote);
-			}
-			else {
-				listener.onAfterUpdate(pollsVote);
-			}
-		}
-
-		return pollsVote;
-	}
-
 	public PollsVote updateImpl(
 		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
 		throws SystemException {
@@ -367,6 +324,11 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		return pollsVoteImpl;
 	}
 
+	public PollsVote findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public PollsVote findByPrimaryKey(long voteId)
 		throws NoSuchVoteException, SystemException {
 		PollsVote pollsVote = fetchByPrimaryKey(voteId);
@@ -381,6 +343,11 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return pollsVote;
+	}
+
+	public PollsVote fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public PollsVote fetchByPrimaryKey(long voteId) throws SystemException {

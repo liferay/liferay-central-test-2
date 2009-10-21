@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.shopping.model.ShoppingCoupon;
+
+import java.util.List;
 
 /**
  * <a href="ShoppingCouponUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.shopping.service.persistence;
  * @generated
  */
 public class ShoppingCouponUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)
+		throws SystemException {
+		return getPersistence().remove(shoppingCoupon);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static ShoppingCoupon update(ShoppingCoupon shoppingCoupon,
+		boolean merge) throws SystemException {
+		return getPersistence().update(shoppingCoupon, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon) {
 		getPersistence().cacheResult(shoppingCoupon);
@@ -45,10 +90,6 @@ public class ShoppingCouponUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> shoppingCoupons) {
 		getPersistence().cacheResult(shoppingCoupons);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon create(
@@ -61,39 +102,6 @@ public class ShoppingCouponUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCouponException {
 		return getPersistence().remove(couponId);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon remove(
-		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(shoppingCoupon);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(ShoppingCoupon, boolean merge)}.
-	 */
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon update(
-		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(shoppingCoupon);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingCoupon the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingCoupon is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon update(
-		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(shoppingCoupon, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateImpl(
@@ -170,18 +178,6 @@ public class ShoppingCouponUtil {
 		java.lang.String code, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByCode(code, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> findAll()

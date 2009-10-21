@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.ServiceComponent;
 
 /**
  * <a href="ServiceComponentPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,14 +37,12 @@ package com.liferay.portal.service.persistence;
  * @see       ServiceComponentUtil
  * @generated
  */
-public interface ServiceComponentPersistence extends BasePersistence {
+public interface ServiceComponentPersistence extends BasePersistence<ServiceComponent> {
 	public void cacheResult(
 		com.liferay.portal.model.ServiceComponent serviceComponent);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.ServiceComponent> serviceComponents);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.ServiceComponent create(
 		long serviceComponentId);
@@ -52,33 +51,6 @@ public interface ServiceComponentPersistence extends BasePersistence {
 		long serviceComponentId)
 		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.ServiceComponent remove(
-		com.liferay.portal.model.ServiceComponent serviceComponent)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(ServiceComponent, boolean merge)}.
-	 */
-	public com.liferay.portal.model.ServiceComponent update(
-		com.liferay.portal.model.ServiceComponent serviceComponent)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  serviceComponent the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when serviceComponent is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.ServiceComponent update(
-		com.liferay.portal.model.ServiceComponent serviceComponent,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent updateImpl(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
@@ -135,14 +107,6 @@ public interface ServiceComponentPersistence extends BasePersistence {
 	public com.liferay.portal.model.ServiceComponent fetchByBNS_BNU(
 		java.lang.String buildNamespace, long buildNumber,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findAll()
 		throws com.liferay.portal.SystemException;

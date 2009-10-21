@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       DLFileShortcutUtil
  * @generated
  */
-public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
+public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileShortcut>
 	implements DLFileShortcutPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileShortcutImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -235,6 +238,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		return dlFileShortcut;
 	}
 
+	public DLFileShortcut remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public DLFileShortcut remove(long fileShortcutId)
 		throws NoSuchFileShortcutException, SystemException {
 		Session session = null;
@@ -325,58 +333,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey());
-
-		return dlFileShortcut;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(DLFileShortcut, boolean merge)}.
-	 */
-	public DLFileShortcut update(DLFileShortcut dlFileShortcut)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(DLFileShortcut dlFileShortcut) method. Use update(DLFileShortcut dlFileShortcut, boolean merge) instead.");
-		}
-
-		return update(dlFileShortcut, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  dlFileShortcut the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when dlFileShortcut is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public DLFileShortcut update(DLFileShortcut dlFileShortcut, boolean merge)
-		throws SystemException {
-		boolean isNew = dlFileShortcut.isNew();
-
-		for (ModelListener<DLFileShortcut> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileShortcut);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileShortcut);
-			}
-		}
-
-		dlFileShortcut = updateImpl(dlFileShortcut, merge);
-
-		for (ModelListener<DLFileShortcut> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileShortcut);
-			}
-			else {
-				listener.onAfterUpdate(dlFileShortcut);
-			}
-		}
 
 		return dlFileShortcut;
 	}
@@ -472,6 +428,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		return dlFileShortcutImpl;
 	}
 
+	public DLFileShortcut findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public DLFileShortcut findByPrimaryKey(long fileShortcutId)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = fetchByPrimaryKey(fileShortcutId);
@@ -488,6 +449,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return dlFileShortcut;
+	}
+
+	public DLFileShortcut fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public DLFileShortcut fetchByPrimaryKey(long fileShortcutId)

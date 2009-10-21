@@ -24,6 +24,8 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.asset.model.AssetTagProperty;
+
 /**
  * <a href="AssetTagPropertyPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       AssetTagPropertyUtil
  * @generated
  */
-public interface AssetTagPropertyPersistence extends BasePersistence {
+public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagProperty> {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> assetTagProperties);
-
-	public void clearCache();
 
 	public com.liferay.portlet.asset.model.AssetTagProperty create(
 		long tagPropertyId);
@@ -53,33 +53,6 @@ public interface AssetTagPropertyPersistence extends BasePersistence {
 		long tagPropertyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchTagPropertyException;
-
-	public com.liferay.portlet.asset.model.AssetTagProperty remove(
-		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(AssetTagProperty, boolean merge)}.
-	 */
-	public com.liferay.portlet.asset.model.AssetTagProperty update(
-		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetTagProperty the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetTagProperty is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.asset.model.AssetTagProperty update(
-		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetTagProperty updateImpl(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
@@ -192,14 +165,6 @@ public interface AssetTagPropertyPersistence extends BasePersistence {
 	public com.liferay.portlet.asset.model.AssetTagProperty fetchByT_K(
 		long tagId, java.lang.String key, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTagProperty> findAll()
 		throws com.liferay.portal.SystemException;

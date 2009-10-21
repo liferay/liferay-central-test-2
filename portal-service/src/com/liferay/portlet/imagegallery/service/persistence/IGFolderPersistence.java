@@ -24,6 +24,8 @@ package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.imagegallery.model.IGFolder;
+
 /**
  * <a href="IGFolderPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,47 +39,18 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       IGFolderUtil
  * @generated
  */
-public interface IGFolderPersistence extends BasePersistence {
+public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 	public void cacheResult(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> igFolders);
 
-	public void clearCache();
-
 	public com.liferay.portlet.imagegallery.model.IGFolder create(long folderId);
 
 	public com.liferay.portlet.imagegallery.model.IGFolder remove(long folderId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
-
-	public com.liferay.portlet.imagegallery.model.IGFolder remove(
-		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(IGFolder, boolean merge)}.
-	 */
-	public com.liferay.portlet.imagegallery.model.IGFolder update(
-		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  igFolder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when igFolder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.imagegallery.model.IGFolder update(
-		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder updateImpl(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
@@ -233,14 +206,6 @@ public interface IGFolderPersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findAll()
 		throws com.liferay.portal.SystemException;

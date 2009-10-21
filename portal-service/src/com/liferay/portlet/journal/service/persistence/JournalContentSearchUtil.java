@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.journal.model.JournalContentSearch;
+
+import java.util.List;
 
 /**
  * <a href="JournalContentSearchUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,46 @@ package com.liferay.portlet.journal.service.persistence;
  * @generated
  */
 public class JournalContentSearchUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static JournalContentSearch remove(
+		JournalContentSearch journalContentSearch) throws SystemException {
+		return getPersistence().remove(journalContentSearch);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static JournalContentSearch update(
+		JournalContentSearch journalContentSearch, boolean merge)
+		throws SystemException {
+		return getPersistence().update(journalContentSearch, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch) {
 		getPersistence().cacheResult(journalContentSearch);
@@ -45,10 +91,6 @@ public class JournalContentSearchUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> journalContentSearchs) {
 		getPersistence().cacheResult(journalContentSearchs);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch create(
@@ -61,39 +103,6 @@ public class JournalContentSearchUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException {
 		return getPersistence().remove(contentSearchId);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalContentSearch remove(
-		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(journalContentSearch);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(JournalContentSearch, boolean merge)}.
-	 */
-	public static com.liferay.portlet.journal.model.JournalContentSearch update(
-		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(journalContentSearch);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalContentSearch the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalContentSearch is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.journal.model.JournalContentSearch update(
-		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(journalContentSearch, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateImpl(
@@ -434,18 +443,6 @@ public class JournalContentSearchUtil {
 		return getPersistence()
 				   .fetchByG_P_L_P_A(groupId, privateLayout, layoutId,
 			portletId, articleId, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findAll()

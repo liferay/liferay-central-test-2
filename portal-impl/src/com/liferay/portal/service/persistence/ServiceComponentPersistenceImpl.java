@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchServiceComponentException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.ServiceComponentImpl;
 import com.liferay.portal.model.impl.ServiceComponentModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       ServiceComponentUtil
  * @generated
  */
-public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
+public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<ServiceComponent>
 	implements ServiceComponentPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ServiceComponentImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -138,6 +141,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		serviceComponent.setPrimaryKey(serviceComponentId);
 
 		return serviceComponent;
+	}
+
+	public ServiceComponent remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ServiceComponent remove(long serviceComponentId)
@@ -236,58 +244,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		return serviceComponent;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ServiceComponent, boolean merge)}.
-	 */
-	public ServiceComponent update(ServiceComponent serviceComponent)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ServiceComponent serviceComponent) method. Use update(ServiceComponent serviceComponent, boolean merge) instead.");
-		}
-
-		return update(serviceComponent, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  serviceComponent the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when serviceComponent is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ServiceComponent update(ServiceComponent serviceComponent,
-		boolean merge) throws SystemException {
-		boolean isNew = serviceComponent.isNew();
-
-		for (ModelListener<ServiceComponent> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(serviceComponent);
-			}
-			else {
-				listener.onBeforeUpdate(serviceComponent);
-			}
-		}
-
-		serviceComponent = updateImpl(serviceComponent, merge);
-
-		for (ModelListener<ServiceComponent> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(serviceComponent);
-			}
-			else {
-				listener.onAfterUpdate(serviceComponent);
-			}
-		}
-
-		return serviceComponent;
-	}
-
 	public ServiceComponent updateImpl(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
 		boolean merge) throws SystemException {
@@ -364,6 +320,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		return serviceComponentImpl;
 	}
 
+	public ServiceComponent findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ServiceComponent findByPrimaryKey(long serviceComponentId)
 		throws NoSuchServiceComponentException, SystemException {
 		ServiceComponent serviceComponent = fetchByPrimaryKey(serviceComponentId);
@@ -380,6 +341,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return serviceComponent;
+	}
+
+	public ServiceComponent fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ServiceComponent fetchByPrimaryKey(long serviceComponentId)

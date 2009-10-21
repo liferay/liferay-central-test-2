@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.UserGroupRole;
+
+import java.util.List;
 
 /**
  * <a href="UserGroupRoleUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,45 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class UserGroupRoleUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static UserGroupRole remove(UserGroupRole userGroupRole)
+		throws SystemException {
+		return getPersistence().remove(userGroupRole);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static UserGroupRole update(UserGroupRole userGroupRole,
+		boolean merge) throws SystemException {
+		return getPersistence().update(userGroupRole, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.UserGroupRole userGroupRole) {
 		getPersistence().cacheResult(userGroupRole);
@@ -45,10 +89,6 @@ public class UserGroupRoleUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles) {
 		getPersistence().cacheResult(userGroupRoles);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.UserGroupRole create(
@@ -61,39 +101,6 @@ public class UserGroupRoleUtil {
 		throws com.liferay.portal.NoSuchUserGroupRoleException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(userGroupRolePK);
-	}
-
-	public static com.liferay.portal.model.UserGroupRole remove(
-		com.liferay.portal.model.UserGroupRole userGroupRole)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(userGroupRole);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(UserGroupRole, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.UserGroupRole update(
-		com.liferay.portal.model.UserGroupRole userGroupRole)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(userGroupRole);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userGroupRole the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userGroupRole is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.UserGroupRole update(
-		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(userGroupRole, merge);
 	}
 
 	public static com.liferay.portal.model.UserGroupRole updateImpl(
@@ -324,18 +331,6 @@ public class UserGroupRoleUtil {
 			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_R_PrevAndNext(userGroupRolePK, groupId, roleId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroupRole> findAll()

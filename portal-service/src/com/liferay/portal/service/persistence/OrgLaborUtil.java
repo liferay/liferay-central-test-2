@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.OrgLabor;
+
+import java.util.List;
 
 /**
  * <a href="OrgLaborUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,44 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class OrgLaborUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static OrgLabor remove(OrgLabor orgLabor) throws SystemException {
+		return getPersistence().remove(orgLabor);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static OrgLabor update(OrgLabor orgLabor, boolean merge)
+		throws SystemException {
+		return getPersistence().update(orgLabor, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.OrgLabor orgLabor) {
 		getPersistence().cacheResult(orgLabor);
 	}
@@ -44,10 +87,6 @@ public class OrgLaborUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors) {
 		getPersistence().cacheResult(orgLabors);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.OrgLabor create(long orgLaborId) {
@@ -58,39 +97,6 @@ public class OrgLaborUtil {
 		throws com.liferay.portal.NoSuchOrgLaborException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(orgLaborId);
-	}
-
-	public static com.liferay.portal.model.OrgLabor remove(
-		com.liferay.portal.model.OrgLabor orgLabor)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(orgLabor);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(OrgLabor, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.OrgLabor update(
-		com.liferay.portal.model.OrgLabor orgLabor)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(orgLabor);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  orgLabor the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when orgLabor is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.OrgLabor update(
-		com.liferay.portal.model.OrgLabor orgLabor, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(orgLabor, merge);
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateImpl(
@@ -154,18 +160,6 @@ public class OrgLaborUtil {
 		return getPersistence()
 				   .findByOrganizationId_PrevAndNext(orgLaborId,
 			organizationId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgLabor> findAll()

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAccountException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -44,6 +45,8 @@ import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.model.impl.AccountModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -61,7 +64,7 @@ import java.util.List;
  * @see       AccountUtil
  * @generated
  */
-public class AccountPersistenceImpl extends BasePersistenceImpl
+public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 	implements AccountPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AccountImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -102,6 +105,11 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		account.setPrimaryKey(accountId);
 
 		return account;
+	}
+
+	public Account remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Account remove(long accountId)
@@ -187,57 +195,6 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		return account;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Account, boolean merge)}.
-	 */
-	public Account update(Account account) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Account account) method. Use update(Account account, boolean merge) instead.");
-		}
-
-		return update(account, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  account the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when account is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Account update(Account account, boolean merge)
-		throws SystemException {
-		boolean isNew = account.isNew();
-
-		for (ModelListener<Account> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(account);
-			}
-			else {
-				listener.onBeforeUpdate(account);
-			}
-		}
-
-		account = updateImpl(account, merge);
-
-		for (ModelListener<Account> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(account);
-			}
-			else {
-				listener.onAfterUpdate(account);
-			}
-		}
-
-		return account;
-	}
-
 	public Account updateImpl(com.liferay.portal.model.Account account,
 		boolean merge) throws SystemException {
 		account = toUnwrappedModel(account);
@@ -296,6 +253,11 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		return accountImpl;
 	}
 
+	public Account findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Account findByPrimaryKey(long accountId)
 		throws NoSuchAccountException, SystemException {
 		Account account = fetchByPrimaryKey(accountId);
@@ -311,6 +273,11 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return account;
+	}
+
+	public Account fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Account fetchByPrimaryKey(long accountId) throws SystemException {

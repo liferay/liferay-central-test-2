@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       ShoppingItemPriceUtil
  * @generated
  */
-public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
+public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<ShoppingItemPrice>
 	implements ShoppingItemPricePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingItemPriceImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -125,6 +128,11 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		shoppingItemPrice.setPrimaryKey(itemPriceId);
 
 		return shoppingItemPrice;
+	}
+
+	public ShoppingItemPrice remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingItemPrice remove(long itemPriceId)
@@ -215,58 +223,6 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		return shoppingItemPrice;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(ShoppingItemPrice, boolean merge)}.
-	 */
-	public ShoppingItemPrice update(ShoppingItemPrice shoppingItemPrice)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ShoppingItemPrice shoppingItemPrice) method. Use update(ShoppingItemPrice shoppingItemPrice, boolean merge) instead.");
-		}
-
-		return update(shoppingItemPrice, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingItemPrice the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingItemPrice is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ShoppingItemPrice update(ShoppingItemPrice shoppingItemPrice,
-		boolean merge) throws SystemException {
-		boolean isNew = shoppingItemPrice.isNew();
-
-		for (ModelListener<ShoppingItemPrice> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItemPrice);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItemPrice);
-			}
-		}
-
-		shoppingItemPrice = updateImpl(shoppingItemPrice, merge);
-
-		for (ModelListener<ShoppingItemPrice> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItemPrice);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItemPrice);
-			}
-		}
-
-		return shoppingItemPrice;
-	}
-
 	public ShoppingItemPrice updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
 		boolean merge) throws SystemException {
@@ -322,6 +278,11 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		return shoppingItemPriceImpl;
 	}
 
+	public ShoppingItemPrice findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ShoppingItemPrice findByPrimaryKey(long itemPriceId)
 		throws NoSuchItemPriceException, SystemException {
 		ShoppingItemPrice shoppingItemPrice = fetchByPrimaryKey(itemPriceId);
@@ -338,6 +299,11 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shoppingItemPrice;
+	}
+
+	public ShoppingItemPrice fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingItemPrice fetchByPrimaryKey(long itemPriceId)

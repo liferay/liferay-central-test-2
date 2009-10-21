@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -48,6 +49,8 @@ import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.model.impl.ExpandoValueImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +68,7 @@ import java.util.List;
  * @see       ExpandoValueUtil
  * @generated
  */
-public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
+public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValue>
 	implements ExpandoValuePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoValueImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -279,6 +282,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		return expandoValue;
 	}
 
+	public ExpandoValue remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public ExpandoValue remove(long valueId)
 		throws NoSuchValueException, SystemException {
 		Session session = null;
@@ -375,58 +383,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoValueImpl.class, expandoValue.getPrimaryKey());
-
-		return expandoValue;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(ExpandoValue, boolean merge)}.
-	 */
-	public ExpandoValue update(ExpandoValue expandoValue)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ExpandoValue expandoValue) method. Use update(ExpandoValue expandoValue, boolean merge) instead.");
-		}
-
-		return update(expandoValue, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  expandoValue the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when expandoValue is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ExpandoValue update(ExpandoValue expandoValue, boolean merge)
-		throws SystemException {
-		boolean isNew = expandoValue.isNew();
-
-		for (ModelListener<ExpandoValue> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(expandoValue);
-			}
-			else {
-				listener.onBeforeUpdate(expandoValue);
-			}
-		}
-
-		expandoValue = updateImpl(expandoValue, merge);
-
-		for (ModelListener<ExpandoValue> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(expandoValue);
-			}
-			else {
-				listener.onAfterUpdate(expandoValue);
-			}
-		}
 
 		return expandoValue;
 	}
@@ -530,6 +486,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		return expandoValueImpl;
 	}
 
+	public ExpandoValue findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ExpandoValue findByPrimaryKey(long valueId)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = fetchByPrimaryKey(valueId);
@@ -545,6 +506,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return expandoValue;
+	}
+
+	public ExpandoValue fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ExpandoValue fetchByPrimaryKey(long valueId)

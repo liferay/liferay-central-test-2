@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserGroupGroupRoleException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.UserGroupGroupRoleImpl;
 import com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       UserGroupGroupRoleUtil
  * @generated
  */
-public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
+public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupGroupRole>
 	implements UserGroupGroupRolePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserGroupGroupRoleImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -193,6 +196,11 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 		return userGroupGroupRole;
 	}
 
+	public UserGroupGroupRole remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove((UserGroupGroupRolePK)primaryKey);
+	}
+
 	public UserGroupGroupRole remove(UserGroupGroupRolePK userGroupGroupRolePK)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		Session session = null;
@@ -281,58 +289,6 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 		return userGroupGroupRole;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(UserGroupGroupRole, boolean merge)}.
-	 */
-	public UserGroupGroupRole update(UserGroupGroupRole userGroupGroupRole)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(UserGroupGroupRole userGroupGroupRole) method. Use update(UserGroupGroupRole userGroupGroupRole, boolean merge) instead.");
-		}
-
-		return update(userGroupGroupRole, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userGroupGroupRole the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userGroupGroupRole is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public UserGroupGroupRole update(UserGroupGroupRole userGroupGroupRole,
-		boolean merge) throws SystemException {
-		boolean isNew = userGroupGroupRole.isNew();
-
-		for (ModelListener<UserGroupGroupRole> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(userGroupGroupRole);
-			}
-			else {
-				listener.onBeforeUpdate(userGroupGroupRole);
-			}
-		}
-
-		userGroupGroupRole = updateImpl(userGroupGroupRole, merge);
-
-		for (ModelListener<UserGroupGroupRole> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(userGroupGroupRole);
-			}
-			else {
-				listener.onAfterUpdate(userGroupGroupRole);
-			}
-		}
-
-		return userGroupGroupRole;
-	}
-
 	public UserGroupGroupRole updateImpl(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole,
 		boolean merge) throws SystemException {
@@ -381,6 +337,11 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 		return userGroupGroupRoleImpl;
 	}
 
+	public UserGroupGroupRole findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey((UserGroupGroupRolePK)primaryKey);
+	}
+
 	public UserGroupGroupRole findByPrimaryKey(
 		UserGroupGroupRolePK userGroupGroupRolePK)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
@@ -398,6 +359,11 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return userGroupGroupRole;
+	}
+
+	public UserGroupGroupRole fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey((UserGroupGroupRolePK)primaryKey);
 	}
 
 	public UserGroupGroupRole fetchByPrimaryKey(

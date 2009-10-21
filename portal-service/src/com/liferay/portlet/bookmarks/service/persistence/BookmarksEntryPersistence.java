@@ -24,6 +24,8 @@ package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+
 /**
  * <a href="BookmarksEntryPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       BookmarksEntryUtil
  * @generated
  */
-public interface BookmarksEntryPersistence extends BasePersistence {
+public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntry> {
 	public void cacheResult(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> bookmarksEntries);
-
-	public void clearCache();
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry create(
 		long entryId);
@@ -53,33 +53,6 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 		long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
-
-	public com.liferay.portlet.bookmarks.model.BookmarksEntry remove(
-		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(BookmarksEntry, boolean merge)}.
-	 */
-	public com.liferay.portlet.bookmarks.model.BookmarksEntry update(
-		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  bookmarksEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when bookmarksEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.bookmarks.model.BookmarksEntry update(
-		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
@@ -223,14 +196,6 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll()
 		throws com.liferay.portal.SystemException;

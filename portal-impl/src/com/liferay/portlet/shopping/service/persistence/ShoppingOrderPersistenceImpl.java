@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       ShoppingOrderUtil
  * @generated
  */
-public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
+public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOrder>
 	implements ShoppingOrderPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingOrderImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -174,6 +177,11 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		return shoppingOrder;
 	}
 
+	public ShoppingOrder remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public ShoppingOrder remove(long orderId)
 		throws NoSuchOrderException, SystemException {
 		Session session = null;
@@ -263,58 +271,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingOrderImpl.class, shoppingOrder.getPrimaryKey());
-
-		return shoppingOrder;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(ShoppingOrder, boolean merge)}.
-	 */
-	public ShoppingOrder update(ShoppingOrder shoppingOrder)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ShoppingOrder shoppingOrder) method. Use update(ShoppingOrder shoppingOrder, boolean merge) instead.");
-		}
-
-		return update(shoppingOrder, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingOrder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingOrder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ShoppingOrder update(ShoppingOrder shoppingOrder, boolean merge)
-		throws SystemException {
-		boolean isNew = shoppingOrder.isNew();
-
-		for (ModelListener<ShoppingOrder> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingOrder);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingOrder);
-			}
-		}
-
-		shoppingOrder = updateImpl(shoppingOrder, merge);
-
-		for (ModelListener<ShoppingOrder> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingOrder);
-			}
-			else {
-				listener.onAfterUpdate(shoppingOrder);
-			}
-		}
 
 		return shoppingOrder;
 	}
@@ -446,6 +402,11 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		return shoppingOrderImpl;
 	}
 
+	public ShoppingOrder findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ShoppingOrder findByPrimaryKey(long orderId)
 		throws NoSuchOrderException, SystemException {
 		ShoppingOrder shoppingOrder = fetchByPrimaryKey(orderId);
@@ -461,6 +422,11 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shoppingOrder;
+	}
+
+	public ShoppingOrder fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingOrder fetchByPrimaryKey(long orderId)

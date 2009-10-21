@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.EmailAddress;
+
+import java.util.List;
 
 /**
  * <a href="EmailAddressUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,45 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class EmailAddressUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static EmailAddress remove(EmailAddress emailAddress)
+		throws SystemException {
+		return getPersistence().remove(emailAddress);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static EmailAddress update(EmailAddress emailAddress, boolean merge)
+		throws SystemException {
+		return getPersistence().update(emailAddress, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.EmailAddress emailAddress) {
 		getPersistence().cacheResult(emailAddress);
@@ -45,10 +89,6 @@ public class EmailAddressUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses) {
 		getPersistence().cacheResult(emailAddresses);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.EmailAddress create(
@@ -61,39 +101,6 @@ public class EmailAddressUtil {
 		throws com.liferay.portal.NoSuchEmailAddressException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(emailAddressId);
-	}
-
-	public static com.liferay.portal.model.EmailAddress remove(
-		com.liferay.portal.model.EmailAddress emailAddress)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(emailAddress);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(EmailAddress, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.EmailAddress update(
-		com.liferay.portal.model.EmailAddress emailAddress)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(emailAddress);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  emailAddress the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when emailAddress is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.EmailAddress update(
-		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(emailAddress, merge);
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateImpl(
@@ -343,18 +350,6 @@ public class EmailAddressUtil {
 		return getPersistence()
 				   .findByC_C_C_P_PrevAndNext(emailAddressId, companyId,
 			classNameId, classPK, primary, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findAll()

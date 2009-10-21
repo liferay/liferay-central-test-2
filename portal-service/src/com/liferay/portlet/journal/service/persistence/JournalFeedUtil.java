@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.journal.model.JournalFeed;
+
+import java.util.List;
 
 /**
  * <a href="JournalFeedUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.journal.service.persistence;
  * @generated
  */
 public class JournalFeedUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static JournalFeed remove(JournalFeed journalFeed)
+		throws SystemException {
+		return getPersistence().remove(journalFeed);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static JournalFeed update(JournalFeed journalFeed, boolean merge)
+		throws SystemException {
+		return getPersistence().update(journalFeed, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed) {
 		getPersistence().cacheResult(journalFeed);
@@ -47,10 +92,6 @@ public class JournalFeedUtil {
 		getPersistence().cacheResult(journalFeeds);
 	}
 
-	public static void clearCache() {
-		getPersistence().clearCache();
-	}
-
 	public static com.liferay.portlet.journal.model.JournalFeed create(long id) {
 		return getPersistence().create(id);
 	}
@@ -59,39 +100,6 @@ public class JournalFeedUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException {
 		return getPersistence().remove(id);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalFeed remove(
-		com.liferay.portlet.journal.model.JournalFeed journalFeed)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(journalFeed);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(JournalFeed, boolean merge)}.
-	 */
-	public static com.liferay.portlet.journal.model.JournalFeed update(
-		com.liferay.portlet.journal.model.JournalFeed journalFeed)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(journalFeed);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalFeed the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalFeed is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.journal.model.JournalFeed update(
-		com.liferay.portlet.journal.model.JournalFeed journalFeed, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(journalFeed, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed updateImpl(
@@ -230,18 +238,6 @@ public class JournalFeedUtil {
 		long groupId, java.lang.String feedId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_F(groupId, feedId, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> findAll()

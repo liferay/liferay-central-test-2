@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.Company;
+
+import java.util.List;
 
 /**
  * <a href="CompanyUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,44 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class CompanyUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static Company remove(Company company) throws SystemException {
+		return getPersistence().remove(company);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static Company update(Company company, boolean merge)
+		throws SystemException {
+		return getPersistence().update(company, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.Company company) {
 		getPersistence().cacheResult(company);
 	}
@@ -44,10 +87,6 @@ public class CompanyUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Company> companies) {
 		getPersistence().cacheResult(companies);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.Company create(long companyId) {
@@ -58,39 +97,6 @@ public class CompanyUtil {
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(companyId);
-	}
-
-	public static com.liferay.portal.model.Company remove(
-		com.liferay.portal.model.Company company)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(company);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Company, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.Company update(
-		com.liferay.portal.model.Company company)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(company);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  company the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when company is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.Company update(
-		com.liferay.portal.model.Company company, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(company, merge);
 	}
 
 	public static com.liferay.portal.model.Company updateImpl(
@@ -219,18 +225,6 @@ public class CompanyUtil {
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException {
 		return getPersistence().findBySystem_PrevAndNext(companyId, system, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> findAll()

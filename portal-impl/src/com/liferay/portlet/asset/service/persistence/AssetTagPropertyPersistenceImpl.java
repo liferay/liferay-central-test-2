@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.asset.model.AssetTagProperty;
 import com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl;
 import com.liferay.portlet.asset.model.impl.AssetTagPropertyModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       AssetTagPropertyUtil
  * @generated
  */
-public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl
+public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTagProperty>
 	implements AssetTagPropertyPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetTagPropertyImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -177,6 +180,11 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl
 		return assetTagProperty;
 	}
 
+	public AssetTagProperty remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public AssetTagProperty remove(long tagPropertyId)
 		throws NoSuchTagPropertyException, SystemException {
 		Session session = null;
@@ -274,58 +282,6 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl
 		return assetTagProperty;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(AssetTagProperty, boolean merge)}.
-	 */
-	public AssetTagProperty update(AssetTagProperty assetTagProperty)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AssetTagProperty assetTagProperty) method. Use update(AssetTagProperty assetTagProperty, boolean merge) instead.");
-		}
-
-		return update(assetTagProperty, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetTagProperty the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetTagProperty is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AssetTagProperty update(AssetTagProperty assetTagProperty,
-		boolean merge) throws SystemException {
-		boolean isNew = assetTagProperty.isNew();
-
-		for (ModelListener<AssetTagProperty> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(assetTagProperty);
-			}
-			else {
-				listener.onBeforeUpdate(assetTagProperty);
-			}
-		}
-
-		assetTagProperty = updateImpl(assetTagProperty, merge);
-
-		for (ModelListener<AssetTagProperty> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(assetTagProperty);
-			}
-			else {
-				listener.onAfterUpdate(assetTagProperty);
-			}
-		}
-
-		return assetTagProperty;
-	}
-
 	public AssetTagProperty updateImpl(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
 		boolean merge) throws SystemException {
@@ -408,6 +364,11 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl
 		return assetTagPropertyImpl;
 	}
 
+	public AssetTagProperty findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AssetTagProperty findByPrimaryKey(long tagPropertyId)
 		throws NoSuchTagPropertyException, SystemException {
 		AssetTagProperty assetTagProperty = fetchByPrimaryKey(tagPropertyId);
@@ -424,6 +385,11 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetTagProperty;
+	}
+
+	public AssetTagProperty fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AssetTagProperty fetchByPrimaryKey(long tagPropertyId)

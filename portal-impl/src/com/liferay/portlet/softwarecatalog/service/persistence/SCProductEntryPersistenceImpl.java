@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -57,6 +58,8 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -77,7 +80,7 @@ import java.util.Set;
  * @see       SCProductEntryUtil
  * @generated
  */
-public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
+public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProductEntry>
 	implements SCProductEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCProductEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -188,6 +191,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		return scProductEntry;
 	}
 
+	public SCProductEntry remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public SCProductEntry remove(long productEntryId)
 		throws NoSuchProductEntryException, SystemException {
 		Session session = null;
@@ -293,58 +301,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		return scProductEntry;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(SCProductEntry, boolean merge)}.
-	 */
-	public SCProductEntry update(SCProductEntry scProductEntry)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(SCProductEntry scProductEntry) method. Use update(SCProductEntry scProductEntry, boolean merge) instead.");
-		}
-
-		return update(scProductEntry, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  scProductEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when scProductEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public SCProductEntry update(SCProductEntry scProductEntry, boolean merge)
-		throws SystemException {
-		boolean isNew = scProductEntry.isNew();
-
-		for (ModelListener<SCProductEntry> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductEntry);
-			}
-			else {
-				listener.onBeforeUpdate(scProductEntry);
-			}
-		}
-
-		scProductEntry = updateImpl(scProductEntry, merge);
-
-		for (ModelListener<SCProductEntry> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(scProductEntry);
-			}
-			else {
-				listener.onAfterUpdate(scProductEntry);
-			}
-		}
-
-		return scProductEntry;
-	}
-
 	public SCProductEntry updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean merge) throws SystemException {
@@ -435,6 +391,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		return scProductEntryImpl;
 	}
 
+	public SCProductEntry findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public SCProductEntry findByPrimaryKey(long productEntryId)
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = fetchByPrimaryKey(productEntryId);
@@ -451,6 +412,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return scProductEntry;
+	}
+
+	public SCProductEntry fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public SCProductEntry fetchByPrimaryKey(long productEntryId)

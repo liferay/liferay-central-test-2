@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       JournalStructureUtil
  * @generated
  */
-public class JournalStructurePersistenceImpl extends BasePersistenceImpl
+public class JournalStructurePersistenceImpl extends BasePersistenceImpl<JournalStructure>
 	implements JournalStructurePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalStructureImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -213,6 +216,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		return journalStructure;
 	}
 
+	public JournalStructure remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public JournalStructure remove(long id)
 		throws NoSuchStructureException, SystemException {
 		Session session = null;
@@ -311,58 +319,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
 			JournalStructureImpl.class, journalStructure.getPrimaryKey());
-
-		return journalStructure;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(JournalStructure, boolean merge)}.
-	 */
-	public JournalStructure update(JournalStructure journalStructure)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(JournalStructure journalStructure) method. Use update(JournalStructure journalStructure, boolean merge) instead.");
-		}
-
-		return update(journalStructure, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  journalStructure the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when journalStructure is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public JournalStructure update(JournalStructure journalStructure,
-		boolean merge) throws SystemException {
-		boolean isNew = journalStructure.isNew();
-
-		for (ModelListener<JournalStructure> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(journalStructure);
-			}
-			else {
-				listener.onBeforeUpdate(journalStructure);
-			}
-		}
-
-		journalStructure = updateImpl(journalStructure, merge);
-
-		for (ModelListener<JournalStructure> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(journalStructure);
-			}
-			else {
-				listener.onAfterUpdate(journalStructure);
-			}
-		}
 
 		return journalStructure;
 	}
@@ -481,6 +437,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		return journalStructureImpl;
 	}
 
+	public JournalStructure findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public JournalStructure findByPrimaryKey(long id)
 		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = fetchByPrimaryKey(id);
@@ -496,6 +457,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		}
 
 		return journalStructure;
+	}
+
+	public JournalStructure fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public JournalStructure fetchByPrimaryKey(long id)

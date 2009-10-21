@@ -24,6 +24,8 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.asset.model.AssetTag;
+
 /**
  * <a href="AssetTagPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,46 +39,17 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       AssetTagUtil
  * @generated
  */
-public interface AssetTagPersistence extends BasePersistence {
+public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 	public void cacheResult(com.liferay.portlet.asset.model.AssetTag assetTag);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetTag> assetTags);
-
-	public void clearCache();
 
 	public com.liferay.portlet.asset.model.AssetTag create(long tagId);
 
 	public com.liferay.portlet.asset.model.AssetTag remove(long tagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchTagException;
-
-	public com.liferay.portlet.asset.model.AssetTag remove(
-		com.liferay.portlet.asset.model.AssetTag assetTag)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(AssetTag, boolean merge)}.
-	 */
-	public com.liferay.portlet.asset.model.AssetTag update(
-		com.liferay.portlet.asset.model.AssetTag assetTag)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetTag the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetTag is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.asset.model.AssetTag update(
-		com.liferay.portlet.asset.model.AssetTag assetTag, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetTag updateImpl(
 		com.liferay.portlet.asset.model.AssetTag assetTag, boolean merge)
@@ -116,14 +89,6 @@ public interface AssetTagPersistence extends BasePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchTagException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> findAll()
 		throws com.liferay.portal.SystemException;

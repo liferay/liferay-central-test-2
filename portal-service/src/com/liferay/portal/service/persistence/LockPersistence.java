@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Lock;
 
 /**
  * <a href="LockPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,45 +37,16 @@ package com.liferay.portal.service.persistence;
  * @see       LockUtil
  * @generated
  */
-public interface LockPersistence extends BasePersistence {
+public interface LockPersistence extends BasePersistence<Lock> {
 	public void cacheResult(com.liferay.portal.model.Lock lock);
 
 	public void cacheResult(java.util.List<com.liferay.portal.model.Lock> locks);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Lock create(long lockId);
 
 	public com.liferay.portal.model.Lock remove(long lockId)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Lock remove(
-		com.liferay.portal.model.Lock lock)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Lock, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Lock update(
-		com.liferay.portal.model.Lock lock)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  lock the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when lock is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Lock update(
-		com.liferay.portal.model.Lock lock, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Lock updateImpl(
 		com.liferay.portal.model.Lock lock, boolean merge)
@@ -160,14 +132,6 @@ public interface LockPersistence extends BasePersistence {
 	public com.liferay.portal.model.Lock fetchByC_K(
 		java.lang.String className, java.lang.String key,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Lock> findAll()
 		throws com.liferay.portal.SystemException;

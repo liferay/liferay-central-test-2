@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.OrgGroupRole;
+
+import java.util.List;
 
 /**
  * <a href="OrgGroupRoleUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,45 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class OrgGroupRoleUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static OrgGroupRole remove(OrgGroupRole orgGroupRole)
+		throws SystemException {
+		return getPersistence().remove(orgGroupRole);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static OrgGroupRole update(OrgGroupRole orgGroupRole, boolean merge)
+		throws SystemException {
+		return getPersistence().update(orgGroupRole, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole) {
 		getPersistence().cacheResult(orgGroupRole);
@@ -45,10 +89,6 @@ public class OrgGroupRoleUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.OrgGroupRole> orgGroupRoles) {
 		getPersistence().cacheResult(orgGroupRoles);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole create(
@@ -61,39 +101,6 @@ public class OrgGroupRoleUtil {
 		throws com.liferay.portal.NoSuchOrgGroupRoleException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(orgGroupRolePK);
-	}
-
-	public static com.liferay.portal.model.OrgGroupRole remove(
-		com.liferay.portal.model.OrgGroupRole orgGroupRole)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(orgGroupRole);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(OrgGroupRole, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.OrgGroupRole update(
-		com.liferay.portal.model.OrgGroupRole orgGroupRole)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(orgGroupRole);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  orgGroupRole the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when orgGroupRole is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.OrgGroupRole update(
-		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(orgGroupRole, merge);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole updateImpl(
@@ -195,18 +202,6 @@ public class OrgGroupRoleUtil {
 			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByRoleId_PrevAndNext(orgGroupRolePK, roleId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findAll()

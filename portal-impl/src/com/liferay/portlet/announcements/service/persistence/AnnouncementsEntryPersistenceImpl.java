@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       AnnouncementsEntryUtil
  * @generated
  */
-public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
+public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<AnnouncementsEntry>
 	implements AnnouncementsEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -191,6 +194,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		return announcementsEntry;
 	}
 
+	public AnnouncementsEntry remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public AnnouncementsEntry remove(long entryId)
 		throws NoSuchEntryException, SystemException {
 		Session session = null;
@@ -279,58 +287,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		return announcementsEntry;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(AnnouncementsEntry, boolean merge)}.
-	 */
-	public AnnouncementsEntry update(AnnouncementsEntry announcementsEntry)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AnnouncementsEntry announcementsEntry) method. Use update(AnnouncementsEntry announcementsEntry, boolean merge) instead.");
-		}
-
-		return update(announcementsEntry, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  announcementsEntry the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when announcementsEntry is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AnnouncementsEntry update(AnnouncementsEntry announcementsEntry,
-		boolean merge) throws SystemException {
-		boolean isNew = announcementsEntry.isNew();
-
-		for (ModelListener<AnnouncementsEntry> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(announcementsEntry);
-			}
-			else {
-				listener.onBeforeUpdate(announcementsEntry);
-			}
-		}
-
-		announcementsEntry = updateImpl(announcementsEntry, merge);
-
-		for (ModelListener<AnnouncementsEntry> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(announcementsEntry);
-			}
-			else {
-				listener.onAfterUpdate(announcementsEntry);
-			}
-		}
-
-		return announcementsEntry;
-	}
-
 	public AnnouncementsEntry updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry,
 		boolean merge) throws SystemException {
@@ -399,6 +355,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		return announcementsEntryImpl;
 	}
 
+	public AnnouncementsEntry findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AnnouncementsEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		AnnouncementsEntry announcementsEntry = fetchByPrimaryKey(entryId);
@@ -414,6 +375,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return announcementsEntry;
+	}
+
+	public AnnouncementsEntry fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AnnouncementsEntry fetchByPrimaryKey(long entryId)

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.model.impl.OrgGroupPermissionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       OrgGroupPermissionUtil
  * @generated
  */
-public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
+public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGroupPermission>
 	implements OrgGroupPermissionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupPermissionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -140,6 +143,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		orgGroupPermission.setPrimaryKey(orgGroupPermissionPK);
 
 		return orgGroupPermission;
+	}
+
+	public OrgGroupPermission remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove((OrgGroupPermissionPK)primaryKey);
 	}
 
 	public OrgGroupPermission remove(OrgGroupPermissionPK orgGroupPermissionPK)
@@ -230,58 +238,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		return orgGroupPermission;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(OrgGroupPermission, boolean merge)}.
-	 */
-	public OrgGroupPermission update(OrgGroupPermission orgGroupPermission)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(OrgGroupPermission orgGroupPermission) method. Use update(OrgGroupPermission orgGroupPermission, boolean merge) instead.");
-		}
-
-		return update(orgGroupPermission, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  orgGroupPermission the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when orgGroupPermission is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public OrgGroupPermission update(OrgGroupPermission orgGroupPermission,
-		boolean merge) throws SystemException {
-		boolean isNew = orgGroupPermission.isNew();
-
-		for (ModelListener<OrgGroupPermission> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(orgGroupPermission);
-			}
-			else {
-				listener.onBeforeUpdate(orgGroupPermission);
-			}
-		}
-
-		orgGroupPermission = updateImpl(orgGroupPermission, merge);
-
-		for (ModelListener<OrgGroupPermission> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(orgGroupPermission);
-			}
-			else {
-				listener.onAfterUpdate(orgGroupPermission);
-			}
-		}
-
-		return orgGroupPermission;
-	}
-
 	public OrgGroupPermission updateImpl(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean merge) throws SystemException {
@@ -330,6 +286,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		return orgGroupPermissionImpl;
 	}
 
+	public OrgGroupPermission findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey((OrgGroupPermissionPK)primaryKey);
+	}
+
 	public OrgGroupPermission findByPrimaryKey(
 		OrgGroupPermissionPK orgGroupPermissionPK)
 		throws NoSuchOrgGroupPermissionException, SystemException {
@@ -347,6 +308,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return orgGroupPermission;
+	}
+
+	public OrgGroupPermission fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey((OrgGroupPermissionPK)primaryKey);
 	}
 
 	public OrgGroupPermission fetchByPrimaryKey(

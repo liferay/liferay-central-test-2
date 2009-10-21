@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.UserGroup;
 
 /**
  * <a href="UserGroupPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       UserGroupUtil
  * @generated
  */
-public interface UserGroupPersistence extends BasePersistence {
+public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 	public void cacheResult(com.liferay.portal.model.UserGroup userGroup);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.UserGroup create(long userGroupId);
 
 	public com.liferay.portal.model.UserGroup remove(long userGroupId)
 		throws com.liferay.portal.NoSuchUserGroupException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.UserGroup remove(
-		com.liferay.portal.model.UserGroup userGroup)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(UserGroup, boolean merge)}.
-	 */
-	public com.liferay.portal.model.UserGroup update(
-		com.liferay.portal.model.UserGroup userGroup)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userGroup the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userGroup is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.UserGroup update(
-		com.liferay.portal.model.UserGroup userGroup, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup updateImpl(
 		com.liferay.portal.model.UserGroup userGroup, boolean merge)
@@ -158,14 +130,6 @@ public interface UserGroupPersistence extends BasePersistence {
 	public com.liferay.portal.model.UserGroup fetchByC_N(long companyId,
 		java.lang.String name, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findAll()
 		throws com.liferay.portal.SystemException;

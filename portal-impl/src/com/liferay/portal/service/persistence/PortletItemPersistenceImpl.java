@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPortletItemException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.PortletItemImpl;
 import com.liferay.portal.model.impl.PortletItemModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       PortletItemUtil
  * @generated
  */
-public class PortletItemPersistenceImpl extends BasePersistenceImpl
+public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	implements PortletItemPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PortletItemImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -171,6 +174,11 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		return portletItem;
 	}
 
+	public PortletItem remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public PortletItem remove(long portletItemId)
 		throws NoSuchPortletItemException, SystemException {
 		Session session = null;
@@ -269,58 +277,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		return portletItem;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(PortletItem, boolean merge)}.
-	 */
-	public PortletItem update(PortletItem portletItem)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(PortletItem portletItem) method. Use update(PortletItem portletItem, boolean merge) instead.");
-		}
-
-		return update(portletItem, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  portletItem the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when portletItem is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public PortletItem update(PortletItem portletItem, boolean merge)
-		throws SystemException {
-		boolean isNew = portletItem.isNew();
-
-		for (ModelListener<PortletItem> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(portletItem);
-			}
-			else {
-				listener.onBeforeUpdate(portletItem);
-			}
-		}
-
-		portletItem = updateImpl(portletItem, merge);
-
-		for (ModelListener<PortletItem> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(portletItem);
-			}
-			else {
-				listener.onAfterUpdate(portletItem);
-			}
-		}
-
-		return portletItem;
-	}
-
 	public PortletItem updateImpl(
 		com.liferay.portal.model.PortletItem portletItem, boolean merge)
 		throws SystemException {
@@ -414,6 +370,11 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		return portletItemImpl;
 	}
 
+	public PortletItem findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public PortletItem findByPrimaryKey(long portletItemId)
 		throws NoSuchPortletItemException, SystemException {
 		PortletItem portletItem = fetchByPrimaryKey(portletItemId);
@@ -429,6 +390,11 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return portletItem;
+	}
+
+	public PortletItem fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public PortletItem fetchByPrimaryKey(long portletItemId)

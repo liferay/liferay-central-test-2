@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl;
 import com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       AssetCategoryPropertyUtil
  * @generated
  */
-public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
+public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<AssetCategoryProperty>
 	implements AssetCategoryPropertyPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetCategoryPropertyImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -177,6 +180,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		return assetCategoryProperty;
 	}
 
+	public AssetCategoryProperty remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public AssetCategoryProperty remove(long categoryPropertyId)
 		throws NoSuchCategoryPropertyException, SystemException {
 		Session session = null;
@@ -275,59 +283,6 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		return assetCategoryProperty;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(AssetCategoryProperty, boolean merge)}.
-	 */
-	public AssetCategoryProperty update(
-		AssetCategoryProperty assetCategoryProperty) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AssetCategoryProperty assetCategoryProperty) method. Use update(AssetCategoryProperty assetCategoryProperty, boolean merge) instead.");
-		}
-
-		return update(assetCategoryProperty, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetCategoryProperty the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetCategoryProperty is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AssetCategoryProperty update(
-		AssetCategoryProperty assetCategoryProperty, boolean merge)
-		throws SystemException {
-		boolean isNew = assetCategoryProperty.isNew();
-
-		for (ModelListener<AssetCategoryProperty> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(assetCategoryProperty);
-			}
-			else {
-				listener.onBeforeUpdate(assetCategoryProperty);
-			}
-		}
-
-		assetCategoryProperty = updateImpl(assetCategoryProperty, merge);
-
-		for (ModelListener<AssetCategoryProperty> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(assetCategoryProperty);
-			}
-			else {
-				listener.onAfterUpdate(assetCategoryProperty);
-			}
-		}
-
-		return assetCategoryProperty;
-	}
-
 	public AssetCategoryProperty updateImpl(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty,
 		boolean merge) throws SystemException {
@@ -410,6 +365,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		return assetCategoryPropertyImpl;
 	}
 
+	public AssetCategoryProperty findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AssetCategoryProperty findByPrimaryKey(long categoryPropertyId)
 		throws NoSuchCategoryPropertyException, SystemException {
 		AssetCategoryProperty assetCategoryProperty = fetchByPrimaryKey(categoryPropertyId);
@@ -427,6 +387,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetCategoryProperty;
+	}
+
+	public AssetCategoryProperty fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AssetCategoryProperty fetchByPrimaryKey(long categoryPropertyId)

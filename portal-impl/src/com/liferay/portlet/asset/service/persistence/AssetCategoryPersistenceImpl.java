@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -58,6 +59,8 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.impl.AssetCategoryImpl;
 import com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -78,7 +81,7 @@ import java.util.Set;
  * @see       AssetCategoryUtil
  * @generated
  */
-public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
+public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCategory>
 	implements AssetCategoryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetCategoryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -242,6 +245,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return assetCategory;
 	}
 
+	public AssetCategory remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public AssetCategory remove(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		Session session = null;
@@ -348,58 +356,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return assetCategory;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(AssetCategory, boolean merge)}.
-	 */
-	public AssetCategory update(AssetCategory assetCategory)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AssetCategory assetCategory) method. Use update(AssetCategory assetCategory, boolean merge) instead.");
-		}
-
-		return update(assetCategory, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetCategory the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetCategory is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AssetCategory update(AssetCategory assetCategory, boolean merge)
-		throws SystemException {
-		boolean isNew = assetCategory.isNew();
-
-		for (ModelListener<AssetCategory> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(assetCategory);
-			}
-			else {
-				listener.onBeforeUpdate(assetCategory);
-			}
-		}
-
-		assetCategory = updateImpl(assetCategory, merge);
-
-		for (ModelListener<AssetCategory> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(assetCategory);
-			}
-			else {
-				listener.onAfterUpdate(assetCategory);
-			}
-		}
-
-		return assetCategory;
-	}
-
 	public AssetCategory updateImpl(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory,
 		boolean merge) throws SystemException {
@@ -499,6 +455,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return assetCategoryImpl;
 	}
 
+	public AssetCategory findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AssetCategory findByPrimaryKey(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = fetchByPrimaryKey(categoryId);
@@ -514,6 +475,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetCategory;
+	}
+
+	public AssetCategory fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AssetCategory fetchByPrimaryKey(long categoryId)

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.MembershipRequest;
+
+import java.util.List;
 
 /**
  * <a href="MembershipRequestUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,46 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class MembershipRequestUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static MembershipRequest remove(MembershipRequest membershipRequest)
+		throws SystemException {
+		return getPersistence().remove(membershipRequest);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static MembershipRequest update(
+		MembershipRequest membershipRequest, boolean merge)
+		throws SystemException {
+		return getPersistence().update(membershipRequest, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.MembershipRequest membershipRequest) {
 		getPersistence().cacheResult(membershipRequest);
@@ -45,10 +90,6 @@ public class MembershipRequestUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.MembershipRequest> membershipRequests) {
 		getPersistence().cacheResult(membershipRequests);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.MembershipRequest create(
@@ -61,39 +102,6 @@ public class MembershipRequestUtil {
 		throws com.liferay.portal.NoSuchMembershipRequestException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(membershipRequestId);
-	}
-
-	public static com.liferay.portal.model.MembershipRequest remove(
-		com.liferay.portal.model.MembershipRequest membershipRequest)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(membershipRequest);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(MembershipRequest, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.MembershipRequest update(
-		com.liferay.portal.model.MembershipRequest membershipRequest)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(membershipRequest);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  membershipRequest the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when membershipRequest is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.MembershipRequest update(
-		com.liferay.portal.model.MembershipRequest membershipRequest,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(membershipRequest, merge);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest updateImpl(
@@ -238,18 +246,6 @@ public class MembershipRequestUtil {
 		return getPersistence()
 				   .findByG_S_PrevAndNext(membershipRequestId, groupId,
 			statusId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> findAll()

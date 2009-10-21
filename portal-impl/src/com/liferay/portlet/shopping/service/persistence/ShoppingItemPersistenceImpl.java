@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -54,6 +55,8 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemModelImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -73,7 +76,7 @@ import java.util.List;
  * @see       ShoppingItemUtil
  * @generated
  */
-public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
+public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingItem>
 	implements ShoppingItemPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingItemImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -182,6 +185,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		return shoppingItem;
 	}
 
+	public ShoppingItem remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public ShoppingItem remove(long itemId)
 		throws NoSuchItemException, SystemException {
 		Session session = null;
@@ -287,58 +295,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemImpl.class, shoppingItem.getPrimaryKey());
-
-		return shoppingItem;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(ShoppingItem, boolean merge)}.
-	 */
-	public ShoppingItem update(ShoppingItem shoppingItem)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(ShoppingItem shoppingItem) method. Use update(ShoppingItem shoppingItem, boolean merge) instead.");
-		}
-
-		return update(shoppingItem, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingItem the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingItem is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public ShoppingItem update(ShoppingItem shoppingItem, boolean merge)
-		throws SystemException {
-		boolean isNew = shoppingItem.isNew();
-
-		for (ModelListener<ShoppingItem> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItem);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItem);
-			}
-		}
-
-		shoppingItem = updateImpl(shoppingItem, merge);
-
-		for (ModelListener<ShoppingItem> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItem);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItem);
-			}
-		}
 
 		return shoppingItem;
 	}
@@ -493,6 +449,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		return shoppingItemImpl;
 	}
 
+	public ShoppingItem findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public ShoppingItem findByPrimaryKey(long itemId)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = fetchByPrimaryKey(itemId);
@@ -508,6 +469,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return shoppingItem;
+	}
+
+	public ShoppingItem fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public ShoppingItem fetchByPrimaryKey(long itemId)

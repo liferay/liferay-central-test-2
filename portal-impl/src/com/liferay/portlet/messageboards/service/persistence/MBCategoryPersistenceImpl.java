@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       MBCategoryUtil
  * @generated
  */
-public class MBCategoryPersistenceImpl extends BasePersistenceImpl
+public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	implements MBCategoryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBCategoryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -188,6 +191,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		return mbCategory;
 	}
 
+	public MBCategory remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public MBCategory remove(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		Session session = null;
@@ -280,57 +288,6 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		return mbCategory;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(MBCategory, boolean merge)}.
-	 */
-	public MBCategory update(MBCategory mbCategory) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(MBCategory mbCategory) method. Use update(MBCategory mbCategory, boolean merge) instead.");
-		}
-
-		return update(mbCategory, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbCategory the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbCategory is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public MBCategory update(MBCategory mbCategory, boolean merge)
-		throws SystemException {
-		boolean isNew = mbCategory.isNew();
-
-		for (ModelListener<MBCategory> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(mbCategory);
-			}
-			else {
-				listener.onBeforeUpdate(mbCategory);
-			}
-		}
-
-		mbCategory = updateImpl(mbCategory, merge);
-
-		for (ModelListener<MBCategory> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(mbCategory);
-			}
-			else {
-				listener.onAfterUpdate(mbCategory);
-			}
-		}
-
-		return mbCategory;
-	}
-
 	public MBCategory updateImpl(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean merge) throws SystemException {
@@ -419,6 +376,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		return mbCategoryImpl;
 	}
 
+	public MBCategory findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public MBCategory findByPrimaryKey(long categoryId)
 		throws NoSuchCategoryException, SystemException {
 		MBCategory mbCategory = fetchByPrimaryKey(categoryId);
@@ -434,6 +396,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return mbCategory;
+	}
+
+	public MBCategory fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public MBCategory fetchByPrimaryKey(long categoryId)

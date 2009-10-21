@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.impl.TasksProposalImpl;
 import com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       TasksProposalUtil
  * @generated
  */
-public class TasksProposalPersistenceImpl extends BasePersistenceImpl
+public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksProposal>
 	implements TasksProposalPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = TasksProposalImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -158,6 +161,11 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		tasksProposal.setPrimaryKey(proposalId);
 
 		return tasksProposal;
+	}
+
+	public TasksProposal remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public TasksProposal remove(long proposalId)
@@ -255,58 +263,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		return tasksProposal;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(TasksProposal, boolean merge)}.
-	 */
-	public TasksProposal update(TasksProposal tasksProposal)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(TasksProposal tasksProposal) method. Use update(TasksProposal tasksProposal, boolean merge) instead.");
-		}
-
-		return update(tasksProposal, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  tasksProposal the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when tasksProposal is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public TasksProposal update(TasksProposal tasksProposal, boolean merge)
-		throws SystemException {
-		boolean isNew = tasksProposal.isNew();
-
-		for (ModelListener<TasksProposal> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(tasksProposal);
-			}
-			else {
-				listener.onBeforeUpdate(tasksProposal);
-			}
-		}
-
-		tasksProposal = updateImpl(tasksProposal, merge);
-
-		for (ModelListener<TasksProposal> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(tasksProposal);
-			}
-			else {
-				listener.onAfterUpdate(tasksProposal);
-			}
-		}
-
-		return tasksProposal;
-	}
-
 	public TasksProposal updateImpl(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal,
 		boolean merge) throws SystemException {
@@ -392,6 +348,11 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		return tasksProposalImpl;
 	}
 
+	public TasksProposal findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public TasksProposal findByPrimaryKey(long proposalId)
 		throws NoSuchProposalException, SystemException {
 		TasksProposal tasksProposal = fetchByPrimaryKey(proposalId);
@@ -407,6 +368,11 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return tasksProposal;
+	}
+
+	public TasksProposal fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public TasksProposal fetchByPrimaryKey(long proposalId)

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.Portlet;
 
 /**
  * <a href="PortletPersistence.java.html"><b><i>View Source</i></b></a>
@@ -36,46 +37,17 @@ package com.liferay.portal.service.persistence;
  * @see       PortletUtil
  * @generated
  */
-public interface PortletPersistence extends BasePersistence {
+public interface PortletPersistence extends BasePersistence<Portlet> {
 	public void cacheResult(com.liferay.portal.model.Portlet portlet);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Portlet> portlets);
-
-	public void clearCache();
 
 	public com.liferay.portal.model.Portlet create(long id);
 
 	public com.liferay.portal.model.Portlet remove(long id)
 		throws com.liferay.portal.NoSuchPortletException,
 			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Portlet remove(
-		com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(Portlet, boolean merge)}.
-	 */
-	public com.liferay.portal.model.Portlet update(
-		com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  portlet the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when portlet is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portal.model.Portlet update(
-		com.liferay.portal.model.Portlet portlet, boolean merge)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Portlet updateImpl(
 		com.liferay.portal.model.Portlet portlet, boolean merge)
@@ -127,14 +99,6 @@ public interface PortletPersistence extends BasePersistence {
 	public com.liferay.portal.model.Portlet fetchByC_P(long companyId,
 		java.lang.String portletId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Portlet> findAll()
 		throws com.liferay.portal.SystemException;

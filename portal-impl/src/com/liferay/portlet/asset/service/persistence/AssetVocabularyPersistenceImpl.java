@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -50,6 +51,8 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.model.impl.AssetVocabularyImpl;
 import com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +70,7 @@ import java.util.List;
  * @see       AssetVocabularyUtil
  * @generated
  */
-public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
+public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVocabulary>
 	implements AssetVocabularyPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetVocabularyImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -196,6 +199,11 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 		return assetVocabulary;
 	}
 
+	public AssetVocabulary remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public AssetVocabulary remove(long vocabularyId)
 		throws NoSuchVocabularyException, SystemException {
 		Session session = null;
@@ -294,58 +302,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetVocabularyImpl.class, assetVocabulary.getPrimaryKey());
-
-		return assetVocabulary;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(AssetVocabulary, boolean merge)}.
-	 */
-	public AssetVocabulary update(AssetVocabulary assetVocabulary)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AssetVocabulary assetVocabulary) method. Use update(AssetVocabulary assetVocabulary, boolean merge) instead.");
-		}
-
-		return update(assetVocabulary, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  assetVocabulary the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when assetVocabulary is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AssetVocabulary update(AssetVocabulary assetVocabulary, boolean merge)
-		throws SystemException {
-		boolean isNew = assetVocabulary.isNew();
-
-		for (ModelListener<AssetVocabulary> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(assetVocabulary);
-			}
-			else {
-				listener.onBeforeUpdate(assetVocabulary);
-			}
-		}
-
-		assetVocabulary = updateImpl(assetVocabulary, merge);
-
-		for (ModelListener<AssetVocabulary> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(assetVocabulary);
-			}
-			else {
-				listener.onAfterUpdate(assetVocabulary);
-			}
-		}
 
 		return assetVocabulary;
 	}
@@ -460,6 +416,11 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 		return assetVocabularyImpl;
 	}
 
+	public AssetVocabulary findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AssetVocabulary findByPrimaryKey(long vocabularyId)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = fetchByPrimaryKey(vocabularyId);
@@ -476,6 +437,11 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return assetVocabulary;
+	}
+
+	public AssetVocabulary fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AssetVocabulary fetchByPrimaryKey(long vocabularyId)

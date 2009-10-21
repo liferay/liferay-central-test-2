@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.Image;
+
+import java.util.List;
 
 /**
  * <a href="ImageUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,44 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class ImageUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static Image remove(Image image) throws SystemException {
+		return getPersistence().remove(image);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static Image update(Image image, boolean merge)
+		throws SystemException {
+		return getPersistence().update(image, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.Image image) {
 		getPersistence().cacheResult(image);
 	}
@@ -44,10 +87,6 @@ public class ImageUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Image> images) {
 		getPersistence().cacheResult(images);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.Image create(long imageId) {
@@ -58,39 +97,6 @@ public class ImageUtil {
 		throws com.liferay.portal.NoSuchImageException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(imageId);
-	}
-
-	public static com.liferay.portal.model.Image remove(
-		com.liferay.portal.model.Image image)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(image);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Image, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.Image update(
-		com.liferay.portal.model.Image image)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(image);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  image the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when image is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.Image update(
-		com.liferay.portal.model.Image image, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(image, merge);
 	}
 
 	public static com.liferay.portal.model.Image updateImpl(
@@ -147,18 +153,6 @@ public class ImageUtil {
 		throws com.liferay.portal.NoSuchImageException,
 			com.liferay.portal.SystemException {
 		return getPersistence().findBySize_PrevAndNext(imageId, size, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> findAll()

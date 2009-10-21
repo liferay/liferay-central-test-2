@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -55,6 +56,8 @@ import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.model.impl.UserGroupModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -75,7 +78,7 @@ import java.util.Set;
  * @see       UserGroupUtil
  * @generated
  */
-public class UserGroupPersistenceImpl extends BasePersistenceImpl
+public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	implements UserGroupPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserGroupImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -160,6 +163,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		userGroup.setPrimaryKey(userGroupId);
 
 		return userGroup;
+	}
+
+	public UserGroup remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public UserGroup remove(long userGroupId)
@@ -265,57 +273,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		return userGroup;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(UserGroup, boolean merge)}.
-	 */
-	public UserGroup update(UserGroup userGroup) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(UserGroup userGroup) method. Use update(UserGroup userGroup, boolean merge) instead.");
-		}
-
-		return update(userGroup, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  userGroup the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when userGroup is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public UserGroup update(UserGroup userGroup, boolean merge)
-		throws SystemException {
-		boolean isNew = userGroup.isNew();
-
-		for (ModelListener<UserGroup> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(userGroup);
-			}
-			else {
-				listener.onBeforeUpdate(userGroup);
-			}
-		}
-
-		userGroup = updateImpl(userGroup, merge);
-
-		for (ModelListener<UserGroup> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(userGroup);
-			}
-			else {
-				listener.onAfterUpdate(userGroup);
-			}
-		}
-
-		return userGroup;
-	}
-
 	public UserGroup updateImpl(com.liferay.portal.model.UserGroup userGroup,
 		boolean merge) throws SystemException {
 		userGroup = toUnwrappedModel(userGroup);
@@ -391,6 +348,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		return userGroupImpl;
 	}
 
+	public UserGroup findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public UserGroup findByPrimaryKey(long userGroupId)
 		throws NoSuchUserGroupException, SystemException {
 		UserGroup userGroup = fetchByPrimaryKey(userGroupId);
@@ -406,6 +368,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return userGroup;
+	}
+
+	public UserGroup fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public UserGroup fetchByPrimaryKey(long userGroupId)

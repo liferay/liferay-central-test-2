@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.PortletPreferences;
+
+import java.util.List;
 
 /**
  * <a href="PortletPreferencesUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,46 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class PortletPreferencesUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static PortletPreferences remove(
+		PortletPreferences portletPreferences) throws SystemException {
+		return getPersistence().remove(portletPreferences);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static PortletPreferences update(
+		PortletPreferences portletPreferences, boolean merge)
+		throws SystemException {
+		return getPersistence().update(portletPreferences, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.PortletPreferences portletPreferences) {
 		getPersistence().cacheResult(portletPreferences);
@@ -45,10 +90,6 @@ public class PortletPreferencesUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.PortletPreferences> portletPreferenceses) {
 		getPersistence().cacheResult(portletPreferenceses);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.PortletPreferences create(
@@ -61,39 +102,6 @@ public class PortletPreferencesUtil {
 		throws com.liferay.portal.NoSuchPortletPreferencesException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(portletPreferencesId);
-	}
-
-	public static com.liferay.portal.model.PortletPreferences remove(
-		com.liferay.portal.model.PortletPreferences portletPreferences)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(portletPreferences);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(PortletPreferences, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.PortletPreferences update(
-		com.liferay.portal.model.PortletPreferences portletPreferences)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(portletPreferences);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  portletPreferences the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when portletPreferences is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.PortletPreferences update(
-		com.liferay.portal.model.PortletPreferences portletPreferences,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(portletPreferences, merge);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences updateImpl(
@@ -267,18 +275,6 @@ public class PortletPreferencesUtil {
 		return getPersistence()
 				   .fetchByO_O_P_P(ownerId, ownerType, plid, portletId,
 			retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> findAll()

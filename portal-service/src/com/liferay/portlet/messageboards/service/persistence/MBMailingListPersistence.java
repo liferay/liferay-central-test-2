@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import com.liferay.portlet.messageboards.model.MBMailingList;
+
 /**
  * <a href="MBMailingListPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,14 +39,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @see       MBMailingListUtil
  * @generated
  */
-public interface MBMailingListPersistence extends BasePersistence {
+public interface MBMailingListPersistence extends BasePersistence<MBMailingList> {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList);
 
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> mbMailingLists);
-
-	public void clearCache();
 
 	public com.liferay.portlet.messageboards.model.MBMailingList create(
 		long mailingListId);
@@ -53,33 +53,6 @@ public interface MBMailingListPersistence extends BasePersistence {
 		long mailingListId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMailingListException;
-
-	public com.liferay.portlet.messageboards.model.MBMailingList remove(
-		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * @deprecated Use {@link #update(MBMailingList, boolean merge)}.
-	 */
-	public com.liferay.portlet.messageboards.model.MBMailingList update(
-		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
-		throws com.liferay.portal.SystemException;
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  mbMailingList the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when mbMailingList is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public com.liferay.portlet.messageboards.model.MBMailingList update(
-		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList,
-		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMailingList updateImpl(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList,
@@ -176,14 +149,6 @@ public interface MBMailingListPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBMailingList fetchByG_C(
 		long groupId, long categoryId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> findAll()
 		throws com.liferay.portal.SystemException;

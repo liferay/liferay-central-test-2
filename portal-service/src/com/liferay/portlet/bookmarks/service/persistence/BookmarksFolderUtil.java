@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+
+import java.util.List;
 
 /**
  * <a href="BookmarksFolderUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.bookmarks.service.persistence;
  * @generated
  */
 public class BookmarksFolderUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static BookmarksFolder remove(BookmarksFolder bookmarksFolder)
+		throws SystemException {
+		return getPersistence().remove(bookmarksFolder);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static BookmarksFolder update(BookmarksFolder bookmarksFolder,
+		boolean merge) throws SystemException {
+		return getPersistence().update(bookmarksFolder, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder) {
 		getPersistence().cacheResult(bookmarksFolder);
@@ -45,10 +90,6 @@ public class BookmarksFolderUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> bookmarksFolders) {
 		getPersistence().cacheResult(bookmarksFolders);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder create(
@@ -61,39 +102,6 @@ public class BookmarksFolderUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchFolderException {
 		return getPersistence().remove(folderId);
-	}
-
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolder remove(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(bookmarksFolder);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(BookmarksFolder, boolean merge)}.
-	 */
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolder update(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(bookmarksFolder);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  bookmarksFolder the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when bookmarksFolder is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolder update(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(bookmarksFolder, merge);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateImpl(
@@ -299,18 +307,6 @@ public class BookmarksFolderUtil {
 			com.liferay.portlet.bookmarks.NoSuchFolderException {
 		return getPersistence()
 				   .findByG_P_PrevAndNext(folderId, groupId, parentFolderId, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findAll()

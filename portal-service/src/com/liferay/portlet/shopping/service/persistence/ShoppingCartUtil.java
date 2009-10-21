@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.shopping.model.ShoppingCart;
+
+import java.util.List;
 
 /**
  * <a href="ShoppingCartUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.shopping.service.persistence;
  * @generated
  */
 public class ShoppingCartUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static ShoppingCart remove(ShoppingCart shoppingCart)
+		throws SystemException {
+		return getPersistence().remove(shoppingCart);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static ShoppingCart update(ShoppingCart shoppingCart, boolean merge)
+		throws SystemException {
+		return getPersistence().update(shoppingCart, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart) {
 		getPersistence().cacheResult(shoppingCart);
@@ -45,10 +90,6 @@ public class ShoppingCartUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> shoppingCarts) {
 		getPersistence().cacheResult(shoppingCarts);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart create(
@@ -61,39 +102,6 @@ public class ShoppingCartUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		return getPersistence().remove(cartId);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCart remove(
-		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(shoppingCart);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(ShoppingCart, boolean merge)}.
-	 */
-	public static com.liferay.portlet.shopping.model.ShoppingCart update(
-		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(shoppingCart);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  shoppingCart the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when shoppingCart is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.shopping.model.ShoppingCart update(
-		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(shoppingCart, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateImpl(
@@ -210,18 +218,6 @@ public class ShoppingCartUtil {
 		long groupId, long userId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_U(groupId, userId, retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findAll()

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       LayoutUtil
  * @generated
  */
-public class LayoutPersistenceImpl extends BasePersistenceImpl
+public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	implements LayoutPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = LayoutImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -263,6 +266,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		return layout;
 	}
 
+	public Layout remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
 	public Layout remove(long plid)
 		throws NoSuchLayoutException, SystemException {
 		Session session = null;
@@ -363,57 +371,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutImpl.class, layout.getPrimaryKey());
-
-		return layout;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Layout, boolean merge)}.
-	 */
-	public Layout update(Layout layout) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Layout layout) method. Use update(Layout layout, boolean merge) instead.");
-		}
-
-		return update(layout, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  layout the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when layout is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Layout update(Layout layout, boolean merge)
-		throws SystemException {
-		boolean isNew = layout.isNew();
-
-		for (ModelListener<Layout> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(layout);
-			}
-			else {
-				listener.onBeforeUpdate(layout);
-			}
-		}
-
-		layout = updateImpl(layout, merge);
-
-		for (ModelListener<Layout> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(layout);
-			}
-			else {
-				listener.onAfterUpdate(layout);
-			}
-		}
 
 		return layout;
 	}
@@ -563,6 +520,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		return layoutImpl;
 	}
 
+	public Layout findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Layout findByPrimaryKey(long plid)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = fetchByPrimaryKey(plid);
@@ -577,6 +539,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return layout;
+	}
+
+	public Layout fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Layout fetchByPrimaryKey(long plid) throws SystemException {

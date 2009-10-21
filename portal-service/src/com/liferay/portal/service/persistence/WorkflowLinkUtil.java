@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.WorkflowLink;
+
+import java.util.List;
 
 /**
  * <a href="WorkflowLinkUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,45 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class WorkflowLinkUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static WorkflowLink remove(WorkflowLink workflowLink)
+		throws SystemException {
+		return getPersistence().remove(workflowLink);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static WorkflowLink update(WorkflowLink workflowLink, boolean merge)
+		throws SystemException {
+		return getPersistence().update(workflowLink, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portal.model.WorkflowLink workflowLink) {
 		getPersistence().cacheResult(workflowLink);
@@ -45,10 +89,6 @@ public class WorkflowLinkUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.WorkflowLink> workflowLinks) {
 		getPersistence().cacheResult(workflowLinks);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.WorkflowLink create(
@@ -61,39 +101,6 @@ public class WorkflowLinkUtil {
 		throws com.liferay.portal.NoSuchWorkflowLinkException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(workflowLinkId);
-	}
-
-	public static com.liferay.portal.model.WorkflowLink remove(
-		com.liferay.portal.model.WorkflowLink workflowLink)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(workflowLink);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(WorkflowLink, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.WorkflowLink update(
-		com.liferay.portal.model.WorkflowLink workflowLink)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(workflowLink);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  workflowLink the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when workflowLink is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.WorkflowLink update(
-		com.liferay.portal.model.WorkflowLink workflowLink, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(workflowLink, merge);
 	}
 
 	public static com.liferay.portal.model.WorkflowLink updateImpl(
@@ -174,18 +181,6 @@ public class WorkflowLinkUtil {
 		return getPersistence()
 				   .fetchByG_C_C(groupId, companyId, classNameId,
 			retrieveFromCache);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.WorkflowLink> findAll()

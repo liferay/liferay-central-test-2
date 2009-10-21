@@ -22,6 +22,12 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+
+import com.liferay.portlet.social.model.SocialRequest;
+
+import java.util.List;
 
 /**
  * <a href="SocialRequestUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +43,45 @@ package com.liferay.portlet.social.service.persistence;
  * @generated
  */
 public class SocialRequestUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static SocialRequest remove(SocialRequest socialRequest)
+		throws SystemException {
+		return getPersistence().remove(socialRequest);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static SocialRequest update(SocialRequest socialRequest,
+		boolean merge) throws SystemException {
+		return getPersistence().update(socialRequest, merge);
+	}
+
 	public static void cacheResult(
 		com.liferay.portlet.social.model.SocialRequest socialRequest) {
 		getPersistence().cacheResult(socialRequest);
@@ -45,10 +90,6 @@ public class SocialRequestUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialRequest> socialRequests) {
 		getPersistence().cacheResult(socialRequests);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest create(
@@ -61,39 +102,6 @@ public class SocialRequestUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchRequestException {
 		return getPersistence().remove(requestId);
-	}
-
-	public static com.liferay.portlet.social.model.SocialRequest remove(
-		com.liferay.portlet.social.model.SocialRequest socialRequest)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(socialRequest);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(SocialRequest, boolean merge)}.
-	 */
-	public static com.liferay.portlet.social.model.SocialRequest update(
-		com.liferay.portlet.social.model.SocialRequest socialRequest)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(socialRequest);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  socialRequest the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when socialRequest is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portlet.social.model.SocialRequest update(
-		com.liferay.portlet.social.model.SocialRequest socialRequest,
-		boolean merge) throws com.liferay.portal.SystemException {
-		return getPersistence().update(socialRequest, merge);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest updateImpl(
@@ -526,18 +534,6 @@ public class SocialRequestUtil {
 		return getPersistence()
 				   .findByC_C_T_R_S_PrevAndNext(requestId, classNameId,
 			classPK, type, receiverUserId, status, obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findAll()

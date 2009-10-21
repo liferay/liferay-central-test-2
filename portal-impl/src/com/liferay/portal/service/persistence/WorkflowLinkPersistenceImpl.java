@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchWorkflowLinkException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -46,6 +47,8 @@ import com.liferay.portal.model.impl.WorkflowLinkImpl;
 import com.liferay.portal.model.impl.WorkflowLinkModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +66,7 @@ import java.util.List;
  * @see       WorkflowLinkUtil
  * @generated
  */
-public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
+public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLink>
 	implements WorkflowLinkPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WorkflowLinkImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -139,6 +142,11 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		workflowLink.setPrimaryKey(workflowLinkId);
 
 		return workflowLink;
+	}
+
+	public WorkflowLink remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public WorkflowLink remove(long workflowLinkId)
@@ -236,58 +244,6 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		return workflowLink;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(WorkflowLink, boolean merge)}.
-	 */
-	public WorkflowLink update(WorkflowLink workflowLink)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(WorkflowLink workflowLink) method. Use update(WorkflowLink workflowLink, boolean merge) instead.");
-		}
-
-		return update(workflowLink, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  workflowLink the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when workflowLink is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public WorkflowLink update(WorkflowLink workflowLink, boolean merge)
-		throws SystemException {
-		boolean isNew = workflowLink.isNew();
-
-		for (ModelListener<WorkflowLink> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(workflowLink);
-			}
-			else {
-				listener.onBeforeUpdate(workflowLink);
-			}
-		}
-
-		workflowLink = updateImpl(workflowLink, merge);
-
-		for (ModelListener<WorkflowLink> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(workflowLink);
-			}
-			else {
-				listener.onAfterUpdate(workflowLink);
-			}
-		}
-
-		return workflowLink;
-	}
-
 	public WorkflowLink updateImpl(
 		com.liferay.portal.model.WorkflowLink workflowLink, boolean merge)
 		throws SystemException {
@@ -367,6 +323,11 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		return workflowLinkImpl;
 	}
 
+	public WorkflowLink findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public WorkflowLink findByPrimaryKey(long workflowLinkId)
 		throws NoSuchWorkflowLinkException, SystemException {
 		WorkflowLink workflowLink = fetchByPrimaryKey(workflowLinkId);
@@ -383,6 +344,11 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return workflowLink;
+	}
+
+	public WorkflowLink fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public WorkflowLink fetchByPrimaryKey(long workflowLinkId)

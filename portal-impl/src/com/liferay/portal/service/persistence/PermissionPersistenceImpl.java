@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -55,6 +56,8 @@ import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.model.impl.PermissionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -75,7 +78,7 @@ import java.util.Set;
  * @see       PermissionUtil
  * @generated
  */
-public class PermissionPersistenceImpl extends BasePersistenceImpl
+public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	implements PermissionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PermissionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -144,6 +147,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		permission.setPrimaryKey(permissionId);
 
 		return permission;
+	}
+
+	public Permission remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Permission remove(long permissionId)
@@ -269,57 +277,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		return permission;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(Permission, boolean merge)}.
-	 */
-	public Permission update(Permission permission) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Permission permission) method. Use update(Permission permission, boolean merge) instead.");
-		}
-
-		return update(permission, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  permission the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when permission is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Permission update(Permission permission, boolean merge)
-		throws SystemException {
-		boolean isNew = permission.isNew();
-
-		for (ModelListener<Permission> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(permission);
-			}
-			else {
-				listener.onBeforeUpdate(permission);
-			}
-		}
-
-		permission = updateImpl(permission, merge);
-
-		for (ModelListener<Permission> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(permission);
-			}
-			else {
-				listener.onAfterUpdate(permission);
-			}
-		}
-
-		return permission;
-	}
-
 	public Permission updateImpl(
 		com.liferay.portal.model.Permission permission, boolean merge)
 		throws SystemException {
@@ -393,6 +350,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		return permissionImpl;
 	}
 
+	public Permission findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Permission findByPrimaryKey(long permissionId)
 		throws NoSuchPermissionException, SystemException {
 		Permission permission = fetchByPrimaryKey(permissionId);
@@ -408,6 +370,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return permission;
+	}
+
+	public Permission fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Permission fetchByPrimaryKey(long permissionId)

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -55,6 +56,8 @@ import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -75,7 +78,7 @@ import java.util.Set;
  * @see       GroupUtil
  * @generated
  */
-public class GroupPersistenceImpl extends BasePersistenceImpl
+public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	implements GroupPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = GroupImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -241,6 +244,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		group.setPrimaryKey(groupId);
 
 		return group;
+	}
+
+	public Group remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Group remove(long groupId)
@@ -414,56 +422,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupImpl.class, group.getPrimaryKey());
-
-		return group;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Group, boolean merge)}.
-	 */
-	public Group update(Group group) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Group group) method. Use update(Group group, boolean merge) instead.");
-		}
-
-		return update(group, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  group the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when group is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Group update(Group group, boolean merge) throws SystemException {
-		boolean isNew = group.isNew();
-
-		for (ModelListener<Group> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(group);
-			}
-			else {
-				listener.onBeforeUpdate(group);
-			}
-		}
-
-		group = updateImpl(group, merge);
-
-		for (ModelListener<Group> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(group);
-			}
-			else {
-				listener.onAfterUpdate(group);
-			}
-		}
 
 		return group;
 	}
@@ -668,6 +626,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		return groupImpl;
 	}
 
+	public Group findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Group findByPrimaryKey(long groupId)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByPrimaryKey(groupId);
@@ -682,6 +645,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return group;
+	}
+
+	public Group fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Group fetchByPrimaryKey(long groupId) throws SystemException {

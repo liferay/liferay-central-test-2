@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.model.Layout;
+
+import java.util.List;
 
 /**
  * <a href="LayoutUtil.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +42,44 @@ package com.liferay.portal.service.persistence;
  * @generated
  */
 public class LayoutUtil {
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
+	 */
+	public static void clearCache() {
+		getPersistence().clearCache();
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
+	 */
+	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static Layout remove(Layout layout) throws SystemException {
+		return getPersistence().remove(layout);
+	}
+
+	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
+	 */
+	public static Layout update(Layout layout, boolean merge)
+		throws SystemException {
+		return getPersistence().update(layout, merge);
+	}
+
 	public static void cacheResult(com.liferay.portal.model.Layout layout) {
 		getPersistence().cacheResult(layout);
 	}
@@ -44,10 +87,6 @@ public class LayoutUtil {
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Layout> layouts) {
 		getPersistence().cacheResult(layouts);
-	}
-
-	public static void clearCache() {
-		getPersistence().clearCache();
 	}
 
 	public static com.liferay.portal.model.Layout create(long plid) {
@@ -58,39 +97,6 @@ public class LayoutUtil {
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException {
 		return getPersistence().remove(plid);
-	}
-
-	public static com.liferay.portal.model.Layout remove(
-		com.liferay.portal.model.Layout layout)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().remove(layout);
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Layout, boolean merge)}.
-	 */
-	public static com.liferay.portal.model.Layout update(
-		com.liferay.portal.model.Layout layout)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(layout);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  layout the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when layout is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public static com.liferay.portal.model.Layout update(
-		com.liferay.portal.model.Layout layout, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().update(layout, merge);
 	}
 
 	public static com.liferay.portal.model.Layout updateImpl(
@@ -414,18 +420,6 @@ public class LayoutUtil {
 		return getPersistence()
 				   .findByG_P_T_PrevAndNext(plid, groupId, privateLayout, type,
 			obc);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	public static java.util.List<Object> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findAll()

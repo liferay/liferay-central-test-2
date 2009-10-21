@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -49,6 +50,8 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +69,7 @@ import java.util.List;
  * @see       AnnouncementsDeliveryUtil
  * @generated
  */
-public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
+public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<AnnouncementsDelivery>
 	implements AnnouncementsDeliveryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsDeliveryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -141,6 +144,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		announcementsDelivery.setPrimaryKey(deliveryId);
 
 		return announcementsDelivery;
+	}
+
+	public AnnouncementsDelivery remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public AnnouncementsDelivery remove(long deliveryId)
@@ -241,59 +249,6 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		return announcementsDelivery;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(AnnouncementsDelivery, boolean merge)}.
-	 */
-	public AnnouncementsDelivery update(
-		AnnouncementsDelivery announcementsDelivery) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(AnnouncementsDelivery announcementsDelivery) method. Use update(AnnouncementsDelivery announcementsDelivery, boolean merge) instead.");
-		}
-
-		return update(announcementsDelivery, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  announcementsDelivery the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when announcementsDelivery is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public AnnouncementsDelivery update(
-		AnnouncementsDelivery announcementsDelivery, boolean merge)
-		throws SystemException {
-		boolean isNew = announcementsDelivery.isNew();
-
-		for (ModelListener<AnnouncementsDelivery> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(announcementsDelivery);
-			}
-			else {
-				listener.onBeforeUpdate(announcementsDelivery);
-			}
-		}
-
-		announcementsDelivery = updateImpl(announcementsDelivery, merge);
-
-		for (ModelListener<AnnouncementsDelivery> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(announcementsDelivery);
-			}
-			else {
-				listener.onAfterUpdate(announcementsDelivery);
-			}
-		}
-
-		return announcementsDelivery;
-	}
-
 	public AnnouncementsDelivery updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery,
 		boolean merge) throws SystemException {
@@ -374,6 +329,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		return announcementsDeliveryImpl;
 	}
 
+	public AnnouncementsDelivery findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public AnnouncementsDelivery findByPrimaryKey(long deliveryId)
 		throws NoSuchDeliveryException, SystemException {
 		AnnouncementsDelivery announcementsDelivery = fetchByPrimaryKey(deliveryId);
@@ -391,6 +351,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return announcementsDelivery;
+	}
+
+	public AnnouncementsDelivery fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public AnnouncementsDelivery fetchByPrimaryKey(long deliveryId)

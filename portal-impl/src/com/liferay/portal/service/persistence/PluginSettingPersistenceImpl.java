@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPluginSettingException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.PluginSettingImpl;
 import com.liferay.portal.model.impl.PluginSettingModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       PluginSettingUtil
  * @generated
  */
-public class PluginSettingPersistenceImpl extends BasePersistenceImpl
+public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSetting>
 	implements PluginSettingPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PluginSettingImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -147,6 +150,11 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		pluginSetting.setPrimaryKey(pluginSettingId);
 
 		return pluginSetting;
+	}
+
+	public PluginSetting remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public PluginSetting remove(long pluginSettingId)
@@ -246,58 +254,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		return pluginSetting;
 	}
 
-	/**
-	 * @deprecated Use {@link #update(PluginSetting, boolean merge)}.
-	 */
-	public PluginSetting update(PluginSetting pluginSetting)
-		throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(PluginSetting pluginSetting) method. Use update(PluginSetting pluginSetting, boolean merge) instead.");
-		}
-
-		return update(pluginSetting, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  pluginSetting the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when pluginSetting is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public PluginSetting update(PluginSetting pluginSetting, boolean merge)
-		throws SystemException {
-		boolean isNew = pluginSetting.isNew();
-
-		for (ModelListener<PluginSetting> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(pluginSetting);
-			}
-			else {
-				listener.onBeforeUpdate(pluginSetting);
-			}
-		}
-
-		pluginSetting = updateImpl(pluginSetting, merge);
-
-		for (ModelListener<PluginSetting> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(pluginSetting);
-			}
-			else {
-				listener.onAfterUpdate(pluginSetting);
-			}
-		}
-
-		return pluginSetting;
-	}
-
 	public PluginSetting updateImpl(
 		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
 		throws SystemException {
@@ -384,6 +340,11 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		return pluginSettingImpl;
 	}
 
+	public PluginSetting findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public PluginSetting findByPrimaryKey(long pluginSettingId)
 		throws NoSuchPluginSettingException, SystemException {
 		PluginSetting pluginSetting = fetchByPrimaryKey(pluginSettingId);
@@ -400,6 +361,11 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return pluginSetting;
+	}
+
+	public PluginSetting fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public PluginSetting fetchByPrimaryKey(long pluginSettingId)

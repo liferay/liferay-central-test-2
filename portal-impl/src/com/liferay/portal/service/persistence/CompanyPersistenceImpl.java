@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchCompanyException;
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.CompanyModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +67,7 @@ import java.util.List;
  * @see       CompanyUtil
  * @generated
  */
-public class CompanyPersistenceImpl extends BasePersistenceImpl
+public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	implements CompanyPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = CompanyImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -156,6 +159,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		company.setPrimaryKey(companyId);
 
 		return company;
+	}
+
+	public Company remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	public Company remove(long companyId)
@@ -251,57 +259,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.removeResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyImpl.class, company.getPrimaryKey());
-
-		return company;
-	}
-
-	/**
-	 * @deprecated Use {@link #update(Company, boolean merge)}.
-	 */
-	public Company update(Company company) throws SystemException {
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Using the deprecated update(Company company) method. Use update(Company company, boolean merge) instead.");
-		}
-
-		return update(company, false);
-	}
-
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param  company the entity to add, update, or merge
-	 * @param  merge boolean value for whether to merge the entity. The default
-	 *         value is false. Setting merge to true is more expensive and
-	 *         should only be true when company is transient. See
-	 *         LEP-5473 for a detailed discussion of this method.
-	 * @return the entity that was added, updated, or merged
-	 */
-	public Company update(Company company, boolean merge)
-		throws SystemException {
-		boolean isNew = company.isNew();
-
-		for (ModelListener<Company> listener : listeners) {
-			if (isNew) {
-				listener.onBeforeCreate(company);
-			}
-			else {
-				listener.onBeforeUpdate(company);
-			}
-		}
-
-		company = updateImpl(company, merge);
-
-		for (ModelListener<Company> listener : listeners) {
-			if (isNew) {
-				listener.onAfterCreate(company);
-			}
-			else {
-				listener.onAfterUpdate(company);
-			}
-		}
 
 		return company;
 	}
@@ -415,6 +372,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		return companyImpl;
 	}
 
+	public Company findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
 	public Company findByPrimaryKey(long companyId)
 		throws NoSuchCompanyException, SystemException {
 		Company company = fetchByPrimaryKey(companyId);
@@ -430,6 +392,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 
 		return company;
+	}
+
+	public Company fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	public Company fetchByPrimaryKey(long companyId) throws SystemException {
