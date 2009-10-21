@@ -84,19 +84,15 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 			}
 
 			cache = _cacheManager.getEhcache(name);
-
-			if (PropsValues.EHCACHE_BLOCKING_CACHE_ALLOWED && blocking) {
-				cache = replaceCacheWithDecoratedCache(cache);
-			}
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Cache name " + name + " is using implementation " +
-						cache.getClass().getName());
-			}
 		}
 
-		return new EhcachePortalCache(cache);
+		PortalCache portalCache = new EhcachePortalCache(cache);
+		
+		if (PropsValues.EHCACHE_BLOCKING_CACHE_ALLOWED && blocking) {
+			portalCache = new BlockingPortalCache(portalCache);
+		}
+
+		return portalCache;
 	}
 
 	public void setConfigPropertyKey(String configPropertyKey) {
