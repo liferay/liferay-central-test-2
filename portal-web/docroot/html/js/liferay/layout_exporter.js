@@ -109,7 +109,6 @@ Liferay.LayoutExporter = {
 			function(A) {
 				options = options || {};
 
-				var messageId = options.messageId;
 				var url = options.url;
 				var title = options.title;
 
