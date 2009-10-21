@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portlet.asset.model.AssetTagProperty;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
@@ -41,7 +42,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetTagPropertyKeyFinderImpl
-	extends BasePersistenceImpl implements AssetTagPropertyKeyFinder {
+	extends BasePersistenceImpl<AssetTagProperty>
+	implements AssetTagPropertyKeyFinder {
 
 	public static String COUNT_BY_GROUP_ID =
 		AssetTagPropertyKeyFinder.class.getName() + ".countByGroupId";

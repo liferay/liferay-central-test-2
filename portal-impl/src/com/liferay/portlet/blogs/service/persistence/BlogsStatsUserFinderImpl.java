@@ -45,7 +45,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BlogsStatsUserFinderImpl
-	extends BasePersistenceImpl implements BlogsStatsUserFinder {
+	extends BasePersistenceImpl<BlogsStatsUser>
+	implements BlogsStatsUserFinder {
 
 	public static String COUNT_BY_ORGANIZATION_IDS =
 		BlogsStatsUserFinder.class.getName() + ".countByOrganizationIds";

@@ -40,7 +40,7 @@ import java.util.List;
  * @author Bruno Farache
  */
 public class PollsChoiceFinderImpl
-	extends BasePersistenceImpl implements PollsChoiceFinder {
+	extends BasePersistenceImpl<PollsChoice> implements PollsChoiceFinder {
 
 	public static String FIND_BY_UUID_G =
 		PollsChoiceFinder.class.getName() + ".findByUuid_G";

@@ -43,7 +43,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialActivityFinderImpl
-	extends BasePersistenceImpl implements SocialActivityFinder {
+	extends BasePersistenceImpl<SocialActivity>
+	implements SocialActivityFinder {
 
 	public static String COUNT_BY_GROUP_ID =
 		SocialActivityFinder.class.getName() + ".countByGroupId";

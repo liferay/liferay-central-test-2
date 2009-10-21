@@ -53,7 +53,7 @@ import java.util.List;
  * @author Raymond Augé
  */
 public class MBCategoryFinderImpl
-	extends BasePersistenceImpl implements MBCategoryFinder {
+	extends BasePersistenceImpl<MBCategory> implements MBCategoryFinder {
 
 	public static String COUNT_BY_S_G_U =
 		MBCategoryFinder.class.getName() + ".countByS_G_U";

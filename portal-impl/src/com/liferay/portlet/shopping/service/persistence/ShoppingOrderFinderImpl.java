@@ -47,7 +47,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingOrderFinderImpl
-	extends BasePersistenceImpl implements ShoppingOrderFinder {
+	extends BasePersistenceImpl<ShoppingOrder> implements ShoppingOrderFinder {
 
 	public static String COUNT_BY_G_C_U_N_PPPS =
 		ShoppingOrderFinder.class.getName() + ".countByG_C_U_N_PPPS";

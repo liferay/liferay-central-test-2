@@ -43,7 +43,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class CalEventFinderImpl
-	extends BasePersistenceImpl implements CalEventFinder {
+	extends BasePersistenceImpl<CalEvent> implements CalEventFinder {
 
 	public static String FIND_BY_G_SD =
 		CalEventFinder.class.getName() + ".findByG_SD";

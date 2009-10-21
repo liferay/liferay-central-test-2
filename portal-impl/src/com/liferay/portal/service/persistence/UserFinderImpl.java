@@ -50,7 +50,8 @@ import java.util.Map;
  * @author Jon Steer
  * @author Raymond Augé
  */
-public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
+public class UserFinderImpl
+	extends BasePersistenceImpl<User> implements UserFinder {
 
 	public static String COUNT_BY_USER =
 		UserFinder.class.getName() + ".countByUser";

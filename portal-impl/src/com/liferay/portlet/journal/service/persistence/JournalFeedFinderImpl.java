@@ -46,7 +46,7 @@ import java.util.List;
  * @author Raymond Augé
  */
 public class JournalFeedFinderImpl
-	extends BasePersistenceImpl implements JournalFeedFinder {
+	extends BasePersistenceImpl<JournalFeed> implements JournalFeedFinder {
 
 	public static String COUNT_BY_C_G_F_N_D =
 		JournalFeedFinder.class.getName() + ".countByC_G_F_N_D";

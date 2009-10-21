@@ -50,7 +50,7 @@ import java.util.List;
  * @author Jorge Ferrer
  */
 public class AssetEntryFinderImpl
-	extends BasePersistenceImpl implements AssetEntryFinder {
+	extends BasePersistenceImpl<AssetEntry> implements AssetEntryFinder {
 
 	public static String FIND_BY_AND_CATEGORY_IDS =
 		AssetEntryFinder.class.getName() + ".findByAndCategoryIds";

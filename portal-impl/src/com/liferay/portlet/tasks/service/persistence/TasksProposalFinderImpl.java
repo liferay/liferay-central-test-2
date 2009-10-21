@@ -42,7 +42,7 @@ import java.util.List;
  * @author Raymond Augé
  */
 public class TasksProposalFinderImpl
-	extends BasePersistenceImpl implements TasksProposalFinder {
+	extends BasePersistenceImpl<TasksProposal> implements TasksProposalFinder {
 
 	public static String COUNT_BY_G_U =
 		TasksProposalFinder.class.getName() + ".countByG_U";

@@ -55,7 +55,8 @@ import java.util.Map;
  * @author Raymond Augé
  */
 public class AnnouncementsEntryFinderImpl
-	extends BasePersistenceImpl implements AnnouncementsEntryFinder {
+	extends BasePersistenceImpl<AnnouncementsEntry>
+	implements AnnouncementsEntryFinder {
 
 	public static String COUNT_BY_HIDDEN =
 		AnnouncementsEntryFinder.class.getName() + ".countByHidden";

@@ -42,7 +42,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BookmarksEntryFinderImpl
-	extends BasePersistenceImpl implements BookmarksEntryFinder {
+	extends BasePersistenceImpl<BookmarksEntry>
+	implements BookmarksEntryFinder {
 
 	public static String COUNT_BY_G_F =
 		BookmarksEntryFinder.class.getName() + ".countByG_F";

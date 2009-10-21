@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DLFolderFinderImpl
-	extends BasePersistenceImpl implements DLFolderFinder {
+	extends BasePersistenceImpl<DLFolder> implements DLFolderFinder {
 
 	public static String COUNT_FE_FS_BY_G_F_S =
 		DLFolderFinder.class.getName() + ".countFE_FS_ByG_F_S";

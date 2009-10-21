@@ -40,7 +40,7 @@ import java.util.List;
  * @author Alexander Chow
  */
 public class ResourceFinderImpl
-	extends BasePersistenceImpl implements ResourceFinder {
+	extends BasePersistenceImpl<Resource> implements ResourceFinder {
 
 	public static String FIND_BY_NAME =
 		ResourceFinder.class.getName() + ".findByName";

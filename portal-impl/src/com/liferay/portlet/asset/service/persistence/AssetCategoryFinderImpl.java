@@ -48,7 +48,7 @@ import java.util.List;
  * @author Jorge Ferrer
  */
 public class AssetCategoryFinderImpl
-	extends BasePersistenceImpl implements AssetCategoryFinder {
+	extends BasePersistenceImpl<AssetCategory> implements AssetCategoryFinder {
 
 	public static String COUNT_BY_G_C_N =
 		AssetCategoryFinder.class.getName() + ".countByG_C_N";

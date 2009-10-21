@@ -46,7 +46,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalStructureFinderImpl
-	extends BasePersistenceImpl implements JournalStructureFinder {
+	extends BasePersistenceImpl<JournalStructure>
+	implements JournalStructureFinder {
 
 	public static String COUNT_BY_C_G_S_N_D =
 		JournalStructureFinder.class.getName() + ".countByC_G_S_N_D";

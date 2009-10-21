@@ -53,7 +53,8 @@ import java.util.List;
  * @author Raymond Augé
  */
 public class JournalArticleFinderImpl
-	extends BasePersistenceImpl implements JournalArticleFinder {
+	extends BasePersistenceImpl<JournalArticle>
+	implements JournalArticleFinder {
 
 	public static String COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_S_R =
 		JournalArticleFinder.class.getName() +

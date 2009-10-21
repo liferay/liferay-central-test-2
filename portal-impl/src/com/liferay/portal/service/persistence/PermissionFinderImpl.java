@@ -50,7 +50,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PermissionFinderImpl
-	extends BasePersistenceImpl implements PermissionFinder {
+	extends BasePersistenceImpl<Permission> implements PermissionFinder {
 
 	public static String COUNT_BY_GROUPS_PERMISSIONS =
 		PermissionFinder.class.getName() + ".countByGroupsPermissions";

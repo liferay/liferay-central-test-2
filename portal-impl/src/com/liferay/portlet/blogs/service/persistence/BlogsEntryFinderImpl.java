@@ -50,7 +50,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BlogsEntryFinderImpl
-	extends BasePersistenceImpl implements BlogsEntryFinder {
+	extends BasePersistenceImpl<BlogsEntry> implements BlogsEntryFinder {
 
 	public static String COUNT_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".countByOrganizationIds";

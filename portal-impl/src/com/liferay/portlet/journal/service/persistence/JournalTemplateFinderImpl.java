@@ -48,7 +48,8 @@ import java.util.List;
  * @author Prakash Reddy
  */
 public class JournalTemplateFinderImpl
-	extends BasePersistenceImpl implements JournalTemplateFinder {
+	extends BasePersistenceImpl<JournalTemplate>
+	implements JournalTemplateFinder {
 
 	public static String COUNT_BY_C_G_T_S_N_D =
 		JournalTemplateFinder.class.getName() + ".countByC_G_T_S_N_D";

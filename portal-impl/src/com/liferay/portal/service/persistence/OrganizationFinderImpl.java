@@ -51,7 +51,7 @@ import java.util.Map;
  * @author Jorge Ferrer
  */
 public class OrganizationFinderImpl
-	extends BasePersistenceImpl implements OrganizationFinder {
+	extends BasePersistenceImpl<Organization> implements OrganizationFinder {
 
 	public static String COUNT_BY_ORGANIZATION_ID =
 		OrganizationFinder.class.getName() + ".countByOrganizationId";

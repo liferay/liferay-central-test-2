@@ -44,7 +44,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PasswordPolicyFinderImpl
-	extends BasePersistenceImpl implements PasswordPolicyFinder {
+	extends BasePersistenceImpl<PasswordPolicy>
+	implements PasswordPolicyFinder {
 
 	public static String COUNT_BY_C_N =
 		PasswordPolicyFinder.class.getName() + ".countByC_N";

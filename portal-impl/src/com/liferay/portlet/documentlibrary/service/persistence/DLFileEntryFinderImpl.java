@@ -43,7 +43,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DLFileEntryFinderImpl
-	extends BasePersistenceImpl implements DLFileEntryFinder {
+	extends BasePersistenceImpl<DLFileEntry> implements DLFileEntryFinder {
 
 	public static String COUNT_BY_G_F_S =
 		DLFileEntryFinder.class.getName() + ".countByG_F_S";

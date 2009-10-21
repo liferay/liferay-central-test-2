@@ -45,7 +45,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBMessageFinderImpl
-	extends BasePersistenceImpl implements MBMessageFinder {
+	extends BasePersistenceImpl<MBMessage> implements MBMessageFinder {
 
 	public static String COUNT_BY_G_U_S =
 		MBMessageFinder.class.getName() + ".countByG_U_S";

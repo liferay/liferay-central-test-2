@@ -43,7 +43,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetTagPropertyFinderImpl
-	extends BasePersistenceImpl implements AssetTagPropertyFinder {
+	extends BasePersistenceImpl<AssetTagProperty>
+	implements AssetTagPropertyFinder {
 
 	public static String COUNT_BY_G_K =
 		AssetTagPropertyFinder.class.getName() + ".countByG_K";

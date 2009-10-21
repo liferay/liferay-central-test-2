@@ -43,7 +43,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingItemFinderImpl
-	extends BasePersistenceImpl implements ShoppingItemFinder {
+	extends BasePersistenceImpl<ShoppingItem> implements ShoppingItemFinder {
 
 	public static String COUNT_BY_G_C =
 		ShoppingItemFinder.class.getName() + ".countByG_C";

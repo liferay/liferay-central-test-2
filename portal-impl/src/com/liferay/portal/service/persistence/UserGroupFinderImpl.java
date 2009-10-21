@@ -49,7 +49,7 @@ import java.util.Map;
  * @author Charles May
  */
 public class UserGroupFinderImpl
-	extends BasePersistenceImpl implements UserGroupFinder {
+	extends BasePersistenceImpl<UserGroup> implements UserGroupFinder {
 
 	public static String COUNT_BY_C_N_D =
 		UserGroupFinder.class.getName() + ".countByC_N_D";

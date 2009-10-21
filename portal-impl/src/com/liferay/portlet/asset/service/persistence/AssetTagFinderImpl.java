@@ -47,7 +47,7 @@ import java.util.List;
  * @author Bruno Farache
  */
 public class AssetTagFinderImpl
-	extends BasePersistenceImpl implements AssetTagFinder {
+	extends BasePersistenceImpl<AssetTag> implements AssetTagFinder {
 
 	public static String COUNT_BY_G_C_N =
 		AssetTagFinder.class.getName() + ".countByG_C_N";

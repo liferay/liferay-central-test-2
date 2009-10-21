@@ -46,7 +46,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBThreadFinderImpl
-	extends BasePersistenceImpl implements MBThreadFinder {
+	extends BasePersistenceImpl<MBThread> implements MBThreadFinder {
 
 	public static String COUNT_BY_S_G_U_S =
 		MBThreadFinder.class.getName() + ".countByS_G_U_S";

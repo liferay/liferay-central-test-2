@@ -48,7 +48,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WikiPageFinderImpl
-	extends BasePersistenceImpl implements WikiPageFinder {
+	extends BasePersistenceImpl<WikiPage> implements WikiPageFinder {
 
 	public static String COUNT_BY_CREATE_DATE =
 		WikiPageFinder.class.getName() + ".countByCreateDate";

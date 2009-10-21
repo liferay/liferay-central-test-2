@@ -44,7 +44,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class LayoutFinderImpl
-	extends BasePersistenceImpl implements LayoutFinder {
+	extends BasePersistenceImpl<Layout> implements LayoutFinder {
 
 	public static String FIND_BY_NULL_FRIENDLY_URL =
 		LayoutFinder.class.getName() + ".findByNullFriendlyURL";

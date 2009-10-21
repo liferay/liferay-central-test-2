@@ -50,7 +50,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 public class GroupFinderImpl
-	extends BasePersistenceImpl implements GroupFinder {
+	extends BasePersistenceImpl<Group> implements GroupFinder {
 
 	public static String COUNT_BY_GROUP_ID =
 		GroupFinder.class.getName() + ".countByGroupId";

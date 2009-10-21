@@ -51,7 +51,8 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  */
-public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
+public class RoleFinderImpl
+	extends BasePersistenceImpl<Role> implements RoleFinder {
 
 	public static String COUNT_BY_COMMUNITY =
 		RoleFinder.class.getName() + ".countByCommunity";

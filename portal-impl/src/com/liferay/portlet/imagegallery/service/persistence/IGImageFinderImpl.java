@@ -42,7 +42,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class IGImageFinderImpl
-	extends BasePersistenceImpl implements IGImageFinder {
+	extends BasePersistenceImpl<IGImage> implements IGImageFinder {
 
 	public static String COUNT_BY_G_F =
 		IGImageFinder.class.getName() + ".countByG_F";

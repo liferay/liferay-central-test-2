@@ -40,7 +40,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PortletPreferencesFinderImpl
-	extends BasePersistenceImpl implements PortletPreferencesFinder {
+	extends BasePersistenceImpl<PortletPreferences>
+	implements PortletPreferencesFinder {
 
 	public static String FIND_BY_PORTLETID =
 		PortletPreferencesFinder.class.getName() + ".findByPortletId";
