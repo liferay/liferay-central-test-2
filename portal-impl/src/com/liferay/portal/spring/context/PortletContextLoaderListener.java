@@ -79,12 +79,9 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
-		ServletContext servletContext = event.getServletContext();
-
-		servletContext.removeAttribute(
-			WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
+
+		ServletContext servletContext = event.getServletContext();
 
 		ApplicationContext applicationContext =
 			WebApplicationContextUtils.getWebApplicationContext(servletContext);
@@ -109,6 +106,9 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+
+		servletContext.removeAttribute(
+			WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 	}
 
 	protected ContextLoader createContextLoader() {
