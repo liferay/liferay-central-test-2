@@ -38,7 +38,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class SerialDestination extends BaseDestination {
 
 	public SerialDestination() {
-		super();
 	}
 
 	/**

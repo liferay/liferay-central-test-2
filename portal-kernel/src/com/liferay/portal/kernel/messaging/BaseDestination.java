@@ -73,9 +73,9 @@ public abstract class BaseDestination implements Destination {
 
 	public void afterPropertiesSet() {
 		if (Validator.isNull(_name)) {
-			throw new IllegalArgumentException(
-				"No name specified for destination");
+			throw new IllegalArgumentException("Name is null");
 		}
+
 		open();
 	}
 
@@ -129,11 +129,11 @@ public abstract class BaseDestination implements Destination {
 		return destinationStatistics;
 	}
 
-    public int getMaximumQueueSize() {
-        return _maximumQueueSize;
-    }
+	public int getMaximumQueueSize() {
+		return _maximumQueueSize;
+	}
 
-    public int getMessageListenerCount() {
+	public int getMessageListenerCount() {
 		return _messageListeners.size();
 	}
 
@@ -205,24 +205,23 @@ public abstract class BaseDestination implements Destination {
 					"receive more messages");
 		}
 
-        if ((_maximumQueueSize > -1) &&
+		if ((_maximumQueueSize > -1) &&
 			(threadPoolExecutor.getQueue().size() > _maximumQueueSize)) {
+
 			throw new IllegalStateException(
-					"Maximum queue size exceeded for " + getName() + "." +
-                    "  Configured for max of " + _maximumQueueSize +
-					" messages; currently at " +
-					threadPoolExecutor.getQueue().size() +
-                    " messages in queue.");
-        }
+				threadPoolExecutor.getQueue().size() +
+					" messages exceeds the maximum queue size of " +
+						_maximumQueueSize);
+		}
 
 		dispatch(_messageListeners, message);
 	}
 
-    public void setMaximumQueueSize(int maximumQueueSize) {
-        _maximumQueueSize = maximumQueueSize;
-    }
+	public void setMaximumQueueSize(int maximumQueueSize) {
+		_maximumQueueSize = maximumQueueSize;
+	}
 
-    public void setName(String name) {
+	public void setName(String name) {
 		_name = name;
 	}
 
@@ -345,12 +344,12 @@ public abstract class BaseDestination implements Destination {
 
 	private Set<DestinationEventListener> _destinationEventListeners =
 		new ConcurrentHashSet<DestinationEventListener>();
-    private int _maximumQueueSize = -1;
-    private Set<MessageListener> _messageListeners =
+	private int _maximumQueueSize = -1;
+	private Set<MessageListener> _messageListeners =
 		new ConcurrentHashSet<MessageListener>();
-    private String _name = StringPool.BLANK;
-    private ThreadPoolExecutor _threadPoolExecutor;
-    private int _workersCoreSize = _WORKERS_CORE_SIZE;
-    private int _workersMaxSize = _WORKERS_MAX_SIZE;
+	private String _name = StringPool.BLANK;
+	private ThreadPoolExecutor _threadPoolExecutor;
+	private int _workersCoreSize = _WORKERS_CORE_SIZE;
+	private int _workersMaxSize = _WORKERS_MAX_SIZE;
 
 }
