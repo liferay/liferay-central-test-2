@@ -223,21 +223,19 @@ public class JournalUtil {
 			JournalStructureConstants.RESERVED_ARTICLE_SMALL_IMAGE_URL,
 			article.getSmallImageURL());
 
-		// Tags
-
-		String[] tagsEntries = new String[0];
+		String[] assetTagNames = new String[0];
 
 		try {
-			tagsEntries = AssetTagLocalServiceUtil.getTagNames(
-				JournalArticle.class.getName(),
-				article.getResourcePrimKey());
+			assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 		}
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_ASSET_TAGS,
-			StringUtil.merge(tagsEntries));
+			root, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_ASSET_TAG_NAMES,
+			StringUtil.merge(assetTagNames));
 
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_ID,
