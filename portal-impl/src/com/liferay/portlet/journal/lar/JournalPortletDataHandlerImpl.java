@@ -458,6 +458,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 
 				if (image == null) {
+					beginPos--;
+
 					continue;
 				}
 
