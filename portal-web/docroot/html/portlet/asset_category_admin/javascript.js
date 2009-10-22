@@ -129,6 +129,7 @@ AUI().add(
 					jQuery('#vocabulary-search-bar').change(
 						function(event) {
 							jQuery('#vocabulary-search-input').focus();
+
 							instance._reloadSearch();
 						}
 					);
@@ -956,9 +957,11 @@ AUI().add(
 
 				_reloadSearch: function() {
 					var	instance = this;
+
 					var options = {
 						input: '#vocabulary-search-input'
 					};
+
 					var selected = jQuery('#vocabulary-select-search').val();
 					var input = jQuery('#vocabulary-search-input');
 					var vocabularyList = jQuery(instance._vocabularyItemSelector);
@@ -980,8 +983,10 @@ AUI().add(
 							{
 								after: {
 									search: function(event) {
+										var results = event.liveSearch.results;
+
 										A.each(
-											event.liveSearch.results,
+											results,
 											function(search) {
 												var nodeWidget = A.Widget.getByNode(search.node);
 												var nodeVisible = nodeWidget.get('boundingBox').hasClass('aui-helper-hidden');

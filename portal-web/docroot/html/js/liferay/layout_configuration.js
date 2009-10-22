@@ -103,6 +103,7 @@ AUI().add(
 							data: data,
 							hide: function(node) {
 								var instance = this;
+
 								var categoryContent = jQuery('.lfr-content-category', node.getDOM());
 								var totalVisibleChildren = categoryContent.find('> div:visible').length;
 

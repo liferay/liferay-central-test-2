@@ -226,6 +226,8 @@ AUI().add(
 			},
 
 			_initializeSearch: function(container) {
+				var instance = this;
+
 				var data = function(node) {
 					var value = node.attr('title');
 

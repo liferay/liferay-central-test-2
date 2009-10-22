@@ -637,7 +637,9 @@ AUI().add(
 
 				_reloadSearch: function() {
 					var	instance = this;
+
 					var options = {};
+
 					var input = jQuery('#tags-admin-search-input');
 					var tagList = jQuery(instance._tagsItemsSelector);
 
