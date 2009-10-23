@@ -29,17 +29,17 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 TaskInstanceInfo taskInstanceInfo = (TaskInstanceInfo)row.getParameter("taskInstanceInfo");
 
-List<String> activityNames = TaskInstanceManagerUtil.getPossibleNextActivityNames(taskInstanceInfo.getTaskInstanceId(), user.getUserId(), null);
+List<String> pathNames = TaskInstanceManagerUtil.getPossibleNextPathNames(taskInstanceInfo.getTaskInstanceId(), user.getUserId(), null);
 %>
 
 <liferay-ui:icon-menu>
 
 	<%
-	for (String activityName : activityNames) {
+	for (String pathName : pathNames) {
 		String message = "proceed";
 
-		if (Validator.isNotNull(activityName)) {
-			message = activityName;
+		if (Validator.isNotNull(pathName)) {
+			message = pathName;
 		}
 	%>
 
@@ -48,8 +48,8 @@ List<String> activityNames = TaskInstanceManagerUtil.getPossibleNextActivityName
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="taskIntanceId" value="<%= StringUtil.valueOf(taskInstanceInfo.getTaskInstanceId()) %>" />
 
-			<c:if test="<%= activityName != null %>">
-				<portlet:param name="activityName" value="<%= activityName %>" />
+			<c:if test="<%= pathName != null %>">
+				<portlet:param name="pathName" value="<%= pathName %>" />
 			</c:if>
 		</portlet:actionURL>
 
