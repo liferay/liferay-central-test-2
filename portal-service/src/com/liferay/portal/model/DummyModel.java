@@ -22,12 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.ServiceContext;
-
-import com.liferay.portlet.expando.model.ExpandoBridge;
-
-import java.io.Serializable;
-
 /**
  * <a href="DummyModel.java.html"><b><i>View Source</i></b></a>
  *
