@@ -201,7 +201,7 @@ if (Validator.isNotNull(content)) {
 		}
 
 		if (structure == null) {
-			content = contentDoc.getRootElement().element("static-content").getTextTrim();
+			content = contentDoc.getRootElement().element("static-content").getText();
 		}
 	}
 	catch (Exception e) {
