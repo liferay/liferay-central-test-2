@@ -42,7 +42,7 @@ public class ScreenNameGeneratorFactory {
 			}
 
 			_screenNameGenerator = (ScreenNameGenerator)InstancePool.get(
-				PropsValues.USERS_SCREEN_NAME_VALIDATOR);
+				PropsValues.USERS_SCREEN_NAME_GENERATOR);
 		}
 
 		if (_log.isDebugEnabled()) {
