@@ -1598,7 +1598,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-api.jar</file-name>
-		<version>1.5.0</version>
+		<version>1.6.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1610,7 +1610,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-core.jar</file-name>
-		<version>1.5.3</version>
+		<version>1.6.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1619,15 +1619,14 @@
 				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 			<license>
-				<bundled-project-name>XPath Grammar and Parser</bundled-project-name>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2002 World Wide Web Consortium, (Massachusetts Institute of Technology, Institut National de Recherche en Informatique et en Automatique, Keio University).</copyright-notice>
+				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-jcr-commons.jar</file-name>
-		<version>1.5.3</version>
+		<version>1.6.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1639,7 +1638,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-spi.jar</file-name>
-		<version>1.5.0</version>
+		<version>1.6.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1651,7 +1650,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-spi-commons.jar</file-name>
-		<version>1.5.0</version>
+		<version>1.6.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1663,7 +1662,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-text-extractors.jar</file-name>
-		<version>1.5.0</version>
+		<version>1.6.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
