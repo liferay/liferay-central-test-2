@@ -47,7 +47,7 @@ public class PortalHibernateConfiguration
 	extends TransactionAwareConfiguration {
 
 	public void setHibernateConfigurationConverter(
-		Converter hibernateConfigurationConverter) {
+		Converter<String> hibernateConfigurationConverter) {
 
 		_hibernateConfigurationConverter = hibernateConfigurationConverter;
 	}
