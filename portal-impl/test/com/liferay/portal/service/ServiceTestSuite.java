@@ -32,17 +32,31 @@ import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
+import com.liferay.portal.util.WebAppPool;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
 import com.liferay.portlet.imagegallery.service.IGImageServiceTest;
 import com.liferay.portlet.messageboards.service.MBMessageServiceTest;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceTest;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -72,6 +86,15 @@ public class ServiceTestSuite extends TestSuite {
 
 		LuceneUtil.checkLuceneDir(TestPropsValues.COMPANY_ID);
 
+		// Upgrade
+
+		try {
+			DBUpgrader.upgrade();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		// Messaging
 
 		MessageBus messageBus = (MessageBus)PortalBeanLocatorUtil.locate(
@@ -96,6 +119,24 @@ public class ServiceTestSuite extends TestSuite {
 
 		try {
 			schedulerEngine.start();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Verify
+
+		try {
+			DBUpgrader.verify();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Resource actions
+
+		try {
+			_checkResourceActions();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -132,6 +173,45 @@ public class ServiceTestSuite extends TestSuite {
 		testSuite.addTestSuite(SocialRelationLocalServiceTest.class);
 
 		return testSuite;
+	}
+
+	private static void _checkResourceActions() throws Exception {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			return;
+		}
+
+		WebAppPool.put(
+			String.valueOf(TestPropsValues.COMPANY_ID),
+			WebKeys.PORTLET_CATEGORY, new PortletCategory());
+
+		for (int i = 0; i < 200; i++) {
+			String portletId = String.valueOf(i);
+
+			Portlet portlet = new PortletImpl();
+
+			portlet.setPortletId(portletId);
+			portlet.setCompanyId(TestPropsValues.COMPANY_ID);
+			portlet.setPortletModes(new HashMap<String, Set<String>>());
+
+			PortletLocalServiceUtil.deployRemotePortlet(portlet);
+
+			List<String> portletActions =
+				ResourceActionsUtil.getPortletResourceActions(portletId);
+
+			ResourceActionLocalServiceUtil.checkResourceActions(
+				portletId, portletActions);
+
+			List<String> modelNames =
+				ResourceActionsUtil.getPortletModelResources(portletId);
+
+			for (String modelName : modelNames) {
+				List<String> modelActions =
+					ResourceActionsUtil.getModelResourceActions(modelName);
+
+				ResourceActionLocalServiceUtil.checkResourceActions(
+					modelName, modelActions);
+			}
+		}
 	}
 
 }

@@ -53,9 +53,12 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 		_cacheManager = new CacheManager(url);
 
-		ManagementService.registerMBeans(
-			_cacheManager, _mbeanServer, _registerCacheManager, _registerCaches,
-			_registerCacheConfigurations, _registerCacheStatistics);
+		if (PropsValues.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED) {
+			ManagementService.registerMBeans(
+				_cacheManager, _mbeanServer, _registerCacheManager,
+				_registerCaches, _registerCacheConfigurations,
+				_registerCacheStatistics);
+		}
 	}
 
 	public void clearAll() {

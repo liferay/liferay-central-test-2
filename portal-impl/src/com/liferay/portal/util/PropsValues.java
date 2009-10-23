@@ -538,6 +538,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.EHCACHE_BLOCKING_CACHE_ALLOWED));
 
+	public static final boolean EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED));
+
 	public static final String
 		FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS =
 			PropsUtil.get(PropsKeys.
