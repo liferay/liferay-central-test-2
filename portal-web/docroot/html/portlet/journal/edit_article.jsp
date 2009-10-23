@@ -668,27 +668,13 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					</c:otherwise>
 				</c:choose>
 
-				<c:choose>
-					<c:when test="<%= article == null %>">
-						<aui:field-wrapper label="permissions">
-							<liferay-ui:input-permissions
-								modelName="<%= JournalArticle.class.getName() %>"
-							/>
-						</aui:field-wrapper>
-					</c:when>
-					<c:otherwise>
-						<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.PERMISSIONS) %>">
-							<liferay-security:permissionsURL
-								modelResource="<%= JournalArticle.class.getName() %>"
-								modelResourceDescription="<%= article.getTitle() %>"
-								resourcePrimKey="<%= String.valueOf(article.getResourcePrimKey()) %>"
-								var="permissionsURL"
-							/>
-		
-							<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" label="<%= true %>" />
-						</c:if>
-					</c:otherwise>
-				</c:choose>
+				<c:if test="<%= article == null %>">
+					<aui:field-wrapper label="permissions">
+						<liferay-ui:input-permissions
+							modelName="<%= JournalArticle.class.getName() %>"
+						/>
+					</aui:field-wrapper>
+				</c:if>
 			</div>
 
 			<br />
