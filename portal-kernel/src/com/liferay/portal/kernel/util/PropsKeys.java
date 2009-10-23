@@ -539,8 +539,6 @@ public interface PropsKeys {
 
 	public static final String JAVASCRIPT_LOG_ENABLED = "javascript.log.enabled";
 
-	public static final String JBI_WORKFLOW_URL = "jbi.workflow.url";
-
 	public static final String JCR_INITIALIZE_ON_STARTUP = "jcr.initialize.on.startup";
 
 	public static final String JCR_JACKRABBIT_CONFIG_FILE_PATH = "jcr.jackrabbit.config.file.path";

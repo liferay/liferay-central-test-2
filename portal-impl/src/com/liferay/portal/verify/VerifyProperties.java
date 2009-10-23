@@ -192,6 +192,7 @@ public class VerifyProperties extends VerifyProcess {
 		"auth.max.failures.limit",
 		"auth.simultaneous.logins",
 		"commons.pool.enabled",
+		"jbi.workflow.url",
 		"webdav.storage.class",
 		"webdav.storage.show.edit.url",
 		"webdav.storage.show.view.url",
