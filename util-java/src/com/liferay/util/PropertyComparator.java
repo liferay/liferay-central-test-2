@@ -37,7 +37,7 @@ import org.apache.commons.beanutils.PropertyUtils;
  * @author Patrick Brady
  * @author Raymond Augé
  */
-public class PropertyComparator implements Comparator {
+public class PropertyComparator implements Comparator<Object> {
 
 	public PropertyComparator(String propertyName) {
 		this(new String[] {propertyName}, true, false);
@@ -94,7 +94,8 @@ public class PropertyComparator implements Comparator {
 				}
 
 				if (property1 instanceof Comparable) {
-					int result = ((Comparable)property1).compareTo(property2);
+					int result = ((Comparable<Object>)property1).compareTo(
+						property2);
 
 					if (result != 0) {
 						return result;
