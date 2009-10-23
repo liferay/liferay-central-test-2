@@ -136,7 +136,7 @@ public class AutoDeployDir {
 	}
 
 	public void unregisterListener(AutoDeployListener listener) {
-		_listeners.add(listener);
+		_listeners.remove(listener);
 	}
 
 	protected void processFile(File file) {
