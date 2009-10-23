@@ -3392,7 +3392,7 @@ public class PortalImpl implements Portal {
 					status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 				}
 				else {
-					status = HttpServletResponse.SC_BAD_REQUEST; 
+					status = HttpServletResponse.SC_BAD_REQUEST;
 				}
 			}
 		}
