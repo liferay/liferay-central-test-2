@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.Iterator;
@@ -38,7 +39,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
-public class CyrusVirtualPersistence extends BasePersistenceImpl {
+public class CyrusVirtualPersistence extends BasePersistenceImpl<Dummy> {
 
 	public static String FIND_BY_USER_ID =
 		"SELECT cyrusVirtual FROM CyrusVirtual cyrusVirtual WHERE userId = ?";

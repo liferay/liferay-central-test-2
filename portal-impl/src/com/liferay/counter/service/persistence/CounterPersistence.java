@@ -29,6 +29,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.concurrent.CompeteLatch;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
+import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsValues;
 
@@ -50,7 +51,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Michael Young
  * @author Shuyang Zhou
  */
-public class CounterPersistence extends BasePersistenceImpl {
+public class CounterPersistence extends BasePersistenceImpl<Dummy> {
 
 	public static int getCounterIncrement() {
 		return PropsValues.COUNTER_INCREMENT;
