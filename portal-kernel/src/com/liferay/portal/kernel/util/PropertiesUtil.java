@@ -43,47 +43,50 @@ import java.util.Properties;
 public class PropertiesUtil {
 
 	public static void copyProperties(Properties from, Properties to) {
-		Iterator itr = from.entrySet().iterator();
+		Iterator<Map.Entry<Object, Object>> itr = from.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<Object, Object> entry = itr.next();
 
 			to.setProperty((String)entry.getKey(), (String)entry.getValue());
 		}
 	}
 
-	public static Properties fromMap(Map map) {
-		if (map instanceof Properties) {
-			return (Properties)map;
-		}
+	public static Properties fromMap(Map<String, String> map) {
+		Properties properties = new Properties();
 
-		Properties p = new Properties();
-
-		Iterator itr = map.entrySet().iterator();
+		Iterator<Map.Entry<String, String>> itr = map.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, String> entry = itr.next();
 
-			String key = (String)entry.getKey();
-			String value = (String)entry.getValue();
+			String key = entry.getKey();
+			String value = entry.getValue();
 
 			if (value != null) {
-				p.setProperty(key, value);
+				properties.setProperty(key, value);
 			}
 		}
 
-		return p;
+		return properties;
 	}
 
-	public static void fromProperties(Properties p, Map map) {
+	public static Properties fromMap(Properties properties) {
+		return properties;
+	}
+
+	public static void fromProperties(
+		Properties properties, Map<String, String> map) {
+
 		map.clear();
 
-		Iterator itr = p.entrySet().iterator();
+		Iterator<Map.Entry<Object, Object>> itr =
+			properties.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<Object, Object> entry = itr.next();
 
-			map.put(entry.getKey(), entry.getValue());
+			map.put((String)entry.getKey(), (String)entry.getValue());
 		}
 	}
 
@@ -112,12 +115,31 @@ public class PropertiesUtil {
 		return subProperties;
 	}
 
-	public static Properties load(String s) throws IOException {
-		Properties p = new Properties();
+	public static String list(Map<String, String> map) {
+		Properties properties = fromMap(map);
 
-		load(p, s);
+		return list(properties);
+	}
 
-		return p;
+	public static void list(Map<String, String> map, PrintStream out) {
+		Properties properties = fromMap(map);
+
+		properties.list(out);
+	}
+
+	public static void list(Map<String, String> map, PrintWriter out) {
+		Properties properties = fromMap(map);
+
+		properties.list(out);
+	}
+
+	public static String list(Properties properties) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(baos);
+
+		properties.list(ps);
+
+		return baos.toString();
 	}
 
 	public static void load(Properties p, String s) throws IOException {
@@ -133,10 +155,11 @@ public class PropertiesUtil {
 
 			p.load(new ByteArrayInputStream(s.getBytes()));
 
-			List propertyNames = Collections.list(p.propertyNames());
+			List<String> propertyNames = Collections.list(
+				(Enumeration<String>)p.propertyNames());
 
 			for (int i = 0; i < propertyNames.size(); i++) {
-				String key = (String)propertyNames.get(i);
+				String key = propertyNames.get(i);
 
 				String value = p.getProperty(key);
 
@@ -153,38 +176,23 @@ public class PropertiesUtil {
 		}
 	}
 
+	public static Properties load(String s) throws IOException {
+		Properties p = new Properties();
+
+		load(p, s);
+
+		return p;
+	}
+
 	public static void merge(Properties p1, Properties p2) {
-		Enumeration enu = p2.propertyNames();
+		Enumeration<String> enu = (Enumeration<String>)p2.propertyNames();
 
 		while (enu.hasMoreElements()) {
-			String key = (String)enu.nextElement();
+			String key = enu.nextElement();
 			String value = p2.getProperty(key);
 
 			p1.setProperty(key, value);
 		}
-	}
-
-	public static String list(Map map) {
-		Properties props = fromMap(map);
-
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		PrintStream ps = new PrintStream(baos);
-
-		props.list(ps);
-
-		return baos.toString();
-	}
-
-	public static void list(Map map, PrintStream out) {
-		Properties props = fromMap(map);
-
-		props.list(out);
-	}
-
-	public static void list(Map map, PrintWriter out) {
-		Properties props = fromMap(map);
-
-		props.list(out);
 	}
 
 	public static String toString(Properties p) {
@@ -196,10 +204,10 @@ public class PropertiesUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		Enumeration enu = p.propertyNames();
+		Enumeration<String> enu = (Enumeration<String>)p.propertyNames();
 
 		while (enu.hasMoreElements()) {
-			String key = (String)enu.nextElement();
+			String key = enu.nextElement();
 
 			sb.append(key);
 			sb.append(StringPool.EQUAL);
@@ -218,10 +226,10 @@ public class PropertiesUtil {
 	}
 
 	public static void trimKeys(Properties p) {
-		Enumeration enu = p.propertyNames();
+		Enumeration<String> enu = (Enumeration<String>)p.propertyNames();
 
 		while (enu.hasMoreElements()) {
-			String key = (String)enu.nextElement();
+			String key = enu.nextElement();
 			String value = p.getProperty(key);
 
 			String trimmedKey = key.trim();
