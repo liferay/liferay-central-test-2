@@ -133,32 +133,8 @@ definePermissionsURL.setParameter("struts_action", "/enterprise_admin_roles/edit
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />save() {
-		AUI().use(
-			'io',
-			function(A) {
-				var form = A.get('#<portlet:namespace />fm');
-
-				var uri = form.getAttribute('action');
-
-				A.io(
-					uri,
-					{
-						form: {
-							id: form
-						},
-						method: 'POST'
-					}
-				);
-			}
-		);
-	}
-</script>
-
 <div class="edit-permissions">
-
-	<form action="<%= actionPortletURL.toString() %>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+	<form action="<%= actionPortletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="role_permissions" />
 	<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
 
@@ -367,10 +343,6 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				sb.append("onclick=\"return false;\" onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
 				sb.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[] {role.getTitle(locale), ResourceActionsUtil.getAction(pageContext, action), LanguageUtil.get(pageContext, ResourceActionsUtil.MODEL_RESOURCE_NAME_PREFIX + resource.getName()), group.getDescriptiveName()}));
 				sb.append("'); return false;\" ");
-			} else {
-				sb.append("onclick=\"");
-				sb.append(renderResponse.getNamespace());
-				sb.append("save();\" ");
 			}
 
 			sb.append("type=\"checkbox\" />");
@@ -391,5 +363,8 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
+	<br />
+
+	<input type="submit" value="<liferay-ui:message key="submit" />" />
 	</form>
 </div>
