@@ -144,7 +144,7 @@ public class IndexWriterFactory {
 			IndexReader reader = null;
 
 			try {
-				reader = IndexReader.open(LuceneUtil.getLuceneDir(companyId));
+				reader = LuceneUtil.getReader(companyId, false);
 
 				reader.deleteDocuments(term);
 			}
@@ -189,7 +189,8 @@ public class IndexWriterFactory {
 
 					IndexWriter writer = new IndexWriter(
 						LuceneUtil.getLuceneDir(companyId),
-						LuceneUtil.getAnalyzer(), create);
+						LuceneUtil.getAnalyzer(), create,
+						IndexWriter.MaxFieldLength.LIMITED);
 
 					writer.setMergeFactor(_MERGE_FACTOR);
 

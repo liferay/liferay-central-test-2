@@ -70,6 +70,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.search.highlight.Highlighter;
+import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.apache.lucene.search.highlight.QueryScorer;
 import org.apache.lucene.search.highlight.QueryTermExtractor;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
@@ -354,11 +355,13 @@ public class LuceneUtil {
 		try {
 			if (luceneDir.fileExists("segments.gen")) {
 				writer = new IndexWriter(
-					luceneDir, LuceneUtil.getAnalyzer(), false);
+					luceneDir, LuceneUtil.getAnalyzer(), false,
+					IndexWriter.MaxFieldLength.LIMITED);
 			}
 			else {
 				writer = new IndexWriter(
-					luceneDir, LuceneUtil.getAnalyzer(), true);
+					luceneDir, LuceneUtil.getAnalyzer(), true,
+					IndexWriter.MaxFieldLength.LIMITED);
 			}
 		}
 		catch (IOException ioe) {
@@ -405,14 +408,16 @@ public class LuceneUtil {
 		return _instance._getLuceneDir(companyId);
 	}
 
-	public static IndexReader getReader(long companyId) throws IOException {
-		return IndexReader.open(getLuceneDir(companyId));
-	}
-
-	public static IndexSearcher getSearcher(long companyId)
+	public static IndexReader getReader(long companyId, boolean readOnly)
 		throws IOException {
 
-		return new IndexSearcher(getLuceneDir(companyId));
+		return IndexReader.open(getLuceneDir(companyId), readOnly);
+	}
+
+	public static IndexSearcher getSearcher(long companyId, boolean readOnly)
+		throws IOException {
+
+		return new IndexSearcher(getLuceneDir(companyId), readOnly);
 	}
 
 	public static String[] getQueryTerms(Query query) {
@@ -467,16 +472,21 @@ public class LuceneUtil {
 		TokenStream tokenStream = LuceneUtil.getAnalyzer().tokenStream(
 			field, new StringReader(s));
 
-		String snippet = highlighter.getBestFragments(
-			tokenStream, s, maxNumFragments, fragmentSuffix);
-
-		if (Validator.isNotNull(snippet) &&
-			!StringUtil.endsWith(snippet, fragmentSuffix)) {
-
-			snippet = snippet + fragmentSuffix;
+		try {
+			String snippet = highlighter.getBestFragments(
+				tokenStream, s, maxNumFragments, fragmentSuffix);
+	
+			if (Validator.isNotNull(snippet) &&
+				!StringUtil.endsWith(snippet, fragmentSuffix)) {
+	
+				snippet = snippet + fragmentSuffix;
+			}
+	
+			return snippet;
 		}
-
-		return snippet;
+		catch (InvalidTokenOffsetsException itoe) {
+			throw new IOException(itoe.getMessage());
+		}
 	}
 
 	public static IndexWriter getWriter(long companyId) throws IOException {

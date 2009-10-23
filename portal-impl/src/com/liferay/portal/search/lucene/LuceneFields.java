@@ -99,7 +99,7 @@ public class LuceneFields {
 			return new Field(
 				field,
 				DateTools.dateToString(date, DateTools.Resolution.SECOND),
-				Field.Store.YES, Field.Index.UN_TOKENIZED);
+				Field.Store.YES, Field.Index.NOT_ANALYZED);
 		}
 	}
 
@@ -145,7 +145,7 @@ public class LuceneFields {
 		//keyword = KeywordsUtil.escape(keyword);
 
 		Field fieldObj = new Field(
-			field, keyword, Field.Store.YES, Field.Index.UN_TOKENIZED);
+			field, keyword, Field.Store.YES, Field.Index.NOT_ANALYZED);
 
 		//fieldObj.setBoost(0);
 
@@ -153,7 +153,7 @@ public class LuceneFields {
 	}
 
 	public static Field getText(String field, String text) {
-		return new Field(field, text, Field.Store.YES, Field.Index.TOKENIZED);
+		return new Field(field, text, Field.Store.YES, Field.Index.ANALYZED);
 	}
 
 	public static Field getText(String field, StringBuilder sb) {

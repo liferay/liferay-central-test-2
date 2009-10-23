@@ -45,7 +45,7 @@ public class ReadOnlyIndexWriter extends IndexWriter {
 			Directory luceneDir, Analyzer analyzer, boolean create)
 		throws IOException {
 
-		super(luceneDir, analyzer, create);
+		super(luceneDir, analyzer, create, IndexWriter.MaxFieldLength.LIMITED);
 	}
 
 	public void addDocument(Document document) {
