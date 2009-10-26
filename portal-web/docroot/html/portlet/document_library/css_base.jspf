@@ -1,0 +1,174 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+.portlet-document-library h3.entry-title, .portlet-document-library h3.folder-title, .portlet-bookmarks h3.entry-title, .portlet-bookmarks h3.folder-title {
+	border-bottom: 1px solid #000;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.portlet-document-library .entry-column-first .entry-column-content, .portlet-bookmarks .entry-column-first .entry-column-content {
+	margin-right: 4em;
+}
+
+.portlet-document-library .detail-column-last, .portlet-bookmarks .detail-column-last {
+	background-color: #D7F1FF;
+	overflow: visible;
+}
+
+.portlet-document-library .detail-column-last .detail-column-content, .portlet-bookmarks .detail-column-last .detail-column-content {
+	border: 1px solid #88C5D9;
+	padding: 0.7em;
+}
+
+.portlet-document-library .custom-attributes label, .portlet-bookmarks .custom-attributes label {
+	display: block;
+	font-weight: bold;
+}
+
+.portlet-document-library .custom-attributes, .portlet-bookmarks .custom-attributes {
+	margin-bottom: 1em;
+}
+
+.portlet-document-library .entry-author, .portlet-bookmarks .entry-author {
+	background: url(<%= themeImagesPath %>/portlet/edit_guest.png) no-repeat 0 50%;
+	border-right: 1px solid #999;
+	color: #999;
+	float: left;
+	margin-right: 10px;
+	padding-left: 25px;
+	padding-right: 10px;
+}
+
+.portlet-document-library .entry-avatar img, .portlet-bookmarks .entry-avatar img {
+	left: -45px;
+	position: relative;
+	top: -25px;
+	width: 200px;
+}
+
+.portlet-document-library .entry-categories .asset-category, .portlet-bookmarks .entry-categories .asset-category {
+	color: #555;
+}
+
+.portlet-document-library .entry-categories, .portlet-bookmarks .entry-categories  {
+	color: #7D7D7D;
+}
+
+.portlet-document-library .entry-date, .portlet-document-library .folder-date, .portlet-bookmarks .folder-date, .portlet-bookmarks .entry-date {
+	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 50%;
+	border-right: 1px solid #999;
+	color: #999;
+	float: left;
+	margin-right: 10px;
+	overflow: auto;
+	padding-left: 25px;
+	padding-right: 10px;
+}
+
+.portlet-document-library .entry-description, .portlet-document-library .folder-description, .portlet-bookmarks .entry-description, .portlet-bookmarks .folder-description {
+	margin: 0 auto 2em;
+}
+
+.portlet-document-library .entry-download .entry-name, .portlet-bookmarks .entry-download .entry-name {
+	position: relative;
+	top: -30px;
+}
+
+.portlet-document-library .entry-download, .portlet-document-library .folder-icon, .portlet-bookmarks .entry-download, .portlet-bookmarks .folder-icon {
+	margin-bottom: 2em;
+	text-align: center;
+}
+
+.portlet-document-library .entry-downloads, .portlet-bookmarks .entry-downloads {
+	color: #999;
+	overflow: auto;
+	padding-left: 10px;
+}
+
+.portlet-document-library .entry-field label, .portlet-document-library .folder-field label {
+	display: block;
+	font-weight: bold;
+}
+
+.portlet-document-library .entry-field, .portlet-document-library .folder-field {
+	clear: left;
+	margin: 1em auto;
+}
+
+.portlet-document-library .entry-ratings, .portlet-bookmarks .entry-ratings {
+	margin: 2em 0;
+}
+
+.portlet-document-library .entry-tags .tag, .portlet-bookmarks .entry-tags .tag {
+	color: #555;
+}
+
+.portlet-document-library .entry-tags, .portlet-bookmarks .entry-tags {
+	color: #7D7D7D;
+}
+
+.portlet-document-library .folder-avatar img, .portlet-bookmarks .folder-avatar img {
+	margin: 0 auto;
+	padding-right: 2em;
+}
+
+.portlet-document-library .folder-column #documentLibraryPanels, .portlet-document-library .entry-panels #documentPanels, .portlet-bookmarks .folder-column #bookmarksPanels  {
+	border-width: 0;
+}
+
+.portlet-document-library .folder-column #subFoldersPanel, .portlet-document-library .folder-column #documentsPanel {
+	clear: both;
+}
+
+.portlet-document-library .folder-column-content, .portlet-bookmarks .folder-column-content {
+	margin-right: 1em;
+	padding: 0;
+}
+
+.portlet-document-library .folder-metadata, .portlet-bookmarks .folder-metadata {
+	clear: both;
+}
+
+.portlet-document-library .folder-search, .portlet-bookmarks .folder-search {
+	float: right;
+	margin: 0 0 0.5em 0.5em;
+}
+
+.portlet-document-library .folder-file-entries, .portlet-bookmarks .folder-file-entries  {
+	background: url(<%= themeImagesPath %>/common/page.png) no-repeat 0 50%;
+	color: #999;
+	overflow: auto;
+	padding-left: 25px;
+}
+
+.portlet-document-library .folder-subfolders, .portlet-bookmarks .folder-subfolders {
+	background: url(<%= themeImagesPath %>/common/folder.png) no-repeat 0 50%;
+	border-right: 1px solid #999;
+	color: #999;
+	float: left;
+	margin-right: 10px;
+	padding-left: 25px;
+	padding-right: 10px;
+}

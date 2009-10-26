@@ -196,7 +196,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</c:choose>
 </c:if>
 
-<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
+<aui:column columnWidth="<%= 75 %>" cssClass="entry-column entry-column-first" first="<%= true %>">
 
 	<%
 	String versionText = LanguageUtil.format(pageContext, "version-x", fileEntry.getVersion());
@@ -206,16 +206,16 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	}
 	%>
 
-	<h3 class="file-entry-title"><%= fileEntry.getTitle() + " (" + versionText + ")" %></h3>
+	<h3 class="entry-title"><%= fileEntry.getTitle() + " (" + versionText + ")" %></h3>
 
-	<div class="file-entry-categories">
+	<div class="entry-categories">
 		<liferay-ui:asset-categories-summary
 			className="<%= DLFileEntry.class.getName() %>"
 			classPK="<%= fileEntryId %>"
 		/>
 	</div>
 
-	<div class="file-entry-tags">
+	<div class="entry-tags">
 		<liferay-ui:asset-tags-summary
 			className="<%= DLFileEntry.class.getName() %>"
 			classPK="<%= fileEntryId %>"
@@ -223,7 +223,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		/>
 	</div>
 
-	<div class="file-entry-description">
+	<div class="entry-description">
 		<%= fileEntry.getDescription() %>
 	</div>
 
@@ -238,26 +238,26 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		</liferay-ui:custom-attributes-available>
 	</div>
 
-	<div class="file-entry-author">
+	<div class="entry-author">
 		<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName())) %>
 	</div>
 
-	<div class="file-entry-date">
+	<div class="entry-date">
 		<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
 	</div>
 
-	<div class="file-entry-downloads">
+	<div class="entry-downloads">
 		<%= fileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
 	</div>
 
-	<div class="file-entry-ratings">
+	<div class="entry-ratings">
 		<liferay-ui:ratings
 			className="<%= DLFileEntry.class.getName() %>"
 			classPK="<%= fileEntryId %>"
 		/>
 	</div>
 
-	<div class="file-entry-field">
+	<div class="entry-field">
 		<label><liferay-ui:message key="url" /></label>
 
 		<liferay-ui:input-resource
@@ -266,7 +266,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</div>
 
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-		<div class="file-entry-field">
+		<div class="entry-field">
 
 			<%
 			String webDavHelpMessage = null;
@@ -286,27 +286,27 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</c:if>
 </aui:column>
 
-<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 	<c:if test="<%= isLocked %>">
 		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
 	</c:if>
 
-	<div class="file-entry-download">
+	<div class="entry-download">
 		<liferay-ui:icon
 			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
 			message='download'
 			url="<%= fileUrl %>"
-			cssClass="file-entry-avatar"
+			cssClass="entry-avatar"
 		/>
 
-		<div class="file-entry-name">
+		<div class="entry-name">
 			<a href="<%= fileUrl %>">
 				<%= title %>
 			</a>
 		</div>
 
 		<c:if test="<%= conversions.length > 0 %>">
-			<div class="file-entry-field file-entry-conversions">
+			<div class="entry-field entry-conversions">
 				<label><liferay-ui:message key="other-available-formats" /></label>
 
 				<%
@@ -344,7 +344,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 }
 %>
 
-<div class="file-entry-panels">
+<div class="entry-panels">
 	<liferay-ui:panel-container id='documentPanels' extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
 		<liferay-ui:panel cssClass="version-history" id='documentVersionHistory' title='<%= LanguageUtil.get(pageContext, "version-history") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 

@@ -110,7 +110,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 %>
 
-<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
+<aui:column columnWidth="<%= 75 %>" cssClass="entry-column entry-column-first" first="<%= true %>">
 
 	<%
 	String versionText = LanguageUtil.format(pageContext, "version-x", toFileEntry.getVersion());
@@ -120,16 +120,16 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 	}
 	%>
 
-	<h3 class="file-entry-title"><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + versionText + ")") %></h3>
+	<h3 class="entry-title"><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + versionText + ")") %></h3>
 
-	<div class="file-entry-categories">
+	<div class="entry-categories">
 		<liferay-ui:asset-categories-summary
 			className="<%= DLFileEntry.class.getName() %>"
 			classPK="<%= toFileEntry.getFileEntryId() %>"
 		/>
 	</div>
 
-	<div class="file-entry-tags">
+	<div class="entry-tags">
 		<liferay-ui:asset-tags-summary
 			className="<%= DLFileEntry.class.getName() %>"
 			classPK="<%= toFileEntry.getFileEntryId() %>"
@@ -137,7 +137,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 		/>
 	</div>
 
-	<div class="file-entry-description">
+	<div class="entry-description">
 		<%= toFileEntry.getDescription() %>
 	</div>
 
@@ -152,26 +152,26 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 		</liferay-ui:custom-attributes-available>
 	</div>
 
-	<div class="file-entry-author">
+	<div class="entry-author">
 		<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(toFileEntry.getUserId(), toFileEntry.getUserName())) %>
 	</div>
 
-	<div class="file-entry-date">
+	<div class="entry-date">
 		<%= dateFormatDateTime.format(toFileEntry.getModifiedDate()) %>
 	</div>
 
-	<div class="file-entry-downloads">
+	<div class="entry-downloads">
 		<%= toFileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
 	</div>
 
-	<div class="file-entry-ratings">
+	<div class="entry-ratings">
 		<liferay-ui:ratings
 			className="<%= DLFileEntry.class.getName() %>"
 			classPK="<%= toFileEntry.getFileEntryId() %>"
 		/>
 	</div>
 
-	<div class="file-entry-field">
+	<div class="entry-field">
 		<label><liferay-ui:message key="url" /></label>
 
 		<liferay-ui:input-resource
@@ -179,36 +179,36 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 		/>
 	</div>
 
-	<div class="file-entry-field">
+	<div class="entry-field">
 		<label><liferay-ui:message key="community" /></label>
 
 		<%= toGroup.getDescriptiveName() %>
 	</div>
 </aui:column>
 
-<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 	<img alt="" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_link.png">
 
 	<c:if test="<%= isLocked %>">
 		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
 	</c:if>
 
-	<div class="file-entry-download">
+	<div class="entry-download">
 		<liferay-ui:icon
 			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
-			cssClass="file-entry-avatar"
+			cssClass="entry-avatar"
 			message='download'
 			url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
 		/>
 
-		<div class="file-entry-name">
+		<div class="entry-name">
 			<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>">
 				<%= toFileEntry.getTitle() %>
 			</a>
 		</div>
 
 		<c:if test="<%= conversions.length > 0 %>">
-			<div class="file-entry-field file-entry-conversions">
+			<div class="entry-field entry-conversions">
 				<label><liferay-ui:message key="other-available-formats" /></label>
 
 				<%
@@ -242,7 +242,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 }
 %>
 
-<div class="file-entry-panels">
+<div class="entry-panels">
 	<liferay-ui:tabs
 		names="<%= tabs2Names %>"
 		param="tabs2"

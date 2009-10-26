@@ -26,29 +26,11 @@
 
 <%@ include file="/html/portlet/document_library/css_base.jspf" %>
 
-.portlet-document-library .entry-panels {
-	clear: both;
-	padding-top: 1em;
+.portlet-bookmarks .entry-visit {
+	margin-bottom: 2em;
+	text-align: center;
 }
 
-.portlet-document-library .entry-panels .version-history {
-	margin-bottom: 3em;
-}
-
-.portlet-document-library img.shortcut-icon {
-	display: inline;
-	margin-top: 100px;
-	position: absolute;
-	z-index: 10;
-}
-
-.portlet-document-library img.locked-icon {
-	display: inline;
-	margin: 95px 0 0 130px;
-	position: absolute;
-	z-index: 10;
-}
-
-.portlet-document-library .taglib-webdav {
-	margin-top: 3em;
+.portlet-bookmarks .entry-url {
+	margin: 1em 0 0.3em;
 }
