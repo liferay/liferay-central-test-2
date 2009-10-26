@@ -1808,6 +1808,11 @@
 			<forward name="portlet.workflow_admin.error" path="portlet.workflow_admin.error" />
 		</action>
 
+		<action path="/workflow_admin/edit_workflow_definition" type="com.liferay.portlet.workflowadmin.action.EditWorkflowDefinitionAction">
+			<forward name="portlet.workflow_admin.edit_workflow_definition" path="portlet.workflow_admin.edit_workflow_definition" />
+			<forward name="portlet.workflow_admin.error" path="portlet.workflow_admin.error" />
+		</action>
+
 		<action path="/workflow_admin/view" forward="portlet.workflow_admin.view" />
 
 		<!-- Workflow Tasks -->
