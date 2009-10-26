@@ -27,10 +27,20 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-BookmarksEntry entry = (BookmarksEntry)row.getObject();
+BookmarksEntry entry = null;
+boolean view = false;
+
+if (row != null) {
+	entry = (BookmarksEntry)row.getObject();
+}
+else {
+	entry = (BookmarksEntry)request.getAttribute("view_entry.jsp-entry");
+
+	view = true;
+}
 %>
 
-<liferay-ui:icon-menu>
+<liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:if test="<%= BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
