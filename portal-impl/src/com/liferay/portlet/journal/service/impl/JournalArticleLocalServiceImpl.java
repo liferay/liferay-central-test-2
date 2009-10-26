@@ -1581,10 +1581,12 @@ public class JournalArticleLocalServiceImpl
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_S_R(
+		String tag = null;
+
+		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator, start, end, obc);
+			status, reviewDate, tag, andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> search(
@@ -1595,10 +1597,12 @@ public class JournalArticleLocalServiceImpl
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_S_R(
+		String tag = null;
+
+		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator, start, end, obc);
+			status, reviewDate, tag, andOperator, start, end, obc);
 	}
 
 	public int searchCount(
@@ -1620,10 +1624,12 @@ public class JournalArticleLocalServiceImpl
 			boolean andOperator)
 		throws SystemException {
 
-		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_S_R(
+		String tag = null;
+
+		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator);
+			status, reviewDate, tag, andOperator);
 	}
 
 	public int searchCount(
@@ -1634,10 +1640,12 @@ public class JournalArticleLocalServiceImpl
 			boolean andOperator)
 		throws SystemException {
 
-		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_S_R(
+		String tag = null;
+
+		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator);
+			status, reviewDate, tag, andOperator);
 	}
 
 	public JournalArticle updateArticle(
