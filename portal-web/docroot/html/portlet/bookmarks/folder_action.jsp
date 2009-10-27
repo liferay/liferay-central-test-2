@@ -117,6 +117,6 @@ if (row == null) {
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="../document_library/add_document" message="add-bookmark" url="<%= editEntryURL %>" />
+		<liferay-ui:icon image="../bookmarks/add_bookmark" message="add-bookmark" url="<%= editEntryURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>
