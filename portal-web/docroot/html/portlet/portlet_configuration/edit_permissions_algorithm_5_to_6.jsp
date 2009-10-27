@@ -137,6 +137,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 	<form action="<%= actionPortletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="role_permissions" />
 	<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
+	<input name="<portlet:namespace />validState" id="<portlet:namespace />validState" type="hidden" value="true" />
 
 	<c:choose>
 		<c:when test="<%= Validator.isNull(modelResource) %>">
@@ -343,6 +344,11 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				sb.append("onclick=\"return false;\" onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
 				sb.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[] {role.getTitle(locale), ResourceActionsUtil.getAction(pageContext, action), LanguageUtil.get(pageContext, ResourceActionsUtil.MODEL_RESOURCE_NAME_PREFIX + resource.getName()), group.getDescriptiveName()}));
 				sb.append("'); return false;\" ");
+			}
+			else {
+				sb.append("onclick=\" jQuery('#");
+				sb.append(renderResponse.getNamespace());
+				sb.append("validState').val(false);\" ");
 			}
 
 			sb.append("type=\"checkbox\" />");

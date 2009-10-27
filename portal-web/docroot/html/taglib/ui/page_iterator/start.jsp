@@ -66,7 +66,31 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 <c:if test='<%= type.equals("regular")  && !themeDisplay.isFacebook() %>'>
 	<script type="text/javascript">
+		function <%= namespace %>save() {
+			AUI().use('node,io', function(A) {
+				var node = A.get('#<%= namespace %>validState');
+
+				if (node != undefined && !eval(node.get("value"))) {
+					if (confirm('<liferay-ui:message key="there-are-changes-in-your-page-save-your-work" />')) {
+						var form = node.get('parentNode');
+						var uri = form.getAttribute('action');
+
+						A.io(
+							uri,
+							{
+								form: {
+									id: form
+								},
+								method: 'POST'
+							}
+						);
+					}
+				}
+			});
+		}
+
 		function <%= namespace %><%= curParam %>updateCur(box) {
+			<%= namespace %>save();
 			var cur = jQuery("option:selected", box).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
@@ -82,6 +106,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		}
 
 		function <%= namespace %><%= deltaParam %>updateDelta(box) {
+			<%= namespace %>save();
 			var delta = jQuery("option:selected", box).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
@@ -241,7 +266,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			<c:if test='<%= type.equals("regular") %>'>
 				<c:choose>
 					<c:when test="<%= cur != 1 %>">
-						<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+						<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" onclick="<%= namespace %>save();" target="<%= target %>">
 					</c:when>
 					<c:otherwise>
 						<span class="first">
@@ -262,7 +287,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 			<c:choose>
 				<c:when test="<%= cur != 1 %>">
-					<a class="previous" href="<%= _getHREF(formName, curParam, cur - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+					<a class="previous" href="<%= _getHREF(formName, curParam, cur - 1, jsCall, url, urlAnchor) %>" onclick="<%= namespace %>save();" target="<%= target %>">
 				</c:when>
 				<c:when test='<%= type.equals("regular") %>'>
 					<span class="previous">
@@ -284,7 +309,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 			<c:choose>
 				<c:when test="<%= cur != pages %>">
-					<a class="next" href="<%= _getHREF(formName, curParam, cur + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+					<a class="next" href="<%= _getHREF(formName, curParam, cur + 1, jsCall, url, urlAnchor) %>" onclick="<%= namespace %>save();" target="<%= target %>">
 				</c:when>
 				<c:when test='<%= type.equals("regular") %>'>
 					<span class="next">
@@ -307,7 +332,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			<c:if test='<%= type.equals("regular") %>'>
 				<c:choose>
 					<c:when test="<%= cur != pages %>">
-						<a class="last" href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
+						<a class="last" href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" onclick="<%= namespace %>save();" target="<%= target %>">
 					</c:when>
 					<c:otherwise>
 						<span class="last">
