@@ -1,6 +1,11 @@
 AUI().add(
 	'liferay-navigation',
 	function(A) {
+		var Lang = A.Lang,
+
+			TPL_DELETE_BUTTON = '<span class="delete-tab aui-helper-hidden">X</span>',
+			TPL_LIST_ITEM = '<li></li>',
+			TPL_TAB_LINK = '<a href="{url}"><span>{pageTitle}</span></a>';
 
 		/**
 		 * OPTIONS
@@ -8,452 +13,440 @@ AUI().add(
 		 * Required
 		 * hasPermission {boolean}: Whether the current user has permission to modify the navigation
 		 * layoutIds {array}: The displayable layout ids.
-		 * navBlock {string|object}: A jQuery selector or DOM element of the navigation.
+		 * navBlock {string|object}: A selector or DOM element of the navigation.
 		 */
 
-		var Navigation = function(options) {
-			var instance = this;
+		var Navigation = function(config) {
+			Navigation.superclass.constructor.apply(this, arguments);
+		};
 
-			instance.options = options;
+		Navigation.NAME = 'navigation';
 
-			instance._navBlock = A.get(instance.options.navBlock);
+		Navigation.ATTRS = {
+			hasPermission: {
+				value: false
+			},
 
-			if (instance._navBlock) {
-				instance._hasPermission = instance.options.hasPermission;
-				instance._isModifiable = instance._navBlock.hasClass('modify-pages');
-				instance._isSortable = instance._navBlock.hasClass('sort-pages') && instance._hasPermission;
-				instance._isUseHandle = instance._navBlock.hasClass('use-handle');
+			isModifiable: {
+				value: false,
+				getter: function(value) {
+					var instance = this;
 
-				instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+					return instance.get('hasPermission') &&
+							instance.get('navBlock').hasClass('modify-pages');
+				}
+			},
 
-				var items = instance._navBlock.queryAll('> ul > li');
+			isSortable: {
+				value: false,
+				getter: function(value) {
+					var instance = this;
 
-				items.each(
-					function(item, index, collection) {
-						item._LFR_layoutId = instance.options.layoutIds[index];
+					return instance.get('hasPermission') &&
+							instance.get('navBlock').hasClass('sort-pages');
+				}
+			},
+
+			layoutIds: {
+				value: []
+			},
+
+			navBlock: {
+				lazyAdd: false,
+				value: null,
+				setter: function(value) {
+					var instance = this;
+
+					value = A.get(value);
+
+					if (!value) {
+						value = A.Attribute.INVALID_VALUE;
 					}
-				);
 
-				instance._addEvent = new Alloy.CustomEvent('add', instance);
-				instance._stopAddEvent = new Alloy.CustomEvent('stopAdd', instance);
-				instance._editEvent = new Alloy.CustomEvent('edit', instance);
-				instance._stopEditEvent = new Alloy.CustomEvent('stopEdit', instance);
-
-				instance._makeAddable();
-				instance._makeDeletable();
-				instance._makeSortable();
-				instance._makeEditable();
+					return value;
+				}
 			}
 		};
 
-		Navigation.prototype = {
-			_addPage: function(event, obj) {
-				var instance = this;
+		A.extend(
+			Navigation,
+			A.Base,
+			{
+				initializer: function(config) {
+					var instance = this;
 
-				var navItem = instance._navBlock;
-				var addBlock = A.Node.create('<li>' + instance._enterPage + '</li>');
+					var navBlock = instance.get('navBlock');
 
-				var blockInput = addBlock.one('input');
+					if (navBlock) {
+						instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
-				navItem.one('ul').append(addBlock);
+						var items = navBlock.queryAll('> ul > li');
+						var layoutIds = instance.get('layoutIds');
 
-				blockInput.focus();
+						items.each(
+							function(item, index, collection) {
+								item._LFR_layoutId = layoutIds[index];
+							}
+						);
 
-				var editComponent = addBlock._editComponent;
+						instance._makeAddable();
+						instance._makeDeletable();
+						instance._makeSortable();
+						instance._makeEditable();
 
-				if (!editComponent) {
+						instance.on('savePage', instance._savePage);
+						instance.on('cancelPage', instance._cancelPage);
+
+						navBlock.delegate('keypress', A.bind(instance._onKeypress, instance), 'input');
+					}
+				},
+
+				_addPage: function(event) {
+					var instance = this;
+
+					if (!event.shiftKey) {
+						Liferay.Dockbar.MenuManager.hideAll();
+						Liferay.Dockbar.UnderlayManager.hideAll();
+					}
+
+					var navBlock = instance.get('navBlock');
+					var addBlock = A.Node.create(TPL_LIST_ITEM);
+
+					navBlock.one('ul').append(addBlock);
+
+					instance._createEditor(
+						addBlock,
+						{
+							prevVal: ''
+						}
+					);
+				},
+
+				_createEditor: function(listItem, options) {
+					var instance = this;
+
 					var prototypeTemplate = instance._prototypeMenuTemplate || '';
 
-					prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + Alloy.generateId() + '_template"');
+					prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + A.guid() + '_template"');
 
-					var editComponent = new Alloy.Overlay(
+					var prevVal = options.prevVal;
+
+					if (options.actionNode) {
+						options.actionNode.hide();
+					}
+
+					var docClick = A.getDoc().on(
+						'click',
+						function(event) {
+							docClick.detach();
+
+							instance.fire('cancelPage', options);
+						}
+					);
+
+					var relayEvent = function(event) {
+						docClick.detach();
+
+						var eventName = event.type.split(':');
+
+						eventName = eventName[1] || eventName[0];
+
+						instance.fire(eventName, options);
+					};
+
+					var tools = [
 						{
-							body: prototypeTemplate,
-							context: [addBlock[0], 'tl', 'bl', ['beforeShow', instance._addEvent, instance._stopAddEvent, instance._editEvent, instance._stopEditEvent]],
+							icon: 'check',
+							id: 'save',
+							handler: function(event) {
+								comboBox.fire('savePage', options);
+							}
+						}
+					];
+
+					if (prototypeTemplate && !prevVal) {
+						tools.unshift(
+							{
+								activeState: true,
+								icon: 'gear',
+								id: 'options',
+								handler: function(event) {
+									var toolItem = this;
+
+									event.halt();
+
+									var action = 'show';
+
+									if (toolItem.StateInteraction.get('active')) {
+										action = 'hide';
+									}
+
+									comboBox._optionsOverlay[action]();
+								}
+							}
+						);
+					}
+
+					var optionsOverlay = new A.Overlay(
+						{
+							bodyContent: prototypeTemplate,
+							align: {
+								node: listItem,
+								points: ['tl', 'bl']
+							},
+							on: {
+								align: function(event) {
+									var instance = this;
+
+									instance._syncUIPosExtras();
+								},
+								destroy: function(event) {
+									var instance = this;
+
+									if (instance.get('rendered')) {
+										instance.get('boundingBox').remove();
+									}
+
+									instance.detachAll();
+								},
+								visibleChange: function(event) {
+									var instance = this;
+
+									if (event.newVal) {
+										if (!instance.get('rendered')) {
+											instance.set('align.node', comboBox.get('contentBox'));
+
+											instance.render();
+										}
+									}
+								}
+							},
 							zIndex: 200
 						}
 					);
 
-					editComponent._trigger = addBlock.one('.aui-options-trigger');
+					var comboBox = new A.Combobox(
+						{
+							after: {
+								destroy: function(event) {
+									instance.fire('stopEditing');
+								},
+								render: function(event) {
+									instance.fire('startEditing');
+								}
+							},
+							field: {
+								value: prevVal
+							},
+							on: {
+								destroy: function(event) {
+									var instance = this;
 
-					if (editComponent._trigger) {
-						editComponent._trigger.on(
-							'click',
-							function(event) {
-								var visible = editComponent.cfg.getProperty('visible');
+									instance.get('boundingBox').remove();
 
-								editComponent.cfg.setProperty('visible', !visible);
+									optionsOverlay.destroy();
+								}
+							},
+							tools: tools
+						}
+					).render(listItem);
 
-								this.toggleClass('aui-trigger-selected');
+					if (prototypeTemplate && instance._optionsOpen && !prevVal) {
+						var optionItem = comboBox.toolset.tools.item('options');
 
-								instance._optionsOpen = !visible;
-							}
-						);
+						optionItem.StateInteraction.set('active', true);
+						optionsOverlay.show();
 					}
 
-					editComponent.render(document.body);
+					var comboField = comboBox._field;
 
-					Alloy.Dom.addClass(editComponent.element, 'lfr-menu-list lfr-component lfr-page-templates');
-					Alloy.Dom.setStyle(editComponent.element, 'min-width', addBlock.get('offsetWidth') + 'px');
+					var comboContentBox = comboBox.get('contentBox');
 
-					addBlock._editComponent = editComponent;
-				}
+					var overlayBoundingBox = optionsOverlay.get('boundingBox');
+					var overlayContentBox = optionsOverlay.get('contentBox');
 
-				if (instance._optionsOpen) {
-					editComponent.show();
-				}
-				else {
-					editComponent.hide();
-					editComponent._trigger.removeClass('aui-trigger-selected');
-				}
+					options.listItem = listItem;
+					options.comboBox = comboBox;
+					options.field = comboField;
+					options.optionsOverlay = optionsOverlay;
 
-				var currentInput = addBlock.one('.enter-page input');
+					comboBox.on('savePage', relayEvent);
+					comboBox.on('cancelPage', relayEvent);
 
-				var savePage = addBlock.one('.save-page');
+					comboBox._optionsOverlay = optionsOverlay;
 
-				var pageParents = A.get(document);
+					listItem._comboBox = comboBox;
 
-				var cancelPage = function() {
-					instance._cancelAddingPage(addBlock);
+					overlayBoundingBox.setStyle('minWidth', listItem.get('offsetWidth') + 'px');
+					overlayContentBox.addClass('lfr-menu-list lfr-component lfr-page-templates');
 
-					A.detach('click', pageBlur, pageParents);
+					comboContentBox.swallowEvent('click');
+					overlayContentBox.swallowEvent('click');
 
-					editComponent.hide();
-				}
+					comboField.get('node').focus();
 
-				var pageBlur = function(internalEvent) {
-					var currentEl = internalEvent.target;
-					var liParent = currentEl.ancestor('ul');
+					var realign = A.bind(optionsOverlay.fire, optionsOverlay, 'align');
 
-					if (!liParent &&
-						currentEl.get('tagName') != 'li' &&
-						!currentEl.ancestor('#add-page, #' + editComponent.id)
-						) {
-						cancelPage();
+					optionsOverlay.on('visibleChange', realign);
+
+					instance.on('stopEditing', realign);
+					instance.on('startEditing', realign);
+
+					if (prevVal) {
+						instance.fire('editPage');
 					}
-				};
+				},
 
-				pageParents.on('click', pageBlur);
+				_cancelPage: function(event) {
+					var instance = this;
 
-				savePage.on(
-					'click',
-					function(event) {
-						instance._savePage(event, this);
+					var listItem = event.listItem;
+					var comboBox = event.comboBox;
+					var field = event.field;
 
-						if (currentInput.val().length) {
-							A.detach('click', pageBlur, pageParents);
-						}
+					var actionNode = event.actionNode;
+
+					if (actionNode) {
+						actionNode.show();
+
+						field.resetValue();
 					}
-				);
-
-				currentInput.on(
-					'keypress',
-					function(event) {
-						if (event.keyCode == 13) {
-							savePage.simulate('click');
-						}
-						else if (event.keyCode == 27) {
-							cancelPage();
-						}
-						else {
-							return;
-						}
+					else {
+						listItem.remove();
 					}
-				);
-			},
 
-			_stopEditing: function(previousName) {
-				var instance = this;
+					comboBox.destroy();
+				},
 
-				instance._navBlock.one('.enter-page').remove();
+				_deleteButton: function(obj) {
+					var instance = this;
 
-				if (previousName) {
-					previousName.removeClass('aui-helper-hidden');
-				}
+					obj.append(TPL_DELETE_BUTTON);
+				},
 
-				instance._stopEditEvent.fire();
-			},
+				_makeAddable: function() {
+					var instance = this;
 
-			_cancelAddingPage: function(obj) {
-				var instance = this;
-
-				obj.remove();
-
-				instance._stopAddEvent.fire();
-			},
-
-			_cancelPage: function(obj, oldName) {
-				var instance = this;
-
-				var navItem = obj.ancestor('li');
-
-				if (oldName) {
-					var enterPage = navItem.one('.enter-page');
-
-					enterPage.previous().removeClass('aui-helper-hidden');
-					enterPage.remove();
-				}
-				else {
-					navItem.remove();
-				}
-
-				instance._stopAddEvent.fire();
-			},
-
-			_deleteButton: function(obj) {
-				var instance = this;
-
-				var deleteTab = A.Node.create('<span class="delete-tab">X</span>');
-
-				obj.append('<span class="delete-tab aui-helper-hidden">X</span>');
-			},
-
-			_makeAddable: function() {
-				var instance = this;
-
-				if (instance._isModifiable) {
-					var navList = instance._navBlock.one('ul');
+					if (instance.get('isModifiable')) {
+						var navList = instance.get('navBlock').one('ul');
 
 						var themeImages = themeDisplay.getPathThemeImages();
 
-						var prototypeMenuTemplate = '';
 						var prototypeMenuNode = A.get('#layoutPrototypeTemplate');
 
 						if (prototypeMenuNode) {
-							prototypeMenuTemplate = prototypeMenuNode.html();
+							instance._prototypeMenuTemplate = prototypeMenuNode.html();
 						}
 
-						instance._prototypeMenuTemplate = prototypeMenuTemplate;
+						if (instance.get('hasPermission')) {
+							var addPageButton = A.get('#addPage');
 
-						instance._enterPage ='<span class="aui-form-field aui-form-text aui-form-options enter-page">' +
-							'<span><input class="text" id="" name="" type="text" /></span>' +
-							'<span class="aui-form-triggers">' +
-								(instance._prototypeMenuTemplate ?
-									'<a class="aui-form-trigger aui-options-trigger ' + (instance._optionsOpen ? 'aui-trigger-selected' : '') + '" href="javascript:;">' +
-										'<img src="' + themeImages + '/spacer.png" />' +
-										'</a>' : '') +
-								'<a class="aui-form-trigger aui-save-trigger save-page" href="javascript:;">' +
-									'<img src="' + themeImages + '/spacer.png" />' +
-								'</a>' +
-							'</span>' +
-						'</span>';
-
-					if (instance._hasPermission) {
-						var addPageButton = A.get('#addPage');
-
-						if (!addPageButton) {
-							var addPageButton = A.Node.create('<div id="add-page">' +
-							'<a href="javascript:;">' +
-							'<span>' + Liferay.Language.get('add-page') + '</span>' +
-							'</a>' +
-							'</div>');
-
-							navList.placeAfter(addPageButton);
+							if (addPageButton) {
+								addPageButton.on('click', instance._addPage, instance);
+							}
 						}
+					}
+				},
 
-						addPageButton.on(
+				_makeDeletable: function() {
+					var instance = this;
+
+					if (instance.get('isModifiable')) {
+						var navBlock = instance.get('navBlock');
+
+						var navItems = navBlock.queryAll('> ul > li').filter(':not(.selected)');
+
+						navBlock.delegate(
+							'click',
+							A.bind(instance._removePage, instance),
+							'.delete-tab'
+						);
+
+						navBlock.delegate(
+							'mouseenter',
+							A.rbind(instance._toggleDeleteButton, instance, 'removeClass'),
+							'li'
+						);
+
+						navBlock.delegate(
+							'mouseleave',
+							A.rbind(instance._toggleDeleteButton, instance, 'addClass'),
+							'li'
+						);
+
+						instance._deleteButton(navItems);
+					}
+				},
+
+				_makeEditable: function() {
+					var instance = this;
+
+					if (instance.get('isModifiable')) {
+						var currentItem = instance.get('navBlock').one('li.selected');
+						var currentLink = currentItem.one('a');
+						var currentSpan = currentLink.one('span');
+
+						currentLink.on(
 							'click',
 							function(event) {
-								if (!event.shiftKey) {
-									Liferay.Dockbar.MenuManager.hideAll();
-									Liferay.Dockbar.UnderlayManager.hideAll();
+								if (event.shiftKey) {
+									event.halt();
+								}
+							}
+						);
+
+						var resetCursor = function() {
+							currentSpan.setStyle('cursor', 'pointer');
+						};
+
+						currentLink.on(
+							'mouseenter',
+							function(event) {
+								if (!themeDisplay.isStateMaximized() || event.shiftKey) {
+									currentSpan.setStyle('cursor', 'text');
+								}
+							}
+						);
+
+						currentLink.on('mouseleave', A.bind(currentSpan.setStyle, currentSpan, 'cursor', 'pointer'));
+
+						currentSpan.on(
+							'click',
+							function(event) {
+								if (themeDisplay.isStateMaximized() && !event.shiftKey) {
+									return;
 								}
 
-								instance._addPage(event, this);
+								event.halt();
+
+								var textNode = event.currentTarget;
+
+								var actionNode = textNode.get('parentNode');
+								var currentText = textNode.text();
+
+								instance._createEditor(
+									currentItem,
+									{
+										actionNode: actionNode,
+										prevVal: currentText,
+										textNode: textNode
+									}
+								);
 							}
 						);
 					}
-				}
-			},
+				},
 
-			_makeDeletable: function() {
-				var instance = this;
+				_makeSortable: function() {
+					var instance = this;
 
-				if (instance._isModifiable && instance._hasPermission) {
-					var navItems = instance._navBlock.queryAll('> ul > li').filter(':not(.selected)');
+					var navBlock = instance.get('navBlock');
+					var navList = navBlock.one('ul');
 
-					instance._navBlock.delegate(
-						'click',
-						function(event) {
-							instance._removePage(event.currentTarget);
-						},
-						'.delete-tab'
-					);
+					if (instance.get('isSortable')) {
+						var items = navList.queryAll('li');
+						var anchors = navList.queryAll('a');
 
-					instance._navBlock.delegate(
-						'mouseenter',
-						function(event) {
-							var deleteTab = event.currentTarget.one('.delete-tab');
-
-							if (deleteTab) {
-								deleteTab.removeClass('aui-helper-hidden');
-							}
-						},
-						'li'
-					);
-
-					instance._navBlock.delegate(
-						'mouseleave',
-						function(event) {
-							var deleteTab = event.currentTarget.one('.delete-tab');
-
-							if (deleteTab) {
-								deleteTab.addClass('aui-helper-hidden');
-							}
-						},
-						'li'
-					);
-
-					instance._deleteButton(navItems);
-				}
-			},
-
-			_makeEditable: function() {
-				var instance = this;
-
-				if (instance._isModifiable) {
-					var currentItem = instance._navBlock.one('li.selected');
-					var currentLink = currentItem.one('a');
-					var currentSpan = currentLink.one('span');
-
-					var swallowEvent = function(event) {
-						event.stopPropagation();
-					};
-
-					currentLink.on(
-						'click',
-						function(event) {
-							if (event.shiftKey) {
-								event.halt();
-							}
-						}
-					);
-
-					var resetCursor = function() {
-						currentSpan.setStyle('cursor', 'pointer');
-					};
-
-					currentLink.on(
-						'mouseenter',
-						function(event) {
-							if (!themeDisplay.isStateMaximized() || event.shiftKey) {
-								currentSpan.setStyle('cursor', 'text');
-							}
-						}
-					);
-
-					currentLink.on('mouseleave', resetCursor);
-
-					currentSpan.on(
-						'click',
-						function(event) {
-							if (themeDisplay.isStateMaximized() && !event.shiftKey) {
-								return;
-							}
-
-							event.halt();
-
-							currentItem.on('click', swallowEvent);
-
-							var span = this;
-							var text = span.text();
-
-							var spanParent = span.get('parentNode');
-
-							var enterPage = A.Node.create(instance._enterPage);
-
-							spanParent.addClass('aui-helper-hidden');
-							spanParent.placeAfter(enterPage);
-
-							enterPage.addClass('edit-page');
-
-							var pageParents = A.get(document);
-
-							var enterPageInput = enterPage.one('input');
-
-							var pageBlur = function(event) {
-								event.stopPropagation();
-
-								if (event.target.get('tagName').toLowerCase() != 'li') {
-									cancelPage();
-								}
-							};
-
-							enterPageInput.val(text);
-
-							enterPageInput.invoke('select');
-
-							var savePage = enterPage.one('.save-page');
-
-							savePage.on(
-								'click',
-								function(event) {
-									instance._savePage(event, this, text);
-
-									if (enterPageInput.val().length) {
-										A.detach('blur', pageBlur, pageParents);
-										A.detach('click', pageBlur, pageParents);
-
-										A.detach('click', swallowEvent, currentItem);
-
-										instance._stopEditEvent.fire();
-									}
-								}
-							);
-
-							var cancelPage = function() {
-								instance._cancelPage(span, text);
-
-								A.detach('blur', pageBlur, pageParents);
-								A.detach('click', pageBlur, pageParents);
-
-								A.detach('click', swallowEvent, currentItem);
-
-								instance._stopEditEvent.fire();
-							};
-
-							enterPageInput.on(
-								'keypress',
-								function(event) {
-									if (event.keyCode == 13) {
-										savePage.simulate('click');
-										A.detach('blur', pageBlur, pageParents);
-										A.detach('click', pageBlur, pageParents);
-									}
-									else if (event.keyCode == 27) {
-										cancelPage();
-										A.detach('blur', pageBlur, pageParents);
-										A.detach('click', pageBlur, pageParents);
-									}
-								}
-							);
-
-							pageParents.on('click', pageBlur);
-
-							resetCursor();
-
-							instance._editEvent.fire();
-						}
-					);
-				}
-			},
-
-			_makeSortable: function() {
-				var instance = this;
-
-				var navBlock = instance._navBlock;
-				var navList = navBlock.one('ul');
-
-				if (instance._isSortable) {
-					var items = navList.queryAll('li');
-					var anchors = navList.queryAll('a');
-
-					if (instance._isUseHandle) {
-						var handle = A.Node.create('<span class="sort-handle">+</span>');
-
-						items.append(handle);
-					}
-					else {
 						anchors.setStyle('cursor', 'move');
 
 						anchors.each(
@@ -465,229 +458,246 @@ AUI().add(
 								}
 							}
 						);
+
+						instance._sortable = new A.Sortable(
+							{
+								nodes: items,
+								on: {
+									'drag:end': function(event) {
+										var dragNode = event.target.get('node');
+
+										instance._saveSortables(dragNode);
+
+										Liferay.trigger(
+											'navigation',
+											{
+												item: dragNode.getDOM(),
+												type: 'sort'
+											}
+										);
+									}
+								}
+							}
+						);
 					}
+				},
 
-					var sortable = new A.Sortable(
-						{
-							nodes: items,
-							on: {
-								'drag:end': function(event) {
-									var dragNode = event.target.get('node');
+				_onKeypress: function(event) {
+					var instance = this;
 
-									instance._saveSortables(dragNode);
+					var keyCode = event.keyCode;
 
+					if (keyCode == 13 || keyCode == 27) {
+						var listItem = event.currentTarget.ancestor('li');
+						var eventType = 'savePage';
+
+						if (keyCode == 27) {
+							eventType = 'cancelPage';
+						}
+
+						var comboBox = listItem._comboBox;
+
+						comboBox.fire(eventType);
+					}
+				},
+
+				_removePage: function(event) {
+					var instance = this;
+
+					var tab = event.currentTarget.ancestor('li');
+
+					if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-page'))) {
+						var data = {
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							cmd: 'delete',
+							groupId: themeDisplay.getScopeGroupId(),
+							privateLayout: themeDisplay.isPrivateLayout(),
+							layoutId: tab._LFR_layoutId
+						};
+
+						jQuery.ajax(
+							{
+								data: data,
+								success: function() {
 									Liferay.trigger(
 										'navigation',
 										{
-											item: dragNode.getDOM(),
-											type: 'sort'
+											item: tab.getDOM(),
+											type: 'delete'
 										}
 									);
-								}
+
+									tab.remove();
+								},
+								url: instance._updateURL
 							}
-						}
-					);
-				}
-			},
+						);
+					}
+				},
 
-			_removePage: function(obj) {
-				var instance = this;
+				_savePage: function(event, obj, oldName) {
+					var instance = this;
 
-				var tab = obj.ancestor('li');
+					var listItem = event.listItem;
+					var comboBox = event.comboBox;
+					var field = event.field;
+					var actionNode = event.actionNode;
+					var textNode = event.textNode;
 
-				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-page'))) {
-					var data = {
-						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-						cmd: 'delete',
-						groupId: themeDisplay.getScopeGroupId(),
-						privateLayout: themeDisplay.isPrivateLayout(),
-						layoutId: tab._LFR_layoutId
-					};
+					var pageTitle = field.get('value');
 
-					jQuery.ajax(
-						{
-							data: data,
-							success: function() {
-								Liferay.trigger(
-									'navigation',
-									{
-										item: tab.getDOM(),
-										type: 'delete'
-									}
-								);
+					pageTitle = Lang.trim(pageTitle);
 
-								tab.remove();
-							},
-							url: instance._updateURL
-						}
-					);
-				}
-			},
+					var data = null;
+					var onSuccess = null;
 
-			_savePage: function(event, obj, oldName) {
-				var instance = this;
+					if (pageTitle) {
+						if (actionNode) {
+							if (field.isDirty()) {
+								data = {
+									doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+									cmd: 'name',
+									groupId: themeDisplay.getScopeGroupId(),
+									privateLayout: themeDisplay.isPrivateLayout(),
+									layoutId: themeDisplay.getLayoutId(),
+									name: pageTitle,
+									languageId: themeDisplay.getLanguageId()
+								};
 
-				if ((event.type == 'keypress') && (event.keyCode !== 13)) {
-					return;
-				}
+								onSuccess = function(id, obj) {
+									var data = A.JSON.parse(obj.responseText);
 
-				var data = null;
-				var onSuccess = null;
+									var doc = A.getDoc();
 
-				var newNavItem = obj.ancestor('li');
-				var name = newNavItem.one('input').val();
-				var enterPage = newNavItem.one('.enter-page');
+									textNode.text(pageTitle);
+									actionNode.show();
 
-				name = A.Lang.trim(name);
+									comboBox.destroy();
 
-				if (name) {
-					if (oldName) {
+									var oldTitle = doc.get('title');
 
-						// Updating an existing page
+									var regex = new RegExp(field.get('prevVal'), 'g');
 
-						if (name != oldName) {
-							data = {
-								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-								cmd: 'name',
-								groupId: themeDisplay.getScopeGroupId(),
-								privateLayout: themeDisplay.isPrivateLayout(),
-								layoutId: themeDisplay.getLayoutId(),
-								name: name,
-								languageId: themeDisplay.getLanguageId()
-							};
+									newTitle = oldTitle.replace(regex, pageTitle);
 
-							onSuccess = function(data) {
-								var currentTab = enterPage.previous();
-								var currentSpan = currentTab.one('span');
+									doc.set('title', newTitle);
+								};
+							}
+							else {
+								// The new name is the same as the old one
 
-								var doc = A.get(document);
-
-								currentSpan.text(name);
-								currentTab.removeClass('aui-helper-hidden');
-
-								enterPage.remove();
-
-								var oldTitle = doc.attr('title');
-
-								var regex = new RegExp(oldName, 'g');
-
-								newTitle = oldTitle.replace(regex, name);
-
-								doc.attr('title', newTitle);
+								comboBox.fire('cancelPage');
 							}
 						}
 						else {
+							var optionsOverlay = comboBox._optionsOverlay;
+							var selectedInput = optionsOverlay.get('contentBox').one('input:checked');
+							var layoutPrototypeId = selectedInput && selectedInput.val();
 
-							// The new name is the same as the old one
+							data = {
+								mainPath: themeDisplay.getPathMain(),
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+								cmd: 'add',
+								groupId: themeDisplay.getScopeGroupId(),
+								privateLayout: themeDisplay.isPrivateLayout(),
+								parentLayoutId: themeDisplay.getParentLayoutId(),
+								name: pageTitle,
+								layoutPrototypeId: layoutPrototypeId
+							};
 
-							var currentTab = enterPage.previous();
+							onSuccess = function(id, obj) {
+								var data = A.JSON.parse(obj.responseText);
 
-							currentTab.removeClass('aui-helper-hidden');
-							enterPage.remove();
+								var tabHtml = A.substitute(
+									TPL_TAB_LINK,
+									{
+										url: data.url,
+										pageTitle: pageTitle
+									}
+								);
 
-							event.halt();
-						}
-					}
-					else {
+								var newTab = A.Node.create(tabHtml);
 
-						// Adding a new page
-
-						var editComponent = newNavItem._editComponent;
-
-						var layoutPrototypeId = null;
-
-						if (editComponent.element) {
-							var selectedInput = A.get(editComponent.element).one('input:checked');
-
-							if (selectedInput) {
-								layoutPrototypeId = selectedInput.val();
-							}
-						}
-
-						data = {
-							mainPath: themeDisplay.getPathMain(),
-							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-							cmd: 'add',
-							groupId: themeDisplay.getScopeGroupId(),
-							privateLayout: themeDisplay.isPrivateLayout(),
-							parentLayoutId: themeDisplay.getParentLayoutId(),
-							name: name,
-							layoutPrototypeId: layoutPrototypeId
-						};
-
-						onSuccess = function(data) {
-							var newTab = A.Node.create('<a href="' + data.url + '"><span>' + Liferay.Util.escapeHTML(name) + '</span></a>');
-
-							if (instance._isUseHandle) {
-								enterPage.placeBefore('<span class="sort-handle">+</span>');
-							}
-							else {
 								newTab.setStyle('cursor', 'move');
+
+								listItem._LFR_layoutId = data.layoutId;
+
+								listItem.append(newTab);
+
+								comboBox.destroy();
+
+								listItem.addClass('sortable-item');
+								instance._sortable.add(listItem);
+
+								instance._deleteButton(listItem);
+
+								Liferay.trigger(
+									'navigation',
+									{
+										item: listItem,
+										type: 'add'
+									}
+								);
 							}
+						}
 
-							newNavItem._LFR_layoutId = data.layoutId;
-
-							enterPage.placeBefore(newTab);
-							enterPage.remove();
-
-							newNavItem.addClass('sortable-item');
-
-							instance._deleteButton(newNavItem);
-
-							Liferay.trigger(
-								'navigation',
+						if (data) {
+							A.io(
+								instance._updateURL,
 								{
-									item: newNavItem,
-									type: 'add'
+									data: A.toQueryString(data),
+									method: 'POST',
+									on: {
+										success: onSuccess
+									}
 								}
 							);
-
-							editComponent.hide();
 						}
 					}
+				},
 
-					jQuery.ajax(
+				_saveSortables: function(node) {
+					var instance = this;
+
+					var priority = instance.get('navBlock').queryAll('li').indexOf(node);
+
+					var data = {
+						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+						cmd: 'priority',
+						groupId: themeDisplay.getScopeGroupId(),
+						privateLayout: themeDisplay.isPrivateLayout(),
+						layoutId: node._LFR_layoutId,
+						priority: priority
+					};
+
+					A.io(
+						instance._updateURL,
 						{
-							data: data,
-							dataType: 'json',
-							success: onSuccess,
-							url: instance._updateURL
+							method: 'POST',
+							data: A.toQueryString(data)
 						}
 					);
-				}
-			},
+				},
 
-			_saveSortables: function(node) {
-				var instance = this;
+				_toggleDeleteButton: function(event, action) {
+					var instance = this;
 
-				var priority = instance._navBlock.queryAll('li').indexOf(node);
+					var deleteTab = event.currentTarget.one('.delete-tab');
 
-				var data = {
-					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-					cmd: 'priority',
-					groupId: themeDisplay.getScopeGroupId(),
-					privateLayout: themeDisplay.isPrivateLayout(),
-					layoutId: node._LFR_layoutId,
-					priority: priority
-				};
-
-				jQuery.ajax(
-					{
-						data: data,
-						url: instance._updateURL
+					if (deleteTab) {
+						deleteTab[action]('aui-helper-hidden');
 					}
-				);
-			},
+				},
 
-			_enterPage: '',
-			_optionsOpen: true,
-			_updateURL: ''
-		};
+				_optionsOpen: true,
+				_updateURL: ''
+			}
+		);
 
 		Liferay.Navigation = Navigation;
 	},
 	'',
 	{
-		requires: ['overlay', 'selector-css3', 'sortable', 'node-event-simulate', 'editable']
+		requires: ['overlay', 'selector-css3', 'sortable', 'node-event-simulate', 'combobox', 'io', 'substitute', 'json-parse']
 	}
 );
