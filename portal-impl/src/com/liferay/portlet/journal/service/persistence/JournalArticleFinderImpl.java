@@ -56,9 +56,9 @@ public class JournalArticleFinderImpl
 	extends BasePersistenceImpl<JournalArticle>
 	implements JournalArticleFinder {
 
-	public static String COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_S_R_T =
+	public static String COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_S_R =
 		JournalArticleFinder.class.getName() +
-			".countByC_G_A_V_T_D_C_T_S_T_D_S_R_T";
+			".countByC_G_A_V_T_D_C_T_S_T_D_S_R";
 
 	public static String FIND_BY_EXPIRATION_DATE =
 		JournalArticleFinder.class.getName() + ".findByExpirationDate";
@@ -69,9 +69,9 @@ public class JournalArticleFinderImpl
 	public static String FIND_BY_R_D =
 		JournalArticleFinder.class.getName() + ".findByR_D";
 
-	public static String FIND_BY_C_G_A_V_T_D_C_T_S_T_D_S_R_T =
+	public static String FIND_BY_C_G_A_V_T_D_C_T_S_T_D_S_R =
 		JournalArticleFinder.class.getName() +
-			".findByC_G_A_V_T_D_C_T_S_T_D_S_R_T";
+			".findByC_G_A_V_T_D_C_T_S_T_D_S_R";
 
 	public int countByKeywords(
 			long companyId, long groupId, String keywords, Double version,
@@ -83,7 +83,6 @@ public class JournalArticleFinderImpl
 		String[] titles = null;
 		String[] descriptions = null;
 		String[] contents = null;
-		String[] tags = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
@@ -91,56 +90,54 @@ public class JournalArticleFinderImpl
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 			contents = CustomSQLUtil.keywords(keywords, false);
-			tags = CustomSQLUtil.keywords(keywords, false);
 		}
 		else {
 			andOperator = true;
 		}
 
-		return countByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+		return countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleIds, version, titles, descriptions,
 			contents, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, tags, andOperator);
+			reviewDate, andOperator);
 	}
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
-			Date displayDateLT, int status, Date reviewDate, String tag,
+			Date displayDateLT, int status, Date reviewDate,
 			boolean andOperator)
 		throws SystemException {
 
-		return countByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+		return countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleId, version, title, description,
 			content, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, tag, andOperator);
+			reviewDate, andOperator);
 	}
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
-			Date displayDateLT, int status, Date reviewDate, String tag,
+			Date displayDateLT, int status, Date reviewDate,
 			boolean andOperator)
 		throws SystemException {
 
-		return countByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+		return countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, new String[] {articleId}, version,
 			new String[] {title}, new String[] {description},
 			new String[] {content}, type, structureIds, templateIds,
-			displayDateGT, displayDateLT, status, reviewDate, 
-			new String[] {tag}, andOperator);
+			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String[] articleIds, Double version,
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,
 			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
-			String[] tags, boolean andOperator)
+			boolean andOperator)
 		throws SystemException {
 
 		articleIds = CustomSQLUtil.keywords(articleIds, false);
@@ -148,7 +145,6 @@ public class JournalArticleFinderImpl
 		descriptions = CustomSQLUtil.keywords(descriptions, false);
 		contents = CustomSQLUtil.keywords(contents, false);
 		structureIds = CustomSQLUtil.keywords(structureIds, false);
-		tags = CustomSQLUtil.keywords(tags, false);
 		templateIds = CustomSQLUtil.keywords(templateIds, false);
 		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
@@ -159,71 +155,33 @@ public class JournalArticleFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_S_R_T);
-
-			if (Validator.isNotNull(tags[0])) {
-				sql = StringUtil.replace(sql, "[$JOIN$]",
-					"LEFT JOIN AssetEntry ON "+
-						"((JournalArticle.title = AssetEntry.title) AND " +
-						"(JournalArticle.groupId = AssetEntry.groupId) AND " +
-						"(JournalArticle.companyId = AssetEntry.companyId) " +
-						"AND " +
-						"(JournalArticle.userId = AssetEntry.userId)) " +
-					"LEFT JOIN AssetEntries_AssetTags ON "+
-						"(AssetEntries_AssetTags.entryId = " +
-							"AssetEntry.entryId) " +
-					"LEFT JOIN AssetTag ON "+
-						"(AssetEntries_AssetTags.tagId = " +
-							"AssetTag.tagId)");
-				sql = StringUtil.replace(sql, "[$WHERE$]",
-					"(AssetTag.name LIKE ? [$AND_OR_NULL_CHECK$]) " +
-					"[$AND_OR_CONNECTOR$]");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$JOIN$]", "");
-				sql = StringUtil.replace(sql, "[$WHERE$]", "");
-			}
+			String sql = CustomSQLUtil.get(COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_S_R);
 
 			if (groupId <= 0) {
-				sql = StringUtil.replace(
-					sql, "(JournalArticle.groupId = ?) AND", "");
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.articleId", StringPool.LIKE, false,
-				articleIds);
+				sql, "articleId", StringPool.LIKE, false, articleIds);
 
 			if (version == null) {
 				sql = StringUtil.replace(
-					sql, "(JournalArticle.version = ?) [$AND_OR_CONNECTOR$]",
-					"");
+					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(JournalArticle.title)", StringPool.LIKE, false,
-				titles);
+				sql, "lower(title)", StringPool.LIKE, false, titles);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.description", StringPool.LIKE, false,
-				descriptions);
+				sql, "description", StringPool.LIKE, false, descriptions);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.content", StringPool.LIKE, false,
-				contents);
-
-			if (Validator.isNotNull(tags[0])){
-				sql = CustomSQLUtil.replaceKeywords(
-					sql, "AssetTag.name", StringPool.LIKE, false, tags);
-			}
-
+				sql, "content", StringPool.LIKE, false, contents);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.structureId", StringPool.EQUAL, false,
-				structureIds);
+				sql, "structureId", StringPool.EQUAL, false, structureIds);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.templateId", StringPool.EQUAL, false,
-				templateIds);
+				sql, "templateId", StringPool.EQUAL, false, templateIds);
 
 			if (status == StatusConstants.ANY) {
-				sql = StringUtil.replace(
-					sql, "(JournalArticle.status = ?) " + "AND", "");
+				sql = StringUtil.replace(sql, "(status = ?) AND", "");
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -249,11 +207,6 @@ public class JournalArticleFinderImpl
 			qPos.add(titles, 2);
 			qPos.add(descriptions, 2);
 			qPos.add(contents, 2);
-
-			if (Validator.isNotNull(tags[0])) {
-				qPos.add(tags, 2);
-			}
-
 			qPos.add(type);
 			qPos.add(type);
 			qPos.add(structureIds, 2);
@@ -345,24 +298,22 @@ public class JournalArticleFinderImpl
 		String[] descriptions = null;
 		String[] contents = null;
 		boolean andOperator = false;
-		String[] tags = null;
 
 		if (Validator.isNotNull(keywords)) {
 			articleIds = CustomSQLUtil.keywords(keywords, false);
 			titles = CustomSQLUtil.keywords(keywords);
 			descriptions = CustomSQLUtil.keywords(keywords, false);
 			contents = CustomSQLUtil.keywords(keywords, false);
-			tags = CustomSQLUtil.keywords(keywords, false);
 		}
 		else {
 			andOperator = true;
 		}
 
-		return findByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleIds, version, titles, descriptions,
 			contents, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, tags, andOperator, start, end, obc);
+			reviewDate, andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> findByReviewDate(
@@ -447,44 +398,44 @@ public class JournalArticleFinderImpl
 		}
 	}
 
-	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
-			Date displayDateLT, int status, Date reviewDate, String tag,
+			Date displayDateLT, int status, Date reviewDate,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return findByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleId, version, title, description,
 			content, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, tag, andOperator, start, end, obc);
+			reviewDate, andOperator, start, end, obc);
 	}
 
-	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
-			Date displayDateLT, int status, Date reviewDate, String tag,
+			Date displayDateLT, int status, Date reviewDate,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return findByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, new String[] {articleId}, version,
 			new String[] {title}, new String[] {description},
 			new String[] {content}, type, structureIds, templateIds,
-			displayDateGT, displayDateLT, status, reviewDate,
-			new String[] {tag}, andOperator, start, end, obc);
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			start, end, obc);
 	}
 
-	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R_T(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String[] articleIds, Double version,
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,
 			Date displayDateGT, Date displayDateLT, int status,
-			Date reviewDate, String[] tags, boolean andOperator, int start,
-			int end, OrderByComparator obc)
+			Date reviewDate, boolean andOperator, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		articleIds = CustomSQLUtil.keywords(articleIds, false);
@@ -492,7 +443,6 @@ public class JournalArticleFinderImpl
 		descriptions = CustomSQLUtil.keywords(descriptions, false);
 		contents = CustomSQLUtil.keywords(contents, false);
 		structureIds = CustomSQLUtil.keywords(structureIds, false);
-		tags = CustomSQLUtil.keywords(tags, false);
 		templateIds = CustomSQLUtil.keywords(templateIds, false);
 		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
@@ -503,73 +453,33 @@ public class JournalArticleFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_G_A_V_T_D_C_T_S_T_D_S_R_T);
-
-			if (Validator.isNotNull(tags[0])) {
-				sql = StringUtil.replace(sql, "[$JOIN$]",
-					"LEFT JOIN AssetEntry ON "+
-						"((JournalArticle.title = AssetEntry.title) AND " +
-						"(JournalArticle.groupId = AssetEntry.groupId) AND " +
-						"(JournalArticle.companyId = AssetEntry.companyId) " +
-						"AND " +
-						"(JournalArticle.userId = AssetEntry.userId)) " +
-					"LEFT JOIN AssetEntries_AssetTags ON "+
-						"(AssetEntries_AssetTags.entryId = " +
-							"AssetEntry.entryId) " +
-					"LEFT JOIN AssetTag ON "+
-						"(AssetEntries_AssetTags.tagId = " +
-							"AssetTag.tagId)");
-				sql = StringUtil.replace(sql, "[$WHERE$]",
-					"(AssetTag.name LIKE ? [$AND_OR_NULL_CHECK$]) " +
-					"[$AND_OR_CONNECTOR$]");
-			}
-			else {
-				sql = StringUtil.replace(sql, "[$JOIN$]", "");
-				sql = StringUtil.replace(sql, "[$WHERE$]", "");
-			}
+			String sql = CustomSQLUtil.get(FIND_BY_C_G_A_V_T_D_C_T_S_T_D_S_R);
 
 			if (groupId <= 0) {
-				sql = StringUtil.replace(
-					sql, "(JournalArticle.groupId = ?) " + "AND", "");
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.articleId", StringPool.LIKE, false,
-				articleIds);
+				sql, "articleId", StringPool.LIKE, false, articleIds);
 
 			if (version == null) {
 				sql = StringUtil.replace(
-					sql, "(JournalArticle.version = ?) [$AND_OR_CONNECTOR$]",
-					"");
+					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(JournalArticle.title)", StringPool.LIKE, false,
-				titles);
+				sql, "lower(title)", StringPool.LIKE, false, titles);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.description", StringPool.LIKE, false,
-				descriptions);
+				sql, "description", StringPool.LIKE, false, descriptions);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.content", StringPool.LIKE, false,
-				contents);
-
-			if (Validator.isNotNull(tags[0])){
-				sql = CustomSQLUtil.replaceKeywords(
-					sql, "TagsEntry.name", StringPool.LIKE, false, tags);
-			}
-
+				sql, "content", StringPool.LIKE, false, contents);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.structureId", StringPool.EQUAL, false,
-				structureIds);
+				sql, "structureId", StringPool.EQUAL, false, structureIds);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticle.templateId", StringPool.EQUAL, false,
-				templateIds);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "TagsEntry.name", StringPool.LIKE, true, tags);
+				sql, "templateId", StringPool.EQUAL, false, templateIds);
 
 			if (status == StatusConstants.ANY) {
-				sql = StringUtil.replace(
-					sql, "(JournalArticle.status = ?) " + "AND", "");
+				sql = StringUtil.replace(sql, "(status = ?) AND", "");
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -596,11 +506,6 @@ public class JournalArticleFinderImpl
 			qPos.add(titles, 2);
 			qPos.add(descriptions, 2);
 			qPos.add(contents, 2);
-
-			if (Validator.isNotNull(tags[0])) {
-				qPos.add(tags, 2);
-			}
-
 			qPos.add(type);
 			qPos.add(type);
 			qPos.add(structureIds, 2);
