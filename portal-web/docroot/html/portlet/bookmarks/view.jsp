@@ -72,7 +72,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 			</c:if>
 
 			<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
-				<liferay-ui:panel-container id='bookmarksPanels' extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
+				<liferay-ui:panel-container id="bookmarksPanels" extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
 						<portlet:param name="struts_action" value="/bookmarks/search" />
 					</liferay-portlet:renderURL>
@@ -103,7 +103,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 									<%= foldersCount %> <liferay-ui:message key="subfolders" />
 								</div>
 
-								<div class="folder-file-entries">
+								<div class="folder-entries">
 									<%= entriesCount %> <liferay-ui:message key="entries" />
 								</div>
 							</div>
@@ -121,7 +121,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 						</c:if>
 
 						<c:if test="<%= foldersCount > 0 %>">
-							<liferay-ui:panel id='subFoldersPanel' title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+							<liferay-ui:panel id="subFoldersPanel" title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 								<liferay-ui:search-container
 									curParam="cur1"
 									headerNames="folder,num-of-folders,num-of-entries"
@@ -255,7 +255,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 
 					<br />
 
-					<liferay-ui:panel id='entriesPanel' title='<%= LanguageUtil.get(pageContext, "bookmarks") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel id="entriesPanel" title='<%= LanguageUtil.get(pageContext, "bookmarks") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 
 						<%
 						String orderByCol = ParamUtil.getString(request, "orderByCol");
@@ -313,6 +313,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 									sb.append(entry.getEntryId());
 
 									rowHREF = sb.toString();
+
 									target = "_blank";
 								}
 								%>

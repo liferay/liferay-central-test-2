@@ -75,7 +75,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 			</c:if>
 
 			<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
-				<liferay-ui:panel-container id='documentLibraryPanels' extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
+				<liferay-ui:panel-container id="documentLibraryPanels" extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
 						<portlet:param name="struts_action" value="/document_library/search" />
 					</liferay-portlet:renderURL>
@@ -127,7 +127,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 							</c:if>
 
 							<c:if test="<%= foldersCount > 0 %>">
-								<liferay-ui:panel id='subFoldersPanel' title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+								<liferay-ui:panel id="subFoldersPanel" title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 									<liferay-ui:search-container
 										curParam="cur1"
 										delta="<%= foldersPerPage %>"
@@ -172,7 +172,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 
 					<c:choose>
 						<c:when test="<%= showSubfolders && showTabs %>">
-							<liferay-ui:panel id='documentsPanel' title='<%= LanguageUtil.get(pageContext, "documents") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+							<liferay-ui:panel id="documentsPanel" title='<%= LanguageUtil.get(pageContext, "documents") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 								<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
 							</liferay-ui:panel>
 						</c:when>

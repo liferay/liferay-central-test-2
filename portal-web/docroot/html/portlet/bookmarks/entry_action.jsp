@@ -28,6 +28,7 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 BookmarksEntry entry = null;
+
 boolean view = false;
 
 if (row != null) {
