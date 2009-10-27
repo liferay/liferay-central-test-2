@@ -475,13 +475,13 @@ public class LuceneUtil {
 		try {
 			String snippet = highlighter.getBestFragments(
 				tokenStream, s, maxNumFragments, fragmentSuffix);
-	
+
 			if (Validator.isNotNull(snippet) &&
 				!StringUtil.endsWith(snippet, fragmentSuffix)) {
-	
+
 				snippet = snippet + fragmentSuffix;
 			}
-	
+
 			return snippet;
 		}
 		catch (InvalidTokenOffsetsException itoe) {
