@@ -183,7 +183,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 				</liferay-ui:panel-container>
 			</aui:column>
 
-			<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+			<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 				<div class="folder-icon">
 					<liferay-ui:icon
 						image='<%= "../document_library/folder" + (((foldersCount + fileEntriesCount) > 0) ? "_full" : StringPool.BLANK) %>'

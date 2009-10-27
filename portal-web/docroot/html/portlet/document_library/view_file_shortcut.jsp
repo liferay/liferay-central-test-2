@@ -186,7 +186,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 	</div>
 </aui:column>
 
-<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 	<img alt="" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_link.png">
 
 	<c:if test="<%= isLocked %>">

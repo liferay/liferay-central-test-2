@@ -34,12 +34,12 @@
 	margin-right: 4em;
 }
 
-.portlet-document-library .file-entry-column-last {
+.portlet-document-library .detail-column-last {
 	background-color: #D7F1FF;
 	overflow: visible;
 }
 
-.portlet-document-library .file-entry-column-last .file-entry-column-content {
+.portlet-document-library .detail-column-last .detail-column-content {
 	border: 1px solid #88C5D9;
 	padding: 0.7em;
 }
