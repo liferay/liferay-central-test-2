@@ -172,7 +172,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 
 					<c:choose>
 						<c:when test="<%= showSubfolders && showTabs %>">
-							<liferay-ui:panel id='entriesPanel' title='<%= LanguageUtil.get(pageContext, "documents") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+							<liferay-ui:panel id='documentsPanel' title='<%= LanguageUtil.get(pageContext, "documents") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 								<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
 							</liferay-ui:panel>
 						</c:when>
@@ -183,7 +183,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 				</liferay-ui:panel-container>
 			</aui:column>
 
-			<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
+			<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
 				<div class="folder-icon">
 					<liferay-ui:icon
 						image='<%= "../document_library/folder" + (((foldersCount + fileEntriesCount) > 0) ? "_full" : StringPool.BLANK) %>'
