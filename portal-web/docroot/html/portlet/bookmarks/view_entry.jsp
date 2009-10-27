@@ -92,7 +92,7 @@ request.setAttribute("view_entry.jsp-entry", entry);
 </aui:column>
 
 <aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
-	<div class="entry-visit">
+	<div class="entry-download">
 		<liferay-ui:icon
 			image='../document_library/bookmark'
 			message='download'
