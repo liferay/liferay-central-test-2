@@ -724,6 +724,7 @@ create-date=تاريخ الإنشاء
 create-page-x=Create Page '{0}'
 create-room=أنشئ غرفة
 create-time=وقت الإنشاء
+created-by-x=Created by {0} (Automatic Copy)
 credentials=الإعتمادات
 credit-card=بطاقة إئتمان
 credit-cards=بطاقات إئتمان

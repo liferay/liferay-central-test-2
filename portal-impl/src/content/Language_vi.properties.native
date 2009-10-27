@@ -430,6 +430,7 @@ create-account=Tạo tài khoản
 create-date=Ngày tạo
 create-page-x=Create Page '{0}'
 create-time=Thời gian tạo
+created-by-x=Created by {0} (Automatic Copy)
 credit-card=Credit Card
 credit-cards=Credit Cards
 cross-references=Tham chiếu

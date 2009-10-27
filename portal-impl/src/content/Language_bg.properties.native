@@ -1044,6 +1044,7 @@ create-date=Създаване на дата
 create-page-x=Create Page '{0}'
 create-room=Създаване на стая
 create-time=Създаване на време
+created-by-x=Created by {0} (Automatic Copy)
 created-by=Създаден от
 credentials=Пълномощия
 credit-card=Кредитна карта

@@ -1082,6 +1082,7 @@ create-date=Skapad datum
 create-page-x=Skapa sida '{0}'
 create-room=Skapa rum
 create-time=Skapa tid
+created-by-x=Created by {0} (Automatic Copy)
 created-by=Skapad Av
 credentials=Lösenord
 credit-card=Kreditkort

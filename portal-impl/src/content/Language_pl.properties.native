@@ -1075,6 +1075,7 @@ create-date=Utwórz datę
 create-page-x=Create Page '{0}'
 create-room=Utwórz pokój
 create-time=Utwórz czas
+created-by-x=Created by {0} (Automatic Copy)
 created-by=Utworzone przez
 credentials=Hasło
 credit-card=Karta kredytowa

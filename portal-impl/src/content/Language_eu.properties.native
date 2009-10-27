@@ -1102,6 +1102,7 @@ create-date=Sortu data
 create-page-x={0}' orria sortu
 create-room=Sortu gela
 create-time=Sortu denbora
+created-by-x=Created by {0} (Automatic Copy)
 created-by=Sortzailea
 credentials=Egiaztagiriak
 credit-card=Kreditu txartela

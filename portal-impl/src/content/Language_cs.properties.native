@@ -1149,6 +1149,7 @@ create-date=Datum
 create-page-x=Vytvořit stránku '{0}'.
 create-room=Vytvořte místnost
 create-time=Čas
+created-by-x=Created by {0} (Automatic Copy)
 created-by=Vytvořeno
 credentials=Ověření
 credit-card=Kreditní karta

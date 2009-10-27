@@ -1068,6 +1068,7 @@ create-date=Дата создания
 create-page-x=Create Page '{0}'
 create-room=Создать комнату
 create-time=Время создания
+created-by-x=Created by {0} (Automatic Copy)
 created-by=Создано
 credentials=Верительные данные
 credit-card=Кредитная карта

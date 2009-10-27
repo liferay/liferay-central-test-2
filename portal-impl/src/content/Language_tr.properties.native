@@ -1090,6 +1090,7 @@ create-date=Tarih Oluştur
 create-page-x=Sayfa Oluştur '{0}'
 create-room=Oda Oluştur
 create-time=Zaman Oluştur
+created-by-x=Created by {0} (Automatic Copy)
 created-by=Tarafından Oluşturuldu:
 credentials=Kimlikler
 credit-card=Kredi Kartı

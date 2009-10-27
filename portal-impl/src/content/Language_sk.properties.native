@@ -989,6 +989,7 @@ create-date=Dátum vytvorenia
 create-page-x=Create Page '{0}'
 create-room=Vytvoriť miestnosť
 create-time=Čas vytvorenia
+created-by-x=Created by {0} (Automatic Copy)
 created-by=Vytvoril(a)
 credentials=Credentials
 credit-card=Kreditná karta
