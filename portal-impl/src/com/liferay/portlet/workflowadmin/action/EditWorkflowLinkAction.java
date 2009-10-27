@@ -44,11 +44,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditLinkAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditWorkflowLinkAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
-public class EditLinkAction extends PortletAction {
+public class EditWorkflowLinkAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
