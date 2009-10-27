@@ -270,6 +270,7 @@ Liferay.Portlet = {
 		var isStatic = (options.isStatic == 'no') ? null : options.isStatic;
 		var namespacedId = options.namespacedId;
 		var portletId = options.portletId;
+		var refreshURL = options.refreshURL;
 
 		if (isStatic) {
 			instance.registerStatic(portletId);
@@ -285,6 +286,7 @@ Liferay.Portlet = {
 					portlet.portletId = portletId;
 					portlet.columnPos = columnPos;
 					portlet.isStatic = isStatic;
+					portlet.refreshURL = refreshURL;
 
 					// Functions to run on portlet load
 

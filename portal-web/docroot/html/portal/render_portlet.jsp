@@ -952,7 +952,8 @@ else {
 					columnPos: <%= columnPos %>,
 					isStatic: '<%= staticVar %>',
 					namespacedId: 'p_p_id<%= UnicodeFormatter.toString(renderResponseImpl.getNamespace()) %>',
-					portletId: '<%= UnicodeFormatter.toString(portletDisplay.getId()) %>'
+					portletId: '<%= UnicodeFormatter.toString(portletDisplay.getId()) %>',
+					refreshURL: '<%= PortletURLUtil.getRefreshURL(request, themeDisplay) %>'
 				}
 			);
 		</script>
