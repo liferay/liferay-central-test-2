@@ -117,7 +117,14 @@ public class ParamAndPropertyAncestorTagImpl
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		return (ServletContext)request.getAttribute(WebKeys.CTX);
+		ServletContext servletContext = (ServletContext)request.getAttribute(
+			WebKeys.CTX);
+
+		if (servletContext == null) {
+			servletContext = pageContext.getServletContext();
+		}
+
+		return servletContext;
 	}
 
 	public HttpServletRequest getServletRequest() {
