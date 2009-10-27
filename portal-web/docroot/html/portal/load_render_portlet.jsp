@@ -53,7 +53,7 @@ String portletId = portlet.getPortletId();
 					Liferay.Portlet.addHTML(
 						{
 							url: '<%= url %>',
-							placeHolder: jQuery('#p_load' + ns + '')[0]
+							placeHolder: jQuery('#p_load' + ns + '')[0],
 							onComplete: function(portlet, portletId) {
 								portlet.refreshURL = '<%= url %>';
 							}
