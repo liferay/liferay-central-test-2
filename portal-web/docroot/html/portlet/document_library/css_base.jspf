@@ -138,7 +138,7 @@
 	border-width: 0;
 }
 
-.portlet-document-library .folder-column #subFoldersPanel, .portlet-document-library .folder-column #documentsPanel {
+.portlet-document-library .folder-column #subFoldersPanel, .portlet-document-library .folder-column #entriesPanel, .portlet-bookmarks .folder-column #subFoldersPanel, .portlet-bookmarks .folder-column #entriesPanel {
 	clear: both;
 }
 

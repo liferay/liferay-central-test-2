@@ -172,7 +172,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 
 					<c:choose>
 						<c:when test="<%= showSubfolders && showTabs %>">
-							<liferay-ui:panel id='documentsPanel' title='<%= LanguageUtil.get(pageContext, "documents") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+							<liferay-ui:panel id='entriesPanel' title='<%= LanguageUtil.get(pageContext, "documents") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 								<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
 							</liferay-ui:panel>
 						</c:when>
