@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -138,106 +139,121 @@ public class PortletURLUtil {
 	public static String getRefreshURL(
 		HttpServletRequest request, ThemeDisplay themeDisplay) {
 
-		Integer columnCount = (Integer)request.getAttribute(
-			WebKeys.RENDER_PORTLET_COLUMN_COUNT);
-		String columnId = (String)request.getAttribute(
-			WebKeys.RENDER_PORTLET_COLUMN_ID);
-		Integer columnPos = (Integer)request.getAttribute(
-			WebKeys.RENDER_PORTLET_COLUMN_POS);
-		String currentURL = PortalUtil.getCurrentURL(request);
-		String doAsUserId = themeDisplay.getDoAsUserId();
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/portal/render_portlet?");
+
 		long plid = themeDisplay.getPlid();
+
+		sb.append("p_l_id=");
+		sb.append(plid);
+
 		Portlet portlet = (Portlet)request.getAttribute(
 			WebKeys.RENDER_PORTLET);
 
 		String portletId = portlet.getPortletId();
 
+		sb.append("&p_p_id=");
+		sb.append(portletId);
+
+		sb.append("&p_p_lifecycle=0");
+
 		WindowState windowState = WindowState.NORMAL;
 
-		if (themeDisplay.getLayoutTypePortlet().hasStateMaxPortletId(
-				portletId)) {
+		LayoutTypePortlet layoutTypePortlet =
+			themeDisplay.getLayoutTypePortlet();
 
+		if (layoutTypePortlet.hasStateMaxPortletId(portletId)) {
 			windowState = WindowState.MAXIMIZED;
 		}
-		else if (themeDisplay.getLayoutTypePortlet().hasStateMinPortletId(
-				portletId)) {
-
+		else if (layoutTypePortlet.hasStateMinPortletId(portletId)) {
 			windowState = WindowState.MINIMIZED;
 		}
 
-		StringBuilder url = new StringBuilder();
+		sb.append("&p_p_state=");
+		sb.append(windowState);
 
-		url.append(themeDisplay.getPathMain());
-		url.append("/portal/render_portlet");
-		url.append("?p_l_id=");
-		url.append(plid);
-		url.append("&p_p_id=");
-		url.append(portletId);
-		url.append("&p_p_lifecycle=0&p_p_state=");
-		url.append(windowState);
-		url.append("&p_p_mode=view&p_p_col_id=");
-		url.append(columnId);
-		url.append("&p_p_col_pos=");
-		url.append(columnPos);
-		url.append("&p_p_col_count=");
-		url.append(columnCount);
+		sb.append("&p_p_mode=view");
+
+		String columnId = (String)request.getAttribute(
+			WebKeys.RENDER_PORTLET_COLUMN_ID);
+
+		sb.append("&p_p_col_id=");
+		sb.append(columnId);
+
+		Integer columnPos = (Integer)request.getAttribute(
+			WebKeys.RENDER_PORTLET_COLUMN_POS);
+
+		sb.append("&p_p_col_pos=");
+		sb.append(columnPos);
+
+		Integer columnCount = (Integer)request.getAttribute(
+			WebKeys.RENDER_PORTLET_COLUMN_COUNT);
+
+		sb.append("&p_p_col_count=");
+		sb.append(columnCount);
 
 		if (portlet.isStatic()) {
-			url.append("&p_p_static=1");
+			sb.append("&p_p_static=1");
 
 			if (portlet.isStaticStart()) {
-				url.append("&p_p_static_start=1");
+				sb.append("&p_p_static_start=1");
 			}
 		}
 
+		String doAsUserId = themeDisplay.getDoAsUserId();
+
 		if (Validator.isNotNull(doAsUserId)) {
-			url.append("&doAsUserId=");
-			url.append(HttpUtil.encodeURL(doAsUserId));
+			sb.append("&doAsUserId=");
+			sb.append(HttpUtil.encodeURL(doAsUserId));
 		}
 
-		url.append("&currentURL=");
-		url.append(HttpUtil.encodeURL(currentURL));
+		String currentURL = PortalUtil.getCurrentURL(request);
+
+		sb.append("&currentURL=");
+		sb.append(HttpUtil.encodeURL(currentURL));
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
 
 		if (ppid.equals(portletId)) {
-			Enumeration enu = request.getParameterNames();
+			Enumeration<String> enu = request.getParameterNames();
 
 			while (enu.hasMoreElements()) {
-				String name = (String)enu.nextElement();
+				String name = enu.nextElement();
 
 				if (!PortalUtil.isReservedParameter(name)) {
 					String[] values = request.getParameterValues(name);
 
 					for (int i = 0; i < values.length; i++) {
-						url.append(StringPool.AMPERSAND);
-						url.append(name);
-						url.append(StringPool.EQUAL);
-						url.append(HttpUtil.encodeURL(values[i]));
+						sb.append(StringPool.AMPERSAND);
+						sb.append(name);
+						sb.append(StringPool.EQUAL);
+						sb.append(HttpUtil.encodeURL(values[i]));
 					}
 				}
 			}
 
-			Map renderParameters = RenderParametersPool.get(
+			Map<String, String[]> renderParameters = RenderParametersPool.get(
 				request, plid, ppid);
 
-			Iterator itr = renderParameters.keySet().iterator();
+			Iterator<String> itr = renderParameters.keySet().iterator();
 
 			while (itr.hasNext()) {
-				String name = (String)itr.next();
+				String name = itr.next();
 
-				String[] values = (String[])renderParameters.get(name);
+				String[] values = renderParameters.get(name);
 
 				for (int i = 0; i < values.length; i++) {
-					url.append(StringPool.AMPERSAND);
-					url.append(name);
-					url.append(StringPool.EQUAL);
-					url.append(HttpUtil.encodeURL(values[i]));
+					sb.append(StringPool.AMPERSAND);
+					sb.append(name);
+					sb.append(StringPool.EQUAL);
+					sb.append(HttpUtil.encodeURL(values[i]));
 				}
 			}
 		}
 
-		return url.toString();
+		return sb.toString();
 	}
 
 	private static final int _CURRENT_URL_PARAMETER_THRESHOLD = 32768;
