@@ -21,9 +21,6 @@ Liferay.Portal.Tabs = {
 };
 
 (function() {
-	var Dom = Alloy.Dom;
-	var Event = Alloy.Event;
-
 	var elementsCache = {};
 
 	AUI().ready(
