@@ -219,20 +219,20 @@ request.setAttribute("view.jsp-folderId", folderId);
 
 										BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
-										foldersCount = subfolderIds.size() - 1;
-										entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
+										int subFoldersCount = subfolderIds.size() - 1;
+										int subEntriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 										%>
 
 										<liferay-ui:search-container-column-text
 											href="<%= rowURL %>"
 											name="num-of-folders"
-											value="<%= String.valueOf(foldersCount) %>"
+											value="<%= String.valueOf(subFoldersCount) %>"
 										/>
 
 										<liferay-ui:search-container-column-text
 											href="<%= rowURL %>"
 											name="num-of-entries"
-											value="<%= String.valueOf(entriesCount) %>"
+											value="<%= String.valueOf(subEntriesCount) %>"
 										/>
 
 										<liferay-ui:search-container-column-jsp
@@ -375,7 +375,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 					/>
 
 					<div class="folder-name">
-						<h4><%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "bookmark-home") %></h4>
+						<h4><%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "bookmarks-home") %></h4>
 					</div>
 				</div>
 
