@@ -111,12 +111,12 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_ENTRY) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFileEntryURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="../document_library/add_document" message="add-bookmark" url="<%= editFileEntryURL %>" />
+		<liferay-ui:icon image="../document_library/add_document" message="add-bookmark" url="<%= editEntryURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>
