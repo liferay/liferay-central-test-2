@@ -136,6 +136,12 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 			/>
 		</liferay-ui:custom-attributes-available>
 
+		<c:if test="<%= entry != null %>">
+			<aui:field-wrapper label="visits">
+				<%= entry.getVisits() %>
+			</aui:field-wrapper>
+		</c:if>
+
 		<aui:input name="categories" type="assetCategories" />
 
 		<aui:input name="tags" type="assetTags" />

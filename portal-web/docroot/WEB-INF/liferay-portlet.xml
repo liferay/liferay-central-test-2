@@ -278,7 +278,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/bookmarks/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-bookmarks</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>

@@ -27,48 +27,11 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-BookmarksFolder folder = null;
-long folderId = 0;
-
-if (row != null) {
-	folder = (BookmarksFolder)row.getObject();
-	folderId = folder.getFolderId();
-}
-else {
-	folder = (BookmarksFolder)request.getAttribute("view.jsp-folder");
-	folderId = (Long)request.getAttribute("view.jsp-folderId");
-}
-
-String modelResource = null;
-String modelResourceDescription = null;
-String resourcePrimKey = null;
-
-boolean showPermissionsURL = false;
-
-if (folder != null) {
-	modelResource = BookmarksFolder.class.getName();
-	modelResourceDescription = folder.getName();
-	resourcePrimKey = String.valueOf(folderId);
-
-	showPermissionsURL = BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.PERMISSIONS);
-}
-else {
-	modelResource = "com.liferay.portlet.bookmarks";
-	modelResourceDescription = themeDisplay.getScopeGroupName();
-	resourcePrimKey = String.valueOf(scopeGroupId);
-
-	showPermissionsURL = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
-}
-
-boolean view = false;
-
-if (row == null) {
-	view = true;
-}
+BookmarksFolder folder = (BookmarksFolder)row.getObject();
 %>
 
-<liferay-ui:icon-menu showExpanded="<%= view %>">
-	<c:if test="<%= (folder != null) && BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>">
+<liferay-ui:icon-menu>
+	<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -78,18 +41,18 @@ if (row == null) {
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
-	<c:if test="<%= showPermissionsURL %>">
+	<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
-			modelResource="<%= modelResource %>"
-			modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
-			resourcePrimKey="<%= resourcePrimKey %>"
+			modelResource="<%= BookmarksFolder.class.getName() %>"
+			modelResourceDescription="<%= folder.getName() %>"
+			resourcePrimKey="<%= String.valueOf(folder.getFolderId()) %>"
 			var="permissionsURL"
 		/>
 
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= (folder != null) && BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
+	<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
@@ -98,25 +61,5 @@ if (row == null) {
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />
-	</c:if>
-
-	<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addFolderURL">
-			<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
-		</portlet:renderURL>
-
-		<liferay-ui:icon image="../document_library/add_folder" message='<%= folder != null ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
-	</c:if>
-
-	<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_ENTRY) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
-			<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-		</portlet:renderURL>
-
-		<liferay-ui:icon image="../document_library/add_document" message="add-bookmark" url="<%= editEntryURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>

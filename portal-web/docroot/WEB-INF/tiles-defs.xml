@@ -241,10 +241,6 @@
 		<put name="portlet_content" value="/portlet/bookmarks/view.jsp" />
 	</definition>
 
-	<definition name="portlet.bookmarks.view_entry" extends="portlet.bookmarks">
-		<put name="portlet_content" value="/portlet/bookmarks/view_entry.jsp" />
-	</definition>
-
 	<!-- Breadcrumb -->
 
 	<definition name="portlet.breadcrumb" extends="portlet" />
