@@ -128,16 +128,13 @@
 				int sideMargin = (PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageWidth) / 2;
 				%>
 
-				<div class="image-thumbnail">
-					<a href="javascript:;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<%= UnicodeFormatter.toString(image.getName()) %>', '<%= UnicodeFormatter.toString(image.getDescription()) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
-						<img alt="<%= image.getName() + ". " + image.getDescription() %>" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&igImageId=<%= image.getImageId() %>&igSmallImage=1&&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;  width: <%= smallImageWidth %>;" />
-					</a>
+				<a class="image-thumbnail" href="javascript:;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<%= UnicodeFormatter.toString(image.getName()) %>', '<%= UnicodeFormatter.toString(image.getDescription()) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
+					<img alt="<%= image.getName() + ". " + image.getDescription() %>" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&igImageId=<%= image.getImageId() %>&igSmallImage=1&&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;  width: <%= smallImageWidth %>;" />
 
-					<div style="text-align: center;">
-						<%= image.getName() %>
+					<span class="image-title"><%= image.getName() %></span>
 
-						<c:if test="<%= scores != null %>">
-							<br />
+					<c:if test="<%= scores != null %>">
+						<span class="image-score">
 
 							<%
 							double score = ((Double)scores.get(i)).doubleValue();
@@ -146,8 +143,8 @@
 							%>
 
 							<liferay-ui:ratings-score score="<%= score %>" />
-						</c:if>
-					</div>
+						</span>
+					</c:if>
 
 					<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
 						<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
@@ -172,7 +169,7 @@
 							classPK="<%= image.getImageId() %>"
 						/>
 					</div>
-				</div>
+				</a>
 			</c:when>
 			<c:otherwise>
 				<div style="float: left; margin: 100px 10px 0px;">
