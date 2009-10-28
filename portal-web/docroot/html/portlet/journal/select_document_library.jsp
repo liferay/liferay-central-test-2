@@ -159,7 +159,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());
-	sb.append("/document_library/");
+	sb.append("/file_system/small/");
 	sb.append(DLUtil.getFileExtension(fileEntry.getName()));
 	sb.append(".png\">");
 	sb.append(fileEntry.getTitle());

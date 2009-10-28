@@ -42,7 +42,7 @@ public class IGImageCustomAttributesDisplay
 	}
 
 	public String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/document_library/bmp.png";
+		return themeDisplay.getPathThemeImages() + "/file_system/small/bmp.png";
 	}
 
 }

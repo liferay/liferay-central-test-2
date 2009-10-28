@@ -314,7 +314,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				%>
 
 					<liferay-ui:icon
-						image='<%= "../document_library/" + conversion %>'
+						image='<%= "../file_system/small/" + conversion %>'
 						message="<%= conversion.toUpperCase() %>"
 						url='<%= fileUrl + "&targetExtension=" + conversion %>'
 						label="<%= true %>"

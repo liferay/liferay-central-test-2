@@ -129,7 +129,7 @@ if (articleDisplay != null) {
 									%>
 
 										<liferay-ui:icon
-											image='<%= "../document_library/" + extension %>'
+											image='<%= "../file_system/small/" + extension %>'
 											message="<%= extension.toUpperCase() %>"
 											url="<%= exportArticleURL.toString() %>"
 											method="get"
@@ -296,7 +296,7 @@ if (articleDisplay != null) {
 							<portlet:param name="templateId" value="<%= articleDisplay.getTemplateId() %>" />
 						</liferay-portlet:renderURL>
 
-						<liferay-ui:icon image="../document_library/xml" message="edit-template" url="<%= editTemplateURL %>" />
+						<liferay-ui:icon image="../file_system/small/xml" message="edit-template" url="<%= editTemplateURL %>" />
 					</c:if>
 
 					<c:if test="<%= showSelectArticleIcon %>">

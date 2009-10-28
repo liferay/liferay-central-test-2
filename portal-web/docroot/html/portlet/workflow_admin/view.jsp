@@ -200,7 +200,7 @@ private String _getIconPath(String modelResource) {
 		return "/document_library/page.png";
 	}
 	else if (modelResource.equals(IGImage.class.getName())) {
-		return "/document_library/bmp.png";
+		return "/file_system/small/bmp.png";
 	}
 	else if (modelResource.equals(JournalArticle.class.getName())) {
 		return "/common/history.png";
