@@ -23,6 +23,7 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -63,6 +64,32 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		return new File(repositoryDir + StringPool.SLASH + dirName);
 	}
 
+	protected File getFileNameDir(
+		long companyId, long repositoryId, String fileName) {
+
+		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
+
+		StringBuilder sb = new StringBuilder();
+
+		String fileNameFragment = FileUtil.stripExtension(fileName);
+
+		if (fileNameFragment.startsWith("DLFE-")) {
+			fileNameFragment = fileNameFragment.substring(5);
+
+			sb.append("DLFE" + StringPool.SLASH);
+		}
+
+		buildPath(sb, fileNameFragment);
+
+		File repositoryDir = getRepositoryDir(companyId, repositoryId);
+
+		File fileNameDir = new File(
+			repositoryDir + StringPool.SLASH + sb.toString() +
+				StringPool.SLASH + fileNameFragment + ext);
+
+		return fileNameDir;
+	}
+
 	protected File getFileNameVersionFile(
 		long companyId, long repositoryId, String fileName, double version) {
 
@@ -101,6 +128,39 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 				fileNameDir + StringPool.SLASH + fileNameFragment +
 					StringPool.UNDERLINE + version + ext);
 		}
+	}
+
+	protected double getHeadVersionNumber(
+		long companyId, long repositoryId, String fileName) {
+
+		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
+
+		if (!fileNameDir.exists()) {
+			return DEFAULT_VERSION;
+		}
+
+		String[] versionNumbers = FileUtil.listFiles(fileNameDir);
+
+		double headVersionNumber = DEFAULT_VERSION;
+
+		for (int i = 0; i < versionNumbers.length; i++) {
+			String versionNumberFragment = versionNumbers[i];
+
+			int pos = versionNumbers[i].lastIndexOf(StringPool.UNDERLINE);
+
+			if (pos > -1) {
+				versionNumberFragment =
+					versionNumberFragment.substring(pos + 1);
+			}
+
+			double versionNumber = GetterUtil.getDouble(versionNumberFragment);
+
+			if (versionNumber > headVersionNumber) {
+				headVersionNumber = versionNumber;
+			}
+		}
+
+		return headVersionNumber;
 	}
 
 }
