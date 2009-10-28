@@ -24,8 +24,36 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-image-gallery .image-title {
-	display: block;
+.portlet-image-gallery .image-popup .image-content {
+	margin-top: 16px;
+	text-align: center;
+}
+
+.portlet-image-gallery .image-popup .image-content .image-categorization {
+	margin-bottom: 20px;
+}
+
+.portlet-image-gallery .image-popup .image-content .image-categorization .has-tags .taglib-asset-categories-summary {
+	border-right: 1px solid #ccc;
+	margin-right: 20px;
+	padding-right: 10px;
+}
+
+.portlet-image-gallery .image-popup .image-content .image-name {
+	font-weight: bold;
+}
+
+.portlet-image-gallery .image-popup .image-content .image-description {
+	font-style: italic;
+}
+
+.portlet-image-gallery .image-popup .taglib-icon-list {
+	float: right;
+}
+
+.portlet-image-gallery .image-popup .taglib-icon-list li {
+	margin-left: 1em;
+	margin-right: 0;
 }
 
 .portlet-image-gallery .image-score {
@@ -46,33 +74,6 @@
 	border-color: #CCCCCC;
 }
 
-.image-popup .image-content {
-	margin-top: 16px;
-	text-align: center;
-}
-
-.image-popup .image-content .image-categorization {
-	margin-bottom: 20px;
-}
-
-.image-popup .image-content .image-categorization .has-tags .taglib-asset-categories-summary {
-	border-right: 1px solid #ccc;
-	margin-right: 20px;
-	padding-right: 10px;
-}
-
-.image-popup .image-content .image-name {
-	font-weight: bold;
-}
-.image-popup .image-content .image-description {
-	font-style: italic;
-}
-
-.image-popup .taglib-icon-list {
-	float: right;
-}
-
-.image-popup .taglib-icon-list li {
-	margin-left: 1em;
-	margin-right: 0;
+.portlet-image-gallery .image-title {
+	display: block;
 }
