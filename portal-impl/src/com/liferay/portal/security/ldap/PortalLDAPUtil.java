@@ -1384,9 +1384,11 @@ public class PortalLDAPUtil {
 
 				cookie = _getCookie(ctx.getResponseControls());
 			}
+
+			ctx.setRequestControls(null);
 		}
 		catch (OperationNotSupportedException onse) {
-			ctx.setRequestControls(new Control[0]);
+			ctx.setRequestControls(null);
 
 			NamingEnumeration<SearchResult> enu = ctx.search(
 				baseDN, filter, cons);
