@@ -27,35 +27,18 @@ import java.util.Map;
 /**
  * <a href="WorkflowEngineManagerUtil.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * The utility class supporting static access to all methods for the {@link
- * WorkflowEngineManager} interface. The target manager object is injected using
- * the {@link #setWorkflowEngineManager(WorkflowEngineManager)} method. Besides
- * the static method access, it is also available through {@link
- * #getWorkflowEngineManager()}.
- * </p>
- *
  * @author Brian Wing Shun Chan
  */
 public class WorkflowEngineManagerUtil {
 
-	/**
-	 * @see WorkflowEngineManager#getAdditionalInformation()
-	 */
 	public static Map<String, Object> getAdditionalInformation() {
 		return _workflowEngineManager.getAdditionalInformation();
 	}
 
-	/**
-	 * @see WorkflowEngineManager#getDelegate()
-	 */
 	public static Object getDelegate() {
 		return _workflowEngineManager.getDelegate();
 	}
 
-	/**
-	 * @see WorkflowEngineManager#getVersion()
-	 */
 	public static String getVersion() {
 		return _workflowEngineManager.getVersion();
 	}
@@ -64,30 +47,18 @@ public class WorkflowEngineManagerUtil {
 		return _workflowEngineManager;
 	}
 
-	/**
-	 * @see WorkflowEngineManager#getWorkflowEngineKey()
-	 */
 	public static String getWorkflowEngineKey() {
 		return _workflowEngineManager.getWorkflowEngineKey();
 	}
 
-	/**
-	 * @see WorkflowEngineManager#getWorkflowEngineName()
-	 */
 	public static String getWorkflowEngineName() {
 		return _workflowEngineManager.getWorkflowEngineName();
 	}
 
-	/**
-	 * @see WorkflowEngineManager#isSupportsGlobalActivities()
-	 */
 	public static boolean isSupportsGlobalActivities() {
 		return _workflowEngineManager.isSupportsGlobalActivities();
 	}
 
-	/**
-	 * @see WorkflowEngineManager#isSupportsWorkflowDefinitionVersioning()
-	 */
 	public static boolean isSupportsWorkflowDefinitionVersioning() {
 		return _workflowEngineManager.isSupportsWorkflowDefinitionVersioning();
 	}

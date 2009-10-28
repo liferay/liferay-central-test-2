@@ -30,17 +30,9 @@ import java.lang.reflect.Method;
 /**
  * <a href="WorkflowRequest.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * This proxy extends the generic {@link ProxyRequest} by adding an optional
- * {@link UserCredential} to the request being attached to the current thread
- * before invoking the method and finally being removed after the invocation.
- * The initialization of the proxy will inspect the method signature for having
- * the {@link CallingUserId} annotation on an argument to treat it as the
- * calling user id to request a user credential for it and pass it along with
- * the request to be attached to the thread before invoking the method.
- * </p>
- *
  * @author Micha Kiener
+ * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class WorkflowRequest extends ProxyRequest {
 
@@ -51,14 +43,10 @@ public class WorkflowRequest extends ProxyRequest {
 		_userCredential = inspectForCallingUserCredential();
 	}
 
-	/**
-	 * Overwritten to attach the user credential passed along, if any available.
-	 *
-	 * @see ProxyRequest#execute(Object)
-	 */
 	public Object execute(Object object) throws WorkflowException {
 		try {
 			UserCredentialThreadLocal.setUserCredential(_userCredential);
+
 			return super.execute(object);
 		}
 		catch (Exception e) {
@@ -73,18 +61,6 @@ public class WorkflowRequest extends ProxyRequest {
 		return _userCredential;
 	}
 
-	/**
-	 * Inspects the parameter list of the given method for having the {@link
-	 * CallingUserId} annotation on it to mark it as the id of the calling user
-	 * which might be used to create a user credential for it which is passed
-	 * along with this proxy to be attached to the current thread before
-	 * invoking the method on the target object.
-	 *
-	 * @return the user credential according to the calling user id, if
-	 *		   available
-	 * @throws WorkflowException is thrown, if initialization of the credential
-	 *		   failed
-	 */
 	protected UserCredential inspectForCallingUserCredential()
 		throws WorkflowException {
 
@@ -105,7 +81,7 @@ public class WorkflowRequest extends ProxyRequest {
 				if (CallingUserId.class.isAssignableFrom(
 						annotation.annotationType())) {
 
-					return UserCredentialFactoryUtil.createCredential(
+					return UserCredentialFactoryUtil.getUserCredential(
 						(Long)getMethodWrapper().getArguments()[i]);
 				}
 			}

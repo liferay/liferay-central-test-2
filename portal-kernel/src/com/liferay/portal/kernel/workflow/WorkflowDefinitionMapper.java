@@ -45,6 +45,8 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
  * </p>
  *
  * @author Micha Kiener
+ * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public interface WorkflowDefinitionMapper {
 

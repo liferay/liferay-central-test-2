@@ -32,37 +32,12 @@ import java.util.Set;
 /**
  * <a href="UserCredential.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * The user credential is a container for a user's id and its roles and is used
- * as the credential towards the workflow engine. For convenience, it is just
- * added automatically through the request by creating it using the {@link
- * UserCredentialFactoryUtil#createCredential(long)} as the API just takes the
- * user id, the role set and additional information is being added by the {@link
- * UserCredentialFactory} invoked by the proxy (most likely the request builder)
- * in order to avoid the implementation or adapter having to call back the
- * portal for the set of roles of a user's id.
- * </p>
- *
  * @author Micha Kiener
+ * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class UserCredential implements Serializable {
 
-	/**
-	 * Default constructor, just used for de-serialization, never for
-	 * construction.
-	 */
-	public UserCredential() {
-	}
-
-	/**
-	 * Adds any additional attribute to this user credential. Make sure the
-	 * value of the attribute is serializable as the user credential might get
-	 * serialized through the message bus, if needed.
-	 *
-	 * @param key the name of the attribute for later retrieval
-	 * @param value the value of the attribute to be stored within this user
-	 *		  credential
-	 */
 	public void addAttribute(String key, Object value) {
 		if (_attributes == null) {
 			_attributes = new HashMap<String, Object>();
@@ -79,105 +54,58 @@ public class UserCredential implements Serializable {
 		return (T)_attributes.get(key);
 	}
 
-	/**
-	 * @return the id of the company the user represented by this credential
-	 *		   belongs to
-	 */
 	public long getCompanyId() {
 		return _companyId;
 	}
 
-	/**
-	 * @return the email address of the user represented by this credential
-	 */
 	public String getEmailAddress() {
 		return _emailAddress;
 	}
 
-	/**
-	 * @return the locale of the user represented by this credential
-	 */
 	public Locale getLocale() {
 		return _locale;
 	}
 
-	/**
-	 * @return the login name of the user represented by this credential
-	 */
 	public String getLogin() {
 		return _login;
 	}
 
-	/**
-	 * @return the set of the role ids the user reflected by this credential has
-	 */
 	public Set<Long> getRoleIds() {
 		return _roleIds;
 	}
 
-	/**
-	 * @return the screen name of the user represented by this credential
-	 */
 	public String getScreenName() {
 		return _screenName;
 	}
 
-	/**
-	 * @return the id of the user reflected by this credential
-	 */
 	public long getUserId() {
 		return _userId;
 	}
 
-	/**
-	 * @param companyId the id of the company the user reflected by this
-	 *		  credential should be assigned to
-	 */
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
-	/**
-	 * @param emailAddress the email address of the user reflected by this
-	 *		  credential
-	 */
 	public void setEmailAddress(String emailAddress) {
 		_emailAddress = emailAddress;
 	}
 
-	/**
-	 * @param locale the locale of the user reflected by this credential
-	 */
 	public void setLocale(Locale locale) {
 		_locale = locale;
 	}
 
-	/**
-	 * @param login the login name of the user reflected by this credential
-	 */
 	public void setLogin(String login) {
 		_login = login;
 	}
 
-	/**
-	 * @param roleIds the set of roles the user of this credential is assigned
-	 *		  to
-	 */
 	public void setRoleIds(Set<Long> roleIds) {
 		_roleIds = roleIds;
 	}
 
-	/**
-	 * @param screenName the screen name of the user reflected by this
-	 *		  credential
-	 */
 	public void setScreenName(String screenName) {
 		_screenName = screenName;
 	}
 
-	/**
-	 * @param userId the id of the user reflected by this credential
-	 */
 	public void setUserId(long userId) {
 		_userId = userId;
 	}

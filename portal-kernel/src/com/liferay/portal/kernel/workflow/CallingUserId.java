@@ -36,22 +36,12 @@ import java.lang.annotation.Target;
 /**
  * <a href="CallingUserId.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * This annotation might be placed on a workflow manager interface method to
- * declare the calling user id parameter index as the method will be intercepted
- * by a Spring aspect and hence the calling user id parameter must be specified
- * in order to be available within the generic advice being weaved into the
- * intercepted method.
- * </p>
- *
  * @author Micha Kiener
+ * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public @interface CallingUserId {
 
-	/**
-	 * @return the index of the calling user id within the argument list or -1
-	 *		   if not available
-	 */
 	public int value() default -1;
 
 }

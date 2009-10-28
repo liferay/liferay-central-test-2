@@ -36,7 +36,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  */
 public class UserCredentialFactoryImpl implements UserCredentialFactory {
 
-	public UserCredential createCredential(long userId)
+	public UserCredential getUserCredential(long userId)
 		throws WorkflowException {
 
 		if (userId <= 0) {

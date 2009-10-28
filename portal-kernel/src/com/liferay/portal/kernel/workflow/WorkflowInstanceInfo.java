@@ -51,6 +51,8 @@ import java.util.Map;
  * </p>
  *
  * @author Micha Kiener
+ * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public interface WorkflowInstanceInfo {
 

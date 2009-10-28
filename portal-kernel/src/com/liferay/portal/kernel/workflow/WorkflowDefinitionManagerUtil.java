@@ -31,22 +31,12 @@ import java.util.Map;
  * <a href="WorkflowDefinitionManagerUtil.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * <p>
- * The utility class supporting static access to all methods for the {@link
- * WorkflowDefinitionManager} interface. The target manager object is injected
- * using the {@link #setWorkflowDefinitionManager(WorkflowDefinitionManager)}
- * method. Besides the static method access, it is also available through {@link
- * #getWorkflowDefinitionManager()}.
- * </p>
- *
  * @author Micha Kiener
+ * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class WorkflowDefinitionManagerUtil {
 
-	/**
-	 * @see WorkflowDefinitionManager#deployWorkflowDefinition(
-	 *		WorkflowDefinition, long, boolean, Map)
-	 */
 	public static void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition, long callingUserId,
 			boolean autoIncrementVersionNumber, Map<String, Object> parameters)
@@ -57,16 +47,10 @@ public class WorkflowDefinitionManagerUtil {
 			parameters);
 	}
 
-	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitionCount()
-	 */
 	public static int getWorkflowDefinitionCount() throws WorkflowException {
 		return _workflowDefinitionManager.getWorkflowDefinitionCount();
 	}
 
-	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitionCount(String)
-	 */
 	public static int getWorkflowDefinitionCount(
 			String workflowDefinitionName)
 		throws WorkflowException {
@@ -79,10 +63,6 @@ public class WorkflowDefinitionManagerUtil {
 		return _workflowDefinitionManager;
 	}
 
-	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(int, int,
-	 *		OrderByComparator)
-	 */
 	public static List<WorkflowDefinition> getWorkflowDefinitions(
 			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException {
@@ -91,10 +71,6 @@ public class WorkflowDefinitionManagerUtil {
 			start, end, orderByComparator);
 	}
 
-	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(String, int, int,
-	 *		OrderByComparator)
-	 */
 	public static List<WorkflowDefinition> getWorkflowDefinitions(
 			String workflowDefinitionName, int start, int end,
 			OrderByComparator orderByComparator)
@@ -104,10 +80,6 @@ public class WorkflowDefinitionManagerUtil {
 			workflowDefinitionName, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see WorkflowDefinitionManager#undeployWorkflowDefinition(
-	 *		WorkflowDefinition, long, Map)
-	 */
 	public static void undeployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition, long callingUserId,
 			Map<String, Object> parameters)

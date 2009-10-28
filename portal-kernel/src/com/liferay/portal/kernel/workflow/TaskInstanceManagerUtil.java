@@ -30,22 +30,12 @@ import java.util.Map;
 /**
  * <a href="TaskInstanceManagerUtil.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * The utility class supporting static access to all methods for the {@link
- * TaskInstanceManager} interface. The target manager object is injected using
- * the {@link #setTaskInstanceManager(TaskInstanceManager)} method. Besides the
- * static method access, it is also available through {@link
- * #getTaskInstanceManager()}.
- * </p>
- *
  * @author Micha Kiener
+ * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class TaskInstanceManagerUtil {
 
-	/**
-	 * @see TaskInstanceManager#assignTaskInstanceToRole(long, long, String,
-	 *		Map, long, Map)
-	 */
 	public static TaskInstanceInfo assignTaskInstanceToRole(
 			long taskInstanceId, long roleId, String comment,
 			Map<String, Object> attributes, long callingUserId,
@@ -57,10 +47,6 @@ public class TaskInstanceManagerUtil {
 			parameters);
 	}
 
-	/**
-	 * @see TaskInstanceManager#assignTaskInstanceToUser(long, UserCredential,
-	 *		String, Map, long, Map)
-	 */
 	public static TaskInstanceInfo assignTaskInstanceToUser(
 			long taskInstanceId, UserCredential userCredential, String comment,
 			Map<String, Object> attributes, long callingUserId,
@@ -72,10 +58,6 @@ public class TaskInstanceManagerUtil {
 			parameters);
 	}
 
-	/**
-	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, Map,
-	 *		Map)
-	 */
 	public static TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String comment,
 			Map<String, Object> attributes, Map<String, Object> parameters)
@@ -85,10 +67,6 @@ public class TaskInstanceManagerUtil {
 			taskInstanceId, userId, comment, attributes, parameters);
 	}
 
-	/**
-	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, String,
-	 *		Map, Map)
-	 */
 	public static TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String pathName,
 			String comment, Map<String, Object> attributes,
@@ -100,9 +78,6 @@ public class TaskInstanceManagerUtil {
 			parameters);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getPossibleNextPathNames(long, long, Map)
-	 */
 	public static List<String> getPossibleNextPathNames(
 			long taskInstanceId, long userId, Map<String, Object> parameters)
 		throws WorkflowException {
@@ -111,10 +86,6 @@ public class TaskInstanceManagerUtil {
 			taskInstanceId, userId, parameters);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfoCountByCredential(
-	 *		UserCredential)
-	 */
 	public static int getTaskInstanceInfoCountByCredential(
 			UserCredential userCredential)
 		throws WorkflowException {
@@ -123,10 +94,6 @@ public class TaskInstanceManagerUtil {
 			userCredential);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfoCountByCredential(
-	 *		UserCredential, boolean)
-	 */
 	public static int getTaskInstanceInfoCountByCredential(
 			UserCredential userCredential, boolean completed)
 		throws WorkflowException {
@@ -135,18 +102,12 @@ public class TaskInstanceManagerUtil {
 			userCredential, completed);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfoCountByRole(long)
-	 */
 	public static int getTaskInstanceInfoCountByRole(long roleId)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getTaskInstanceInfoCountByRole(roleId);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfoCountByRole(long, boolean)
-	 */
 	public static int getTaskInstanceInfoCountByRole(
 			long roleId, boolean completed)
 		throws WorkflowException {
@@ -155,18 +116,12 @@ public class TaskInstanceManagerUtil {
 			roleId, completed);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfoCountByUser(long)
-	 */
 	public static int getTaskInstanceInfoCountByUser(long userId)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getTaskInstanceInfoCountByUser(userId);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfoCountByUser(long, boolean)
-	 */
 	public static int getTaskInstanceInfoCountByUser(
 			long userId, boolean completed)
 		throws WorkflowException {
@@ -175,9 +130,6 @@ public class TaskInstanceManagerUtil {
 			userId, completed);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfoCountByWorkflowInstance(long)
-	 */
 	public static int getTaskInstanceInfoCountByWorkflowInstance(
 			long workflowInstanceId)
 		throws WorkflowException {
@@ -186,10 +138,6 @@ public class TaskInstanceManagerUtil {
 			workflowInstanceId);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfoCountByWorkflowInstance(long,
-	 *		boolean)
-	 */
 	public static int getTaskInstanceInfoCountByWorkflowInstance(
 			long workflowInstanceId, boolean completed)
 		throws WorkflowException {
@@ -198,10 +146,6 @@ public class TaskInstanceManagerUtil {
 			workflowInstanceId, completed);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential,
-	 *		int, int, OrderByComparator)
-	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 			UserCredential userCredential, int start, int end,
 			OrderByComparator orderByComparator)
@@ -211,10 +155,6 @@ public class TaskInstanceManagerUtil {
 			userCredential, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential,
-	 *		boolean, int, int, OrderByComparator)
-	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 			UserCredential userCredential, boolean completed, int start,
 			int end, OrderByComparator orderByComparator)
@@ -224,10 +164,6 @@ public class TaskInstanceManagerUtil {
 			userCredential, completed, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long, int, int,
-	 *		OrderByComparator)
-	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(
 			long roleId, int start, int end,
 			OrderByComparator orderByComparator)
@@ -237,10 +173,6 @@ public class TaskInstanceManagerUtil {
 			roleId, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long, boolean, int,
-	 *		int, OrderByComparator)
-	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(
 			long roleId, boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
@@ -250,10 +182,6 @@ public class TaskInstanceManagerUtil {
 			roleId, completed, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long, int, int,
-	 *		OrderByComparator)
-	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByUser(
 			long userId, int start, int end,
 			OrderByComparator orderByComparator)
@@ -263,10 +191,6 @@ public class TaskInstanceManagerUtil {
 			userId, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long, boolean, int,
-	 *		int, OrderByComparator)
-	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByUser(
 			long userId, boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
@@ -276,10 +200,6 @@ public class TaskInstanceManagerUtil {
 			userId, completed, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
-	 *		int, int, OrderByComparator)
-	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
 			long workflowInstanceId, int start, int end,
 			OrderByComparator orderByComparator)
@@ -289,10 +209,6 @@ public class TaskInstanceManagerUtil {
 			workflowInstanceId, start, end, orderByComparator);
 	}
 
-	/**
-	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
-	 *		boolean, int, int, OrderByComparator)
-	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
 			long workflowInstanceId, boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
