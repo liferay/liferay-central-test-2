@@ -1,8 +1,8 @@
 AUI().add(
 	'liferay-navigation',
 	function(A) {
-		var Lang = A.Lang,
-
+		var Lang =
+			A.Lang,
 			TPL_DELETE_BUTTON = '<span class="delete-tab aui-helper-hidden">X</span>',
 			TPL_LIST_ITEM = '<li></li>',
 			TPL_TAB_LINK = '<a href="{url}"><span>{pageTitle}</span></a>';
