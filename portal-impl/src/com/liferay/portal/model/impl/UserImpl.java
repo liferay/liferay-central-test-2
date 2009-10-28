@@ -633,9 +633,9 @@ public class UserImpl extends UserModelImpl implements User {
 
 	private static Log _log = LogFactoryUtil.getLog(UserImpl.class);
 
+	private Locale _locale;
 	private boolean _passwordModified;
 	private String _passwordUnencrypted;
-	private Locale _locale;
 	private TimeZone _timeZone;
 
 }
