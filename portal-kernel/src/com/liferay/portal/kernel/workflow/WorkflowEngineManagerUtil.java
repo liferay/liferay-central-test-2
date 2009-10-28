@@ -31,12 +31,16 @@ import java.util.Map;
  */
 public class WorkflowEngineManagerUtil {
 
-	public static Map<String, Object> getAdditionalInformation() {
-		return _workflowEngineManager.getAdditionalInformation();
+	public static String getKey() {
+		return _workflowEngineManager.getKey();
 	}
 
-	public static Object getDelegate() {
-		return _workflowEngineManager.getDelegate();
+	public static String getName() {
+		return _workflowEngineManager.getName();
+	}
+
+	public static Map<String, Object> getOptionalAttributes() {
+		return _workflowEngineManager.getOptionalAttributes();
 	}
 
 	public static String getVersion() {
@@ -45,22 +49,6 @@ public class WorkflowEngineManagerUtil {
 
 	public static WorkflowEngineManager getWorkflowEngineManager() {
 		return _workflowEngineManager;
-	}
-
-	public static String getWorkflowEngineKey() {
-		return _workflowEngineManager.getWorkflowEngineKey();
-	}
-
-	public static String getWorkflowEngineName() {
-		return _workflowEngineManager.getWorkflowEngineName();
-	}
-
-	public static boolean isSupportsGlobalActivities() {
-		return _workflowEngineManager.isSupportsGlobalActivities();
-	}
-
-	public static boolean isSupportsWorkflowDefinitionVersioning() {
-		return _workflowEngineManager.isSupportsWorkflowDefinitionVersioning();
 	}
 
 	public void setWorkflowEngineManager(

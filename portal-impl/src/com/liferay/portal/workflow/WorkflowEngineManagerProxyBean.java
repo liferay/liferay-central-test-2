@@ -36,31 +36,19 @@ import java.util.Map;
 public class WorkflowEngineManagerProxyBean
 	extends BaseProxyBean implements WorkflowEngineManager {
 
-	public Map<String, Object> getAdditionalInformation() {
+	public String getKey() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Object getDelegate() {
+	public String getName() {
+		throw new UnsupportedOperationException();
+	}
+
+	public Map<String, Object> getOptionalAttributes() {
 		throw new UnsupportedOperationException();
 	}
 
 	public String getVersion() {
-		throw new UnsupportedOperationException();
-	}
-
-	public String getWorkflowEngineKey() {
-		throw new UnsupportedOperationException();
-	}
-
-	public String getWorkflowEngineName() {
-		throw new UnsupportedOperationException();
-	}
-
-	public boolean isSupportsGlobalActivities() {
-		throw new UnsupportedOperationException();
-	}
-
-	public boolean isSupportsWorkflowDefinitionVersioning() {
 		throw new UnsupportedOperationException();
 	}
 
