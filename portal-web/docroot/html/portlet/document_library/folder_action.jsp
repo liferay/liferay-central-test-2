@@ -134,7 +134,7 @@ if (row == null) {
 		<liferay-ui:icon image="add_instance" message="add-shortcut" url="<%= editFileShortcutURL %>" />
 	</c:if>
 
-	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
+	<c:if test="<%= (portletDisplay.isWebDAVEnabled()) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
 		<liferay-ui:icon cssClass='<%= randomNamespace + "-webdav-action" %>' image="desktop" message="access-from-my-desktop" url="javascript:;" />
 	</c:if>
 </liferay-ui:icon-menu>
