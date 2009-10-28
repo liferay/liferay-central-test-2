@@ -31,9 +31,10 @@
 </liferay-util:buffer>
 
 <%
-html = StringUtil.replace(html, "portlet-document-library", "portlet-bookmarks");
-html = StringUtil.replace(html, "file-entry", "entry");
 html = StringUtil.replace(html, "documentLibraryPanels", "bookmarksPanels");
+html = StringUtil.replace(html, "file-entries", "entries");
+html = StringUtil.replace(html, "file-entry", "entry");
+html = StringUtil.replace(html, "portlet-document-library", "portlet-bookmarks");
 %>
 
 <%= html %>

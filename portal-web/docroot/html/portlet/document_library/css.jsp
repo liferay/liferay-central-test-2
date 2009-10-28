@@ -168,7 +168,7 @@
 	margin: 0 0 0.5em 0.5em;
 }
 
-.portlet-document-library .folder-file-entry {
+.portlet-document-library .folder-file-entries {
 	background: url(<%= themeImagesPath %>/common/page.png) no-repeat 0 50%;
 	color: #999;
 	overflow: auto;
