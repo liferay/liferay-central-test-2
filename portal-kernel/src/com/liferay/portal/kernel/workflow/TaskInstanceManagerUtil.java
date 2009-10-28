@@ -48,13 +48,13 @@ public class TaskInstanceManagerUtil {
 	}
 
 	public static TaskInstanceInfo assignTaskInstanceToUser(
-			long taskInstanceId, UserCredential userCredential, String comment,
+			long taskInstanceId, long userId, String comment,
 			Map<String, Object> attributes, long callingUserId,
 			Map<String, Object> parameters)
 		throws WorkflowException {
 
 		return _taskInstanceManager.assignTaskInstanceToUser(
-			taskInstanceId, userCredential, comment, attributes, callingUserId,
+			taskInstanceId, userId, comment, attributes, callingUserId,
 			parameters);
 	}
 
@@ -84,22 +84,6 @@ public class TaskInstanceManagerUtil {
 
 		return _taskInstanceManager.getPossibleNextPathNames(
 			taskInstanceId, userId, parameters);
-	}
-
-	public static int getTaskInstanceInfoCountByCredential(
-			UserCredential userCredential)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfoCountByCredential(
-			userCredential);
-	}
-
-	public static int getTaskInstanceInfoCountByCredential(
-			UserCredential userCredential, boolean completed)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfoCountByCredential(
-			userCredential, completed);
 	}
 
 	public static int getTaskInstanceInfoCountByRole(long roleId)
@@ -144,24 +128,6 @@ public class TaskInstanceManagerUtil {
 
 		return _taskInstanceManager.getTaskInstanceInfoCountByWorkflowInstance(
 			workflowInstanceId, completed);
-	}
-
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-			UserCredential userCredential, int start, int end,
-			OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByCredential(
-			userCredential, start, end, orderByComparator);
-	}
-
-	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-			UserCredential userCredential, boolean completed, int start,
-			int end, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _taskInstanceManager.getTaskInstanceInfosByCredential(
-			userCredential, completed, start, end, orderByComparator);
 	}
 
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(

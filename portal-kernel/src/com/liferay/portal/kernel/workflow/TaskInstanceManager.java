@@ -117,7 +117,7 @@ public interface TaskInstanceManager {
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
 	public TaskInstanceInfo assignTaskInstanceToUser(
-			long taskInstanceId, UserCredential userCredential, String comment,
+			long taskInstanceId, long userId, String comment,
 			Map<String, Object> attributes, @CallingUserId long callingUserId,
 			Map<String, Object> parameters)
 		throws WorkflowException;
@@ -261,40 +261,6 @@ public interface TaskInstanceManager {
 		throws WorkflowException;
 
 	/**
-	 * Returns the total count of open tasks currently assigned to the user
-	 * represented by the given credential or indirectly assigned to one of its
-	 * roles. The implementation of this method should be fast.
-	 *
-	 * @param  userCredential the credential representing the user and its role
-	 *		   set to return the count of tasks assigned to either the user or
-	 *		   one of its roles
-	 * @return the total count of open tasks of the user represented by the
-	 *		   credential
-	 * @throws WorkflowException is thrown if the querying failed
-	 */
-	public int getTaskInstanceInfoCountByCredential(
-			UserCredential userCredential)
-		throws WorkflowException;
-
-	/**
-	 * Returns the total count of tasks currently assigned to the user
-	 * represented by the given credential or indirectly assigned to one of its
-	 * roles. The implementation of this method should be fast.
-	 *
-	 * @param  userCredential the credential representing the user and its role
-	 *		   set to return the count of tasks assigned to either the user or
-	 *		   one of its roles
-	 * @param  completed <code>true</code>, if only completed tasks should be
-	 *		   returned, <code>false</code> for all open tasks
-	 * @return the total count of open tasks of the user represented by the
-	 *		   credential
-	 * @throws WorkflowException is thrown if the querying failed
-	 */
-	public int getTaskInstanceInfoCountByCredential(
-			UserCredential userCredential, boolean completed)
-		throws WorkflowException;
-
-	/**
 	 * Returns the total count of open tasks currently assigned to the specified
 	 * role. The implementation of this method should be fast.
 	 *
@@ -377,51 +343,6 @@ public interface TaskInstanceManager {
 	 */
 	public int getTaskInstanceInfoCountByWorkflowInstance(
 			long workflowInstanceId, boolean completed)
-		throws WorkflowException;
-
-	/**
-	 * Queries for all tasks currently assigned to the user represented by the
-	 * given credential or indirectly assigned to one of the roles the user is
-	 * assigned to. So a task being returned could either be directly assigned
-	 * to the user or assigned to a role the user is a member of.
-	 *
-	 * @param  userCredential the credential representing the user to return
-	 *		   tasks for
-	 * @param  completed <code>true</code>, if only completed tasks should be
-	 *		   returned, <code>false</code> for all open tasks
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
-	 * @return all tasks either be assigned to the user directly or indirectly
-	 *		   assigned to one of its roles
-	 * @throws WorkflowException is thrown if querying failed
-	 */
-	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-			UserCredential userCredential, boolean completed, int start,
-			int end, OrderByComparator orderByComparator)
-		throws WorkflowException;
-
-	/**
-	 * Queries for all tasks currently assigned to the user represented by the
-	 * given credential or indirectly assigned to one of the roles the user is
-	 * assigned to. So a task being returned could either be directly assigned
-	 * to the user or assigned to a role the user is a member of. If only open
-	 * tasks should be returned, use {@link
-	 * #getTaskInstanceInfosByCredential(UserCredential, boolean, int, int,
-	 * OrderByComparator)} instead.
-	 *
-	 * @param  userCredential the credential representing the user to return
-	 *		   tasks for
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
-	 * @return all tasks either be assigned to the user directly or indirectly
-	 *		   assigned to one of its roles
-	 * @throws WorkflowException is thrown if querying failed
-	 */
-	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-			UserCredential userCredential, int start, int end,
-			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	/**

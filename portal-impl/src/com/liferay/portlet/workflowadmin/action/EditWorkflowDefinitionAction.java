@@ -26,11 +26,11 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.workflow.DefaultWorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -110,15 +110,14 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 	protected void deleteWorkflowDefinition(ActionRequest actionRequest)
 		throws Exception {
 
-		long userId = PortalUtil.getUserId(actionRequest);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String name = ParamUtil.getString(actionRequest, "name");
 		int version = ParamUtil.getInteger(actionRequest, "version");
 
-		WorkflowDefinition workflowDefinition = new DefaultWorkflowDefinition(
-			name, version, null, null);
-
 		WorkflowDefinitionManagerUtil.undeployWorkflowDefinition(
-			workflowDefinition, userId, null);
+			themeDisplay.getUserId(), name, version);
 	}
 
 	protected void updateWorkflowDefinition(ActionRequest actionRequest)
@@ -127,15 +126,15 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
-		long userId = PortalUtil.getUserId(actionRequest);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String name = ParamUtil.getString(actionRequest, "name");
 		File file = uploadRequest.getFile("file");
 
-		WorkflowDefinition workflowDefinition = new DefaultWorkflowDefinition(
-			name, 0, new FileInputStream(file), null);
-
-		WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
-			workflowDefinition, userId, true, null);
+		WorkflowDefinition workflowDefinition =
+			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
+				themeDisplay.getUserId(), name, new FileInputStream(file));
 
 		actionRequest.setAttribute(
 			WebKeys.WORKFLOW_DEFINITION, workflowDefinition);

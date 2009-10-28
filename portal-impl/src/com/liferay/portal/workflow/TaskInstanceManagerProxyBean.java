@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
 import com.liferay.portal.kernel.workflow.TaskInstanceManager;
-import com.liferay.portal.kernel.workflow.UserCredential;
 
 import java.util.List;
 import java.util.Map;
@@ -49,7 +48,7 @@ public class TaskInstanceManagerProxyBean
 	}
 
 	public TaskInstanceInfo assignTaskInstanceToUser(
-		long taskInstanceId, UserCredential userCredential, String comment,
+		long taskInstanceId, long userId, String comment,
 		Map<String, Object> attributes, long callingUserId,
 		Map<String, Object> parameters) {
 
@@ -72,18 +71,6 @@ public class TaskInstanceManagerProxyBean
 
 	public List<String> getPossibleNextPathNames(
 		long taskInstanceId, long userId, Map<String, Object> parameters) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public int getTaskInstanceInfoCountByCredential(
-		UserCredential userCredential) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public int getTaskInstanceInfoCountByCredential(
-		UserCredential userCredential, boolean completed) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -112,20 +99,6 @@ public class TaskInstanceManagerProxyBean
 
 	public int getTaskInstanceInfoCountByWorkflowInstance(
 		long workflowInstanceId, boolean completed) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-		UserCredential userCredential, boolean completed, int start, int end,
-		OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-		UserCredential userCredential, int start, int end,
-		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

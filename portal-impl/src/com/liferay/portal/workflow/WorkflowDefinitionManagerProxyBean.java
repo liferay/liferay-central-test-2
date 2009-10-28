@@ -27,8 +27,9 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
 
+import java.io.InputStream;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * <a href="WorkflowDefinitionManagerProxyBean.java.html"><b><i>View Source</i>
@@ -39,10 +40,13 @@ import java.util.Map;
 public class WorkflowDefinitionManagerProxyBean
 	extends BaseProxyBean implements WorkflowDefinitionManager {
 
-	public void deployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition, long callingUserId,
-		boolean autoIncrementVersionNumber, Map<String, Object> parameters) {
+	public WorkflowDefinition deployWorkflowDefinition(
+		long userId, String name, InputStream inputStream) {
 
+		throw new UnsupportedOperationException();
+	}
+
+	public WorkflowDefinition getWorkflowDefinition(String name, int version) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -50,7 +54,7 @@ public class WorkflowDefinitionManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowDefinitionCount(String workflowDefinitionName) {
+	public int getWorkflowDefinitionCount(String name) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -61,15 +65,13 @@ public class WorkflowDefinitionManagerProxyBean
 	}
 
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName, int start, int end,
-		OrderByComparator orderByComparator) {
+		String name, int start, int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void undeployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition, long callingUserId,
-		Map<String, Object> parameters) {
+		long userId, String name, int version) {
 
 		throw new UnsupportedOperationException();
 	}

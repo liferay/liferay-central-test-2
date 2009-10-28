@@ -11,12 +11,11 @@
 	<!-- Advice -->
 
 	<bean id="com.liferay.portal.workflow.WorkflowLockingAdvice" class="com.liferay.portal.workflow.WorkflowLockingAdvice" />
-	<bean id="com.liferay.portal.workflow.WorkflowProxyAdvice" class="com.liferay.portal.workflow.WorkflowProxyAdvice" />	
 	<aop:config>
 		<aop:aspect ref="com.liferay.portal.workflow.WorkflowLockingAdvice" order="1">
 			<aop:around pointcut="execution (public void com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean.undeployWorkflowDefinition(..)) || execution (public com.liferay.portal.kernel.workflow.WorkflowInstanceInfo com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean.startWorkflowInstance(..))" method="invoke" />
 		</aop:aspect>
-		<aop:aspect ref="com.liferay.portal.workflow.WorkflowProxyAdvice" order="2">
+		<aop:aspect ref="messagingProxyAdvice" order="2">
 			<aop:around pointcut="bean(com.liferay.portal.workflow.*ProxyBean)" method="invoke" />
 		</aop:aspect>
 	</aop:config>
@@ -60,11 +59,6 @@
 
 	<bean class="com.liferay.portal.kernel.workflow.TaskInstanceManagerUtil">
 		<property name="taskInstanceManager" ref="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" />
-	</bean>
-	<bean class="com.liferay.portal.kernel.workflow.UserCredentialFactoryUtil">
-		<property name="userCredentialFactory">
-			<bean class="com.liferay.portal.workflow.UserCredentialFactoryImpl" />
-		</property>
 	</bean>
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil">
 		<property name="workflowDefinitionManager" ref="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" />

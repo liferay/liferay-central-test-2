@@ -24,8 +24,9 @@ package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.io.InputStream;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * <a href="WorkflowDefinitionManagerUtil.java.html"><b><i>View Source</i></b>
@@ -37,26 +38,30 @@ import java.util.Map;
  */
 public class WorkflowDefinitionManagerUtil {
 
-	public static void deployWorkflowDefinition(
-			WorkflowDefinition workflowDefinition, long callingUserId,
-			boolean autoIncrementVersionNumber, Map<String, Object> parameters)
+	public static WorkflowDefinition deployWorkflowDefinition(
+			long userId, String name, InputStream inputStream)
 		throws WorkflowException {
 
-		_workflowDefinitionManager.deployWorkflowDefinition(
-			workflowDefinition, callingUserId, autoIncrementVersionNumber,
-			parameters);
+		return _workflowDefinitionManager.deployWorkflowDefinition(
+			userId, name, inputStream);
+	}
+
+	public static WorkflowDefinition getWorkflowDefinition(
+			String name, int version)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.getWorkflowDefinition(
+			name, version);
 	}
 
 	public static int getWorkflowDefinitionCount() throws WorkflowException {
 		return _workflowDefinitionManager.getWorkflowDefinitionCount();
 	}
 
-	public static int getWorkflowDefinitionCount(
-			String workflowDefinitionName)
+	public static int getWorkflowDefinitionCount(String name)
 		throws WorkflowException {
 
-		return _workflowDefinitionManager.getWorkflowDefinitionCount(
-			workflowDefinitionName);
+		return _workflowDefinitionManager.getWorkflowDefinitionCount(name);
 	}
 
 	public static WorkflowDefinitionManager getWorkflowDefinitionManager() {
@@ -72,21 +77,20 @@ public class WorkflowDefinitionManagerUtil {
 	}
 
 	public static List<WorkflowDefinition> getWorkflowDefinitions(
-			String workflowDefinitionName, int start, int end,
+			String name, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowDefinitionManager.getWorkflowDefinitions(
-			workflowDefinitionName, start, end, orderByComparator);
+			name, start, end, orderByComparator);
 	}
 
 	public static void undeployWorkflowDefinition(
-			WorkflowDefinition workflowDefinition, long callingUserId,
-			Map<String, Object> parameters)
+			long userId, String name, int version)
 		throws WorkflowException {
 
 		_workflowDefinitionManager.undeployWorkflowDefinition(
-			workflowDefinition, callingUserId, parameters);
+			userId, name, version);
 	}
 
 	public void setWorkflowDefinitionManager(
