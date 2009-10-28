@@ -44,6 +44,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("resources") %>'>
+
 		<%
 		List<String> modelResources = ListUtil.fromArray(_WORKFLOW_RESOURCES);
 		%>
@@ -129,7 +130,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 
 				</liferay-ui:search-container-row>
 
-				<liferay-ui:search-iterator paginate="<%= false %>" />
+				<liferay-ui:search-iterator />
 			</liferay-ui:search-container>
 
 			<aui:button-row>
@@ -172,7 +173,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 				/>
 			</liferay-ui:search-container-row>
 
-			<liferay-ui:search-iterator paginate="<%= false %>" />
+			<liferay-ui:search-iterator />
 		</liferay-ui:search-container>
 	</c:when>
 </c:choose>

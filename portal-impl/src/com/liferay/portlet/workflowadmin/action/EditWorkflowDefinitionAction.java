@@ -39,9 +39,6 @@ import com.liferay.portal.util.WebKeys;
 
 import java.io.File;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -119,16 +116,11 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		int version = ParamUtil.getInteger(actionRequest, "version");
 
-		ResourceRetriever resourceRetriever = null;
-		Map attributes = new HashMap<String, Object>();
-
 		WorkflowDefinition workflowDefinition = new DefaultWorkflowDefinition(
-			resourceRetriever, name, version, attributes);
-
-		Map parameters = new HashMap<String, Object>();
+			null, name, version, null);
 
 		WorkflowDefinitionManagerUtil.undeployWorkflowDefinition(
-			workflowDefinition, userId, parameters);
+			workflowDefinition, userId, null);
 	}
 
 	protected void updateWorkflowDefinition(ActionRequest actionRequest)
@@ -146,17 +138,11 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		ResourceRetriever resourceRetriever = new ByteArrayResourceRetriever(
 			bytes);
 
-		int version = 0;
-		Map attributes = new HashMap<String, Object>();
-
 		WorkflowDefinition workflowDefinition = new DefaultWorkflowDefinition(
-			resourceRetriever, name, version, attributes);
-
-		boolean autoIncrementVersionNumber = true;
-		Map parameters = new HashMap<String, Object>();
+			resourceRetriever, name, 0, null);
 
 		WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
-			workflowDefinition, userId, autoIncrementVersionNumber, parameters);
+			workflowDefinition, userId, true, null);
 
 		actionRequest.setAttribute(
 			WebKeys.WORKFLOW_DEFINITION, workflowDefinition);

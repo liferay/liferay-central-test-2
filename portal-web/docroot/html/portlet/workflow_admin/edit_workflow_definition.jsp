@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/workflow_admin/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "workflow-definitions");
+
+String redirect = ParamUtil.getString(request, "redirect");
+
 WorkflowDefinition workflowDefinition = (WorkflowDefinition)request.getAttribute(WebKeys.WORKFLOW_DEFINITION);
 
 String name = StringPool.BLANK;
@@ -34,10 +38,6 @@ if (workflowDefinition != null) {
 	name = workflowDefinition.getWorkflowDefinitionName();
 	version = String.valueOf(workflowDefinition.getWorkflowDefinitionVersion());
 }
-
-String redirect = ParamUtil.getString(request, "redirect");
-
-String tabs1 = ParamUtil.getString(request, "tabs1", "workflow-definitions");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

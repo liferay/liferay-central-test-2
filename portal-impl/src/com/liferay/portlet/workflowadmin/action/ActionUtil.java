@@ -75,20 +75,14 @@ public class ActionUtil {
 			WorkflowDefinitionManagerUtil.getWorkflowDefinitions(
 				name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		WorkflowDefinition workflowDefinition = null;
-
-		for (WorkflowDefinition curWorkflowDefinition : workflowDefinitions) {
-			int curVersion =
-				curWorkflowDefinition.getWorkflowDefinitionVersion();
-
-			if (version == curVersion) {
-				workflowDefinition = curWorkflowDefinition;
+		for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
+			if (version == workflowDefinition.getWorkflowDefinitionVersion()) {
+				request.setAttribute(
+					WebKeys.WORKFLOW_DEFINITION, workflowDefinition);
 
 				break;
 			}
 		}
-
-		request.setAttribute(WebKeys.WORKFLOW_DEFINITION, workflowDefinition);
 	}
 
 }
