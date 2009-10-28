@@ -958,10 +958,24 @@ public class ServicePreAction extends Action {
 
 		if (Validator.isNotNull(i18nPath)) {
 			if (Validator.isNotNull(contextPath)) {
+				friendlyURLPrivateGroupPath = StringUtil.replaceFirst(
+					friendlyURLPrivateGroupPath, contextPath,
+					contextPath + i18nPath);
+				friendlyURLPrivateUserPath = StringUtil.replaceFirst(
+					friendlyURLPrivateUserPath, contextPath,
+					contextPath + i18nPath);
+				friendlyURLPublicPath = StringUtil.replaceFirst(
+					friendlyURLPublicPath, contextPath,
+					contextPath + i18nPath);
 				mainPath = StringUtil.replaceFirst(
 					mainPath, contextPath, contextPath + i18nPath);
 			}
 			else {
+				friendlyURLPrivateGroupPath =
+					i18nPath + friendlyURLPrivateGroupPath;
+				friendlyURLPrivateUserPath =
+					i18nPath + friendlyURLPrivateUserPath;
+				friendlyURLPublicPath = i18nPath + friendlyURLPublicPath;
 				mainPath = i18nPath + mainPath;
 			}
 		}
