@@ -42,14 +42,13 @@ fileEntry = fileEntry.toEscapedModel();
 long fileEntryId = fileEntry.getFileEntryId();
 long folderId = fileEntry.getFolderId();
 String name = fileEntry.getName();
+String title = fileEntry.getTitle();
 
 String extension = StringPool.BLANK;
 
-if (Validator.isNotNull(name)) {
-	extension = FileUtil.getExtension(name);
+if (Validator.isNotNull(title)) {
+	extension = FileUtil.getExtension(title);
 }
-
-String title = fileEntry.getTitle();
 
 String[] conversions = new String[0];
 
@@ -290,7 +289,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	<c:if test="<%= isLocked %>">
 		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
 	</c:if>
-
+	 <%    System.out.println("extension: " + extension);
+	     System.out.println("name: " + name);
+		 %>
 	<div class="file-entry-download">
 		<liferay-ui:icon
 			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
