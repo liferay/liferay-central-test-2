@@ -103,7 +103,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 									<%= foldersCount %> <liferay-ui:message key="subfolders" />
 								</div>
 
-								<div class="folder-entries">
+								<div class="folder-entry">
 									<%= entriesCount %> <liferay-ui:message key="entries" />
 								</div>
 							</div>
