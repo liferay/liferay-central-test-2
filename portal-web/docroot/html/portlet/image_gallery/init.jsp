@@ -49,6 +49,8 @@
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
 
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
+
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {

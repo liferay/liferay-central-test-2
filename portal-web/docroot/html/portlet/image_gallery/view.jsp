@@ -42,6 +42,9 @@ if ((folder == null) && (defaultFolderId != IGFolderConstants.DEFAULT_PARENT_FOL
 	}
 }
 
+int foldersCount = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+int imagesCount = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -59,302 +62,251 @@ if (themeDisplay.isSignedIn()) {
 }
 
 tabs1Names += ",recent-images";
+
+request.setAttribute("view.jsp-folder", folder);
+request.setAttribute("view.jsp-folderId", folderId);
 %>
 
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	url="<%= portletURL.toString() %>"
-/>
+<c:if test="<%= folder == null %>">
+	<liferay-ui:tabs
+		names="<%= tabs1Names %>"
+		url="<%= portletURL.toString() %>"
+	/>
+</c:if>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
-		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
-			<portlet:param name="struts_action" value="/image_gallery/search" />
-		</liferay-portlet:renderURL>
+		<aui:layout>
+			<c:if test="<%= folder != null %>">
+				<h3 class="folder-title"><%= folder.getName() %></h3>
+			</c:if>
 
-		<aui:form action="<%= searchURL %>" method="get" name="fm1" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-			<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
+			<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
+				<liferay-ui:panel-container id="imageGalleryPanels" extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
+					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
+						<portlet:param name="struts_action" value="/image_gallery/search" />
+					</liferay-portlet:renderURL>
 
-			<%
-			List<String> headerNames = new ArrayList<String>();
+					<aui:form action="<%= searchURL %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+						<liferay-portlet:renderURLParams varImpl="searchURL" />
+						<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+						<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+						<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
 
-			headerNames.add("folder");
-			headerNames.add("num-of-folders");
-			headerNames.add("num-of-images");
-			headerNames.add(StringPool.BLANK);
+						<div class="folder-search">
+							<aui:input cssClass="input-text-search" id="keywords1" label="" name="keywords" size="30" type="text" />
 
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+							<aui:button type="submit" value="search" />
+						</div>
 
-			int total = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+						<c:if test="<%= folder != null %>">
+							<div class="folder-description">
+								<%= folder.getDescription() %>
+							</div>
 
-			searchContainer.setTotal(total);
+							<div class="folder-metadata">
+								<div class="folder-date">
+									<%= LanguageUtil.format(pageContext, "last-updated-x", dateFormatDate.format(folder.getModifiedDate())) %>
+								</div>
 
-			List results = IGFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+								<div class="folder-subfolders">
+									<%= foldersCount %> <liferay-ui:message key="subfolders" />
+								</div>
 
-			searchContainer.setResults(results);
+								<div class="folder-images">
+									<%= imagesCount %> <liferay-ui:message key="images" />
+								</div>
+							</div>
 
-			List resultRows = searchContainer.getResultRows();
+							<div class="custom-attributes">
+								<liferay-ui:custom-attributes-available className="<%= IGFolder.class.getName() %>">
+									<liferay-ui:custom-attribute-list
+										className="<%= IGFolder.class.getName() %>"
+										classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
+										editable="<%= false %>"
+										label="<%= true %>"
+									/>
+								</liferay-ui:custom-attributes-available>
+							</div>
+						</c:if>
 
-			for (int i = 0; i < results.size(); i++) {
-				IGFolder curFolder = (IGFolder)results.get(i);
+						<c:if test="<%= foldersCount > 0 %>">
+							<liferay-ui:panel id="subFoldersPanel" title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+								<liferay-ui:search-container
+									curParam="cur1"
+									headerNames="folder,num-of-folders,num-of-images"
+									iteratorURL="<%= portletURL %>"
+								>
+									<liferay-ui:search-container-results
+										results="<%= IGFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+										total="<%= IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+									/>
 
-				curFolder = curFolder.toEscapedModel();
+									<liferay-ui:search-container-row
+										className="com.liferay.portlet.imagegallery.model.IGFolder"
+										escapedModel="<%= true %>"
+										keyProperty="folderId"
+										modelVar="curFolder"
+									>
+										<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
+											<portlet:param name="struts_action" value="/image_gallery/view" />
+											<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+										</liferay-portlet:renderURL>
 
-				ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
+										<liferay-ui:search-container-column-text
+											buffer="buffer"
+											name="folder"
+										>
 
-				PortletURL rowURL = renderResponse.createRenderURL();
+											<%
+											buffer.append("<a href=\"");
+											buffer.append(rowURL);
+											buffer.append("\">");
+											buffer.append("<img alt=\"");
+											buffer.append(LanguageUtil.get(pageContext, "folder"));
+											buffer.append("\" class=\"label-icon\" src=\"");
+											buffer.append(themeDisplay.getPathThemeImages());
+											buffer.append("/common/folder.png\">");
+											buffer.append("<strong>");
+											buffer.append(curFolder.getName());
+											buffer.append("</strong>");
 
-				rowURL.setWindowState(WindowState.MAXIMIZED);
+											if (Validator.isNotNull(curFolder.getDescription())) {
+												buffer.append("<br />");
+												buffer.append(curFolder.getDescription());
+											}
 
-				rowURL.setParameter("struts_action", "/image_gallery/view");
-				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+											buffer.append("</a>");
 
-				// Name and description
+											List subfolders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
-				StringBuilder sb = new StringBuilder();
+											if (subfolders.size() > 0) {
+												int subfoldersCount = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
-				sb.append("<a href=\"");
-				sb.append(rowURL);
-				sb.append("\">");
-				sb.append("<img align=\"left\" border=\"0\" src=\"");
-				sb.append(themeDisplay.getPathThemeImages());
-				sb.append("/common/folder.png\">");
-				sb.append("<strong>");
-				sb.append(curFolder.getName());
-				sb.append("</strong>");
+												buffer.append("<br /><u>");
+												buffer.append(LanguageUtil.get(pageContext, "subfolders"));
+												buffer.append("</u>: ");
 
-				if (Validator.isNotNull(curFolder.getDescription())) {
-					sb.append("<br />");
-					sb.append(curFolder.getDescription());
-				}
+												for (int j = 0; j < subfolders.size(); j++) {
+													IGFolder subfolder = (IGFolder)subfolders.get(j);
 
-				sb.append("</a>");
+													subfolder = subfolder.toEscapedModel();
 
-				List subfolders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
+													rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
-				if (subfolders.size() > 0) {
-					int subfoldersCount = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
+													buffer.append("<a href=\"");
+													buffer.append(rowURL);
+													buffer.append("\">");
+													buffer.append(subfolder.getName());
+													buffer.append("</a>");
 
-					sb.append("<br /><u>");
-					sb.append(LanguageUtil.get(pageContext, "subfolders"));
-					sb.append("</u>: ");
+													if ((j + 1) < subfolders.size()) {
+														buffer.append(", ");
+													}
+												}
 
-					for (int j = 0; j < subfolders.size(); j++) {
-						IGFolder subfolder = (IGFolder)subfolders.get(j);
+												if (subfoldersCount > subfolders.size()) {
+													rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-						subfolder = subfolder.toEscapedModel();
+													buffer.append(", <a href=\"");
+													buffer.append(rowURL);
+													buffer.append("\">");
+													buffer.append(LanguageUtil.get(pageContext, "more"));
+													buffer.append(" &raquo;");
+													buffer.append("</a>");
+												}
 
-						rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
+												rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+											}
+											%>
 
-						sb.append("<a href=\"");
-						sb.append(rowURL);
-						sb.append("\">");
-						sb.append(subfolder.getName());
-						sb.append("</a>");
+										</liferay-ui:search-container-column-text>
 
-						if ((j + 1) < subfolders.size()) {
-							sb.append(", ");
-						}
-					}
+										<%
+										List subfolderIds = new ArrayList();
 
-					if (subfoldersCount > subfolders.size()) {
-						rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+										subfolderIds.add(new Long(curFolder.getFolderId()));
 
-						sb.append(", <a href=\"");
-						sb.append(rowURL);
-						sb.append("\">");
-						sb.append(LanguageUtil.get(pageContext, "more"));
-						sb.append(" &raquo;");
-						sb.append("</a>");
-					}
+										IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
-					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-				}
+										int subFoldersCount = subfolderIds.size() - 1;
+										int subEntriesCount = IGImageLocalServiceUtil.getFoldersImagesCount(scopeGroupId, subfolderIds);
+										%>
 
-				row.addText(sb.toString());
+										<liferay-ui:search-container-column-text
+											href="<%= rowURL %>"
+											name="num-of-folders"
+											value="<%= String.valueOf(subFoldersCount) %>"
+										/>
 
-				// Statistics
+										<liferay-ui:search-container-column-text
+											href="<%= rowURL %>"
+											name="num-of-entries"
+											value="<%= String.valueOf(subEntriesCount) %>"
+										/>
 
-				List subfolderIds = new ArrayList();
+										<liferay-ui:search-container-column-jsp
+											align="right"
+											path="/html/portlet/image_gallery/folder_action.jsp"
+										/>
+									</liferay-ui:search-container-row>
 
-				subfolderIds.add(new Long(curFolder.getFolderId()));
+									<liferay-ui:search-iterator />
+								</liferay-ui:search-container>
+							</liferay-ui:panel>
+						</c:if>
+					</aui:form>
 
-				IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+					<script type="text/javascript">
+						<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+							Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
+						</c:if>
+					</script>
 
-				int foldersCount = subfolderIds.size() - 1;
-				int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(scopeGroupId, subfolderIds);
+					<br />
 
-				row.addText(String.valueOf(foldersCount), rowURL);
-				row.addText(String.valueOf(imagesCount), rowURL);
-
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/image_gallery/folder_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
-			}
-
-			boolean showAddFolderButton = IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
-			boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
-			boolean showSearch = (results.size() > 0);
-			%>
-
-			<c:if test="<%= showAddFolderButton || showPermissionsButton || showSearch %>">
-				<div>
-					<c:if test="<%= showSearch %>">
-						<aui:input cssClass="input-text-search" id="keywords1" label="" name="keywords" size="30" type="text" />
-
-						<aui:button type="submit" value="search-folders" />
-					</c:if>
-
-					<c:if test="<%= showAddFolderButton %>">
-						<aui:button onClick='<%= renderResponse.getNamespace() + "addFolder();" %>' value='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />
-					</c:if>
-
-					<c:if test="<%= showPermissionsButton %>">
+					<liferay-ui:panel id="entriesPanel" title='<%= LanguageUtil.get(pageContext, "images") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 
 						<%
-						String modelResource = "com.liferay.portlet.imagegallery";
-						String modelResourceDescription = themeDisplay.getScopeGroupName();
-						String resourcePrimKey = String.valueOf(scopeGroupId);
+						SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
-						if (folder != null) {
-							modelResource = IGFolder.class.getName();
-							modelResourceDescription = folder.getName();
-							resourcePrimKey = String.valueOf(folder.getFolderId());
-						}
+						int total = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
+
+						searchContainer.setTotal(total);
+
+						List results = IGImageLocalServiceUtil.getImages(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+
+						searchContainer.setResults(results);
 						%>
 
-						<liferay-security:permissionsURL
-							modelResource="<%= modelResource %>"
-							modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
-							resourcePrimKey="<%= resourcePrimKey %>"
-							var="permissionsURL"
-						/>
+						<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
 
-						<aui:button onClick="<%= permissionsURL %>" value="permissions" />
-					</c:if>
+					</liferay-ui:panel>
+				</liferay-ui:panel-container>
+			</aui:column>
+
+			<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
+				<div class="folder-icon">
+					<liferay-ui:icon
+						image='<%= ((foldersCount + imagesCount) > 0) ? "../image_gallery/folder_full_image" : "folder_empty" %>'
+						cssClass="folder-avatar"
+						message='<%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "image-home") %>'
+					/>
+
+					<div class="folder-name">
+						<h4><%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "image-home") %></h4>
+					</div>
 				</div>
 
-				<br />
-			</c:if>
+				<%
+				request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+				%>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</aui:form>
-
-		<script type="text/javascript">
-			function <portlet:namespace />addFolder() {
-				var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';
-
-				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-					url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm1.<portlet:namespace />keywords.value;
-				}
-
-				submitForm(document.hrefFm, url);
-			}
-
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-			</c:if>
-		</script>
-
-		<script type="text/javascript">
-			function <portlet:namespace />viewSlideShow() {
-				var slideShowWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view_slide_show" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
-				slideShowWindow.focus();
-			}
-		</script>
-
-		<br />
-
-		<aui:form action="<%= searchURL %>" method="get" name="fm2" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-			<aui:input name="searchFolderId" type="hidden" value="<%= folderId %>" />
-
-			<liferay-ui:tabs names="images" />
-
-			<%
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
-
-			int total = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
-
-			searchContainer.setTotal(total);
-
-			List results = IGImageLocalServiceUtil.getImages(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
-
-			searchContainer.setResults(results);
-
-			boolean showAddImageButton = IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_IMAGE);
-
-			boolean showSearch = (results.size() > 0);
-			%>
-
-			<c:if test="<%= showAddImageButton || showSearch %>">
-				<div>
-					<c:if test="<%= showSearch %>">
-						<aui:input cssClass="input-text-search" id="keywords2" label="" name="keywords" size="30" type="text" />
-
-						<aui:button type="submit" value="search-this-folder" />
-					</c:if>
-
-					<c:if test="<%= showAddImageButton %>">
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editImageURL">
-							<portlet:param name="struts_action" value="/image_gallery/edit_image" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-						</portlet:renderURL>
-
-						<aui:button onClick="<%= editImageURL %>" value="add-image" />
-					</c:if>
-
-					<c:if test="<%= showSearch %>">
-						<aui:button onClick='<%= renderResponse.getNamespace() + "viewSlideShow();" %>' value="view-slide-show" />
-					</c:if>
-				</div>
-
-				<br />
-			</c:if>
-
-			<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
-		</aui:form>
-
-		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-			</script>
-		</c:if>
-
-		<br />
+				<liferay-util:include page="/html/portlet/image_gallery/folder_action.jsp" />
+			</aui:column>
+		</aui:layout>
 
 		<%
-		StringBuilder sb = new StringBuilder();
-
-		IGFolder curFolder = folder;
-
-		while (true) {
-			if (curFolder == null) {
-				break;
-			}
-
-			sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
-			sb.insert(0, StringPool.SLASH);
-
-			if (curFolder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				break;
-			}
-			else {
-				curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-			}
-		}
-
 		if (folder != null) {
 			IGUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 
@@ -365,9 +317,6 @@ tabs1Names += ",recent-images";
 		}
 		%>
 
-		<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
-			<liferay-ui:webdav path='<%= "/image_gallery" + sb.toString() %>' />
-		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-images") || tabs1.equals("recent-images") %>'>
 

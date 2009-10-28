@@ -22,7 +22,23 @@
  */
 %>
 
-<%@ include file="/html/portlet/css_init.jsp" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
+
+<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+
+<liferay-util:buffer var="html">
+	<liferay-util:include page="/html/portlet/document_library/css.jsp" />
+</liferay-util:buffer>
+
+<%
+html = StringUtil.replace(html, "documentLibraryPanels", "imageGalleryPanels");
+html = StringUtil.replace(html, "file-entries", "images");
+html = StringUtil.replace(html, "file-entry", "image");
+html = StringUtil.replace(html, "portlet-document-library", "portlet-image-gallery");
+%>
+
+<%= html %>
 
 .portlet-image-gallery .image-popup .image-content {
 	margin-top: 16px;
