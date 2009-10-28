@@ -24,6 +24,11 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-image-gallery .image-thumbnail {
+	float: left;
+	margin: 20px 10px 0;
+}
+
 .image-popup .image-content {
 	margin-top: 16px;
 	text-align: center;
