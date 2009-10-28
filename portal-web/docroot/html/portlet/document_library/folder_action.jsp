@@ -111,7 +111,7 @@ if (row == null) {
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="../document_library/add_folder" message='<%= folder != null ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
+		<liferay-ui:icon image="add_folder" message='<%= folder != null ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">

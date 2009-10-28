@@ -94,8 +94,8 @@ request.setAttribute("view_entry.jsp-entry", entry);
 <aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 	<div class="entry-download">
 		<liferay-ui:icon
-			image='../document_library/bookmark'
-			message='download'
+			image="../bookmarks/bookmark"
+			message="download"
 			url="<%= entry.getUrl() %>"
 			cssClass="entry-avatar"
 		/>
