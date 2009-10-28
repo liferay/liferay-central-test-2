@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.resource.ResourceRetriever;
+import java.io.InputStream;
 
 import java.util.Map;
 
@@ -30,38 +30,39 @@ import java.util.Map;
  * <a href="DefaultWorkflowDefinition.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class DefaultWorkflowDefinition implements WorkflowDefinition {
 
 	public DefaultWorkflowDefinition(
-		ResourceRetriever resourceRetriever, String workflowDefinitionName,
-		int workflowDefinitionVersion, Map<String, Object> attributes) {
+		String name, int version, InputStream inputStream,
+		Map<String, Object> optionalAttributes) {
 
-		_resourceRetriever = resourceRetriever;
-		_workflowDefinitionName = workflowDefinitionName;
-		_workflowDefinitionVersion = workflowDefinitionVersion;
-		_attributes = attributes;
+		_name = name;
+		_version = version;
+		_inputStream = inputStream;
+		_optionalAttributes = optionalAttributes;
 	}
 
-	public Map<String, Object> getAttributes() {
-		return _attributes;
+	public InputStream getInputStream() {
+		return _inputStream;
 	}
 
-	public ResourceRetriever getJar() {
-		return _resourceRetriever;
+	public String getName() {
+		return _name;
 	}
 
-	public String getWorkflowDefinitionName() {
-		return _workflowDefinitionName;
+	public Map<String, Object> getOptionalAttributes() {
+		return _optionalAttributes;
 	}
 
-	public int getWorkflowDefinitionVersion() {
-		return _workflowDefinitionVersion;
+	public int getVersion() {
+		return _version;
 	}
 
-	private Map<String, Object> _attributes;
-	private ResourceRetriever _resourceRetriever;
-	private String _workflowDefinitionName;
-	private int _workflowDefinitionVersion;
+	private InputStream _inputStream;
+	private String _name;
+	private Map<String, Object> _optionalAttributes;
+	private int _version;
 
 }

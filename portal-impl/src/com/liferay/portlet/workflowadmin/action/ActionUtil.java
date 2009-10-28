@@ -76,7 +76,7 @@ public class ActionUtil {
 				name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
-			if (version == workflowDefinition.getWorkflowDefinitionVersion()) {
+			if (version == workflowDefinition.getVersion()) {
 				request.setAttribute(
 					WebKeys.WORKFLOW_DEFINITION, workflowDefinition);
 

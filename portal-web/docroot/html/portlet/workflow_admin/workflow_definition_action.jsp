@@ -35,8 +35,8 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 		<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="name" value="<%= workflowDefinition.getWorkflowDefinitionName() %>" />
-		<portlet:param name="version" value="<%= String.valueOf(workflowDefinition.getWorkflowDefinitionVersion()) %>" />
+		<portlet:param name="name" value="<%= workflowDefinition.getName() %>" />
+		<portlet:param name="version" value="<%= String.valueOf(workflowDefinition.getVersion()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -45,8 +45,8 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 		<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="name" value="<%= workflowDefinition.getWorkflowDefinitionName() %>" />
-		<portlet:param name="version" value="<%= String.valueOf(workflowDefinition.getWorkflowDefinitionVersion()) %>" />
+		<portlet:param name="name" value="<%= workflowDefinition.getName() %>" />
+		<portlet:param name="version" value="<%= String.valueOf(workflowDefinition.getVersion()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

@@ -22,23 +22,12 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.resource.ResourceRetriever;
+import java.io.InputStream;
 
 import java.util.Map;
 
 /**
  * <a href="WorkflowDefinition.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * The workflow definition information holds attributes of a workflow definition
- * acting as the model for a workflow.
- * </p>
- *
- * <p>
- * If the engine supports versioning, the workflow definition is identified by
- * its definition id and version, otherwise its id is the only unique
- * identification.
- * </p>
  *
  * @author Micha Kiener
  * @author Shuyang Zhou
@@ -46,53 +35,12 @@ import java.util.Map;
  */
 public interface WorkflowDefinition {
 
-	/**
-	 * Returns an optional array of any kind of attributes needed to describe
-	 * this workflow definition besides the name and version. If the
-	 * implementation does not provide or support attributes, <code>null</code>
-	 * is returned. If it does support attributes, but none have been set yet,
-	 * an empty map must be returned, never <code>null</code>.
-	 *
-	 * @return the map of any additional attributes to the workflow definition,
-	 *		   if supported, <code>null</code> otherwise
-	 */
-	public Map<String, Object> getAttributes();
+	public InputStream getInputStream();
 
-	/**
-	 * <p>
-	 * A workflow definition is being deployed as an archive, having the
-	 * definition file (usually an XML file) within a folder called META-INF and
-	 * any optional classes the workflow engine would need in order to execute
-	 * any actions and activities. The jar being returned as the resource will
-	 * be deployed within the lib folder of the workflow plugin.
-	 * </p>
-	 *
-	 * <p>
-	 * This method returns <code>null</code>, if this definition has been
-	 * queried through the {@link WorkflowDefinitionManager}.
-	 * </p>
-	 *
-	 * @return the resource representing the workflow definition jar to be
-	 *		   deployed
-	 */
-	public ResourceRetriever getJar();
+	public String getName();
 
-	/**
-	 * Returns the unique name of this workflow definition. If the underlying
-	 * engine supports versioning, the name and the version must be unique,
-	 * otherwise, the version is ignored.
-	 *
-	 * @return the workflow definition name
-	 */
-	public String getWorkflowDefinitionName();
+	public Map<String, Object> getOptionalAttributes();
 
-	/**
-	 * Returns the version of this workflow definition which builds a composite
-	 * id with the definition id. The version is ignored, if the underlying
-	 * engine does not support versioning.
-	 *
-	 * @return the version of this definition
-	 */
-	public int getWorkflowDefinitionVersion();
+	public int getVersion();
 
 }

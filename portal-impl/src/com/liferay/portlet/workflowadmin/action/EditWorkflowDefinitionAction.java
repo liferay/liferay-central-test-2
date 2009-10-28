@@ -22,12 +22,9 @@
 
 package com.liferay.portlet.workflowadmin.action;
 
-import com.liferay.portal.kernel.resource.ByteArrayResourceRetriever;
-import com.liferay.portal.kernel.resource.ResourceRetriever;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.DefaultWorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
@@ -38,6 +35,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -117,7 +115,7 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		int version = ParamUtil.getInteger(actionRequest, "version");
 
 		WorkflowDefinition workflowDefinition = new DefaultWorkflowDefinition(
-			null, name, version, null);
+			name, version, null, null);
 
 		WorkflowDefinitionManagerUtil.undeployWorkflowDefinition(
 			workflowDefinition, userId, null);
@@ -131,15 +129,10 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 
 		long userId = PortalUtil.getUserId(actionRequest);
 		String name = ParamUtil.getString(actionRequest, "name");
-
 		File file = uploadRequest.getFile("file");
-		byte[] bytes = FileUtil.getBytes(file);
-
-		ResourceRetriever resourceRetriever = new ByteArrayResourceRetriever(
-			bytes);
 
 		WorkflowDefinition workflowDefinition = new DefaultWorkflowDefinition(
-			resourceRetriever, name, 0, null);
+			name, 0, new FileInputStream(file), null);
 
 		WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
 			workflowDefinition, userId, true, null);

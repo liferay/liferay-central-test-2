@@ -35,8 +35,8 @@ String name = StringPool.BLANK;
 String version = StringPool.BLANK;
 
 if (workflowDefinition != null) {
-	name = workflowDefinition.getWorkflowDefinitionName();
-	version = String.valueOf(workflowDefinition.getWorkflowDefinitionVersion());
+	name = workflowDefinition.getName();
+	version = String.valueOf(workflowDefinition.getVersion());
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();

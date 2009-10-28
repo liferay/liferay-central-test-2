@@ -70,19 +70,14 @@ public class WorkflowLockingAdvice {
 			(WorkflowDefinition)arguments[0];
 		long userId = (Long)arguments[1];
 
-		String workflowDefinitionName =
-			workflowDefinition.getWorkflowDefinitionName();
-		Integer workflowDefinitionVersion =
-			workflowDefinition.getWorkflowDefinitionVersion();
-
 		String className = WorkflowDefinition.class.getName();
 		String key = _encodeKey(
-			workflowDefinitionName, workflowDefinitionVersion);
+			workflowDefinition.getName(), workflowDefinition.getVersion());
 
 		if (LockLocalServiceUtil.isLocked(className, key)) {
 			throw new WorkflowException(
-				"Workflow definition name " + workflowDefinitionName +
-					" and version " + workflowDefinitionVersion +
+				"Workflow definition name " + workflowDefinition.getName() +
+					" and version " + workflowDefinition.getVersion() +
 						" is being undeployed");
 		}
 
@@ -98,14 +93,12 @@ public class WorkflowLockingAdvice {
 		}
 	}
 
-	private String _encodeKey(
-		String workflowDefinitionName, Integer workflowDefinitionVersion) {
-
+	private String _encodeKey(String name, int version) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(workflowDefinitionName);
+		sb.append(name);
 		sb.append(StringPool.POUND);
-		sb.append(workflowDefinitionVersion);
+		sb.append(version);
 
 		return sb.toString();
 	}

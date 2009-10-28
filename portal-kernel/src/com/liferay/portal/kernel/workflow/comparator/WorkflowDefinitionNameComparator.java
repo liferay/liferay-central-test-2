@@ -51,16 +51,14 @@ public class WorkflowDefinitionNameComparator extends OrderByComparator {
 		WorkflowDefinition workflowDefinition1 = (WorkflowDefinition)obj1;
 		WorkflowDefinition workflowDefinition2 = (WorkflowDefinition)obj2;
 
-		String name1 = workflowDefinition1.getWorkflowDefinitionName();
-		String name2 = workflowDefinition2.getWorkflowDefinitionName();
+		String name1 = workflowDefinition1.getName();
+		String name2 = workflowDefinition2.getName();
 
 		int value = name1.compareTo(name2);
 
 		if (value == 0) {
-			Integer version1 =
-				workflowDefinition1.getWorkflowDefinitionVersion();
-			Integer version2 =
-				workflowDefinition2.getWorkflowDefinitionVersion();
+			Integer version1 = workflowDefinition1.getVersion();
+			Integer version2 = workflowDefinition2.getVersion();
 
 			value = version1.compareTo(version2);
 		}

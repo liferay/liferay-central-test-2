@@ -114,12 +114,12 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 							for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
 								boolean selected = false;
 
-								if ((workflowLink != null) && (workflowLink.getDefinitionName().equals(workflowDefinition.getWorkflowDefinitionName()))) {
+								if ((workflowLink != null) && (workflowLink.getDefinitionName().equals(workflowDefinition.getName()))) {
 									selected = true;
 								}
 							%>
 
-								<aui:option label="<%= workflowDefinition.getWorkflowDefinitionName() %>" selected="<%= selected %>" />
+								<aui:option label="<%= workflowDefinition.getName() %>" selected="<%= selected %>" />
 
 							<%
 							}
@@ -159,12 +159,12 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 
 				<liferay-ui:search-container-column-text
 					name="name"
-					value="<%= workflowDefinition.getWorkflowDefinitionName() %>"
+					value="<%= workflowDefinition.getName() %>"
 				/>
 
 				<liferay-ui:search-container-column-text
 					name="version"
-					value="<%= String.valueOf(workflowDefinition.getWorkflowDefinitionVersion()) %>"
+					value="<%= String.valueOf(workflowDefinition.getVersion()) %>"
 				/>
 
 				<liferay-ui:search-container-column-jsp
