@@ -149,8 +149,8 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 			int pos = versionNumberFragment.lastIndexOf(StringPool.UNDERLINE);
 
 			if (pos > -1) {
-				versionNumberFragment =
-					versionNumberFragment.substring(pos + 1);
+				versionNumberFragment = versionNumberFragment.substring(
+					pos + 1);
 			}
 
 			double versionNumber = GetterUtil.getDouble(versionNumberFragment);
