@@ -146,7 +146,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		for (int i = 0; i < versionNumbers.length; i++) {
 			String versionNumberFragment = versionNumbers[i];
 
-			int pos = versionNumbers[i].lastIndexOf(StringPool.UNDERLINE);
+			int pos = versionNumberFragment.lastIndexOf(StringPool.UNDERLINE);
 
 			if (pos > -1) {
 				versionNumberFragment =
