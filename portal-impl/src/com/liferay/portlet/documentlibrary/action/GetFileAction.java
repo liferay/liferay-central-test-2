@@ -139,7 +139,9 @@ public class GetFileAction extends PortletAction {
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (NoSuchFileEntryException nsfee) {
-			PortalUtil.sendError(404, nsfee, actionRequest, actionResponse);
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfee, actionRequest,
+				actionResponse);
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, actionRequest, actionResponse);
