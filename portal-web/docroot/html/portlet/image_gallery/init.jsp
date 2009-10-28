@@ -49,8 +49,6 @@
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
 
-Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
-
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
@@ -61,4 +59,6 @@ else if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 }
 
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>

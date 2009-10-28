@@ -41,6 +41,8 @@ else {
 	folderId = (Long)request.getAttribute("view.jsp-folderId");
 }
 
+int imagesCount = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
+
 String modelResource = null;
 String modelResourceDescription = null;
 String resourcePrimKey = null;
@@ -67,8 +69,6 @@ boolean view = false;
 if (row == null) {
 	view = true;
 }
-
-int imagesCount = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
