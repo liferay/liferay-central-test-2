@@ -49,9 +49,9 @@ public class EventResponseImpl
 	}
 
 	protected void init(
-		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
-		String portletName, User user, Layout layout)
-	throws PortletModeException, WindowStateException {
+			PortletRequestImpl portletRequestImpl, HttpServletResponse response,
+			String portletName, User user, Layout layout)
+		throws PortletModeException, WindowStateException {
 
 		init(
 			portletRequestImpl, response, portletName, user, layout, null,
