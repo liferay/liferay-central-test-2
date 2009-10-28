@@ -292,7 +292,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 	<div class="file-entry-download">
 		<liferay-ui:icon
-			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
+			image='<%= "../file_system/large/" + DLUtil.getGenericName(extension) %>'
 			message='download'
 			url="<%= fileUrl %>"
 			cssClass="file-entry-avatar"

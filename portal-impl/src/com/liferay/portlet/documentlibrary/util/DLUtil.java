@@ -241,7 +241,7 @@ public class DLUtil {
 		_genericNames.put("wav", "music");
 		_genericNames.put("wma", "music");
 
-		_genericNames.put("pdf", "pdfs");
+		_genericNames.put("pdf", "pdf");
 
 		_genericNames.put("odp", "presentation");
 		_genericNames.put("ppt", "presentation");

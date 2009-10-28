@@ -370,7 +370,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 			<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 				<div class="folder-icon">
 					<liferay-ui:icon
-						image='<%= ((foldersCount + entriesCount) > 0) ? "../bookmarks/folder_full_bookmark" : "folder_empty" %>'
+						image='<%= "../file_system/large/" + (((foldersCount + entriesCount) > 0) ? "folder_full_bookmark" : "folder_empty") %>'
 						cssClass="folder-avatar"
 						message='<%= folder != null ? folder.getName() : LanguageUtil.get(pageContext, "bookmarks-home") %>'
 					/>
