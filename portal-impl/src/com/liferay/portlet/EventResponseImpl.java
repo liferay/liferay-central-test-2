@@ -22,9 +22,16 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.User;
+
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
+import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
+import javax.portlet.WindowStateException;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="EventResponseImpl.java.html"><b><i>View Source</i></b></a>
@@ -39,6 +46,16 @@ public class EventResponseImpl
 	}
 
 	public void setRenderParameters(EventRequest eventRequest) {
+	}
+
+	protected void init(
+		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
+		String portletName, User user, Layout layout)
+	throws PortletModeException, WindowStateException {
+
+		init(
+			portletRequestImpl, response, portletName, user, layout, null,
+			null);
 	}
 
 }

@@ -25,9 +25,6 @@ package com.liferay.portlet;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 
-import javax.portlet.PortletMode;
-import javax.portlet.WindowState;
-
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -39,15 +36,13 @@ public class EventResponseFactory {
 
 	public static EventResponseImpl create(
 			EventRequestImpl eventRequestImpl, HttpServletResponse response,
-			String portletName, User user, Layout layout,
-			WindowState windowState, PortletMode portletMode)
+			String portletName, User user, Layout layout)
 		throws Exception {
 
 		EventResponseImpl eventResponseImpl = new EventResponseImpl();
 
 		eventResponseImpl.init(
-			eventRequestImpl, response, portletName, user, layout, windowState,
-			portletMode);
+			eventRequestImpl, response, portletName, user, layout);
 
 		return eventResponseImpl;
 	}

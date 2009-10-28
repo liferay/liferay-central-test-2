@@ -25,6 +25,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
@@ -95,7 +96,6 @@ import java.util.Map;
 import javax.portlet.Event;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
-import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -251,11 +251,12 @@ public class LayoutAction extends Action {
 		request.setAttribute(WebKeys.FORWARD_URL, forwardURL);
 	}
 
-	protected List<Portlet> getLayoutSetPortlets(
+	protected List<LayoutTypePortlet> getLayoutSetPortlets(
 			long groupId, boolean privateLayout)
 		throws Exception {
 
-		List<Portlet> portlets = new ArrayList<Portlet>();
+		List<LayoutTypePortlet> layoutTypePortlets =
+			new ArrayList<LayoutTypePortlet>();
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout, LayoutConstants.TYPE_PORTLET);
@@ -268,10 +269,10 @@ public class LayoutAction extends Action {
 			LayoutTypePortlet layoutTypePortlet =
 				(LayoutTypePortlet)layout.getLayoutType();
 
-			portlets.addAll(layoutTypePortlet.getPortlets());
+			layoutTypePortlets.add(layoutTypePortlet);
 		}
 
-		return portlets;
+		return layoutTypePortlets;
 	}
 
 	protected void includeLayoutContent(
@@ -323,8 +324,9 @@ public class LayoutAction extends Action {
 
 	protected void processEvent(
 			PortletRequestImpl portletRequestImpl,
-			StateAwareResponseImpl stateAwareResponseImpl, Portlet portlet,
-			List<Portlet> portlets, Event event)
+			StateAwareResponseImpl stateAwareResponseImpl,
+			LayoutTypePortlet layoutTypePortlet, Portlet portlet,
+			List<LayoutTypePortlet> layoutTypePortlets, Event event)
 		throws Exception {
 
 		HttpServletRequest request = portletRequestImpl.getHttpServletRequest();
@@ -344,8 +346,47 @@ public class LayoutAction extends Action {
 			portlet, servletContext);
 		PortletContext portletContext = portletConfig.getPortletContext();
 
-		WindowState windowState = portletRequestImpl.getWindowState();
-		PortletMode portletMode = portletRequestImpl.getPortletMode();
+		WindowState windowState = null;
+
+		if (layoutTypePortlet.hasStateMaxPortletId(portletId)) {
+			windowState = WindowState.MAXIMIZED;
+		}
+		else if (layoutTypePortlet.hasStateMinPortletId(portletId)) {
+			windowState = WindowState.MINIMIZED;
+		}
+		else {
+			windowState = WindowState.NORMAL;
+		}
+
+		PortletMode portletMode = null;
+
+		if (layoutTypePortlet.hasModeAboutPortletId(portletId)) {
+			portletMode = LiferayPortletMode.ABOUT;
+		}
+		else if (layoutTypePortlet.hasModeConfigPortletId(portletId)) {
+			portletMode = LiferayPortletMode.CONFIG;
+		}
+		else if (layoutTypePortlet.hasModeEditDefaultsPortletId(portletId)) {
+			portletMode = LiferayPortletMode.EDIT_DEFAULTS;
+		}
+		else if (layoutTypePortlet.hasModeEditGuestPortletId(portletId)) {
+			portletMode = LiferayPortletMode.EDIT_GUEST;
+		}
+		else if (layoutTypePortlet.hasModeEditPortletId(portletId)) {
+			portletMode = PortletMode.EDIT;
+		}
+		else if (layoutTypePortlet.hasModeHelpPortletId(portletId)) {
+			portletMode = PortletMode.HELP;
+		}
+		else if (layoutTypePortlet.hasModePreviewPortletId(portletId)) {
+			portletMode = LiferayPortletMode.PREVIEW;
+		}
+		else if (layoutTypePortlet.hasModePrintPortletId(portletId)) {
+			portletMode = LiferayPortletMode.PRINT;
+		}
+		else {
+			portletMode = PortletMode.VIEW;
+		}
 
 		User user = stateAwareResponseImpl.getUser();
 		Layout layout = stateAwareResponseImpl.getLayout();
@@ -354,14 +395,13 @@ public class LayoutAction extends Action {
 			portletRequestImpl.getPreferencesImpl();
 
 		EventRequestImpl eventRequestImpl = EventRequestFactory.create(
-			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, portletPreferences, layout.getPlid());
+			request, portlet, invokerPortlet, portletContext,
+			windowState, portletMode, portletPreferences, layout.getPlid());
 
 		eventRequestImpl.setEvent(event);
 
 		EventResponseImpl eventResponseImpl = EventResponseFactory.create(
-			eventRequestImpl, response, portletId, user, layout, windowState,
-			portletMode);
+			eventRequestImpl, response, portletId, user, layout);
 
 		eventRequestImpl.defineObjects(portletConfig, eventResponseImpl);
 
@@ -390,12 +430,9 @@ public class LayoutAction extends Action {
 			catch (UnavailableException ue) {
 				throw ue;
 			}
-			catch (PortletException pe) {
-				eventResponseImpl.setWindowState(windowState);
-				eventResponseImpl.setPortletMode(portletMode);
-			}
 
-			processEvents(eventRequestImpl, eventResponseImpl, portlets);
+			processEvents(eventRequestImpl, eventResponseImpl,
+				layoutTypePortlets);
 		}
 		finally {
 			eventRequestImpl.cleanUp();
@@ -405,7 +442,7 @@ public class LayoutAction extends Action {
 	protected void processEvents(
 			PortletRequestImpl portletRequestImpl,
 			StateAwareResponseImpl stateAwareResponseImpl,
-			List<Portlet> portlets)
+			List<LayoutTypePortlet> layoutTypePortlets)
 		throws Exception {
 
 		List<Event> events = stateAwareResponseImpl.getEvents();
@@ -417,14 +454,20 @@ public class LayoutAction extends Action {
 		for (Event event : events) {
 			javax.xml.namespace.QName qName = event.getQName();
 
-			for (Portlet portlet : portlets) {
-				QName processingQName = portlet.getProcessingEvent(
-					qName.getNamespaceURI(), qName.getLocalPart());
+			for (LayoutTypePortlet layoutTypePortlet : layoutTypePortlets) {
 
-				if (processingQName != null) {
-					processEvent(
-						portletRequestImpl, stateAwareResponseImpl, portlet,
-						portlets, event);
+				List<Portlet> portlets = layoutTypePortlet.getPortlets();
+
+				for (Portlet portlet : portlets) {
+					QName processingQName = portlet.getProcessingEvent(
+						qName.getNamespaceURI(), qName.getLocalPart());
+
+					if (processingQName != null) {
+						processEvent(
+							portletRequestImpl, stateAwareResponseImpl,
+							layoutTypePortlet, portlet, layoutTypePortlets,
+							event);
+					}
 				}
 			}
 		}
@@ -658,11 +701,11 @@ public class LayoutAction extends Action {
 					request, layout.getPlid(), portletId,
 					actionResponseImpl.getRenderParameterMap());
 
-				if (actionResponseImpl.getEvents().size() > 0) {
-					List<Portlet> portlets = null;
+				List<LayoutTypePortlet> layoutTypePortlets = null;
 
+				if (actionResponseImpl.getEvents().size() > 0) {
 					if (PropsValues.PORTLET_EVENT_DISTRIBUTION_LAYOUT_SET) {
-						portlets = getLayoutSetPortlets(
+						layoutTypePortlets = getLayoutSetPortlets(
 							layout.getGroupId(), layout.isPrivateLayout());
 					}
 					else {
@@ -672,13 +715,16 @@ public class LayoutAction extends Action {
 							LayoutTypePortlet layoutTypePortlet =
 								(LayoutTypePortlet)layout.getLayoutType();
 
-							portlets =
-								layoutTypePortlet.getPortlets();
+							layoutTypePortlets =
+								new ArrayList<LayoutTypePortlet>();
+
+							layoutTypePortlets.add(layoutTypePortlet);
 						}
 					}
 
 					processEvents(
-						actionRequestImpl, actionResponseImpl, portlets);
+						actionRequestImpl, actionResponseImpl,
+						layoutTypePortlets);
 
 					actionRequestImpl.defineObjects(
 						portletConfig, actionResponseImpl);

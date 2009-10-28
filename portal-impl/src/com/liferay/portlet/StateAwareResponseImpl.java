@@ -284,8 +284,13 @@ public abstract class StateAwareResponseImpl
 		_publicRenderParameters = PublicRenderParametersPool.get(
 			getHttpServletRequest(), layout.getPlid());
 
-		setWindowState(windowState);
-		setPortletMode(portletMode);
+		if (windowState != null) {
+			setWindowState(windowState);
+		}
+
+		if (portletMode != null) {
+			setPortletMode(portletMode);
+		}
 
 		// Set _calledSetRenderParameter to false because setWindowState and
 		// setPortletMode sets it to true
