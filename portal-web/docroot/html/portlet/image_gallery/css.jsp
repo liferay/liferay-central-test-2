@@ -25,8 +25,15 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-image-gallery .image-thumbnail {
+	border: 2px solid #EEEEEE;
 	float: left;
-	margin: 20px 10px 0;
+	margin: 20px 4px 0;
+	padding: 5px 5px 0;
+	text-align: center;
+}
+
+.portlet-image-gallery .image-thumbnail:hover {
+	border-color: #CCCCCC;
 }
 
 .image-popup .image-content {
