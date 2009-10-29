@@ -97,10 +97,6 @@ public interface TaskInstanceManager {
 	 * reflect those changes made to the task instance.
 	 *
 	 * @param  taskInstanceId the id of the task instance to be assigned
-	 * @param  userCredential the credential of the user to assign the task to,
-	 *		   representing the user's attributes and its role set, a credential
-	 *		   can be created using the id of the user through {@link
-	 *		   UserCredentialFactoryUtil#createCredential(long)}
 	 * @param  comment the optional comment for the user being the new assignee
 	 * @param  attributes the optional attributes to be passed on to the context
 	 *		   information of the workflow instance (they can be empty or even

@@ -23,7 +23,7 @@
 package com.liferay.portal.kernel.workflow.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
+import com.liferay.portal.kernel.workflow.WorkflowInstance;
 
 import java.util.Date;
 
@@ -50,19 +50,19 @@ public class WorkflowInstanceStartDateComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		WorkflowInstanceInfo workflowInstanceInfo1 = (WorkflowInstanceInfo)obj1;
-		WorkflowInstanceInfo workflowInstanceInfo2 = (WorkflowInstanceInfo)obj2;
+		WorkflowInstance workflowInstance1 = (WorkflowInstance)obj1;
+		WorkflowInstance workflowInstance2 = (WorkflowInstance)obj2;
 
-		Date startDate1 = workflowInstanceInfo1.getStartDate();
-		Date startDate2 = workflowInstanceInfo2.getStartDate();
+		Date startDate1 = workflowInstance1.getStartDate();
+		Date startDate2 = workflowInstance2.getStartDate();
 
 		int value = startDate1.compareTo(startDate2);
 
 		if (value == 0) {
 			Long workflowInstanceId1 =
-				workflowInstanceInfo1.getWorkflowInstanceId();
+				workflowInstance1.getWorkflowInstanceId();
 			Long workflowInstanceId2 =
-				workflowInstanceInfo2.getWorkflowInstanceId();
+				workflowInstance2.getWorkflowInstanceId();
 
 			value = workflowInstanceId1.compareTo(workflowInstanceId2);
 		}

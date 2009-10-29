@@ -36,11 +36,11 @@ import java.util.Map;
  *
  * <p>
  * A task is always related to a workflow instance (represented through a {@link
- * WorkflowInstanceInfo}) and breaks the execution of the workflow execution
- * plan until the task has been completed. Consequently a task is an element
- * within a workflow definition to break the execution and let the user do some
- * work like making a decision or providing additional information to be used by
- * the continuation of the workflow execution after the task has been completed.
+ * WorkflowInstance}) and breaks the execution of the workflow execution plan
+ * until the task has been completed. Consequently a task is an element within a
+ * workflow definition to break the execution and let the user do some work like
+ * making a decision or providing additional information to be used by the
+ * continuation of the workflow execution after the task has been completed.
  * </p>
  *
  * <p>
@@ -76,7 +76,7 @@ public interface TaskInstanceInfo {
 	 * Returns optional attributes of this task which are dependent on the
 	 * underlying engine. This map of attributes must not be confused with the
 	 * one being returned by the workflow instance through {@link
-	 * WorkflowInstanceInfo#getContext()}.
+	 * WorkflowInstance#getContext()}.
 	 *
 	 * @return the optional map of attributes related to this task, might be
 	 *		   empty or even <code>null</code>

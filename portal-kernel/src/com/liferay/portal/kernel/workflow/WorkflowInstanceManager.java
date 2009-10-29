@@ -92,7 +92,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if adding the context information
 	 *		   failed
 	 */
-	public WorkflowInstanceInfo addContextInformation(
+	public WorkflowInstance addContextInformation(
 			long workflowInstanceId, Map<String, Object> context)
 		throws WorkflowException;
 
@@ -171,7 +171,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the instance was not found or any
 	 *		   other error occurred
 	 */
-	public WorkflowInstanceInfo getWorkflowInstanceInfo(
+	public WorkflowInstance getWorkflowInstance(
 			long workflowInstanceId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
 
@@ -186,7 +186,7 @@ public interface WorkflowInstanceManager {
 	 *		   or not
 	 * @throws WorkflowException is thrown if querying failed
 	 */
-	public int getWorkflowInstanceInfoCount(
+	public int getWorkflowInstanceCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion)
 		throws WorkflowException;
 
@@ -204,7 +204,7 @@ public interface WorkflowInstanceManager {
 	 *		   workflow definition
 	 * @throws WorkflowException is thrown if querying failed
 	 */
-	public int getWorkflowInstanceInfoCount(
+	public int getWorkflowInstanceCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean completed)
 		throws WorkflowException;
@@ -234,7 +234,7 @@ public interface WorkflowInstanceManager {
 	 *		   instances found
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
-	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+	public List<WorkflowInstance> getWorkflowInstances(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean completed, boolean retrieveChildrenInfo, int start, int end,
 			OrderByComparator orderByComparator)
@@ -244,7 +244,7 @@ public interface WorkflowInstanceManager {
 	 * Returns a list of workflow instance information for a given workflow
 	 * definition and optionally a certain version of it. By default, it only
 	 * returns open workflow instances. If ended ones should be returned as well
-	 * or even exclusively, the method {@link #getWorkflowInstanceInfos(String,
+	 * or even exclusively, the method {@link #getWorkflowInstances(String,
 	 * Integer, boolean, int, int, OrderByComparator)} should be used instead.
 	 *
 	 * @param  workflowDefinitionName the name of the workflow definition to
@@ -263,7 +263,7 @@ public interface WorkflowInstanceManager {
 	 *		   instances found
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
-	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+	public List<WorkflowInstance> getWorkflowInstances(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean retrieveChildrenInfo, int start, int end,
 			OrderByComparator orderByComparator)
@@ -320,7 +320,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if triggering the next activity
 	 *		   failed
 	 */
-	public WorkflowInstanceInfo signalWorkflowInstance(
+	public WorkflowInstance signalWorkflowInstance(
 			long workflowInstanceId, Map<String, Object> attributes,
 			@CallingUserId long callingUserId, Map<String, Object> parameters)
 		throws WorkflowException;
@@ -366,7 +366,7 @@ public interface WorkflowInstanceManager {
 	 *		   the activity was not found or is not executable due to the
 	 *		   current state of the instance
 	 */
-	public WorkflowInstanceInfo signalWorkflowInstanceByActivity(
+	public WorkflowInstance signalWorkflowInstanceByActivity(
 			long workflowInstanceId, String activityName,
 			Map<String, Object> attributes, @CallingUserId long callingUserId,
 			Map<String, Object> parameters)
@@ -408,7 +408,7 @@ public interface WorkflowInstanceManager {
 	 *		   was not found or is not executable due to the current state of
 	 *		   the instance
 	 */
-	public WorkflowInstanceInfo signalWorkflowInstanceByPath(
+	public WorkflowInstance signalWorkflowInstanceByPath(
 			long workflowInstanceId, String pathName,
 			Map<String, Object> attributes, @CallingUserId long callingUserId,
 			Map<String, Object> parameters)
@@ -440,7 +440,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
-	public WorkflowInstanceInfo startWorkflowInstance(
+	public WorkflowInstance startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, @CallingUserId long callingUserId,
 			Map<String, Object> parameters)
@@ -476,7 +476,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
-	public WorkflowInstanceInfo startWorkflowInstance(
+	public WorkflowInstance startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, @CallingUserId long callingUserId,
 			String activityName, Map<String, Object> parameters)

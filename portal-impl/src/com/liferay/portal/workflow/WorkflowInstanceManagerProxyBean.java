@@ -24,7 +24,7 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
+import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 
 import java.util.List;
@@ -39,7 +39,7 @@ import java.util.Map;
 public class WorkflowInstanceManagerProxyBean
 	extends BaseProxyBean implements WorkflowInstanceManager {
 
-	public WorkflowInstanceInfo addContextInformation(
+	public WorkflowInstance addContextInformation(
 		long workflowInstanceId, Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
@@ -57,26 +57,26 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstanceInfo getWorkflowInstanceInfo(
+	public WorkflowInstance getWorkflowInstance(
 		long workflowInstanceId, boolean retrieveChildrenInfo) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowInstanceInfoCount(
+	public int getWorkflowInstanceCount(
 		String workflowDefinitionName, Integer workflowDefinitionVersion) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowInstanceInfoCount(
+	public int getWorkflowInstanceCount(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		boolean completed) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+	public List<WorkflowInstance> getWorkflowInstances(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		boolean completed, boolean retrieveChildrenInfo, int start, int end,
 		OrderByComparator orderByComparator) {
@@ -84,7 +84,7 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
+	public List<WorkflowInstance> getWorkflowInstances(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		boolean retrieveChildrenInfo, int start, int end,
 		OrderByComparator orderByComparator) {
@@ -96,14 +96,14 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstanceInfo signalWorkflowInstance(
+	public WorkflowInstance signalWorkflowInstance(
 		long workflowInstanceId, Map<String, Object> attributes,
 		long callingUserId, Map<String, Object> parameters) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstanceInfo signalWorkflowInstanceByActivity(
+	public WorkflowInstance signalWorkflowInstanceByActivity(
 		long workflowInstanceId, String activityName,
 		Map<String, Object> attributes, long callingUserId,
 		Map<String, Object> parameters) {
@@ -111,7 +111,7 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstanceInfo signalWorkflowInstanceByPath(
+	public WorkflowInstance signalWorkflowInstanceByPath(
 		long workflowInstanceId, String pathName,
 		Map<String, Object> attributes, long callingUserId,
 		Map<String, Object> parameters) {
@@ -119,7 +119,7 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstanceInfo startWorkflowInstance(
+	public WorkflowInstance startWorkflowInstance(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		Map<String, Object> context, long callingUserId,
 		Map<String, Object> parameters) {
@@ -127,7 +127,7 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstanceInfo startWorkflowInstance(
+	public WorkflowInstance startWorkflowInstance(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		Map<String, Object> context, long callingUserId, String activityName,
 		Map<String, Object> parameters) {

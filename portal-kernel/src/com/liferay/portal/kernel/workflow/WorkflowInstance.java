@@ -27,34 +27,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="WorkflowInstanceInfo.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This interface represents the information for a single workflow instance
- * created and loaded through the {@link WorkflowInstanceManager} where you can
- * find further descriptions about how to start and work with workflow
- * instances.
- * </p>
- *
- * <p>
- * A workflow instance is always created in connection with a workflow
- * definition and optionally related to a domain object instance. The workflow
- * instance is the element used to track the current state of a workflow and its
- * history and any other related entities like tasks, timers and jobs.
- * </p>
- *
- * <p>
- * Usually this interface is not implemented by the native process instance
- * depending on the underlying workflow engine but is rather returned as a proxy
- * information object just holding the necessary information to represent the
- * native workflow instance.
- * </p>
+ * <a href="WorkflowInstance.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public interface WorkflowInstanceInfo {
+public interface WorkflowInstance {
 
 	/**
 	 * If this is a parent workflow instance, its children are being returned
@@ -66,7 +45,7 @@ public interface WorkflowInstanceInfo {
 	 * @return the list of children, if any, an empty list otherwise (never
 	 *		   <code>null</code>)
 	 */
-	public List<WorkflowInstanceInfo> getChildren();
+	public List<WorkflowInstance> getChildren();
 
 	/**
 	 * <p>
@@ -137,7 +116,7 @@ public interface WorkflowInstanceInfo {
 	 * @return the parent instance of this child instance or <code>null</code>
 	 *		   if this is the root instance
 	 */
-	public WorkflowInstanceInfo getParent();
+	public WorkflowInstance getParent();
 
 	/**
 	 * <p>
@@ -152,7 +131,7 @@ public interface WorkflowInstanceInfo {
 	 *
 	 * @return the domain object identifier, if related to one, <code>0</code>
 	 *		   otherwise
-	 * @see	   WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
+	 * @see	   WorkflowInstanceManager#getWorkflowInstance(String, long,
 	 *		   boolean) for more details about related domain objects
 	 */
 	public long getRelationId();
@@ -170,7 +149,7 @@ public interface WorkflowInstanceInfo {
 	 *
 	 * @return the domain object type identifier, if related to one,
 	 *		   <code>null</code> otherwise
-	 * @see	   WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
+	 * @see	   WorkflowInstanceManager#getWorkflowInstance(String, long,
 	 *		   boolean) for more details about related domain objects
 	 */
 	public String getRelationType();
