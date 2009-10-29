@@ -6,14 +6,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean name="workflowAwareAnnotationHandlerImpl" class="com.liferay.portal.kernel.workflow.WorkflowAwareAnnotationHandlerImpl" />
-	<bean class="com.liferay.portal.spring.annotation.AnnotationScannerBeanPostProcessor">
-		<property name="annotationHandlers">
-			<list>
-				<ref bean="workflowAwareAnnotationHandlerImpl" />
-			</list>
-		</property>
-	</bean>
 	<bean class="com.liferay.portal.spring.annotation.BeanReferenceAnnotationBeanPostProcessor" />
 	<bean id="basePersistence" abstract="true">
 		<property name="dataSource" ref="liferayDataSource" />

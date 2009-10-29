@@ -46,7 +46,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 	<c:when test='<%= tabs1.equals("resources") %>'>
 
 		<%
-		List<WorkflowAware> annotations = WorkflowUtil.getAnnotations();
+		List<String> modelResources = ListUtil.fromArray(_WORKFLOW_RESOURCES);
 		%>
 
 		<portlet:actionURL var="editWorkflowLinkURL">
@@ -60,15 +60,20 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 				iteratorURL="<%= portletURL %>"
 			>
 				<liferay-ui:search-container-results
-					results="<%= ListUtil.subList(annotations, searchContainer.getStart(), searchContainer.getEnd()) %>"
-					total="<%= annotations.size() %>"
+					results="<%= ListUtil.subList(modelResources, searchContainer.getStart(), searchContainer.getEnd()) %>"
+					total="<%= modelResources.size() %>"
 				/>
 
 				<liferay-ui:search-container-row
-					className="com.liferay.portal.kernel.annotation.WorkflowAware"
-					modelVar="workflowAware"
+					className="java.lang.String"
+					modelVar="modelResource"
 					stringKey="<%= true %>"
 				>
+
+					<liferay-ui:search-container-row-parameter
+						name="modelResource"
+						value="<%= modelResource %>"
+					/>
 
 					<liferay-ui:search-container-column-text
 						buffer="buffer"
@@ -78,10 +83,10 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 						<%
 						buffer.append("<img align=\"left\" border=\"0\" src=\"");
 						buffer.append(themeDisplay.getPathThemeImages());
-						buffer.append(workflowAware.iconPath());
+						buffer.append(_getIconPath(modelResource));
 						buffer.append("\" style=\"margin-right: 5px\">");
 						buffer.append("<strong>");
-						buffer.append(LanguageUtil.get(pageContext, "model.resource." + workflowAware.resourceName()));
+						buffer.append(LanguageUtil.get(pageContext, "model.resource." + modelResource));
 						buffer.append("</strong>");
 						%>
 
@@ -91,7 +96,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 						name="workflow"
 					>
 						<%
-						long classNameId = PortalUtil.getClassNameId(workflowAware.resourceName());
+						long classNameId = PortalUtil.getClassNameId(modelResource);
 						%>
 
 						<aui:select label="" name='<%= "workflowDefinitionName@" + classNameId %>'>
@@ -172,3 +177,52 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 		</liferay-ui:search-container>
 	</c:when>
 </c:choose>
+
+<%!
+private static final String[] _WORKFLOW_RESOURCES = {
+	BlogsEntry.class.getName(),
+	BookmarksEntry.class.getName(),
+	CalEvent.class.getName(),
+	DLFileEntry.class.getName(),
+	IGImage.class.getName(),
+	JournalArticle.class.getName(),
+	MBMessage.class.getName(),
+	WikiPage.class.getName()
+};
+
+private String _getIconPath(String modelResource) {
+	if (modelResource.equals(BlogsEntry.class.getName())) {
+		return "/common/page.png";
+	}
+	else if (modelResource.equals(BookmarksEntry.class.getName())) {
+		return "/ratings/star_hover.png";
+	}
+	else if (modelResource.equals(DLFileEntry.class.getName())) {
+		return "/document_library/page.png";
+	}
+	else if (modelResource.equals(IGImage.class.getName())) {
+		return "/file_system/small/bmp.png";
+	}
+	else if (modelResource.equals(JournalArticle.class.getName())) {
+		return "/common/history.png";
+	}
+	else if (modelResource.equals(Layout.class.getName())) {
+		return "/common/page.png";
+	}
+	else if (modelResource.equals(MBMessage.class.getName())) {
+		return "/common/conversation.png";
+	}
+	else if (modelResource.equals(Organization.class.getName())) {
+		return "/common/organization_icon.png";
+	}
+	else if (modelResource.equals(User.class.getName())) {
+		return "/common/user_icon.png";
+	}
+	else if (modelResource.equals(WikiPage.class.getName())) {
+		return "/common/pages.png";
+	}
+	else {
+		return "/common/page.png";
+	}
+}
+%>
