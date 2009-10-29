@@ -13,7 +13,7 @@
 	<bean id="com.liferay.portal.workflow.WorkflowLockingAdvice" class="com.liferay.portal.workflow.WorkflowLockingAdvice" />
 	<aop:config>
 		<aop:aspect ref="com.liferay.portal.workflow.WorkflowLockingAdvice" order="1">
-			<aop:around pointcut="execution (public void com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean.undeployWorkflowDefinition(..)) || execution (public com.liferay.portal.kernel.workflow.WorkflowInstanceInfo com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean.startWorkflowInstance(..))" method="invoke" />
+			<aop:around pointcut="execution (public void com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean.undeployWorkflowDefinition(..)) || execution (public com.liferay.portal.kernel.workflow.WorkflowInstance com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean.startWorkflowInstance(..))" method="invoke" />
 		</aop:aspect>
 		<aop:aspect ref="messagingProxyAdvice" order="2">
 			<aop:around pointcut="bean(com.liferay.portal.workflow.*ProxyBean)" method="invoke" />
