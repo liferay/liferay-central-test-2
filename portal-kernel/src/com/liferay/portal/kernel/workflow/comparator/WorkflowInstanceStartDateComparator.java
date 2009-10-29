@@ -35,11 +35,14 @@ import java.util.Date;
  */
 public class WorkflowInstanceStartDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "startDate ASC, id ASC";
+	public static String ORDER_BY_ASC = "startDate ASC, workflowInstanceId ASC";
 
-	public static String ORDER_BY_DESC = "startDate DESC, id DESC";
+	public static String ORDER_BY_DESC =
+		"startDate DESC, workflowInstanceId DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"startDate", "id"};
+	public static String[] ORDER_BY_FIELDS = {
+		"startDate", "workflowInstanceId"
+	};
 
 	public WorkflowInstanceStartDateComparator() {
 		this(false);

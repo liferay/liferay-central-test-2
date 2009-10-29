@@ -35,11 +35,12 @@ import java.util.Date;
  */
 public class WorkflowInstanceEndDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "endDate ASC, id ASC";
+	public static String ORDER_BY_ASC = "endDate ASC, workflowInstanceId ASC";
 
-	public static String ORDER_BY_DESC = "endDate DESC, id DESC";
+	public static String ORDER_BY_DESC =
+		"endDate DESC, workflowInstanceId DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"endDate", "id"};
+	public static String[] ORDER_BY_FIELDS = {"endDate", "workflowInstanceId"};
 
 	public WorkflowInstanceEndDateComparator() {
 		this(false);
