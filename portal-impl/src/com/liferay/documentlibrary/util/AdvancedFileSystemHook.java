@@ -32,6 +32,10 @@ import java.io.File;
 /**
  * <a href="AdvancedFileSystemHook.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * See http://issues.liferay.com/browse/LPS-1976.
+ * </p>
+ *
  * @author Jorge Ferrer
  */
 public class AdvancedFileSystemHook extends FileSystemHook {
