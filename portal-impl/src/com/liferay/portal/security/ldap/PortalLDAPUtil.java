@@ -1386,6 +1386,8 @@ public class PortalLDAPUtil {
 			}
 		}
 		catch (OperationNotSupportedException onse) {
+			ctx.setRequestControls(null);
+
 			NamingEnumeration<SearchResult> enu = ctx.search(
 				baseDN, filter, cons);
 
