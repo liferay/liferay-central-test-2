@@ -133,7 +133,6 @@
 	<classpathentry kind="lib" path="lib/portal/eclipse-core-runtime.jar"/>
 	<classpathentry kind="lib" path="lib/portal/eclipselink.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ecs.jar"/>
-	<classpathentry kind="lib" path="lib/portal/edoras.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ehcache.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ehcache-terracotta.jar"/>
 	<classpathentry kind="lib" path="lib/portal/freemarker.jar"/>

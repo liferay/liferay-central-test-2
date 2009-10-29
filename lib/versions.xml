@@ -1415,17 +1415,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/edoras.jar</file-name>
-		<version>1.1</version>
-		<project-name>Edoras</project-name>
-		<project-url>http://www.edorasframework.org</project-url>
-		<licenses>
-			<license>
-				<license-name>MPL 1.1</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/ehcache.jar</file-name>
 		<version>1.7.0</version>
 		<project-name>Ehcache</project-name>
