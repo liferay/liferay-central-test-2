@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.service.impl;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.WorkflowAware;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -116,6 +117,9 @@ import javax.mail.internet.InternetAddress;
 
 import javax.portlet.PortletPreferences;
 
+@WorkflowAware(
+	iconPath = "/common/history.png",
+	resourceName = "com.liferay.portlet.journal.model.JournalArticle")
 /**
  * <a href="JournalArticleLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>

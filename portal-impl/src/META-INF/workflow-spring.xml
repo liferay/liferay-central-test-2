@@ -80,6 +80,9 @@
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowLogManagerUtil">
 		<property name="workflowLogManager" ref="com.liferay.portal.workflow.WorkflowLogManagerProxyBean" />
 	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.WorkflowUtil">
+		<property name="annotationHandler" ref="workflowAwareAnnotationHandlerImpl" />
+	</bean>
 
 	<!-- Messaging -->
 
