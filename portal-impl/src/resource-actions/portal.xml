@@ -32,6 +32,7 @@
 		<supports>
 			<action-key>ADD_COMMUNITY</action-key>
 			<action-key>ADD_LAYOUT_PROTOTYPE</action-key>
+			<action-key>ADD_LAYOUT_SET_PROTOTYPE</action-key>
 			<action-key>ADD_LICENSE</action-key>
 			<action-key>ADD_ORGANIZATION</action-key>
 			<action-key>ADD_PASSWORD_POLICY</action-key>

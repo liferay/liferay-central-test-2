@@ -38,7 +38,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 		<a href="<%= viewRolesURL %>"><liferay-ui:message key="view-all" /></a>
 	</span>
 
-	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LAYOUT_PROTOTYPE) %>">
+	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LAYOUT_SET_PROTOTYPE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addLayoutSetPrototypeURL">
 			<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layout_set_prototype" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
