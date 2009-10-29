@@ -319,6 +319,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 		workflowLinkImpl.setModifiedDate(workflowLink.getModifiedDate());
 		workflowLinkImpl.setClassNameId(workflowLink.getClassNameId());
 		workflowLinkImpl.setDefinitionName(workflowLink.getDefinitionName());
+		workflowLinkImpl.setDefinitionVersion(workflowLink.getDefinitionVersion());
 
 		return workflowLinkImpl;
 	}

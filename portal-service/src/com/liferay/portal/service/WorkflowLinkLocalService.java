@@ -102,7 +102,12 @@ public interface WorkflowLinkLocalService {
 
 	public com.liferay.portal.model.WorkflowLink addWorkflowLink(long userId,
 		long companyId, long groupId, long classNameId,
-		java.lang.String definitionName)
+		java.lang.String definitionName, int definitionVersion)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteWorkflowLink(long userId, long companyId, long groupId,
+		long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -114,7 +119,7 @@ public interface WorkflowLinkLocalService {
 
 	public com.liferay.portal.model.WorkflowLink updateWorkflowLink(
 		long userId, long companyId, long groupId, long classNameId,
-		java.lang.String definitionName)
+		java.lang.String definitionName, int definitionVersion)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

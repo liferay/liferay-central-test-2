@@ -93,6 +93,10 @@ public interface WorkflowLinkModel extends BaseModel<WorkflowLink> {
 
 	public void setDefinitionName(String definitionName);
 
+	public int getDefinitionVersion();
+
+	public void setDefinitionVersion(int definitionVersion);
+
 	public WorkflowLink toEscapedModel();
 
 	public boolean isNew();

@@ -825,6 +825,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="definitionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="definitionVersion" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl" table="AnnouncementsDelivery">
 		<cache usage="read-write" />

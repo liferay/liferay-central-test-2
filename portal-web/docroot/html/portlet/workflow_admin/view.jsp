@@ -119,7 +119,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 								}
 							%>
 
-								<aui:option label="<%= workflowDefinition.getName() %>" selected="<%= selected %>" />
+								<aui:option label="<%= workflowDefinition.getName() %>" selected="<%= selected %>" value="<%= workflowDefinition.getName() + StringPool.AT + workflowDefinition.getVersion() %>" />
 
 							<%
 							}

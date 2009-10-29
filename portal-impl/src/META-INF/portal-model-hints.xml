@@ -707,6 +707,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />
 		<field name="definitionName" type="String" />
+		<field name="definitionVersion" type="int" />
 	</model>
 	<model name="com.liferay.portlet.announcements.model.AnnouncementsDelivery">
 		<field name="deliveryId" type="long" />

@@ -111,11 +111,19 @@ public class WorkflowLinkLocalServiceWrapper implements WorkflowLinkLocalService
 
 	public com.liferay.portal.model.WorkflowLink addWorkflowLink(long userId,
 		long companyId, long groupId, long classNameId,
-		java.lang.String definitionName)
+		java.lang.String definitionName, int definitionVersion)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _workflowLinkLocalService.addWorkflowLink(userId, companyId,
-			groupId, classNameId, definitionName);
+			groupId, classNameId, definitionName, definitionVersion);
+	}
+
+	public void deleteWorkflowLink(long userId, long companyId, long groupId,
+		long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_workflowLinkLocalService.deleteWorkflowLink(userId, companyId,
+			groupId, classNameId);
 	}
 
 	public com.liferay.portal.model.WorkflowLink getWorkflowLink(
@@ -128,11 +136,11 @@ public class WorkflowLinkLocalServiceWrapper implements WorkflowLinkLocalService
 
 	public com.liferay.portal.model.WorkflowLink updateWorkflowLink(
 		long userId, long companyId, long groupId, long classNameId,
-		java.lang.String definitionName)
+		java.lang.String definitionName, int definitionVersion)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _workflowLinkLocalService.updateWorkflowLink(userId, companyId,
-			groupId, classNameId, definitionName);
+			groupId, classNameId, definitionName, definitionVersion);
 	}
 
 	public WorkflowLinkLocalService getWrappedWorkflowLinkLocalService() {

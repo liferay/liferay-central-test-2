@@ -74,9 +74,10 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "definitionName", new Integer(Types.VARCHAR) }
+			{ "definitionName", new Integer(Types.VARCHAR) },
+			{ "definitionVersion", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WorkflowLink (workflowLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,modifiedDate DATE null,classNameId LONG,definitionName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table WorkflowLink (workflowLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,modifiedDate DATE null,classNameId LONG,definitionName VARCHAR(75) null,definitionVersion INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table WorkflowLink";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -99,6 +100,7 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setDefinitionName(soapModel.getDefinitionName());
+		model.setDefinitionVersion(soapModel.getDefinitionVersion());
 
 		return model;
 	}
@@ -241,6 +243,14 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		_definitionName = definitionName;
 	}
 
+	public int getDefinitionVersion() {
+		return _definitionVersion;
+	}
+
+	public void setDefinitionVersion(int definitionVersion) {
+		_definitionVersion = definitionVersion;
+	}
+
 	public WorkflowLink toEscapedModel() {
 		if (isEscapedModel()) {
 			return (WorkflowLink)this;
@@ -259,6 +269,7 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
 			model.setDefinitionName(HtmlUtil.escape(getDefinitionName()));
+			model.setDefinitionVersion(getDefinitionVersion());
 
 			model = (WorkflowLink)Proxy.newProxyInstance(WorkflowLink.class.getClassLoader(),
 					new Class[] { WorkflowLink.class },
@@ -292,6 +303,7 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setClassNameId(getClassNameId());
 		clone.setDefinitionName(getDefinitionName());
+		clone.setDefinitionVersion(getDefinitionVersion());
 
 		return clone;
 	}
@@ -355,6 +367,8 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		sb.append(getClassNameId());
 		sb.append(", definitionName=");
 		sb.append(getDefinitionName());
+		sb.append(", definitionVersion=");
+		sb.append(getDefinitionVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -399,6 +413,10 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 			"<column><column-name>definitionName</column-name><column-value><![CDATA[");
 		sb.append(getDefinitionName());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>definitionVersion</column-name><column-value><![CDATA[");
+		sb.append(getDefinitionVersion());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -420,5 +438,6 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 	private long _originalClassNameId;
 	private boolean _setOriginalClassNameId;
 	private String _definitionName;
+	private int _definitionVersion;
 	private transient ExpandoBridge _expandoBridge;
 }

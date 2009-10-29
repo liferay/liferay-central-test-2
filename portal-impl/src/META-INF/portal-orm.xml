@@ -884,6 +884,7 @@
 			</basic>
 			<basic name="classNameId" />
 			<basic name="definitionName" />
+			<basic name="definitionVersion" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

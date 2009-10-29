@@ -57,6 +57,7 @@ public class WorkflowLinkSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setDefinitionName(model.getDefinitionName());
+		soapModel.setDefinitionVersion(model.getDefinitionVersion());
 
 		return soapModel;
 	}
@@ -173,6 +174,14 @@ public class WorkflowLinkSoap implements Serializable {
 		_definitionName = definitionName;
 	}
 
+	public int getDefinitionVersion() {
+		return _definitionVersion;
+	}
+
+	public void setDefinitionVersion(int definitionVersion) {
+		_definitionVersion = definitionVersion;
+	}
+
 	private long _workflowLinkId;
 	private long _groupId;
 	private long _companyId;
@@ -181,4 +190,5 @@ public class WorkflowLinkSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _classNameId;
 	private String _definitionName;
+	private int _definitionVersion;
 }

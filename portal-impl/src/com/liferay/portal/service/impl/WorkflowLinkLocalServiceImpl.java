@@ -36,13 +36,14 @@ import java.util.Date;
  * </a>
  *
  * @author Jorge Ferrer
+ * @author Bruno Farache
  */
 public class WorkflowLinkLocalServiceImpl
 	extends WorkflowLinkLocalServiceBaseImpl {
 
 	public WorkflowLink addWorkflowLink(
 			long userId, long companyId, long groupId, long classNameId,
-			String definitionName)
+			String definitionName, int definitionVersion)
 		throws PortalException, SystemException {
 		long workflowLinkId = counterLocalService.increment();
 
@@ -59,10 +60,25 @@ public class WorkflowLinkLocalServiceImpl
 		workflowLink.setCompanyId(companyId);
 		workflowLink.setClassNameId(classNameId);
 		workflowLink.setDefinitionName(definitionName);
+		workflowLink.setDefinitionVersion(definitionVersion);
 
 		workflowLinkPersistence.update(workflowLink, false);
 
 		return workflowLink;
+	}
+
+	public void deleteWorkflowLink(
+			long userId, long companyId, long groupId, long classNameId)
+		throws PortalException, SystemException {
+
+		try {
+			WorkflowLink workflowLink = getWorkflowLink(
+				companyId, groupId, classNameId);
+
+			deleteWorkflowLink(workflowLink);
+		}
+		catch (NoSuchWorkflowLinkException nswle) {
+		}
 	}
 
 	public WorkflowLink getWorkflowLink(
@@ -92,7 +108,7 @@ public class WorkflowLinkLocalServiceImpl
 
 	public WorkflowLink updateWorkflowLink(
 			long userId, long companyId, long groupId, long classNameId,
-			String definitionName)
+			String definitionName, int definitionVersion)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -103,7 +119,8 @@ public class WorkflowLinkLocalServiceImpl
 
 		if (workflowLink == null) {
 			workflowLink = addWorkflowLink(
-				userId, companyId, groupId, classNameId, definitionName);
+				userId, companyId, groupId, classNameId, definitionName,
+				definitionVersion);
 		}
 
 		workflowLink.setModifiedDate(now);
@@ -113,6 +130,7 @@ public class WorkflowLinkLocalServiceImpl
 		workflowLink.setCompanyId(companyId);
 		workflowLink.setClassNameId(classNameId);
 		workflowLink.setDefinitionName(definitionName);
+		workflowLink.setDefinitionVersion(definitionVersion);
 
 		workflowLinkPersistence.update(workflowLink, false);
 

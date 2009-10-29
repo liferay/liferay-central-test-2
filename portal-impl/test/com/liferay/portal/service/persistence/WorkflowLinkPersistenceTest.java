@@ -82,6 +82,7 @@ public class WorkflowLinkPersistenceTest extends BasePersistenceTestCase {
 		newWorkflowLink.setModifiedDate(nextDate());
 		newWorkflowLink.setClassNameId(nextLong());
 		newWorkflowLink.setDefinitionName(randomString());
+		newWorkflowLink.setDefinitionVersion(nextInt());
 
 		_persistence.update(newWorkflowLink, false);
 
@@ -104,6 +105,8 @@ public class WorkflowLinkPersistenceTest extends BasePersistenceTestCase {
 			newWorkflowLink.getClassNameId());
 		assertEquals(existingWorkflowLink.getDefinitionName(),
 			newWorkflowLink.getDefinitionName());
+		assertEquals(existingWorkflowLink.getDefinitionVersion(),
+			newWorkflowLink.getDefinitionVersion());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -184,6 +187,7 @@ public class WorkflowLinkPersistenceTest extends BasePersistenceTestCase {
 		workflowLink.setModifiedDate(nextDate());
 		workflowLink.setClassNameId(nextLong());
 		workflowLink.setDefinitionName(randomString());
+		workflowLink.setDefinitionVersion(nextInt());
 
 		_persistence.update(workflowLink, false);
 
