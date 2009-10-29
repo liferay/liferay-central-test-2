@@ -239,6 +239,7 @@ action.ADD_IMAGE=Προσθέστε την εικόνα
 action.ADD_INSTANCE=Προσθέστε την περίπτωση
 action.ADD_ITEM=Προσθέστε το στοιχείο
 action.ADD_LAYOUT_PROTOTYPE=Προσθέστε το πρωτότυπο σχεδιαγράμματος
+action.ADD_LAYOUT_SET_PROTOTYPE=Προσθέστε το καθορισμένο πρωτότυπο σχεδιαγράμματος (Automatic Translation)
 action.ADD_LICENSE=Προσθέστε την άδεια
 action.ADD_MESSAGE=Προσθέστε το μήνυμα
 action.ADD_NODE=Προσθέστε τον κόμβο

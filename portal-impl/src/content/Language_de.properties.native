@@ -239,6 +239,7 @@ action.ADD_IMAGE=Bild hinzufügen
 action.ADD_INSTANCE=Instanz hinzufügen
 action.ADD_ITEM=Artikel hinzufügen
 action.ADD_LAYOUT_PROTOTYPE=Addieren Sie Plan-Prototyp
+action.ADD_LAYOUT_SET_PROTOTYPE=Addieren Sie Plan-gesetzten Prototyp (Automatic Translation)
 action.ADD_LICENSE=Lizenz hinzufügen
 action.ADD_MESSAGE=Nachricht hinzufügen
 action.ADD_NODE=Knoten hinzufügen

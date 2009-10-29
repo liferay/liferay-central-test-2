@@ -239,6 +239,7 @@ action.ADD_IMAGE=Aggiungi Immagine
 action.ADD_INSTANCE=Aggiungi Istanza
 action.ADD_ITEM=Aggiungi Articolo
 action.ADD_LAYOUT_PROTOTYPE=Aggiunga il prototipo della disposizione
+action.ADD_LAYOUT_SET_PROTOTYPE=Aggiunga il prototipo stabilito della disposizione (Automatic Translation)
 action.ADD_LICENSE=Aggiungi Licenza
 action.ADD_MESSAGE=Aggiungi Messaggio
 action.ADD_NODE=Aggiungi Nodo

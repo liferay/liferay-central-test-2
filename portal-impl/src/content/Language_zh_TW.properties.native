@@ -239,6 +239,7 @@ action.ADD_IMAGE=增加圖像
 action.ADD_INSTANCE=增加事例
 action.ADD_ITEM=增加項目
 action.ADD_LAYOUT_PROTOTYPE=增加佈局原型
+action.ADD_LAYOUT_SET_PROTOTYPE=增加佈局集合原型 (Automatic Translation)
 action.ADD_LICENSE=增加執照
 action.ADD_MESSAGE=增加消息
 action.ADD_NODE=增加結

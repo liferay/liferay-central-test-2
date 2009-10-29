@@ -239,6 +239,7 @@ action.ADD_IMAGE=Adicione A Imagem
 action.ADD_INSTANCE=Adicione O Exemplo
 action.ADD_ITEM=Adicione O Artigo
 action.ADD_LAYOUT_PROTOTYPE=Adicione o protótipo da disposição
+action.ADD_LAYOUT_SET_PROTOTYPE=Adicione protótipo ajustado da disposição (Automatic Translation)
 action.ADD_LICENSE=Adicione A Licença
 action.ADD_MESSAGE=Adicione A Mensagem
 action.ADD_NODE=Adicione O Nó

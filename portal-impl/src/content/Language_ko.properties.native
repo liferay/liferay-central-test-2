@@ -239,6 +239,7 @@ action.ADD_IMAGE=심상을 추가하십시요
 action.ADD_INSTANCE=경우를 추가하십시요
 action.ADD_ITEM=품목을 추가하십시요
 action.ADD_LAYOUT_PROTOTYPE=배치 시제품을 추가하십시오
+action.ADD_LAYOUT_SET_PROTOTYPE=배치 고정되는 시제품을 추가하십시오 (Automatic Translation)
 action.ADD_LICENSE=면허를 추가하십시요
 action.ADD_MESSAGE=메시지를 추가하십시요
 action.ADD_NODE=마디를 추가하십시요

@@ -239,6 +239,7 @@ action.ADD_IMAGE=Afbeelding toevoegen
 action.ADD_INSTANCE=Instantie toevoegen
 action.ADD_ITEM=Item toevoegen
 action.ADD_LAYOUT_PROTOTYPE=Voeg het Prototype van de Lay-out toe
+action.ADD_LAYOUT_SET_PROTOTYPE=Voeg het Vastgestelde Prototype van de Lay-out toe (Automatic Translation)
 action.ADD_LICENSE=Licentie toevoegen
 action.ADD_MESSAGE=Bericht toevoegen
 action.ADD_NODE=Knooppunt toevoegen
