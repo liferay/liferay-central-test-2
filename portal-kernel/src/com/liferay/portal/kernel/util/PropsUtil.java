@@ -22,10 +22,10 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.util.Properties;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.util.Properties;
 
 /**
  * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
