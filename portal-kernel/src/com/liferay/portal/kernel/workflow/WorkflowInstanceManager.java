@@ -176,54 +176,6 @@ public interface WorkflowInstanceManager {
 		throws WorkflowException;
 
 	/**
-	 * <p>
-	 * Returns the workflow instance information for a specific relation object
-	 * instance. Starting a new workflow instance can be done in relation to a
-	 * certain object instance by providing its type (usually the fully
-	 * qualified class name or some unique type information) and its identifier.
-	 * If done so, the instance might be queried using this method as it will
-	 * return the instance related to the specified object instance. This is
-	 * useful to run a workflow related to a domain object and request its
-	 * current state of the workflow afterwards.
-	 * </p>
-	 *
-	 * <p>
-	 * Unlike the {@link #getWorkflowInstanceInfos(String, long, boolean, int,
-	 * int, OrderByComparator)} , this method assumes there is only one workflow
-	 * instance per domain object. If this is not the case, the method {@link
-	 * #getWorkflowInstanceInfos(String, long, boolean, int, int,
-	 * OrderByComparator)} should be used instead where a list of workflow
-	 * instances will be returned rather than one instance only.
-	 * </p>
-	 *
-	 * <p>
-	 * This method returns a workflow instance regardless if it is still open or
-	 * already finished, but it will return <code>null</code> rather than
-	 * throwing an exception, if no such instance found in relation to the
-	 * specified domain object instance.
-	 * </p>
-	 *
-	 * <p>
-	 * <b><i>Note</i></b> The support of a related domain object however is
-	 * optional and might not be supported by the underlying engine.
-	 * </p>
-	 *
-	 * @param  relationType the unique type representing the domain object class
-	 *		   to return a workflow instance information for
-	 * @param  relationId the identifier of the domain object instance returning
-	 *		   a workflow instance information for
-	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *		   children's information should be returned as well or if only the
-	 *		   root workflow instance should be returned, without the children
-	 * @return the workflow instance related to the specified domain object
-	 *		   instance, if found, <code>null</code> otherwise
-	 * @throws WorkflowException is thrown, if querying failed
-	 */
-	public WorkflowInstanceInfo getWorkflowInstanceInfo(
-			String relationType, long relationId, boolean retrieveChildrenInfo)
-		throws WorkflowException;
-
-	/**
 	 * Returns the count of all workflow instances for a certain definition name
 	 * and optional version or all versions of that workflow definition.
 	 *
@@ -255,19 +207,6 @@ public interface WorkflowInstanceManager {
 	public int getWorkflowInstanceInfoCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean completed)
-		throws WorkflowException;
-
-	/**
-	 * Returns the count of all workflow instances related to a specific
-	 * relation type and id (relation object the process instance is linked to).
-	 *
-	 * @param  relationType the type of relation the count is estimated for
-	 * @param  relationId the id of the relation object
-	 * @return the count of process instances for the specified relation object
-	 * @throws WorkflowException is thrown if querying failed
-	 */
-	public int getWorkflowInstanceInfoCount(
-			String relationType, long relationId)
 		throws WorkflowException;
 
 	/**
@@ -328,46 +267,6 @@ public interface WorkflowInstanceManager {
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean retrieveChildrenInfo, int start, int end,
 			OrderByComparator orderByComparator)
-		throws WorkflowException;
-
-	/**
-	 * <p>
-	 * Returns a list of workflow instance information related to the specified
-	 * domain object instance. See the documentation on method {@link
-	 * #getWorkflowInstanceInfo(String, long, boolean)} on how a domain object
-	 * can be related to a workflow instance.
-	 * </p>
-	 *
-	 * <p>
-	 * Unlike the above mentioned method, this one returns a list of workflow
-	 * instance information rather than just the first one found. If there might
-	 * be more than one workflow instance in relation to the same domain object
-	 * instance, this method must always be used.
-	 * </p>
-	 *
-	 * <p>
-	 * <b><i>Note</i></b> The support of a related domain object however is
-	 * optional and might not be supported by the underlying engine.
-	 * </p>
-	 *
-	 * @param  relationType the unique type representing the domain object class
-	 *		   to return the workflow instance information for
-	 * @param  relationId the identifier of the domain object instance returning
-	 *		   workflow instance information for
-	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
-	 *		   children's information should be returned as well or if only the
-	 *		   root workflow instance should be returned, without the children
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
-	 * @return the list of workflow instance information found in relation to
-	 *		   the specified domain object instance or an empty list, if nothing
-	 *		   found, never <code>null</code>
-	 * @throws WorkflowException is thrown, if querying failed
-	 */
-	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-			String relationType, long relationId, boolean retrieveChildrenInfo,
-			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	/**
@@ -581,100 +480,6 @@ public interface WorkflowInstanceManager {
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, @CallingUserId long callingUserId,
 			String activityName, Map<String, Object> parameters)
-		throws WorkflowException;
-
-	/**
-	 * <p>
-	 * Creates a new workflow instance and starts the workflow by triggering the
-	 * first default activity and returns the information object for it. The
-	 * instance is running after the specified workflow definition and is
-	 * initialized with the given map of context information, if provided
-	 * (optional). The newly created instance is related to the specified domain
-	 * object instance and hence can be retrieved later using the {@link
-	 * #getWorkflowInstanceInfo(String, long, boolean)} (see its comment for
-	 * more information about relations to domain objects).
-	 * </p>
-	 *
-	 * <p>
-	 * <b><i>Note</i></b> The support of a related domain object however is
-	 * optional and might not be supported by the underlying engine.
-	 * </p>
-	 *
-	 * @param  workflowDefinitionName the name of the workflow definition to
-	 *		   create a new workflow instance for
-	 * @param  workflowDefinitionVersion the optional, specific version of the
-	 *		   workflow definition, if not provided (<code>null</code>), the
-	 *		   newest version is used automatically.
-	 * @param  relationType the unique type identifier of the domain object
-	 *		   class to create a new workflow instance in relation to
-	 * @param  relationId the identifier of the domain object instance to create
-	 *		   a new workflow instance in relation to
-	 * @param  context the optional map of context information being attached to
-	 *		   the process instance, the objects contained in the map must be
-	 *		   serializable in order to be persisted along the workflow instance
-	 * @param  callingUserId the user creating this new workflow instance
-	 * @param  parameters any optional parameters the process engine would need
-	 *		   in order to start the new workflow instance, unlike the
-	 *		   attributes, this map is transient and only passed on to the
-	 *		   engine, its not merged into the existing attributes of the
-	 *		   process instance
-	 * @return the workflow instance information after being successfully
-	 *		   created
-	 * @throws WorkflowException is thrown, if the new instance could not be
-	 *		   created or the workflow could not be started
-	 */
-	public WorkflowInstanceInfo startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			String relationType, long relationId, Map<String, Object> context,
-			@CallingUserId long callingUserId, Map<String, Object> parameters)
-		throws WorkflowException;
-
-	/**
-	 * <p>
-	 * In addition to the {@link #startWorkflowInstance(String, Integer, String,
-	 * long, Map, long, Map)} this method also supports the starting activity
-	 * name to be provided to tell the engine how to start the new workflow.
-	 * This method depends on the workflow definition and engine actually, if a
-	 * specific starting activity is provided, the activity name provided might
-	 * be ignored, if the engine does not support it or if the workflow
-	 * definition only has one starting point.
-	 * </p>
-	 *
-	 * <p>
-	 * <b><i>Note</i></b> The support of a related domain object however is
-	 * optional and might not be supported by the underlying engine.
-	 * </p>
-	 *
-	 * @param  workflowDefinitionName the name of the workflow definition to
-	 *		   create a new workflow instance for
-	 * @param  workflowDefinitionVersion the optional, specific version of the
-	 *		   workflow definition, if not provided (<code>null</code>), the
-	 *		   newest version is used automatically
-	 * @param  relationType the unique type identifier of the domain object
-	 *		   class to create a new workflow instance in relation to
-	 * @param  relationId the identifier of the domain object instance to create
-	 *		   a new workflow instance in relation to
-	 * @param  context the optional map of context information being attached to
-	 *		   the process instance, the objects contained in the map must be
-	 *		   serializable in order to be persisted along the workflow instance
-	 * @param  callingUserId the user creating this new workflow instance
-	 * @param  activityName the optional activity name to initialize the
-	 *		   workflow
-	 * @param  parameters any optional parameters the process engine would need
-	 *		   in order to start the new workflow instance, unlike the
-	 *		   attributes, this map is transient and only passed on to the
-	 *		   engine, its not merged into the existing attributes of the
-	 *		   process instance
-	 * @return the workflow instance information after being successfully
-	 *		   created
-	 * @throws WorkflowException is thrown, if the new instance could not be
-	 *		   created or the workflow could not be started
-	 */
-	public WorkflowInstanceInfo startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			String relationType, long relationId, Map<String, Object> context,
-			@CallingUserId long callingUserId, String activityName,
-			Map<String, Object> parameters)
 		throws WorkflowException;
 
 }

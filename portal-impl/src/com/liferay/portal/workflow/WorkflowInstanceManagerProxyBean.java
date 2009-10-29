@@ -63,12 +63,6 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstanceInfo getWorkflowInstanceInfo(
-		String relationType, long relationId, boolean retrieveChildrenInfo) {
-
-		throw new UnsupportedOperationException();
-	}
-
 	public int getWorkflowInstanceInfoCount(
 		String workflowDefinitionName, Integer workflowDefinitionVersion) {
 
@@ -78,12 +72,6 @@ public class WorkflowInstanceManagerProxyBean
 	public int getWorkflowInstanceInfoCount(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		boolean completed) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public int getWorkflowInstanceInfoCount(
-		String relationType, long relationId) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -100,13 +88,6 @@ public class WorkflowInstanceManagerProxyBean
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		boolean retrieveChildrenInfo, int start, int end,
 		OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-		String relationType, long relationId, boolean retrieveChildrenInfo,
-		int start, int end,	OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -149,23 +130,6 @@ public class WorkflowInstanceManagerProxyBean
 	public WorkflowInstanceInfo startWorkflowInstance(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		Map<String, Object> context, long callingUserId, String activityName,
-		Map<String, Object> parameters) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public WorkflowInstanceInfo startWorkflowInstance(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		String relationType, long relationId, Map<String, Object> context,
-		long callingUserId, Map<String, Object> parameters) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public WorkflowInstanceInfo startWorkflowInstance(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		String relationType, long relationId, Map<String, Object> context,
-		long callingUserId, String activityName,
 		Map<String, Object> parameters) {
 
 		throw new UnsupportedOperationException();

@@ -70,14 +70,6 @@ public class WorkflowInstanceManagerUtil {
 			workflowInstanceId, retrieveChildrenInfo);
 	}
 
-	public static WorkflowInstanceInfo getWorkflowInstanceInfo(
-			String relationType, long relationId, boolean retrieveChildrenInfo)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstanceInfo(
-			relationType, relationId, retrieveChildrenInfo);
-	}
-
 	public static int getWorkflowInstanceInfoCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion)
 		throws WorkflowException {
@@ -93,14 +85,6 @@ public class WorkflowInstanceManagerUtil {
 
 		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
 			workflowDefinitionName, workflowDefinitionVersion, completed);
-	}
-
-	public static int getWorkflowInstanceInfoCount(
-			String relationType, long relationId)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstanceInfoCount(
-			relationType, relationId);
 	}
 
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
@@ -123,16 +107,6 @@ public class WorkflowInstanceManagerUtil {
 		return _workflowInstanceManager.getWorkflowInstanceInfos(
 			workflowDefinitionName, workflowDefinitionVersion,
 			retrieveChildrenInfo, start, end, orderByComparator);
-	}
-
-	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-			String relationType, long relationId, boolean retrieveChildrenInfo,
-			int start, int end, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstanceInfos(
-			relationType, relationId, retrieveChildrenInfo, start, end,
-			orderByComparator);
 	}
 
 	public static WorkflowInstanceManager getWorkflowInstanceManager() {
@@ -196,29 +170,6 @@ public class WorkflowInstanceManagerUtil {
 		return _workflowInstanceManager.startWorkflowInstance(
 			workflowDefinitionName, workflowDefinitionVersion, context,
 			callingUserId, activityName, parameters);
-	}
-
-	public static WorkflowInstanceInfo startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			String relationType, long relationId, Map<String, Object> context,
-			long callingUserId, Map<String, Object> parameters)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.startWorkflowInstance(
-			workflowDefinitionName, workflowDefinitionVersion, relationType,
-			relationId, context, callingUserId, parameters);
-	}
-
-	public static WorkflowInstanceInfo startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			String relationType, long relationId, Map<String, Object> context,
-			long callingUserId, String activityName,
-			Map<String, Object> parameters)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.startWorkflowInstance(
-			workflowDefinitionName, workflowDefinitionVersion, relationType,
-			relationId, context, callingUserId, activityName, parameters);
 	}
 
 	public void setWorkflowInstanceManager(
