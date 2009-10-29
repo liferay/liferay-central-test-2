@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.util.Properties;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -68,11 +70,52 @@ public class PropsUtil {
 		return value;
 	}
 
+	public static Properties getProperties() {
+		Properties properties = null;
+
+		try {
+			Object returnObj = PortalClassInvoker.invoke(
+				_CLASS, _METHOD_GET_PROPERTIES, false);
+
+			if (returnObj != null) {
+				properties = (Properties)returnObj;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return properties;
+	}
+
+	public static Properties getProperties(
+		String prefix, boolean removePrefix) {
+
+		Properties properties = null;
+
+		try {
+			Object returnObj = PortalClassInvoker.invoke(
+				_CLASS, _METHOD_GET_PROPERTIES, prefix,
+				new BooleanWrapper(removePrefix), false);
+
+			if (returnObj != null) {
+				properties = (Properties)returnObj;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return properties;
+	}
+
 	private static final String _CLASS = "com.liferay.portal.util.PropsUtil";
 
 	private static final String _METHOD_GET = "get";
 
 	private static final String _METHOD_GET_ARRAY = "getArray";
+
+	private static final String _METHOD_GET_PROPERTIES = "getProperties";
 
 	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
 
