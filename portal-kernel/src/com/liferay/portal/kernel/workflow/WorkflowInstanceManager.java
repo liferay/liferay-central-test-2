@@ -158,51 +158,6 @@ public interface WorkflowInstanceManager {
 		throws WorkflowException;
 
 	/**
-	 * <p>
-	 * Returns the history of the specified workflow instance. The history will
-	 * contain the workflow log entries being made which are workflow engine
-	 * specific in terms of what event will be part of the history.
-	 * </p>
-	 *
-	 * <p>
-	 * If the parameter <code>includeChildren</code> is set to <code>true</code>
-	 * , a complete history is returned, also including the log entries from the
-	 * children of the given instance, if any in chronological, descending
-	 * order, the newest entry at first position.
-	 *
-	 * @param  workflowInstanceId the workflow instance identifier to return its
-	 *		   history
-	 * @param  includeChildren flag, indicating whether to return the history of
-	 *		   children too
-	 * @param  start inclusive start position for paginating the result
-	 * @param  end exclusive end position for paginating the result
-	 * @param  orderByComparator comparator for sorting the result
-	 * @return the list of history entries for the given instance and optionally
-	 *		   its children
-	 * @throws WorkflowException is thrown, if querying failed
-	 */
-	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
-			long workflowInstanceId, boolean includeChildren, int start,
-			int end, OrderByComparator orderByComparator)
-		throws WorkflowException;
-
-	/**
-	 * Returns the count of the workflow instance history entries for the given
-	 * workflow instance, optionally including the count of entries from the
-	 * children too.
-	 *
-	 * @param  workflowInstanceId the id of the workflow instance to retrieve
-	 *		   the count of history entries
-	 * @param  includeChildren flag, whether to include the entries from the
-	 *		   children as well
-	 * @return the count of history entries
-	 * @throws WorkflowException is thrown, if the count could not be queried
-	 */
-	public int getWorkflowInstanceHistoryCount(
-			long workflowInstanceId, boolean includeChildren)
-		throws WorkflowException;
-
-	/**
 	 * Returns the workflow instance information for the given identifier, if
 	 * found, otherwise an exception will be thrown.
 	 *

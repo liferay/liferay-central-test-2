@@ -62,23 +62,6 @@ public class WorkflowInstanceManagerUtil {
 			workflowInstanceId, userId, parameters);
 	}
 
-	public static List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
-			long workflowInstanceId, boolean includeChildren, int start,
-			int end, OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstanceHistory(
-			workflowInstanceId, includeChildren, start, end, orderByComparator);
-	}
-
-	public static int getWorkflowInstanceHistoryCount(
-			long workflowInstanceId, boolean includeChildren)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstanceHistoryCount(
-			workflowInstanceId, includeChildren);
-	}
-
 	public static WorkflowInstanceInfo getWorkflowInstanceInfo(
 			long workflowInstanceId, boolean retrieveChildrenInfo)
 		throws WorkflowException {

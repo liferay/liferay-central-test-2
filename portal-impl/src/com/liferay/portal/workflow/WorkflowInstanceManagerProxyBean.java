@@ -24,7 +24,6 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowInstanceHistory;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 
@@ -54,19 +53,6 @@ public class WorkflowInstanceManagerProxyBean
 
 	public List<String> getPossibleNextPathNames(
 		long workflowInstanceId, long userId, Map<String, Object> parameters) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
-		long workflowInstanceId, boolean includeChildren, int start, int end,
-		OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public int getWorkflowInstanceHistoryCount(
-		long workflowInstanceId, boolean includeChildren) {
 
 		throw new UnsupportedOperationException();
 	}

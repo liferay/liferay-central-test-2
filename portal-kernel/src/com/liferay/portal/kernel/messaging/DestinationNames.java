@@ -98,6 +98,8 @@ public interface DestinationNames {
 
 	public static final String WORKFLOW_INSTANCE = "liferay/workflow_instance";
 
+	public static final String WORKFLOW_LOG = "liferay/workflow_log";
+
 	public static final String WORKFLOW_TASK = "liferay/workflow_task";
 
 }

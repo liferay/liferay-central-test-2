@@ -23,44 +23,46 @@
 package com.liferay.portal.kernel.workflow.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowInstanceHistory;
+import com.liferay.portal.kernel.workflow.WorkflowLog;
+
+import java.util.Date;
 
 /**
- * <a href="WorkflowInstanceHistoryUserIdComparator.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="WorkflowLogCreateDateComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowInstanceHistoryUserIdComparator extends OrderByComparator {
+public class WorkflowLogCreateDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "userId ASC, id ASC";
+	public static String ORDER_BY_ASC = "createDate ASC, workflowLogId ASC";
 
-	public static String ORDER_BY_DESC = "userId DESC, id DESC";
+	public static String ORDER_BY_DESC = "createDate DESC, workflowLogId DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"userId", "id"};
+	public static String[] ORDER_BY_FIELDS = {"createDate", "workflowLogId"};
 
-	public WorkflowInstanceHistoryUserIdComparator() {
+	public WorkflowLogCreateDateComparator() {
 		this(false);
 	}
 
-	public WorkflowInstanceHistoryUserIdComparator(boolean asc) {
+	public WorkflowLogCreateDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		WorkflowInstanceHistory history1 = (WorkflowInstanceHistory)obj1;
-		WorkflowInstanceHistory history2 = (WorkflowInstanceHistory)obj2;
+		WorkflowLog workflowLog1 = (WorkflowLog)obj1;
+		WorkflowLog workflowLog2 = (WorkflowLog)obj2;
 
-		Long userId1 = history1.getUserId();
-		Long userId2 = history2.getUserId();
+		Date createDate1 = workflowLog1.getCreateDate();
+		Date createDate2 = workflowLog2.getCreateDate();
 
-		int value = userId1.compareTo(userId2);
+		int value = createDate1.compareTo(createDate2);
 
-		if (value == 0) {
-			Long historyId1 = history1.getHistoryEntryId();
-			Long historyId2 = history2.getHistoryEntryId();
+		if (value != 0) {
+			Long workflowLogId1 = workflowLog1.getWorkflowLogId();
+			Long workflowLogId2 = workflowLog2.getWorkflowLogId();
 
-			value = historyId1.compareTo(historyId2);
+			value = workflowLogId1.compareTo(workflowLogId2);
 		}
 
 		if (_asc) {
