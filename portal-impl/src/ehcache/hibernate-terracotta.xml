@@ -1,5 +1,5 @@
 <!--
-This configuration is optimized for Terracotta DSO. The attribute
+This configuration is optimized for Terracotta. The attribute
 maxElementsInMemory has been increased to account for the capabilities that
 Terracotta provides.
 -->
@@ -12,18 +12,25 @@ Terracotta provides.
 		eternal="false"
         timeToIdleSeconds="600"
 		overflowToDisk="false"
-	/>
+	>
+		<terracotta />
+	</defaultCache>
 	<cache
 		name="org.hibernate.cache.UpdateTimestampsCache"
 		maxElementsInMemory="100000"
 		eternal="true"
 		overflowToDisk="false"
-	/>
+	>
+		<terracotta />
+	</cache>
 	<cache
 		name="com.liferay.portal.model.impl.UserImpl"
 		maxElementsInMemory="100000"
 		eternal="false"
         timeToIdleSeconds="600"
 		overflowToDisk="false"
-	/>
+	>
+		<terracotta />
+	</cache>
+	<terracottaConfig url="localhost:9510" />
 </ehcache>
