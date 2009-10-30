@@ -84,7 +84,7 @@ try {
 			<c:if test="<%= !completed %>">
 				<liferay-ui:search-container-column-jsp
 					align="right"
-					path="/html/portlet/workflow_tasks/task_action.jsp"
+					path="/html/portlet/workflow_tasks/workflow_task_action.jsp"
 				/>
 			</c:if>
 		</liferay-ui:search-container-row>
