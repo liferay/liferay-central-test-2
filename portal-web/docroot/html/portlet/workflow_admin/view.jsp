@@ -114,7 +114,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 							for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
 								boolean selected = false;
 
-								if ((workflowLink != null) && (workflowLink.getDefinitionName().equals(workflowDefinition.getName()))) {
+								if ((workflowLink != null) && (workflowLink.getWorkflowDefinitionName().equals(workflowDefinition.getName()))) {
 									selected = true;
 								}
 							%>

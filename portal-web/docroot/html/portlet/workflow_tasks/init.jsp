@@ -24,9 +24,9 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTask" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowException" %>
 
 <%
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);

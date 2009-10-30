@@ -53,7 +53,7 @@ try {
 	>
 		<liferay-ui:search-container-results
 			results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
-			total="<%= WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId()) %>"
+			total="<%= WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completed) %>"
 		/>
 
 		<liferay-ui:search-container-row
