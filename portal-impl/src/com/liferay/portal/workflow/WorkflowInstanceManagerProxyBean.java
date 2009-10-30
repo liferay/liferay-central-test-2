@@ -39,98 +39,52 @@ import java.util.Map;
 public class WorkflowInstanceManagerProxyBean
 	extends BaseProxyBean implements WorkflowInstanceManager {
 
-	public WorkflowInstance addContextInformation(
-		long workflowInstanceId, Map<String, Object> context) {
+	public void deleteWorkflowInstance(long workflowInstanceId) {
+		throw new UnsupportedOperationException();
+	}
+
+	public List<String> getNextTransitionNames(
+		long userId, long workflowInstanceId) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<String> getPossibleNextActivityNames(
-		long workflowInstanceId, long userId, Map<String, Object> parameters) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<String> getPossibleNextPathNames(
-		long workflowInstanceId, long userId, Map<String, Object> parameters) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public WorkflowInstance getWorkflowInstance(
-		long workflowInstanceId, boolean retrieveChildrenInfo) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public int getWorkflowInstanceCount(
-		String workflowDefinitionName, Integer workflowDefinitionVersion) {
-
+	public WorkflowInstance getWorkflowInstance(long workflowInstanceId) {
 		throw new UnsupportedOperationException();
 	}
 
 	public int getWorkflowInstanceCount(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean completed) {
+		Boolean completed) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowInstance> getWorkflowInstances(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean completed, boolean retrieveChildrenInfo, int start, int end,
+		Boolean completed, int start, int end,
 		OrderByComparator orderByComparator) {
 
-		throw new UnsupportedOperationException();
-	}
-
-	public List<WorkflowInstance> getWorkflowInstances(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean retrieveChildrenInfo, int start, int end,
-		OrderByComparator orderByComparator) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public void removeWorkflowInstance(long workflowInstanceId) {
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstance signalWorkflowInstance(
-		long workflowInstanceId, Map<String, Object> attributes,
-		long callingUserId, Map<String, Object> parameters) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public WorkflowInstance signalWorkflowInstanceByActivity(
-		long workflowInstanceId, String activityName,
-		Map<String, Object> attributes, long callingUserId,
-		Map<String, Object> parameters) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public WorkflowInstance signalWorkflowInstanceByPath(
-		long workflowInstanceId, String pathName,
-		Map<String, Object> attributes, long callingUserId,
-		Map<String, Object> parameters) {
+		long userId, long workflowInstanceId, String transitionName,
+		Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstance startWorkflowInstance(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		Map<String, Object> context, long callingUserId,
-		Map<String, Object> parameters) {
+		long userId, String workflowDefinitionName,
+		Integer workflowDefinitionVersion, String transitionName,
+		Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstance startWorkflowInstance(
-		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		Map<String, Object> context, long callingUserId, String activityName,
-		Map<String, Object> parameters) {
+	public WorkflowInstance updateContext(
+		long workflowInstanceId, Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
 	}

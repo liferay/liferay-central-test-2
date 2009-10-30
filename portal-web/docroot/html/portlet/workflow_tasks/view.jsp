@@ -52,18 +52,18 @@ try {
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= TaskInstanceManagerUtil.getTaskInstanceInfosByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
-			total="<%= TaskInstanceManagerUtil.getTaskInstanceInfoCountByUser(user.getUserId()) %>"
+			results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
+			total="<%= WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId()) %>"
 		/>
 
 		<liferay-ui:search-container-row
-			className="com.liferay.portal.kernel.workflow.TaskInstanceInfo"
-			modelVar="taskInstanceInfo"
+			className="com.liferay.portal.kernel.workflow.WorkflowTask"
+			modelVar="workflowTask"
 			stringKey="<%= true %>"
 		>
 			<liferay-ui:search-container-row-parameter
-				name="taskInstanceInfo"
-				value="<%= taskInstanceInfo %>"
+				name="workflowTask"
+				value="<%= workflowTask %>"
 			/>
 
 			<liferay-ui:search-container-column-text

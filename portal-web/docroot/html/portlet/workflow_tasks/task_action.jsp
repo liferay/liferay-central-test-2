@@ -27,29 +27,29 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-TaskInstanceInfo taskInstanceInfo = (TaskInstanceInfo)row.getParameter("taskInstanceInfo");
+WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
 
-List<String> pathNames = TaskInstanceManagerUtil.getPossibleNextPathNames(taskInstanceInfo.getTaskInstanceId(), user.getUserId(), null);
+List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
 %>
 
 <liferay-ui:icon-menu>
 
 	<%
-	for (String pathName : pathNames) {
+	for (String transitionName : transitionNames) {
 		String message = "proceed";
 
-		if (Validator.isNotNull(pathName)) {
-			message = pathName;
+		if (Validator.isNotNull(transitionName)) {
+			message = transitionName;
 		}
 	%>
 
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_task" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="taskIntanceId" value="<%= StringUtil.valueOf(taskInstanceInfo.getTaskInstanceId()) %>" />
+			<portlet:param name="workflowTaskId" value="<%= StringUtil.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 
-			<c:if test="<%= pathName != null %>">
-				<portlet:param name="pathName" value="<%= pathName %>" />
+			<c:if test="<%= transitionName != null %>">
+				<portlet:param name="transitionName" value="<%= transitionName %>" />
 			</c:if>
 		</portlet:actionURL>
 

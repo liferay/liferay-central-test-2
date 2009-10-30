@@ -36,140 +36,76 @@ import java.util.Map;
  */
 public class WorkflowInstanceManagerUtil {
 
-	public static WorkflowInstance addContextInformation(
-			long workflowInstanceId, Map<String, Object> context)
+	public static void deleteWorkflowInstance(long workflowInstanceId)
 		throws WorkflowException {
 
-		return _workflowInstanceManager.addContextInformation(
-			workflowInstanceId, context);
+		_workflowInstanceManager.deleteWorkflowInstance(workflowInstanceId);
 	}
 
-	public static List<String> getPossibleNextActivityNames(
-			long workflowInstanceId, long userId,
-			Map<String, Object> parameters)
+	public static List<String> getNextTransitionNames(
+			long userId, long workflowInstanceId)
 		throws WorkflowException {
 
-		return _workflowInstanceManager.getPossibleNextActivityNames(
-			workflowInstanceId, userId, parameters);
+		return _workflowInstanceManager.getNextTransitionNames(
+			userId, workflowInstanceId);
 	}
 
-	public static List<String> getPossibleNextPathNames(
-			long workflowInstanceId, long userId,
-			Map<String, Object> parameters)
+	public static WorkflowInstance getWorkflowInstance(long workflowInstanceId)
 		throws WorkflowException {
 
-		return _workflowInstanceManager.getPossibleNextPathNames(
-			workflowInstanceId, userId, parameters);
-	}
-
-	public static WorkflowInstance getWorkflowInstance(
-			long workflowInstanceId, boolean retrieveChildrenInfo)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstance(
-			workflowInstanceId, retrieveChildrenInfo);
-	}
-
-	public static int getWorkflowInstanceCount(
-			String workflowDefinitionName, Integer workflowDefinitionVersion)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstanceCount(
-			workflowDefinitionName, workflowDefinitionVersion);
+		return _workflowInstanceManager.getWorkflowInstance(workflowInstanceId);
 	}
 
 	public static int getWorkflowInstanceCount(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean completed)
+			Boolean completed)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.getWorkflowInstanceCount(
 			workflowDefinitionName, workflowDefinitionVersion, completed);
 	}
 
-	public static List<WorkflowInstance> getWorkflowInstances(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean completed, boolean retrieveChildrenInfo, int start, int end,
-			OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstances(
-			workflowDefinitionName, workflowDefinitionVersion, completed,
-			retrieveChildrenInfo, start, end, orderByComparator);
-	}
-
-	public static List<WorkflowInstance> getWorkflowInstances(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean retrieveChildrenInfo, int start, int end,
-			OrderByComparator orderByComparator)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.getWorkflowInstances(
-			workflowDefinitionName, workflowDefinitionVersion,
-			retrieveChildrenInfo, start, end, orderByComparator);
-	}
-
 	public static WorkflowInstanceManager getWorkflowInstanceManager() {
 		return _workflowInstanceManager;
 	}
 
-	public static void removeWorkflowInstance(long workflowInstanceId)
+	public static List<WorkflowInstance> getWorkflowInstances(
+			String workflowDefinitionName, Integer workflowDefinitionVersion,
+			Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
-		_workflowInstanceManager.removeWorkflowInstance(workflowInstanceId);
+		return _workflowInstanceManager.getWorkflowInstances(
+			workflowDefinitionName, workflowDefinitionVersion, completed, start,
+			end, orderByComparator);
 	}
 
 	public static WorkflowInstance signalWorkflowInstance(
-			long workflowInstanceId, Map<String, Object> attributes,
-			long callingUserId, Map<String, Object> parameters)
+			long userId, long workflowInstanceId, String transitionName,
+			Map<String, Object> context)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.signalWorkflowInstance(
-			workflowInstanceId, attributes, callingUserId, parameters);
-	}
-
-	public static WorkflowInstance signalWorkflowInstanceByActivity(
-			long workflowInstanceId, String activityName,
-			Map<String, Object> attributes, long callingUserId,
-			Map<String, Object> parameters)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.signalWorkflowInstanceByActivity(
-			workflowInstanceId, activityName, attributes, callingUserId,
-			parameters);
-	}
-
-	public static WorkflowInstance signalWorkflowInstanceByPath(
-			long workflowInstanceId, String pathName,
-			Map<String, Object> attributes, long callingUserId,
-			Map<String, Object> parameters)
-		throws WorkflowException {
-
-		return _workflowInstanceManager.signalWorkflowInstanceByPath(
-			workflowInstanceId, pathName, attributes, callingUserId,
-			parameters);
+			userId, workflowInstanceId, transitionName, context);
 	}
 
 	public static WorkflowInstance startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId,
-			Map<String, Object> parameters)
+			long userId, String workflowDefinitionName,
+			Integer workflowDefinitionVersion, String transitionName,
+			Map<String, Object> context)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(
-			workflowDefinitionName, workflowDefinitionVersion, context,
-			callingUserId, parameters);
+			userId, workflowDefinitionName, workflowDefinitionVersion,
+			transitionName, context);
 	}
 
-	public static WorkflowInstance startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId,
-			String activityName, Map<String, Object> parameters)
+	public static WorkflowInstance updateContext(
+			long workflowInstanceId, Map<String, Object> context)
 		throws WorkflowException {
 
-		return _workflowInstanceManager.startWorkflowInstance(
-			workflowDefinitionName, workflowDefinitionVersion, context,
-			callingUserId, activityName, parameters);
+		return _workflowInstanceManager.updateContext(
+			workflowInstanceId, context);
 	}
 
 	public void setWorkflowInstanceManager(

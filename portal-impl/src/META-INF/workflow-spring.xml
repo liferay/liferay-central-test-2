@@ -22,14 +22,6 @@
 
 	<!-- Proxy -->
 
-	<bean id="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" class="com.liferay.portal.workflow.TaskInstanceManagerProxyBean">
-		<property name="singleDestinationSynchronousMessageSender">
-			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<property name="destinationName" value="liferay/workflow_task" />
-				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
-			</bean>
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" class="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
@@ -62,12 +54,17 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.workflow.WorkflowTaskManagerProxyBean" class="com.liferay.portal.workflow.WorkflowTaskManagerProxyBean">
+		<property name="singleDestinationSynchronousMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<property name="destinationName" value="liferay/workflow_task" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+			</bean>
+		</property>
+	</bean>
 
 	<!-- Util -->
 
-	<bean class="com.liferay.portal.kernel.workflow.TaskInstanceManagerUtil">
-		<property name="taskInstanceManager" ref="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" />
-	</bean>
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil">
 		<property name="workflowDefinitionManager" ref="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" />
 	</bean>
@@ -79,6 +76,9 @@
 	</bean>
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowLogManagerUtil">
 		<property name="workflowLogManager" ref="com.liferay.portal.workflow.WorkflowLogManagerProxyBean" />
+	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil">
+		<property name="workflowTaskManager" ref="com.liferay.portal.workflow.WorkflowTaskManagerProxyBean" />
 	</bean>
 
 	<!-- Messaging -->

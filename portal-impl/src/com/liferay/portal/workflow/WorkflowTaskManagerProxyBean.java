@@ -24,56 +24,81 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowDefinition;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
-
-import java.io.InputStream;
+import com.liferay.portal.kernel.workflow.WorkflowTask;
+import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * <a href="WorkflowDefinitionManagerProxyBean.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="WorkflowTaskManagerProxyBean.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public class WorkflowDefinitionManagerProxyBean
-	extends BaseProxyBean implements WorkflowDefinitionManager {
+public class WorkflowTaskManagerProxyBean
+	extends BaseProxyBean implements WorkflowTaskManager {
 
-	public WorkflowDefinition deployWorkflowDefinition(
-		long userId, String name, InputStream inputStream) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public WorkflowDefinition getWorkflowDefinition(String name, int version) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int getWorkflowDefinitionCount() {
-		throw new UnsupportedOperationException();
-	}
-
-	public int getWorkflowDefinitionCount(String name) {
-		throw new UnsupportedOperationException();
-	}
-
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		int start, int end, OrderByComparator orderByComparator) {
+	public WorkflowTask assignWorkflowTaskToRole(
+		long userId, long workflowTaskId, long roleId, String comment,
+		Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String name, int start, int end, OrderByComparator orderByComparator) {
+	public WorkflowTask assignWorkflowTaskToUser(
+		long userId, long workflowTaskId, long assigneeUserId, String comment,
+		Map<String, Object> context) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void undeployWorkflowDefinition(
-		long userId, String name, int version) {
+	public WorkflowTask completeWorkflowTask(
+		long userId, long workflowTaskId, String transitionName, String comment,
+		Map<String, Object> context) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<String> getNextTransitionNames(
+		long userId, long workflowTaskId) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public int getWorkflowTaskByRole(long roleId, Boolean completed) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getWorkflowTaskByUser(long userId, Boolean completed) {
+		throw new UnsupportedOperationException();
+	}
+
+	public int getWorkflowTaskByWorkflowInstance(
+		long workflowInstanceId, Boolean completed) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowTask> getWorkflowTasksByRole(
+		long roleId, Boolean completed, int start, int end,
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowTask> getWorkflowTasksByUser(
+		long userId, Boolean completed, int start, int end,
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
+		long workflowInstanceId, Boolean completed, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}

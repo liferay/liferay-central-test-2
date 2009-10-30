@@ -22,26 +22,46 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Date;
+import java.util.Map;
 
-@Documented
-@Inherited
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
 /**
- * <a href="CallingUserId.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowTask.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public @interface CallingUserId {
+public interface WorkflowTask {
 
-	public int value() default -1;
+	public long getAssigneeRoleId();
+
+	public long getAssigneeUserId();
+
+	public Map<String, Object> getOptionalAttributes();
+
+	public Date getCompletionDate();
+
+	public Date getCreateDate();
+
+	public String getDescription();
+
+	public Date getDueDate();
+
+	public long getWorkflowTaskId();
+
+	public String getName();
+
+	public long getWorkflowDefinitionId();
+
+	public String getWorkflowDefinitionName();
+
+	public int getWorkflowDefinitionVersion();
+
+	public long getWorkflowInstanceId();
+
+	public boolean isAsynchronous();
+
+	public boolean isCompleted();
 
 }

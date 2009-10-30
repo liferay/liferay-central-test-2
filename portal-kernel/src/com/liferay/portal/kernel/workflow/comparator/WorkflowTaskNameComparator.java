@@ -23,46 +23,43 @@
 package com.liferay.portal.kernel.workflow.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
-
-import java.util.Date;
+import com.liferay.portal.kernel.workflow.WorkflowTask;
 
 /**
- * <a href="TaskInstanceCreateDateComparator.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="WorkflowTaskNameComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class TaskInstanceCreateDateComparator extends OrderByComparator {
+public class WorkflowTaskNameComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "createDate ASC, id ASC";
+	public static String ORDER_BY_ASC = "taskName ASC, workflowTaskId ASC";
 
-	public static String ORDER_BY_DESC = "createDate DESC, id DESC";
+	public static String ORDER_BY_DESC = "taskName DESC, workflowTaskId DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"createDate", "id"};
+	public static String[] ORDER_BY_FIELDS = {"taskName", "workflowTaskId"};
 
-	public TaskInstanceCreateDateComparator() {
+	public WorkflowTaskNameComparator() {
 		this(false);
 	}
 
-	public TaskInstanceCreateDateComparator(boolean asc) {
+	public WorkflowTaskNameComparator(boolean asc) {
 		_asc = asc;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		TaskInstanceInfo taskInstance1 = (TaskInstanceInfo)obj1;
-		TaskInstanceInfo taskInstance2 = (TaskInstanceInfo)obj2;
+		WorkflowTask workflowTask1 = (WorkflowTask)obj1;
+		WorkflowTask workflowTask2 = (WorkflowTask)obj2;
 
-		Date createDate1 = taskInstance1.getCreateDate();
-		Date createDate2 = taskInstance2.getCreateDate();
+		String name1 = workflowTask1.getName();
+		String name2 = workflowTask2.getName();
 
-		int value = createDate1.compareTo(createDate2);
+		int value = name1.compareTo(name2);
 
 		if (value == 0) {
-			Long taskInstanceId1 = taskInstance1.getTaskInstanceId();
-			Long taskInstanceId2 = taskInstance2.getTaskInstanceId();
+			Long workflowTaskId1 = workflowTask1.getWorkflowTaskId();
+			Long workflowTaskId2 = workflowTask2.getWorkflowTaskId();
 
-			value = taskInstanceId1.compareTo(taskInstanceId2);
+			value = workflowTaskId1.compareTo(workflowTaskId2);
 		}
 
 		if (_asc) {

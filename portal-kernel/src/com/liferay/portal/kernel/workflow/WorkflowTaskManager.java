@@ -31,48 +31,55 @@ import java.util.Map;
 
 @MessagingProxy(mode = ProxyMode.SYNC)
 /**
- * <a href="WorkflowInstanceManager.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowTaskManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public interface WorkflowInstanceManager {
+public interface WorkflowTaskManager {
 
-	public void deleteWorkflowInstance(long workflowInstanceId)
+	public WorkflowTask assignWorkflowTaskToRole(
+			long userId, long workflowTaskId, long roleId, String comment,
+			Map<String, Object> context)
 		throws WorkflowException;
 
-	public List<String> getNextTransitionNames(
-			long userId, long workflowInstanceId)
+	public WorkflowTask assignWorkflowTaskToUser(
+			long userId, long workflowTaskId, long assigneeUserId,
+			String comment, Map<String, Object> context)
 		throws WorkflowException;
 
-	public WorkflowInstance getWorkflowInstance(long workflowInstanceId)
+	public WorkflowTask completeWorkflowTask(
+			long userId, long workflowTaskId, String transitionName,
+			String comment, Map<String, Object> context)
 		throws WorkflowException;
 
-	public int getWorkflowInstanceCount(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Boolean completed)
+	public List<String> getNextTransitionNames(long userId, long workflowTaskId)
 		throws WorkflowException;
 
-	public List<WorkflowInstance> getWorkflowInstances(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Boolean completed, int start, int end,
+	public int getWorkflowTaskByRole(long roleId, Boolean completed)
+		throws WorkflowException;
+
+	public int getWorkflowTaskByUser(long userId, Boolean completed)
+		throws WorkflowException;
+
+	public int getWorkflowTaskByWorkflowInstance(
+			long workflowInstanceId, Boolean completed)
+		throws WorkflowException;
+
+	public List<WorkflowTask> getWorkflowTasksByRole(
+			long roleId, Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
-	public WorkflowInstance signalWorkflowInstance(
-			long userId, long workflowInstanceId, String transitionName,
-			Map<String, Object> context)
+	public List<WorkflowTask> getWorkflowTasksByUser(
+			long userId, Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
-	public WorkflowInstance startWorkflowInstance(
-			long userId, String workflowDefinitionName,
-			Integer workflowDefinitionVersion, String transitionName,
-			Map<String, Object> context)
-		throws WorkflowException;
-
-	public WorkflowInstance updateContext(
-			long workflowInstanceId, Map<String, Object> context)
+	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
+			long workflowInstanceId, Boolean completed, int start, int end,
+			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 }

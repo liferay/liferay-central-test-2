@@ -24,13 +24,11 @@ package com.liferay.portlet.workflowtasks.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.TaskInstanceManagerUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.model.User;
+import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -82,24 +80,17 @@ public class EditTaskAction extends PortletAction {
 	}
 
 	protected void updateTask(ActionRequest actionRequest) throws Exception {
-		long taskIntanceId = ParamUtil.getLong(
-			actionRequest, "taskIntanceId");
-		String activityName = ParamUtil.getString(
-			actionRequest, "activityName");
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		User user = PortalUtil.getUser(actionRequest);
+		long workflowTaskId = ParamUtil.getLong(
+			actionRequest, "workflowTaskId");
+		String transitionName = ParamUtil.getString(
+			actionRequest, "transitionName");
 
-		String comment = StringPool.BLANK;
-
-		if (Validator.isNull(activityName)) {
-			TaskInstanceManagerUtil.completeTaskInstance(
-				taskIntanceId, user.getUserId(), comment, null, null);
-		}
-		else {
-			TaskInstanceManagerUtil.completeTaskInstance(
-				taskIntanceId, user.getUserId(), activityName, comment, null,
-				null);
-		}
+		WorkflowTaskManagerUtil.completeWorkflowTask(
+			themeDisplay.getUserId(), workflowTaskId, transitionName, null,
+			null);
 	}
 
 }
