@@ -34,10 +34,6 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class PropsValues {
 
-	public static final boolean ADMIN_DEFAULT_ADD_TO_EXISTING_USER =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.ADMIN_DEFAULT_ADD_TO_EXISTING_USER));
-
 	public static final String[] ADMIN_DEFAULT_GROUP_NAMES =
 		StringUtil.split(
 			PropsUtil.get(PropsKeys.ADMIN_DEFAULT_GROUP_NAMES),

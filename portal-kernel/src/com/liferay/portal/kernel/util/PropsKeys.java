@@ -29,8 +29,6 @@ package com.liferay.portal.kernel.util;
  */
 public interface PropsKeys {
 
-	public static final String ADMIN_DEFAULT_ADD_TO_EXISTING_USER = "admin.default.add.to.existing.user";
-
 	public static final String ADMIN_DEFAULT_GROUP_NAMES = "admin.default.group.names";
 
 	public static final String ADMIN_DEFAULT_ROLE_NAMES = "admin.default.role.names";
