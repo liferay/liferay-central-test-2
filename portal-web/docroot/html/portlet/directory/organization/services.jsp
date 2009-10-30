@@ -81,7 +81,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 				</tr>
 				<tr>
 					<td>
-						<b><liferay-ui:message key="open" /></b>
+						<strong><liferay-ui:message key="open" /></strong>
 					</td>
 
 					<%
@@ -101,7 +101,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 				</tr>
 				<tr>
 					<td>
-						<b><liferay-ui:message key="close" /></b>
+						<strong><liferay-ui:message key="close[status]" /></strong>
 					</td>
 
 					<%

@@ -741,7 +741,7 @@
 							<option value="double"><liferay-ui:message key="double" /></option>
 							<option value="dotted"><liferay-ui:message key="dotted" /></option>
 							<option value="groove"><liferay-ui:message key="groove" /></option>
-							<option value="hidden"><liferay-ui:message key="hidden" /></option>
+							<option value="hidden"><liferay-ui:message key="hidden[css]" /></option>
 							<option value="inset"><liferay-ui:message key="inset" /></option>
 							<option value="outset"><liferay-ui:message key="outset" /></option>
 							<option value="ridge"><liferay-ui:message key="ridge" /></option>
@@ -758,7 +758,7 @@
 							<option value="double"><liferay-ui:message key="double" /></option>
 							<option value="dotted"><liferay-ui:message key="dotted" /></option>
 							<option value="groove"><liferay-ui:message key="groove" /></option>
-							<option value="hidden"><liferay-ui:message key="hidden" /></option>
+							<option value="hidden"><liferay-ui:message key="hidden[css]" /></option>
 							<option value="inset"><liferay-ui:message key="inset" /></option>
 							<option value="outset"><liferay-ui:message key="outset" /></option>
 							<option value="ridge"><liferay-ui:message key="ridge" /></option>
@@ -775,7 +775,7 @@
 							<option value="double"><liferay-ui:message key="double" /></option>
 							<option value="dotted"><liferay-ui:message key="dotted" /></option>
 							<option value="groove"><liferay-ui:message key="groove" /></option>
-							<option value="hidden"><liferay-ui:message key="hidden" /></option>
+							<option value="hidden"><liferay-ui:message key="hidden[css]" /></option>
 							<option value="inset"><liferay-ui:message key="inset" /></option>
 							<option value="outset"><liferay-ui:message key="outset" /></option>
 							<option value="ridge"><liferay-ui:message key="ridge" /></option>
@@ -792,7 +792,7 @@
 							<option value="double"><liferay-ui:message key="double" /></option>
 							<option value="dotted"><liferay-ui:message key="dotted" /></option>
 							<option value="groove"><liferay-ui:message key="groove" /></option>
-							<option value="hidden"><liferay-ui:message key="hidden" /></option>
+							<option value="hidden"><liferay-ui:message key="hidden[css]" /></option>
 							<option value="inset"><liferay-ui:message key="inset" /></option>
 							<option value="outset"><liferay-ui:message key="outset" /></option>
 							<option value="ridge"><liferay-ui:message key="ridge" /></option>
