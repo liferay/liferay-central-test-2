@@ -58,7 +58,6 @@
 
 		<aui:form action="<%= loginURL %>" method="post" name="fm">
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-			<aui:input name="rememberMe" type="hidden" value="<%= rememberMe %>" />
 
 			<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
 
@@ -128,18 +127,6 @@
 					jQuery('#<portlet:namespace />password').keypress(
 						function(event) {
 							Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
-						}
-					);
-
-					jQuery('#<portlet:namespace />rememberMeCheckbox').click(
-						function() {
-							var checked = 'off';
-
-							if (this.checked) {
-								checked = 'on';
-							}
-
-							jQuery('#<portlet:namespace />rememberMe').val(checked);
 						}
 					);
 				}
