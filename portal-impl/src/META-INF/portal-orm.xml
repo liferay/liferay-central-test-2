@@ -883,8 +883,8 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="classNameId" />
-			<basic name="definitionName" />
-			<basic name="definitionVersion" />
+			<basic name="workflowDefinitionName" />
+			<basic name="workflowDefinitionVersion" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

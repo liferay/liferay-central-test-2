@@ -121,20 +121,21 @@ public class WorkflowLinkWrapper implements WorkflowLink {
 		_workflowLink.setClassNameId(classNameId);
 	}
 
-	public java.lang.String getDefinitionName() {
-		return _workflowLink.getDefinitionName();
+	public java.lang.String getWorkflowDefinitionName() {
+		return _workflowLink.getWorkflowDefinitionName();
 	}
 
-	public void setDefinitionName(java.lang.String definitionName) {
-		_workflowLink.setDefinitionName(definitionName);
+	public void setWorkflowDefinitionName(
+		java.lang.String workflowDefinitionName) {
+		_workflowLink.setWorkflowDefinitionName(workflowDefinitionName);
 	}
 
-	public int getDefinitionVersion() {
-		return _workflowLink.getDefinitionVersion();
+	public int getWorkflowDefinitionVersion() {
+		return _workflowLink.getWorkflowDefinitionVersion();
 	}
 
-	public void setDefinitionVersion(int definitionVersion) {
-		_workflowLink.setDefinitionVersion(definitionVersion);
+	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion) {
+		_workflowLink.setWorkflowDefinitionVersion(workflowDefinitionVersion);
 	}
 
 	public com.liferay.portal.model.WorkflowLink toEscapedModel() {

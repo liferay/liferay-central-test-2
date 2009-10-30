@@ -706,8 +706,8 @@
 		<field name="userName" type="String" />
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />
-		<field name="definitionName" type="String" />
-		<field name="definitionVersion" type="int" />
+		<field name="workflowDefinitionName" type="String" />
+		<field name="workflowDefinitionVersion" type="int" />
 	</model>
 	<model name="com.liferay.portlet.announcements.model.AnnouncementsDelivery">
 		<field name="deliveryId" type="long" />

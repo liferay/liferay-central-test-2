@@ -43,7 +43,7 @@ public class WorkflowLinkLocalServiceImpl
 
 	public WorkflowLink addWorkflowLink(
 			long userId, long companyId, long groupId, long classNameId,
-			String definitionName, int definitionVersion)
+			String workflowDefinitionName, int workflowDefinitionVersion)
 		throws PortalException, SystemException {
 		long workflowLinkId = counterLocalService.increment();
 
@@ -59,8 +59,8 @@ public class WorkflowLinkLocalServiceImpl
 		workflowLink.setGroupId(groupId);
 		workflowLink.setCompanyId(companyId);
 		workflowLink.setClassNameId(classNameId);
-		workflowLink.setDefinitionName(definitionName);
-		workflowLink.setDefinitionVersion(definitionVersion);
+		workflowLink.setWorkflowDefinitionName(workflowDefinitionName);
+		workflowLink.setWorkflowDefinitionVersion(workflowDefinitionVersion);
 
 		workflowLinkPersistence.update(workflowLink, false);
 
@@ -108,7 +108,7 @@ public class WorkflowLinkLocalServiceImpl
 
 	public WorkflowLink updateWorkflowLink(
 			long userId, long companyId, long groupId, long classNameId,
-			String definitionName, int definitionVersion)
+			String workflowDefinitionName, int workflowDefinitionVersion)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -119,8 +119,8 @@ public class WorkflowLinkLocalServiceImpl
 
 		if (workflowLink == null) {
 			workflowLink = addWorkflowLink(
-				userId, companyId, groupId, classNameId, definitionName,
-				definitionVersion);
+				userId, companyId, groupId, classNameId, workflowDefinitionName,
+				workflowDefinitionVersion);
 		}
 
 		workflowLink.setModifiedDate(now);
@@ -129,8 +129,8 @@ public class WorkflowLinkLocalServiceImpl
 		workflowLink.setGroupId(groupId);
 		workflowLink.setCompanyId(companyId);
 		workflowLink.setClassNameId(classNameId);
-		workflowLink.setDefinitionName(definitionName);
-		workflowLink.setDefinitionVersion(definitionVersion);
+		workflowLink.setWorkflowDefinitionName(workflowDefinitionName);
+		workflowLink.setWorkflowDefinitionVersion(workflowDefinitionVersion);
 
 		workflowLinkPersistence.update(workflowLink, false);
 

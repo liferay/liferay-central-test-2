@@ -1728,6 +1728,6 @@ create table WorkflowLink (
 	userName VARCHAR(75) null,
 	modifiedDate DATE null,
 	classNameId LONG,
-	definitionName VARCHAR(75) null,
-	definitionVersion INTEGER
+	workflowDefinitionName VARCHAR(75) null,
+	workflowDefinitionVersion INTEGER
 );

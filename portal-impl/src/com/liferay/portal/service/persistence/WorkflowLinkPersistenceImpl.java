@@ -318,8 +318,8 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 		workflowLinkImpl.setUserName(workflowLink.getUserName());
 		workflowLinkImpl.setModifiedDate(workflowLink.getModifiedDate());
 		workflowLinkImpl.setClassNameId(workflowLink.getClassNameId());
-		workflowLinkImpl.setDefinitionName(workflowLink.getDefinitionName());
-		workflowLinkImpl.setDefinitionVersion(workflowLink.getDefinitionVersion());
+		workflowLinkImpl.setWorkflowDefinitionName(workflowLink.getWorkflowDefinitionName());
+		workflowLinkImpl.setWorkflowDefinitionVersion(workflowLink.getWorkflowDefinitionVersion());
 
 		return workflowLinkImpl;
 	}
@@ -405,7 +405,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 
 				query.append("ORDER BY ");
 
-				query.append("workflowLink.definitionName ASC");
+				query.append("workflowLink.workflowDefinitionName ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -491,7 +491,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				else {
 					query.append("ORDER BY ");
 
-					query.append("workflowLink.definitionName ASC");
+					query.append("workflowLink.workflowDefinitionName ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -614,7 +614,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 			else {
 				query.append("ORDER BY ");
 
-				query.append("workflowLink.definitionName ASC");
+				query.append("workflowLink.workflowDefinitionName ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -714,7 +714,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 
 				query.append("ORDER BY ");
 
-				query.append("workflowLink.definitionName ASC");
+				query.append("workflowLink.workflowDefinitionName ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -867,7 +867,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				else {
 					query.append("ORDER BY ");
 
-					query.append("workflowLink.definitionName ASC");
+					query.append("workflowLink.workflowDefinitionName ASC");
 				}
 
 				Query q = session.createQuery(query.toString());

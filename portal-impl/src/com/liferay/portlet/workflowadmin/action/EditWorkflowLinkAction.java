@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.service.WorkflowLinkLocalServiceUtil;
@@ -90,11 +91,6 @@ public class EditWorkflowLinkAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long companyId = themeDisplay.getCompanyId();
-		long userId = themeDisplay.getUserId();
-
-		long groupId = 0;
-
 		Enumeration<String> enu = actionRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
@@ -104,23 +100,26 @@ public class EditWorkflowLinkAction extends PortletAction {
 				continue;
 			}
 
+			String value = ParamUtil.getString(actionRequest, name);
+
 			long classNameId = GetterUtil.getLong(
 				name.substring(_PREFIX.length(), name.length()));
 
-			String value = ParamUtil.getString(actionRequest, name);
-
 			if (Validator.isNull(value)) {
 				WorkflowLinkLocalServiceUtil.deleteWorkflowLink(
-					userId, companyId, groupId, classNameId);
+					themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
+					classNameId);
 			}
 			else {
-				String values[] = value.split(StringPool.AT);
+				String[] values = StringUtil.split(value, StringPool.AT);
 
 				String workflowDefinitionName = values[0];
-				int workflowDefinitionVersion = Integer.valueOf(values[1]);
+				int workflowDefinitionVersion = GetterUtil.getInteger(
+					values[1]);
 
 				WorkflowLinkLocalServiceUtil.updateWorkflowLink(
-					userId, companyId, 0, classNameId, workflowDefinitionName,
+					themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
+					classNameId, workflowDefinitionName,
 					workflowDefinitionVersion);
 			}
 		}

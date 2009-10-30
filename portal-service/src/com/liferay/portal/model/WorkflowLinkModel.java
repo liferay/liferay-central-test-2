@@ -89,13 +89,13 @@ public interface WorkflowLinkModel extends BaseModel<WorkflowLink> {
 
 	public void setClassNameId(long classNameId);
 
-	public String getDefinitionName();
+	public String getWorkflowDefinitionName();
 
-	public void setDefinitionName(String definitionName);
+	public void setWorkflowDefinitionName(String workflowDefinitionName);
 
-	public int getDefinitionVersion();
+	public int getWorkflowDefinitionVersion();
 
-	public void setDefinitionVersion(int definitionVersion);
+	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion);
 
 	public WorkflowLink toEscapedModel();
 
