@@ -52,7 +52,8 @@ public class ReportRequestMessageListener implements MessageListener {
 		ReportRequest request = (ReportRequest)message.getPayload();
 
 		ReportResultContainer reportResultContainer =
-			_reportResultContainer.clone(request.getReportName());
+			_reportResultContainer.clone(request.getReportDesignRetriever()
+				.getReportName());
 
 		Message responseMessage = MessageBusUtil.createResponseMessage(message);
 
