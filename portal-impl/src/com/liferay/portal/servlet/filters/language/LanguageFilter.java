@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.language;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -83,7 +84,7 @@ public class LanguageFilter extends BasePortalFilter {
 			StringBuffer sb = new StringBuffer();
 
 			sb.append(StringPool.APOSTROPHE);
-			sb.append(LanguageUtil.get(locale, key));
+			sb.append(UnicodeLanguageUtil.get(locale, key));
 			sb.append(StringPool.APOSTROPHE);
 
 			content = content.replace(match, sb.toString());
