@@ -66,20 +66,14 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 
 <c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
 	<div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
-		<c:if test="<%= Validator.isNotNull(label) %>">
+		<c:if test="<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>">
 			<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
-
-			<c:if test='<%= !inlineLabel.equals("right") %>'>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 					<liferay-ui:icon-help message="<%= helpMessage %>" />
 				</c:if>
-			</c:if>
-
-			<c:if test="<%= Validator.isNull(inlineLabel) %>">
-				</label>
-			</c:if>
+			</label>
 		</c:if>
 </c:if>
 
@@ -237,15 +231,13 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 	<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
 </c:if>
 
-<c:if test='<%= Validator.isNotNull(label) && !type.equals("radio") && Validator.isNotNull(inlineLabel) %>'>
-	<c:if test='<%= inlineLabel.equals("right") %>'>
+<c:if test='<%= Validator.isNotNull(label) && !type.equals("radio") && inlineLabel.equals("right") %>'>
+	<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 		<liferay-ui:message key="<%= label %>" />
 
 		<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 			<liferay-ui:icon-help message="<%= helpMessage %>" />
 		</c:if>
-	</c:if>
-
 	</label>
 </c:if>
 

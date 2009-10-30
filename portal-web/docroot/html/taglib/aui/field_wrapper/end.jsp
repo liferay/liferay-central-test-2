@@ -28,20 +28,19 @@
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:helpMessage"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:label"));
+String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
 %>
 
 		</select>
 	</span>
 
-	<c:if test="<%= Validator.isNotNull(inlineLabel) %>">
-		<c:if test='<%= inlineLabel.equals("right") %>'>
+	<c:if test="<%= inlineLabel.equals("right") %>">
+		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK  %>" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 				<liferay-ui:icon-help message="<%= helpMessage %>" />
 			</c:if>
-		</c:if>
-
 		</label>
 	</c:if>
 </div>
