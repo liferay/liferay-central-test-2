@@ -144,7 +144,7 @@
 
 .aui-form .aui-block-labels .inline-label {
 	position: relative;
-	top: .15em;
+	top: -.15em;
 }
 
 .aui-form .inline-field {
