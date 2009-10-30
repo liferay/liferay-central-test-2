@@ -57,13 +57,13 @@ public interface WorkflowTaskManager {
 	public List<String> getNextTransitionNames(long userId, long workflowTaskId)
 		throws WorkflowException;
 
-	public int getWorkflowTaskByRole(long roleId, Boolean completed)
+	public int getWorkflowTaskCountByRole(long roleId, Boolean completed)
 		throws WorkflowException;
 
-	public int getWorkflowTaskByUser(long userId, Boolean completed)
+	public int getWorkflowTaskCountByUser(long userId, Boolean completed)
 		throws WorkflowException;
 
-	public int getWorkflowTaskByWorkflowInstance(
+	public int getWorkflowTaskCountByWorkflowInstance(
 			long workflowInstanceId, Boolean completed)
 		throws WorkflowException;
 

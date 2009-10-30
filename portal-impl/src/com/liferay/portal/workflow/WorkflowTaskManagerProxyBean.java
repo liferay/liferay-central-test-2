@@ -68,15 +68,15 @@ public class WorkflowTaskManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowTaskByRole(long roleId, Boolean completed) {
+	public int getWorkflowTaskCountByRole(long roleId, Boolean completed) {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowTaskByUser(long userId, Boolean completed) {
+	public int getWorkflowTaskCountByUser(long userId, Boolean completed) {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getWorkflowTaskByWorkflowInstance(
+	public int getWorkflowTaskCountByWorkflowInstance(
 		long workflowInstanceId, Boolean completed) {
 
 		throw new UnsupportedOperationException();

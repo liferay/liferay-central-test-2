@@ -71,23 +71,25 @@ public class WorkflowTaskManagerUtil {
 			userId, workflowTaskId);
 	}
 
-	public static int getWorkflowTaskByRole(long roleId, Boolean completed)
+	public static int getWorkflowTaskCountByRole(long roleId, Boolean completed)
 		throws WorkflowException {
 
-		return _workflowTaskManager.getWorkflowTaskByRole(roleId, completed);
+		return _workflowTaskManager.getWorkflowTaskCountByRole(
+			roleId, completed);
 	}
 
-	public static int getWorkflowTaskByUser(long userId, Boolean completed)
+	public static int getWorkflowTaskCountByUser(long userId, Boolean completed)
 		throws WorkflowException {
 
-		return _workflowTaskManager.getWorkflowTaskByUser(userId, completed);
+		return _workflowTaskManager.getWorkflowTaskCountByUser(
+			userId, completed);
 	}
 
-	public static int getWorkflowTaskByWorkflowInstance(
+	public static int getWorkflowTaskCountByWorkflowInstance(
 			long workflowInstanceId, Boolean completed)
 		throws WorkflowException {
 
-		return _workflowTaskManager.getWorkflowTaskByWorkflowInstance(
+		return _workflowTaskManager.getWorkflowTaskCountByWorkflowInstance(
 			workflowInstanceId, completed);
 	}
 
