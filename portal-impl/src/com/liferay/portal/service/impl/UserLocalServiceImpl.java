@@ -417,11 +417,27 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Groups
 
-		if (groupIds != null) {
-			groupLocalService.addUserGroups(userId, groupIds);
+		Set<Long> groupIdsSet = SetUtil.fromArray(groupIds);
+
+		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
+			companyId, PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
+			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
+
+		for (String defaultGroupName : defaultGroupNames) {
+			try {
+				Group group = groupPersistence.findByC_N(
+					companyId, defaultGroupName);
+
+				groupIdsSet.add(group.getGroupId());
+			}
+			catch (NoSuchGroupException nsge) {
+			}
 		}
 
-		setDefaultGroups(companyId, user);
+		groupIds = ArrayUtil.toArray(
+			groupIdsSet.toArray(new Long[groupIdsSet.size()]));
+
+		groupLocalService.addUserGroups(userId, groupIds);
 
 		// Organizations
 
@@ -429,37 +445,69 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Roles
 
-		if (roleIds != null) {
-			roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
+		Set<Long> roleIdsSet = SetUtil.fromArray(roleIds);
 
-			userPersistence.setRoles(userId, roleIds);
+		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
+			companyId, PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, StringPool.NEW_LINE,
+			PropsValues.ADMIN_DEFAULT_ROLE_NAMES);
+
+		for (String defaultRoleName : defaultRoleNames) {
+			try {
+				Role role = rolePersistence.findByC_N(
+					companyId, defaultRoleName);
+
+				roleIdsSet.add(role.getRoleId());
+			}
+			catch (NoSuchRoleException nsge) {
+			}
 		}
 
-		setDefaultRoles(companyId, user);
+		roleIds = ArrayUtil.toArray(
+			roleIdsSet.toArray(new Long[roleIdsSet.size()]));
+
+		roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
+
+		userPersistence.setRoles(userId, roleIds);
 
 		// User groups
 
-		if (userGroupIds != null) {
-			Set<UserGroup> userGroupSet = new HashSet<UserGroup>();
+		Set<UserGroup> userGroups = new HashSet<UserGroup>();
 
+		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
+			companyId, PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_USER_GROUP_NAMES);
+
+		for (String defaultUserGroupName : defaultUserGroupNames) {
+			try {
+				UserGroup userGroup = userGroupPersistence.findByC_N(
+					companyId, defaultUserGroupName);
+
+				userGroups.add(userGroup);
+
+				copyUserGroupLayouts(
+					userGroup.getUserGroupId(), new long[] {userId});
+			}
+			catch (NoSuchUserGroupException nsuge) {
+			}
+		}
+
+		if (userGroupIds != null) {
 			for (long userGroupId : userGroupIds) {
 				try{
 					UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
 						userGroupId);
 
-					userGroupSet.add(userGroup);
+					userGroups.add(userGroup);
 
 					copyUserGroupLayouts(userGroupId, new long[] {userId});
 				}
 				catch (NoSuchUserGroupException nsuge) {
 				}
 			}
-
-			userPersistence.setUserGroups(
-				userId, ListUtil.fromCollection(userGroupSet));
 		}
 
-		setDefaultUserGroups(companyId, user);
+		userPersistence.setUserGroups(
+			userId, ListUtil.fromCollection(userGroups));
 
 		// Asset
 
@@ -1627,98 +1675,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
-	}
-
-	public void setDefaultGroups(long companyId, User user)
-		throws SystemException {
-
-		Set<Long> groupIdSet = new HashSet<Long>();
-
-		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
-			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
-		List<Group> currentGroups = user.getGroups();
-
-		for (String defaultGroupName : defaultGroupNames) {
-			try {
-				Group defaultGroup = groupPersistence.findByC_N(
-					companyId, defaultGroupName);
-				if (!currentGroups.contains(defaultGroup)) {
-					groupIdSet.add(defaultGroup.getGroupId());
-				}
-			}
-			catch (NoSuchGroupException nsge) {
-			}
-		}
-
-		long[] groupIds = ArrayUtil.toArray(
-			(Long[])groupIdSet.toArray(new Long[groupIdSet.size()]));
-
-		userPersistence.setGroups(user.getUserId(), groupIds);
-	}
-
-	public void setDefaultRoles(long companyId, User user)
-		throws PortalException, SystemException {
-
-		Set<Long> roleIdSet = new HashSet<Long>();
-
-		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, StringPool.NEW_LINE,
-			PropsValues.ADMIN_DEFAULT_ROLE_NAMES);
-		List<Role> currentRoles = user.getRoles();
-
-		for (String defaultRoleName : defaultRoleNames) {
-			try {
-				Role defaultRole = rolePersistence.findByC_N(
-					companyId, defaultRoleName);
-				if (!currentRoles.contains(defaultRole)) {
-					roleIdSet.add(defaultRole.getRoleId());
-				}
-			}
-			catch (NoSuchRoleException nsre) {
-			}
-		}
-
-		long[] roleIds = ArrayUtil.toArray(
-			(Long[])roleIdSet.toArray(new Long[roleIdSet.size()]));
-
-		roleIds = EnterpriseAdminUtil.addRequiredRoles(
-			user.getUserId(), roleIds);
-
-		userPersistence.setRoles(user.getUserId(), roleIds);
-	}
-
-	public void setDefaultUserGroups(long companyId, User user)
-		throws PortalException, SystemException {
-
-		Set<Long> userGroupIdSet = new HashSet<Long>();
-
-		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES,
-			StringPool.NEW_LINE,
-			PropsValues.ADMIN_DEFAULT_USER_GROUP_NAMES);
-		List<UserGroup> currentUserGroups = user.getUserGroups();
-
-		for (String defaultUserGroupName : defaultUserGroupNames) {
-			try {
-				UserGroup defaultUserGroup = userGroupPersistence.findByC_N(
-					companyId, defaultUserGroupName);
-				if (!currentUserGroups.contains(defaultUserGroup)) {
-
-					userGroupIdSet.add(defaultUserGroup.getUserGroupId());
-
-					copyUserGroupLayouts(
-						defaultUserGroup.getUserGroupId(), user.getUserId());
-				}
-			}
-			catch (NoSuchUserGroupException nsuge) {
-			}
-		}
-
-		long[] userGroupIds = ArrayUtil.toArray(
-			(Long[])userGroupIdSet.toArray(new Long[userGroupIdSet.size()]));
-
-		userPersistence.setUserGroups(user.getUserId(), userGroupIds);
 	}
 
 	public void setRoleUsers(long roleId, long[] userIds)
