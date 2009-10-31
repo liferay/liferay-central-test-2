@@ -124,7 +124,7 @@ AUI().add(
 				textInput.focus();
 			}
 
-			if (options.curTags != '') {
+			if (options.curTags) {
 				instance._curTags = options.curTags.split(',');
 
 				instance._update();
