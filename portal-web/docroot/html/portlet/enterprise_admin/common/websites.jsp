@@ -113,11 +113,10 @@ else {
 		function () {
 			new Liferay.AutoFields(
 				{
-					container: '#websites > fieldset',
-					baseRows: '#websites > fieldset .lfr-form-row',
+					contentBox: '#websites > fieldset',
 					fieldIndexes: '<portlet:namespace />websitesIndexes'
 				}
-			);
+			).render();
 		}
 	);
 </script>

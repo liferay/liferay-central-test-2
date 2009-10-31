@@ -385,16 +385,10 @@
 
 .lfr-form-row {
 	border-bottom: 1px solid #CCC;
-	margin-bottom: 10px;
 	margin-top: 10px;
 	overflow: hidden;
 	padding: 5px;
 	padding-top: 1px;
-	position: relative;
-}
-
-.ie .lfr-form-row {
-	width: 100%;
 }
 
 .lfr-form-row:hover {
@@ -409,47 +403,9 @@
 	float: left;
 }
 
-.lfr-form-row .row-controls {
-	bottom: 5px;
-	float: right;
-	position: absolute;
-	right: 5px;
-}
-
-.lfr-form-row .row-controls a {
-	background: url() no-repeat 2px 50%;
-	display: block;
-	float: left;
-	font-size: 0;
-	height: 16px;
-	padding: 2px;
-	text-indent: -9999em;
-	width: 16px;
-}
-
-.lfr-form-row .row-controls .add-row {
-	background-image: url(<%= themeImagesPath %>/common/add.png);
-}
-
-.lfr-form-row .row-controls .delete-row {
-	background-image: url(<%= themeImagesPath %>/common/delete.png);
-}
-
 .lfr-form-row legend .field-label{
 	float:left;
 	margin-right: 10px;
-}
-
-.lfr-form-row .lfr-arrow-controls a {
-	background: url() no-repeat 2px 50%;
-	clear: none;
-	display: block;
-	float: left;
-	font-size: 0;
-	height: 16px;
-	padding: 2px;
-	text-indent: -9999em;
-	width: 16px;
 }
 
 .lfr-form-row .handle-sort-vertical {
@@ -464,36 +420,37 @@
 	padding: 0;
 }
 
+.aui-autorow {
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.ie .aui-autorow {
+	width: 100%;
+}
+
+.lfr-autorow-controls {
+	bottom: 5px;
+	position: absolute;
+	right: 5px;
+}
+
 /* ---------- Undo manager ---------- */
 
-.undo-queue.queue-empty {
-	display: none;
-}
-
-.ie6 .undo-queue.queue-empty {
-	display: none;
-}
-
-.undo-queue .undo-action {
-	float: left;
-}
-
-.undo-queue .clear-undos {
-	float: right;
-}
-
-.undo-queue.queue-single .clear-undos {
-	display: none;
-}
-
-.portlet-msg-info.undo-queue {
-	overflow: hidden;
+.aui-undomanager .lfr-undo-queue {
 	margin: 10px auto;
 }
 
-.ie6 .portlet-msg-info.undo-queue {
-	zoom: 1;
-	overflow: visible;
+.lfr-action-undo {
+	float: left;
+}
+
+.lfr-action-clear {
+	float: right;
+}
+
+.lfr-queue-empty .lfr-action-clear, .lfr-queue-single .lfr-action-clear {
+	display: none;
 }
 
 /* ---------- Panel Page styles ---------- */

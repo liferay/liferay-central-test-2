@@ -112,11 +112,10 @@ else {
 		function () {
 			new Liferay.AutoFields(
 				{
-					container: '#additionalEmailAddresses > fieldset',
-					baseRows: '#additionalEmailAddresses > fieldset .lfr-form-row',
+					contentBox: '#additionalEmailAddresses > fieldset',
 					fieldIndexes: '<portlet:namespace />emailAddressesIndexes'
 				}
-			);
+			).render();
 		}
 	);
 </script>

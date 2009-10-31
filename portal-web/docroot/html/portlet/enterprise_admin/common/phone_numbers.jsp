@@ -116,11 +116,10 @@ else {
 		function () {
 			new Liferay.AutoFields(
 				{
-					container: '#phoneNumbers > fieldset',
-					baseRows: '#phoneNumbers > fieldset .lfr-form-row',
+					contentBox: '#phoneNumbers > fieldset',
 					fieldIndexes: '<portlet:namespace />phonesIndexes'
 				}
-			);
+			).render();
 		}
 	);
 </script>

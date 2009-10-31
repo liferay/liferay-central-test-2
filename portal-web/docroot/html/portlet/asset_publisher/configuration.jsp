@@ -545,17 +545,12 @@ configurationActionURL.setParameter("portletResource", portletResource);
 									Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 									Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 
-									var queryRules = jQuery('#<portlet:namespace />queryRules');
-									var queryRulesContainer = queryRules.find('> fieldset');
-									var queryRulesRows = queryRulesContainer.find('.lfr-form-row');
-
 									var autoFields = new Liferay.AutoFields(
 										{
-											container: queryRulesContainer,
-											baseRows: queryRulesRows,
+											contentBox: '#<portlet:namespace />queryRules > fieldset',
 											fieldIndexes: '<portlet:namespace />queryLogicIndexes'
 										}
-									);
+									).render();
 
 									var initQueryNameFields = function(selectFields) {
 										selectFields = selectFields || jQuery('.asset-query-name');
@@ -584,35 +579,34 @@ configurationActionURL.setParameter("portletResource", portletResource);
 										);
 									};
 
-									autoFields.bind(
-										'addRow',
-										function(event, data) {
-											data = data[0];
-
-											var row = jQuery(data.row);
-											var index = data.idSeed;
+									autoFields.on(
+										'autorow:clone',
+										function(event) {
+											var row = jQuery(event.row.get('contentBox').getDOM());
+											var guid = event.guid;
 
 											initQueryNameFields(row.find('.asset-query-name'));
 
 											var firstCategoriesInput = row.find('.categories-selector > input:visible:first');
-											var categoriesRandomNamespace = (firstCategoriesInput.attr('name') || firstCategoriesInput.attr('id')).substring(0,5);
+
+											var categoriesRandomNamespace = (firstCategoriesInput.attr('name') || firstCategoriesInput.attr('id') || '').substring(0,5);
 
 											new Liferay.AssetCategoriesSelector(
 												{
 													instanceVar: categoriesRandomNamespace,
-													seed: index,
+													seed: guid,
 													hiddenInput: '<portlet:namespace/>queryCategoryIds',
 													summarySpan: categoriesRandomNamespace + 'assetCategoriesSummary'
 												}
 											);
 
 											var firstTagsInput = row.find('.tags-selector > input:visible:first');
-											var tagsRandomNamespace = (firstTagsInput.attr('name') || firstTagsInput.attr('id')).substring(0, 5);
+											var tagsRandomNamespace = (firstTagsInput.attr('name') || firstTagsInput.attr('id') || '').substring(0, 5);
 
 											new Liferay.AssetTagsSelector(
 												{
 													instanceVar: tagsRandomNamespace,
-													seed: index,
+													seed: guid,
 													hiddenInput:  '<portlet:namespace/>queryTagNames',
 													summarySpan: tagsRandomNamespace + 'assetTagsSummary',
 													textInput: tagsRandomNamespace + 'assetTagNames',

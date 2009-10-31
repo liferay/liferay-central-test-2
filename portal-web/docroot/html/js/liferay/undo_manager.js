@@ -1,6 +1,29 @@
 AUI().add(
 	'liferay-undo-manager',
 	function(A) {
+		var Lang = A.Lang;
+
+		var CSS_ACTION_CLEAR = 'lfr-action-clear';
+
+		var CSS_ACTION_UNDO = 'lfr-action-undo';
+
+		var CSS_HELPER_CLEARFIX = 'aui-helper-clearfix';
+
+		var CSS_ITEMS_LEFT = 'lfr-items-left';
+
+		var CSS_MESSAGE_INFO = 'portlet-msg-info';
+
+		var CSS_QUEUE = 'lfr-undo-queue';
+
+		var CSS_QUEUE_EMPTY = 'lfr-queue-empty';
+
+		var CSS_QUEUE_SINGLE = 'lfr-queue-single';
+
+		var TPL_UNDO_TEXT = '<span class="' + CSS_ITEMS_LEFT + '">(0)</span>';
+
+		var TPL_ACTION_CLEAR = '<a class="' + CSS_ACTION_CLEAR + '" href="javascript:;"></a>';
+
+		var TPL_ACTION_UNDO = '<a class="' + CSS_ACTION_UNDO + '" href="javascript:;"></a>';
 
 		/**
 		 * OPTIONS
@@ -9,86 +32,91 @@ AUI().add(
 		 * container {string|object}: A jQuery selector that contains the rows you wish to duplicate.
 		 *
 		 * Optional
-		 * location {string}: The location in the container (top or bottom) where the manager will be added
+		 * location {string}: The location in the container (top or bottom) where the manager will be added. Specifying false
+		 * will perform default rendering
 		 *
 		 */
 
-		var UndoManager = function(options) {
-			var instance = this;
+		var UndoManager = function(config) {
+			UndoManager.superclass.constructor.apply(this, arguments);
+		};
 
-			UndoManager.superclass.constructor.apply(instance, arguments);
+		UndoManager.NAME = 'undomanager';
 
-			var defaults = {
-				container: null,
-				location: 'top'
-			};
-
-			options = jQuery.extend(defaults, options);
-
-			if (options.container) {
-				var undoText = Liferay.Language.get('undo-x');
-
-				undoText = A.substitute(undoText, ['<span class="items-left">(0)</span>']);
-
-				instance._container = jQuery(options.container);
-				instance._manager = jQuery('<div class="portlet-msg-info undo-queue queue-empty"><a class="undo-action" href="javascript:;">' + undoText + '</a><a class="clear-undos" href="javascript:;">' + Liferay.Language.get('clear-history') + '</a></div>');
-
-				instance._undoItemsLeft = instance._manager.find('.items-left');
-				instance._undoButton = instance._manager.find('.undo-action');
-				instance._clearUndos = instance._manager.find('.clear-undos');
-
-				instance.bind('update', instance._updateList);
-
-				instance._clearUndos.click(
-					function(event) {
-						instance._undoCache = [];
-
-						instance.trigger('update');
-						instance.trigger('clearList');
-					}
-				);
-
-				instance._undoButton.click(
-					function(event) {
-						instance.undo(1);
-					}
-				);
-
-				var attachMethod = 'prepend';
-
-				if (options.location != 'top') {
-					attachMethod = 'append';
-				}
-
-				instance._container[attachMethod](instance._manager);
-
-				instance.set('container', instance._container);
-
-				jQuery(window).unload(
-					function(event) {
-						instance._undoCache = [];
-					}
-				);
+		UndoManager.ATTRS = {
+			location: {
+				value: 'top'
 			}
 		};
 
 		A.extend(
 			UndoManager,
-			Liferay.Observable,
+			A.Widget,
 			{
+				initializer: function(config) {
+					var instance = this;
+
+					instance._undoCache = new A.DataSet();
+				},
+
+				renderUI: function() {
+					var instance = this;
+
+					var clearText = Liferay.Language.get('clear-history');
+					var undoText = Liferay.Language.get('undo-x');
+
+					undoText = A.substitute(undoText, [TPL_UNDO_TEXT]);
+
+					var contentBox = instance.get('contentBox');
+
+					var actionClear = A.Node.create(TPL_ACTION_CLEAR);
+					var actionUndo = A.Node.create(TPL_ACTION_UNDO);
+
+					actionClear.append(clearText);
+					actionUndo.append(undoText);
+
+					contentBox.appendChild(actionUndo);
+					contentBox.appendChild(actionClear);
+
+					contentBox.addClass(CSS_HELPER_CLEARFIX);
+					contentBox.addClass(CSS_MESSAGE_INFO);
+					contentBox.addClass(CSS_QUEUE);
+					contentBox.addClass(CSS_QUEUE_EMPTY);
+
+					instance.after('update', instance._updateList);
+
+					instance._undoItemsLeft = contentBox.one('.' + CSS_ITEMS_LEFT);
+
+					instance._actionClear = actionClear;
+					instance._actionUndo = actionUndo;
+				},
+
+				bindUI: function() {
+					var instance = this;
+
+					instance._actionClear.on('click', instance._onActionClear, instance);
+					instance._actionUndo.on('click', instance._onActionUndo, instance);
+
+					instance.after('render', instance._afterUndoManagerRender);
+				},
+
 				add: function(handler, stateData) {
 					var instance = this;
 
-					if (handler && typeof handler == 'function') {
+					if (Lang.isFunction(handler)) {
 						var undo = {
 							handler: handler,
 							stateData: stateData
 						};
 
-						instance._undoCache.push(undo);
+						instance._undoCache.insert(0, undo);
 
-						instance.trigger('update');
-						instance.trigger('add');
+						var eventData = {
+							undo: undo
+						};
+
+						instance.fire('update', eventData);
+						instance.fire('add', eventData);
 					}
 				},
 
@@ -97,45 +125,81 @@ AUI().add(
 
 					limit = limit || 1;
 
-					var i = instance._undoCache.length - 1;
+					var undoCache = instance._undoCache;
 
-					while (limit > 0 && i >= 0) {
-						var undoAction = instance._undoCache.pop();
+					undoCache.each(
+						function(item, index, collection) {
+							if (index < limit) {
+								item.handler.call(instance, item.stateData);
 
-						undoAction.handler.call(instance, undoAction.stateData);
+								undoCache.removeAt(0);
+							}
+							else {
+								return false;
+							}
+						}
+					);
 
-						limit--;
-						i--;
+					instance.fire('update');
+					instance.fire('undo');
+				},
+
+				_afterUndoManagerRender: function(event) {
+					var instance = this;
+
+					var location = instance.get('location');
+
+					if (location !== false) {
+						var boundingBox = instance.get('boundingBox');
+						var boundingBoxParent = boundingBox.get('parentNode');
+
+						var action = 'append';
+
+						if (location == 'top') {
+							action = 'prepend';
+						}
+
+						boundingBoxParent[action](boundingBox);
 					}
+				},
 
-					instance.trigger('update');
-					instance.trigger('undo');
+				_onActionClear: function(event) {
+					var instance = this;
+
+					instance._undoCache.clear();
+
+					instance.fire('update');
+					instance.fire('clearList');
+				},
+
+				_onActionUndo: function(event) {
+					var instance = this;
+
+					instance.undo(1);
 				},
 
 				_updateList: function() {
 					var instance = this;
 
-					var itemsLeft = instance._undoCache.length;
-					var manager = instance._manager;
+					var itemsLeft = instance._undoCache.size();
+					var contentBox = instance.get('contentBox');
 
-					if (itemsLeft == 1) {
-						manager.addClass('queue-single');
-					}
-					else {
-						manager.removeClass('queue-single');
-					}
+					var actionSingle = 'removeClass';
+					var actionEmpty = 'addClass';
 
 					if (itemsLeft > 0) {
-						manager.removeClass('queue-empty');
+						if (itemsLeft == 1) {
+							actionSingle = 'addClass';
+						}
+
+						actionEmpty = 'removeClass';
 					}
-					else {
-						manager.addClass('queue-empty');
-					}
+
+					contentBox[actionSingle](CSS_QUEUE_SINGLE);
+					contentBox[actionEmpty](CSS_QUEUE_EMPTY);
 
 					instance._undoItemsLeft.text('(' + itemsLeft + ')');
-				},
-
-				_undoCache: []
+				}
 			}
 		);
 
@@ -143,6 +207,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['liferay-observable', 'substitute']
+		requires: ['base', 'data-set', 'substitute']
 	}
 );

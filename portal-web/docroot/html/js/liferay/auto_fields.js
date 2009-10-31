@@ -1,6 +1,11 @@
 AUI().add(
 	'liferay-auto-fields',
 	function(A) {
+		var Lang = A.Lang;
+
+		var CSS_AUTOROW_CONTROLS = 'lfr-autorow-controls';
+
+		var TPL_INPUT_HIDDEN = '<input name="{name}" type="hidden" />';
 
 		/**
 		 * OPTIONS
@@ -16,284 +21,151 @@ AUI().add(
 		 *
 		 */
 
-		var AutoFields = function(options) {
-			var instance = this;
+		var AutoFields = function(config) {
+			AutoFields.superclass.constructor.apply(this, arguments);
+		};
 
-			AutoFields.superclass.constructor.apply(instance, arguments);
+		AutoFields.NAME = 'autofields';
 
-			instance.options = options;
+		AutoFields.ATTRS = {
+			baseRows: {
+				value: '.lfr-form-row',
+				setter: function(value) {
+					var instance = this;
 
-			var container = jQuery(options.container);
-			var baseRows = jQuery(options.baseRows);
+					if (Lang.isString(value)) {
+						value = instance.get('contentBox').all(value);
+					}
 
-			var fullContainer = jQuery('<div class="row-container"></div>');
-			var baseContainer = jQuery('<div class="lfr-form-row"></div>');
+					if (!value) {
+						value = A.Attribute.INVALID_VALUE;
+					}
 
-			var rowControls = jQuery('<span class="row-controls"><a href="javascript:;" class="add-row">' + Liferay.Language.get('add-row') + '</a><a href="javascript:;" class="delete-row modify-link">' + Liferay.Language.get('delete-row') + '</a></span>');
-
-			instance._baseContainer = fullContainer;
-			instance._idSeed = baseRows.length;
-
-			instance._undoManager = new Liferay.UndoManager(
-				{
-					container: container
+					return value;
 				}
-			);
-
-			if (options.fieldIndexes) {
-				instance._fieldIndexes = jQuery('[name=' + options.fieldIndexes + ']');
-
-				if (!instance._fieldIndexes.length) {
-					instance._fieldIndexes = jQuery('<input name="' + options.fieldIndexes + '" type="hidden" />')
-					instance._baseContainer.append(instance._fieldIndexes);
-				}
+			},
+			fieldIndexes: {
+				value: ''
+			},
+			sortable: {
+				value: false
+			},
+			sortableHandle: {
+				value: null
 			}
-			else {
-				instance._fieldIndexes = jQuery([]);
-			}
-
-			fullContainer.click(
-				function(event) {
-					if (event.target.parentNode.className.indexOf('row-controls') > -1) {
-						var target = jQuery(event.target);
-						var currentRow = target.parents('.lfr-form-row:first')[0];
-
-						if (target.is('.add-row')) {
-							instance.addRow(currentRow);
-						}
-
-						if (target.is('.delete-row')) {
-							target.trigger('change');
-
-							instance.deleteRow(currentRow);
-						}
-					}
-				}
-			);
-
-			instance._container = container;
-			instance._rowContainer = fullContainer;
-
-			baseRows.each(
-				function(i) {
-					var formRow;
-					var controls = rowControls.clone();
-					var currentRow = jQuery(this);
-
-					if (currentRow.is('.lfr-form-row')) {
-						formRow = currentRow;
-					}
-					else {
-						formRow = baseContainer.clone();
-						formRow.append(this);
-					}
-
-					formRow.append(controls);
-					fullContainer[0].appendChild(formRow[0]);
-
-					if (i == 0) {
-						instance._rowTemplate = formRow.clone();
-						instance._clearForm(instance._rowTemplate);
-					}
-				}
-			);
-
-			var rows = fullContainer.find('.lfr-form-row');
-
-			container.append(fullContainer);
-
-			if (options.sortable){
-				instance._makeSortable(options.sortableHandle);
-			}
-
-			Liferay.bind(
-				'submitForm',
-				function(event, data) {
-					var form = jQuery(data.form);
-
-					form.find('.lfr-form-row:hidden').remove();
-
-					var fieldOrder = instance.serialize();
-
-					instance._fieldIndexes.val(fieldOrder);
-				}
-			);
-
-			instance._undoManager.bind(
-				'clearList',
-				function(event) {
-					var hiddenRows = instance._rowContainer.find('.lfr-form-row:hidden');
-
-					hiddenRows.remove();
-				}
-			);
 		};
 
 		A.extend(
 			AutoFields,
-			Liferay.Observable,
+			A.Widget,
 			{
-				addRow: function(el) {
+				renderUI: function() {
 					var instance = this;
 
-					var currentRow = jQuery(el);
-					var clone = currentRow.clone(true);
+					var contentBox = instance.get('contentBox');
+					var baseRows = instance.get('baseRows');
 
-					var newSeed = (++instance._idSeed);
+					instance._guid = baseRows.size();
 
-					clone.find('input, select, textarea, span').each(
-						function() {
-							var el = jQuery(this);
-							var oldName = el.attr('name') || el.attr('id');
-							var originalName = oldName.replace(/([0-9]+)$/, '');
-							var newName = originalName + newSeed;
+					instance._undoManager = new Liferay.UndoManager().render(contentBox);
 
-							if (el.is(':radio')) {
-								oldName = el.attr('id');
+					instance._renderFieldIndexes();
 
-								el.attr('checked', '');
-								el.attr('value', newSeed);
-								el.attr('id', newName);
-							}
-							else if (el.is(':button') || el.is('span')) {
-								if (oldName) {
-									el.attr('id', newName);
-								}
-							}
-							else {
-								el.attr('name', newName);
-								el.attr('id', newName);
-							}
+					instance.rows = new A.DataSet();
 
-							clone.find('label[for=' + oldName + ']').attr('for', newName);
-						}
-					);
-
-					instance._clearForm(clone);
-
-					clone.find("input[type=hidden]").each(
-						function() {
-							this.value = '';
-						}
-					);
-
-					currentRow.after(clone);
-
-					if (instance.options.sortable) {
-						clone.find('.handle-sort-vertical').attr('id', '');
-
-						clone.resetId();
-
-						instance._sortable.add(clone[0]);
+					if (instance.get('sortable')){
+						instance._initSortable();
 					}
 
-					Liferay.Util.focusFormField(clone.find('input:text:first')[0]);
-
-					instance.trigger('addRow', {row: clone, originalRow: currentRow, idSeed: newSeed});
+					baseRows.each(instance._initRows, instance);
 				},
 
-				deleteRow: function(el) {
+				bindUI: function() {
 					var instance = this;
 
-					var visibleRows = instance._rowContainer.find('.lfr-form-row:visible');
+					instance.on('autorow:clone', instance._onCloneRow);
+					instance.on('autorow:delete', instance._onDeleteRow);
 
-					if (visibleRows.length == 1) {
-						instance.addRow(el);
-					}
+					Liferay.bind('submitForm', A.bind(instance._syncFields, instance));
 
-					var deletedElement = jQuery(el);
-
-					deletedElement.hide();
-
-					instance._undoManager.add(
-						function(stateData) {
-							deletedElement.show();
-						}
-					);
-
-					instance.trigger('deleteRow', {row: deletedElement});
+					instance._undoManager.on('clearList', instance._clearInactiveRows, instance);
 				},
 
 				serialize: function(filter) {
 					var instance = this;
 
-					var rows = instance._baseContainer.find('.lfr-form-row:visible');
+					var rows = instance.rows;
 					var serializedData = [];
 
-					if (filter) {
-						serializedData = filter.apply(instance, [rows]) || [];
-					}
-					else {
-						rows.each(
-							function(i) {
-								var formField = jQuery(this).find(':input:first');
-								var fieldId = formField.attr('id');
+					filter = filter || function(item, index, collection) {
+						var contentBox = item.get('contentBox');
 
-								if (!fieldId) {
-									fieldId = formField.attr('name');
-								}
-								fieldId = (fieldId || '').match(/([0-9]+)$/);
+						var field = contentBox.one('input, select, textarea');
 
-								if (fieldId && fieldId[0]) {
-									serializedData.push(fieldId[0]);
-								}
+						if (field) {
+							fieldId = field.get('id') || field.get('name') || '';
+
+							fieldId = fieldId.match(/([0-9]+)$/);
+
+							var fieldData = fieldId && fieldId[0];
+
+							if (fieldData) {
+								serializedData.push(fieldData);
 							}
-						)
-					}
+						}
+					};
+
+					rows.each(filter);
 
 					return serializedData.join(',');
 				},
 
-				_clearForm: function(obj) {
+				_clearInactiveRows: function() {
 					var instance = this;
 
-					obj.find('input, select, textarea').each(
-						function(i, n) {
-							var type = this.type;
-							var tag = this.tagName.toLowerCase();
+					var rows = instance.rows.filter(
+						function(item, index, collection) {
+							var active = item.get('active');
 
-							if (type == 'text' || type == 'password' || tag == 'textarea') {
-								this.value = '';
+							if (!active) {
+								item.destroy();
 							}
-							else if (type == 'checkbox' || type == 'radio') {
-								this.checked = false;
-							}
-							else if (tag == 'select') {
-								this.selectedIndex = -1;
-							}
+
+							return active;
 						}
 					);
+
+					instance.rows = rows;
+
+					return instance.rows;
 				},
 
-				_moveDown: function(target) {
-					var element = jQuery(target);
-
-					while (!element.is('.lfr-form-row')) {
-						element = element.parent();
-					}
-
-					element.next().after(element);
-				},
-
-				_moveUp: function(target) {
-					var element = jQuery(target);
-
-					while(!element.is('.lfr-form-row')) {
-						element = element.parent();
-					}
-
-					element.prev().before(element);
-				},
-
-				_makeSortable: function(sortableHandle) {
+				_initRows: function(item, index, collection) {
 					var instance = this;
 
-					var rowContainer = A.get(instance._rowContainer[0]);
+					var row = new AutoRow(
+						{
+							bubbles: instance,
+							contentBox: item,
+							guid: (++instance._guid),
+							reset: false,
+							sortable: instance._sortable
+						}
+					).render();
 
-					var rows = rowContainer.queryAll('.lfr-form-row');
+					row._originalConfig.reset = true;
+
+					instance.rows.add(row);
+				},
+
+				_initSortable: function() {
+					var instance = this;
+
+					var sortableHandle = instance.get('sortableHandle');
+					var contentBox = instance.get('contentBox');
 
 					if (sortableHandle) {
-						rowContainer.queryAll(sortableHandle).addClass('handle-sort-vertical');
+						contentBox.queryAll(sortableHandle).addClass('handle-sort-vertical');
 					}
 
 					instance._sortable = new A.Sortable(
@@ -304,19 +176,355 @@ AUI().add(
 							dd: {
 								handles: [sortableHandle]
 							},
-							nodes: rows
+							nodes: []
 						}
 					);
 				},
 
-				_idSeed: 0
+				_onCloneRow: function(event) {
+					var instance = this;
+
+					instance.rows.add(event.row);
+				},
+
+				_onDeleteRow: function(event) {
+					var instance = this;
+
+					var deletedRow = event.deletedRow;
+
+					var activeRows = instance.rows.filter(
+						function(item, index, collection) {
+							return item.get('active');
+						}
+					);
+
+					if (activeRows.size() == 0) {
+						deletedRow.clone();
+					}
+
+					var historyState = A.bind(deletedRow.set, deletedRow, 'active', true);
+
+					instance._undoManager.add(historyState);
+				},
+
+				_syncFields: function() {
+					var instance = this;
+
+					instance._clearInactiveRows();
+					instance._updateFieldIndexes();
+				},
+
+				_renderFieldIndexes: function() {
+					var instance = this;
+
+					var contentBox = instance.get('contentBox');
+					var fieldIndexes = instance.get('fieldIndexes');
+
+					if (fieldIndexes) {
+						instance._fieldIndexes = A.get('[name=' + fieldIndexes + ']');
+
+						if (!instance._fieldIndexes) {
+							var fieldIndexHTML = A.substitute(
+								TPL_INPUT_HIDDEN,
+								{
+									name: fieldIndexes
+								}
+							);
+
+							instance._fieldIndexes = A.Node.create(fieldIndexHTML);
+
+							contentBox.appendChild(instance._fieldIndexes);
+						}
+					}
+				},
+
+				_updateFieldIndexes: function() {
+					var instance = this;
+
+					if (instance._fieldIndexes) {
+						var fieldOrder = instance.serialize();
+
+						instance._fieldIndexes.val(fieldOrder);
+					}
+				},
+
+				_guid: 0
 			}
 		);
+
+		var AutoRow = function() {
+			AutoRow.superclass.constructor.apply(this, arguments);
+		};
+
+		AutoRow.NAME = 'autorow';
+
+		AutoRow.ATTRS = {
+			active: {
+				value: true
+			},
+			bubbles: {
+				value: null
+			},
+			guid: {
+				lazyAdd: false,
+				value: 0
+			},
+			reset: {
+				value: true
+			}
+		};
+
+		A.extend(
+			AutoRow,
+			A.Widget,
+			{
+				initializer: function(config) {
+					var instance = this;
+
+					instance._originalConfig = config;
+					instance._sortable = config.sortable;
+				},
+
+				renderUI: function() {
+					var instance = this;
+
+					var boundingBox = instance.get('boundingBox');
+
+					var renderControls = new A.ToolSet(
+						{
+							tools: [
+								{
+									id: 'add',
+									icon: 'plusthick',
+									handler: {
+										fn: instance.clone,
+										context: instance
+									}
+								},
+								{
+									id: 'delete',
+									icon: 'minusthick',
+									handler: {
+										fn: instance.remove,
+										context: instance
+									}
+								}
+							]
+						}
+					)
+					.render(boundingBox);
+
+					renderControls.get('boundingBox').addClass(CSS_AUTOROW_CONTROLS);
+
+					if (instance.get('reset')) {
+						instance._clearForm();
+					}
+
+					if (instance._sortable) {
+						instance._sortable.add(boundingBox);
+					}
+				},
+
+				bindUI: function() {
+					var instance = this;
+
+					instance._createEvents();
+
+					instance.after('activeChange', instance._afterActiveChange);
+					instance.after('visibleChange', instance._afterRowVisibleChange);
+
+					instance.after('destroy', instance._afterDestroyRow);
+				},
+
+				clone: function() {
+					var instance = this;
+
+					var boundingBox = instance.get('boundingBox');
+					var parentNode = boundingBox.get('parentNode');
+
+					var clonedNode = instance._createClone();
+					var guid = instance.get('guid') + 1;
+
+					var config = {
+						contentBox: clonedNode,
+						guid: guid
+					};
+
+					A.mix(config, instance._originalConfig);
+
+					var clone = new instance.constructor(config);
+
+					var cloneBoundingBox = clone.get('boundingBox');
+
+					clone.render(parentNode);
+
+					boundingBox.placeAfter(cloneBoundingBox);
+
+					instance.fire(
+						'clone',
+						{
+							guid: guid,
+							originalRow: instance,
+							row: clone
+						}
+					);
+
+					return clone;
+				},
+
+				remove: function() {
+					var instance = this;
+
+					instance.set('active', false);
+
+					instance.fire(
+						'delete',
+						{
+							guid: instance.get('guid'),
+							deletedRow: instance
+						}
+					);
+				},
+
+				_afterActiveChange: function(event) {
+					var instance = this;
+
+					var action = 'hide';
+
+					if (event.newVal) {
+						action = 'show';
+					}
+
+					instance[action]();
+				},
+
+				_afterDestroyRow: function(event) {
+					var instance = this;
+
+					instance.get('boundingBox').remove();
+				},
+
+				_afterRowVisibleChange: function(event) {
+					var instance = this;
+
+					var action = 'addClass';
+
+					if (event.newVal) {
+						action = 'removeClass';
+					}
+
+					instance.get('boundingBox')[action]('aui-helper-hidden');
+				},
+
+				_clearForm: function() {
+					var instance = this;
+
+					var contentBox = instance.get('contentBox');
+
+					contentBox.queryAll('input, select, textarea').each(
+						function(item, index, collection) {
+							var type = item.getAttribute('type');
+							var tag = item.get('nodeName').toLowerCase();
+
+							if (type == 'text' || type == 'password' || tag == 'textarea') {
+								item.val('');
+							}
+							else if (type == 'checkbox' || type == 'radio') {
+								item.set('checked', false);
+							}
+							else if (tag == 'select') {
+								item.set('selectedIndex', -1);
+							}
+						}
+					);
+				},
+
+				_createClone: function() {
+					var instance = this;
+
+					var clone = instance.get('contentBox').cloneNode(true);
+
+					var guid = instance.get('guid') + 1;
+
+					clone.queryAll('input, select, textarea, span').each(
+						function(item, index, collection) {
+							var oldName = item.getAttribute('name') || item.getAttribute('id');
+
+							var originalName = oldName.replace(/([0-9]+)$/, '');
+							var newName = originalName + guid;
+
+							var type = item.getAttribute('type');
+
+							if (type == 'radio') {
+								oldName = item.getAttribute('id');
+
+								item.setAttribute('checked', '');
+								item.setAttribute('value', guid);
+								item.setAttribute('id', newName);
+							}
+							else if ((type == 'button' || item.get('nodeName').toLowerCase() == 'button') ||
+									item.get('nodeName').toLowerCase() == 'span') {
+
+								if (oldName) {
+									item.setAttribute('id', newName);
+								}
+							}
+							else {
+								item.setAttribute('name', newName);
+								item.setAttribute('id', newName);
+							}
+
+							var labelNode = clone.one('label[for=' + oldName + ']');
+
+							if (labelNode) {
+								labelNode.setAttribute('for', newName);
+							}
+						}
+					);
+
+					clone.queryAll('input[type=hidden]').set('value', '');
+
+					clone.resetId();
+
+					if (instance._sortable) {
+						clone.one('.handle-sort-vertical').attr('id', '');
+					}
+
+					var firstTextField = clone.one('input[type=text]');
+
+					if (firstTextField) {
+						Liferay.Util.focusFormField(firstTextField.getDOM());
+					}
+
+					return clone;
+				},
+
+				_createEvents: function() {
+					var instance = this;
+
+					var bubbles = instance.get('bubbles');
+
+					if (bubbles) {
+						instance.addTarget(bubbles);
+					}
+
+					var eventConfig = {
+						emitsFacade: true,
+						bubbles: true
+					};
+
+					instance.publish('clone', eventConfig);
+					instance.publish('delete', eventConfig);
+				}
+			}
+		);
+
+		AutoFields.AutoRow = AutoRow;
 
 		Liferay.AutoFields = AutoFields;
 	},
 	'',
 	{
-		requires: ['liferay-observable', 'sortable', 'liferay-undo-manager']
+		requires: ['base', 'data-set', 'liferay-undo-manager', 'sortable']
 	}
 );

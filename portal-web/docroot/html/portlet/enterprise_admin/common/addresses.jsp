@@ -161,45 +161,42 @@ else {
 		function () {
 			var addresses = new Liferay.AutoFields(
 				{
-					container: '#addresses > fieldset',
-					baseRows: '#addresses > fieldset .lfr-form-row',
-					fieldIndexes: '<portlet:namespace />addressesIndexes'
+					contentBox: '#addresses > fieldset',
+					fieldIndexes: '<portlet:namespace />addressesIndexes',
+					on: {
+						'autorow:clone': function(event) {
+
+							var row = event.row.get('contentBox');
+							var guid = event.guid;
+
+							row = jQuery(row.getDOM());
+
+							var dynamicSelects = row.find('select[data-componentType=dynamic_select]');
+
+							dynamicSelects.unbind('change');
+
+							new Liferay.DynamicSelect(
+								[
+									{
+										select: "<portlet:namespace />addressCountryId" + guid,
+										selectId: "countryId",
+										selectDesc: "name",
+										selectVal: '',
+										selectData: Liferay.Address.getCountries
+									},
+									{
+										select: "<portlet:namespace />addressRegionId" + guid,
+										selectId: "regionId",
+										selectDesc: "name",
+										selectVal: '',
+										selectData: Liferay.Address.getRegions
+									}
+								]
+							);
+						}
+					}
 				}
-			);
-
-			addresses.bind(
-				'addRow',
-				function(event, data) {
-					data = data[0];
-
-					var row = data.row;
-					var originalRow = data.originalRow;
-					var idSeed = data.idSeed;
-
-					var dynamicSelects = row.find('select[data-componentType=dynamic_select]');
-
-					dynamicSelects.unbind('change');
-
-					new Liferay.DynamicSelect(
-						[
-							{
-								select: "<portlet:namespace />addressCountryId" + idSeed,
-								selectId: "countryId",
-								selectDesc: "name",
-								selectVal: '',
-								selectData: Liferay.Address.getCountries
-							},
-							{
-								select: "<portlet:namespace />addressRegionId" + idSeed,
-								selectId: "regionId",
-								selectDesc: "name",
-								selectVal: '',
-								selectData: Liferay.Address.getRegions
-							}
-						]
-					);
-				}
-			);
+			).render();
 		}
 	);
 </script>
