@@ -37,7 +37,7 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 		<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
 	</span>
 
-	<c:if test="<%= inlineLabel.equals("right") %>">
+	<c:if test='<%= inlineLabel.equals("right") %>'>
 		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK  %>" for="<%= name %>">
 			<liferay-ui:message key="<%= label %>" />
 

@@ -72,7 +72,7 @@ if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 
 <c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
 	<div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
-		<c:if test="<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>">
+		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
 			<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + forLabel + "\"" : StringPool.BLANK %>>
 				<liferay-ui:message key="<%= label %>" />
 
