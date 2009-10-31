@@ -34,7 +34,7 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 		</select>
 	</span>
 
-	<c:if test="<%= inlineLabel.equals("right") %>">
+	<c:if test='<%= inlineLabel.equals("right") %>'>
 		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK  %>" <%= !name.equals(namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 			<liferay-ui:message key="<%= label %>" />
 

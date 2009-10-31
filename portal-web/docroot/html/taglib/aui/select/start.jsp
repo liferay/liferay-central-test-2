@@ -42,7 +42,7 @@ boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("au
 %>
 
 <div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
-	<c:if test="<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>">
+	<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
 		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK  %>" for="<%= name %>">
 			<liferay-ui:message key="<%= label %>" />
 
