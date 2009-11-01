@@ -167,10 +167,9 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 			<c:if test="<%= !disabled %>">
 				new Liferay.AutoFields(
 					{
-						container: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
-						baseRows: '#<%= randomNamespace %>languageSelector .lfr-form-row'
+						contentBox: '#<%= randomNamespace %>languageSelector .lfr-panel-content'
 					}
-				);
+				).render();
 			</c:if>
 
 			var panel = new Liferay.PanelFloating(
