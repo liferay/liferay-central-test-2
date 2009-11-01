@@ -265,11 +265,10 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 			'liferay-auto-fields',
 			new Liferay.AutoFields(
 				{
-					container: '#services > fieldset',
-					baseRows: '#services > fieldset .lfr-form-row',
+					contentBox: '#services > fieldset',
 					fieldIndexes: '<portlet:namespace />orgLaborsIndexes'
 				}
-			);
+			).render();
 		}
 	);
 </script>
