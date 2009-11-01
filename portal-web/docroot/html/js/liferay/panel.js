@@ -17,72 +17,74 @@ AUI().add(
 		 *
 		 */
 
-		var Panel = function(options) {
-			var instance = this;
-
-			Panel.superclass.constructor.apply(instance, arguments);
-
-			var defaults = {
-				container: null,
-				panel: '.lfr-panel',
-				panelContent: '.lfr-panel-content',
-				header: '.lfr-panel-header',
-				titles: '.lfr-panel-titlebar',
-				footer: '.lfr-panel-footer',
-				accordion: false,
-				collapsible: true,
-				persistState: false
-			};
-
-			options = jQuery.extend(defaults, options);
-
-			instance._inContainer = false;
-			instance._container = jQuery(document.body);
-
-			if (options.container) {
-				instance._container = jQuery(options.container);
-				instance._inContainer = true;
-			}
-
-			instance._panel = instance._container.find(options.panel);
-
-			instance._panelContent = instance._panel.find(options.panelContent);
-			instance._header = instance._panel.find(options.header);
-			instance._footer = instance._panel.find(options.footer);
-			instance._panelTitles = instance._panel.find(options.titles);
-			instance._accordion = options.accordion;
-
-			instance._collapsible = options.collapsible;
-			instance._persistState = options.persistState;
-
-			if (instance._collapsible) {
-				instance.makeCollapsible();
-
-				Liferay.Util.disableSelection(instance._panelTitles);
-
-				instance._panelTitles.css(
-					{
-						cursor: 'pointer'
-					}
-				);
-
-				var collapsedPanels = instance._panel.filter('.lfr-collapsed');
-
-				if (instance._accordion && !collapsedPanels.length) {
-					instance._panel.slice(1).addClass('lfr-collapsed');
-				}
-			}
-
-			instance.set('container', instance._container);
-			instance.set('panel', instance._panel);
-			instance.set('panelContent', instance._panelContent);
-			instance.set('panelTitles', instance._panelTitles);
+		var Panel = function(config) {
+			Panel.superclass.constructor.apply(this, arguments);
 		};
 
 		A.extend(
 			Panel,
-			Liferay.Observable,
+			A.Base,
 			{
+				initializer: function(config) {
+					var instance = this;
+
+					var defaults = {
+						container: null,
+						panel: '.lfr-panel',
+						panelContent: '.lfr-panel-content',
+						header: '.lfr-panel-header',
+						titles: '.lfr-panel-titlebar',
+						footer: '.lfr-panel-footer',
+						accordion: false,
+						collapsible: true,
+						persistState: false
+					};
+
+					config = jQuery.extend(defaults, config);
+
+					instance._inContainer = false;
+					instance._container = jQuery(document.body);
+
+					if (config.container) {
+						instance._container = jQuery(config.container);
+						instance._inContainer = true;
+					}
+
+					instance._panel = instance._container.find(config.panel);
+
+					instance._panelContent = instance._panel.find(config.panelContent);
+					instance._header = instance._panel.find(config.header);
+					instance._footer = instance._panel.find(config.footer);
+					instance._panelTitles = instance._panel.find(config.titles);
+					instance._accordion = config.accordion;
+
+					instance._collapsible = config.collapsible;
+					instance._persistState = config.persistState;
+
+					if (instance._collapsible) {
+						instance.makeCollapsible();
+
+						Liferay.Util.disableSelection(instance._panelTitles);
+
+						instance._panelTitles.css(
+							{
+								cursor: 'pointer'
+							}
+						);
+
+						var collapsedPanels = instance._panel.filter('.lfr-collapsed');
+
+						if (instance._accordion && !collapsedPanels.length) {
+							instance._panel.slice(1).addClass('lfr-collapsed');
+						}
+					}
+
+					instance.set('container', instance._container);
+					instance.set('panel', instance._panel);
+					instance.set('panelContent', instance._panelContent);
+					instance.set('panelTitles', instance._panelTitles);
+				},
+
 				makeCollapsible: function() {
 					var instance = this;
 
@@ -138,7 +140,7 @@ AUI().add(
 
 					instance._saveState(panelId, state);
 
-					instance.trigger('titleClick');
+					instance.fire('titleClick');
 				},
 
 				_saveState: function (id, state) {
@@ -183,6 +185,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['liferay-observable']
+		requires: ['base']
 	}
 );

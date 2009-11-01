@@ -89,7 +89,7 @@ AUI().add(
 
 					instance._trigger.removeClass('lfr-trigger-selected');
 
-					instance.trigger('hide');
+					instance.fire('hide');
 				},
 
 				onOuterClick: function() {
@@ -97,7 +97,7 @@ AUI().add(
 
 					instance.hide();
 
-					instance.trigger('outerClick');
+					instance.fire('outerClick');
 				},
 
 				onTitleClick: function(el) {
@@ -127,7 +127,7 @@ AUI().add(
 						instance.hide(trigger);
 					}
 
-					instance.trigger('triggerClick');
+					instance.fire('triggerClick');
 				},
 
 				paginate: function(currentPanelContent) {
@@ -307,7 +307,7 @@ AUI().add(
 						instance._setMaxPageHeight();
 					}
 
-					instance.trigger('show');
+					instance.fire('show');
 				},
 
 				_setMaxPageHeight: function() {
