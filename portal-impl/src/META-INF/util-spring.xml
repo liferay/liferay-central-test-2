@@ -59,6 +59,11 @@
 			<bean class="com.liferay.portal.captcha.CaptchaImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.dao.db.DBFactoryUtil" class="com.liferay.portal.kernel.dao.db.DBFactoryUtil">
+		<property name="DBFactory">
+			<bean class="com.liferay.portal.dao.db.DBFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil">
 		<property name="sqlUpdateFactory">
 			<bean class="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" />
@@ -215,11 +220,6 @@
 	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil">
 		<property name="calendarFactory">
 			<bean class="com.liferay.portal.util.CalendarFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.DatabaseUtil" class="com.liferay.portal.kernel.util.DatabaseUtil">
-		<property name="database">
-			<bean class="com.liferay.portal.util.DatabaseImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.DateFormatFactoryUtil" class="com.liferay.portal.kernel.util.DateFormatFactoryUtil">

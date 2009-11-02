@@ -20,22 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
-
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+package com.liferay.portal.kernel.dao.db;
 
 /**
- * <a href="DBUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DBFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author	   Alexander Chow
- * @author	   Ganesh Ram
- * @deprecated
+ * @author Brian Wing Shun Chan
  */
-public abstract class DBUtil implements DB {
+public class DBFactoryUtil {
 
-	public static DB getInstance() {
-		return DBFactoryUtil.getDB();
+	public static DB getDB() {
+		return getDBFactory().getDB();
 	}
+
+	public static DB getDB(Object dialect) {
+		return getDBFactory().getDB(dialect);
+	}
+
+	public static DB getDB(String type) {
+		return getDBFactory().getDB(type);
+	}
+
+	public static DBFactory getDBFactory() {
+		return _dbFactory;
+	}
+
+	public static void setDB(Object dialect) {
+		getDBFactory().setDB(dialect);
+	}
+
+	public static void setDB(String type) {
+		getDBFactory().setDB(type);
+	}
+
+	public void setDBFactory(DBFactory dbFactory) {
+		_dbFactory = dbFactory;
+	}
+
+	private static DBFactory _dbFactory;
 
 }

@@ -22,11 +22,12 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 
 /**
@@ -60,20 +61,20 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		String tempFileName = generateTempFile();
 
 		try {
-			DBUtil dbUtil = DBUtil.getInstance();
+			DB db = DBFactoryUtil.getDB();
 
 			String createSQL = getCreateSQL();
 
 			if (Validator.isNotNull(createSQL)) {
-				dbUtil.runSQL("drop table " + getTableName());
+				db.runSQL("drop table " + getTableName());
 
-				dbUtil.runSQL(createSQL);
+				db.runSQL(createSQL);
 			}
 
 			if (Validator.isNotNull(tempFileName)) {
 				String deleteSQL = getDeleteSQL();
 
-				dbUtil.runSQL(deleteSQL);
+				db.runSQL(deleteSQL);
 
 				populateTable(tempFileName);
 			}

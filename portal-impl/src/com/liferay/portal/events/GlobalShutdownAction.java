@@ -27,6 +27,8 @@ import com.liferay.portal.im.ICQConnector;
 import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
@@ -38,7 +40,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.pop.POPServerUtil;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
@@ -145,9 +146,9 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		// Hypersonic
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
-		if (dbUtil.getType().equals(DBUtil.TYPE_HYPERSONIC)) {
+		if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
 			try {
 				Connection connection = DataAccess.getConnection();
 

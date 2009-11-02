@@ -20,24 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
+import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.util.StringUtil;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
 
 /**
- * <a href="HypersonicUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="JDataStoreDB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Sandeep Soni
  * @author Ganesh Ram
  */
-public class HypersonicUtil extends DBUtil {
+public class JDataStoreDB extends FirebirdDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -46,72 +45,35 @@ public class HypersonicUtil extends DBUtil {
 		template = replaceTemplate(template, getTemplate());
 
 		template = reword(template);
-		template = StringUtil.replace(template, "\\'", "''");
+		template = StringUtil.replace(
+			template,
+			new String[] {"\\'", "\\\"", "\\\\",  "\\n", "\\r"},
+			new String[] {"''", "\"", "\\", "\n", "\r"});
 
 		return template;
 	}
 
-	protected HypersonicUtil() {
-		super(TYPE_HYPERSONIC);
-	}
-
-	protected String buildCreateFileContent(
-		String databaseName, int population) {
-
-		return null;
+	protected JDataStoreDB() {
+		super(TYPE_JDATASTORE);
 	}
 
 	protected String getServerName() {
-		return "hypersonic";
+		return "jdatastore";
 	}
 
 	protected String[] getTemplate() {
-		return _HYPERSONIC;
+		return _JDATASTORE;
 	}
 
-	protected String reword(String data) throws IOException {
-		BufferedReader br = new BufferedReader(new StringReader(data));
-
-		StringBuilder sb = new StringBuilder();
-
-		String line = null;
-
-		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_NAME)) {
-				String[] template = buildColumnNameTokens(line);
-
-				line = StringUtil.replace(
-					"alter table @table@ alter column @old-column@ rename to " +
-						"@new-column@;",
-					REWORD_TEMPLATE, template);
-			}
-			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				String[] template = buildColumnTypeTokens(line);
-
-				line = StringUtil.replace(
-					"alter table @table@ alter column @old-column@ @type@ " +
-						"@nullable@;",
-					REWORD_TEMPLATE, template);
-			}
-
-			sb.append(line);
-			sb.append("\n");
-		}
-
-		br.close();
-
-		return sb.toString();
-	}
-
-	private static String[] _HYPERSONIC = {
-		"//", "true", "false",
-		"'1970-01-01'", "now()",
-		" binary", " bit", " timestamp",
-		" double", " int", " bigint",
-		" longvarchar", " longvarchar", " varchar",
+	private static String[] _JDATASTORE = {
+		"--", "TRUE", "FALSE",
+		"'1970-01-01'", "current_timestamp",
+		" binary", " boolean", " date",
+		" double", " integer", " bigint",
+		" long varchar", " long varchar", " varchar",
 		"", "commit"
 	};
 
-	private static HypersonicUtil _instance = new HypersonicUtil();
+	private static JDataStoreDB _instance = new JDataStoreDB();
 
 }

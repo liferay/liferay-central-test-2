@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
+import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -29,15 +30,15 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="SAPUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="HypersonicDB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Sandeep Soni
  * @author Ganesh Ram
  */
-public class SAPUtil extends DBUtil {
+public class HypersonicDB extends BaseDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -46,12 +47,13 @@ public class SAPUtil extends DBUtil {
 		template = replaceTemplate(template, getTemplate());
 
 		template = reword(template);
+		template = StringUtil.replace(template, "\\'", "''");
 
 		return template;
 	}
 
-	protected SAPUtil() {
-		super(TYPE_SAP);
+	protected HypersonicDB() {
+		super(TYPE_HYPERSONIC);
 	}
 
 	protected String buildCreateFileContent(
@@ -61,11 +63,11 @@ public class SAPUtil extends DBUtil {
 	}
 
 	protected String getServerName() {
-		return "sap";
+		return "hypersonic";
 	}
 
 	protected String[] getTemplate() {
-		return _SAP;
+		return _HYPERSONIC;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -80,14 +82,16 @@ public class SAPUtil extends DBUtil {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"rename column @table@.@old-column@ to @new-column@;",
+					"alter table @table@ alter column @old-column@ rename to " +
+						"@new-column@;",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ modify @old-column@ @type@;",
+					"alter table @table@ alter column @old-column@ @type@ " +
+						"@nullable@;",
 					REWORD_TEMPLATE, template);
 			}
 
@@ -100,15 +104,15 @@ public class SAPUtil extends DBUtil {
 		return sb.toString();
 	}
 
-	private static String[] _SAP = {
-		"##", "TRUE", "FALSE",
-		"'1970-01-01 00:00:00.000000'", "timestamp",
-		" long byte", " boolean", " timestamp",
-		" float", " int", " bigint",
-		" varchar", " varchar", " varchar",
+	private static String[] _HYPERSONIC = {
+		"//", "true", "false",
+		"'1970-01-01'", "now()",
+		" binary", " bit", " timestamp",
+		" double", " int", " bigint",
+		" longvarchar", " longvarchar", " varchar",
 		"", "commit"
 	};
 
-	private static SAPUtil _instance = new SAPUtil();
+	private static HypersonicDB _instance = new HypersonicDB();
 
 }

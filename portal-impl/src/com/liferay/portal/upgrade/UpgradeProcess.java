@@ -22,10 +22,11 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.tools.sql.DBUtil;
 
 import java.io.IOException;
 
@@ -54,39 +55,55 @@ public abstract class UpgradeProcess {
 	}
 
 	public boolean isSupportsAlterColumnName() {
-		return DBUtil.getInstance().isSupportsAlterColumnName();
+		DB db = DBFactoryUtil.getDB();
+
+		return db.isSupportsAlterColumnName();
 	}
 
 	public boolean isSupportsAlterColumnType() {
-		return DBUtil.getInstance().isSupportsAlterColumnType();
+		DB db = DBFactoryUtil.getDB();
+
+		return db.isSupportsAlterColumnType();
 	}
 
 	public boolean isSupportsStringCaseSensitiveQuery() {
-		return DBUtil.getInstance().isSupportsStringCaseSensitiveQuery();
+		DB db = DBFactoryUtil.getDB();
+
+		return db.isSupportsStringCaseSensitiveQuery();
 	}
 
 	public boolean isSupportsUpdateWithInnerJoin() {
-		return DBUtil.getInstance().isSupportsUpdateWithInnerJoin();
+		DB db = DBFactoryUtil.getDB();
+
+		return db.isSupportsUpdateWithInnerJoin();
 	}
 
 	public void runSQL(String template) throws IOException, SQLException {
-		DBUtil.getInstance().runSQL(template);
+		DB db = DBFactoryUtil.getDB();
+
+		db.runSQL(template);
 	}
 
 	public void runSQL(String[] templates) throws IOException, SQLException {
-		DBUtil.getInstance().runSQL(templates);
+		DB db = DBFactoryUtil.getDB();
+
+		db.runSQL(templates);
 	}
 
 	public void runSQLTemplate(String path)
 		throws IOException, NamingException, SQLException {
 
-		DBUtil.getInstance().runSQLTemplate(path);
+		DB db = DBFactoryUtil.getDB();
+
+		db.runSQLTemplate(path);
 	}
 
 	public void runSQLTemplate(String path, boolean failOnError)
 		throws IOException, NamingException, SQLException {
 
-		DBUtil.getInstance().runSQLTemplate(path, failOnError);
+		DB db = DBFactoryUtil.getDB();
+
+		db.runSQLTemplate(path, failOnError);
 	}
 
 	public void upgrade() throws UpgradeException {

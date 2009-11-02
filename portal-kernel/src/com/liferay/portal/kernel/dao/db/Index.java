@@ -20,27 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.kernel.dao.db;
 
 /**
- * <a href="InterBaseUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="Index.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class InterBaseUtil extends FirebirdUtil {
+public class Index {
 
-	public static DBUtil getInstance() {
-		return _instance;
+	public Index(String indexName, String tableName, boolean unique) {
+		_indexName = indexName;
+		_tableName = tableName;
+		_unique = unique;
 	}
 
-	protected InterBaseUtil() {
-		super(TYPE_INTERBASE);
+	public String getIndexName() {
+		return _indexName;
 	}
 
-	protected String getServerName() {
-		return "interbase";
+	public String getTableName() {
+		return _tableName;
 	}
 
-	private static InterBaseUtil _instance = new InterBaseUtil();
+	public boolean isUnique() {
+		return _unique;
+	}
+
+	private String _indexName;
+	private String _tableName;
+	private boolean _unique;
 
 }

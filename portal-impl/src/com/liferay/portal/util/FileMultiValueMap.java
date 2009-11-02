@@ -22,11 +22,12 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MultiValueMap;
 import com.liferay.portal.kernel.util.SerializableUtil;
-import com.liferay.portal.tools.sql.HypersonicUtil;
 
 import java.io.File;
 import java.io.Serializable;
@@ -293,7 +294,9 @@ public class FileMultiValueMap<K extends Serializable, V extends Serializable>
 		try {
 			con = _getConnection();
 
-			HypersonicUtil.getInstance().runSQL(con, _CREATE_SQL);
+			DB db = DBFactoryUtil.getDB(DB.TYPE_HYPERSONIC);
+
+			db.runSQL(con, _CREATE_SQL);
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);

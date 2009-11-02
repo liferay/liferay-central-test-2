@@ -22,9 +22,10 @@
 
 package com.liferay.portlet.messageboards.util.comparator;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
 
 import java.util.Date;
@@ -60,7 +61,9 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 
 		boolean ignoreMilliseconds = false;
 
-		if (!PortalUtil.getDB().isSupportsDateMilliseconds()) {
+		DB db = DBFactoryUtil.getDB();
+
+		if (!db.isSupportsDateMilliseconds()) {
 			ignoreMilliseconds = true;
 		}
 

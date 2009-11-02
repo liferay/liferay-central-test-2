@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
+import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -39,16 +40,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
+ * <a href="DB2DB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Bruno Farache
  * @author Sandeep Soni
  * @author Ganesh Ram
  */
-public class DB2Util extends DBUtil {
+public class DB2DB extends BaseDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -93,7 +94,7 @@ public class DB2Util extends DBUtil {
 		_reorgTables(templates);
 	}
 
-	protected DB2Util() {
+	protected DB2DB() {
 		super(TYPE_DB2);
 	}
 
@@ -209,6 +210,6 @@ public class DB2Util extends DBUtil {
 
 	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
 
-	private static DB2Util _instance = new DB2Util();
+	private static DB2DB _instance = new DB2DB();
 
 }

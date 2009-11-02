@@ -22,9 +22,10 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.InitUtil;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class DBBuilder {
 		InitUtil.initWithSpring();
 
 		if (args.length == 1) {
-			new DBBuilder(args[0], DBUtil.TYPE_ALL);
+			new DBBuilder(args[0], DB.TYPE_ALL);
 		}
 		else if (args.length == 2) {
 			new DBBuilder(args[0], StringUtil.split(args[1]));
@@ -86,18 +87,18 @@ public class DBBuilder {
 		for (int i = 0; i < _databaseTypes.length; i++) {
 			String databaseType = _databaseTypes[i];
 
-			if (databaseType.equals(DBUtil.TYPE_HYPERSONIC) ||
-				databaseType.equals(DBUtil.TYPE_INTERBASE) ||
-				databaseType.equals(DBUtil.TYPE_JDATASTORE) ||
-				databaseType.equals(DBUtil.TYPE_SAP)) {
+			if (databaseType.equals(DB.TYPE_HYPERSONIC) ||
+				databaseType.equals(DB.TYPE_INTERBASE) ||
+				databaseType.equals(DB.TYPE_JDATASTORE) ||
+				databaseType.equals(DB.TYPE_SAP)) {
 
 				continue;
 			}
 
-			DBUtil dbUtil = _getDBUtil(_databaseTypes[i]);
+			DB db = DBFactoryUtil.getDB(_databaseTypes[i]);
 
-			if (dbUtil != null) {
-				dbUtil.buildCreateFile(_databaseName);
+			if (db != null) {
+				db.buildCreateFile(_databaseName);
 			}
 		}
 	}
@@ -108,16 +109,12 @@ public class DBBuilder {
 		}
 
 		for (int i = 0; i < _databaseTypes.length; i++) {
-			DBUtil dbUtil = _getDBUtil(_databaseTypes[i]);
+			DB db = DBFactoryUtil.getDB(_databaseTypes[i]);
 
-			if (dbUtil != null) {
-				dbUtil.buildSQLFile(fileName);
+			if (db != null) {
+				db.buildSQLFile(fileName);
 			}
 		}
-	}
-
-	private DBUtil _getDBUtil(String type) {
-		return DBUtil.getInstance(type);
 	}
 
 	private String _databaseName;

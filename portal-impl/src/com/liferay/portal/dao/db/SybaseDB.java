@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
+import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -30,15 +31,16 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="SQLServerUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SybaseDB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Bruno Farache
  * @author Sandeep Soni
  * @author Ganesh Ram
  */
-public class SQLServerUtil extends DBUtil {
+public class SybaseDB extends BaseDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -47,6 +49,7 @@ public class SQLServerUtil extends DBUtil {
 		template = replaceTemplate(template, getTemplate());
 
 		template = reword(template);
+		template = StringUtil.replace(template, ");\n", ")\ngo\n");
 		template = StringUtil.replace(template, "\ngo;\n", "\ngo\n");
 		template = StringUtil.replace(
 			template,
@@ -56,12 +59,8 @@ public class SQLServerUtil extends DBUtil {
 		return template;
 	}
 
-	public boolean isSupportsAlterColumnType() {
-		return _SUPPORTS_ALTER_COLUMN_TYPE;
-	}
-
-	protected SQLServerUtil() {
-		super(TYPE_SQLSERVER);
+	protected SybaseDB() {
+		super(TYPE_SYBASE);
 	}
 
 	protected String buildCreateFileContent(String databaseName, int population)
@@ -71,30 +70,36 @@ public class SQLServerUtil extends DBUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("drop database " + databaseName + ";\n");
-		sb.append("create database " + databaseName + ";\n");
-		sb.append("\n");
-		sb.append("go\n");
-		sb.append("\n");
-		sb.append("use " + databaseName + ";\n\n");
+		sb = new StringBuilder();
+
+		sb.append("use master\n");
+		sb.append(
+			"exec sp_dboption '" + databaseName + "', " +
+				"'allow nulls by default' , true\n");
+		sb.append("go\n\n");
+		sb.append(
+			"exec sp_dboption '" + databaseName + "', " +
+				"'select into/bulkcopy/pllsort' , true\n");
+		sb.append("go\n\n");
+
+		sb.append("use " + databaseName + "\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
-					"-sql-server.sql"));
+				"../sql/portal" + suffix + "/portal" + suffix + "-sybase.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
+		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
+		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
 
 		return sb.toString();
 	}
 
 	protected String getServerName() {
-		return "sql-server";
+		return "sybase";
 	}
 
 	protected String[] getTemplate() {
-		return _SQL_SERVER;
+		return _SYBASE;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -105,6 +110,11 @@ public class SQLServerUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
+
+			if (line.indexOf(DROP_COLUMN) != -1) {
+				line = StringUtil.replace(line, " drop column ", " drop ");
+			}
+
 			if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
@@ -130,17 +140,17 @@ public class SQLServerUtil extends DBUtil {
 		return sb.toString();
 	}
 
-	private static String[] _SQL_SERVER = {
+	protected static String DROP_COLUMN = "drop column";
+
+	private static String[] _SYBASE = {
 		"--", "1", "0",
-		"'19700101'", "GetDate()",
-		" image", " bit", " datetime",
-		" float", " int", " bigint",
-		" nvarchar(2000)", " ntext", " nvarchar",
+		"'19700101'", "getdate()",
+		" image", " int", " datetime",
+		" float", " int", " decimal(20,0)",
+		" varchar(1000)", " text", " varchar",
 		"  identity(1,1)", "go"
 	};
 
-	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
-
-	private static SQLServerUtil _instance = new SQLServerUtil();
+	private static SybaseDB _instance = new SybaseDB();
 
 }

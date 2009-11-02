@@ -22,10 +22,11 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
@@ -64,9 +65,9 @@ public class VerifyMySQL extends VerifyProcess {
 	}
 
 	protected void doVerify() throws Exception {
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
-		if (!dbUtil.getType().equals(DBUtil.TYPE_MYSQL)) {
+		if (!db.getType().equals(DB.TYPE_MYSQL)) {
 			return;
 		}
 

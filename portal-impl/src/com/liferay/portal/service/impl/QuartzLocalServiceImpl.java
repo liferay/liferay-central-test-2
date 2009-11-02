@@ -23,11 +23,12 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.base.QuartzLocalServiceBaseImpl;
-import com.liferay.portal.tools.sql.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -66,10 +67,10 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
 		try {
-			dbUtil.runSQLTemplate("quartz-tables.sql", false);
+			db.runSQLTemplate("quartz-tables.sql", false);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

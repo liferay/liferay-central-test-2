@@ -37,13 +37,10 @@ import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.tools.sql.DB;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
 import java.io.Serializable;
-
-import java.sql.SQLException;
 
 import java.util.Date;
 import java.util.List;
@@ -219,8 +216,6 @@ public interface Portal {
 	public Date getDate(
 			int month, int day, int year, TimeZone timeZone, PortalException pe)
 		throws PortalException;
-
-	public DB getDB();
 
 	public long getDefaultCompanyId();
 
@@ -562,8 +557,6 @@ public interface Portal {
 			Portlet portlet, String queryString, String columnId,
 			Integer columnPos, Integer columnCount, String path)
 		throws IOException, ServletException;
-
-	public void runSQL(String sql) throws IOException, SQLException;
 
 	public void sendError(
 			Exception e, ActionRequest actionRequest,

@@ -20,10 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -31,13 +30,15 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="IngresUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SAPDB.java.html"><b><i>View Source</i></b></a>
  *
- * @author David Maier
+ * @author Alexander Chow
+ * @author Sandeep Soni
+ * @author Ganesh Ram
  */
-public class IngresUtil extends DBUtil {
+public class SAPDB extends BaseDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -46,17 +47,12 @@ public class IngresUtil extends DBUtil {
 		template = replaceTemplate(template, getTemplate());
 
 		template = reword(template);
-		template = StringUtil.replace(template, "\\n", "'+x'0a'+'");
 
 		return template;
 	}
 
-	public boolean isSupportsAlterColumnName() {
-		return _SUPPORTS_ALTER_COLUMN_NAME;
-	}
-
-	protected IngresUtil() {
-		super(TYPE_INGRES);
+	protected SAPDB() {
+		super(TYPE_SAP);
 	}
 
 	protected String buildCreateFileContent(
@@ -66,39 +62,11 @@ public class IngresUtil extends DBUtil {
 	}
 
 	protected String getServerName() {
-		return "ingres";
+		return "sap";
 	}
 
 	protected String[] getTemplate() {
-		return _INGRES;
-	}
-
-	protected String replaceTemplate(String template, String[] actual) {
-		if ((template == null) || (TEMPLATE == null) || (actual == null)) {
-			return null;
-		}
-
-		if (TEMPLATE.length != actual.length) {
-			return template;
-		}
-
-		for (int i = 0; i < TEMPLATE.length; i++) {
-			if (TEMPLATE[i].equals("##") ||
-				TEMPLATE[i].equals("'01/01/1970'")) {
-
-				template = template.replaceAll(TEMPLATE[i], actual[i]);
-			}
-			else if (TEMPLATE[i].equals("COMMIT_TRANSACTION")) {
-				template = StringUtil.replace(
-					template, TEMPLATE[i] + ";", actual[i]);
-			}
-			else {
-				template = template.replaceAll(
-					"\\b" + TEMPLATE[i] + "\\b", actual[i]);
-			}
-		}
-
-		return template;
+		return _SAP;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -110,26 +78,18 @@ public class IngresUtil extends DBUtil {
 
 		while ((line = br.readLine()) != null) {
 			if (line.startsWith(ALTER_COLUMN_NAME)) {
-				line = "-- " + line;
+				String[] template = buildColumnNameTokens(line);
 
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"This statement is not supported by Ingres: " + line);
-				}
+				line = StringUtil.replace(
+					"rename column @table@.@old-column@ to @new-column@;",
+					REWORD_TEMPLATE, template);
 			}
 			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter @old-column@ @type@;",
+					"alter table @table@ modify @old-column@ @type@;",
 					REWORD_TEMPLATE, template);
-			}
-			else if (line.indexOf(DROP_PRIMARY_KEY) != -1) {
-				String[] tokens = StringUtil.split(line, " ");
-
-				line = StringUtil.replace(
-					"alter table @table@ drop constraint @table@_pkey;",
-					"@table@", tokens[2]);
 			}
 
 			sb.append(line);
@@ -141,19 +101,15 @@ public class IngresUtil extends DBUtil {
 		return sb.toString();
 	}
 
-	private static String[] _INGRES = {
-		"--", "1", "0",
-		"'1970-01-01'", "date('now')",
-		" byte varying", " tinyint", " timestamp",
-		" float", " integer", " bigint",
-		" varchar(1000)", " long varchar", " varchar",
-		"", "commit;\\g"
+	private static String[] _SAP = {
+		"##", "TRUE", "FALSE",
+		"'1970-01-01 00:00:00.000000'", "timestamp",
+		" long byte", " boolean", " timestamp",
+		" float", " int", " bigint",
+		" varchar", " varchar", " varchar",
+		"", "commit"
 	};
 
-	private static boolean _SUPPORTS_ALTER_COLUMN_NAME;
-
-	private static Log _log = LogFactoryUtil.getLog(IngresUtil.class);
-
-	private static IngresUtil _instance = new IngresUtil();
+	private static SAPDB _instance = new SAPDB();
 
 }

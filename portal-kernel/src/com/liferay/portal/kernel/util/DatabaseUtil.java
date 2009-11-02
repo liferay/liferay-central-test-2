@@ -41,6 +41,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+
 import java.io.IOException;
 
 import java.sql.SQLException;
@@ -50,11 +53,43 @@ import javax.naming.NamingException;
 /**
  * <a href="DatabaseUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Ganesh Ram
+ * @author	   Ganesh Ram
+ * @author	   Brian Wing Shun Chan
+ * @deprecated {@link DBFactoryUtil}
  */
 public class DatabaseUtil {
 
 	public static Database getDatabase() {
+		if (_database != null) {
+			return _database;
+		}
+
+		_database = new Database() {
+
+			public String getType() {
+				DB db = DBFactoryUtil.getDB();
+
+				return db.getType();
+			}
+
+			public void runSQLTemplate(String path)
+				throws IOException, NamingException, SQLException {
+
+				DB db = DBFactoryUtil.getDB();
+
+				db.runSQLTemplate(path);
+			}
+
+			public void runSQLTemplate(String path, boolean failOnError)
+				throws IOException, NamingException, SQLException {
+
+				DB db = DBFactoryUtil.getDB();
+
+				db.runSQLTemplate(path, failOnError);
+			}
+
+		};
+
 		return _database;
 	}
 

@@ -23,6 +23,8 @@
 package com.liferay.portal.tools.samplesqlbuilder;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -35,7 +37,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -158,7 +159,7 @@ public class SampleSQLBuilder {
 
 			_writerMySQL = new FileWriter(_outputDir +  "/sample-mysql.sql");
 
-			DBUtil mysqlDBUtil = DBUtil.getInstance(DBUtil.TYPE_MYSQL);
+			DB mysqlDB = DBFactoryUtil.getDB(DB.TYPE_MYSQL);
 
 			boolean previousBlankLine = false;
 
@@ -168,7 +169,7 @@ public class SampleSQLBuilder {
 			String s = null;
 
 			while ((s = br.readLine()) != null) {
-				s = mysqlDBUtil.buildSQL(s).trim();
+				s = mysqlDB.buildSQL(s).trim();
 
 				_writerMySQL.write(s);
 

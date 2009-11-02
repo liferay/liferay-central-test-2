@@ -20,8 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -29,15 +31,15 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="FirebirdUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SQLServerDB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Sandeep Soni
  * @author Ganesh Ram
  */
-public class FirebirdUtil extends DBUtil {
+public class SQLServerDB extends BaseDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -46,18 +48,21 @@ public class FirebirdUtil extends DBUtil {
 		template = replaceTemplate(template, getTemplate());
 
 		template = reword(template);
-		template = removeInserts(template);
-		template = removeNull(template);
+		template = StringUtil.replace(template, "\ngo;\n", "\ngo\n");
+		template = StringUtil.replace(
+			template,
+			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
+			new String[] {"\\", "''", "\"", "\n", "\r"});
 
 		return template;
 	}
 
-	protected FirebirdUtil() {
-		super(TYPE_FIREBIRD);
+	public boolean isSupportsAlterColumnType() {
+		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
-	protected FirebirdUtil(String type) {
-		super(type);
+	protected SQLServerDB() {
+		super(TYPE_SQLSERVER);
 	}
 
 	protected String buildCreateFileContent(String databaseName, int population)
@@ -67,26 +72,30 @@ public class FirebirdUtil extends DBUtil {
 
 		StringBuilder sb = new StringBuilder();
 
+		sb.append("drop database " + databaseName + ";\n");
+		sb.append("create database " + databaseName + ";\n");
+		sb.append("\n");
+		sb.append("go\n");
+		sb.append("\n");
+		sb.append("use " + databaseName + ";\n\n");
 		sb.append(
-			"create database '" + databaseName +
-				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
-		sb.append(
-			"connect '" + databaseName +
-				".gdb' user 'sysdba' password 'masterkey';\n");
-		sb.append(
-			readSQL(
-				"../sql/portal" + suffix + "/portal" + suffix + "-firebird.sql",
-				_FIREBIRD[0], ";\n"));
+			FileUtil.read(
+				"../sql/portal" + suffix + "/portal" + suffix +
+					"-sql-server.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
 
 		return sb.toString();
 	}
 
 	protected String getServerName() {
-		return "firebird";
+		return "sql-server";
 	}
 
 	protected String[] getTemplate() {
-		return _FIREBIRD;
+		return _SQL_SERVER;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -101,16 +110,15 @@ public class FirebirdUtil extends DBUtil {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column \"@old-column@\" to " +
-						"\"@new-column@\";",
+					"exec sp_rename '@table@.@old-column@', '@new-column@', " +
+						"'column';",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column \"@old-column@\" " +
-						"type @type@;",
+					"alter table @table@ alter column @old-column@ @type@;",
 					REWORD_TEMPLATE, template);
 			}
 
@@ -123,15 +131,17 @@ public class FirebirdUtil extends DBUtil {
 		return sb.toString();
 	}
 
-	private static String[] _FIREBIRD = {
+	private static String[] _SQL_SERVER = {
 		"--", "1", "0",
-		"'01/01/1970'", "current_timestamp",
-		" blob", " smallint", " timestamp",
-		" double precision", " integer", " int64",
-		" varchar(4000)", " blob", " varchar",
-		"", "commit"
+		"'19700101'", "GetDate()",
+		" image", " bit", " datetime",
+		" float", " int", " bigint",
+		" nvarchar(2000)", " ntext", " nvarchar",
+		"  identity(1,1)", "go"
 	};
 
-	private static FirebirdUtil _instance = new FirebirdUtil();
+	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
+
+	private static SQLServerDB _instance = new SQLServerDB();
 
 }

@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
+import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsValues;
@@ -31,15 +32,15 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="MySQLUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MySQLDB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Sandeep Soni
  * @author Ganesh Ram
  */
-public class MySQLUtil extends DBUtil {
+public class MySQLDB extends BaseDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -61,7 +62,7 @@ public class MySQLUtil extends DBUtil {
 		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 	}
 
-	protected MySQLUtil() {
+	protected MySQLDB() {
 		super(TYPE_MYSQL);
 	}
 
@@ -157,6 +158,6 @@ public class MySQLUtil extends DBUtil {
 
 	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
 
-	private static MySQLUtil _instance = new MySQLUtil();
+	private static MySQLDB _instance = new MySQLDB();
 
 }

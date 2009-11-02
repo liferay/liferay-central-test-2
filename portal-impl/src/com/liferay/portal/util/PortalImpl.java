@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -110,8 +112,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.tools.sql.DB;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upload.UploadPortletRequestImpl;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.comparator.PortletControlPanelWeightComparator;
@@ -153,8 +153,6 @@ import java.lang.reflect.Method;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
-import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1099,10 +1097,6 @@ public class PortalImpl implements Portal {
 		throws PortalException {
 
 		return getDate(month, day, year, -1, -1, timeZone, pe);
-	}
-
-	public DB getDB() {
-		return DBUtil.getInstance();
 	}
 
 	public long getDefaultCompanyId() {
@@ -3310,10 +3304,6 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public void runSQL(String sql) throws IOException, SQLException {
-		DBUtil.getInstance().runSQL(sql);
-	}
-
 	public void sendError(
 			Exception e, ActionRequest actionRequest,
 			ActionResponse actionResponse)
@@ -4027,7 +4017,7 @@ public class PortalImpl implements Portal {
 			"[$TRUE$]"
 		};
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB dbUtil = DBFactoryUtil.getDB();
 
 		_customSqlClassNameIds = new String[] {
 			String.valueOf(PortalUtil.getClassNameId(Group.class)),

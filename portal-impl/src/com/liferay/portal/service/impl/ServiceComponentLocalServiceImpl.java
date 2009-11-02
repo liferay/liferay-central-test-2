@@ -26,6 +26,8 @@ import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -41,7 +43,6 @@ import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
 import com.liferay.portal.tools.servicebuilder.Entity;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
@@ -262,7 +263,7 @@ public class ServiceComponentLocalServiceImpl
 			String tablesSQL, String sequencesSQL, String indexesSQL)
 		throws Exception {
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
 		if (previousServiceComponent == null) {
 			if (_log.isInfoEnabled()) {
@@ -271,9 +272,9 @@ public class ServiceComponentLocalServiceImpl
 						" SQL scripts for the first time");
 			}
 
-			dbUtil.runSQLTemplateString(tablesSQL, true, false);
-			dbUtil.runSQLTemplateString(sequencesSQL, true, false);
-			dbUtil.runSQLTemplateString(indexesSQL, true, false);
+			db.runSQLTemplateString(tablesSQL, true, false);
+			db.runSQLTemplateString(sequencesSQL, true, false);
+			db.runSQLTemplateString(indexesSQL, true, false);
 		}
 		else if (buildAutoUpgrade) {
 			if (_log.isInfoEnabled()) {
@@ -289,7 +290,7 @@ public class ServiceComponentLocalServiceImpl
 					_log.info("Upgrading database with tables.sql");
 				}
 
-				dbUtil.runSQLTemplateString(tablesSQL, true, false);
+				db.runSQLTemplateString(tablesSQL, true, false);
 
 				upgradeModels(classLoader);
 			}
@@ -301,7 +302,7 @@ public class ServiceComponentLocalServiceImpl
 					_log.info("Upgrading database with sequences.sql");
 				}
 
-				dbUtil.runSQLTemplateString(sequencesSQL, true, false);
+				db.runSQLTemplateString(sequencesSQL, true, false);
 			}
 
 			if (!indexesSQL.equals(
@@ -311,7 +312,7 @@ public class ServiceComponentLocalServiceImpl
 					_log.info("Upgrading database with indexes.sql");
 				}
 
-				dbUtil.runSQLTemplateString(indexesSQL, true, false);
+				db.runSQLTemplateString(indexesSQL, true, false);
 			}
 		}
 	}

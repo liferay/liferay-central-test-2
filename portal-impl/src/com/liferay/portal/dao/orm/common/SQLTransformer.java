@@ -22,10 +22,11 @@
 
 package com.liferay.portal.dao.orm.common;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.HashMap;
@@ -45,9 +46,9 @@ public class SQLTransformer {
 	private SQLTransformer() {
 		_sqlMap = new HashMap<String, String>();
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB dbUtil = DBFactoryUtil.getDB();
 
-		if (dbUtil.getType().equals(DBUtil.TYPE_MYSQL)) {
+		if (dbUtil.getType().equals(DB.TYPE_MYSQL)) {
 			_vendorMySQL = true;
 		}
 	}

@@ -24,6 +24,8 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -37,7 +39,6 @@ import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.tools.sql.DB;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
@@ -324,8 +325,11 @@ public class PortalUtil {
 		return getPortal().getDate(month, day, year, timeZone, pe);
 	}
 
+	/**
+	 * @deprecated {@link DBFactoryUtil#getDB()}
+	 */
 	public static DB getDB() {
-		return getPortal().getDB();
+		return DBFactoryUtil.getDB();
 	}
 
 	public static long getDefaultCompanyId() {
@@ -1036,8 +1040,11 @@ public class PortalUtil {
 			columnId, columnPos, columnCount, path);
 	}
 
+	/**
+	 * @deprecated {@link DB#runSQL(String)}
+	 */
 	public static void runSQL(String sql) throws IOException, SQLException {
-		getPortal().runSQL(sql);
+		DBFactoryUtil.getDB().runSQL(sql);
 	}
 
 	public static void sendError(

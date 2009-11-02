@@ -23,6 +23,8 @@
 package com.liferay.portal.convert;
 
 import com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -30,7 +32,6 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.spring.hibernate.DialectDetector;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.ShutdownUtil;
@@ -76,7 +77,7 @@ public class ConvertDatabase extends ConvertProcess {
 
 		Dialect dialect = DialectDetector.getDialect(dataSource);
 
-		DBUtil dbUtil = DBUtil.getInstance(dialect);
+		DB db = DBFactoryUtil.getDB(dialect);
 
 		List<String> modelNames = ModelHintsUtil.getModels();
 
@@ -120,7 +121,7 @@ public class ConvertDatabase extends ConvertProcess {
 
 				String tempFileName = table.generateTempFile();
 
-				dbUtil.runSQL(connection, createSql);
+				db.runSQL(connection, createSql);
 
 				if (tempFileName != null) {
 					table.populateTable(tempFileName, connection);

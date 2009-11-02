@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
+import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -30,15 +31,15 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="OracleUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="OracleDB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Sandeep Soni
  * @author Ganesh Ram
  */
-public class OracleUtil extends DBUtil {
+public class OracleDB extends BaseDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -113,7 +114,7 @@ public class OracleUtil extends DBUtil {
 			"../sql/" + fileName + "/" + fileName + "-oracle.sql", oracle);
 	}
 
-	protected OracleUtil() {
+	protected OracleDB() {
 		super(TYPE_ORACLE);
 	}
 
@@ -225,6 +226,6 @@ public class OracleUtil extends DBUtil {
 		"", "commit"
 	};
 
-	private static OracleUtil _instance = new OracleUtil();
+	private static OracleDB _instance = new OracleDB();
 
 }

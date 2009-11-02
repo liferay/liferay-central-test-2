@@ -27,6 +27,8 @@ import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.convert.util.PermissionView;
 import com.liferay.portal.convert.util.ResourcePermissionView;
 import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -60,7 +62,6 @@ import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PropsValues;
@@ -212,12 +213,12 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		MaintenanceUtil.appendStatus("Cleaning up legacy tables");
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
-		dbUtil.runSQL("DELETE FROM " + ResourceCodeModelImpl.TABLE_NAME);
-		dbUtil.runSQL("DELETE FROM " + PermissionModelImpl.TABLE_NAME);
-		dbUtil.runSQL("DELETE FROM " + ResourceModelImpl.TABLE_NAME);
-		dbUtil.runSQL("DELETE FROM Roles_Permissions");
+		db.runSQL("DELETE FROM " + ResourceCodeModelImpl.TABLE_NAME);
+		db.runSQL("DELETE FROM " + PermissionModelImpl.TABLE_NAME);
+		db.runSQL("DELETE FROM " + ResourceModelImpl.TABLE_NAME);
+		db.runSQL("DELETE FROM Roles_Permissions");
 
 		MaintenanceUtil.appendStatus("Converted to bitwise permission");
 	}
@@ -351,7 +352,9 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		MaintenanceUtil.appendStatus("Converted roles for " + legacyName);
 
-		DBUtil.getInstance().runSQL(legacyTable.getDeleteSQL());
+		DB db = DBFactoryUtil.getDB();
+
+		db.runSQL(legacyTable.getDeleteSQL());
 
 		FileUtil.delete(legacyFile);
 	}

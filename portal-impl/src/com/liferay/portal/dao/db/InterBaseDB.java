@@ -20,59 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
-import com.liferay.portal.kernel.util.StringUtil;
-
-import java.io.IOException;
+import com.liferay.portal.kernel.dao.db.DB;
 
 /**
- * <a href="JDataStoreUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="InterBaseDB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Sandeep Soni
- * @author Ganesh Ram
  */
-public class JDataStoreUtil extends FirebirdUtil {
+public class InterBaseDB extends FirebirdDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
-	public String buildSQL(String template) throws IOException {
-		template = convertTimestamp(template);
-		template = replaceTemplate(template, getTemplate());
-
-		template = reword(template);
-		template = StringUtil.replace(
-			template,
-			new String[] {"\\'", "\\\"", "\\\\",  "\\n", "\\r"},
-			new String[] {"''", "\"", "\\", "\n", "\r"});
-
-		return template;
-	}
-
-	protected JDataStoreUtil() {
-		super(TYPE_JDATASTORE);
+	protected InterBaseDB() {
+		super(TYPE_INTERBASE);
 	}
 
 	protected String getServerName() {
-		return "jdatastore";
+		return "interbase";
 	}
 
-	protected String[] getTemplate() {
-		return _JDATASTORE;
-	}
-
-	private static String[] _JDATASTORE = {
-		"--", "TRUE", "FALSE",
-		"'1970-01-01'", "current_timestamp",
-		" binary", " boolean", " date",
-		" double", " integer", " bigint",
-		" long varchar", " long varchar", " varchar",
-		"", "commit"
-	};
-
-	private static JDataStoreUtil _instance = new JDataStoreUtil();
+	private static InterBaseDB _instance = new InterBaseDB();
 
 }

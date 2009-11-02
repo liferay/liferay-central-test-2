@@ -20,35 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.kernel.dao.db;
 
 /**
- * <a href="Index.java.html"><b><i>View Source</i></b></a>
+ * <a href="DBFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class Index {
+public interface DBFactory {
 
-	public Index(String indexName, String tableName, boolean unique) {
-		_indexName = indexName;
-		_tableName = tableName;
-		_unique = unique;
-	}
+	public DB getDB();
 
-	public String getIndexName() {
-		return _indexName;
-	}
+	public DB getDB(Object dialect);
 
-	public String getTableName() {
-		return _tableName;
-	}
+	public DB getDB(String type);
 
-	public boolean isUnique() {
-		return _unique;
-	}
+	public void setDB(Object dialect);
 
-	private String _indexName;
-	private String _tableName;
-	private boolean _unique;
+	public void setDB(String type);
 
 }

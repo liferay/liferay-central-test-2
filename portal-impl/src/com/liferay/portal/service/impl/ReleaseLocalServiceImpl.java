@@ -25,6 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,7 +36,6 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseConstants;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.sql.Connection;
@@ -67,21 +68,21 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 	public void createTablesAndPopulate() throws SystemException {
 		try {
-			DBUtil dbUtil = DBUtil.getInstance();
+			DB db = DBFactoryUtil.getDB();
 
-			dbUtil.runSQLTemplate("portal-tables.sql", false);
-			dbUtil.runSQLTemplate("portal-data-common.sql", false);
-			dbUtil.runSQLTemplate("portal-data-counter.sql", false);
+			db.runSQLTemplate("portal-tables.sql", false);
+			db.runSQLTemplate("portal-data-common.sql", false);
+			db.runSQLTemplate("portal-data-counter.sql", false);
 
 			if (!GetterUtil.getBoolean(
 					PropsUtil.get(PropsKeys.SCHEMA_RUN_MINIMAL))) {
 
-				dbUtil.runSQLTemplate("portal-data-sample.vm", false);
+				db.runSQLTemplate("portal-data-sample.vm", false);
 			}
 
-			dbUtil.runSQLTemplate("portal-data-release.sql", false);
-			dbUtil.runSQLTemplate("indexes.sql", false);
-			dbUtil.runSQLTemplate("sequences.sql", false);
+			db.runSQLTemplate("portal-data-release.sql", false);
+			db.runSQLTemplate("indexes.sql", false);
+			db.runSQLTemplate("sequences.sql", false);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -175,14 +176,14 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 	protected void testSupportsStringCaseSensitiveQuery()
 		throws SystemException {
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
 		int count = testSupportsStringCaseSensitiveQuery(
 			ReleaseConstants.TEST_STRING);
 
 		if (count == 0) {
 			try {
-				dbUtil.runSQL(
+				db.runSQL(
 					"alter table Release_ add testString VARCHAR(1024) null");
 			}
 			catch (Exception e) {
@@ -192,7 +193,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			}
 
 			try {
-				dbUtil.runSQL(
+				db.runSQL(
 					"update Release_ set testString = '" +
 						ReleaseConstants.TEST_STRING + "'");
 			}
@@ -215,10 +216,10 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			ReleaseConstants.TEST_STRING.toUpperCase());
 
 		if (count == 0) {
-			dbUtil.setSupportsStringCaseSensitiveQuery(true);
+			db.setSupportsStringCaseSensitiveQuery(true);
 		}
 		else {
-			dbUtil.setSupportsStringCaseSensitiveQuery(false);
+			db.setSupportsStringCaseSensitiveQuery(false);
 		}
 	}
 

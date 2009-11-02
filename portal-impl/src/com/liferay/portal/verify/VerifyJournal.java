@@ -22,13 +22,14 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -158,9 +159,9 @@ public class VerifyJournal extends VerifyProcess {
 	}
 
 	protected void verifyOracleNewLine() throws Exception {
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB dbUtil = DBFactoryUtil.getDB();
 
-		if (!dbUtil.getType().equals(DBUtil.TYPE_ORACLE)) {
+		if (!dbUtil.getType().equals(DB.TYPE_ORACLE)) {
 			return;
 		}
 

@@ -23,11 +23,11 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.dao.orm.hibernate.DB2Dialect;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.tools.sql.DBUtil;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -49,7 +49,7 @@ public class DialectDetector {
 	public static String determineDialect(DataSource dataSource) {
 		Dialect dialect = getDialect(dataSource);
 
-		DBUtil.setInstance(dialect);
+		DBFactoryUtil.setDB(dialect);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Using dialect " + dialect.getClass().getName());

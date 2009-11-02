@@ -22,6 +22,9 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.Index;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -33,8 +36,6 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
-import com.liferay.portal.tools.sql.DBUtil;
-import com.liferay.portal.tools.sql.Index;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsUtil;
@@ -68,10 +69,10 @@ public class StartupHelper {
 
 	public void deleteTempImages() {
 		try {
-			DBUtil dbUtil = DBUtil.getInstance();
+			DB db = DBFactoryUtil.getDB();
 
-			dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
-			dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
+			db.runSQL(_DELETE_TEMP_IMAGES_1);
+			db.runSQL(_DELETE_TEMP_IMAGES_2);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -190,7 +191,7 @@ public class StartupHelper {
 			_log.info("Adding indexes");
 		}
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
 		BufferedReader bufferedReader = new BufferedReader(new StringReader(
 			readIndexesSQL()));
@@ -218,7 +219,7 @@ public class StartupHelper {
 			}
 
 			try {
-				dbUtil.runSQL(sql);
+				db.runSQL(sql);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -249,9 +250,9 @@ public class StartupHelper {
 			_log.info("Dropping stale indexes");
 		}
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
-		String type = dbUtil.getType();
+		String type = db.getType();
 
 		Thread currentThread = Thread.currentThread();
 
@@ -318,9 +319,7 @@ public class StartupHelper {
 
 			String sql = "drop index " + indexName;
 
-			if (type.equals(DBUtil.TYPE_MYSQL) ||
-				type.equals(DBUtil.TYPE_SQLSERVER)) {
-
+			if (type.equals(DB.TYPE_MYSQL) || type.equals(DB.TYPE_SQLSERVER)) {
 				sql += " on " + tableName;
 			}
 
@@ -328,7 +327,7 @@ public class StartupHelper {
 				_log.info(sql);
 			}
 
-			dbUtil.runSQL(sql);
+			db.runSQL(sql);
 		}
 
 		return validIndexNames;
@@ -341,26 +340,26 @@ public class StartupHelper {
 	protected List<Index> getIndexes() throws Exception {
 		List<Index> indexes = null;
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
-		String type = dbUtil.getType();
+		String type = db.getType();
 
-		if (type.equals(DBUtil.TYPE_DB2)) {
+		if (type.equals(DB.TYPE_DB2)) {
 			indexes = getDB2Indexes();
 		}
-		else if (type.equals(DBUtil.TYPE_MYSQL)) {
+		else if (type.equals(DB.TYPE_MYSQL)) {
 			indexes = getMySQLIndexes();
 		}
-		else if (type.equals(DBUtil.TYPE_ORACLE)) {
+		else if (type.equals(DB.TYPE_ORACLE)) {
 			indexes = getOracleIndexes();
 		}
-		else if (type.equals(DBUtil.TYPE_POSTGRESQL)) {
+		else if (type.equals(DB.TYPE_POSTGRESQL)) {
 			indexes = getPostgreSQLIndexes();
 		}
-		else if (type.equals(DBUtil.TYPE_SQLSERVER)) {
+		else if (type.equals(DB.TYPE_SQLSERVER)) {
 			indexes = getSQLServerIndexes();
 		}
-		else if (type.equals(DBUtil.TYPE_SYBASE)) {
+		else if (type.equals(DB.TYPE_SYBASE)) {
 			indexes = getSybaseIndexes();
 		}
 

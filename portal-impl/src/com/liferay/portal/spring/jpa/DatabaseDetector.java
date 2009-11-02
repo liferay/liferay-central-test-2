@@ -41,12 +41,13 @@
 
 package com.liferay.portal.spring.jpa;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
@@ -85,11 +86,11 @@ public class DatabaseDetector {
 
 			if (dbName.equals("Apache Derby")) {
 				database = Database.DERBY;
-				type = DBUtil.TYPE_DERBY;
+				type = DB.TYPE_DERBY;
 			}
 			else if (dbName.startsWith("DB2/")) {
 				database = Database.DB2;
-				type = DBUtil.TYPE_DB2;
+				type = DB.TYPE_DB2;
 			}
 			else if (dbName.equals("HSQL Database Engine")) {
 				if (_log.isWarnEnabled()) {
@@ -106,36 +107,36 @@ public class DatabaseDetector {
 				}
 
 				database = Database.HSQL;
-				type = DBUtil.TYPE_HYPERSONIC;
+				type = DB.TYPE_HYPERSONIC;
 			}
 			else if (dbName.equals("Informix Dynamic Server")) {
 				database = Database.INFORMIX;
-				type = DBUtil.TYPE_INFORMIX;
+				type = DB.TYPE_INFORMIX;
 			}
 			else if (dbName.startsWith("Microsoft SQL Server")) {
 				database = Database.SQL_SERVER;
-				type = DBUtil.TYPE_SQLSERVER;
+				type = DB.TYPE_SQLSERVER;
 			}
 			else if (dbName.equals("MySQL")) {
 				database = Database.MYSQL;
-				type = DBUtil.TYPE_MYSQL;
+				type = DB.TYPE_MYSQL;
 			}
 			else if (dbName.equals("Oracle")) {
 				database = Database.ORACLE;
-				type = DBUtil.TYPE_ORACLE;
+				type = DB.TYPE_ORACLE;
 			}
 			else if (dbName.equals("PostgreSQL")) {
 				database = Database.POSTGRESQL;
-				type = DBUtil.TYPE_POSTGRESQL;
+				type = DB.TYPE_POSTGRESQL;
 			}
 			else if (dbName.equals("Sybase SQL Server")) {
 				database = Database.SYBASE;
-				type = DBUtil.TYPE_SYBASE;
+				type = DB.TYPE_SYBASE;
 			}
 
 			if (dbName.equals("ASE") && (dbMajorVersion == 15)) {
 				database = Database.SYBASE;
-				type = DBUtil.TYPE_SYBASE;
+				type = DB.TYPE_SYBASE;
 			}
 		}
 		catch (Exception e) {
@@ -144,7 +145,7 @@ public class DatabaseDetector {
 			if (msg.indexOf("explicitly set for database: DB2") != -1) {
 				database = Database.DB2;
 
-				type = DBUtil.TYPE_DB2;
+				type = DB.TYPE_DB2;
 			}
 			else {
 				_log.error(e, e);
@@ -163,10 +164,10 @@ public class DatabaseDetector {
 		}
 
 		if (Validator.isNotNull(PropsValues.JPA_DATABASE_TYPE)) {
-			DBUtil.setInstance(PropsValues.JPA_DATABASE_TYPE);
+			DBFactoryUtil.setDB(PropsValues.JPA_DATABASE_TYPE);
 		}
 		else {
-			DBUtil.setInstance(type);
+			DBFactoryUtil.setDB(type);
 		}
 
 		return database;

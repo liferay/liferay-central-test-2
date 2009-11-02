@@ -22,14 +22,15 @@
 
 package com.liferay.portal.scheduler.quartz;
 
+import com.liferay.portal.dao.db.DB2DB;
+import com.liferay.portal.dao.db.DerbyDB;
+import com.liferay.portal.dao.db.HypersonicDB;
+import com.liferay.portal.dao.db.PostgreSQLDB;
+import com.liferay.portal.dao.db.SQLServerDB;
+import com.liferay.portal.dao.db.SybaseDB;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.tools.sql.DB2Util;
-import com.liferay.portal.tools.sql.DBUtil;
-import com.liferay.portal.tools.sql.DerbyUtil;
-import com.liferay.portal.tools.sql.HypersonicUtil;
-import com.liferay.portal.tools.sql.PostgreSQLUtil;
-import com.liferay.portal.tools.sql.SQLServerUtil;
-import com.liferay.portal.tools.sql.SybaseUtil;
 
 import java.io.IOException;
 
@@ -711,24 +712,24 @@ public class DynamicDriverDelegate extends StdJDBCDelegate {
 	protected Class<?> getDriverDelegateClass() {
 		Class<?> driverDelegateClass = StdJDBCDelegate.class;
 
-		DBUtil dbUtil = DBUtil.getInstance();
+		DB db = DBFactoryUtil.getDB();
 
-		if (dbUtil instanceof DB2Util) {
+		if (db instanceof DB2DB) {
 			driverDelegateClass = DB2v7Delegate.class;
 		}
-		else if (dbUtil instanceof DerbyUtil) {
+		else if (db instanceof DerbyDB) {
 			driverDelegateClass = CloudscapeDelegate.class;
 		}
-		else if (dbUtil instanceof HypersonicUtil) {
+		else if (db instanceof HypersonicDB) {
 			driverDelegateClass = HSQLDBDelegate.class;
 		}
-		else if (dbUtil instanceof PostgreSQLUtil) {
+		else if (db instanceof PostgreSQLDB) {
 			driverDelegateClass = PostgreSQLDelegate.class;
 		}
-		else if (dbUtil instanceof SQLServerUtil) {
+		else if (db instanceof SQLServerDB) {
 			driverDelegateClass = MSSQLDelegate.class;
 		}
-		else if (dbUtil instanceof SybaseUtil) {
+		else if (db instanceof SybaseDB) {
 			driverDelegateClass = MSSQLDelegate.class;
 		}
 

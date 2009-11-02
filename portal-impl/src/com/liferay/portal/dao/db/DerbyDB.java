@@ -20,8 +20,11 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.dao.db;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -30,16 +33,15 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="SybaseUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DerbyDB.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Bruno Farache
  * @author Sandeep Soni
  * @author Ganesh Ram
  */
-public class SybaseUtil extends DBUtil {
+public class DerbyDB extends BaseDB {
 
-	public static DBUtil getInstance() {
+	public static DB getInstance() {
 		return _instance;
 	}
 
@@ -47,19 +49,24 @@ public class SybaseUtil extends DBUtil {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
 
-		template = reword(template);
-		template = StringUtil.replace(template, ");\n", ")\ngo\n");
-		template = StringUtil.replace(template, "\ngo;\n", "\ngo\n");
-		template = StringUtil.replace(
-			template,
-			new String[] {"\\\\", "\\'", "\\\"", "\\n", "\\r"},
-			new String[] {"\\", "''", "\"", "\n", "\r"});
+		template = reword(template );
+		//template = _removeLongInserts(derby);
+		template = removeNull(template);
+		template = StringUtil.replace(template , "\\'", "''");
 
 		return template;
 	}
 
-	protected SybaseUtil() {
-		super(TYPE_SYBASE);
+	public boolean isSupportsAlterColumnName() {
+		return _SUPPORTS_ALTER_COLUMN_NAME;
+	}
+
+	public boolean isSupportsAlterColumnType() {
+		return _SUPPORTS_ALTER_COLUMN_TYPE;
+	}
+
+	protected DerbyDB() {
+		super(TYPE_DERBY);
 	}
 
 	protected String buildCreateFileContent(String databaseName, int population)
@@ -69,36 +76,26 @@ public class SybaseUtil extends DBUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb = new StringBuilder();
-
-		sb.append("use master\n");
-		sb.append(
-			"exec sp_dboption '" + databaseName + "', " +
-				"'allow nulls by default' , true\n");
-		sb.append("go\n\n");
-		sb.append(
-			"exec sp_dboption '" + databaseName + "', " +
-				"'select into/bulkcopy/pllsort' , true\n");
-		sb.append("go\n\n");
-
-		sb.append("use " + databaseName + "\n\n");
+		sb.append("drop database " + databaseName + ";\n");
+		sb.append("create database " + databaseName + ";\n");
+		sb.append("connect to " + databaseName + ";\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix + "-sybase.sql"));
+				"../sql/portal" + suffix + "/portal" + suffix + "-derby.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
+		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
 		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
+		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
 
 		return sb.toString();
 	}
 
 	protected String getServerName() {
-		return "sybase";
+		return "derby";
 	}
 
 	protected String[] getTemplate() {
-		return _SYBASE;
+		return _DERBY;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -109,25 +106,15 @@ public class SybaseUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
+			if (line.startsWith(ALTER_COLUMN_NAME) ||
+				line.startsWith(ALTER_COLUMN_TYPE)) {
 
-			if (line.indexOf(DROP_COLUMN) != -1) {
-				line = StringUtil.replace(line, " drop column ", " drop ");
-			}
+				line = "-- " + line;
 
-			if (line.startsWith(ALTER_COLUMN_NAME)) {
-				String[] template = buildColumnNameTokens(line);
-
-				line = StringUtil.replace(
-					"exec sp_rename '@table@.@old-column@', '@new-column@', " +
-						"'column';",
-					REWORD_TEMPLATE, template);
-			}
-			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				String[] template = buildColumnTypeTokens(line);
-
-				line = StringUtil.replace(
-					"alter table @table@ alter column @old-column@ @type@;",
-					REWORD_TEMPLATE, template);
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"This statement is not supported by Derby: " + line);
+				}
 			}
 
 			sb.append(line);
@@ -139,17 +126,21 @@ public class SybaseUtil extends DBUtil {
 		return sb.toString();
 	}
 
-	protected static String DROP_COLUMN = "drop column";
-
-	private static String[] _SYBASE = {
+	private static String[] _DERBY = {
 		"--", "1", "0",
-		"'19700101'", "getdate()",
-		" image", " int", " datetime",
-		" float", " int", " decimal(20,0)",
-		" varchar(1000)", " text", " varchar",
-		"  identity(1,1)", "go"
+		"'1970-01-01-00.00.00.000000'", "current timestamp",
+		" blob", " smallint", " timestamp",
+		" double", " integer", " bigint",
+		" varchar(4000)", " clob", " varchar",
+		" generated always as identity", "commit"
 	};
 
-	private static SybaseUtil _instance = new SybaseUtil();
+	private static boolean _SUPPORTS_ALTER_COLUMN_NAME;
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
+
+	private static Log _log = LogFactoryUtil.getLog(DerbyDB.class);
+
+	private static DerbyDB _instance = new DerbyDB();
 
 }
