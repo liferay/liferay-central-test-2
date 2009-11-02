@@ -57,7 +57,8 @@ public class LayoutSetPrototypePermissionUtil {
 	}
 
 	public void setLayoutSetPrototypePermission (
-			LayoutSetPrototypePermission layoutSetPrototypePermission) {
+		LayoutSetPrototypePermission layoutSetPrototypePermission) {
+
 		_layoutSetPrototypePermission = layoutSetPrototypePermission;
 	}
 
