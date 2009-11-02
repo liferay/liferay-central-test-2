@@ -979,6 +979,14 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/gl/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/gl_ES/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
 		<url-pattern>/hu/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
