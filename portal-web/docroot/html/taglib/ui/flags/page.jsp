@@ -31,7 +31,7 @@ String className = (String)request.getAttribute("liferay-ui:flags:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:flags:classPK"));
 String contentTitle = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:contentTitle"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:flags:label"), true);
-String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:message"), "flag");
+String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:message"), "flag[action]");
 long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:flags:reportedUserId"));
 %>
 
