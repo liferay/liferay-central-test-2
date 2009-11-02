@@ -46,7 +46,7 @@ public class ReadWriteLockKey<T> {
 			return false;
 		}
 
-		if (!(obj instanceof ReadWriteLockKey)) {
+		if (!(obj instanceof ReadWriteLockKey<?>)) {
 			return false;
 		}
 
