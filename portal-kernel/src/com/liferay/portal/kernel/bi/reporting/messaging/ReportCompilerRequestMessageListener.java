@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.bi.reporting.messaging;
 
+import com.liferay.portal.kernel.bi.reporting.ReportDesignRetriever;
 import com.liferay.portal.kernel.bi.reporting.ReportEngine;
 import com.liferay.portal.kernel.bi.reporting.ReportGenerationException;
 import com.liferay.portal.kernel.bi.reporting.ReportRequest;
@@ -41,7 +42,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 public class ReportCompilerRequestMessageListener implements MessageListener {
 
 	public ReportCompilerRequestMessageListener(
-		ReportEngine reportEngine, 
+		ReportEngine reportEngine,
 		ReportResultContainer reportResultContainer) {
 
 		_reportEngine = reportEngine;
@@ -49,12 +50,13 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 	}
 
 	public void receive(Message message) {
+		ReportRequest reportRequest = (ReportRequest)message.getPayload();
 
-		ReportRequest reportRequest = (ReportRequest) message.getPayload();
+		ReportDesignRetriever reportDesignRetriever =
+			reportRequest.getReportDesignRetriever();
 
 		ReportResultContainer reportResultContainer =
-			_reportResultContainer.clone(reportRequest
-				.getReportDesignRetriever().getReportName());
+			_reportResultContainer.clone(reportDesignRetriever.getReportName());
 
 		try {
 			_reportEngine.compile(reportRequest);
@@ -65,9 +67,8 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 			reportResultContainer.setReportGenerationException(rge);
 		}
 		finally {
-			Message responseMessage =
-				MessageBusUtil.createResponseMessage(
-					message, reportResultContainer);
+			Message responseMessage = MessageBusUtil.createResponseMessage(
+				message, reportResultContainer);
 
 			responseMessage.setPayload(reportResultContainer);
 

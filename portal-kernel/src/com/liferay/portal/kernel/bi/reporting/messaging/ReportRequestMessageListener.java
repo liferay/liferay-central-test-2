@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.bi.reporting.messaging;
 
+import com.liferay.portal.kernel.bi.reporting.ReportDesignRetriever;
 import com.liferay.portal.kernel.bi.reporting.ReportEngine;
 import com.liferay.portal.kernel.bi.reporting.ReportGenerationException;
 import com.liferay.portal.kernel.bi.reporting.ReportRequest;
@@ -49,16 +50,16 @@ public class ReportRequestMessageListener implements MessageListener {
 	}
 
 	public void receive(Message message) {
-		ReportRequest request = (ReportRequest)message.getPayload();
+		ReportRequest reportRequest = (ReportRequest)message.getPayload();
+
+		ReportDesignRetriever reportDesignRetriever =
+			reportRequest.getReportDesignRetriever();
 
 		ReportResultContainer reportResultContainer =
-			_reportResultContainer.clone(request.getReportDesignRetriever()
-				.getReportName());
-
-		Message responseMessage = MessageBusUtil.createResponseMessage(message);
+			_reportResultContainer.clone(reportDesignRetriever.getReportName());
 
 		try {
-			_reportEngine.execute(request, reportResultContainer);
+			_reportEngine.execute(reportRequest, reportResultContainer);
 		}
 		catch (ReportGenerationException rge) {
 			_log.error("Unable to generate report", rge);
@@ -66,6 +67,9 @@ public class ReportRequestMessageListener implements MessageListener {
 			reportResultContainer.setReportGenerationException(rge);
 		}
 		finally {
+			Message responseMessage = MessageBusUtil.createResponseMessage(
+				message);
+
 			responseMessage.setPayload(reportResultContainer);
 
 			MessageBusUtil.sendMessage(

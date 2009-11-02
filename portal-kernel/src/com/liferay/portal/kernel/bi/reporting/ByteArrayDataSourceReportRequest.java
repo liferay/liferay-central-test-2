@@ -22,22 +22,49 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
-import java.io.Serializable;
-
 import java.util.Map;
 
 /**
- * <a href="ReportRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ByteArrayDataSourceReportRequest.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Michael C. Han
  * @author Gavin Wan
+ * @author Brian Wing Shun Chan
  */
-public interface ReportRequest extends Serializable {
+public class ByteArrayDataSourceReportRequest
+	extends DefaultDataSourceReportRequest {
 
-	public ReportDesignRetriever getReportDesignRetriever();
+	public ByteArrayDataSourceReportRequest(
+		ReportDesignRetriever reportDesignRetriever,
+		Map<String, String> reportParameters, String reportFormat,
+		String reportDataSourceType, byte[] dataSourceBytes) {
 
-	public ReportFormat getReportFormat();
+		super(reportDesignRetriever, reportParameters, reportFormat);
 
-	public Map<String, String> getReportParameters();
+		_reportDataSourceType = ReportDataSourceType.parse(
+			reportDataSourceType);
+		_dataSourceBytes = dataSourceBytes;
+	}
+
+	public byte[] getDataSourceBytes() {
+		return _dataSourceBytes;
+	}
+
+	public ReportDataSourceType getReportDataSourceType() {
+		return _reportDataSourceType;
+	}
+
+	public void setDataSourceBytes(byte[] dataSourceBytes) {
+		_dataSourceBytes = dataSourceBytes;
+	}
+
+	public void setReportDataSourceType(
+		ReportDataSourceType reportDataSourceType) {
+
+		_reportDataSourceType = reportDataSourceType;
+	}
+
+	private byte[] _dataSourceBytes;
+	private ReportDataSourceType _reportDataSourceType;
 
 }
