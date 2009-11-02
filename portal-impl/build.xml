@@ -402,6 +402,10 @@ ${exception.message}
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="gl" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="de" />
 		</antcall>
 

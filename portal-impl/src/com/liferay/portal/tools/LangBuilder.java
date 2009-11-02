@@ -93,6 +93,7 @@ public class LangBuilder {
 				_createProps(content, "nl"); // Dutch
 				_createProps(content, "fi"); // Finnish
 				_createProps(content, "fr"); // French
+				_createProps(content, "gl"); // Galician
 				_createProps(content, "de"); // German
 				_createProps(content, "el"); // Greek
 				_createProps(content, "hu"); // Hungarian
@@ -350,6 +351,7 @@ public class LangBuilder {
 			translationId.equals("en_ca") ||
 			translationId.equals("en_cs") ||
 			translationId.equals("en_fi") ||
+			translationId.equals("en_gl") ||
 			translationId.equals("en_hu") ||
 			translationId.equals("en_nb") ||
 			translationId.equals("en_fa") ||
@@ -361,8 +363,8 @@ public class LangBuilder {
 			translationId.equals("en_vi")) {
 
 			// Automatic translator does not support Arabic, Basque, Bulgarian,
-			// Catalan, Czech, Finnish, Hungarian, Norwegian Bokmål, Persian,
-			// Polish, Russian, Slovak, Swedish, Turkish, or Vietnamese
+			// Catalan, Czech, Finnish, Galician, Hungarian, Norwegian Bokmål,
+			// Persian, Polish, Russian, Slovak, Swedish, Turkish, or Vietnamese
 
 			return null;
 		}
