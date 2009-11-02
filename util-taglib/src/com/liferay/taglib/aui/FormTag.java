@@ -113,12 +113,14 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 		}
 	}
 
-	public void setAction(String action) {
-		_action = action;
+	public void setAction(PortletURL portletURL) {
+		if (portletURL != null) {
+			_action = portletURL.toString();
+		}
 	}
 
-	public void setAction(PortletURL portletURL) {
-		_action = portletURL.toString();
+	public void setAction(String action) {
+		_action = action;
 	}
 
 	public void setCssClass(String cssClass) {
