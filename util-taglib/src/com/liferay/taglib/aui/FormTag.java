@@ -136,7 +136,7 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 	}
 
 	public void setEscapeXml(boolean escapeXml) {
-		_escapeXml = Boolean.valueOf(escapeXml);
+		_escapeXml = escapeXml;
 	}
 
 	public void setInlineLabel(boolean inlineLabel) {
@@ -160,7 +160,7 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _endPage;
-	private boolean _escapeXml = Boolean.TRUE;
+	private boolean _escapeXml = true;
 	private boolean _inlineLabel;
 	private String _name = "fm";
 	private String _startPage;
