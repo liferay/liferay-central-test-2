@@ -50,15 +50,17 @@ public class LayoutSetPrototypePermissionUtil {
 			permissionChecker, layoutSetPrototypeId, actionId);
 	}
 
-	public static LayoutPrototypePermission getLayoutSetPrototypePermission() {
+	public static LayoutSetPrototypePermission
+		getLayoutSetPrototypePermission() {
+
 		return _layoutSetPrototypePermission;
 	}
 
 	public void setLayoutSetPrototypePermission (
-			LayoutPrototypePermission layoutPrototypePermission) {
-		_layoutSetPrototypePermission = layoutPrototypePermission;
+			LayoutSetPrototypePermission layoutSetPrototypePermission) {
+		_layoutSetPrototypePermission = layoutSetPrototypePermission;
 	}
 
-	private static LayoutPrototypePermission _layoutSetPrototypePermission;
+	private static LayoutSetPrototypePermission _layoutSetPrototypePermission;
 
 }

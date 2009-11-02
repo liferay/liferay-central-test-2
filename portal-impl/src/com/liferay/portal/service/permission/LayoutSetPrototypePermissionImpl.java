@@ -33,7 +33,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
  * @author Brian Wing Shun Chan
  */
 public class LayoutSetPrototypePermissionImpl
-	implements LayoutPrototypePermission {
+	implements LayoutSetPrototypePermission {
 
 	public void check(
 			PermissionChecker permissionChecker, long layoutSetPrototypeId,
