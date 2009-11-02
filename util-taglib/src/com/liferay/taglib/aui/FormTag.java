@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.portlet.PortletURL;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
@@ -113,6 +115,10 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 
 	public void setAction(String action) {
 		_action = action;
+	}
+
+	public void setAction(PortletURL portletURL) {
+		_action = portletURL.toString();
 	}
 
 	public void setCssClass(String cssClass) {
