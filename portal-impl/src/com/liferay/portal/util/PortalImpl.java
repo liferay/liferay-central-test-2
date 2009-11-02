@@ -4017,7 +4017,7 @@ public class PortalImpl implements Portal {
 			"[$TRUE$]"
 		};
 
-		DB dbUtil = DBFactoryUtil.getDB();
+		DB db = DBFactoryUtil.getDB();
 
 		_customSqlClassNameIds = new String[] {
 			String.valueOf(PortalUtil.getClassNameId(Group.class)),
@@ -4031,8 +4031,8 @@ public class PortalImpl implements Portal {
 			String.valueOf(PortalUtil.getClassNameId(IGImage.class)),
 			String.valueOf(PortalUtil.getClassNameId(MBMessage.class)),
 			String.valueOf(PortalUtil.getClassNameId(WikiPage.class)),
-			dbUtil.getTemplateFalse(),
-			dbUtil.getTemplateTrue()
+			db.getTemplateFalse(),
+			db.getTemplateTrue()
 		};
 	}
 

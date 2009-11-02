@@ -46,9 +46,9 @@ public class SQLTransformer {
 	private SQLTransformer() {
 		_sqlMap = new HashMap<String, String>();
 
-		DB dbUtil = DBFactoryUtil.getDB();
+		DB db = DBFactoryUtil.getDB();
 
-		if (dbUtil.getType().equals(DB.TYPE_MYSQL)) {
+		if (db.getType().equals(DB.TYPE_MYSQL)) {
 			_vendorMySQL = true;
 		}
 	}
