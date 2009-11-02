@@ -23,6 +23,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -54,9 +55,11 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 		}
 		finally {
 			if (!ServerDetector.isResin()) {
+				_action = null;
 				_cssClass = null;
 				_dynamicAttributes.clear();
 				_endPage = null;
+				_escapeXml = true;
 				_inlineLabel = false;
 				_name = "fm";
 				_startPage = null;
@@ -69,6 +72,11 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
+			if (_escapeXml) {
+				_action = HtmlUtil.escape(_action);
+			}
+
+			request.setAttribute("aui:form:action", _action);
 			request.setAttribute("aui:form:cssClass", _cssClass);
 			request.setAttribute(
 				"aui:form:dynamicAttributes", _dynamicAttributes);
@@ -103,6 +111,10 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 		}
 	}
 
+	public void setAction(String action) {
+		_action = action;
+	}
+
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
@@ -115,6 +127,10 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 
 	public void setEndPage(String endPage) {
 		_endPage = endPage;
+	}
+
+	public void setEscapeXml(boolean escapeXml) {
+		_escapeXml = Boolean.valueOf(escapeXml);
 	}
 
 	public void setInlineLabel(boolean inlineLabel) {
@@ -133,10 +149,12 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 
 	private static final String _START_PAGE = "/html/taglib/aui/form/start.jsp";
 
+	private String _action;
 	private String _cssClass;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _endPage;
+	private boolean _escapeXml = Boolean.TRUE;
 	private boolean _inlineLabel;
 	private String _name = "fm";
 	private String _startPage;

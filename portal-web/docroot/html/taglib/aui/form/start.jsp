@@ -25,10 +25,11 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String action = GetterUtil.getString((String)request.getAttribute("aui:form:action"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:form:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:form:dynamicAttributes");
 boolean inlineLabels = GetterUtil.getBoolean((String)request.getAttribute("aui:form:inlineLabels"));
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
 %>
 
-<form class="aui-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= name %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<form action="<%= action %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= name %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
