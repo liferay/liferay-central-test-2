@@ -207,12 +207,15 @@ portletURL.setParameter("name", name);
 
 	<aui:fieldset>
 		<aui:field-wrapper>
+
 			<%
-			String fileMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024);
+			long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024;
 			%>
 
-			<c:if test='<%= !fileMaxSize.equals("0") %>'>
-				<p class="portlet-msg-info"><%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", fileMaxSize, false) %></p>
+			<c:if test="<%= fileMaxSize != 0 %>">
+				<div class="portlet-msg-info">
+					<%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", String.valueOf(fileMaxSize), false) %>
+				</div>
 			</c:if>
 		</aui:field-wrapper>
 

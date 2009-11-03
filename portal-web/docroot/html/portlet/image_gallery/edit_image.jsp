@@ -140,8 +140,10 @@ if (image != null) {
 		long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 		%>
 
-		<c:if test='<%= imageMaxSize != 0 %>'>
-			<p class="portlet-msg-info"><%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", String.valueOf(imageMaxSize), false) %></p>
+		<c:if test="<%= imageMaxSize != 0 %>">
+			<div class="portlet-msg-info">
+				<%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", String.valueOf(imageMaxSize), false) %>
+			</div>
 		</c:if>
 	</aui:field-wrapper>
 
