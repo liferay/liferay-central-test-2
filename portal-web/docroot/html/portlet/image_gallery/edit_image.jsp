@@ -141,7 +141,7 @@ if (image != null) {
 		%>
 
 		<c:if test='<%= imageMaxSize != 0 %>'>
-			<%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", String.valueOf(imageMaxSize), false) %>
+			<p class="portlet-msg-info"><%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", String.valueOf(imageMaxSize), false) %></p>
 		</c:if>
 	</aui:field-wrapper>
 

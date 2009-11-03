@@ -212,7 +212,7 @@ portletURL.setParameter("name", name);
 			%>
 
 			<c:if test='<%= !fileMaxSize.equals("0") %>'>
-				<%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", fileMaxSize, false) %>
+				<p class="portlet-msg-info"><%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", fileMaxSize, false) %></p>
 			</c:if>
 		</aui:field-wrapper>
 
