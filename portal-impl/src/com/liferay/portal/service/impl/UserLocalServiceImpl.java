@@ -153,6 +153,108 @@ import javax.mail.internet.InternetAddress;
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
+	public void addDefaultGroups(long userId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Set<Long> groupIdsSet = new HashSet<Long>();
+
+		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
+			user.getCompanyId(), PropsKeys.ADMIN_DEFAULT_GROUP_NAMES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
+
+		for (String defaultGroupName : defaultGroupNames) {
+			try {
+				Group group = groupPersistence.findByC_N(
+					user.getCompanyId(), defaultGroupName);
+
+				if (!userPersistence.containsGroup(
+						userId, group.getGroupId())) {
+
+					groupIdsSet.add(group.getGroupId());
+				}
+			}
+			catch (NoSuchGroupException nsge) {
+			}
+		}
+
+		long[] groupIds = ArrayUtil.toArray(
+			groupIdsSet.toArray(new Long[groupIdsSet.size()]));
+
+		groupLocalService.addUserGroups(userId, groupIds);
+	}
+
+	public void addDefaultRoles(long userId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Set<Long> roleIdSet = new HashSet<Long>();
+
+		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
+			user.getCompanyId(), PropsKeys.ADMIN_DEFAULT_ROLE_NAMES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_ROLE_NAMES);
+
+		for (String defaultRoleName : defaultRoleNames) {
+			try {
+				Role role = rolePersistence.findByC_N(
+					user.getCompanyId(), defaultRoleName);
+
+				if (!userPersistence.containsRole(
+						userId, role.getRoleId())) {
+
+					roleIdSet.add(role.getRoleId());
+				}
+			}
+			catch (NoSuchRoleException nsre) {
+			}
+		}
+
+		long[] roleIds = ArrayUtil.toArray(
+			roleIdSet.toArray(new Long[roleIdSet.size()]));
+
+		roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
+
+		userPersistence.addRoles(userId, roleIds);
+	}
+
+	public void addDefaultUserGroups(long userId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Set<Long> userGroupIdSet = new HashSet<Long>();
+
+		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
+			user.getCompanyId(), PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_USER_GROUP_NAMES);
+
+		for (String defaultUserGroupName : defaultUserGroupNames) {
+			try {
+				UserGroup userGroup = userGroupPersistence.findByC_N(
+					user.getCompanyId(), defaultUserGroupName);
+
+				if (!userPersistence.containsUserGroup(
+						userId, userGroup.getUserGroupId())) {
+
+					userGroupIdSet.add(userGroup.getUserGroupId());
+				}
+			}
+			catch (NoSuchUserGroupException nsuge) {
+			}
+		}
+
+		long[] userGroupIds = ArrayUtil.toArray(
+			userGroupIdSet.toArray(new Long[userGroupIdSet.size()]));
+
+		for (long userGroupId : userGroupIds) {
+			copyUserGroupLayouts(userGroupId, userId);
+		}
+
+		userPersistence.setUserGroups(userId, userGroupIds);
+	}
+
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
@@ -417,27 +519,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Groups
 
-		Set<Long> groupIdsSet = SetUtil.fromArray(groupIds);
-
-		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
-			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
-
-		for (String defaultGroupName : defaultGroupNames) {
-			try {
-				Group group = groupPersistence.findByC_N(
-					companyId, defaultGroupName);
-
-				groupIdsSet.add(group.getGroupId());
-			}
-			catch (NoSuchGroupException nsge) {
-			}
+		if (groupIds != null) {
+			groupLocalService.addUserGroups(userId, groupIds);
 		}
 
-		groupIds = ArrayUtil.toArray(
-			groupIdsSet.toArray(new Long[groupIdsSet.size()]));
-
-		groupLocalService.addUserGroups(userId, groupIds);
+		addDefaultGroups(userId);
 
 		// Organizations
 
@@ -445,69 +531,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Roles
 
-		Set<Long> roleIdsSet = SetUtil.fromArray(roleIds);
+		if (roleIds != null) {
+			roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
 
-		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, StringPool.NEW_LINE,
-			PropsValues.ADMIN_DEFAULT_ROLE_NAMES);
-
-		for (String defaultRoleName : defaultRoleNames) {
-			try {
-				Role role = rolePersistence.findByC_N(
-					companyId, defaultRoleName);
-
-				roleIdsSet.add(role.getRoleId());
-			}
-			catch (NoSuchRoleException nsge) {
-			}
+			userPersistence.setRoles(userId, roleIds);
 		}
 
-		roleIds = ArrayUtil.toArray(
-			roleIdsSet.toArray(new Long[roleIdsSet.size()]));
-
-		roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
-
-		userPersistence.setRoles(userId, roleIds);
+		addDefaultRoles(userId);
 
 		// User groups
 
-		Set<UserGroup> userGroups = new HashSet<UserGroup>();
-
-		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES,
-			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_USER_GROUP_NAMES);
-
-		for (String defaultUserGroupName : defaultUserGroupNames) {
-			try {
-				UserGroup userGroup = userGroupPersistence.findByC_N(
-					companyId, defaultUserGroupName);
-
-				userGroups.add(userGroup);
-
-				copyUserGroupLayouts(
-					userGroup.getUserGroupId(), new long[] {userId});
-			}
-			catch (NoSuchUserGroupException nsuge) {
-			}
-		}
-
 		if (userGroupIds != null) {
 			for (long userGroupId : userGroupIds) {
-				try{
-					UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
-						userGroupId);
-
-					userGroups.add(userGroup);
-
-					copyUserGroupLayouts(userGroupId, new long[] {userId});
-				}
-				catch (NoSuchUserGroupException nsuge) {
-				}
+				copyUserGroupLayouts(userGroupId, new long[] {userId});
 			}
+
+			userPersistence.setUserGroups(userId, userGroupIds);
 		}
 
-		userPersistence.setUserGroups(
-			userId, ListUtil.fromCollection(userGroups));
+		addDefaultUserGroups(userId);
 
 		// Asset
 

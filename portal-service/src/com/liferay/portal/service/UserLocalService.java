@@ -96,6 +96,18 @@ public interface UserLocalService {
 		com.liferay.portal.model.User user, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public void addDefaultGroups(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addDefaultRoles(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addDefaultUserGroups(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

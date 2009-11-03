@@ -104,6 +104,24 @@ public class UserLocalServiceUtil {
 		return getService().updateUser(user, merge);
 	}
 
+	public static void addDefaultGroups(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().addDefaultGroups(userId);
+	}
+
+	public static void addDefaultRoles(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().addDefaultRoles(userId);
+	}
+
+	public static void addDefaultUserGroups(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().addDefaultUserGroups(userId);
+	}
+
 	public static void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

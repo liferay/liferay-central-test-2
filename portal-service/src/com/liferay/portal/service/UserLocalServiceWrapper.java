@@ -104,6 +104,24 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.updateUser(user, merge);
 	}
 
+	public void addDefaultGroups(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_userLocalService.addDefaultGroups(userId);
+	}
+
+	public void addDefaultRoles(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_userLocalService.addDefaultRoles(userId);
+	}
+
+	public void addDefaultUserGroups(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_userLocalService.addDefaultUserGroups(userId);
+	}
+
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
