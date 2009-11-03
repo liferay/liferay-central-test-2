@@ -167,7 +167,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 		</div>
 
 		<aui:layout>
-			<aui:column columnWidth="15">
+			<aui:column columnWidth="<%= 15 %>">
 				<div class="image-field">
 					<label><liferay-ui:message key="height" /></label>
 
@@ -175,7 +175,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 				</div>
 			</aui:column>
 
-			<aui:column columnWidth="15">
+			<aui:column columnWidth="<%= 15 %>">
 				<div class="image-field">
 					<label><liferay-ui:message key="width" /></label>
 
@@ -183,7 +183,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 				</div>
 			</aui:column>
 
-			<aui:column columnWidth="15">
+			<aui:column columnWidth="<%= 15 %>">
 				<div class="image-field">
 					<label><liferay-ui:message key="size" /></label>
 

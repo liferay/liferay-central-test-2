@@ -78,21 +78,21 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-image-galle
 }
 
 .portlet-image-gallery .image-thumbnail {
-	border: 2px solid #EEEEEE;
+	border: 2px solid #eee;
 	float: left;
 	margin: 20px 4px 0;
 	padding: 5px 5px 0;
 	text-align: center;
-	text-decoration:none;
+	text-decoration: none;
 }
 
 .portlet-image-gallery .image-thumbnail:hover {
-	border-color: #CCCCCC;
+	border-color: #ccc;
 }
 
 .portlet-image-gallery .image-date {
+	border-width: 0;
 	float: none;
-	border: none;
 }
 
 .portlet-image-gallery .image-download .image-name {
