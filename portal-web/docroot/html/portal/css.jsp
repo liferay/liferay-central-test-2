@@ -774,7 +774,7 @@
 }
 
 .lfr-upload-container .upload-file {
-	background: #f0faf0 url(<%= themeImagesPath %>/document_library/jpg.png) no-repeat 5px 50%;
+	background: #f0faf0 url(<%= themeImagesPath %>/file_system/small/jpg.png) no-repeat 5px 50%;
 	border-bottom: 1px solid #ccc;
 	display: block;
 	font-weight: bold;

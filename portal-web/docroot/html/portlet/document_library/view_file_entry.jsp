@@ -288,7 +288,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
 		<c:if test="<%= isLocked %>">
-			<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
+			<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 		</c:if>
 
 		<div class="file-entry-download">
