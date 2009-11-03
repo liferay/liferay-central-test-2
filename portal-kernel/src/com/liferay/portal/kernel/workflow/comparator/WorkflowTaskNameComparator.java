@@ -32,11 +32,11 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
  */
 public class WorkflowTaskNameComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "taskName ASC, workflowTaskId ASC";
+	public static String ORDER_BY_ASC = "name ASC, workflowTaskId ASC";
 
-	public static String ORDER_BY_DESC = "taskName DESC, workflowTaskId DESC";
+	public static String ORDER_BY_DESC = "name DESC, workflowTaskId DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"taskName", "workflowTaskId"};
+	public static String[] ORDER_BY_FIELDS = {"name", "workflowTaskId"};
 
 	public WorkflowTaskNameComparator() {
 		this(false);
