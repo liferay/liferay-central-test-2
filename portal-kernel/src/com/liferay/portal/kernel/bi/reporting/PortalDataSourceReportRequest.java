@@ -25,16 +25,16 @@ package com.liferay.portal.kernel.bi.reporting;
 import java.util.Map;
 
 /**
- * <a href="DefaultDataSourceReportRequest.java.html"><b><i>View Source</i></b>
+ * <a href="PortalDataSourceReportRequest.java.html"><b><i>View Source</i></b>
  * </a>
- * 
+ *
  * @author Gavin Wan
  * @author Brian Wing Shun Chan
  */
-public class DefaultDataSourceReportRequest
+public class PortalDataSourceReportRequest
 	extends EmptyDataSourceReportRequest {
 
-	public DefaultDataSourceReportRequest(
+	public PortalDataSourceReportRequest(
 		ReportDesignRetriever reportDesignRetriever,
 		Map<String, String> reportParameters, String reportFormat) {
 

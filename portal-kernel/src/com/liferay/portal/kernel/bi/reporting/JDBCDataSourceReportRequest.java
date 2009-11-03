@@ -30,8 +30,7 @@ import java.util.Map;
  * @author Gavin Wan
  * @author Brian Wing Shun Chan
  */
-public class JDBCDataSourceReportRequest
-	extends EmptyDataSourceReportRequest {
+public class JDBCDataSourceReportRequest extends EmptyDataSourceReportRequest {
 
 	public JDBCDataSourceReportRequest(
 		ReportDesignRetriever reportDesignRetriever,
