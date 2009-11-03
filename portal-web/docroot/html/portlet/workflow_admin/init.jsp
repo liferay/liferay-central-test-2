@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.NoSuchWorkflowLinkException" %>
+<%@ page import="com.liferay.portal.NoSuchWorkflowDefinitionLinkException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>

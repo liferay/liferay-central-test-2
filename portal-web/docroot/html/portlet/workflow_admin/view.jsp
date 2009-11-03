@@ -104,12 +104,12 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 							<aui:option><liferay-ui:message key="no-workflow" /></aui:option>
 
 							<%
-							WorkflowLink workflowLink = null;
+							WorkflowDefinitionLink workflowLink = null;
 
 							try {
-								workflowLink = WorkflowLinkLocalServiceUtil.getWorkflowLink(company.getCompanyId(), 0, classNameId);
+								workflowLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), 0, classNameId);
 							}
-							catch (NoSuchWorkflowLinkException nswle) {
+							catch (NoSuchWorkflowDefinitionLinkException nswle) {
 							}
 
 							for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
