@@ -34,85 +34,87 @@ long entryId = entry.getEntryId();
 request.setAttribute("view_entry.jsp-entry", entry);
 %>
 
-<aui:column columnWidth="<%= 75 %>" cssClass="entry-column entry-column-first" first="<%= true %>">
-	<h3 class="entry-title"><%= entry.getName() %></h3>
+<aui:layout>
+	<aui:column columnWidth="<%= 75 %>" cssClass="entry-column entry-column-first" first="<%= true %>">
+		<h3 class="entry-title"><%= entry.getName() %></h3>
 
-	<div class="entry-categories">
-		<liferay-ui:asset-categories-summary
-			className="<%= BookmarksEntry.class.getName() %>"
-			classPK="<%= entryId %>"
-		/>
-	</div>
-
-	<div class="entry-tags">
-		<liferay-ui:asset-tags-summary
-			className="<%= BookmarksEntry.class.getName() %>"
-			classPK="<%= entryId %>"
-			message="tags"
-		/>
-	</div>
-
-	<div class="entry-url">
-		<a href="<%= entry.getUrl() %>"><%= entry.getUrl() %></a>
-	</div>
-
-	<div class="entry-description">
-		<%= entry.getComments() %>
-	</div>
-
-	<div class="custom-attributes">
-		<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
-			<liferay-ui:custom-attribute-list
+		<div class="entry-categories">
+			<liferay-ui:asset-categories-summary
 				className="<%= BookmarksEntry.class.getName() %>"
-				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
-				editable="<%= false %>"
-				label="<%= true %>"
+				classPK="<%= entryId %>"
 			/>
-		</liferay-ui:custom-attributes-available>
-	</div>
-
-	<div class="entry-author">
-		<%= LanguageUtil.format(pageContext, "created-by-x", PortalUtil.getUserName(entry.getUserId(), themeDisplay.getScopeGroupName())) %>
-	</div>
-
-	<div class="entry-date">
-		<%= dateFormatDate.format(entry.getCreateDate()) %>
-	</div>
-
-	<div class="entry-downloads">
-		<%= entry.getVisits() %> <liferay-ui:message key="visits" />
-	</div>
-
-	<div class="entry-ratings">
-		<liferay-ui:ratings
-			className="<%= BookmarksEntry.class.getName() %>"
-			classPK="<%= entryId %>"
-		/>
-	</div>
-</aui:column>
-
-<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
-	<div class="entry-download">
-		<liferay-ui:icon
-			image="../file_system/large/bookmark"
-			message="download"
-			url="<%= entry.getUrl() %>"
-			cssClass="entry-avatar"
-		/>
-
-		<div class="entry-name">
-			<a href="<%= entry.getUrl() %>">
-				<%= entry.getName() %>
-			</a>
 		</div>
-	</div>
 
-	<%
-	request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-	%>
+		<div class="entry-tags">
+			<liferay-ui:asset-tags-summary
+				className="<%= BookmarksEntry.class.getName() %>"
+				classPK="<%= entryId %>"
+				message="tags"
+			/>
+		</div>
 
-	<liferay-util:include page="/html/portlet/bookmarks/entry_action.jsp" />
-</aui:column>
+		<div class="entry-url">
+			<a href="<%= entry.getUrl() %>"><%= entry.getUrl() %></a>
+		</div>
+
+		<div class="entry-description">
+			<%= entry.getComments() %>
+		</div>
+
+		<div class="custom-attributes">
+			<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
+				<liferay-ui:custom-attribute-list
+					className="<%= BookmarksEntry.class.getName() %>"
+					classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+					editable="<%= false %>"
+					label="<%= true %>"
+				/>
+			</liferay-ui:custom-attributes-available>
+		</div>
+
+		<div class="entry-author">
+			<%= LanguageUtil.format(pageContext, "created-by-x", PortalUtil.getUserName(entry.getUserId(), themeDisplay.getScopeGroupName())) %>
+		</div>
+
+		<div class="entry-date">
+			<%= dateFormatDate.format(entry.getCreateDate()) %>
+		</div>
+
+		<div class="entry-downloads">
+			<%= entry.getVisits() %> <liferay-ui:message key="visits" />
+		</div>
+
+		<div class="entry-ratings">
+			<liferay-ui:ratings
+				className="<%= BookmarksEntry.class.getName() %>"
+				classPK="<%= entryId %>"
+			/>
+		</div>
+	</aui:column>
+
+	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
+		<div class="entry-download">
+			<liferay-ui:icon
+				image="../file_system/large/bookmark"
+				message="download"
+				url="<%= entry.getUrl() %>"
+				cssClass="entry-avatar"
+			/>
+
+			<div class="entry-name">
+				<a href="<%= entry.getUrl() %>">
+					<%= entry.getName() %>
+				</a>
+			</div>
+		</div>
+
+		<%
+		request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+		%>
+
+		<liferay-util:include page="/html/portlet/bookmarks/entry_action.jsp" />
+	</aui:column>
+</aui:layout>
 
 <%
 BookmarksUtil.addPortletBreadcrumbEntries(entry, request, renderResponse);

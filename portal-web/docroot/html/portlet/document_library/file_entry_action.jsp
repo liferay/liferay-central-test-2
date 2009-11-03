@@ -73,7 +73,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 <liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:choose>
 		<c:when test="<%= fileEntry != null %>">
-			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
+			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
 				<liferay-ui:icon
 					image="download"
 					url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + fileEntry.getFolderId() + "&title=" + HttpUtil.encodeURL(fileEntry.getTitle()) %>'
@@ -123,7 +123,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 			%>
 
-			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
+			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
 				<liferay-ui:icon
 					image="download"
 					url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId() + "&folderId=" + fileEntry.getFolderId() + "&title=" + HttpUtil.encodeURL(fileEntry.getTitle()) %>'
