@@ -1782,19 +1782,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(
 			serviceContext.getScopeGroupId());
 
-		User user = null;
-		String fullName = null;
-		String emailAddress = null;
+		String emailAddress = StringPool.BLANK;
+		String fullName = message.getUserName();
 
 		try {
-			user = userPersistence.findByPrimaryKey(message.getUserId());
+			User user = userPersistence.findByPrimaryKey(message.getUserId());
 
 			emailAddress = user.getEmailAddress();
 			fullName = user.getFullName();
 		}
 		catch (NoSuchUserException nsue) {
-			emailAddress = StringPool.BLANK;
-			fullName = message.getUserName();
 		}
 
 		MBCategory category = message.getCategory();
