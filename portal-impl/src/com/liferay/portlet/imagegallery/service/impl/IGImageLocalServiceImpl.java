@@ -412,6 +412,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImagePersistence.findByPrimaryKey(imageId);
 	}
 
+	public InputStream getImageAsStream(IGImage image)
+		throws PortalException, SystemException {
+
+		Image file = imageLocalService.getImage(image.getLargeImageId());
+
+		return imageLocalService.getImageAsStream(file);
+	}
+
 	public IGImage getImageByCustom1ImageId(long custom1ImageId)
 		throws PortalException, SystemException {
 
