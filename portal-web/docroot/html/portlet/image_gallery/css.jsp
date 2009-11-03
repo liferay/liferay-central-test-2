@@ -90,6 +90,15 @@ html = StringUtil.replace(html, "portlet-document-library", "portlet-image-galle
 	border-color: #CCCCCC;
 }
 
+.portlet-image-gallery .image-date {
+	float: none;
+	border: none;
+}
+
+.portlet-image-gallery .image-download .image-name {
+	top: 0;
+}
+
 .portlet-image-gallery .image-title {
 	display: block;
 }

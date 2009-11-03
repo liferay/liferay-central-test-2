@@ -237,7 +237,6 @@ public class ServletResponseUtil {
 			response.setContentType(contentType);
 		}
 
-
 		response.setHeader(
 			HttpHeaders.CACHE_CONTROL, HttpHeaders.CACHE_CONTROL_PUBLIC_VALUE);
 		response.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_PUBLIC_VALUE);

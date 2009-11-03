@@ -1,3 +1,4 @@
+
 <%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
@@ -150,7 +151,9 @@
 
 				<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
 					<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
-						<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
+						<liferay-ui:icon-list>
+							<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
+						</liferay-ui:icon-list>
 					</div>
 				</div>
 

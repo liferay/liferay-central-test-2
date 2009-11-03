@@ -22,36 +22,62 @@
  */
 %>
 
-<liferay-ui:icon-list>
-	<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-			<portlet:param name="struts_action" value="/image_gallery/edit_image" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
-		</portlet:renderURL>
+<%
+boolean view = false;
+if (request.getAttribute("view_image.jsp-view") != null) {
+	view = (Boolean)request.getAttribute("view_image.jsp-view");
+}
+%>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
-	</c:if>
+<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.VIEW) %>">
+	<portlet:actionURL var="downloadURL">
+		<portlet:param name="struts_action" value="/image_gallery/get_image" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
+	</portlet:actionURL>
 
-	<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.PERMISSIONS) %>">
-		<liferay-security:permissionsURL
-			modelResource="<%= IGImage.class.getName() %>"
-			modelResourceDescription="<%= String.valueOf(image.getImageId()) %>"
-			resourcePrimKey="<%= String.valueOf(image.getImageId()) %>"
-			var="permissionsURL"
-		/>
+	<liferay-ui:icon image="download" url="<%= downloadURL %>" message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(image.getImageSize(), locale) + "k)" %>'
+	/>
+</c:if>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-	</c:if>
+<c:if test="<%= !view && IGImagePermission.contains(permissionChecker, image, ActionKeys.VIEW) %>">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewURL">
+		<portlet:param name="struts_action" value="/image_gallery/view_image" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
+	</portlet:renderURL>
 
-	<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-			<portlet:param name="struts_action" value="/image_gallery/edit_image" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
-		</portlet:actionURL>
+	<liferay-ui:icon image="view" url="<%= viewURL %>" />
+</c:if>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
-	</c:if>
-</liferay-ui:icon-list>
+<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE) %>">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:param name="struts_action" value="/image_gallery/edit_image" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:icon image="edit" url="<%= editURL %>" />
+</c:if>
+
+<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.PERMISSIONS) %>">
+	<liferay-security:permissionsURL
+		modelResource="<%= IGImage.class.getName() %>"
+		modelResourceDescription="<%= String.valueOf(image.getImageId()) %>"
+		resourcePrimKey="<%= String.valueOf(image.getImageId()) %>"
+		var="permissionsURL"
+	/>
+
+	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+</c:if>
+
+<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.DELETE) %>">
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:param name="struts_action" value="/image_gallery/edit_image" />
+		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon-delete url="<%= deleteURL %>" />
+</c:if>

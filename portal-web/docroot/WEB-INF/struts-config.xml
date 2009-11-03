@@ -920,6 +920,11 @@
 			<forward name="portlet.image_gallery.view" path="portlet.image_gallery.view" />
 		</action>
 
+		<action path="/image_gallery/view_image" type="com.liferay.portlet.imagegallery.action.EditImageAction">
+			<forward name="portlet.image_gallery.edit_image" path="portlet.image_gallery.view_image" />
+			<forward name="portlet.image_gallery.error" path="portlet.image_gallery.error" />
+		</action>
+
 		<action path="/image_gallery/view_slide_show" type="com.liferay.portlet.imagegallery.action.ViewSlideShowAction">
 			<forward name="portlet.image_gallery.error" path="portlet.image_gallery.error" />
 			<forward name="portlet.image_gallery.view_slide_show" path="portlet.image_gallery.view_slide_show" />

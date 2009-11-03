@@ -545,6 +545,10 @@
 		<put name="portlet_content" value="/portlet/image_gallery/view.jsp" />
 	</definition>
 
+	<definition name="portlet.image_gallery.view_image" extends="portlet.image_gallery">
+		<put name="portlet_content" value="/portlet/image_gallery/view_image.jsp" />
+	</definition>
+
 	<definition name="portlet.image_gallery.view_slide_show" extends="portlet.image_gallery">
 		<put name="portlet_content" value="/portlet/image_gallery/view_slide_show.jsp" />
 	</definition>
