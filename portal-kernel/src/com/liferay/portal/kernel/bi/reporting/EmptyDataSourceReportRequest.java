@@ -25,20 +25,51 @@ package com.liferay.portal.kernel.bi.reporting;
 import java.util.Map;
 
 /**
- * <a href="DefaultDataSourceReportRequest.java.html"><b><i>View Source</i></b>
+ * <a href="EmptyDataSourceReportRequest.java.html"><b><i>View Source</i></b>
  * </a>
- * 
+ *
  * @author Gavin Wan
  * @author Brian Wing Shun Chan
  */
-public class DefaultDataSourceReportRequest
-	extends EmptyDataSourceReportRequest {
+public class EmptyDataSourceReportRequest implements ReportRequest {
 
-	public DefaultDataSourceReportRequest(
+	public EmptyDataSourceReportRequest(
 		ReportDesignRetriever reportDesignRetriever,
 		Map<String, String> reportParameters, String reportFormat) {
 
-		super(reportDesignRetriever, reportParameters, reportFormat);
+		_reportDesignRetriever = reportDesignRetriever;
+		_reportParameters = reportParameters;
+		_reportFormat = ReportFormat.parse(reportFormat);
 	}
+
+	public ReportDesignRetriever getReportDesignRetriever() {
+		return _reportDesignRetriever;
+	}
+
+	public ReportFormat getReportFormat() {
+		return _reportFormat;
+	}
+
+	public Map<String, String> getReportParameters() {
+		return _reportParameters;
+	}
+
+	public void setReportDesignRetriever(
+		ReportDesignRetriever reportDesignRetriever) {
+
+		_reportDesignRetriever = reportDesignRetriever;
+	}
+
+	public void setReportFormat(ReportFormat reportFormat) {
+		_reportFormat = reportFormat;
+	}
+
+	public void setReportParameters(Map<String, String> reportParameters) {
+		_reportParameters.putAll(reportParameters);
+	}
+
+	private ReportDesignRetriever _reportDesignRetriever;
+	private ReportFormat _reportFormat;
+	private Map<String, String> _reportParameters;
 
 }

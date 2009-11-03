@@ -32,7 +32,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 public class ByteArrayDataSourceReportRequest
-	extends DefaultDataSourceReportRequest {
+	extends EmptyDataSourceReportRequest {
 
 	public ByteArrayDataSourceReportRequest(
 		ReportDesignRetriever reportDesignRetriever,

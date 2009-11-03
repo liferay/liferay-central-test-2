@@ -31,7 +31,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 public class JDBCDataSourceReportRequest
-	extends DefaultDataSourceReportRequest {
+	extends EmptyDataSourceReportRequest {
 
 	public JDBCDataSourceReportRequest(
 		ReportDesignRetriever reportDesignRetriever,
