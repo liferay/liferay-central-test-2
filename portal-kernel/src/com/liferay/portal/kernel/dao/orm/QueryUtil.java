@@ -79,6 +79,12 @@ public class QueryUtil {
 			else {
 				List<Object> list = new ArrayList<Object>();
 
+				DB db = DBFactoryUtil.getDB();
+
+				if (!db.isSupportsScrollableResults()) {
+					return list;
+				}
+
 				ScrollableResults sr = query.scroll();
 
 				if (sr.first() && sr.scroll(start)) {
@@ -124,6 +130,12 @@ public class QueryUtil {
 		int[] scrollIds = Randomizer.getInstance().nextInt(total, num);
 
 		List<Object> list = new ArrayList<Object>();
+
+		DB db = DBFactoryUtil.getDB();
+
+		if (!db.isSupportsScrollableResults()) {
+			return list;
+		}
 
 		ScrollableResults sr = query.scroll();
 
