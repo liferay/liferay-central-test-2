@@ -144,13 +144,6 @@ public class ImageLocalServiceUtil {
 		return getService().getImage(is);
 	}
 
-	public static java.io.InputStream getImageAsStream(
-		com.liferay.portal.model.Image image)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getImageAsStream(image);
-	}
-
 	public static com.liferay.portal.model.Image getImageOrDefault(long imageId) {
 		return getService().getImageOrDefault(imageId);
 	}

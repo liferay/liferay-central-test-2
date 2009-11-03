@@ -906,8 +906,6 @@
 
 		<action path="/image_gallery/find_image" type="com.liferay.portlet.imagegallery.action.FindImageAction" />
 
-		<action path="/image_gallery/get_image" type="com.liferay.portlet.imagegallery.action.GetImageAction" />
-
 		<action path="/image_gallery/search" forward="portlet.image_gallery.search" />
 
 		<action path="/image_gallery/select_folder" type="com.liferay.portlet.imagegallery.action.EditFolderAction">

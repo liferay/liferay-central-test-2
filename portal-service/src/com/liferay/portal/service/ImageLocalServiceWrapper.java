@@ -143,13 +143,6 @@ public class ImageLocalServiceWrapper implements ImageLocalService {
 		return _imageLocalService.getImage(is);
 	}
 
-	public java.io.InputStream getImageAsStream(
-		com.liferay.portal.model.Image image)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _imageLocalService.getImageAsStream(image);
-	}
-
 	public com.liferay.portal.model.Image getImageOrDefault(long imageId) {
 		return _imageLocalService.getImageOrDefault(imageId);
 	}

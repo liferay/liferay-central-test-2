@@ -273,13 +273,6 @@ public class IGImageLocalServiceUtil {
 		return getService().getImage(imageId);
 	}
 
-	public static java.io.InputStream getImageAsStream(
-		com.liferay.portlet.imagegallery.model.IGImage image)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getImageAsStream(image);
-	}
-
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByCustom1ImageId(
 		long custom1ImageId)
 		throws com.liferay.portal.PortalException,

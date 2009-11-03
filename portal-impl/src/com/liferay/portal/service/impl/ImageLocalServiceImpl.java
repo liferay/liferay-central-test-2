@@ -217,15 +217,6 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return getImage(is, null);
 	}
 
-	public InputStream getImageAsStream(Image image)
-		throws PortalException, SystemException {
-
-		com.liferay.portal.image.Hook hook =
-			com.liferay.portal.image.HookFactory.getInstance();
-
-		return hook.getImageAsStream(image);
-	}
-
 	public Image getImageOrDefault(long imageId) {
 		Image image = getImage(imageId);
 
