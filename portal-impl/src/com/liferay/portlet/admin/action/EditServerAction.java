@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.servlet.StringServletOutputStream;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -138,7 +137,7 @@ public class EditServerAction extends PortletAction {
 			reIndex(actionRequest);
 		}
 		else if (cmd.equals("runScript")) {
-			runScript(actionRequest, actionResponse);
+			runScript(portletConfig, actionRequest, actionResponse);
 		}
 		else if (cmd.equals("shutdown")) {
 			shutdown(actionRequest);
@@ -292,14 +291,13 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void runScript(
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String language = ParamUtil.getString(actionRequest, "language");
 		String script = ParamUtil.getString(actionRequest, "script");
 
-		PortletConfig portletConfig = (PortletConfig)actionRequest.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
 		PortletContext portletContext = portletConfig.getPortletContext();
 
 		Map<String, Object> portletObjects = ScriptingUtil.getPortletObjects(
@@ -315,7 +313,8 @@ public class EditServerAction extends PortletAction {
 		try {
 			ScriptingUtil.exec(null, portletObjects, language, script);
 
-			SessionMessages.add(actionRequest, "scriptOut", baos.toString());
+			SessionMessages.add(
+				actionRequest, "script_output", baos.toString());
 		}
 		catch (ScriptingException se) {
 			SessionErrors.add(

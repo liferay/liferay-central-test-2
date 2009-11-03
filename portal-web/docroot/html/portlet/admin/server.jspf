@@ -35,8 +35,6 @@ NumberFormat numberFormat = NumberFormat.getInstance();
 
 numberFormat.setMaximumIntegerDigits(2);
 numberFormat.setMinimumIntegerDigits(2);
-
-String scriptOutput = (String) SessionMessages.get(renderRequest, "scriptOutput");
 %>
 
 <liferay-ui:message key="uptime" />:
@@ -55,7 +53,7 @@ String scriptOutput = (String) SessionMessages.get(renderRequest, "scriptOutput"
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:tabs
-			names="resources,log-levels,properties,data-migration,file-uploads,mail,OpenOffice,shutdown"
+			names="resources,log-levels,properties,data-migration,file-uploads,mail,OpenOffice,script,shutdown"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -736,6 +734,58 @@ String scriptOutput = (String) SessionMessages.get(renderRequest, "scriptOutput"
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateOpenOffice');" />
 			</c:when>
+			<c:when test='<%= tabs2.equals("script") %>'>
+
+				<%
+				String language = ParamUtil.getString(renderRequest, "language", "javascript");
+				String script = ParamUtil.getString(renderRequest, "script", "// ### Javascript Sample ###\n\n// number = Packages.com.liferay.portal.service.UserLocalServiceUtil.getUsersCount();\n" + "// out.println(number);");
+
+				String scriptOutput = (String)SessionMessages.get(renderRequest, "script_output");
+				%>
+
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="language" />
+					</td>
+					<td>
+						<select id="<portlet:namespace />language" name="<portlet:namespace />language">
+
+							<%
+							for (String supportedLanguage: ScriptingUtil.getSupportedLanguages()) {
+							%>
+
+								<option <%= supportedLanguage.equals(language) ? "selected" : "" %> value="<%= supportedLanguage %>"><%= TextFormatter.format(supportedLanguage,  TextFormatter.J) %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="script" />
+					</td>
+					<td>
+						<textarea class="lfr-textarea" id="<portlet:namespace />script" name="<portlet:namespace />script"><%= script %></textarea>
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<c:if test="<%= Validator.isNotNull(scriptOutput) %>">
+					<b><liferay-ui:message key="output" /></b>
+
+					<pre><%= scriptOutput %></pre>
+
+					<br /><br />
+				</c:if>
+
+				<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('runScript');" />
+			</c:when>
 			<c:when test='<%= tabs2.equals("shutdown") %>'>
 				<table class="lfr-table">
 				<tr>
@@ -828,105 +878,58 @@ String scriptOutput = (String) SessionMessages.get(renderRequest, "scriptOutput"
 
 				<br />
 
-				<liferay-ui:panel-container id="actionsScriptContainer" extended="<%= true %>" persistState="<%= true %>">
-					<liferay-ui:panel id="actionsPanel" title='<%= LanguageUtil.get(pageContext, "actions") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
-						<table class="lfr-table">
-						<tr>
-							<td>
-								<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
-							</td>
-							<td>
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="clear-content-cached-by-this-vm" />
-							</td>
-							<td>
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="clear-content-cached-across-the-cluster" />
-							</td>
-							<td>
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="clear-the-database-cache" />
-							</td>
-							<td>
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="reindex-all-search-indexes" />
-							</td>
-							<td>
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('reIndex');" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="generate-thread-dump" />
-							</td>
-							<td>
-								<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('threadDump');" />
-							</td>
-						</tr>
-						</table>
-					</liferay-ui:panel>
-					<liferay-ui:panel id="scriptPanel" title='<%= LanguageUtil.get(pageContext, "script") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+				<liferay-ui:tabs names="actions" />
 
-						<%
-						String language = ParamUtil.getString(renderRequest, "language", "javascript");
-						String script = ParamUtil.getString(renderRequest, "script", _DEFAULT_SCRIPT);
-						%>
-
-						<liferay-ui:message key="language" />
-						<br />
-
-						<select id="<portlet:namespace />language" name="<portlet:namespace />language">
-
-							<%
-							for (String supportedLanguage: ScriptingUtil.getSupportedLanguages()) {
-							%>
-
-								<option <%= supportedLanguage.equals(language) ? "selected" : "" %> value="<%= supportedLanguage %>"><%= supportedLanguage.substring(0, 1).toUpperCase() + supportedLanguage.substring(1).toLowerCase() %></option>
-
-							<%
-							}
-							%>
-
-						</select>
-
-						<br />
-
-						<liferay-ui:message key="script" />
-
-						<br />
-
-						<textarea class="<%= language %>" id="<portlet:namespace />script" name="<portlet:namespace />script" style="height: 300px; width: 98%;" wrap="off"><%= script %></textarea>
-
-						<br /><br />
-
-						<c:if test="<%= Validator.isNotNull(scriptOutput) %>">
-							<b><liferay-ui:message key="output" /></b>
-
-							<pre><%= scriptOutput %></pre>
-
-							<br /><br />
-						</c:if>
-
-						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('runScript');" />
-
-					</liferay-ui:panel>
-				</liferay-ui:panel-container>
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('gc');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-content-cached-by-this-vm" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-content-cached-across-the-cluster" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheMulti');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="clear-the-database-cache" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheDb');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="reindex-all-search-indexes" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('reIndex');" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="generate-thread-dump" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('threadDump');" />
+					</td>
+				</tr>
+				</table>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
@@ -967,6 +970,4 @@ private MeterPlot _getMeterPlot(DefaultValueDataset dataset, PageContext pageCon
 
 	return plot;
 }
-
-private String _DEFAULT_SCRIPT = "// ### Javascript Sample ###\n// number = Packages.com.liferay.portal.service.UserLocalServiceUtil.getUsersCount();\n" + "// out.println(number);";
 %>
