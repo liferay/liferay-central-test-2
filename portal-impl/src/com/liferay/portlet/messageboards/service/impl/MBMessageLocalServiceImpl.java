@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -40,6 +41,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -1780,10 +1782,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(
 			serviceContext.getScopeGroupId());
 
-		User user = userPersistence.findByPrimaryKey(message.getUserId());
+		User user = null;
+		String fullName = null;
+		String emailAddress = null;
 
-		String emailAddress = user.getEmailAddress();
-		String fullName = user.getFullName();
+		try {
+			user = userPersistence.findByPrimaryKey(message.getUserId());
+
+			emailAddress = user.getEmailAddress();
+			fullName = user.getFullName();
+		}
+		catch (NoSuchUserException nsue) {
+			emailAddress = StringPool.BLANK;
+			fullName = message.getUserName();
+		}
 
 		MBCategory category = message.getCategory();
 
@@ -1803,7 +1815,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"message_boards/message/" + message.getMessageId();
 
 		String portletName = PortalUtil.getPortletTitle(
-			PortletKeys.MESSAGE_BOARDS, user);
+			PortletKeys.MESSAGE_BOARDS, LocaleUtil.getDefault());
 
 		String fromName = MBUtil.getEmailFromName(preferences);
 		String fromAddress = MBUtil.getEmailFromAddress(preferences);
