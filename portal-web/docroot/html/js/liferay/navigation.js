@@ -385,57 +385,61 @@ AUI().add(
 
 					if (instance.get('isModifiable')) {
 						var currentItem = instance.get('navBlock').one('li.selected');
-						var currentLink = currentItem.one('a');
-						var currentSpan = currentLink.one('span');
 
-						currentLink.on(
-							'click',
-							function(event) {
-								if (event.shiftKey) {
-									event.halt();
-								}
-							}
-						);
+						if (currentItem) {
+							var currentLink = currentItem.one('a');
 
-						var resetCursor = function() {
-							currentSpan.setStyle('cursor', 'pointer');
-						};
-
-						currentLink.on(
-							'mouseenter',
-							function(event) {
-								if (!themeDisplay.isStateMaximized() || event.shiftKey) {
-									currentSpan.setStyle('cursor', 'text');
-								}
-							}
-						);
-
-						currentLink.on('mouseleave', A.bind(currentSpan.setStyle, currentSpan, 'cursor', 'pointer'));
-
-						currentSpan.on(
-							'click',
-							function(event) {
-								if (themeDisplay.isStateMaximized() && !event.shiftKey) {
-									return;
-								}
-
-								event.halt();
-
-								var textNode = event.currentTarget;
-
-								var actionNode = textNode.get('parentNode');
-								var currentText = textNode.text();
-
-								instance._createEditor(
-									currentItem,
-									{
-										actionNode: actionNode,
-										prevVal: currentText,
-										textNode: textNode
+							if (currentLink) {
+								currentLink.on(
+									'click',
+									function(event) {
+										if (event.shiftKey) {
+											event.halt();
+										}
 									}
 								);
+
+								currentLink.on(
+									'mouseenter',
+									function(event) {
+										if (!themeDisplay.isStateMaximized() || event.shiftKey) {
+											currentSpan.setStyle('cursor', 'text');
+										}
+									}
+								);
+
+								currentLink.on('mouseleave', A.bind(currentSpan.setStyle, currentSpan, 'cursor', 'pointer'));
+
+								var currentSpan = currentLink.one('span');
+
+								if (currentSpan) {
+									currentSpan.on(
+										'click',
+										function(event) {
+											if (themeDisplay.isStateMaximized() && !event.shiftKey) {
+												return;
+											}
+
+											event.halt();
+
+											var textNode = event.currentTarget;
+
+											var actionNode = textNode.get('parentNode');
+											var currentText = textNode.text();
+
+											instance._createEditor(
+												currentItem,
+												{
+													actionNode: actionNode,
+													prevVal: currentText,
+													textNode: textNode
+												}
+											);
+										}
+									);
+								}
 							}
-						);
+						}
 					}
 				},
 
