@@ -54,7 +54,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 			<portlet:param name="modelResource" value="<%= User.class.getName() %>" />
 		</liferay-portlet:renderURL>
 
-		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandoURL %>"><liferay-ui:message key="custom-attributes" /></a></span>
+		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandoURL %>"><liferay-ui:message key="custom-fields" /></a></span>
 
 		<span class="lfr-toolbar-button export-button"><a href="javascript:submitForm(document.hrefFm, '<%= themeDisplay.getPathMain() %>/enterprise_admin/export_users');"><liferay-ui:message key="export" /></a></span>
 	</c:if>

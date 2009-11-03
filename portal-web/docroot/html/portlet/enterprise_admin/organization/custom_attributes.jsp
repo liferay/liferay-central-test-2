@@ -28,7 +28,7 @@
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 %>
 
-<h3><liferay-ui:message key="custom-attributes" /></h3>
+<h3><liferay-ui:message key="custom-fields" /></h3>
 
 <aui:fieldset>
 	<liferay-ui:custom-attribute-list

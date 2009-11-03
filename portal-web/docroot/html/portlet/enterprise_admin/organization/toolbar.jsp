@@ -54,7 +54,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 			<portlet:param name="modelResource" value="<%= Organization.class.getName() %>" />
 		</liferay-portlet:renderURL>
 
-		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandoURL %>"><liferay-ui:message key="custom-attributes" /></a></span>
+		<span class="lfr-toolbar-button custom-attributes-button"><a href="<%= expandoURL %>"><liferay-ui:message key="custom-fields" /></a></span>
 	</c:if>
 
 	<c:if test="<%= Validator.isNotNull(backURL) %>">
