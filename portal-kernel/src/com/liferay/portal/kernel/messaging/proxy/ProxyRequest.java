@@ -77,7 +77,14 @@ public class ProxyRequest implements Serializable {
 			return MethodInvoker.invoke(_methodWrapper, object);
 		}
 		catch (InvocationTargetException e) {
-			throw new Exception(e.getTargetException());
+			Throwable targetThrowable = e.getCause();
+			
+			if(targetThrowable instanceof Exception) {
+				throw (Exception) targetThrowable;
+			}
+			else {
+				throw new Exception(targetThrowable);
+			}
 		}
 	}
 
