@@ -31,6 +31,7 @@
 <%@ page import="com.liferay.portal.convert.ConvertProcess" %>
 <%@ page import="com.liferay.portal.dao.shard.ManualShardSelector" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
+<%@ page import="com.liferay.portal.kernel.scripting.ScriptingUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.InstancePool" %>
 <%@ page import="com.liferay.portal.kernel.xml.Document" %>
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>

@@ -31,11 +31,16 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.scripting.ScriptingException;
+import com.liferay.portal.kernel.scripting.ScriptingUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.servlet.StringServletOutputStream;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -58,12 +63,16 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.log4j.Log4JUtil;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import java.util.Enumeration;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
@@ -127,6 +136,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("reIndex")) {
 			reIndex(actionRequest);
+		}
+		else if (cmd.equals("runScript")) {
+			runScript(actionRequest, actionResponse);
 		}
 		else if (cmd.equals("shutdown")) {
 			shutdown(actionRequest);
@@ -276,6 +288,40 @@ public class EditServerAction extends PortletAction {
 					_log.error(e, e);
 				}
 			}
+		}
+	}
+
+	protected void runScript(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		String language = ParamUtil.getString(actionRequest, "language");
+		String script = ParamUtil.getString(actionRequest, "script");
+
+		PortletConfig portletConfig = (PortletConfig)actionRequest.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletContext portletContext = portletConfig.getPortletContext();
+
+		Map<String, Object> portletObjects = ScriptingUtil.getPortletObjects(
+			portletConfig, portletContext, actionRequest, actionResponse);
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		PrintStream ps = new PrintStream(
+			new StringServletOutputStream(baos));
+
+		portletObjects.put("out", ps);
+
+		try {
+			ScriptingUtil.exec(null, portletObjects, language, script);
+
+			SessionMessages.add(actionRequest, "scriptOut", baos.toString());
+		}
+		catch (ScriptingException se) {
+			SessionErrors.add(
+				actionRequest, ScriptingException.class.getName(), se);
+
+			_log.error(se.getMessage());
 		}
 	}
 
