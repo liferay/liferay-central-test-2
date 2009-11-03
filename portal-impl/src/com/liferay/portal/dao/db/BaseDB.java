@@ -138,6 +138,10 @@ public abstract class BaseDB implements DB {
 		return _SUPPORTS_DATE_MILLISECONDS;
 	}
 
+	public boolean isSupportsScrollableResults() {
+		return _SUPPORTS_SCROLLABLE_RESULTS;
+	}
+
 	public boolean isSupportsStringCaseSensitiveQuery() {
 		return _supportsStringCaseSensitiveQuery;
 	}
@@ -718,6 +722,8 @@ public abstract class BaseDB implements DB {
 	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE = true;
 
 	private static boolean _SUPPORTS_DATE_MILLISECONDS = true;
+
+	private static boolean _SUPPORTS_SCROLLABLE_RESULTS = true;
 
 	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 

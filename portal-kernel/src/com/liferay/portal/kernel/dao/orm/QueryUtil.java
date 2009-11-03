@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -151,6 +153,12 @@ public class QueryUtil {
 		int boundary = 0;
 
 		Comparable<?>[] array = new Comparable[3];
+
+		DB db = DBFactoryUtil.getDB();
+
+		if (!db.isSupportsScrollableResults()) {
+			return array;
+		}
 
 		ScrollableResults sr = query.scroll();
 

@@ -69,6 +69,10 @@ public class DB2DB extends BaseDB {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
+	public boolean isSupportsScrollableResults() {
+		return _SUPPORTS_SCROLLABLE_RESULTS;
+	}
+
 	public void runSQL(String template) throws IOException, SQLException {
 		if (template.startsWith(ALTER_COLUMN_NAME) ||
 			template.startsWith(ALTER_COLUMN_TYPE)) {
@@ -209,6 +213,8 @@ public class DB2DB extends BaseDB {
 	};
 
 	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
+
+	private static boolean _SUPPORTS_SCROLLABLE_RESULTS;
 
 	private static DB2DB _instance = new DB2DB();
 

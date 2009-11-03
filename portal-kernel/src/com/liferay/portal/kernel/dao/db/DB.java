@@ -97,6 +97,8 @@ public interface DB {
 
 	public boolean isSupportsDateMilliseconds();
 
+	public boolean isSupportsScrollableResults();
+
 	public boolean isSupportsStringCaseSensitiveQuery();
 
 	public boolean isSupportsUpdateWithInnerJoin();
