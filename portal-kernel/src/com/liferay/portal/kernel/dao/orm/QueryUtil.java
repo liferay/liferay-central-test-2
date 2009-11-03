@@ -82,6 +82,11 @@ public class QueryUtil {
 				DB db = DBFactoryUtil.getDB();
 
 				if (!db.isSupportsScrollableResults()) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Database does not support scrollable results");
+					}
+
 					return list;
 				}
 
@@ -134,6 +139,10 @@ public class QueryUtil {
 		DB db = DBFactoryUtil.getDB();
 
 		if (!db.isSupportsScrollableResults()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Database does not support scrollable results");
+			}
+
 			return list;
 		}
 
@@ -169,6 +178,10 @@ public class QueryUtil {
 		DB db = DBFactoryUtil.getDB();
 
 		if (!db.isSupportsScrollableResults()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Database does not support scrollable results");
+			}
+
 			return array;
 		}
 
