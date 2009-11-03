@@ -127,6 +127,12 @@ public interface ImageLocalService {
 		throws java.io.IOException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.io.InputStream getImageAsStream(
+		com.liferay.portal.model.Image image)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Image getImageOrDefault(long imageId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

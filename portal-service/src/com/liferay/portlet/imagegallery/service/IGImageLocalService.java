@@ -214,6 +214,12 @@ public interface IGImageLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.io.InputStream getImageAsStream(
+		com.liferay.portlet.imagegallery.model.IGImage image)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByCustom1ImageId(
 		long custom1ImageId)
 		throws com.liferay.portal.PortalException,
