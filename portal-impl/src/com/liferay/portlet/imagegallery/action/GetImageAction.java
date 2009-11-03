@@ -139,5 +139,5 @@ public class GetImageAction extends PortletAction {
 			ServletResponseUtil.cleanUp(is);
 		}
 	}
-	
+
 }
