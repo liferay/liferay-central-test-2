@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -60,10 +59,9 @@ public class LoginPostAction extends Action {
 			}
 
 			HttpSession session = request.getSession();
+
 			long companyId = PortalUtil.getCompanyId(request);
-			User user = PortalUtil.getUser(request);
-			boolean adminDefaultAddToExistingUser = PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.ADMIN_DEFAULT_ADD_TO_EXISTING_USER);
+			long userId = PortalUtil.getUserId(request);
 
 			// Language
 
@@ -81,7 +79,7 @@ public class LoginPostAction extends Action {
 
 				jsonObj.put("command", "signIn");
 				jsonObj.put("companyId", companyId);
-				jsonObj.put("userId", user.getUserId());
+				jsonObj.put("userId", userId);
 				jsonObj.put("sessionId", sessionId);
 				jsonObj.put("remoteAddr", remoteAddr);
 				jsonObj.put("remoteHost", remoteHost);
@@ -91,10 +89,12 @@ public class LoginPostAction extends Action {
 					DestinationNames.LIVE_USERS, jsonObj);
 			}
 
-			if (adminDefaultAddToExistingUser) {
-				UserLocalServiceUtil.addDefaultGroups(user.getUserId());
-				UserLocalServiceUtil.addDefaultRoles(user.getUserId());
-				UserLocalServiceUtil.addDefaultUserGroups(user.getUserId());
+			if (PrefsPropsUtil.getBoolean(
+					companyId, PropsKeys.ADMIN_SYNC_DEFAULT_ASSOCIATIONS)) {
+
+				UserLocalServiceUtil.addDefaultGroups(userId);
+				UserLocalServiceUtil.addDefaultRoles(userId);
+				UserLocalServiceUtil.addDefaultUserGroups(userId);
 			}
 		}
 		catch (Exception e) {

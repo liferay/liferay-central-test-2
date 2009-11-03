@@ -33,10 +33,10 @@ boolean fieldEnableBirthday = ParamUtil.getBoolean(request, "settings(" + PropsK
 String adminReservedScreenNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_RESERVED_SCREEN_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_SCREEN_NAMES));
 String adminReservedEmailAddresses = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES));
 
-boolean adminDefaultAddToExistingUser = ParamUtil.getBoolean(request, "settings(" + PropsKeys.ADMIN_DEFAULT_ADD_TO_EXISTING_USER + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_ADD_TO_EXISTING_USER, PropsValues.ADMIN_DEFAULT_ADD_TO_EXISTING_USER));
 String adminDefaultGroupNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_DEFAULT_GROUP_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_GROUP_NAMES));
 String adminDefaultRoleNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_DEFAULT_ROLE_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_ROLE_NAMES));
 String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES));
+boolean adminSyncDefaultAssociations = ParamUtil.getBoolean(request, "settings(" + PropsKeys.ADMIN_SYNC_DEFAULT_ASSOCIATIONS + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_SYNC_DEFAULT_ASSOCIATIONS, PropsValues.ADMIN_SYNC_DEFAULT_ASSOCIATIONS));
 %>
 
 <h3><liferay-ui:message key="users" /></h3>
@@ -65,7 +65,7 @@ String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + P
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input helpMessage="check-to-apply-the-changes-to-existing-users" inlineLabel="left" label="apply-to-existing-users" name='<%= "settings(" + PropsKeys.ADMIN_DEFAULT_ADD_TO_EXISTING_USER + ")" %>' type="checkbox" value="<%= adminDefaultAddToExistingUser %>" />
+			<aui:input helpMessage="check-to-apply-the-changes-to-existing-users" inlineLabel="left" label="apply-to-existing-users" name='<%= "settings(" + PropsKeys.ADMIN_SYNC_DEFAULT_ASSOCIATIONS + ")" %>' type="checkbox" value="<%= adminSyncDefaultAssociations %>" />
 
 			<aui:input helpMessage="enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users" label="communities" name='<%= "settings(" + PropsKeys.ADMIN_DEFAULT_GROUP_NAMES + ")" %>' type="textarea" value="<%= adminDefaultGroupNames %>" />
 

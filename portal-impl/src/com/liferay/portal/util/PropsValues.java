@@ -34,10 +34,6 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class PropsValues {
 
-	public static final boolean ADMIN_DEFAULT_ADD_TO_EXISTING_USER =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.ADMIN_DEFAULT_ADD_TO_EXISTING_USER));
-
 	public static final String[] ADMIN_DEFAULT_GROUP_NAMES =
 		StringUtil.split(
 			PropsUtil.get(PropsKeys.ADMIN_DEFAULT_GROUP_NAMES),
@@ -65,6 +61,10 @@ public class PropsValues {
 	public static final String[] ADMIN_RESERVED_SCREEN_NAMES = StringUtil.split(
 		PropsUtil.get(PropsKeys.ADMIN_RESERVED_SCREEN_NAMES),
 		StringPool.NEW_LINE);
+
+	public static final boolean ADMIN_SYNC_DEFAULT_ASSOCIATIONS =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.ADMIN_SYNC_DEFAULT_ASSOCIATIONS));
 
 	public static final String ANNOUNCEMENTS_EMAIL_BODY =
 		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_BODY);
