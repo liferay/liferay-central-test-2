@@ -275,15 +275,24 @@ public class ImageServlet extends HttpServlet {
 			throw new NoSuchImageException("Image is null");
 		}
 		else {
+			String contentType = null;
+
 			if (!image.getType().equals(ImageConstants.TYPE_NOT_AVAILABLE)) {
-				String contentType = ContentTypeUtil.getContentType(
-					image.getType());
+				contentType = ContentTypeUtil.getContentType(image.getType());
 
 				response.setContentType(contentType);
 			}
 
+			String fileName = ParamUtil.getString(request, "fileName");
+
 			try {
-				ServletResponseUtil.write(response, image.getTextObj());
+				if (Validator.isNotNull(fileName)) {
+					ServletResponseUtil.sendFile(
+						response, fileName, image.getTextObj(), contentType);
+				}
+				else {
+					ServletResponseUtil.write(response, image.getTextObj());
+				}
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

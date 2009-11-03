@@ -55,9 +55,8 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 	Group group = themeDisplay.getScopeGroup();
 
-	webDavUrl =  themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString();
+	webDavUrl = themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString();
 }
-
 %>
 
 <script type="text/javascript">
@@ -96,7 +95,9 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 		var messageId = "<portlet:namespace />popup_" + id;
 
-		var html = "<div class='image-content'>";
+		var html = "";
+
+		html += "<div class='image-content'>";
 		html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
 		html += "</div>"
 
@@ -106,11 +107,11 @@ if (portletDisplay.isWebDAVEnabled()) {
 				var popup = new A.Dialog(
 					{
 						bodyContent: html,
-						draggable: false,
-						destroyOnClose: true,
 						centered: true,
-						title: false,
+						destroyOnClose: true,
+						draggable: false,
 						modal: true,
+						title: false,
 						width: winWidth
 					}
 				)
@@ -125,7 +126,6 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="image-column image-column-first" first="<%= true %>">
-
 		<h3 class="image-title"><%= image.getName() %></h3>
 
 		<div class="image-categories">
@@ -244,7 +244,8 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 		<%
 		request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-		request.setAttribute("view_image.jsp-view", true);
+
+		request.setAttribute("view_image.jsp-view", Boolean.TRUE.toString());
 		%>
 
 		<liferay-ui:icon-menu showExpanded="<%= true %>">

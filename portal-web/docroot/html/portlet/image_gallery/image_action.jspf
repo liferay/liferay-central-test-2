@@ -23,21 +23,16 @@
 %>
 
 <%
-boolean view = false;
-if (request.getAttribute("view_image.jsp-view") != null) {
-	view = (Boolean)request.getAttribute("view_image.jsp-view");
-}
+boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.jsp-view"));
 %>
 
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.VIEW) %>">
-	<portlet:actionURL var="downloadURL">
-		<portlet:param name="struts_action" value="/image_gallery/get_image" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
-	</portlet:actionURL>
 
-	<liferay-ui:icon image="download" url="<%= downloadURL %>" message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(image.getImageSize(), locale) + "k)" %>'
-	/>
+	<%
+	String downloadURL = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() + "&fileName=" + HttpUtil.encodeURL(image.getNameWithExtension()) + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId());
+	%>
+
+	<liferay-ui:icon image="download" url="<%= downloadURL %>" message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(image.getImageSize(), locale) + "k)" %>' />
 </c:if>
 
 <c:if test="<%= !view && IGImagePermission.contains(permissionChecker, image, ActionKeys.VIEW) %>">

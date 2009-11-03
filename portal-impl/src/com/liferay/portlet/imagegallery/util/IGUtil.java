@@ -59,8 +59,7 @@ public class IGUtil {
 		PortletURL portletURL = renderResponse.createRenderURL();
 
 		portletURL.setParameter("struts_action", "/image_gallery/view_image");
-			portletURL.setParameter(
-				"imageId", String.valueOf(image.getImageId()));
+		portletURL.setParameter("imageId", String.valueOf(image.getImageId()));
 
 		PortalUtil.addPortletBreadcrumbEntry(
 			request, image.getName(), portletURL.toString());
