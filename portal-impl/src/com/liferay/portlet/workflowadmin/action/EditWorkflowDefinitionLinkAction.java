@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.service.WorkflowLinkLocalServiceUtil;
+import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -47,12 +47,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditWorkflowLinkAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditWorkflowDefinitionLinkAction.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Jorge Ferrer
  * @author Bruno Farache
  */
-public class EditWorkflowLinkAction extends PortletAction {
+public class EditWorkflowDefinitionLinkAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -60,7 +61,7 @@ public class EditWorkflowLinkAction extends PortletAction {
 		throws Exception {
 
 		try {
-			updateWorkflowLink(actionRequest);
+			updateWorkflowDefinitionLinks(actionRequest);
 
 			sendRedirect(actionRequest, actionResponse);
 		}
@@ -85,7 +86,30 @@ public class EditWorkflowLinkAction extends PortletAction {
 			renderRequest, "portlet.workflow_admin.view"));
 	}
 
-	protected void updateWorkflowLink(ActionRequest actionRequest)
+	protected void updateWorkflowDefinitionLink(
+			ThemeDisplay themeDisplay, String value, long classNameId)
+		throws Exception {
+
+		if (Validator.isNull(value)) {
+			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
+				themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
+				classNameId);
+		}
+		else {
+			String[] values = StringUtil.split(value, StringPool.AT);
+
+			String workflowDefinitionName = values[0];
+			int workflowDefinitionVersion = GetterUtil.getInteger(
+				values[1]);
+
+			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
+				themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
+				classNameId, workflowDefinitionName,
+				workflowDefinitionVersion);
+		}
+	}
+
+	protected void updateWorkflowDefinitionLinks(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -105,23 +129,7 @@ public class EditWorkflowLinkAction extends PortletAction {
 			long classNameId = GetterUtil.getLong(
 				name.substring(_PREFIX.length(), name.length()));
 
-			if (Validator.isNull(value)) {
-				WorkflowLinkLocalServiceUtil.deleteWorkflowLink(
-					themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
-					classNameId);
-			}
-			else {
-				String[] values = StringUtil.split(value, StringPool.AT);
-
-				String workflowDefinitionName = values[0];
-				int workflowDefinitionVersion = GetterUtil.getInteger(
-					values[1]);
-
-				WorkflowLinkLocalServiceUtil.updateWorkflowLink(
-					themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
-					classNameId, workflowDefinitionName,
-					workflowDefinitionVersion);
-			}
+			updateWorkflowDefinitionLink(themeDisplay, value, classNameId);
 		}
 	}
 

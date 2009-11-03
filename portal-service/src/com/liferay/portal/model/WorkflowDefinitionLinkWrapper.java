@@ -24,7 +24,7 @@ package com.liferay.portal.model;
 
 
 /**
- * <a href="WorkflowLinkSoap.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionLinkSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -32,176 +32,185 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This class is a wrapper for {@link WorkflowLink}.
+ * This class is a wrapper for {@link WorkflowDefinitionLink}.
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       WorkflowLink
+ * @see       WorkflowDefinitionLink
  * @generated
  */
-public class WorkflowLinkWrapper implements WorkflowLink {
-	public WorkflowLinkWrapper(WorkflowLink workflowLink) {
-		_workflowLink = workflowLink;
+public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
+	public WorkflowDefinitionLinkWrapper(
+		WorkflowDefinitionLink workflowDefinitionLink) {
+		_workflowDefinitionLink = workflowDefinitionLink;
 	}
 
 	public long getPrimaryKey() {
-		return _workflowLink.getPrimaryKey();
+		return _workflowDefinitionLink.getPrimaryKey();
 	}
 
 	public void setPrimaryKey(long pk) {
-		_workflowLink.setPrimaryKey(pk);
+		_workflowDefinitionLink.setPrimaryKey(pk);
 	}
 
-	public long getWorkflowLinkId() {
-		return _workflowLink.getWorkflowLinkId();
+	public long getWorkflowDefinitionLinkId() {
+		return _workflowDefinitionLink.getWorkflowDefinitionLinkId();
 	}
 
-	public void setWorkflowLinkId(long workflowLinkId) {
-		_workflowLink.setWorkflowLinkId(workflowLinkId);
+	public void setWorkflowDefinitionLinkId(long workflowDefinitionLinkId) {
+		_workflowDefinitionLink.setWorkflowDefinitionLinkId(workflowDefinitionLinkId);
 	}
 
 	public long getGroupId() {
-		return _workflowLink.getGroupId();
+		return _workflowDefinitionLink.getGroupId();
 	}
 
 	public void setGroupId(long groupId) {
-		_workflowLink.setGroupId(groupId);
+		_workflowDefinitionLink.setGroupId(groupId);
 	}
 
 	public long getCompanyId() {
-		return _workflowLink.getCompanyId();
+		return _workflowDefinitionLink.getCompanyId();
 	}
 
 	public void setCompanyId(long companyId) {
-		_workflowLink.setCompanyId(companyId);
+		_workflowDefinitionLink.setCompanyId(companyId);
 	}
 
 	public long getUserId() {
-		return _workflowLink.getUserId();
+		return _workflowDefinitionLink.getUserId();
 	}
 
 	public void setUserId(long userId) {
-		_workflowLink.setUserId(userId);
+		_workflowDefinitionLink.setUserId(userId);
 	}
 
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.SystemException {
-		return _workflowLink.getUserUuid();
+		return _workflowDefinitionLink.getUserUuid();
 	}
 
 	public void setUserUuid(java.lang.String userUuid) {
-		_workflowLink.setUserUuid(userUuid);
+		_workflowDefinitionLink.setUserUuid(userUuid);
 	}
 
 	public java.lang.String getUserName() {
-		return _workflowLink.getUserName();
+		return _workflowDefinitionLink.getUserName();
 	}
 
 	public void setUserName(java.lang.String userName) {
-		_workflowLink.setUserName(userName);
+		_workflowDefinitionLink.setUserName(userName);
+	}
+
+	public java.util.Date getCreateDate() {
+		return _workflowDefinitionLink.getCreateDate();
+	}
+
+	public void setCreateDate(java.util.Date createDate) {
+		_workflowDefinitionLink.setCreateDate(createDate);
 	}
 
 	public java.util.Date getModifiedDate() {
-		return _workflowLink.getModifiedDate();
+		return _workflowDefinitionLink.getModifiedDate();
 	}
 
 	public void setModifiedDate(java.util.Date modifiedDate) {
-		_workflowLink.setModifiedDate(modifiedDate);
+		_workflowDefinitionLink.setModifiedDate(modifiedDate);
 	}
 
 	public java.lang.String getClassName() {
-		return _workflowLink.getClassName();
+		return _workflowDefinitionLink.getClassName();
 	}
 
 	public long getClassNameId() {
-		return _workflowLink.getClassNameId();
+		return _workflowDefinitionLink.getClassNameId();
 	}
 
 	public void setClassNameId(long classNameId) {
-		_workflowLink.setClassNameId(classNameId);
+		_workflowDefinitionLink.setClassNameId(classNameId);
 	}
 
 	public java.lang.String getWorkflowDefinitionName() {
-		return _workflowLink.getWorkflowDefinitionName();
+		return _workflowDefinitionLink.getWorkflowDefinitionName();
 	}
 
 	public void setWorkflowDefinitionName(
 		java.lang.String workflowDefinitionName) {
-		_workflowLink.setWorkflowDefinitionName(workflowDefinitionName);
+		_workflowDefinitionLink.setWorkflowDefinitionName(workflowDefinitionName);
 	}
 
 	public int getWorkflowDefinitionVersion() {
-		return _workflowLink.getWorkflowDefinitionVersion();
+		return _workflowDefinitionLink.getWorkflowDefinitionVersion();
 	}
 
 	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion) {
-		_workflowLink.setWorkflowDefinitionVersion(workflowDefinitionVersion);
+		_workflowDefinitionLink.setWorkflowDefinitionVersion(workflowDefinitionVersion);
 	}
 
-	public com.liferay.portal.model.WorkflowLink toEscapedModel() {
-		return _workflowLink.toEscapedModel();
+	public WorkflowDefinitionLink toEscapedModel() {
+		return _workflowDefinitionLink.toEscapedModel();
 	}
 
 	public boolean isNew() {
-		return _workflowLink.isNew();
+		return _workflowDefinitionLink.isNew();
 	}
 
 	public boolean setNew(boolean n) {
-		return _workflowLink.setNew(n);
+		return _workflowDefinitionLink.setNew(n);
 	}
 
 	public boolean isCachedModel() {
-		return _workflowLink.isCachedModel();
+		return _workflowDefinitionLink.isCachedModel();
 	}
 
 	public void setCachedModel(boolean cachedModel) {
-		_workflowLink.setCachedModel(cachedModel);
+		_workflowDefinitionLink.setCachedModel(cachedModel);
 	}
 
 	public boolean isEscapedModel() {
-		return _workflowLink.isEscapedModel();
+		return _workflowDefinitionLink.isEscapedModel();
 	}
 
 	public void setEscapedModel(boolean escapedModel) {
-		_workflowLink.setEscapedModel(escapedModel);
+		_workflowDefinitionLink.setEscapedModel(escapedModel);
 	}
 
 	public java.io.Serializable getPrimaryKeyObj() {
-		return _workflowLink.getPrimaryKeyObj();
+		return _workflowDefinitionLink.getPrimaryKeyObj();
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
-		return _workflowLink.getExpandoBridge();
+		return _workflowDefinitionLink.getExpandoBridge();
 	}
 
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		_workflowLink.setExpandoBridgeAttributes(serviceContext);
+		_workflowDefinitionLink.setExpandoBridgeAttributes(serviceContext);
 	}
 
 	public java.lang.Object clone() {
-		return _workflowLink.clone();
+		return _workflowDefinitionLink.clone();
 	}
 
-	public int compareTo(com.liferay.portal.model.WorkflowLink workflowLink) {
-		return _workflowLink.compareTo(workflowLink);
+	public int compareTo(WorkflowDefinitionLink workflowDefinitionLink) {
+		return _workflowDefinitionLink.compareTo(workflowDefinitionLink);
 	}
 
 	public int hashCode() {
-		return _workflowLink.hashCode();
+		return _workflowDefinitionLink.hashCode();
 	}
 
 	public java.lang.String toString() {
-		return _workflowLink.toString();
+		return _workflowDefinitionLink.toString();
 	}
 
 	public java.lang.String toXmlString() {
-		return _workflowLink.toXmlString();
+		return _workflowDefinitionLink.toXmlString();
 	}
 
-	public WorkflowLink getWrappedWorkflowLink() {
-		return _workflowLink;
+	public WorkflowDefinitionLink getWrappedWorkflowDefinitionLink() {
+		return _workflowDefinitionLink;
 	}
 
-	private WorkflowLink _workflowLink;
+	private WorkflowDefinitionLink _workflowDefinitionLink;
 }

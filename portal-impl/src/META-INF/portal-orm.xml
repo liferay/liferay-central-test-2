@@ -872,19 +872,42 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portal.model.impl.WorkflowLinkModelImpl">
+	<mapped-superclass class="com.liferay.portal.model.impl.WorkflowDefinitionLinkModelImpl">
 		<attributes>
-			<id name="workflowLinkId" />
+			<id name="workflowDefinitionLinkId" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="classNameId" />
 			<basic name="workflowDefinitionName" />
 			<basic name="workflowDefinitionVersion" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.WorkflowInstanceLinkModelImpl">
+		<attributes>
+			<id name="workflowInstanceLinkId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="workflowInstanceId" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2742,8 +2765,12 @@
 		<table name="Website" />
 		<attributes />
 	</entity>
-	<entity class="com.liferay.portal.model.impl.WorkflowLinkImpl" name="WorkflowLink">
-		<table name="WorkflowLink" />
+	<entity class="com.liferay.portal.model.impl.WorkflowDefinitionLinkImpl" name="WorkflowDefinitionLink">
+		<table name="WorkflowDefinitionLink" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portal.model.impl.WorkflowInstanceLinkImpl" name="WorkflowInstanceLink">
+		<table name="WorkflowInstanceLink" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl" name="AnnouncementsDelivery">

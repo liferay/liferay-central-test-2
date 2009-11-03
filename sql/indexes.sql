@@ -629,5 +629,7 @@ create unique index IX_899D3DFB on WikiPage (uuid_, groupId);
 
 create unique index IX_21277664 on WikiPageResource (nodeId, title);
 
-create index IX_2007FCC9 on WorkflowLink (companyId);
-create index IX_343EE6B1 on WorkflowLink (groupId, companyId, classNameId);
+create index IX_A8B0D276 on WorkflowDefinitionLink (companyId);
+create index IX_B6EE8C9E on WorkflowDefinitionLink (groupId, companyId, classNameId);
+
+create index IX_415A7007 on WorkflowInstanceLink (groupId, companyId, classNameId, classPK);

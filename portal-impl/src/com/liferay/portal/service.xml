@@ -1838,11 +1838,11 @@
 			<finder-column name="primary" />
 		</finder>
 	</entity>
-	<entity name="WorkflowLink" local-service="true" remote-service="false">
+	<entity name="WorkflowDefinitionLink" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
-		<column name="workflowLinkId" type="long" primary="true" />
+		<column name="workflowDefinitionLinkId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -1853,6 +1853,7 @@
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
@@ -1872,10 +1873,43 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="G_C_C" return-type="WorkflowLink">
+		<finder name="G_C_C" return-type="WorkflowDefinitionLink">
 			<finder-column name="groupId" />
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
+		</finder>
+	</entity>
+	<entity name="WorkflowInstanceLink" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="workflowInstanceLinkId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
+		<column name="workflowInstanceId" type="long" />
+
+		<!-- Finder methods -->
+
+		<finder name="G_C_C_C" return-type="WorkflowInstanceLink">
+			<finder-column name="groupId" />
+			<finder-column name="companyId" />
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
 		</finder>
 	</entity>
 	<exceptions>

@@ -1809,7 +1809,7 @@
 			<forward name="portlet.workflow_admin.error" path="portlet.workflow_admin.error" />
 		</action>
 
-		<action path="/workflow_admin/edit_workflow_link" type="com.liferay.portlet.workflowadmin.action.EditWorkflowLinkAction">
+		<action path="/workflow_admin/edit_workflow_definition_link" type="com.liferay.portlet.workflowadmin.action.EditWorkflowDefinitionLinkAction">
 			<forward name="portlet.workflow_admin.error" path="portlet.workflow_admin.error" />
 		</action>
 

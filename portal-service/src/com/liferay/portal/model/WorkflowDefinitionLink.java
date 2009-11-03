@@ -20,29 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.model;
+
 
 /**
- * <a href="NoSuchWorkflowLinkException.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionLink.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the WorkflowDefinitionLink table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.WorkflowDefinitionLinkImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author    Brian Wing Shun Chan
+ * @see       WorkflowDefinitionLinkModel
+ * @see       com.liferay.portal.model.impl.WorkflowDefinitionLinkImpl
+ * @see       com.liferay.portal.model.impl.WorkflowDefinitionLinkModelImpl
+ * @generated
  */
-public class NoSuchWorkflowLinkException extends NoSuchModelException {
-
-	public NoSuchWorkflowLinkException() {
-		super();
-	}
-
-	public NoSuchWorkflowLinkException(String msg) {
-		super(msg);
-	}
-
-	public NoSuchWorkflowLinkException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public NoSuchWorkflowLinkException(Throwable cause) {
-		super(cause);
-	}
-
+public interface WorkflowDefinitionLink extends WorkflowDefinitionLinkModel {
 }

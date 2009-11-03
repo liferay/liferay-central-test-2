@@ -1876,8 +1876,10 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl")
-	protected com.liferay.portal.service.persistence.WorkflowLinkPersistence workflowLinkPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence.impl")
+	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence.impl")
+	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	protected ContainsUser containsUser;
 	protected AddUser addUser;
 	protected ClearUsers clearUsers;

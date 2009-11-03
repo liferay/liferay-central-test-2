@@ -24,7 +24,7 @@ package com.liferay.portal.service;
 
 
 /**
- * <a href="WorkflowLinkLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionLinkLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,38 +33,40 @@ package com.liferay.portal.service;
  *
  * <p>
  * This class provides static methods for the
- * {@link WorkflowLinkLocalService} bean. The static methods of
+ * {@link WorkflowDefinitionLinkLocalService} bean. The static methods of
  * this class calls the same methods of the bean instance. It's convenient to be
  * able to just write one line to call a method on a bean instead of writing a
  * lookup call and a method call.
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       WorkflowLinkLocalService
+ * @see       WorkflowDefinitionLinkLocalService
  * @generated
  */
-public class WorkflowLinkLocalServiceUtil {
-	public static com.liferay.portal.model.WorkflowLink addWorkflowLink(
-		com.liferay.portal.model.WorkflowLink workflowLink)
+public class WorkflowDefinitionLinkLocalServiceUtil {
+	public static com.liferay.portal.model.WorkflowDefinitionLink addWorkflowDefinitionLink(
+		com.liferay.portal.model.WorkflowDefinitionLink workflowDefinitionLink)
 		throws com.liferay.portal.SystemException {
-		return getService().addWorkflowLink(workflowLink);
+		return getService().addWorkflowDefinitionLink(workflowDefinitionLink);
 	}
 
-	public static com.liferay.portal.model.WorkflowLink createWorkflowLink(
-		long workflowLinkId) {
-		return getService().createWorkflowLink(workflowLinkId);
+	public static com.liferay.portal.model.WorkflowDefinitionLink createWorkflowDefinitionLink(
+		long workflowDefinitionLinkId) {
+		return getService()
+				   .createWorkflowDefinitionLink(workflowDefinitionLinkId);
 	}
 
-	public static void deleteWorkflowLink(long workflowLinkId)
+	public static void deleteWorkflowDefinitionLink(
+		long workflowDefinitionLinkId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteWorkflowLink(workflowLinkId);
+		getService().deleteWorkflowDefinitionLink(workflowDefinitionLinkId);
 	}
 
-	public static void deleteWorkflowLink(
-		com.liferay.portal.model.WorkflowLink workflowLink)
+	public static void deleteWorkflowDefinitionLink(
+		com.liferay.portal.model.WorkflowDefinitionLink workflowDefinitionLink)
 		throws com.liferay.portal.SystemException {
-		getService().deleteWorkflowLink(workflowLink);
+		getService().deleteWorkflowDefinitionLink(workflowDefinitionLink);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
@@ -79,80 +81,85 @@ public class WorkflowLinkLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public static com.liferay.portal.model.WorkflowLink getWorkflowLink(
-		long workflowLinkId)
+	public static com.liferay.portal.model.WorkflowDefinitionLink getWorkflowDefinitionLink(
+		long workflowDefinitionLinkId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getWorkflowLink(workflowLinkId);
+		return getService().getWorkflowDefinitionLink(workflowDefinitionLinkId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.WorkflowLink> getWorkflowLinks(
+	public static java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> getWorkflowDefinitionLinks(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return getService().getWorkflowLinks(start, end);
+		return getService().getWorkflowDefinitionLinks(start, end);
 	}
 
-	public static int getWorkflowLinksCount()
+	public static int getWorkflowDefinitionLinksCount()
 		throws com.liferay.portal.SystemException {
-		return getService().getWorkflowLinksCount();
+		return getService().getWorkflowDefinitionLinksCount();
 	}
 
-	public static com.liferay.portal.model.WorkflowLink updateWorkflowLink(
-		com.liferay.portal.model.WorkflowLink workflowLink)
+	public static com.liferay.portal.model.WorkflowDefinitionLink updateWorkflowDefinitionLink(
+		com.liferay.portal.model.WorkflowDefinitionLink workflowDefinitionLink)
 		throws com.liferay.portal.SystemException {
-		return getService().updateWorkflowLink(workflowLink);
+		return getService().updateWorkflowDefinitionLink(workflowDefinitionLink);
 	}
 
-	public static com.liferay.portal.model.WorkflowLink updateWorkflowLink(
-		com.liferay.portal.model.WorkflowLink workflowLink, boolean merge)
-		throws com.liferay.portal.SystemException {
-		return getService().updateWorkflowLink(workflowLink, merge);
+	public static com.liferay.portal.model.WorkflowDefinitionLink updateWorkflowDefinitionLink(
+		com.liferay.portal.model.WorkflowDefinitionLink workflowDefinitionLink,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService()
+				   .updateWorkflowDefinitionLink(workflowDefinitionLink, merge);
 	}
 
-	public static com.liferay.portal.model.WorkflowLink addWorkflowLink(
+	public static com.liferay.portal.model.WorkflowDefinitionLink addWorkflowDefinitionLink(
 		long userId, long companyId, long groupId, long classNameId,
 		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addWorkflowLink(userId, companyId, groupId, classNameId,
-			workflowDefinitionName, workflowDefinitionVersion);
+				   .addWorkflowDefinitionLink(userId, companyId, groupId,
+			classNameId, workflowDefinitionName, workflowDefinitionVersion);
 	}
 
-	public static void deleteWorkflowLink(long userId, long companyId,
-		long groupId, long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().deleteWorkflowLink(userId, companyId, groupId, classNameId);
-	}
-
-	public static com.liferay.portal.model.WorkflowLink getWorkflowLink(
+	public static void deleteWorkflowDefinitionLink(long userId,
 		long companyId, long groupId, long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getWorkflowLink(companyId, groupId, classNameId);
+		getService()
+			.deleteWorkflowDefinitionLink(userId, companyId, groupId,
+			classNameId);
 	}
 
-	public static com.liferay.portal.model.WorkflowLink updateWorkflowLink(
+	public static com.liferay.portal.model.WorkflowDefinitionLink getWorkflowDefinitionLink(
+		long companyId, long groupId, long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getWorkflowDefinitionLink(companyId, groupId, classNameId);
+	}
+
+	public static com.liferay.portal.model.WorkflowDefinitionLink updateWorkflowDefinitionLink(
 		long userId, long companyId, long groupId, long classNameId,
 		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateWorkflowLink(userId, companyId, groupId, classNameId,
-			workflowDefinitionName, workflowDefinitionVersion);
+				   .updateWorkflowDefinitionLink(userId, companyId, groupId,
+			classNameId, workflowDefinitionName, workflowDefinitionVersion);
 	}
 
-	public static WorkflowLinkLocalService getService() {
+	public static WorkflowDefinitionLinkLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("WorkflowLinkLocalService is not set");
+			throw new RuntimeException(
+				"WorkflowDefinitionLinkLocalService is not set");
 		}
 
 		return _service;
 	}
 
-	public void setService(WorkflowLinkLocalService service) {
+	public void setService(WorkflowDefinitionLinkLocalService service) {
 		_service = service;
 	}
 
-	private static WorkflowLinkLocalService _service;
+	private static WorkflowDefinitionLinkLocalService _service;
 }

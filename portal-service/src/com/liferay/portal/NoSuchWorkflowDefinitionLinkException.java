@@ -20,19 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
-
-import com.liferay.portal.model.WorkflowLink;
+package com.liferay.portal;
 
 /**
- * <a href="WorkflowLinkImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="NoSuchWorkflowDefinitionLinkException.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WorkflowLinkImpl extends WorkflowLinkModelImpl
-	implements WorkflowLink {
+public class NoSuchWorkflowDefinitionLinkException
+	extends NoSuchModelException {
 
-	public WorkflowLinkImpl() {
+	public NoSuchWorkflowDefinitionLinkException() {
+		super();
+	}
+
+	public NoSuchWorkflowDefinitionLinkException(String msg) {
+		super(msg);
+	}
+
+	public NoSuchWorkflowDefinitionLinkException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public NoSuchWorkflowDefinitionLinkException(Throwable cause) {
+		super(cause);
 	}
 
 }

@@ -56,7 +56,8 @@
 	<import class="com.liferay.portal.model.UserTrackerPath" />
 	<import class="com.liferay.portal.model.WebDAVProps" />
 	<import class="com.liferay.portal.model.Website" />
-	<import class="com.liferay.portal.model.WorkflowLink" />
+	<import class="com.liferay.portal.model.WorkflowDefinitionLink" />
+	<import class="com.liferay.portal.model.WorkflowInstanceLink" />
 	<import class="com.liferay.portlet.announcements.model.AnnouncementsDelivery" />
 	<import class="com.liferay.portlet.announcements.model.AnnouncementsEntry" />
 	<import class="com.liferay.portlet.announcements.model.AnnouncementsFlag" />
@@ -813,19 +814,35 @@
 		<property name="typeId" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.WorkflowLinkImpl" table="WorkflowLink">
+	<class name="com.liferay.portal.model.impl.WorkflowDefinitionLinkImpl" table="WorkflowDefinitionLink">
 		<cache usage="read-write" />
-		<id name="workflowLinkId" type="long">
+		<id name="workflowDefinitionLinkId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="workflowDefinitionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="workflowDefinitionVersion" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.WorkflowInstanceLinkImpl" table="WorkflowInstanceLink">
+		<cache usage="read-write" />
+		<id name="workflowInstanceLinkId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="workflowInstanceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl" table="AnnouncementsDelivery">
 		<cache usage="read-write" />

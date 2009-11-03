@@ -110,7 +110,8 @@ import com.liferay.portal.service.UserTrackerPathLocalService;
 import com.liferay.portal.service.WebDAVPropsLocalService;
 import com.liferay.portal.service.WebsiteLocalService;
 import com.liferay.portal.service.WebsiteService;
-import com.liferay.portal.service.WorkflowLinkLocalService;
+import com.liferay.portal.service.WorkflowDefinitionLinkLocalService;
+import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
 import com.liferay.portal.service.persistence.BrowserTrackerPersistence;
@@ -172,7 +173,8 @@ import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
-import com.liferay.portal.service.persistence.WorkflowLinkPersistence;
+import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
+import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
 /**
  * <a href="ResourcePermissionServiceBaseImpl.java.html"><b><i>View Source</i>
@@ -1389,22 +1391,40 @@ public abstract class ResourcePermissionServiceBaseImpl extends PrincipalBean
 		this.websitePersistence = websitePersistence;
 	}
 
-	public WorkflowLinkLocalService getWorkflowLinkLocalService() {
-		return workflowLinkLocalService;
+	public WorkflowDefinitionLinkLocalService getWorkflowDefinitionLinkLocalService() {
+		return workflowDefinitionLinkLocalService;
 	}
 
-	public void setWorkflowLinkLocalService(
-		WorkflowLinkLocalService workflowLinkLocalService) {
-		this.workflowLinkLocalService = workflowLinkLocalService;
+	public void setWorkflowDefinitionLinkLocalService(
+		WorkflowDefinitionLinkLocalService workflowDefinitionLinkLocalService) {
+		this.workflowDefinitionLinkLocalService = workflowDefinitionLinkLocalService;
 	}
 
-	public WorkflowLinkPersistence getWorkflowLinkPersistence() {
-		return workflowLinkPersistence;
+	public WorkflowDefinitionLinkPersistence getWorkflowDefinitionLinkPersistence() {
+		return workflowDefinitionLinkPersistence;
 	}
 
-	public void setWorkflowLinkPersistence(
-		WorkflowLinkPersistence workflowLinkPersistence) {
-		this.workflowLinkPersistence = workflowLinkPersistence;
+	public void setWorkflowDefinitionLinkPersistence(
+		WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence) {
+		this.workflowDefinitionLinkPersistence = workflowDefinitionLinkPersistence;
+	}
+
+	public WorkflowInstanceLinkLocalService getWorkflowInstanceLinkLocalService() {
+		return workflowInstanceLinkLocalService;
+	}
+
+	public void setWorkflowInstanceLinkLocalService(
+		WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService) {
+		this.workflowInstanceLinkLocalService = workflowInstanceLinkLocalService;
+	}
+
+	public WorkflowInstanceLinkPersistence getWorkflowInstanceLinkPersistence() {
+		return workflowInstanceLinkPersistence;
+	}
+
+	public void setWorkflowInstanceLinkPersistence(
+		WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence) {
+		this.workflowInstanceLinkPersistence = workflowInstanceLinkPersistence;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -1718,10 +1738,14 @@ public abstract class ResourcePermissionServiceBaseImpl extends PrincipalBean
 	protected WebsiteService websiteService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected WebsitePersistence websitePersistence;
-	@BeanReference(name = "com.liferay.portal.service.WorkflowLinkLocalService.impl")
-	protected WorkflowLinkLocalService workflowLinkLocalService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl")
-	protected WorkflowLinkPersistence workflowLinkPersistence;
+	@BeanReference(name = "com.liferay.portal.service.WorkflowDefinitionLinkLocalService.impl")
+	protected WorkflowDefinitionLinkLocalService workflowDefinitionLinkLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence.impl")
+	protected WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
+	@BeanReference(name = "com.liferay.portal.service.WorkflowInstanceLinkLocalService.impl")
+	protected WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence.impl")
+	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")

@@ -20,32 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.model.impl;
 
+import com.liferay.portal.model.WorkflowInstanceLink;
 
 /**
- * <a href="WorkflowLink.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowInstanceLinkImpl.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the WorkflowLink table in the
- * database.
- * </p>
- *
- * <p>
- * Customize {@link com.liferay.portal.model.impl.WorkflowLinkImpl} and rerun the
- * ServiceBuilder to generate the new methods.
- * </p>
- *
- * @author    Brian Wing Shun Chan
- * @see       WorkflowLinkModel
- * @see       com.liferay.portal.model.impl.WorkflowLinkImpl
- * @see       com.liferay.portal.model.impl.WorkflowLinkModelImpl
- * @generated
+ * @author Brian Wing Shun Chan
  */
-public interface WorkflowLink extends WorkflowLinkModel {
+public class WorkflowInstanceLinkImpl
+	extends WorkflowInstanceLinkModelImpl implements WorkflowInstanceLink {
+
+	public WorkflowInstanceLinkImpl() {
+	}
+
 }

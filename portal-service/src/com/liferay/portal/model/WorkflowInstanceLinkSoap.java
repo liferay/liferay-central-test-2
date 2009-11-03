@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="WorkflowLinkSoap.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowInstanceLinkSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -38,32 +38,35 @@ import java.util.List;
  *
  * <p>
  * This class is used by
- * {@link com.liferay.portal.service.http.WorkflowLinkServiceSoap}.
+ * {@link com.liferay.portal.service.http.WorkflowInstanceLinkServiceSoap}.
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.WorkflowLinkServiceSoap
+ * @see       com.liferay.portal.service.http.WorkflowInstanceLinkServiceSoap
  * @generated
  */
-public class WorkflowLinkSoap implements Serializable {
-	public static WorkflowLinkSoap toSoapModel(WorkflowLink model) {
-		WorkflowLinkSoap soapModel = new WorkflowLinkSoap();
+public class WorkflowInstanceLinkSoap implements Serializable {
+	public static WorkflowInstanceLinkSoap toSoapModel(
+		WorkflowInstanceLink model) {
+		WorkflowInstanceLinkSoap soapModel = new WorkflowInstanceLinkSoap();
 
-		soapModel.setWorkflowLinkId(model.getWorkflowLinkId());
+		soapModel.setWorkflowInstanceLinkId(model.getWorkflowInstanceLinkId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
+		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setClassNameId(model.getClassNameId());
-		soapModel.setWorkflowDefinitionName(model.getWorkflowDefinitionName());
-		soapModel.setWorkflowDefinitionVersion(model.getWorkflowDefinitionVersion());
+		soapModel.setClassPK(model.getClassPK());
+		soapModel.setWorkflowInstanceId(model.getWorkflowInstanceId());
 
 		return soapModel;
 	}
 
-	public static WorkflowLinkSoap[] toSoapModels(WorkflowLink[] models) {
-		WorkflowLinkSoap[] soapModels = new WorkflowLinkSoap[models.length];
+	public static WorkflowInstanceLinkSoap[] toSoapModels(
+		WorkflowInstanceLink[] models) {
+		WorkflowInstanceLinkSoap[] soapModels = new WorkflowInstanceLinkSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -72,14 +75,15 @@ public class WorkflowLinkSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static WorkflowLinkSoap[][] toSoapModels(WorkflowLink[][] models) {
-		WorkflowLinkSoap[][] soapModels = null;
+	public static WorkflowInstanceLinkSoap[][] toSoapModels(
+		WorkflowInstanceLink[][] models) {
+		WorkflowInstanceLinkSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new WorkflowLinkSoap[models.length][models[0].length];
+			soapModels = new WorkflowInstanceLinkSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new WorkflowLinkSoap[0][0];
+			soapModels = new WorkflowInstanceLinkSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -89,33 +93,34 @@ public class WorkflowLinkSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static WorkflowLinkSoap[] toSoapModels(List<WorkflowLink> models) {
-		List<WorkflowLinkSoap> soapModels = new ArrayList<WorkflowLinkSoap>(models.size());
+	public static WorkflowInstanceLinkSoap[] toSoapModels(
+		List<WorkflowInstanceLink> models) {
+		List<WorkflowInstanceLinkSoap> soapModels = new ArrayList<WorkflowInstanceLinkSoap>(models.size());
 
-		for (WorkflowLink model : models) {
+		for (WorkflowInstanceLink model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new WorkflowLinkSoap[soapModels.size()]);
+		return soapModels.toArray(new WorkflowInstanceLinkSoap[soapModels.size()]);
 	}
 
-	public WorkflowLinkSoap() {
+	public WorkflowInstanceLinkSoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _workflowLinkId;
+		return _workflowInstanceLinkId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setWorkflowLinkId(pk);
+		setWorkflowInstanceLinkId(pk);
 	}
 
-	public long getWorkflowLinkId() {
-		return _workflowLinkId;
+	public long getWorkflowInstanceLinkId() {
+		return _workflowInstanceLinkId;
 	}
 
-	public void setWorkflowLinkId(long workflowLinkId) {
-		_workflowLinkId = workflowLinkId;
+	public void setWorkflowInstanceLinkId(long workflowInstanceLinkId) {
+		_workflowInstanceLinkId = workflowInstanceLinkId;
 	}
 
 	public long getGroupId() {
@@ -150,6 +155,14 @@ public class WorkflowLinkSoap implements Serializable {
 		_userName = userName;
 	}
 
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -166,29 +179,30 @@ public class WorkflowLinkSoap implements Serializable {
 		_classNameId = classNameId;
 	}
 
-	public String getWorkflowDefinitionName() {
-		return _workflowDefinitionName;
+	public long getClassPK() {
+		return _classPK;
 	}
 
-	public void setWorkflowDefinitionName(String workflowDefinitionName) {
-		_workflowDefinitionName = workflowDefinitionName;
+	public void setClassPK(long classPK) {
+		_classPK = classPK;
 	}
 
-	public int getWorkflowDefinitionVersion() {
-		return _workflowDefinitionVersion;
+	public long getWorkflowInstanceId() {
+		return _workflowInstanceId;
 	}
 
-	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion) {
-		_workflowDefinitionVersion = workflowDefinitionVersion;
+	public void setWorkflowInstanceId(long workflowInstanceId) {
+		_workflowInstanceId = workflowInstanceId;
 	}
 
-	private long _workflowLinkId;
+	private long _workflowInstanceLinkId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
+	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
-	private String _workflowDefinitionName;
-	private int _workflowDefinitionVersion;
+	private long _classPK;
+	private long _workflowInstanceId;
 }

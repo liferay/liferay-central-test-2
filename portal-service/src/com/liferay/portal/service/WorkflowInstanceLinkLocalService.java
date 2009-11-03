@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
- * <a href="WorkflowLinkLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowInstanceLinkLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -39,7 +39,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * <p>
  * This interface defines the service. The default implementation is
  * {@link
- * com.liferay.portal.service.impl.WorkflowLinkLocalServiceImpl}}.
+ * com.liferay.portal.service.impl.WorkflowInstanceLinkLocalServiceImpl}}.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>
@@ -49,25 +49,25 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       WorkflowLinkLocalServiceUtil
+ * @see       WorkflowInstanceLinkLocalServiceUtil
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface WorkflowLinkLocalService {
-	public com.liferay.portal.model.WorkflowLink addWorkflowLink(
-		com.liferay.portal.model.WorkflowLink workflowLink)
+public interface WorkflowInstanceLinkLocalService {
+	public com.liferay.portal.model.WorkflowInstanceLink addWorkflowInstanceLink(
+		com.liferay.portal.model.WorkflowInstanceLink workflowInstanceLink)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink createWorkflowLink(
-		long workflowLinkId);
+	public com.liferay.portal.model.WorkflowInstanceLink createWorkflowInstanceLink(
+		long workflowInstanceLinkId);
 
-	public void deleteWorkflowLink(long workflowLinkId)
+	public void deleteWorkflowInstanceLink(long workflowInstanceLinkId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteWorkflowLink(
-		com.liferay.portal.model.WorkflowLink workflowLink)
+	public void deleteWorkflowInstanceLink(
+		com.liferay.portal.model.WorkflowInstanceLink workflowInstanceLink)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> dynamicQuery(
@@ -79,47 +79,24 @@ public interface WorkflowLinkLocalService {
 		int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.WorkflowLink getWorkflowLink(
-		long workflowLinkId)
+	public com.liferay.portal.model.WorkflowInstanceLink getWorkflowInstanceLink(
+		long workflowInstanceLinkId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.WorkflowLink> getWorkflowLinks(
+	public java.util.List<com.liferay.portal.model.WorkflowInstanceLink> getWorkflowInstanceLinks(
 		int start, int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getWorkflowLinksCount()
+	public int getWorkflowInstanceLinksCount()
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink updateWorkflowLink(
-		com.liferay.portal.model.WorkflowLink workflowLink)
+	public com.liferay.portal.model.WorkflowInstanceLink updateWorkflowInstanceLink(
+		com.liferay.portal.model.WorkflowInstanceLink workflowInstanceLink)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink updateWorkflowLink(
-		com.liferay.portal.model.WorkflowLink workflowLink, boolean merge)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.WorkflowLink addWorkflowLink(long userId,
-		long companyId, long groupId, long classNameId,
-		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void deleteWorkflowLink(long userId, long companyId, long groupId,
-		long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.WorkflowLink getWorkflowLink(
-		long companyId, long groupId, long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.WorkflowLink updateWorkflowLink(
-		long userId, long companyId, long groupId, long classNameId,
-		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public com.liferay.portal.model.WorkflowInstanceLink updateWorkflowInstanceLink(
+		com.liferay.portal.model.WorkflowInstanceLink workflowInstanceLink,
+		boolean merge) throws com.liferay.portal.SystemException;
 }

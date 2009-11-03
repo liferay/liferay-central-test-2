@@ -650,14 +650,23 @@
 	<bean id="com.liferay.portal.service.persistence.WebsiteUtil" class="com.liferay.portal.service.persistence.WebsiteUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.WebsitePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.WorkflowLinkLocalService.impl" class="com.liferay.portal.service.impl.WorkflowLinkLocalServiceImpl" />
-	<bean id="com.liferay.portal.service.WorkflowLinkLocalService.velocity" class="com.liferay.portal.service.impl.WorkflowLinkLocalServiceImpl" />
-	<bean id="com.liferay.portal.service.WorkflowLinkLocalServiceUtil" class="com.liferay.portal.service.WorkflowLinkLocalServiceUtil">
-		<property name="service" ref="com.liferay.portal.service.WorkflowLinkLocalService.impl" />
+	<bean id="com.liferay.portal.service.WorkflowDefinitionLinkLocalService.impl" class="com.liferay.portal.service.impl.WorkflowDefinitionLinkLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.WorkflowDefinitionLinkLocalService.velocity" class="com.liferay.portal.service.impl.WorkflowDefinitionLinkLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil" class="com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.WorkflowDefinitionLinkLocalService.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl" class="com.liferay.portal.service.persistence.WorkflowLinkPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portal.service.persistence.WorkflowLinkUtil" class="com.liferay.portal.service.persistence.WorkflowLinkUtil">
-		<property name="persistence" ref="com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl" />
+	<bean id="com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence.impl" class="com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.WorkflowDefinitionLinkUtil" class="com.liferay.portal.service.persistence.WorkflowDefinitionLinkUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.WorkflowInstanceLinkLocalService.impl" class="com.liferay.portal.service.impl.WorkflowInstanceLinkLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.WorkflowInstanceLinkLocalService.velocity" class="com.liferay.portal.service.impl.WorkflowInstanceLinkLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil" class="com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.WorkflowInstanceLinkLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence.impl" class="com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.WorkflowInstanceLinkUtil" class="com.liferay.portal.service.persistence.WorkflowInstanceLinkUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.velocity" class="com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryLocalServiceImpl" />

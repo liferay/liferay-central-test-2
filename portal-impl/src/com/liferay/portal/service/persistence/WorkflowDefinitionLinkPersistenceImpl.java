@@ -23,7 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
-import com.liferay.portal.NoSuchWorkflowLinkException;
+import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -42,9 +42,9 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.model.WorkflowLink;
-import com.liferay.portal.model.impl.WorkflowLinkImpl;
-import com.liferay.portal.model.impl.WorkflowLinkModelImpl;
+import com.liferay.portal.model.WorkflowDefinitionLink;
+import com.liferay.portal.model.impl.WorkflowDefinitionLinkImpl;
+import com.liferay.portal.model.impl.WorkflowDefinitionLinkModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
@@ -54,7 +54,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="WorkflowLinkPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionLinkPersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -62,117 +62,122 @@ import java.util.List;
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       WorkflowLinkPersistence
- * @see       WorkflowLinkUtil
+ * @see       WorkflowDefinitionLinkPersistence
+ * @see       WorkflowDefinitionLinkUtil
  * @generated
  */
-public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLink>
-	implements WorkflowLinkPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = WorkflowLinkImpl.class.getName();
+public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<WorkflowDefinitionLink>
+	implements WorkflowDefinitionLinkPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = WorkflowDefinitionLinkImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId",
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
 			new String[] {
 				Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_C_C = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_C_C = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByG_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_C = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_C_C",
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_C = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
-	public void cacheResult(WorkflowLink workflowLink) {
-		EntityCacheUtil.putResult(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkImpl.class, workflowLink.getPrimaryKey(), workflowLink);
+	public void cacheResult(WorkflowDefinitionLink workflowDefinitionLink) {
+		EntityCacheUtil.putResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkImpl.class,
+			workflowDefinitionLink.getPrimaryKey(), workflowDefinitionLink);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
 			new Object[] {
-				new Long(workflowLink.getGroupId()),
-				new Long(workflowLink.getCompanyId()),
-				new Long(workflowLink.getClassNameId())
-			}, workflowLink);
+				new Long(workflowDefinitionLink.getGroupId()),
+				new Long(workflowDefinitionLink.getCompanyId()),
+				new Long(workflowDefinitionLink.getClassNameId())
+			}, workflowDefinitionLink);
 	}
 
-	public void cacheResult(List<WorkflowLink> workflowLinks) {
-		for (WorkflowLink workflowLink : workflowLinks) {
+	public void cacheResult(
+		List<WorkflowDefinitionLink> workflowDefinitionLinks) {
+		for (WorkflowDefinitionLink workflowDefinitionLink : workflowDefinitionLinks) {
 			if (EntityCacheUtil.getResult(
-						WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-						WorkflowLinkImpl.class, workflowLink.getPrimaryKey(),
-						this) == null) {
-				cacheResult(workflowLink);
+						WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+						WorkflowDefinitionLinkImpl.class,
+						workflowDefinitionLink.getPrimaryKey(), this) == null) {
+				cacheResult(workflowDefinitionLink);
 			}
 		}
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(WorkflowLinkImpl.class.getName());
-		EntityCacheUtil.clearCache(WorkflowLinkImpl.class.getName());
+		CacheRegistry.clear(WorkflowDefinitionLinkImpl.class.getName());
+		EntityCacheUtil.clearCache(WorkflowDefinitionLinkImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
-	public WorkflowLink create(long workflowLinkId) {
-		WorkflowLink workflowLink = new WorkflowLinkImpl();
+	public WorkflowDefinitionLink create(long workflowDefinitionLinkId) {
+		WorkflowDefinitionLink workflowDefinitionLink = new WorkflowDefinitionLinkImpl();
 
-		workflowLink.setNew(true);
-		workflowLink.setPrimaryKey(workflowLinkId);
+		workflowDefinitionLink.setNew(true);
+		workflowDefinitionLink.setPrimaryKey(workflowDefinitionLinkId);
 
-		return workflowLink;
+		return workflowDefinitionLink;
 	}
 
-	public WorkflowLink remove(Serializable primaryKey)
+	public WorkflowDefinitionLink remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
-	public WorkflowLink remove(long workflowLinkId)
-		throws NoSuchWorkflowLinkException, SystemException {
+	public WorkflowDefinitionLink remove(long workflowDefinitionLinkId)
+		throws NoSuchWorkflowDefinitionLinkException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WorkflowLink workflowLink = (WorkflowLink)session.get(WorkflowLinkImpl.class,
-					new Long(workflowLinkId));
+			WorkflowDefinitionLink workflowDefinitionLink = (WorkflowDefinitionLink)session.get(WorkflowDefinitionLinkImpl.class,
+					new Long(workflowDefinitionLinkId));
 
-			if (workflowLink == null) {
+			if (workflowDefinitionLink == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No WorkflowLink exists with the primary key " +
-						workflowLinkId);
+					_log.warn(
+						"No WorkflowDefinitionLink exists with the primary key " +
+						workflowDefinitionLinkId);
 				}
 
-				throw new NoSuchWorkflowLinkException(
-					"No WorkflowLink exists with the primary key " +
-					workflowLinkId);
+				throw new NoSuchWorkflowDefinitionLinkException(
+					"No WorkflowDefinitionLink exists with the primary key " +
+					workflowDefinitionLinkId);
 			}
 
-			return remove(workflowLink);
+			return remove(workflowDefinitionLink);
 		}
-		catch (NoSuchWorkflowLinkException nsee) {
+		catch (NoSuchWorkflowDefinitionLinkException nsee) {
 			throw nsee;
 		}
 		catch (Exception e) {
@@ -183,40 +188,43 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 		}
 	}
 
-	public WorkflowLink remove(WorkflowLink workflowLink)
+	public WorkflowDefinitionLink remove(
+		WorkflowDefinitionLink workflowDefinitionLink)
 		throws SystemException {
-		for (ModelListener<WorkflowLink> listener : listeners) {
-			listener.onBeforeRemove(workflowLink);
+		for (ModelListener<WorkflowDefinitionLink> listener : listeners) {
+			listener.onBeforeRemove(workflowDefinitionLink);
 		}
 
-		workflowLink = removeImpl(workflowLink);
+		workflowDefinitionLink = removeImpl(workflowDefinitionLink);
 
-		for (ModelListener<WorkflowLink> listener : listeners) {
-			listener.onAfterRemove(workflowLink);
+		for (ModelListener<WorkflowDefinitionLink> listener : listeners) {
+			listener.onAfterRemove(workflowDefinitionLink);
 		}
 
-		return workflowLink;
+		return workflowDefinitionLink;
 	}
 
-	protected WorkflowLink removeImpl(WorkflowLink workflowLink)
+	protected WorkflowDefinitionLink removeImpl(
+		WorkflowDefinitionLink workflowDefinitionLink)
 		throws SystemException {
-		workflowLink = toUnwrappedModel(workflowLink);
+		workflowDefinitionLink = toUnwrappedModel(workflowDefinitionLink);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (workflowLink.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(WorkflowLinkImpl.class,
-						workflowLink.getPrimaryKeyObj());
+			if (workflowDefinitionLink.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(WorkflowDefinitionLinkImpl.class,
+						workflowDefinitionLink.getPrimaryKeyObj());
 
 				if (staleObject != null) {
 					session.evict(staleObject);
 				}
 			}
 
-			session.delete(workflowLink);
+			session.delete(workflowDefinitionLink);
 
 			session.flush();
 		}
@@ -229,38 +237,39 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		WorkflowLinkModelImpl workflowLinkModelImpl = (WorkflowLinkModelImpl)workflowLink;
+		WorkflowDefinitionLinkModelImpl workflowDefinitionLinkModelImpl = (WorkflowDefinitionLinkModelImpl)workflowDefinitionLink;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C,
 			new Object[] {
-				new Long(workflowLinkModelImpl.getOriginalGroupId()),
-				new Long(workflowLinkModelImpl.getOriginalCompanyId()),
-				new Long(workflowLinkModelImpl.getOriginalClassNameId())
+				new Long(workflowDefinitionLinkModelImpl.getOriginalGroupId()),
+				new Long(workflowDefinitionLinkModelImpl.getOriginalCompanyId()),
+				new Long(workflowDefinitionLinkModelImpl.getOriginalClassNameId())
 			});
 
-		EntityCacheUtil.removeResult(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkImpl.class, workflowLink.getPrimaryKey());
+		EntityCacheUtil.removeResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkImpl.class,
+			workflowDefinitionLink.getPrimaryKey());
 
-		return workflowLink;
+		return workflowDefinitionLink;
 	}
 
-	public WorkflowLink updateImpl(
-		com.liferay.portal.model.WorkflowLink workflowLink, boolean merge)
-		throws SystemException {
-		workflowLink = toUnwrappedModel(workflowLink);
+	public WorkflowDefinitionLink updateImpl(
+		com.liferay.portal.model.WorkflowDefinitionLink workflowDefinitionLink,
+		boolean merge) throws SystemException {
+		workflowDefinitionLink = toUnwrappedModel(workflowDefinitionLink);
 
-		boolean isNew = workflowLink.isNew();
+		boolean isNew = workflowDefinitionLink.isNew();
 
-		WorkflowLinkModelImpl workflowLinkModelImpl = (WorkflowLinkModelImpl)workflowLink;
+		WorkflowDefinitionLinkModelImpl workflowDefinitionLinkModelImpl = (WorkflowDefinitionLinkModelImpl)workflowDefinitionLink;
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			BatchSessionUtil.update(session, workflowLink, merge);
+			BatchSessionUtil.update(session, workflowDefinitionLink, merge);
 
-			workflowLink.setNew(false);
+			workflowDefinitionLink.setNew(false);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -271,121 +280,126 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EntityCacheUtil.putResult(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowLinkImpl.class, workflowLink.getPrimaryKey(), workflowLink);
+		EntityCacheUtil.putResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkImpl.class,
+			workflowDefinitionLink.getPrimaryKey(), workflowDefinitionLink);
 
 		if (!isNew &&
-				((workflowLink.getGroupId() != workflowLinkModelImpl.getOriginalGroupId()) ||
-				(workflowLink.getCompanyId() != workflowLinkModelImpl.getOriginalCompanyId()) ||
-				(workflowLink.getClassNameId() != workflowLinkModelImpl.getOriginalClassNameId()))) {
+				((workflowDefinitionLink.getGroupId() != workflowDefinitionLinkModelImpl.getOriginalGroupId()) ||
+				(workflowDefinitionLink.getCompanyId() != workflowDefinitionLinkModelImpl.getOriginalCompanyId()) ||
+				(workflowDefinitionLink.getClassNameId() != workflowDefinitionLinkModelImpl.getOriginalClassNameId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C,
 				new Object[] {
-					new Long(workflowLinkModelImpl.getOriginalGroupId()),
-					new Long(workflowLinkModelImpl.getOriginalCompanyId()),
-					new Long(workflowLinkModelImpl.getOriginalClassNameId())
+					new Long(workflowDefinitionLinkModelImpl.getOriginalGroupId()),
+					new Long(workflowDefinitionLinkModelImpl.getOriginalCompanyId()),
+					new Long(workflowDefinitionLinkModelImpl.getOriginalClassNameId())
 				});
 		}
 
 		if (isNew ||
-				((workflowLink.getGroupId() != workflowLinkModelImpl.getOriginalGroupId()) ||
-				(workflowLink.getCompanyId() != workflowLinkModelImpl.getOriginalCompanyId()) ||
-				(workflowLink.getClassNameId() != workflowLinkModelImpl.getOriginalClassNameId()))) {
+				((workflowDefinitionLink.getGroupId() != workflowDefinitionLinkModelImpl.getOriginalGroupId()) ||
+				(workflowDefinitionLink.getCompanyId() != workflowDefinitionLinkModelImpl.getOriginalCompanyId()) ||
+				(workflowDefinitionLink.getClassNameId() != workflowDefinitionLinkModelImpl.getOriginalClassNameId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
 				new Object[] {
-					new Long(workflowLink.getGroupId()),
-					new Long(workflowLink.getCompanyId()),
-					new Long(workflowLink.getClassNameId())
-				}, workflowLink);
+					new Long(workflowDefinitionLink.getGroupId()),
+					new Long(workflowDefinitionLink.getCompanyId()),
+					new Long(workflowDefinitionLink.getClassNameId())
+				}, workflowDefinitionLink);
 		}
 
-		return workflowLink;
+		return workflowDefinitionLink;
 	}
 
-	protected WorkflowLink toUnwrappedModel(WorkflowLink workflowLink) {
-		if (workflowLink instanceof WorkflowLinkImpl) {
-			return workflowLink;
+	protected WorkflowDefinitionLink toUnwrappedModel(
+		WorkflowDefinitionLink workflowDefinitionLink) {
+		if (workflowDefinitionLink instanceof WorkflowDefinitionLinkImpl) {
+			return workflowDefinitionLink;
 		}
 
-		WorkflowLinkImpl workflowLinkImpl = new WorkflowLinkImpl();
+		WorkflowDefinitionLinkImpl workflowDefinitionLinkImpl = new WorkflowDefinitionLinkImpl();
 
-		workflowLinkImpl.setNew(workflowLink.isNew());
-		workflowLinkImpl.setPrimaryKey(workflowLink.getPrimaryKey());
+		workflowDefinitionLinkImpl.setNew(workflowDefinitionLink.isNew());
+		workflowDefinitionLinkImpl.setPrimaryKey(workflowDefinitionLink.getPrimaryKey());
 
-		workflowLinkImpl.setWorkflowLinkId(workflowLink.getWorkflowLinkId());
-		workflowLinkImpl.setGroupId(workflowLink.getGroupId());
-		workflowLinkImpl.setCompanyId(workflowLink.getCompanyId());
-		workflowLinkImpl.setUserId(workflowLink.getUserId());
-		workflowLinkImpl.setUserName(workflowLink.getUserName());
-		workflowLinkImpl.setModifiedDate(workflowLink.getModifiedDate());
-		workflowLinkImpl.setClassNameId(workflowLink.getClassNameId());
-		workflowLinkImpl.setWorkflowDefinitionName(workflowLink.getWorkflowDefinitionName());
-		workflowLinkImpl.setWorkflowDefinitionVersion(workflowLink.getWorkflowDefinitionVersion());
+		workflowDefinitionLinkImpl.setWorkflowDefinitionLinkId(workflowDefinitionLink.getWorkflowDefinitionLinkId());
+		workflowDefinitionLinkImpl.setGroupId(workflowDefinitionLink.getGroupId());
+		workflowDefinitionLinkImpl.setCompanyId(workflowDefinitionLink.getCompanyId());
+		workflowDefinitionLinkImpl.setUserId(workflowDefinitionLink.getUserId());
+		workflowDefinitionLinkImpl.setUserName(workflowDefinitionLink.getUserName());
+		workflowDefinitionLinkImpl.setCreateDate(workflowDefinitionLink.getCreateDate());
+		workflowDefinitionLinkImpl.setModifiedDate(workflowDefinitionLink.getModifiedDate());
+		workflowDefinitionLinkImpl.setClassNameId(workflowDefinitionLink.getClassNameId());
+		workflowDefinitionLinkImpl.setWorkflowDefinitionName(workflowDefinitionLink.getWorkflowDefinitionName());
+		workflowDefinitionLinkImpl.setWorkflowDefinitionVersion(workflowDefinitionLink.getWorkflowDefinitionVersion());
 
-		return workflowLinkImpl;
+		return workflowDefinitionLinkImpl;
 	}
 
-	public WorkflowLink findByPrimaryKey(Serializable primaryKey)
+	public WorkflowDefinitionLink findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
-	public WorkflowLink findByPrimaryKey(long workflowLinkId)
-		throws NoSuchWorkflowLinkException, SystemException {
-		WorkflowLink workflowLink = fetchByPrimaryKey(workflowLinkId);
+	public WorkflowDefinitionLink findByPrimaryKey(
+		long workflowDefinitionLinkId)
+		throws NoSuchWorkflowDefinitionLinkException, SystemException {
+		WorkflowDefinitionLink workflowDefinitionLink = fetchByPrimaryKey(workflowDefinitionLinkId);
 
-		if (workflowLink == null) {
+		if (workflowDefinitionLink == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No WorkflowLink exists with the primary key " +
-					workflowLinkId);
+				_log.warn(
+					"No WorkflowDefinitionLink exists with the primary key " +
+					workflowDefinitionLinkId);
 			}
 
-			throw new NoSuchWorkflowLinkException(
-				"No WorkflowLink exists with the primary key " +
-				workflowLinkId);
+			throw new NoSuchWorkflowDefinitionLinkException(
+				"No WorkflowDefinitionLink exists with the primary key " +
+				workflowDefinitionLinkId);
 		}
 
-		return workflowLink;
+		return workflowDefinitionLink;
 	}
 
-	public WorkflowLink fetchByPrimaryKey(Serializable primaryKey)
+	public WorkflowDefinitionLink fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
-	public WorkflowLink fetchByPrimaryKey(long workflowLinkId)
-		throws SystemException {
-		WorkflowLink workflowLink = (WorkflowLink)EntityCacheUtil.getResult(WorkflowLinkModelImpl.ENTITY_CACHE_ENABLED,
-				WorkflowLinkImpl.class, workflowLinkId, this);
+	public WorkflowDefinitionLink fetchByPrimaryKey(
+		long workflowDefinitionLinkId) throws SystemException {
+		WorkflowDefinitionLink workflowDefinitionLink = (WorkflowDefinitionLink)EntityCacheUtil.getResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+				WorkflowDefinitionLinkImpl.class, workflowDefinitionLinkId, this);
 
-		if (workflowLink == null) {
+		if (workflowDefinitionLink == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				workflowLink = (WorkflowLink)session.get(WorkflowLinkImpl.class,
-						new Long(workflowLinkId));
+				workflowDefinitionLink = (WorkflowDefinitionLink)session.get(WorkflowDefinitionLinkImpl.class,
+						new Long(workflowDefinitionLinkId));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (workflowLink != null) {
-					cacheResult(workflowLink);
+				if (workflowDefinitionLink != null) {
+					cacheResult(workflowDefinitionLink);
 				}
 
 				closeSession(session);
 			}
 		}
 
-		return workflowLink;
+		return workflowDefinitionLink;
 	}
 
-	public List<WorkflowLink> findByCompanyId(long companyId)
+	public List<WorkflowDefinitionLink> findByCompanyId(long companyId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		List<WorkflowLink> list = (List<WorkflowLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+		List<WorkflowDefinitionLink> list = (List<WorkflowDefinitionLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -397,15 +411,16 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"SELECT workflowLink FROM WorkflowLink workflowLink WHERE ");
+					"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
 
-				query.append("workflowLink.companyId = ?");
+				query.append("workflowDefinitionLink.companyId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("workflowLink.workflowDefinitionName ASC");
+				query.append(
+					"workflowDefinitionLink.workflowDefinitionName ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -420,7 +435,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WorkflowLink>();
+					list = new ArrayList<WorkflowDefinitionLink>();
 				}
 
 				cacheResult(list);
@@ -435,20 +450,20 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 		return list;
 	}
 
-	public List<WorkflowLink> findByCompanyId(long companyId, int start, int end)
-		throws SystemException {
+	public List<WorkflowDefinitionLink> findByCompanyId(long companyId,
+		int start, int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<WorkflowLink> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<WorkflowDefinitionLink> findByCompanyId(long companyId,
+		int start, int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<WorkflowLink> list = (List<WorkflowLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<WorkflowDefinitionLink> list = (List<WorkflowDefinitionLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -460,9 +475,9 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"SELECT workflowLink FROM WorkflowLink workflowLink WHERE ");
+					"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
 
-				query.append("workflowLink.companyId = ?");
+				query.append("workflowDefinitionLink.companyId = ?");
 
 				query.append(" ");
 
@@ -472,7 +487,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 					String[] orderByFields = obc.getOrderByFields();
 
 					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("workflowLink.");
+						query.append("workflowDefinitionLink.");
 						query.append(orderByFields[i]);
 
 						if (obc.isAscending()) {
@@ -491,7 +506,8 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				else {
 					query.append("ORDER BY ");
 
-					query.append("workflowLink.workflowDefinitionName ASC");
+					query.append(
+						"workflowDefinitionLink.workflowDefinitionName ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -500,15 +516,15 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 
 				qPos.add(companyId);
 
-				list = (List<WorkflowLink>)QueryUtil.list(q, getDialect(),
-						start, end);
+				list = (List<WorkflowDefinitionLink>)QueryUtil.list(q,
+						getDialect(), start, end);
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WorkflowLink>();
+					list = new ArrayList<WorkflowDefinitionLink>();
 				}
 
 				cacheResult(list);
@@ -523,55 +539,55 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 		return list;
 	}
 
-	public WorkflowLink findByCompanyId_First(long companyId,
+	public WorkflowDefinitionLink findByCompanyId_First(long companyId,
 		OrderByComparator obc)
-		throws NoSuchWorkflowLinkException, SystemException {
-		List<WorkflowLink> list = findByCompanyId(companyId, 0, 1, obc);
+		throws NoSuchWorkflowDefinitionLinkException, SystemException {
+		List<WorkflowDefinitionLink> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
-			msg.append("No WorkflowLink exists with the key {");
+			msg.append("No WorkflowDefinitionLink exists with the key {");
 
 			msg.append("companyId=" + companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchWorkflowLinkException(msg.toString());
+			throw new NoSuchWorkflowDefinitionLinkException(msg.toString());
 		}
 		else {
 			return list.get(0);
 		}
 	}
 
-	public WorkflowLink findByCompanyId_Last(long companyId,
+	public WorkflowDefinitionLink findByCompanyId_Last(long companyId,
 		OrderByComparator obc)
-		throws NoSuchWorkflowLinkException, SystemException {
+		throws NoSuchWorkflowDefinitionLinkException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<WorkflowLink> list = findByCompanyId(companyId, count - 1, count,
-				obc);
+		List<WorkflowDefinitionLink> list = findByCompanyId(companyId,
+				count - 1, count, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
-			msg.append("No WorkflowLink exists with the key {");
+			msg.append("No WorkflowDefinitionLink exists with the key {");
 
 			msg.append("companyId=" + companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchWorkflowLinkException(msg.toString());
+			throw new NoSuchWorkflowDefinitionLinkException(msg.toString());
 		}
 		else {
 			return list.get(0);
 		}
 	}
 
-	public WorkflowLink[] findByCompanyId_PrevAndNext(long workflowLinkId,
-		long companyId, OrderByComparator obc)
-		throws NoSuchWorkflowLinkException, SystemException {
-		WorkflowLink workflowLink = findByPrimaryKey(workflowLinkId);
+	public WorkflowDefinitionLink[] findByCompanyId_PrevAndNext(
+		long workflowDefinitionLinkId, long companyId, OrderByComparator obc)
+		throws NoSuchWorkflowDefinitionLinkException, SystemException {
+		WorkflowDefinitionLink workflowDefinitionLink = findByPrimaryKey(workflowDefinitionLinkId);
 
 		int count = countByCompanyId(companyId);
 
@@ -583,9 +599,9 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 			StringBuilder query = new StringBuilder();
 
 			query.append(
-				"SELECT workflowLink FROM WorkflowLink workflowLink WHERE ");
+				"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
 
-			query.append("workflowLink.companyId = ?");
+			query.append("workflowDefinitionLink.companyId = ?");
 
 			query.append(" ");
 
@@ -595,7 +611,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				String[] orderByFields = obc.getOrderByFields();
 
 				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("workflowLink.");
+					query.append("workflowDefinitionLink.");
 					query.append(orderByFields[i]);
 
 					if (obc.isAscending()) {
@@ -614,7 +630,8 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 			else {
 				query.append("ORDER BY ");
 
-				query.append("workflowLink.workflowDefinitionName ASC");
+				query.append(
+					"workflowDefinitionLink.workflowDefinitionName ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -624,13 +641,13 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					workflowLink);
+					workflowDefinitionLink);
 
-			WorkflowLink[] array = new WorkflowLinkImpl[3];
+			WorkflowDefinitionLink[] array = new WorkflowDefinitionLinkImpl[3];
 
-			array[0] = (WorkflowLink)objArray[0];
-			array[1] = (WorkflowLink)objArray[1];
-			array[2] = (WorkflowLink)objArray[2];
+			array[0] = (WorkflowDefinitionLink)objArray[0];
+			array[1] = (WorkflowDefinitionLink)objArray[1];
+			array[2] = (WorkflowDefinitionLink)objArray[2];
 
 			return array;
 		}
@@ -642,14 +659,16 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 		}
 	}
 
-	public WorkflowLink findByG_C_C(long groupId, long companyId,
-		long classNameId) throws NoSuchWorkflowLinkException, SystemException {
-		WorkflowLink workflowLink = fetchByG_C_C(groupId, companyId, classNameId);
+	public WorkflowDefinitionLink findByG_C_C(long groupId, long companyId,
+		long classNameId)
+		throws NoSuchWorkflowDefinitionLinkException, SystemException {
+		WorkflowDefinitionLink workflowDefinitionLink = fetchByG_C_C(groupId,
+				companyId, classNameId);
 
-		if (workflowLink == null) {
+		if (workflowDefinitionLink == null) {
 			StringBuilder msg = new StringBuilder();
 
-			msg.append("No WorkflowLink exists with the key {");
+			msg.append("No WorkflowDefinitionLink exists with the key {");
 
 			msg.append("groupId=" + groupId);
 
@@ -665,18 +684,18 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchWorkflowLinkException(msg.toString());
+			throw new NoSuchWorkflowDefinitionLinkException(msg.toString());
 		}
 
-		return workflowLink;
+		return workflowDefinitionLink;
 	}
 
-	public WorkflowLink fetchByG_C_C(long groupId, long companyId,
+	public WorkflowDefinitionLink fetchByG_C_C(long groupId, long companyId,
 		long classNameId) throws SystemException {
 		return fetchByG_C_C(groupId, companyId, classNameId, true);
 	}
 
-	public WorkflowLink fetchByG_C_C(long groupId, long companyId,
+	public WorkflowDefinitionLink fetchByG_C_C(long groupId, long companyId,
 		long classNameId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(companyId), new Long(classNameId)
@@ -698,23 +717,24 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"SELECT workflowLink FROM WorkflowLink workflowLink WHERE ");
+					"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
 
-				query.append("workflowLink.groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("workflowLink.companyId = ?");
+				query.append("workflowDefinitionLink.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("workflowLink.classNameId = ?");
+				query.append("workflowDefinitionLink.companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("workflowDefinitionLink.classNameId = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
-				query.append("workflowLink.workflowDefinitionName ASC");
+				query.append(
+					"workflowDefinitionLink.workflowDefinitionName ASC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -726,30 +746,30 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 
 				qPos.add(classNameId);
 
-				List<WorkflowLink> list = q.list();
+				List<WorkflowDefinitionLink> list = q.list();
 
 				result = list;
 
-				WorkflowLink workflowLink = null;
+				WorkflowDefinitionLink workflowDefinitionLink = null;
 
 				if (list.isEmpty()) {
 					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
 						finderArgs, list);
 				}
 				else {
-					workflowLink = list.get(0);
+					workflowDefinitionLink = list.get(0);
 
-					cacheResult(workflowLink);
+					cacheResult(workflowDefinitionLink);
 
-					if ((workflowLink.getGroupId() != groupId) ||
-							(workflowLink.getCompanyId() != companyId) ||
-							(workflowLink.getClassNameId() != classNameId)) {
+					if ((workflowDefinitionLink.getGroupId() != groupId) ||
+							(workflowDefinitionLink.getCompanyId() != companyId) ||
+							(workflowDefinitionLink.getClassNameId() != classNameId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
-							finderArgs, workflowLink);
+							finderArgs, workflowDefinitionLink);
 					}
 				}
 
-				return workflowLink;
+				return workflowDefinitionLink;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -757,7 +777,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 			finally {
 				if (result == null) {
 					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C,
-						finderArgs, new ArrayList<WorkflowLink>());
+						finderArgs, new ArrayList<WorkflowDefinitionLink>());
 				}
 
 				closeSession(session);
@@ -768,7 +788,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				return null;
 			}
 			else {
-				return (WorkflowLink)result;
+				return (WorkflowDefinitionLink)result;
 			}
 		}
 	}
@@ -813,22 +833,22 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 		}
 	}
 
-	public List<WorkflowLink> findAll() throws SystemException {
+	public List<WorkflowDefinitionLink> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<WorkflowLink> findAll(int start, int end)
+	public List<WorkflowDefinitionLink> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
-	public List<WorkflowLink> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<WorkflowDefinitionLink> findAll(int start, int end,
+		OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<WorkflowLink> list = (List<WorkflowLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<WorkflowDefinitionLink> list = (List<WorkflowDefinitionLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
 		if (list == null) {
@@ -840,7 +860,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				StringBuilder query = new StringBuilder();
 
 				query.append(
-					"SELECT workflowLink FROM WorkflowLink workflowLink ");
+					"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink ");
 
 				if (obc != null) {
 					query.append("ORDER BY ");
@@ -848,7 +868,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 					String[] orderByFields = obc.getOrderByFields();
 
 					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("workflowLink.");
+						query.append("workflowDefinitionLink.");
 						query.append(orderByFields[i]);
 
 						if (obc.isAscending()) {
@@ -867,20 +887,21 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				else {
 					query.append("ORDER BY ");
 
-					query.append("workflowLink.workflowDefinitionName ASC");
+					query.append(
+						"workflowDefinitionLink.workflowDefinitionName ASC");
 				}
 
 				Query q = session.createQuery(query.toString());
 
 				if (obc == null) {
-					list = (List<WorkflowLink>)QueryUtil.list(q, getDialect(),
-							start, end, false);
+					list = (List<WorkflowDefinitionLink>)QueryUtil.list(q,
+							getDialect(), start, end, false);
 
 					Collections.sort(list);
 				}
 				else {
-					list = (List<WorkflowLink>)QueryUtil.list(q, getDialect(),
-							start, end);
+					list = (List<WorkflowDefinitionLink>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
 			}
 			catch (Exception e) {
@@ -888,7 +909,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WorkflowLink>();
+					list = new ArrayList<WorkflowDefinitionLink>();
 				}
 
 				cacheResult(list);
@@ -903,21 +924,23 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		for (WorkflowLink workflowLink : findByCompanyId(companyId)) {
-			remove(workflowLink);
+		for (WorkflowDefinitionLink workflowDefinitionLink : findByCompanyId(
+				companyId)) {
+			remove(workflowDefinitionLink);
 		}
 	}
 
 	public void removeByG_C_C(long groupId, long companyId, long classNameId)
-		throws NoSuchWorkflowLinkException, SystemException {
-		WorkflowLink workflowLink = findByG_C_C(groupId, companyId, classNameId);
+		throws NoSuchWorkflowDefinitionLinkException, SystemException {
+		WorkflowDefinitionLink workflowDefinitionLink = findByG_C_C(groupId,
+				companyId, classNameId);
 
-		remove(workflowLink);
+		remove(workflowDefinitionLink);
 	}
 
 	public void removeAll() throws SystemException {
-		for (WorkflowLink workflowLink : findAll()) {
-			remove(workflowLink);
+		for (WorkflowDefinitionLink workflowDefinitionLink : findAll()) {
+			remove(workflowDefinitionLink);
 		}
 	}
 
@@ -935,10 +958,11 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(workflowLink) ");
-				query.append("FROM WorkflowLink workflowLink WHERE ");
+				query.append("SELECT COUNT(workflowDefinitionLink) ");
+				query.append(
+					"FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
 
-				query.append("workflowLink.companyId = ?");
+				query.append("workflowDefinitionLink.companyId = ?");
 
 				query.append(" ");
 
@@ -985,18 +1009,19 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 
 				StringBuilder query = new StringBuilder();
 
-				query.append("SELECT COUNT(workflowLink) ");
-				query.append("FROM WorkflowLink workflowLink WHERE ");
+				query.append("SELECT COUNT(workflowDefinitionLink) ");
+				query.append(
+					"FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
 
-				query.append("workflowLink.groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("workflowLink.companyId = ?");
+				query.append("workflowDefinitionLink.groupId = ?");
 
 				query.append(" AND ");
 
-				query.append("workflowLink.classNameId = ?");
+				query.append("workflowDefinitionLink.companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("workflowDefinitionLink.classNameId = ?");
 
 				query.append(" ");
 
@@ -1043,7 +1068,7 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 				session = openSession();
 
 				Query q = session.createQuery(
-						"SELECT COUNT(workflowLink) FROM WorkflowLink workflowLink");
+						"SELECT COUNT(workflowDefinitionLink) FROM WorkflowDefinitionLink workflowDefinitionLink");
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1068,14 +1093,14 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
-						"value.object.listener.com.liferay.portal.model.WorkflowLink")));
+						"value.object.listener.com.liferay.portal.model.WorkflowDefinitionLink")));
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener<WorkflowLink>> listenersList = new ArrayList<ModelListener<WorkflowLink>>();
+				List<ModelListener<WorkflowDefinitionLink>> listenersList = new ArrayList<ModelListener<WorkflowDefinitionLink>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<WorkflowLink>)Class.forName(
+					listenersList.add((ModelListener<WorkflowDefinitionLink>)Class.forName(
 							listenerClassName).newInstance());
 				}
 
@@ -1185,7 +1210,9 @@ public class WorkflowLinkPersistenceImpl extends BasePersistenceImpl<WorkflowLin
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl")
-	protected com.liferay.portal.service.persistence.WorkflowLinkPersistence workflowLinkPersistence;
-	private static Log _log = LogFactoryUtil.getLog(WorkflowLinkPersistenceImpl.class);
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence.impl")
+	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence.impl")
+	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static Log _log = LogFactoryUtil.getLog(WorkflowDefinitionLinkPersistenceImpl.class);
 }

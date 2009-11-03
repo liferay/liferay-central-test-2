@@ -205,14 +205,28 @@ create table UserGroupGroupRole (
 	primary key (userGroupId, groupId, roleId)
 );
 
-create table WorkflowLink (
-	workflowLinkId LONG not null primary key,
+create table WorkflowDefinitionLink (
+	workflowDefinitionLinkId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
+	createDate DATE null,
 	modifiedDate DATE null,
 	classNameId LONG,
 	workflowDefinitionName VARCHAR(75) null,
 	workflowDefinitionVersion INTEGER
+);
+
+create table WorkflowInstanceLink (
+	workflowInstanceLinkId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	workflowInstanceId LONG
 );

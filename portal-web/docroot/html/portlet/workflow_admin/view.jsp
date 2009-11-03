@@ -49,11 +49,11 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 		List<String> modelResources = ListUtil.fromArray(_WORKFLOW_RESOURCES);
 		%>
 
-		<portlet:actionURL var="editWorkflowLinkURL">
-			<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_link" />
+		<portlet:actionURL var="editWorkflowDefinitionLinkURL">
+			<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition_link" />
 		</portlet:actionURL>
 
-		<aui:form action="<%= editWorkflowLinkURL %>" method="post">
+		<aui:form action="<%= editWorkflowDefinitionLinkURL %>" method="post">
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
 			<liferay-ui:search-container
@@ -95,6 +95,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 					<liferay-ui:search-container-column-text
 						name="workflow"
 					>
+
 						<%
 						long classNameId = PortalUtil.getClassNameId(modelResource);
 						%>

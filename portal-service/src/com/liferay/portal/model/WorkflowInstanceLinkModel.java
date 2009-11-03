@@ -32,7 +32,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <a href="WorkflowLinkModel.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowInstanceLinkModel.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -40,24 +40,24 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the WorkflowLink table in the
+ * This interface is a model that represents the WorkflowInstanceLink table in the
  * database.
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       WorkflowLink
- * @see       com.liferay.portal.model.impl.WorkflowLinkImpl
- * @see       com.liferay.portal.model.impl.WorkflowLinkModelImpl
+ * @see       WorkflowInstanceLink
+ * @see       com.liferay.portal.model.impl.WorkflowInstanceLinkImpl
+ * @see       com.liferay.portal.model.impl.WorkflowInstanceLinkModelImpl
  * @generated
  */
-public interface WorkflowLinkModel extends BaseModel<WorkflowLink> {
+public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLink> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);
 
-	public long getWorkflowLinkId();
+	public long getWorkflowInstanceLinkId();
 
-	public void setWorkflowLinkId(long workflowLinkId);
+	public void setWorkflowInstanceLinkId(long workflowInstanceLinkId);
 
 	public long getGroupId();
 
@@ -79,6 +79,10 @@ public interface WorkflowLinkModel extends BaseModel<WorkflowLink> {
 
 	public void setUserName(String userName);
 
+	public Date getCreateDate();
+
+	public void setCreateDate(Date createDate);
+
 	public Date getModifiedDate();
 
 	public void setModifiedDate(Date modifiedDate);
@@ -89,15 +93,15 @@ public interface WorkflowLinkModel extends BaseModel<WorkflowLink> {
 
 	public void setClassNameId(long classNameId);
 
-	public String getWorkflowDefinitionName();
+	public long getClassPK();
 
-	public void setWorkflowDefinitionName(String workflowDefinitionName);
+	public void setClassPK(long classPK);
 
-	public int getWorkflowDefinitionVersion();
+	public long getWorkflowInstanceId();
 
-	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion);
+	public void setWorkflowInstanceId(long workflowInstanceId);
 
-	public WorkflowLink toEscapedModel();
+	public WorkflowInstanceLink toEscapedModel();
 
 	public boolean isNew();
 
@@ -119,7 +123,7 @@ public interface WorkflowLinkModel extends BaseModel<WorkflowLink> {
 
 	public Object clone();
 
-	public int compareTo(WorkflowLink workflowLink);
+	public int compareTo(WorkflowInstanceLink workflowInstanceLink);
 
 	public int hashCode();
 

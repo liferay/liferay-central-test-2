@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.WorkflowLink;
-import com.liferay.portal.model.WorkflowLinkSoap;
+import com.liferay.portal.model.WorkflowInstanceLink;
+import com.liferay.portal.model.WorkflowInstanceLinkSoap;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
@@ -46,7 +46,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="WorkflowLinkModelImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowInstanceLinkModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -54,61 +54,65 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the WorkflowLink table in the
+ * This interface is a model that represents the WorkflowInstanceLink table in the
  * database.
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       WorkflowLinkImpl
- * @see       com.liferay.portal.model.WorkflowLink
- * @see       com.liferay.portal.model.WorkflowLinkModel
+ * @see       WorkflowInstanceLinkImpl
+ * @see       com.liferay.portal.model.WorkflowInstanceLink
+ * @see       com.liferay.portal.model.WorkflowInstanceLinkModel
  * @generated
  */
-public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
-	public static final String TABLE_NAME = "WorkflowLink";
+public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanceLink> {
+	public static final String TABLE_NAME = "WorkflowInstanceLink";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "workflowLinkId", new Integer(Types.BIGINT) },
+			{ "workflowInstanceLinkId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "workflowDefinitionName", new Integer(Types.VARCHAR) },
-			{ "workflowDefinitionVersion", new Integer(Types.INTEGER) }
+			{ "classPK", new Integer(Types.BIGINT) },
+			{ "workflowInstanceId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WorkflowLink (workflowLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,modifiedDate DATE null,classNameId LONG,workflowDefinitionName VARCHAR(75) null,workflowDefinitionVersion INTEGER)";
-	public static final String TABLE_SQL_DROP = "drop table WorkflowLink";
+	public static final String TABLE_SQL_CREATE = "create table WorkflowInstanceLink (workflowInstanceLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,workflowInstanceId LONG)";
+	public static final String TABLE_SQL_DROP = "drop table WorkflowInstanceLink";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
-				"value.object.entity.cache.enabled.com.liferay.portal.model.WorkflowLink"),
+				"value.object.entity.cache.enabled.com.liferay.portal.model.WorkflowInstanceLink"),
 			true);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
-				"value.object.finder.cache.enabled.com.liferay.portal.model.WorkflowLink"),
+				"value.object.finder.cache.enabled.com.liferay.portal.model.WorkflowInstanceLink"),
 			true);
 
-	public static WorkflowLink toModel(WorkflowLinkSoap soapModel) {
-		WorkflowLink model = new WorkflowLinkImpl();
+	public static WorkflowInstanceLink toModel(
+		WorkflowInstanceLinkSoap soapModel) {
+		WorkflowInstanceLink model = new WorkflowInstanceLinkImpl();
 
-		model.setWorkflowLinkId(soapModel.getWorkflowLinkId());
+		model.setWorkflowInstanceLinkId(soapModel.getWorkflowInstanceLinkId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setClassNameId(soapModel.getClassNameId());
-		model.setWorkflowDefinitionName(soapModel.getWorkflowDefinitionName());
-		model.setWorkflowDefinitionVersion(soapModel.getWorkflowDefinitionVersion());
+		model.setClassPK(soapModel.getClassPK());
+		model.setWorkflowInstanceId(soapModel.getWorkflowInstanceId());
 
 		return model;
 	}
 
-	public static List<WorkflowLink> toModels(WorkflowLinkSoap[] soapModels) {
-		List<WorkflowLink> models = new ArrayList<WorkflowLink>(soapModels.length);
+	public static List<WorkflowInstanceLink> toModels(
+		WorkflowInstanceLinkSoap[] soapModels) {
+		List<WorkflowInstanceLink> models = new ArrayList<WorkflowInstanceLink>(soapModels.length);
 
-		for (WorkflowLinkSoap soapModel : soapModels) {
+		for (WorkflowInstanceLinkSoap soapModel : soapModels) {
 			models.add(toModel(soapModel));
 		}
 
@@ -116,29 +120,29 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 	}
 
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
-				"lock.expiration.time.com.liferay.portal.model.WorkflowLink"));
+				"lock.expiration.time.com.liferay.portal.model.WorkflowInstanceLink"));
 
-	public WorkflowLinkModelImpl() {
+	public WorkflowInstanceLinkModelImpl() {
 	}
 
 	public long getPrimaryKey() {
-		return _workflowLinkId;
+		return _workflowInstanceLinkId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setWorkflowLinkId(pk);
+		setWorkflowInstanceLinkId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_workflowLinkId);
+		return new Long(_workflowInstanceLinkId);
 	}
 
-	public long getWorkflowLinkId() {
-		return _workflowLinkId;
+	public long getWorkflowInstanceLinkId() {
+		return _workflowInstanceLinkId;
 	}
 
-	public void setWorkflowLinkId(long workflowLinkId) {
-		_workflowLinkId = workflowLinkId;
+	public void setWorkflowInstanceLinkId(long workflowInstanceLinkId) {
+		_workflowInstanceLinkId = workflowInstanceLinkId;
 	}
 
 	public long getGroupId() {
@@ -201,6 +205,14 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		_userName = userName;
 	}
 
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -235,45 +247,55 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		return _originalClassNameId;
 	}
 
-	public String getWorkflowDefinitionName() {
-		return GetterUtil.getString(_workflowDefinitionName);
+	public long getClassPK() {
+		return _classPK;
 	}
 
-	public void setWorkflowDefinitionName(String workflowDefinitionName) {
-		_workflowDefinitionName = workflowDefinitionName;
+	public void setClassPK(long classPK) {
+		_classPK = classPK;
+
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = classPK;
+		}
 	}
 
-	public int getWorkflowDefinitionVersion() {
-		return _workflowDefinitionVersion;
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
-	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion) {
-		_workflowDefinitionVersion = workflowDefinitionVersion;
+	public long getWorkflowInstanceId() {
+		return _workflowInstanceId;
 	}
 
-	public WorkflowLink toEscapedModel() {
+	public void setWorkflowInstanceId(long workflowInstanceId) {
+		_workflowInstanceId = workflowInstanceId;
+	}
+
+	public WorkflowInstanceLink toEscapedModel() {
 		if (isEscapedModel()) {
-			return (WorkflowLink)this;
+			return (WorkflowInstanceLink)this;
 		}
 		else {
-			WorkflowLink model = new WorkflowLinkImpl();
+			WorkflowInstanceLink model = new WorkflowInstanceLinkImpl();
 
 			model.setNew(isNew());
 			model.setEscapedModel(true);
 
-			model.setWorkflowLinkId(getWorkflowLinkId());
+			model.setWorkflowInstanceLinkId(getWorkflowInstanceLinkId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
+			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
-			model.setWorkflowDefinitionName(HtmlUtil.escape(
-					getWorkflowDefinitionName()));
-			model.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
+			model.setClassPK(getClassPK());
+			model.setWorkflowInstanceId(getWorkflowInstanceId());
 
-			model = (WorkflowLink)Proxy.newProxyInstance(WorkflowLink.class.getClassLoader(),
-					new Class[] { WorkflowLink.class },
+			model = (WorkflowInstanceLink)Proxy.newProxyInstance(WorkflowInstanceLink.class.getClassLoader(),
+					new Class[] { WorkflowInstanceLink.class },
 					new ReadOnlyBeanHandler(model));
 
 			return model;
@@ -282,7 +304,7 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(WorkflowLink.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(WorkflowInstanceLink.class.getName(),
 					getPrimaryKey());
 		}
 
@@ -294,32 +316,34 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 	}
 
 	public Object clone() {
-		WorkflowLinkImpl clone = new WorkflowLinkImpl();
+		WorkflowInstanceLinkImpl clone = new WorkflowInstanceLinkImpl();
 
-		clone.setWorkflowLinkId(getWorkflowLinkId());
+		clone.setWorkflowInstanceLinkId(getWorkflowInstanceLinkId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
+		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setClassNameId(getClassNameId());
-		clone.setWorkflowDefinitionName(getWorkflowDefinitionName());
-		clone.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
+		clone.setClassPK(getClassPK());
+		clone.setWorkflowInstanceId(getWorkflowInstanceId());
 
 		return clone;
 	}
 
-	public int compareTo(WorkflowLink workflowLink) {
-		int value = 0;
+	public int compareTo(WorkflowInstanceLink workflowInstanceLink) {
+		long pk = workflowInstanceLink.getPrimaryKey();
 
-		value = getWorkflowDefinitionName()
-					.compareTo(workflowLink.getWorkflowDefinitionName());
-
-		if (value != 0) {
-			return value;
+		if (getPrimaryKey() < pk) {
+			return -1;
 		}
-
-		return 0;
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -327,16 +351,16 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 			return false;
 		}
 
-		WorkflowLink workflowLink = null;
+		WorkflowInstanceLink workflowInstanceLink = null;
 
 		try {
-			workflowLink = (WorkflowLink)obj;
+			workflowInstanceLink = (WorkflowInstanceLink)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;
 		}
 
-		long pk = workflowLink.getPrimaryKey();
+		long pk = workflowInstanceLink.getPrimaryKey();
 
 		if (getPrimaryKey() == pk) {
 			return true;
@@ -353,8 +377,8 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{workflowLinkId=");
-		sb.append(getWorkflowLinkId());
+		sb.append("{workflowInstanceLinkId=");
+		sb.append(getWorkflowInstanceLinkId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -363,14 +387,16 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
-		sb.append(", workflowDefinitionName=");
-		sb.append(getWorkflowDefinitionName());
-		sb.append(", workflowDefinitionVersion=");
-		sb.append(getWorkflowDefinitionVersion());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
+		sb.append(", workflowInstanceId=");
+		sb.append(getWorkflowInstanceId());
 		sb.append("}");
 
 		return sb.toString();
@@ -380,12 +406,12 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<model><model-name>");
-		sb.append("com.liferay.portal.model.WorkflowLink");
+		sb.append("com.liferay.portal.model.WorkflowInstanceLink");
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>workflowLinkId</column-name><column-value><![CDATA[");
-		sb.append(getWorkflowLinkId());
+			"<column><column-name>workflowInstanceLinkId</column-name><column-value><![CDATA[");
+		sb.append(getWorkflowInstanceLinkId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
@@ -404,6 +430,10 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append(getCreateDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
@@ -412,12 +442,12 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>workflowDefinitionName</column-name><column-value><![CDATA[");
-		sb.append(getWorkflowDefinitionName());
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>workflowDefinitionVersion</column-name><column-value><![CDATA[");
-		sb.append(getWorkflowDefinitionVersion());
+			"<column><column-name>workflowInstanceId</column-name><column-value><![CDATA[");
+		sb.append(getWorkflowInstanceId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -425,7 +455,7 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 		return sb.toString();
 	}
 
-	private long _workflowLinkId;
+	private long _workflowInstanceLinkId;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
@@ -435,11 +465,14 @@ public class WorkflowLinkModelImpl extends BaseModelImpl<WorkflowLink> {
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
+	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
 	private long _originalClassNameId;
 	private boolean _setOriginalClassNameId;
-	private String _workflowDefinitionName;
-	private int _workflowDefinitionVersion;
+	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
+	private long _workflowInstanceId;
 	private transient ExpandoBridge _expandoBridge;
 }

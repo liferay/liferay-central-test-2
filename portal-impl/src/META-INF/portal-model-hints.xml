@@ -698,16 +698,29 @@
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
-	<model name="com.liferay.portal.model.WorkflowLink">
-		<field name="workflowLinkId" type="long" />
+	<model name="com.liferay.portal.model.WorkflowDefinitionLink">
+		<field name="workflowDefinitionLinkId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />
 		<field name="workflowDefinitionName" type="String" />
 		<field name="workflowDefinitionVersion" type="int" />
+	</model>
+	<model name="com.liferay.portal.model.WorkflowInstanceLink">
+		<field name="workflowInstanceLinkId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="workflowInstanceId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.announcements.model.AnnouncementsDelivery">
 		<field name="deliveryId" type="long" />

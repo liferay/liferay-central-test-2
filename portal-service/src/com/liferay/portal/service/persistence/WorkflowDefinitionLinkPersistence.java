@@ -22,10 +22,10 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.model.WorkflowLink;
+import com.liferay.portal.model.WorkflowDefinitionLink;
 
 /**
- * <a href="WorkflowLinkPersistence.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionLinkPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,82 +33,86 @@ import com.liferay.portal.model.WorkflowLink;
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       WorkflowLinkPersistenceImpl
- * @see       WorkflowLinkUtil
+ * @see       WorkflowDefinitionLinkPersistenceImpl
+ * @see       WorkflowDefinitionLinkUtil
  * @generated
  */
-public interface WorkflowLinkPersistence extends BasePersistence<WorkflowLink> {
-	public void cacheResult(com.liferay.portal.model.WorkflowLink workflowLink);
+public interface WorkflowDefinitionLinkPersistence extends BasePersistence<WorkflowDefinitionLink> {
+	public void cacheResult(
+		com.liferay.portal.model.WorkflowDefinitionLink workflowDefinitionLink);
 
 	public void cacheResult(
-		java.util.List<com.liferay.portal.model.WorkflowLink> workflowLinks);
+		java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> workflowDefinitionLinks);
 
-	public com.liferay.portal.model.WorkflowLink create(long workflowLinkId);
+	public com.liferay.portal.model.WorkflowDefinitionLink create(
+		long workflowDefinitionLinkId);
 
-	public com.liferay.portal.model.WorkflowLink remove(long workflowLinkId)
-		throws com.liferay.portal.NoSuchWorkflowLinkException,
+	public com.liferay.portal.model.WorkflowDefinitionLink remove(
+		long workflowDefinitionLinkId)
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink updateImpl(
-		com.liferay.portal.model.WorkflowLink workflowLink, boolean merge)
+	public com.liferay.portal.model.WorkflowDefinitionLink updateImpl(
+		com.liferay.portal.model.WorkflowDefinitionLink workflowDefinitionLink,
+		boolean merge) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.WorkflowDefinitionLink findByPrimaryKey(
+		long workflowDefinitionLinkId)
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.WorkflowDefinitionLink fetchByPrimaryKey(
+		long workflowDefinitionLinkId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink findByPrimaryKey(
-		long workflowLinkId)
-		throws com.liferay.portal.NoSuchWorkflowLinkException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.WorkflowLink fetchByPrimaryKey(
-		long workflowLinkId) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portal.model.WorkflowLink> findByCompanyId(
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.WorkflowLink> findByCompanyId(
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.WorkflowLink> findByCompanyId(
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink findByCompanyId_First(
+	public com.liferay.portal.model.WorkflowDefinitionLink findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWorkflowLinkException,
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink findByCompanyId_Last(
+	public com.liferay.portal.model.WorkflowDefinitionLink findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWorkflowLinkException,
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink[] findByCompanyId_PrevAndNext(
-		long workflowLinkId, long companyId,
+	public com.liferay.portal.model.WorkflowDefinitionLink[] findByCompanyId_PrevAndNext(
+		long workflowDefinitionLinkId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWorkflowLinkException,
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink findByG_C_C(long groupId,
-		long companyId, long classNameId)
-		throws com.liferay.portal.NoSuchWorkflowLinkException,
+	public com.liferay.portal.model.WorkflowDefinitionLink findByG_C_C(
+		long groupId, long companyId, long classNameId)
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink fetchByG_C_C(long groupId,
-		long companyId, long classNameId)
+	public com.liferay.portal.model.WorkflowDefinitionLink fetchByG_C_C(
+		long groupId, long companyId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.WorkflowLink fetchByG_C_C(long groupId,
-		long companyId, long classNameId, boolean retrieveFromCache)
+	public com.liferay.portal.model.WorkflowDefinitionLink fetchByG_C_C(
+		long groupId, long companyId, long classNameId,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.WorkflowLink> findAll()
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portal.model.WorkflowLink> findAll(
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.WorkflowLink> findAll(
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -116,7 +120,7 @@ public interface WorkflowLinkPersistence extends BasePersistence<WorkflowLink> {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_C_C(long groupId, long companyId, long classNameId)
-		throws com.liferay.portal.NoSuchWorkflowLinkException,
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;

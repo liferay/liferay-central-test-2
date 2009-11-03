@@ -1925,7 +1925,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowLinkPersistence.impl")
-	protected com.liferay.portal.service.persistence.WorkflowLinkPersistence workflowLinkPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence.impl")
+	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence.impl")
+	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	private static Log _log = LogFactoryUtil.getLog(SubscriptionPersistenceImpl.class);
 }
