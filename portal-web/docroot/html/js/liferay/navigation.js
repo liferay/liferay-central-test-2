@@ -390,29 +390,29 @@ AUI().add(
 							var currentLink = currentItem.one('a');
 
 							if (currentLink) {
-								currentLink.on(
-									'click',
-									function(event) {
-										if (event.shiftKey) {
-											event.halt();
-										}
-									}
-								);
-
-								currentLink.on(
-									'mouseenter',
-									function(event) {
-										if (!themeDisplay.isStateMaximized() || event.shiftKey) {
-											currentSpan.setStyle('cursor', 'text');
-										}
-									}
-								);
-
-								currentLink.on('mouseleave', A.bind(currentSpan.setStyle, currentSpan, 'cursor', 'pointer'));
-
 								var currentSpan = currentLink.one('span');
 
 								if (currentSpan) {
+									currentLink.on(
+										'click',
+										function(event) {
+											if (event.shiftKey) {
+												event.halt();
+											}
+										}
+									);
+
+									currentLink.on(
+										'mouseenter',
+										function(event) {
+											if (!themeDisplay.isStateMaximized() || event.shiftKey) {
+												currentSpan.setStyle('cursor', 'text');
+											}
+										}
+									);
+
+									currentLink.on('mouseleave', A.bind(currentSpan.setStyle, currentSpan, 'cursor', 'pointer'));
+
 									currentSpan.on(
 										'click',
 										function(event) {
