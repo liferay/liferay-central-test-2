@@ -32,14 +32,17 @@ String redirect = currentURL;
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 DLFolder folder = null;
+
 long folderId = 0;
 
 if (row != null) {
 	folder = (DLFolder)row.getObject();
+
 	folderId = folder.getFolderId();
 }
 else {
 	folder = (DLFolder)request.getAttribute("view.jsp-folder");
+
 	folderId = (Long)request.getAttribute("view.jsp-folderId");
 }
 

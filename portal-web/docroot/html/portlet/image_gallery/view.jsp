@@ -64,6 +64,7 @@ if (themeDisplay.isSignedIn()) {
 tabs1Names += ",recent-images";
 
 request.setAttribute("view.jsp-folder", folder);
+
 request.setAttribute("view.jsp-folderId", folderId);
 %>
 

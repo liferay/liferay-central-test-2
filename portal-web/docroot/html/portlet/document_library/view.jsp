@@ -60,6 +60,7 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-folder", folder);
+
 request.setAttribute("view.jsp-folderId", folderId);
 %>
 

@@ -30,14 +30,17 @@ String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + String
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 IGFolder folder = null;
+
 long folderId = 0;
 
 if (row != null) {
 	folder = (IGFolder)row.getObject();
+
 	folderId = folder.getFolderId();
 }
 else {
 	folder = (IGFolder)request.getAttribute("view.jsp-folder");
+
 	folderId = (Long)request.getAttribute("view.jsp-folderId");
 }
 

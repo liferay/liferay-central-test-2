@@ -28,14 +28,17 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 BookmarksFolder folder = null;
+
 long folderId = 0;
 
 if (row != null) {
 	folder = (BookmarksFolder)row.getObject();
+
 	folderId = folder.getFolderId();
 }
 else {
 	folder = (BookmarksFolder)request.getAttribute("view.jsp-folder");
+
 	folderId = (Long)request.getAttribute("view.jsp-folderId");
 }
 
