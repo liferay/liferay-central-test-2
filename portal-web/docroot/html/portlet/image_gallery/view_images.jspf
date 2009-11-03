@@ -146,31 +146,31 @@
 							<liferay-ui:ratings-score score="<%= score %>" />
 						</span>
 					</c:if>
+				</a>
 
-					<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
-						<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
-							<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
-						</div>
+				<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
+					<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
+						<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
 					</div>
+				</div>
 
-					<%
-					List assetTags = AssetTagServiceUtil.getTags(IGImage.class.getName(), image.getImageId());
-					%>
+				<%
+				List assetTags = AssetTagServiceUtil.getTags(IGImage.class.getName(), image.getImageId());
+				%>
 
-					<div id="<portlet:namespace />categorizacionContainer_<%= largeImage.getImageId() %>" style="display: none;">
-						<span <%= !assetTags.isEmpty() ? "class=\"has-tags\"" : "" %>>
-							<liferay-ui:asset-categories-summary
-								className="<%= IGImage.class.getName() %>"
-								classPK="<%= image.getImageId() %>"
-							/>
-						</span>
-
-						<liferay-ui:asset-tags-summary
+				<div id="<portlet:namespace />categorizacionContainer_<%= largeImage.getImageId() %>" style="display: none;">
+					<span <%= !assetTags.isEmpty() ? "class=\"has-tags\"" : "" %>>
+						<liferay-ui:asset-categories-summary
 							className="<%= IGImage.class.getName() %>"
 							classPK="<%= image.getImageId() %>"
 						/>
-					</div>
-				</a>
+					</span>
+
+					<liferay-ui:asset-tags-summary
+						className="<%= IGImage.class.getName() %>"
+						classPK="<%= image.getImageId() %>"
+					/>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<div style="float: left; margin: 100px 10px 0px;">
