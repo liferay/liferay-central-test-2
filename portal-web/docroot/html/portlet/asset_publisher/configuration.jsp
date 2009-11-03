@@ -430,7 +430,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							/>
 						</div>
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "filter") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "filter[action]") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<liferay-ui:asset-tags-error />
 
 						<div id="<portlet:namespace />queryRules">
