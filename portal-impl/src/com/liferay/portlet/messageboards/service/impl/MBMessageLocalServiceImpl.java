@@ -2049,6 +2049,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subject = StringUtil.replace(
 			subject,
 			new String[] {
+				"[$BLOGS_COMMENTS_BODY$]",
 				"[$BLOGS_COMMENTS_USER_ADDRESS$]",
 				"[$BLOGS_COMMENTS_USER_NAME$]",
 				"[$BLOGS_ENTRY_URL$]",
@@ -2058,6 +2059,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"[$TO_NAME$]"
 			},
 			new String[] {
+				message.getBody(),
 				commentsUser.getEmailAddress(),
 				commentsUser.getFullName(),
 				blogsEntryURL,
@@ -2070,6 +2072,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		body = StringUtil.replace(
 			body,
 			new String[] {
+				"[$BLOGS_COMMENTS_BODY$]",
 				"[$BLOGS_COMMENTS_USER_ADDRESS$]",
 				"[$BLOGS_COMMENTS_USER_NAME$]",
 				"[$BLOGS_ENTRY_URL$]",
@@ -2079,6 +2082,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"[$TO_NAME$]"
 			},
 			new String[] {
+				message.getBody(),
 				commentsUser.getEmailAddress(),
 				commentsUser.getFullName(),
 				blogsEntryURL,
