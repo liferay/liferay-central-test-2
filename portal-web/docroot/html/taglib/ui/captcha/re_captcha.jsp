@@ -24,4 +24,26 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<liferay-util:include page='<%= "/html/taglib/ui/captcha/" + PropsValues.CAPTCHA_ENGINE + ".jsp" %>' />
+<%
+String scriptURL = PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT + PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC;
+%>
+
+<script type="text/javascript">
+	var RecaptchaOptions = {
+		lang : '<%= locale.getLanguage() %>',
+		theme : 'white'
+	};
+</script>
+
+<script src="<%= scriptURL %>" type="text/javascript">
+</script>
+
+<noscript>
+	<iframe frameborder="0" height="300" src="<%= scriptURL %>" width="500"></iframe>
+
+	<br />
+
+	<textarea cols="40" name="recaptcha_challenge_field" rows="3"></textarea>
+
+	<input name="recaptcha_response_field"  type="hidden"value="manual_challenge" />
+</noscript>

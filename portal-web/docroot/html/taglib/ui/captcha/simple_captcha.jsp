@@ -24,4 +24,34 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<liferay-util:include page='<%= "/html/taglib/ui/captcha/" + PropsValues.CAPTCHA_ENGINE + ".jsp" %>' />
+<%@ page import="com.liferay.portal.kernel.captcha.CaptchaUtil" %>
+
+<%
+String url = (String)request.getAttribute("liferay-ui:captcha:url");
+
+boolean captchaEnabled = false;
+
+if (portletRequest != null) {
+	captchaEnabled = CaptchaUtil.isEnabled(portletRequest);
+}
+else {
+	captchaEnabled = CaptchaUtil.isEnabled(request);
+}
+%>
+
+<c:if test="<%= captchaEnabled %>">
+	<div class="taglib-captcha">
+		<img alt="captcha" class="captcha" src="<%= url %>" />
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="text-verification" />
+			</td>
+			<td>
+				<input name="<%= namespace %>captchaText" size="10" type="text" value="" />
+			</td>
+		</tr>
+		</table>
+	</div>
+</c:if>

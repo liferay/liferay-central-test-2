@@ -233,6 +233,24 @@ public class PropsValues {
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE));
 
+	public static final String CAPTCHA_ENGINE =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE);
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT);
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_NOSCRIPT =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_NOSCRIPT);
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY);
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE);
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC);
+
 	public static final int CAPTCHA_MAX_CHALLENGES = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.CAPTCHA_MAX_CHALLENGES));
 

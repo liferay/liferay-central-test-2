@@ -29,7 +29,11 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsFiles;
@@ -53,6 +57,8 @@ import nl.captcha.util.Helper;
  * <a href="CaptchaImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ * @author Tagnaouti Boubker
  */
 public class CaptchaImpl implements Captcha {
 
@@ -70,44 +76,11 @@ public class CaptchaImpl implements Captcha {
 			return;
 		}
 
-		HttpSession session = request.getSession();
-
-		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
-
-		if (captchaText == null) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Captcha text is null. User " + request.getRemoteUser() +
-						" may be trying to circumvent the captcha.");
-			}
-
-			throw new CaptchaTextException();
+		if (PropsValues.CAPTCHA_ENGINE.equals("re_captcha")) {
+			checkReCaptcha(request);
 		}
-
-		if (!captchaText.equals(ParamUtil.getString(request, "captchaText"))) {
-			throw new CaptchaTextException();
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Captcha text is valid");
-		}
-
-		session.removeAttribute(WebKeys.CAPTCHA_TEXT);
-
-		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-			(Validator.isNotNull(request.getRemoteUser()))) {
-
-			Integer count = (Integer)session.getAttribute(
-				WebKeys.CAPTCHA_COUNT);
-
-			if (count == null) {
-				count = new Integer(1);
-			}
-			else {
-				count = new Integer(count.intValue() + 1);
-			}
-
-			session.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+		else {
+			checkSimpleCaptcha(request);
 		}
 	}
 
@@ -118,48 +91,11 @@ public class CaptchaImpl implements Captcha {
 			return;
 		}
 
-		PortletSession portletSession = portletRequest.getPortletSession();
-
-		String captchaText = (String)portletSession.getAttribute(
-			WebKeys.CAPTCHA_TEXT);
-
-		if (captchaText == null) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Captcha text is null. User " +
-						portletRequest.getRemoteUser() +
-							" may be trying to circumvent the captcha.");
-			}
-
-			throw new CaptchaTextException();
+		if (PropsValues.CAPTCHA_ENGINE.equals("re_captcha")) {
+			checkReCaptcha(portletRequest);
 		}
-
-		if (!captchaText.equals(
-				ParamUtil.getString(portletRequest, "captchaText"))) {
-
-			throw new CaptchaTextException();
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Captcha text is valid");
-		}
-
-		portletSession.removeAttribute(WebKeys.CAPTCHA_TEXT);
-
-		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-			(Validator.isNotNull(portletRequest.getRemoteUser()))) {
-
-			Integer count = (Integer)portletSession.getAttribute(
-				WebKeys.CAPTCHA_COUNT);
-
-			if (count == null) {
-				count = new Integer(1);
-			}
-			else {
-				count = new Integer(count.intValue() + 1);
-			}
-
-			portletSession.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+		else {
+			checkSimpleCaptcha(portletRequest);
 		}
 	}
 
@@ -242,6 +178,169 @@ public class CaptchaImpl implements Captcha {
 		response.setContentType(ContentTypes.IMAGE_JPEG);
 
 		_captchaProducer.createImage(response.getOutputStream(), captchaText);
+	}
+
+	protected void checkReCaptcha(PortletRequest portletRequest)
+		throws CaptchaTextException {
+
+		HttpServletRequest servletRequest =
+			PortalUtil.getHttpServletRequest(portletRequest);
+
+		checkReCaptcha(servletRequest);
+	}
+
+	protected void checkReCaptcha(HttpServletRequest servletRequest)
+		throws CaptchaTextException {
+
+		String remoteIp = servletRequest.getRemoteAddr();
+
+		String recaptchaChallenge =
+			ParamUtil.getString(servletRequest, "recaptcha_challenge_field");
+		String recaptchaResponse =
+			ParamUtil.getString(servletRequest, "recaptcha_response_field");
+
+		if (recaptchaResponse.equals(StringPool.BLANK)) {
+			throw new CaptchaTextException("Captcha response cannot be empty");
+		}
+
+		Http.Options options = new Http.Options();
+
+		options.setLocation(PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY);
+		options.addPart(
+			"privatekey", PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE);
+		options.addPart("remoteip", remoteIp);
+		options.addPart("challenge", recaptchaChallenge);
+		options.addPart("response", recaptchaResponse);
+		options.setPost(true);
+
+		String message = null;
+
+		try {
+			message = HttpUtil.URLtoString(options);
+		}
+		catch (IOException e) {
+			_log.error("Error requestion recaptcha message", e);
+
+			throw new CaptchaTextException();
+		}
+
+		if (message == null) {
+			_log.error("Answer from reCaptcha is null");
+
+			throw new CaptchaTextException();
+		}
+
+		String[] messages = message.split("\r?\n");
+
+		if (messages.length < 1) {
+			_log.error("Invalid answer from reCaptcha : " + message);
+
+			throw new CaptchaTextException();
+		}
+
+		if (!GetterUtil.getBoolean(messages[0])) {
+			throw new CaptchaTextException();
+		}
+	}
+
+	protected void checkSimpleCaptcha(PortletRequest portletRequest)
+		throws CaptchaTextException {
+
+		if (!isEnabled(portletRequest)) {
+			return;
+		}
+
+		PortletSession portletSession = portletRequest.getPortletSession();
+
+		String captchaText = (String)portletSession.getAttribute(
+			WebKeys.CAPTCHA_TEXT);
+
+		if (captchaText == null) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Captcha text is null. User " +
+						portletRequest.getRemoteUser() +
+							" may be trying to circumvent the captcha.");
+			}
+
+			throw new CaptchaTextException();
+		}
+
+		if (!captchaText.equals(
+				ParamUtil.getString(portletRequest, "captchaText"))) {
+
+			throw new CaptchaTextException();
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Captcha text is valid");
+		}
+
+		portletSession.removeAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(portletRequest.getRemoteUser()))) {
+
+			Integer count = (Integer)portletSession.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			if (count == null) {
+				count = new Integer(1);
+			}
+			else {
+				count = new Integer(count.intValue() + 1);
+			}
+
+			portletSession.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+		}
+	}
+
+	protected void checkSimpleCaptcha(HttpServletRequest request)
+		throws CaptchaTextException {
+
+		if (!isEnabled(request)) {
+			return;
+		}
+
+		HttpSession session = request.getSession();
+
+		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if (captchaText == null) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Captcha text is null. User " + request.getRemoteUser() +
+						" may be trying to circumvent the captcha.");
+			}
+
+			throw new CaptchaTextException();
+		}
+
+		if (!captchaText.equals(ParamUtil.getString(request, "captchaText"))) {
+			throw new CaptchaTextException();
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Captcha text is valid");
+		}
+
+		session.removeAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(request.getRemoteUser()))) {
+
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			if (count == null) {
+				count = new Integer(1);
+			}
+			else {
+				count = new Integer(count.intValue() + 1);
+			}
+
+			session.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CaptchaImpl.class);
