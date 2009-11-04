@@ -77,7 +77,7 @@ public class DLUtil {
 		portletURL.setParameter("name", fileEntry.getName());
 
 		PortalUtil.addPortletBreadcrumbEntry(
-			request, fileEntry.getName(), portletURL.toString());
+			request, fileEntry.getTitle(), portletURL.toString());
 	}
 
 	public static void addPortletBreadcrumbEntries(
@@ -97,7 +97,7 @@ public class DLUtil {
 			"fileShortcutId", String.valueOf(fileShortcut.getFileShortcutId()));
 
 		PortalUtil.addPortletBreadcrumbEntry(
-			request, fileShortcut.getToName(), portletURL.toString());
+			request, fileShortcut.getToTitle(), portletURL.toString());
 	}
 
 	public static void addPortletBreadcrumbEntries(
