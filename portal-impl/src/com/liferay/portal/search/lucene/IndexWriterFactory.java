@@ -22,27 +22,19 @@
 
 package com.liferay.portal.search.lucene;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
 import java.io.IOException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Semaphore;
-
 import org.apache.lucene.analysis.SimpleAnalyzer;
+import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
@@ -52,82 +44,39 @@ import org.apache.lucene.store.FSDirectory;
 /**
  * <a href="IndexWriterFactory.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * Lucene only allows one IndexWriter to be open at a time. However, multiple
- * threads can use this single IndexWriter. This class manages a global
- * IndexWriter and uses reference counting to determine when it can be closed.
- * </p>
- *
- * <p>
- * To delete documents, IndexReaders are used but cannot delete while another
- * IndexWriter or IndexReader has the write lock. A semaphore is used to
- * serialize delete and add operations. If the shared IndexWriter is open,
- * concurrent add operations are permitted.
- * </p>
- *
  * @author Harry Mark
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  */
 public class IndexWriterFactory {
 
-	public IndexWriterFactory() {
+	public void checkLuceneDir(long companyId) {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
-		// Create semaphores for all companies
+		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
 
 		try {
-			List<Company> companies = CompanyLocalServiceUtil.getCompanies(
-				false);
 
-			for (Company company : companies) {
-				_lockLookup.put(company.getCompanyId(), new Semaphore(1));
-			}
+			// LEP-6078
 
-			_lockLookup.put(CompanyConstants.SYSTEM, new Semaphore(1));
-		}
-		catch (SystemException se) {
-			_log.error(se);
-		}
-	}
-
-	public void acquireLock(long companyId, boolean needExclusive)
-		throws InterruptedException {
-
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		Semaphore lock = _lockLookup.get(companyId);
-
-		if (lock != null) {
-
-			// Exclusive checking is used to prevent greedy IndexWriter sharing.
-			// This registers a need for exclusive lock, and causes IndexWriters
-			// to wait in FIFO order.
-
-			if (needExclusive) {
-				synchronized (_lockLookup) {
-					_needExclusiveLock++;
-				}
-			}
-
-			try {
-				lock.acquire();
-			}
-			finally {
-				if (needExclusive) {
-					synchronized (_lockLookup) {
-						_needExclusiveLock--;
-					}
-				}
+			if (luceneDir.fileExists("write.lock")) {
+				luceneDir.deleteFile("write.lock");
 			}
 		}
-		else {
-			if (_log.isWarnEnabled()) {
-				_log.warn("IndexWriterFactory lock not found for " + companyId);
-			}
+		catch (IOException ioe) {
+			_log.error("Unable to clear write lock", ioe);
+		}
+
+		// Lucene does not properly release its lock on the index when
+		// IndexWriter throws an exception
+
+		try {
+			write(companyId, null);
+		}
+		catch (IOException ioe) {
+			_log.error("Check Lucene directory failed for " + companyId, ioe);
 		}
 	}
 
@@ -138,13 +87,12 @@ public class IndexWriterFactory {
 			return;
 		}
 
-		try {
-			acquireLock(companyId, true);
-
+		synchronized(this) {
 			IndexReader reader = null;
 
 			try {
-				reader = LuceneUtil.getReader(companyId, false);
+				reader =
+					IndexReader.open(LuceneUtil.getLuceneDir(companyId), false);
 
 				reader.deleteDocuments(term);
 			}
@@ -154,172 +102,40 @@ public class IndexWriterFactory {
 				}
 			}
 		}
-		finally {
-			releaseLock(companyId);
-		}
 	}
 
-	public IndexWriter getWriter(long companyId, boolean create)
-		throws IOException {
-
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return getReadOnlyIndexWriter();
-		}
-
-		boolean hasError = false;
-		boolean newWriter = false;
-
-		try {
-
-			// If others need an exclusive lock, then wait to acquire lock
-			// before proceeding. This prevents starvation.
-
-			if (_needExclusiveLock > 0) {
-				acquireLock(companyId, false);
-				releaseLock(companyId);
-			}
-
-			synchronized (this) {
-				IndexWriterData writerData = _writerLookup.get(companyId);
-
-				if (writerData == null) {
-					newWriter = true;
-
-					acquireLock(companyId, false);
-
-					IndexWriter writer = new IndexWriter(
-						LuceneUtil.getLuceneDir(companyId),
-						LuceneUtil.getAnalyzer(), create,
-						IndexWriter.MaxFieldLength.LIMITED);
-
-					writer.setMergeFactor(_MERGE_FACTOR);
-
-					writerData = new IndexWriterData(companyId, writer, 0);
-
-					_writerLookup.put(companyId, writerData);
-				}
-
-				writerData.setCount(writerData.getCount() + 1);
-
-				return writerData.getWriter();
-			}
-		}
-		catch (Exception e) {
-			hasError = true;
-
-			_log.error("Unable to create a new writer", e);
-
-			throw new IOException("Unable to create a new writer");
-		}
-		finally {
-			if (hasError && newWriter) {
-				try {
-					releaseLock(companyId);
-				}
-				catch (Exception e) {
-				}
-			}
-		}
-	}
-
-	public void releaseLock(long companyId) {
+	public void write(long companyId, Document doc) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
-		Semaphore lock = _lockLookup.get(companyId);
+		synchronized(this) {
+			IndexWriter writer = null;
 
-		if (lock != null) {
-			lock.release();
-		}
-	}
-
-	public void write(long companyId) {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		IndexWriterData writerData = _writerLookup.get(companyId);
-
-		if (writerData != null) {
-			decrement(writerData);
-		}
-		else {
-			if (_log.isWarnEnabled()) {
-				_log.warn("IndexWriterData not found for " + companyId);
-			}
-		}
-	}
-
-	public void write(IndexWriter writer) throws IOException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		boolean writerFound = false;
-
-		synchronized (this) {
-			if (!_writerLookup.isEmpty()) {
-				for (IndexWriterData writerData : _writerLookup.values()) {
-					if (writerData.getWriter() == writer) {
-						writerFound = true;
-
-						decrement(writerData);
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (!writerFound) {
 			try {
-				_optimizeCount++;
+				writer = new IndexWriter(
+					LuceneUtil.getLuceneDir(companyId),
+					LuceneUtil.getAnalyzer(),
+					IndexWriter.MaxFieldLength.LIMITED);
 
-				if ((_OPTIMIZE_INTERVAL == 0) ||
-					(_optimizeCount >= _OPTIMIZE_INTERVAL)) {
+				if (doc != null) {
+					writer.setMergeFactor(_MERGE_FACTOR);
+					writer.addDocument(doc);
 
-					writer.optimize();
+					_optimizeCount++;
 
-					_optimizeCount = 0;
+					if ((_OPTIMIZE_INTERVAL == 0) ||
+						(_optimizeCount >= _OPTIMIZE_INTERVAL)) {
+
+						writer.optimize();
+
+						_optimizeCount = 0;
+					}
 				}
 			}
 			finally {
-				writer.close();
-			}
-		}
-	}
-
-	protected void decrement(IndexWriterData writerData) {
-		if (writerData.getCount() > 0) {
-			writerData.setCount(writerData.getCount() - 1);
-
-			if (writerData.getCount() == 0) {
-				_writerLookup.remove(writerData.getCompanyId());
-
-				try {
-					IndexWriter writer = writerData.getWriter();
-
-					try {
-						_optimizeCount++;
-
-						if ((_OPTIMIZE_INTERVAL == 0) ||
-							(_optimizeCount >= _OPTIMIZE_INTERVAL)) {
-
-							writer.optimize();
-
-							_optimizeCount = 0;
-						}
-					}
-					finally {
-						writer.close();
-					}
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-				finally {
-					releaseLock(writerData.getCompanyId());
+				if (writer != null) {
+					writer.close();
 				}
 			}
 		}
@@ -351,7 +167,7 @@ public class IndexWriterFactory {
 
 			dir.mkdir();
 
-			_readOnlyLuceneDir = LuceneUtil.getDirectory(dir.getPath(), false);
+			_readOnlyLuceneDir = LuceneUtil.getDirectory(dir.getPath());
 		}
 
 		return _readOnlyLuceneDir;
@@ -367,10 +183,6 @@ public class IndexWriterFactory {
 
 	private FSDirectory _readOnlyLuceneDir = null;
 	private IndexWriter _readOnlyIndexWriter = null;
-	private Map<Long, Semaphore> _lockLookup = new HashMap<Long, Semaphore>();
-	private Map<Long, IndexWriterData> _writerLookup =
-		new HashMap<Long, IndexWriterData>();
-	private int _needExclusiveLock = 0;
 	private int _optimizeCount = 0;
 
 }
