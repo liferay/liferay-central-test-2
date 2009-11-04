@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -152,6 +153,12 @@ public class PortletResponseUtil {
 		throws IOException {
 
 		OutputStream os = null;
+
+		String isClassName = is.getClass().getName();
+
+		if (!isClassName.equals(BufferedInputStream.class.getName())) {
+			is = new BufferedInputStream(is);
+		}
 
 		try {
 			if (!mimeResponse.isCommitted()) {
