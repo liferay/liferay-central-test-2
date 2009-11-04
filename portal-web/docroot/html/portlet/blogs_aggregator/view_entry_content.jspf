@@ -65,12 +65,14 @@
 					/>
 				</span>
 
-				<span class="entry-tags">
-					<liferay-ui:asset-tags-summary
-						className="<%= BlogsEntry.class.getName() %>"
-						classPK="<%= entry.getEntryId() %>"
-					/>
-				</span>
+				<c:if test="<%= showTags %>">
+					<span class="entry-tags">
+						<liferay-ui:asset-tags-summary
+							className="<%= BlogsEntry.class.getName() %>"
+							classPK="<%= entry.getEntryId() %>"
+						/>
+					</span>
+				</c:if>
 			</div>
 		</c:if>
 	</div>

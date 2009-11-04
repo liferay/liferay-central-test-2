@@ -62,6 +62,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		int max = ParamUtil.getInteger(actionRequest, "max");
 		boolean enableRssSubscription = ParamUtil.getBoolean(
 			actionRequest, "enableRssSubscription");
+		boolean showTags = ParamUtil.getBoolean(
+			actionRequest, "showTags");
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -76,6 +78,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("max", String.valueOf(max));
 		preferences.setValue(
 			"enable-rss-subscription", String.valueOf(enableRssSubscription));
+		preferences.setValue("show-tags", String.valueOf(showTags));
 
 		preferences.store();
 

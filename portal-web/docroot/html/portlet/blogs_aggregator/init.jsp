@@ -50,6 +50,7 @@ long organizationId = GetterUtil.getLong(preferences.getValue("organization-id",
 String displayStyle = preferences.getValue("display-style", "abstract");
 int max = GetterUtil.getInteger(preferences.getValue("max", "20"));
 boolean enableRssSubscription = GetterUtil.getBoolean(preferences.getValue("enable-rss-subscription", null), true);
+boolean showTags = GetterUtil.getBoolean(preferences.getValue("show-tags", null), true);
 
 if (organizationId == 0) {
 	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);

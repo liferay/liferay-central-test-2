@@ -137,6 +137,14 @@ if (organizationId > 0) {
 		<liferay-ui:input-checkbox param="enableRssSubscription" defaultValue="<%= enableRssSubscription %>" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="show-tags" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="showTags" defaultValue="<%= showTags %>" />
+	</td>
+</tr>
 </table>
 
 <br />
