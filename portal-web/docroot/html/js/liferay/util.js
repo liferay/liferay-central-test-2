@@ -71,8 +71,7 @@ Liferay.Util = {
 	addInputType: function(el) {
 		var instance = this;
 
-		instance.addInputType = function() {
-		};
+		instance.addInputType = function() {};
 
 		if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
 			instance.addInputType = function(el) {
