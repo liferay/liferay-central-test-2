@@ -28,18 +28,14 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.SystemProperties;
 
-import java.io.File;
 import java.io.IOException;
 
-import org.apache.lucene.analysis.SimpleAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
 
 /**
  * <a href="IndexWriterFactory.java.html"><b><i>View Source</i></b></a>
@@ -141,38 +137,6 @@ public class IndexWriterFactory {
 		}
 	}
 
-	protected IndexWriter getReadOnlyIndexWriter() {
-		if (_readOnlyIndexWriter == null) {
-			try {
-				if (_log.isInfoEnabled()) {
-					_log.info("Disabling writing to index for this process");
-				}
-
-				_readOnlyIndexWriter = new ReadOnlyIndexWriter(
-					getReadOnlyLuceneDir(), new SimpleAnalyzer(), true);
-			}
-			catch (IOException ioe) {
-				throw new RuntimeException(ioe);
-			}
-		}
-
-		return _readOnlyIndexWriter;
-	}
-
-	protected Directory getReadOnlyLuceneDir() throws IOException {
-		if (_readOnlyLuceneDir == null) {
-			String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
-
-			File dir = new File(tmpDir + "/liferay/lucene/empty");
-
-			dir.mkdir();
-
-			_readOnlyLuceneDir = LuceneUtil.getDirectory(dir.getPath());
-		}
-
-		return _readOnlyLuceneDir;
-	}
-
 	private static final int _MERGE_FACTOR = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.LUCENE_MERGE_FACTOR));
 
@@ -181,8 +145,6 @@ public class IndexWriterFactory {
 
 	private static Log _log = LogFactoryUtil.getLog(IndexWriterFactory.class);
 
-	private FSDirectory _readOnlyLuceneDir = null;
-	private IndexWriter _readOnlyIndexWriter = null;
 	private int _optimizeCount = 0;
 
 }
