@@ -461,6 +461,10 @@ public class LayoutTypePortletImpl
 			}
 		}
 
+		if (hasPortletMaximized(portletId)) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -1141,6 +1145,14 @@ public class LayoutTypePortletImpl
 			if (staticPortletId.equals(portletId)) {
 				return true;
 			}
+		}
+
+		return false;
+	}
+
+	protected boolean hasPortletMaximized(String portletId) {
+		if (StringUtil.contains(getStateMax(), portletId)) {
+			return true;
 		}
 
 		return false;
