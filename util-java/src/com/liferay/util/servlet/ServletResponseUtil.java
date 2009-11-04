@@ -203,12 +203,6 @@ public class ServletResponseUtil {
 
 		OutputStream os = null;
 
-		String isClassName = is.getClass().getName();
-
-		if (!isClassName.equals(BufferedInputStream.class.getName())) {
-			is = new BufferedInputStream(is);
-		}
-
 		try {
 			if (!response.isCommitted()) {
 				if (contentLength > 0) {
@@ -216,6 +210,10 @@ public class ServletResponseUtil {
 				}
 
 				os = new BufferedOutputStream(response.getOutputStream());
+
+				if (!(is instanceof BufferedInputStream)) {
+					is = new BufferedInputStream(is);
+				}
 
 				int c = is.read();
 

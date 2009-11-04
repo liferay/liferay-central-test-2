@@ -154,12 +154,6 @@ public class PortletResponseUtil {
 
 		OutputStream os = null;
 
-		String isClassName = is.getClass().getName();
-
-		if (!isClassName.equals(BufferedInputStream.class.getName())) {
-			is = new BufferedInputStream(is);
-		}
-
 		try {
 			if (!mimeResponse.isCommitted()) {
 				if (contentLength > 0) {
@@ -173,6 +167,10 @@ public class PortletResponseUtil {
 
 				os = new BufferedOutputStream(
 					mimeResponse.getPortletOutputStream());
+
+				if (!(is instanceof BufferedInputStream)) {
+					is = new BufferedInputStream(is);
+				}
 
 				int c = is.read();
 
