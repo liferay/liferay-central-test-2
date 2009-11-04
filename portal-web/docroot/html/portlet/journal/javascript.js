@@ -1617,6 +1617,13 @@ AUI().add(
 						10000
 					);
 				}
+
+				var columnFirst = A.one('.aui-column-first');
+				var columnLast = A.one('.aui-column-last');
+
+				columnFirst.show();
+				columnLast.setStyle('float', '');
+				columnLast.replaceClass('aui-w100', 'aui-w75');
 			},
 
 			_enableEditMode: function() {
@@ -1644,6 +1651,13 @@ AUI().add(
 
 				var structureMessage = instance._getById('structureMessage');
 				instance._clearMessage(structureMessage);
+
+				var columnFirst = A.one('.aui-column-first');
+				var columnLast = A.one('.aui-column-last');
+
+				columnFirst.hide();
+				columnLast.setStyle('float', 'left');
+				columnLast.replaceClass('aui-w75', 'aui-w100');
 			},
 
 			_enableFields: function() {
