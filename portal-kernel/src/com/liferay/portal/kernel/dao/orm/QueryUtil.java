@@ -96,11 +96,11 @@ public class QueryUtil {
 					for (int i = start; i < end; i++) {
 						Object[] array = sr.get();
 
-						if (array.length > 1) {
-							list.add(array);
+						if (array.length == 1) {
+							list.add(array[0]);
 						}
 						else {
-							list.add(array[0]);
+							list.add(array);
 						}
 
 						if (!sr.next()) {
@@ -155,9 +155,14 @@ public class QueryUtil {
 
 		for (int i = 0; i < scrollIds.length; i++) {
 			if (sr.scroll(scrollIds[i])) {
-				Object obj = sr.get(0);
+				Object[] array = sr.get();
 
-				list.add(obj);
+				if (array.length == 1) {
+					list.add(array[0]);
+				}
+				else {
+					list.add(array);
+				}
 
 				sr.first();
 			}
