@@ -362,7 +362,7 @@ portletURL.setParameter("name", name);
 if (fileEntry != null) {
 	DLUtil.addPortletBreadcrumbEntries(fileEntry, request, renderResponse);
 
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-file-entry"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
 	DLUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);

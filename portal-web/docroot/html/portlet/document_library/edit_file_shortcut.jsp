@@ -221,7 +221,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 if (fileShortcut != null) {
 	DLUtil.addPortletBreadcrumbEntries(fileShortcut, request, renderResponse);
 
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-file-shortcut"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
 	DLUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);

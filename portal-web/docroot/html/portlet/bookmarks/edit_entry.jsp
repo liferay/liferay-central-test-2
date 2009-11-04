@@ -163,12 +163,14 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 </c:if>
 
 <%
-BookmarksUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
-
 if (entry != null) {
+	BookmarksUtil.addPortletBreadcrumbEntries(entry, request, renderResponse);
+
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
+	BookmarksUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
+
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-entry"), currentURL);
-}
+}	
 %>

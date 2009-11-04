@@ -65,7 +65,7 @@ public class BookmarksUtil {
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
-		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
+		portletURL.setParameter("struts_action", "/bookmarks/view_entry");
 		portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 
 		PortalUtil.addPortletBreadcrumbEntry(

@@ -262,7 +262,7 @@ if (image != null) {
 if (image != null) {
 	IGUtil.addPortletBreadcrumbEntries(image, request, renderResponse);
 
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-image"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
 	IGUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
