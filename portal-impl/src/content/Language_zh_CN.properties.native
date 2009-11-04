@@ -3473,6 +3473,7 @@ show-special-items=显示特别的项目
 show-subfolders=显示子文件夹
 show-syntax-help=显示语法帮助
 show-tags-with-zero-assets=显示标记没有财产
+show-tags=显示标记 (Automatic Translation)
 show-todays-events=显示今天的事件
 show-wiki-borders=显示 Wiki 边框
 show=显示
