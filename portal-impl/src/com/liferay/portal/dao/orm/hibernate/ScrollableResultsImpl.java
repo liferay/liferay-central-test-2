@@ -47,6 +47,15 @@ public class ScrollableResultsImpl implements ScrollableResults {
 		}
 	}
 
+	public Object[] get() throws ORMException {
+		try {
+			return _scrollableResults.get();
+		}
+		catch (Exception e) {
+			throw ExceptionTranslator.translate(e);
+		}
+	}
+
 	public Object get(int i) throws ORMException {
 		try {
 			return _scrollableResults.get(i);

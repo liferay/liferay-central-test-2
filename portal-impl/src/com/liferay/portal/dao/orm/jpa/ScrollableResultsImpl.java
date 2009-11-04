@@ -69,6 +69,21 @@ public class ScrollableResultsImpl implements ScrollableResults {
 		return true;
 	}
 
+	public Object[] get() throws ORMException {
+		Object[] result = null;
+
+		Object object = _results.get(_current - 1);
+
+		if (object instanceof Object[]) {
+			result = (Object[])object;
+		}
+		else {
+			result = new Object[] {object};
+		}
+
+		return result;
+	}
+
 	public Object get(int i) throws ORMException {
 		Object result = null;
 

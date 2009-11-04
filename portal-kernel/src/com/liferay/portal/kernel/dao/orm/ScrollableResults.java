@@ -31,6 +31,8 @@ public interface ScrollableResults {
 
 	public boolean first() throws ORMException;
 
+	public Object[] get() throws ORMException;
+
 	public Object get(int i) throws ORMException;
 
 	public boolean last() throws ORMException;

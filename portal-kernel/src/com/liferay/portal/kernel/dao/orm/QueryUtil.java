@@ -94,9 +94,14 @@ public class QueryUtil {
 
 				if (sr.first() && sr.scroll(start)) {
 					for (int i = start; i < end; i++) {
-						Object obj = sr.get(0);
+						Object[] array = sr.get();
 
-						list.add(obj);
+						if (array.length > 1) {
+							list.add(array);
+						}
+						else {
+							list.add(array[0]);
+						}
 
 						if (!sr.next()) {
 							break;
