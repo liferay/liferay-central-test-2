@@ -28,7 +28,7 @@
 	<c:when test="<%= showTabs && portletName.equals(PortletKeys.DOCUMENT_LIBRARY) %>">
 
 		<%
-		String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
+		String tabs1 = ParamUtil.getString(request, "tabs1", "document-home");
 
 		PortletURL tabs1URL = renderResponse.createRenderURL();
 
@@ -36,11 +36,11 @@
 		%>
 
 		<liferay-ui:tabs
-			names="folders,my-documents,recent-documents"
+			names="document-home,my-documents,recent-documents"
 			url="<%= tabs1URL.toString() %>"
 		/>
 	</c:when>
 	<c:when test="<%= showTabs && showSubfolders %>">
-		<liferay-ui:tabs names="folders" />
+		<liferay-ui:tabs names="document-home" />
 	</c:when>
 </c:choose>

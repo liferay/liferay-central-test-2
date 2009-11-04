@@ -35,7 +35,7 @@ if (folder != null) {
 %>
 
 <aui:form method="post" name="fm">
-	<liferay-ui:tabs names="folders" />
+	<liferay-ui:tabs names="document-home" />
 
 	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
