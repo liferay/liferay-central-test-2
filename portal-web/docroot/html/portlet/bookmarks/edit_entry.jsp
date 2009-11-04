@@ -172,5 +172,5 @@ else {
 	BookmarksUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-entry"), currentURL);
-}	
+}
 %>
