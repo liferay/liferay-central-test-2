@@ -1129,6 +1129,15 @@ public class LayoutTypePortletImpl
 		return false;
 	}*/
 
+	protected boolean hasPortletMaximized(String portletId) {
+		if (StringUtil.contains(getStateMax(), portletId)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected boolean hasStaticPortletId(String columnId, String portletId) {
 		String[] staticPortletIdsStart = getStaticPortletIds(
 			PropsKeys.LAYOUT_STATIC_PORTLETS_START + columnId);
@@ -1145,14 +1154,6 @@ public class LayoutTypePortletImpl
 			if (staticPortletId.equals(portletId)) {
 				return true;
 			}
-		}
-
-		return false;
-	}
-
-	protected boolean hasPortletMaximized(String portletId) {
-		if (StringUtil.contains(getStateMax(), portletId)) {
-			return true;
 		}
 
 		return false;
