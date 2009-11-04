@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
+String tabs1 = ParamUtil.getString(request, "tabs1", "image-home");
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
@@ -55,7 +55,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 List scores = null;
 
-String tabs1Names = "folders";
+String tabs1Names = "image-home";
 
 if (themeDisplay.isSignedIn()) {
 	tabs1Names += ",my-images";
@@ -76,7 +76,7 @@ request.setAttribute("view.jsp-folderId", folderId);
 </c:if>
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("folders") %>'>
+	<c:when test='<%= tabs1.equals("image-home") %>'>
 		<aui:layout>
 			<c:if test="<%= folder != null %>">
 				<h3 class="folder-title"><%= folder.getName() %></h3>
