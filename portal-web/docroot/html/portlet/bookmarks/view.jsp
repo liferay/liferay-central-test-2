@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/bookmarks/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
+String tabs1 = ParamUtil.getString(request, "tabs1", "bookmarks-home");
 
 BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS_FOLDER);
 
@@ -60,13 +60,13 @@ request.setAttribute("view.jsp-folderId", folderId);
 
 <c:if test="<%= folder == null %>">
 	<liferay-ui:tabs
-		names="folders,my-entries,recent-entries"
+		names="bookmarks-home,my-entries,recent-entries"
 		url="<%= portletURL.toString() %>"
 	/>
 </c:if>
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("folders") %>'>
+	<c:when test='<%= tabs1.equals("bookmarks-home") %>'>
 		<aui:layout>
 			<c:if test="<%= folder != null %>">
 				<h3 class="folder-title"><%= folder.getName() %></h3>
