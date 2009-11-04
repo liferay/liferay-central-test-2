@@ -42,12 +42,14 @@ public interface Captcha {
 	public void check(PortletRequest portletRequest)
 		throws CaptchaTextException;
 
+	public String getTaglibPath();
+
 	public boolean isEnabled(HttpServletRequest request);
 
 	public boolean isEnabled(PortletRequest portletRequest);
 
 	public void serveImage(
-		HttpServletRequest request, HttpServletResponse response)
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException;
 
 	public void serveImage(

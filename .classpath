@@ -170,6 +170,7 @@
 	<classpathentry kind="lib" path="lib/portal/jets3t.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jfreechart.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jgroups.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jhlabs-filters.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jodconverter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jrcs-diff.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jruby.jar"/>

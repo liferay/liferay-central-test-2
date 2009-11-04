@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -19,23 +20,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.captcha;
+<%@ include file="/html/taglib/ui/captcha/init.jsp" %>
 
-import com.liferay.portal.kernel.captcha.Captcha;
-import com.liferay.portal.kernel.captcha.CaptchaWrapper;
-import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.util.PropsValues;
+<script src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC %>" type="text/javascript"></script>
 
-/**
- * <a href="CaptchaImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- */
-public class CaptchaImpl extends CaptchaWrapper {
+<script type="text/javascript">
+	var RecaptchaOptions = {
+		lang : '<%= locale.getLanguage() %>',
+		theme : 'white'
+	};
+</script>
 
-	public CaptchaImpl() {
-		super((Captcha)InstancePool.get(PropsValues.CAPTCHA_ENGINE_IMPL));
-	}
+<noscript>
+	<iframe frameborder="0" height="300" src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC %>" width="500"></iframe><br />
 
-}
+	<textarea cols="40" name="recaptcha_challenge_field" rows="3"></textarea>
+
+	<input name="recaptcha_response_field" type="hidden" value="manual_challenge" />
+</noscript>

@@ -20,29 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.captcha;
+package com.liferay.portal.captcha.simplecaptcha;
 
-import com.liferay.portlet.words.util.WordsUtil;
+import com.liferay.util.PwdGenerator;
 
-import java.util.Properties;
-
-import nl.captcha.text.TextProducer;
+import nl.captcha.text.producer.TextProducer;
 
 /**
- * <a href="DictionaryWordTextProducer.java.html"><b><i>View Source</i></b></a>
+ * <a href="PinNumberTextProducer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DictionaryWordTextProducer implements TextProducer {
-
-	public DictionaryWordTextProducer() {
-	}
-
-	public void setProperties(Properties props) {
-	}
+public class PinNumberTextProducer implements TextProducer {
 
 	public String getText() {
-		return WordsUtil.getRandomWord();
+		return PwdGenerator.getPinNumber();
 	}
 
 }

@@ -137,12 +137,12 @@ public interface PropsKeys {
 
 	public static final String AUTO_DEPLOY_DEST_DIR = "auto.deploy.dest.dir";
 
-	public static final String AUTO_DEPLOY_ENABLED = "auto.deploy.enabled";
+    public static final String AUTO_DEPLOY_ENABLED = "auto.deploy.enabled";
 
 	public static final String AUTO_DEPLOY_INTERVAL = "auto.deploy.interval";
-
+    
 	public static final String AUTO_DEPLOY_JBOSS_PREFIX = "auto.deploy.jboss.prefix";
-
+    
 	public static final String AUTO_DEPLOY_LISTENERS = "auto.deploy.listeners";
 
 	public static final String AUTO_DEPLOY_TOMCAT_CONF_DIR = "auto.deploy.tomcat.conf.dir";
@@ -209,17 +209,31 @@ public interface PropsKeys {
 
 	public static final String CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE = "captcha.check.portlet.message_boards.edit_message";
 
-	public static final String CAPTCHA_ENGINE = "captcha.engine";
-
-	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT = "captcha.engine.recaptcha.url.script";
-
-	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_NOSCRIPT = "captcha.engine.recaptcha.url.noscript";
-
-	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY = "captcha.engine.recaptcha.url.verify";
+	public static final String CAPTCHA_ENGINE_IMPL = "captcha.engine.impl";
 
 	public static final String CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE = "captcha.engine.recaptcha.key.private";
 
 	public static final String CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC = "captcha.engine.recaptcha.key.public";
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_NOSCRIPT = "captcha.engine.recaptcha.url.noscript";
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT = "captcha.engine.recaptcha.url.script";
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY = "captcha.engine.recaptcha.url.verify";
+
+	public static final String CAPTCHA_ENGINE_SIMPLECAPTCHA_BACKGROUND_PRODUCERS = "captcha.engine.simplecaptcha.background.producers";
+
+	public static final String CAPTCHA_ENGINE_SIMPLECAPTCHA_GIMPY_RENDERERS = "captcha.engine.simplecaptcha.gimpy.renderers";
+
+	public static final String CAPTCHA_ENGINE_SIMPLECAPTCHA_HEIGHT = "captcha.engine.simplecaptcha.height";
+
+	public static final String CAPTCHA_ENGINE_SIMPLECAPTCHA_NOISE_PRODUCERS = "captcha.engine.simplecaptcha.noise.producers";
+
+	public static final String CAPTCHA_ENGINE_SIMPLECAPTCHA_TEXT_PRODUCERS = "captcha.engine.simplecaptcha.text.producers";
+
+	public static final String CAPTCHA_ENGINE_SIMPLECAPTCHA_WIDTH = "captcha.engine.simplecaptcha.width";
+
+	public static final String CAPTCHA_ENGINE_SIMPLECAPTCHA_WORD_RENDERERS = "captcha.engine.simplecaptcha.word.renderers";
 
 	public static final String CAPTCHA_MAX_CHALLENGES = "captcha.max.challenges";
 

@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,38 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/taglib/init.jsp" %>
+package com.liferay.portal.captcha.simplecaptcha;
 
-<%@ page import="com.liferay.portal.kernel.captcha.CaptchaUtil" %>
+import com.liferay.portlet.words.util.WordsUtil;
 
-<%
-String url = (String)request.getAttribute("liferay-ui:captcha:url");
+import nl.captcha.text.producer.TextProducer;
 
-boolean captchaEnabled = false;
+/**
+ * <a href="DictionaryWordTextProducer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
+public class DictionaryWordTextProducer implements TextProducer {
 
-if (portletRequest != null) {
-	captchaEnabled = CaptchaUtil.isEnabled(portletRequest);
+	public String getText() {
+		return WordsUtil.getRandomWord();
+	}
+
 }
-else {
-	captchaEnabled = CaptchaUtil.isEnabled(request);
-}
-%>
-
-<c:if test="<%= captchaEnabled %>">
-	<div class="taglib-captcha">
-		<img alt="captcha" class="captcha" src="<%= url %>" />
-
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="text-verification" />
-			</td>
-			<td>
-				<input name="<%= namespace %>captchaText" size="10" type="text" value="" />
-			</td>
-		</tr>
-		</table>
-	</div>
-</c:if>

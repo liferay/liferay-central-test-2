@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -19,30 +20,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.captcha;
+<%@ include file="/html/taglib/ui/captcha/init.jsp" %>
 
-import com.liferay.util.PwdGenerator;
+<%
+String url = (String)request.getAttribute("liferay-ui:captcha:url");
 
-import java.util.Properties;
+boolean captchaEnabled = false;
 
-import nl.captcha.text.TextProducer;
-
-/**
- * <a href="PinNumberTextProducer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- */
-public class PinNumberTextProducer implements TextProducer {
-
-	public PinNumberTextProducer() {
-	}
-
-	public void setProperties(Properties props) {
-	}
-
-	public String getText() {
-		return PwdGenerator.getPinNumber();
-	}
-
+if (portletRequest != null) {
+	captchaEnabled = CaptchaUtil.isEnabled(portletRequest);
 }
+else {
+	captchaEnabled = CaptchaUtil.isEnabled(request);
+}
+%>
+
+<c:if test="<%= captchaEnabled %>">
+	<div class="taglib-captcha">
+		<img alt="captcha" class="captcha" src="<%= url %>" />
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="text-verification" />
+			</td>
+			<td>
+				<input name="<%= namespace %>captchaText" size="10" type="text" value="" />
+			</td>
+		</tr>
+		</table>
+	</div>
+</c:if>

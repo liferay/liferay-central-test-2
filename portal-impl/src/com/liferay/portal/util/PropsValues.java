@@ -233,23 +233,52 @@ public class PropsValues {
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE));
 
-	public static final String CAPTCHA_ENGINE =
-		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE);
-
-	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT =
-		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT);
-
-	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_NOSCRIPT =
-		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_NOSCRIPT);
-
-	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY =
-		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY);
+	public static final String CAPTCHA_ENGINE_IMPL =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_IMPL);
 
 	public static final String CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE =
 		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE);
 
 	public static final String CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC =
 		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC);
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_NOSCRIPT =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_NOSCRIPT);
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT);
+
+	public static final String CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY =
+		PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY);
+
+	public static final String[]
+		CAPTCHA_ENGINE_SIMPLECAPTCHA_BACKGROUND_PRODUCERS =
+			PropsUtil.getArray(PropsKeys.
+				CAPTCHA_ENGINE_SIMPLECAPTCHA_BACKGROUND_PRODUCERS);
+
+	public static final String[] CAPTCHA_ENGINE_SIMPLECAPTCHA_GIMPY_RENDERERS =
+		PropsUtil.getArray(PropsKeys.
+			CAPTCHA_ENGINE_SIMPLECAPTCHA_GIMPY_RENDERERS);
+
+	public static final int CAPTCHA_ENGINE_SIMPLECAPTCHA_HEIGHT =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_SIMPLECAPTCHA_HEIGHT));
+
+	public static final String[] CAPTCHA_ENGINE_SIMPLECAPTCHA_NOISE_PRODUCERS =
+		PropsUtil.getArray(PropsKeys.
+			CAPTCHA_ENGINE_SIMPLECAPTCHA_NOISE_PRODUCERS);
+
+	public static final String[] CAPTCHA_ENGINE_SIMPLECAPTCHA_TEXT_PRODUCERS =
+		PropsUtil.getArray(PropsKeys.
+			CAPTCHA_ENGINE_SIMPLECAPTCHA_TEXT_PRODUCERS);
+
+	public static final int CAPTCHA_ENGINE_SIMPLECAPTCHA_WIDTH =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.CAPTCHA_ENGINE_SIMPLECAPTCHA_WIDTH));
+
+	public static final String[] CAPTCHA_ENGINE_SIMPLECAPTCHA_WORD_RENDERERS =
+		PropsUtil.getArray(PropsKeys.
+			CAPTCHA_ENGINE_SIMPLECAPTCHA_WORD_RENDERERS);
 
 	public static final int CAPTCHA_MAX_CHALLENGES = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.CAPTCHA_MAX_CHALLENGES));

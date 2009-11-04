@@ -31,58 +31,52 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="CaptchaUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CaptchaWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CaptchaUtil {
+public class CaptchaWrapper implements Captcha {
 
-	public static void check(HttpServletRequest request)
-		throws CaptchaTextException {
-
-		getCaptcha().check(request);
-	}
-
-	public static void check(PortletRequest portletRequest)
-		throws CaptchaTextException {
-
-		getCaptcha().check(portletRequest);
-	}
-
-	public static Captcha getCaptcha() {
-		return _captcha;
-	}
-
-	public static String getTaglibPath() {
-		return getCaptcha().getTaglibPath();
-	}
-
-	public static boolean isEnabled(HttpServletRequest request) {
-		return getCaptcha().isEnabled(request);
-	}
-
-	public static boolean isEnabled(PortletRequest portletRequest) {
-		return getCaptcha().isEnabled(portletRequest);
-	}
-
-	public static void serveImage(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
-
-		getCaptcha().serveImage(request, response);
-	}
-
-	public static void serveImage(
-			PortletRequest portletRequest, PortletResponse portletResponse)
-		throws IOException {
-
-		getCaptcha().serveImage(portletRequest, portletResponse);
-	}
-
-	public void setCaptcha(Captcha captcha) {
+	public CaptchaWrapper(Captcha captcha) {
 		_captcha = captcha;
 	}
 
-	private static Captcha _captcha;
+	public void check(HttpServletRequest request) throws CaptchaTextException {
+		_captcha.check(request);
+	}
+
+	public void check(PortletRequest portletRequest)
+		throws CaptchaTextException {
+
+		_captcha.check(portletRequest);
+	}
+
+	public String getTaglibPath() {
+		return _captcha.getTaglibPath();
+	}
+
+	public boolean isEnabled(HttpServletRequest request) {
+		return _captcha.isEnabled(request);
+	}
+
+	public boolean isEnabled(PortletRequest portletRequest) {
+		return _captcha.isEnabled(portletRequest);
+	}
+
+	public void serveImage(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
+
+		_captcha.serveImage(request, response);
+	}
+
+	public void serveImage(
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws IOException {
+
+		_captcha.serveImage(portletRequest, portletResponse);
+	}
+
+	private Captcha _captcha;
 
 }
