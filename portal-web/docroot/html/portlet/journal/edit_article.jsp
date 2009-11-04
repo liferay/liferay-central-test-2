@@ -279,6 +279,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		return null;
 	}
 
+	function <portlet:namespace />getLanguageViewURL(languageId) {
+		return "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=<%= version %>&<portlet:namespace />languageId=" + languageId;
+	}
+
 	function <portlet:namespace />getSuggestionsContent() {
 		var content = '';
 
@@ -536,7 +540,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<c:when test="<%= structure == null %>">
 						<div id="<portlet:namespace />structureTreeWrapper">
 							<ul class="structure-tree" id="<portlet:namespace />structureTree">
-								<li class="structure-field" data-component-name="TextField" data-component-type="text">
+								<li class="structure-field" dataName="TextField" dataType="text">
 									<span class="journal-article-close"></span>
 
 									<span class="folder">
@@ -564,7 +568,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 									</span>
 								</li>
 
-								<li class="structure-field" data-component-name="TextAreaField" data-component-type="text_area">
+								<li class="structure-field" dataName="TextAreaField" dataType="text_area">
 									<span class="journal-article-close"></span>
 
 									<span class="folder">
@@ -783,6 +787,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			Liferay.Portlet.Journal.PROXY.editorImpl = '<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>';
 			Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
 			Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
+			Liferay.Portlet.Journal.PROXY.p_p_id = '<%= PortletKeys.JOURNAL %>';
 
 			new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
 		}

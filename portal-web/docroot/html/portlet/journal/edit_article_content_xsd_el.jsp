@@ -79,7 +79,7 @@ if (elRepeatable && !elRepeatablePrototype) {
 StringBuilder parentStructureData = new StringBuilder();
 
 if (Validator.isNotNull(elParentStructureId)) {
-	parentStructureData.append("data-component-parentStructureId='");
+	parentStructureData.append("dataParentStructureId='");
 	parentStructureData.append(elParentStructureId);
 	parentStructureData.append("'");
 
@@ -93,12 +93,12 @@ if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {
 Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL);
 %>
 
-<li class="<%= css.toString().trim() %>" <%= parentStructureData.toString() %> data-component-instanceId='<%= elInstanceId %>' data-component-name='<%= elName %>' data-component-repeatable='<%= elRepeatable %>' data-component-type='<%= elType %>' data-component-index-type='<%= elIndexType %>' <%= metaData %>>
+<li class="<%= css.toString().trim() %>" <%= parentStructureData.toString() %> dataInstanceId='<%= elInstanceId %>' dataName='<%= elName %>' dataRepeatable='<%= elRepeatable %>' dataType='<%= elType %>' dataIndexType='<%= elIndexType %>' <%= metaData %>>
 	<span class="journal-article-close"></span>
 
 	<span class="folder">
 		<div class="field-container">
-			<input class="journal-article-localized" id="<portlet:namespace />Localized" type="hidden" value='<%= !elLanguageId.equals(StringPool.BLANK) ? languageId : "false" %>' />
+			<input class="journal-article-localized" type="hidden" value='<%= !elLanguageId.equals(StringPool.BLANK) ? languageId : "false" %>' />
 
 			<div class="journal-article-move-handler"></div>
 
@@ -144,10 +144,10 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 					<c:if test="<%= Validator.isNotNull(elContent) %>">
 						<span class="journal-image-show-hide">
-							[ <a class="journal-image-link" href="javascript:void(0);"><span class="show-label"><liferay-ui:message key="show" /></span><span class="hide-label"><liferay-ui:message key="hide" /></span></a> ]
+							[ <a class="journal-image-link" href="javascript:void(0);"><span class="show-label"><liferay-ui:message key="show" /></span><span class="hide-label aui-helper-hidden"><liferay-ui:message key="hide" /></span></a> ]
 						</span>
 
-						<div class="journal-image-preview">
+						<div class="journal-image-preview aui-helper-hidden">
 							<input class="journal-image-content" type="hidden" value="<%= elContent %>" />
 
 							<input class="journal-image-delete" type="hidden" value="" />
@@ -166,13 +166,13 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				<c:if test='<%= elType.equals("image_gallery") %>'>
 					<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="75" type="text" value="<%= elContent %>" />
 
-					<input class="journal-imagegallery-button" data-imagegallery-url="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
+					<input class="journal-imagegallery-button" dataImagegalleryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("document_library") %>'>
 					<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="75" type="text" value="<%= elContent %>" />
 
-					<input class="journal-documentlibrary-button" data-documentlibrary-url="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
+					<input class="journal-documentlibrary-button" dataDocumentlibraryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("boolean") %>'>
@@ -349,7 +349,7 @@ private String _buildMetaDataHTMLAttributes(Map<String, String> elMetaData, Stri
 
 		String content = elMetaData.get(name);
 
-		sb.append("data-component-");
+		sb.append("data");
 		sb.append(name);
 		sb.append("='");
 		sb.append(HtmlUtil.escapeAttribute(content));

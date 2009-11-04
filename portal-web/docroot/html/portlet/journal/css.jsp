@@ -25,7 +25,6 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .journal-article-component-list {
-	display: none;
 	margin: 10px 0 0 0;
 }
 
@@ -450,10 +449,6 @@
 	margin: 5px 0 0 0;
 }
 
-.journal-article-edit-field-wrapper {
-	display: none;
-}
-
 .ie .journal-article-edit-field-wrapper form {
 	width: auto;
 }
@@ -519,10 +514,6 @@
 	height: 6em;
 }
 
-.portlet-journal .journal-message, div.save-structure-message, .portlet-journal .structure-message {
-	display: none;
-}
-
 .save-structure-button {
 	display: none;
 }
@@ -540,10 +531,6 @@
 	width: 450px;
 }
 
-.save-structure-template-dialog .journal-structureid-field {
-	display: none;
-}
-
 .save-structure-name {
 	width: 470px;
 }
@@ -551,10 +538,6 @@
 .save-structure-description {
 	height: 150px;
 	width: 470px;
-}
-
-.journal-structureid-field {
-	display: none;
 }
 
 .portlet-journal .repeatable-button {
@@ -579,13 +562,8 @@
 	font-weight: normal;
 }
 
-.portlet-journal .journal-image-link .hide-label {
-	display: none;
-}
-
 .portlet-journal .journal-image-preview {
 	border: 1px dotted;
-	display: none;
 	margin-top: 2px;
 	overflow: scroll;
 	padding: 4px;

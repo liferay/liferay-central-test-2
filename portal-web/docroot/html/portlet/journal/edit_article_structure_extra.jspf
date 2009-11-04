@@ -24,7 +24,7 @@
 
 <div id="<portlet:namespace />saveStructureTemplateDialogWrapper" style="display: none;">
 	<div id="<portlet:namespace />saveStructureTemplateDialog" class="save-structure-template-dialog">
-		<div class="portlet-msg-success save-structure-message" id="<portlet:namespace />saveStructureMessage">
+		<div class="portlet-msg-success save-structure-message aui-helper-hidden" id="<portlet:namespace />saveStructureMessage">
 			<liferay-ui:message key="your-request-processed-successfully" />
 		</div>
 
@@ -44,7 +44,7 @@
 
 		<a href="#" id="<portlet:namespace />showStructureIdContainer"><liferay-ui:message key="change-structure-id" /> &raquo;</a>
 
-		<div class="journal-structureid-field" id="<portlet:namespace />structureIdContainer">
+		<div class="journal-structureid-field aui-helper-hidden" id="<portlet:namespace />structureIdContainer">
 			<div>
 				<liferay-ui:message key="structure-id" />:
 			</div>
@@ -56,10 +56,10 @@
 	</div>
 </div>
 
-<div class="journal-article-edit-field-wrapper" id="<portlet:namespace />journalArticleEditFieldWrapper">
+<div class="journal-article-edit-field-wrapper aui-helper-hidden" id="<portlet:namespace />journalArticleEditFieldWrapper">
 	<form action="" class="aui-form" method="post">
 		<div class="journal-article-edit-field aui-block-labels" id="<portlet:namespace />journalArticleEditField">
-			<div class="portlet-msg-success journal-message" id="<portlet:namespace />journalMessage">
+			<div class="portlet-msg-success journal-message aui-helper-hidden" id="<portlet:namespace />journalMessage">
 				<liferay-ui:message key="your-request-processed-successfully" />
 			</div>
 
@@ -148,35 +148,35 @@
 </div>
 
 <div class="journal-fieldmodel-container" id="journalFieldModelContainer">
-	<div data-component-type="text">
+	<div dataType="text">
 		<input class="principal-field-element lfr-input-text" size="75" type="text" value="" />
 	</div>
 
-	<div data-component-type="text_area">
+	<div dataType="text_area">
 		<input class="principal-field-element lfr-input-text" size="75" type="text" value="" />
 	</div>
 
-	<div data-component-type="text_box">
+	<div dataType="text_box">
 		<textarea class="principal-field-element lfr-textarea" cols="80" rows="10"></textarea>
 	</div>
 
-	<div data-component-type="image">
+	<div dataType="image">
 		<input class="principal-field-element lfr-input-text flexible" size="75"  type="file" value="" />
 	</div>
 
-	<div data-component-type="image_gallery">
+	<div dataType="image_gallery">
 		<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="75" type="text" value="" />
 
-		<input class="journal-imagegallery-button" data-imagegallery-url="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
+		<input class="journal-imagegallery-button" dataImagegalleryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 	</div>
 
-	<div data-component-type="document_library">
+	<div dataType="document_library">
 		<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="75" type="text" value="" />
 
-		<input class="journal-documentlibrary-button" data-documentlibrary-url="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
+		<input class="journal-documentlibrary-button" dataDocumentlibraryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 	</div>
 
-	<div data-component-type="boolean">
+	<div dataType="boolean">
 		<div class="journal-subfield">
 			<input class="principal-field-element" type="checkbox" />
 
@@ -184,11 +184,11 @@
 		</div>
 	</div>
 
-	<div data-component-type="selection_break">
+	<div dataType="selection_break">
 		<div class="principal-field-element separator"></div>
 	</div>
 
-	<div data-component-type="list">
+	<div dataType="list">
 		<div class="journal-list-subfield">
 			<select class="principal-field-element"></select>
 
@@ -210,7 +210,7 @@
 		</div>
 	</div>
 
-	<div data-component-type="multi-list">
+	<div dataType="multi-list">
 		<div class="journal-list-subfield">
 			<select class="principal-field-element" multiple="true"></select>
 
@@ -232,7 +232,7 @@
 		</div>
 	</div>
 
-	<div data-component-type="link_to_layout">
+	<div dataType="link_to_layout">
 		<select class="principal-field-element">
 			<option value=""></option>
 
