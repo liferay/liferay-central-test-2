@@ -37,6 +37,8 @@ Liferay.Util = {
 	},
 
 	addInputFocus: function() {
+		var instance = this;
+
 		AUI().use('node',
 			function(A) {
 				var handleFocus = function(event) {
@@ -58,10 +60,12 @@ Liferay.Util = {
 					}
 				};
 
-				A.on('focus', handleFocus, document.body);
-				A.on('blur', handleFocus, document.body);
+				A.on('focus', handleFocus, document);
+				A.on('blur', handleFocus, document);
 			}
 		);
+
+		instance.addInputFocus = function(){};
 	},
 
 	addInputType: function(el) {
@@ -439,24 +443,31 @@ Liferay.Util = {
 	},
 
 	focusFormField: function(el, caretPosition) {
-		var interacting = false;
-		var eventData = caretPosition ? [caretPosition] : null;
+		var instance = this;
 
-		jQuery(document).one(
-			'click',
-			function() {
-				interacting = true;
-			}
-		);
+		instance.addInputFocus();
 
 		AUI().ready(
-			function() {
-				if (el && (el.offsetHeight != 0) && !interacting) {
-					var elObj = jQuery(el);
+			'event',
+			'node',
+			function(A) {
+				var interacting = false;
 
-					jQuery('input').trigger('blur');
+				var clickHandle = A.getDoc().on(
+					'click',
+					function(event) {
+						interacting = true;
 
-					elObj.trigger('focus', eventData);
+						clickHandle.detach();
+					}
+				);
+
+				if (!interacting) {
+					el = A.get(el);
+
+					if (el) {
+						el.focus();
+					}
 				}
 			}
 		);
