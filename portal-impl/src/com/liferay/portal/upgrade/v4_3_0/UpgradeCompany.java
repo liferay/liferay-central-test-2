@@ -27,10 +27,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.CompanyTable;
 import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
@@ -45,7 +45,7 @@ import com.liferay.portal.util.PortletKeys;
 public class UpgradeCompany extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		ValueMapper companyIdMapper = ValueMapperFactory.getValueMapper();
+		ValueMapper companyIdMapper = ValueMapperFactoryUtil.getValueMapper();
 
 		AvailableMappersUtil.setCompanyIdMapper(companyIdMapper);
 

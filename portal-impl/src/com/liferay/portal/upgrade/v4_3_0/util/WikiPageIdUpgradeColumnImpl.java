@@ -23,9 +23,9 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 
 /**
@@ -42,7 +42,7 @@ public class WikiPageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 		_nodeIdColumn = nodeIdColumn;
 		_titleColumn = titleColumn;
-		_wikiPageIdMapper = ValueMapperFactory.getValueMapper();
+		_wikiPageIdMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {

@@ -24,10 +24,10 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.upgrade.StagnantRowException;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
 /**
  * <a href="LayoutPlidUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +48,7 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_groupIdColumn = groupIdColumn;
 		_privateLayoutColumn = privateLayoutColumn;
 		_layoutIdColumn = layoutIdColumn;
-		_layoutPlidMapper = ValueMapperFactory.getValueMapper();
+		_layoutPlidMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {

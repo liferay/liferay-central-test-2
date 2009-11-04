@@ -20,41 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_0.util;
+package com.liferay.portal.kernel.upgrade.util;
 
-import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
-import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-
-import java.sql.Types;
+import java.util.Iterator;
 
 /**
- * <a href="PollsVoteChoiceIdUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ValueMapperWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PollsVoteChoiceIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class ValueMapperWrapper implements ValueMapper {
 
-	public PollsVoteChoiceIdUpgradeColumnImpl(
-		UpgradeColumn questionIdColumn, ValueMapper pollsChoiceIdMapper) {
+	public ValueMapperWrapper(ValueMapper valueMapper) {
+		_valueMapper = valueMapper;
+	}
 
-		super("choiceId", new Integer(Types.VARCHAR));
-
-		_questionIdColumn = questionIdColumn;
-		_pollsChoiceIdMapper = pollsChoiceIdMapper;
+	public ValueMapper getValueMapper() {
+		return _valueMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long oldQuestionId = (Long)_questionIdColumn.getOldValue();
-
-		String oldChoiceIdValue =
-			"{questionId=" + oldQuestionId + ", choiceId=" + oldValue + "}";
-
-		return _pollsChoiceIdMapper.getNewValue(oldChoiceIdValue);
+		return _valueMapper.getNewValue(oldValue);
 	}
 
-	private UpgradeColumn _questionIdColumn;
-	private ValueMapper _pollsChoiceIdMapper;
+	public void mapValue(Object oldValue, Object newValue) throws Exception {
+		_valueMapper.mapValue(oldValue, newValue);
+	}
+
+	public void appendException(Object exception) {
+		_valueMapper.appendException(exception);
+	}
+
+	public Iterator<Object> iterator() throws Exception {
+		return _valueMapper.iterator();
+	}
+
+	public int size() throws Exception {
+		return _valueMapper.size();
+	}
+
+	private ValueMapper _valueMapper;
 
 }

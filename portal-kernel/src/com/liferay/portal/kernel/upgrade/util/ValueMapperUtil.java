@@ -20,45 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.kernel.upgrade.util;
+
+import com.liferay.portal.kernel.util.FileUtil;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import java.util.Iterator;
 
 /**
- * <a href="ValueMapperWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="ValueMapperUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ValueMapperWrapper implements ValueMapper {
+public class ValueMapperUtil {
 
-	public ValueMapperWrapper(ValueMapper valueMapper) {
-		_valueMapper = valueMapper;
+	public static void persist(
+			ValueMapper valueMapper, String tmpDir, String fileName)
+		throws Exception {
+
+		FileUtil.mkdirs(tmpDir);
+
+		BufferedWriter bw = new BufferedWriter(
+			new FileWriter(tmpDir + "/" + fileName + ".txt"));
+
+		try {
+			Iterator<Object> itr = valueMapper.iterator();
+
+			while (itr.hasNext()) {
+				Object oldValue = itr.next();
+
+				Object newValue = valueMapper.getNewValue(oldValue);
+
+				bw.write(oldValue + "=" + newValue);
+
+				if (itr.hasNext()) {
+					bw.write("\n");
+				}
+			}
+		}
+		finally {
+			bw.close();
+		}
 	}
-
-	public ValueMapper getValueMapper() {
-		return _valueMapper;
-	}
-
-	public Object getNewValue(Object oldValue) throws Exception {
-		return _valueMapper.getNewValue(oldValue);
-	}
-
-	public void mapValue(Object oldValue, Object newValue) throws Exception {
-		_valueMapper.mapValue(oldValue, newValue);
-	}
-
-	public void appendException(Object exception) {
-		_valueMapper.appendException(exception);
-	}
-
-	public Iterator<Object> iterator() throws Exception {
-		return _valueMapper.iterator();
-	}
-
-	public int size() throws Exception {
-		return _valueMapper.size();
-	}
-
-	private ValueMapper _valueMapper;
 
 }

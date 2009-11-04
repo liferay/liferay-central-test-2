@@ -23,6 +23,8 @@
 package com.liferay.portal.upgrade.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 
 import java.sql.Types;
 
@@ -47,7 +49,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		_trackValues = trackValues;
 
 		if (_trackValues) {
-			_valueMapper = ValueMapperFactory.getValueMapper();
+			_valueMapper = ValueMapperFactoryUtil.getValueMapper();
 		}
 	}
 

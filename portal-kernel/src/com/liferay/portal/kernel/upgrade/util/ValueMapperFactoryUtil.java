@@ -20,22 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.kernel.upgrade.util;
 
 /**
- * <a href="ValueMapperFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="ValueMapperFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ValueMapperFactory {
+public class ValueMapperFactoryUtil {
 
 	public static ValueMapper getValueMapper() {
-		if (true) {
-			return new MemoryValueMapper();
-		}
-		else {
-			return new DatabaseValueMapper();
-		}
+		return getValueMapperFactory().getValueMapper();
 	}
+
+	public static ValueMapperFactory getValueMapperFactory() {
+		return _valueMapperFactory;
+	}
+
+	public void setValueMapperFactory(ValueMapperFactory valueMapperFactory) {
+		_valueMapperFactory = valueMapperFactory;
+	}
+
+	private static ValueMapperFactory _valueMapperFactory;
 
 }

@@ -26,9 +26,9 @@ import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -50,7 +50,7 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_companyIdColumn = companyIdColumn;
 		_folderIdColumn = folderIdColumn;
 		_nameColumn = nameColumn;
-		_dlFileEntryIdMapper = ValueMapperFactory.getValueMapper();
+		_dlFileEntryIdMapper = ValueMapperFactoryUtil.getValueMapper();
 		_movedFolderIds = new HashSet<Long>();
 	}
 

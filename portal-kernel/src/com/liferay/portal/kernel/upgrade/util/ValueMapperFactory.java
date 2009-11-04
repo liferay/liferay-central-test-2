@@ -20,49 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
-
-import com.liferay.portal.kernel.util.FileUtil;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-
-import java.util.Iterator;
+package com.liferay.portal.kernel.upgrade.util;
 
 /**
- * <a href="ValueMapperUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ValueMapperFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ValueMapperUtil {
+public interface ValueMapperFactory {
 
-	public static void persist(
-			ValueMapper valueMapper, String tmpDir, String fileName)
-		throws Exception {
-
-		FileUtil.mkdirs(tmpDir);
-
-		BufferedWriter bw = new BufferedWriter(
-			new FileWriter(tmpDir + "/" + fileName + ".txt"));
-
-		try {
-			Iterator<Object> itr = valueMapper.iterator();
-
-			while (itr.hasNext()) {
-				Object oldValue = itr.next();
-
-				Object newValue = valueMapper.getNewValue(oldValue);
-
-				bw.write(oldValue + "=" + newValue);
-
-				if (itr.hasNext()) {
-					bw.write("\n");
-				}
-			}
-		}
-		finally {
-			bw.close();
-		}
-	}
+	public ValueMapper getValueMapper();
 
 }

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.util.SystemProperties;
 
 /**
@@ -39,7 +39,7 @@ public class ValueMapperUtil {
 
 		tmpDir += "/com/liferay/portal/upgrade/v4_3_0/ValueMapperUtil";
 
-		com.liferay.portal.upgrade.util.ValueMapperUtil.persist(
+		com.liferay.portal.kernel.upgrade.util.ValueMapperUtil.persist(
 			valueMapper, tmpDir, fileName);
 	}
 

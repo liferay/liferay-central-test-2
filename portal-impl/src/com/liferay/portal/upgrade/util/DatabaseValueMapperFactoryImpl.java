@@ -22,24 +22,19 @@
 
 package com.liferay.portal.upgrade.util;
 
-import java.util.Iterator;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapperFactory;
 
 /**
- * <a href="ValueMapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="DatabaseValueMapperFactoryImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */
-public interface ValueMapper {
+public class DatabaseValueMapperFactoryImpl implements ValueMapperFactory {
 
-	public Object getNewValue(Object oldValue) throws Exception;
-
-	public void mapValue(Object oldValue, Object newValue) throws Exception;
-
-	public void appendException(Object exception);
-
-	public Iterator<Object> iterator() throws Exception;
-
-	public int size() throws Exception;
+	public ValueMapper getValueMapper() {
+		return new DatabaseValueMapper();
+	}
 
 }

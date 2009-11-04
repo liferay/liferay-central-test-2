@@ -23,9 +23,9 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
 /**
  * <a href="IGImageIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ public class IGImageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		super("imageId", false);
 
 		_companyIdColumn = companyIdColumn;
-		_igImageIdMapper = ValueMapperFactory.getValueMapper();
+		_igImageIdMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {

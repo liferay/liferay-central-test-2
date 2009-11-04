@@ -23,9 +23,9 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
 import java.sql.Types;
 
@@ -44,7 +44,7 @@ public class JournalStructurePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 		_companyIdColumn = companyIdColumn;
 		_groupIdColumn = groupIdColumn;
-		_journalStructureIdMapper = ValueMapperFactory.getValueMapper();
+		_journalStructureIdMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
