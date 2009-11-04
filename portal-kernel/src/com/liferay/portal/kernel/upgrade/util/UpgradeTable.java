@@ -20,31 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.kernel.upgrade.util;
 
-import com.liferay.portal.PortalException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeException.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */
-public class UpgradeException extends PortalException {
+public interface UpgradeTable {
 
-	public UpgradeException() {
-		super();
-	}
+	public void appendColumn(StringBuilder sb, Object value, boolean last)
+		throws Exception;
 
-	public UpgradeException(String msg) {
-		super(msg);
-	}
+	public void appendColumn(
+			StringBuilder sb, ResultSet rs, String name, Integer type,
+			boolean last)
+		throws Exception;
 
-	public UpgradeException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+	public String getCreateSQL() throws Exception;
 
-	public UpgradeException(Throwable cause) {
-		super(cause);
-	}
+	public void setCreateSQL(String createSQL) throws Exception;
+
+	public String getDeleteSQL() throws Exception;
+
+	public String getInsertSQL() throws Exception;
+
+	public String getSelectSQL() throws Exception;
+
+	public void setColumn(
+			PreparedStatement ps, int index, Integer type, String value)
+		throws Exception;
+
+	public void updateTable() throws Exception;
 
 }

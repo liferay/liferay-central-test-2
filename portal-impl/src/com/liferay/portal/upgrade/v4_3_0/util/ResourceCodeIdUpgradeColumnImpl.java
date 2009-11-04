@@ -22,12 +22,12 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.upgrade.UpgradeException;
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 /**
  * <a href="ResourceCodeIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>

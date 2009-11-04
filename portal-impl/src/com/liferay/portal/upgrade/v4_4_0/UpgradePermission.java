@@ -23,13 +23,13 @@
 package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.imagegallery.model.IGFolder;

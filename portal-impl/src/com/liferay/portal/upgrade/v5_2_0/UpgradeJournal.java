@@ -23,12 +23,12 @@
 package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PwdGenerator;
 

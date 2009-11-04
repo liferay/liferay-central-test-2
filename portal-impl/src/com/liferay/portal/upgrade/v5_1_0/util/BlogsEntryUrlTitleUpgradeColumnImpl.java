@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade.v5_1_0.util;
 
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
 import java.util.HashSet;

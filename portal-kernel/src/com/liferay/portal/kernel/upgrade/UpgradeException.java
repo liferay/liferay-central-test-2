@@ -20,32 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.kernel.upgrade;
+
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Alexander Chow
  */
-public interface UpgradeColumn {
+public class UpgradeException extends PortalException {
 
-	public String getName();
+	public UpgradeException() {
+		super();
+	}
 
-	public boolean isApplicable(String name);
+	public UpgradeException(String msg) {
+		super(msg);
+	}
 
-	public Integer getOldColumnType(Integer defaultType);
+	public UpgradeException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public Object getOldValue();
-
-	public void setOldValue(Object oldValue);
-
-	public Integer getNewColumnType(Integer defaultType);
-
-	public Object getNewValue(Object oldValue) throws Exception;
-
-	public Object getNewValue();
-
-	public void setNewValue(Object newValue);
+	public UpgradeException(Throwable cause) {
+		super(cause);
+	}
 
 }

@@ -20,23 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
-
-import com.liferay.portal.PortalException;
+package com.liferay.portal.kernel.upgrade.util;
 
 /**
- * <a href="StagnantRowException.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
-public class StagnantRowException extends PortalException {
+public interface UpgradeColumn {
 
-	public StagnantRowException(String msg) {
-		super(msg);
-	}
+	public String getName();
 
-	public StagnantRowException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+	public boolean isApplicable(String name);
+
+	public Integer getOldColumnType(Integer defaultType);
+
+	public Object getOldValue();
+
+	public void setOldValue(Object oldValue);
+
+	public Integer getNewColumnType(Integer defaultType);
+
+	public Object getNewValue(Object oldValue) throws Exception;
+
+	public Object getNewValue();
+
+	public void setNewValue(Object newValue);
 
 }

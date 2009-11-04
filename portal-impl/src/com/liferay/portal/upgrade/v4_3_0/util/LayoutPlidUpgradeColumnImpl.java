@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.upgrade.StagnantRowException;
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
 

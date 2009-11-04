@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v5_2_0;
 
-import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
  * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>

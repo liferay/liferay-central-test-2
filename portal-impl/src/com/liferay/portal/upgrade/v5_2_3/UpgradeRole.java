@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeProcess;
 
 /**
  * <a href="UpgradeRole.java.html"><b><i>View Source</i></b></a>

@@ -24,9 +24,9 @@ package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.upgrade.StagnantRowException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.upgrade.StagnantRowException;
 
 /**
  * <a href="IdReplacer.java.html"><b><i>View Source</i></b></a>

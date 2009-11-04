@@ -22,8 +22,8 @@
 
 package com.liferay.portal.upgrade.v5_2_0.util;
 
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 /**
  * <a href="OrganizationTypeUpgradeColumnImpl.java.html"><b><i>View Source</i>

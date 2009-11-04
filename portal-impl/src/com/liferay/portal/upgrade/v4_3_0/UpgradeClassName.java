@@ -22,8 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeProcess;
 
 /**
  * <a href="UpgradeClassName.java.html"><b><i>View Source</i></b></a>

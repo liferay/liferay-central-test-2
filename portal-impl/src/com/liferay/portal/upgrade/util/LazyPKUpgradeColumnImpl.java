@@ -23,7 +23,7 @@
 package com.liferay.portal.upgrade.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.upgrade.StagnantRowException;
+import com.liferay.portal.kernel.upgrade.StagnantRowException;
 
 /**
  * <a href="LazyPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>

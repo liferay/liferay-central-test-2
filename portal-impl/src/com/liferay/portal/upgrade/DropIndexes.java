@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.events.StartupHelperUtil;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
  * <a href="DropIndexes.java.html"><b><i>View Source</i></b></a>

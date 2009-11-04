@@ -22,8 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
 

@@ -22,11 +22,11 @@
 
 package com.liferay.portal.upgrade.v4_4_0.util;
 
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 import java.util.Set;
 

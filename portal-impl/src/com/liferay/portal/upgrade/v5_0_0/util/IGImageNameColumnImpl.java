@@ -22,9 +22,9 @@
 
 package com.liferay.portal.upgrade.v5_0_0.util;
 
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 /**
  * <a href="IGImageNameColumnImpl.java.html"><b><i>View Source</i></b></a>

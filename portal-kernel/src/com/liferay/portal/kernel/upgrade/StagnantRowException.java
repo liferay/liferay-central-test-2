@@ -20,41 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.kernel.upgrade;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="StagnantRowException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Brian Wing Shun Chan
  */
-public interface UpgradeTable {
+public class StagnantRowException extends PortalException {
 
-	public void appendColumn(StringBuilder sb, Object value, boolean last)
-		throws Exception;
+	public StagnantRowException(String msg) {
+		super(msg);
+	}
 
-	public void appendColumn(
-			StringBuilder sb, ResultSet rs, String name, Integer type,
-			boolean last)
-		throws Exception;
-
-	public String getCreateSQL() throws Exception;
-
-	public void setCreateSQL(String createSQL) throws Exception;
-
-	public String getDeleteSQL() throws Exception;
-
-	public String getInsertSQL() throws Exception;
-
-	public String getSelectSQL() throws Exception;
-
-	public void setColumn(
-			PreparedStatement ps, int index, Integer type, String value)
-		throws Exception;
-
-	public void updateTable() throws Exception;
+	public StagnantRowException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
 }

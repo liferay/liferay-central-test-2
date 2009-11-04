@@ -22,7 +22,7 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.verify.VerifyException;
 
 /**

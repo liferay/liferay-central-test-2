@@ -23,8 +23,8 @@
 package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
-import com.liferay.portal.upgrade.UpgradeProcess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

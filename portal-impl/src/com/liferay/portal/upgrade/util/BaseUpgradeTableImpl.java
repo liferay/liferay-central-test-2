@@ -26,9 +26,9 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.upgrade.UpgradeException;
 
 /**
  * <a href="BaseUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>

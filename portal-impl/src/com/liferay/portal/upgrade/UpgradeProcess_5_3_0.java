@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeAsset;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeAssetPublisher;

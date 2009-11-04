@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.portal.upgrade.StagnantRowException;
+import com.liferay.portal.kernel.upgrade.StagnantRowException;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

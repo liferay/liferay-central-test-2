@@ -22,9 +22,9 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_2_3.util.BookmarksEntryTable;
 
 /**

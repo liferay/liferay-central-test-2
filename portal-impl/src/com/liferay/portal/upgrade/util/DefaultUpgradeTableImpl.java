@@ -22,9 +22,11 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.kernel.upgrade.StagnantRowException;
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.tools.comparator.ColumnsComparator;
-import com.liferay.portal.upgrade.StagnantRowException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

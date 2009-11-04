@@ -24,13 +24,13 @@ package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileRankTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileShortcutTable;
