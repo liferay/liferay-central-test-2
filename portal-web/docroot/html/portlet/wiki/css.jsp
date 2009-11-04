@@ -316,6 +316,10 @@
 	padding-bottom: 10px;
 }
 
+.portlet-wiki .top-links .page-search {
+	float: right;
+}
+
 .portlet-wiki .top-links .top-links-navigation {
 	float: left;
 }

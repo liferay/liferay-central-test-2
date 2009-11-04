@@ -126,12 +126,11 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 							&nbsp;
 						</div>
 
-						<span class="nobr">
-							<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
+						<div class="page-search">
+							<aui:input cssClass="input-text-search" inlineField="<%= true %>" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
 
 							<aui:button type="submit" value="search" />
-						</span>
-
+						</div>
 					</aui:fieldset>
 				</aui:form>
 			</aui:column>
