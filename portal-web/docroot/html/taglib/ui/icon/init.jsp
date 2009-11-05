@@ -48,7 +48,7 @@ boolean iconMenuShowWhenSingleIcon = GetterUtil.getBoolean((String)request.getAt
 String image = (String)request.getAttribute("liferay-ui:icon:image");
 String imageHover = (String)request.getAttribute("liferay-ui:icon:imageHover");
 
-boolean auiImage = image.startsWith("../aui/");
+boolean auiImage = (image != null) && image.startsWith("../aui/");
 
 String message = (String)request.getAttribute("liferay-ui:icon:message");
 
