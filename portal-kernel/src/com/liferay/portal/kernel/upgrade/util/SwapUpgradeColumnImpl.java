@@ -20,30 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.kernel.upgrade.util;
 
 /**
- * <a href="TempUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SwapUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */
-public class TempUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public TempUpgradeColumnImpl(String name) {
-		super(name);
+	public SwapUpgradeColumnImpl(String name, ValueMapper valueMapper) {
+		this(name, null, valueMapper);
 	}
 
-	public TempUpgradeColumnImpl(String name, Integer oldColumnType) {
+	public SwapUpgradeColumnImpl(
+		String name, Integer oldColumnType, ValueMapper valueMapper) {
+
 		super(name, oldColumnType);
-	}
 
-	public Integer getNewColumnType(Integer defaultType) {
-		return getOldColumnType(defaultType);
+		_valueMapper = valueMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		return oldValue;
+		return _valueMapper.getNewValue(oldValue);
 	}
+
+	private ValueMapper _valueMapper;
 
 }

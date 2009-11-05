@@ -20,33 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
+package com.liferay.portal.kernel.upgrade.util;
 
-import com.liferay.portal.kernel.upgrade.util.ValueMapper;
+import java.sql.Types;
+
+import java.util.Date;
 
 /**
- * <a href="SwapUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DateUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public class DateUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public SwapUpgradeColumnImpl(String name, ValueMapper valueMapper) {
-		this(name, null, valueMapper);
-	}
-
-	public SwapUpgradeColumnImpl(
-		String name, Integer oldColumnType, ValueMapper valueMapper) {
-
-		super(name, oldColumnType);
-
-		_valueMapper = valueMapper;
+	public DateUpgradeColumnImpl(String name) {
+		super(name, new Integer(Types.TIMESTAMP));
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		return _valueMapper.getNewValue(oldValue);
-	}
+		Date oldDate = (Date)oldValue;
 
-	private ValueMapper _valueMapper;
+		return oldDate.getTime();
+	}
 
 }

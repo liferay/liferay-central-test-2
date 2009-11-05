@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
  * <a href="PrefsOwnerTypeUpgradeColumnImpl.java.html"><b><i>View Source</i></b>

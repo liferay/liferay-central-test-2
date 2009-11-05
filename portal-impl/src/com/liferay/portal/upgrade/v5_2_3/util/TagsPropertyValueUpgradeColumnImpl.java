@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade.v5_2_3.util;
 
+import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
  * <a href="TagsPropertyValueUpgradeColumnImpl.java.html"><b><i>View Source</i>

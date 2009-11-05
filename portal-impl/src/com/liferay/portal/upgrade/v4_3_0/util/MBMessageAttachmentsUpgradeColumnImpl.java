@@ -26,9 +26,9 @@ import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
  * <a href="MBMessageAttachmentsUpgradeColumnImpl.java.html"><b><i>View Source

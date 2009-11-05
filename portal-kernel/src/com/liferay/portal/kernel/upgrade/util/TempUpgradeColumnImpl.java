@@ -20,71 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
-
-import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
+package com.liferay.portal.kernel.upgrade.util;
 
 /**
- * <a href="BaseUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="TempUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */
-public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
+public class TempUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public BaseUpgradeColumnImpl(String name) {
-		this(name, null);
+	public TempUpgradeColumnImpl(String name) {
+		super(name);
 	}
 
-	public BaseUpgradeColumnImpl(String name, Integer oldColumnType) {
-		_name = name;
-		_oldColumnType = oldColumnType;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public boolean isApplicable(String name) {
-		if (_name.equals(name)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public Integer getOldColumnType(Integer defaultType) {
-		if (_oldColumnType == null) {
-			return defaultType;
-		}
-		else {
-			return _oldColumnType;
-		}
-	}
-
-	public Object getOldValue() {
-		return _oldValue;
-	}
-
-	public void setOldValue(Object oldValue) {
-		_oldValue = oldValue;
+	public TempUpgradeColumnImpl(String name, Integer oldColumnType) {
+		super(name, oldColumnType);
 	}
 
 	public Integer getNewColumnType(Integer defaultType) {
-		return defaultType;
+		return getOldColumnType(defaultType);
 	}
 
-	public Object getNewValue() {
-		return _newValue;
+	public Object getNewValue(Object oldValue) throws Exception {
+		return oldValue;
 	}
-
-	public void setNewValue(Object newValue) {
-		_newValue = newValue;
-	}
-
-	private String _name;
-	private Integer _oldColumnType;
-	private Object _oldValue;
-	private Object _newValue;
 
 }

@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
  * <a href="ShoppingCouponLimitCategoriesUpgradeColumnImpl.java.html"><b><i>View

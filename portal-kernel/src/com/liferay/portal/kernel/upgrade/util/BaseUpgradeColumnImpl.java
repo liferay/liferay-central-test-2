@@ -20,27 +20,69 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.util;
-
-import java.sql.Types;
-
-import java.util.Date;
+package com.liferay.portal.kernel.upgrade.util;
 
 /**
- * <a href="DateUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DateUpgradeColumnImpl extends BaseUpgradeColumnImpl {
+public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 
-	public DateUpgradeColumnImpl(String name) {
-		super(name, new Integer(Types.TIMESTAMP));
+	public BaseUpgradeColumnImpl(String name) {
+		this(name, null);
 	}
 
-	public Object getNewValue(Object oldValue) throws Exception {
-		Date oldDate = (Date)oldValue;
-
-		return oldDate.getTime();
+	public BaseUpgradeColumnImpl(String name, Integer oldColumnType) {
+		_name = name;
+		_oldColumnType = oldColumnType;
 	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public boolean isApplicable(String name) {
+		if (_name.equals(name)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public Integer getOldColumnType(Integer defaultType) {
+		if (_oldColumnType == null) {
+			return defaultType;
+		}
+		else {
+			return _oldColumnType;
+		}
+	}
+
+	public Object getOldValue() {
+		return _oldValue;
+	}
+
+	public void setOldValue(Object oldValue) {
+		_oldValue = oldValue;
+	}
+
+	public Integer getNewColumnType(Integer defaultType) {
+		return defaultType;
+	}
+
+	public Object getNewValue() {
+		return _newValue;
+	}
+
+	public void setNewValue(Object newValue) {
+		_newValue = newValue;
+	}
+
+	private String _name;
+	private Integer _oldColumnType;
+	private Object _oldValue;
+	private Object _newValue;
 
 }
