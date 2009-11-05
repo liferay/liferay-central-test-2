@@ -343,7 +343,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				String newParameters =
 					"/get_file?uuid=" + fileEntry.getUuid() +
-						"&amp;groupId=@group_id@";
+						"&amp;groupId=" + _DATA_HANDLER_GROUP_ID;
 
 				sb.replace(beginPos, endPos, newParameters);
 			}
@@ -474,7 +474,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				String newParameters =
 					"/image_gallery?uuid=" + image.getUuid() +
-						"&amp;groupId=@group_id@&amp;t=" + timestamp;
+						"&amp;groupId=" + _DATA_HANDLER_GROUP_ID +
+							"&amp;t=" + timestamp;
 
 				sb.replace(beginPos, endPos, newParameters);
 			}
@@ -623,6 +624,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			structureIds, article.getStructureId(), article.getStructureId());
 		String parentTemplateId = MapUtil.getString(
 			templateIds, article.getTemplateId(), article.getTemplateId());
+
+		String content = article.getContent();
+
+		article.setContent(
+			StringUtil.replace(
+				content, _DATA_HANDLER_GROUP_ID, String.valueOf(groupId)));
 
 		Date displayDate = article.getDisplayDate();
 
@@ -1696,6 +1703,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = true;
+
+	private static final String _DATA_HANDLER_GROUP_ID =
+		"@data_handler_group_id@";
 
 	private static final String _NAMESPACE = "journal";
 
