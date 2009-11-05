@@ -31,6 +31,7 @@ if (iconListIconCount != null) {
 	iconListIconCount.increment();
 }
 
+boolean isAuiIcon = false;
 boolean iconListShowWhenSingleIcon = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-list:showWhenSingleIcon"));
 
 Boolean iconListSingleIcon = (Boolean)request.getAttribute("liferay-ui:icon-list:single-icon");
@@ -48,6 +49,11 @@ boolean iconMenuShowWhenSingleIcon = GetterUtil.getBoolean((String)request.getAt
 String image = (String)request.getAttribute("liferay-ui:icon:image");
 String imageHover = (String)request.getAttribute("liferay-ui:icon:imageHover");
 
+if (image!= null && image.startsWith("../aui/")) {
+	isAuiIcon = true;
+	image = image.substring("../aui/".length());
+}
+
 String message = (String)request.getAttribute("liferay-ui:icon:message");
 
 if (message == null) {
@@ -58,7 +64,12 @@ String src = (String)request.getAttribute("liferay-ui:icon:src");
 String srcHover = (String)request.getAttribute("liferay-ui:icon:srcHover");
 
 if (Validator.isNull(src)) {
-	src = themeDisplay.getPathThemeImages() + "/common/" + image + ".png";
+	if (isAuiIcon) {
+		src = themeDisplay.getPathThemeImages() + "/spacer.png";
+	}
+	else {
+		src = themeDisplay.getPathThemeImages() + "/common/" + image + ".png";
+	}
 }
 
 if (Validator.isNull(srcHover) && Validator.isNotNull(imageHover)) {
