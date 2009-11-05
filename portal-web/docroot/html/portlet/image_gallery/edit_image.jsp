@@ -109,6 +109,8 @@ if (image != null) {
 	}
 </script>
 
+<liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
+
 <portlet:actionURL var="editImageURL">
 	<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 </portlet:actionURL>
@@ -120,6 +122,10 @@ if (image != null) {
 	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 	<aui:input name="imageId" type="hidden" value="<%= imageId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
+
+	<c:if test="<%= image != null %>">
+		<h3 class="image-title"><%= image.getName() %></h3>
+	</c:if>
 
 	<liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />
 

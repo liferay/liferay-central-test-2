@@ -124,6 +124,8 @@ if (portletDisplay.isWebDAVEnabled()) {
 	}
 </script>
 
+<liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
+
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="image-column image-column-first" first="<%= true %>">
 		<h3 class="image-title"><%= image.getName() %></h3>
