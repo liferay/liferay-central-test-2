@@ -1357,6 +1357,14 @@ public class ServicePreAction extends Action {
 				companyId, themeId, wapTheme);
 			colorScheme = ThemeLocalServiceUtil.getColorScheme(
 				companyId, theme.getThemeId(), colorSchemeId, wapTheme);
+
+			if (!wapTheme && theme.isWapTheme()) {
+				theme = ThemeLocalServiceUtil.getTheme(
+					companyId,
+					PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, false);
+				colorScheme = ThemeLocalServiceUtil.getColorScheme(
+					companyId, theme.getThemeId(), colorSchemeId, false);
+			}
 		}
 		else if (layout != null) {
 			if (wapTheme) {
