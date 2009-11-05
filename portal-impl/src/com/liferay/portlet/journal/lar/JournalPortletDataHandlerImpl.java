@@ -343,7 +343,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				String newParameters =
 					"/get_file?uuid=" + fileEntry.getUuid() +
-						"&amp;groupId=" + _DATA_HANDLER_GROUP_ID;
+						"&amp;groupId=@data_handler_group_id@";
 
 				sb.replace(beginPos, endPos, newParameters);
 			}
@@ -474,8 +474,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				String newParameters =
 					"/image_gallery?uuid=" + image.getUuid() +
-						"&amp;groupId=" + _DATA_HANDLER_GROUP_ID +
-							"&amp;t=" + timestamp;
+						"&amp;groupId=@data_handler_group_id@&amp;t=" +
+						timestamp;
 
 				sb.replace(beginPos, endPos, newParameters);
 			}
@@ -620,16 +620,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		boolean incrementVersion = false;
 
-		String parentStructureId = MapUtil.getString(
-			structureIds, article.getStructureId(), article.getStructureId());
-		String parentTemplateId = MapUtil.getString(
-			templateIds, article.getTemplateId(), article.getTemplateId());
-
 		String content = article.getContent();
 
 		article.setContent(
 			StringUtil.replace(
-				content, _DATA_HANDLER_GROUP_ID, String.valueOf(groupId)));
+				content, "@data_handler_group_id@", String.valueOf(groupId)));
+
+		String parentStructureId = MapUtil.getString(
+			structureIds, article.getStructureId(), article.getStructureId());
+		String parentTemplateId = MapUtil.getString(
+			templateIds, article.getTemplateId(), article.getTemplateId());
 
 		Date displayDate = article.getDisplayDate();
 
@@ -1703,9 +1703,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = true;
-
-	private static final String _DATA_HANDLER_GROUP_ID =
-		"@data_handler_group_id@";
 
 	private static final String _NAMESPACE = "journal";
 
