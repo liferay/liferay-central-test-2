@@ -35,11 +35,11 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 /**
- * <a href="Lucene.java.html"><b><i>View Source</i></b></a>
+ * <a href="LuceneHelper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  */
-public interface Lucene {
+public interface LuceneHelper {
 
 	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value);

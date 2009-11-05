@@ -51,7 +51,7 @@ public class IndexWriterFactoryImpl implements IndexWriterFactory {
 
 			try {
 				indexReader = IndexReader.open(
-					LuceneUtil.getLuceneDir(companyId), false);
+					LuceneHelperUtil.getLuceneDir(companyId), false);
 
 				indexReader.deleteDocuments(term);
 			}
@@ -73,8 +73,8 @@ public class IndexWriterFactoryImpl implements IndexWriterFactory {
 
 			try {
 				indexWriter = new IndexWriter(
-					LuceneUtil.getLuceneDir(companyId),
-					LuceneUtil.getAnalyzer(),
+					LuceneHelperUtil.getLuceneDir(companyId),
+					LuceneHelperUtil.getAnalyzer(),
 					IndexWriter.MaxFieldLength.LIMITED);
 
 				if (document != null) {
