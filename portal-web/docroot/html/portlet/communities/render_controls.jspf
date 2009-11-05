@@ -23,7 +23,7 @@
 %>
 
 <%!
-private String _renderControls(String namespace, ResourceBundle resourceBundle, PortletDataHandlerControl[] controls) {
+private String _renderControls(String namespace, ResourceBundle resourceBundle, PortletDataHandlerControl[] controls, boolean portletDisabled) {
 	StringBuilder sb = new StringBuilder();
 
 	for (int i = 0; i < controls.length; i++) {
@@ -51,6 +51,9 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 
 			if (controls[i].isDisabled()) {
 				sb.append(" class=\"disabled\" disabled ");
+			}
+			else if (portletDisabled) {
+				sb.append(" disabled ");
 			}
 
 			sb.append("name=\"");
@@ -81,7 +84,7 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 				sb.append(namespace);
 				sb.append(control.getNamespacedControlName());
 				sb.append("Controls\">");
-				sb.append(_renderControls(namespace, resourceBundle, children));
+				sb.append(_renderControls(namespace, resourceBundle, children, portletDisabled));
 				sb.append("</ul>");
 			}
 		}

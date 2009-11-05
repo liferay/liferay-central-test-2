@@ -254,14 +254,14 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 											taglibOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + rootPortletId + "Controls');";
 											%>
 
-											<aui:input checked="<%= checked %>" inlineLabel="right" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>" name="<%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + rootPortletId %>" onchange="<%= taglibOnChange %>" type="checkbox" />
+											<aui:input inlineLabel="right" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>" name="<%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + rootPortletId %>" onchange="<%= taglibOnChange %>" type="checkbox" value="<%= checked %>" />
 
 											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
 												<li class="<%= renderResponse.getNamespace() %>handler-control">
-													<aui:input checked="<%= checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" />
+													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
 												</li>
 
-												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls, !checked) %>
 											</ul>
 										</li>
 
