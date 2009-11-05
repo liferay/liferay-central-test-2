@@ -35,8 +35,8 @@ import org.apache.lucene.index.Term;
 public interface IndexWriterFactory {
 
 	public void deleteDocuments(long companyId, Term term)
-		throws InterruptedException, IOException;
+		throws IOException;
 
-	public void write(long companyId, Document doc) throws IOException;
+	public void write(long companyId, Document document) throws IOException;
 
 }

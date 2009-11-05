@@ -179,14 +179,14 @@ public class LuceneUtil {
 		return _lucene.getLuceneDir(companyId);
 	}
 
+	public static String[] getQueryTerms(Query query) {
+		return _lucene.getQueryTerms(query);
+	}
+
 	public static IndexSearcher getSearcher(long companyId, boolean readOnly)
 		throws IOException {
 
 		return _lucene.getSearcher(companyId, readOnly);
-	}
-
-	public static String[] getQueryTerms(Query query) {
-		return _lucene.getQueryTerms(query);
 	}
 
 	public static String getSnippet(Query query, String field, String s)
@@ -207,8 +207,10 @@ public class LuceneUtil {
 			preTag, postTag);
 	}
 
-	public static void write(long companyId, Document doc) throws IOException {
-		_lucene.write(companyId, doc);
+	public static void write(long companyId, Document document)
+		throws IOException {
+
+		_lucene.write(companyId, document);
 	}
 
 	public void setLucene(Lucene lucene) {

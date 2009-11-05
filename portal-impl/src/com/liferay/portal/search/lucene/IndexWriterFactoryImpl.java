@@ -23,9 +23,7 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
@@ -43,73 +41,66 @@ import org.apache.lucene.index.Term;
  */
 public class IndexWriterFactoryImpl implements IndexWriterFactory {
 
-	public void deleteDocuments(long companyId, Term term)
-		throws InterruptedException, IOException {
-
+	public void deleteDocuments(long companyId, Term term) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		synchronized(this) {
-			IndexReader reader = null;
+			IndexReader indexReader = null;
 
 			try {
-				reader =
-					IndexReader.open(LuceneUtil.getLuceneDir(companyId), false);
+				indexReader = IndexReader.open(
+					LuceneUtil.getLuceneDir(companyId), false);
 
-				reader.deleteDocuments(term);
+				indexReader.deleteDocuments(term);
 			}
 			finally {
-				if (reader != null) {
-					reader.close();
+				if (indexReader != null) {
+					indexReader.close();
 				}
 			}
 		}
 	}
 
-	public void write(long companyId, Document doc) throws IOException {
+	public void write(long companyId, Document document) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		synchronized(this) {
-			IndexWriter writer = null;
+			IndexWriter indexWriter = null;
 
 			try {
-				writer = new IndexWriter(
+				indexWriter = new IndexWriter(
 					LuceneUtil.getLuceneDir(companyId),
 					LuceneUtil.getAnalyzer(),
 					IndexWriter.MaxFieldLength.LIMITED);
 
-				if (doc != null) {
-					writer.setMergeFactor(_MERGE_FACTOR);
-					writer.addDocument(doc);
+				if (document != null) {
+					indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
+					indexWriter.addDocument(document);
 
 					_optimizeCount++;
 
-					if ((_OPTIMIZE_INTERVAL == 0) ||
-						(_optimizeCount >= _OPTIMIZE_INTERVAL)) {
+					if ((PropsValues.LUCENE_OPTIMIZE_INTERVAL == 0) ||
+						(_optimizeCount >=
+							PropsValues.LUCENE_OPTIMIZE_INTERVAL)) {
 
-						writer.optimize();
+						indexWriter.optimize();
 
 						_optimizeCount = 0;
 					}
 				}
 			}
 			finally {
-				if (writer != null) {
-					writer.close();
+				if (indexWriter != null) {
+					indexWriter.close();
 				}
 			}
 		}
 	}
 
-	private static final int _MERGE_FACTOR = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.LUCENE_MERGE_FACTOR));
-
-	private static final int _OPTIMIZE_INTERVAL = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.LUCENE_OPTIMIZE_INTERVAL));
-
-	private int _optimizeCount = 0;
+	private int _optimizeCount;
 
 }

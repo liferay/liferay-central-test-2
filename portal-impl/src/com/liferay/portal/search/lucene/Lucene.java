@@ -60,15 +60,14 @@ public interface Lucene {
 
 	public Analyzer getAnalyzer();
 
-	public FSDirectory getDirectory(String path)
-		throws IOException;
+	public FSDirectory getDirectory(String path) throws IOException;
 
 	public Directory getLuceneDir(long companyId);
 
+	public String[] getQueryTerms(Query query);
+
 	public IndexSearcher getSearcher(long companyId, boolean readOnly)
 		throws IOException;
-
-	public String[] getQueryTerms(Query query);
 
 	public String getSnippet(
 			Query query, String field, String s, int maxNumFragments,
@@ -76,6 +75,6 @@ public interface Lucene {
 			String postTag)
 		throws IOException;
 
-	public void write(long companyId, Document doc) throws IOException;
+	public void write(long companyId, Document document) throws IOException;
 
 }

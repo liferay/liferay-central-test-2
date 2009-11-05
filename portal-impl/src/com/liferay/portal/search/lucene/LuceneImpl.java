@@ -229,12 +229,7 @@ public class LuceneImpl implements Lucene {
 	}
 
 	public void deleteDocuments(long companyId, Term term) throws IOException {
-		try {
-			_indexWriterFactory.deleteDocuments(companyId, term);
-		}
-		catch (InterruptedException ie) {
-			_log.error(ie);
-		}
+		_indexWriterFactory.deleteDocuments(companyId, term);
 	}
 
 	public Analyzer getAnalyzer() {
@@ -272,12 +267,6 @@ public class LuceneImpl implements Lucene {
 		}
 	}
 
-	public IndexSearcher getSearcher(long companyId, boolean readOnly)
-		throws IOException {
-
-		return new IndexSearcher(getLuceneDir(companyId), readOnly);
-	}
-
 	public String[] getQueryTerms(Query query) {
 		String[] fieldNames = new String[] {
 			Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES, Field.TITLE,
@@ -302,6 +291,12 @@ public class LuceneImpl implements Lucene {
 		}
 
 		return queryTerms.toArray(new String[queryTerms.size()]);
+	}
+
+	public IndexSearcher getSearcher(long companyId, boolean readOnly)
+		throws IOException {
+
+		return new IndexSearcher(getLuceneDir(companyId), readOnly);
 	}
 
 	public String getSnippet(
@@ -344,8 +339,8 @@ public class LuceneImpl implements Lucene {
 		_indexWriterFactory = indexWriterFactory;
 	}
 
-	public void write(long companyId, Document doc) throws IOException {
-		_indexWriterFactory.write(companyId, doc);
+	public void write(long companyId, Document document) throws IOException {
+		_indexWriterFactory.write(companyId, document);
 	}
 
 	private LuceneImpl() {
@@ -504,9 +499,9 @@ public class LuceneImpl implements Lucene {
 			}
 
 			try {
-				DataSource ds = InfrastructureUtil.getDataSource();
+				DataSource dataSource = InfrastructureUtil.getDataSource();
 
-				directory = new JdbcDirectory(ds, _dialect, tableName);
+				directory = new JdbcDirectory(dataSource, _dialect, tableName);
 
 				_jdbcDirectories.put(tableName, directory);
 
@@ -619,9 +614,9 @@ public class LuceneImpl implements Lucene {
 
 	private static Log _log = LogFactoryUtil.getLog(LuceneImpl.class);
 
-	private IndexWriterFactory _indexWriterFactory;
 	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
+	private IndexWriterFactory _indexWriterFactory;
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();
 	private Map<String, Directory> _ramDirectories =

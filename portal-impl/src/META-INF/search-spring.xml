@@ -36,11 +36,12 @@
 		<property name="writer" ref="indexWriter.lucene" />
 	</bean>
 	<bean id="indexWriterFactory" class="com.liferay.portal.search.lucene.IndexWriterFactoryImpl" />
-	<bean id="lucene" class="com.liferay.portal.search.lucene.LuceneImpl">
-		<property name="indexWriterFactory" ref="indexWriterFactory" />
-	</bean>
 	<bean id="com.liferay.portal.search.lucene.LuceneUtil" class="com.liferay.portal.search.lucene.LuceneUtil">
-		<property name="lucene" ref="lucene" />
+		<property name="lucene">
+			<bean class="com.liferay.portal.search.lucene.LuceneImpl">
+				<property name="indexWriterFactory" ref="indexWriterFactory" />
+			</bean>
+		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil" class="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil">
 		<property name="booleanClauseFactory">
