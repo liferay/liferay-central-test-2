@@ -59,6 +59,7 @@
 				<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" message="recent-documents" label="<%= true %>" url='<%= topLink.equals("recent-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
 
 				<c:if test="<%= themeDisplay.isSignedIn() %>">
+
 					<%
 					portletURL.setParameter("topLink", "my-documents");
 					%>
