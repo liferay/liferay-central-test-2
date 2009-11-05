@@ -590,3 +590,7 @@
 	right: 0;
 	top: 0;
 }
+
+.portlet-journal .lfr-textarea {
+	width: 350px;
+}

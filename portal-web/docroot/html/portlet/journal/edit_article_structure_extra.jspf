@@ -149,29 +149,29 @@
 
 <div class="journal-fieldmodel-container" id="journalFieldModelContainer">
 	<div dataType="text">
-		<input class="principal-field-element lfr-input-text" size="75" type="text" value="" />
+		<input class="principal-field-element lfr-input-text" size="55" type="text" value="" />
 	</div>
 
 	<div dataType="text_area">
-		<input class="principal-field-element lfr-input-text" size="75" type="text" value="" />
+		<input class="principal-field-element lfr-input-text" size="55" type="text" value="" />
 	</div>
 
 	<div dataType="text_box">
-		<textarea class="principal-field-element lfr-textarea" cols="80" rows="10"></textarea>
+		<textarea class="principal-field-element lfr-textarea" cols="60" rows="10"></textarea>
 	</div>
 
 	<div dataType="image">
-		<input class="principal-field-element lfr-input-text flexible" size="75"  type="file" value="" />
+		<input class="principal-field-element lfr-input-text flexible" size="40"  type="file" value="" />
 	</div>
 
 	<div dataType="image_gallery">
-		<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="75" type="text" value="" />
+		<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="55" type="text" value="" />
 
 		<input class="journal-imagegallery-button" dataImagegalleryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 	</div>
 
 	<div dataType="document_library">
-		<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="75" type="text" value="" />
+		<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="55" type="text" value="" />
 
 		<input class="journal-documentlibrary-button" dataDocumentlibraryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 	</div>

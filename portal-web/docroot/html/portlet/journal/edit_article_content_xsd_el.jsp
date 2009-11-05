@@ -112,11 +112,11 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 			<div class="journal-article-component-container">
 				<c:if test='<%= elType.equals("text") %>'>
-					<input class="principal-field-element lfr-input-text" size="75" type="text" value="<%= elContent %>" />
+					<input class="principal-field-element lfr-input-text" size="55" type="text" value="<%= elContent %>" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_box") %>'>
-					<textarea class="principal-field-element lfr-textarea" cols="80" rows="10"><%= elContent %></textarea>
+					<textarea class="principal-field-element lfr-textarea" cols="60" rows="10"><%= elContent %></textarea>
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_area") %>'>
@@ -133,12 +133,12 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						initMethod='<%= renderResponse.getNamespace() + "initEditor" + elName %>'
 						onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>'
 						height="250"
-						width="600"
+						width="500"
 					/>
 				</c:if>
 
 				<c:if test='<%= elType.equals("image") %>'>
-					<input class="principal-field-element lfr-input-text flexible" class="journal-image-field" size="75" type="file" />
+					<input class="principal-field-element lfr-input-text flexible" class="journal-image-field" size="40" type="file" />
 
 					<br />
 
@@ -164,13 +164,13 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("image_gallery") %>'>
-					<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="75" type="text" value="<%= elContent %>" />
+					<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="55" type="text" value="<%= elContent %>" />
 
 					<input class="journal-imagegallery-button" dataImagegalleryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("document_library") %>'>
-					<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="75" type="text" value="<%= elContent %>" />
+					<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="55" type="text" value="<%= elContent %>" />
 
 					<input class="journal-documentlibrary-button" dataDocumentlibraryUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 				</c:if>

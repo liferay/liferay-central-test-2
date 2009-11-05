@@ -552,7 +552,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											</label>
 
 											<div class="journal-article-component-container">
-												<input class="principal-field-element" size="75" type="text" value="" />
+												<input class="principal-field-element" size="55" type="text" value="" />
 											</div>
 
 											<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
