@@ -27,10 +27,7 @@
 <%
 String topLink = ParamUtil.getString(request, "topLink", "image-home");
 
-long folderId = 0;
-if (request.getAttribute("view.jsp-folderId") != null) {
-	folderId = (Long)request.getAttribute("view.jsp-folderId");
-}
+long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
 boolean viewFolder = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-viewFolder"));
 

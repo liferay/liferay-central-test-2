@@ -31,10 +31,10 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 <c:if test="<%= !print && portletName.equals(PortletKeys.WIKI) %>">
 
 	<%
-	WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
-	WikiPage currentPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
-
 	String strutsAction = ParamUtil.getString(request, "struts_action");
+
+	WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+	WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 	String keywords = ParamUtil.getString(request, "keywords");
 
@@ -96,7 +96,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 				frontPageURL.setParameter("title", WikiPageConstants.FRONT_PAGE);
 				%>
 
-				<liferay-ui:icon cssClass="top-link" image="../aui/home" message="<%= WikiPageConstants.FRONT_PAGE %>" label="<%= true %>" url='<%= currentPage != null && (currentPage.getTitle().equals(WikiPageConstants.FRONT_PAGE)) ? StringPool.BLANK : frontPageURL.toString() %>' />
+				<liferay-ui:icon cssClass="top-link" image="../aui/home" message="<%= WikiPageConstants.FRONT_PAGE %>" label="<%= true %>" url='<%= wikiPage != null && (wikiPage.getTitle().equals(WikiPageConstants.FRONT_PAGE)) ? StringPool.BLANK : frontPageURL.toString() %>' />
 
 				<%
 				portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
@@ -133,11 +133,11 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 				</aui:form>
 			</div>
 
-			<script type="text/javascript">
 			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
+				<script type="text/javascript">
+					Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
+				</script>
 			</c:if>
-		</script>
 		</div>
 	</div>
 </c:if>

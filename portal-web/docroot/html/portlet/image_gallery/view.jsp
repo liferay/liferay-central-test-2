@@ -53,10 +53,10 @@ portletURL.setParameter("struts_action", "/image_gallery/view");
 portletURL.setParameter("topLink", topLink);
 portletURL.setParameter("folderId", String.valueOf(folderId));
 
-List scores = null;
-
 request.setAttribute("view.jsp-folder", folder);
-request.setAttribute("view.jsp-folderId", folderId);
+
+request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
+
 request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 %>
 
@@ -240,6 +240,8 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 						List results = IGImageLocalServiceUtil.getImages(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 						searchContainer.setResults(results);
+
+						List scores = null;
 						%>
 
 						<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
@@ -303,6 +305,10 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 		<aui:layout>
 			<h3 class="folder-title"><liferay-ui:message key="<%= topLink %>" /></h3>
+
+			<%
+			List scores = null;
+			%>
 
 			<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
 		</aui:layout>

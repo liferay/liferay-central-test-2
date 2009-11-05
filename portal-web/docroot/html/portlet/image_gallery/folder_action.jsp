@@ -41,7 +41,7 @@ if (row != null) {
 else {
 	folder = (IGFolder)request.getAttribute("view.jsp-folder");
 
-	folderId = (Long)request.getAttribute("view.jsp-folderId");
+	folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 }
 
 int imagesCount = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);

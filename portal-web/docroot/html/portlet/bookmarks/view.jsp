@@ -54,7 +54,9 @@ portletURL.setParameter("topLink", topLink);
 portletURL.setParameter("folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-folder", folder);
-request.setAttribute("view.jsp-folderId", folderId);
+
+request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
+
 request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 %>
 
