@@ -110,6 +110,8 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 %>
 
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
 

@@ -28,6 +28,7 @@
 	border-bottom: 1px solid #000;
 	font-size: 14px;
 	font-weight: 700;
+	margin-top: 0;
 }
 
 .portlet-document-library .file-entry-column-first .file-entry-column-content {
@@ -152,6 +153,7 @@
 
 .portlet-document-library .folder-column #subFoldersPanel, .portlet-document-library .folder-column #documentsPanel {
 	clear: both;
+	margin-bottom: 1.5em;
 }
 
 .portlet-document-library .folder-column-content {
@@ -201,4 +203,25 @@
 
 .portlet-document-library .taglib-webdav {
 	margin-top: 3em;
+}
+
+.portlet-document-library .top-links {
+	float: right;
+}
+
+.portlet-document-library .top-links .top-link {
+	padding-right: 0.5em;
+	border-right: 1px solid #bbb;
+}
+
+.portlet-document-library .top-links .top-link.last {
+	border: none;
+}
+
+.portlet-document-library .top-links .top-links-navigation {
+	float: left;
+}
+
+.portlet-document-library .folder-layout {
+	clear: both;
 }

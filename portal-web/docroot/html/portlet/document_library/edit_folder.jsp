@@ -59,6 +59,8 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	}
 </script>
 
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFolderURL">
 	<portlet:param name="struts_action" value="/document_library/edit_folder" />
 </portlet:actionURL>

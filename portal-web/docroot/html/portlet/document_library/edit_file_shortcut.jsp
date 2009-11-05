@@ -139,6 +139,8 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	}
 </script>
 
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFileShortcutURL">
 	<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 </portlet:actionURL>

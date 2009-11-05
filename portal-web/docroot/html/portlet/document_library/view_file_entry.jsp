@@ -175,6 +175,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	);
 </script>
 
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+
 <c:if test="<%= isLocked.booleanValue() %>">
 	<c:choose>
 		<c:when test="<%= hasLock.booleanValue() %>">
