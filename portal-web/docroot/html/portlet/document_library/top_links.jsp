@@ -37,7 +37,6 @@
 
 		boolean viewFolder = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-viewFolder"));
 
-
 		PortletURL portletURL = renderResponse.createRenderURL();
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
