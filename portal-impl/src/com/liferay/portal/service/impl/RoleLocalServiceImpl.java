@@ -316,13 +316,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns true if the user has the Regular role specified by the name
-	 * parameter.
+	 * Returns true if the user has the regular role.
 	 *
-	 * @throws IllegalArgumentException if the role are not from a Regular
-	 * type {@link RoleConstants}
-	 *
-	 * @return true if the user has the role
+	 * @return true if the user has the regular role
 	 */
 	public boolean hasUserRole(
 			long userId, long companyId, String name, boolean inherited)
@@ -331,10 +327,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		Role role = rolePersistence.findByC_N(companyId, name);
 
 		if (role.getType() != RoleConstants.TYPE_REGULAR) {
-			throw new IllegalArgumentException(
-				"You cannot use this method to check community/organization " +
-				"roles. " +
-				"Please use UserGroupRoleLocalServiceUtil.hasUserGroupRole");
+			throw new IllegalArgumentException(name + " is not a regular role");
 		}
 
 		if (inherited) {
@@ -351,9 +344,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns true if the user has any one of the specified roles.
+	 * Returns true if the user has any one of the specified regular roles.
 	 *
-	 * @return true if the user has the role
+	 * @return true if the user has the regular role
 	 */
 	public boolean hasUserRoles(
 			long userId, long companyId, String[] names, boolean inherited)
