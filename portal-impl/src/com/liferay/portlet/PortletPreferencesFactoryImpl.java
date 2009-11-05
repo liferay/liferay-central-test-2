@@ -31,8 +31,6 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -44,7 +42,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -256,7 +253,7 @@ public class PortletPreferencesFactoryImpl
 				plid = PortletKeys.PREFS_PLID_SHARED;
 
 				if (portlet.isPreferencesOwnedByGroup()) {
-					ownerId = getGroupId(themeDisplay);
+					ownerId = selLayout.getGroupId();
 					ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 					portletId = PortletConstants.getRootPortletId(portletId);
 				}
@@ -303,7 +300,7 @@ public class PortletPreferencesFactoryImpl
 			WebKeys.THEME_DISPLAY);
 
 		return getPortletSetup(
-			getGroupId(themeDisplay), themeDisplay.getLayout(), portletId,
+			themeDisplay.getScopeGroupId(), themeDisplay.getLayout(), portletId,
 			defaultPreferences);
 	}
 
@@ -365,27 +362,8 @@ public class PortletPreferencesFactoryImpl
 		}
 	}
 
-	protected long getGroupId(ThemeDisplay themeDisplay){
-		long groupId = themeDisplay.getScopeGroupId();
-
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(
-				themeDisplay.getScopeGroupId());
-
-			if (group.getParentGroupId() >
-				GroupConstants.DEFAULT_PARENT_GROUP_ID) {
-
-				groupId = group.getParentGroupId();
-			}
-		}
-		catch (Exception e) {
-		}
-
-		return groupId;
-	}
-
 	protected PortletPreferences getPortletSetup(
-			long groupId, Layout layout, String portletId,
+			long scopeGroupId, Layout layout, String portletId,
 			String defaultPreferences)
 		throws SystemException {
 
@@ -422,8 +400,8 @@ public class PortletPreferencesFactoryImpl
 			plid = PortletKeys.PREFS_PLID_SHARED;
 
 			if (uniquePerGroup) {
-				if (groupId > LayoutConstants.DEFAULT_PLID) {
-					ownerId = groupId;
+				if (scopeGroupId > LayoutConstants.DEFAULT_PLID) {
+					ownerId = scopeGroupId;
 				}
 				else {
 					ownerId = layout.getGroupId();
