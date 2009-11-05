@@ -63,16 +63,12 @@ AUI().add(
 					helper.setStyle('width', '450px');
 
 					instance.updateTextAreaVisibility('hidden');
-
-					// Liferay.Util.disableSelection(document.body);
 				},
 
 				'drag:end': function(event) {
 					instance._dropField();
 
 					instance.updateTextAreaVisibility('visible');
-
-					// Liferay.Util.enableSelection(document.body);
 				},
 
 				'drag:out': function(event) {
@@ -143,8 +139,6 @@ AUI().add(
 
 					instance.updateTextAreaVisibility('hidden');
 
-					// Liferay.Util.disableSelection(document.body);
-
 					instance.clonedSource = source.cloneNode(true);
 
 					source.placeBefore(instance.clonedSource);
@@ -185,7 +179,6 @@ AUI().add(
 						addedComponent.hide();
 
 						var fieldInstance = instance._fieldInstanceFactory(componentType);
-						// var fieldLabel = fieldInstance.get('fieldLabel');
 						var variableName = fieldInstance.get('variableName') + instance._getUID();
 
 						if (fieldInstance.get('fieldType') == 'text_area') {
@@ -201,7 +194,6 @@ AUI().add(
 						addedComponent.remove();
 
 						fieldInstance.set('source', newComponent);
-						// fieldInstance.set('fieldLabel', fieldLabel);
 						fieldInstance.set('variableName', variableName);
 
 						instance.createNestedList(
@@ -217,8 +209,6 @@ AUI().add(
 						fieldsDataSet.add(id, fieldInstance);
 
 						instance.repositionEditFieldOptions();
-
-						// Liferay.Util.enableSelection(document.body);
 					}
 					else {
 						source.remove();
@@ -1594,7 +1584,6 @@ AUI().add(
 				var instance = this;
 
 				instance.repositionEditFieldOptions();
-				// Liferay.Util.enableSelection(document.body);
 			},
 
 			disableEditMode: function() {
