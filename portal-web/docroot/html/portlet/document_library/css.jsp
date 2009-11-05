@@ -161,10 +161,6 @@
 	padding: 0;
 }
 
-.portlet-document-library .folder-layout {
-	clear: both;
-}
-
 .portlet-document-library .folder-metadata {
 	clear: both;
 }
@@ -207,6 +203,10 @@
 
 .portlet-document-library .taglib-webdav {
 	margin-top: 3em;
+}
+
+.portlet-document-library .top-links-container {
+	clear: both;
 }
 
 .portlet-document-library .top-links {
