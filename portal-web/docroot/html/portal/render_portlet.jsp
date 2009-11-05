@@ -334,6 +334,13 @@ if (!layoutTypePortlet.hasPortletId(portletId)) {
 	showMoveIcon = false;
 }
 
+// Portlets in the Control Panel cannot be moved
+
+if (layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+	showCloseIcon = false;
+	showMoveIcon = false;
+}
+
 // Static portlets cannot be moved
 
 if (portlet.isStatic()) {
