@@ -200,7 +200,6 @@ boolean deployed = false;
 		deployed = false;
 
 		for (Theme curTheme: themes) {
-
 			if (curTheme.isWapTheme()) {
 				continue;
 			}
