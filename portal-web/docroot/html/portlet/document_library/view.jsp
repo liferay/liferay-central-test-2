@@ -68,7 +68,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 <c:choose>
 	<c:when test='<%= topLink.equals("document-home") %>'>
-		<aui:layout cssClass="folder-layout">
+		<aui:layout>
 			<c:if test="<%= folder != null %>">
 				<h3 class="folder-title"><%= folder.getName() %></h3>
 			</c:if>
@@ -187,7 +187,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 	</c:when>
 	<c:when test='<%= topLink.equals("my-documents") || topLink.equals("recent-documents") %>'>
-		<aui:layout cssClass="folder-layout">
+		<aui:layout>
 			<h3 class="folder-title"><liferay-ui:message key="<%= topLink %>" /></h3>
 
 			<%

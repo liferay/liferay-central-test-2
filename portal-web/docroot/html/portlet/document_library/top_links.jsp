@@ -43,55 +43,57 @@
 		portletURL.setWindowState(WindowState.MAXIMIZED);
 		%>
 
-		<div class="top-links">
-			<div class="top-links-navigation">
-
-				<%
-				portletURL.setParameter("topLink", "document-home");
-				%>
-
-				<liferay-ui:icon cssClass="top-link" image="../aui/home" message="document-home" label="<%= true %>" url='<%= (topLink.equals("document-home") && folderId == 0 && viewFolder) ? StringPool.BLANK : portletURL.toString() %>' />
-
-				<%
-				portletURL.setParameter("topLink", "recent-documents");
-				%>
-
-				<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" message="recent-documents" label="<%= true %>" url='<%= topLink.equals("recent-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
-
-				<c:if test="<%= themeDisplay.isSignedIn() %>">
+		<div class="top-links-container">
+			<div class="top-links">
+				<div class="top-links-navigation">
 
 					<%
-					portletURL.setParameter("topLink", "my-documents");
+					portletURL.setParameter("topLink", "document-home");
 					%>
 
-					<liferay-ui:icon cssClass="top-link last" image="../aui/person" message="my-documents" label="<%= true %>" url='<%= topLink.equals("my-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
-				</c:if>
-			</div>
+					<liferay-ui:icon cssClass="top-link" image="../aui/home" message="document-home" label="<%= true %>" url='<%= (topLink.equals("document-home") && folderId == 0 && viewFolder) ? StringPool.BLANK : portletURL.toString() %>' />
 
-			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
-				<portlet:param name="struts_action" value="/document_library/search" />
-			</liferay-portlet:renderURL>
+					<%
+					portletURL.setParameter("topLink", "recent-documents");
+					%>
 
-			<c:if test="<%= showFoldersSearch %>">
-				<div class="folder-search">
-					<aui:form action="<%= searchURL %>" method="get" name="searchFm" onSubmit="submitForm(this); return false;">
-						<liferay-portlet:renderURLParams varImpl="searchURL" />
-						<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-						<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-						<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
+					<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" message="recent-documents" label="<%= true %>" url='<%= topLink.equals("recent-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
 
-						<aui:input cssClass="input-text-search" id="keywords1" label="" name="keywords" size="30" type="text" />
+					<c:if test="<%= themeDisplay.isSignedIn() %>">
 
-						<aui:button type="submit" value="search" />
-					</aui:form>
+						<%
+						portletURL.setParameter("topLink", "my-documents");
+						%>
+
+						<liferay-ui:icon cssClass="top-link last" image="../aui/person" message="my-documents" label="<%= true %>" url='<%= topLink.equals("my-documents") ? StringPool.BLANK : portletURL.toString() %>'/>
+					</c:if>
 				</div>
 
-				<script type="text/javascript">
-					<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-						Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
-					</c:if>
-				</script>
-			</c:if>
+				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
+					<portlet:param name="struts_action" value="/document_library/search" />
+				</liferay-portlet:renderURL>
+
+				<c:if test="<%= showFoldersSearch %>">
+					<div class="folder-search">
+						<aui:form action="<%= searchURL %>" method="get" name="searchFm" onSubmit="submitForm(this); return false;">
+							<liferay-portlet:renderURLParams varImpl="searchURL" />
+							<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+							<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+							<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
+
+							<aui:input cssClass="input-text-search" id="keywords1" label="" name="keywords" size="30" type="text" />
+
+							<aui:button type="submit" value="search" />
+						</aui:form>
+					</div>
+
+					<script type="text/javascript">
+						<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+							Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
+						</c:if>
+					</script>
+				</c:if>
+			</div>
 		</div>
 	</c:when>
 	<c:when test="<%= showTabs && showSubfolders %>">
