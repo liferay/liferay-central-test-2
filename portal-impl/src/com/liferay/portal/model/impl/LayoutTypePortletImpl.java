@@ -81,193 +81,45 @@ public class LayoutTypePortletImpl
 		super(layout);
 	}
 
-	public LayoutTemplate getLayoutTemplate() {
-		LayoutTemplate layoutTemplate =
-			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
-				getLayoutTemplateId(), false, null);
-
-		if (layoutTemplate == null) {
-			layoutTemplate = new LayoutTemplateImpl(
-				StringPool.BLANK, StringPool.BLANK);
-
-			List<String> columns = new ArrayList<String>();
-
-			for (int i = 1; i <= 10; i++) {
-				columns.add("column-" + i);
-			}
-
-			layoutTemplate.setColumns(columns);
-		}
-
-		return layoutTemplate;
+	public void addModeAboutPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModeAbout(StringUtil.add(getModeAbout(), portletId));
 	}
 
-	public String getLayoutTemplateId() {
-		String layoutTemplateId =
-			getTypeSettingsProperties().getProperty(
-				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID);
-
-		if (Validator.isNull(layoutTemplateId)) {
-			layoutTemplateId = StringPool.BLANK;
-		}
-
-		return layoutTemplateId;
+	public void addModeConfigPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModeConfig(StringUtil.add(getModeConfig(), portletId));
 	}
 
-	public void setLayoutTemplateId(long userId, String newLayoutTemplateId) {
-		setLayoutTemplateId(userId, newLayoutTemplateId, true);
+	public void addModeEditDefaultsPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModeEditDefaults(StringUtil.add(getModeEditDefaults(), portletId));
 	}
 
-	public void setLayoutTemplateId(
-		long userId, String newLayoutTemplateId, boolean checkPermission) {
-
-		if (checkPermission &&
-			!PluginSettingLocalServiceUtil.hasPermission(
-				userId, newLayoutTemplateId, Plugin.TYPE_LAYOUT_TEMPLATE)) {
-
-			return;
-		}
-
-		String oldLayoutTemplateId = getLayoutTemplateId();
-
-		if (Validator.isNull(oldLayoutTemplateId)) {
-			oldLayoutTemplateId = PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID;
-		}
-
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, newLayoutTemplateId);
-
-		String themeId = null;
-
-		try {
-			Layout layout = getLayout();
-
-			Theme theme = layout.getTheme();
-
-			if (theme != null) {
-				themeId = theme.getThemeId();
-			}
-			else {
-				themeId = layout.getThemeId();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		LayoutTemplate oldLayoutTemplate =
-			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
-				oldLayoutTemplateId, false, themeId);
-
-		if (oldLayoutTemplate == null) {
-			return;
-		}
-
-		LayoutTemplate newLayoutTemplate =
-			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
-				newLayoutTemplateId, false, themeId);
-
-		List<String> oldColumns = oldLayoutTemplate.getColumns();
-		List<String> newColumns = newLayoutTemplate.getColumns();
-
-		reorganizePortlets(newColumns, oldColumns);
+	public void addModeEditGuestPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModeEditGuest(StringUtil.add(getModeEditGuest(), portletId));
 	}
 
-	public int getNumOfColumns() {
-		return getLayoutTemplate().getColumns().size();
+	public void addModeEditPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModeEdit(StringUtil.add(getModeEdit(), portletId));
 	}
 
-	public List<Portlet> getAllPortlets() throws SystemException {
-		List<Portlet> portlets = new ArrayList<Portlet>();
-
-		List<String> columns = getColumns();
-
-		for (int i = 0; i < columns.size(); i++) {
-			String columnId = columns.get(i);
-
-			portlets.addAll(getAllPortlets(columnId));
-
-		}
-
-		return portlets;
+	public void addModeHelpPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModeHelp(StringUtil.add(getModeHelp(), portletId));
 	}
 
-	public List<Portlet> getAllPortlets(String columnId)
-		throws SystemException {
-
-		String columnValue =
-			getTypeSettingsProperties().getProperty(columnId);
-
-		String[] portletIds = StringUtil.split(columnValue);
-
-		List<Portlet> portlets = new ArrayList<Portlet>(portletIds.length);
-
-		for (int i = 0; i < portletIds.length; i++) {
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				getLayout().getCompanyId(), portletIds[i]);
-
-			if (portlet != null) {
-				portlets.add(portlet);
-			}
-		}
-
-		List<Portlet> startPortlets = getStaticPortlets(
-			PropsKeys.LAYOUT_STATIC_PORTLETS_START + columnId);
-
-		List<Portlet> endPortlets = getStaticPortlets(
-			PropsKeys.LAYOUT_STATIC_PORTLETS_END + columnId);
-
-		return addStaticPortlets(portlets, startPortlets, endPortlets);
+	public void addModePreviewPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModePreview(StringUtil.add(getModePreview(), portletId));
 	}
 
-	public List<Portlet> addStaticPortlets(
-		List<Portlet> portlets, List<Portlet> startPortlets,
-		List<Portlet> endPortlets) {
-
-		// Return the original array of portlets if no static portlets are
-		// specified
-
-		if (startPortlets == null) {
-			startPortlets = new ArrayList<Portlet>();
-		}
-
-		if (endPortlets == null) {
-			endPortlets = new ArrayList<Portlet>();
-		}
-
-		if ((startPortlets.isEmpty()) && (endPortlets.isEmpty())) {
-			return portlets;
-		}
-
-		// New array of portlets that contain the static portlets
-
-		List<Portlet> list = new ArrayList<Portlet>(
-			portlets.size() + startPortlets.size() + endPortlets.size());
-
-		if (startPortlets != null) {
-			list.addAll(startPortlets);
-		}
-
-		for (int i = 0; i < portlets.size(); i++) {
-			Portlet portlet = portlets.get(i);
-
-			// Add the portlet if and only if it is not also a static portlet
-
-			if (!startPortlets.contains(portlet) &&
-				!endPortlets.contains(portlet)) {
-
-				list.add(portlet);
-			}
-		}
-
-		if (endPortlets != null) {
-			list.addAll(endPortlets);
-		}
-
-		return list;
+	public void addModePrintPortletId(String portletId) {
+		removeModesPortletId(portletId);
+		setModePrint(StringUtil.add(getModePrint(), portletId));
 	}
-
-	// Modify portlets
 
 	public String addPortletId(long userId, String portletId) {
 		return addPortletId(userId, portletId, true);
@@ -408,23 +260,182 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	public List<Portlet> getPortlets() throws SystemException {
-		List<String> portletIds = getPortletIds();
+	public void addStateMaxPortletId(String portletId) {
+		removeStatesPortletId(portletId);
+		//setStateMax(StringUtil.add(getStateMax(), portletId));
+		setStateMax(StringUtil.add(StringPool.BLANK, portletId));
+	}
 
-		List<Portlet> portlets = new ArrayList<Portlet>(portletIds.size());
+	public void addStateMinPortletId(String portletId) {
+		removeStateMaxPortletId(portletId);
+		setStateMin(StringUtil.add(getStateMin(), portletId));
+	}
 
-		for (int i = 0; i < portletIds.size(); i++) {
-			String portletId = portletIds.get(i);
+	public List<Portlet> addStaticPortlets(
+		List<Portlet> portlets, List<Portlet> startPortlets,
+		List<Portlet> endPortlets) {
 
+		// Return the original array of portlets if no static portlets are
+		// specified
+
+		if (startPortlets == null) {
+			startPortlets = new ArrayList<Portlet>();
+		}
+
+		if (endPortlets == null) {
+			endPortlets = new ArrayList<Portlet>();
+		}
+
+		if ((startPortlets.isEmpty()) && (endPortlets.isEmpty())) {
+			return portlets;
+		}
+
+		// New array of portlets that contain the static portlets
+
+		List<Portlet> list = new ArrayList<Portlet>(
+			portlets.size() + startPortlets.size() + endPortlets.size());
+
+		if (startPortlets != null) {
+			list.addAll(startPortlets);
+		}
+
+		for (int i = 0; i < portlets.size(); i++) {
+			Portlet portlet = portlets.get(i);
+
+			// Add the portlet if and only if it is not also a static portlet
+
+			if (!startPortlets.contains(portlet) &&
+				!endPortlets.contains(portlet)) {
+
+				list.add(portlet);
+			}
+		}
+
+		if (endPortlets != null) {
+			list.addAll(endPortlets);
+		}
+
+		return list;
+	}
+
+	public List<Portlet> getAllPortlets() throws SystemException {
+		List<Portlet> portlets = new ArrayList<Portlet>();
+
+		List<String> columns = getColumns();
+
+		for (int i = 0; i < columns.size(); i++) {
+			String columnId = columns.get(i);
+
+			portlets.addAll(getAllPortlets(columnId));
+
+		}
+
+		return portlets;
+	}
+
+	public List<Portlet> getAllPortlets(String columnId)
+		throws SystemException {
+
+		String columnValue =
+			getTypeSettingsProperties().getProperty(columnId);
+
+		String[] portletIds = StringUtil.split(columnValue);
+
+		List<Portlet> portlets = new ArrayList<Portlet>(portletIds.length);
+
+		for (int i = 0; i < portletIds.length; i++) {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				getLayout().getCompanyId(), portletId);
+				getLayout().getCompanyId(), portletIds[i]);
 
 			if (portlet != null) {
 				portlets.add(portlet);
 			}
 		}
 
-		return portlets;
+		List<Portlet> startPortlets = getStaticPortlets(
+			PropsKeys.LAYOUT_STATIC_PORTLETS_START + columnId);
+
+		List<Portlet> endPortlets = getStaticPortlets(
+			PropsKeys.LAYOUT_STATIC_PORTLETS_END + columnId);
+
+		return addStaticPortlets(portlets, startPortlets, endPortlets);
+	}
+
+	public LayoutTemplate getLayoutTemplate() {
+		LayoutTemplate layoutTemplate =
+			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
+				getLayoutTemplateId(), false, null);
+
+		if (layoutTemplate == null) {
+			layoutTemplate = new LayoutTemplateImpl(
+				StringPool.BLANK, StringPool.BLANK);
+
+			List<String> columns = new ArrayList<String>();
+
+			for (int i = 1; i <= 10; i++) {
+				columns.add("column-" + i);
+			}
+
+			layoutTemplate.setColumns(columns);
+		}
+
+		return layoutTemplate;
+	}
+
+	public String getLayoutTemplateId() {
+		String layoutTemplateId =
+			getTypeSettingsProperties().getProperty(
+				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID);
+
+		if (Validator.isNull(layoutTemplateId)) {
+			layoutTemplateId = StringPool.BLANK;
+		}
+
+		return layoutTemplateId;
+	}
+
+	public String getModeAbout() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_ABOUT);
+	}
+
+	public String getModeConfig() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_CONFIG);
+	}
+
+	public String getModeEdit() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_EDIT);
+	}
+
+	public String getModeEditDefaults() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_EDIT_DEFAULTS);
+	}
+
+	public String getModeEditGuest() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_EDIT_GUEST);
+	}
+
+	public String getModeHelp() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_HELP);
+	}
+
+	public String getModePreview() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_PREVIEW);
+	}
+
+	public String getModePrint() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_PRINT);
+	}
+
+	public int getNumOfColumns() {
+		return getLayoutTemplate().getColumns().size();
 	}
 
 	public List<String> getPortletIds() {
@@ -444,6 +455,95 @@ public class LayoutTypePortletImpl
 		}
 
 		return portletIds;
+	}
+
+	public List<Portlet> getPortlets() throws SystemException {
+		List<String> portletIds = getPortletIds();
+
+		List<Portlet> portlets = new ArrayList<Portlet>(portletIds.size());
+
+		for (int i = 0; i < portletIds.size(); i++) {
+			String portletId = portletIds.get(i);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				getLayout().getCompanyId(), portletId);
+
+			if (portlet != null) {
+				portlets.add(portlet);
+			}
+		}
+
+		return portlets;
+	}
+
+	public String getStateMax() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.STATE_MAX);
+	}
+
+	public String getStateMaxPortletId() {
+		String[] stateMax = StringUtil.split(getStateMax());
+
+		if (stateMax.length > 0) {
+			return stateMax[0];
+		}
+		else {
+			return StringPool.BLANK;
+		}
+	}
+
+	public String getStateMin() {
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.STATE_MIN);
+	}
+
+	public boolean hasModeAboutPortletId(String portletId) {
+		return StringUtil.contains(getModeAbout(), portletId);
+	}
+
+	public boolean hasModeConfigPortletId(String portletId) {
+		return StringUtil.contains(getModeConfig(), portletId);
+	}
+
+	public boolean hasModeEditDefaultsPortletId(String portletId) {
+		return StringUtil.contains(getModeEditDefaults(), portletId);
+	}
+
+	public boolean hasModeEditGuestPortletId(String portletId) {
+		return StringUtil.contains(getModeEditGuest(), portletId);
+	}
+
+	public boolean hasModeEditPortletId(String portletId) {
+		return StringUtil.contains(getModeEdit(), portletId);
+	}
+
+	public boolean hasModeHelpPortletId(String portletId) {
+		return StringUtil.contains(getModeHelp(), portletId);
+	}
+
+	public boolean hasModePreviewPortletId(String portletId) {
+		return StringUtil.contains(getModePreview(), portletId);
+	}
+
+	public boolean hasModePrintPortletId(String portletId) {
+		return StringUtil.contains(getModePrint(), portletId);
+	}
+
+	public boolean hasModeViewPortletId(String portletId) {
+		if (hasModeAboutPortletId(portletId) ||
+			hasModeConfigPortletId(portletId) ||
+			hasModeEditPortletId(portletId) ||
+			hasModeEditDefaultsPortletId(portletId) ||
+			hasModeEditGuestPortletId(portletId) ||
+			hasModeHelpPortletId(portletId) ||
+			hasModePreviewPortletId(portletId) ||
+			hasModePrintPortletId(portletId)) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	public boolean hasPortletId(String portletId) {
@@ -466,6 +566,57 @@ public class LayoutTypePortletImpl
 		}
 
 		return false;
+	}
+
+	public boolean hasStateMax() {
+		String[] stateMax = StringUtil.split(getStateMax());
+
+		if (stateMax.length > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean hasStateMaxPortletId(String portletId) {
+		if (StringUtil.contains(getStateMax(), portletId)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean hasStateMin() {
+		String[] stateMin = StringUtil.split(getStateMin());
+
+		if (stateMin.length > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean hasStateMinPortletId(String portletId) {
+		if (StringUtil.contains(getStateMin(), portletId)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean hasStateNormalPortletId(String portletId) {
+		if (hasStateMaxPortletId(portletId) ||
+			hasStateMinPortletId(portletId)) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	public void movePortletId(
@@ -500,6 +651,75 @@ public class LayoutTypePortletImpl
 		catch (Exception e) {
 			_log.error("Unable to fire portlet layout listener event", e);
 		}
+	}
+
+	public void removeModeAboutPortletId(String portletId) {
+		setModeAbout(StringUtil.remove(getModeAbout(), portletId));
+	}
+
+	public void removeModeConfigPortletId(String portletId) {
+		setModeConfig(StringUtil.remove(getModeConfig(), portletId));
+	}
+
+	public void removeModeEditDefaultsPortletId(String portletId) {
+		setModeEditDefaults(
+			StringUtil.remove(getModeEditDefaults(), portletId));
+	}
+
+	public void removeModeEditGuestPortletId(String portletId) {
+		setModeEditGuest(StringUtil.remove(getModeEditGuest(), portletId));
+	}
+
+	public void removeModeEditPortletId(String portletId) {
+		setModeEdit(StringUtil.remove(getModeEdit(), portletId));
+	}
+
+	public void removeModeHelpPortletId(String portletId) {
+		setModeHelp(StringUtil.remove(getModeHelp(), portletId));
+	}
+
+	public void removeModePreviewPortletId(String portletId) {
+		setModePreview(StringUtil.remove(getModePreview(), portletId));
+	}
+
+	public void removeModePrintPortletId(String portletId) {
+		setModePrint(StringUtil.remove(getModePrint(), portletId));
+	}
+
+	public void removeModesPortletId(String portletId) {
+		removeModeAboutPortletId(portletId);
+		removeModeConfigPortletId(portletId);
+		removeModeEditPortletId(portletId);
+		removeModeEditDefaultsPortletId(portletId);
+		removeModeEditGuestPortletId(portletId);
+		removeModeHelpPortletId(portletId);
+		removeModePreviewPortletId(portletId);
+		removeModePrintPortletId(portletId);
+	}
+
+	public void removeNestedColumns(String portletId) {
+		UnicodeProperties props = getTypeSettingsProperties();
+
+		UnicodeProperties newProps = new UnicodeProperties();
+
+		for (String key : props.keySet()) {
+			if (!key.startsWith(portletId)) {
+				newProps.setProperty(key, props.getProperty(key));
+			}
+		}
+
+		getLayout().setTypeSettingsProperties(newProps);
+
+		String nestedColumnIds = GetterUtil.getString(
+			getTypeSettingsProperties().getProperty(
+				LayoutTypePortletConstants.NESTED_COLUMN_IDS));
+
+		String[] nestedColumnIdsArray = ArrayUtil.removeByPrefix(
+			StringUtil.split(nestedColumnIds), portletId);
+
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.NESTED_COLUMN_IDS,
+			StringUtil.merge(nestedColumnIdsArray));
 	}
 
 	public void removePortletId(long userId, String portletId) {
@@ -557,8 +777,17 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	public void setPortletIds(String columnId, String portletIds) {
-		getTypeSettingsProperties().setProperty(columnId, portletIds);
+	public void removeStateMaxPortletId(String portletId) {
+		setStateMax(StringUtil.remove(getStateMax(), portletId));
+	}
+
+	public void removeStateMinPortletId(String portletId) {
+		setStateMin(StringUtil.remove(getStateMin(), portletId));
+	}
+
+	public void removeStatesPortletId(String portletId) {
+		removeStateMaxPortletId(portletId);
+		removeStateMinPortletId(portletId);
 	}
 
 	public void reorganizePortlets(
@@ -590,347 +819,6 @@ public class LayoutTypePortletImpl
 			lastNewColumnId, lastNewColumnValue);
 	}
 
-	// Maximized state
-
-	public String getStateMax() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.STATE_MAX);
-	}
-
-	public void setStateMax(String stateMax) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.STATE_MAX, stateMax);
-	}
-
-	public boolean hasStateMax() {
-		String[] stateMax = StringUtil.split(getStateMax());
-
-		if (stateMax.length > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void addStateMaxPortletId(String portletId) {
-		removeStatesPortletId(portletId);
-		//setStateMax(StringUtil.add(getStateMax(), portletId));
-		setStateMax(StringUtil.add(StringPool.BLANK, portletId));
-	}
-
-	public String getStateMaxPortletId() {
-		String[] stateMax = StringUtil.split(getStateMax());
-
-		if (stateMax.length > 0) {
-			return stateMax[0];
-		}
-		else {
-			return StringPool.BLANK;
-		}
-	}
-
-	public boolean hasStateMaxPortletId(String portletId) {
-		if (StringUtil.contains(getStateMax(), portletId)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void removeStateMaxPortletId(String portletId) {
-		setStateMax(StringUtil.remove(getStateMax(), portletId));
-	}
-
-	// Minimized state
-
-	public String getStateMin() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.STATE_MIN);
-	}
-
-	public void setStateMin(String stateMin) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.STATE_MIN, stateMin);
-	}
-
-	public boolean hasStateMin() {
-		String[] stateMin = StringUtil.split(getStateMin());
-
-		if (stateMin.length > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void addStateMinPortletId(String portletId) {
-		removeStateMaxPortletId(portletId);
-		setStateMin(StringUtil.add(getStateMin(), portletId));
-	}
-
-	public boolean hasStateMinPortletId(String portletId) {
-		if (StringUtil.contains(getStateMin(), portletId)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void removeStateMinPortletId(String portletId) {
-		setStateMin(StringUtil.remove(getStateMin(), portletId));
-	}
-
-	// Normal state
-
-	public boolean hasStateNormalPortletId(String portletId) {
-		if (hasStateMaxPortletId(portletId) ||
-			hasStateMinPortletId(portletId)) {
-
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	// All states
-
-	public void resetStates() {
-		setStateMax(StringPool.BLANK);
-		setStateMin(StringPool.BLANK);
-	}
-
-	public void removeStatesPortletId(String portletId) {
-		removeStateMaxPortletId(portletId);
-		removeStateMinPortletId(portletId);
-	}
-
-	// About mode
-
-	public String getModeAbout() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.MODE_ABOUT);
-	}
-
-	public void setModeAbout(String modeAbout) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.MODE_ABOUT, modeAbout);
-	}
-
-	public void addModeAboutPortletId(String portletId) {
-		removeModesPortletId(portletId);
-		setModeAbout(StringUtil.add(getModeAbout(), portletId));
-	}
-
-	public boolean hasModeAboutPortletId(String portletId) {
-		return StringUtil.contains(getModeAbout(), portletId);
-	}
-
-	public void removeModeAboutPortletId(String portletId) {
-		setModeAbout(StringUtil.remove(getModeAbout(), portletId));
-	}
-
-	// Config mode
-
-	public String getModeConfig() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.MODE_CONFIG);
-	}
-
-	public void setModeConfig(String modeConfig) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.MODE_CONFIG, modeConfig);
-	}
-
-	public void addModeConfigPortletId(String portletId) {
-		removeModesPortletId(portletId);
-		setModeConfig(StringUtil.add(getModeConfig(), portletId));
-	}
-
-	public boolean hasModeConfigPortletId(String portletId) {
-		return StringUtil.contains(getModeConfig(), portletId);
-	}
-
-	public void removeModeConfigPortletId(String portletId) {
-		setModeConfig(StringUtil.remove(getModeConfig(), portletId));
-	}
-
-	// Edit mode
-
-	public String getModeEdit() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.MODE_EDIT);
-	}
-
-	public void setModeEdit(String modeEdit) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.MODE_EDIT, modeEdit);
-	}
-
-	public void addModeEditPortletId(String portletId) {
-		removeModesPortletId(portletId);
-		setModeEdit(StringUtil.add(getModeEdit(), portletId));
-	}
-
-	public boolean hasModeEditPortletId(String portletId) {
-		return StringUtil.contains(getModeEdit(), portletId);
-	}
-
-	public void removeModeEditPortletId(String portletId) {
-		setModeEdit(StringUtil.remove(getModeEdit(), portletId));
-	}
-
-	// Edit defaults mode
-
-	public String getModeEditDefaults() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.MODE_EDIT_DEFAULTS);
-	}
-
-	public void setModeEditDefaults(String modeEditDefaults) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.MODE_EDIT_DEFAULTS, modeEditDefaults);
-	}
-
-	public void addModeEditDefaultsPortletId(String portletId) {
-		removeModesPortletId(portletId);
-		setModeEditDefaults(StringUtil.add(getModeEditDefaults(), portletId));
-	}
-
-	public boolean hasModeEditDefaultsPortletId(String portletId) {
-		return StringUtil.contains(getModeEditDefaults(), portletId);
-	}
-
-	public void removeModeEditDefaultsPortletId(String portletId) {
-		setModeEditDefaults(
-			StringUtil.remove(getModeEditDefaults(), portletId));
-	}
-
-	// Edit guest mode
-
-	public String getModeEditGuest() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.MODE_EDIT_GUEST);
-	}
-
-	public void setModeEditGuest(String modeEditGuest) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.MODE_EDIT_GUEST, modeEditGuest);
-	}
-
-	public void addModeEditGuestPortletId(String portletId) {
-		removeModesPortletId(portletId);
-		setModeEditGuest(StringUtil.add(getModeEditGuest(), portletId));
-	}
-
-	public boolean hasModeEditGuestPortletId(String portletId) {
-		return StringUtil.contains(getModeEditGuest(), portletId);
-	}
-
-	public void removeModeEditGuestPortletId(String portletId) {
-		setModeEditGuest(StringUtil.remove(getModeEditGuest(), portletId));
-	}
-
-	// Help mode
-
-	public String getModeHelp() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.MODE_HELP);
-	}
-
-	public void setModeHelp(String modeHelp) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.MODE_HELP, modeHelp);
-	}
-
-	public void addModeHelpPortletId(String portletId) {
-		removeModesPortletId(portletId);
-		setModeHelp(StringUtil.add(getModeHelp(), portletId));
-	}
-
-	public boolean hasModeHelpPortletId(String portletId) {
-		return StringUtil.contains(getModeHelp(), portletId);
-	}
-
-	public void removeModeHelpPortletId(String portletId) {
-		setModeHelp(StringUtil.remove(getModeHelp(), portletId));
-	}
-
-	// Preview mode
-
-	public String getModePreview() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.MODE_PREVIEW);
-	}
-
-	public void setModePreview(String modePreview) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.MODE_PREVIEW, modePreview);
-	}
-
-	public void addModePreviewPortletId(String portletId) {
-		removeModesPortletId(portletId);
-		setModePreview(StringUtil.add(getModePreview(), portletId));
-	}
-
-	public boolean hasModePreviewPortletId(String portletId) {
-		return StringUtil.contains(getModePreview(), portletId);
-	}
-
-	public void removeModePreviewPortletId(String portletId) {
-		setModePreview(StringUtil.remove(getModePreview(), portletId));
-	}
-
-	// Print mode
-
-	public String getModePrint() {
-		return getTypeSettingsProperties().getProperty(
-			LayoutTypePortletConstants.MODE_PRINT);
-	}
-
-	public void setModePrint(String modePrint) {
-		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.MODE_PRINT, modePrint);
-	}
-
-	public void addModePrintPortletId(String portletId) {
-		removeModesPortletId(portletId);
-		setModePrint(StringUtil.add(getModePrint(), portletId));
-	}
-
-	public boolean hasModePrintPortletId(String portletId) {
-		return StringUtil.contains(getModePrint(), portletId);
-	}
-
-	public void removeModePrintPortletId(String portletId) {
-		setModePrint(StringUtil.remove(getModePrint(), portletId));
-	}
-
-	// View mode
-
-	public boolean hasModeViewPortletId(String portletId) {
-		if (hasModeAboutPortletId(portletId) ||
-			hasModeConfigPortletId(portletId) ||
-			hasModeEditPortletId(portletId) ||
-			hasModeEditDefaultsPortletId(portletId) ||
-			hasModeEditGuestPortletId(portletId) ||
-			hasModeHelpPortletId(portletId) ||
-			hasModePreviewPortletId(portletId) ||
-			hasModePrintPortletId(portletId)) {
-
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	// All modes
-
 	public void resetModes() {
 		setModeAbout(StringPool.BLANK);
 		setModeConfig(StringPool.BLANK);
@@ -942,40 +830,122 @@ public class LayoutTypePortletImpl
 		setModePrint(StringPool.BLANK);
 	}
 
-	public void removeModesPortletId(String portletId) {
-		removeModeAboutPortletId(portletId);
-		removeModeConfigPortletId(portletId);
-		removeModeEditPortletId(portletId);
-		removeModeEditDefaultsPortletId(portletId);
-		removeModeEditGuestPortletId(portletId);
-		removeModeHelpPortletId(portletId);
-		removeModePreviewPortletId(portletId);
-		removeModePrintPortletId(portletId);
+	public void resetStates() {
+		setStateMax(StringPool.BLANK);
+		setStateMin(StringPool.BLANK);
 	}
 
-	public void removeNestedColumns(String portletId) {
-		UnicodeProperties props = getTypeSettingsProperties();
+	public void setLayoutTemplateId(long userId, String newLayoutTemplateId) {
+		setLayoutTemplateId(userId, newLayoutTemplateId, true);
+	}
 
-		UnicodeProperties newProps = new UnicodeProperties();
+	public void setLayoutTemplateId(
+		long userId, String newLayoutTemplateId, boolean checkPermission) {
 
-		for (String key : props.keySet()) {
-			if (!key.startsWith(portletId)) {
-				newProps.setProperty(key, props.getProperty(key));
-			}
+		if (checkPermission &&
+			!PluginSettingLocalServiceUtil.hasPermission(
+				userId, newLayoutTemplateId, Plugin.TYPE_LAYOUT_TEMPLATE)) {
+
+			return;
 		}
 
-		getLayout().setTypeSettingsProperties(newProps);
+		String oldLayoutTemplateId = getLayoutTemplateId();
 
-		String nestedColumnIds = GetterUtil.getString(
-			getTypeSettingsProperties().getProperty(
-				LayoutTypePortletConstants.NESTED_COLUMN_IDS));
-
-		String[] nestedColumnIdsArray = ArrayUtil.removeByPrefix(
-			StringUtil.split(nestedColumnIds), portletId);
+		if (Validator.isNull(oldLayoutTemplateId)) {
+			oldLayoutTemplateId = PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID;
+		}
 
 		getTypeSettingsProperties().setProperty(
-			LayoutTypePortletConstants.NESTED_COLUMN_IDS,
-			StringUtil.merge(nestedColumnIdsArray));
+			LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, newLayoutTemplateId);
+
+		String themeId = null;
+
+		try {
+			Layout layout = getLayout();
+
+			Theme theme = layout.getTheme();
+
+			if (theme != null) {
+				themeId = theme.getThemeId();
+			}
+			else {
+				themeId = layout.getThemeId();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		LayoutTemplate oldLayoutTemplate =
+			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
+				oldLayoutTemplateId, false, themeId);
+
+		if (oldLayoutTemplate == null) {
+			return;
+		}
+
+		LayoutTemplate newLayoutTemplate =
+			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
+				newLayoutTemplateId, false, themeId);
+
+		List<String> oldColumns = oldLayoutTemplate.getColumns();
+		List<String> newColumns = newLayoutTemplate.getColumns();
+
+		reorganizePortlets(newColumns, oldColumns);
+	}
+
+	public void setModeAbout(String modeAbout) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_ABOUT, modeAbout);
+	}
+
+	public void setModeConfig(String modeConfig) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_CONFIG, modeConfig);
+	}
+
+	public void setModeEdit(String modeEdit) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_EDIT, modeEdit);
+	}
+
+	public void setModeEditDefaults(String modeEditDefaults) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_EDIT_DEFAULTS, modeEditDefaults);
+	}
+
+	public void setModeEditGuest(String modeEditGuest) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_EDIT_GUEST, modeEditGuest);
+	}
+
+	public void setModeHelp(String modeHelp) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_HELP, modeHelp);
+	}
+
+	public void setModePreview(String modePreview) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_PREVIEW, modePreview);
+	}
+
+	public void setModePrint(String modePrint) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_PRINT, modePrint);
+	}
+
+	public void setPortletIds(String columnId, String portletIds) {
+		getTypeSettingsProperties().setProperty(columnId, portletIds);
+	}
+
+	public void setStateMax(String stateMax) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.STATE_MAX, stateMax);
+	}
+
+	public void setStateMin(String stateMin) {
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.STATE_MIN, stateMin);
 	}
 
 	protected void addNestedColumn(String columnId) {
@@ -987,6 +957,24 @@ public class LayoutTypePortletImpl
 
 			getTypeSettingsProperties().setProperty(
 				LayoutTypePortletConstants.NESTED_COLUMN_IDS, nestedColumnIds);
+		}
+	}
+
+	protected void deletePortletSetup(String portletId) {
+		try {
+			List<PortletPreferences> list =
+				PortletPreferencesLocalServiceUtil.getPortletPreferences(
+					getLayout().getPlid(), portletId);
+
+			for (int i = 0; i < list.size(); i++) {
+				PortletPreferences portletPreferences = list.get(i);
+
+				PortletPreferencesLocalServiceUtil.deletePortletPreferences(
+					portletPreferences.getPortletPreferencesId());
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -1007,6 +995,22 @@ public class LayoutTypePortletImpl
 
 		return ListUtil.fromArray(StringUtil.split(nestedColumnIds));
 	}
+
+	/*protected boolean hasStaticPortletId(String portletId) {
+		LayoutTemplate layoutTemplate = getLayoutTemplate();
+
+		List columns = layoutTemplate.getColumns();
+
+		for (int i = 0; i < columns.size(); i++) {
+			String columnId = (String)columns.get(i);
+
+			if (hasStaticPortletId(columnId, portletId)) {
+				return true;
+			}
+		}
+
+		return false;
+	}*/
 
 	protected String[] getStaticPortletIds(String position) {
 		Layout layout = getLayout();
@@ -1113,22 +1117,6 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	/*protected boolean hasStaticPortletId(String portletId) {
-		LayoutTemplate layoutTemplate = getLayoutTemplate();
-
-		List columns = layoutTemplate.getColumns();
-
-		for (int i = 0; i < columns.size(); i++) {
-			String columnId = (String)columns.get(i);
-
-			if (hasStaticPortletId(columnId, portletId)) {
-				return true;
-			}
-		}
-
-		return false;
-	}*/
-
 	protected boolean hasStaticPortletId(String columnId, String portletId) {
 		String[] staticPortletIdsStart = getStaticPortletIds(
 			PropsKeys.LAYOUT_STATIC_PORTLETS_START + columnId);
@@ -1188,24 +1176,6 @@ public class LayoutTypePortletImpl
 		}
 
 		deletePortletSetup(portletId);
-	}
-
-	protected void deletePortletSetup(String portletId) {
-		try {
-			List<PortletPreferences> list =
-				PortletPreferencesLocalServiceUtil.getPortletPreferences(
-					getLayout().getPlid(), portletId);
-
-			for (int i = 0; i < list.size(); i++) {
-				PortletPreferences portletPreferences = list.get(i);
-
-				PortletPreferencesLocalServiceUtil.deletePortletPreferences(
-					portletPreferences.getPortletPreferencesId());
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 	}
 
 	private static final String _NESTED_PORTLETS_NAMESPACE =

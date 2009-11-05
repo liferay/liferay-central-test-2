@@ -41,12 +41,12 @@ public class LayoutTypeImpl implements LayoutType {
 		return _layout;
 	}
 
-	public void setLayout(Layout layout) {
-		_layout = layout;
-	}
-
 	public UnicodeProperties getTypeSettingsProperties() {
 		return _layout.getTypeSettingsProperties();
+	}
+
+	public void setLayout(Layout layout) {
+		_layout = layout;
 	}
 
 	private Layout _layout;
