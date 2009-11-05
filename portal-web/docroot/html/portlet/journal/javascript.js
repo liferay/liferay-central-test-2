@@ -578,10 +578,10 @@ AUI().add(
 				var instance = this;
 
 				var downloadAction = themeDisplay.getPathMain() + '/journal/get_article_content';
-				var form = instance.getPrincipalForm();
+				var auxForm = instance.getPrincipalForm('fm2');
 
 				var articleContent = instance.getArticleContentXML();
-				var xmlInput = instance.getByName(form, 'xml', true);
+				var xmlInput = instance.getByName(auxForm, 'xml', true);
 
 				if (instance.structureChange()) {
 					if (confirm(Liferay.Language.get('you-should-save-the-structure-first'))) {
@@ -591,12 +591,12 @@ AUI().add(
 					return;
 				}
 
-				form.attr('action', downloadAction);
-				form.attr('target', '_self');
+				auxForm.attr('action', downloadAction);
+				auxForm.attr('target', '_self');
 
 				xmlInput.val(articleContent);
 
-				form.submit();
+				auxForm.submit();
 			},
 
 			editContainerNormalMode: function() {
