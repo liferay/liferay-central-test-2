@@ -174,7 +174,6 @@ boolean deployed = false;
 			if (Validator.equals(defaultWapThemeId, curTheme.getThemeId())) {
 				deployed = true;
 			}
-
 		%>
 
 			<aui:option label="<%= curTheme.getName() %>" selected="<%= (Validator.equals(defaultWapThemeId, curTheme.getThemeId())) %>" value="<%= curTheme.getThemeId() %>" />
@@ -191,23 +190,19 @@ boolean deployed = false;
 	<aui:select label="default-control-panel-theme" name='<%= "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")" %>'>
 
 		<%
+		themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), false);
+		deployed = false;
+
 		Theme controlPanelTheme = ThemeLocalServiceUtil.getTheme(company.getCompanyId(), "controlpanel", false);
 
 		if (controlPanelTheme != null) {
 			themes.add(controlPanelTheme);
 		}
 
-		deployed = false;
-
 		for (Theme curTheme: themes) {
-			if (curTheme.isWapTheme()) {
-				continue;
-			}
-
 			if (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) {
 				deployed = true;
 			}
-
 		%>
 
 			<aui:option label="<%= curTheme.getName() %>" selected="<%= (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) %>" value="<%= curTheme.getThemeId() %>" />
