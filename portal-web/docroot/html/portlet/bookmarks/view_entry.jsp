@@ -34,6 +34,8 @@ long entryId = entry.getEntryId();
 request.setAttribute("view_entry.jsp-entry", entry);
 %>
 
+<liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
+
 <aui:layout>
 	<aui:column columnWidth="<%= 75 %>" cssClass="entry-column entry-column-first" first="<%= true %>">
 		<h3 class="entry-title"><%= entry.getName() %></h3>

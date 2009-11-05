@@ -61,6 +61,8 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	}
 </script>
 
+<liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
+
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
 	<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
 </portlet:actionURL>
@@ -72,10 +74,9 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 
-	<liferay-ui:tabs
-		names="entry"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-	/>
+	<c:if test="<%= entry != null %>">
+		<h3 class="entry-title"><%= entry.getName() %></h3>
+	</c:if>
 
 	<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
