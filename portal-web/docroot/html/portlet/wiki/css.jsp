@@ -84,6 +84,7 @@
 }
 
 .portlet-wiki h1.page-title {
+	clear: both;
 	margin: 0 0 10px 0;
 }
 
@@ -316,20 +317,38 @@
 	padding-bottom: 10px;
 }
 
+.portlet-wiki .top-links {
+	float: right;
+}
+
+.portlet-wiki .top-links .top-link {
+	padding-right: 0.5em;
+	border-right: 1px solid #bbb;
+}
+
+.portlet-wiki .top-links-container {
+	clear: both;
+}
+
+.portlet-wiki .top-links-nodes {
+	border: 1px solid #ddd;
+	float: left;
+	margin: 0 0.5em 0.5em;
+	padding: 0.2em 0.5em;
+}
+
 .portlet-wiki .top-links .page-search {
 	float: right;
+	margin: 0 0 0.5em 0.5em;
 }
 
-.portlet-wiki .top-links .top-links-navigation {
+
+.portlet-wiki .top-links .top-link.last {
+	border: none;
+}
+
+.portlet-wiki .top-links .top-links-navigation, .portlet-wiki .top-links-configuration {
 	float: left;
-}
-
-.portlet-wiki .top-links .top-links-search {
-	float: right;
-}
-
-.portlet-wiki .top-links table {
-	width: 100%;
 }
 
 .portlet-wiki .subscription-info tr td {
