@@ -214,12 +214,12 @@
 }
 
 .portlet-document-library .top-links .top-link {
-	padding-right: 0.5em;
 	border-right: 1px solid #bbb;
+	padding-right: 0.5em;
 }
 
 .portlet-document-library .top-links .top-link.last {
-	border: none;
+	border-width: 0;
 }
 
 .portlet-document-library .top-links .top-links-navigation {
