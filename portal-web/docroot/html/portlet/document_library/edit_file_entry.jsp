@@ -188,6 +188,10 @@ portletURL.setParameter("name", name);
 	<aui:input name="newFolderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 
+	<c:if test="<%= fileEntry != null %>">
+		<h3 class="file-entry-title"><%= fileEntry.getTitle() %></h3>
+	</c:if>
+
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />
 
