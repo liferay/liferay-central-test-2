@@ -161,6 +161,10 @@
 	padding: 0;
 }
 
+.portlet-document-library .folder-layout {
+	clear: both;
+}
+
 .portlet-document-library .folder-metadata {
 	clear: both;
 }
@@ -220,8 +224,4 @@
 
 .portlet-document-library .top-links .top-links-navigation {
 	float: left;
-}
-
-.portlet-document-library .folder-layout {
-	clear: both;
 }
