@@ -43,8 +43,12 @@ Liferay.Util = {
 			function(A) {
 				var handleFocus = function(event) {
 					var target = event.target;
-					var tagName = target.get('tagName').toLowerCase();
+					var tagName = target.get('tagName');
 					var nodeType = target.get('type');
+
+					if (tagName) {
+						tagName = tagName.toLowerCase();
+					}
 
 					if (
 						(tagName == 'input' && /text|password/.test(nodeType)) ||
