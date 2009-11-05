@@ -1204,7 +1204,7 @@ AUI().add(
 				auxForm.attr('action', previewURL);
 				auxForm.attr('target', '_blank');
 
-				var titleInput = instance.getByName(form, 'title', true);
+				var titleInput = instance.getByName(form, 'title');
 				var titleAuxFormInput = instance.getByName(auxForm, 'title', true);
 				var xmlAuxFormInput = instance.getByName(auxForm, 'xml', true);
 
