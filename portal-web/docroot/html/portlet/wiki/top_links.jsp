@@ -132,6 +132,12 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 					<aui:button type="submit" value="search" />
 				</aui:form>
 			</div>
+
+			<script type="text/javascript">
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+				Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
+			</c:if>
+		</script>
 		</div>
 	</div>
 </c:if>
