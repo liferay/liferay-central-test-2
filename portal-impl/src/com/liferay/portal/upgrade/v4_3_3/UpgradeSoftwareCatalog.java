@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v4_3_3;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v4_3_3.util.SCFrameworkVersionTable;
 import com.liferay.portal.upgrade.v4_3_3.util.SCLicenseTable;
 import com.liferay.portal.upgrade.v4_3_3.util.SCProductEntryTable;
@@ -41,7 +41,7 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 		// SCFrameworkVersion
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			SCFrameworkVersionTable.TABLE_NAME,
 			SCFrameworkVersionTable.TABLE_COLUMNS);
 
@@ -51,7 +51,7 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 		// SCLicense
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			SCLicenseTable.TABLE_NAME, SCLicenseTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(SCLicenseTable.TABLE_SQL_CREATE);
@@ -60,7 +60,7 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 		// SCProductEntry
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			SCProductEntryTable.TABLE_NAME, SCProductEntryTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(SCProductEntryTable.TABLE_SQL_CREATE);
@@ -69,7 +69,7 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 		// SCProductVersion
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			SCProductVersionTable.TABLE_NAME,
 			SCProductVersionTable.TABLE_COLUMNS);
 

@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.LazyPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
@@ -76,7 +76,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn =
 			new MBCategoryIdUpgradeColumnImpl();
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			MBCategoryTable.TABLE_NAME, MBCategoryTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
@@ -92,7 +92,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		UpgradeColumn upgradeParentCategoryIdColumn = new SwapUpgradeColumnImpl(
 			"parentCategoryId", categoryIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			MBCategoryTable.TABLE_NAME, MBCategoryTable.TABLE_COLUMNS,
 			upgradeParentCategoryIdColumn);
 
@@ -113,7 +113,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				upgradePKColumn, upgradeCompanyIdColumn,
 			upgradeThreadIdPKColumn);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			MBMessageTable.TABLE_NAME, MBMessageTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
 			upgradeCategoryIdColumn, upgradeThreadIdPKColumn,
@@ -135,7 +135,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		UpgradeColumn upgradeParentMessageIdColumn = new SwapUpgradeColumnImpl(
 			"parentMessageId", messageIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			MBMessageTable.TABLE_NAME, MBMessageTable.TABLE_COLUMNS,
 			upgradeParentMessageIdColumn);
 
@@ -151,7 +151,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		upgradePKColumn = new PKUpgradeColumnImpl("messageFlagId", true);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			MBMessageFlagTable.TABLE_NAME, MBMessageFlagTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeUserIdColumn, upgradeMessageIdColumn);
 
@@ -161,7 +161,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// MBStatsUser
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			MBStatsUserTable.TABLE_NAME, MBStatsUserTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("statsUserId", false),
 			upgradeGroupIdColumn, upgradeUserIdColumn);
@@ -179,7 +179,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			"lastPostByUserId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			MBThreadTable.TABLE_NAME, MBThreadTable.TABLE_COLUMNS,
 			upgradeThreadIdColumn, upgradeCategoryIdColumn,
 			upgradeRootMessageIdColumn, upgradeLastPostByUserIdColumn);
@@ -204,7 +204,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
 			classNameIdColumn, classPKContainers);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			MBDiscussionTable.TABLE_NAME, MBDiscussionTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("discussionId", false),
 			classNameIdColumn, upgradeClassPKColumn, upgradeThreadIdColumn);

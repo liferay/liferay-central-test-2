@@ -26,11 +26,11 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileRankTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileShortcutTable;
@@ -67,7 +67,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			// DLFileEntry
 
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				DLFileEntryTable.TABLE_NAME, DLFileEntryTable.TABLE_COLUMNS);
 
 			upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
@@ -82,7 +82,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			// DLFileRank
 
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS);
 
 			upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
@@ -97,7 +97,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			// DLFileShortcut
 
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				DLFileShortcutTable.TABLE_NAME,
 				DLFileShortcutTable.TABLE_COLUMNS);
 
@@ -113,7 +113,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			// DLFileVersion
 
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				DLFileVersionTable.TABLE_NAME,
 				DLFileVersionTable.TABLE_COLUMNS);
 

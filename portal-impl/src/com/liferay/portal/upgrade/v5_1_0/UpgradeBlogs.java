@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryTable;
 import com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryUrlTitleUpgradeColumnImpl;
 
@@ -45,7 +45,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 		UpgradeColumn urlTitleColumn = new BlogsEntryUrlTitleUpgradeColumnImpl(
 			entryIdColumn, titleColumn);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			BlogsEntryTable.TABLE_NAME, BlogsEntryTable.TABLE_COLUMNS,
 			entryIdColumn, titleColumn, urlTitleColumn);
 

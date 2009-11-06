@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
 
@@ -61,7 +61,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Groups_Orgs
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_GROUPS_ORGS, _COLUMNS_GROUPS_ORGS, upgradeGroupIdColumn,
 			upgradeOrganizationIdColumn);
 
@@ -71,7 +71,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Groups_Permissions
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUPS_PERMISSIONS,
 			upgradeGroupIdColumn);
 
@@ -81,7 +81,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Groups_Roles
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_GROUPS_ROLES, _COLUMNS_GROUPS_ROLES,
 			upgradeGroupIdColumn, upgradeRoleIdColumn);
 
@@ -91,7 +91,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Groups_UserGroups
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_GROUPS_USERGROUPS, _COLUMNS_GROUPS_USERGROUPS,
 			upgradeGroupIdColumn, upgradeUserGroupIdColumn);
 
@@ -101,7 +101,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Roles_Permissions
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_ROLES_PERMISSIONS, _COLUMNS_ROLES_PERMISSIONS,
 			upgradeRoleIdColumn);
 
@@ -111,7 +111,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Users_Groups
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_USERS_GROUPS, _COLUMNS_USERS_GROUPS, upgradeUserIdColumn,
 			upgradeGroupIdColumn);
 
@@ -121,7 +121,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Users_Orgs
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_USERS_ORGS, _COLUMNS_USERS_ORGS, upgradeUserIdColumn,
 			upgradeOrganizationIdColumn);
 
@@ -131,7 +131,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Users_Permissions
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_USERS_PERMISSIONS, _COLUMNS_USERS_PERMISSIONS,
 			upgradeUserIdColumn);
 
@@ -141,7 +141,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Users_Roles
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_USERS_ROLES, _COLUMNS_USERS_ROLES, upgradeUserIdColumn,
 			upgradeRoleIdColumn);
 
@@ -151,7 +151,7 @@ public class UpgradeMappingTables extends UpgradeProcess {
 
 		// Users_UserGroups
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_USERS_USERGROUPS, _COLUMNS_USERS_USERGROUPS,
 			upgradeUserIdColumn, upgradeUserGroupIdColumn);
 

@@ -26,11 +26,11 @@ import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.UserTracker;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 
 import java.sql.Types;
 
@@ -61,7 +61,7 @@ public class UpgradeCounter extends UpgradeProcess {
 			}
 		}
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			_TABLE_COUNTER, _COLUMNS_COUNTER);
 
 		upgradeTable.setCreateSQL(_CREATE_COUNTER);

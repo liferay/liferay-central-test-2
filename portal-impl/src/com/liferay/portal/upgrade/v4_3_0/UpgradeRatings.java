@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
@@ -71,7 +71,7 @@ public class UpgradeRatings extends UpgradeProcess {
 		UpgradeColumn upgradeClassPKColumn = new ClassPKUpgradeColumnImpl(
 			classNameIdColumn, classPKContainers);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			RatingsEntryTable.TABLE_NAME, RatingsEntryTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("entryId", false), upgradeUserIdColumn,
 			classNameIdColumn, upgradeClassPKColumn);
@@ -82,7 +82,7 @@ public class UpgradeRatings extends UpgradeProcess {
 
 		// RatingsStats
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			RatingsStatsTable.TABLE_NAME, RatingsStatsTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("statsId", false), classNameIdColumn,
 			upgradeClassPKColumn);

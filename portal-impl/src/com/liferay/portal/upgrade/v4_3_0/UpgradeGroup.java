@@ -28,12 +28,12 @@ import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
@@ -96,7 +96,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		UpgradeColumn upgradeNameColumn = new GroupNameUpgradeColumnImpl(
 			upgradePKColumn, upgradeClassPKColumn);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			GroupTable.TABLE_NAME, GroupTable.TABLE_COLUMNS, upgradePKColumn,
 			classNameIdColumn, upgradeClassPKColumn, upgradeNameColumn);
 
@@ -139,7 +139,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		Object[][] layoutColumns = ArrayUtil.append(
 			layoutColumns1, layoutColumns2);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			LayoutTable.TABLE_NAME, layoutColumns, upgradeLayoutOwnerIdColumn,
 			upgradeLayoutOwnerIdGroupIdColumn,
 			upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn,
@@ -168,7 +168,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		Object[][] layoutSetColumns = ArrayUtil.append(
 			layoutSetColumns1, layoutSetColumns2);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			LayoutSetTable.TABLE_NAME, layoutSetColumns,
 			new PKUpgradeColumnImpl("layoutSetId", false),
 			upgradeGroupIdColumn);
@@ -185,7 +185,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// OrgGroupPermission
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			OrgGroupPermissionTable.TABLE_NAME,
 			OrgGroupPermissionTable.TABLE_COLUMNS, upgradeGroupIdColumn);
 
@@ -195,7 +195,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		// OrgGroupRole
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			OrgGroupRoleTable.TABLE_NAME, OrgGroupRoleTable.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 

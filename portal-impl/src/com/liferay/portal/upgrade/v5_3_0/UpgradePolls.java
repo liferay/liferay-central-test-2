@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v5_3_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v5_3_0.util.PollsChoiceTable;
 import com.liferay.portal.upgrade.v5_3_0.util.PollsQuestionTable;
 
@@ -43,7 +43,7 @@ public class UpgradePolls extends UpgradeProcess {
 
 			// PollsChoice
 
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				PollsChoiceTable.TABLE_NAME, PollsChoiceTable.TABLE_COLUMNS);
 
 			upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
@@ -58,7 +58,7 @@ public class UpgradePolls extends UpgradeProcess {
 
 			// PollsQuestion
 
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				PollsQuestionTable.TABLE_NAME,
 				PollsQuestionTable.TABLE_COLUMNS);
 

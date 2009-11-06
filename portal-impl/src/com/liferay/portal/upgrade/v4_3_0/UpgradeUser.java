@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AccountTable;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
@@ -68,7 +68,7 @@ public class UpgradeUser extends UpgradeProcess {
 			new UserPortraitIdUpgradeColumnImpl(
 				upgradePKColumn, AvailableMappersUtil.getImageIdMapper());
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			UserTable.TABLE_NAME, UserTable.TABLE_COLUMNS, upgradePKColumn,
 			upgradeCompanyIdColumn, upgradeContactIdColumn,
 			upgradeUserPortraitIdColumn);
@@ -85,7 +85,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// Account
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			AccountTable.TABLE_NAME, AccountTable.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
@@ -107,7 +107,7 @@ public class UpgradeUser extends UpgradeProcess {
 		UpgradeColumn upgradeSuffixIdColumn = new TempUpgradeColumnImpl(
 			"suffixId", new Integer(Types.VARCHAR));
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ContactTable.TABLE_NAME, ContactTable.TABLE_COLUMNS,
 			upgradeContactIdColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
 			upgradeAccountIdColumn, upgradeParentContactIdColumn,
@@ -117,7 +117,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// CyrusUser
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			CyrusUserTable.TABLE_NAME, CyrusUserTable.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
@@ -125,7 +125,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// CyrusVirtual
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			CyrusVirtualTable.TABLE_NAME, CyrusVirtualTable.TABLE_COLUMNS,
 			upgradeUserIdColumn);
 
@@ -133,7 +133,7 @@ public class UpgradeUser extends UpgradeProcess {
 
 		// PasswordTracker
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			PasswordTrackerTable.TABLE_NAME, PasswordTrackerTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("passwordTrackerId", false),
 			upgradeUserIdColumn);

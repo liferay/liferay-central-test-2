@@ -20,30 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_0;
+package com.liferay.portal.upgrade.util;
 
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.upgrade.v4_3_0.util.ReleaseTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactory;
 
 /**
- * <a href="UpgradeRelease.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultUpgradeTableFactoryImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UpgradeRelease extends UpgradeProcess {
+public class DefaultUpgradeTableFactoryImpl implements UpgradeTableFactory {
 
-	protected void doUpgrade() throws Exception {
+	public UpgradeTable getUpgradeTable(
+		String tableName, Object[][] columns, UpgradeColumn... upgradeColumns) {
 
-		// Release
-
-		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-			ReleaseTable.TABLE_NAME, ReleaseTable.TABLE_COLUMNS);
-
-		upgradeTable.setCreateSQL(ReleaseTable.TABLE_SQL_CREATE);
-
-		upgradeTable.updateTable();
+		return new DefaultUpgradeTableImpl(tableName, columns, upgradeColumns);
 	}
 
 }

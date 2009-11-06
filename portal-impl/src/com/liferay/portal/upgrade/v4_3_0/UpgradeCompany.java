@@ -27,10 +27,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
 import com.liferay.portal.model.Account;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.CompanyTable;
 import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
@@ -73,7 +73,7 @@ public class UpgradeCompany extends UpgradeProcess {
 			DLLocalServiceUtil.checkRoot(companyId);
 		}*/
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			CompanyTable.TABLE_NAME, CompanyTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(CompanyTable.TABLE_SQL_CREATE);

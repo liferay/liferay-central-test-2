@@ -44,151 +44,6 @@ import java.util.List;
 public class DefaultUpgradeTableImpl
 	extends BaseUpgradeTableImpl implements UpgradeTable {
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns) {
-		this(tableName, columns, null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1) {
-
-		this(tableName, columns, upgradeColumn1, null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2) {
-
-		this(tableName, columns, upgradeColumn1, upgradeColumn2, null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3) {
-
-		this(
-			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
-			null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
-		UpgradeColumn upgradeColumn4) {
-
-		this(
-			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
-			upgradeColumn4, null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
-		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5) {
-
-		this(
-			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
-			upgradeColumn4, upgradeColumn5, null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
-		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
-		UpgradeColumn upgradeColumn6) {
-
-		this(
-			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
-			upgradeColumn4, upgradeColumn5, upgradeColumn6, null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
-		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
-		UpgradeColumn upgradeColumn6, UpgradeColumn upgradeColumn7) {
-
-		this(
-			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
-			upgradeColumn4, upgradeColumn5, upgradeColumn6, upgradeColumn7,
-			null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
-		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
-		UpgradeColumn upgradeColumn6, UpgradeColumn upgradeColumn7,
-		UpgradeColumn upgradeColumn8) {
-
-		this(
-			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
-			upgradeColumn4, upgradeColumn5, upgradeColumn6, upgradeColumn7,
-			upgradeColumn8, null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
-		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
-		UpgradeColumn upgradeColumn6, UpgradeColumn upgradeColumn7,
-		UpgradeColumn upgradeColumn8, UpgradeColumn upgradeColumn9) {
-
-		this(
-			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
-			upgradeColumn4, upgradeColumn5, upgradeColumn6, upgradeColumn7,
-			upgradeColumn8, upgradeColumn9, null);
-	}
-
-	public DefaultUpgradeTableImpl(
-		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
-		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
-		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
-		UpgradeColumn upgradeColumn6, UpgradeColumn upgradeColumn7,
-		UpgradeColumn upgradeColumn8, UpgradeColumn upgradeColumn9,
-		UpgradeColumn upgradeColumn10) {
-
-		super(tableName);
-
-		// Sort the column names to ensure they're sorted based on the
-		// constructor's list of columns to upgrade. This is needed if you
-		// use TempUpgradeColumnImpl and need to ensure a column's temporary
-		// value is populated in the correct order.
-
-		columns = columns.clone();
-
-		List<String> sortedColumnNames = new ArrayList<String>();
-
-		getSortedColumnName(sortedColumnNames, upgradeColumn1);
-		getSortedColumnName(sortedColumnNames, upgradeColumn2);
-		getSortedColumnName(sortedColumnNames, upgradeColumn3);
-		getSortedColumnName(sortedColumnNames, upgradeColumn4);
-		getSortedColumnName(sortedColumnNames, upgradeColumn5);
-		getSortedColumnName(sortedColumnNames, upgradeColumn6);
-		getSortedColumnName(sortedColumnNames, upgradeColumn7);
-		getSortedColumnName(sortedColumnNames, upgradeColumn8);
-		getSortedColumnName(sortedColumnNames, upgradeColumn9);
-		getSortedColumnName(sortedColumnNames, upgradeColumn10);
-
-		if (sortedColumnNames.size() > 0) {
-			Arrays.sort(columns, new ColumnsComparator(sortedColumnNames));
-		}
-
-		setColumns(columns);
-
-		_upgradeColumns = new UpgradeColumn[columns.length];
-
-		prepareUpgradeColumns(upgradeColumn1);
-		prepareUpgradeColumns(upgradeColumn2);
-		prepareUpgradeColumns(upgradeColumn3);
-		prepareUpgradeColumns(upgradeColumn4);
-		prepareUpgradeColumns(upgradeColumn5);
-		prepareUpgradeColumns(upgradeColumn6);
-		prepareUpgradeColumns(upgradeColumn7);
-		prepareUpgradeColumns(upgradeColumn8);
-		prepareUpgradeColumns(upgradeColumn9);
-		prepareUpgradeColumns(upgradeColumn10);
-	}
-
 	public String getExportedData(ResultSet rs) throws Exception {
 		StringBuilder sb = new StringBuilder();
 
@@ -250,6 +105,37 @@ public class DefaultUpgradeTableImpl
 		}
 
 		super.setColumn(ps, index, type, value);
+	}
+
+	protected DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn... upgradeColumns) {
+
+		super(tableName);
+
+		// Sort the column names to ensure they're sorted based on the
+		// constructor's list of columns to upgrade. This is needed if you
+		// use TempUpgradeColumnImpl and need to ensure a column's temporary
+		// value is populated in the correct order.
+
+		columns = columns.clone();
+
+		List<String> sortedColumnNames = new ArrayList<String>();
+
+		for (UpgradeColumn upgradeColumn : upgradeColumns) {
+			getSortedColumnName(sortedColumnNames, upgradeColumn);
+		}
+
+		if (sortedColumnNames.size() > 0) {
+			Arrays.sort(columns, new ColumnsComparator(sortedColumnNames));
+		}
+
+		setColumns(columns);
+
+		_upgradeColumns = new UpgradeColumn[columns.length];
+
+		for (UpgradeColumn upgradeColumn : upgradeColumns) {
+			prepareUpgradeColumns(upgradeColumn);
+		}
 	}
 
 	protected void getSortedColumnName(

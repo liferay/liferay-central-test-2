@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.OrgGroupPermissionTable;
@@ -50,7 +50,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"organizationId", true);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			OrganizationTable.TABLE_NAME, OrganizationTable.TABLE_COLUMNS,
 			upgradePKColumn);
 
@@ -67,7 +67,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 			new SwapUpgradeColumnImpl(
 				"parentOrganizationId", organizationIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			OrganizationTable.TABLE_NAME, OrganizationTable.TABLE_COLUMNS,
 			upgradeParentOrganizationIdColumn);
 
@@ -78,7 +78,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		// OrgGroupPermission
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			OrgGroupPermissionTable.TABLE_NAME,
 			OrgGroupPermissionTable.TABLE_COLUMNS, upgradeOrganizationIdColumn);
 
@@ -90,7 +90,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		upgradePKColumn = new PKUpgradeColumnImpl("orgLaborId", true);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			OrgLaborTable.TABLE_NAME, OrgLaborTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeOrganizationIdColumn);
 

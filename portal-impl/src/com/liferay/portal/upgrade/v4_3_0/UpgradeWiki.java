@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.WikiNodeTable;
@@ -59,7 +59,7 @@ public class UpgradeWiki extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"nodeId", true);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			WikiNodeTable.TABLE_NAME, WikiNodeTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
@@ -86,7 +86,7 @@ public class UpgradeWiki extends UpgradeProcess {
 			new WikiPageResourcePrimKeyUpgradeColumnImpl(
 				upgradePageIdColumn);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			WikiPageTable.TABLE_NAME, WikiPageTable.TABLE_COLUMNS,
 			upgradeNodeIdColumn, upgradeTitleColumn, upgradePageIdColumn,
 			upgradePageResourcePrimKeyColumn, upgradeUserIdColumn);

@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCartItemIdUpgradeColumnImpl;
@@ -65,7 +65,7 @@ public class UpgradeShopping extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"categoryId", true);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingCategoryTable.TABLE_NAME,
 			ShoppingCategoryTable.TABLE_COLUMNS, upgradePKColumn,
 			upgradeGroupIdColumn, upgradeUserIdColumn);
@@ -82,7 +82,7 @@ public class UpgradeShopping extends UpgradeProcess {
 		UpgradeColumn upgradeParentCategoryIdColumn = new SwapUpgradeColumnImpl(
 			"parentCategoryId", categoryIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingCategoryTable.TABLE_NAME,
 			ShoppingCategoryTable.TABLE_COLUMNS, upgradeParentCategoryIdColumn);
 
@@ -95,7 +95,7 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		upgradePKColumn = new PKUpgradeColumnImpl("itemId", true);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingItemTable.TABLE_NAME, ShoppingItemTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeCategoryIdColumn, upgradeUserIdColumn);
 
@@ -112,7 +112,7 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// ShoppingItemField
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingItemTable.TABLE_NAME, ShoppingItemTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("itemFieldId", false), upgradeItemIdColumn);
 
@@ -122,7 +122,7 @@ public class UpgradeShopping extends UpgradeProcess {
 
 		// ShoppingItemPrice
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingItemPriceTable.TABLE_NAME,
 			ShoppingItemPriceTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("itemPriceId", false), upgradeItemIdColumn);
@@ -136,7 +136,7 @@ public class UpgradeShopping extends UpgradeProcess {
 		upgradePKColumn = new PKUpgradeColumnImpl(
 			"orderId", new Integer(Types.VARCHAR), true);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingOrderTable.TABLE_NAME, ShoppingOrderTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
@@ -154,7 +154,7 @@ public class UpgradeShopping extends UpgradeProcess {
 		UpgradeColumn upgradeCartItemIdColumn =
 			new ShoppingCartItemIdUpgradeColumnImpl(itemIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingOrderItemTable.TABLE_NAME,
 			ShoppingOrderItemTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("orderItemId", false),
@@ -169,7 +169,7 @@ public class UpgradeShopping extends UpgradeProcess {
 		UpgradeColumn upgradeItemIdsColumn =
 			new ShoppingCartItemIdsUpgradeColumnImpl(itemIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingCartTable.TABLE_NAME, ShoppingCartTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl(
 				"cartId", new Integer(Types.VARCHAR), false),
@@ -185,7 +185,7 @@ public class UpgradeShopping extends UpgradeProcess {
 			new ShoppingCouponLimitCategoriesUpgradeColumnImpl(
 				categoryIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ShoppingCouponTable.TABLE_NAME, ShoppingCouponTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl(
 				"couponId", new Integer(Types.VARCHAR), false),

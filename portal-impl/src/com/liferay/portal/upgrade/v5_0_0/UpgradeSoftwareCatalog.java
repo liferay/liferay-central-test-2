@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v5_0_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v5_0_0.util.SCProductVersionTable;
 
 /**
@@ -38,7 +38,7 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 		// SCProductVersion
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			SCProductVersionTable.TABLE_NAME,
 			SCProductVersionTable.TABLE_COLUMNS);
 

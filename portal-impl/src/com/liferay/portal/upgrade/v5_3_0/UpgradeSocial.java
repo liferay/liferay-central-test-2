@@ -29,11 +29,11 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.DateUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.v5_3_0.util.SocialActivityTable;
 import com.liferay.portal.upgrade.v5_3_0.util.SocialRelationTable;
 import com.liferay.portal.upgrade.v5_3_0.util.SocialRequestTable;
@@ -60,7 +60,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		UpgradeColumn modifiedDateColumn = new DateUpgradeColumnImpl(
 			"modifiedDate");
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			SocialActivityTable.TABLE_NAME, SocialActivityTable.TABLE_COLUMNS,
 			createDateColumn);
 
@@ -70,7 +70,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		// SocialRelation
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			SocialRelationTable.TABLE_NAME, SocialRelationTable.TABLE_COLUMNS,
 			createDateColumn);
 
@@ -80,7 +80,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 		// SocialRequest
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			SocialRequestTable.TABLE_NAME, SocialRequestTable.TABLE_COLUMNS,
 			createDateColumn, modifiedDateColumn);
 

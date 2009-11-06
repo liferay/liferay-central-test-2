@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.DLFileEntryIdUpgradeColumnImpl;
@@ -66,7 +66,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"folderId", true);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFolderTable.TABLE_NAME, DLFolderTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
@@ -82,7 +82,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		UpgradeColumn upgradeParentFolderIdColumn = new SwapUpgradeColumnImpl(
 			"parentFolderId", folderIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFolderTable.TABLE_NAME, DLFolderTable.TABLE_COLUMNS,
 			upgradeParentFolderIdColumn);
 
@@ -107,7 +107,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			"versionUserId", new Integer(Types.VARCHAR),
 			AvailableMappersUtil.getUserIdMapper());
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFileEntryTable.TABLE_NAME, DLFileEntryTable.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeFolderIdColumn, upgradeNameColumn,
 			fileEntryIdColumn, upgradeUserIdColumn, upgradeVersionUserIdColumn);
@@ -122,7 +122,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileRank
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("fileRankId", false),
 			upgradeUserIdColumn, upgradeFolderIdColumn);
@@ -135,7 +135,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradePKColumn = new PKUpgradeColumnImpl("fileShortcutId", true);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFileShortcutTable.TABLE_NAME, DLFileShortcutTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeUserIdColumn, upgradeFolderIdColumn,
 			upgradeToFolderIdColumn);
@@ -150,7 +150,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileVersion
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFileVersionTable.TABLE_NAME, DLFileVersionTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("fileVersionId", false),
 			upgradeUserIdColumn, upgradeFolderIdColumn);

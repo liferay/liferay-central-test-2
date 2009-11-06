@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.kernel.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ContactIdUpgradeColumnImpl;
@@ -52,7 +52,7 @@ public class UpgradeContact extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"contactId", new Integer(Types.VARCHAR), true);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			ContactTable.TABLE_NAME, ContactTable.TABLE_COLUMNS,
 			upgradePKColumn);
 
@@ -73,7 +73,7 @@ public class UpgradeContact extends UpgradeProcess {
 		UpgradeColumn upgradeContactIdColumn = new ContactIdUpgradeColumnImpl(
 			upgradeScreenNameColumn, contactIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			UserTable.TABLE_NAME, UserTable.TABLE_COLUMNS,
 			upgradeScreenNameColumn, upgradeContactIdColumn);
 

@@ -28,9 +28,9 @@ import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleContentUpgradeColumnImpl;
@@ -98,7 +98,7 @@ public class UpgradeJournal extends UpgradeProcess {
 				upgradeStructureIdColumn,
 				AvailableMappersUtil.getImageIdMapper());
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			JournalArticleTable.TABLE_NAME, JournalArticleTable.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn, upgradeUserIdColumn,
 			upgradeApprovedByUserIdColumn, upgradeArticlePKColumn,
@@ -124,7 +124,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		UpgradeColumn upgradeXSDColumn =
 			new JournalStructureXSDUpgradeColumnImpl();
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			JournalStructureTable.TABLE_NAME,
 			JournalStructureTable.TABLE_COLUMNS, upgradeCompanyIdColumn,
 			upgradeGroupIdColumn, upgradeStructurePKColumn, upgradeUserIdColumn,
@@ -157,7 +157,7 @@ public class UpgradeJournal extends UpgradeProcess {
 				upgradeTemplatePKColumn,
 				AvailableMappersUtil.getImageIdMapper());
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			JournalTemplateTable.TABLE_NAME, JournalTemplateTable.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn,
 			upgradeTemplatePKColumn, upgradeUserIdColumn,

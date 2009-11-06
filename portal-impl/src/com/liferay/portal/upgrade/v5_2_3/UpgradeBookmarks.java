@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v5_2_3.util.BookmarksEntryTable;
 
 /**
@@ -42,7 +42,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 			// BookmarksEntry
 
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				BookmarksEntryTable.TABLE_NAME,
 				BookmarksEntryTable.TABLE_COLUMNS);
 

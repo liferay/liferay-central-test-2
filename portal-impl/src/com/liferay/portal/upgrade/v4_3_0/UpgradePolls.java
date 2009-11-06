@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.PollsChoiceIdUpgradeColumnImpl;
@@ -59,7 +59,7 @@ public class UpgradePolls extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"questionId", true);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			PollsQuestionTable.TABLE_NAME, PollsQuestionTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
@@ -79,7 +79,7 @@ public class UpgradePolls extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradeChoiceId =
 			new PollsChoiceIdUpgradeColumnImpl(upgradeQuestionIdColumn);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			PollsChoiceTable.TABLE_NAME, PollsChoiceTable.TABLE_COLUMNS,
 			upgradeQuestionIdColumn, upgradeChoiceId);
 
@@ -95,7 +95,7 @@ public class UpgradePolls extends UpgradeProcess {
 			new PollsVoteChoiceIdUpgradeColumnImpl(
 				upgradeQuestionIdColumn, choiceIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			PollsVoteTable.TABLE_NAME, PollsVoteTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("voteId", false), upgradeUserIdColumn,
 			upgradeQuestionIdColumn, upgradeVoteChoiceIdColumn);

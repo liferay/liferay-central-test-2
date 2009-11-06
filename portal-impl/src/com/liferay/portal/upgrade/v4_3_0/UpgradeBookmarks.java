@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.kernel.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.BookmarksEntryTable;
@@ -58,7 +58,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		PKUpgradeColumnImpl upgradePKColumn = new PKUpgradeColumnImpl(
 			"folderId", true);
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			BookmarksFolderTable.TABLE_NAME, BookmarksFolderTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
@@ -74,7 +74,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		UpgradeColumn upgradeParentFolderIdColumn = new SwapUpgradeColumnImpl(
 			"parentFolderId", folderIdMapper);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			BookmarksFolderTable.TABLE_NAME, BookmarksFolderTable.TABLE_COLUMNS,
 			upgradeParentFolderIdColumn);
 
@@ -87,7 +87,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		upgradePKColumn = new PKUpgradeColumnImpl("entryId", true);
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			BookmarksEntryTable.TABLE_NAME, BookmarksEntryTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeFolderIdColumn, upgradeUserIdColumn);
 

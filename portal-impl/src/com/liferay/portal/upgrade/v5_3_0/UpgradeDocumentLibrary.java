@@ -30,10 +30,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.v5_3_0.util.DLFileEntryNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v5_3_0.util.DLFileEntryTitleUpgradeColumnImpl;
 import com.liferay.portal.util.PortletKeys;
@@ -111,7 +111,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		UpgradeColumn titleColumn = new DLFileEntryTitleUpgradeColumnImpl(
 			nameColumn, "title");
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
 			nameColumn, titleColumn);
 
@@ -119,7 +119,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileRank
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS,
 			nameColumn);
 
@@ -130,7 +130,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		UpgradeColumn toNameColumn = new DLFileEntryNameUpgradeColumnImpl(
 			"toName");
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
 			toNameColumn);
 
@@ -138,7 +138,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// DLFileVersion
 
-		upgradeTable = new DefaultUpgradeTableImpl(
+		upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS,
 			nameColumn);
 
