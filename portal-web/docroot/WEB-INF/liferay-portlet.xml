@@ -474,6 +474,7 @@
 		<struts-path>wiki_display</struts-path>
 		<configuration-action-class>com.liferay.portlet.wikidisplay.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<portlet-data-handler-class>com.liferay.portlet.wiki.lar.WikiDisplayPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>
