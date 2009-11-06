@@ -355,11 +355,9 @@ public class SeleneseToJavaBuilder {
 					 param1.equals("assertSelectedLabel")) {
 
 				if (param1.equals("assertNotSelectedLabel")) {
-
 					sb.append("assertNotEquals");
 				}
 				else if (param1.equals("assertSelectedLabel")) {
-
 					sb.append("assertEquals");
 				}
 
@@ -373,11 +371,9 @@ public class SeleneseToJavaBuilder {
 					 param1.equals("assertSelectedLabels")) {
 
 				if (param1.equals("assertNotSelectedLabels")) {
-
 					sb.append("assertNotEquals");
 				}
 				else if (param1.equals("assertSelectedLabels")) {
-
 					sb.append("assertEquals");
 				}
 
