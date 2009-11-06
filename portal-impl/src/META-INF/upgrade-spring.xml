@@ -44,6 +44,6 @@
 
 	<!-- util-spring.xml -->
 
-	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />
-	<bean id="com.liferay.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />
+	<bean id="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />
+	<bean id="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />
 </beans>

@@ -30,7 +30,7 @@
 		<property name="renderer" ref="com.liferay.portal.kernel.bean.Renderer" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPool" class="com.liferay.portal.cache.MultiVMPoolImpl">
-		<property name="portalCacheManager" ref="com.liferay.portal.cache.MultiVMPortalCacheManager" />
+		<property name="portalCacheManager" ref="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil">
 		<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
@@ -41,7 +41,7 @@
 	</bean>
 	<!--<bean id="com.liferay.kernel.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPool" class="com.liferay.portal.cache.SingleVMPoolImpl">
-		<property name="portalCacheManager" ref="com.liferay.portal.cache.SingleVMPortalCacheManager" />
+		<property name="portalCacheManager" ref="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil">
 		<property name="singleVMPool" ref="com.liferay.portal.kernel.cache.SingleVMPool" />
