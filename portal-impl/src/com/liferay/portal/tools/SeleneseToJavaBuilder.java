@@ -246,9 +246,9 @@ public class SeleneseToJavaBuilder {
 			String param3 = fixParam(params[2]);
 
 			if (param1.equals("addSelection") || param1.equals("clickAt") ||
-				param1.equals("keyPress") || param1.equals("select") ||
-				param1.equals("type") || param1.equals("typeKeys") ||
-				param1.equals("waitForPopUp")) {
+				param1.equals("keyPress") || param1.equals("openWindow") ||
+				param1.equals("select") || param1.equals("type") ||
+				param1.equals("typeKeys") || param1.equals("waitForPopUp")) {
 
 				sb.append("selenium.");
 				sb.append(param1);
@@ -350,6 +350,42 @@ public class SeleneseToJavaBuilder {
 				}
 
 				sb.append("));");
+			}
+			else if (param1.equals("assertNotSelectedLabel") ||
+					 param1.equals("assertSelectedLabel")) {
+
+				if (param1.equals("assertNotSelectedLabel")) {
+
+					sb.append("assertNotEquals");
+				}
+				else if (param1.equals("assertSelectedLabel")) {
+
+					sb.append("assertEquals");
+				}
+
+				sb.append("(\"");
+				sb.append(param3);
+				sb.append("\", selenium.getSelectedLabel(\"");
+				sb.append(param2);
+				sb.append("\"));");
+			}
+			else if (param1.equals("assertNotSelectedLabels") ||
+					 param1.equals("assertSelectedLabels")) {
+
+				if (param1.equals("assertNotSelectedLabels")) {
+
+					sb.append("assertNotEquals");
+				}
+				else if (param1.equals("assertSelectedLabels")) {
+
+					sb.append("assertEquals");
+				}
+
+				sb.append("(\"");
+				sb.append(param3);
+				sb.append("\", join(selenium.getSelectedLabels(\"");
+				sb.append(param2);
+				sb.append("\"), \',\'));");
 			}
 			else if (param1.equals("assertNotText") ||
 					 param1.equals("assertText")) {
