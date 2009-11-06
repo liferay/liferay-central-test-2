@@ -7,17 +7,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="velocityHookAdvice" class="com.liferay.portal.spring.aop.ServiceVelocityAdvice">
-		<property name="exceptionSafe" value="true" />
-	</bean>
-	<aop:config>
-		<aop:aspect ref="velocityHookAdvice">
-			<aop:around pointcut="bean(*.velocity)" method="invoke" />
-		</aop:aspect>
-	</aop:config>
 	<bean id="com.liferay.documentlibrary.util.DLIndexerUtil" class="com.liferay.documentlibrary.util.DLIndexerUtil">
 		<property name="DLIndexer">
 			<bean class="com.liferay.documentlibrary.util.DLIndexerImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.events.StartupHelperUtil" class="com.liferay.portal.events.StartupHelperUtil">
+		<property name="startupHelper">
+			<bean class="com.liferay.portal.events.StartupHelper" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil">
@@ -32,28 +29,28 @@
 	<bean id="com.liferay.portal.kernel.bean.RendererUtil.velocity" class="com.liferay.portal.kernel.bean.RendererUtil">
 		<property name="renderer" ref="com.liferay.portal.kernel.bean.Renderer" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
-		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
-		<property name="MBeanServer" ref="mbeanServer" />
-	</bean>
-	<!--<bean id="com.liferay.kernel.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPool" class="com.liferay.portal.cache.MultiVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.cache.MultiVMPortalCacheManager" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil">
 		<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
-		<property name="configPropertyKey" value="ehcache.single.vm.config.location" />
+	<bean id="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
+		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
 		<property name="MBeanServer" ref="mbeanServer" />
 	</bean>
-	<!--<bean id="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
+	<!--<bean id="com.liferay.kernel.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPool" class="com.liferay.portal.cache.SingleVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.cache.SingleVMPortalCacheManager" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil">
 		<property name="singleVMPool" ref="com.liferay.portal.kernel.cache.SingleVMPool" />
 	</bean>
+	<bean id="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
+		<property name="configPropertyKey" value="ehcache.single.vm.config.location" />
+		<property name="MBeanServer" ref="mbeanServer" />
+	</bean>
+	<!--<bean id="com.liferay.portal.kernel.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
 	<bean id="com.liferay.portal.kernel.captcha.CaptchaUtil" class="com.liferay.portal.kernel.captcha.CaptchaUtil">
 		<property name="captcha">
 			<bean class="com.liferay.portal.captcha.CaptchaImpl" />
@@ -64,14 +61,14 @@
 			<bean class="com.liferay.portal.dao.db.DBFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil">
-		<property name="sqlUpdateFactory">
-			<bean class="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil">
 		<property name="mappingSqlQueryFactory">
 			<bean class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil">
+		<property name="sqlUpdateFactory">
+			<bean class="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.dao.orm.EntityCacheUtil" class="com.liferay.portal.kernel.dao.orm.EntityCacheUtil">
@@ -86,11 +83,6 @@
 			<bean class="com.liferay.portal.dao.orm.common.FinderCacheImpl">
 				<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
 			</bean>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.events.StartupHelperUtil" class="com.liferay.portal.events.StartupHelperUtil">
-		<property name="startupHelper">
-			<bean class="com.liferay.portal.events.StartupHelper" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.image.ImageProcessorUtil" class="com.liferay.portal.kernel.image.ImageProcessorUtil">
@@ -117,6 +109,100 @@
 		<property name="unicodeLanguage">
 			<bean class="com.liferay.portal.language.UnicodeLanguageImpl" />
 		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.search.IndexerRegistryUtil" class="com.liferay.portal.kernel.search.IndexerRegistryUtil">
+		<property name="indexerRegistry">
+			<bean class="com.liferay.portal.search.IndexerRegistryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" class="com.liferay.portal.kernel.servlet.BrowserSnifferUtil">
+		<property name="browserSniffer">
+			<bean class="com.liferay.portal.servlet.BrowserSnifferImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" class="com.liferay.portal.kernel.servlet.ImageServletTokenUtil">
+		<property name="imageServletToken">
+			<bean class="com.liferay.portal.servlet.ImageServletTokenImpl">
+				<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil">
+		<property name="calendarFactory">
+			<bean class="com.liferay.portal.util.CalendarFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.DateFormatFactoryUtil" class="com.liferay.portal.kernel.util.DateFormatFactoryUtil">
+		<property name="dateFormatFactory">
+			<bean class="com.liferay.portal.util.DateFormatFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.DiffHtmlUtil" class="com.liferay.portal.kernel.util.DiffHtmlUtil">
+		<property name="diffHtml">
+			<bean class="com.liferay.portal.util.DiffHtmlImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil">
+		<property name="diff">
+			<bean class="com.liferay.portal.util.DiffImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.DigesterUtil" class="com.liferay.portal.kernel.util.DigesterUtil">
+		<property name="digester">
+			<bean class="com.liferay.portal.util.DigesterImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil" class="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil">
+		<property name="fastDateFormatFactory">
+			<bean class="com.liferay.portal.util.FastDateFormatFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.FileUtil" class="com.liferay.portal.kernel.util.FileUtil">
+		<property name="file">
+			<bean class="com.liferay.portal.util.FileImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.HtmlUtil" class="com.liferay.portal.kernel.util.HtmlUtil">
+		<property name="html">
+			<bean class="com.liferay.portal.util.HtmlImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.HttpUtil" class="com.liferay.portal.kernel.util.HttpUtil">
+		<property name="http">
+			<bean class="com.liferay.portal.util.HttpImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.MimeTypesUtil" class="com.liferay.portal.kernel.util.MimeTypesUtil">
+		<property name="mimeTypes">
+			<bean class="com.liferay.portal.util.MimeTypesImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.MultiValueMapFactoryUtil" class="com.liferay.portal.kernel.util.MultiValueMapFactoryUtil">
+		<property name="multiValueMapFactory">
+			<bean class="com.liferay.portal.util.MultiValueMapFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.uuid.PortalUUID" class="com.liferay.portal.uuid.PortalUUIDImpl" />
+	<bean id="com.liferay.portal.kernel.uuid.PortalUUIDUtil" class="com.liferay.portal.kernel.uuid.PortalUUIDUtil">
+		<property name="portalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.velocity.VelocityEngine" class="com.liferay.portal.velocity.VelocityEngineImpl" />
+	<bean id="com.liferay.portal.kernel.velocity.VelocityEngineUtil" class="com.liferay.portal.kernel.velocity.VelocityEngineUtil">
+		<property name="velocityEngine" ref="com.liferay.portal.kernel.velocity.VelocityEngine" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.webcache.WebCachePoolUtil" class="com.liferay.portal.kernel.webcache.WebCachePoolUtil">
+		<property name="webCachePool">
+			<bean class="com.liferay.portal.webcache.WebCachePoolImpl">
+				<property name="singleVMPool" ref="com.liferay.portal.kernel.cache.SingleVMPool" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.xml.SAXReader" class="com.liferay.portal.xml.SAXReaderImpl" />
+	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
+		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil.velocity" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
+		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
 	</bean>
 	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil">
 		<property name="modelHints">
@@ -200,108 +286,9 @@
 			<bean class="com.liferay.portal.service.persistence.BatchSessionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.search.IndexerRegistryUtil" class="com.liferay.portal.kernel.search.IndexerRegistryUtil">
-		<property name="indexerRegistry">
-			<bean class="com.liferay.portal.search.IndexerRegistryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" class="com.liferay.portal.kernel.servlet.BrowserSnifferUtil">
-		<property name="browserSniffer">
-			<bean class="com.liferay.portal.servlet.BrowserSnifferImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" class="com.liferay.portal.kernel.servlet.ImageServletTokenUtil">
-		<property name="imageServletToken">
-			<bean class="com.liferay.portal.servlet.ImageServletTokenImpl">
-				<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
-			</bean>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil">
-		<property name="calendarFactory">
-			<bean class="com.liferay.portal.util.CalendarFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.DateFormatFactoryUtil" class="com.liferay.portal.kernel.util.DateFormatFactoryUtil">
-		<property name="dateFormatFactory">
-			<bean class="com.liferay.portal.util.DateFormatFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil">
-		<property name="diff">
-			<bean class="com.liferay.portal.util.DiffImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.DiffHtmlUtil" class="com.liferay.portal.kernel.util.DiffHtmlUtil">
-		<property name="diffHtml">
-			<bean class="com.liferay.portal.util.DiffHtmlImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.DigesterUtil" class="com.liferay.portal.kernel.util.DigesterUtil">
-		<property name="digester">
-			<bean class="com.liferay.portal.util.DigesterImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil" class="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil">
-		<property name="fastDateFormatFactory">
-			<bean class="com.liferay.portal.util.FastDateFormatFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.FileUtil" class="com.liferay.portal.kernel.util.FileUtil">
-		<property name="file">
-			<bean class="com.liferay.portal.util.FileImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.HtmlUtil" class="com.liferay.portal.kernel.util.HtmlUtil">
-		<property name="html">
-			<bean class="com.liferay.portal.util.HtmlImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.HttpUtil" class="com.liferay.portal.kernel.util.HttpUtil">
-		<property name="http">
-			<bean class="com.liferay.portal.util.HttpImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.MimeTypesUtil" class="com.liferay.portal.kernel.util.MimeTypesUtil">
-		<property name="mimeTypes">
-			<bean class="com.liferay.portal.util.MimeTypesImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.util.MultiValueMapFactoryUtil" class="com.liferay.portal.kernel.util.MultiValueMapFactoryUtil">
-		<property name="multiValueMapFactory">
-			<bean class="com.liferay.portal.util.MultiValueMapFactoryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.util.PortalUtil" class="com.liferay.portal.util.PortalUtil">
 		<property name="portal">
 			<bean class="com.liferay.portal.util.PortalImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.uuid.PortalUUID" class="com.liferay.portal.uuid.PortalUUIDImpl" />
-	<bean id="com.liferay.portal.kernel.uuid.PortalUUIDUtil" class="com.liferay.portal.kernel.uuid.PortalUUIDUtil">
-		<property name="portalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
-	</bean>
-	<bean id="com.liferay.portal.kernel.velocity.VelocityEngine" class="com.liferay.portal.velocity.VelocityEngineImpl" />
-	<bean id="com.liferay.portal.kernel.velocity.VelocityEngineUtil" class="com.liferay.portal.kernel.velocity.VelocityEngineUtil">
-		<property name="velocityEngine" ref="com.liferay.portal.kernel.velocity.VelocityEngine" />
-	</bean>
-	<bean id="com.liferay.portal.kernel.webcache.WebCachePoolUtil" class="com.liferay.portal.kernel.webcache.WebCachePoolUtil">
-		<property name="webCachePool">
-			<bean class="com.liferay.portal.webcache.WebCachePoolImpl">
-				<property name="singleVMPool" ref="com.liferay.portal.kernel.cache.SingleVMPool" />
-			</bean>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.xml.SAXReader" class="com.liferay.portal.xml.SAXReaderImpl" />
-	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
-		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
-	</bean>
-	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil.velocity" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
-		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
-	</bean>
-	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil">
-		<property name="expandoBridgeIndexer">
-			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil">
@@ -309,8 +296,21 @@
 			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil">
+		<property name="expandoBridgeIndexer">
+			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journalcontent.util.JournalContent" class="com.liferay.portlet.journalcontent.util.JournalContentImpl" />
 	<bean id="com.liferay.portlet.journalcontent.util.JournalContentUtil" class="com.liferay.portlet.journalcontent.util.JournalContentUtil">
 		<property name="journalContent" ref="com.liferay.portlet.journalcontent.util.JournalContent" />
 	</bean>
+	<bean id="velocityHookAdvice" class="com.liferay.portal.spring.aop.ServiceVelocityAdvice">
+		<property name="exceptionSafe" value="true" />
+	</bean>
+	<aop:config>
+		<aop:aspect ref="velocityHookAdvice">
+			<aop:around pointcut="bean(*.velocity)" method="invoke" />
+		</aop:aspect>
+	</aop:config>
 </beans>
