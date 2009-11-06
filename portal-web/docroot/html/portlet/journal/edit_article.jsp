@@ -225,6 +225,15 @@ if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
 	}
 }
 
+String textAreaContent = content;
+String textFieldContent = StringPool.BLANK;
+
+if ((article != null) && (structure == null)) {
+	textAreaContent = _getDefaultStructureContent(content, "TextAreaField");
+
+	textFieldContent = _getDefaultStructureContent(content, "TextField");
+}
+
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
@@ -293,7 +302,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	}
 
 	function <portlet:namespace />initEditor() {
-		return "<%= UnicodeFormatter.toString(content) %>";
+		return "<%= UnicodeFormatter.toString(textAreaContent) %>";
 	}
 
 	function <portlet:namespace />removeArticleLocale() {
@@ -552,7 +561,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											</label>
 
 											<div class="journal-article-component-container">
-												<input class="principal-field-element" size="55" type="text" value="" />
+												<input class="principal-field-element" size="55" type="text" value="<%= textFieldContent %>" />
 											</div>
 
 											<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
@@ -915,6 +924,24 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_bottom.jsp");
 		}
 	}
+}
+
+private String _getDefaultStructureContent(String content, String fieldName) throws Exception {
+	List<Element> elements = new ArrayList<Element>();
+
+	Document document = SAXReaderUtil.read(content);
+
+	Iterator<Element> itr = document.getRootElement().elements().iterator();
+
+	while (itr.hasNext()) {
+		Element curElement = itr.next();
+
+		if (fieldName.equals(curElement.attributeValue("name", StringPool.BLANK))) {
+			return curElement.elementTextTrim("dynamic-content");
+		}
+	}
+
+	return StringPool.BLANK;
 }
 
 private Map<String, String> _getMetaData(Element xsdElement, String elName) {
