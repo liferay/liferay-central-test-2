@@ -109,7 +109,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 								resultFields: [
 									{
 										key: 'label',
-										locator: 'name[@language-id="<%= themeDisplay.getLocale() %>"]'
+										locator: 'name'
 									}
 								]
 							};
