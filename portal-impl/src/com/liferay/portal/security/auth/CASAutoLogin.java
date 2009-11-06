@@ -34,11 +34,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.servlet.filters.sso.cas.CASFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-
-import edu.yale.its.tp.cas.client.filter.CASFilter;
 
 import javax.naming.Binding;
 import javax.naming.NamingEnumeration;

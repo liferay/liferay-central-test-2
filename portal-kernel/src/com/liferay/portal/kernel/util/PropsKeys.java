@@ -249,7 +249,7 @@ public interface PropsKeys {
 
 	public static final String CAS_SERVICE_URL = "cas.service.url";
 
-	public static final String CAS_VALIDATE_URL = "cas.validate.url";
+	public static final String CAS_SERVER_URL_PREFIX = "cas.server.url.prefix";
 
 	public static final String CDN_HOST_HTTP = "cdn.host.http";
 

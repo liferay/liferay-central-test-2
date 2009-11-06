@@ -301,8 +301,8 @@ public class PropsValues {
 	public static final String CAS_SERVICE_URL =
 		PropsUtil.get(PropsKeys.CAS_SERVICE_URL);
 
-	public static final String CAS_VALIDATE_URL =
-		PropsUtil.get(PropsKeys.CAS_VALIDATE_URL);
+	public static final String CAS_SERVER_URL_PREFIX =
+		PropsUtil.get(PropsKeys.CAS_SERVER_URL_PREFIX);
 
 	public static final String CDN_HOST_HTTP =
 		PropsUtil.get(PropsKeys.CDN_HOST_HTTP);

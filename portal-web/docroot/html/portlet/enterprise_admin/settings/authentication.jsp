@@ -38,7 +38,7 @@ String casLoginUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_LO
 String casLogoutUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_LOGOUT_URL + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGOUT_URL, PropsValues.CAS_LOGOUT_URL));
 String casServerName = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_SERVER_NAME + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME, PropsValues.CAS_SERVER_NAME));
 String casServiceUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_SERVICE_URL + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL, PropsValues.CAS_SERVICE_URL));
-String casValidateUrl = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_VALIDATE_URL + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_VALIDATE_URL, PropsValues.CAS_VALIDATE_URL));
+String casServerUrlPrefix = ParamUtil.getString(request, "settings(" + PropsKeys.CAS_SERVER_URL_PREFIX + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_URL_PREFIX, PropsValues.CAS_SERVER_URL_PREFIX));
 
 boolean ntlmAuthEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.NTLM_AUTH_ENABLED + ")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED));
 String ntlmDomainController = ParamUtil.getString(request, "settings(" + PropsKeys.NTLM_DOMAIN_CONTROLLER + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER, PropsValues.NTLM_DOMAIN_CONTROLLER));
@@ -104,7 +104,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 
 			<aui:input cssClass="lfr-input-text-container" label="service-url" name='<%= "settings(" + PropsKeys.CAS_SERVICE_URL + ")" %>' type="text" value="<%= casServiceUrl %>" />
 
-			<aui:input cssClass="lfr-input-text-container" label="validate-url" name='<%= "settings(" + PropsKeys.CAS_VALIDATE_URL + ")" %>' type="text" value="<%= casValidateUrl %>" />
+			<aui:input cssClass="lfr-input-text-container" label="server-url-prefix" name='<%= "settings(" + PropsKeys.CAS_SERVER_URL_PREFIX + ")" %>' type="text" value="<%= casServerUrlPrefix %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
 

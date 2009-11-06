@@ -228,7 +228,7 @@
 
 				<unjar src="${project.dir}/lib/development/saxpath.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/axis.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/casclient.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/cas-client-core.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/commons-beanutils.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/commons-digester.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/commons-httpclient.jar" dest="${classpath.jsp}" />
