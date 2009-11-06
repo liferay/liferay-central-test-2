@@ -54,7 +54,7 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.search.lucene.LuceneHelperUtil;
+import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -177,7 +177,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			// Lucene
 
-			LuceneHelperUtil.checkLuceneDir(company.getCompanyId());
+			LuceneUtil.checkLuceneDir(company.getCompanyId());
 
 			// Demo settings
 
@@ -215,7 +215,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			// Lucene
 
-			LuceneHelperUtil.checkLuceneDir(company.getCompanyId());
+			LuceneUtil.checkLuceneDir(company.getCompanyId());
 		}
 
 		long companyId = company.getCompanyId();

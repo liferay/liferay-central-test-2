@@ -84,13 +84,13 @@ import org.apache.lucene.store.jdbc.lock.JdbcLock;
 import org.apache.lucene.store.jdbc.support.JdbcTemplate;
 
 /**
- * <a href="LuceneHelperImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="LuceneImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
  */
-public class LuceneHelperImpl implements LuceneHelper {
+public class LuceneImpl implements Lucene {
 
 	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value) {
@@ -177,7 +177,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			return;
 		}
 
-		Directory luceneDir = getLuceneDir(companyId);
+		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
 
 		try {
 
@@ -343,7 +343,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		_indexWriterFactory.write(companyId, document);
 	}
 
-	private LuceneHelperImpl() {
+	private LuceneImpl() {
 		String analyzerName = PropsUtil.get(PropsKeys.LUCENE_ANALYZER);
 
 		if (Validator.isNotNull(analyzerName)) {
@@ -612,7 +612,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 	private static final String _LUCENE_TABLE_PREFIX = "LUCENE_";
 
-	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(LuceneImpl.class);
 
 	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;

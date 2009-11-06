@@ -67,7 +67,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		org.apache.lucene.search.Sort luceneSort = null;
 
 		try {
-			searcher = LuceneHelperUtil.getSearcher(companyId, true);
+			searcher = LuceneUtil.getSearcher(companyId, true);
 
 			if (sorts != null) {
 				SortField[] sortFields = new SortField[sorts.length];
@@ -178,7 +178,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		String[] queryTerms = new String[0];
 
 		try {
-			queryTerms = LuceneHelperUtil.getQueryTerms(
+			queryTerms = LuceneUtil.getQueryTerms(
 				QueryTranslator.translate(query));
 		}
 		catch (ParseException pe) {
@@ -203,7 +203,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		String s = StringUtil.merge(values);
 
 		try {
-			snippet = LuceneHelperUtil.getSnippet(
+			snippet = LuceneUtil.getSnippet(
 				QueryTranslator.translate(query), field, s);
 		}
 		catch (ParseException pe) {

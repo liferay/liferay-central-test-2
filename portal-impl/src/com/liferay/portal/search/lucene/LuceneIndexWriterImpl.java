@@ -50,7 +50,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		throws SearchException {
 
 		try {
-			LuceneHelperUtil.write(companyId, _getLuceneDocument(doc));
+			LuceneUtil.write(companyId, _getLuceneDocument(doc));
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Wrote document " + doc.get(Field.UID));
@@ -65,8 +65,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		throws SearchException {
 
 		try {
-			LuceneHelperUtil.deleteDocuments(
-				companyId, new Term(Field.UID, uid));
+			LuceneUtil.deleteDocuments(companyId, new Term(Field.UID, uid));
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Deleted document " + uid);
@@ -81,7 +80,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		throws SearchException {
 
 		try {
-			LuceneHelperUtil.deleteDocuments(
+			LuceneUtil.deleteDocuments(
 				companyId, new Term(Field.PORTLET_ID, portletId));
 		}
 		catch (IOException ioe) {

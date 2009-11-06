@@ -39,13 +39,13 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 /**
- * <a href="LuceneHelperUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="LuceneUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
  */
-public class LuceneHelperUtil {
+public class LuceneUtil {
 
 	public static void addDate(Document doc, String field, Date value) {
 		doc.add(LuceneFields.getDate(field, value));
@@ -84,7 +84,7 @@ public class LuceneHelperUtil {
 	public static void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value) {
 
-		getLuceneHelper().addExactTerm(booleanQuery, field, value);
+		_lucene.addExactTerm(booleanQuery, field, value);
 	}
 
 	public static void addRequiredTerm(
@@ -126,7 +126,7 @@ public class LuceneHelperUtil {
 	public static void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like) {
 
-		getLuceneHelper().addRequiredTerm(booleanQuery, field, value, like);
+		_lucene.addRequiredTerm(booleanQuery, field, value, like);
 	}
 
 	public static void addTerm(
@@ -148,49 +148,45 @@ public class LuceneHelperUtil {
 			boolean like)
 		throws ParseException {
 
-		getLuceneHelper().addTerm(booleanQuery, field, value, like);
+		_lucene.addTerm(booleanQuery, field, value, like);
 	}
 
 	public static void checkLuceneDir(long companyId) {
-		getLuceneHelper().checkLuceneDir(companyId);
+		_lucene.checkLuceneDir(companyId);
 	}
 
 	public static void delete(long companyId) {
-		getLuceneHelper().delete(companyId);
+		_lucene.delete(companyId);
 	}
 
 	public static void deleteDocuments(long companyId, Term term)
 		throws IOException {
 
-		getLuceneHelper().deleteDocuments(companyId, term);
+		_lucene.deleteDocuments(companyId, term);
 	}
 
 	public static Analyzer getAnalyzer() {
-		return getLuceneHelper().getAnalyzer();
+		return _lucene.getAnalyzer();
 	}
 
 	public static FSDirectory getDirectory(String path)
 		throws IOException {
 
-		return getLuceneHelper().getDirectory(path);
+		return _lucene.getDirectory(path);
 	}
 
 	public static Directory getLuceneDir(long companyId) {
-		return getLuceneHelper().getLuceneDir(companyId);
-	}
-
-	public static LuceneHelper getLuceneHelper() {
-		return _luceneHelper;
+		return _lucene.getLuceneDir(companyId);
 	}
 
 	public static String[] getQueryTerms(Query query) {
-		return getLuceneHelper().getQueryTerms(query);
+		return _lucene.getQueryTerms(query);
 	}
 
 	public static IndexSearcher getSearcher(long companyId, boolean readOnly)
 		throws IOException {
 
-		return getLuceneHelper().getSearcher(companyId, readOnly);
+		return _lucene.getSearcher(companyId, readOnly);
 	}
 
 	public static String getSnippet(Query query, String field, String s)
@@ -206,7 +202,7 @@ public class LuceneHelperUtil {
 			String postTag)
 		throws IOException {
 
-		return getLuceneHelper().getSnippet(
+		return _lucene.getSnippet(
 			query, field, s, maxNumFragments, fragmentLength, fragmentSuffix,
 			preTag, postTag);
 	}
@@ -214,13 +210,13 @@ public class LuceneHelperUtil {
 	public static void write(long companyId, Document document)
 		throws IOException {
 
-		getLuceneHelper().write(companyId, document);
+		_lucene.write(companyId, document);
 	}
 
-	public void setLuceneHelper(LuceneHelper luceneHelper) {
-		_luceneHelper = luceneHelper;
+	public void setLucene(Lucene lucene) {
+		_lucene = lucene;
 	}
 
-	private static LuceneHelper _luceneHelper;
+	private static Lucene _lucene;
 
 }

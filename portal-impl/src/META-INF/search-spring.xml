@@ -36,9 +36,9 @@
 		<property name="writer" ref="indexWriter.lucene" />
 	</bean>
 	<bean id="indexWriterFactory" class="com.liferay.portal.search.lucene.IndexWriterFactoryImpl" />
-	<bean id="com.liferay.portal.search.lucene.LuceneHelperUtil" class="com.liferay.portal.search.lucene.LuceneHelperUtil">
-		<property name="luceneHelper">
-			<bean class="com.liferay.portal.search.lucene.LuceneHelperImpl">
+	<bean id="com.liferay.portal.search.lucene.LuceneUtil" class="com.liferay.portal.search.lucene.LuceneUtil">
+		<property name="lucene">
+			<bean class="com.liferay.portal.search.lucene.LuceneImpl">
 				<property name="indexWriterFactory" ref="indexWriterFactory" />
 			</bean>
 		</property>

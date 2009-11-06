@@ -68,7 +68,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		/*for (int i = 0; i < companyIds.length; i++) {
 			long companyId = companyIds[i];
 
-			LuceneHelperUtil.checkLuceneDir(companyId);
+			LuceneUtil.checkLuceneDir(companyId);
 
 			DLLocalServiceUtil.checkRoot(companyId);
 		}*/
