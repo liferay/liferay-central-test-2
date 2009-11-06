@@ -32,7 +32,7 @@ import java.util.Map;
  */
 public enum ReportDataSourceType {
 
-	JASPER_CSV("jasper_csv"), JASPER_EMPTY("jasper_empty"), 
+	JASPER_CSV("jasper_csv"), JASPER_EMPTY("jasper_empty"),
 	JASPER_XLS("jasper_xls"), JASPER_XML("jasper_xml"), JDBC("jdbc"),
 	PORTAL("portal");
 
