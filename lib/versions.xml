@@ -1030,7 +1030,7 @@
 		<file-name>portal/cas-client-core.jar</file-name>
 		<version>3.1.9</version>
 		<project-name>CAS Java Client</project-name>
-		<project-url>http://www.ja-sig.org/downloads/cas-clients/</project-url>
+		<project-url>http://www.ja-sig.org/downloads/cas-clients</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>

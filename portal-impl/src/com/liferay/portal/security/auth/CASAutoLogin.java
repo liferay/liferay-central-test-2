@@ -77,7 +77,7 @@ public class CASAutoLogin implements AutoLogin {
 			HttpSession session = request.getSession();
 
 			String screenName = (String)session.getAttribute(
-				CASFilter.CAS_FILTER_USER);
+				CASFilter.SCREEN_NAME);
 
 			if (Validator.isNull(screenName)) {
 				return credentials;
