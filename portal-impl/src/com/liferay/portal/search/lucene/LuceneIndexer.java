@@ -104,6 +104,8 @@ public class LuceneIndexer implements Runnable {
 			stopWatch1.start();
 		}
 
+		String[] indexIds = new String[] {String.valueOf(_companyId)};
+
 		try {
 			LuceneUtil.delete(_companyId);
 			LuceneUtil.checkLuceneDir(_companyId);
@@ -138,7 +140,7 @@ public class LuceneIndexer implements Runnable {
 					_log.info("Reindexing with " + indexerClass + " started");
 				}
 
-				indexer.reIndex(new String[] {String.valueOf(_companyId)});
+				indexer.reIndex(indexIds);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(

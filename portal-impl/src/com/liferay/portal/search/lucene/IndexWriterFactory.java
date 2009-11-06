@@ -22,21 +22,129 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
+
 import java.io.IOException;
 
 import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.store.Directory;
 
 /**
  * <a href="IndexWriterFactory.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Harry Mark
+ * @author Brian Wing Shun Chan
  * @author Bruno Farache
  */
-public interface IndexWriterFactory {
+public class IndexWriterFactory {
+
+	public void checkLuceneDir(long companyId) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
+
+		try {
+
+			// LEP-6078
+
+			if (luceneDir.fileExists("write.lock")) {
+				luceneDir.deleteFile("write.lock");
+			}
+		}
+		catch (IOException ioe) {
+			_log.error("Unable to clear write lock", ioe);
+		}
+
+		// Lucene does not properly release its lock on the index when
+		// IndexWriter throws an exception
+
+		try {
+			write(companyId, null);
+		}
+		catch (IOException ioe) {
+			_log.error("Check Lucene directory failed for " + companyId, ioe);
+		}
+	}
 
 	public void deleteDocuments(long companyId, Term term)
-		throws IOException;
+		throws InterruptedException, IOException {
 
-	public void write(long companyId, Document document) throws IOException;
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		synchronized(this) {
+			IndexReader reader = null;
+
+			try {
+				reader =
+					IndexReader.open(LuceneUtil.getLuceneDir(companyId), false);
+
+				reader.deleteDocuments(term);
+			}
+			finally {
+				if (reader != null) {
+					reader.close();
+				}
+			}
+		}
+	}
+
+	public void write(long companyId, Document doc) throws IOException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		synchronized(this) {
+			IndexWriter writer = null;
+
+			try {
+				writer = new IndexWriter(
+					LuceneUtil.getLuceneDir(companyId),
+					LuceneUtil.getAnalyzer(),
+					IndexWriter.MaxFieldLength.LIMITED);
+
+				if (doc != null) {
+					writer.setMergeFactor(_MERGE_FACTOR);
+					writer.addDocument(doc);
+
+					_optimizeCount++;
+
+					if ((_OPTIMIZE_INTERVAL == 0) ||
+						(_optimizeCount >= _OPTIMIZE_INTERVAL)) {
+
+						writer.optimize();
+
+						_optimizeCount = 0;
+					}
+				}
+			}
+			finally {
+				if (writer != null) {
+					writer.close();
+				}
+			}
+		}
+	}
+
+	private static final int _MERGE_FACTOR = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.LUCENE_MERGE_FACTOR));
+
+	private static final int _OPTIMIZE_INTERVAL = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.LUCENE_OPTIMIZE_INTERVAL));
+
+	private static Log _log = LogFactoryUtil.getLog(IndexWriterFactory.class);
+
+	private int _optimizeCount = 0;
 
 }
