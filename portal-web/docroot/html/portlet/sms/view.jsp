@@ -69,7 +69,7 @@
 		<tr>
 			<td></td>
 			<td>
-				<input disabled maxlength="3" name="<portlet:namespace />length" size="3" type="text" value="<%= subject.length() + message.length() %>" />
+				<input disabled="disabled" maxlength="3" name="<portlet:namespace />length" size="3" type="text" value="<%= subject.length() + message.length() %>" />
 
 				<span style="font-size: xx-small;">(500 <liferay-ui:message key="characters-maximum" />)</span>
 			</td>

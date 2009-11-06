@@ -33,7 +33,7 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 boolean value = ParamUtil.getBoolean(request, param, defaultValue.booleanValue());
 %>
 
-<select <%= disabled ? "disabled" : "" %> name="<%= namespace %><%= param %>">
+<select <%= disabled ? "disabled=\"disabled\"" : "" %> name="<%= namespace %><%= param %>">
 	<option <%= (value) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
 	<option <%= (!value) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 </select>

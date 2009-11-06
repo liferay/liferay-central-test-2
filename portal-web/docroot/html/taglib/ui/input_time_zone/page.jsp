@@ -38,7 +38,7 @@ NumberFormat numberFormat = NumberFormat.getInstance(locale);
 numberFormat.setMinimumIntegerDigits(2);
 %>
 
-<select <%= disabled ? "disabled" : "" %> name="<%= name %>">
+<select <%= disabled ? "disabled=\"disabled\"" : "" %> name="<%= name %>">
 	<c:if test="<%= nullable %>">
 		<option value=""></option>
 	</c:if>

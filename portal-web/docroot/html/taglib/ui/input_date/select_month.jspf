@@ -22,7 +22,7 @@
  */
 %>
 
-<select class="aui-helper-hidden" <%= disabled ? "disabled" : "" %> id="<%= monthParam %>" name="<%= monthParam %>">
+<select class="aui-helper-hidden" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= monthParam %>" name="<%= monthParam %>">
 	<c:if test="<%= monthNullable %>">
 		<option value=""></option>
 	</c:if>

@@ -112,4 +112,4 @@ if (dateFormatPattern.indexOf("y") == 0) {
 	</c:when>
 </c:choose>
 
-<input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
+<input class="<%= disabled ? "disabled=\"disabled\"" : "" %>" id="<%= imageInputId %>Input" type="hidden" />

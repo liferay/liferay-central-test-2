@@ -174,7 +174,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 					<br />
 
-					<input disabled id="<%= namespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
+					<input disabled="disabled" id="<%= namespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
 
 					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
 				</td>
@@ -395,7 +395,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 								<br />
 
-								<input disabled id="<%= namespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
+								<input disabled="disabled" id="<%= namespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
 
 								<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
 							</td>

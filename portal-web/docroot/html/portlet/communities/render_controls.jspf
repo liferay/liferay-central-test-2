@@ -50,10 +50,10 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 			sb.append(control.getDefaultState() ? "checked=\"checked\" " : "");
 
 			if (controls[i].isDisabled()) {
-				sb.append(" class=\"disabled\" disabled ");
+				sb.append(" class=\"disabled\" disabled=\"disabled\" ");
 			}
 			else if (portletDisabled) {
-				sb.append(" disabled ");
+				sb.append("  disabled=\"disabled\" ");
 			}
 
 			sb.append("name=\"");

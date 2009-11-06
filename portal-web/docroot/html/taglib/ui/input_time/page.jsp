@@ -50,7 +50,7 @@ if (timeFormatPattern.indexOf("a") == -1) {
 %>
 
 <div class="lfr-input-time">
-	<select <%= disabled ? "disabled" : "" %> name="<%= hourParam %>">
+	<select <%= disabled ? "disabled=\"disabled\"" : "" %> name="<%= hourParam %>">
 		<c:if test="<%= hourNullable %>">
 			<option value=""></option>
 		</c:if>
@@ -72,7 +72,7 @@ if (timeFormatPattern.indexOf("a") == -1) {
 
 	</select>
 
-	<select <%= disabled ? "disabled" : "" %> name="<%= minuteParam %>">
+	<select <%= disabled ? "disabled=\"disabled\"" : "" %> name="<%= minuteParam %>">
 		<c:if test="<%= minuteNullable %>">
 			<option value=""></option>
 		</c:if>
@@ -97,7 +97,7 @@ if (timeFormatPattern.indexOf("a") == -1) {
 			<input type="hidden" name="<%= amPmParam %>" value="<%= Calendar.AM %>" />
 		</c:when>
 		<c:otherwise>
-			<select <%= disabled ? "disabled" : "" %> name="<%= amPmParam %>">
+			<select <%= disabled ? "disabled=\"disabled\"" : "" %> name="<%= amPmParam %>">
 				<c:if test="<%= amPmNullable %>">
 					<option value=""></option>
 				</c:if>

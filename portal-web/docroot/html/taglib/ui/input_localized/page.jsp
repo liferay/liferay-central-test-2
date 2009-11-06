@@ -44,10 +44,10 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 <div class="taglib-input-localized">
 	<c:choose>
 		<c:when test='<%= type.equals("input") %>'>
-			<input class="language-value <%= cssClass %>" <%= disabled ? "disabled" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" type="text" value="<%= HtmlUtil.escape(defaultLanguageValue) %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+			<input class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" type="text" value="<%= HtmlUtil.escape(defaultLanguageValue) %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 		</c:when>
 		<c:when test='<%= type.equals("textarea") %>'>
-			<textarea class="language-value <%= cssClass %>" <%= disabled ? "disabled" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= HtmlUtil.escape(defaultLanguageValue) %></textarea>
+			<textarea class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + defaultLanguageId %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= HtmlUtil.escape(defaultLanguageValue) %></textarea>
 		</c:when>
 	</c:choose>
 
@@ -100,7 +100,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 							<div class="aui-ctrl-holder aui-form-column">
 								<img alt="<%=  Validator.isNotNull(curLanguageId) ? LocaleUtil.fromLanguageId(curLanguageId).getDisplayName() : StringPool.BLANK %>" class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(curLanguageId) ? curLanguageId : "../spacer" %>.png" />
 
-								<select <%= disabled ? "disabled" : "" %> id="<portlet:namespace />languageId<%= i %>">
+								<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace />languageId<%= i %>">
 									<option value="" />
 
 									<%
@@ -140,10 +140,10 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 
 								<c:choose>
 									<c:when test='<%= type.equals("input") %>'>
-										<input class="language-value" <%= disabled ? "disabled" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
+										<input class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
 									</c:when>
 									<c:when test='<%= type.equals("textarea") %>'>
-										<textarea class="language-value" <%= disabled ? "disabled" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
+										<textarea class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
 									</c:when>
 								</c:choose>
 							</div>
