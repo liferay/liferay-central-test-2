@@ -209,6 +209,14 @@ if (Validator.isNotNull(content)) {
 	}
 }
 
+String textAreaContent = content;
+String textFieldContent = StringPool.BLANK;
+
+if ((article != null) && (structure == null)) {
+	textAreaContent = _getDefaultStructureContent(content, "TextAreaField");
+	textFieldContent = _getDefaultStructureContent(content, "TextField");
+}
+
 boolean disableIncrementVersion = false;
 
 if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
@@ -223,15 +231,6 @@ if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
 		incrementVersion = true;
 		disableIncrementVersion = true;
 	}
-}
-
-String textAreaContent = content;
-String textFieldContent = StringPool.BLANK;
-
-if ((article != null) && (structure == null)) {
-	textAreaContent = _getDefaultStructureContent(content, "TextAreaField");
-
-	textFieldContent = _getDefaultStructureContent(content, "TextField");
 }
 
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
@@ -934,10 +933,10 @@ private String _getDefaultStructureContent(String content, String fieldName) thr
 	Iterator<Element> itr = document.getRootElement().elements().iterator();
 
 	while (itr.hasNext()) {
-		Element curElement = itr.next();
+		Element element = itr.next();
 
-		if (fieldName.equals(curElement.attributeValue("name", StringPool.BLANK))) {
-			return curElement.elementTextTrim("dynamic-content");
+		if (fieldName.equals(element.attributeValue("name", StringPool.BLANK))) {
+			return element.elementTextTrim("dynamic-content");
 		}
 	}
 
