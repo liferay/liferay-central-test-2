@@ -50,12 +50,28 @@ public class ByteArrayDataSourceReportRequest
 		return _dataSourceBytes;
 	}
 
+	public String getDataSourceCharset(){
+		return _dataSourceCharset;
+	}
+
+	public String getDataSourceColumnNames(){
+		return _dataSourceColumnNames;
+	}
+
 	public ReportDataSourceType getReportDataSourceType() {
 		return _reportDataSourceType;
 	}
 
 	public void setDataSourceBytes(byte[] dataSourceBytes) {
 		_dataSourceBytes = dataSourceBytes;
+	}
+
+	public void setDataSourceCharset(String dataSourceCharset) {
+		_dataSourceCharset = dataSourceCharset;
+	}
+
+	public void setDataSourceColumnNames(String dataSourceColumnNames) {
+		_dataSourceColumnNames = dataSourceColumnNames;
 	}
 
 	public void setReportDataSourceType(
@@ -65,6 +81,8 @@ public class ByteArrayDataSourceReportRequest
 	}
 
 	private byte[] _dataSourceBytes;
+	private String _dataSourceCharset;
+	private String _dataSourceColumnNames;
 	private ReportDataSourceType _reportDataSourceType;
 
 }
