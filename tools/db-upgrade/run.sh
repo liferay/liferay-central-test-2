@@ -11,4 +11,4 @@ do
 	export LIFERAY_CLASSPATH=$LIFERAY_CLASSPATH:$fileName
 done
 
-$JAVA_HOME/bin/java -Xmx1024m -Dexternal-properties=com/liferay/portal/tools/dependencies/portal-upgrade.properties -Dfile.encoding=UTF8 -Duser.country=US -Duser.language=en -Duser.timezone=GMT -cp $LIFERAY_CLASSPATH com.liferay.portal.tools.DBUpgrader
+$JAVA_HOME/bin/java -Xmx1024m -Dfile.encoding=UTF8 -Duser.country=US -Duser.language=en -Duser.timezone=GMT -cp $LIFERAY_CLASSPATH com.liferay.portal.tools.DBUpgrader
