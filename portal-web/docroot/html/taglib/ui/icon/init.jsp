@@ -48,7 +48,7 @@ boolean iconMenuShowWhenSingleIcon = GetterUtil.getBoolean((String)request.getAt
 String image = (String)request.getAttribute("liferay-ui:icon:image");
 String imageHover = (String)request.getAttribute("liferay-ui:icon:imageHover");
 
-boolean auiImage = (image != null) && image.startsWith("../aui/");
+boolean auiImage = (image != null) && image.startsWith(_AUI_PATH);
 
 String message = (String)request.getAttribute("liferay-ui:icon:message");
 
@@ -105,4 +105,8 @@ if (!label) {
 		details += " title=\"" + LanguageUtil.get(pageContext, message) + "\"";
 	}
 }
+%>
+
+<%!
+private static String _AUI_PATH = "../aui/";
 %>

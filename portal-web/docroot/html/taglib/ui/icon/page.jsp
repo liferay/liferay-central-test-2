@@ -120,7 +120,7 @@ String imgClass = "icon";
 
 if (auiImage) {
 	details += " style=\"background-image: url('" + themeDisplay.getPathThemeImages() + "/aui/icon_sprite.png'); height: 16px; width: 16px;\"";
-	imgClass += " aui-icon-" + image.substring(7);
+	imgClass += " aui-icon-" + image.substring(_AUI_PATH.length());
 }
 
 boolean urlIsNotNull = Validator.isNotNull(url);
