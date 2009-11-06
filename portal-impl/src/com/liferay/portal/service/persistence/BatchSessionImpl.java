@@ -76,7 +76,9 @@ public class BatchSessionImpl implements BatchSession {
 			return;
 		}
 
-		if ((_counter.get() % PropsValues.HIBERNATE_JDBC_BATCH_SIZE) == 0) {
+		if ((PropsValues.HIBERNATE_JDBC_BATCH_SIZE == 0) || 
+			((_counter.get() % PropsValues.HIBERNATE_JDBC_BATCH_SIZE) == 0)) {
+
 			session.flush();
 			session.clear();
 		}
