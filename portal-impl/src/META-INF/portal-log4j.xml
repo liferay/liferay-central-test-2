@@ -208,6 +208,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.upgrade">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.util.JavaProps">
 		<priority value="ERROR" />
 	</category>
