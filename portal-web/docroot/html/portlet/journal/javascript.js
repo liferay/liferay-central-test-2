@@ -2730,6 +2730,39 @@ AUI().add(
 			StructureField,
 			A.Base,
 			{
+				cloneableAttrs: [
+					'displayAsTooltip',
+					'fieldLabel',
+					'fieldType',
+					'innerHTML',
+					'instructions',
+					'localized',
+					'localizedValue',
+					'predefinedValue',
+					'repeatable',
+					'required',
+					'variableName'
+				],
+
+				initializer: function() {
+					var instance = this;
+
+					A.each(
+						instance.cloneableAttrs,
+						function(item, index, collection) {
+							var attrEventName = item + 'Change';
+
+							instance.after(
+								attrEventName,
+								A.bind(
+									instance.propagateAttr,
+									instance
+								)
+							);
+						}
+					);
+				},
+
 				clone: function() {
 					var instance = this;
 
@@ -2737,19 +2770,7 @@ AUI().add(
 					var portletNamespace = instance.portletNamespace;
 
 					A.each(
-						[
-							'displayAsTooltip',
-							'fieldLabel',
-							'fieldType',
-							'innerHTML',
-							'instructions',
-							'localized',
-							'localizedValue',
-							'predefinedValue',
-							'repeatable',
-							'required',
-							'variableName'
-						],
+						instance.cloneableAttrs,
 						function(item, index, collection) {
 							options[item] = instance.get(item);
 						}
@@ -2918,6 +2939,28 @@ AUI().add(
 					}
 
 					return input ? input.val() : 'false';
+				},
+
+				getRepeatedSiblings: function() {
+					var instance = this;
+
+					return Journal.prototype.getRepeatedSiblings.apply(instance, [instance]);
+				},
+
+				propagateAttr: function(event) {
+					var instance = this;
+					var siblings = instance.getRepeatedSiblings();
+
+					if (siblings) {
+						siblings.each(function(node, i) {
+							var id = node.get('id');
+							var fieldInstance = fieldsDataSet.item(id);
+
+							if (fieldInstance) {
+								fieldInstance.set(event.attrName, event.newVal);
+							}
+						});
+					}
 				},
 
 				setFieldLabel: function(value) {
