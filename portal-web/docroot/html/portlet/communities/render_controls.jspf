@@ -53,7 +53,7 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 				sb.append(" class=\"disabled\" disabled=\"disabled\" ");
 			}
 			else if (portletDisabled) {
-				sb.append("  disabled=\"disabled\" ");
+				sb.append(" disabled=\"disabled\" ");
 			}
 
 			sb.append("name=\"");
