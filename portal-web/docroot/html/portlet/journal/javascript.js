@@ -2747,18 +2747,12 @@ AUI().add(
 				initializer: function() {
 					var instance = this;
 
+					var propagateAttr = instance.propagateAttr;
+
 					A.each(
 						instance.cloneableAttrs,
 						function(item, index, collection) {
-							var attrEventName = item + 'Change';
-
-							instance.after(
-								attrEventName,
-								A.bind(
-									instance.propagateAttr,
-									instance
-								)
-							);
+							instance.after(item + 'Change', propagateAttr);
 						}
 					);
 				},
@@ -2949,17 +2943,20 @@ AUI().add(
 
 				propagateAttr: function(event) {
 					var instance = this;
+
 					var siblings = instance.getRepeatedSiblings();
 
 					if (siblings) {
-						siblings.each(function(node, i) {
-							var id = node.get('id');
-							var fieldInstance = fieldsDataSet.item(id);
+						siblings.each(
+							function(item, index, collection) {
+								var id = item.get('id');
+								var fieldInstance = fieldsDataSet.item(id);
 
-							if (fieldInstance) {
-								fieldInstance.set(event.attrName, event.newVal);
+								if (fieldInstance) {
+									fieldInstance.set(event.attrName, event.newVal);
+								}
 							}
-						});
+						);
 					}
 				},
 
