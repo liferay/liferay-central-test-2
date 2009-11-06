@@ -38,7 +38,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.lucene.KeywordsUtil;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -59,6 +58,8 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
@@ -89,9 +90,17 @@ import org.apache.lucene.store.jdbc.support.JdbcTemplate;
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
- * @author Bruno Farache
  */
 public class LuceneUtil {
+
+	public static void acquireLock(long companyId) {
+		try {
+			_instance._sharedWriter.acquireLock(companyId, true);
+		}
+		catch (InterruptedException ie) {
+			_log.error(ie);
+		}
+	}
 
 	public static void addDate(Document doc, String field, Date value) {
 		doc.add(LuceneFields.getDate(field, value));
@@ -320,7 +329,54 @@ public class LuceneUtil {
 	}
 
 	public static void checkLuceneDir(long companyId) {
-		_instance._sharedWriter.checkLuceneDir(companyId);
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
+
+		try {
+
+			// LEP-6078
+
+			if (luceneDir.fileExists("write.lock")) {
+				luceneDir.deleteFile("write.lock");
+			}
+		}
+		catch (IOException ioe) {
+			_log.error("Unable to clear write lock", ioe);
+		}
+
+		IndexWriter writer = null;
+
+		// Lucene does not properly release its lock on the index when
+		// IndexWriter throws an exception
+
+		try {
+			if (luceneDir.fileExists("segments.gen")) {
+				writer = new IndexWriter(
+					luceneDir, LuceneUtil.getAnalyzer(), false,
+					IndexWriter.MaxFieldLength.LIMITED);
+			}
+			else {
+				writer = new IndexWriter(
+					luceneDir, LuceneUtil.getAnalyzer(), true,
+					IndexWriter.MaxFieldLength.LIMITED);
+			}
+		}
+		catch (IOException ioe) {
+			_log.error("Check Lucene directory failed for " + companyId, ioe);
+		}
+		finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				}
+				catch (IOException ioe) {
+					_log.error(ioe);
+				}
+			}
+		}
 	}
 
 	public static void delete(long companyId) {
@@ -342,14 +398,20 @@ public class LuceneUtil {
 		return _instance._getAnalyzer();
 	}
 
-	public static FSDirectory getDirectory(String path)
+	public static FSDirectory getDirectory(String path, boolean create)
 		throws IOException {
 
-		return FSDirectory.open(new File(path));
+		return FSDirectory.getDirectory(path, false);
 	}
 
 	public static Directory getLuceneDir(long companyId) {
 		return _instance._getLuceneDir(companyId);
+	}
+
+	public static IndexReader getReader(long companyId, boolean readOnly)
+		throws IOException {
+
+		return IndexReader.open(getLuceneDir(companyId), readOnly);
 	}
 
 	public static IndexSearcher getSearcher(long companyId, boolean readOnly)
@@ -427,8 +489,26 @@ public class LuceneUtil {
 		}
 	}
 
-	public static void write(long companyId, Document doc) throws IOException {
-		_instance._sharedWriter.write(companyId, doc);
+	public static IndexWriter getWriter(long companyId) throws IOException {
+		return getWriter(companyId, false);
+	}
+
+	public static IndexWriter getWriter(long companyId, boolean create)
+		throws IOException {
+
+		return _instance._sharedWriter.getWriter(companyId, create);
+	}
+
+	public static void releaseLock(long companyId) {
+		_instance._sharedWriter.releaseLock(companyId);
+	}
+
+	public static void write(long companyId) {
+		_instance._sharedWriter.write(companyId);
+	}
+
+	public static void write(IndexWriter writer) throws IOException {
+		_instance._sharedWriter.write(writer);
 	}
 
 	private LuceneUtil() {
@@ -520,7 +600,7 @@ public class LuceneUtil {
 		String path = _getPath(companyId);
 
 		try {
-			Directory directory = getDirectory(path);
+			Directory directory = getDirectory(path, false);
 
 			directory.close();
 		}
@@ -609,15 +689,18 @@ public class LuceneUtil {
 		String path = _getPath(companyId);
 
 		try {
-			directory = getDirectory(path);
+			directory = getDirectory(path, false);
 		}
 		catch (IOException ioe1) {
-			if (directory != null) {
-				try {
+			try {
+				if (directory != null) {
 					directory.close();
 				}
-				catch (Exception e) {
-				}
+
+				directory = getDirectory(path, true);
+			}
+			catch (IOException ioe2) {
+				throw new RuntimeException(ioe2);
 			}
 		}
 
