@@ -58,8 +58,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
@@ -231,25 +229,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public void deleteDocuments(long companyId, Term term) throws IOException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		synchronized(this) {
-			IndexReader indexReader = null;
-
-			try {
-				indexReader = IndexReader.open(
-					LuceneHelperUtil.getLuceneDir(companyId), false);
-
-				indexReader.deleteDocuments(term);
-			}
-			finally {
-				if (indexReader != null) {
-					indexReader.close();
-				}
-			}
-		}
+		_indexWriterFactory.deleteDocuments(companyId, term);
 	}
 
 	public Analyzer getAnalyzer() {
@@ -355,42 +335,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	public void setIndexWriterFactory(IndexWriterFactory indexWriterFactory) {
+		_indexWriterFactory = indexWriterFactory;
+	}
+
 	public void write(long companyId, Document document) throws IOException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		synchronized(this) {
-			IndexWriter indexWriter = null;
-
-			try {
-				indexWriter = new IndexWriter(
-					LuceneHelperUtil.getLuceneDir(companyId),
-					LuceneHelperUtil.getAnalyzer(),
-					IndexWriter.MaxFieldLength.LIMITED);
-
-				if (document != null) {
-					indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
-					indexWriter.addDocument(document);
-
-					_optimizeCount++;
-
-					if ((PropsValues.LUCENE_OPTIMIZE_INTERVAL == 0) ||
-						(_optimizeCount >=
-							PropsValues.LUCENE_OPTIMIZE_INTERVAL)) {
-
-						indexWriter.optimize();
-
-						_optimizeCount = 0;
-					}
-				}
-			}
-			finally {
-				if (indexWriter != null) {
-					indexWriter.close();
-				}
-			}
-		}
+		_indexWriterFactory.write(companyId, document);
 	}
 
 	private LuceneHelperImpl() {
@@ -666,9 +616,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
+	private IndexWriterFactory _indexWriterFactory;
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();
-	private int _optimizeCount;
 	private Map<String, Directory> _ramDirectories =
 		new ConcurrentHashMap<String, Directory>();
 
