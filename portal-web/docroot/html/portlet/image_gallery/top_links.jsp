@@ -79,10 +79,10 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 			</aui:form>
 		</div>
 
-		<script type="text/javascript">
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
-			</c:if>
-		</script>
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<script type="text/javascript">
+					Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
+			</script>
+		</c:if>
 	</div>
 </div>

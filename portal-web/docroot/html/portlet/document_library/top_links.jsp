@@ -83,11 +83,11 @@
 						</aui:form>
 					</div>
 
-					<script type="text/javascript">
-						<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+					<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+						<script type="text/javascript">
 							Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
-						</c:if>
-					</script>
+						</script>
+					</c:if>
 				</c:if>
 			</div>
 		</div>
