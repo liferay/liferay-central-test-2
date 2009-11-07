@@ -116,10 +116,6 @@ public class ServiceContext implements Serializable {
 		return _scopeGroupId;
 	}
 
-	public boolean getStartWorkflow() {
-		return _startWorkflow;
-	}
-
 	public int getStatus() {
 		return _status;
 	}
@@ -130,6 +126,10 @@ public class ServiceContext implements Serializable {
 
 	public long getUserId() {
 		return _userId;
+	}
+
+	public boolean isStartWorkflow() {
+		return _startWorkflow;
 	}
 
 	public void setAddCommunityPermissions(boolean addCommunityPermissions) {

@@ -31,10 +31,9 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.base.WorkflowInstanceLinkLocalServiceBaseImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <a href="WorkflowInstanceLinkLocalServiceImpl.java.html"><b><i>View Source
@@ -51,10 +50,10 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			long classPK, long workflowInstanceId)
 		throws PortalException, SystemException {
 
-		long workflowInstanceLinkId = counterLocalService.increment();
-
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
+
+		long workflowInstanceLinkId = counterLocalService.increment();
 
 		WorkflowInstanceLink workflowInstanceLink =
 			workflowInstanceLinkPersistence.create(workflowInstanceLinkId);
@@ -79,7 +78,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			long classNameId = classNameLocalService.getClassNameId(className);
+			long classNameId = PortalUtil.getClassNameId(className);
 
 			WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
 				companyId, groupId, classNameId, classPK);
@@ -104,7 +103,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			long classNameId = classNameLocalService.getClassNameId(className);
+			long classNameId = PortalUtil.getClassNameId(className);
 
 			WorkflowDefinitionLink workflowDefinitionLink =
 				workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
@@ -115,13 +114,10 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			int workflowDefinitionVersion =
 				workflowDefinitionLink.getWorkflowDefinitionVersion();
 
-			String transitionName = null;
-			Map<String, Object> context = new HashMap<String, Object>();
-
 			WorkflowInstance workflowInstance =
 				WorkflowInstanceManagerUtil.startWorkflowInstance(
 					userId, workflowDefinitionName, workflowDefinitionVersion,
-					transitionName, context);
+					null, null);
 
 			addWorkflowInstanceLink(
 				userId, companyId, groupId, classNameId, classPK,

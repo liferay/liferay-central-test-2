@@ -47,10 +47,10 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			String workflowDefinitionName, int workflowDefinitionVersion)
 		throws PortalException, SystemException {
 
-		long workflowDefinitionLinkId = counterLocalService.increment();
-
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
+
+		long workflowDefinitionLinkId = counterLocalService.increment();
 
 		WorkflowDefinitionLink workflowDefinitionLink =
 			workflowDefinitionLinkPersistence.create(workflowDefinitionLinkId);
