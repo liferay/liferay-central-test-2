@@ -944,6 +944,12 @@ public class PropsValues {
 	public static final String LUCENE_FILE_EXTRACTOR_REGEXP_STRIP =
 		PropsUtil.get(PropsKeys.LUCENE_FILE_EXTRACTOR_REGEXP_STRIP);
 
+	public static final int LUCENE_MERGE_FACTOR = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.LUCENE_MERGE_FACTOR));
+
+	public static final int LUCENE_OPTIMIZE_INTERVAL = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.LUCENE_OPTIMIZE_INTERVAL));
+
 	public static final boolean LUCENE_STORE_JDBC_AUTO_CLEAN_UP =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP));

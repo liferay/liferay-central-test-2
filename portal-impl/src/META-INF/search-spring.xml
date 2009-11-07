@@ -35,6 +35,11 @@
 		<property name="searcher" ref="indexSearcher.lucene" />
 		<property name="writer" ref="indexWriter.lucene" />
 	</bean>
+	<bean id="com.liferay.portal.search.lucene.LuceneHelperUtil" class="com.liferay.portal.search.lucene.LuceneHelperUtil">
+		<property name="luceneHelper">
+			<bean class="com.liferay.portal.search.lucene.LuceneHelperImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil" class="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil">
 		<property name="booleanClauseFactory">
 			<bean class="com.liferay.portal.search.generic.BooleanClauseFactoryImpl" />

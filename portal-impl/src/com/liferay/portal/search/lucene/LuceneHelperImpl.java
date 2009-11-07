@@ -38,6 +38,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.lucene.KeywordsUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -46,7 +47,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -58,8 +58,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
@@ -86,87 +84,15 @@ import org.apache.lucene.store.jdbc.lock.JdbcLock;
 import org.apache.lucene.store.jdbc.support.JdbcTemplate;
 
 /**
- * <a href="LuceneUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="LuceneHelperImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
+ * @author Bruno Farache
  */
-public class LuceneUtil {
+public class LuceneHelperImpl implements LuceneHelper {
 
-	public static void acquireLock(long companyId) {
-		try {
-			_instance._sharedWriter.acquireLock(companyId, true);
-		}
-		catch (InterruptedException ie) {
-			_log.error(ie);
-		}
-	}
-
-	public static void addDate(Document doc, String field, Date value) {
-		doc.add(LuceneFields.getDate(field, value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, boolean value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, Boolean value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, double value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, Double value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, int value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, Integer value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, long value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, Long value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, short value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, Short value) {
-
-		addExactTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addExactTerm(
+	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value) {
 
 		//text = KeywordsUtil.escape(value);
@@ -176,73 +102,7 @@ public class LuceneUtil {
 		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 	}
 
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, boolean value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, Boolean value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, double value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, Double value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, int value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, Integer value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, long value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, Long value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, short value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, Short value) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, String value) {
-
-		addRequiredTerm(booleanQuery, field, value, false);
-	}
-
-	public static void addRequiredTerm(
+	public void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like) {
 
 		if (like) {
@@ -266,23 +126,8 @@ public class LuceneUtil {
 		}
 	}
 
-	public static void addTerm(
-			BooleanQuery booleanQuery, String field, long value)
-		throws ParseException {
-
-		addTerm(booleanQuery, field, String.valueOf(value));
-	}
-
-	public static void addTerm(
-			BooleanQuery booleanQuery, String field, String value)
-		throws ParseException {
-
-		addTerm(booleanQuery, field, value, false);
-	}
-
-	public static void addTerm(
-			BooleanQuery booleanQuery, String field, String value,
-			boolean like)
+	public void addTerm(
+			BooleanQuery booleanQuery, String field, String value, boolean like)
 		throws ParseException {
 
 		if (Validator.isNull(value)) {
@@ -304,8 +149,7 @@ public class LuceneUtil {
 			booleanQuery.add(wildcardQuery, BooleanClause.Occur.SHOULD);
 		}
 		else {
-			QueryParser queryParser = new QueryParser(
-				field, LuceneUtil.getAnalyzer());
+			QueryParser queryParser = new QueryParser(field, getAnalyzer());
 
 			try {
 				Query query = queryParser.parse(value);
@@ -328,12 +172,12 @@ public class LuceneUtil {
 		}
 	}
 
-	public static void checkLuceneDir(long companyId) {
+	public void checkLuceneDir(long companyId) {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
-		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
+		Directory luceneDir = getLuceneDir(companyId);
 
 		try {
 
@@ -347,80 +191,83 @@ public class LuceneUtil {
 			_log.error("Unable to clear write lock", ioe);
 		}
 
-		IndexWriter writer = null;
-
 		// Lucene does not properly release its lock on the index when
 		// IndexWriter throws an exception
 
 		try {
-			if (luceneDir.fileExists("segments.gen")) {
-				writer = new IndexWriter(
-					luceneDir, LuceneUtil.getAnalyzer(), false,
-					IndexWriter.MaxFieldLength.LIMITED);
-			}
-			else {
-				writer = new IndexWriter(
-					luceneDir, LuceneUtil.getAnalyzer(), true,
-					IndexWriter.MaxFieldLength.LIMITED);
-			}
+			write(companyId, null);
 		}
 		catch (IOException ioe) {
 			_log.error("Check Lucene directory failed for " + companyId, ioe);
 		}
-		finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				}
-				catch (IOException ioe) {
-					_log.error(ioe);
-				}
-			}
+	}
+
+	public void delete(long companyId) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
+		}
+
+		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
+			_deleteFile(companyId);
+		}
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(
+					_LUCENE_STORE_TYPE_JDBC)) {
+
+			_deleteJdbc(companyId);
+		}
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
+			_deleteRam(companyId);
+		}
+		else {
+			throw new RuntimeException(
+				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
 	}
 
-	public static void delete(long companyId) {
-		_instance._delete(companyId);
+	public void deleteDocuments(long companyId, Term term) throws IOException {
+		_indexAccessor.deleteDocuments(companyId, term);
 	}
 
-	public static void deleteDocuments(long companyId, Term term)
-		throws IOException {
-
+	public Analyzer getAnalyzer() {
 		try {
-			_instance._sharedWriter.deleteDocuments(companyId, term);
+			return (Analyzer)_analyzerClass.newInstance();
 		}
-		catch (InterruptedException ie) {
-			_log.error(ie);
+		catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 
-	public static Analyzer getAnalyzer() {
-		return _instance._getAnalyzer();
+	public FSDirectory getDirectory(String path) throws IOException {
+		return FSDirectory.open(new File(path));
 	}
 
-	public static FSDirectory getDirectory(String path, boolean create)
-		throws IOException {
+	public Directory getLuceneDir(long companyId) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
+		}
 
-		return FSDirectory.getDirectory(path, false);
+		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
+			return _getLuceneDirFile(companyId);
+		}
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(
+					_LUCENE_STORE_TYPE_JDBC)) {
+
+			return _getLuceneDirJdbc(companyId);
+		}
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
+			return _getLuceneDirRam(companyId);
+		}
+		else {
+			throw new RuntimeException(
+				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
+		}
 	}
 
-	public static Directory getLuceneDir(long companyId) {
-		return _instance._getLuceneDir(companyId);
-	}
-
-	public static IndexReader getReader(long companyId, boolean readOnly)
-		throws IOException {
-
-		return IndexReader.open(getLuceneDir(companyId), readOnly);
-	}
-
-	public static IndexSearcher getSearcher(long companyId, boolean readOnly)
-		throws IOException {
-
-		return new IndexSearcher(getLuceneDir(companyId), readOnly);
-	}
-
-	public static String[] getQueryTerms(Query query) {
+	public String[] getQueryTerms(Query query) {
 		String[] fieldNames = new String[] {
 			Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES, Field.TITLE,
 			Field.USER_NAME
@@ -446,14 +293,13 @@ public class LuceneUtil {
 		return queryTerms.toArray(new String[queryTerms.size()]);
 	}
 
-	public static String getSnippet(Query query, String field, String s)
+	public IndexSearcher getSearcher(long companyId, boolean readOnly)
 		throws IOException {
 
-		return getSnippet(
-			query, field, s, 3, 80, "...", StringPool.BLANK, StringPool.BLANK);
+		return new IndexSearcher(getLuceneDir(companyId), readOnly);
 	}
 
-	public static String getSnippet(
+	public String getSnippet(
 			Query query, String field, String s, int maxNumFragments,
 			int fragmentLength, String fragmentSuffix, String preTag,
 			String postTag)
@@ -469,7 +315,7 @@ public class LuceneUtil {
 
 		highlighter.setTextFragmenter(new SimpleFragmenter(fragmentLength));
 
-		TokenStream tokenStream = LuceneUtil.getAnalyzer().tokenStream(
+		TokenStream tokenStream = getAnalyzer().tokenStream(
 			field, new StringReader(s));
 
 		try {
@@ -489,29 +335,15 @@ public class LuceneUtil {
 		}
 	}
 
-	public static IndexWriter getWriter(long companyId) throws IOException {
-		return getWriter(companyId, false);
+	public void setIndexAccessor(IndexAccessor indexAccessor) {
+		_indexAccessor = indexAccessor;
 	}
 
-	public static IndexWriter getWriter(long companyId, boolean create)
-		throws IOException {
-
-		return _instance._sharedWriter.getWriter(companyId, create);
+	public void write(long companyId, Document document) throws IOException {
+		_indexAccessor.write(companyId, document);
 	}
 
-	public static void releaseLock(long companyId) {
-		_instance._sharedWriter.releaseLock(companyId);
-	}
-
-	public static void write(long companyId) {
-		_instance._sharedWriter.write(companyId);
-	}
-
-	public static void write(IndexWriter writer) throws IOException {
-		_instance._sharedWriter.write(writer);
-	}
-
-	private LuceneUtil() {
+	private LuceneHelperImpl() {
 		String analyzerName = PropsUtil.get(PropsKeys.LUCENE_ANALYZER);
 
 		if (Validator.isNotNull(analyzerName)) {
@@ -570,37 +402,11 @@ public class LuceneUtil {
 		}
 	}
 
-	private void _delete(long companyId) {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
-		}
-
-		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
-			_deleteFile(companyId);
-		}
-		else if (PropsValues.LUCENE_STORE_TYPE.equals(
-					_LUCENE_STORE_TYPE_JDBC)) {
-
-			_deleteJdbc(companyId);
-		}
-		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
-			_deleteRam(companyId);
-		}
-		else {
-			throw new RuntimeException(
-				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
-		}
-	}
-
 	private void _deleteFile(long companyId) {
 		String path = _getPath(companyId);
 
 		try {
-			Directory directory = getDirectory(path, false);
+			Directory directory = getDirectory(path);
 
 			directory.close();
 		}
@@ -652,55 +458,21 @@ public class LuceneUtil {
 	private void _deleteRam(long companyId) {
 	}
 
-	private Analyzer _getAnalyzer() {
-		try {
-			return (Analyzer)_analyzerClass.newInstance();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private Directory _getLuceneDir(long companyId) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
-		}
-
-		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
-			return _getLuceneDirFile(companyId);
-		}
-		else if (PropsValues.LUCENE_STORE_TYPE.equals(
-					_LUCENE_STORE_TYPE_JDBC)) {
-
-			return _getLuceneDirJdbc(companyId);
-		}
-		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
-			return _getLuceneDirRam(companyId);
-		}
-		else {
-			throw new RuntimeException(
-				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
-		}
-	}
-
 	private Directory _getLuceneDirFile(long companyId) {
 		Directory directory = null;
 
 		String path = _getPath(companyId);
 
 		try {
-			directory = getDirectory(path, false);
+			directory = getDirectory(path);
 		}
 		catch (IOException ioe1) {
-			try {
-				if (directory != null) {
+			if (directory != null) {
+				try {
 					directory.close();
 				}
-
-				directory = getDirectory(path, true);
-			}
-			catch (IOException ioe2) {
-				throw new RuntimeException(ioe2);
+				catch (Exception e) {
+				}
 			}
 		}
 
@@ -727,9 +499,9 @@ public class LuceneUtil {
 			}
 
 			try {
-				DataSource ds = InfrastructureUtil.getDataSource();
+				DataSource dataSource = InfrastructureUtil.getDataSource();
 
-				directory = new JdbcDirectory(ds, _dialect, tableName);
+				directory = new JdbcDirectory(dataSource, _dialect, tableName);
 
 				_jdbcDirectories.put(tableName, directory);
 
@@ -840,13 +612,11 @@ public class LuceneUtil {
 
 	private static final String _LUCENE_TABLE_PREFIX = "LUCENE_";
 
-	private static Log _log = LogFactoryUtil.getLog(LuceneUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);
 
-	private static LuceneUtil _instance = new LuceneUtil();
-
-	private IndexWriterFactory _sharedWriter = new IndexWriterFactory();
 	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
+	private IndexAccessor _indexAccessor = new IndexAccessorImpl();
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();
 	private Map<String, Directory> _ramDirectories =

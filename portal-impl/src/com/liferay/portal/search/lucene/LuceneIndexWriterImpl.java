@@ -49,12 +49,8 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 	public void addDocument(long companyId, Document doc)
 		throws SearchException {
 
-		org.apache.lucene.index.IndexWriter writer = null;
-
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(_getLuceneDocument(doc));
+			LuceneHelperUtil.write(companyId, _getLuceneDocument(doc));
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Wrote document " + doc.get(Field.UID));
@@ -63,18 +59,14 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		catch (IOException ioe) {
 			throw new SearchException(ioe);
 		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
 	}
 
 	public void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
 		try {
-			LuceneUtil.deleteDocuments(companyId, new Term(Field.UID, uid));
+			LuceneHelperUtil.deleteDocuments(
+				companyId, new Term(Field.UID, uid));
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Deleted document " + uid);
@@ -89,7 +81,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		throws SearchException {
 
 		try {
-			LuceneUtil.deleteDocuments(
+			LuceneHelperUtil.deleteDocuments(
 				companyId, new Term(Field.PORTLET_ID, portletId));
 		}
 		catch (IOException ioe) {

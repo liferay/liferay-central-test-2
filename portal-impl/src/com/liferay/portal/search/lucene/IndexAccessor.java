@@ -22,39 +22,20 @@
 
 package com.liferay.portal.search.lucene;
 
-import org.apache.lucene.index.IndexWriter;
+import java.io.IOException;
+
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.Term;
 
 /**
- * <a href="IndexWriterData.java.html"><b><i>View Source</i></b></a>
+ * <a href="IndexAccessor.java.html"><b><i>View Source</i></b></a>
  *
- * @author Harry Mark
+ * @author Bruno Farache
  */
-public class IndexWriterData {
+public interface IndexAccessor {
 
-	public IndexWriterData(long companyId, IndexWriter writer, int count) {
-		_companyId = companyId;
-		_writer = writer;
-		_count = count;
-	}
+	public void deleteDocuments(long companyId, Term term) throws IOException;
 
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public IndexWriter getWriter() {
-		return _writer;
-	}
-
-	public int getCount() {
-		return _count;
-	}
-
-	public void setCount(int count) {
-		_count = count;
-	}
-
-	private long _companyId;
-	private IndexWriter _writer;
-	private int _count;
+	public void write(long companyId, Document document) throws IOException;
 
 }

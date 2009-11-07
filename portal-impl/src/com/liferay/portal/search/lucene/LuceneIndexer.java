@@ -34,12 +34,9 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.PortletLuceneComparator;
 
-import java.io.IOException;
-
 import java.util.List;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.lucene.index.IndexWriter;
 
 /**
  * <a href="LuceneIndexer.java.html"><b><i>View Source</i></b></a>
@@ -107,20 +104,10 @@ public class LuceneIndexer implements Runnable {
 			stopWatch1.start();
 		}
 
-		LuceneUtil.delete(_companyId);
-
 		try {
-			IndexWriter writer = LuceneUtil.getWriter(_companyId, true);
+			LuceneHelperUtil.delete(_companyId);
+			LuceneHelperUtil.checkLuceneDir(_companyId);
 
-			LuceneUtil.write(writer);
-		}
-		catch (IOException ioe) {
-			_log.error(ioe.getMessage(), ioe);
-		}
-
-		String[] indexIds = new String[] {String.valueOf(_companyId)};
-
-		try {
 			List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(
 				_companyId);
 
@@ -151,7 +138,7 @@ public class LuceneIndexer implements Runnable {
 					_log.info("Reindexing with " + indexerClass + " started");
 				}
 
-				indexer.reIndex(indexIds);
+				indexer.reIndex(new String[] {String.valueOf(_companyId)});
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
