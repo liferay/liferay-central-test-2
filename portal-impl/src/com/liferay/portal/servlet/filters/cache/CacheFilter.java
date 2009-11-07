@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -87,20 +88,6 @@ public class CacheFilter extends BasePortalFilter {
 		}
 	}
 
-	protected String getBrowserType(HttpServletRequest request) {
-		if (BrowserSnifferUtil.isIe(request) &&
-			BrowserSnifferUtil.getMajorVersion(request) == 7.0) {
-
-			return _BROWSER_TYPE_IE_7;
-		}
-		else if (BrowserSnifferUtil.isIe(request)) {
-			return _BROWSER_TYPE_IE;
-		}
-		else {
-			return _BROWSER_TYPE_OTHER;
-		}
-	}
-
 	protected String getCacheKey(HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
 
@@ -127,10 +114,13 @@ public class CacheFilter extends BasePortalFilter {
 
 		sb.append(languageId);
 
-		// Browser type
+		// User agent
+
+		String userAgent = GetterUtil.getString(
+			request.getHeader(HttpHeaders.USER_AGENT));
 
 		sb.append(StringPool.POUND);
-		sb.append(getBrowserType(request));
+		sb.append(userAgent.toLowerCase().hashCode());
 
 		// Gzip compression
 
