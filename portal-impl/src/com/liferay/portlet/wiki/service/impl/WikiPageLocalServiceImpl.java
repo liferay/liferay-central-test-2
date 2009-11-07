@@ -926,8 +926,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return updatePage(
 			userId, nodeId, title, 0, oldPage.getContent(),
 			WikiPageConstants.REVERTED + " to " + version, false,
-			oldPage.getFormat(), null, oldPage.getRedirectTitle(),
-			serviceContext);
+			oldPage.getFormat(), getParentPageTitle(oldPage),
+			oldPage.getRedirectTitle(),	serviceContext);
 	}
 
 	public void subscribePage(long userId, long nodeId, String title)
@@ -1115,6 +1115,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		for (WikiPage curPage : links) {
 			WikiCacheUtil.clearCache(curPage.getNodeId(), curPage.getTitle());
+		}
+	}
+
+	protected String getParentPageTitle(WikiPage page) {
+		try {
+			WikiPage parentPage = getPage(
+				page.getNodeId(), page.getParentTitle());
+
+			return parentPage.getTitle();
+		}
+		catch (Exception e) {
+			return null;
 		}
 	}
 
