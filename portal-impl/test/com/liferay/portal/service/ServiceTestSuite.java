@@ -36,7 +36,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
-import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -84,7 +84,7 @@ public class ServiceTestSuite extends TestSuite {
 
 		// Lucene
 
-		LuceneUtil.checkLuceneDir(TestPropsValues.COMPANY_ID);
+		LuceneHelperUtil.checkLuceneDir(TestPropsValues.COMPANY_ID);
 
 		// Upgrade
 
