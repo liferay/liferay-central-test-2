@@ -457,12 +457,6 @@ public class CacheFilter extends BasePortalFilter {
 
 	private static final int _PATTERN_RESOURCE = 2;
 
-	private static final String _BROWSER_TYPE_IE_7 = "ie_7";
-
-	private static final String _BROWSER_TYPE_IE = "ie";
-
-	private static final String _BROWSER_TYPE_OTHER = "other";
-
 	private static Log _log = LogFactoryUtil.getLog(CacheFilter.class);
 
 	private int _pattern;
