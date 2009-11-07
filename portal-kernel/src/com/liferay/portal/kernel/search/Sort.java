@@ -66,24 +66,24 @@ public class Sort implements Serializable {
 		return _fieldName;
 	}
 
-	public void setFieldName(String fieldName) {
-		_fieldName = fieldName;
-	}
-
 	public int getType() {
 		return _type;
-	}
-
-	public void setType(int type) {
-		_type = type;
 	}
 
 	public boolean isReverse() {
 		return _reverse;
 	}
 
+	public void setFieldName(String fieldName) {
+		_fieldName = fieldName;
+	}
+
 	public void setReverse(boolean reverse) {
 		_reverse = reverse;
+	}
+
+	public void setType(int type) {
+		_type = type;
 	}
 
 	public String toString() {
@@ -100,7 +100,7 @@ public class Sort implements Serializable {
 	}
 
 	private String _fieldName;
-	private int _type;
 	private boolean _reverse;
+	private int _type;
 
 }

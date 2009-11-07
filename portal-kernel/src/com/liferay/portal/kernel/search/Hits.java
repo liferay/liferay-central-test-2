@@ -33,41 +33,41 @@ import java.util.List;
  */
 public interface Hits extends Serializable {
 
-	public long getStart();
-
-	public void setStart(long start);
-
-	public float getSearchTime();
-
-	public void setSearchTime(float time);
-
-	public String[] getQueryTerms();
-
-	public void setQueryTerms(String[] queryTerms);
+	public Document doc(int n);
 
 	public Document[] getDocs();
 
-	public void setDocs(Document[] docs);
-
 	public int getLength();
 
-	public void setLength(int length);
+	public String[] getQueryTerms();
+
+	public float[] getScores();
+
+	public float getSearchTime();
 
 	public String[] getSnippets();
 
-	public void setSnippets(String[] snippets);
+	public long getStart();
 
-	public float[] getScores();
+	public float score(int n);
+
+	public void setDocs(Document[] docs);
+
+	public void setLength(int length);
+
+	public void setQueryTerms(String[] queryTerms);
 
 	public void setScores(float[] scores);
 
 	public void setScores(Float[] scores);
 
-	public Document doc(int n);
+	public void setSearchTime(float time);
+
+	public void setSnippets(String[] snippets);
+
+	public void setStart(long start);
 
 	public String snippet(int n);
-
-	public float score(int n);
 
 	public List<Document> toList();
 

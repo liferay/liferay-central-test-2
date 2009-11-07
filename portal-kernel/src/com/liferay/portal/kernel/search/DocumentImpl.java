@@ -353,8 +353,8 @@ public class DocumentImpl implements Document {
 
 	private static final String _UID_PORTLET = "_PORTLET_";
 
-	private Map<String, Field> _fields = new HashMap<String, Field>();
 	private DateFormat _dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
 		_DATE_FORMAT_PATTERN);
+	private Map<String, Field> _fields = new HashMap<String, Field>();
 
 }

@@ -36,56 +36,52 @@ public class HitsImpl implements Hits {
 	public HitsImpl() {
 	}
 
-	public long getStart() {
-		return _start;
-	}
-
-	public void setStart(long start) {
-		_start = start;
-	}
-
-	public float getSearchTime() {
-		return _searchTime;
-	}
-
-	public void setSearchTime(float time) {
-		_searchTime = time;
-	}
-
-	public String[] getQueryTerms() {
-		return _queryTerms;
-	}
-
-	public void setQueryTerms(String[] queryTerms) {
-		_queryTerms = queryTerms;
+	public Document doc(int n) {
+		return _docs[n];
 	}
 
 	public Document[] getDocs() {
 		return _docs;
 	}
 
-	public void setDocs(Document[] docs) {
-		_docs = docs;
-	}
-
 	public int getLength() {
 		return _length;
 	}
 
-	public void setLength(int length) {
-		_length = length;
+	public String[] getQueryTerms() {
+		return _queryTerms;
+	}
+
+	public float[] getScores() {
+		return _scores;
+	}
+
+	public float getSearchTime() {
+		return _searchTime;
 	}
 
 	public String[] getSnippets() {
 		return _snippets;
 	}
 
-	public void setSnippets(String[] snippets) {
-		_snippets = snippets;
+	public long getStart() {
+		return _start;
 	}
 
-	public float[] getScores() {
-		return _scores;
+	public float score(int n) {
+		return _scores[n];
+	}
+
+	public void setDocs(Document[] docs) {
+		_docs = docs;
+	}
+
+	public void setLength(int length) {
+		_length = length;
+	}
+
+	public void setQueryTerms(String[] queryTerms) {
+		_queryTerms = queryTerms;
 	}
 
 	public void setScores(float[] scores) {
@@ -102,16 +98,20 @@ public class HitsImpl implements Hits {
 		setScores(primScores);
 	}
 
-	public Document doc(int n) {
-		return _docs[n];
+	public void setSearchTime(float time) {
+		_searchTime = time;
+	}
+
+	public void setSnippets(String[] snippets) {
+		_snippets = snippets;
+	}
+
+	public void setStart(long start) {
+		_start = start;
 	}
 
 	public String snippet(int n) {
 		return _snippets[n];
-	}
-
-	public float score(int n) {
-		return _scores[n];
 	}
 
 	public List<Document> toList() {
@@ -124,12 +124,12 @@ public class HitsImpl implements Hits {
 		return subset;
 	}
 
-	private long _start;
-	private float _searchTime;
-	private String[] _queryTerms;
 	private Document[] _docs;
 	private int _length;
-	private String[] _snippets;
+	private String[] _queryTerms;
 	private float[] _scores = new float[0];
+	private float _searchTime;
+	private String[] _snippets;
+	private long _start;
 
 }

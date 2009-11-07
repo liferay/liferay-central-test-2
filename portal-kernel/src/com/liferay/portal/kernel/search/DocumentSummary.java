@@ -37,20 +37,20 @@ public class DocumentSummary {
 		_url = url;
 	}
 
-	public String getTitle() {
-		return _title;
-	}
-
 	public String getContent() {
 		return _content;
+	}
+
+	public String getTitle() {
+		return _title;
 	}
 
 	public PortletURL getURL() {
 		return _url;
 	}
 
-	private String _title;
 	private String _content;
+	private String _title;
 	private PortletURL _url;
 
 }
