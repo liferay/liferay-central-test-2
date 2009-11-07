@@ -80,14 +80,12 @@ plugins.includes=${plugins.includes}</echo>
 		<replace file="portal-impl/src/portal.properties">
 			<replacefilter
 				token="#upgrade.processes="
-
 				value="upgrade.processes="
 			/>
 			<replacefilter
 				token="#com.liferay.portal.upgrade.UpgradeProcess_"
 				value="com.liferay.portal.upgrade.UpgradeProcess_"
 			/>
-
 			<replacefilter
 				token="verify.frequency=0"
 				value="verify.frequency=1"
