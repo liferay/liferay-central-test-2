@@ -1119,6 +1119,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	protected String getParentPageTitle(WikiPage page) {
+
+		// LPS-4586
+
 		try {
 			WikiPage parentPage = getPage(
 				page.getNodeId(), page.getParentTitle());
