@@ -153,7 +153,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		String entryId = doc.get(Field.ENTRY_CLASS_PK);
 
-		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
+		portletURL.setParameter("struts_action", "/bookmarks/view_entry");
 		portletURL.setParameter("entryId", entryId);
 
 		return new DocumentSummary(title, url, portletURL);
