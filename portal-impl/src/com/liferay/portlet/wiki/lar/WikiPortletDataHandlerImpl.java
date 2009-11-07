@@ -289,6 +289,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				WikiNodeLocalServiceUtil.deleteNodes(context.getGroupId());
 			}
+
 			return null;
 		}
 		catch (Exception e) {
