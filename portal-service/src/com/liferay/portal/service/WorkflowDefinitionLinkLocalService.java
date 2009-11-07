@@ -106,8 +106,8 @@ public interface WorkflowDefinitionLinkLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteWorkflowDefinitionLink(long userId, long companyId,
-		long groupId, long classNameId)
+	public void deleteWorkflowDefinitionLink(long companyId, long groupId,
+		long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

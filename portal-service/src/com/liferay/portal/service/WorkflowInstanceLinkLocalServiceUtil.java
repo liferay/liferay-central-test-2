@@ -109,6 +109,42 @@ public class WorkflowInstanceLinkLocalServiceUtil {
 				   .updateWorkflowInstanceLink(workflowInstanceLink, merge);
 	}
 
+	public static com.liferay.portal.model.WorkflowInstanceLink addWorkflowInstanceLink(
+		long userId, long companyId, long groupId, long classNameId,
+		long classPK, long workflowInstanceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addWorkflowInstanceLink(userId, companyId, groupId,
+			classNameId, classPK, workflowInstanceId);
+	}
+
+	public static void deleteWorkflowInstanceLink(long companyId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.deleteWorkflowInstanceLink(companyId, groupId, className, classPK);
+	}
+
+	public static com.liferay.portal.model.WorkflowInstanceLink getWorkflowInstanceLink(
+		long companyId, long groupId, long classNameId, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getWorkflowInstanceLink(companyId, groupId, classNameId,
+			classPK);
+	}
+
+	public static void startWorkflowInstance(long companyId, long groupId,
+		long userId, java.lang.String className, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.startWorkflowInstance(companyId, groupId, userId, className,
+			classPK);
+	}
+
 	public static WorkflowInstanceLinkLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException(

@@ -55,6 +55,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		WorkflowDefinitionLink workflowDefinitionLink =
 			workflowDefinitionLinkPersistence.create(workflowDefinitionLinkId);
 
+		workflowDefinitionLink.setCreateDate(now);
 		workflowDefinitionLink.setModifiedDate(now);
 		workflowDefinitionLink.setUserId(userId);
 		workflowDefinitionLink.setUserName(user.getFullName());
@@ -72,7 +73,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	}
 
 	public void deleteWorkflowDefinitionLink(
-			long userId, long companyId, long groupId, long classNameId)
+			long companyId, long groupId, long classNameId)
 		throws PortalException, SystemException {
 
 		try {
@@ -81,7 +82,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
 		}
-		catch (NoSuchWorkflowDefinitionLinkException nswle) {
+		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
 		}
 	}
 

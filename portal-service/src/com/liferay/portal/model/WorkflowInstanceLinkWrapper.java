@@ -146,7 +146,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		_workflowInstanceLink.setWorkflowInstanceId(workflowInstanceId);
 	}
 
-	public WorkflowInstanceLink toEscapedModel() {
+	public com.liferay.portal.model.WorkflowInstanceLink toEscapedModel() {
 		return _workflowInstanceLink.toEscapedModel();
 	}
 
@@ -191,7 +191,8 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		return _workflowInstanceLink.clone();
 	}
 
-	public int compareTo(WorkflowInstanceLink workflowInstanceLink) {
+	public int compareTo(
+		com.liferay.portal.model.WorkflowInstanceLink workflowInstanceLink) {
 		return _workflowInstanceLink.compareTo(workflowInstanceLink);
 	}
 

@@ -116,6 +116,10 @@ public class ServiceContext implements Serializable {
 		return _scopeGroupId;
 	}
 
+	public boolean getStartWorkflow() {
+		return _startWorkflow;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -204,6 +208,10 @@ public class ServiceContext implements Serializable {
 		_scopeGroupId = scopeGroupId;
 	}
 
+	public void setStartWorkflow(boolean startWorkflow) {
+		_startWorkflow = startWorkflow;
+	}
+
 	public void setStatus(int status) {
 		_status = status;
 	}
@@ -234,6 +242,7 @@ public class ServiceContext implements Serializable {
 	private long _scopeGroupId;
 	private String _userDisplayURL;
 	private long _plid;
+	private boolean _startWorkflow;
 	private int _status = StatusConstants.APPROVED;
 	private long _userId;
 

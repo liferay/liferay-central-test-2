@@ -326,6 +326,14 @@ public class JournalArticleLocalServiceImpl
 			userId, article, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
 
+		// Workflow
+
+		if (serviceContext.getStartWorkflow()) {
+			workflowInstanceLinkLocalService.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				JournalArticle.class.getName(), resourcePrimKey);
+		}
+
 		// Message boards
 
 		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
@@ -677,6 +685,12 @@ public class JournalArticleLocalServiceImpl
 			// Message boards
 
 			mbMessageLocalService.deleteDiscussionMessages(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
+
+			// Workflow
+
+			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+				article.getCompanyId(), article.getGroupId(),
 				JournalArticle.class.getName(), article.getResourcePrimKey());
 
 			// Asset

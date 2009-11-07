@@ -121,13 +121,12 @@ public class WorkflowDefinitionLinkLocalServiceUtil {
 			classNameId, workflowDefinitionName, workflowDefinitionVersion);
 	}
 
-	public static void deleteWorkflowDefinitionLink(long userId,
-		long companyId, long groupId, long classNameId)
+	public static void deleteWorkflowDefinitionLink(long companyId,
+		long groupId, long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.deleteWorkflowDefinitionLink(userId, companyId, groupId,
-			classNameId);
+			.deleteWorkflowDefinitionLink(companyId, groupId, classNameId);
 	}
 
 	public static com.liferay.portal.model.WorkflowDefinitionLink getWorkflowDefinitionLink(

@@ -147,7 +147,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		_workflowDefinitionLink.setWorkflowDefinitionVersion(workflowDefinitionVersion);
 	}
 
-	public WorkflowDefinitionLink toEscapedModel() {
+	public com.liferay.portal.model.WorkflowDefinitionLink toEscapedModel() {
 		return _workflowDefinitionLink.toEscapedModel();
 	}
 
@@ -192,7 +192,8 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		return _workflowDefinitionLink.clone();
 	}
 
-	public int compareTo(WorkflowDefinitionLink workflowDefinitionLink) {
+	public int compareTo(
+		com.liferay.portal.model.WorkflowDefinitionLink workflowDefinitionLink) {
 		return _workflowDefinitionLink.compareTo(workflowDefinitionLink);
 	}
 
