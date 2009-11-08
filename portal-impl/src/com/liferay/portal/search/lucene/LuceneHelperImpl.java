@@ -92,6 +92,12 @@ import org.apache.lucene.store.jdbc.support.JdbcTemplate;
  */
 public class LuceneHelperImpl implements LuceneHelper {
 
+	public void addDocument(long companyId, Document document)
+		throws IOException {
+
+		_indexAccessor.addDocument(companyId, document);
+	}
+
 	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value) {
 
@@ -195,7 +201,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		// IndexWriter throws an exception
 
 		try {
-			write(companyId, null);
+			addDocument(companyId, null);
 		}
 		catch (IOException ioe) {
 			_log.error("Check Lucene directory failed for " + companyId, ioe);
@@ -335,12 +341,10 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
-	public void setIndexAccessor(IndexAccessor indexAccessor) {
-		_indexAccessor = indexAccessor;
-	}
+	public void updateDocument(long companyId, Term term, Document document)
+		throws IOException {
 
-	public void write(long companyId, Document document) throws IOException {
-		_indexAccessor.write(companyId, document);
+		_indexAccessor.updateDocument(companyId, term, document);
 	}
 
 	private LuceneHelperImpl() {

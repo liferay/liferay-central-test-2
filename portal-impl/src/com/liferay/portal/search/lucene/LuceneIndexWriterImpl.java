@@ -46,14 +46,15 @@ import org.apache.lucene.index.Term;
  */
 public class LuceneIndexWriterImpl implements IndexWriter {
 
-	public void addDocument(long companyId, Document doc)
+	public void addDocument(long companyId, Document document)
 		throws SearchException {
 
 		try {
-			LuceneHelperUtil.write(companyId, _getLuceneDocument(doc));
+			LuceneHelperUtil.addDocument(
+				companyId, _getLuceneDocument(document));
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Wrote document " + doc.get(Field.UID));
+				_log.debug("Added document " + document.get(Field.UID));
 			}
 		}
 		catch (IOException ioe) {
@@ -89,21 +90,30 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
-	public void updateDocument(long companyId, String uid, Document doc)
+	public void updateDocument(long companyId, String uid, Document document)
 		throws SearchException {
 
-		deleteDocument(companyId, uid);
+		try {
+			LuceneHelperUtil.updateDocument(
+				companyId, new Term(Field.UID, uid),
+				_getLuceneDocument(document));
 
-		addDocument(companyId, doc);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Updated document " + document.get(Field.UID));
+			}
+		}
+		catch (IOException ioe) {
+			throw new SearchException(ioe);
+		}
 	}
 
 	private org.apache.lucene.document.Document _getLuceneDocument(
-		Document doc) {
+		Document document) {
 
-		org.apache.lucene.document.Document luceneDoc =
+		org.apache.lucene.document.Document luceneDocument =
 			new org.apache.lucene.document.Document();
 
-		Collection<Field> fields = doc.getFields().values();
+		Collection<Field> fields = document.getFields().values();
 
 		for (Field field : fields) {
 			String name = field.getName();
@@ -126,11 +136,11 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 
 				luceneField.setBoost(boost);
 
-				luceneDoc.add(luceneField);
+				luceneDocument.add(luceneField);
 			}
 		}
 
-		return luceneDoc;
+		return luceneDocument;
 	}
 
 	private static Log _log =

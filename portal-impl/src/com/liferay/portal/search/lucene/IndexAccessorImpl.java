@@ -41,6 +41,12 @@ import org.apache.lucene.index.Term;
  */
 public class IndexAccessorImpl implements IndexAccessor {
 
+	public void addDocument(long companyId, Document document)
+		throws IOException {
+
+		write(companyId, null, document);
+	}
+
 	public void deleteDocuments(long companyId, Term term) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -63,7 +69,15 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
-	public void write(long companyId, Document document) throws IOException {
+	public void updateDocument(long companyId, Term term, Document document)
+		throws IOException {
+
+		write(companyId, term, document);
+	}
+
+	protected void write(long companyId, Term term, Document document)
+		throws IOException {
+
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -79,7 +93,13 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 				if (document != null) {
 					indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
-					indexWriter.addDocument(document);
+
+					if (term != null) {
+						indexWriter.updateDocument(term, document);
+					}
+					else {
+						indexWriter.addDocument(document);
+					}
 
 					_optimizeCount++;
 

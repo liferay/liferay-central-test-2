@@ -51,6 +51,12 @@ public class LuceneHelperUtil {
 		doc.add(LuceneFields.getDate(field, value));
 	}
 
+	public static void addDocument(long companyId, Document document)
+		throws IOException {
+
+		getLuceneHelper().addDocument(companyId, document);
+	}
+
 	public static void addExactTerm(
 		BooleanQuery booleanQuery, String field, boolean value) {
 
@@ -211,10 +217,11 @@ public class LuceneHelperUtil {
 			preTag, postTag);
 	}
 
-	public static void write(long companyId, Document document)
+	public static void updateDocument(
+			long companyId, Term term, Document document)
 		throws IOException {
 
-		getLuceneHelper().write(companyId, document);
+		getLuceneHelper().updateDocument(companyId, term, document);
 	}
 
 	public void setLuceneHelper(LuceneHelper luceneHelper) {

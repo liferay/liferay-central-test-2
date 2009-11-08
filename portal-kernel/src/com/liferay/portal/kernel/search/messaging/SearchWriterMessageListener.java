@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.IndexWriter;
 
 /**
  * <a href="SearchWriterMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -60,19 +61,21 @@ public class SearchWriterMessageListener
 		String id = searchRequest.getId();
 		Document doc = searchRequest.getDocument();
 
+		IndexWriter indexWriter = searchEngine.getWriter();
+
 		if (searchEngineCommand.equals(SearchEngineCommand.ADD)) {
-			searchEngine.getWriter().addDocument(companyId, doc);
+			indexWriter.addDocument(companyId, doc);
 		}
 		else if (searchEngineCommand.equals(SearchEngineCommand.DELETE)) {
-			searchEngine.getWriter().deleteDocument(companyId, id);
+			indexWriter.deleteDocument(companyId, id);
 		}
 		else if (searchEngineCommand.equals(
 					SearchEngineCommand.DELETE_PORTLET_DOCUMENTS)) {
 
-			searchEngine.getWriter().deletePortletDocuments(companyId, id);
+			indexWriter.deletePortletDocuments(companyId, id);
 		}
 		else if (searchEngineCommand.equals(SearchEngineCommand.UPDATE)) {
-			searchEngine.getWriter().updateDocument(companyId, id, doc);
+			indexWriter.updateDocument(companyId, id, doc);
 		}
 	}
 

@@ -41,6 +41,9 @@ import org.apache.lucene.store.FSDirectory;
  */
 public interface LuceneHelper {
 
+	public void addDocument(long companyId, Document document)
+		throws IOException;
+
 	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value);
 
@@ -74,6 +77,7 @@ public interface LuceneHelper {
 			String postTag)
 		throws IOException;
 
-	public void write(long companyId, Document document) throws IOException;
+	public void updateDocument(long companyId, Term term, Document document)
+		throws IOException;
 
 }
