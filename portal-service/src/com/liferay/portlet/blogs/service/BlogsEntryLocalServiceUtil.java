@@ -292,9 +292,10 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getUrlTitle(entryId, title);
 	}
 
-	public static void reIndex(com.liferay.portlet.blogs.model.BlogsEntry entry)
+	public static void reIndex(
+		com.liferay.portlet.blogs.model.BlogsEntry entry, boolean update)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(entry);
+		getService().reIndex(entry, update);
 	}
 
 	public static void reIndex(long entryId)

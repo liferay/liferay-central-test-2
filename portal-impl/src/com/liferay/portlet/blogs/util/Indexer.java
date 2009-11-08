@@ -69,6 +69,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
+	public static void deleteEntries(long companyId) throws SearchException {
+		SearchEngineUtil.deletePortletDocuments(companyId, PORTLET_ID);
+	}
+
 	public static void deleteEntry(long companyId, long entryId)
 		throws SearchException {
 
