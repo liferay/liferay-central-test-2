@@ -34,14 +34,14 @@ import org.apache.lucene.index.Term;
  */
 public interface IndexAccessor {
 
-	public void addDocument(long companyId, Document document)
-		throws IOException;
+	public void addDocument(Document document) throws IOException;
 
 	public void cleanUp() throws IOException;
 
-	public void deleteDocuments(long companyId, Term term) throws IOException;
+	public void deleteDocuments(Term term) throws IOException;
 
-	public void updateDocument(long companyId, Term term, Document document)
-		throws IOException;
+	public long getCompanyId();
+
+	public void updateDocument(Term term, Document document) throws IOException;
 
 }

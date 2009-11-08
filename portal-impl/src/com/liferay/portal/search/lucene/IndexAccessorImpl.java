@@ -40,10 +40,12 @@ import org.apache.lucene.index.Term;
  */
 public class IndexAccessorImpl implements IndexAccessor {
 
-	public void addDocument(long companyId, Document document)
-		throws IOException {
+	public IndexAccessorImpl(long companyId) {
+		_companyId = companyId;
+	}
 
-		write(companyId, null, document);
+	public void addDocument(Document document) throws IOException {
+		write(null, document);
 	}
 
 	public void cleanUp() throws IOException {
@@ -56,13 +58,13 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
-	public void deleteDocuments(long companyId, Term term) throws IOException {
+	public void deleteDocuments(Term term) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		synchronized (this) {
-			initIndexWriter(companyId);
+			initIndexWriter();
 
 			try {
 				_indexWriter.deleteDocuments(term);
@@ -73,16 +75,20 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
-	public void updateDocument(long companyId, Term term, Document document)
-		throws IOException {
-
-		write(companyId, term, document);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	protected void initIndexWriter(long companyId) throws IOException {
+	public void updateDocument(Term term, Document document)
+		throws IOException {
+
+		write(term, document);
+	}
+
+	protected void initIndexWriter() throws IOException {
 		if (_indexWriter == null) {
 			_indexWriter = new IndexWriter(
-				LuceneHelperUtil.getLuceneDir(companyId),
+				LuceneHelperUtil.getLuceneDir(_companyId),
 				LuceneHelperUtil.getAnalyzer(),
 				IndexWriter.MaxFieldLength.LIMITED);
 
@@ -90,15 +96,13 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
-	protected void write(long companyId, Term term, Document document)
-		throws IOException {
-
+	protected void write(Term term, Document document) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		synchronized (this) {
-			initIndexWriter(companyId);
+			initIndexWriter();
 
 			try {
 				if (document != null) {
@@ -127,6 +131,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	private long _companyId;
 	private IndexWriter _indexWriter;
 	private int _optimizeCount;
 

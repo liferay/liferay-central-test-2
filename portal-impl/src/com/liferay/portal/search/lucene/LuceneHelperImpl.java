@@ -95,7 +95,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void addDocument(long companyId, Document document)
 		throws IOException {
 
-		_indexAccessor.addDocument(companyId, document);
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+
+		indexAccessor.addDocument(document);
 	}
 
 	public void addExactTerm(
@@ -235,7 +237,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public void deleteDocuments(long companyId, Term term) throws IOException {
-		_indexAccessor.deleteDocuments(companyId, term);
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+
+		indexAccessor.deleteDocuments(term);
 	}
 
 	public Analyzer getAnalyzer() {
@@ -344,7 +348,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void updateDocument(long companyId, Term term, Document document)
 		throws IOException {
 
-		_indexAccessor.updateDocument(companyId, term, document);
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+
+		indexAccessor.updateDocument(term, document);
 	}
 
 	private LuceneHelperImpl() {
@@ -483,6 +489,17 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return directory;
 	}
 
+	private IndexAccessor _getIndexAccessor(long companyId) {
+		IndexAccessor indexAccessor = _indexAccessorMap.get(companyId);
+
+		if (indexAccessor == null) {
+			indexAccessor = new IndexAccessorImpl(companyId);
+
+			_indexAccessorMap.put(companyId, indexAccessor);
+		}
+
+		return indexAccessor;
+	}
 	private Directory _getLuceneDirJdbc(long companyId) {
 		JdbcDirectory directory = null;
 
@@ -620,7 +637,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
-	private IndexAccessor _indexAccessor = new IndexAccessorImpl();
+	private Map<Long, IndexAccessor> _indexAccessorMap =
+		new ConcurrentHashMap<Long, IndexAccessor>();
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();
 	private Map<String, Directory> _ramDirectories =
