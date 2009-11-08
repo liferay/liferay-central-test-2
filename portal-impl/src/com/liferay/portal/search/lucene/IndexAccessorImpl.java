@@ -28,7 +28,6 @@ import com.liferay.portal.util.PropsValues;
 import java.io.IOException;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 
@@ -47,24 +46,29 @@ public class IndexAccessorImpl implements IndexAccessor {
 		write(companyId, null, document);
 	}
 
+	public void cleanUp() throws IOException {
+		synchronized (this) {
+			if (_indexWriter != null) {
+				_indexWriter.close();
+			}
+
+			_indexWriter = null;
+		}
+	}
+
 	public void deleteDocuments(long companyId, Term term) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		synchronized (this) {
-			IndexReader indexReader = null;
+			initIndexWriter(companyId);
 
 			try {
-				indexReader = IndexReader.open(
-					LuceneHelperUtil.getLuceneDir(companyId), false);
-
-				indexReader.deleteDocuments(term);
+				_indexWriter.deleteDocuments(term);
 			}
 			finally {
-				if (indexReader != null) {
-					indexReader.close();
-				}
+				cleanUp();
 			}
 		}
 	}
@@ -75,6 +79,17 @@ public class IndexAccessorImpl implements IndexAccessor {
 		write(companyId, term, document);
 	}
 
+	protected void initIndexWriter(long companyId) throws IOException {
+		if (_indexWriter == null) {
+			_indexWriter = new IndexWriter(
+				LuceneHelperUtil.getLuceneDir(companyId),
+				LuceneHelperUtil.getAnalyzer(),
+				IndexWriter.MaxFieldLength.LIMITED);
+
+			_indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
+		}
+	}
+
 	protected void write(long companyId, Term term, Document document)
 		throws IOException {
 
@@ -83,22 +98,15 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 
 		synchronized (this) {
-			IndexWriter indexWriter = null;
+			initIndexWriter(companyId);
 
 			try {
-				indexWriter = new IndexWriter(
-					LuceneHelperUtil.getLuceneDir(companyId),
-					LuceneHelperUtil.getAnalyzer(),
-					IndexWriter.MaxFieldLength.LIMITED);
-
 				if (document != null) {
-					indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
-
 					if (term != null) {
-						indexWriter.updateDocument(term, document);
+						_indexWriter.updateDocument(term, document);
 					}
 					else {
-						indexWriter.addDocument(document);
+						_indexWriter.addDocument(document);
 					}
 
 					_optimizeCount++;
@@ -107,20 +115,19 @@ public class IndexAccessorImpl implements IndexAccessor {
 						(_optimizeCount >=
 							PropsValues.LUCENE_OPTIMIZE_INTERVAL)) {
 
-						indexWriter.optimize();
+						_indexWriter.optimize();
 
 						_optimizeCount = 0;
 					}
 				}
 			}
 			finally {
-				if (indexWriter != null) {
-					indexWriter.close();
-				}
+				cleanUp();
 			}
 		}
 	}
 
+	private IndexWriter _indexWriter;
 	private int _optimizeCount;
 
 }
