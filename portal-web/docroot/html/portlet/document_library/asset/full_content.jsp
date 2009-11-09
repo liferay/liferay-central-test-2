@@ -29,7 +29,7 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 %>
 
 <div class="asset-resource-info">
-	<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=<%= themeDisplay.getPlid() %>&folderId=<%= fileEntry.getFolderId() %>&title=<%= HttpUtil.encodeURL(fileEntry.getTitle()) %>">
+	<a href="<%= themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) %>">
 		<img align="left" border="0" class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= DLUtil.getFileExtension(fileEntry.getTitle()) %>.png" /><%= fileEntry.getTitle() %>
 	</a>
 </div>

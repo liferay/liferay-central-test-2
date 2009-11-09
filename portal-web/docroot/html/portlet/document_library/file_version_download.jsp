@@ -42,6 +42,6 @@ String extension = FileUtil.getExtension(fileEntry.getTitle());
 <liferay-ui:icon
 	image='<%= "../file_system/small/" + extension %>'
 	message="<%= extension.toUpperCase() %>"
-	url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + fileEntry.getFolderId() + "&title=" + HttpUtil.encodeURL(fileEntry.getTitle()) + "&version=" + fileVersion.getVersion() %>'
+	url='<%= themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileVersion.getVersion() %>'
 	label="<%= true %>"
 />

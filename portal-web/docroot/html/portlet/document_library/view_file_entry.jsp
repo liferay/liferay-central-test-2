@@ -74,7 +74,7 @@ try {
 catch (Exception e) {
 }
 
-String fileUrl = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&title=" + HttpUtil.encodeURL(title);
+String fileUrl = themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(title);
 String webDavUrl = StringPool.BLANK;
 
 if (portletDisplay.isWebDAVEnabled()) {
@@ -263,7 +263,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			<label><liferay-ui:message key="url" /></label>
 
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?uuid=" + fileEntry.getUuid() + "&groupId=" + fileEntry.getGroupId() %>'
+				url='<%= themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + "/" + fileEntry.getUuid() %>'
 			/>
 		</div>
 
@@ -319,7 +319,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						<liferay-ui:icon
 							image='<%= "../file_system/small/" + conversion %>'
 							message="<%= conversion.toUpperCase() %>"
-							url='<%= fileUrl + "&targetExtension=" + conversion %>'
+							url='<%= fileUrl + "?targetExtension=" + conversion %>'
 							label="<%= true %>"
 						/>
 
@@ -415,16 +415,14 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 
 				StringBuilder sb = new StringBuilder();
 
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/document_library/get_file?p_l_id=");
-				sb.append(themeDisplay.getPlid());
-				sb.append("&groupId=");
+				sb.append(themeDisplay.getPortalURL());
+				sb.append("/document/");
 				sb.append(themeDisplay.getScopeGroupId());
-				sb.append("&folderId=");
+				sb.append(StringPool.SLASH);
 				sb.append(folderId);
-				sb.append("&title=");
+				sb.append(StringPool.SLASH);
 				sb.append(HttpUtil.encodeURL(title));
-				sb.append("&version=");
+				sb.append("?version=");
 				sb.append(String.valueOf(fileVersion.getVersion()));
 
 				String rowHREF = sb.toString();

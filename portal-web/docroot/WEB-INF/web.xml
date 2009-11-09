@@ -711,6 +711,12 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>Document Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.DocumentServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>Facebook Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.FacebookServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
@@ -857,6 +863,10 @@
 		<servlet-name>Display Chart</servlet-name>
 		<url-pattern>/display_chart/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Document Servlet</servlet-name>
+		<url-pattern>/document/*</url-pattern>
+	</servlet-mapping>	
 	<servlet-mapping>
 		<servlet-name>Facebook Servlet</servlet-name>
 		<url-pattern>/facebook/*</url-pattern>

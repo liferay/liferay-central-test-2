@@ -25,7 +25,7 @@
 <c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
 
 	<%
-	String fileUrl = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&title=" + HttpUtil.encodeURL(fileEntry.getTitle());
+	String fileUrl = themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
 	String webDavUrl = StringPool.BLANK;
 
 	if (portletDisplay.isWebDAVEnabled()) {

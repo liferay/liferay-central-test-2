@@ -178,7 +178,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 			<label><liferay-ui:message key="url" /></label>
 
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
+				url='<%= themeDisplay.getPortalURL() + "/document/" + fileShortcutId %>'
 			/>
 		</div>
 
@@ -201,11 +201,11 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 				image='<%= "../file_system/large/" + DLUtil.getGenericName(extension) %>'
 				cssClass="file-entry-avatar"
 				message="download"
-				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
+				url='<%= themeDisplay.getPortalURL() + "/document/" + fileShortcutId %>'
 			/>
 
 			<div class="file-entry-name">
-				<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>">
+				<a href="<%= themeDisplay.getPortalURL() + "/document/" + fileShortcutId %>">
 					<%= toFileEntry.getTitle() %>
 				</a>
 			</div>
@@ -217,13 +217,12 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 					<%
 					for (int i = 0; i < conversions.length; i++) {
 						String conversion = conversions[i];
-
 					%>
 
 						<liferay-ui:icon
 							image='<%= "../file_system/small/" + conversion %>'
 							message="<%= conversion.toUpperCase() %>"
-							url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + toFolder.getFolderId() + "&title=" + HttpUtil.encodeURL(toFileEntry.getTitle()) + "&targetExtension=" + conversion %>'
+							url='<%= themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + toFolder.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(toFileEntry.getTitle()) + "?targetExtension=" + conversion %>'
 							label="<%= true %>"
 						/>
 
@@ -296,12 +295,10 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 
 				StringBuilder sb = new StringBuilder();
 
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/document_library/get_file?p_l_id=");
-				sb.append(themeDisplay.getPlid());
-				sb.append("&fileShortcutId=");
+				sb.append(themeDisplay.getPortalURL());
+				sb.append("/document/");
 				sb.append(fileShortcutId);
-				sb.append("&version=");
+				sb.append("?version=");
 				sb.append(String.valueOf(fileVersion.getVersion()));
 
 				String rowHREF = sb.toString();

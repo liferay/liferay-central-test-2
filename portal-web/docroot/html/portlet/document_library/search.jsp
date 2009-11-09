@@ -131,14 +131,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			DLFolder folder = fileEntry.getFolder();
 
-			PortletURL rowURL = renderResponse.createActionURL();
-
-			rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-
-			rowURL.setParameter("struts_action", "/document_library/get_file");
-			rowURL.setParameter("groupId", String.valueOf(scopeGroupId));
-			rowURL.setParameter("folderId", String.valueOf(folderId));
-			rowURL.setParameter("title", fileEntry.getTitle());
+			String rowURL = themeDisplay.getPortalURL() + "/document/" + scopeGroupId + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
 
 			row.addText(folder.getName(), rowURL);
 			row.addText(fileEntry.getTitle(), rowURL);

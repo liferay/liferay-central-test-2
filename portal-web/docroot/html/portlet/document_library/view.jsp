@@ -220,7 +220,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 					String rowHREF = null;
 
 					if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW)) {
-						rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId() + "&folderId=" + fileEntry.getFolderId() + "&title=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()));
+						rowHREF = themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()));
 					}
 					%>
 

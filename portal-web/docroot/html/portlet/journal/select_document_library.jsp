@@ -141,17 +141,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-	StringBuilder sb = new StringBuilder();
-
-	sb.append(themeDisplay.getPathMain());
-	sb.append("/document_library/get_file?p_l_id=");
-	sb.append(themeDisplay.getPlid());
-	sb.append("&folderId=");
-	sb.append(folderId);
-	sb.append("&title=");
-	sb.append(HttpUtil.encodeURL(fileEntry.getTitle()));
-
-	String rowHREF = sb.toString();
+	String rowHREF = themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
 
 	// Title
 
@@ -184,11 +174,11 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("opener.");
 	sb.append(renderResponse.getNamespace());
 	sb.append("selectDocumentLibrary('");
-	sb.append(themeDisplay.getPathMain());
-	sb.append("/document_library/get_file?uuid=");
-	sb.append(fileEntry.getUuid());
-	sb.append("&groupId=");
+	sb.append(themeDisplay.getPortalURL());
+	sb.append("/document/");
 	sb.append(groupId);
+	sb.append(StringPool.SLASH);
+	sb.append(fileEntry.getUuid());
 	sb.append("'); window.close();");
 
 	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
