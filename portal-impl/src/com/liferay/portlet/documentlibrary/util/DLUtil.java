@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -163,8 +164,8 @@ public class DLUtil {
 			request, folder.getName(), portletURL.toString());
 	}
 
-	public static String getFileExtension(String name) {
-		return _instance._getFileExtension(name);
+	public static String getFileExtension(String title) {
+		return _instance._getFileExtension(title);
 	}
 
 	public static String getGenericName(String extension) {
@@ -261,14 +262,8 @@ public class DLUtil {
 		_genericNames.put("wmv", "video");
 	}
 
-	private String _getFileExtension(String name) {
-		String extension = StringPool.BLANK;
-
-		int pos = name.lastIndexOf(StringPool.PERIOD);
-
-		if (pos != -1) {
-			extension = name.substring(pos + 1, name.length()).toLowerCase();
-		}
+	private String _getFileExtension(String title) {
+		String extension = FileUtil.getExtension(title);
 
 		if (!_fileExtensions.contains(extension)) {
 			extension = _DEFAULT_FILE_EXTENSION;
