@@ -71,55 +71,15 @@ public class IndexAccessorImpl implements IndexAccessor {
 	public IndexAccessorImpl(long companyId) {
 		_companyId = companyId;
 
-		// Dialect
-
-		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_JDBC)) {
-			Connection con = null;
-
-			try {
-				con = DataAccess.getConnection();
-
-				String url = con.getMetaData().getURL();
-
-				int x = url.indexOf(":");
-				int y = url.indexOf(":", x + 1);
-
-				String urlPrefix = url.substring(x + 1, y);
-
-				String dialectClass = PropsUtil.get(
-					PropsKeys.LUCENE_STORE_JDBC_DIALECT + urlPrefix);
-
-				if (dialectClass != null) {
-					if (_log.isDebugEnabled()) {
-						_log.debug("JDBC class implementation " + dialectClass);
-					}
-				}
-				else {
-					if (_log.isDebugEnabled()) {
-						_log.debug("JDBC class implementation is null");
-					}
-				}
-
-				if (dialectClass != null) {
-					_dialect =
-						(Dialect)Class.forName(dialectClass).newInstance();
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-			finally{
-				DataAccess.cleanUp(con);
-			}
-
-			if (_dialect == null) {
-				_log.error("No JDBC dialect found");
-			}
-		}
+		_initDialect();
 	}
 
 	public void addDocument(Document document) throws IOException {
-		write(null, document);
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		_write(null, document);
 	}
 
 	public void checkLuceneDir() throws IOException {
@@ -135,8 +95,8 @@ public class IndexAccessorImpl implements IndexAccessor {
 					IndexWriter.unlock(directory);
 				}
 
-				initIndexWriter();
-				cleanUp();
+				_initIndexWriter();
+				_cleanUp();
 			}
 		}
 	}
@@ -178,13 +138,13 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 
 		synchronized (this) {
-			initIndexWriter();
+			_initIndexWriter();
 
 			try {
 				_indexWriter.deleteDocuments(term);
 			}
 			finally {
-				cleanUp();
+				_cleanUp();
 			}
 		}
 	}
@@ -218,59 +178,20 @@ public class IndexAccessorImpl implements IndexAccessor {
 	public void updateDocument(Term term, Document document)
 		throws IOException {
 
-		write(term, document);
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		_write(term, document);
 	}
 
-	protected void cleanUp() throws IOException {
+	private void _cleanUp() throws IOException {
 		synchronized (this) {
 			if (_indexWriter != null) {
 				_indexWriter.close();
 			}
 
 			_indexWriter = null;
-		}
-	}
-
-	protected void initIndexWriter() throws IOException {
-		if (_indexWriter == null) {
-			_indexWriter = new IndexWriter(
-				getLuceneDir(), LuceneHelperUtil.getAnalyzer(),
-				IndexWriter.MaxFieldLength.LIMITED);
-
-			_indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
-		}
-	}
-
-	protected void write(Term term, Document document) throws IOException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		synchronized (this) {
-			initIndexWriter();
-
-			try {
-				if (term != null) {
-					_indexWriter.updateDocument(term, document);
-				}
-				else {
-					_indexWriter.addDocument(document);
-				}
-
-				_optimizeCount++;
-
-				if ((PropsValues.LUCENE_OPTIMIZE_INTERVAL == 0) ||
-					(_optimizeCount >=
-						PropsValues.LUCENE_OPTIMIZE_INTERVAL)) {
-
-					_indexWriter.optimize();
-
-					_optimizeCount = 0;
-				}
-			}
-			finally {
-				cleanUp();
-			}
 		}
 	}
 
@@ -356,7 +277,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private Directory _getLuceneDirJdbc() {
-		JdbcDirectory directory = null;
+		JdbcDirectory jdbcDirectory = null;
 
 		Thread currentThread = Thread.currentThread();
 
@@ -368,21 +289,22 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 			String tableName = _getTableName();
 
-			directory = (JdbcDirectory)_jdbcDirectories.get(tableName);
+			jdbcDirectory = (JdbcDirectory)_jdbcDirectories.get(tableName);
 
-			if (directory != null) {
-				return directory;
+			if (jdbcDirectory != null) {
+				return jdbcDirectory;
 			}
 
 			try {
 				DataSource dataSource = InfrastructureUtil.getDataSource();
 
-				directory = new JdbcDirectory(dataSource, _dialect, tableName);
+				jdbcDirectory = new JdbcDirectory(
+					dataSource, _dialect, tableName);
 
-				_jdbcDirectories.put(tableName, directory);
+				_jdbcDirectories.put(tableName, jdbcDirectory);
 
-				if (!directory.tableExists()) {
-					directory.create();
+				if (!jdbcDirectory.tableExists()) {
+					jdbcDirectory.create();
 				}
 			}
 			catch (IOException ioe) {
@@ -395,14 +317,14 @@ public class IndexAccessorImpl implements IndexAccessor {
 							"whether a table exists");
 				}
 
-				_manuallyCreateJdbcDirectory(directory, tableName);
+				_manuallyCreateJdbcDirectory(jdbcDirectory, tableName);
 			}
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 
-		return directory;
+		return jdbcDirectory;
 	}
 
 	private Directory _getLuceneDirRam() {
@@ -433,8 +355,65 @@ public class IndexAccessorImpl implements IndexAccessor {
 		return _LUCENE_TABLE_PREFIX + _companyId;
 	}
 
+	private void _initDialect() {
+		if (!PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_JDBC)) {
+			return;
+		}
+
+		Connection con = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			String url = con.getMetaData().getURL();
+
+			int x = url.indexOf(StringPool.COLON);
+			int y = url.indexOf(StringPool.COLON, x + 1);
+
+			String urlPrefix = url.substring(x + 1, y);
+
+			String dialectClass = PropsUtil.get(
+				PropsKeys.LUCENE_STORE_JDBC_DIALECT + urlPrefix);
+
+			if (dialectClass != null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("JDBC class implementation " + dialectClass);
+				}
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug("JDBC class implementation is null");
+				}
+			}
+
+			if (dialectClass != null) {
+				_dialect = (Dialect)Class.forName(dialectClass).newInstance();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+		finally{
+			DataAccess.cleanUp(con);
+		}
+
+		if (_dialect == null) {
+			_log.error("No JDBC dialect found");
+		}
+	}
+
+	private void _initIndexWriter() throws IOException {
+		if (_indexWriter == null) {
+			_indexWriter = new IndexWriter(
+				getLuceneDir(), LuceneHelperUtil.getAnalyzer(),
+				IndexWriter.MaxFieldLength.LIMITED);
+
+			_indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
+		}
+	}
+
 	private void _manuallyCreateJdbcDirectory(
-		JdbcDirectory directory, String tableName) {
+		JdbcDirectory jdbcDirectory, String tableName) {
 
 		// LEP-2181
 
@@ -451,11 +430,12 @@ public class IndexAccessorImpl implements IndexAccessor {
 			rs = metaData.getTables(null, null, tableName, null);
 
 			if (!rs.next()) {
-				JdbcTemplate jdbcTemplate = directory.getJdbcTemplate();
+				JdbcTemplate jdbcTemplate = jdbcDirectory.getJdbcTemplate();
 
-				jdbcTemplate.executeUpdate(directory.getTable().sqlCreate());
+				jdbcTemplate.executeUpdate(
+					jdbcDirectory.getTable().sqlCreate());
 
-				Class<?> lockClass = directory.getSettings().getLockClass();
+				Class<?> lockClass = jdbcDirectory.getSettings().getLockClass();
 
 				JdbcLock jdbcLock = null;
 
@@ -464,10 +444,10 @@ public class IndexAccessorImpl implements IndexAccessor {
 				}
 				catch (Exception e) {
 					throw new JdbcStoreException(
-						"Failed to create lock class " + lockClass);
+						"Could not create lock class " + lockClass);
 				}
 
-				jdbcLock.initializeDatabase(directory);
+				jdbcLock.initializeDatabase(jdbcDirectory);
 			}
 		}
 		catch (Exception e) {
@@ -477,6 +457,34 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 		finally {
 			DataAccess.cleanUp(con, null, rs);
+		}
+	}
+
+	private void _write(Term term, Document document) throws IOException {
+		synchronized (this) {
+			_initIndexWriter();
+
+			try {
+				if (term != null) {
+					_indexWriter.updateDocument(term, document);
+				}
+				else {
+					_indexWriter.addDocument(document);
+				}
+
+				_optimizeCount++;
+
+				if ((PropsValues.LUCENE_OPTIMIZE_INTERVAL == 0) ||
+					(_optimizeCount >= PropsValues.LUCENE_OPTIMIZE_INTERVAL)) {
+
+					_indexWriter.optimize();
+
+					_optimizeCount = 0;
+				}
+			}
+			finally {
+				_cleanUp();
+			}
 		}
 	}
 
@@ -493,9 +501,9 @@ public class IndexAccessorImpl implements IndexAccessor {
 	private long _companyId;
 	private Dialect _dialect;
 	private IndexWriter _indexWriter;
-	private int _optimizeCount;
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();
+	private int _optimizeCount;
 	private Map<String, Directory> _ramDirectories =
 		new ConcurrentHashMap<String, Directory>();
 
