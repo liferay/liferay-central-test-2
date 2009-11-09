@@ -53,7 +53,7 @@ public class DBFactoryUtil {
 		getDBFactory().setDB(type);
 	}
 
-	public void setDBFactory(DBFactory dbFactory) {
+	public static void setDBFactory(DBFactory dbFactory) {
 		_dbFactory = dbFactory;
 	}
 

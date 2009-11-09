@@ -56,11 +56,6 @@
 			<bean class="com.liferay.portal.captcha.CaptchaImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.dao.db.DBFactoryUtil" class="com.liferay.portal.kernel.dao.db.DBFactoryUtil">
-		<property name="DBFactory">
-			<bean class="com.liferay.portal.dao.db.DBFactoryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil">
 		<property name="mappingSqlQueryFactory">
 			<bean class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" />
