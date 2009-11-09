@@ -24,12 +24,6 @@ import java.util.List;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(${entity.name}Persistence.class.getName() + ".impl");
-	}
-
 	public void testCreate() throws Exception {
 		<#if entity.hasCompoundPK()>
 			${entity.PKClassName} pk = new ${entity.PKClassName}(
@@ -382,6 +376,12 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(${entity.varName}, false);
 
 		return ${entity.varName};
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(${entity.name}Persistence.class.getName() + ".impl");
 	}
 
 	private ${entity.name}Persistence _persistence;
