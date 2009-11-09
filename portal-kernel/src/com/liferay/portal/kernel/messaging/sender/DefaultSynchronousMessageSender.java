@@ -38,7 +38,7 @@ import com.liferay.portal.kernel.uuid.PortalUUID;
  * @author Michael C. Han
  */
 public class DefaultSynchronousMessageSender
-	implements SynchronousMessageSender{
+	implements SynchronousMessageSender {
 
 	public DefaultSynchronousMessageSender() {
 	}
@@ -63,19 +63,24 @@ public class DefaultSynchronousMessageSender
 	public Object send(String destinationName, Message message, long timeout)
 		throws MessageBusException {
 
-		if (!_messageBus.hasDestination(destinationName)) {
+		Destination destination = _messageBus.getDestination(destinationName);
+
+		if (destination == null) {
 			if (_log.isInfoEnabled()) {
-				_log.info("No destination configured for: " + destinationName);
+				_log.info(
+					"Destination " + destinationName + " is not configured");
 			}
+
 			return null;
 		}
 
-		if (_messageBus.getDestination(destinationName).
-				getMessageListenerCount() == 0) {
+		if (destination.getMessageListenerCount() == 0) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"No service providers listening on: " + destinationName);
+					"Destination " + destinationName +
+						" does not have any message listeners");
 			}
+
 			return null;
 		}
 

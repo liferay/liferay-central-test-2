@@ -65,12 +65,12 @@ public class DefaultMessageBus implements MessageBus {
 		shutdown(true);
 	}
 
-	public int getDestinationCount() {
-		return _destinations.size();
-	}
-
 	public Destination getDestination(String destinationName) {
 		return _destinations.get(destinationName);
+	}
+
+	public int getDestinationCount() {
+		return _destinations.size();
 	}
 
 	public Collection<String> getDestinationNames() {

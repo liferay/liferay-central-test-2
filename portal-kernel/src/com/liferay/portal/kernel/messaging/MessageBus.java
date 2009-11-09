@@ -40,11 +40,11 @@ public interface MessageBus {
 		String destinationName,
 		DestinationEventListener destinationEventListener);
 
+	public Destination getDestination(String destinationName);
+
 	public int getDestinationCount();
 
 	public Collection<String> getDestinationNames();
-
-	public Destination getDestination(String destinationName);
 
 	public Collection<Destination> getDestinations();
 
