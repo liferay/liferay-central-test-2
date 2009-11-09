@@ -30,6 +30,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = null;
 
+boolean alreadyExistingPage = false;
+
 long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 long[] nodeIds = null;
@@ -61,11 +63,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	addPageURL.setParameter("nodeId", String.valueOf(nodeId));
 	addPageURL.setParameter("title", keywords);
 	addPageURL.setParameter("editTitle", "1");
-	%>
 
-	<strong><aui:a cssClass="new-page" href="<%= addPageURL.toString() %>" label="create-a-new-page-on-this-topic" /></strong>
-
-	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
 
 	portletURL.setParameter("struts_action", "/wiki/search");
@@ -105,6 +103,10 @@ String keywords = ParamUtil.getString(request, "keywords");
 			long curNodeId = GetterUtil.getLong(doc.get("nodeId"));
 			String title = doc.get("title");
 
+			if (title.equalsIgnoreCase(keywords)) {
+				alreadyExistingPage = true;
+			}
+
 			WikiNode curNode = null;
 
 			try {
@@ -137,6 +139,10 @@ String keywords = ParamUtil.getString(request, "keywords");
 			resultRows.add(row);
 		}
 	%>
+
+		<c:if test="<%= !alreadyExistingPage %>">
+			<strong><aui:a cssClass="new-page" href="<%= addPageURL.toString() %>" label="create-a-new-page-on-this-topic" /></strong>
+		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
