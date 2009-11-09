@@ -337,7 +337,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		if (!PropsValues.WEBDAV_LITMUS) {
 			validate(fileName, true);
-			
+
 			if (!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
 				throw new SourceFileNameException(sourceFileName);
 			}
