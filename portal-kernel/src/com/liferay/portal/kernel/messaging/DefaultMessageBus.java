@@ -69,6 +69,10 @@ public class DefaultMessageBus implements MessageBus {
 		return _destinations.size();
 	}
 
+	public Destination getDestination(String destinationName) {
+		return _destinations.get(destinationName);
+	}
+
 	public Collection<String> getDestinationNames() {
 		return _destinations.keySet();
 	}

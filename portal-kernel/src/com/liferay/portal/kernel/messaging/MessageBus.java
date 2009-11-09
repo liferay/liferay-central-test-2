@@ -44,6 +44,8 @@ public interface MessageBus {
 
 	public Collection<String> getDestinationNames();
 
+	public Destination getDestination(String destinationName);
+
 	public Collection<Destination> getDestinations();
 
 	public boolean hasDestination(String destinationName);
