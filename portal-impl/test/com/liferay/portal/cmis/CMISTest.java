@@ -45,6 +45,15 @@ import org.apache.abdera.model.Workspace;
  */
 public class CMISTest extends TestCase {
 
+	public void setUp() throws Exception {
+		Entry folder = CMISUtil.getEntry(
+			_BASE_CHILDREN_URL, _LIFERAY_TEST, _cmisConstants.BASE_TYPE_FOLDER);
+
+		if (folder != null) {
+			CMISUtil.delete(folder);
+		}
+	}
+
 	public void testCRUD() throws Exception {
 		FileInputStream fis = new FileInputStream(_TEST_FILE);
 
@@ -100,15 +109,6 @@ public class CMISTest extends TestCase {
 			}
 
 			assertEquals(true, found);
-		}
-	}
-
-	protected void setUp() throws Exception {
-		Entry folder = CMISUtil.getEntry(
-			_BASE_CHILDREN_URL, _LIFERAY_TEST, _cmisConstants.BASE_TYPE_FOLDER);
-
-		if (folder != null) {
-			CMISUtil.delete(folder);
 		}
 	}
 

@@ -48,6 +48,14 @@ import org.apache.abdera.parser.Parser;
  */
 public class ParserTest extends TestCase {
 
+	public void setUp() throws Exception {
+		_abdera = Abdera.getInstance();
+
+		Factory factory = _abdera.getFactory();
+
+		factory.registerExtension(new CMISExtensionFactory());
+	}
+
 	public void testDocument() throws Exception {
 		Entry entry = (Entry)getElement("cmis-document.xml");
 
@@ -111,14 +119,6 @@ public class ParserTest extends TestCase {
 		Parser parser = _abdera.getParser();
 
 		return parser.parse(new FileInputStream(path)).getRoot();
-	}
-
-	protected void setUp() throws Exception {
-		_abdera = Abdera.getInstance();
-
-		Factory factory = _abdera.getFactory();
-
-		factory.registerExtension(new CMISExtensionFactory());
 	}
 
 	private static CMISConstants _cmisConstants = CMISConstants.getInstance();
