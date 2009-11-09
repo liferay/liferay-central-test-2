@@ -73,8 +73,6 @@ public class DocumentServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		InputStream is = null;
-
 		try {
 			long companyId = PortalInstances.getCompanyId(request);
 
@@ -94,8 +92,7 @@ public class DocumentServlet extends HttpServlet {
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			permissionChecker =
-				PermissionCheckerFactoryUtil.create(user, true);
+			permissionChecker = PermissionCheckerFactoryUtil.create(user, true);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
@@ -111,125 +108,12 @@ public class DocumentServlet extends HttpServlet {
 
 			String[] pathArray = StringUtil.split(path, StringPool.SLASH);
 
-			if (pathArray.length > 0 && pathArray.length <= 3) {
-				long groupId = 0;
-				long folderId = 0;
-				String name = null;
-				String fileName = null;
-
-				DLFileEntry fileEntry = null;
-
-				if (pathArray.length == 1) {
-					long fileShortcutId = GetterUtil.getLong(pathArray[0]);
-
-					DLFileShortcut fileShortcut =
-						DLFileShortcutServiceUtil.getFileShortcut(
-							fileShortcutId);
-
-					groupId = fileShortcut.getGroupId();
-					folderId = fileShortcut.getToFolderId();
-					name = fileShortcut.getToName();
-
-					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-						groupId, folderId, name);
-
-					fileName = fileEntry.getTitle();
-				}
-				else if (pathArray.length == 2) {
-					groupId = GetterUtil.getLong(pathArray[0]);
-
-					fileEntry = DLFileEntryLocalServiceUtil.
-						getFileEntryByUuidAndGroupId(pathArray[1], groupId);
-
-					folderId = fileEntry.getFolderId();
-					fileName = fileEntry.getTitle();
-					name = fileEntry.getName();
-				}
-				else {
-					groupId = GetterUtil.getLong(pathArray[0]);
-					folderId = GetterUtil.getLong(pathArray[1]);
-					fileName = HttpUtil.decodeURL(pathArray[2], true);
-
-					fileEntry = DLFileEntryServiceUtil.getFileEntryByTitle(
-						groupId, folderId, fileName);
-
-					name = fileEntry.getName();
-				}
-
-				if (fileEntry != null) {
-					DLFileEntryPermission.check(
-						permissionChecker, fileEntry, ActionKeys.VIEW);
-
-					double version = ParamUtil.getDouble(request, "version");
-
-					String targetExtension = ParamUtil.getString(
-						request, "targetExtension");
-
-					if (version == 0) {
-						if (fileEntry.getVersion() > 0) {
-							version = fileEntry.getVersion();
-						}
-						else {
-							throw new NoSuchFileEntryException();
-						}
-					}
-
-					is = DLFileEntryLocalServiceUtil.getFileAsStream(
-						companyId, userId, groupId, folderId, name, version);
-
-					boolean converted = false;
-
-					if (Validator.isNotNull(targetExtension)) {
-						String id = DocumentConversionUtil.getTempFileId(
-							fileEntry.getFileEntryId(), version);
-
-						String sourceExtension =
-							FileUtil.getExtension(fileName);
-
-						InputStream convertedIS =
-							DocumentConversionUtil.convert(
-								id, is, sourceExtension, targetExtension);
-
-						if ((convertedIS != null) && (convertedIS != is)) {
-							StringBuilder sb = new StringBuilder();
-
-							sb.append(FileUtil.stripExtension(fileName));
-							sb.append(StringPool.PERIOD);
-							sb.append(targetExtension);
-
-							fileName = sb.toString();
-
-							is = convertedIS;
-
-							converted = true;
-						}
-					}
-
-					int contentLength = 0;
-
-					if (!converted) {
-						if (version >= fileEntry.getVersion()) {
-							contentLength = fileEntry.getSize();
-						}
-						else {
-							DLFileVersion fileVersion =
-								DLFileVersionLocalServiceUtil.getFileVersion(
-									groupId, folderId, name, version);
-
-							contentLength = fileVersion.getSize();
-						}
-					}
-
-					String contentType = MimeTypesUtil.getContentType(fileName);
-
-					ServletResponseUtil.sendFile(
-						response, fileName, is, contentLength, contentType);
-
-					return;
-				}
+			if ((pathArray.length > 0) && (pathArray.length <= 3)) {
+				sendFile(request, response, permissionChecker, pathArray);
 			}
-
-			throw new NoSuchFileEntryException();
+			else {
+				throw new NoSuchFileEntryException();
+			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			PortalUtil.sendError(
@@ -237,6 +121,131 @@ public class DocumentServlet extends HttpServlet {
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
+		}
+	}
+
+	protected void sendFile(
+			HttpServletRequest request, HttpServletResponse response,
+			PermissionChecker permissionChecker, String[] pathArray)
+		throws Exception {
+
+		long groupId = 0;
+		long folderId = 0;
+		String name = null;
+		String fileName = null;
+
+		DLFileEntry fileEntry = null;
+
+		if (pathArray.length == 1) {
+			long fileShortcutId = GetterUtil.getLong(pathArray[0]);
+
+			DLFileShortcut fileShortcut =
+				DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
+
+			groupId = fileShortcut.getGroupId();
+			folderId = fileShortcut.getToFolderId();
+			name = fileShortcut.getToName();
+
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				groupId, folderId, name);
+
+			fileName = fileEntry.getTitle();
+		}
+		else if (pathArray.length == 2) {
+			groupId = GetterUtil.getLong(pathArray[0]);
+
+			fileEntry =
+				DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
+					pathArray[1], groupId);
+
+			folderId = fileEntry.getFolderId();
+			fileName = fileEntry.getTitle();
+			name = fileEntry.getName();
+		}
+		else {
+			groupId = GetterUtil.getLong(pathArray[0]);
+			folderId = GetterUtil.getLong(pathArray[1]);
+			fileName = HttpUtil.decodeURL(pathArray[2], true);
+
+			fileEntry = DLFileEntryServiceUtil.getFileEntryByTitle(
+				groupId, folderId, fileName);
+
+			name = fileEntry.getName();
+		}
+
+		if (fileEntry == null) {
+			throw new NoSuchFileEntryException();
+		}
+
+		DLFileEntryPermission.check(
+			permissionChecker, fileEntry, ActionKeys.VIEW);
+
+		double version = ParamUtil.getDouble(request, "version");
+
+		String targetExtension = ParamUtil.getString(
+			request, "targetExtension");
+
+		if (version == 0) {
+			if (fileEntry.getVersion() > 0) {
+				version = fileEntry.getVersion();
+			}
+			else {
+				throw new NoSuchFileEntryException();
+			}
+		}
+
+		InputStream is = null;
+
+		try {
+			is = DLFileEntryLocalServiceUtil.getFileAsStream(
+				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
+				groupId, folderId, name, version);
+
+			boolean converted = false;
+
+			if (Validator.isNotNull(targetExtension)) {
+				String id = DocumentConversionUtil.getTempFileId(
+					fileEntry.getFileEntryId(), version);
+
+				String sourceExtension = FileUtil.getExtension(fileName);
+
+				InputStream convertedIS = DocumentConversionUtil.convert(
+					id, is, sourceExtension, targetExtension);
+
+				if ((convertedIS != null) && (convertedIS != is)) {
+					StringBuilder sb = new StringBuilder();
+
+					sb.append(FileUtil.stripExtension(fileName));
+					sb.append(StringPool.PERIOD);
+					sb.append(targetExtension);
+
+					fileName = sb.toString();
+
+					is = convertedIS;
+
+					converted = true;
+				}
+			}
+
+			int contentLength = 0;
+
+			if (!converted) {
+				if (version >= fileEntry.getVersion()) {
+					contentLength = fileEntry.getSize();
+				}
+				else {
+					DLFileVersion fileVersion =
+						DLFileVersionLocalServiceUtil.getFileVersion(
+							groupId, folderId, name, version);
+
+					contentLength = fileVersion.getSize();
+				}
+			}
+
+			String contentType = MimeTypesUtil.getContentType(fileName);
+
+			ServletResponseUtil.sendFile(
+				response, fileName, is, contentLength, contentType);
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);

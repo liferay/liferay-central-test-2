@@ -131,10 +131,10 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			DLFolder folder = fileEntry.getFolder();
 
-			String rowURL = themeDisplay.getPortalURL() + "/document/" + scopeGroupId + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
+			String rowHREF = themeDisplay.getPortalURL() + "/document/" + scopeGroupId + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
 
-			row.addText(folder.getName(), rowURL);
-			row.addText(fileEntry.getTitle(), rowURL);
+			row.addText(folder.getName(), rowHREF);
+			row.addText(fileEntry.getTitle(), rowHREF);
 
 			// Score
 

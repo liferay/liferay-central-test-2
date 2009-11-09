@@ -145,7 +145,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Title
 
-	sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 
 	sb.append("<img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());

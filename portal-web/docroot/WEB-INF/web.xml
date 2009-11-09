@@ -715,7 +715,6 @@
 		<servlet-class>com.liferay.portal.servlet.DocumentServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
-	
 	<servlet>
 		<servlet-name>Facebook Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.FacebookServlet</servlet-class>
@@ -866,7 +865,7 @@
 	<servlet-mapping>
 		<servlet-name>Document Servlet</servlet-name>
 		<url-pattern>/document/*</url-pattern>
-	</servlet-mapping>	
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Facebook Servlet</servlet-name>
 		<url-pattern>/facebook/*</url-pattern>
