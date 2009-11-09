@@ -42,6 +42,13 @@ import java.util.List;
  */
 public class AssetCategoryPropertyPersistenceTest
 	extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (AssetCategoryPropertyPersistence)PortalBeanLocatorUtil.locate(AssetCategoryPropertyPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -191,13 +198,6 @@ public class AssetCategoryPropertyPersistenceTest
 		_persistence.update(assetCategoryProperty, false);
 
 		return assetCategoryProperty;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (AssetCategoryPropertyPersistence)PortalBeanLocatorUtil.locate(AssetCategoryPropertyPersistence.class.getName() +
-				".impl");
 	}
 
 	private AssetCategoryPropertyPersistence _persistence;

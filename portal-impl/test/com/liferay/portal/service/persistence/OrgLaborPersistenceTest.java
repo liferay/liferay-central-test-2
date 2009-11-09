@@ -38,6 +38,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (OrgLaborPersistence)PortalBeanLocatorUtil.locate(OrgLaborPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -200,13 +207,6 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(orgLabor, false);
 
 		return orgLabor;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (OrgLaborPersistence)PortalBeanLocatorUtil.locate(OrgLaborPersistence.class.getName() +
-				".impl");
 	}
 
 	private OrgLaborPersistence _persistence;

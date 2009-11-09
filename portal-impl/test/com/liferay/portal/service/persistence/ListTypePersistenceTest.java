@@ -38,6 +38,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ListTypePersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ListTypePersistence)PortalBeanLocatorUtil.locate(ListTypePersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		int pk = nextInt();
 
@@ -157,13 +164,6 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(listType, false);
 
 		return listType;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ListTypePersistence)PortalBeanLocatorUtil.locate(ListTypePersistence.class.getName() +
-				".impl");
 	}
 
 	private ListTypePersistence _persistence;

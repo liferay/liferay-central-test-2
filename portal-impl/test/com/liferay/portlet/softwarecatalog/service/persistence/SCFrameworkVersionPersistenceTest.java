@@ -41,6 +41,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(SCFrameworkVersionPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -198,13 +205,6 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(scFrameworkVersion, false);
 
 		return scFrameworkVersion;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(SCFrameworkVersionPersistence.class.getName() +
-				".impl");
 	}
 
 	private SCFrameworkVersionPersistence _persistence;

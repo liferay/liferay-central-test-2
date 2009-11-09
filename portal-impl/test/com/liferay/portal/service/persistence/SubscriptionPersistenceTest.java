@@ -39,6 +39,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (SubscriptionPersistence)PortalBeanLocatorUtil.locate(SubscriptionPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -186,13 +193,6 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(subscription, false);
 
 		return subscription;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (SubscriptionPersistence)PortalBeanLocatorUtil.locate(SubscriptionPersistence.class.getName() +
-				".impl");
 	}
 
 	private SubscriptionPersistence _persistence;

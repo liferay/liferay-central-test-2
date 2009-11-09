@@ -38,6 +38,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class CountryPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (CountryPersistence)PortalBeanLocatorUtil.locate(CountryPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -168,13 +175,6 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(country, false);
 
 		return country;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (CountryPersistence)PortalBeanLocatorUtil.locate(CountryPersistence.class.getName() +
-				".impl");
 	}
 
 	private CountryPersistence _persistence;

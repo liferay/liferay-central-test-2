@@ -38,6 +38,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShardPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ShardPersistence)PortalBeanLocatorUtil.locate(ShardPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -159,13 +166,6 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(shard, false);
 
 		return shard;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ShardPersistence)PortalBeanLocatorUtil.locate(ShardPersistence.class.getName() +
-				".impl");
 	}
 
 	private ShardPersistence _persistence;

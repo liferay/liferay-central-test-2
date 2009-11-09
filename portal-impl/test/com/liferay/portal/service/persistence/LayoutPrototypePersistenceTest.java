@@ -39,6 +39,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (LayoutPrototypePersistence)PortalBeanLocatorUtil.locate(LayoutPrototypePersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -173,13 +180,6 @@ public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(layoutPrototype, false);
 
 		return layoutPrototype;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (LayoutPrototypePersistence)PortalBeanLocatorUtil.locate(LayoutPrototypePersistence.class.getName() +
-				".impl");
 	}
 
 	private LayoutPrototypePersistence _persistence;

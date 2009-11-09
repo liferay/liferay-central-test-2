@@ -40,6 +40,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -180,13 +187,6 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		_persistence.update(scProductScreenshot, false);
 
 		return scProductScreenshot;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName() +
-				".impl");
 	}
 
 	private SCProductScreenshotPersistence _persistence;

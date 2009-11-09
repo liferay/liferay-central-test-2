@@ -38,6 +38,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class RolePersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (RolePersistence)PortalBeanLocatorUtil.locate(RolePersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -174,13 +181,6 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(role, false);
 
 		return role;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (RolePersistence)PortalBeanLocatorUtil.locate(RolePersistence.class.getName() +
-				".impl");
 	}
 
 	private RolePersistence _persistence;

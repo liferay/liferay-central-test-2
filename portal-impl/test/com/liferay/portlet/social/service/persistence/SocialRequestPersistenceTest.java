@@ -40,6 +40,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (SocialRequestPersistence)PortalBeanLocatorUtil.locate(SocialRequestPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -199,13 +206,6 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(socialRequest, false);
 
 		return socialRequest;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (SocialRequestPersistence)PortalBeanLocatorUtil.locate(SocialRequestPersistence.class.getName() +
-				".impl");
 	}
 
 	private SocialRequestPersistence _persistence;

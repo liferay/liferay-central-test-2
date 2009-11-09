@@ -39,6 +39,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (MBDiscussionPersistence)PortalBeanLocatorUtil.locate(MBDiscussionPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -164,13 +171,6 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(mbDiscussion, false);
 
 		return mbDiscussion;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (MBDiscussionPersistence)PortalBeanLocatorUtil.locate(MBDiscussionPersistence.class.getName() +
-				".impl");
 	}
 
 	private MBDiscussionPersistence _persistence;

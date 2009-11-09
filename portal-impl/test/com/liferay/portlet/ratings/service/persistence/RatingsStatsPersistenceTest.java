@@ -39,6 +39,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -172,13 +179,6 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(ratingsStats, false);
 
 		return ratingsStats;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName() +
-				".impl");
 	}
 
 	private RatingsStatsPersistence _persistence;

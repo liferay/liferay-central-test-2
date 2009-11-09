@@ -41,6 +41,13 @@ import java.util.List;
  */
 public class JournalArticleResourcePersistenceTest
 	extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -164,13 +171,6 @@ public class JournalArticleResourcePersistenceTest
 		_persistence.update(journalArticleResource, false);
 
 		return journalArticleResource;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName() +
-				".impl");
 	}
 
 	private JournalArticleResourcePersistence _persistence;

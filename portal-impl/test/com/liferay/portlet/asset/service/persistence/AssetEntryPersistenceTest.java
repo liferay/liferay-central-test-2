@@ -40,6 +40,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (AssetEntryPersistence)PortalBeanLocatorUtil.locate(AssetEntryPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -233,13 +240,6 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(assetEntry, false);
 
 		return assetEntry;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (AssetEntryPersistence)PortalBeanLocatorUtil.locate(AssetEntryPersistence.class.getName() +
-				".impl");
 	}
 
 	private AssetEntryPersistence _persistence;

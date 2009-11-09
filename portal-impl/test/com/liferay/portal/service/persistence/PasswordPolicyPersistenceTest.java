@@ -40,6 +40,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (PasswordPolicyPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -256,13 +263,6 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(passwordPolicy, false);
 
 		return passwordPolicy;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (PasswordPolicyPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyPersistence.class.getName() +
-				".impl");
 	}
 
 	private PasswordPolicyPersistence _persistence;

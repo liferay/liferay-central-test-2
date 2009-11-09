@@ -39,6 +39,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class LockPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (LockPersistence)PortalBeanLocatorUtil.locate(LockPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -183,13 +190,6 @@ public class LockPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(lock, false);
 
 		return lock;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (LockPersistence)PortalBeanLocatorUtil.locate(LockPersistence.class.getName() +
-				".impl");
 	}
 
 	private LockPersistence _persistence;

@@ -38,6 +38,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserGroupPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (UserGroupPersistence)PortalBeanLocatorUtil.locate(UserGroupPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -166,13 +173,6 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(userGroup, false);
 
 		return userGroup;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (UserGroupPersistence)PortalBeanLocatorUtil.locate(UserGroupPersistence.class.getName() +
-				".impl");
 	}
 
 	private UserGroupPersistence _persistence;

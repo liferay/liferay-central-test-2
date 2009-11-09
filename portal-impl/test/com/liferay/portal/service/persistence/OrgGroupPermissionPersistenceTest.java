@@ -39,6 +39,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (OrgGroupPermissionPersistence)PortalBeanLocatorUtil.locate(OrgGroupPermissionPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		OrgGroupPermissionPK pk = new OrgGroupPermissionPK(nextLong(),
 				nextLong(), nextLong());
@@ -169,13 +176,6 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(orgGroupPermission, false);
 
 		return orgGroupPermission;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (OrgGroupPermissionPersistence)PortalBeanLocatorUtil.locate(OrgGroupPermissionPersistence.class.getName() +
-				".impl");
 	}
 
 	private OrgGroupPermissionPersistence _persistence;

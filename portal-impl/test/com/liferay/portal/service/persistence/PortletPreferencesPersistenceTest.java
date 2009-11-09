@@ -39,6 +39,13 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PortletPreferencesPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (PortletPreferencesPersistence)PortalBeanLocatorUtil.locate(PortletPreferencesPersistence.class.getName() +
+				".impl");
+	}
+
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -175,13 +182,6 @@ public class PortletPreferencesPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(portletPreferences, false);
 
 		return portletPreferences;
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (PortletPreferencesPersistence)PortalBeanLocatorUtil.locate(PortletPreferencesPersistence.class.getName() +
-				".impl");
 	}
 
 	private PortletPreferencesPersistence _persistence;
