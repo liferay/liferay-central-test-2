@@ -78,323 +78,404 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 	}
 </script>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />save(); return false;">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "save(); return false;" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+<liferay-ui:tabs
+	names="email-from,page-added-email,page-updated-email,display-settings,rss"
+	param="tabs2"
+	url="<%= portletURL %>"
+/>
 
-	<liferay-ui:tabs
-		names="email-from,page-added-email,page-updated-email,display-settings,rss"
-		param="tabs2"
-		url="<%= portletURL %>"
-	/>
+<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
+<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
+<liferay-ui:error key="emailPageAddedBody" message="please-enter-a-valid-body" />
+<liferay-ui:error key="emailPageAddedSignature" message="please-enter-a-valid-signature" />
+<liferay-ui:error key="emailPageAddedSubjectPrefix" message="please-enter-a-valid-subject" />
+<liferay-ui:error key="emailPageUpdatedBody" message="please-enter-a-valid-body" />
+<liferay-ui:error key="emailPageUpdatedSignature" message="please-enter-a-valid-signature" />
+<liferay-ui:error key="emailPageUpdatedSubjectPrefix" message="please-enter-a-valid-subject" />
+<liferay-ui:error key="visibleNodesCount" message="please-specify-at-least-one-visible-node" />
 
-	<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
-	<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
-	<liferay-ui:error key="emailPageAddedBody" message="please-enter-a-valid-body" />
-	<liferay-ui:error key="emailPageAddedSignature" message="please-enter-a-valid-signature" />
-	<liferay-ui:error key="emailPageAddedSubjectPrefix" message="please-enter-a-valid-subject" />
-	<liferay-ui:error key="emailPageUpdatedBody" message="please-enter-a-valid-body" />
-	<liferay-ui:error key="emailPageUpdatedSignature" message="please-enter-a-valid-signature" />
-	<liferay-ui:error key="emailPageUpdatedSubjectPrefix" message="please-enter-a-valid-subject" />
-	<liferay-ui:error key="visibleNodesCount" message="please-specify-at-least-one-visible-node" />
+<c:choose>
+	<c:when test='<%= tabs2.equals("email-from") %>'>
+		<table class="lfr-table">
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="name" />
+			</td>
+			<td>
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="address" />
+			</td>
+			<td>
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+			</td>
+		</tr>
+		</table>
 
-	<c:choose>
-		<c:when test='<%= tabs2.equals("email-from") %>'>
-			<aui:fieldset>
-				<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" value="<%= emailFromName %>" />
+		<br />
 
-				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
-			</aui:fieldset>
+		<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+		<br /><br />
 
-			<br /><br />
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<strong>[$COMPANY_ID$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$COMPANY_MX$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$COMPANY_NAME$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$COMMUNITY_NAME$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_USER_ADDRESS$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_USER_NAME$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-user-who-added-the-page" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PORTLET_NAME$]</strong>
+			</td>
+			<td>
+				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.startsWith("page-") %>'>
+		<table class="lfr-table">
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="enabled" />
+			</td>
+			<td>
+				<c:choose>
+					<c:when test='<%= tabs2.equals("page-added-email") %>'>
+						<liferay-ui:input-checkbox param="emailPageAddedEnabled" defaultValue="<%= WikiUtil.getEmailPageAddedEnabled(preferences) %>" />
+					</c:when>
+					<c:when test='<%= tabs2.equals("page-updated-email") %>'>
+						<liferay-ui:input-checkbox param="emailPageUpdatedEnabled" defaultValue="<%= WikiUtil.getEmailPageUpdatedEnabled(preferences) %>" />
+					</c:when>
+				</c:choose>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="subject-prefix" />
+			</td>
+			<td>
+				<c:choose>
+					<c:when test='<%= tabs2.equals("page-added-email") %>'>
+						<input class="lfr-input-text" name="<portlet:namespace />emailPageAddedSubjectPrefix" type="text" value="<%= emailPageAddedSubjectPrefix %>" />
+					</c:when>
+					<c:when test='<%= tabs2.equals("page-updated-email") %>'>
+						<input class="lfr-input-text" name="<portlet:namespace />emailPageUpdatedSubjectPrefix" type="text" value="<%= emailPageUpdatedSubjectPrefix %>" />
+					</c:when>
+				</c:choose>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="body" />
+			</td>
+			<td>
+				<textarea class="lfr-textarea" name="<%= bodyEditorParam %>" wrap="soft"><%= bodyEditorBody %></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="signature" />
+			</td>
+			<td>
+				<textarea class="lfr-textarea" name="<%= signatureEditorParam %>" wrap="soft"><%= signatureEditorBody %></textarea>
+			</td>
+		</tr>
+		</table>
 
+		<br />
+
+		<strong><liferay-ui:message key="definition-of-terms" /></strong>
+
+		<br /><br />
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<strong>[$COMPANY_ID$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$COMPANY_MX$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$COMPANY_NAME$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$COMMUNITY_NAME$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$DIFFS_URL$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-url-of-the-page-comparing-this-page-content-with-the-previous-version" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$FROM_ADDRESS$]</strong>
+			</td>
+			<td>
+				<%= emailFromAddress %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$FROM_NAME$]</strong>
+			</td>
+			<td>
+				<%= emailFromName %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$NODE_NAME$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-node-in-which-the-page-was-added" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_CONTENT$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-page-content" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_DATE_UPDATE$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-date-of-the-modifications" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_DIFFS$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-page-content-compared-with-the-previous-version-page-content" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_ID$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-page-id" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_SUMMARY$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-summary-of-the-page-or-the-modifications" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_TITLE$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-page-title" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_URL$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-page-url" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_USER_ADDRESS$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PAGE_USER_NAME$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-user-who-added-the-page" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PORTAL_URL$]</strong>
+			</td>
+			<td>
+				<%= company.getVirtualHost() %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$PORTLET_NAME$]</strong>
+			</td>
+			<td>
+				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$TO_ADDRESS$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-address-of-the-email-recipient" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>[$TO_NAME$]</strong>
+			</td>
+			<td>
+				<liferay-ui:message key="the-name-of-the-email-recipient" />
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("display-settings") %>'>
+		<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED || PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
 			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$COMPANY_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_MX$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMMUNITY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_USER_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_USER_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-user-who-added-the-page" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
+
+			<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED %>">
+				<tr>
+					<td class="lfr-label">
+						<liferay-ui:message key="enable-page-ratings" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="enablePageRatings" defaultValue="<%= enablePageRatings %>" />
+					</td>
+				</tr>
+			</c:if>
+
+			<c:if test="<%= PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
+				<tr>
+					<td class="lfr-label">
+						<liferay-ui:message key="enable-comments" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
+					</td>
+				</tr>
+				<tr>
+					<td class="lfr-label">
+						<liferay-ui:message key="enable-comment-ratings" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
+					</td>
+				</tr>
+			</c:if>
+
 			</table>
 
 			<br />
-		</c:when>
-		<c:when test='<%= tabs2.startsWith("page-") %>'>
-			<aui:fieldset>
-				<c:choose>
-					<c:when test='<%= tabs2.equals("page-added-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailPageAddedEnabled" type="checkbox" value="<%= WikiUtil.getEmailPageAddedEnabled(preferences) %>" />
-					</c:when>
-					<c:when test='<%= tabs2.equals("page-updated-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailPageUpdatedEnabled" type="checkbox" value="<%= WikiUtil.getEmailPageUpdatedEnabled(preferences) %>" />
-					</c:when>
-				</c:choose>
+		</c:if>
 
-				<c:choose>
-					<c:when test='<%= tabs2.equals("page-added-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="emailPageAddedSubjectPrefix" type="text" value="<%= emailPageAddedSubjectPrefix %>" />
-					</c:when>
-					<c:when test='<%= tabs2.equals("page-updated-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="emailPageUpdatedSubjectPrefix" type="text" value="<%= emailPageUpdatedSubjectPrefix %>" />
-					</c:when>
-				</c:choose>
-
-				<aui:input cssClass="lfr-textarea-container" label="body" name="<%= bodyEditorParam %>" type="textarea" value="<%= bodyEditorBody %>" />
-
-				<aui:input cssClass="lfr-textarea-container" label="signature" name="<%= signatureEditorParam %>"  type="textarea" value="<%= signatureEditorBody %>" wrap="soft" />
-			</aui:fieldset>
-
-			<strong><liferay-ui:message key="definition-of-terms" /></strong>
-
-			<br /><br />
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<strong>[$COMPANY_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_MX$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMPANY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$COMMUNITY_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$DIFFS_URL$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-url-of-the-page-comparing-this-page-content-with-the-previous-version" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_ADDRESS$]</strong>
-				</td>
-				<td>
-					<%= emailFromAddress %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$FROM_NAME$]</strong>
-				</td>
-				<td>
-					<%= emailFromName %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$NODE_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-node-in-which-the-page-was-added" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_CONTENT$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-content" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_DATE_UPDATE$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-date-of-the-modifications" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_DIFFS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-content-compared-with-the-previous-version-page-content" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_ID$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-id" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_SUMMARY$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-summary-of-the-page-or-the-modifications" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_TITLE$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-title" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_URL$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-page-url" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_USER_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PAGE_USER_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-user-who-added-the-page" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTAL_URL$]</strong>
-				</td>
-				<td>
-					<%= company.getVirtualHost() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$PORTLET_NAME$]</strong>
-				</td>
-				<td>
-					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_ADDRESS$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-address-of-the-email-recipient" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>[$TO_NAME$]</strong>
-				</td>
-				<td>
-					<liferay-ui:message key="the-name-of-the-email-recipient" />
-				</td>
-			</tr>
-			</table>
-
-			<br />
-		</c:when>
-		<c:when test='<%= tabs2.equals("display-settings") %>'>
-			<aui:fieldset>
-				<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED || PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
-					<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED %>">
-						<aui:input inlineLabel="left" label="enable-page-ratings" name="enablePageRatings" type="checkbox" value="<%= enablePageRatings %>" />
-					</c:if>
-
-					<c:if test="<%= PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
-						<aui:input inlineLabel="left" label="enable-comments" name="enableComments" type="checkbox" value="<%= enableComments %>" />
-
-						<aui:input inlineLabel="left" label="enable-comment-ratings" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
-					</c:if>
-				</c:if>
-			</aui:fieldset>
-
-			<aui:fieldset>
-				<aui:legend label="visible-wikis" />
-				<aui:input name="visibleNodes" type="hidden" value="" />
-				<aui:input name="hiddenNodes" type="hidden" value="" />
+		<table class="lfr-table">
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="visible-wikis" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input name="<portlet:namespace />visibleNodes" type="hidden" value="" />
+				<input name="<portlet:namespace />hiddenNodes" type="hidden" value="" />
 
 				<%
 				Set<String> currentVisibleNodes = SetUtil.fromArray(StringUtil.split(allNodes));
@@ -448,43 +529,58 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 					leftList="<%= leftList %>"
 					rightList="<%= rightList %>"
 				/>
-			</aui:fieldset>
-		</c:when>
-		<c:when test='<%= tabs2.equals("rss") %>'>
-			<aui:fieldset>
-				<aui:select label="maximum-items-to-display" name="rssDelta">
-					<aui:option selected="<%= rssDelta == 1 %>" label="1" />
-					<aui:option selected="<%= rssDelta == 2 %>" label="2" />
-					<aui:option selected="<%= rssDelta == 3 %>" label="3" />
-					<aui:option selected="<%= rssDelta == 4 %>" label="4" />
-					<aui:option selected="<%= rssDelta == 5 %>" label="5" />
-					<aui:option selected="<%= rssDelta == 10 %>" label="10" />
-					<aui:option selected="<%= rssDelta == 15 %>" label="15" />
-					<aui:option selected="<%= rssDelta == 20 %>" label="20" />
-					<aui:option selected="<%= rssDelta == 25 %>" label="25" />
-					<aui:option selected="<%= rssDelta == 30 %>" label="30" />
-					<aui:option selected="<%= rssDelta == 40 %>" label="40" />
-					<aui:option selected="<%= rssDelta == 50 %>" label="50" />
-					<aui:option selected="<%= rssDelta == 60 %>" label="60" />
-					<aui:option selected="<%= rssDelta == 70 %>" label="70" />
-					<aui:option selected="<%= rssDelta == 80 %>" label="80" />
-					<aui:option selected="<%= rssDelta == 90 %>" label="90" />
-					<aui:option selected="<%= rssDelta == 100 %>" label="100" />
-				</aui:select>
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("rss") %>'>
+		<table class="lfr-table">
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="maximum-items-to-display" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />rssDelta">
+					<option <%= (rssDelta == 1) ? "selected" : "" %> value="1">1</option>
+					<option <%= (rssDelta == 2) ? "selected" : "" %> value="2">2</option>
+					<option <%= (rssDelta == 3) ? "selected" : "" %> value="3">3</option>
+					<option <%= (rssDelta == 4) ? "selected" : "" %> value="4">4</option>
+					<option <%= (rssDelta == 5) ? "selected" : "" %> value="5">5</option>
+					<option <%= (rssDelta == 10) ? "selected" : "" %> value="10">10</option>
+					<option <%= (rssDelta == 15) ? "selected" : "" %> value="15">15</option>
+					<option <%= (rssDelta == 20) ? "selected" : "" %> value="20">20</option>
+					<option <%= (rssDelta == 25) ? "selected" : "" %> value="25">25</option>
+					<option <%= (rssDelta == 30) ? "selected" : "" %> value="30">30</option>
+					<option <%= (rssDelta == 40) ? "selected" : "" %> value="40">40</option>
+					<option <%= (rssDelta == 50) ? "selected" : "" %> value="50">50</option>
+					<option <%= (rssDelta == 60) ? "selected" : "" %> value="60">60</option>
+					<option <%= (rssDelta == 70) ? "selected" : "" %> value="70">70</option>
+					<option <%= (rssDelta == 80) ? "selected" : "" %> value="80">80</option>
+					<option <%= (rssDelta == 90) ? "selected" : "" %> value="90">90</option>
+					<option <%= (rssDelta == 100) ? "selected" : "" %> value="100">100</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="display-style" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />rssDisplayStyle">
+					<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>"><liferay-ui:message key="full-content" /></option>
+					<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>"><liferay-ui:message key="abstract" /></option>
+					<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>"><liferay-ui:message key="title" /></option>
+				</select>
+			</td>
+		</tr>
+		</table>
+	</c:when>
+</c:choose>
 
-				<aui:select label="display-style" name="rssDisplayStyle" >
-					<aui:option selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>" label="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>" />
-					<aui:option selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" label="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" />
-					<aui:option selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" label="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" />
-				</aui:select>
-			</aui:fieldset>
-		</c:when>
-	</c:choose>
+<br />
 
-	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="save" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-		<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
-	</aui:button-row>
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
-</aui:form>
+</form>
