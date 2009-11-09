@@ -1207,7 +1207,9 @@ public class DLFileEntryLocalServiceImpl
 	protected String getTitle(String name, String title) {
 		String extension = FileUtil.getExtension(name);
 
-		if (!title.toLowerCase().endsWith(StringPool.PERIOD + extension)) {
+		if (Validator.isNotNull(extension) &&
+			!title.toLowerCase().endsWith(StringPool.PERIOD + extension)) {
+
 			title += StringPool.PERIOD + extension;
 		}
 
