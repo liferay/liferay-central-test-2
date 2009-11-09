@@ -35,7 +35,7 @@ import java.util.Map;
  */
 public interface WorkflowInstance {
 
-	public List<WorkflowInstance> getChildren();
+	public List<WorkflowInstance> getChildrenWorkflowInstances();
 
 	public Map<String, Object> getContext();
 
@@ -43,7 +43,7 @@ public interface WorkflowInstance {
 
 	public Date getEndDate();
 
-	public WorkflowInstance getParent();
+	public WorkflowInstance getParentWorkflowInstance();
 
 	public Date getStartDate();
 
