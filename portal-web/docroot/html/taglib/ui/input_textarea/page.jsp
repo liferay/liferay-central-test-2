@@ -32,4 +32,18 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 String value = ParamUtil.getString(request, param, defaultValue);
 %>
 
-<textarea class="lfr-textarea" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onChange="Liferay.Util.checkMaxLength(this, <%= ModelHintsConstants.TEXTAREA_MAX_LENGTH %>);" onKeyDown="Liferay.Util.disableEsc();" onKeyPress="Liferay.Util.checkMaxLength(this, <%= ModelHintsConstants.TEXTAREA_MAX_LENGTH %>);"><%= value %></textarea>
+<textarea class="lfr-textarea" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onKeyDown="Liferay.Util.disableEsc();"><%= value %></textarea>
+
+<script type="text/javascript">
+	AUI().ready(
+		'char-counter',
+		function(A) {
+			new A.CharCounter(
+				{
+					input: '#<%= namespace %><%= param %>',
+					maxLength: <%= ModelHintsConstants.TEXTAREA_MAX_LENGTH %>
+				}
+			);
+		}
+	);
+</script>
