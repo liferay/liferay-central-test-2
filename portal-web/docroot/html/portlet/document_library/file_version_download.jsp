@@ -35,13 +35,11 @@ String[] conversions = (String[])objArray[2];
 PortletURL redirectURL = (PortletURL)objArray[3];
 Boolean isLocked = (Boolean)objArray[4];
 Boolean hasLock = (Boolean)objArray[5];
-
-String extension = FileUtil.getExtension(fileEntry.getTitle());
 %>
 
 <liferay-ui:icon
-	image='<%= "../file_system/small/" + extension %>'
-	message="<%= extension.toUpperCase() %>"
+	image='<%= "../file_system/small/" + DLUtil.getFileExtension(fileEntry.getTitle()) %>'
+	message="<%= FileUtil.getExtension(fileEntry.getTitle()).toUpperCase() %>"
 	url='<%= themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileVersion.getVersion() %>'
 	label="<%= true %>"
 />
