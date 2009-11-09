@@ -35,8 +35,6 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
 
 /**
  * <a href="LuceneHelperUtil.java.html"><b><i>View Source</i></b></a>
@@ -173,16 +171,6 @@ public class LuceneHelperUtil {
 
 	public static Analyzer getAnalyzer() {
 		return getLuceneHelper().getAnalyzer();
-	}
-
-	public static FSDirectory getDirectory(String path)
-		throws IOException {
-
-		return getLuceneHelper().getDirectory(path);
-	}
-
-	public static Directory getLuceneDir(long companyId) {
-		return getLuceneHelper().getLuceneDir(companyId);
 	}
 
 	public static LuceneHelper getLuceneHelper() {

@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.store.Directory;
 
 /**
  * <a href="IndexAccessor.java.html"><b><i>View Source</i></b></a>
@@ -36,11 +37,15 @@ public interface IndexAccessor {
 
 	public void addDocument(Document document) throws IOException;
 
-	public void cleanUp() throws IOException;
+	public void checkLuceneDir() throws IOException;
+
+	public void delete() ;
 
 	public void deleteDocuments(Term term) throws IOException;
 
 	public long getCompanyId();
+
+	public Directory getLuceneDir();
 
 	public void updateDocument(Term term, Document document) throws IOException;
 

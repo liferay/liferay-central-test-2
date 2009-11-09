@@ -31,8 +31,6 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
 
 /**
  * <a href="LuceneHelper.java.html"><b><i>View Source</i></b></a>
@@ -61,10 +59,6 @@ public interface LuceneHelper {
 	public void deleteDocuments(long companyId, Term term) throws IOException;
 
 	public Analyzer getAnalyzer();
-
-	public FSDirectory getDirectory(String path) throws IOException;
-
-	public Directory getLuceneDir(long companyId);
 
 	public String[] getQueryTerms(Query query);
 
