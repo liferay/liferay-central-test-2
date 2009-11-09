@@ -39,6 +39,8 @@ if (node != null) {
 }
 
 String keywords = ParamUtil.getString(request, "keywords");
+
+boolean createNewPage = true;
 %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
@@ -54,8 +56,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 	<h1 class="page-title"><liferay-ui:message key="search-results" /></h1>
 
 	<%
-	boolean createNewPage = true;
-
 	PortletURL addPageURL = renderResponse.createRenderURL();
 
 	addPageURL.setParameter("struts_action", "/wiki/edit_page");
