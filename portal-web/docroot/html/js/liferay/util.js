@@ -189,12 +189,6 @@ Liferay.Util = {
 		allBox.checked = (totalBoxes == totalOn);
 	},
 
-	checkMaxLength: function(box, maxLength) {
-		if ((box.value.length) >= maxLength) {
-			box.value = box.value.substring(0, maxLength - 1);
-		}
-	},
-
 	checkTab: function(box) {
 		if ((document.all) && (event.keyCode == 9)) {
 			box.selection = document.selection.createRange();
