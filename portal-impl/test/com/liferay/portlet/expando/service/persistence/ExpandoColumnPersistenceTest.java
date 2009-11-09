@@ -40,13 +40,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ExpandoColumnPersistence)PortalBeanLocatorUtil.locate(ExpandoColumnPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -182,6 +175,13 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(expandoColumn, false);
 
 		return expandoColumn;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ExpandoColumnPersistence)PortalBeanLocatorUtil.locate(ExpandoColumnPersistence.class.getName() +
+				".impl");
 	}
 
 	private ExpandoColumnPersistence _persistence;

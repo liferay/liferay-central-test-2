@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (PasswordPolicyRelPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyRelPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -174,6 +167,13 @@ public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(passwordPolicyRel, false);
 
 		return passwordPolicyRel;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (PasswordPolicyRelPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyRelPersistence.class.getName() +
+				".impl");
 	}
 
 	private PasswordPolicyRelPersistence _persistence;

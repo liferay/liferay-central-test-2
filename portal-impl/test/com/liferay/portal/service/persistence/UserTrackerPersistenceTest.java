@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (UserTrackerPersistence)PortalBeanLocatorUtil.locate(UserTrackerPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -187,6 +180,13 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(userTracker, false);
 
 		return userTracker;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (UserTrackerPersistence)PortalBeanLocatorUtil.locate(UserTrackerPersistence.class.getName() +
+				".impl");
 	}
 
 	private UserTrackerPersistence _persistence;

@@ -40,13 +40,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(TasksReviewPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -207,6 +200,13 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(tasksReview, false);
 
 		return tasksReview;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(TasksReviewPersistence.class.getName() +
+				".impl");
 	}
 
 	private TasksReviewPersistence _persistence;

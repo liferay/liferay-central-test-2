@@ -40,13 +40,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class CalEventPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(CalEventPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -233,6 +226,13 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(calEvent, false);
 
 		return calEvent;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(CalEventPersistence.class.getName() +
+				".impl");
 	}
 
 	private CalEventPersistence _persistence;

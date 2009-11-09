@@ -41,13 +41,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingCategoryPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ShoppingCategoryPersistence)PortalBeanLocatorUtil.locate(ShoppingCategoryPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -199,6 +192,13 @@ public class ShoppingCategoryPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(shoppingCategory, false);
 
 		return shoppingCategory;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ShoppingCategoryPersistence)PortalBeanLocatorUtil.locate(ShoppingCategoryPersistence.class.getName() +
+				".impl");
 	}
 
 	private ShoppingCategoryPersistence _persistence;

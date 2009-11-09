@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (PluginSettingPersistence)PortalBeanLocatorUtil.locate(PluginSettingPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -180,6 +173,13 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(pluginSetting, false);
 
 		return pluginSetting;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (PluginSettingPersistence)PortalBeanLocatorUtil.locate(PluginSettingPersistence.class.getName() +
+				".impl");
 	}
 
 	private PluginSettingPersistence _persistence;

@@ -40,13 +40,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -189,6 +182,13 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		_persistence.update(journalArticleImage, false);
 
 		return journalArticleImage;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName() +
+				".impl");
 	}
 
 	private JournalArticleImagePersistence _persistence;

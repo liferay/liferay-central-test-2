@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AddressPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (AddressPersistence)PortalBeanLocatorUtil.locate(AddressPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -212,6 +205,13 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(address, false);
 
 		return address;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (AddressPersistence)PortalBeanLocatorUtil.locate(AddressPersistence.class.getName() +
+				".impl");
 	}
 
 	private AddressPersistence _persistence;

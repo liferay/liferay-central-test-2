@@ -38,13 +38,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (UserIdMapperPersistence)PortalBeanLocatorUtil.locate(UserIdMapperPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -173,6 +166,13 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(userIdMapper, false);
 
 		return userIdMapper;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (UserIdMapperPersistence)PortalBeanLocatorUtil.locate(UserIdMapperPersistence.class.getName() +
+				".impl");
 	}
 
 	private UserIdMapperPersistence _persistence;

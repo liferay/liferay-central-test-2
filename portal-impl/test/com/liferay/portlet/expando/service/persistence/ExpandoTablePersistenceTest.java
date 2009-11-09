@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ExpandoTablePersistence)PortalBeanLocatorUtil.locate(ExpandoTablePersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -170,6 +163,13 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(expandoTable, false);
 
 		return expandoTable;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ExpandoTablePersistence)PortalBeanLocatorUtil.locate(ExpandoTablePersistence.class.getName() +
+				".impl");
 	}
 
 	private ExpandoTablePersistence _persistence;

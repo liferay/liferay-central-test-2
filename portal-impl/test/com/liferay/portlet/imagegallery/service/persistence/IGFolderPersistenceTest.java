@@ -40,13 +40,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class IGFolderPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (IGFolderPersistence)PortalBeanLocatorUtil.locate(IGFolderPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -190,6 +183,13 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(igFolder, false);
 
 		return igFolder;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (IGFolderPersistence)PortalBeanLocatorUtil.locate(IGFolderPersistence.class.getName() +
+				".impl");
 	}
 
 	private IGFolderPersistence _persistence;

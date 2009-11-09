@@ -38,13 +38,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ResourcePersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -164,6 +157,13 @@ public class ResourcePersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(resource, false);
 
 		return resource;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
+				".impl");
 	}
 
 	private ResourcePersistence _persistence;

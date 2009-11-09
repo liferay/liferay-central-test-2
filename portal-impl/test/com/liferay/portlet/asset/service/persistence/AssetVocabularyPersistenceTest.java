@@ -41,13 +41,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (AssetVocabularyPersistence)PortalBeanLocatorUtil.locate(AssetVocabularyPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -199,6 +192,13 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(assetVocabulary, false);
 
 		return assetVocabulary;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (AssetVocabularyPersistence)PortalBeanLocatorUtil.locate(AssetVocabularyPersistence.class.getName() +
+				".impl");
 	}
 
 	private AssetVocabularyPersistence _persistence;

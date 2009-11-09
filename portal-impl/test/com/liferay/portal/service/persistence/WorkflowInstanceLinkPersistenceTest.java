@@ -40,13 +40,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WorkflowInstanceLinkPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (WorkflowInstanceLinkPersistence)PortalBeanLocatorUtil.locate(WorkflowInstanceLinkPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -201,6 +194,13 @@ public class WorkflowInstanceLinkPersistenceTest extends BasePersistenceTestCase
 		_persistence.update(workflowInstanceLink, false);
 
 		return workflowInstanceLink;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (WorkflowInstanceLinkPersistence)PortalBeanLocatorUtil.locate(WorkflowInstanceLinkPersistence.class.getName() +
+				".impl");
 	}
 
 	private WorkflowInstanceLinkPersistence _persistence;

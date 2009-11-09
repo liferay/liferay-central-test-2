@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ServiceComponentPersistence)PortalBeanLocatorUtil.locate(ServiceComponentPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -176,6 +169,13 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(serviceComponent, false);
 
 		return serviceComponent;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ServiceComponentPersistence)PortalBeanLocatorUtil.locate(ServiceComponentPersistence.class.getName() +
+				".impl");
 	}
 
 	private ServiceComponentPersistence _persistence;

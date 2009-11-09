@@ -40,13 +40,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WikiNodePersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -193,6 +186,13 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(wikiNode, false);
 
 		return wikiNode;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName() +
+				".impl");
 	}
 
 	private WikiNodePersistence _persistence;

@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserGroupGroupRolePersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (UserGroupGroupRolePersistence)PortalBeanLocatorUtil.locate(UserGroupGroupRolePersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		UserGroupGroupRolePK pk = new UserGroupGroupRolePK(nextLong(),
 				nextLong(), nextLong());
@@ -174,6 +167,13 @@ public class UserGroupGroupRolePersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(userGroupGroupRole, false);
 
 		return userGroupGroupRole;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (UserGroupGroupRolePersistence)PortalBeanLocatorUtil.locate(UserGroupGroupRolePersistence.class.getName() +
+				".impl");
 	}
 
 	private UserGroupGroupRolePersistence _persistence;

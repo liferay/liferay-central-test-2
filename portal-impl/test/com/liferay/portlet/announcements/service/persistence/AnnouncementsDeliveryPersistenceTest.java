@@ -41,13 +41,6 @@ import java.util.List;
  */
 public class AnnouncementsDeliveryPersistenceTest
 	extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -186,6 +179,13 @@ public class AnnouncementsDeliveryPersistenceTest
 		_persistence.update(announcementsDelivery, false);
 
 		return announcementsDelivery;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName() +
+				".impl");
 	}
 
 	private AnnouncementsDeliveryPersistence _persistence;

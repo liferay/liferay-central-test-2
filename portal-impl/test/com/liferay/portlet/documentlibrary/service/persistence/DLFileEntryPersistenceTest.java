@@ -40,13 +40,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -228,6 +221,13 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(dlFileEntry, false);
 
 		return dlFileEntry;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName() +
+				".impl");
 	}
 
 	private DLFileEntryPersistence _persistence;

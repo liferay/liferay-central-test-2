@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (BrowserTrackerPersistence)PortalBeanLocatorUtil.locate(BrowserTrackerPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -168,6 +161,13 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(browserTracker, false);
 
 		return browserTracker;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (BrowserTrackerPersistence)PortalBeanLocatorUtil.locate(BrowserTrackerPersistence.class.getName() +
+				".impl");
 	}
 
 	private BrowserTrackerPersistence _persistence;

@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ResourcePermissionPersistence)PortalBeanLocatorUtil.locate(ResourcePermissionPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -186,6 +179,13 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(resourcePermission, false);
 
 		return resourcePermission;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ResourcePermissionPersistence)PortalBeanLocatorUtil.locate(ResourcePermissionPersistence.class.getName() +
+				".impl");
 	}
 
 	private ResourcePermissionPersistence _persistence;

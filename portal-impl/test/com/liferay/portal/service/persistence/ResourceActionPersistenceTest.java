@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (ResourceActionPersistence)PortalBeanLocatorUtil.locate(ResourceActionPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -172,6 +165,13 @@ public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(resourceAction, false);
 
 		return resourceAction;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ResourceActionPersistence)PortalBeanLocatorUtil.locate(ResourceActionPersistence.class.getName() +
+				".impl");
 	}
 
 	private ResourceActionPersistence _persistence;

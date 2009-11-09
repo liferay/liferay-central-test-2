@@ -39,13 +39,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCLicensePersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(SCLicensePersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -176,6 +169,13 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(scLicense, false);
 
 		return scLicense;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(SCLicensePersistence.class.getName() +
+				".impl");
 	}
 
 	private SCLicensePersistence _persistence;

@@ -41,13 +41,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_persistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(BookmarksEntryPersistence.class.getName() +
-				".impl");
-	}
-
 	public void testCreate() throws Exception {
 		long pk = nextLong();
 
@@ -210,6 +203,13 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(bookmarksEntry, false);
 
 		return bookmarksEntry;
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(BookmarksEntryPersistence.class.getName() +
+				".impl");
 	}
 
 	private BookmarksEntryPersistence _persistence;
