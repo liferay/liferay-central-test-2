@@ -326,20 +326,6 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			}
 			%>
 
-			<script type="text/javascript">
-				AUI().ready(
-					'char-counter',
-					function(A) {
-						new A.CharCounter(
-							{
-								input: '#<%= fieldParam %>',
-								maxLength: <%= maxLength %>
-							}
-						);
-					}
-				);
-			</script>
-
 			<c:choose>
 				<c:when test='<%= displayHeight.equals(ModelHintsConstants.TEXT_DISPLAY_HEIGHT) %>'>
 
@@ -373,6 +359,20 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 					</c:choose>
 				</c:otherwise>
 			</c:choose>
+
+			<script type="text/javascript">
+				AUI().ready(
+					'char-counter',
+					function(A) {
+						new A.CharCounter(
+							{
+								input: '#<%= fieldParam %>',
+								maxLength: <%= maxLength %>
+							}
+						);
+					}
+				);
+			</script>
 		</c:when>
 	</c:choose>
 </c:if>
