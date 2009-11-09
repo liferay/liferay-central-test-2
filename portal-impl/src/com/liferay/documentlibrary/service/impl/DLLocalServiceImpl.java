@@ -330,15 +330,15 @@ public class DLLocalServiceImpl implements DLLocalService {
 	}
 
 	public void validate(String fileName, String sourceFileName, InputStream is)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		String fileNameExtension = FileUtil.getExtension(fileName);
 		String sourceFileNameExtension = FileUtil.getExtension(sourceFileName);
 
 		if (!PropsValues.WEBDAV_LITMUS) {
-			if (Validator.isNull(fileNameExtension) ||
-				!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
-
+			validate(fileName, true);
+			
+			if (!fileNameExtension.equalsIgnoreCase(sourceFileNameExtension)) {
 				throw new SourceFileNameException(sourceFileName);
 			}
 		}

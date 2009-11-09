@@ -93,6 +93,6 @@ public interface DLLocalService {
 		throws PortalException, SystemException;
 
 	public void validate(String fileName, String sourceFileName, InputStream is)
-		throws PortalException;
+		throws PortalException, SystemException;
 
 }
