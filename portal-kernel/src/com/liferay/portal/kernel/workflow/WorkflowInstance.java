@@ -35,6 +35,8 @@ import java.util.Map;
  */
 public interface WorkflowInstance {
 
+	public int getChildrenWorkflowInstanceCount();
+
 	public List<WorkflowInstance> getChildrenWorkflowInstances();
 
 	public Map<String, Object> getContext();
@@ -44,6 +46,8 @@ public interface WorkflowInstance {
 	public Date getEndDate();
 
 	public WorkflowInstance getParentWorkflowInstance();
+
+	public long getParentWorkflowInstanceId();
 
 	public Date getStartDate();
 
