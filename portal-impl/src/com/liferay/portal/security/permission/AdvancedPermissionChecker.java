@@ -76,6 +76,15 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return false;
 		}
 
+		if (ownerId == defaultUserId) {
+			if (actionId == ActionKeys.VIEW) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
 		try {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				return ResourcePermissionLocalServiceUtil.hasResourcePermission(
