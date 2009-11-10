@@ -380,21 +380,21 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			<aui:fieldset>
 				<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED || PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
 					<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED %>">
-						<aui:input inlineLabel="left" label="enable-page-ratings" name="enablePageRatings" type="checkbox" value="<%= enablePageRatings %>" />
+						<aui:input inlineLabel="left" name="enablePageRatings" type="checkbox" value="<%= enablePageRatings %>" />
 					</c:if>
 
 					<c:if test="<%= PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
-						<aui:input inlineLabel="left" label="enable-comments" name="enableComments" type="checkbox" value="<%= enableComments %>" />
+						<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
 
-						<aui:input inlineLabel="left" label="enable-comment-ratings" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+						<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
 					</c:if>
 				</c:if>
 			</aui:fieldset>
 
 			<aui:fieldset>
 				<aui:legend label="visible-wikis" />
-				<aui:input name="visibleNodes" type="hidden" value="" />
-				<aui:input name="hiddenNodes" type="hidden" value="" />
+				<aui:input name="visibleNodes" type="hidden" />
+				<aui:input name="hiddenNodes" type="hidden" />
 
 				<%
 				Set<String> currentVisibleNodes = SetUtil.fromArray(StringUtil.split(allNodes));
@@ -453,29 +453,29 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		<c:when test='<%= tabs2.equals("rss") %>'>
 			<aui:fieldset>
 				<aui:select label="maximum-items-to-display" name="rssDelta">
-					<aui:option selected="<%= rssDelta == 1 %>" label="1" />
-					<aui:option selected="<%= rssDelta == 2 %>" label="2" />
-					<aui:option selected="<%= rssDelta == 3 %>" label="3" />
-					<aui:option selected="<%= rssDelta == 4 %>" label="4" />
-					<aui:option selected="<%= rssDelta == 5 %>" label="5" />
-					<aui:option selected="<%= rssDelta == 10 %>" label="10" />
-					<aui:option selected="<%= rssDelta == 15 %>" label="15" />
-					<aui:option selected="<%= rssDelta == 20 %>" label="20" />
-					<aui:option selected="<%= rssDelta == 25 %>" label="25" />
-					<aui:option selected="<%= rssDelta == 30 %>" label="30" />
-					<aui:option selected="<%= rssDelta == 40 %>" label="40" />
-					<aui:option selected="<%= rssDelta == 50 %>" label="50" />
-					<aui:option selected="<%= rssDelta == 60 %>" label="60" />
-					<aui:option selected="<%= rssDelta == 70 %>" label="70" />
-					<aui:option selected="<%= rssDelta == 80 %>" label="80" />
-					<aui:option selected="<%= rssDelta == 90 %>" label="90" />
-					<aui:option selected="<%= rssDelta == 100 %>" label="100" />
+					<aui:option label="1" selected="<%= rssDelta == 1 %>" />
+					<aui:option label="2" selected="<%= rssDelta == 2 %>" />
+					<aui:option label="3" selected="<%= rssDelta == 3 %>" />
+					<aui:option label="4" selected="<%= rssDelta == 4 %>" />
+					<aui:option label="5" selected="<%= rssDelta == 5 %>" />
+					<aui:option label="10" selected="<%= rssDelta == 10 %>" />
+					<aui:option label="15" selected="<%= rssDelta == 15 %>" />
+					<aui:option label="20" selected="<%= rssDelta == 20 %>" />
+					<aui:option label="25" selected="<%= rssDelta == 25 %>" />
+					<aui:option label="30" selected="<%= rssDelta == 30 %>" />
+					<aui:option label="40" selected="<%= rssDelta == 40 %>" />
+					<aui:option label="50" selected="<%= rssDelta == 50 %>" />
+					<aui:option label="60" selected="<%= rssDelta == 60 %>" />
+					<aui:option label="70" selected="<%= rssDelta == 70 %>" />
+					<aui:option label="80" selected="<%= rssDelta == 80 %>" />
+					<aui:option label="90" selected="<%= rssDelta == 90 %>" />
+					<aui:option label="100" selected="<%= rssDelta == 100 %>" />
 				</aui:select>
 
-				<aui:select label="display-style" name="rssDisplayStyle" >
-					<aui:option selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>" label="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>" />
-					<aui:option selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" label="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" />
-					<aui:option selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" label="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" />
+				<aui:select label="display-style" name="rssDisplayStyle">
+					<aui:option label="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>" />
+					<aui:option label="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" />
+					<aui:option label="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" />
 				</aui:select>
 			</aui:fieldset>
 		</c:when>
