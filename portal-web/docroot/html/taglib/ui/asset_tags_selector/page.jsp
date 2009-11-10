@@ -51,41 +51,31 @@ if (curTagsParam != null) {
 }
 %>
 
-<div class="lfr-asset-tags-selector" id="<%= namespace + randomNamespace %>assetTagsSelector">
+<div class="lfr-tags-selector-content" id="<%= namespace + randomNamespace %>assetTagsSelector">
 	<aui:input name="<%= hiddenInput %>" type="hidden" />
 
-	<span class="ui-tags empty" id="<%= randomNamespace %>assetTagsSummary"></span>
-		<input class="ui-tags-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
-
-		<aui:button disabled="<%= true %>" name='<%= randomNamespace + "addTag" %>' value="add-tags" />
-	</span>
-
-	<liferay-ui:message key="or" />
-
-	<aui:button name='<%= randomNamespace + "selectTag" %>' value="select-tags" />
-
-	<c:if test="<%= suggestible %>">
-		<aui:button name='<%= randomNamespace + "suggestions" %>' value="suggestions" />
-	</c:if>
+	<input class="lfr-tag-selector-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
 </div>
 
 <script type="text/javascript">
 	AUI().ready(
 		'liferay-tags-selector',
 		function() {
+
 			new Liferay.AssetTagsSelector(
 				{
-					instanceVar: "<%= namespace + randomNamespace %>",
-					hiddenInput: "<%= namespace + hiddenInput %>",
-					textInput: "<%= randomNamespace %>assetTagNames",
-					summarySpan: "<%= randomNamespace %>assetTagsSummary",
-					curTags: "<%= HtmlUtil.escapeJS(curTags) %>",
-					focus: <%= focus %>,
+					allowSuggestions: true,
+					contentBox: '#<%= namespace + randomNamespace %>assetTagsSelector',
+					instanceVar: '<%= namespace + randomNamespace %>',
+					hiddenInput: '#<%= namespace + hiddenInput %>',
+					input: '#<%= randomNamespace %>assetTagNames',
+					curTags: '<%= HtmlUtil.escapeJS(curTags) %>',
+					focused: <%= focus %>,
 					contentCallback: function() {
 						return <%= contentCallback %>();
 					}
 				}
-			);
+			).render();
 		}
 	);
 </script>
