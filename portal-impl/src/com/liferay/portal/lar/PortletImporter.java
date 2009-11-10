@@ -570,6 +570,8 @@ public class PortletImporter {
 				}
 
 				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+					portletId = PortletConstants.getRootPortletId(portletId);
+
 					String userUuid = el.attributeValue("archive-user-uuid");
 					String name = el.attributeValue("archive-name");
 
