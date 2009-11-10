@@ -112,7 +112,7 @@ public class JSPWikiEngine implements WikiEngine {
 						existsObj = Boolean.FALSE;
 					}
 
-					links.put(title, existsObj);
+					links.put(title.toLowerCase(), existsObj);
 				}
 			}
 

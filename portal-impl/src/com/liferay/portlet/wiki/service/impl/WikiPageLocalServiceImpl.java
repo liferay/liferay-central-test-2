@@ -552,7 +552,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		for (WikiPage page : pages) {
 			for (Map<String, Boolean> pageTitle : pageTitles) {
-				if (pageTitle.get(page.getTitle()) != null) {
+				if (pageTitle.get(page.getTitle().toLowerCase()) != null) {
 					notOrphans.add(page);
 
 					break;
@@ -1150,7 +1150,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		Map<String, Boolean> links = WikiCacheUtil.getOutgoingLinks(page);
 
-		Boolean link = links.get(targetTitle);
+		Boolean link = links.get(targetTitle.toLowerCase());
 
 		if (link != null) {
 			return true;
