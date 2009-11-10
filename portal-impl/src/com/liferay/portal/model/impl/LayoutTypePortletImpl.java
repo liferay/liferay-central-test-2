@@ -77,7 +77,7 @@ public class LayoutTypePortletImpl
 		return PortletConstants.INSTANCE_SEPARATOR + instanceId;
 	}
 
-	public LayoutTypePortletImpl(LayoutImpl layout) {
+	public LayoutTypePortletImpl(Layout layout) {
 		super(layout);
 	}
 

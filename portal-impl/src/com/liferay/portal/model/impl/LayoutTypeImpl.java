@@ -33,7 +33,7 @@ import com.liferay.portal.model.LayoutType;
  */
 public class LayoutTypeImpl implements LayoutType {
 
-	public LayoutTypeImpl(LayoutImpl layout) {
+	public LayoutTypeImpl(Layout layout) {
 		setLayout(layout);
 	}
 
