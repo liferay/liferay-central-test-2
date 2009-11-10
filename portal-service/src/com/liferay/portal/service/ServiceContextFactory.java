@@ -36,6 +36,8 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
@@ -74,14 +76,38 @@ public class ServiceContextFactory {
 			themeDisplay.getUser().getDisplayURL(themeDisplay));
 		serviceContext.setUserId(themeDisplay.getUserId());
 
-		// Expando
+		// ExpandoBridge Attributes
 
-		Map<String, Serializable> attributes =
+		Map<String, Serializable> expandoBridgeAttributes =
 			PortalUtil.getExpandoBridgeAttributes(
 				ExpandoBridgeFactoryUtil.getExpandoBridge(className),
 				portletRequest);
 
-		serviceContext.setExpandoBridgeAttributes(attributes);
+		serviceContext.setExpandoBridgeAttributes(expandoBridgeAttributes);
+
+		// ServiceContext Attributes
+
+		Map<String, Serializable> serviceContextAttributes =
+			new HashMap<String, Serializable>();
+
+		Enumeration<String> enu = portletRequest.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
+
+			String[] values = portletRequest.getParameterValues(param);
+
+			if ((values != null) && (values.length > 0)) {
+				if (values.length == 1) {
+					serviceContextAttributes.put(param, values[0]);
+				}
+				else {
+					serviceContextAttributes.put(param, values);
+				}
+			}
+		}
+
+		serviceContext.setAttributes(serviceContextAttributes);
 
 		// Permissions
 
