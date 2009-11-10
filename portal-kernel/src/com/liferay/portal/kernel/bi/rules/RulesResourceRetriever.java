@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.bi.rules;
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.io.Serializable;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,10 +35,6 @@ import java.util.Set;
  * @author Michael C. Han
  */
 public class RulesResourceRetriever implements Serializable {
-
-	public RulesResourceRetriever(String rulesLanguage) {
-		this(null, rulesLanguage);
-	}
 
 	public RulesResourceRetriever(ResourceRetriever resourceRetriever) {
 		this(resourceRetriever, null);
@@ -51,6 +48,10 @@ public class RulesResourceRetriever implements Serializable {
 		}
 
 		_rulesLanguage = rulesLanguage;
+	}
+
+	public RulesResourceRetriever(String rulesLanguage) {
+		this(null, rulesLanguage);
 	}
 
 	public void addResourceRetriever(ResourceRetriever resourceRetriever) {
