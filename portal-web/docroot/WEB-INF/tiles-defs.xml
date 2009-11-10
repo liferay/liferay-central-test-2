@@ -959,12 +959,12 @@
 
 	<definition name="portlet.polls_display" extends="portlet" />
 
-	<definition name="portlet.polls_display.view" extends="portlet.polls_display">
-		<put name="portlet_content" value="/portlet/polls_display/view.jsp" />
-	</definition>
-
 	<definition name="portlet.polls_display.error" extends="portlet.polls_display">
 		<put name="portlet_content" value="/portlet/polls_display/error.jsp" />
+	</definition>
+
+	<definition name="portlet.polls_display.view" extends="portlet.polls_display">
+		<put name="portlet_content" value="/portlet/polls_display/view.jsp" />
 	</definition>
 
 	<!-- Portlet Configuration -->
