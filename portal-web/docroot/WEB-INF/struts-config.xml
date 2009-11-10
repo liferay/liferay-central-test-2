@@ -1404,6 +1404,7 @@
 
 		<action path="/polls_display/view" type="com.liferay.portlet.pollsdisplay.action.ViewAction">
 			<forward name="portlet.polls_display.view" path="portlet.polls_display.view" />
+			<forward name="portlet.polls_display.error" path="portlet.polls_display.error" />
 		</action>
 
 		<!-- Portlet Configuration -->
