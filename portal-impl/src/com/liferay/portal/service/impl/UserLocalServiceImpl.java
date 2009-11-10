@@ -214,7 +214,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long[] roleIds = ArrayUtil.toArray(
 			roleIdSet.toArray(new Long[roleIdSet.size()]));
 
-		roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
+		roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
 
 		userPersistence.addRoles(userId, roleIds);
 	}
@@ -532,7 +532,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Roles
 
 		if (roleIds != null) {
-			roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
+			roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
 
 			userPersistence.setRoles(userId, roleIds);
 		}
@@ -2458,7 +2458,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Roles
 
 		if (roleIds != null) {
-			roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
+			roleIds = EnterpriseAdminUtil.addRequiredRoles(user, roleIds);
 
 			userPersistence.setRoles(userId, roleIds);
 		}
