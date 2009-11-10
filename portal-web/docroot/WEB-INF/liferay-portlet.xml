@@ -525,6 +525,7 @@
 		<icon>/html/icons/polls_display.png</icon>
 		<struts-path>polls_display</struts-path>
 		<configuration-action-class>com.liferay.portlet.pollsdisplay.action.ConfigurationActionImpl</configuration-action-class>
+		<portlet-data-handler-class>com.liferay.portlet.polls.lar.PollsDisplayPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>true</instanceable>

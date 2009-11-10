@@ -64,8 +64,196 @@ import javax.portlet.PortletPreferences;
  * <a href="PollsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Marcellus Tavares
  */
 public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
+
+	public static void exportQuestion(
+			PortletDataContext context, Element questionsEl, Element choicesEl,
+			Element votesEl, PollsQuestion question)
+		throws SystemException {
+
+		if (!context.isWithinDateRange(question.getModifiedDate())) {
+			return;
+		}
+
+		String path = getQuestionPath(context, question);
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
+		Element questionEl = questionsEl.addElement("question");
+
+		questionEl.addAttribute("path", path);
+
+		question.setUserUuid(question.getUserUuid());
+
+		List<PollsChoice> choices = PollsChoiceUtil.findByQuestionId(
+			question.getQuestionId());
+
+		for (PollsChoice choice : choices) {
+			exportChoice(context, choicesEl, choice);
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "votes")) {
+			List<PollsVote> votes = PollsVoteUtil.findByQuestionId(
+				question.getQuestionId());
+
+			for (PollsVote vote : votes) {
+				exportVote(context, votesEl, vote);
+			}
+		}
+
+		context.addZipEntry(path, question);
+	}
+
+	public static void importChoice(
+			PortletDataContext context, Map<Long, Long> questionPKs,
+			Map<Long, Long> choicePKs, PollsChoice choice)
+		throws Exception {
+
+		long questionId = MapUtil.getLong(
+			questionPKs, choice.getQuestionId(), choice.getQuestionId());
+
+		PollsChoice existingChoice = null;
+
+		try {
+			PollsQuestionUtil.findByPrimaryKey(questionId);
+
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
+				try {
+					existingChoice = PollsChoiceFinderUtil.findByUuid_G(
+						choice.getUuid(), context.getGroupId());
+
+					existingChoice = PollsChoiceLocalServiceUtil.updateChoice(
+						existingChoice.getChoiceId(), questionId,
+						choice.getName(), choice.getDescription());
+				}
+				catch (NoSuchChoiceException nsce) {
+					existingChoice = PollsChoiceLocalServiceUtil.addChoice(
+						choice.getUuid(), questionId, choice.getName(),
+						choice.getDescription());
+				}
+			}
+			else {
+				existingChoice = PollsChoiceLocalServiceUtil.addChoice(
+					questionId, choice.getName(), choice.getDescription());
+			}
+
+			choicePKs.put(choice.getChoiceId(), existingChoice.getChoiceId());
+		}
+		catch (NoSuchQuestionException nsqe) {
+			_log.error(
+				"Could not find the question for choice " +
+					choice.getChoiceId());
+		}
+	}
+
+	public static void importQuestion(
+			PortletDataContext context, Map<Long, Long> questionPKs,
+			PollsQuestion question)
+		throws SystemException, PortalException {
+
+		long userId = context.getUserId(question.getUserUuid());
+
+		Date expirationDate = question.getExpirationDate();
+
+		int expirationMonth = 0;
+		int expirationDay = 0;
+		int expirationYear = 0;
+		int expirationHour = 0;
+		int expirationMinute = 0;
+		boolean neverExpire = true;
+
+		if (expirationDate != null) {
+			Calendar expirationCal = CalendarFactoryUtil.getCalendar();
+
+			expirationCal.setTime(expirationDate);
+
+			expirationMonth = expirationCal.get(Calendar.MONTH);
+			expirationDay = expirationCal.get(Calendar.DATE);
+			expirationYear = expirationCal.get(Calendar.YEAR);
+			expirationHour = expirationCal.get(Calendar.HOUR);
+			expirationMinute = expirationCal.get(Calendar.MINUTE);
+			neverExpire = false;
+
+			if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
+				expirationHour += 12;
+			}
+		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(context.getScopeGroupId());
+
+		PollsQuestion existingQuestion = null;
+
+		if (context.getDataStrategy().equals(
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
+			existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
+				question.getUuid(), context.getGroupId());
+
+			if (existingQuestion == null) {
+				existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
+					question.getUuid(), userId, question.getTitleMap(),
+					question.getDescriptionMap(), expirationMonth,
+					expirationDay, expirationYear, expirationHour,
+					expirationMinute, neverExpire, null, serviceContext);
+			}
+			else {
+				existingQuestion = PollsQuestionLocalServiceUtil.updateQuestion(
+					userId, existingQuestion.getQuestionId(),
+					question.getTitleMap(), question.getDescriptionMap(),
+					expirationMonth, expirationDay, expirationYear,
+					expirationHour, expirationMinute, neverExpire);
+			}
+		}
+		else {
+			existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
+				userId, question.getTitleMap(), question.getDescriptionMap(),
+				expirationMonth, expirationDay, expirationYear, expirationHour,
+				expirationMinute, neverExpire, null, serviceContext);
+		}
+
+		questionPKs.put(
+			question.getQuestionId(), existingQuestion.getQuestionId());
+	}
+
+	public static void importVote(
+			PortletDataContext context, Map<Long, Long> questionPKs,
+			Map<Long, Long> choicePKs, PollsVote vote)
+		throws Exception {
+
+		long userId = context.getUserId(vote.getUserUuid());
+		long questionId = MapUtil.getLong(
+			questionPKs, vote.getQuestionId(), vote.getQuestionId());
+		long choiceId = MapUtil.getLong(
+			choicePKs, vote.getChoiceId(), vote.getChoiceId());
+
+		try {
+			PollsQuestionUtil.findByPrimaryKey(questionId);
+			PollsChoiceUtil.findByPrimaryKey(choiceId);
+
+			PollsVoteLocalServiceUtil.addVote(
+				userId, questionId, choiceId);
+		}
+		catch (DuplicateVoteException dve) {
+		}
+		catch (NoSuchQuestionException nsqe) {
+			_log.error(
+				"Could not find the question for vote " + vote.getVoteId());
+		}
+		catch (NoSuchChoiceException nsve) {
+			_log.error(
+				"Could not find the choice for vote " + vote.getVoteId());
+		}
+	}
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
@@ -204,7 +392,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		return _ALWAYS_EXPORTABLE;
 	}
 
-	protected void exportChoice(
+	protected static void exportChoice(
 			PortletDataContext context, Element questionsEl, PollsChoice choice)
 		throws SystemException {
 
@@ -221,47 +409,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		context.addZipEntry(path, choice);
 	}
 
-	protected void exportQuestion(
-			PortletDataContext context, Element questionsEl, Element choicesEl,
-			Element votesEl, PollsQuestion question)
-		throws SystemException {
-
-		if (!context.isWithinDateRange(question.getModifiedDate())) {
-			return;
-		}
-
-		String path = getQuestionPath(context, question);
-
-		if (!context.isPathNotProcessed(path)) {
-			return;
-		}
-
-		Element questionEl = questionsEl.addElement("question");
-
-		questionEl.addAttribute("path", path);
-
-		question.setUserUuid(question.getUserUuid());
-
-		List<PollsChoice> choices = PollsChoiceUtil.findByQuestionId(
-			question.getQuestionId());
-
-		for (PollsChoice choice : choices) {
-			exportChoice(context, choicesEl, choice);
-		}
-
-		if (context.getBooleanParameter(_NAMESPACE, "votes")) {
-			List<PollsVote> votes = PollsVoteUtil.findByQuestionId(
-				question.getQuestionId());
-
-			for (PollsVote vote : votes) {
-				exportVote(context, votesEl, vote);
-			}
-		}
-
-		context.addZipEntry(path, question);
-	}
-
-	protected void exportVote(
+	protected static void exportVote(
 			PortletDataContext context, Element questionsEl, PollsVote vote)
 		throws SystemException {
 
@@ -278,154 +426,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		context.addZipEntry(path, vote);
 	}
 
-	protected void importChoice(
-			PortletDataContext context, Map<Long, Long> questionPKs,
-			Map<Long, Long> choicePKs, PollsChoice choice)
-		throws Exception {
-
-		long questionId = MapUtil.getLong(
-			questionPKs, choice.getQuestionId(), choice.getQuestionId());
-
-		PollsChoice existingChoice = null;
-
-		try {
-			PollsQuestionUtil.findByPrimaryKey(questionId);
-
-			if (context.getDataStrategy().equals(
-					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
-				try {
-					existingChoice = PollsChoiceFinderUtil.findByUuid_G(
-						choice.getUuid(), context.getGroupId());
-
-					existingChoice = PollsChoiceLocalServiceUtil.updateChoice(
-						existingChoice.getChoiceId(), questionId,
-						choice.getName(), choice.getDescription());
-				}
-				catch (NoSuchChoiceException nsce) {
-					existingChoice = PollsChoiceLocalServiceUtil.addChoice(
-						choice.getUuid(), questionId, choice.getName(),
-						choice.getDescription());
-				}
-			}
-			else {
-				existingChoice = PollsChoiceLocalServiceUtil.addChoice(
-					questionId, choice.getName(), choice.getDescription());
-			}
-
-			choicePKs.put(choice.getChoiceId(), existingChoice.getChoiceId());
-		}
-		catch (NoSuchQuestionException nsqe) {
-			_log.error(
-				"Could not find the question for choice " +
-					choice.getChoiceId());
-		}
-	}
-
-	protected void importQuestion(
-			PortletDataContext context, Map<Long, Long> questionPKs,
-			PollsQuestion question)
-		throws SystemException, PortalException {
-
-		long userId = context.getUserId(question.getUserUuid());
-
-		Date expirationDate = question.getExpirationDate();
-
-		int expirationMonth = 0;
-		int expirationDay = 0;
-		int expirationYear = 0;
-		int expirationHour = 0;
-		int expirationMinute = 0;
-		boolean neverExpire = true;
-
-		if (expirationDate != null) {
-			Calendar expirationCal = CalendarFactoryUtil.getCalendar();
-
-			expirationCal.setTime(expirationDate);
-
-			expirationMonth = expirationCal.get(Calendar.MONTH);
-			expirationDay = expirationCal.get(Calendar.DATE);
-			expirationYear = expirationCal.get(Calendar.YEAR);
-			expirationHour = expirationCal.get(Calendar.HOUR);
-			expirationMinute = expirationCal.get(Calendar.MINUTE);
-			neverExpire = false;
-
-			if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
-				expirationHour += 12;
-			}
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setScopeGroupId(context.getScopeGroupId());
-
-		PollsQuestion existingQuestion = null;
-
-		if (context.getDataStrategy().equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
-			existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
-				question.getUuid(), context.getGroupId());
-
-			if (existingQuestion == null) {
-				existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-					question.getUuid(), userId, question.getTitleMap(),
-					question.getDescriptionMap(), expirationMonth,
-					expirationDay, expirationYear, expirationHour,
-					expirationMinute, neverExpire, null, serviceContext);
-			}
-			else {
-				existingQuestion = PollsQuestionLocalServiceUtil.updateQuestion(
-					userId, existingQuestion.getQuestionId(),
-					question.getTitleMap(), question.getDescriptionMap(),
-					expirationMonth, expirationDay, expirationYear,
-					expirationHour, expirationMinute, neverExpire);
-			}
-		}
-		else {
-			existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-				userId, question.getTitleMap(), question.getDescriptionMap(),
-				expirationMonth, expirationDay, expirationYear, expirationHour,
-				expirationMinute, neverExpire, null, serviceContext);
-		}
-
-		questionPKs.put(
-			question.getQuestionId(), existingQuestion.getQuestionId());
-	}
-
-	protected void importVote(
-			PortletDataContext context, Map<Long, Long> questionPKs,
-			Map<Long, Long> choicePKs, PollsVote vote)
-		throws Exception {
-
-		long userId = context.getUserId(vote.getUserUuid());
-		long questionId = MapUtil.getLong(
-			questionPKs, vote.getQuestionId(), vote.getQuestionId());
-		long choiceId = MapUtil.getLong(
-			choicePKs, vote.getChoiceId(), vote.getChoiceId());
-
-		try {
-			PollsQuestionUtil.findByPrimaryKey(questionId);
-			PollsChoiceUtil.findByPrimaryKey(choiceId);
-
-			PollsVoteLocalServiceUtil.addVote(
-				userId, questionId, choiceId);
-		}
-		catch (DuplicateVoteException dve) {
-		}
-		catch (NoSuchQuestionException nsqe) {
-			_log.error(
-				"Could not find the question for vote " + vote.getVoteId());
-		}
-		catch (NoSuchChoiceException nsve) {
-			_log.error(
-				"Could not find the choice for vote " + vote.getVoteId());
-		}
-	}
-
-	protected String getChoicePath(
+	protected static String getChoicePath(
 		PortletDataContext context, PollsChoice choice) {
 
 		StringBuilder sb = new StringBuilder();
@@ -440,7 +441,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected String getQuestionPath(
+	protected static String getQuestionPath(
 		PortletDataContext context, PollsQuestion question) {
 
 		StringBuilder sb = new StringBuilder();
@@ -453,7 +454,9 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected String getVotePath(PortletDataContext context, PollsVote vote) {
+	protected static String getVotePath(
+		PortletDataContext context, PollsVote vote) {
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(context.getPortletPath(PortletKeys.POLLS));
