@@ -463,7 +463,14 @@
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="(var PATH_JAVASCRIPT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathJavaScript() %&gt;/aui/';" flags="g" byline="false">
+				<replaceregexp match="(var PATH_JAVASCRIPT ?= ?)[^;]+;|\s+javascript: PATH_JAVASCRIPT," replace="" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
+				<replaceregexp match="PATH_JAVASCRIPT \+ ('[\w-]+.js')" replace="getFullPath(\1)" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
@@ -478,6 +485,20 @@
 				</replaceregexp>
 
 				<replaceregexp match="(var PATH_THEME_ROOT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathThemeRoot() %&gt;/css/';" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
+				<replaceregexp match="(\n)(\t+)(window.AUI = \{)" replace="\1\2var getFullPath = function(file) {\1\2\2return '&lt;%= alloyURL %&gt;'.replace('{file}', file);\1\2};\1\1\2\3" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
+				<replaceregexp match="(filter: ?)'[\w-]+'" replace="\1'&lt;%= alloyFilter %&gt;'" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"

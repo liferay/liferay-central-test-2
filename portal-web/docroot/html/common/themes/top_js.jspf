@@ -190,13 +190,25 @@
 
 		var themeDisplay = Liferay.ThemeDisplay;
 
+		<%
+		long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
+
+		String alloyBaseURL = themeDisplay.getPathJavaScript() + "/aui/{file}";
+
+		String alloyFilter = "raw";
+
+		String alloyURL = alloyBaseURL + "?t=" + javaScriptLastModified;
+
+		if (themeDisplay.isThemeJsFastLoad()) {
+			alloyFilter = "min";
+
+			alloyURL = PortalUtil.getStaticResourceURL(request, alloyBaseURL, javaScriptLastModified);
+		}
+		%>
+
 		<%@ include file="/html/portal/aui/js.jspf" %>
 	// ]]>
 </script>
-
-<%
-long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
-%>
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
