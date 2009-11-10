@@ -514,8 +514,10 @@ AUI().add(
 					sel.collapse(false);
 					sel.select();
 				}
-				else if (field.selectionStart) {
-					field.selectionEnd = field.selectionStart;
+				else if (field.setSelectionRange) {
+					var selectionStart = field.selectionStart;
+
+					field.setSelectionRange(selectionStart, selectionStart);
 				}
 			},
 
