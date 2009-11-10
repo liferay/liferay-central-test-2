@@ -76,18 +76,9 @@ public class ServiceContextFactory {
 			themeDisplay.getUser().getDisplayURL(themeDisplay));
 		serviceContext.setUserId(themeDisplay.getUserId());
 
-		// ExpandoBridge Attributes
+		// Attributes
 
-		Map<String, Serializable> expandoBridgeAttributes =
-			PortalUtil.getExpandoBridgeAttributes(
-				ExpandoBridgeFactoryUtil.getExpandoBridge(className),
-				portletRequest);
-
-		serviceContext.setExpandoBridgeAttributes(expandoBridgeAttributes);
-
-		// ServiceContext Attributes
-
-		Map<String, Serializable> serviceContextAttributes =
+		Map<String, Serializable> attributes =
 			new HashMap<String, Serializable>();
 
 		Enumeration<String> enu = portletRequest.getParameterNames();
@@ -99,15 +90,24 @@ public class ServiceContextFactory {
 
 			if ((values != null) && (values.length > 0)) {
 				if (values.length == 1) {
-					serviceContextAttributes.put(param, values[0]);
+					attributes.put(param, values[0]);
 				}
 				else {
-					serviceContextAttributes.put(param, values);
+					attributes.put(param, values);
 				}
 			}
 		}
 
-		serviceContext.setAttributes(serviceContextAttributes);
+		serviceContext.setAttributes(attributes);
+
+		// Expando
+
+		Map<String, Serializable> expandoBridgeAttributes =
+			PortalUtil.getExpandoBridgeAttributes(
+				ExpandoBridgeFactoryUtil.getExpandoBridge(className),
+				portletRequest);
+
+		serviceContext.setExpandoBridgeAttributes(expandoBridgeAttributes);
 
 		// Permissions
 
