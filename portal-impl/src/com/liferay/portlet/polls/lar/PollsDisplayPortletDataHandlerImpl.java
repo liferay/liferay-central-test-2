@@ -205,6 +205,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 						context, questionPKs, choicePKs, vote);
 				}
 			}
+
 			long questionId = GetterUtil.getLong(
 				preferences.getValue("question-id", StringPool.BLANK));
 
