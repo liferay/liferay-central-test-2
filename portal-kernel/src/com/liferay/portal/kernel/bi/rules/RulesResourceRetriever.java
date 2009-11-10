@@ -25,6 +25,8 @@ package com.liferay.portal.kernel.bi.rules;
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <a href="RulesResourceRetriever.java.html"><b><i>View Source</i></b></a>
@@ -33,26 +35,38 @@ import java.io.Serializable;
  */
 public class RulesResourceRetriever implements Serializable {
 
+	public RulesResourceRetriever(String rulesLanguage) {
+		this(null, rulesLanguage);
+	}
+
 	public RulesResourceRetriever(ResourceRetriever resourceRetriever) {
 		this(resourceRetriever, null);
 	}
 
 	public RulesResourceRetriever(
-		ResourceRetriever resourceRetriever, RulesLanguage rulesLanguage) {
+		ResourceRetriever resourceRetriever, String rulesLanguage) {
 
-		_resourceRetriever = resourceRetriever;
+		if (resourceRetriever != null) {
+			_resourceRetrievers.add(resourceRetriever);
+		}
+
 		_rulesLanguage = rulesLanguage;
 	}
 
-	public ResourceRetriever getResourceRetriever() {
-		return _resourceRetriever;
+	public void addResourceRetriever(ResourceRetriever resourceRetriever) {
+		_resourceRetrievers.add(resourceRetriever);
 	}
 
-	public RulesLanguage getRulesLanguage() {
+	public Set<ResourceRetriever> getResourceRetrievers() {
+		return _resourceRetrievers;
+	}
+
+	public String getRulesLanguage() {
 		return _rulesLanguage;
 	}
 
-	private ResourceRetriever _resourceRetriever;
-	private RulesLanguage _rulesLanguage;
+	private Set<ResourceRetriever> _resourceRetrievers =
+		new HashSet<ResourceRetriever>();
+	private String _rulesLanguage;
 
 }
