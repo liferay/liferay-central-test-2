@@ -233,7 +233,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			MBMessage message = itr.next();
 
 			message.setUserUuid(message.getUserUuid());
-			
+
 			addRatingsEntries(MBMessage.class, message.getPrimaryKey());
 		}
 
@@ -601,7 +601,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			}
 
 			importRatingsEntries(
-				MBMessage.class, message.getPrimaryKey(), 
+				MBMessage.class, message.getPrimaryKey(),
 				messagePKs.get(message.getPrimaryKey()));
 		}
 	}
