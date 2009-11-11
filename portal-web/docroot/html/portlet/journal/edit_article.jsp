@@ -268,7 +268,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		var imageInputIdInput = AUI().one(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]);
 
 		if (imageInputIdInput) {
-			imageInputIdInput.toggleClass('disabled')
+			imageInputIdInput.toggleClass('disabled');
 		}
 	}
 

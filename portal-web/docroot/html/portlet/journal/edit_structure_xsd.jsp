@@ -64,9 +64,9 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 		Liferay.Util.switchEditor(
 			{
-				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
+				popup: popup,
 				textarea: '<portlet:namespace />xsdContent',
-				popup: popup
+				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
 			}
 		);
 	}
