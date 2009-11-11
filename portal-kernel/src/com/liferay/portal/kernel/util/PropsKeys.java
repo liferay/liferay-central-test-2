@@ -841,7 +841,7 @@ public interface PropsKeys {
 
 	public static final String LUCENE_BUFFER_SIZE = "lucene.buffer.size";
 
-	public static final String LUCENE_COMMIT_DOCUMENTS_INTERVAL = "lucene.commit.documents.interval";
+	public static final String LUCENE_COMMIT_BATCH_SIZE = "lucene.commit.batch.size";
 
 	public static final String LUCENE_COMMIT_TIME_INTERVAL = "lucene.commit.time.interval";
 

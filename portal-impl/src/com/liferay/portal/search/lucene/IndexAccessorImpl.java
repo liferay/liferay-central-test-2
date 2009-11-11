@@ -99,8 +99,12 @@ public class IndexAccessorImpl implements IndexAccessor {
 					IndexWriter.unlock(directory);
 				}
 
-				_initIndexWriter();
-				_cleanUp(true);
+				try {
+					_initIndexWriter();
+				}
+				finally {
+					_doCleanUp();
+				}
 			}
 		}
 	}
@@ -147,10 +151,10 @@ public class IndexAccessorImpl implements IndexAccessor {
 			try {
 				_indexWriter.deleteDocuments(term);
 
-				_documentCount++;
+				_writeCount++;
 			}
 			finally {
-				_cleanUp(false);
+				_cleanUp();
 			}
 		}
 	}
@@ -191,17 +195,12 @@ public class IndexAccessorImpl implements IndexAccessor {
 		_write(term, document);
 	}
 
-	private void _cleanUp(boolean close) throws IOException {
+	private void _cleanUp() throws IOException {
 		synchronized (this) {
-			int interval = PropsValues.LUCENE_COMMIT_DOCUMENTS_INTERVAL;
+			if ((PropsValues.LUCENE_COMMIT_BATCH_SIZE == 0) ||
+				(PropsValues.LUCENE_COMMIT_BATCH_SIZE <= _writeCount)) {
 
-			if (close || interval == 0 || (interval <= _documentCount)) {
-				if (_indexWriter != null) {
-					_indexWriter.close();
-				}
-
-				_indexWriter = null;
-				_documentCount = 0;
+				_doCleanUp();
 			}
 		}
 	}
@@ -260,6 +259,15 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private void _deleteRam() {
+	}
+
+	private void _doCleanUp() throws IOException {
+		if (_indexWriter != null) {
+			_indexWriter.close();
+		}
+
+		_indexWriter = null;
+		_writeCount = 0;
 	}
 
 	private FSDirectory _getDirectory(String path) throws IOException {
@@ -367,27 +375,29 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private void _initCommitScheduler() {
-		int interval = PropsValues.LUCENE_COMMIT_TIME_INTERVAL;
-
-		if (interval > 0) {
-			ScheduledExecutorService executor =
-				Executors.newSingleThreadScheduledExecutor();
-
-			Runnable runnable = new Runnable() {
-
-				public void run() {
-					try {
-						_cleanUp(true);
-					}
-					catch (IOException ioe) {
-						_log.error("Could not run scheduled commit.", ioe);
-					}
-				}
-			};
-
-			executor.scheduleWithFixedDelay(
-				runnable, 0, interval, TimeUnit.MILLISECONDS);
+		if (PropsValues.LUCENE_COMMIT_TIME_INTERVAL <= 0) {
+			return;
 		}
+
+		ScheduledExecutorService scheduledExecutorService =
+			Executors.newSingleThreadScheduledExecutor();
+
+		Runnable runnable = new Runnable() {
+
+			public void run() {
+				try {
+					_doCleanUp();
+				}
+				catch (IOException ioe) {
+					_log.error("Could not run scheduled commit", ioe);
+				}
+			}
+
+		};
+
+		scheduledExecutorService.scheduleWithFixedDelay(
+			runnable, 0, PropsValues.LUCENE_COMMIT_TIME_INTERVAL,
+			TimeUnit.MILLISECONDS);
 	}
 
 	private void _initDialect() {
@@ -443,8 +453,8 @@ public class IndexAccessorImpl implements IndexAccessor {
 				getLuceneDir(), LuceneHelperUtil.getAnalyzer(),
 				IndexWriter.MaxFieldLength.LIMITED);
 
-			_indexWriter.setRAMBufferSizeMB(PropsValues.LUCENE_BUFFER_SIZE);
 			_indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
+			_indexWriter.setRAMBufferSizeMB(PropsValues.LUCENE_BUFFER_SIZE);
 		}
 	}
 
@@ -508,7 +518,6 @@ public class IndexAccessorImpl implements IndexAccessor {
 					_indexWriter.addDocument(document);
 				}
 
-				_documentCount++;
 				_optimizeCount++;
 
 				if ((PropsValues.LUCENE_OPTIMIZE_INTERVAL == 0) ||
@@ -518,9 +527,11 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 					_optimizeCount = 0;
 				}
+
+				_writeCount++;
 			}
 			finally {
-				_cleanUp(false);
+				_cleanUp();
 			}
 		}
 	}
@@ -537,12 +548,12 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 	private long _companyId;
 	private Dialect _dialect;
-	private int _documentCount;
 	private IndexWriter _indexWriter;
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();
 	private int _optimizeCount;
 	private Map<String, Directory> _ramDirectories =
 		new ConcurrentHashMap<String, Directory>();
+	private int _writeCount;
 
 }
