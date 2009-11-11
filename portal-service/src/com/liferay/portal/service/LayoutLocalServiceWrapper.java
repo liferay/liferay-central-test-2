@@ -319,6 +319,12 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.getNullFriendlyURLLayouts();
 	}
 
+	public boolean hasLayouts(long groupId, boolean privateLayout,
+		long parentLayoutId) throws com.liferay.portal.SystemException {
+		return _layoutLocalService.hasLayouts(groupId, privateLayout,
+			parentLayoutId);
+	}
+
 	public void importLayouts(long userId, long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,

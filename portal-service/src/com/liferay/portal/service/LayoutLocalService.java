@@ -254,6 +254,10 @@ public interface LayoutLocalService {
 	public java.util.List<com.liferay.portal.model.Layout> getNullFriendlyURLLayouts()
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasLayouts(long groupId, boolean privateLayout,
+		long parentLayoutId) throws com.liferay.portal.SystemException;
+
 	public void importLayouts(long userId, long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,

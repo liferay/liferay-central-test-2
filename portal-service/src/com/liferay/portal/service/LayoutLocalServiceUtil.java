@@ -331,6 +331,11 @@ public class LayoutLocalServiceUtil {
 		return getService().getNullFriendlyURLLayouts();
 	}
 
+	public static boolean hasLayouts(long groupId, boolean privateLayout,
+		long parentLayoutId) throws com.liferay.portal.SystemException {
+		return getService().hasLayouts(groupId, privateLayout, parentLayoutId);
+	}
+
 	public static void importLayouts(long userId, long groupId,
 		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
 		java.io.File file)

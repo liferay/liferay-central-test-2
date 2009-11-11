@@ -366,6 +366,10 @@ public class LayoutWrapper implements Layout {
 		return _layout.getChildren();
 	}
 
+	public boolean hasChildren() throws com.liferay.portal.SystemException {
+		return _layout.hasChildren();
+	}
+
 	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
 		throws com.liferay.portal.SystemException {
 		return _layout.getAllChildren();

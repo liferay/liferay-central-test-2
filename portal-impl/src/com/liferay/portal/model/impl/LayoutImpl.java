@@ -310,6 +310,11 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			getGroupId(), isPrivateLayout(), getLayoutId());
 	}
 
+	public boolean hasChildren() throws SystemException {
+		return LayoutLocalServiceUtil.hasLayouts(
+			getGroupId(), isPrivateLayout(), getLayoutId());
+	}
+
 	public List<Layout> getAllChildren() throws SystemException {
 		List<Layout> layouts = new ArrayList<Layout>();
 

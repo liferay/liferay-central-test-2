@@ -62,13 +62,7 @@ public class GetLayoutsAction extends JSONAction {
 		for (Layout layout : layouts) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			boolean hasChildren = false;
-
-			if (layout.getChildren().size() > 0) {
-				hasChildren = true;
-			}
-
-			jsonObject.put("hasChildren", hasChildren);
+			jsonObject.put("hasChildren", layout.hasChildren());
 			jsonObject.put("layoutId", layout.getLayoutId());
 			jsonObject.put("name", layout.getName());
 			jsonObject.put("parentLayoutId", layout.getParentLayoutId());

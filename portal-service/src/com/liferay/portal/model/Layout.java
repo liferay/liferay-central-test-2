@@ -81,6 +81,8 @@ public interface Layout extends LayoutModel {
 	public java.util.List<com.liferay.portal.model.Layout> getChildren()
 		throws com.liferay.portal.SystemException;
 
+	public boolean hasChildren() throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
 		throws com.liferay.portal.SystemException;
 

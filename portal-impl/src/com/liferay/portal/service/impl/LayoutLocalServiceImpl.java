@@ -611,6 +611,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layoutFinder.findByNullFriendlyURL();
 	}
 
+	public boolean hasLayouts(
+			long groupId, boolean privateLayout, long parentLayoutId)
+		throws SystemException {
+
+		return layoutPersistence.countByG_P_P(
+			groupId, privateLayout, parentLayoutId) > 0;
+	}
+
 	public void importLayouts(
 			long userId, long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, File file)
