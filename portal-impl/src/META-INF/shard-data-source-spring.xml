@@ -91,6 +91,11 @@
 			</map>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil">
+		<property name="mappingSqlQueryFactory">
+			<bean class="com.liferay.portal.dao.shard.ShardMappingSqlQueryFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil">
 		<property name="sqlUpdateFactory">
 			<bean class="com.liferay.portal.dao.shard.ShardSqlUpdateFactoryImpl" />
