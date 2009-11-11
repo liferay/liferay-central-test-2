@@ -125,6 +125,16 @@ AUI().add(
 					instance.entries.after('remove', instance._updateHiddenInput, instance);
 				},
 
+				syncUI: function() {
+					var instance = this;
+
+					AssetTagsSelector.superclass.syncUI.apply(instance, arguments);
+
+					var curTags = instance.get('curTags');
+
+					A.each(curTags, instance.add, instance);
+				},
+
 				_formatEntry: function(item) {
 					var instance = this;
 
