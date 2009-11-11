@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -68,6 +69,22 @@ public class LocaleUtil {
 
 	private LocaleUtil() {
 		_locale = new Locale("en", "US");
+
+		_isoCountries = (String[])Locale.getISOCountries().clone();
+
+		for (int i = 0; i < _isoCountries.length; i++) {
+			_isoCountries[i] = _isoCountries[i].toUpperCase();
+		}
+
+		Arrays.sort(_isoCountries);
+
+		_isoLanguages = (String[])Locale.getISOLanguages().clone();
+
+		for (int i = 0; i < _isoLanguages.length; i++) {
+			_isoLanguages[i] = _isoLanguages[i].toLowerCase();
+		}
+
+		Arrays.sort(_isoLanguages);
 	}
 
 	private Locale _fromLanguageId(String languageId) {
@@ -84,12 +101,23 @@ public class LocaleUtil {
 				int pos = languageId.indexOf(StringPool.UNDERLINE);
 
 				if (pos == -1) {
+					if (Arrays.binarySearch(_isoLanguages, languageId) < 0) {
+						return _getDefault();
+					}
+
 					locale = new Locale(languageId);
 				}
 				else {
 					String languageCode = languageId.substring(0, pos);
 					String countryCode = languageId.substring(
 						pos + 1, languageId.length());
+
+					if ((Arrays.binarySearch(
+							_isoLanguages, languageCode) < 0) ||
+						(Arrays.binarySearch(_isoCountries, countryCode) < 0)) {
+
+						return _getDefault();
+					}
 
 					locale = new Locale(languageCode, countryCode);
 				}
@@ -177,6 +205,8 @@ public class LocaleUtil {
 
 	private static LocaleUtil _instance = new LocaleUtil();
 
+	private String[] _isoCountries;
+	private String[] _isoLanguages;
 	private Locale _locale;
 	private Map<String, Locale> _locales = new HashMap<String, Locale>();
 

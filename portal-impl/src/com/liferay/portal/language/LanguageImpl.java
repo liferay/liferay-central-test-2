@@ -421,6 +421,7 @@ public class LanguageImpl implements Language {
 		if (Validator.isNotNull(languageId)) {
 			if (_localesMap.containsKey(languageId) ||
 				_charEncodings.containsKey(languageId)) {
+
 				return languageId;
 			}
 		}
