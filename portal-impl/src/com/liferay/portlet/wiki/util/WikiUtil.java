@@ -303,7 +303,7 @@ public class WikiUtil {
 
 		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
 
-		nodes = _sortWikiNodes(nodes, visibleNodes);
+		nodes = _orderNodes(nodes, visibleNodes);
 
 		Iterator<WikiNode> itr = nodes.iterator();
 
@@ -336,12 +336,12 @@ public class WikiUtil {
 		return _instance._validate(nodeId, content, format);
 	}
 
-	private static List<WikiNode> _sortWikiNodes(
-		List<WikiNode> nodes, String[] orderedNodeNames) {
+	private static List<WikiNode> _orderNodes(
+		List<WikiNode> nodes, String[] nodeNames) {
 
 		List<WikiNode> orderedNodes = new ArrayList<WikiNode>();
 
-		for (String nodeName : orderedNodeNames) {
+		for (String nodeName : nodeNames) {
 			for (WikiNode node : nodes) {
 				if (node.getName().equals(nodeName)) {
 					orderedNodes.add(node);
