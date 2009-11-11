@@ -452,10 +452,19 @@ public class EditUserAction extends PortletAction {
 
 			user = PortalUtil.getSelectedUser(actionRequest);
 
-			boolean showDetails = ParamUtil.getBoolean(
-					actionRequest, "showDetails", true);
+			String oldPassword = AdminUtil.getUpdateUserPassword(
+				actionRequest, user.getUserId());
+			String newPassword1 = ParamUtil.getString(
+				actionRequest, "password1");
+			String newPassword2 = ParamUtil.getString(
+				actionRequest, "password2");
+			boolean passwordReset = ParamUtil.getBoolean(
+				actionRequest, "passwordReset");
 
-			if (!showDetails){
+			boolean showDetails = ParamUtil.getBoolean(
+				actionRequest, "showDetails", true);
+
+			if (!showDetails) {
 				Contact contact = user.getContact();
 
 				screenName = user.getScreenName();
@@ -477,15 +486,6 @@ public class EditUserAction extends PortletAction {
 
 				jobTitle = user.getJobTitle();
 			}
-
-			String oldPassword = AdminUtil.getUpdateUserPassword(
-				actionRequest, user.getUserId());
-			String newPassword1 = ParamUtil.getString(
-				actionRequest, "password1");
-			String newPassword2 = ParamUtil.getString(
-				actionRequest, "password2");
-			boolean passwordReset = ParamUtil.getBoolean(
-				actionRequest, "passwordReset");
 
 			String tempOldScreenName = user.getScreenName();
 
