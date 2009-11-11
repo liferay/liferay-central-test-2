@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
@@ -111,7 +112,7 @@ public class DLFileEntryImpl
 	public String getLuceneProperties() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(getTitle());
+		sb.append(FileUtil.stripExtension(getTitle()));
 		sb.append(StringPool.SPACE);
 		sb.append(getDescription());
 		sb.append(StringPool.SPACE);
