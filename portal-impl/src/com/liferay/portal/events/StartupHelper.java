@@ -97,19 +97,19 @@ public class StartupHelper {
 	}
 
 	public void upgradeProcess(int buildNumber) throws UpgradeException {
-		String[] upgradeProcesses = PropsUtil.getArray(
+		String[] upgradeProcessClassNames = PropsUtil.getArray(
 			PropsKeys.UPGRADE_PROCESSES);
 
-		for (int i = 0; i < upgradeProcesses.length; i++) {
+		for (String upgradeProcessClassName : upgradeProcessClassNames) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Initializing upgrade " + upgradeProcesses[i]);
+				_log.debug("Initializing upgrade " + upgradeProcessClassName);
 			}
 
 			UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
-				upgradeProcesses[i]);
+				upgradeProcessClassName);
 
 			if (upgradeProcess == null) {
-				_log.error(upgradeProcesses[i] + " cannot be found");
+				_log.error(upgradeProcessClassName + " cannot be found");
 
 				continue;
 			}
@@ -118,13 +118,13 @@ public class StartupHelper {
 				(upgradeProcess.getThreshold() > buildNumber)) {
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Running upgrade " + upgradeProcesses[i]);
+					_log.debug("Running upgrade " + upgradeProcessClassName);
 				}
 
 				upgradeProcess.upgrade();
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Finished upgrade " + upgradeProcesses[i]);
+					_log.debug("Finished upgrade " + upgradeProcessClassName);
 				}
 
 				_upgraded = true;
@@ -135,7 +135,7 @@ public class StartupHelper {
 						"Upgrade threshold " + upgradeProcess.getThreshold() +
 							" will not trigger upgrade");
 
-					_log.debug("Skipping upgrade " + upgradeProcesses[i]);
+					_log.debug("Skipping upgrade " + upgradeProcessClassName);
 				}
 			}
 		}
@@ -156,7 +156,7 @@ public class StartupHelper {
 				PropsUtil.set(PropsKeys.INDEX_ON_STARTUP, "true");
 			}
 
-			String[] verifyProcesses = PropsUtil.getArray(
+			String[] verifyProcessClassNames = PropsUtil.getArray(
 				PropsKeys.VERIFY_PROCESSES);
 
 			BatchSessionUtil.setEnabled(true);
@@ -166,8 +166,8 @@ public class StartupHelper {
 			SearchEngineUtil.setIndexReadOnly(true);
 
 			try {
-				for (String className : verifyProcesses) {
-					verifyProcess(className);
+				for (String verifyProcessClassName : verifyProcessClassNames) {
+					verifyProcess(verifyProcessClassName);
 				}
 			}
 			finally {
@@ -554,35 +554,37 @@ public class StartupHelper {
 			"com/liferay/portal/tools/sql/dependencies/indexes.sql");
 	}
 
-	protected void verifyProcess(String className) throws VerifyException {
+	protected void verifyProcess(String verifyProcessClassName)
+		throws VerifyException {
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Initializing verification " + className);
+			_log.debug("Initializing verification " + verifyProcessClassName);
 		}
 
 		try {
 			VerifyProcess verifyProcess = (VerifyProcess)Class.forName(
-				className).newInstance();
+				verifyProcessClassName).newInstance();
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Running verification " + className);
+				_log.debug("Running verification " + verifyProcessClassName);
 			}
 
 			verifyProcess.verify();
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Finished verification " + className);
+				_log.debug("Finished verification " + verifyProcessClassName);
 			}
 
 			_verified = true;
 		}
 		catch (ClassNotFoundException cnfe) {
-			_log.error(className + " cannot be found");
+			_log.error(verifyProcessClassName + " cannot be found");
 		}
 		catch (IllegalAccessException iae) {
-			_log.error(className + " cannot be accessed");
+			_log.error(verifyProcessClassName + " cannot be accessed");
 		}
 		catch (InstantiationException ie) {
-			_log.error(className + " cannot be initiated");
+			_log.error(verifyProcessClassName + " cannot be initiated");
 		}
 	}
 
