@@ -419,7 +419,10 @@ public class LanguageImpl implements Language {
 		String languageId = ParamUtil.getString(request, "languageId");
 
 		if (Validator.isNotNull(languageId)) {
-			return languageId;
+			if (_localesMap.containsKey(languageId) ||
+				_charEncodings.containsKey(languageId)) {
+				return languageId;
+			}
 		}
 
 		Locale locale = PortalUtil.getLocale(request);
