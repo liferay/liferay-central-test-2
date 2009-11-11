@@ -33,8 +33,10 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
@@ -98,7 +100,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (!group.isUser()) {
+				serviceContext.setAddCommunityPermissions(true);
+			}
+
 			serviceContext.setAddGuestPermissions(true);
 
 			int status = HttpServletResponse.SC_CREATED;
@@ -175,7 +182,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (!group.isUser()) {
+				serviceContext.setAddCommunityPermissions(true);
+			}
+
 			serviceContext.setAddGuestPermissions(true);
 
 			int status = HttpServletResponse.SC_CREATED;
@@ -361,7 +373,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				ServiceContext serviceContext = new ServiceContext();
 
-				serviceContext.setAddCommunityPermissions(true);
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (!group.isUser()) {
+					serviceContext.setAddCommunityPermissions(true);
+				}
+
 				serviceContext.setAddGuestPermissions(true);
 
 				DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
@@ -421,18 +438,23 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			String[] pathArray = webDavRequest.getPathArray();
 
+			long groupId = webDavRequest.getGroupId();
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (!group.isUser()) {
+				serviceContext.setAddCommunityPermissions(true);
+			}
+
 			serviceContext.setAddGuestPermissions(true);
 
 			DLFolderServiceUtil.addFolder(
-				webDavRequest.getGroupId(), parentFolderId, name, description,
-				serviceContext);
+				groupId, parentFolderId, name, description, serviceContext);
 
 			String location = StringUtil.merge(pathArray, StringPool.SLASH);
 
@@ -616,7 +638,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (!group.isUser()) {
+				serviceContext.setAddCommunityPermissions(true);
+			}
+
 			serviceContext.setAddGuestPermissions(true);
 
 			try {
