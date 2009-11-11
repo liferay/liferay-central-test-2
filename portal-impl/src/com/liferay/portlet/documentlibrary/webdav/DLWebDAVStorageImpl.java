@@ -100,12 +100,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (!group.isUser()) {
-				serviceContext.setAddCommunityPermissions(true);
-			}
-
+			serviceContext.setAddCommunityPermissions(
+				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			int status = HttpServletResponse.SC_CREATED;
@@ -182,12 +178,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (!group.isUser()) {
-				serviceContext.setAddCommunityPermissions(true);
-			}
-
+			serviceContext.setAddCommunityPermissions(
+				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			int status = HttpServletResponse.SC_CREATED;
@@ -375,10 +367,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-				if (!group.isUser()) {
-					serviceContext.setAddCommunityPermissions(true);
-				}
-
+				serviceContext.setAddCommunityPermissions(
+					isAddCommunityPermissions(groupId));
 				serviceContext.setAddGuestPermissions(true);
 
 				DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
@@ -445,12 +435,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (!group.isUser()) {
-				serviceContext.setAddCommunityPermissions(true);
-			}
-
+			serviceContext.setAddCommunityPermissions(
+				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			DLFolderServiceUtil.addFolder(
@@ -640,10 +626,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			if (!group.isUser()) {
-				serviceContext.setAddCommunityPermissions(true);
-			}
-
+			serviceContext.setAddCommunityPermissions(
+				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			try {
@@ -874,6 +858,17 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	protected long getParentFolderId(String[] pathArray) throws Exception {
 		return getFolderId(pathArray, true);
+	}
+
+	protected boolean isAddCommunityPermissions(long groupId) throws Exception {
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		if (!group.isUser()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	protected boolean isLocked(DLFileEntry fileEntry, String lockUuid)
