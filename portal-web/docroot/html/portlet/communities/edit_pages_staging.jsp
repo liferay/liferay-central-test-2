@@ -41,7 +41,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			<liferay-ui:message key="activate-staging" />
 		</td>
 		<td>
-			<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />stagingEnabled" type="checkbox" onClick="<portlet:namespace />updateStaging();">
+			<input <%= (stagingGroup != null) ? "checked" : "" %> <%= (stagingGroup != null) && (stagingGroup.getGroupId() == themeDisplay.getDoAsGroupId()) ? "disabled" : "" %> name="<portlet:namespace />stagingEnabled" type="checkbox" onClick="<portlet:namespace />updateStaging();">
 		</td>
 	</tr>
 
