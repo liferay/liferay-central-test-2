@@ -265,7 +265,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Minute"].disabled = checked;
 		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "AmPm"].disabled = checked;
 
-		jQuery(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]).toggleClass('disabled');
+		var imageInputIdInput = AUI().one(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]);
+
+		if (imageInputIdInput) {
+			imageInputIdInput.toggleClass('disabled')
+		}
 	}
 
 	function <portlet:namespace />editorContentChanged(text) {

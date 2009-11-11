@@ -52,11 +52,21 @@ boolean useEditorCodepress = editorType.equals("codepress");
 		}
 		%>
 
+		var editorForm = AUI().one(document.<portlet:namespace />editorForm);
+
+		if (editorForm) {
+			var popup = editorForm.ancestor('.aui-widget-bd');
+
+			if (popup) {
+				popup = popup.getDOM();
+			}
+		}
+
 		Liferay.Util.switchEditor(
 			{
 				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
 				textarea: '<portlet:namespace />xsdContent',
-				popup: jQuery(document.<portlet:namespace />editorForm).parents('.aui-widget-bd:first')
+				popup: popup
 			}
 		);
 	}
@@ -64,12 +74,14 @@ boolean useEditorCodepress = editorType.equals("codepress");
 	function <portlet:namespace />updateStructureXsd() {
 		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
 
-		var xsdContent = jQuery('input[name=<portlet:namespace />xsd]');
+		var xsdContent = AUI().one('input[name=<portlet:namespace />xsd]');
 		var content = '';
 
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
-				content = <portlet:namespace />xsdContent.getCode();
+				if (xsdContent) {
+					content = <portlet:namespace />xsdContent.getCode();
+				}
 			</c:when>
 			<c:otherwise>
 				content = document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value;

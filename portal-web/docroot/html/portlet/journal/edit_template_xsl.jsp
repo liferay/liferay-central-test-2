@@ -53,10 +53,13 @@ else {
 
 <script type="text/javascript">
 	function <portlet:namespace />getEditorContent() {
-		var xslContent = jQuery('input[name=<portlet:namespace />xslContent]');
-		var content = decodeURIComponent(xslContent.val());
+		var xslContent = AUI().one('input[name=<portlet:namespace />xslContent]');
 
-		if (content == "") {
+		if (xslContent) {
+			var content = decodeURIComponent(xslContent.val());
+		}
+
+		if (!content) {
 			content = "<%= UnicodeFormatter.toString(defaultContent) %>";
 		}
 
@@ -73,22 +76,34 @@ else {
 		}
 		%>
 
+		var editorForm = AUI().one(document.<portlet:namespace />editorForm);
+
+		if (editorForm) {
+			var popup = editorForm.ancestor('.aui-widget-bd');
+
+			if (popup) {
+				popup = popup.getDOM();
+			}
+		}
+
 		Liferay.Util.switchEditor(
 			{
 				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
 				textarea: '<portlet:namespace />xslContent',
-				popup: jQuery(document.<portlet:namespace />editorForm).parents('.aui-widget-bd:first')
+				popup: popup
 			}
 		);
 	}
 
 	function <portlet:namespace />updateTemplateXsl() {
-		var xslContent = jQuery('input[name=<portlet:namespace />xslContent]');
+		var xslContent = AUI().one('input[name=<portlet:namespace />xslContent]');
 		var content = '';
 
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
-				content = encodeURIComponent(<portlet:namespace />xslContent.getCode());
+				if (xslContent) {
+					content = encodeURIComponent(<portlet:namespace />xslContent.getCode());
+				}
 			</c:when>
 			<c:otherwise>
 				content = encodeURIComponent(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value);
