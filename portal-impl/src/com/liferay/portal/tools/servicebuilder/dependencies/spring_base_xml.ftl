@@ -23,15 +23,8 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="velocityHookAdvice" class="com.liferay.portal.spring.aop.ServiceVelocityAdvice">
-		<property name="classLoader" ref="portletClassLoader" />
-		<property name="exceptionSafe" value="true" />
-	</bean>
 	<aop:config>
-		<aop:pointcut id="transactionOperation" expression="bean(*Service.impl) || bean(*Service.velocity)" />
+		<aop:pointcut id="transactionOperation" expression="bean(*Service.impl)" />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionOperation" order="1" />
-		<aop:aspect ref="velocityHookAdvice" order="2">
-			<aop:around pointcut="bean(*.velocity)" method="invoke" />
-		</aop:aspect>
 	</aop:config>
 </beans>

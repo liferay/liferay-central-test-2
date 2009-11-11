@@ -22,6 +22,7 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -39,42 +40,48 @@ public class ServiceLocator {
 	}
 
 	public Object findService(String serviceName) {
-		if (serviceName.endsWith(_SERVICE)) {
-			serviceName += _VELOCITY;
-		}
-
-		Object obj = null;
+		Object bean = null;
 
 		try {
-			obj = PortalBeanLocatorUtil.locate(serviceName);
+			bean = PortalBeanLocatorUtil.locate(_getServiceName(serviceName));
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
-		return obj;
+		return bean;
 	}
 
 	public Object findService(String servletContextName, String serviceName) {
-		if (serviceName.endsWith(_SERVICE)) {
-			serviceName += _VELOCITY;
-		}
-
-		Object obj = null;
+		Object bean = null;
 
 		try {
-			obj = PortletBeanLocatorUtil.locate(
-				servletContextName, serviceName);
+			bean = PortletBeanLocatorUtil.locate(
+				servletContextName, _getServiceName(serviceName));
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
-		return obj;
+		return bean;
 	}
 
 	private ServiceLocator() {
 	}
+
+	private String _getServiceName(String serviceName) {
+		if (!serviceName.endsWith(BeanLocatorImpl.VELOCITY_SUFFIX)) {
+			if (serviceName.endsWith(_SERVICE)) {
+				serviceName += _IMPL;
+			}
+
+			serviceName += BeanLocatorImpl.VELOCITY_SUFFIX;
+		}
+
+		return serviceName;
+	}
+
+	private static final String _IMPL = ".impl";
 
 	private static final String _SERVICE = "Service";
 

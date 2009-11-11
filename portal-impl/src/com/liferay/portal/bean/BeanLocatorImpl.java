@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.lang.reflect.Proxy;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -35,6 +40,8 @@ import org.springframework.context.ApplicationContext;
  * @author Brian Wing Shun Chan
  */
 public class BeanLocatorImpl implements BeanLocator {
+
+	public static final String VELOCITY_SUFFIX = ".velocity";
 
 	public BeanLocatorImpl(
 		ClassLoader classLoader, ApplicationContext applicationContext) {
@@ -56,12 +63,34 @@ public class BeanLocatorImpl implements BeanLocator {
 			_log.debug("Locating " + name);
 		}
 
-		return _applicationContext.getBean(name);
+		if (name.endsWith(VELOCITY_SUFFIX)) {
+			String originalName = name.substring(
+				0, name.length() - VELOCITY_SUFFIX.length());
+
+			Object bean = _velocityBeans.get(originalName);
+
+			if (bean == null) {
+				bean = _applicationContext.getBean(originalName);
+
+				bean = Proxy.newProxyInstance(
+					_classLoader, bean.getClass().getInterfaces(),
+					new VelocityBeanHandler(bean, _classLoader));
+
+				_velocityBeans.put(originalName, bean);
+			}
+
+			return bean;
+		}
+		else {
+			return _applicationContext.getBean(name);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BeanLocatorImpl.class);
 
 	private ClassLoader _classLoader;
 	private ApplicationContext _applicationContext;
+	private Map<String, Object> _velocityBeans =
+		new ConcurrentHashMap<String, Object>();
 
 }

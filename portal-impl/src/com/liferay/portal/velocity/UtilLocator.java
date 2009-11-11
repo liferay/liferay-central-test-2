@@ -22,8 +22,11 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * <a href="UtilLocator.java.html"><b><i>View Source</i></b></a>
@@ -37,30 +40,47 @@ public class UtilLocator {
 	}
 
 	public Object findUtil(String utilName) {
-		if (utilName.endsWith(_UTIL)) {
-			utilName += _VELOCITY;
+		Object bean = null;
+
+		try {
+			bean = PortalBeanLocatorUtil.locate(_getUtilName(utilName));
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
-		return PortalBeanLocatorUtil.locate(utilName);
+		return bean;
 	}
 
 	public Object findUtil(
 		String servletContextName, String utilName) {
 
-		if (utilName.endsWith(_UTIL)) {
-			utilName += _VELOCITY;
+		Object bean = null;
+
+		try {
+			bean = PortletBeanLocatorUtil.locate(
+				servletContextName, _getUtilName(utilName));
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
-		return PortletBeanLocatorUtil.locate(servletContextName, utilName);
+		return bean;
 	}
 
 	private UtilLocator() {
 	}
 
-	private static final String _UTIL = "Util";
+	private String _getUtilName(String utilName) {
+		if (!utilName.endsWith(BeanLocatorImpl.VELOCITY_SUFFIX)) {
+			utilName += BeanLocatorImpl.VELOCITY_SUFFIX;
+		}
 
-	private static final String _VELOCITY = ".velocity";
+		return utilName;
+	}
 
 	private static UtilLocator _instance = new UtilLocator();
+
+	private static Log _log = LogFactoryUtil.getLog(UtilLocator.class);
 
 }

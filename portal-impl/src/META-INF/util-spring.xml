@@ -26,9 +26,6 @@
 	<bean id="com.liferay.portal.kernel.bean.RendererUtil" class="com.liferay.portal.kernel.bean.RendererUtil">
 		<property name="renderer" ref="com.liferay.portal.kernel.bean.Renderer" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.bean.RendererUtil.velocity" class="com.liferay.portal.kernel.bean.RendererUtil">
-		<property name="renderer" ref="com.liferay.portal.kernel.bean.Renderer" />
-	</bean>
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPool" class="com.liferay.portal.cache.MultiVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" />
 	</bean>
@@ -199,9 +196,6 @@
 	</bean>
 	<bean id="com.liferay.portal.kernel.xml.SAXReader" class="com.liferay.portal.xml.SAXReaderImpl" />
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
-		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
-	</bean>
-	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil.velocity" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
 		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
 	</bean>
 	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil">

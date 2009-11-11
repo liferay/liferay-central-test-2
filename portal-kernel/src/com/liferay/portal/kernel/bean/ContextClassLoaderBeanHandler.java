@@ -48,7 +48,11 @@ public class ContextClassLoaderBeanHandler implements InvocationHandler {
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			currentThread.setContextClassLoader(_classLoader);
+			if ((_classLoader != null) &&
+				(contextClassLoader != _classLoader)) {
+
+				currentThread.setContextClassLoader(_classLoader);
+			}
 
 			return method.invoke(_bean, args);
 		}
@@ -56,7 +60,11 @@ public class ContextClassLoaderBeanHandler implements InvocationHandler {
 			throw ite.getTargetException();
 		}
 		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
+			if ((_classLoader != null) &&
+				(contextClassLoader != _classLoader)) {
+
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
 		}
 	}
 

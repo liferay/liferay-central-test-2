@@ -20,18 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.aop;
+package com.liferay.portal.bean;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import java.lang.Object;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
- * <a href="ServiceVelocityAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="VelocityBeanHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ServiceVelocityAdvice {
+public class VelocityBeanHandler implements InvocationHandler {
 
-	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
+	public VelocityBeanHandler(Object bean, ClassLoader classLoader) {
+		_bean = bean;
+		_classLoader = classLoader;
+	}
+
+	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 
 		Thread currentThread = Thread.currentThread();
@@ -45,15 +53,10 @@ public class ServiceVelocityAdvice {
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return proceedingJoinPoint.proceed();
+			return method.invoke(_bean, args);
 		}
-		catch (Throwable t) {
-			if (_exceptionSafe) {
-				return null;
-			}
-			else {
-				throw t;
-			}
+		catch (InvocationTargetException ite) {
+			return null;
 		}
 		finally {
 			if ((_classLoader != null) &&
@@ -64,15 +67,7 @@ public class ServiceVelocityAdvice {
 		}
 	}
 
-	public void setClassLoader(ClassLoader classLoader) {
-		_classLoader = classLoader;
-	}
-
-	public void setExceptionSafe(boolean exceptionSafe) {
-		_exceptionSafe = exceptionSafe;
-	}
-
+	private Object _bean;
 	private ClassLoader _classLoader;
-	private boolean _exceptionSafe;
 
 }

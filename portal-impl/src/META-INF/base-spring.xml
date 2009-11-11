@@ -22,17 +22,11 @@
 		</property>
 	</bean>
 	<bean id="serviceHookAdvice" class="com.liferay.portal.spring.aop.ServiceHookAdvice" />
-	<bean id="velocityHookAdvice" class="com.liferay.portal.spring.aop.ServiceVelocityAdvice">
-		<property name="exceptionSafe" value="true" />
-	</bean>
 	<aop:config>
-		<aop:pointcut id="transactionOperation" expression="(bean(*Service.impl) || bean(*Service.velocity)) &amp;&amp; !within(com.liferay.counter..*)" />
+		<aop:pointcut id="transactionOperation" expression="bean(*Service.impl) &amp;&amp; !within(com.liferay.counter..*)" />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionOperation" order="1" />
 		<aop:aspect ref="serviceHookAdvice" order="2">
-			<aop:around pointcut="bean(*Service.impl) || bean(*Service.velocity)" method="invoke" />
-		</aop:aspect>
-		<aop:aspect ref="velocityHookAdvice" order="3">
-			<aop:around pointcut="bean(*.velocity)" method="invoke" />
+			<aop:around pointcut="bean(*Service.impl)" method="invoke" />
 		</aop:aspect>
 	</aop:config>
 </beans>
