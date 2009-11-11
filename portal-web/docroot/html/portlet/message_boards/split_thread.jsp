@@ -152,7 +152,7 @@ boolean quote = false;
 	<aui:button-row>
 		<aui:button type="submit" value="ok" />
 
-		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
+		<aui:button onClick="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

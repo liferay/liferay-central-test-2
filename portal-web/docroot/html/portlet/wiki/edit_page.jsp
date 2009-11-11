@@ -380,7 +380,7 @@ if (Validator.isNull(redirect)) {
 
 				<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewPage();" %>' type="button" value="preview" />
 
-				<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
+				<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 			</aui:button-row>
 		</aui:fieldset>
 	</c:if>

@@ -105,7 +105,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				<aui:button-row>
 					<aui:button type="submit" value="vote" />
 
-					<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
+					<aui:button onClick="<%= redirect %>" value="cancel" />
 				</aui:button-row>
 
 				<%
@@ -128,7 +128,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 							<aui:button onClick="<%= viewQuestionURL %>" value="back-to-vote" />
 						</c:when>
 						<c:when test="<%= Validator.isNotNull(redirect) %>">
-							<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="back" />
+							<aui:button onClick="<%= redirect %>" value="back" />
 						</c:when>
 					</c:choose>
 				</aui:button-row>

@@ -260,7 +260,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		<aui:button-row>
 			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || (entry.getStatus() == StatusConstants.DRAFT)) ? "publish" : "save" %>' />
 
-			<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
+			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

@@ -79,7 +79,7 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	<aui:button-row>
 		<aui:button name="saveButton" onClick='<%= uploadProgressId + ".startProgress(); " +  importProgressId + ".startProgress(); return true;" %>' type="submit" value="import" />
 
-		<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

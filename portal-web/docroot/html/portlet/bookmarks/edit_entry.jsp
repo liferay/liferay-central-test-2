@@ -153,7 +153,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 
-		<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
+		<aui:button onClick="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

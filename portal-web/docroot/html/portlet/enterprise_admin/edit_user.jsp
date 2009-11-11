@@ -270,7 +270,7 @@ String curSection = mainSections[0];
 
 						<aui:button onClick="<%= taglibOnClick %>" value="save" />
 
-						<aui:button onClick="<%= PortalUtil.escapeRedirect(backURL) %>" value="cancel" />
+						<aui:button onClick="<%= backURL %>" value="cancel" />
 					</aui:button-row>
 
 					<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">

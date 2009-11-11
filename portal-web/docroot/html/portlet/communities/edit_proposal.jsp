@@ -360,7 +360,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 		</c:when>
 	</c:choose>
 
-	<aui:button onClick="<%= PortalUtil.escapeRedirect(redirect) %>" value="cancel" />
+	<aui:button onClick="<%= redirect %>" value="cancel" />
 </aui:form>
 
 <br />

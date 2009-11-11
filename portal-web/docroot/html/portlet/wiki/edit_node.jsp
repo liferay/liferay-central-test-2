@@ -77,7 +77,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 		<aui:button-row>
 			<aui:button name="saveButton" type="submit" value="save" />
 
-			<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
+			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
