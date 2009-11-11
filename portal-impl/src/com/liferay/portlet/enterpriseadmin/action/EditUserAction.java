@@ -452,6 +452,37 @@ public class EditUserAction extends PortletAction {
 
 			user = PortalUtil.getSelectedUser(actionRequest);
 
+			Contact contact = user.getContact();
+
+			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
+
+			birthdayCal.setTime(contact.getBirthday());
+
+			screenName = ParamUtil.getString(
+				actionRequest, "screenName", user.getScreenName());
+			emailAddress = ParamUtil.getString(
+				actionRequest, "emailAddress", user.getEmailAddress());
+			firstName = ParamUtil.getString(
+				actionRequest, "firstName", user.getFirstName());
+			middleName = ParamUtil.getString(
+				actionRequest, "middleName", user.getMiddleName());
+			lastName = ParamUtil.getString(
+				actionRequest, "lastName", user.getLastName());
+			prefixId = ParamUtil.getInteger(
+				actionRequest, "prefixId", contact.getPrefixId());
+			suffixId = ParamUtil.getInteger(
+				actionRequest, "suffixId", contact.getSuffixId());
+			male = ParamUtil.getBoolean(actionRequest, "male", user.isMale());
+			birthdayMonth = ParamUtil.getInteger(
+				actionRequest, "birthdayMonth",
+				birthdayCal.get(Calendar.MONTH));
+			birthdayDay = ParamUtil.getInteger(
+				actionRequest, "birthdayDay", birthdayCal.get(Calendar.DATE));
+			birthdayYear = ParamUtil.getInteger(
+				actionRequest, "birthdayYear", birthdayCal.get(Calendar.YEAR));
+			jobTitle = ParamUtil.getString(
+				actionRequest, "jobTitle", user.getJobTitle());
+
 			String oldPassword = AdminUtil.getUpdateUserPassword(
 				actionRequest, user.getUserId());
 			String newPassword1 = ParamUtil.getString(
@@ -460,32 +491,6 @@ public class EditUserAction extends PortletAction {
 				actionRequest, "password2");
 			boolean passwordReset = ParamUtil.getBoolean(
 				actionRequest, "passwordReset");
-
-			boolean showDetails = ParamUtil.getBoolean(
-				actionRequest, "showDetails", true);
-
-			if (!showDetails) {
-				Contact contact = user.getContact();
-
-				screenName = user.getScreenName();
-				emailAddress = user.getEmailAddress();
-				firstName = user.getFirstName();
-				middleName = user.getMiddleName();
-				lastName = user.getLastName();
-				prefixId = contact.getPrefixId();
-				suffixId = contact.getSuffixId();
-				male = user.getMale();
-
-				Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
-
-				birthdayCal.setTime(contact.getBirthday());
-
-				birthdayMonth = birthdayCal.get(Calendar.MONTH);
-				birthdayDay = birthdayCal.get(Calendar.DATE);
-				birthdayYear = birthdayCal.get(Calendar.YEAR);
-
-				jobTitle = user.getJobTitle();
-			}
 
 			String tempOldScreenName = user.getScreenName();
 
