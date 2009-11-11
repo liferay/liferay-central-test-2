@@ -46,6 +46,7 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -79,6 +81,7 @@ import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -103,6 +106,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Julio Camarero
+ * @author Wesley Gong
  */
 public class EditUserAction extends PortletAction {
 
@@ -447,6 +451,32 @@ public class EditUserAction extends PortletAction {
 			// Update user
 
 			user = PortalUtil.getSelectedUser(actionRequest);
+
+			boolean showDetails = ParamUtil.getBoolean(
+					actionRequest, "showDetails", true);
+
+			if (!showDetails){
+				Contact contact = user.getContact();
+
+				screenName = user.getScreenName();
+				emailAddress = user.getEmailAddress();
+				firstName = user.getFirstName();
+				middleName = user.getMiddleName();
+				lastName = user.getLastName();
+				prefixId = contact.getPrefixId();
+				suffixId = contact.getSuffixId();
+				male = user.getMale();
+
+				Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
+
+				birthdayCal.setTime(contact.getBirthday());
+
+				birthdayMonth = birthdayCal.get(Calendar.MONTH);
+				birthdayDay = birthdayCal.get(Calendar.DATE);
+				birthdayYear = birthdayCal.get(Calendar.YEAR);
+
+				jobTitle = user.getJobTitle();
+			}
 
 			String oldPassword = AdminUtil.getUpdateUserPassword(
 				actionRequest, user.getUserId());

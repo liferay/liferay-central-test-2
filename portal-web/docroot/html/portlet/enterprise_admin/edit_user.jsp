@@ -232,9 +232,15 @@ String curSection = mainSections[0];
 					request.setAttribute("websites.classPK", 0L);
 				}
 
+				boolean showDetails = false;
+
 				for (String section : allSections) {
 					String sectionId = _getSectionId(section);
 					String sectionJsp = "/html/portlet/enterprise_admin/user/" + _getSectionJsp(section) + ".jsp";
+
+					if (Validator.equals(section, "details")) {
+						showDetails = true;
+					}
 				%>
 
 					<div class="form-section <%= curSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
@@ -244,6 +250,8 @@ String curSection = mainSections[0];
 				<%
 				}
 				%>
+
+				<input name="<portlet:namespace />showDetails" type="hidden" value="<%= showDetails %>" />
 
 				<div class="lfr-component form-navigation">
 					<div class="user-info">
