@@ -33,10 +33,8 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
@@ -365,8 +363,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				ServiceContext serviceContext = new ServiceContext();
 
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 				serviceContext.setAddCommunityPermissions(
 					isAddCommunityPermissions(groupId));
 				serviceContext.setAddGuestPermissions(true);
@@ -624,8 +620,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 			serviceContext.setAddCommunityPermissions(
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
@@ -858,17 +852,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	protected long getParentFolderId(String[] pathArray) throws Exception {
 		return getFolderId(pathArray, true);
-	}
-
-	protected boolean isAddCommunityPermissions(long groupId) throws Exception {
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		if (!group.isUser()) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	protected boolean isLocked(DLFileEntry fileEntry, String lockUuid)

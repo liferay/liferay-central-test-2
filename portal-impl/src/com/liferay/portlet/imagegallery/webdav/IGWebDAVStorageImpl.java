@@ -31,9 +31,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
@@ -105,13 +103,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (!group.isUser()) {
-				serviceContext.setAddCommunityPermissions(
-					addCommunityPermissions);
-			}
-
+			serviceContext.setAddCommunityPermissions(
+				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(addGuestPermissions);
 			serviceContext.setScopeGroupId(groupId);
 
@@ -174,12 +167,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (!group.isUser()) {
-				serviceContext.setAddCommunityPermissions(true);
-			}
-
+			serviceContext.setAddCommunityPermissions(
+				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			int status = HttpServletResponse.SC_CREATED;
@@ -338,12 +327,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (!group.isUser()) {
-				serviceContext.setAddCommunityPermissions(true);
-			}
-
+			serviceContext.setAddCommunityPermissions(
+				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setPlid(getPlid(webDavRequest.getGroupId()));
 			serviceContext.setScopeGroupId(webDavRequest.getGroupId());
@@ -482,12 +467,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (!group.isUser()) {
-				serviceContext.setAddCommunityPermissions(true);
-			}
-
+			serviceContext.setAddCommunityPermissions(
+				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
 			try {

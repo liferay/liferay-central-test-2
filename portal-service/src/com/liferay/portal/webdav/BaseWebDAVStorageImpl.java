@@ -23,7 +23,9 @@
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Lock;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import javax.servlet.http.HttpServletResponse;
@@ -146,6 +148,17 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
 	protected long getPlid(long groupId) throws SystemException {
 		return LayoutLocalServiceUtil.getDefaultPlid(groupId);
+	}
+
+	protected boolean isAddCommunityPermissions(long groupId) throws Exception {
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		if (!group.isUser()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private String _rootPath;
