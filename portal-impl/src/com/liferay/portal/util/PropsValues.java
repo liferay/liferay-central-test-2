@@ -936,6 +936,17 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LOOK_AND_FEEL_MODIFIABLE));
 
+	public static final int LUCENE_BUFFER_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.LUCENE_BUFFER_SIZE));
+
+	public static final int LUCENE_COMMIT_DOCUMENTS_INTERVAL =
+		GetterUtil.getInteger(
+				PropsUtil.get(PropsKeys.LUCENE_COMMIT_DOCUMENTS_INTERVAL));
+
+	public static final int LUCENE_COMMIT_TIME_INTERVAL =
+		GetterUtil.getInteger(
+				PropsUtil.get(PropsKeys.LUCENE_COMMIT_TIME_INTERVAL));
+
 	public static final String LUCENE_DIR = PropsUtil.get(PropsKeys.LUCENE_DIR);
 
 	public static final String LUCENE_FILE_EXTRACTOR =

@@ -44,6 +44,9 @@ import java.sql.Statement;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
@@ -71,6 +74,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 	public IndexAccessorImpl(long companyId) {
 		_companyId = companyId;
 
+		_initCommitScheduler();
 		_initDialect();
 	}
 
@@ -96,7 +100,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 				}
 
 				_initIndexWriter();
-				_cleanUp();
+				_cleanUp(true);
 			}
 		}
 	}
@@ -142,9 +146,11 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 			try {
 				_indexWriter.deleteDocuments(term);
+
+				_documentCount++;
 			}
 			finally {
-				_cleanUp();
+				_cleanUp(false);
 			}
 		}
 	}
@@ -185,13 +191,18 @@ public class IndexAccessorImpl implements IndexAccessor {
 		_write(term, document);
 	}
 
-	private void _cleanUp() throws IOException {
+	private void _cleanUp(boolean close) throws IOException {
 		synchronized (this) {
-			if (_indexWriter != null) {
-				_indexWriter.close();
-			}
+			int interval = PropsValues.LUCENE_COMMIT_DOCUMENTS_INTERVAL;
 
-			_indexWriter = null;
+			if (close || interval == 0 || (interval <= _documentCount)) {
+				if (_indexWriter != null) {
+					_indexWriter.close();
+				}
+
+				_indexWriter = null;
+				_documentCount = 0;
+			}
 		}
 	}
 
@@ -355,6 +366,30 @@ public class IndexAccessorImpl implements IndexAccessor {
 		return _LUCENE_TABLE_PREFIX + _companyId;
 	}
 
+	private void _initCommitScheduler() {
+		int interval = PropsValues.LUCENE_COMMIT_TIME_INTERVAL;
+
+		if (interval > 0) {
+			ScheduledExecutorService executor =
+				Executors.newSingleThreadScheduledExecutor();
+
+			Runnable runnable = new Runnable() {
+
+				public void run() {
+					try {
+						_cleanUp(true);
+					}
+					catch (IOException ioe) {
+						_log.error("Could not run scheduled commit.", ioe);
+					}
+				}
+			};
+
+			executor.scheduleWithFixedDelay(
+				runnable, 0, interval, TimeUnit.MILLISECONDS);
+		}
+	}
+
 	private void _initDialect() {
 		if (!PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_JDBC)) {
 			return;
@@ -408,6 +443,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 				getLuceneDir(), LuceneHelperUtil.getAnalyzer(),
 				IndexWriter.MaxFieldLength.LIMITED);
 
+			_indexWriter.setRAMBufferSizeMB(PropsValues.LUCENE_BUFFER_SIZE);
 			_indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
 		}
 	}
@@ -472,6 +508,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 					_indexWriter.addDocument(document);
 				}
 
+				_documentCount++;
 				_optimizeCount++;
 
 				if ((PropsValues.LUCENE_OPTIMIZE_INTERVAL == 0) ||
@@ -483,7 +520,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 				}
 			}
 			finally {
-				_cleanUp();
+				_cleanUp(false);
 			}
 		}
 	}
@@ -500,6 +537,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 	private long _companyId;
 	private Dialect _dialect;
+	private int _documentCount;
 	private IndexWriter _indexWriter;
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();
