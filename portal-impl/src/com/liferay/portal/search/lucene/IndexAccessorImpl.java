@@ -375,7 +375,9 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private void _initCommitScheduler() {
-		if (PropsValues.LUCENE_COMMIT_TIME_INTERVAL <= 0) {
+		if ((PropsValues.LUCENE_COMMIT_BATCH_SIZE <= 0) ||
+			(PropsValues.LUCENE_COMMIT_TIME_INTERVAL <= 0)) {
+
 			return;
 		}
 
