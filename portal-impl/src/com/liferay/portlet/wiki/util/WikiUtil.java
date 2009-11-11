@@ -50,11 +50,11 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
-import com.liferay.portlet.wiki.util.comparator.VisibleNodesComparator;
 
 import java.io.IOException;
 import java.io.StringReader;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -303,7 +303,7 @@ public class WikiUtil {
 
 		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
 
-		nodes = ListUtil.sort(nodes, new VisibleNodesComparator(visibleNodes));
+		nodes = _sortWikiNodes(nodes, visibleNodes);
 
 		Iterator<WikiNode> itr = nodes.iterator();
 
@@ -334,6 +334,28 @@ public class WikiUtil {
 		throws WikiFormatException {
 
 		return _instance._validate(nodeId, content, format);
+	}
+
+	private static List<WikiNode> _sortWikiNodes(
+		List<WikiNode> nodes, String[] orderedNodeNames) {
+
+		List<WikiNode> orderedNodes = new ArrayList<WikiNode>();
+
+		for (String nodeName : orderedNodeNames) {
+			for (WikiNode node : nodes) {
+				if (node.getName().equals(nodeName)) {
+					orderedNodes.add(node);
+
+					nodes.remove(node);
+
+					break;
+				}
+			}
+		}
+
+		orderedNodes.addAll(nodes);
+
+		return orderedNodes;
 	}
 
 	private String _convert(
