@@ -121,11 +121,11 @@ public class RendererImpl implements Renderer {
 			}
 
 			try {
-				BeanLocator locator = PortletBeanLocatorUtil.getBeanLocator(
+				BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
 					servletContextName);
 
 				velocityTemplateContent = ContentUtil.get(
-					locator.getClassLoader(),
+					beanLocator.getClassLoader(),
 					PropsUtil.get(RENDERER_TEMPLATE_PREFIX + className));
 			}
 			catch (Exception e) {
