@@ -151,7 +151,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 			try {
 				_indexWriter.deleteDocuments(term);
 
-				_writeCount++;
+				_batchCount++;
 			}
 			finally {
 				_cleanUp();
@@ -198,7 +198,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 	private void _cleanUp() throws IOException {
 		synchronized (this) {
 			if ((PropsValues.LUCENE_COMMIT_BATCH_SIZE == 0) ||
-				(PropsValues.LUCENE_COMMIT_BATCH_SIZE <= _writeCount)) {
+				(PropsValues.LUCENE_COMMIT_BATCH_SIZE <= _batchCount)) {
 
 				_doCleanUp();
 			}
@@ -267,7 +267,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 
 		_indexWriter = null;
-		_writeCount = 0;
+		_batchCount = 0;
 	}
 
 	private FSDirectory _getDirectory(String path) throws IOException {
@@ -530,7 +530,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 					_optimizeCount = 0;
 				}
 
-				_writeCount++;
+				_batchCount++;
 			}
 			finally {
 				_cleanUp();
@@ -548,6 +548,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 	private static Log _log = LogFactoryUtil.getLog(IndexAccessorImpl.class);
 
+	private int _batchCount;
 	private long _companyId;
 	private Dialect _dialect;
 	private IndexWriter _indexWriter;
@@ -556,6 +557,5 @@ public class IndexAccessorImpl implements IndexAccessor {
 	private int _optimizeCount;
 	private Map<String, Directory> _ramDirectories =
 		new ConcurrentHashMap<String, Directory>();
-	private int _writeCount;
 
 }
