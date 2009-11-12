@@ -26,6 +26,7 @@ import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
@@ -72,6 +73,7 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
  *
  * @author Brian Wing Shun Chan
  */
+@AutoInject
 public abstract class IGImageServiceBaseImpl extends PrincipalBean
 	implements IGImageService {
 	public IGFolderLocalService getIGFolderLocalService() {

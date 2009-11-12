@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -66,6 +67,7 @@ import java.util.List;
  * @see       ImageUtil
  * @generated
  */
+@AutoInject
 public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	implements ImagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ImageImpl.class.getName();

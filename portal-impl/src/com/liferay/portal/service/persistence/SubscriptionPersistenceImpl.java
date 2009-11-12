@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -66,6 +67,7 @@ import java.util.List;
  * @see       SubscriptionUtil
  * @generated
  */
+@AutoInject
 public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscription>
 	implements SubscriptionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SubscriptionImpl.class.getName();
