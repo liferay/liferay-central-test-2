@@ -164,7 +164,11 @@ public class JSONServiceAction extends JSONAction {
 				}
 			}
 			catch (Exception e) {
-				_log.error(e, e);
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Calling " + method.getName() + " with args " + args +
+							" raises exception", e);
+				}
 
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
