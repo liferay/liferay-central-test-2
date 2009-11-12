@@ -28,6 +28,13 @@
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
 
 String type = (String)request.getAttribute("liferay-ui:search:type");
+int delta = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:search:delta"));
+boolean deltaConfig = true;
+
+if (delta <= 0) {
+	delta = searchContainer.getDelta();
+	deltaConfig = false;
+}
 
 PortletURL iteratorURL = searchContainer.getIteratorURL();
 
@@ -41,7 +48,8 @@ if (iteratorURL != null) {
 <liferay-ui:page-iterator
 	cur="<%= searchContainer.getCur() %>"
 	curParam="<%= searchContainer.getCurParam() %>"
-	delta="<%= searchContainer.getDelta() %>"
+	delta="<%= delta %>"
+	deltaConfig="<%= deltaConfig %>"
 	deltaParam="<%= searchContainer.getDeltaParam() %>"
 	maxPages="<%= searchContainer.getMaxPages() %>"
 	total="<%= searchContainer.getTotal() %>"

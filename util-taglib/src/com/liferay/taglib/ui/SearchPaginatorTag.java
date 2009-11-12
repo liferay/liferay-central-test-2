@@ -37,9 +37,14 @@ public class SearchPaginatorTag extends SearchFormTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:search:delta", String.valueOf(_delta));
 		request.setAttribute("liferay-ui:search:type", _type);
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setDelta(int delta) {
+		_delta = delta;
 	}
 
 	public void setType(String type) {
@@ -53,6 +58,7 @@ public class SearchPaginatorTag extends SearchFormTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/search_paginator/page.jsp";
 
+	private int _delta;
 	private String _type = "regular";
 
 }
