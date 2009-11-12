@@ -47,9 +47,11 @@
 		AUI().io(
 			'<%= themeDisplay.getPathMain() %>/portal/session_click',
 			{
-				data: {
-					'<%= id %>': <%= id %>curClickValue
-				}
+				data: AUI().toQueryString(
+					{
+						'<%= id %>': <%= id %>curClickValue
+					}
+				)
 			}
 		);
 	}
