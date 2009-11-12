@@ -59,12 +59,14 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 			</c:choose>
 
 			if ((saveState == null) || saveState) {
-				jQuery.ajax(
+				AUI().io(
+					themeDisplay.getPathMain() + '/portal/session_click',
 					{
-						url: themeDisplay.getPathMain() + '/portal/session_click',
-						data: {
-							'<%= id %>': 'none'
-						}
+						data: AUI().toQueryString(
+							{
+								'<%= id %>': 'none'
+							}
+						)
 					}
 				);
 			}
@@ -84,12 +86,14 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 			</c:choose>
 
 			if ((saveState == null) || saveState) {
-				jQuery.ajax(
+				AUI().io(
+					themeDisplay.getPathMain() + '/portal/session_click',
 					{
-						url: themeDisplay.getPathMain() + '/portal/session_click',
-						data: {
-							'<%= id %>': ''
-						}
+						data: AUI().toQueryString(
+							{
+								'<%= id %>': ''
+							}
+						)
 					}
 				);
 			}
