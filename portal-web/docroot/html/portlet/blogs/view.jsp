@@ -59,6 +59,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 	<%
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
+	searchContainer.setDelta(pageDelta);
 	searchContainer.setDeltaConfigurable(false);
 
 	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(BlogsEntry.class.getName(), searchContainer);
