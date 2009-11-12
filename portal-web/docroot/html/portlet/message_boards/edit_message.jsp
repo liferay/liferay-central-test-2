@@ -402,6 +402,7 @@ if ((message != null) && message.isAttachments()) {
 			<%
 			}
 			%>
+
 		}
 	);
 </script>
