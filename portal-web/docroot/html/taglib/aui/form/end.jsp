@@ -34,16 +34,35 @@ name = portletResponse.getNamespace() + name;
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			jQuery('#<%= name %> :input').focus(
-				function(event) {
-					jQuery(this).parents('.aui-ctrl-holder:first').addClass('aui-row-focused');
+		function(A) {
+			var form = A.one('#<%= name %>');
+
+			if (form) {
+				var inputs = form.all('input,select,textarea,button');
+
+				if (inputs) {
+					inputs.on(
+						'focus',
+						function(event) {
+							var holder = event.target.ancestor('.aui-ctrl-holder');
+
+							if (holder) {
+								holder.addClass('aui-row-focused');
+							}
+						}
+					);
+					inputs.on(
+						'blur',
+						function(event) {
+							var holder = event.target.ancestor('.aui-ctrl-holder');
+
+							if (holder) {
+								holder.removeClass('aui-row-focused');
+							}
+						}
+					);
 				}
-			).blur(
-				function(event) {
-					jQuery(this).parents('.aui-ctrl-holder:first').removeClass('aui-row-focused');
-				}
-			);
+			}
 		}
 	);
 </script>
