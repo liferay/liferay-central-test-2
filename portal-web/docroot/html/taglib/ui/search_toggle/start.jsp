@@ -28,10 +28,10 @@
 	var <%= id %>curClickValue = "<%= clickValue %>";
 
 	function <%= id %>toggleSearch() {
-		jQuery("#<%= id %>basic").toggle();
-		jQuery("#<%= id %>advanced").toggle();
+		AUI().one("#<%= id %>basic").toggle();
+		AUI().one("#<%= id %>advanced").toggle();
 
-		var advancedSearchObj = jQuery("#<%= id %><%= displayTerms.ADVANCED_SEARCH %>");
+		var advancedSearchObj = AUI().one("#<%= id %><%= displayTerms.ADVANCED_SEARCH %>");
 
 		if (<%= id %>curClickValue == "basic") {
 			<%= id %>curClickValue = "advanced";
@@ -44,9 +44,9 @@
 			advancedSearchObj.val(false);
 		}
 
-		jQuery.ajax(
+		AUI().io(
+			'<%= themeDisplay.getPathMain() %>/portal/session_click',
 			{
-				url: '<%= themeDisplay.getPathMain() %>/portal/session_click',
 				data: {
 					'<%= id %>': <%= id %>curClickValue
 				}
@@ -57,7 +57,7 @@
 
 <input id="<%= id %><%= displayTerms.ADVANCED_SEARCH %>" name="<%= namespace %><%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value="<%= clickValue.equals("basic") ? false : true %>" />
 
-<div id="<%= id %>basic" style="display: <%= clickValue.equals("basic") ? "block" : "none" %>;">
+<div id="<%= id %>basic" class="<%= clickValue.equals("basic") ? "" : "aui-helper-hidden" %>">
 	<c:choose>
 		<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
 			<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
@@ -76,7 +76,7 @@
 	</c:choose>
 </div>
 
-<div id="<%= id %>advanced" style="display: <%= !clickValue.equals("basic") ? "block" : "none" %>;">
+<div id="<%= id %>advanced" class="<%= !clickValue.equals("basic") ? "" : "aui-helper-hidden" %>">
 
 	<%
 	StringBuilder sb = new StringBuilder();
