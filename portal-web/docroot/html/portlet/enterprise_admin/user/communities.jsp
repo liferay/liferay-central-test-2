@@ -53,7 +53,19 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 		searchContainer.addRow(rowColumns, groupId);
 		searchContainer.updateDataStore();
 
-		jQuery('.selected .modify-link').trigger('change');
+		<portlet:namespace />trackChanges();
+	}
+
+	function <portlet:namespace />trackChanges() {
+		AUI().use(
+			'event',
+			function(A) {
+				A.fire(
+					'enterpriseAdmin:trackChanges',
+					A.one('.selected .modify-link')
+				);
+			}
+		);
 	}
 </script>
 
@@ -106,7 +118,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a class="modify-link" href="javascript:;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer').deleteRow(this, <%= group.getGroupId() %>);"><%= removeGroupIcon %></a>
+				<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges();Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer').deleteRow(this, <%= group.getGroupId() %>);"><%= removeGroupIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>

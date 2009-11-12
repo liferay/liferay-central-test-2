@@ -165,15 +165,14 @@ else {
 					fieldIndexes: '<portlet:namespace />addressesIndexes',
 					on: {
 						'autorow:clone': function(event) {
-
 							var row = event.row.get('contentBox');
 							var guid = event.guid;
 
-							row = jQuery(row.getDOM());
+							var dynamicSelects = row.one('select[data-componentType=dynamic_select]');
 
-							var dynamicSelects = row.find('select[data-componentType=dynamic_select]');
-
-							dynamicSelects.unbind('change');
+							if (dynamicSelects) {
+								dynamicSelects.detach('change');
+							}
 
 							new Liferay.DynamicSelect(
 								[

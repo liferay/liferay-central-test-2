@@ -184,15 +184,23 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	}
 
 	function <portlet:namespace />getUsersCount(className, ids, active, callback) {
-		jQuery.ajax(
-			{
-				url: '<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',
-				data: {
-					className: className,
-					ids: ids,
-					active: active
-				},
-				success: callback
+		AUI().use(
+			'io',
+			function(A) {
+				A.io(
+					'<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',
+					{
+						data: A.toQueryString({
+							className: className,
+							ids: ids,
+							active: active
+						}),
+						method: 'POST',
+						on: {
+							success: callback
+						}
+					}
+				);
 			}
 		);
 	}

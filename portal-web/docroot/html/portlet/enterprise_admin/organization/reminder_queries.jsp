@@ -114,13 +114,13 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 	function <portlet:namespace />updateReminderQueriesLanguage() {
 		if (lastLanguageId != "<%= defaultLanguageId %>") {
 			if (reminderQueriesChanged) {
-				var reminderQueriesValue = jQuery("#<portlet:namespace />reminderQueries_temp").attr("value");
+				var reminderQueriesValue = AUI().one("#<portlet:namespace />reminderQueries_temp").attr("value");
 
 				if (reminderQueriesValue == null) {
 					reminderQueriesValue = "";
 				}
 
-				jQuery("#<portlet:namespace />reminderQueries_" + lastLanguageId).attr("value", reminderQueriesValue);
+				AUI().one("#<portlet:namespace />reminderQueries_" + lastLanguageId).attr("value", reminderQueriesValue);
 
 				reminderQueriesChanged = false;
 			}
@@ -139,10 +139,10 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 		if (selLanguageId != "") {
 			<portlet:namespace />updateReminderQueriesLanguageTemps(selLanguageId);
 
-			jQuery("#<portlet:namespace />reminderQueries_temp").show();
+			AUI().one("#<portlet:namespace />reminderQueries_temp").show();
 		}
 		else {
-			jQuery("#<portlet:namespace />reminderQueries_temp").hide();
+			AUI().one("#<portlet:namespace />reminderQueries_temp").hide();
 		}
 
 		lastLanguageId = selLanguageId;
@@ -152,18 +152,27 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 
 	function <portlet:namespace />updateReminderQueriesLanguageTemps(lang) {
 		if (lang != "<%= defaultLanguageId %>") {
-			var reminderQueriesValue = jQuery("#<portlet:namespace />reminderQueries_" + lang).attr("value");
-			var defaultReminderQueriesValue = jQuery("#<portlet:namespace />reminderQueries_<%= defaultLanguageId %>").attr("value");
+			var reminderQueriesLang = AUI().one("#<portlet:namespace />reminderQueries_" + lang);
+
+			if (reminderQueriesLang) {
+				var reminderQueriesValue = reminderQueriesLang.attr("value");
+			}
+
+			var defaultReminderQueriesLang = AUI().one("#<portlet:namespace />reminderQueries_<%= defaultLanguageId %>");
+
+			if (defaultReminderQueriesLang) {
+				var defaultReminderQueriesValue = defaultReminderQueriesLan.attr("value");
+			}
 
 			if (defaultReminderQueriesValue == null) {
 				defaultReminderQueriesValue = "";
 			}
 
 			if ((reminderQueriesValue == null) || (reminderQueriesValue == "")) {
-				jQuery("#<portlet:namespace />reminderQueries_temp").attr("value", defaultReminderQueriesValue);
+				AUI().one("#<portlet:namespace />reminderQueries_temp").attr("value", defaultReminderQueriesValue);
 			}
 			else {
-				jQuery("#<portlet:namespace />reminderQueries_temp").attr("value", reminderQueriesValue);
+				AUI().one("#<portlet:namespace />reminderQueries_temp").attr("value", reminderQueriesValue);
 			}
 		}
 	}

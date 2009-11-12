@@ -53,17 +53,17 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 <script type="text/javascript">
 	function <portlet:namespace />changePortrait(newPortraitURL) {
-		jQuery('#<portlet:namespace />avatar').attr('src', newPortraitURL);
-		jQuery('.avatar').attr('src', newPortraitURL);
+		AUI().one('#<portlet:namespace />avatar').attr('src', newPortraitURL);
+		AUI().one('.avatar').attr('src', newPortraitURL);
 
-		jQuery('#<portlet:namespace />deletePortrait').val(false);
+		AUI().one('#<portlet:namespace />deletePortrait').val(false);
 	}
 
 	function <portlet:namespace />deletePortrait(defaultPortraitURL) {
-		jQuery('#<portlet:namespace />deletePortrait').val(true);
+		AUI().one('#<portlet:namespace />deletePortrait').val(true);
 
-		jQuery('#<portlet:namespace />avatar').attr('src', defaultPortraitURL);
-		jQuery('.avatar').attr('src', defaultPortraitURL);
+		AUI().one('#<portlet:namespace />avatar').attr('src', defaultPortraitURL);
+		AUI().one('.avatar').attr('src', defaultPortraitURL);
 	}
 
 	function <portlet:namespace />openEditUserPortraitWindow(editUserPortraitURL) {
@@ -73,13 +73,20 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	}
 
 	AUI().ready(
-		function() {
-			jQuery('span.modify-link').bind(
-				'click',
-				function() {
-					jQuery(this).trigger('change');
-				}
-			);
+		function(A) {
+			var modifyLinks = A.all('span.modify-link');
+
+			if (modifyLinks) {
+				modifyLinks.on(
+					'click',
+					function() {
+						A.fire(
+							'enterpriseAdmin:trackChanges',
+							A.one('.selected .modify-link')
+						);
+					}
+				);
+			}
 		}
 	);
 </script>

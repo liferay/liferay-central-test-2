@@ -59,17 +59,17 @@ if (organization != null) {
 
 <script type="text/javascript">
 	function <portlet:namespace />changeLogo(newLogoURL) {
-		jQuery('#<portlet:namespace />avatar').attr('src', newLogoURL);
-		jQuery('.avatar').attr('src', newLogoURL);
+		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
+		AUI().one('.avatar').attr('src', newLogoURL);
 
-		jQuery('#<portlet:namespace />deleteLogo').val(false);
+		AUI().one('#<portlet:namespace />deleteLogo').val(false);
 	}
 
 	function <portlet:namespace />deleteLogo(defaultLogoURL) {
-		jQuery('#<portlet:namespace />deleteLogo').val(true);
+		AUI().one('#<portlet:namespace />deleteLogo').val(true);
 
-		jQuery('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
-		jQuery('.avatar').attr('src', defaultLogoURL);
+		AUI().one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
+		AUI().one('.avatar').attr('src', defaultLogoURL);
 	}
 
 	function <portlet:namespace />openEditOrganizationLogoWindow(editOrganizationLogoURL) {
@@ -113,19 +113,35 @@ if (organization != null) {
 				searchContainer.addRow(rowColumns, organizationId);
 				searchContainer.updateDataStore(organizationId);
 
-				jQuery('.selected .modify-link').trigger('change');
+				<portlet:namespace />trackChanges();
+			}
+		);
+	}
+
+	function <portlet:namespace />trackChanges() {
+		AUI().use(
+			'event',
+			function(A) {
+				A.fire(
+					'enterpriseAdmin:trackChanges',
+					A.one('.selected .modify-link')
+				);
 			}
 		);
 	}
 
 	AUI().ready(
-		function() {
-			jQuery('span.modify-link').bind(
-				'click',
-				function() {
-					jQuery(this).trigger('change');
-				}
-			);
+		function(A) {
+			var modifyLinks = A.all('span.modify-link');
+
+			if (modifyLinks) {
+				modifyLinks.on(
+					'click',
+					function() {
+						<portlet:namespace />trackChanges();
+					}
+				);
+			}
 		}
 	);
 </script>
@@ -310,7 +326,7 @@ if (parentOrganization != null) {
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a class="modify-link" href="javascript:;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+			<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges();Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -353,21 +369,26 @@ if (parentOrganization != null) {
 	);
 
 	<c:if test="<%= organization == null %>">
-		jQuery('#<portlet:namespace />type').change(
-			function(event) {
+		AUI().ready(
+			function(A) {
+				A.one('#<portlet:namespace />type').on(
+					'change',
+					function(event) {
 
-				<%
-				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
-				%>
+						<%
+						for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
+						%>
 
-					if (this.value == '<%= curType %>') {
-						jQuery('#<portlet:namespace />countryDiv').<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(curType)))) ? "show" : "hide" %>();
+							if (event.target.val() == '<%= curType %>') {
+								A.one('#<portlet:namespace />countryDiv').<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(curType)))) ? "show" : "hide" %>();
+							}
+
+						<%
+						}
+						%>
+
 					}
-
-				<%
-				}
-				%>
-
+				);
 			}
 		);
 	</c:if>

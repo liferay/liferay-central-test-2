@@ -123,7 +123,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			selectedGroupNames = selectedGroupNamesField.split("@@");
 		}
 
-		if (jQuery.inArray(selectedGroupIds, groupId) == -1) {
+		if (AUI().Array.indexOf(selectedGroupIds, groupId) == -1) {
 			selectedGroupIds.push(groupId);
 			selectedGroupNames.push(name);
 		}
@@ -262,59 +262,6 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 				<aui:button onClick="<%= redirect %>" value="cancel" />
 			</aui:button-row>
 		</aui:form>
-
-		<script type="text/javascript">
-			AUI().ready(
-				function() {
-					var form = jQuery("#<portlet:namespace />fm");
-
-					var allBox = form.find("input[name=<portlet:namespace />actionAllBox]");
-					var inputs = form.find("input[type=checkbox]").not(allBox);
-
-					var inputsCount = inputs.length;
-
-					if (inputs.not(":checked").length == 0) {
-						allBox.attr("checked", true);
-					}
-
-					allBox.click(
-						function() {
-							var allBoxChecked = this.checked;
-
-							if (allBoxChecked) {
-								var uncheckedInputs = inputs.not(":checked");
-
-								uncheckedInputs.trigger("click");
-							}
-							else {
-								var checkedInputs = inputs.filter(":checked");
-
-								checkedInputs.trigger("click");
-							}
-
-							allBox.attr("checked", allBoxChecked);
-						}
-					);
-
-					inputs.click(
-						function() {
-							var uncheckedCount = inputs.not(":checked").length;
-
-							if (this.checked) {
-								if (uncheckedCount == 0) {
-									allBox.attr("checked", true);
-								}
-							}
-							else {
-								if (inputsCount > uncheckedCount) {
-									allBox.attr("checked", false);
-								}
-							}
-						}
-					);
-				}
-			);
-		</script>
 	</c:otherwise>
 </c:choose>
 

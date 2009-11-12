@@ -25,39 +25,43 @@ AUI().add(
 		var FormNavigator = function(options) {
 			var instance = this;
 
-			instance._container = jQuery(options.container);
+			instance._container = A.one(options.container);
 
-			instance._navigation = instance._container.find('.form-navigation');
-			instance._sections = instance._container.find('.form-section');
+			instance._navigation = instance._container.all('.form-navigation');
+			instance._sections = instance._container.all('.form-section');
 
-			instance._navigation.find('li a').click(
-				function(event) {
-					var li = jQuery(this.parentNode);
+			if (instance._navigation) {
+				instance._navigation.all('li a').on(
+					'click',
+					function(event) {
+						var target = event.target;
+						var li = target.get('parentNode');
 
-					if (!li.is('.selected')) {
-						instance._revealSection(this.href, li);
+						if (li && !li.test('.selected')) {
+							instance._revealSection(target.attr('href'), li);
 
-						var currentSection = this.href.split('#');
+							var currentSection = target.attr('href').split('#');
 
-						if (currentSection[1]) {
-							location.hash = instance._hashKey + currentSection[1];
+							if (currentSection[1]) {
+								location.hash = instance._hashKey + currentSection[1];
+							}
 						}
-					}
 
-					return false;
-				}
-			);
+						return false;
+					}
+				);
+			}
 
 			if (options.modifiedSections) {
-				instance._modifiedSections = jQuery('[name=' + options.modifiedSections+ ']');
+				instance._modifiedSections = A.all('[name=' + options.modifiedSections+ ']');
 
-				if (!instance._modifiedSections.length) {
-					instance._modifiedSections = jQuery('<input name="' + options.modifiedSections+ '" type="hidden" />')
+				if (!instance._modifiedSections) {
+					instance._modifiedSections = A.Node.create('<input name="' + options.modifiedSections+ '" type="hidden" />')
 					instance._container.append(instance._modifiedSections);
 				}
 			}
 			else {
-				instance._modifiedSections = jQuery([]);
+				instance._modifiedSections = null;
 			}
 
 			if (options.defaultModifiedSections) {
@@ -69,18 +73,30 @@ AUI().add(
 
 			instance._revealSection(location.hash);
 
-			instance._container.find('input, select, textarea, .modify-link').change(
-				function(event) {
-					instance._trackChanges(this);
-				}
+		    A.on(
+				'enterpriseAdmin:trackChanges',
+				function(element) {
+		        	instance._trackChanges(element);
+		    	}
 			);
+
+			var inputs = instance._container.all('input, select, textarea');
+
+			if (inputs) {
+				inputs.on(
+					'change',
+					function(event) {
+						A.fire('enterpriseAdmin:trackChanges', event.target);
+					}
+				);
+			}
 
 			Liferay.bind(
 				'submitForm',
 				function(event, data) {
-					var form = jQuery(data.form);
-
-					instance._modifiedSections.val(instance._modifiedSectionsArray.join(','));
+					if (instance._modifiedSections) {
+						instance._modifiedSections.val(instance._modifiedSectionsArray.join(','));
+					}
 				}
 			);
 		};
@@ -91,7 +107,7 @@ AUI().add(
 
 				id = id.replace(instance._hashKey, '');
 
-				var li = currentNavItem || instance._navigation.find('[href$=' + id + ']').parent();
+				var li = currentNavItem || instance._navigation.one('[href$=' + id + ']').get('parentNode');
 
 				id = id.split('#');
 
@@ -101,22 +117,32 @@ AUI().add(
 
 				id = '#' + id[1];
 
-				var section = jQuery(id);
+				var section = A.one(id);
+				var selected = instance._navigation.all('.selected');
 
-				instance._navigation.find('.selected').removeClass('selected');
+				if (selected) {
+					selected.removeClass('selected');
+				}
+
 				instance._sections.removeClass('selected');
 
-				section.addClass('selected');
+				if (section) {
+					section.addClass('selected');
+				}
+
 				li.addClass('selected');
 			},
 
 			_trackChanges: function(el) {
 				var instance = this;
 
-				var currentSection = jQuery(el).parents('.form-section:first').attr('id');
+				var currentSection = A.get(el).ancestor('.form-section').attr('id');
 
-				var currentSectionLink = jQuery('#' + currentSection + 'Link');
-				currentSectionLink.parent().addClass('section-modified');
+				var currentSectionLink = A.one('#' + currentSection + 'Link');
+
+				if (currentSectionLink) {
+					currentSectionLink.get('parentNode').addClass('section-modified');
+				}
 
 				instance._addModifiedSection(currentSection);
 			},
@@ -124,7 +150,7 @@ AUI().add(
 			_addModifiedSection: function (section) {
 				var instance = this;
 
-				if (jQuery.inArray(section, instance._modifiedSectionsArray) == -1) {
+				if (A.Array.indexOf(section, instance._modifiedSectionsArray) == -1) {
 					instance._modifiedSectionsArray.push(section);
 				}
 			},

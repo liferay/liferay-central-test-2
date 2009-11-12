@@ -54,7 +54,19 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		searchContainer.addRow(rowColumns, organizationId);
 		searchContainer.updateDataStore();
 
-		jQuery('.selected .modify-link').trigger('change');
+		<portlet:namespace />trackChanges();
+	}
+
+	function <portlet:namespace />trackChanges() {
+		AUI().use(
+			'event',
+			function(A) {
+				A.fire(
+					'enterpriseAdmin:trackChanges',
+					A.one('.selected .modify-link')
+				);
+			}
+		);
 	}
 </script>
 
@@ -114,7 +126,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a class="modify-link" href="javascript:;" onclick="jQuery(this).trigger('change'); Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+				<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges();Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>

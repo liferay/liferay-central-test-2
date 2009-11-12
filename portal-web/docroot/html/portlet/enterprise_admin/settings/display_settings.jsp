@@ -44,17 +44,17 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 
 <script type="text/javascript">
 	function <portlet:namespace />changeLogo(newLogoURL) {
-		jQuery('#<portlet:namespace />avatar').attr('src', newLogoURL);
-		jQuery('.company-logo').attr('src', newLogoURL);
+		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
+		AUI().one('.company-logo').attr('src', newLogoURL);
 
-		jQuery('#<portlet:namespace />deleteLogo').val(false);
+		AUI().one('#<portlet:namespace />deleteLogo').val(false);
 	}
 
 	function <portlet:namespace />deleteLogo(defaultLogoURL) {
-		jQuery('#<portlet:namespace />deleteLogo').val(true);
+		AUI().one('#<portlet:namespace />deleteLogo').val(true);
 
-		jQuery('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
-		jQuery('.company-logo').attr('src', defaultLogoURL);
+		AUI().one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
+		AUI().one('.company-logo').attr('src', defaultLogoURL);
 	}
 
 	function <portlet:namespace />openEditCompanyLogoWindow(editCompanyLogoURL) {
@@ -64,13 +64,20 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 	}
 
 	AUI().ready(
-		function() {
-			jQuery('span.modify-link').bind(
-				'click',
-				function() {
-					jQuery(this).trigger('change');
-				}
-			);
+		function(A) {
+			var modifyLinks = A.all('span.modify-link');
+
+			if (modifyLinks) {
+				modifyLinks.on(
+					'click',
+					function() {
+						A.fire(
+							'enterpriseAdmin:trackChanges',
+							A.one('.selected .modify-link')
+						);
+					}
+				);
+			}
 		}
 	);
 </script>
