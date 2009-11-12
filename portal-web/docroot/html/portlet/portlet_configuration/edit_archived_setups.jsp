@@ -25,14 +25,16 @@
 <%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
-
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
-PortletURL portletURL = renderResponse.createActionURL();
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/portlet_configuration/edit_archived_setups");
+portletURL.setParameter("portletResource", portletResource);
 %>
 
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
@@ -48,8 +50,7 @@ PortletURL portletURL = renderResponse.createActionURL();
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-<input name="<portlet:namespace />returnToFullPageURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(returnToFullPageURL) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletURL.toString()) %>" />
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletResource) %>">
 
 <%
