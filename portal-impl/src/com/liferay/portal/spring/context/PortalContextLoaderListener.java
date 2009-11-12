@@ -48,6 +48,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 		ApplicationContext applicationContext =
 			ContextLoader.getCurrentWebApplicationContext();
+
 		BeanLocator beanLocator = new BeanLocatorImpl(
 			PortalClassLoaderUtil.getClassLoader(), applicationContext);
 
