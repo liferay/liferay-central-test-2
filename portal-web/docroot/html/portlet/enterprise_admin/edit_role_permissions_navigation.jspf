@@ -28,7 +28,7 @@ List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyI
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 %>
 
-<aui:form action="#" name="resourceSelection">
+<aui:form action="<%= currentURL %>" name="resourceSelection">
 	<aui:fieldset>
 		<aui:select name="add-permissions" onchange='<%= renderResponse.getNamespace() + "addPermissions(this);" %>'>
 			<aui:option label="" />
