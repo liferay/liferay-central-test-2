@@ -22,6 +22,7 @@
 
 package com.liferay.portal.scheduler.quartz;
 
+import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -54,6 +55,7 @@ import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
+@AutoInject
 /**
  * <a href="QuartzSchedulerEngineImpl.java.html"><b><i>View Source</i></b></a>
  *
