@@ -236,7 +236,6 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.service_clp=" + _TPL_ROOT + "service_clp.ftl\n"+
 				"\t-Dservice.tpl.service_clp_message_listener=" + _TPL_ROOT + "service_clp_message_listener.ftl\n"+
 				"\t-Dservice.tpl.service_clp_serializer=" + _TPL_ROOT + "service_clp_serializer.ftl\n"+
-				"\t-Dservice.tpl.service_factory=" + _TPL_ROOT + "service_factory.ftl\n"+
 				"\t-Dservice.tpl.service_http=" + _TPL_ROOT + "service_http.ftl\n"+
 				"\t-Dservice.tpl.service_impl=" + _TPL_ROOT + "service_impl.ftl\n"+
 				"\t-Dservice.tpl.service_json_serializer=" + _TPL_ROOT + "service_json_serializer.ftl\n"+
@@ -474,8 +473,6 @@ public class ServiceBuilder {
 			"service_clp_message_listener", _tplServiceClpMessageListener);
 		_tplServiceClpSerializer = _getTplProperty(
 			"service_clp_serializer", _tplServiceClpSerializer);
-		_tplServiceFactory = _getTplProperty(
-			"service_factory", _tplServiceFactory);
 		_tplServiceHttp = _getTplProperty("service_http", _tplServiceHttp);
 		_tplServiceImpl = _getTplProperty("service_impl", _tplServiceImpl);
 		_tplServiceJsonSerializer = _getTplProperty(
@@ -4264,7 +4261,6 @@ public class ServiceBuilder {
 		_TPL_ROOT + "service_clp_message_listener.ftl";
 	private String _tplServiceClpSerializer =
 		_TPL_ROOT + "service_clp_serializer.ftl";
-	private String _tplServiceFactory = _TPL_ROOT + "service_factory.ftl";
 	private String _tplServiceHttp = _TPL_ROOT + "service_http.ftl";
 	private String _tplServiceImpl = _TPL_ROOT + "service_impl.ftl";
 	private String _tplServiceJsonSerializer =
