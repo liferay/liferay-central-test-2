@@ -52,15 +52,21 @@
 
 	<script type="text/javascript">
 		AUI().ready(
-			function () {
-				var socialBookmarks = jQuery('#<%= randomNamespace %>socialBookmarks');
-				var linkSocialBookmarks = socialBookmarks.find('.show-bookmarks');
+			function (A) {
+				var socialBookmarks = A.one('#<%= randomNamespace %>socialBookmarks');
 
-				linkSocialBookmarks.click(
-					function(event) {
-						socialBookmarks.toggleClass('visible');
+				if (socialBookmarks) {
+					var linkSocialBookmarks = socialBookmarks.all('.show-bookmarks');
+
+					if (linkSocialBookmarks) {
+						linkSocialBookmarks.on(
+							'click',
+							function(event) {
+								socialBookmarks.toggleClass('visible');
+							}
+						);
 					}
-				);
+				}
 			}
 		);
 	</script>
