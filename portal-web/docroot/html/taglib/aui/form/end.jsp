@@ -38,7 +38,7 @@ name = portletResponse.getNamespace() + name;
 			var form = A.one('#<%= name %>');
 
 			if (form) {
-				var inputs = form.all('input,select,textarea,button');
+				var inputs = form.all('button,input,select,textarea');
 
 				if (inputs) {
 					inputs.on(
