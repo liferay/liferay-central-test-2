@@ -28,6 +28,6 @@
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:panel:id"));
 %>
 
-<div id="<%= id %>"> </div>
+<div id="<%= id %>"></div>
 
 <div id="<%= id %>bodyContent">

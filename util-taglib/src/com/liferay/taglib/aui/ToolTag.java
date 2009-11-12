@@ -41,11 +41,10 @@ public class ToolTag extends TagSupport {
 			_icon = _id;
 		}
 
-		PanelTag parentTag =
-				(PanelTag)findAncestorWithClass(
-					this, PanelTag.class);
+		PanelTag parentTag = (PanelTag)findAncestorWithClass(
+			this, PanelTag.class);
 
-		parentTag.addTool(this);
+		parentTag.addToolTag(this);
 
 		return EVAL_PAGE;
 	}

@@ -43,11 +43,12 @@ import javax.servlet.jsp.JspException;
  */
 public class PanelTag extends IncludeTag {
 
-	public void addTool(ToolTag tool) {
-		if (_tools == null) {
-			_tools = new ArrayList<ToolTag>();
+	public void addToolTag(ToolTag toolTag) {
+		if (_toolTags == null) {
+			_toolTags = new ArrayList<ToolTag>();
 		}
-		_tools.add(tool);
+
+		_toolTags.add(toolTag);
 	}
 
 	public int doEndTag() throws JspException {
@@ -59,7 +60,7 @@ public class PanelTag extends IncludeTag {
 				"aui:panel:collapsible", String.valueOf(_collapsible));
 			request.setAttribute("aui:panel:id", _id);
 			request.setAttribute("aui:panel:label", _label);
-			request.setAttribute("aui:panel:tools", _tools);
+			request.setAttribute("aui:panel:toolTags", _toolTags);
 
 			PortalIncludeUtil.include(pageContext, getEndPage());
 
@@ -75,7 +76,7 @@ public class PanelTag extends IncludeTag {
 				_id = null;
 				_label = null;
 				_startPage = null;
-				_tools = null;
+				_toolTags = null;
 			}
 		}
 	}
@@ -97,7 +98,7 @@ public class PanelTag extends IncludeTag {
 				"aui:panel:collapsible", String.valueOf(_collapsible));
 			request.setAttribute("aui:panel:id", _id);
 			request.setAttribute("aui:panel:label", _label);
-			request.setAttribute("aui:panel:tools", _tools);
+			request.setAttribute("aui:panel:toolTags", _toolTags);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -126,8 +127,8 @@ public class PanelTag extends IncludeTag {
 		}
 	}
 
-	public List<ToolTag> getTools() {
-		return _tools;
+	public List<ToolTag> getToolTags() {
+		return _toolTags;
 	}
 
 	public void setCollapsible(boolean collapsible) {
@@ -160,6 +161,6 @@ public class PanelTag extends IncludeTag {
 	private String _id;
 	private String _label;
 	private String _startPage;
-	private List<ToolTag> _tools;
+	private List<ToolTag> _toolTags;
 
 }
