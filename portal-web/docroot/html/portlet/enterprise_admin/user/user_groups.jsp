@@ -90,7 +90,7 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges();Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer').deleteRow(this, <%= userGroup.getUserGroupId() %>);"><%= removeUserGroupIcon %></a>
+				<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges(); Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer').deleteRow(this, <%= userGroup.getUserGroupId() %>);"><%= removeUserGroupIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>

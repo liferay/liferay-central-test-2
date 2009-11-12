@@ -153,7 +153,7 @@ userGroupRoles.addAll(organizationRoles);
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges();Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer').deleteRow(this, <%= role.getRoleId() %>);"><%= removeRoleIcon %></a>
+				<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges(); Liferay.SearchContainer.get('<portlet:namespace />rolesSearchContainer').deleteRow(this, <%= role.getRoleId() %>);"><%= removeRoleIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>
@@ -209,7 +209,7 @@ userGroupRoles.addAll(organizationRoles);
 
 				<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 					<liferay-ui:search-container-column-text>
-						<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges();Liferay.SearchContainer.get('<portlet:namespace />organizationRolesSearchContainer').deleteRow(this, '<%= userGroupRole.getRoleId() %>'); <portlet:namespace />deleteGroupRole('<%= userGroupRole.getRoleId() %>', '<%= userGroupRole.getGroupId() %>');"><%= removeRoleIcon %></a>
+						<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges(); Liferay.SearchContainer.get('<portlet:namespace />organizationRolesSearchContainer').deleteRow(this, '<%= userGroupRole.getRoleId() %>'); <portlet:namespace />deleteGroupRole('<%= userGroupRole.getRoleId() %>', '<%= userGroupRole.getGroupId() %>');"><%= removeRoleIcon %></a>
 					</liferay-ui:search-container-column-text>
 				</c:if>
 			</liferay-ui:search-container-row>
@@ -267,7 +267,7 @@ userGroupRoles.addAll(organizationRoles);
 
 				<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 					<liferay-ui:search-container-column-text>
-						<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges();Liferay.SearchContainer.get('<portlet:namespace />communityRolesSearchContainer').deleteRow(this, '<%= userGroupRole.getRoleId() %>'); <portlet:namespace />deleteGroupRole('<%= userGroupRole.getRoleId() %>', '<%= userGroupRole.getGroupId() %>')"><%= removeRoleIcon %></a>
+						<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges(); Liferay.SearchContainer.get('<portlet:namespace />communityRolesSearchContainer').deleteRow(this, '<%= userGroupRole.getRoleId() %>'); <portlet:namespace />deleteGroupRole('<%= userGroupRole.getRoleId() %>', '<%= userGroupRole.getGroupId() %>')"><%= removeRoleIcon %></a>
 					</liferay-ui:search-container-column-text>
 				</c:if>
 			</liferay-ui:search-container-row>
