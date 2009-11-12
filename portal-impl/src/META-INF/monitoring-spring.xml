@@ -7,10 +7,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
 	<bean id="portalStatistics" class="com.liferay.portal.monitoring.statistics.portal.ServerStatistics">
-		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService.impl" />
+		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
 	<bean id="portletStatistics" class="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics">
-		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService.impl" />
+		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
 	<bean id="com.liferay.portal.monitoring.MonitoringService" class="com.liferay.portal.monitoring.DefaultMonitoringService">
 		<property name="dataSampleProcessors">

@@ -23,6 +23,7 @@
 package com.liferay.counter.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.util.List;
 
@@ -35,6 +36,15 @@ public class CounterUtil {
 
 	public static List<String> getNames() throws SystemException {
 		return getPersistence().getNames();
+	}
+
+	public static CounterPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (CounterPersistence)PortalBeanLocatorUtil.locate(
+				CounterPersistence.class.getName());
+		}
+
+		return _persistence;
 	}
 
 	public static long increment() throws SystemException {
@@ -63,10 +73,6 @@ public class CounterUtil {
 
 	public static void reset(String name, long size) throws SystemException {
 		getPersistence().reset(name, size);
-	}
-
-	public static CounterPersistence getPersistence() {
-		return _persistence;
 	}
 
 	public void setPersistence(CounterPersistence persistence) {

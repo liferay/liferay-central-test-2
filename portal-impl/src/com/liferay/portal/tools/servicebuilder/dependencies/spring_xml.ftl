@@ -12,7 +12,7 @@
 
 	<#if entity.hasColumns()>
 		<#if (entity.dataSource != "liferayDataSource") || (entity.sessionFactory != "liferaySessionFactory")>
-			<bean id="${packagePath}.service.persistence.${entity.name}Persistence.impl" class="${entity.getPersistenceClass()}" parent="basePersistence">
+			<bean id="${packagePath}.service.persistence.${entity.name}Persistence" class="${entity.getPersistenceClass()}" parent="basePersistence">
 				<#if entity.dataSource != "liferayDataSource">
 					<property name="dataSource" ref="${entity.getDataSource()}" />
 				</#if>
@@ -22,17 +22,13 @@
 				</#if>
 			</bean>
 		<#else>
-			<bean id="${packagePath}.service.persistence.${entity.name}Persistence.impl" class="${entity.getPersistenceClass()}" parent="basePersistence" />
+			<bean id="${packagePath}.service.persistence.${entity.name}Persistence" class="${entity.getPersistenceClass()}" parent="basePersistence" />
 		</#if>
-
-		<bean id="${packagePath}.service.persistence.${entity.name}Util" class="${packagePath}.service.persistence.${entity.name}Util" >
-			<property name="persistence" ref="${packagePath}.service.persistence.${entity.name}Persistence.impl" />
-		</bean>
 	</#if>
 
 	<#if entity.hasFinderClass()>
 		<#if (entity.dataSource != "liferayDataSource") || (entity.sessionFactory != "liferaySessionFactory")>
-			<bean id="${packagePath}.service.persistence.${entity.name}Finder.impl" class="${entity.finderClass}" parent="basePersistence">
+			<bean id="${packagePath}.service.persistence.${entity.name}Finder" class="${entity.finderClass}" parent="basePersistence">
 				<#if entity.dataSource != "liferayDataSource">
 					<property name="dataSource" ref="${entity.getDataSource()}" />
 				</#if>
@@ -42,11 +38,7 @@
 				</#if>
 			</bean>
 		<#else>
-			<bean id="${packagePath}.service.persistence.${entity.name}Finder.impl" class="${entity.finderClass}" parent="basePersistence" />
+			<bean id="${packagePath}.service.persistence.${entity.name}Finder" class="${entity.finderClass}" parent="basePersistence" />
 		</#if>
-
-		<bean id="${packagePath}.service.persistence.${entity.name}FinderUtil" class="${packagePath}.service.persistence.${entity.name}FinderUtil">
-			<property name="finder" ref="${packagePath}.service.persistence.${entity.name}Finder.impl" />
-		</bean>
 	</#if>
 </#list>

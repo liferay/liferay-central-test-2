@@ -320,7 +320,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService")
 	protected QuartzLocalService quartzLocalService;
 
 	private static final int _DESCRIPTION_MAX_LENGTH = 120;

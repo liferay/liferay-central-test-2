@@ -3,6 +3,8 @@ package ${packagePath}.service.persistence;
 import ${packagePath}.model.${entity.name};
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import java.util.Date;
@@ -105,6 +107,14 @@ public class ${entity.name}Util {
 	</#list>
 
 	public static ${entity.name}Persistence getPersistence() {
+		if (_persistence == null) {
+			<#if pluginName != "">
+				_persistence = (${entity.name}Persistence)PortletBeanLocatorUtil.locate(${packagePath}.service.ClpSerializer.SERVLET_CONTEXT_NAME, ${entity.name}Persistence.class.getName());
+			<#else>
+				_persistence = (${entity.name}Persistence)PortalBeanLocatorUtil.locate(${entity.name}Persistence.class.getName());
+			</#if>
+		}
+
 		return _persistence;
 	}
 

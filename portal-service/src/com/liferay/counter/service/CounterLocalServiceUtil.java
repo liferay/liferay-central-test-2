@@ -23,6 +23,7 @@
 package com.liferay.counter.service;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.util.List;
 
@@ -34,33 +35,42 @@ import java.util.List;
 public class CounterLocalServiceUtil {
 
 	public static List<String> getNames() throws SystemException {
-		return _service.getNames();
+		return getService().getNames();
+	}
+
+	public static CounterLocalService getService() {
+		if (_service == null) {
+			_service = (CounterLocalService)PortalBeanLocatorUtil.locate(
+				CounterLocalService.class.getName());
+		}
+
+		return _service;
 	}
 
 	public static long increment() throws SystemException {
-		return _service.increment();
+		return getService().increment();
 	}
 
 	public static long increment(String name) throws SystemException {
-		return _service.increment(name);
+		return getService().increment(name);
 	}
 
 	public static long increment(String name, int size) throws SystemException {
-		return _service.increment(name, size);
+		return getService().increment(name, size);
 	}
 
 	public static void rename(String oldName, String newName)
 		throws SystemException {
 
-		_service.rename(oldName, newName);
+		getService().rename(oldName, newName);
 	}
 
 	public static void reset(String name) throws SystemException {
-		_service.reset(name);
+		getService().reset(name);
 	}
 
 	public static void reset(String name, long size) throws SystemException {
-		_service.reset(name, size);
+		getService().reset(name, size);
 	}
 
 	public void setService(CounterLocalService service) {

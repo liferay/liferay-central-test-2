@@ -622,8 +622,7 @@ public class HookHotDeployListener
 		String packagePath = modelName.substring(0, pos);
 
 		return (BasePersistence<?>)PortalBeanLocatorUtil.locate(
-			packagePath + ".service.persistence." + entityName +
-				"Persistence.impl");
+			packagePath + ".service.persistence." + entityName + "Persistence");
 	}
 
 	protected File getPortalJspBackupFile(File portalJspFile) {

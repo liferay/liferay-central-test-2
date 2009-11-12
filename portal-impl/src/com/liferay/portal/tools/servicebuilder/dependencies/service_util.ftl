@@ -1,5 +1,6 @@
 package ${packagePath}.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ClassLoaderProxy;
 
@@ -80,7 +81,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 	public static ${entity.name}${sessionTypeName}Service getService() {
 		if (_service == null) {
 			<#if pluginName != "">
-				Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME, ${entity.name}${sessionTypeName}ServiceUtil.class.getName());
+				Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME, ${entity.name}${sessionTypeName}Service.class.getName());
 				ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME, "portletClassLoader");
 
 				ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj, portletClassLoader);
@@ -89,7 +90,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 				ClpSerializer.setClassLoader(portletClassLoader);
 			<#else>
-				throw new RuntimeException("${entity.name}${sessionTypeName}Service is not set");
+				_service = (${entity.name}${sessionTypeName}Service)PortalBeanLocatorUtil.locate(${entity.name}${sessionTypeName}Service.class.getName());
 			</#if>
 		}
 

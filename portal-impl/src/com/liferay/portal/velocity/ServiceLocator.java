@@ -71,21 +71,11 @@ public class ServiceLocator {
 
 	private String _getServiceName(String serviceName) {
 		if (!serviceName.endsWith(BeanLocatorImpl.VELOCITY_SUFFIX)) {
-			if (serviceName.endsWith(_SERVICE)) {
-				serviceName += _IMPL;
-			}
-
 			serviceName += BeanLocatorImpl.VELOCITY_SUFFIX;
 		}
 
 		return serviceName;
 	}
-
-	private static final String _IMPL = ".impl";
-
-	private static final String _SERVICE = "Service";
-
-	private static final String _VELOCITY = ".velocity";
 
 	private static ServiceLocator _instance = new ServiceLocator();
 

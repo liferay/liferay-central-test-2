@@ -25,6 +25,7 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusVirtualException;
 import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.util.List;
 
@@ -34,16 +35,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class CyrusVirtualUtil {
-
-	public static void remove(String emailAddress)
-		throws NoSuchCyrusVirtualException, SystemException {
-
-		getPersistence().remove(emailAddress);
-	}
-
-	public static void update(CyrusVirtual user) throws SystemException {
-		getPersistence().update(user);
-	}
 
 	public static CyrusVirtual findByPrimaryKey(String emailAddress)
 		throws NoSuchCyrusVirtualException, SystemException {
@@ -57,12 +48,28 @@ public class CyrusVirtualUtil {
 		return getPersistence().findByUserId(userId);
 	}
 
+	public static CyrusVirtualPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence =
+				(CyrusVirtualPersistence)PortalBeanLocatorUtil.locate(
+					CyrusVirtualPersistence.class.getName());
+		}
+
+		return _persistence;
+	}
+
+	public static void remove(String emailAddress)
+		throws NoSuchCyrusVirtualException, SystemException {
+
+		getPersistence().remove(emailAddress);
+	}
+
 	public static void removeByUserId(long userId) throws SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 
-	public static CyrusVirtualPersistence getPersistence() {
-		return _persistence;
+	public static void update(CyrusVirtual user) throws SystemException {
+		getPersistence().update(user);
 	}
 
 	public void setPersistence(CyrusVirtualPersistence persistence) {

@@ -6,21 +6,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="com.liferay.mail.service.MailService.impl" class="com.liferay.mail.service.impl.MailServiceImpl" />
-	<bean id="com.liferay.mail.service.MailServiceFactory" class="com.liferay.mail.service.MailServiceFactory">
-		<property name="service" ref="com.liferay.mail.service.MailService.impl" />
-	</bean>
-	<bean id="com.liferay.mail.service.MailServiceUtil" class="com.liferay.mail.service.MailServiceUtil">
-		<property name="service" ref="com.liferay.mail.service.MailService.impl" />
-	</bean>
+	<bean id="com.liferay.mail.service.MailService" class="com.liferay.mail.service.impl.MailServiceImpl" />
 	<bean id="com.liferay.mail.service.persistence.CyrusUserPersistence" class="com.liferay.mail.service.persistence.CyrusUserPersistence" parent="basePersistence" />
-	<bean id="com.liferay.mail.service.persistence.CyrusUserUtil" class="com.liferay.mail.service.persistence.CyrusUserUtil">
-		<property name="persistence" ref="com.liferay.mail.service.persistence.CyrusUserPersistence" />
-	</bean>
 	<bean id="com.liferay.mail.service.persistence.CyrusVirtualPersistence" class="com.liferay.mail.service.persistence.CyrusVirtualPersistence" parent="basePersistence" />
-	<bean id="com.liferay.mail.service.persistence.CyrusVirtualUtil" class="com.liferay.mail.service.persistence.CyrusVirtualUtil">
-		<property name="persistence" ref="com.liferay.mail.service.persistence.CyrusVirtualPersistence" />
-	</bean>
 
 	<!-- Messaging -->
 

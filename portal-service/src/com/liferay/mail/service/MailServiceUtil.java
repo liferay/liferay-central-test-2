@@ -24,6 +24,7 @@ package com.liferay.mail.service;
 
 import com.liferay.mail.model.Filter;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class MailServiceUtil {
 		long companyId, long userId, List<Filter> filters,
 		List<String> emailAddresses, boolean leaveCopy) {
 
-		_service.addForward(
+		getService().addForward(
 			companyId, userId, filters, emailAddresses, leaveCopy);
 	}
 
@@ -49,7 +50,7 @@ public class MailServiceUtil {
 		long companyId, long userId, String password, String firstName,
 		String middleName, String lastName, String emailAddress) {
 
-		_service.addUser(
+		getService().addUser(
 			companyId, userId, password, firstName, middleName, lastName,
 			emailAddress);
 	}
@@ -58,46 +59,55 @@ public class MailServiceUtil {
 		long companyId, long userId, String emailAddress,
 		String vacationMessage) {
 
-		_service.addVacationMessage(
+		getService().addVacationMessage(
 			companyId, userId, emailAddress, vacationMessage);
 	}
 
 	public static void clearSession() {
-		_service.clearSession();
+		getService().clearSession();
 	}
 
 	public static void deleteEmailAddress(long companyId, long userId) {
-		_service.deleteEmailAddress(companyId, userId);
+		getService().deleteEmailAddress(companyId, userId);
 	}
 
 	public static void deleteUser(long companyId, long userId) {
-		_service.deleteUser(companyId, userId);
+		getService().deleteUser(companyId, userId);
+	}
+
+	public static MailService getService() {
+		if (_service == null) {
+			_service = (MailService)PortalBeanLocatorUtil.locate(
+				MailService.class.getName());
+		}
+
+		return _service;
 	}
 
 	public static Session getSession() throws SystemException {
-		return _service.getSession();
+		return getService().getSession();
 	}
 
 	public static void sendEmail(MailMessage mailMessage) {
-		_service.sendEmail(mailMessage);
+		getService().sendEmail(mailMessage);
 	}
 
 	public static void updateBlocked(
 		long companyId, long userId, List<String> blocked) {
 
-		_service.updateBlocked(companyId, userId, blocked);
+		getService().updateBlocked(companyId, userId, blocked);
 	}
 
 	public static void updateEmailAddress(
 		long companyId, long userId, String emailAddress) {
 
-		_service.updateEmailAddress(companyId, userId, emailAddress);
+		getService().updateEmailAddress(companyId, userId, emailAddress);
 	}
 
 	public static void updatePassword(
 		long companyId, long userId, String password) {
 
-		_service.updatePassword(companyId, userId, password);
+		getService().updatePassword(companyId, userId, password);
 	}
 
 	public void setService(MailService service) {

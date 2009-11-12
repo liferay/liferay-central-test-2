@@ -37,6 +37,28 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
  */
 public class CyrusUserPersistence extends BasePersistenceImpl<Dummy> {
 
+	public CyrusUser findByPrimaryKey(long userId)
+		throws NoSuchCyrusUserException, SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (CyrusUser)session.load(
+				CyrusUser.class, String.valueOf(userId));
+		}
+		catch (ObjectNotFoundException onfe) {
+			throw new NoSuchCyrusUserException();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public void remove(long userId)
 		throws NoSuchCyrusUserException, SystemException {
 
@@ -85,28 +107,6 @@ public class CyrusUserPersistence extends BasePersistenceImpl<Dummy> {
 
 				session.flush();
 			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public CyrusUser findByPrimaryKey(long userId)
-		throws NoSuchCyrusUserException, SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (CyrusUser)session.load(
-				CyrusUser.class, String.valueOf(userId));
-		}
-		catch (ObjectNotFoundException onfe) {
-			throw new NoSuchCyrusUserException();
 		}
 		catch (Exception e) {
 			throw processException(e);

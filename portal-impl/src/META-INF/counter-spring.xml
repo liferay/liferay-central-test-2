@@ -6,20 +6,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="com.liferay.counter.service.CounterLocalService.impl" class="com.liferay.counter.service.impl.CounterLocalServiceImpl" />
-	<bean id="com.liferay.counter.service.CounterLocalServiceFactory" class="com.liferay.counter.service.CounterLocalServiceFactory">
-		<property name="service" ref="com.liferay.counter.service.CounterLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.counter.service.CounterLocalServiceUtil" class="com.liferay.counter.service.CounterLocalServiceUtil">
-		<property name="service" ref="com.liferay.counter.service.CounterLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.counter.service.CounterService.impl" class="com.liferay.counter.service.impl.CounterServiceImpl" />
-	<bean id="com.liferay.counter.service.CounterServiceFactory" class="com.liferay.counter.service.CounterServiceFactory">
-		<property name="service" ref="com.liferay.counter.service.CounterService.impl" />
-	</bean>
-	<bean id="com.liferay.counter.service.CounterServiceUtil" class="com.liferay.counter.service.CounterServiceUtil">
-		<property name="service" ref="com.liferay.counter.service.CounterService.impl" />
-	</bean>
+	<bean id="com.liferay.counter.service.CounterLocalService" class="com.liferay.counter.service.impl.CounterLocalServiceImpl" />
+	<bean id="com.liferay.counter.service.CounterService" class="com.liferay.counter.service.impl.CounterServiceImpl" />
 	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" parent="basePersistence">
 		<property name="dataSource">
 			<bean class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
@@ -30,8 +18,5 @@
 				</property>
 			</bean>
 		</property>
-	</bean>
-	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil">
-		<property name="persistence" ref="com.liferay.counter.service.persistence.CounterPersistence" />
 	</bean>
 </beans>

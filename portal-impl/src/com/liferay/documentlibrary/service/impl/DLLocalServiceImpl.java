@@ -355,9 +355,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 	protected DLFolderService dlFolderService;
 
 	private static final String _GROUP_LOCAL_SERVICE =
-		"com.liferay.portal.service.GroupLocalService.impl";
+		"com.liferay.portal.service.GroupLocalService";
 
 	private static final String _DL_FOLDER_SERVICE =
-		"com.liferay.portlet.documentlibrary.service.DLFolderService.impl";
+		"com.liferay.portlet.documentlibrary.service.DLFolderService";
 
 }

@@ -44,63 +44,6 @@ public class CyrusVirtualPersistence extends BasePersistenceImpl<Dummy> {
 	public static String FIND_BY_USER_ID =
 		"SELECT cyrusVirtual FROM CyrusVirtual cyrusVirtual WHERE userId = ?";
 
-	public void remove(String emailAddress)
-		throws NoSuchCyrusVirtualException, SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CyrusVirtual virtual = (CyrusVirtual)session.load(
-				CyrusVirtual.class, emailAddress);
-
-			session.delete(virtual);
-
-			session.flush();
-		}
-		catch (ObjectNotFoundException onfe) {
-			throw new NoSuchCyrusVirtualException();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void update(CyrusVirtual virtual) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			try {
-				CyrusVirtual virtualModel = (CyrusVirtual)session.load(
-					CyrusVirtual.class, virtual.getEmailAddress());
-
-				virtualModel.setUserId(virtual.getUserId());
-
-				session.flush();
-			}
-			catch (ObjectNotFoundException onfe) {
-				CyrusVirtual virtualModel = new CyrusVirtual(
-					virtual.getEmailAddress(), virtual.getUserId());
-
-				session.save(virtualModel);
-
-				session.flush();
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public CyrusVirtual findByPrimaryKey(String emailAddress)
 		throws NoSuchCyrusVirtualException, SystemException {
 
@@ -142,6 +85,32 @@ public class CyrusVirtualPersistence extends BasePersistenceImpl<Dummy> {
 		}
 	}
 
+	public void remove(String emailAddress)
+		throws NoSuchCyrusVirtualException, SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CyrusVirtual virtual = (CyrusVirtual)session.load(
+				CyrusVirtual.class, emailAddress);
+
+			session.delete(virtual);
+
+			session.flush();
+		}
+		catch (ObjectNotFoundException onfe) {
+			throw new NoSuchCyrusVirtualException();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public void removeByUserId(long userId) throws SystemException {
 		Session session = null;
 
@@ -161,6 +130,37 @@ public class CyrusVirtualPersistence extends BasePersistenceImpl<Dummy> {
 			}
 
 			closeSession(session);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void update(CyrusVirtual virtual) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			try {
+				CyrusVirtual virtualModel = (CyrusVirtual)session.load(
+					CyrusVirtual.class, virtual.getEmailAddress());
+
+				virtualModel.setUserId(virtual.getUserId());
+
+				session.flush();
+			}
+			catch (ObjectNotFoundException onfe) {
+				CyrusVirtual virtualModel = new CyrusVirtual(
+					virtual.getEmailAddress(), virtual.getUserId());
+
+				session.save(virtualModel);
+
+				session.flush();
+			}
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -5,18 +5,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="com.liferay.documentlibrary.service.DLLocalService.impl" class="com.liferay.documentlibrary.service.impl.DLLocalServiceImpl" />
-	<bean id="com.liferay.documentlibrary.service.DLLocalServiceFactory" class="com.liferay.documentlibrary.service.DLLocalServiceFactory">
-		<property name="service" ref="com.liferay.documentlibrary.service.DLLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.documentlibrary.service.DLLocalServiceUtil" class="com.liferay.documentlibrary.service.DLLocalServiceUtil">
-		<property name="service" ref="com.liferay.documentlibrary.service.DLLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.documentlibrary.service.DLService.impl" class="com.liferay.documentlibrary.service.impl.DLServiceImpl" />
-	<bean id="com.liferay.documentlibrary.service.DLServiceFactory" class="com.liferay.documentlibrary.service.DLServiceFactory">
-		<property name="service" ref="com.liferay.documentlibrary.service.DLService.impl" />
-	</bean>
-	<bean id="com.liferay.documentlibrary.service.DLServiceUtil" class="com.liferay.documentlibrary.service.DLServiceUtil">
-		<property name="service" ref="com.liferay.documentlibrary.service.DLService.impl" />
-	</bean>
+	<bean id="com.liferay.documentlibrary.service.DLLocalService" class="com.liferay.documentlibrary.service.impl.DLLocalServiceImpl" />
+	<bean id="com.liferay.documentlibrary.service.DLService" class="com.liferay.documentlibrary.service.impl.DLServiceImpl" />
 </beans>

@@ -2620,20 +2620,20 @@ public class ServiceBuilder {
 
 			String beanId = beanEl.attributeValue("id");
 
-			if (beanId.endsWith("ServiceUtil") &&
-				!beanId.endsWith("LocalServiceUtil")) {
+			if (beanId.endsWith("Service") &&
+				!beanId.endsWith("LocalService")) {
 
 				String entityName = beanId;
 
 				entityName = StringUtil.replace(entityName, ".service.", ".");
 
-				int pos = entityName.indexOf("ServiceUtil");
+				int pos = entityName.indexOf("Service");
 
 				entityName = entityName.substring(0, pos);
 
 				Entity entity = getEntity(entityName);
 
-				String serviceName = beanId.substring(0, beanId.length() - 4);
+				String serviceName = beanId;
 
 				String serviceMapping = serviceName;
 
@@ -3127,22 +3127,29 @@ public class ServiceBuilder {
 
 		File xmlFile = new File(_springFileName);
 
-		if (!xmlFile.exists()) {
-			String xml =
-				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-				"\n" +
-				"<beans\n" +
-				"\tdefault-init-method=\"afterPropertiesSet\"\n" +
-				"\txmlns=\"http://www.springframework.org/schema/beans\"\n" +
-				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-				"\txsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\"\n" +
-				">\n" +
-				"</beans>";
+		String xml =
+			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+			"\n" +
+			"<beans\n" +
+			"\tdefault-init-method=\"afterPropertiesSet\"\n" +
+			"\txmlns=\"http://www.springframework.org/schema/beans\"\n" +
+			"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+			"\txsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\"\n" +
+			">\n" +
+			"</beans>";
 
+		if (!xmlFile.exists()) {
 			FileUtil.write(xmlFile, xml);
 		}
 
 		String oldContent = FileUtil.read(xmlFile);
+
+		if (Validator.isNotNull(_pluginName) &&
+			oldContent.contains("DOCTYPE beans PUBLIC")) {
+
+			oldContent = xml;
+		}
+
 		String newContent = _fixSpringXml(oldContent);
 
 		int x = oldContent.indexOf("<beans");
@@ -3159,15 +3166,23 @@ public class ServiceBuilder {
 
 			newContent =
 				newContent.substring(0, x) + content +
-				newContent.substring(x, newContent.length());
+					newContent.substring(x, newContent.length());
 		}
 		else {
 			firstSession = newContent.lastIndexOf("<bean", firstSession) - 1;
-			lastSession = newContent.indexOf("</bean>", lastSession) + 8;
+
+			int tempLastSession = newContent.indexOf(
+				"<bean id=\"", lastSession + 1);
+
+			if (tempLastSession == -1) {
+				tempLastSession = newContent.indexOf("</beans>", lastSession);
+			}
+
+			lastSession = tempLastSession;
 
 			newContent =
 				newContent.substring(0, firstSession) + content +
-				newContent.substring(lastSession, newContent.length());
+					newContent.substring(lastSession, newContent.length());
 		}
 
 		newContent = _formatXml(newContent);

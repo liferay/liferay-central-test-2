@@ -110,8 +110,8 @@
 	</bean>
 	<aop:config>
 		<aop:aspect ref="com.liferay.portal.dao.shard.ShardAdvice">
-			<aop:around pointcut="bean(com.liferay.portal.service.CompanyLocalService.impl)" method="invokeCompanyService" />
-			<aop:around pointcut="bean(*Persistence.impl) or bean(*Finder.impl)" method="invokePersistence" />
+			<aop:around pointcut="bean(com.liferay.portal.service.CompanyLocalService)" method="invokeCompanyService" />
+			<aop:around pointcut="bean(*Persistence) or bean(*Finder)" method="invokePersistence" />
 			<aop:around pointcut="execution(void com.liferay.portal.convert.messaging.ConvertProcessMessageListener.receive(..))" method="invokeGlobally" />
 			<aop:around pointcut="execution(void com.liferay.portal.events.StartupHelper.*(..))" method="invokeGlobally" />
 			<aop:around pointcut="execution(* com.liferay.portal.service.impl.AccountLocalServiceImpl.getAccount(long, long))" method="invokeByParameter" />

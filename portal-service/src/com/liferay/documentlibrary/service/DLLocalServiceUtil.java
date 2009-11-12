@@ -24,6 +24,7 @@ package com.liferay.documentlibrary.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.service.ServiceContext;
 
@@ -46,21 +47,21 @@ public class DLLocalServiceUtil {
 			InputStream is)
 		throws PortalException, SystemException {
 
-		_service.addFile(
+		getService().addFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			validateFileExtension, fileEntryId, properties, modifiedDate,
 			serviceContext, is);
 	}
 
 	public static void checkRoot(long companyId) throws SystemException {
-		_service.checkRoot(companyId);
+		getService().checkRoot(companyId);
 	}
 
 	public static InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		return _service.getFileAsStream(companyId, repositoryId, fileName);
+		return getService().getFileAsStream(companyId, repositoryId, fileName);
 	}
 
 	public static InputStream getFileAsStream(
@@ -68,8 +69,17 @@ public class DLLocalServiceUtil {
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		return _service.getFileAsStream(
+		return getService().getFileAsStream(
 			companyId, repositoryId, fileName, versionNumber);
+	}
+
+	public static DLLocalService getService() {
+		if (_service == null) {
+			_service = (DLLocalService)PortalBeanLocatorUtil.locate(
+				DLLocalService.class.getName());
+		}
+
+		return _service;
 	}
 
 	public static boolean hasFile(
@@ -77,14 +87,14 @@ public class DLLocalServiceUtil {
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		return _service.hasFile(
+		return getService().hasFile(
 			companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public static void move(String srcDir, String destDir)
 		throws SystemException {
 
-		_service.move(srcDir, destDir);
+		getService().move(srcDir, destDir);
 	}
 
 	public static Hits search(
@@ -93,7 +103,7 @@ public class DLLocalServiceUtil {
 			int end)
 		throws SystemException {
 
-		return _service.search(
+		return getService().search(
 			companyId, portletId, groupId, userId, repositoryIds, keywords,
 			start, end);
 	}
@@ -106,7 +116,7 @@ public class DLLocalServiceUtil {
 			InputStream is)
 		throws PortalException, SystemException {
 
-		_service.updateFile(
+		getService().updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			validateFileExtension, versionNumber, sourceFileName, fileEntryId,
 			properties, modifiedDate, serviceContext, is);
@@ -116,28 +126,28 @@ public class DLLocalServiceUtil {
 			String fileName, boolean validateFileExtension, byte[] bytes)
 		throws PortalException, SystemException {
 
-		_service.validate(fileName, validateFileExtension, bytes);
+		getService().validate(fileName, validateFileExtension, bytes);
 	}
 
 	public static void validate(
 			String fileName, boolean validateFileExtension, File file)
 		throws PortalException, SystemException {
 
-		_service.validate(fileName, validateFileExtension, file);
+		getService().validate(fileName, validateFileExtension, file);
 	}
 
 	public static void validate(
 			String fileName, boolean validateFileExtension, InputStream is)
 		throws PortalException, SystemException {
 
-		_service.validate(fileName, validateFileExtension, is);
+		getService().validate(fileName, validateFileExtension, is);
 	}
 
 	public static void validate(
 			String fileName, String sourceFileName, InputStream is)
 		throws PortalException, SystemException {
 
-		_service.validate(fileName, sourceFileName, is);
+		getService().validate(fileName, sourceFileName, is);
 	}
 
 	public void setService(DLLocalService service) {

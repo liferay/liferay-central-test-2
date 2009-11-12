@@ -684,7 +684,7 @@ public class PortalImpl implements Portal {
 		sb.append(packagePath);
 		sb.append(".service.persistence.");
 		sb.append(modelName);
-		sb.append("Persistence.impl");
+		sb.append("Persistence");
 
 		String beanName = sb.toString();
 

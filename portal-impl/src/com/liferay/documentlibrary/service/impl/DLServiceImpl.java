@@ -247,6 +247,6 @@ public class DLServiceImpl implements DLService {
 	protected DLLocalService dlLocalService;
 
 	private static final String _DL_LOCAL_SERVICE =
-		"com.liferay.documentlibrary.service.DLLocalService.impl";
+		"com.liferay.documentlibrary.service.DLLocalService";
 
 }
