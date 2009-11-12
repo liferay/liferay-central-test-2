@@ -185,14 +185,14 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryImpl.LOCK_EXPIRATION_TIME).toLowerCase();
 			%>
 
-			<span class="portlet-msg-success">
+			<div class="portlet-msg-success">
 				<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
-			</span>
+			</div>
 		</c:when>
 		<c:otherwise>
-			<span class="portlet-msg-error">
+			<div class="portlet-msg-error">
 				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId())), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
-			</span>
+			</div>
 		</c:otherwise>
 	</c:choose>
 </c:if>

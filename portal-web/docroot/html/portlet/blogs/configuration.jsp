@@ -34,9 +34,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<span class="portlet-msg-info">
+	<div class="portlet-msg-info">
 		<liferay-ui:message key="set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss" />
-	</span>
+	</div>
 
 	<aui:fieldset>
 		<aui:legend label="page" />

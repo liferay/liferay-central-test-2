@@ -88,9 +88,9 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 	<c:if test='<%= SessionMessages.contains(request, "missingOpenIdUserInformation") %>'>
-		<span class="portlet-msg-info">
+		<div class="portlet-msg-info">
 			<liferay-ui:message key="you-have-successfully-authenticated-please-provide-the-following-required-information-to-access-the-portal" />
-		</span>
+		</div>
 	</c:if>
 
 	<aui:model-context bean="<%= contact2 %>" model="<%= Contact.class %>" />

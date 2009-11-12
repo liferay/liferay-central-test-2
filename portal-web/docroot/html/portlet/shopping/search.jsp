@@ -179,7 +179,7 @@ for (int i = 0; i < results.size(); i++) {
 		row.addText(currencyFormat.format(item.getPrice()), rowURL);
 	}
 	else {
-		row.addText("<span class=\"portlet-msg-success\">" + currencyFormat.format(ShoppingUtil.calculateActualPrice(item)) + "</span>", rowURL);
+		row.addText("<div class=\"portlet-msg-success\">" + currencyFormat.format(ShoppingUtil.calculateActualPrice(item)) + "</div>", rowURL);
 	}
 
 	// Action

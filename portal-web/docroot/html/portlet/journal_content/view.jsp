@@ -206,9 +206,9 @@ if (articleDisplay != null) {
 							if (article.isExpired()) {
 						%>
 
-								<span class="portlet-msg-alert">
+								<div class="portlet-msg-alert">
 									<%= LanguageUtil.format(pageContext, "x-is-expired", article.getTitle()) %>
-								</span>
+								</div>
 
 						<%
 							}
@@ -225,16 +225,16 @@ if (articleDisplay != null) {
 											<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 										</liferay-portlet:renderURL>
 
-										<span class="portlet-msg-alert">
+										<div class="portlet-msg-alert">
 											<a href="<%= editURL %>">
 												<%= LanguageUtil.format(pageContext, "x-is-not approved", article.getTitle()) %>
 											</a>
-										</span>
+										</div>
 								</c:when>
 								<c:otherwise>
-									<span class="portlet-msg-alert">
+									<div class="portlet-msg-alert">
 										<%= LanguageUtil.format(pageContext, "x-is-not approved", article.getTitle()) %>
-									</span>
+									</div>
 								</c:otherwise>
 							</c:choose>
 
@@ -244,9 +244,9 @@ if (articleDisplay != null) {
 						catch (NoSuchArticleException nsae) {
 						%>
 
-							<span class="portlet-msg-error">
+							<div class="portlet-msg-error">
 								<%= LanguageUtil.get(pageContext, "the-selected-web-content-no-longer-exists") %>
-							</span>
+							</div>
 
 						<%
 						}

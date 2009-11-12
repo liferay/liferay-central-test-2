@@ -151,9 +151,9 @@
 						<liferay-ui:message key="show-borders" /> <input id="show-borders" name="show-borders" type="checkbox" />
 					</label>
 
-					<p class="form-hint portlet-msg-info" id="border-note">
+					<div class="form-hint portlet-msg-info" id="border-note">
 						<liferay-ui:message key="this-change-will-only-be-shown-after-you-refresh-the-page" />
-					</p>
+					</div>
 				</div>
 			</fieldset>
 

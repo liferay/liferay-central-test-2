@@ -47,14 +47,14 @@
 			<td>
 				<c:choose>
 					<c:when test="<%= status.equals(RepositoryReport.SUCCESS) %>">
-						<span class="portlet-msg-success">
-						<liferay-ui:message key="ok" />
-						</span>
+						<div class="portlet-msg-success">
+							<liferay-ui:message key="ok" />
+						</div>
 					</c:when>
 					<c:otherwise>
-						<span class="portlet-msg-error">
-						<%= status %>
-						</span>
+						<div class="portlet-msg-error">
+							<%= status %>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</td>

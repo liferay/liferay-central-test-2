@@ -29,14 +29,14 @@
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 
-<span class="portlet-msg-info">
+<div class="portlet-msg-info">
 	<liferay-ui:message key="please-choose-a-reminder-query" />
-</span>
+</div>
 
 <c:if test="<%= SessionErrors.contains(request, UserReminderQueryException.class.getName()) %>">
-	<span class="portlet-msg-error">
+	<div class="portlet-msg-error">
 		<liferay-ui:message key="reminder-query-and-answer-cannot-be-empty" />
-	</span>
+	</div>
 </c:if>
 
 <fieldset class="aui-block-labels">

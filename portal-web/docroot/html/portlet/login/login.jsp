@@ -66,7 +66,7 @@
 				String userPassword = (String)SessionMessages.get(request, "user_added_password");
 				%>
 
-				<span class="portlet-msg-success">
+				<div class="portlet-msg-success">
 					<c:choose>
 						<c:when test="<%= company.isStrangersVerify() || Validator.isNull(userPassword) %>">
 							<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", userEmailAddress) %>
@@ -75,7 +75,7 @@
 							<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {userPassword, userEmailAddress}, false) %>
 						</c:otherwise>
 					</c:choose>
-				</span>
+				</div>
 			</c:if>
 
 			<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />

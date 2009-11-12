@@ -276,9 +276,9 @@ public class ScriptingPortlet extends GenericPortlet {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("<span class=\"portlet-msg-error\">");
+		sb.append("<div class=\"portlet-msg-error\">");
 		sb.append(themeDisplay.translate("an-unexpected-error-occurred"));
-		sb.append("</span>");
+		sb.append("</div>");
 
 		if (PortalPermissionUtil.contains(
 				permissionChecker, ActionKeys.CONFIGURATION)) {

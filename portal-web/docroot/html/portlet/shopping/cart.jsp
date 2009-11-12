@@ -258,16 +258,16 @@ for (int i = 0; itr.hasNext(); i++) {
 		if (ShoppingUtil.isInStock(item, itemFields, fieldsArray, count)) {
 			sb.append(LanguageUtil.get(pageContext, "availability"));
 			sb.append(": ");
-			sb.append("<span class=\"portlet-msg-success\">");
+			sb.append("<div class=\"portlet-msg-success\">");
 			sb.append(LanguageUtil.get(pageContext, "in-stock"));
-			sb.append("</span>");
+			sb.append("</div>");
 		}
 		else {
 			sb.append(LanguageUtil.get(pageContext, "availability"));
 			sb.append(": ");
-			sb.append("<span class=\"portlet-msg-error\">");
+			sb.append("<div class=\"portlet-msg-error\">");
 			sb.append(LanguageUtil.get(pageContext, "out-of-stock"));
-			sb.append("</span>");
+			sb.append("</div>");
 
 			sb.append("<script type=\"text/javascript\">");
 			sb.append("itemsInStock = false;");
@@ -322,17 +322,17 @@ for (int i = 0; itr.hasNext(); i++) {
 			sb.append("<strike>");
 			sb.append(currencyFormat.format(itemPrice.getPrice()));
 			sb.append("</strike> ");
-			sb.append("<span class=\"portlet-msg-success\">");
+			sb.append("<div class=\"portlet-msg-success\">");
 			sb.append(currencyFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)));
-			sb.append("</span> / ");
+			sb.append("</div> / ");
 			sb.append(LanguageUtil.get(pageContext, "you-save"));
 			sb.append(": ");
-			sb.append("<span class=\"portlet-msg-error\">");
+			sb.append("<div class=\"portlet-msg-error\">");
 			sb.append(currencyFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)));
 			sb.append(" (");
 			sb.append(percentFormat.format(itemPrice.getDiscount()));
 			sb.append(")");
-			sb.append("</span>");
+			sb.append("</div>");
 		}
 	}
 
@@ -417,7 +417,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		</c:if>
 
 		<c:if test="<%= subtotal != actualSubtotal %>">
-			<strike><%= currencyFormat.format(subtotal) %></strike> <span class="portlet-msg-success"><%= currencyFormat.format(actualSubtotal) %></span>
+			<strike><%= currencyFormat.format(subtotal) %></strike> <div class="portlet-msg-success"><%= currencyFormat.format(actualSubtotal) %></div>
 		</c:if>
 	</td>
 </tr>
@@ -428,9 +428,9 @@ for (int i = 0; itr.hasNext(); i++) {
 			<liferay-ui:message key="you-save" />:
 		</td>
 		<td>
-			<span class="portlet-msg-error">
-			<%= currencyFormat.format(discountSubtotal) %> (<%= percentFormat.format(ShoppingUtil.calculateDiscountPercent(items)) %>)
-			</span>
+			<div class="portlet-msg-error">
+				<%= currencyFormat.format(discountSubtotal) %> (<%= percentFormat.format(ShoppingUtil.calculateDiscountPercent(items)) %>)
+			</div>
 		</td>
 	</tr>
 </c:if>
@@ -522,9 +522,9 @@ double insurance = ShoppingUtil.calculateInsurance(items);
 			<liferay-ui:message key="coupon-discount" />:
 		</td>
 		<td>
-			<span class="portlet-msg-error">
-			<%= currencyFormat.format(ShoppingUtil.calculateCouponDiscount(items, coupon)) %>
-			</span>
+			<div class="portlet-msg-error">
+				<%= currencyFormat.format(ShoppingUtil.calculateCouponDiscount(items, coupon)) %>
+			</div>
 		</td>
 	</tr>
 </c:if>

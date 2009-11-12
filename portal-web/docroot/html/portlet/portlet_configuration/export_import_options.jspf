@@ -107,7 +107,7 @@
 				%>
 
 					<li class="tree-item">
-						<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></span>
+						<div class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></div>
 					</li>
 
 				<%

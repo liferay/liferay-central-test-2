@@ -40,8 +40,8 @@ catch (Exception e) {
 	<liferay-util:param name="tabs1" value="cart" />
 </liferay-util:include>
 
-<span class="portlet-msg-success">
-<liferay-ui:message key="thank-you-for-your-purchase" />
-</span>
+<div class="portlet-msg-success">
+	<liferay-ui:message key="thank-you-for-your-purchase" />
+</div>
 
 <liferay-ui:message key="your-order-number-is" /> <strong><%= orderId %></strong>. <liferay-ui:message key="you-will-receive-an-email-shortly-with-your-order-summary-and-further-details" />

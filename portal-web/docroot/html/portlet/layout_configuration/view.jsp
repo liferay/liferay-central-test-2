@@ -79,9 +79,9 @@
 				%>
 
 				<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
-					<p class="portlet-msg-info">
+					<div class="portlet-msg-info">
 						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
-					</p>
+					</div>
 				</c:if>
 
 				<c:if test="<%= permissionChecker.isOmniadmin() %>">

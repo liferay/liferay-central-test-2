@@ -315,9 +315,9 @@ for (int i = 0; i < results.size(); i++) {
 	}
 	else {
 		row.addText(
-			"<span class=\"portlet-msg-success\">" +
+			"<div class=\"portlet-msg-success\">" +
 				currencyFormat.format(ShoppingUtil.calculateActualPrice(item)) +
-					"</span>",
+					"</div>",
 			rowURL);
 	}
 

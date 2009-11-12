@@ -67,6 +67,6 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 		</aui:fieldset>
 	</c:when>
 	<c:otherwise>
-		<span class="portlet-msg-info"><liferay-ui:message key="this-section-will-be-editable-after-creating-the-user" /></span>
+		<div class="portlet-msg-info"><liferay-ui:message key="this-section-will-be-editable-after-creating-the-user" /></div>
 	</c:otherwise>
 </c:choose>

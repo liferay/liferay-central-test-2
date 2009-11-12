@@ -31,9 +31,9 @@ boolean passwordPolicyEnabled = PortalLDAPUtil.isPasswordPolicyEnabled(company.g
 %>
 
 <c:if test="<%= passwordPolicyEnabled %>">
-	<span class="portlet-msg-info">
+	<div class="portlet-msg-info">
 		<liferay-ui:message key="you-are-using-ldaps-password-policy" />
-	</span>
+	</div>
 </c:if>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/password_policy/toolbar.jsp">

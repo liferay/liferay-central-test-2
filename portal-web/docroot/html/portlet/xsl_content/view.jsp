@@ -101,9 +101,9 @@ catch (Exception e) {
 	_log.error(e.getMessage());
 %>
 
-	<span class="portlet-msg-error">
-	<liferay-ui:message key="an-error-occurred-while-processing-your-xml-and-xsl" />
-	</span>
+	<div class="portlet-msg-error">
+		<liferay-ui:message key="an-error-occurred-while-processing-your-xml-and-xsl" />
+	</div>
 
 <%
 }

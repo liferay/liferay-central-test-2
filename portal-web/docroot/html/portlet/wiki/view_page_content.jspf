@@ -75,9 +75,9 @@ try {
 catch (WikiFormatException wfe) {
 %>
 
-	<span class="portlet-msg-error">
+	<div class="portlet-msg-error">
 		<liferay-ui:message key="the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted" />
-	</span>
+	</div>
 
 	<div class="wiki-body">
 		<pre>
@@ -91,9 +91,9 @@ catch (Exception e) {
 	_log.error("Error formatting the wiki page " + wikiPage.getPageId() + " with the format " + wikiPage.getFormat(), e);
 %>
 
-	<span class="portlet-msg-error">
+	<div class="portlet-msg-error">
 		<liferay-ui:message key="an-error-occurred-while-formatting-the-wiki-page" />
-	</span>
+	</div>
 
 <%
 }

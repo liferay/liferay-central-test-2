@@ -33,9 +33,9 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 <input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
 
-<span class="portlet-msg-info">
+<div class="portlet-msg-info">
 	<liferay-ui:message key="please-set-a-new-password" />
-</span>
+</div>
 
 <c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
 
@@ -43,7 +43,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	UserPasswordException upe = (UserPasswordException)SessionErrors.get(request, UserPasswordException.class.getName());
 	%>
 
-	<span class="portlet-msg-error">
+	<div class="portlet-msg-error">
 		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_ALREADY_USED %>">
 			<liferay-ui:message key="that-password-has-already-been-used-please-enter-in-a-different-password" />
 		</c:if>
@@ -75,7 +75,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
 			<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
 		</c:if>
-	</span>
+	</div>
 </c:if>
 
 <fieldset class="aui-block-labels">

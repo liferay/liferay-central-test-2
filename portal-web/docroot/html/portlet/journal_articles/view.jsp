@@ -213,9 +213,9 @@ double version = ParamUtil.getDouble(request, "version");
 				</c:if>
 			</c:when>
 			<c:otherwise>
-				<span class="portlet-msg-error">
+				<div class="portlet-msg-error">
 					<liferay-ui:message key="you-do-not-have-the-required-permissions" />
-				</span>
+				</div>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>

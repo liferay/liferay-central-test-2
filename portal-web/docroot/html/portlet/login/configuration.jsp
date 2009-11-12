@@ -93,9 +93,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 			url="<%= portletURL %>"
 		/>
 
-		<span class="portlet-msg-info">
+		<div class="portlet-msg-info">
 			<liferay-ui:message key="enter-custom-values-or-leave-it-blank-to-use-the-default-portal-settings" />
-		</span>
+		</div>
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("password-changed-notification") %>'>

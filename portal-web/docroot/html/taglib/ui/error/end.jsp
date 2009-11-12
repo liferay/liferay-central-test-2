@@ -34,23 +34,23 @@ String rowBreak = (String)request.getAttribute("liferay-ui:error:rowBreak");
 <c:choose>
 	<c:when test="<%= (key != null) && Validator.isNull(message) %>">
 		<c:if test="<%= SessionErrors.contains(portletRequest, key) %>">
-			</span>
+			</div>
 
 			<%= rowBreak %>
 		</c:if>
 	</c:when>
 	<c:when test="<%= key == null %>">
 		<c:if test="<%= !SessionErrors.isEmpty(portletRequest) %>">
-			<span class="portlet-msg-error">
-			<liferay-ui:message key="you-have-entered-invalid-data" />
-			</span>
+			<div class="portlet-msg-error">
+				<liferay-ui:message key="you-have-entered-invalid-data" />
+			</div>
 
 			<%= rowBreak %>
 		</c:if>
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= SessionErrors.contains(portletRequest, key) %>">
-			<span class="portlet-msg-error">
+			<div class="portlet-msg-error">
 
 			<c:choose>
 				<c:when test="<%= translateMessage %>">
@@ -61,7 +61,7 @@ String rowBreak = (String)request.getAttribute("liferay-ui:error:rowBreak");
 				</c:otherwise>
 			</c:choose>
 
-			</span>
+			</div>
 
 			<%= rowBreak %>
 		</c:if>

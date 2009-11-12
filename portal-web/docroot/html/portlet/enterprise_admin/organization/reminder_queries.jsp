@@ -44,9 +44,9 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 
 <h3><liferay-ui:message key="reminder-queries" /></h3>
 
-<span class="portlet-msg-info">
+<div class="portlet-msg-info">
 	<liferay-ui:message key="specify-custom-reminder-queries-for-the-users-of-this-organization" />
-</span>
+</div>
 
 <aui:fieldset>
 	<aui:input label='<%= LanguageUtil.get(pageContext, "default-language") + StringPool.COLON + StringPool.SPACE + defaultLocale.getDisplayName(defaultLocale) %>' name="reminderQueries" type="textarea" />

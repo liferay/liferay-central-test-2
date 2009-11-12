@@ -408,14 +408,14 @@ for (int i = 0; itr.hasNext(); i++) {
 	sb = new StringBuilder();
 
 	if (ShoppingUtil.isInStock(item, itemFields, fieldsArray, count)) {
-		sb.append("<span class=\"portlet-msg-success\">");
+		sb.append("<div class=\"portlet-msg-success\">");
 		sb.append(LanguageUtil.get(pageContext, "in-stock"));
-		sb.append("</span>");
+		sb.append("</div>");
 	}
 	else {
-		sb.append("<span class=\"portlet-msg-error\">");
+		sb.append("<div class=\"portlet-msg-error\">");
 		sb.append(LanguageUtil.get(pageContext, "out-of-stock"));
-		sb.append("</span>");
+		sb.append("</div>");
 	}
 
 	row.addText(sb.toString(), rowURL);
