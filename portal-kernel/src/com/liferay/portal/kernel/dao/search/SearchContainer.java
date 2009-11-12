@@ -92,6 +92,8 @@ public class SearchContainer<R> {
 			_cur = DEFAULT_CUR;
 		}
 
+		_deltaHidden = delta;
+
 		setDelta(ParamUtil.getInteger(portletRequest, _deltaParam, delta));
 
 		_iteratorURL = iteratorURL;
@@ -252,6 +254,8 @@ public class SearchContainer<R> {
 
 	public void setDeltaConfigurable(boolean deltaConfigurable) {
 		_deltaConfigurable = deltaConfigurable;
+
+		setDelta(_deltaHidden);
 	}
 
 	public void setDeltaParam(String deltaParam) {
@@ -343,6 +347,7 @@ public class SearchContainer<R> {
 	private String _curParam = DEFAULT_CUR_PARAM;
 	private int _delta = DEFAULT_DELTA;
 	private boolean _deltaConfigurable = DEFAULT_DELTA_CONFIGURABLE;
+	private int _deltaHidden;
 	private String _deltaParam = DEFAULT_DELTA_PARAM;
 	private DisplayTerms _displayTerms;
 	private String _emptyResultsMessage;
