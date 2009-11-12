@@ -78,8 +78,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.lar.PortletDataHandlerKeys;
-import com.liferay.portal.lar.UserIdStrategy;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
@@ -122,7 +120,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -249,7 +246,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			userGroupIdSet.toArray(new Long[userGroupIdSet.size()]));
 
 		for (long userGroupId : userGroupIds) {
-			copyUserGroupLayouts(userGroupId, userId);
+			userGroupLocalService.copyUserGroupLayouts(userGroupId, userId);
 		}
 
 		userPersistence.setUserGroups(userId, userGroupIds);
@@ -339,7 +336,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		copyUserGroupLayouts(userGroupId, userIds);
+		userGroupLocalService.copyUserGroupLayouts(userGroupId, userIds);
 
 		userGroupPersistence.addUsers(userGroupId, userIds);
 
@@ -543,7 +540,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (userGroupIds != null) {
 			for (long userGroupId : userGroupIds) {
-				copyUserGroupLayouts(userGroupId, new long[] {userId});
+				userGroupLocalService.copyUserGroupLayouts(
+					userGroupId, new long[] {userId});
 			}
 
 			userPersistence.setUserGroups(userId, userGroupIds);
@@ -862,26 +860,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userGroupPersistence.clearUsers(userGroupId);
 
 		PermissionCacheUtil.clearCache();
-	}
-
-	public void copyUserGroupLayouts(long userGroupId, long userIds[])
-		throws PortalException, SystemException {
-
-		for (long userId : userIds) {
-			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
-				copyUserGroupLayouts(userGroupId, userId);
-			}
-		}
-	}
-
-	public void copyUserGroupLayouts(long userGroupIds[], long userId)
-		throws PortalException, SystemException {
-
-		for (long userGroupId : userGroupIds) {
-			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
-				copyUserGroupLayouts(userGroupId, userId);
-			}
-		}
 	}
 
 	public KeyValuePair decryptUserId(
@@ -1757,7 +1735,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		copyUserGroupLayouts(userGroupId, userIds);
+		userGroupLocalService.copyUserGroupLayouts(userGroupId, userIds);
 
 		userGroupPersistence.setUsers(userGroupId, userIds);
 
@@ -2516,7 +2494,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// User groups
 
 		if (userGroupIds != null) {
-			copyUserGroupLayouts(userGroupIds, userId);
+			userGroupLocalService.copyUserGroupLayouts(userGroupIds, userId);
 
 			userPersistence.setUserGroups(userId, userGroupIds);
 		}
@@ -2774,41 +2752,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return authResult;
 	}
 
-	protected void copyUserGroupLayouts(long userGroupId, long userId)
-		throws PortalException, SystemException {
-
-		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
-		User user = getUserById(userId);
-
-		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
-
-		if (userGroup.hasPrivateLayouts()) {
-			long sourceGroupId = userGroup.getGroup().getGroupId();
-			long targetGroupId = user.getGroup().getGroupId();
-
-			byte[] bytes = layoutLocalService.exportLayouts(
-				sourceGroupId, true, parameterMap, null, null);
-
-			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-			layoutLocalService.importLayouts(
-				userId, targetGroupId, true, parameterMap, bais);
-		}
-
-		if (userGroup.hasPublicLayouts()) {
-			long sourceGroupId = userGroup.getGroup().getGroupId();
-			long targetGroupId = user.getGroup().getGroupId();
-
-			byte[] bytes = layoutLocalService.exportLayouts(
-				sourceGroupId, false, parameterMap, null, null);
-
-			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-			layoutLocalService.importLayouts(
-				userId, targetGroupId, false, parameterMap, bais);
-		}
-	}
-
 	protected void doSendPassword(
 			long companyId, String emailAddress, String remoteAddr,
 			String remoteHost, String userAgent, String fromName,
@@ -2957,58 +2900,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		MailMessage message = new MailMessage(from, to, subject, body, true);
 
 		mailService.sendEmail(message);
-	}
-
-	protected Map<String, String[]> getLayoutTemplatesParameters() {
-		Map<String, String[]> parameterMap =
-			new LinkedHashMap<String, String[]>();
-
-		parameterMap.put(
-			PortletDataHandlerKeys.CATEGORIES,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DATA_STRATEGY,
-			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
-			new String[] {PortletDataHandlerKeys.
-				LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME});
-		parameterMap.put(
-			PortletDataHandlerKeys.PERMISSIONS,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLETS_MERGE_MODE,
-			new String[] {PortletDataHandlerKeys.
-				PORTLETS_MERGE_MODE_ADD_TO_BOTTOM});
-		parameterMap.put(
-			PortletDataHandlerKeys.THEME,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.USER_ID_STRATEGY,
-			new String[] {UserIdStrategy.CURRENT_USER_ID});
-		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS,
-			new String[] {Boolean.FALSE.toString()});
-
-		return parameterMap;
 	}
 
 	protected String getScreenName(String screenName) {

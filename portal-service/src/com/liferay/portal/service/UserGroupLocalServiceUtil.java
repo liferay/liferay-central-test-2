@@ -126,6 +126,24 @@ public class UserGroupLocalServiceUtil {
 		getService().clearUserUserGroups(userId);
 	}
 
+	public static void copyUserGroupLayouts(long userGroupId, long[] userIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().copyUserGroupLayouts(userGroupId, userIds);
+	}
+
+	public static void copyUserGroupLayouts(long[] userGroupIds, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().copyUserGroupLayouts(userGroupIds, userId);
+	}
+
+	public static void copyUserGroupLayouts(long userGroupId, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().copyUserGroupLayouts(userGroupId, userId);
+	}
+
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,

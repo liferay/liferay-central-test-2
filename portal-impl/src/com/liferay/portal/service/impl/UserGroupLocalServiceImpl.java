@@ -34,17 +34,23 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.lar.UserIdStrategy;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 
+import java.io.ByteArrayInputStream;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="UserGroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -100,6 +106,61 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		userPersistence.clearUserGroups(userId);
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public void copyUserGroupLayouts(long userGroupId, long userIds[])
+		throws PortalException, SystemException {
+
+		for (long userId : userIds) {
+			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
+				copyUserGroupLayouts(userGroupId, userId);
+			}
+		}
+	}
+
+	public void copyUserGroupLayouts(long userGroupIds[], long userId)
+		throws PortalException, SystemException {
+
+		for (long userGroupId : userGroupIds) {
+			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
+				copyUserGroupLayouts(userGroupId, userId);
+			}
+		}
+	}
+
+	public void copyUserGroupLayouts(long userGroupId, long userId)
+		throws PortalException, SystemException {
+
+		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
+
+		if (userGroup.hasPrivateLayouts()) {
+			long sourceGroupId = userGroup.getGroup().getGroupId();
+			long targetGroupId = user.getGroup().getGroupId();
+
+			byte[] bytes = layoutLocalService.exportLayouts(
+				sourceGroupId, true, parameterMap, null, null);
+
+			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+
+			layoutLocalService.importLayouts(
+				userId, targetGroupId, true, parameterMap, bais);
+		}
+
+		if (userGroup.hasPublicLayouts()) {
+			long sourceGroupId = userGroup.getGroup().getGroupId();
+			long targetGroupId = user.getGroup().getGroupId();
+
+			byte[] bytes = layoutLocalService.exportLayouts(
+				sourceGroupId, false, parameterMap, null, null);
+
+			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+
+			layoutLocalService.importLayouts(
+				userId, targetGroupId, false, parameterMap, bais);
+		}
 	}
 
 	public void deleteUserGroup(long userGroupId)
@@ -204,7 +265,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void setUserUserGroups(long userId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
-		userLocalService.copyUserGroupLayouts(userGroupIds, userId);
+		copyUserGroupLayouts(userGroupIds, userId);
 
 		userPersistence.setUserGroups(userId, userGroupIds);
 
@@ -242,6 +303,58 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		userGroupPersistence.update(userGroup, false);
 
 		return userGroup;
+	}
+
+	protected Map<String, String[]> getLayoutTemplatesParameters() {
+		Map<String, String[]> parameterMap =
+			new LinkedHashMap<String, String[]>();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.CATEGORIES,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DATA_STRATEGY,
+			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
+			new String[] {PortletDataHandlerKeys.
+				LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME});
+		parameterMap.put(
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA_ALL,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLETS_MERGE_MODE,
+			new String[] {PortletDataHandlerKeys.
+				PORTLETS_MERGE_MODE_ADD_TO_BOTTOM});
+		parameterMap.put(
+			PortletDataHandlerKeys.THEME,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_ID_STRATEGY,
+			new String[] {UserIdStrategy.CURRENT_USER_ID});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
+
+		return parameterMap;
 	}
 
 	protected void validate(long userGroupId, long companyId, String name)

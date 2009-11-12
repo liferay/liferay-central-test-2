@@ -107,6 +107,18 @@ public interface UserGroupLocalService {
 	public void clearUserUserGroups(long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void copyUserGroupLayouts(long userGroupId, long[] userIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void copyUserGroupLayouts(long[] userGroupIds, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void copyUserGroupLayouts(long userGroupId, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserGroup getUserGroup(long companyId,
 		java.lang.String name)

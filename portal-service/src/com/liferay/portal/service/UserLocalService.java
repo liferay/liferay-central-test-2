@@ -198,14 +198,6 @@ public interface UserLocalService {
 	public void clearUserGroupUsers(long userGroupId)
 		throws com.liferay.portal.SystemException;
 
-	public void copyUserGroupLayouts(long userGroupId, long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void copyUserGroupLayouts(long[] userGroupIds, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.PortalException,

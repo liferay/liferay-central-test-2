@@ -123,6 +123,24 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 		_userGroupLocalService.clearUserUserGroups(userId);
 	}
 
+	public void copyUserGroupLayouts(long userGroupId, long[] userIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_userGroupLocalService.copyUserGroupLayouts(userGroupId, userIds);
+	}
+
+	public void copyUserGroupLayouts(long[] userGroupIds, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_userGroupLocalService.copyUserGroupLayouts(userGroupIds, userId);
+	}
+
+	public void copyUserGroupLayouts(long userGroupId, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_userGroupLocalService.copyUserGroupLayouts(userGroupId, userId);
+	}
+
 	public com.liferay.portal.model.UserGroup getUserGroup(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
