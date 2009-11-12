@@ -28,12 +28,11 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.InitUtil;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * <a href="PortalContextLoaderListener.java.html"><b><i>View Source</i></b></a>
@@ -47,11 +46,8 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 		super.contextInitialized(event);
 
-		ServletContext servletContext = event.getServletContext();
-
 		ApplicationContext applicationContext =
-			WebApplicationContextUtils.getWebApplicationContext(servletContext);
-
+			ContextLoader.getCurrentWebApplicationContext();
 		BeanLocator beanLocator = new BeanLocatorImpl(
 			PortalClassLoaderUtil.getClassLoader(), applicationContext);
 
