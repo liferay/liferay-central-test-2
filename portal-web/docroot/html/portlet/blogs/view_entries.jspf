@@ -109,4 +109,4 @@ if (rssURLParams.length() > 0) {
 	<link href="<%= rssURL %>" rel="alternate" title="RSS" type="application/rss+xml" />
 </liferay-util:html-top>
 
-<liferay-ui:search-paginator delta="<%= pageDelta %>" searchContainer="<%= searchContainer %>" />
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

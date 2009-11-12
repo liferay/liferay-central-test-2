@@ -1652,11 +1652,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>deltaConfig</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>deltaParam</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -2358,11 +2353,6 @@
 		<name>search-paginator</name>
 		<tag-class>com.liferay.taglib.ui.SearchPaginatorTag</tag-class>
 		<body-content>JSP</body-content>
-		<attribute>
-			<name>delta</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
 		<attribute>
 			<name>page</name>
 			<required>false</required>
