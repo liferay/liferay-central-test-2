@@ -163,7 +163,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 	AUI().ready(
 		'liferay-auto-fields',
 		'liferay-panel-floating',
-		function () {
+		function (A) {
 			<c:if test="<%= !disabled %>">
 				new Liferay.AutoFields(
 					{
@@ -181,43 +181,44 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 				}
 			);
 
-			panel.bind(
-				'hide',
-				function(event) {
-					var instance = this;
+			var languageSelector = A.one('#<%= randomNamespace %>languageSelector select');
 
-					var container = instance.get('container');
+			if (languageSelector) {
+				languageSelector.on(
+					'change',
+					function(event) {
+						var target = event.target;
+						var targetEl = target.getDOM();
 
-					jQuery(document.<portlet:namespace />fm).append(container);
-				}
-			);
+						var selectedOption = targetEl[targetEl.selectedIndex];
+						var selectedValue = selectedOption.value;
 
-			jQuery('#<%= randomNamespace %>languageSelector select').change(
-				function(event) {
-					var selectedOption = this[this.selectedIndex];
-					var selectedValue = selectedOption.value;
+						var newName = '<portlet:namespace /><%= name %>_';
 
-					var newName = '<portlet:namespace /><%= name %>_';
+						var currentRow = target.ancestor('.lfr-form-row');
 
-					var currentRow = jQuery(this).parents('.lfr-form-row:first');
+						var img = currentRow.all('img.language-flag');
+						var imgSrc = 'spacer';
 
-					var img = currentRow.find('img.language-flag');
-					var imgSrc = 'spacer';
+						if (selectedValue) {
+							newName ='<portlet:namespace /><%= name %>_' + selectedValue;
 
-					if (selectedValue) {
-						newName ='<portlet:namespace /><%= name %>_' + selectedValue;
+							imgSrc = 'language/' + selectedValue;
+						}
 
-						imgSrc = 'language/' + selectedValue;
+						var inputField = currentRow.one('.language-value');
+
+						if (inputField) {
+							inputField.attr('name', newName);
+							inputField.attr('id', newName);
+						}
+
+						if (img) {
+							img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
+						}
 					}
-
-					var inputField = currentRow.find('.language-value');
-
-					inputField.attr('name', newName);
-					inputField.attr('id', newName);
-
-					img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
-				}
-			);
+				);
+			}
 		}
 	);
 </script>
