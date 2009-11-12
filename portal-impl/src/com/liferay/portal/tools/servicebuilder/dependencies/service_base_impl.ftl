@@ -1,6 +1,7 @@
 package ${packagePath}.service.base;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import ${beanLocatorUtil};
@@ -45,6 +46,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 	</#if>
 </#list>
 
+@AutoInject
 <#if sessionTypeName == "Local">
 	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService {
 <#else>
