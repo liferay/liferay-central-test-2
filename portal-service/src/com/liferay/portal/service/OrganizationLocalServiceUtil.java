@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="OrganizationLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -365,7 +366,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static OrganizationLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("OrganizationLocalService is not set");
+			_service = (OrganizationLocalService)PortalBeanLocatorUtil.locate(OrganizationLocalService.class.getName());
 		}
 
 		return _service;

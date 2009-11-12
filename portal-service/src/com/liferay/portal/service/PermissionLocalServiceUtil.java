@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PermissionLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -317,7 +318,7 @@ public class PermissionLocalServiceUtil {
 
 	public static PermissionLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("PermissionLocalService is not set");
+			_service = (PermissionLocalService)PortalBeanLocatorUtil.locate(PermissionLocalService.class.getName());
 		}
 
 		return _service;

@@ -23,6 +23,7 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
@@ -226,6 +227,10 @@ public class ShoppingCouponUtil {
 	}
 
 	public static ShoppingCouponPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (ShoppingCouponPersistence)PortalBeanLocatorUtil.locate(ShoppingCouponPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

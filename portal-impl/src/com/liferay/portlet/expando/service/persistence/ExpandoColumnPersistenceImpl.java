@@ -1077,17 +1077,17 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence expandoColumnPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence expandoRowPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence expandoTablePersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	private static Log _log = LogFactoryUtil.getLog(ExpandoColumnPersistenceImpl.class);
 }

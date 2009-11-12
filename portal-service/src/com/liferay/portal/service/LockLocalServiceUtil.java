@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="LockLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -188,7 +189,7 @@ public class LockLocalServiceUtil {
 
 	public static LockLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("LockLocalService is not set");
+			_service = (LockLocalService)PortalBeanLocatorUtil.locate(LockLocalService.class.getName());
 		}
 
 		return _service;

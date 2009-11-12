@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.journal.model.JournalFeed;
@@ -307,6 +308,10 @@ public class JournalFeedUtil {
 	}
 
 	public static JournalFeedPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (JournalFeedPersistence)PortalBeanLocatorUtil.locate(JournalFeedPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

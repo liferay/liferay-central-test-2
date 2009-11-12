@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="SocialActivityFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -128,6 +130,10 @@ public class SocialActivityFinderUtil {
 	}
 
 	public static SocialActivityFinder getFinder() {
+		if (_finder == null) {
+			_finder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="BookmarksEntryFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +41,10 @@ public class BookmarksEntryFinderUtil {
 	}
 
 	public static BookmarksEntryFinder getFinder() {
+		if (_finder == null) {
+			_finder = (BookmarksEntryFinder)PortalBeanLocatorUtil.locate(BookmarksEntryFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

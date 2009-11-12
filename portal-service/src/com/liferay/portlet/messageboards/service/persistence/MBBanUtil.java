@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.messageboards.model.MBBan;
@@ -326,6 +327,10 @@ public class MBBanUtil {
 	}
 
 	public static MBBanPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (MBBanPersistence)PortalBeanLocatorUtil.locate(MBBanPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

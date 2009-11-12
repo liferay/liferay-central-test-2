@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.bookmarks.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="BookmarksFolderServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -80,7 +81,7 @@ public class BookmarksFolderServiceUtil {
 
 	public static BookmarksFolderService getService() {
 		if (_service == null) {
-			throw new RuntimeException("BookmarksFolderService is not set");
+			_service = (BookmarksFolderService)PortalBeanLocatorUtil.locate(BookmarksFolderService.class.getName());
 		}
 
 		return _service;

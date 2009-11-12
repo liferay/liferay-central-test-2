@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
@@ -427,6 +428,10 @@ public class SCProductEntryUtil {
 	}
 
 	public static SCProductEntryPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (SCProductEntryPersistence)PortalBeanLocatorUtil.locate(SCProductEntryPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

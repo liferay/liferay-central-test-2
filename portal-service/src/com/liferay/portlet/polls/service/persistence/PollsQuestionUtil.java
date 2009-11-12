@@ -23,6 +23,7 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.polls.model.PollsQuestion;
@@ -280,6 +281,10 @@ public class PollsQuestionUtil {
 	}
 
 	public static PollsQuestionPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (PollsQuestionPersistence)PortalBeanLocatorUtil.locate(PollsQuestionPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

@@ -23,6 +23,7 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -488,6 +489,10 @@ public class CalEventUtil {
 	}
 
 	public static CalEventPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(CalEventPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

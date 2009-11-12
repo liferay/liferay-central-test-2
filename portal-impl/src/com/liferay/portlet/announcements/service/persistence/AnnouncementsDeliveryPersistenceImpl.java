@@ -1061,15 +1061,15 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence")
 	protected com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence")
 	protected com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence announcementsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence")
 	protected com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence announcementsFlagPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsDeliveryPersistenceImpl.class);
 }

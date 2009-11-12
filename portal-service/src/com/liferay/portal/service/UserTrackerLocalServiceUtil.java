@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="UserTrackerLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -127,7 +128,7 @@ public class UserTrackerLocalServiceUtil {
 
 	public static UserTrackerLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("UserTrackerLocalService is not set");
+			_service = (UserTrackerLocalService)PortalBeanLocatorUtil.locate(UserTrackerLocalService.class.getName());
 		}
 
 		return _service;

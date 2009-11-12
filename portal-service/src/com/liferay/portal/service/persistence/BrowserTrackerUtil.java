@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.BrowserTracker;
 
@@ -175,6 +176,10 @@ public class BrowserTrackerUtil {
 	}
 
 	public static BrowserTrackerPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (BrowserTrackerPersistence)PortalBeanLocatorUtil.locate(BrowserTrackerPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

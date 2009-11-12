@@ -303,44 +303,44 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoColumnLocalService")
 	protected ExpandoColumnLocalService expandoColumnLocalService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoColumnService.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoColumnService")
 	protected ExpandoColumnService expandoColumnService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence")
 	protected ExpandoColumnPersistence expandoColumnPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoRowLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoRowLocalService")
 	protected ExpandoRowLocalService expandoRowLocalService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence")
 	protected ExpandoRowPersistence expandoRowPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoTableLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoTableLocalService")
 	protected ExpandoTableLocalService expandoTableLocalService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence")
 	protected ExpandoTablePersistence expandoTablePersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService")
 	protected ExpandoValueLocalService expandoValueLocalService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService")
 	protected ExpandoValueService expandoValueService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService")
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService")
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
 	protected UserFinder userFinder;
 }

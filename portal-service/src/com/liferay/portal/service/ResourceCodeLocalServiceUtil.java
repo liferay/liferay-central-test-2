@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ResourceCodeLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -132,7 +133,7 @@ public class ResourceCodeLocalServiceUtil {
 
 	public static ResourceCodeLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ResourceCodeLocalService is not set");
+			_service = (ResourceCodeLocalService)PortalBeanLocatorUtil.locate(ResourceCodeLocalService.class.getName());
 		}
 
 		return _service;

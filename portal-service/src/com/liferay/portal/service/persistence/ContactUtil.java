@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Contact;
 
@@ -193,6 +194,10 @@ public class ContactUtil {
 	}
 
 	public static ContactPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (ContactPersistence)PortalBeanLocatorUtil.locate(ContactPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

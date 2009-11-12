@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tasks.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="TasksProposalLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -288,7 +289,7 @@ public class TasksProposalLocalServiceUtil {
 
 	public static TasksProposalLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("TasksProposalLocalService is not set");
+			_service = (TasksProposalLocalService)PortalBeanLocatorUtil.locate(TasksProposalLocalService.class.getName());
 		}
 
 		return _service;

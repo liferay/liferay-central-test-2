@@ -23,6 +23,7 @@
 package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.asset.model.AssetTagProperty;
@@ -333,6 +334,10 @@ public class AssetTagPropertyUtil {
 	}
 
 	public static AssetTagPropertyPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (AssetTagPropertyPersistence)PortalBeanLocatorUtil.locate(AssetTagPropertyPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="IGImageFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +41,10 @@ public class IGImageFinderUtil {
 	}
 
 	public static IGImageFinder getFinder() {
+		if (_finder == null) {
+			_finder = (IGImageFinder)PortalBeanLocatorUtil.locate(IGImageFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

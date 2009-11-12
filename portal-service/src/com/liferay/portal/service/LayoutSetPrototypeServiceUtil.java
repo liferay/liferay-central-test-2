@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="LayoutSetPrototypeServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -86,7 +87,7 @@ public class LayoutSetPrototypeServiceUtil {
 
 	public static LayoutSetPrototypeService getService() {
 		if (_service == null) {
-			throw new RuntimeException("LayoutSetPrototypeService is not set");
+			_service = (LayoutSetPrototypeService)PortalBeanLocatorUtil.locate(LayoutSetPrototypeService.class.getName());
 		}
 
 		return _service;

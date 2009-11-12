@@ -2004,25 +2004,25 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence")
 	protected com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence")
 	protected com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence announcementsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence")
 	protected com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence announcementsFlagPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence")
 	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence")
 	protected com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence")
 	protected com.liferay.portal.service.persistence.RolePersistence rolePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence")
 	protected com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence;
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsEntryPersistenceImpl.class);
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WebsiteServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -80,7 +81,7 @@ public class WebsiteServiceUtil {
 
 	public static WebsiteService getService() {
 		if (_service == null) {
-			throw new RuntimeException("WebsiteService is not set");
+			_service = (WebsiteService)PortalBeanLocatorUtil.locate(WebsiteService.class.getName());
 		}
 
 		return _service;

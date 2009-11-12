@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AnnouncementsFlagLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -134,8 +135,7 @@ public class AnnouncementsFlagLocalServiceUtil {
 
 	public static AnnouncementsFlagLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"AnnouncementsFlagLocalService is not set");
+			_service = (AnnouncementsFlagLocalService)PortalBeanLocatorUtil.locate(AnnouncementsFlagLocalService.class.getName());
 		}
 
 		return _service;

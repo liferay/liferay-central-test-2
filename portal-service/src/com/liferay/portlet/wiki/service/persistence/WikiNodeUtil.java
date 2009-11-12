@@ -23,6 +23,7 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -357,6 +358,10 @@ public class WikiNodeUtil {
 	}
 
 	public static WikiNodePersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

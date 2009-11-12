@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="AnnouncementsEntryFinderUtil.java.html"><b><i>View Source</i></b>
  * </a>
@@ -95,6 +97,10 @@ public class AnnouncementsEntryFinderUtil {
 	}
 
 	public static AnnouncementsEntryFinder getFinder() {
+		if (_finder == null) {
+			_finder = (AnnouncementsEntryFinder)PortalBeanLocatorUtil.locate(AnnouncementsEntryFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

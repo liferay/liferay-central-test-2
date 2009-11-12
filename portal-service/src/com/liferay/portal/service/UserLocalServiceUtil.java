@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="UserLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -898,7 +899,7 @@ public class UserLocalServiceUtil {
 
 	public static UserLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("UserLocalService is not set");
+			_service = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName());
 		}
 
 		return _service;

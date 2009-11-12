@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="AssetTagPropertyKeyFinderUtil.java.html"><b><i>View Source</i></b>
  * </a>
@@ -45,6 +47,10 @@ public class AssetTagPropertyKeyFinderUtil {
 	}
 
 	public static AssetTagPropertyKeyFinder getFinder() {
+		if (_finder == null) {
+			_finder = (AssetTagPropertyKeyFinder)PortalBeanLocatorUtil.locate(AssetTagPropertyKeyFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

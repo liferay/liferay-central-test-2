@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="RoleServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -142,7 +143,7 @@ public class RoleServiceUtil {
 
 	public static RoleService getService() {
 		if (_service == null) {
-			throw new RuntimeException("RoleService is not set");
+			_service = (RoleService)PortalBeanLocatorUtil.locate(RoleService.class.getName());
 		}
 
 		return _service;

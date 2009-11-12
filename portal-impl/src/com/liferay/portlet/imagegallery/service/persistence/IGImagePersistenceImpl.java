@@ -3310,25 +3310,25 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence")
 	protected com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence")
 	protected com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
 	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence assetCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
 	private static Log _log = LogFactoryUtil.getLog(IGImagePersistenceImpl.class);
 }

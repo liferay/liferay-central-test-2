@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.PasswordPolicy;
 
@@ -207,6 +208,10 @@ public class PasswordPolicyUtil {
 	}
 
 	public static PasswordPolicyPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (PasswordPolicyPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

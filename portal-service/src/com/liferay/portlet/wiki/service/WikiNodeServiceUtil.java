@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WikiNodeServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -99,7 +100,7 @@ public class WikiNodeServiceUtil {
 
 	public static WikiNodeService getService() {
 		if (_service == null) {
-			throw new RuntimeException("WikiNodeService is not set");
+			_service = (WikiNodeService)PortalBeanLocatorUtil.locate(WikiNodeService.class.getName());
 		}
 
 		return _service;

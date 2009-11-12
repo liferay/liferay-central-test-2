@@ -280,54 +280,54 @@ public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService")
 	protected WikiNodeLocalService wikiNodeLocalService;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiNodeService")
 	protected WikiNodeService wikiNodeService;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence")
 	protected WikiNodePersistence wikiNodePersistence;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageLocalService")
 	protected WikiPageLocalService wikiPageLocalService;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageService")
 	protected WikiPageService wikiPageService;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence")
 	protected WikiPagePersistence wikiPagePersistence;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageFinder")
 	protected WikiPageFinder wikiPageFinder;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.WikiPageResourceLocalService")
 	protected WikiPageResourceLocalService wikiPageResourceLocalService;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence")
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService")
 	protected GroupLocalService groupLocalService;
-	@BeanReference(name = "com.liferay.portal.service.GroupService.impl")
+	@BeanReference(name = "com.liferay.portal.service.GroupService")
 	protected GroupService groupService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
 	protected GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder")
 	protected GroupFinder groupFinder;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService")
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.SubscriptionLocalService")
 	protected SubscriptionLocalService subscriptionLocalService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence")
 	protected SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService")
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
 	protected UserFinder userFinder;
 }

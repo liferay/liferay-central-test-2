@@ -23,6 +23,7 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -985,6 +986,10 @@ public class BlogsEntryUtil {
 	}
 
 	public static BlogsEntryPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (BlogsEntryPersistence)PortalBeanLocatorUtil.locate(BlogsEntryPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

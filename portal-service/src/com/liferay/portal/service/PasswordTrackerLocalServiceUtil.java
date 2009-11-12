@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PasswordTrackerLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -135,7 +136,7 @@ public class PasswordTrackerLocalServiceUtil {
 
 	public static PasswordTrackerLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("PasswordTrackerLocalService is not set");
+			_service = (PasswordTrackerLocalService)PortalBeanLocatorUtil.locate(PasswordTrackerLocalService.class.getName());
 		}
 
 		return _service;

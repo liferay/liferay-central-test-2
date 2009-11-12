@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Subscription;
 
@@ -348,6 +349,10 @@ public class SubscriptionUtil {
 	}
 
 	public static SubscriptionPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (SubscriptionPersistence)PortalBeanLocatorUtil.locate(SubscriptionPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

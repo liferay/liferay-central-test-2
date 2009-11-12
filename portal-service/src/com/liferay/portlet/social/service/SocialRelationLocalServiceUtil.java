@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SocialRelationLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -169,7 +170,7 @@ public class SocialRelationLocalServiceUtil {
 
 	public static SocialRelationLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("SocialRelationLocalService is not set");
+			_service = (SocialRelationLocalService)PortalBeanLocatorUtil.locate(SocialRelationLocalService.class.getName());
 		}
 
 		return _service;

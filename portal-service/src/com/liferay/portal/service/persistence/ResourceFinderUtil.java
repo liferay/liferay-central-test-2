@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="ResourceFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,6 +42,10 @@ public class ResourceFinderUtil {
 	}
 
 	public static ResourceFinder getFinder() {
+		if (_finder == null) {
+			_finder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

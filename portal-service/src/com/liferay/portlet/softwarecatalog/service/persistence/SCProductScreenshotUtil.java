@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
@@ -294,6 +295,10 @@ public class SCProductScreenshotUtil {
 	}
 
 	public static SCProductScreenshotPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

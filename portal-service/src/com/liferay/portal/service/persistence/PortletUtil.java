@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Portlet;
 
@@ -221,6 +222,10 @@ public class PortletUtil {
 	}
 
 	public static PortletPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (PortletPersistence)PortalBeanLocatorUtil.locate(PortletPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

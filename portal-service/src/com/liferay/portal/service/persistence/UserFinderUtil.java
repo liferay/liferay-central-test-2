@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="UserFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -118,6 +120,10 @@ public class UserFinderUtil {
 	}
 
 	public static UserFinder getFinder() {
+		if (_finder == null) {
+			_finder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

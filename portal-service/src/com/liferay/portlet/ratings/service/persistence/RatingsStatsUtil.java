@@ -23,6 +23,7 @@
 package com.liferay.portlet.ratings.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -178,6 +179,10 @@ public class RatingsStatsUtil {
 	}
 
 	public static RatingsStatsPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

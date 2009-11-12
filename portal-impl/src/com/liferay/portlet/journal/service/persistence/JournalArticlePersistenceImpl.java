@@ -5242,43 +5242,43 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence")
 	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence")
 	protected com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence")
 	protected com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence")
 	protected com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence")
 	protected com.liferay.portlet.journal.service.persistence.JournalFeedPersistence journalFeedPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence")
 	protected com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence")
 	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence")
 	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
 	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence")
 	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence assetCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence")
 	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
-	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence")
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	private static Log _log = LogFactoryUtil.getLog(JournalArticlePersistenceImpl.class);
 }

@@ -476,94 +476,94 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanLocalService")
 	protected MBBanLocalService mbBanLocalService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanService")
 	protected MBBanService mbBanService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence")
 	protected MBBanPersistence mbBanPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBCategoryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBCategoryLocalService")
 	protected MBCategoryLocalService mbCategoryLocalService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBCategoryService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBCategoryService")
 	protected MBCategoryService mbCategoryService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence")
 	protected MBCategoryPersistence mbCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder")
 	protected MBCategoryFinder mbCategoryFinder;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBDiscussionLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBDiscussionLocalService")
 	protected MBDiscussionLocalService mbDiscussionLocalService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence")
 	protected MBDiscussionPersistence mbDiscussionPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMailingListLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMailingListLocalService")
 	protected MBMailingListLocalService mbMailingListLocalService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence")
 	protected MBMailingListPersistence mbMailingListPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageLocalService")
 	protected MBMessageLocalService mbMessageLocalService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageService")
 	protected MBMessageService mbMessageService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence")
 	protected MBMessagePersistence mbMessagePersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFinder")
 	protected MBMessageFinder mbMessageFinder;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageFlagLocalService")
 	protected MBMessageFlagLocalService mbMessageFlagLocalService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageFlagService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBMessageFlagService")
 	protected MBMessageFlagService mbMessageFlagService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence")
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBStatsUserLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBStatsUserLocalService")
 	protected MBStatsUserLocalService mbStatsUserLocalService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence")
 	protected MBStatsUserPersistence mbStatsUserPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBThreadLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBThreadLocalService")
 	protected MBThreadLocalService mbThreadLocalService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBThreadService.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBThreadService")
 	protected MBThreadService mbThreadService;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence")
 	protected MBThreadPersistence mbThreadPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadFinder")
 	protected MBThreadFinder mbThreadFinder;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.documentlibrary.service.DLLocalService.impl")
+	@BeanReference(name = "com.liferay.documentlibrary.service.DLLocalService")
 	protected DLLocalService dlLocalService;
-	@BeanReference(name = "com.liferay.documentlibrary.service.DLService.impl")
+	@BeanReference(name = "com.liferay.documentlibrary.service.DLService")
 	protected DLService dlService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService")
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService")
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
 	protected UserFinder userFinder;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryLocalService")
 	protected AssetEntryLocalService assetEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryService.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryService")
 	protected AssetEntryService assetEntryService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")
 	protected AssetEntryPersistence assetEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryFinder")
 	protected AssetEntryFinder assetEntryFinder;
-	@BeanReference(name = "com.liferay.portlet.ratings.service.RatingsStatsLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.ratings.service.RatingsStatsLocalService")
 	protected RatingsStatsLocalService ratingsStatsLocalService;
-	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence")
 	protected RatingsStatsPersistence ratingsStatsPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService")
 	protected SocialActivityLocalService socialActivityLocalService;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected SocialActivityPersistence socialActivityPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder")
 	protected SocialActivityFinder socialActivityFinder;
 }

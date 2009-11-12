@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="BlogsEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -370,7 +371,7 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static BlogsEntryLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("BlogsEntryLocalService is not set");
+			_service = (BlogsEntryLocalService)PortalBeanLocatorUtil.locate(BlogsEntryLocalService.class.getName());
 		}
 
 		return _service;

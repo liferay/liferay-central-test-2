@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.messageboards.model.MBStatsUser;
@@ -333,6 +334,10 @@ public class MBStatsUserUtil {
 	}
 
 	public static MBStatsUserPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (MBStatsUserPersistence)PortalBeanLocatorUtil.locate(MBStatsUserPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

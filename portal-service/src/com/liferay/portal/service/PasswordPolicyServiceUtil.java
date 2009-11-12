@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PasswordPolicyServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -86,7 +87,7 @@ public class PasswordPolicyServiceUtil {
 
 	public static PasswordPolicyService getService() {
 		if (_service == null) {
-			throw new RuntimeException("PasswordPolicyService is not set");
+			_service = (PasswordPolicyService)PortalBeanLocatorUtil.locate(PasswordPolicyService.class.getName());
 		}
 
 		return _service;

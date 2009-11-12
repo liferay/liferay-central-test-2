@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.calendar.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="CalEventLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -322,7 +323,7 @@ public class CalEventLocalServiceUtil {
 
 	public static CalEventLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("CalEventLocalService is not set");
+			_service = (CalEventLocalService)PortalBeanLocatorUtil.locate(CalEventLocalService.class.getName());
 		}
 
 		return _service;

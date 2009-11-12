@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MembershipRequestLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -147,8 +148,7 @@ public class MembershipRequestLocalServiceUtil {
 
 	public static MembershipRequestLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"MembershipRequestLocalService is not set");
+			_service = (MembershipRequestLocalService)PortalBeanLocatorUtil.locate(MembershipRequestLocalService.class.getName());
 		}
 
 		return _service;

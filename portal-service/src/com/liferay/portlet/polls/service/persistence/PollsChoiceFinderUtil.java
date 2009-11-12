@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="PollsChoiceFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,6 +38,10 @@ public class PollsChoiceFinderUtil {
 	}
 
 	public static PollsChoiceFinder getFinder() {
+		if (_finder == null) {
+			_finder = (PollsChoiceFinder)PortalBeanLocatorUtil.locate(PollsChoiceFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

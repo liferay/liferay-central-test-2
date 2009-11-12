@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.ListType;
 
@@ -194,6 +195,10 @@ public class ListTypeUtil {
 	}
 
 	public static ListTypePersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (ListTypePersistence)PortalBeanLocatorUtil.locate(ListTypePersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

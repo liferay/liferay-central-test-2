@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="RoleLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -297,7 +298,7 @@ public class RoleLocalServiceUtil {
 
 	public static RoleLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("RoleLocalService is not set");
+			_service = (RoleLocalService)PortalBeanLocatorUtil.locate(RoleLocalService.class.getName());
 		}
 
 		return _service;

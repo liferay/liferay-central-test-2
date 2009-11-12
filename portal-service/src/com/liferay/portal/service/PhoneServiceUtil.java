@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PhoneServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -84,7 +85,7 @@ public class PhoneServiceUtil {
 
 	public static PhoneService getService() {
 		if (_service == null) {
-			throw new RuntimeException("PhoneService is not set");
+			_service = (PhoneService)PortalBeanLocatorUtil.locate(PhoneService.class.getName());
 		}
 
 		return _service;

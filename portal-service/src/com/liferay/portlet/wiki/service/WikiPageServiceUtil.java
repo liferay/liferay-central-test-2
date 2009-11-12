@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WikiPageServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -180,7 +181,7 @@ public class WikiPageServiceUtil {
 
 	public static WikiPageService getService() {
 		if (_service == null) {
-			throw new RuntimeException("WikiPageService is not set");
+			_service = (WikiPageService)PortalBeanLocatorUtil.locate(WikiPageService.class.getName());
 		}
 
 		return _service;

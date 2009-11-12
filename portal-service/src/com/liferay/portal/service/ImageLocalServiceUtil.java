@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ImageLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -193,7 +194,7 @@ public class ImageLocalServiceUtil {
 
 	public static ImageLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ImageLocalService is not set");
+			_service = (ImageLocalService)PortalBeanLocatorUtil.locate(ImageLocalService.class.getName());
 		}
 
 		return _service;

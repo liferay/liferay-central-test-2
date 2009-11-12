@@ -2781,29 +2781,29 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence")
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence")
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence")
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence")
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence")
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence")
 	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
 	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence")
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	private static Log _log = LogFactoryUtil.getLog(DLFolderPersistenceImpl.class);
 }

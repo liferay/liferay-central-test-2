@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -501,6 +502,10 @@ public class DLFileEntryUtil {
 	}
 
 	public static DLFileEntryPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

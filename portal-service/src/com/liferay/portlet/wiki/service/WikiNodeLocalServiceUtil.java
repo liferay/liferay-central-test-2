@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WikiNodeLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -252,7 +253,7 @@ public class WikiNodeLocalServiceUtil {
 
 	public static WikiNodeLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("WikiNodeLocalService is not set");
+			_service = (WikiNodeLocalService)PortalBeanLocatorUtil.locate(WikiNodeLocalService.class.getName());
 		}
 
 		return _service;

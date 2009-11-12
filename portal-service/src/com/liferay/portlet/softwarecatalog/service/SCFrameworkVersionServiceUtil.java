@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SCFrameworkVersionServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -90,7 +91,7 @@ public class SCFrameworkVersionServiceUtil {
 
 	public static SCFrameworkVersionService getService() {
 		if (_service == null) {
-			throw new RuntimeException("SCFrameworkVersionService is not set");
+			_service = (SCFrameworkVersionService)PortalBeanLocatorUtil.locate(SCFrameworkVersionService.class.getName());
 		}
 
 		return _service;

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="RegionServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -80,7 +81,7 @@ public class RegionServiceUtil {
 
 	public static RegionService getService() {
 		if (_service == null) {
-			throw new RuntimeException("RegionService is not set");
+			_service = (RegionService)PortalBeanLocatorUtil.locate(RegionService.class.getName());
 		}
 
 		return _service;

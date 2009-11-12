@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.ratings.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="RatingsEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +60,7 @@ public class RatingsEntryServiceUtil {
 
 	public static RatingsEntryService getService() {
 		if (_service == null) {
-			throw new RuntimeException("RatingsEntryService is not set");
+			_service = (RatingsEntryService)PortalBeanLocatorUtil.locate(RatingsEntryService.class.getName());
 		}
 
 		return _service;

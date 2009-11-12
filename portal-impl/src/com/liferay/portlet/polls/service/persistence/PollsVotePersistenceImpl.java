@@ -1326,15 +1326,15 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence")
 	protected com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence")
 	protected com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence")
 	protected com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	private static Log _log = LogFactoryUtil.getLog(PollsVotePersistenceImpl.class);
 }

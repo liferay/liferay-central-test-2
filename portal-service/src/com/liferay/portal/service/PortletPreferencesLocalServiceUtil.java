@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PortletPreferencesLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -208,8 +209,7 @@ public class PortletPreferencesLocalServiceUtil {
 
 	public static PortletPreferencesLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"PortletPreferencesLocalService is not set");
+			_service = (PortletPreferencesLocalService)PortalBeanLocatorUtil.locate(PortletPreferencesLocalService.class.getName());
 		}
 
 		return _service;

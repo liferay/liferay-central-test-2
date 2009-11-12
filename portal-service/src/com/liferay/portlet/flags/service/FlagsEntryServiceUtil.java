@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.flags.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="FlagsEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +59,7 @@ public class FlagsEntryServiceUtil {
 
 	public static FlagsEntryService getService() {
 		if (_service == null) {
-			throw new RuntimeException("FlagsEntryService is not set");
+			_service = (FlagsEntryService)PortalBeanLocatorUtil.locate(FlagsEntryService.class.getName());
 		}
 
 		return _service;

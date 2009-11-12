@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ExpandoValueServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -62,7 +63,7 @@ public class ExpandoValueServiceUtil {
 
 	public static ExpandoValueService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ExpandoValueService is not set");
+			_service = (ExpandoValueService)PortalBeanLocatorUtil.locate(ExpandoValueService.class.getName());
 		}
 
 		return _service;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MBThreadLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -231,7 +232,7 @@ public class MBThreadLocalServiceUtil {
 
 	public static MBThreadLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("MBThreadLocalService is not set");
+			_service = (MBThreadLocalService)PortalBeanLocatorUtil.locate(MBThreadLocalService.class.getName());
 		}
 
 		return _service;

@@ -23,6 +23,7 @@
 package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
@@ -229,6 +230,10 @@ public class AnnouncementsFlagUtil {
 	}
 
 	public static AnnouncementsFlagPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (AnnouncementsFlagPersistence)PortalBeanLocatorUtil.locate(AnnouncementsFlagPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

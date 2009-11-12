@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ShoppingCategoryServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -81,7 +82,7 @@ public class ShoppingCategoryServiceUtil {
 
 	public static ShoppingCategoryService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ShoppingCategoryService is not set");
+			_service = (ShoppingCategoryService)PortalBeanLocatorUtil.locate(ShoppingCategoryService.class.getName());
 		}
 
 		return _service;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="DLFolderFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -55,6 +57,10 @@ public class DLFolderFinderUtil {
 	}
 
 	public static DLFolderFinder getFinder() {
+		if (_finder == null) {
+			_finder = (DLFolderFinder)PortalBeanLocatorUtil.locate(DLFolderFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

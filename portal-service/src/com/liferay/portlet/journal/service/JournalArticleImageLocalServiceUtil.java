@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="JournalArticleImageLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -177,8 +178,7 @@ public class JournalArticleImageLocalServiceUtil {
 
 	public static JournalArticleImageLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"JournalArticleImageLocalService is not set");
+			_service = (JournalArticleImageLocalService)PortalBeanLocatorUtil.locate(JournalArticleImageLocalService.class.getName());
 		}
 
 		return _service;

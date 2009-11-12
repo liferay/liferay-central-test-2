@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.WebDAVProps;
 
@@ -177,6 +178,10 @@ public class WebDAVPropsUtil {
 	}
 
 	public static WebDAVPropsPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (WebDAVPropsPersistence)PortalBeanLocatorUtil.locate(WebDAVPropsPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

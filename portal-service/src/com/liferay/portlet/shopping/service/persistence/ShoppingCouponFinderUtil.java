@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="ShoppingCouponFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,6 +48,10 @@ public class ShoppingCouponFinderUtil {
 	}
 
 	public static ShoppingCouponFinder getFinder() {
+		if (_finder == null) {
+			_finder = (ShoppingCouponFinder)PortalBeanLocatorUtil.locate(ShoppingCouponFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

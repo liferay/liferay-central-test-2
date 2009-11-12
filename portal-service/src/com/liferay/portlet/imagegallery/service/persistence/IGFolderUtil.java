@@ -23,6 +23,7 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -417,6 +418,10 @@ public class IGFolderUtil {
 	}
 
 	public static IGFolderPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (IGFolderPersistence)PortalBeanLocatorUtil.locate(IGFolderPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

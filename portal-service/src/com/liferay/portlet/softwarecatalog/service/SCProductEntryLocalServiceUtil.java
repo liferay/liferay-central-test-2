@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SCProductEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -285,7 +286,7 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static SCProductEntryLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("SCProductEntryLocalService is not set");
+			_service = (SCProductEntryLocalService)PortalBeanLocatorUtil.locate(SCProductEntryLocalService.class.getName());
 		}
 
 		return _service;

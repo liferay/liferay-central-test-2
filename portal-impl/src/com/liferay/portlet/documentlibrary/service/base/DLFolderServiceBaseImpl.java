@@ -442,88 +442,88 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService")
 	protected DLFileEntryLocalService dlFileEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryService")
 	protected DLFileEntryService dlFileEntryService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence")
 	protected DLFileEntryPersistence dlFileEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder")
 	protected DLFileEntryFinder dlFileEntryFinder;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileRankLocalService")
 	protected DLFileRankLocalService dlFileRankLocalService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence")
 	protected DLFileRankPersistence dlFileRankPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService")
 	protected DLFileShortcutLocalService dlFileShortcutLocalService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileShortcutService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileShortcutService")
 	protected DLFileShortcutService dlFileShortcutService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence")
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService")
 	protected DLFileVersionLocalService dlFileVersionLocalService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence")
 	protected DLFileVersionPersistence dlFileVersionPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderLocalService")
 	protected DLFolderLocalService dlFolderLocalService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderService.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderService")
 	protected DLFolderService dlFolderService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence")
 	protected DLFolderPersistence dlFolderPersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder")
 	protected DLFolderFinder dlFolderFinder;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.documentlibrary.service.DLLocalService.impl")
+	@BeanReference(name = "com.liferay.documentlibrary.service.DLLocalService")
 	protected DLLocalService dlLocalService;
-	@BeanReference(name = "com.liferay.documentlibrary.service.DLService.impl")
+	@BeanReference(name = "com.liferay.documentlibrary.service.DLService")
 	protected DLService dlService;
-	@BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService")
 	protected GroupLocalService groupLocalService;
-	@BeanReference(name = "com.liferay.portal.service.GroupService.impl")
+	@BeanReference(name = "com.liferay.portal.service.GroupService")
 	protected GroupService groupService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
 	protected GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder")
 	protected GroupFinder groupFinder;
-	@BeanReference(name = "com.liferay.portal.service.LayoutLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutLocalService")
 	protected LayoutLocalService layoutLocalService;
-	@BeanReference(name = "com.liferay.portal.service.LayoutService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LayoutService")
 	protected LayoutService layoutService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence")
 	protected LayoutPersistence layoutPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutFinder")
 	protected LayoutFinder layoutFinder;
-	@BeanReference(name = "com.liferay.portal.service.LockLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.LockLocalService")
 	protected LockLocalService lockLocalService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
 	protected LockPersistence lockPersistence;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService")
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService")
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
 	protected UserFinder userFinder;
-	@BeanReference(name = "com.liferay.portal.service.WebDAVPropsLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.WebDAVPropsLocalService")
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence")
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService")
 	protected ExpandoValueLocalService expandoValueLocalService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService")
 	protected ExpandoValueService expandoValueService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected ExpandoValuePersistence expandoValuePersistence;
 }

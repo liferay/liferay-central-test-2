@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.OrgGroupRole;
 
@@ -249,6 +250,10 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static OrgGroupRolePersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (OrgGroupRolePersistence)PortalBeanLocatorUtil.locate(OrgGroupRolePersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

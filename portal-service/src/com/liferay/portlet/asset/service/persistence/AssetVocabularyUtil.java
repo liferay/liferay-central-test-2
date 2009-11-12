@@ -23,6 +23,7 @@
 package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -361,6 +362,10 @@ public class AssetVocabularyUtil {
 	}
 
 	public static AssetVocabularyPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (AssetVocabularyPersistence)PortalBeanLocatorUtil.locate(AssetVocabularyPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

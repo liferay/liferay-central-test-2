@@ -23,6 +23,7 @@
 package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.tasks.model.TasksReview;
@@ -456,6 +457,10 @@ public class TasksReviewUtil {
 	}
 
 	public static TasksReviewPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(TasksReviewPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

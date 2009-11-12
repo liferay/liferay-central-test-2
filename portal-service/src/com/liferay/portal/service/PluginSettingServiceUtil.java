@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PluginSettingServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -56,7 +57,7 @@ public class PluginSettingServiceUtil {
 
 	public static PluginSettingService getService() {
 		if (_service == null) {
-			throw new RuntimeException("PluginSettingService is not set");
+			_service = (PluginSettingService)PortalBeanLocatorUtil.locate(PluginSettingService.class.getName());
 		}
 
 		return _service;

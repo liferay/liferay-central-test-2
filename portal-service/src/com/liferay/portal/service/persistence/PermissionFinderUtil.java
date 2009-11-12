@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="PermissionFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -133,6 +135,10 @@ public class PermissionFinderUtil {
 	}
 
 	public static PermissionFinder getFinder() {
+		if (_finder == null) {
+			_finder = (PermissionFinder)PortalBeanLocatorUtil.locate(PermissionFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ResourceActionLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -132,7 +133,7 @@ public class ResourceActionLocalServiceUtil {
 
 	public static ResourceActionLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ResourceActionLocalService is not set");
+			_service = (ResourceActionLocalService)PortalBeanLocatorUtil.locate(ResourceActionLocalService.class.getName());
 		}
 
 		return _service;

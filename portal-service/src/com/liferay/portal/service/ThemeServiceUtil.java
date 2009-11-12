@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ThemeServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -55,7 +56,7 @@ public class ThemeServiceUtil {
 
 	public static ThemeService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ThemeService is not set");
+			_service = (ThemeService)PortalBeanLocatorUtil.locate(ThemeService.class.getName());
 		}
 
 		return _service;

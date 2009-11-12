@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="OrgGroupPermissionFinderUtil.java.html"><b><i>View Source</i></b>
  * </a>
@@ -35,6 +37,10 @@ public class OrgGroupPermissionFinderUtil {
 	}
 
 	public static OrgGroupPermissionFinder getFinder() {
+		if (_finder == null) {
+			_finder = (OrgGroupPermissionFinder)PortalBeanLocatorUtil.locate(OrgGroupPermissionFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

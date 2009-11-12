@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.ServiceComponent;
 
@@ -235,6 +236,10 @@ public class ServiceComponentUtil {
 	}
 
 	public static ServiceComponentPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (ServiceComponentPersistence)PortalBeanLocatorUtil.locate(ServiceComponentPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

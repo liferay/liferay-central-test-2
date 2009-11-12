@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ClassNameServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -66,7 +67,7 @@ public class ClassNameServiceUtil {
 
 	public static ClassNameService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ClassNameService is not set");
+			_service = (ClassNameService)PortalBeanLocatorUtil.locate(ClassNameService.class.getName());
 		}
 
 		return _service;

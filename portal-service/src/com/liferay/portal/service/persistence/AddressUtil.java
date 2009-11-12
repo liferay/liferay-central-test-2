@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Address;
 
@@ -493,6 +494,10 @@ public class AddressUtil {
 	}
 
 	public static AddressPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (AddressPersistence)PortalBeanLocatorUtil.locate(AddressPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

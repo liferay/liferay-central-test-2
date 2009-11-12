@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="UserIdMapperLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -142,7 +143,7 @@ public class UserIdMapperLocalServiceUtil {
 
 	public static UserIdMapperLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("UserIdMapperLocalService is not set");
+			_service = (UserIdMapperLocalService)PortalBeanLocatorUtil.locate(UserIdMapperLocalService.class.getName());
 		}
 
 		return _service;

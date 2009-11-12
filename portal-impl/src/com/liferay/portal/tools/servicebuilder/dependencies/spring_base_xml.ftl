@@ -24,7 +24,7 @@
 		</property>
 	</bean>
 	<aop:config>
-		<aop:pointcut id="transactionOperation" expression="bean(*Service.impl)" />
+		<aop:pointcut id="transactionOperation" expression="bean(*Service)" />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionOperation" order="1" />
 	</aop:config>
 </beans>

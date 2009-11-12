@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AssetCategoryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -236,7 +237,7 @@ public class AssetCategoryLocalServiceUtil {
 
 	public static AssetCategoryLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("AssetCategoryLocalService is not set");
+			_service = (AssetCategoryLocalService)PortalBeanLocatorUtil.locate(AssetCategoryLocalService.class.getName());
 		}
 
 		return _service;

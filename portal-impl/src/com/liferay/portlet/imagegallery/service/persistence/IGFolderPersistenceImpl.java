@@ -2389,21 +2389,21 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence")
 	protected com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence")
 	protected com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
 	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence")
 	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	private static Log _log = LogFactoryUtil.getLog(IGFolderPersistenceImpl.class);
 }

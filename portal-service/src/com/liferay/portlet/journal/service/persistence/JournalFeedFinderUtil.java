@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="JournalFeedFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -82,6 +84,10 @@ public class JournalFeedFinderUtil {
 	}
 
 	public static JournalFeedFinder getFinder() {
+		if (_finder == null) {
+			_finder = (JournalFeedFinder)PortalBeanLocatorUtil.locate(JournalFeedFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

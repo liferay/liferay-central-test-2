@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="AssetCategoryFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -67,6 +69,10 @@ public class AssetCategoryFinderUtil {
 	}
 
 	public static AssetCategoryFinder getFinder() {
+		if (_finder == null) {
+			_finder = (AssetCategoryFinder)PortalBeanLocatorUtil.locate(AssetCategoryFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

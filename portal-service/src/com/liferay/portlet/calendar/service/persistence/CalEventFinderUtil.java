@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.calendar.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="CalEventFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,6 +39,10 @@ public class CalEventFinderUtil {
 	}
 
 	public static CalEventFinder getFinder() {
+		if (_finder == null) {
+			_finder = (CalEventFinder)PortalBeanLocatorUtil.locate(CalEventFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

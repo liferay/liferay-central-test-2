@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DLFileVersionLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -123,7 +124,7 @@ public class DLFileVersionLocalServiceUtil {
 
 	public static DLFileVersionLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("DLFileVersionLocalService is not set");
+			_service = (DLFileVersionLocalService)PortalBeanLocatorUtil.locate(DLFileVersionLocalService.class.getName());
 		}
 
 		return _service;

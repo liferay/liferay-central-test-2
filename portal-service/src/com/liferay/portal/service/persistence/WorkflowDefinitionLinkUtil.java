@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 
@@ -234,6 +235,10 @@ public class WorkflowDefinitionLinkUtil {
 	}
 
 	public static WorkflowDefinitionLinkPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (WorkflowDefinitionLinkPersistence)PortalBeanLocatorUtil.locate(WorkflowDefinitionLinkPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

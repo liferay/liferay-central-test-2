@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SubscriptionLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -170,7 +171,7 @@ public class SubscriptionLocalServiceUtil {
 
 	public static SubscriptionLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("SubscriptionLocalService is not set");
+			_service = (SubscriptionLocalService)PortalBeanLocatorUtil.locate(SubscriptionLocalService.class.getName());
 		}
 
 		return _service;

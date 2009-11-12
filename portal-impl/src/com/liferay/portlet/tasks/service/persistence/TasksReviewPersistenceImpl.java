@@ -2601,15 +2601,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence")
 	protected com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence;
-	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence")
 	protected com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
 	private static Log _log = LogFactoryUtil.getLog(TasksReviewPersistenceImpl.class);
 }

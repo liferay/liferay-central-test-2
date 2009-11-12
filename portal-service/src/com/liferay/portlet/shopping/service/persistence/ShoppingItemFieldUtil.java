@@ -23,6 +23,7 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.shopping.model.ShoppingItemField;
@@ -199,6 +200,10 @@ public class ShoppingItemFieldUtil {
 	}
 
 	public static ShoppingItemFieldPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (ShoppingItemFieldPersistence)PortalBeanLocatorUtil.locate(ShoppingItemFieldPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

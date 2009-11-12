@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ShoppingCouponLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -191,7 +192,7 @@ public class ShoppingCouponLocalServiceUtil {
 
 	public static ShoppingCouponLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ShoppingCouponLocalService is not set");
+			_service = (ShoppingCouponLocalService)PortalBeanLocatorUtil.locate(ShoppingCouponLocalService.class.getName());
 		}
 
 		return _service;

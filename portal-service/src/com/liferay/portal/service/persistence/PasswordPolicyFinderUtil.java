@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="PasswordPolicyFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,6 +43,10 @@ public class PasswordPolicyFinderUtil {
 	}
 
 	public static PasswordPolicyFinder getFinder() {
+		if (_finder == null) {
+			_finder = (PasswordPolicyFinder)PortalBeanLocatorUtil.locate(PasswordPolicyFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

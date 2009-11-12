@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="GroupLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -389,7 +390,7 @@ public class GroupLocalServiceUtil {
 
 	public static GroupLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("GroupLocalService is not set");
+			_service = (GroupLocalService)PortalBeanLocatorUtil.locate(GroupLocalService.class.getName());
 		}
 
 		return _service;

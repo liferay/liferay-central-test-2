@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AnnouncementsDeliveryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -163,8 +164,7 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 
 	public static AnnouncementsDeliveryLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"AnnouncementsDeliveryLocalService is not set");
+			_service = (AnnouncementsDeliveryLocalService)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryLocalService.class.getName());
 		}
 
 		return _service;

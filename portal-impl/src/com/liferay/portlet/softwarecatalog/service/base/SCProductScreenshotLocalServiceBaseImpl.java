@@ -363,56 +363,56 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService")
 	protected SCLicenseLocalService scLicenseLocalService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseService")
 	protected SCLicenseService scLicenseService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence")
 	protected SCLicensePersistence scLicensePersistence;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService")
 	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService")
 	protected SCFrameworkVersionService scFrameworkVersionService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence")
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService")
 	protected SCProductEntryLocalService scProductEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryService")
 	protected SCProductEntryService scProductEntryService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence")
 	protected SCProductEntryPersistence scProductEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService")
 	protected SCProductScreenshotLocalService scProductScreenshotLocalService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence")
 	protected SCProductScreenshotPersistence scProductScreenshotPersistence;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService")
 	protected SCProductVersionLocalService scProductVersionLocalService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductVersionService.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.SCProductVersionService")
 	protected SCProductVersionService scProductVersionService;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence")
 	protected SCProductVersionPersistence scProductVersionPersistence;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.ImageLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ImageLocalService")
 	protected ImageLocalService imageLocalService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
 	protected ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService")
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService")
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
 	protected UserFinder userFinder;
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MBBanServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -60,7 +61,7 @@ public class MBBanServiceUtil {
 
 	public static MBBanService getService() {
 		if (_service == null) {
-			throw new RuntimeException("MBBanService is not set");
+			_service = (MBBanService)PortalBeanLocatorUtil.locate(MBBanService.class.getName());
 		}
 
 		return _service;

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.EmailAddress;
 
@@ -431,6 +432,10 @@ public class EmailAddressUtil {
 	}
 
 	public static EmailAddressPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (EmailAddressPersistence)PortalBeanLocatorUtil.locate(EmailAddressPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

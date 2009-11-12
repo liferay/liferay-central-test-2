@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.PluginSetting;
 
@@ -230,6 +231,10 @@ public class PluginSettingUtil {
 	}
 
 	public static PluginSettingPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (PluginSettingPersistence)PortalBeanLocatorUtil.locate(PluginSettingPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

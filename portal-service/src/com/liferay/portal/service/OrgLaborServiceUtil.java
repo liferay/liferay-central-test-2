@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="OrgLaborServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -91,7 +92,7 @@ public class OrgLaborServiceUtil {
 
 	public static OrgLaborService getService() {
 		if (_service == null) {
-			throw new RuntimeException("OrgLaborService is not set");
+			_service = (OrgLaborService)PortalBeanLocatorUtil.locate(OrgLaborService.class.getName());
 		}
 
 		return _service;

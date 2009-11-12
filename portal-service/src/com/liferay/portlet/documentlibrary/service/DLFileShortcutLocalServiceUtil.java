@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DLFileShortcutLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -235,7 +236,7 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static DLFileShortcutLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("DLFileShortcutLocalService is not set");
+			_service = (DLFileShortcutLocalService)PortalBeanLocatorUtil.locate(DLFileShortcutLocalService.class.getName());
 		}
 
 		return _service;

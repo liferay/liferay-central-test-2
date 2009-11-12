@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="CountryServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -91,7 +92,7 @@ public class CountryServiceUtil {
 
 	public static CountryService getService() {
 		if (_service == null) {
-			throw new RuntimeException("CountryService is not set");
+			_service = (CountryService)PortalBeanLocatorUtil.locate(CountryService.class.getName());
 		}
 
 		return _service;

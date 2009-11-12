@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
@@ -329,6 +330,10 @@ public class SCProductVersionUtil {
 	}
 
 	public static SCProductVersionPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (SCProductVersionPersistence)PortalBeanLocatorUtil.locate(SCProductVersionPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

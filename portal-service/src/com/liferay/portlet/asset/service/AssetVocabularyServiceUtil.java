@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AssetVocabularyServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -96,7 +97,7 @@ public class AssetVocabularyServiceUtil {
 
 	public static AssetVocabularyService getService() {
 		if (_service == null) {
-			throw new RuntimeException("AssetVocabularyService is not set");
+			_service = (AssetVocabularyService)PortalBeanLocatorUtil.locate(AssetVocabularyService.class.getName());
 		}
 
 		return _service;

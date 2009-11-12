@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Release;
 
@@ -142,6 +143,10 @@ public class ReleaseUtil {
 	}
 
 	public static ReleasePersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (ReleasePersistence)PortalBeanLocatorUtil.locate(ReleasePersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

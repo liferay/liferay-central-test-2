@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Shard;
 
@@ -200,6 +201,10 @@ public class ShardUtil {
 	}
 
 	public static ShardPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (ShardPersistence)PortalBeanLocatorUtil.locate(ShardPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

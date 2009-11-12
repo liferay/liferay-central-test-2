@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AssetEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -154,7 +155,7 @@ public class AssetEntryServiceUtil {
 
 	public static AssetEntryService getService() {
 		if (_service == null) {
-			throw new RuntimeException("AssetEntryService is not set");
+			_service = (AssetEntryService)PortalBeanLocatorUtil.locate(AssetEntryService.class.getName());
 		}
 
 		return _service;

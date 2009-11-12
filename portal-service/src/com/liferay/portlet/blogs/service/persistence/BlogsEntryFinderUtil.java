@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="BlogsEntryFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -65,6 +67,10 @@ public class BlogsEntryFinderUtil {
 	}
 
 	public static BlogsEntryFinder getFinder() {
+		if (_finder == null) {
+			_finder = (BlogsEntryFinder)PortalBeanLocatorUtil.locate(BlogsEntryFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="JournalArticleFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -173,6 +175,10 @@ public class JournalArticleFinderUtil {
 	}
 
 	public static JournalArticleFinder getFinder() {
+		if (_finder == null) {
+			_finder = (JournalArticleFinder)PortalBeanLocatorUtil.locate(JournalArticleFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

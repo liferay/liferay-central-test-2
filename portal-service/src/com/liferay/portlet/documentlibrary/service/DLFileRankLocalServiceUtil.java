@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DLFileRankLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -145,7 +146,7 @@ public class DLFileRankLocalServiceUtil {
 
 	public static DLFileRankLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("DLFileRankLocalService is not set");
+			_service = (DLFileRankLocalService)PortalBeanLocatorUtil.locate(DLFileRankLocalService.class.getName());
 		}
 
 		return _service;

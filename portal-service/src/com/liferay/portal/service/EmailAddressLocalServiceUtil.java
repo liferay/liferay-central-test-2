@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="EmailAddressLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -146,7 +147,7 @@ public class EmailAddressLocalServiceUtil {
 
 	public static EmailAddressLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("EmailAddressLocalService is not set");
+			_service = (EmailAddressLocalService)PortalBeanLocatorUtil.locate(EmailAddressLocalService.class.getName());
 		}
 
 		return _service;

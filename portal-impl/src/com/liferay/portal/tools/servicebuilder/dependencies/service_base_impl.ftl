@@ -158,22 +158,22 @@ protected void runSQL(String sql) throws SystemException {
 
 <#list referenceList as tempEntity>
 	<#if tempEntity.hasLocalService()>
-		@BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl")
+		@BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}LocalService")
 		protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
 	</#if>
 
 	<#if tempEntity.hasRemoteService()>
-		@BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl")
+		@BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}Service")
 		protected ${tempEntity.name}Service ${tempEntity.varName}Service;
 	</#if>
 
 	<#if tempEntity.hasColumns()>
-		@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl")
+		@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence")
 		protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 	</#if>
 
 	<#if tempEntity.hasFinderClass()>
-		@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl")
+		@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder")
 		protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
 	</#if>
 </#list>

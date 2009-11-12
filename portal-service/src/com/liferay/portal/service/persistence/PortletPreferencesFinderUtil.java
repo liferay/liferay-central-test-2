@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="PortletPreferencesFinderUtil.java.html"><b><i>View Source</i></b>
  * </a>
@@ -35,6 +37,10 @@ public class PortletPreferencesFinderUtil {
 	}
 
 	public static PortletPreferencesFinder getFinder() {
+		if (_finder == null) {
+			_finder = (PortletPreferencesFinder)PortalBeanLocatorUtil.locate(PortletPreferencesFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

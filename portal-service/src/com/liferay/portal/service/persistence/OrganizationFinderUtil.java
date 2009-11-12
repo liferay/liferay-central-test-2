@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="OrganizationFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -121,6 +123,10 @@ public class OrganizationFinderUtil {
 	}
 
 	public static OrganizationFinder getFinder() {
+		if (_finder == null) {
+			_finder = (OrganizationFinder)PortalBeanLocatorUtil.locate(OrganizationFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MBMessageFlagLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -167,7 +168,7 @@ public class MBMessageFlagLocalServiceUtil {
 
 	public static MBMessageFlagLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("MBMessageFlagLocalService is not set");
+			_service = (MBMessageFlagLocalService)PortalBeanLocatorUtil.locate(MBMessageFlagLocalService.class.getName());
 		}
 
 		return _service;

@@ -292,42 +292,42 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.polls.service.PollsChoiceLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsChoiceLocalService")
 	protected PollsChoiceLocalService pollsChoiceLocalService;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence")
 	protected PollsChoicePersistence pollsChoicePersistence;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoiceFinder")
 	protected PollsChoiceFinder pollsChoiceFinder;
-	@BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService")
 	protected PollsQuestionLocalService pollsQuestionLocalService;
-	@BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsQuestionService")
 	protected PollsQuestionService pollsQuestionService;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence")
 	protected PollsQuestionPersistence pollsQuestionPersistence;
-	@BeanReference(name = "com.liferay.portlet.polls.service.PollsVoteLocalService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsVoteLocalService")
 	protected PollsVoteLocalService pollsVoteLocalService;
-	@BeanReference(name = "com.liferay.portlet.polls.service.PollsVoteService.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.PollsVoteService")
 	protected PollsVoteService pollsVoteService;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence")
 	protected PollsVotePersistence pollsVotePersistence;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	@BeanReference(name = "com.liferay.counter.service.CounterService")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	@BeanReference(name = "com.liferay.portal.service.ResourceService")
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	@BeanReference(name = "com.liferay.portal.service.UserService")
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
 	protected UserFinder userFinder;
 }

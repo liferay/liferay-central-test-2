@@ -23,6 +23,7 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.social.model.SocialRelation;
@@ -591,6 +592,10 @@ public class SocialRelationUtil {
 	}
 
 	public static SocialRelationPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (SocialRelationPersistence)PortalBeanLocatorUtil.locate(SocialRelationPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

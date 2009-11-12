@@ -23,6 +23,7 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -385,6 +386,10 @@ public class BookmarksFolderUtil {
 	}
 
 	public static BookmarksFolderPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (BookmarksFolderPersistence)PortalBeanLocatorUtil.locate(BookmarksFolderPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

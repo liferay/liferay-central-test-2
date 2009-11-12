@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DLFolderLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -317,7 +318,7 @@ public class DLFolderLocalServiceUtil {
 
 	public static DLFolderLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("DLFolderLocalService is not set");
+			_service = (DLFolderLocalService)PortalBeanLocatorUtil.locate(DLFolderLocalService.class.getName());
 		}
 
 		return _service;

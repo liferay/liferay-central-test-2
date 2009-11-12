@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ContactServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +47,7 @@ package com.liferay.portal.service;
 public class ContactServiceUtil {
 	public static ContactService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ContactService is not set");
+			_service = (ContactService)PortalBeanLocatorUtil.locate(ContactService.class.getName());
 		}
 
 		return _service;

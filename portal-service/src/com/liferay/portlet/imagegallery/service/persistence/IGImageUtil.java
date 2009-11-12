@@ -23,6 +23,7 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -560,6 +561,10 @@ public class IGImageUtil {
 	}
 
 	public static IGImagePersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (IGImagePersistence)PortalBeanLocatorUtil.locate(IGImagePersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

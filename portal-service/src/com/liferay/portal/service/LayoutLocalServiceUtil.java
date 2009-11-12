@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="LayoutLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -512,7 +513,7 @@ public class LayoutLocalServiceUtil {
 
 	public static LayoutLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("LayoutLocalService is not set");
+			_service = (LayoutLocalService)PortalBeanLocatorUtil.locate(LayoutLocalService.class.getName());
 		}
 
 		return _service;

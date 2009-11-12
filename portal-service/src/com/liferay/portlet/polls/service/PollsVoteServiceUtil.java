@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PollsVoteServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -53,7 +54,7 @@ public class PollsVoteServiceUtil {
 
 	public static PollsVoteService getService() {
 		if (_service == null) {
-			throw new RuntimeException("PollsVoteService is not set");
+			_service = (PollsVoteService)PortalBeanLocatorUtil.locate(PollsVoteService.class.getName());
 		}
 
 		return _service;

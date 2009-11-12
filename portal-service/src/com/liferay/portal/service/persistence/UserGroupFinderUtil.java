@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="UserGroupFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -53,6 +55,10 @@ public class UserGroupFinderUtil {
 	}
 
 	public static UserGroupFinder getFinder() {
+		if (_finder == null) {
+			_finder = (UserGroupFinder)PortalBeanLocatorUtil.locate(UserGroupFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SCProductScreenshotLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -149,8 +150,7 @@ public class SCProductScreenshotLocalServiceUtil {
 
 	public static SCProductScreenshotLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"SCProductScreenshotLocalService is not set");
+			_service = (SCProductScreenshotLocalService)PortalBeanLocatorUtil.locate(SCProductScreenshotLocalService.class.getName());
 		}
 
 		return _service;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="IGFolderLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -254,7 +255,7 @@ public class IGFolderLocalServiceUtil {
 
 	public static IGFolderLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("IGFolderLocalService is not set");
+			_service = (IGFolderLocalService)PortalBeanLocatorUtil.locate(IGFolderLocalService.class.getName());
 		}
 
 		return _service;

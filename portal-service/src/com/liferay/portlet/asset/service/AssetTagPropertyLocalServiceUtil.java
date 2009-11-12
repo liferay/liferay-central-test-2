@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AssetTagPropertyLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -176,8 +177,7 @@ public class AssetTagPropertyLocalServiceUtil {
 
 	public static AssetTagPropertyLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"AssetTagPropertyLocalService is not set");
+			_service = (AssetTagPropertyLocalService)PortalBeanLocatorUtil.locate(AssetTagPropertyLocalService.class.getName());
 		}
 
 		return _service;

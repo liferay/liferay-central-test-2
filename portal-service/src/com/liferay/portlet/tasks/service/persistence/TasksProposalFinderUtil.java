@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="TasksProposalFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,6 +42,10 @@ public class TasksProposalFinderUtil {
 	}
 
 	public static TasksProposalFinder getFinder() {
+		if (_finder == null) {
+			_finder = (TasksProposalFinder)PortalBeanLocatorUtil.locate(TasksProposalFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

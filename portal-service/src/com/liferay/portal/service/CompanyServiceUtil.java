@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="CompanyServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -170,7 +171,7 @@ public class CompanyServiceUtil {
 
 	public static CompanyService getService() {
 		if (_service == null) {
-			throw new RuntimeException("CompanyService is not set");
+			_service = (CompanyService)PortalBeanLocatorUtil.locate(CompanyService.class.getName());
 		}
 
 		return _service;

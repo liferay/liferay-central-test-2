@@ -23,6 +23,7 @@
 package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -604,6 +605,10 @@ public class AssetCategoryUtil {
 	}
 
 	public static AssetCategoryPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (AssetCategoryPersistence)PortalBeanLocatorUtil.locate(AssetCategoryPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AnnouncementsEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -86,7 +87,7 @@ public class AnnouncementsEntryServiceUtil {
 
 	public static AnnouncementsEntryService getService() {
 		if (_service == null) {
-			throw new RuntimeException("AnnouncementsEntryService is not set");
+			_service = (AnnouncementsEntryService)PortalBeanLocatorUtil.locate(AnnouncementsEntryService.class.getName());
 		}
 
 		return _service;

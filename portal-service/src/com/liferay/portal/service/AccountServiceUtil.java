@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AccountServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +47,7 @@ package com.liferay.portal.service;
 public class AccountServiceUtil {
 	public static AccountService getService() {
 		if (_service == null) {
-			throw new RuntimeException("AccountService is not set");
+			_service = (AccountService)PortalBeanLocatorUtil.locate(AccountService.class.getName());
 		}
 
 		return _service;

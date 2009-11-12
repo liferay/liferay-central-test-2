@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="WikiPageFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -66,6 +68,10 @@ public class WikiPageFinderUtil {
 	}
 
 	public static WikiPageFinder getFinder() {
+		if (_finder == null) {
+			_finder = (WikiPageFinder)PortalBeanLocatorUtil.locate(WikiPageFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="IGImageLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -408,7 +409,7 @@ public class IGImageLocalServiceUtil {
 
 	public static IGImageLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("IGImageLocalService is not set");
+			_service = (IGImageLocalService)PortalBeanLocatorUtil.locate(IGImageLocalService.class.getName());
 		}
 
 		return _service;

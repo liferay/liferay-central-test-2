@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WorkflowInstanceLinkLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -147,8 +148,7 @@ public class WorkflowInstanceLinkLocalServiceUtil {
 
 	public static WorkflowInstanceLinkLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException(
-				"WorkflowInstanceLinkLocalService is not set");
+			_service = (WorkflowInstanceLinkLocalService)PortalBeanLocatorUtil.locate(WorkflowInstanceLinkLocalService.class.getName());
 		}
 
 		return _service;

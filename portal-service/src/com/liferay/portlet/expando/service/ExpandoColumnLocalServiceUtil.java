@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ExpandoColumnLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -283,7 +284,7 @@ public class ExpandoColumnLocalServiceUtil {
 
 	public static ExpandoColumnLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ExpandoColumnLocalService is not set");
+			_service = (ExpandoColumnLocalService)PortalBeanLocatorUtil.locate(ExpandoColumnLocalService.class.getName());
 		}
 
 		return _service;

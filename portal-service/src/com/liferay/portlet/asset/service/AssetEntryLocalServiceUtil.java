@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AssetEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -252,7 +253,7 @@ public class AssetEntryLocalServiceUtil {
 
 	public static AssetEntryLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("AssetEntryLocalService is not set");
+			_service = (AssetEntryLocalService)PortalBeanLocatorUtil.locate(AssetEntryLocalService.class.getName());
 		}
 
 		return _service;

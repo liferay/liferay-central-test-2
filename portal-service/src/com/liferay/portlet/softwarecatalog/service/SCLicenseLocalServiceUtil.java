@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SCLicenseLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -179,7 +180,7 @@ public class SCLicenseLocalServiceUtil {
 
 	public static SCLicenseLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("SCLicenseLocalService is not set");
+			_service = (SCLicenseLocalService)PortalBeanLocatorUtil.locate(SCLicenseLocalService.class.getName());
 		}
 
 		return _service;

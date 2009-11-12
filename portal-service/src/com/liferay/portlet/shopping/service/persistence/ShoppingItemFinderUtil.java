@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="ShoppingItemFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -68,6 +70,10 @@ public class ShoppingItemFinderUtil {
 	}
 
 	public static ShoppingItemFinder getFinder() {
+		if (_finder == null) {
+			_finder = (ShoppingItemFinder)PortalBeanLocatorUtil.locate(ShoppingItemFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

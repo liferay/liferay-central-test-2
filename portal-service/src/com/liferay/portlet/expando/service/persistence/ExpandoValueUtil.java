@@ -23,6 +23,7 @@
 package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.expando.model.ExpandoValue;
@@ -627,6 +628,10 @@ public class ExpandoValueUtil {
 	}
 
 	public static ExpandoValuePersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (ExpandoValuePersistence)PortalBeanLocatorUtil.locate(ExpandoValuePersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

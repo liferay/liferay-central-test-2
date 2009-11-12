@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="MBMessageFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -58,6 +60,10 @@ public class MBMessageFinderUtil {
 	}
 
 	public static MBMessageFinder getFinder() {
+		if (_finder == null) {
+			_finder = (MBMessageFinder)PortalBeanLocatorUtil.locate(MBMessageFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

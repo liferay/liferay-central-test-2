@@ -2521,7 +2521,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 	<#list referenceList as tempEntity>
 		<#if tempEntity.hasColumns()>
-			@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl")
+			@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence")
 			protected ${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 		</#if>
 	</#list>

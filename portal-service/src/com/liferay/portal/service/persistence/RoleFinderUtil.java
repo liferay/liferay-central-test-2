@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 /**
  * <a href="RoleFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -101,6 +103,10 @@ public class RoleFinderUtil {
 	}
 
 	public static RoleFinder getFinder() {
+		if (_finder == null) {
+			_finder = (RoleFinder)PortalBeanLocatorUtil.locate(RoleFinder.class.getName());
+		}
+
 		return _finder;
 	}
 

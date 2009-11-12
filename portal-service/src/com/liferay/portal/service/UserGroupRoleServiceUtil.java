@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="UserGroupRoleServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -74,7 +75,7 @@ public class UserGroupRoleServiceUtil {
 
 	public static UserGroupRoleService getService() {
 		if (_service == null) {
-			throw new RuntimeException("UserGroupRoleService is not set");
+			_service = (UserGroupRoleService)PortalBeanLocatorUtil.locate(UserGroupRoleService.class.getName());
 		}
 
 		return _service;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MBCategoryServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -126,7 +127,7 @@ public class MBCategoryServiceUtil {
 
 	public static MBCategoryService getService() {
 		if (_service == null) {
-			throw new RuntimeException("MBCategoryService is not set");
+			_service = (MBCategoryService)PortalBeanLocatorUtil.locate(MBCategoryService.class.getName());
 		}
 
 		return _service;

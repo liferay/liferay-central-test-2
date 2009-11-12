@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -423,6 +424,10 @@ public class MBThreadUtil {
 	}
 
 	public static MBThreadPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(MBThreadPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

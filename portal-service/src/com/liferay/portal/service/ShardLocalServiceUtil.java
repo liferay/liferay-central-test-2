@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ShardLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -120,7 +121,7 @@ public class ShardLocalServiceUtil {
 
 	public static ShardLocalService getService() {
 		if (_service == null) {
-			throw new RuntimeException("ShardLocalService is not set");
+			_service = (ShardLocalService)PortalBeanLocatorUtil.locate(ShardLocalService.class.getName());
 		}
 
 		return _service;

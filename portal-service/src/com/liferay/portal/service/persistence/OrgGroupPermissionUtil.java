@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.OrgGroupPermission;
 
@@ -251,6 +252,10 @@ public class OrgGroupPermissionUtil {
 	}
 
 	public static OrgGroupPermissionPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (OrgGroupPermissionPersistence)PortalBeanLocatorUtil.locate(OrgGroupPermissionPersistence.class.getName());
+		}
+
 		return _persistence;
 	}
 

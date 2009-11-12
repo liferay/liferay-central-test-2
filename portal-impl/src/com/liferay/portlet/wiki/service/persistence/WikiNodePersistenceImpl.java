@@ -1969,19 +1969,19 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence")
 	protected com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence")
 	protected com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence;
-	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence")
 	protected com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence")
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	private static Log _log = LogFactoryUtil.getLog(WikiNodePersistenceImpl.class);
 }
