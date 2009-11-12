@@ -68,7 +68,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		}
 		%>
 
-		<table class="lfr-table" id="<%= randomNamespace %>inputPermissionsTable" class="<%= inputPermissionsShowConfigure ? "" : "aui-helper-hidden" %>">
+		<table class="lfr-table <%= inputPermissionsShowConfigure ? "" : "aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsTable">
 		<tr>
 			<th style="text-align: right;">
 				<liferay-ui:message key="action" />
@@ -116,7 +116,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 			}
 		%>
 
-			<tr id="<%= randomNamespace %>inputPermissionsAction<%= action %>" class="<%= showAction ? "" : "aui-helper-hidden" %>">
+			<tr class="<%= showAction ? "" : "aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsAction<%= action %>">
 				<td style="text-align: right;">
 					<%= ResourceActionsUtil.getAction(pageContext, action) %>
 				</td>
@@ -145,13 +145,13 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		<input id="<%= randomNamespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
 		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
 
-		<div id="<%= randomNamespace %>inputPermissionsConfigureLink" class="<%= inputPermissionsShowConfigure ? "aui-helper-hidden" : "" %>">
+		<div class="<%= inputPermissionsShowConfigure ? "aui-helper-hidden" : "" %>" id="<%= randomNamespace %>inputPermissionsConfigureLink">
 			<label class="inline-label" for="<%= namespace %>inputPermissionsPublic"><input <%= inputPermissionsPublicChecked ? "checked" : "" %> id="<%= namespace %>inputPermissionsPublic" name="<%= namespace %>inputPermissionsPublic" type="checkbox" /> <liferay-ui:message key="public" /></label>
 
 			<a href="javascript:<%= randomNamespace %>inputPermissionsConfigure();" style="margin-left: 10px;"><liferay-ui:message key="configure" /> &raquo;</a>
 		</div>
 
-		<div id="<%= randomNamespace %>inputPermissionsMoreLink" class="<%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "aui-helper-hidden" : "" %>">
+		<div class="<%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "aui-helper-hidden" : "" %>" id="<%= randomNamespace %>inputPermissionsMoreLink">
 			<a href="javascript:<%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
 		</div>
 
