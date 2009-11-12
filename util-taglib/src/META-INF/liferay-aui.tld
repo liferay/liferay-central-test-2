@@ -436,6 +436,26 @@
 		<dynamic-attributes>true</dynamic-attributes>
 	</tag>
 	<tag>
+		<name>panel</name>
+		<tag-class>com.liferay.taglib.aui.PanelTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>collapsible</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>label</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>select</name>
 		<tag-class>com.liferay.taglib.aui.SelectTag</tag-class>
 		<body-content>JSP</body-content>
@@ -520,5 +540,25 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<tag>
+		<name>tool</name>
+		<tag-class>com.liferay.taglib.aui.ToolTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>handler</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>icon</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 </taglib>
