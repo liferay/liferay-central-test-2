@@ -28,6 +28,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserGroupNameException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -37,6 +40,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
+import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -197,6 +201,23 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			companyId, name, description, params);
 	}
 
+	public void setUserUserGroups(long userId, long[] userGroupIds)
+		throws PortalException, SystemException {
+
+		userLocalService.copyUserGroupLayouts(userGroupIds, userId);
+
+		userPersistence.setUserGroups(userId, userGroupIds);
+
+		try {
+			UserIndexer.updateUsers(new long[] {userId});
+		}
+		catch (SearchException se) {
+			_log.error("Indexing " + userId, se);
+		}
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws SystemException {
 
@@ -243,5 +264,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		catch (NoSuchUserGroupException nsuge) {
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		UserGroupLocalServiceImpl.class);
 
 }

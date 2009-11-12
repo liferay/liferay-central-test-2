@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -991,9 +992,7 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, long userId, Attribute attr)
 		throws Exception {
 
-		// Remove all user group membership from user
-
-		UserGroupLocalServiceUtil.clearUserUserGroups(userId);
+		List<Long> newUserGroupIds = new ArrayList<Long>(attr.size());
 
 		for (int i = 0; i < attr.size(); i++) {
 
@@ -1028,10 +1027,14 @@ public class PortalLDAPUtil {
 							userGroup.getUserGroupId());
 				}
 
-				UserLocalServiceUtil.addUserGroupUsers(
-					userGroup.getUserGroupId(), new long[] {userId});
+				newUserGroupIds.add(userGroup.getUserGroupId());
 			}
 		}
+
+		UserGroupLocalServiceUtil.setUserUserGroups(
+			userId,
+			ArrayUtil.toArray(
+				newUserGroupIds.toArray(new Long[newUserGroupIds.size()])));
 	}
 
 	private static User _importLDAPUser(
@@ -1301,9 +1304,7 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, long userGroupId, Attribute attr)
 		throws Exception {
 
-		// Remove all user membership from user group
-
-		UserLocalServiceUtil.clearUserGroupUsers(userGroupId);
+		List<Long> newUserIds = new ArrayList<Long>(attr.size());
 
 		for (int i = 0; i < attr.size(); i++) {
 
@@ -1336,10 +1337,13 @@ public class PortalLDAPUtil {
 							userGroupId);
 				}
 
-				UserLocalServiceUtil.addUserGroupUsers(
-					userGroupId, new long[] {user.getUserId()});
+				newUserIds.add(user.getUserId());
 			}
 		}
+
+		UserLocalServiceUtil.setUserGroupUsers(
+			userGroupId,
+			ArrayUtil.toArray(newUserIds.toArray(new Long[newUserIds.size()])));
 	}
 
 	private static List<SearchResult> _searchLDAP(

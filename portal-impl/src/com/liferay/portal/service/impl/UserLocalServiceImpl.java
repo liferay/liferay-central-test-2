@@ -864,6 +864,26 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void copyUserGroupLayouts(long userGroupId, long userIds[])
+		throws PortalException, SystemException {
+
+		for (long userId : userIds) {
+			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
+				copyUserGroupLayouts(userGroupId, userId);
+			}
+		}
+	}
+
+	public void copyUserGroupLayouts(long userGroupIds[], long userId)
+		throws PortalException, SystemException {
+
+		for (long userGroupId : userGroupIds) {
+			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
+				copyUserGroupLayouts(userGroupId, userId);
+			}
+		}
+	}
+
 	public KeyValuePair decryptUserId(
 			long companyId, String name, String password)
 		throws PortalException, SystemException {
@@ -2786,26 +2806,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			layoutLocalService.importLayouts(
 				userId, targetGroupId, false, parameterMap, bais);
-		}
-	}
-
-	protected void copyUserGroupLayouts(long userGroupId, long userIds[])
-		throws PortalException, SystemException {
-
-		for (long userId : userIds) {
-			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
-				copyUserGroupLayouts(userGroupId, userId);
-			}
-		}
-	}
-
-	protected void copyUserGroupLayouts(long userGroupIds[], long userId)
-		throws PortalException, SystemException {
-
-		for (long userGroupId : userGroupIds) {
-			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
-				copyUserGroupLayouts(userGroupId, userId);
-			}
 		}
 	}
 

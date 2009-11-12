@@ -171,6 +171,12 @@ public class UserGroupLocalServiceUtil {
 		return getService().searchCount(companyId, name, description, params);
 	}
 
+	public static void setUserUserGroups(long userId, long[] userGroupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().setUserUserGroups(userId, userGroupIds);
+	}
+
 	public static void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException {
 		getService().unsetGroupUserGroups(groupId, userGroupIds);

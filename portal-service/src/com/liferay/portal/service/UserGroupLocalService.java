@@ -144,6 +144,10 @@ public interface UserGroupLocalService {
 		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
+	public void setUserUserGroups(long userId, long[] userGroupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException;
 

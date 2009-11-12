@@ -265,6 +265,18 @@ public class UserLocalServiceUtil {
 		getService().clearUserGroupUsers(userGroupId);
 	}
 
+	public static void copyUserGroupLayouts(long userGroupId, long[] userIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().copyUserGroupLayouts(userGroupId, userIds);
+	}
+
+	public static void copyUserGroupLayouts(long[] userGroupIds, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().copyUserGroupLayouts(userGroupIds, userId);
+	}
+
 	public static com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.PortalException,

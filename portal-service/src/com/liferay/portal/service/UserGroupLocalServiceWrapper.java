@@ -169,6 +169,12 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 			params);
 	}
 
+	public void setUserUserGroups(long userId, long[] userGroupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_userGroupLocalService.setUserUserGroups(userId, userGroupIds);
+	}
+
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException {
 		_userGroupLocalService.unsetGroupUserGroups(groupId, userGroupIds);
