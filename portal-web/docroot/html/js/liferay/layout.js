@@ -174,7 +174,9 @@ AUI().add(
 
 						var handle = portlet.one(instance._handleSelector);
 
-						handle.setStyle('cursor', 'move');
+						if (handle) {
+							handle.setStyle('cursor', 'move');
+						}
 
 						portlet._registeredDraggable = true;
 					}
@@ -492,7 +494,9 @@ AUI().add(
 					if (!portlet._registeredDraggable) {
 						var handle = portlet.one(instance._handleSelector);
 
-						handle.setStyle('cursor', 'move');
+						if (handle) {
+							handle.setStyle('cursor', 'move');
+						}
 
 						portlet.setStyle('position', 'absolute');
 
