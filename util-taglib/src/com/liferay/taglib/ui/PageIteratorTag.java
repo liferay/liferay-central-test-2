@@ -54,6 +54,9 @@ public class PageIteratorTag extends TagSupport {
 			request.setAttribute(
 				"liferay-ui:page-iterator:delta", String.valueOf(_delta));
 			request.setAttribute(
+				"liferay-ui:page-iterator:deltaConfigurable",
+				String.valueOf(_deltaConfigurable));
+			request.setAttribute(
 				"liferay-ui:page-iterator:deltaParam", _deltaParam);
 			request.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
 			request.setAttribute(
@@ -132,6 +135,10 @@ public class PageIteratorTag extends TagSupport {
 		_delta = delta;
 	}
 
+	public void setDeltaConfigurable(boolean deltaConfigurable) {
+		_deltaConfigurable = deltaConfigurable;
+	}
+
 	public void setDeltaParam(String deltaParam) {
 		_deltaParam = deltaParam;
 	}
@@ -187,6 +194,8 @@ public class PageIteratorTag extends TagSupport {
 	private int _cur;
 	private String _curParam;
 	private int _delta = SearchContainer.DEFAULT_DELTA;
+	private boolean _deltaConfigurable =
+		SearchContainer.DEFAULT_DELTA_CONFIGURABLE;
 	private String _deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
 	private String _jsCall;
 	private int _maxPages = 10;

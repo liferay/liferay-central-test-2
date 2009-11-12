@@ -50,6 +50,8 @@ public class SearchContainer<R> {
 
 	public static final int DEFAULT_DELTA = 20;
 
+	public static final boolean DEFAULT_DELTA_CONFIGURABLE = true;
+
 	public static final String DEFAULT_DELTA_PARAM = "delta";
 
 	public static final int DEFAULT_MAX_PAGES = 25;
@@ -226,6 +228,10 @@ public class SearchContainer<R> {
 		return _total;
 	}
 
+	public boolean isDeltaConfigurable() {
+		return _deltaConfigurable;
+	}
+
 	public boolean isHover() {
 		return _hover;
 	}
@@ -242,6 +248,10 @@ public class SearchContainer<R> {
 		}
 
 		_calculateStartAndEnd();
+	}
+
+	public void setDeltaConfigurable(boolean deltaConfigurable) {
+		_deltaConfigurable = deltaConfigurable;
 	}
 
 	public void setDeltaParam(String deltaParam) {
@@ -332,6 +342,7 @@ public class SearchContainer<R> {
 	private int _cur;
 	private String _curParam = DEFAULT_CUR_PARAM;
 	private int _delta = DEFAULT_DELTA;
+	private boolean _deltaConfigurable = DEFAULT_DELTA_CONFIGURABLE;
 	private String _deltaParam = DEFAULT_DELTA_PARAM;
 	private DisplayTerms _displayTerms;
 	private String _emptyResultsMessage;

@@ -29,6 +29,7 @@ String formName = namespace + request.getAttribute("liferay-ui:page-iterator:for
 int cur = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:cur"));
 String curParam = (String)request.getAttribute("liferay-ui:page-iterator:curParam");
 int delta = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:delta"));
+boolean deltaConfigurable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:page-iterator:deltaConfigurable"));
 String deltaParam = (String)request.getAttribute("liferay-ui:page-iterator:deltaParam");
 String jsCall = (String)request.getAttribute("liferay-ui:page-iterator:jsCall");
 int maxPages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:maxPages"));
@@ -165,7 +166,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 					<liferay-ui:message key="items-per-page" />
 
 					<c:choose>
-						<c:when test="<%= themeDisplay.isFacebook() %>">
+						<c:when test="<%= !deltaConfigurable || themeDisplay.isFacebook() %>">
 							<%= delta %>
 						</c:when>
 						<c:otherwise>
