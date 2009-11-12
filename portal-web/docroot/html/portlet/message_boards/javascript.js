@@ -99,7 +99,6 @@ AUI().add(
 						on: {
 							success: function(id, xHR) {
 								var response = xHR.responseText;
-
 								var emoticonsContainer = A.Node.create('<div class="lfr-emoticon-container"></div>');
 
 								instance._emoticons = emoticonsContainer.html(response);
@@ -137,11 +136,12 @@ AUI().add(
 					fontType: {
 						options: [Liferay.Language.get('font'), 'Arial', 'Comic Sans', 'Courier New', 'Tahoma', 'Times New Roman', 'Verdana', 'Wingdings'],
 						onChange: function(event) {
-							var value = event.target.val();
+							var target = event.target;
+							var value = target.val();
 
 							if (value != Liferay.Language.get('font')) {
 								instance.insertTag('font', value);
-								event.target.getDOM().selectedIndex = 0;
+								target.getDOM().selectedIndex = 0;
 							}
 						}
 					},
@@ -149,11 +149,12 @@ AUI().add(
 					fontSize: {
 						options: [Liferay.Language.get('size'), 1, 2, 3, 4, 5, 6, 7],
 						onChange: function(event) {
-							var value = event.target.val();
+							var target = event.target;
+							var value = target.val();
 
 							if (value != Liferay.Language.get('size')) {
 								instance.insertTag('size', value);
-								event.target.getDOM().selectedIndex = 0;
+								target.getDOM().selectedIndex = 0;
 							}
 						},
 						groupEnd: true
