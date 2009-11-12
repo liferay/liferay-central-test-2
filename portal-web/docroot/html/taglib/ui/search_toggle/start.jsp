@@ -59,7 +59,7 @@
 
 <input id="<%= id %><%= displayTerms.ADVANCED_SEARCH %>" name="<%= namespace %><%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value="<%= clickValue.equals("basic") ? false : true %>" />
 
-<div id="<%= id %>basic" class="<%= clickValue.equals("basic") ? "" : "aui-helper-hidden" %>">
+<div class="<%= clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>basic">
 	<c:choose>
 		<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
 			<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
@@ -78,7 +78,7 @@
 	</c:choose>
 </div>
 
-<div id="<%= id %>advanced" class="<%= !clickValue.equals("basic") ? "" : "aui-helper-hidden" %>">
+<div class="<%= !clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>advanced">
 
 	<%
 	StringBuilder sb = new StringBuilder();
