@@ -68,7 +68,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		}
 		%>
 
-		<table class="lfr-table" id="<%= randomNamespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
+		<table class="lfr-table" id="<%= randomNamespace %>inputPermissionsTable" class="<%= inputPermissionsShowConfigure ? "" : "aui-helper-hidden" %>">
 		<tr>
 			<th style="text-align: right;">
 				<liferay-ui:message key="action" />
@@ -116,7 +116,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 			}
 		%>
 
-			<tr id="<%= randomNamespace %>inputPermissionsAction<%= action %>" style="display: <%= showAction ? "" : "none" %>;">
+			<tr id="<%= randomNamespace %>inputPermissionsAction<%= action %>" class="<%= showAction ? "" : "aui-helper-hidden" %>">
 				<td style="text-align: right;">
 					<%= ResourceActionsUtil.getAction(pageContext, action) %>
 				</td>
@@ -145,20 +145,20 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		<input id="<%= randomNamespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
 		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
 
-		<div id="<%= randomNamespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
+		<div id="<%= randomNamespace %>inputPermissionsConfigureLink" class="<%= inputPermissionsShowConfigure ? "aui-helper-hidden" : "" %>">
 			<label class="inline-label" for="<%= namespace %>inputPermissionsPublic"><input <%= inputPermissionsPublicChecked ? "checked" : "" %> id="<%= namespace %>inputPermissionsPublic" name="<%= namespace %>inputPermissionsPublic" type="checkbox" /> <liferay-ui:message key="public" /></label>
 
 			<a href="javascript:<%= randomNamespace %>inputPermissionsConfigure();" style="margin-left: 10px;"><liferay-ui:message key="configure" /> &raquo;</a>
 		</div>
 
-		<div id="<%= randomNamespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">
+		<div id="<%= randomNamespace %>inputPermissionsMoreLink" class="<%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "aui-helper-hidden" : "" %>">
 			<a href="javascript:<%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
 		</div>
 
 		<script type="text/javascript">
 			function <%= randomNamespace %>inputPermissionsConfigure() {
-				jQuery("#<%= randomNamespace %>inputPermissionsTable").show();
-				jQuery("#<%= randomNamespace %>inputPermissionsMoreLink").show();
+				AUI().one("#<%= randomNamespace %>inputPermissionsTable").show();
+				AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").show();
 
 				<%
 				for (int i = 0; i < supportedActions.size(); i++) {
@@ -167,15 +167,15 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					if (communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
 				%>
 
-						jQuery("#<%= randomNamespace %>inputPermissionsAction<%= action %>").show();
+						AUI().one("#<%= randomNamespace %>inputPermissionsAction<%= action %>").show();
 
 				<%
 					}
 				}
 				%>
 
-				jQuery("#<%= randomNamespace %>inputPermissionsConfigureLink").hide();
-				jQuery("#<%= randomNamespace %>inputPermissionsShowConfigure").val("true");
+				AUI().one("#<%= randomNamespace %>inputPermissionsConfigureLink").hide();
+				AUI().one("#<%= randomNamespace %>inputPermissionsShowConfigure").val("true");
 			}
 
 			function <%= randomNamespace %>inputPermissionsMore() {
@@ -187,15 +187,15 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					if (!communityDefaultActions.contains(action) && !guestDefaultActions.contains(action)) {
 				%>
 
-						jQuery("#<%= randomNamespace %>inputPermissionsAction<%= action %>").show();
+						AUI().one("#<%= randomNamespace %>inputPermissionsAction<%= action %>").show();
 
 				<%
 					}
 				}
 				%>
 
-				jQuery("#<%= randomNamespace %>inputPermissionsMoreLink").hide();
-				jQuery("#<%= randomNamespace %>inputPermissionsShowMore").val("true");
+				AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").hide();
+				AUI().one("#<%= randomNamespace %>inputPermissionsShowMore").val("true");
 			}
 		</script>
 	</c:when>
