@@ -67,7 +67,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 <c:if test='<%= type.equals("regular")  && !themeDisplay.isFacebook() %>'>
 	<script type="text/javascript">
 		function <%= namespace %><%= curParam %>updateCur(box) {
-			var cur = jQuery("option:selected", box).val();
+			var cur = AUI().one(box).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
 				var href = "<%= url %><%= namespace %><%= curParam %>=" + cur + "<%= urlAnchor %>";
@@ -82,7 +82,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		}
 
 		function <%= namespace %><%= deltaParam %>updateDelta(box) {
-			var delta = jQuery("option:selected", box).val();
+			var delta = AUI().one(box).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
 				var href = "<%= deltaURL %>&<%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
