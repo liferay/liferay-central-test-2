@@ -124,7 +124,7 @@ if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 
 			booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 
-			String onClick = "jQuery(this).prev().val(this.checked);";
+			String onClick = "AUI().one(this).previous().val(this.checked);";
 			String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
 
 			if (onClickDynamicAttribute != null) {
