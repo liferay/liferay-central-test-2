@@ -24,151 +24,98 @@
 
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
 
-<liferay-ui:message key="set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<fieldset>
-	<legend><liferay-ui:message key="page" /></legend>
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<table class="lfr-table">
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="maximum-items-to-display" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />pageDelta">
-				<option <%= (pageDelta == 1) ? "selected" : "" %> value="1">1</option>
-				<option <%= (pageDelta == 2) ? "selected" : "" %> value="2">2</option>
-				<option <%= (pageDelta == 3) ? "selected" : "" %> value="3">3</option>
-				<option <%= (pageDelta == 4) ? "selected" : "" %> value="4">4</option>
-				<option <%= (pageDelta == 5) ? "selected" : "" %> value="5">5</option>
-				<option <%= (pageDelta == 10) ? "selected" : "" %> value="10">10</option>
-				<option <%= (pageDelta == 15) ? "selected" : "" %> value="15">15</option>
-				<option <%= (pageDelta == 20) ? "selected" : "" %> value="20">20</option>
-				<option <%= (pageDelta == 25) ? "selected" : "" %> value="25">25</option>
-				<option <%= (pageDelta == 30) ? "selected" : "" %> value="30">30</option>
-				<option <%= (pageDelta == 40) ? "selected" : "" %> value="40">40</option>
-				<option <%= (pageDelta == 50) ? "selected" : "" %> value="50">50</option>
-				<option <%= (pageDelta == 60) ? "selected" : "" %> value="60">60</option>
-				<option <%= (pageDelta == 70) ? "selected" : "" %> value="70">70</option>
-				<option <%= (pageDelta == 80) ? "selected" : "" %> value="80">80</option>
-				<option <%= (pageDelta == 90) ? "selected" : "" %> value="90">90</option>
-				<option <%= (pageDelta == 100) ? "selected" : "" %> value="100">100</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="display-style" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />pageDisplayStyle">
-				<option <%= (pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>"><liferay-ui:message key="full-content" /></option>
-				<option <%= (pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>"><liferay-ui:message key="abstract" /></option>
-				<option <%= (pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>"><liferay-ui:message key="title" /></option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="enable-flags" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="enableFlags" defaultValue="<%= enableFlags %>" />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="enable-ratings" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
-		</td>
-	</tr>
+	<liferay-ui:message key="set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss" />
 
-	<c:if test="<%= PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED %>">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="enable-comments" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
-			</td>
-		</tr>
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="enable-comment-ratings" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
-			</td>
-		</tr>
-	</c:if>
+	<aui:fieldset>
+		<aui:legend label="page" />
 
-	</table>
-</fieldset>
+		<aui:select label="maximum-items-to-display" name="pageDelta">
+			<aui:option label="1" selected="<%= pageDelta == 1 %>" />
+			<aui:option label="2" selected="<%= pageDelta == 2 %>" />
+			<aui:option label="3" selected="<%= pageDelta == 3 %>" />
+			<aui:option label="4" selected="<%= pageDelta == 4 %>" />
+			<aui:option label="5" selected="<%= pageDelta == 5 %>" />
+			<aui:option label="10" selected="<%= pageDelta == 10 %>" />
+			<aui:option label="15" selected="<%= pageDelta == 15 %>" />
+			<aui:option label="20" selected="<%= pageDelta == 20 %>" />
+			<aui:option label="25" selected="<%= pageDelta == 25 %>" />
+			<aui:option label="30" selected="<%= pageDelta == 30 %>" />
+			<aui:option label="40" selected="<%= pageDelta == 40 %>" />
+			<aui:option label="50" selected="<%= pageDelta == 50 %>" />
+			<aui:option label="60" selected="<%= pageDelta == 60 %>" />
+			<aui:option label="70" selected="<%= pageDelta == 70 %>" />
+			<aui:option label="80" selected="<%= pageDelta == 80 %>" />
+			<aui:option label="90" selected="<%= pageDelta == 90 %>" />
+			<aui:option label="100" selected="<%= pageDelta == 100 %>" />
+		</aui:select>
 
-<fieldset>
-	<legend><liferay-ui:message key="rss" /></legend>
+		<aui:select label="display-style" name="pageDisplayStyle">
+			<aui:option label="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>" selected="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>" />
+			<aui:option label="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" selected="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" />
+			<aui:option label="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" selected="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" />
+		</aui:select>
 
-	<table class="lfr-table">
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="maximum-items-to-display" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />rssDelta">
-				<option <%= (rssDelta == 1) ? "selected" : "" %> value="1">1</option>
-				<option <%= (rssDelta == 2) ? "selected" : "" %> value="2">2</option>
-				<option <%= (rssDelta == 3) ? "selected" : "" %> value="3">3</option>
-				<option <%= (rssDelta == 4) ? "selected" : "" %> value="4">4</option>
-				<option <%= (rssDelta == 5) ? "selected" : "" %> value="5">5</option>
-				<option <%= (rssDelta == 10) ? "selected" : "" %> value="10">10</option>
-				<option <%= (rssDelta == 15) ? "selected" : "" %> value="15">15</option>
-				<option <%= (rssDelta == 20) ? "selected" : "" %> value="20">20</option>
-				<option <%= (rssDelta == 25) ? "selected" : "" %> value="25">25</option>
-				<option <%= (rssDelta == 30) ? "selected" : "" %> value="30">30</option>
-				<option <%= (rssDelta == 40) ? "selected" : "" %> value="40">40</option>
-				<option <%= (rssDelta == 50) ? "selected" : "" %> value="50">50</option>
-				<option <%= (rssDelta == 60) ? "selected" : "" %> value="60">60</option>
-				<option <%= (rssDelta == 70) ? "selected" : "" %> value="70">70</option>
-				<option <%= (rssDelta == 80) ? "selected" : "" %> value="80">80</option>
-				<option <%= (rssDelta == 90) ? "selected" : "" %> value="90">90</option>
-				<option <%= (rssDelta == 100) ? "selected" : "" %> value="100">100</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="display-style" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />rssDisplayStyle">
-				<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>"><liferay-ui:message key="full-content" /></option>
-				<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>"><liferay-ui:message key="abstract" /></option>
-				<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>"><liferay-ui:message key="title" /></option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="format" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />rssFormat">
-				<option <%= (rssFormat.equals("rss10")) ? "selected" : "" %> value="rss10">RSS 1.0</option>
-				<option <%= (rssFormat.equals("rss20")) ? "selected" : "" %> value="rss20">RSS 2.0</option>
-				<option <%= (rssFormat.equals("atom10")) ? "selected" : "" %> value="atom10">Atom 1.0</option>
-			</select>
-		</td>
-	</tr>
-	</table>
-</fieldset>
+		<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
 
-<br />
+		<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+		<c:if test="<%= PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED %>">
+			<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
 
-</form>
+			<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+		</c:if>
+	</aui:fieldset>
+
+	<aui:fieldset>
+		<aui:legend label="rss" />
+
+		<aui:select label="maximum-items-to-display" name="rssDelta">
+			<aui:option label="1" selected="<%= rssDelta == 1 %>" />
+			<aui:option label="2" selected="<%= rssDelta == 2 %>" />
+			<aui:option label="3" selected="<%= rssDelta == 3 %>" />
+			<aui:option label="4" selected="<%= rssDelta == 4 %>" />
+			<aui:option label="5" selected="<%= rssDelta == 5 %>" />
+			<aui:option label="10" selected="<%= rssDelta == 10 %>" />
+			<aui:option label="15" selected="<%= rssDelta == 15 %>" />
+			<aui:option label="20" selected="<%= rssDelta == 20 %>" />
+			<aui:option label="25" selected="<%= rssDelta == 25 %>" />
+			<aui:option label="30" selected="<%= rssDelta == 30 %>" />
+			<aui:option label="40" selected="<%= rssDelta == 40 %>" />
+			<aui:option label="50" selected="<%= rssDelta == 50 %>" />
+			<aui:option label="60" selected="<%= rssDelta == 60 %>" />
+			<aui:option label="70" selected="<%= rssDelta == 70 %>" />
+			<aui:option label="80" selected="<%= rssDelta == 80 %>" />
+			<aui:option label="90" selected="<%= rssDelta == 90 %>" />
+			<aui:option label="100" selected="<%= rssDelta == 100 %>" />
+		</aui:select>
+
+		<aui:select label="display-style" name="rssDisplayStyle">
+			<aui:option label="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>" />
+			<aui:option label="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" />
+			<aui:option label="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" />
+		</aui:select>
+
+		<aui:select label="format" name="rssFormat">
+			<aui:option label="RSS 1.0" selected='<%= rssFormat.equals("rss10") %>' value="rss10" />
+			<aui:option label="RSS 2.0" selected='<%= rssFormat.equals("rss20") %>' value="rss20" />
+			<aui:option label="Atom 1.0" selected='<%= rssFormat.equals("atom10") %>' value="atom10" />
+		</aui:select>
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+
+</aui:form>
