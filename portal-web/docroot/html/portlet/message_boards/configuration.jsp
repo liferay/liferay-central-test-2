@@ -624,27 +624,27 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				if (lastLanguageId != "<%= defaultLanguageId %>") {
 					if (changed) {
 						for (var i = 0; i < 10; i++) {
-							var priorityName = jQuery("#<portlet:namespace />priorityName" + i + "_temp").attr("value");
-							var priorityImage = jQuery("#<portlet:namespace />priorityImage" + i + "_temp").attr("value");
-							var priorityValue = jQuery("#<portlet:namespace />priorityValue" + i + "_temp").attr("value");
+							var priorityName = AUI().one("#<portlet:namespace />priorityName" + i + "_temp").attr("value");
+							var priorityImage = AUI().one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value");
+							var priorityValue = AUI().one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value");
 
 							if (priorityName == null) {
 								priorityName = "";
 							}
 
-							jQuery("#<portlet:namespace />priorityName" + i + "_" + lastLanguageId).attr("value", priorityName);
+							AUI().one("#<portlet:namespace />priorityName" + i + "_" + lastLanguageId).attr("value", priorityName);
 
 							if (priorityImage == null) {
 								priorityImage = "";
 							}
 
-							jQuery("#<portlet:namespace />priorityImage" + i + "_" + lastLanguageId).attr("value", priorityImage);
+							AUI().one("#<portlet:namespace />priorityImage" + i + "_" + lastLanguageId).attr("value", priorityImage);
 
 							if (priorityValue == null) {
 								priorityValue = "";
 							}
 
-							jQuery("#<portlet:namespace />priorityValue" + i + "_" + lastLanguageId).attr("value", priorityValue);
+							AUI().one("#<portlet:namespace />priorityValue" + i + "_" + lastLanguageId).attr("value", priorityValue);
 						}
 
 						changed = false;
@@ -664,10 +664,10 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				if (selLanguageId != "") {
 					<portlet:namespace />updateLanguageTemps(selLanguageId);
 
-					jQuery("#<portlet:namespace />localized-priorities-table").show();
+					AUI().one("#<portlet:namespace />localized-priorities-table").show();
 				}
 				else {
-					jQuery("#<portlet:namespace />localized-priorities-table").hide();
+					AUI().one("#<portlet:namespace />localized-priorities-table").hide();
 				}
 
 				lastLanguageId = selLanguageId;
@@ -678,13 +678,13 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			function <portlet:namespace />updateLanguageTemps(lang) {
 				if (lang != "<%= defaultLanguageId %>") {
 					for (var i = 0; i < 10; i++) {
-						var priorityName = jQuery("#<portlet:namespace />priorityName" + i + "_" + lang).attr("value");
-						var priorityImage = jQuery("#<portlet:namespace />priorityImage" + i + "_" + lang).attr("value");
-						var priorityValue = jQuery("#<portlet:namespace />priorityValue" + i + "_" + lang).attr("value");
+						var priorityName = AUI().one("#<portlet:namespace />priorityName" + i + "_" + lang).attr("value");
+						var priorityImage = AUI().one("#<portlet:namespace />priorityImage" + i + "_" + lang).attr("value");
+						var priorityValue = AUI().one("#<portlet:namespace />priorityValue" + i + "_" + lang).attr("value");
 
-						var defaultName = jQuery("#<portlet:namespace />priorityName" + i + "_" + "<%= defaultLanguageId %>").attr("value");
-						var defaultImage = jQuery("#<portlet:namespace />priorityImage" + i + "_" + "<%= defaultLanguageId %>").attr("value");
-						var defaultValue = jQuery("#<portlet:namespace />priorityValue" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+						var defaultName = AUI().one("#<portlet:namespace />priorityName" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+						var defaultImage = AUI().one("#<portlet:namespace />priorityImage" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+						var defaultValue = AUI().one("#<portlet:namespace />priorityValue" + i + "_" + "<%= defaultLanguageId %>").attr("value");
 
 						if (defaultName == null) {
 							defaultName = "";
@@ -699,24 +699,24 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 						}
 
 						if ((priorityName == null) || (priorityName == "")) {
-							jQuery("#<portlet:namespace />priorityName" + i + "_temp").attr("value", defaultName);
+							AUI().one("#<portlet:namespace />priorityName" + i + "_temp").attr("value", defaultName);
 						}
 						else {
-							jQuery("#<portlet:namespace />priorityName" + i + "_temp").attr("value", priorityName);
+							AUI().one("#<portlet:namespace />priorityName" + i + "_temp").attr("value", priorityName);
 						}
 
 						if ((priorityImage == null) || (priorityImage == "")) {
-							jQuery("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", defaultImage);
+							AUI().one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", defaultImage);
 						}
 						else {
-							jQuery("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", priorityImage);
+							AUI().one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", priorityImage);
 						}
 
 						if ((priorityValue == null) || (priorityValue == "")) {
-							jQuery("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", defaultValue);
+							AUI().one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", defaultValue);
 						}
 						else {
-							jQuery("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", priorityValue);
+							AUI().one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", priorityValue);
 						}
 					}
 				}
@@ -792,13 +792,13 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			function <portlet:namespace />updateLanguage() {
 				if (lastLanguageId != "<%= defaultLanguageId %>") {
 					if (ranksChanged) {
-						var ranksValue = jQuery("#<portlet:namespace />ranks_temp").attr("value");
+						var ranksValue = AUI().one("#<portlet:namespace />ranks_temp").attr("value");
 
 						if (ranksValue == null) {
 							ranksValue = "";
 						}
 
-						jQuery("#<portlet:namespace />ranks_" + lastLanguageId).attr("value", ranksValue);
+						AUI().one("#<portlet:namespace />ranks_" + lastLanguageId).attr("value", ranksValue);
 
 						ranksChanged = false;
 					}
@@ -817,10 +817,10 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				if (selLanguageId != "") {
 					<portlet:namespace />updateLanguageTemps(selLanguageId);
 
-					jQuery("#<portlet:namespace />ranks_temp").show();
+					AUI().one("#<portlet:namespace />ranks_temp").show();
 				}
 				else {
-					jQuery("#<portlet:namespace />ranks_temp").hide();
+					AUI().one("#<portlet:namespace />ranks_temp").hide();
 				}
 
 				lastLanguageId = selLanguageId;
@@ -830,18 +830,18 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 			function <portlet:namespace />updateLanguageTemps(lang) {
 				if (lang != "<%= defaultLanguageId %>") {
-					var ranksValue = jQuery("#<portlet:namespace />ranks_" + lang).attr("value");
-					var defaultRanksValue = jQuery("#<portlet:namespace />ranks_<%= defaultLanguageId %>").attr("value");
+					var ranksValue = AUI().one("#<portlet:namespace />ranks_" + lang).attr("value");
+					var defaultRanksValue = AUI().one("#<portlet:namespace />ranks_<%= defaultLanguageId %>").attr("value");
 
 					if (defaultRanksValue == null) {
 						defaultRanksValue = "";
 					}
 
 					if ((ranksValue == null) || (ranksValue == "")) {
-						jQuery("#<portlet:namespace />ranks_temp").attr("value", defaultRanksValue);
+						AUI().one("#<portlet:namespace />ranks_temp").attr("value", defaultRanksValue);
 					}
 					else {
-						jQuery("#<portlet:namespace />ranks_temp").attr("value", ranksValue);
+						AUI().one("#<portlet:namespace />ranks_temp").attr("value", ranksValue);
 					}
 				}
 			}

@@ -367,7 +367,7 @@ if ((message != null) && message.isAttachments()) {
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
+		function(A) {
 			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
 			</c:if>
@@ -375,19 +375,30 @@ if ((message != null) && message.isAttachments()) {
 			<%
 			for (int i = 1; i <= existingAttachments.length; i++) {
 			%>
+				var removeExisting = A.one("#<portlet:namespace />removeExisting" + <%= i %>);
 
-				jQuery("#<portlet:namespace />removeExisting" + <%= i %>).click(
-					function() {
-						var button = jQuery(this);
-						var span = jQuery("#<portlet:namespace />existingFile" + <%= i %>);
-						var file = jQuery("#<portlet:namespace />msgFile" + <%= i %>);
+				if (removeExisting) {
+					removeExisting.on(
+						'click',
+						function(event) {
+							var button = event.target;
+							var span = A.one("#<portlet:namespace />existingFile" + <%= i %>);
+							var file = A.one("#<portlet:namespace />msgFile" + <%= i %>);
 
-						button.remove();
-						span.remove();
-						file.show();
-					}
-				);
+							if (button) {
+								button.remove();
+							}
 
+							if (span) {
+								span.remove();
+							}
+
+							if (files) {
+								file.show();
+							}
+						}
+					);
+				}
 			<%
 			}
 			%>

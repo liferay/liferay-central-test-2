@@ -53,16 +53,16 @@ String threadView = messageDisplay.getThreadView();
 			}
 		);
 
-		var addAnswerFlagDiv = jQuery('#<portlet:namespace />addAnswerFlagDiv').clone();
+		var addAnswerFlagDiv = AUI().one('#<portlet:namespace />addAnswerFlagDiv').cloneNode(true);
 
 		var html = addAnswerFlagDiv.html();
 
 		html = '<div class="answer" id="<portlet:namespace />deleteAnswerFlag_' + messageId + '">' + html + '</div>';
 		html = html.replace(/@MESSAGE_ID@/g, messageId);
 
-		jQuery('#<portlet:namespace />message_' + messageId).find('div.tags:first').html(html);
+		AUI().one('#<portlet:namespace />message_' + messageId).one('div.tags').html(html);
 
-		jQuery('#<portlet:namespace />addAnswerFlag_' + messageId).remove();
+		AUI().one('#<portlet:namespace />addAnswerFlag_' + messageId).remove();
 	}
 
 	function <portlet:namespace />deleteAnswerFlag(messageId) {
@@ -72,16 +72,16 @@ String threadView = messageDisplay.getThreadView();
 			}
 		);
 
-		var deleteAnswerFlagDiv = jQuery('#<portlet:namespace />deleteAnswerFlagDiv').clone();
+		var deleteAnswerFlagDiv = AUI().one('#<portlet:namespace />deleteAnswerFlagDiv').cloneNode(true);
 
 		var html = deleteAnswerFlagDiv.html();
 
 		html = '<li id="<portlet:namespace />addAnswerFlag_' + messageId + '">' + html + '</li>';
 		html = html.replace(/@MESSAGE_ID@/g, messageId);
 
-		jQuery('#<portlet:namespace />message_' + messageId).find('ul.edit-controls:first').prepend(html);
+		AUI().one('#<portlet:namespace />message_' + messageId).one('ul.edit-controls').prepend(html);
 
-		jQuery('#<portlet:namespace />deleteAnswerFlag_' + messageId).remove();
+		AUI().one('#<portlet:namespace />deleteAnswerFlag_' + messageId).remove();
 	}
 
 	<c:if test="<%= thread.getRootMessageId() != message.getMessageId() %>">

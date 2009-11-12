@@ -5,15 +5,18 @@ AUI().add(
 			var instance = this;
 			options = options || {};
 
-			instance._textarea = jQuery(options.textarea);
-			instance._location = jQuery(options.location || []);
+			instance._textarea = A.one(options.textarea);
+			instance._location = A.one(options.location);
 
-			instance._createEmoticons();
-			instance._createToolbar();
+			instance._createEmoticons(
+				function() {
+					instance._createToolbar();
 
-			if (options.onLoad) {
-				options.onLoad();
-			}
+					if (options.onLoad) {
+						options.onLoad();
+					}
+				}
+			);
 		};
 
 		bbCode.prototype = {
@@ -38,7 +41,7 @@ AUI().add(
 				var endTag = '[/' + tag + ']';
 
 				var textarea = instance._textarea;
-				var field = textarea[0];
+				var field = textarea.getDOM();
 				var value = textarea.val();
 
 				if (Liferay.Browser.isIe()) {
@@ -78,7 +81,7 @@ AUI().add(
 					field.value += begTag + content + endTag;
 				}
 
-				textarea.trigger('focus');
+				textarea.focus();
 			},
 
 			setHTML: function(content) {
@@ -87,28 +90,39 @@ AUI().add(
 				instance._textarea.val(content);
 			},
 
-			_createEmoticons: function() {
+			_createEmoticons: function(callback) {
 				var instance = this;
 
-				var xHR = jQuery.ajax(
+				A.io(
+					themeDisplay.getPathMain() + '/portal/emoticons',
 					{
-						url: themeDisplay.getPathMain() + '/portal/emoticons',
-						async: false
-					}
-				);
+						on: {
+							success: function(id, xHR) {
+								var response = xHR.responseText;
 
-				var response = xHR.responseText;
+								var emoticonsContainer = A.Node.create('<div class="lfr-emoticon-container"></div>');
 
-				var emoticonsContainer = jQuery('<div class="lfr-emoticon-container"></div>');
+								instance._emoticons = emoticonsContainer.html(response);
 
-				instance._emoticons = emoticonsContainer.append(response);
+								var emoticons = instance._emoticons.all('.emoticon');
 
-				instance._emoticons.find('.emoticon').click(
-					function(event) {
-						var emoticonCode = this.getAttribute('emoticonCode');
+								if (emoticons) {
+									emoticons.on(
+										'click',
+										function(event) {
+											var emoticonCode = event.currentTarget.getAttribute('emoticonCode');
 
-						if (emoticonCode) {
-							instance._insertEmoticon(emoticonCode);
+											if (emoticonCode) {
+												instance._insertEmoticon(emoticonCode);
+											}
+										}
+									);
+								}
+
+								if (callback) {
+									callback.apply(instance, []);
+								}
+							}
 						}
 					}
 				);
@@ -123,11 +137,11 @@ AUI().add(
 					fontType: {
 						options: [Liferay.Language.get('font'), 'Arial', 'Comic Sans', 'Courier New', 'Tahoma', 'Times New Roman', 'Verdana', 'Wingdings'],
 						onChange: function(event) {
-							var value = this[this.selectedIndex].value;
+							var value = event.target.val();
 
 							if (value != Liferay.Language.get('font')) {
-								instance.insertTag('font', this[this.selectedIndex].value);
-								this.selectedIndex = 0;
+								instance.insertTag('font', value);
+								event.target.getDOM().selectedIndex = 0;
 							}
 						}
 					},
@@ -135,11 +149,11 @@ AUI().add(
 					fontSize: {
 						options: [Liferay.Language.get('size'), 1, 2, 3, 4, 5, 6, 7],
 						onChange: function(event) {
-							var value = this[this.selectedIndex].value;
+							var value = event.target.val();
 
 							if (value != Liferay.Language.get('size')) {
-								instance.insertTag('size', this[this.selectedIndex].value);
-								this.selectedIndex = 0;
+								instance.insertTag('size', value);
+								event.target.getDOM().selectedIndex = 0;
 							}
 						},
 						groupEnd: true
@@ -278,26 +292,26 @@ AUI().add(
 					}
 				};
 
-				jQuery.each(
+				A.each(
 					instance._buttons,
-					function(i, n) {
-						var buttonClass = ' ' + (this.className || '');
-						var buttonText = this.text || '';
+					function(n, i) {
+						var buttonClass = ' ' + (n.className || '');
+						var buttonText = n.text || '';
 
-						if (i != 'insert' && !this.options) {
-							var imagePath = themeDisplay.getPathThemeImages() + '/' + this.image;
+						if (i != 'insert' && !n.options) {
+							var imagePath = themeDisplay.getPathThemeImages() + '/' + n.image;
 
 							html +=
 								'<a buttonId="' + i + '" class="lfr-button ' + buttonClass + '" href="javascript:;" title="' + buttonText + '">' +
 								'<img alt="' + buttonText + '" buttonId="' + i + '" src="' + imagePath + '" >' +
 								'</a>';
 						}
-						else if (this.options && this.options.length) {
+						else if (n.options && n.options.length) {
 							html += '<select class="' + buttonClass + '" selectId="' + i + '" title="' + buttonText + '">';
 
-							jQuery.each(
-								this.options,
-								function(i, v) {
+							A.each(
+								n.options,
+								function(v, i) {
 									html += '<option value="' + v + '">' + v + '</option>';
 								}
 							);
@@ -305,21 +319,21 @@ AUI().add(
 							html += '</select>';
 						}
 
-						if (this.groupEnd) {
+						if (n.groupEnd) {
 							html += '<span class="lfr-separator"></span>';
 						}
 					}
 				);
 
-				if (!instance._location.length) {
-					instance._location = jQuery('<div class="lfr-toolbar">' + html + '</div>');
-					instance._textarea.before(instance._location);
+				if (!instance._location) {
+					instance._location = A.Node.create('<div class="lfr-toolbar">' + html + '</div>');
+					instance._textarea.placeBefore(instance._location);
 				}
 				else {
 					instance._location.html(html);
 				}
 
-				var emoticonButton = instance._location.find('.lfr-button[buttonId=emoticons]');
+				var emoticonButton = instance._location.all('.lfr-button[buttonId=emoticons]');
 				var hoveringOver = false;
 				var offsetHeight = 0;
 				var offsetWidth = 0;
@@ -330,8 +344,8 @@ AUI().add(
 					function(A) {
 						var emoticonOverlay = new A.ContextOverlay(
 							{
-								trigger: emoticonButton[0],
-								contentBox: instance._emoticons[0],
+								trigger: emoticonButton.item(0),
+								contentBox: instance._emoticons.item(0),
 								hideDelay: 500,
 								align: {
 									 points: ['tr', 'br']
@@ -343,7 +357,8 @@ AUI().add(
 					}
 				);
 
-				instance._location.click(
+				instance._location.on(
+					'click',
 					function(event) {
 						instance._setSelectionRange();
 
@@ -356,42 +371,49 @@ AUI().add(
 					}
 				);
 
-				var selects = instance._location.find('select');
+				var selects = instance._location.all('select');
 
-				selects.change(
-					function(event) {
-						var selectId = this.getAttribute('selectId');
+				if (selects) {
+					selects.on(
+						'change',
+						function(event) {
+							var selectId = event.target.getAttribute('selectId');
 
-						if (selectId && instance._buttons[selectId].onChange) {
-							instance._buttons[selectId].onChange.apply(this, [event]);
+							if (selectId && instance._buttons[selectId].onChange) {
+								instance._buttons[selectId].onChange.apply(this, [event]);
+							}
 						}
-					}
-				);
+					);
+				}
 
-				instance._fontColorInput = jQuery('<input type="hidden" val="" />');
+				instance._fontColorInput = A.Node.create('<input type="hidden" val="" />');
 
 				AUI().use(
 					'color-picker',
 					function(A) {
-						instance._location.find('.use-colorpicker').before(instance._fontColorInput);
+						var colorpicker = instance._location.one('.use-colorpicker');
 
-						new A.ColorPicker(
-							{
-								after: {
-									colorChange: function() {
-										instance._fontColorInput[0].value = '#' + this.get('hex');
-									},
-									visibleChange: function(event) {
-										if (!event.newVal) {
-											instance._insertColor();
+						if (colorpicker) {
+							instance._fontColorInput.placeBefore(colorpicker);
+
+							new A.ColorPicker(
+								{
+									after: {
+										colorChange: function() {
+											instance._fontColorInput.val('#' + this.get('hex'));
+										},
+										visibleChange: function(event) {
+											if (!event.newVal) {
+												instance._insertColor();
+											}
 										}
-									}
-								},
-								trigger: instance._location.find('.use-colorpicker')[0],
-								zIndex: 9999
-							}
-						)
-						.render();
+									},
+									trigger: colorpicker,
+									zIndex: 9999
+								}
+							)
+							.render();
+						}
 					}
 				);
 			},
@@ -426,9 +448,9 @@ AUI().add(
 				var instance = this;
 
 				var textarea = instance._textarea;
-				var field = textarea[0];
+				var field = textarea.getDOM();
 
-				textarea.trigger('focus');
+				textarea.focus();
 
 				if (Liferay.Browser.isIe()) {
 					field.focus();
@@ -504,7 +526,7 @@ AUI().add(
 				var instance = this;
 
 				var textarea = instance._textarea;
-				var field = textarea[0];
+				var field = textarea.getDOM();
 
 				if (Liferay.Browser.isIe()) {
 					field.focus();
@@ -525,7 +547,7 @@ AUI().add(
 				var instance = this;
 
 				if (Liferay.Browser.isIe() && (instance._selectionRange == null)) {
-					instance._textarea.trigger('focus');
+					instance._textarea.focus();
 
 					instance._selectionRange = document.selection.createRange();
 				}
