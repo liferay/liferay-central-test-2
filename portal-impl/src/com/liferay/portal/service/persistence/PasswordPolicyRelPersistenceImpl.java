@@ -71,6 +71,23 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	public static final String FINDER_CLASS_NAME_ENTITY = PasswordPolicyRelImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_PASSWORDPOLICYID = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByPasswordPolicyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_PASSWORDPOLICYID = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByPasswordPolicyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_PASSWORDPOLICYID = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByPasswordPolicyId",
+			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
@@ -404,6 +421,253 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		}
 
 		return passwordPolicyRel;
+	}
+
+	public List<PasswordPolicyRel> findByPasswordPolicyId(long passwordPolicyId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(passwordPolicyId) };
+
+		List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PASSWORDPOLICYID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+
+				query.append("passwordPolicyRel.passwordPolicyId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(passwordPolicyId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<PasswordPolicyRel>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PASSWORDPOLICYID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<PasswordPolicyRel> findByPasswordPolicyId(
+		long passwordPolicyId, int start, int end) throws SystemException {
+		return findByPasswordPolicyId(passwordPolicyId, start, end, null);
+	}
+
+	public List<PasswordPolicyRel> findByPasswordPolicyId(
+		long passwordPolicyId, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(passwordPolicyId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PASSWORDPOLICYID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+
+				query.append("passwordPolicyRel.passwordPolicyId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("passwordPolicyRel.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(passwordPolicyId);
+
+				list = (List<PasswordPolicyRel>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<PasswordPolicyRel>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PASSWORDPOLICYID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public PasswordPolicyRel findByPasswordPolicyId_First(
+		long passwordPolicyId, OrderByComparator obc)
+		throws NoSuchPasswordPolicyRelException, SystemException {
+		List<PasswordPolicyRel> list = findByPasswordPolicyId(passwordPolicyId,
+				0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No PasswordPolicyRel exists with the key {");
+
+			msg.append("passwordPolicyId=" + passwordPolicyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPasswordPolicyRelException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public PasswordPolicyRel findByPasswordPolicyId_Last(
+		long passwordPolicyId, OrderByComparator obc)
+		throws NoSuchPasswordPolicyRelException, SystemException {
+		int count = countByPasswordPolicyId(passwordPolicyId);
+
+		List<PasswordPolicyRel> list = findByPasswordPolicyId(passwordPolicyId,
+				count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No PasswordPolicyRel exists with the key {");
+
+			msg.append("passwordPolicyId=" + passwordPolicyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPasswordPolicyRelException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public PasswordPolicyRel[] findByPasswordPolicyId_PrevAndNext(
+		long passwordPolicyRelId, long passwordPolicyId, OrderByComparator obc)
+		throws NoSuchPasswordPolicyRelException, SystemException {
+		PasswordPolicyRel passwordPolicyRel = findByPrimaryKey(passwordPolicyRelId);
+
+		int count = countByPasswordPolicyId(passwordPolicyId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+
+			query.append("passwordPolicyRel.passwordPolicyId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("passwordPolicyRel.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(passwordPolicyId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					passwordPolicyRel);
+
+			PasswordPolicyRel[] array = new PasswordPolicyRelImpl[3];
+
+			array[0] = (PasswordPolicyRel)objArray[0];
+			array[1] = (PasswordPolicyRel)objArray[1];
+			array[2] = (PasswordPolicyRel)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public PasswordPolicyRel findByC_C(long classNameId, long classPK)
@@ -777,6 +1041,14 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		return list;
 	}
 
+	public void removeByPasswordPolicyId(long passwordPolicyId)
+		throws SystemException {
+		for (PasswordPolicyRel passwordPolicyRel : findByPasswordPolicyId(
+				passwordPolicyId)) {
+			remove(passwordPolicyRel);
+		}
+	}
+
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchPasswordPolicyRelException, SystemException {
 		PasswordPolicyRel passwordPolicyRel = findByC_C(classNameId, classPK);
@@ -796,6 +1068,54 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		for (PasswordPolicyRel passwordPolicyRel : findAll()) {
 			remove(passwordPolicyRel);
 		}
+	}
+
+	public int countByPasswordPolicyId(long passwordPolicyId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(passwordPolicyId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PASSWORDPOLICYID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(passwordPolicyRel) ");
+				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+
+				query.append("passwordPolicyRel.passwordPolicyId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(passwordPolicyId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PASSWORDPOLICYID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	public int countByC_C(long classNameId, long classPK)

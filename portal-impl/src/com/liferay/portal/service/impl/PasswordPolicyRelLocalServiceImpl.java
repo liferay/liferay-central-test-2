@@ -110,6 +110,12 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
+	public void deletePasswordPolicyRels(long passwordPolicyId)
+		throws SystemException {
+
+		passwordPolicyRelPersistence.removeByPasswordPolicyId(passwordPolicyId);
+	}
+
 	public void deletePasswordPolicyRels(
 			long passwordPolicyId, String className, long[] classPKs)
 		throws SystemException {

@@ -907,6 +907,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="PasswordPolicyId" return-type="Collection">
+			<finder-column name="passwordPolicyId" />
+		</finder>
 		<finder name="C_C" return-type="PasswordPolicyRel">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />

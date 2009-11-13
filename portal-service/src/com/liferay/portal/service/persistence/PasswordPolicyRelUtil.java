@@ -123,6 +123,54 @@ public class PasswordPolicyRelUtil {
 		return getPersistence().fetchByPrimaryKey(passwordPolicyRelId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> findByPasswordPolicyId(
+		long passwordPolicyId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByPasswordPolicyId(passwordPolicyId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> findByPasswordPolicyId(
+		long passwordPolicyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByPasswordPolicyId(passwordPolicyId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> findByPasswordPolicyId(
+		long passwordPolicyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByPasswordPolicyId(passwordPolicyId, start, end, obc);
+	}
+
+	public static com.liferay.portal.model.PasswordPolicyRel findByPasswordPolicyId_First(
+		long passwordPolicyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByPasswordPolicyId_First(passwordPolicyId, obc);
+	}
+
+	public static com.liferay.portal.model.PasswordPolicyRel findByPasswordPolicyId_Last(
+		long passwordPolicyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByPasswordPolicyId_Last(passwordPolicyId, obc);
+	}
+
+	public static com.liferay.portal.model.PasswordPolicyRel[] findByPasswordPolicyId_PrevAndNext(
+		long passwordPolicyRelId, long passwordPolicyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByPasswordPolicyId_PrevAndNext(passwordPolicyRelId,
+			passwordPolicyId, obc);
+	}
+
 	public static com.liferay.portal.model.PasswordPolicyRel findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
@@ -182,6 +230,11 @@ public class PasswordPolicyRelUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
+	public static void removeByPasswordPolicyId(long passwordPolicyId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByPasswordPolicyId(passwordPolicyId);
+	}
+
 	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
 			com.liferay.portal.SystemException {
@@ -197,6 +250,11 @@ public class PasswordPolicyRelUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByPasswordPolicyId(long passwordPolicyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByPasswordPolicyId(passwordPolicyId);
 	}
 
 	public static int countByC_C(long classNameId, long classPK)

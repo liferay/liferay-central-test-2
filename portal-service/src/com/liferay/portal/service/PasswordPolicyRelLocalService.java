@@ -115,6 +115,9 @@ public interface PasswordPolicyRelLocalService {
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	public void deletePasswordPolicyRels(long passwordPolicyId)
+		throws com.liferay.portal.SystemException;
+
 	public void deletePasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.SystemException;

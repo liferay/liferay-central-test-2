@@ -142,6 +142,11 @@ public class PasswordPolicyLocalServiceImpl
 			throw new RequiredPasswordPolicyException();
 		}
 
+		// Password policy relations
+
+		passwordPolicyRelLocalService.deletePasswordPolicyRels(
+			passwordPolicyId);
+
 		// Resources
 
 		resourceLocalService.deleteResource(
