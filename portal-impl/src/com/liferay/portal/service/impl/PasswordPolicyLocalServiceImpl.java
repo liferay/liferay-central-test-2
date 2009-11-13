@@ -28,6 +28,7 @@ import com.liferay.portal.PasswordPolicyNameException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredPasswordPolicyException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -41,6 +42,7 @@ import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -141,6 +143,21 @@ public class PasswordPolicyLocalServiceImpl
 		if (passwordPolicy.isDefaultPolicy()) {
 			throw new RequiredPasswordPolicyException();
 		}
+
+		LinkedHashMap<String, Object> userParams =
+			new LinkedHashMap<String, Object>();
+		userParams.put("usersPasswordPolicies", passwordPolicyId);
+
+		List<User> users = userLocalService.search(
+			passwordPolicy.getCompanyId(), StringPool.BLANK, null, userParams,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator) null);
+
+		long[] userIds = new long[users.size()];
+		for (int i = 0; i < userIds.length; i++) {
+			userIds[i] = users.get(i).getUserId();
+		}
+
+		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 
 		// Resources
 
