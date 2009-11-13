@@ -61,228 +61,156 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:tabs
-	names="email-from,event-reminder-email,display-settings"
-	param="tabs2"
-	url="<%= portletURL %>"
-/>
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
-<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
-<liferay-ui:error key="emailEventReminderBody" message="please-enter-a-valid-body" />
-<liferay-ui:error key="emailEventReminderSubject" message="please-enter-a-valid-subject" />
+	<liferay-ui:tabs
+		names="email-from,event-reminder-email,display-settings"
+		param="tabs2"
+		url="<%= portletURL %>"
+	/>
 
-<c:choose>
-	<c:when test='<%= tabs2.equals("email-from") %>'>
-		<table class="lfr-table">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="name" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= HtmlUtil.escape(emailFromName) %>" />
-			</td>
-		</tr>
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="address" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= HtmlUtil.escape(emailFromAddress) %>" />
-			</td>
-		</tr>
-		</table>
-	</c:when>
-	<c:when test='<%= tabs2.equals("event-reminder-email") %>'>
-		<table class="lfr-table">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="enabled" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="emailEventReminderEnabled" defaultValue="<%= CalUtil.getEmailEventReminderEnabled(preferences) %>" />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="subject" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />emailEventReminderSubject" type="text" value="<%= HtmlUtil.escape(emailEventReminderSubject) %>" />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="body" />
-			</td>
-			<td>
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+	<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
+	<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
+	<liferay-ui:error key="emailEventReminderBody" message="please-enter-a-valid-body" />
+	<liferay-ui:error key="emailEventReminderSubject" message="please-enter-a-valid-subject" />
 
-				<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
-			</td>
-		</tr>
-		</table>
+	<c:choose>
+		<c:when test='<%= tabs2.equals("email-from") %>'>
+			<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" type="text" value="<%= emailFromName %>" />
 
-		<br />
+			<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+		</c:when>
+		<c:when test='<%= tabs2.equals("event-reminder-email") %>'>
+			<aui:fieldset>
+				<aui:input inlineLabel="left" label="enabled" name="emailEventReminderEnabled" type="checkbox" value="<%= CalUtil.getEmailEventReminderEnabled(preferences) %>" />
 
-		<strong><liferay-ui:message key="definition-of-terms" /></strong>
+				<aui:input cssClass="lfr-input-text-container" label="subject" name="emailEventReminderSubject" type="text" value="<%= emailEventReminderSubject %>" />
 
-		<br /><br />
+				<aui:field-wrapper label="body">
+					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<strong>[$EVENT_START_DATE$]</strong>
-			</td>
-			<td>
-				The event start date
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$EVENT_TITLE$]</strong>
-			</td>
-			<td>
-				The event title
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$FROM_ADDRESS$]</strong>
-			</td>
-			<td>
-				<%= HtmlUtil.escape(emailFromAddress) %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$FROM_NAME$]</strong>
-			</td>
-			<td>
-				<%= HtmlUtil.escape(emailFromName) %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$PORTAL_URL$]</strong>
-			</td>
-			<td>
-				<%= company.getVirtualHost() %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$PORTLET_NAME$]</strong>
-			</td>
-			<td>
-				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$TO_ADDRESS$]</strong>
-			</td>
-			<td>
-				The address of the email recipient
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>[$TO_NAME$]</strong>
-			</td>
-			<td>
-				The name of the email recipient
-			</td>
-		</tr>
-		</table>
-	</c:when>
-	<c:when test='<%= tabs2.equals("display-settings") %>'>
-		<fieldset>
-			<legend><liferay-ui:message key="default-tab" /></legend>
+					<aui:input name="<%= editorParam %>" type="hidden" />
+				</aui:field-wrapper>
+			</aui:fieldset>
+
+			<strong><liferay-ui:message key="definition-of-terms" /></strong>
+
+			<br /><br />
 
 			<table class="lfr-table">
 			<tr>
-				<td class="lfr-label">
-					<liferay-ui:message key="default-tab" />
+				<td>
+					<strong>[$EVENT_START_DATE$]</strong>
 				</td>
 				<td>
-					<select name="<portlet:namespace />tabs1Default">
-
-						<%
-						for (String tabs1Name : tabs1NamesArray) {
-						%>
-
-							<option <%= tabs1Default.equals(tabs1Name) ? "selected" : "" %> value="<%= tabs1Name %>"><liferay-ui:message key="<%= tabs1Name %>" /></option>
-
-						<%
-						}
-						%>
-					</select>
+					The event start date
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$EVENT_TITLE$]</strong>
+				</td>
+				<td>
+					The event title
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$FROM_ADDRESS$]</strong>
+				</td>
+				<td>
+					<%= HtmlUtil.escape(emailFromAddress) %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$FROM_NAME$]</strong>
+				</td>
+				<td>
+					<%= HtmlUtil.escape(emailFromName) %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$PORTAL_URL$]</strong>
+				</td>
+				<td>
+					<%= company.getVirtualHost() %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$PORTLET_NAME$]</strong>
+				</td>
+				<td>
+					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$TO_ADDRESS$]</strong>
+				</td>
+				<td>
+					The address of the email recipient
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>[$TO_NAME$]</strong>
+				</td>
+				<td>
+					The name of the email recipient
 				</td>
 			</tr>
 			</table>
-		</fieldset>
+		</c:when>
+		<c:when test='<%= tabs2.equals("display-settings") %>'>
+			<aui:fieldset>
+				<aui:legend label="default-tab" />
 
-		<br />
+				<aui:select label="default-tab" name="tabs1Default">
 
-		<fieldset>
-			<legend><liferay-ui:message key="summary-tab" /></legend>
+					<%
+					for (String tabs1Name : tabs1NamesArray) {
+					%>
 
-			<table class="lfr-table">
-			<tr>
-				<td class="lfr-label">
-					<liferay-ui:message key="orientation" />
-				</td>
-				<td>
-					<select name="<portlet:namespace />summaryTabOrientation" size="1">
-						<option <%= summaryTabOrientation.equals("horizontal") ? "selected" : "" %>value="horizontal"><liferay-ui:message key="horizontal" /></option>
-						<option <%= summaryTabOrientation.equals("vertical") ? "selected" : "" %> value="vertical"><liferay-ui:message key="vertical" /></option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td class="lfr-label">
-					<liferay-ui:message key="show-mini-month" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param="summaryTabShowMiniMonth" defaultValue="<%= summaryTabShowMiniMonth %>" />
-				</td>
-			</tr>
-			<tr>
-				<td class="lfr-label">
-					<liferay-ui:message key="show-todays-events" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param="summaryTabShowTodaysEvents" defaultValue="<%= summaryTabShowTodaysEvents %>" />
-				</td>
-			</tr>
-			</table>
-		</fieldset>
-	</c:when>
-</c:choose>
+					<aui:option label="<%= tabs1Name %>" selected="<%= tabs1Default.equals(tabs1Name) %>" />
 
-<br />
+					<%
+					}
+					%>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+				</aui:select>
+			</aui:fieldset>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
+			<aui:fieldset>
+				<aui:legend label="summary-tab" />
 
-</form>
+				<aui:select label="summary-tab" name="summaryTabOrientation">
+					<aui:option label="horizontal" selected='<%= summaryTabOrientation.equals("horizontal") %>' />
+					<aui:option label="vertical" selected='<%= summaryTabOrientation.equals("vertical") %>' />
+				</aui:select>
+
+				<aui:input inlineLabel="left" label="show-mini-month" name="summaryTabShowMiniMonth" type="checkbox" value="<%= summaryTabShowMiniMonth %>" />
+
+				<aui:input inlineLabel="left" label="show-todays-events" name="summaryTabShowTodaysEvents" type="checkbox" value="<%= summaryTabShowTodaysEvents %>" />
+			</aui:fieldset>
+		</c:when>
+	</c:choose>
+
+	<br />
+
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.calendar.edit_configuration.jsp";
