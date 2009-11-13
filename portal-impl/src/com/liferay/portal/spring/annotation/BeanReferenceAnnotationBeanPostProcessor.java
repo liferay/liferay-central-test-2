@@ -92,14 +92,15 @@ public class BeanReferenceAnnotationBeanPostProcessor
 	private void _autoInject(
 		Object targetBean, String targetBeanName, Class<?> beanClass) {
 
-		if (beanClass == null || beanClass.isInterface()) {
+		if ((beanClass == null) || beanClass.isInterface()) {
 			return;
 		}
 
 		String className = beanClass.getName();
 
-		if (className.equals(JAVA_LANG_OBJECT) ||
-			className.startsWith(ORG_SPRINGFRAMEWORK)) {
+		if (className.equals(_JAVA_LANG_OBJECT) ||
+			className.startsWith(_ORG_SPRINGFRAMEWORK)) {
+
 			return;
 		}
 
@@ -140,8 +141,9 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		return;
 	}
 
-	private static String JAVA_LANG_OBJECT = "java.lang.Object";
-	private static String ORG_SPRINGFRAMEWORK = "org.springframework";
+	private static String _JAVA_LANG_OBJECT = "java.lang.Object";
+
+	private static String _ORG_SPRINGFRAMEWORK = "org.springframework";
 
 	private BeanFactory _beanFactory;
 	private Map<String, Object> _beans = new HashMap<String, Object>();
