@@ -130,6 +130,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
+	public List<AssetEntry> getEntries(long tagId) throws SystemException {
+		return assetEntryFinder.findByTagId(tagId);
+	}
+
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws SystemException {
 

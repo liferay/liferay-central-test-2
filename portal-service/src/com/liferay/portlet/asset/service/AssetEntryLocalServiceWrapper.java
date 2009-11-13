@@ -148,6 +148,11 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 		return _assetEntryLocalService.getEntries(entryQuery);
 	}
 
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
+		long tagId) throws com.liferay.portal.SystemException {
+		return _assetEntryLocalService.getEntries(tagId);
+	}
+
 	public int getEntriesCount(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.SystemException {

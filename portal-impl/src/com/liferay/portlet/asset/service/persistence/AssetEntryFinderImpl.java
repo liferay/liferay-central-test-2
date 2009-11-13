@@ -48,6 +48,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Marcellus Tavares
  */
 public class AssetEntryFinderImpl
 	extends BasePersistenceImpl<AssetEntry> implements AssetEntryFinder {
@@ -57,6 +58,9 @@ public class AssetEntryFinderImpl
 
 	public static String FIND_BY_AND_TAG_IDS =
 		AssetEntryFinder.class.getName() + ".findByAndTagIds";
+
+	public static String FIND_BY_TAG_ID =
+		AssetEntryFinder.class.getName() + ".findByTagId";
 
 	public int countEntries(AssetEntryQuery entryQuery) throws SystemException {
 		Session session = null;
@@ -77,6 +81,35 @@ public class AssetEntryFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<AssetEntry> findByTagId(long tagId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_TAG_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("AssetEntry", AssetEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(tagId);
+
+			return (List<AssetEntry>) QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
