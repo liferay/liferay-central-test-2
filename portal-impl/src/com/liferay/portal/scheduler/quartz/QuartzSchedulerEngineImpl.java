@@ -147,10 +147,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	public Scheduler getScheduler() {
-		return _scheduler;
-	}
-
 	public void schedule(
 			com.liferay.portal.kernel.scheduler.Trigger trigger,
 			String description, String destination, Message message)
