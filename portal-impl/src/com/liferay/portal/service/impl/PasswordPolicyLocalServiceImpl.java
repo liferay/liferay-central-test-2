@@ -146,15 +146,19 @@ public class PasswordPolicyLocalServiceImpl
 
 		LinkedHashMap<String, Object> userParams =
 			new LinkedHashMap<String, Object>();
+
 		userParams.put("usersPasswordPolicies", passwordPolicyId);
 
 		List<User> users = userLocalService.search(
 			passwordPolicy.getCompanyId(), StringPool.BLANK, null, userParams,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator) null);
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
 		long[] userIds = new long[users.size()];
-		for (int i = 0; i < userIds.length; i++) {
-			userIds[i] = users.get(i).getUserId();
+
+		for (int i = 0; i < users.size(); i++) {
+			User user = users.get(i);
+
+			userIds[i] = user.getUserId();
 		}
 
 		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
