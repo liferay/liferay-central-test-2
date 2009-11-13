@@ -56,11 +56,52 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		return bean;
 	}
 
+	private void autoInject(
+		Object targetBean, String targetBeanName, Class<?> beanClass) {
+		if (beanClass == null) {
+			return;
+		}
+
+		String className = beanClass.getName();
+		if (!className.startsWith("com.liferay")) {
+			return;
+		}
+
+		AutoInject autoInject = beanClass.getAnnotation(AutoInject.class);
+		if (autoInject == null) {
+			autoInject(targetBean, targetBeanName, beanClass.getSuperclass());
+		}
+		else if (autoInject.enable()){
+			Field[] fields = beanClass.getDeclaredFields();
+			for(Field field : fields) {
+				BeanReference beanReference =
+					field.getAnnotation(BeanReference.class);
+				if (beanReference != null) {
+					String referredBeanName = beanReference.name();
+					Object referredBean = _localBeanCache.get(referredBeanName);
+					if (referredBean == null) {
+						referredBean = _beanFactory.getBean(referredBeanName);
+						_localBeanCache.put(referredBeanName, referredBean);
+					}
+					ReflectionUtils.makeAccessible(field);
+					try {
+						field.set(targetBean, referredBean);
+					}
+					catch (Throwable t) {
+						throw new BeanCreationException(
+							targetBeanName,
+							"Injection of BeanReference fields failed", t);
+					}
+				}
+			}
+		}
+		return;
+	}
+
 	public boolean postProcessAfterInstantiation(Object bean, String beanName)
 		throws BeansException {
 
-		_autoInject(bean, beanName, bean.getClass());
-
+		autoInject(bean, beanName, bean.getClass());
 		return true;
 	}
 
@@ -90,62 +131,8 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		_beanFactory = beanFactory;
 	}
 
-	private void _autoInject(
-		Object targetBean, String targetBeanName, Class<?> beanClass) {
-
-		if (beanClass == null) {
-			return;
-		}
-
-		String className = beanClass.getName();
-
-		if (className.equals(Object.class.getName())) {
-			return;
-		}
-
-		AutoInject autoInject = beanClass.getAnnotation(AutoInject.class);
-
-		if (autoInject == null) {
-			_autoInject(targetBean, targetBeanName, beanClass.getSuperclass());
-		}
-		else if (autoInject.enable()){
-			Field[] fields = beanClass.getDeclaredFields();
-
-			for (Field field : fields) {
-				BeanReference beanReference = field.getAnnotation(
-					BeanReference.class);
-
-				if (beanReference == null) {
-					continue;
-				}
-
-				String referencedBeanName = beanReference.name();
-
-				Object referencedBean = _beans.get(referencedBeanName);
-
-				if (referencedBean == null) {
-					referencedBean = _beanFactory.getBean(referencedBeanName);
-
-					_beans.put(referencedBeanName, referencedBean);
-				}
-
-				ReflectionUtils.makeAccessible(field);
-
-				try {
-					field.set(targetBean, referencedBean);
-				}
-				catch (Throwable t) {
-					throw new BeanCreationException(
-						targetBeanName, "Could not inject BeanReference fields",
-						t);
-				}
-			}
-		}
-
-		return;
-	}
-
 	private BeanFactory _beanFactory;
-	private Map<String, Object> _beans = new HashMap<String, Object>();
+
+	private Map<String, Object> _localBeanCache = new HashMap<String, Object>();
 
 }
