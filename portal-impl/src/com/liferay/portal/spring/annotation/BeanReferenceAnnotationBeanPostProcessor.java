@@ -22,22 +22,20 @@
 
 package com.liferay.portal.spring.annotation;
 
-import com.liferay.portal.kernel.annotation.AutoInject;
-import com.liferay.portal.kernel.annotation.BeanReference;
-
 import java.beans.PropertyDescriptor;
 
-import java.lang.reflect.Field;
-
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.annotation.InjectionMetadata;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.util.ReflectionUtils;
 
 /**
@@ -45,10 +43,10 @@ import org.springframework.util.ReflectionUtils;
  * Source</i></b></a>
  *
  * @author Michael Young
- * @author Shuyang Zhou
  */
 public class BeanReferenceAnnotationBeanPostProcessor
-	implements BeanFactoryAware, InstantiationAwareBeanPostProcessor {
+	implements BeanFactoryAware, InstantiationAwareBeanPostProcessor,
+		MergedBeanDefinitionPostProcessor {
 
 	public Object postProcessAfterInitialization(Object bean, String beanName)
 		throws BeansException {
@@ -56,52 +54,20 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		return bean;
 	}
 
-	private void autoInject(
-		Object targetBean, String targetBeanName, Class<?> beanClass) {
-		if (beanClass == null) {
-			return;
-		}
-
-		String className = beanClass.getName();
-		if (!className.startsWith("com.liferay")) {
-			return;
-		}
-
-		AutoInject autoInject = beanClass.getAnnotation(AutoInject.class);
-		if (autoInject == null) {
-			autoInject(targetBean, targetBeanName, beanClass.getSuperclass());
-		}
-		else if (autoInject.enable()){
-			Field[] fields = beanClass.getDeclaredFields();
-			for(Field field : fields) {
-				BeanReference beanReference =
-					field.getAnnotation(BeanReference.class);
-				if (beanReference != null) {
-					String referredBeanName = beanReference.name();
-					Object referredBean = _localBeanCache.get(referredBeanName);
-					if (referredBean == null) {
-						referredBean = _beanFactory.getBean(referredBeanName);
-						_localBeanCache.put(referredBeanName, referredBean);
-					}
-					ReflectionUtils.makeAccessible(field);
-					try {
-						field.set(targetBean, referredBean);
-					}
-					catch (Throwable t) {
-						throw new BeanCreationException(
-							targetBeanName,
-							"Injection of BeanReference fields failed", t);
-					}
-				}
-			}
-		}
-		return;
-	}
-
 	public boolean postProcessAfterInstantiation(Object bean, String beanName)
 		throws BeansException {
 
-		autoInject(bean, beanName, bean.getClass());
+		InjectionMetadata injectionMetadata = findResourceMetadata(
+			bean.getClass());
+
+		try {
+			injectionMetadata.injectFields(bean, beanName);
+		}
+		catch (Throwable t) {
+			throw new BeanCreationException(
+				beanName, "Injection of BeanReference fields failed", t);
+		}
+
 		return true;
 	}
 
@@ -118,11 +84,34 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		return null;
 	}
 
+	public void postProcessMergedBeanDefinition(
+			RootBeanDefinition beanDefinition, Class beanType,
+			String beanName) {
+
+		if (beanType == null) {
+			return;
+		}
+
+		InjectionMetadata injectionMetadata = findResourceMetadata(beanType);
+
+		injectionMetadata.checkConfigMembers(beanDefinition);
+	}
+
 	public PropertyValues postProcessPropertyValues(
 			PropertyValues propertyValues,
 			PropertyDescriptor[] propertyDescriptors, Object bean,
 			String beanName)
 		throws BeansException {
+
+		InjectionMetadata metadata = findResourceMetadata(bean.getClass());
+
+		try {
+			metadata.injectMethods(bean, beanName, propertyValues);
+		}
+		catch (Throwable t) {
+			throw new BeanCreationException(
+				beanName, "Injection of BeanReference methods failed", t);
+		}
 
 		return propertyValues;
 	}
@@ -131,8 +120,35 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		_beanFactory = beanFactory;
 	}
 
+	protected InjectionMetadata findResourceMetadata(Class clazz) {
+		InjectionMetadata injectionMetadata = _injectionMetadataMap.get(clazz);
+
+		if (injectionMetadata != null) {
+			return injectionMetadata;
+		}
+
+		synchronized (_injectionMetadataMap) {
+			injectionMetadata = _injectionMetadataMap.get(clazz);
+
+			if (injectionMetadata == null) {
+				injectionMetadata = new InjectionMetadata(clazz);
+
+				BeanReferenceCallback callback = new BeanReferenceCallback(
+					_beanFactory, injectionMetadata, clazz);
+
+				ReflectionUtils.doWithFields(clazz, callback);
+				ReflectionUtils.doWithMethods(clazz, callback);
+
+				_injectionMetadataMap.put(clazz, injectionMetadata);
+			}
+		}
+
+		return injectionMetadata;
+	}
+
 	private BeanFactory _beanFactory;
 
-	private Map<String, Object> _localBeanCache = new HashMap<String, Object>();
+	private Map<Class<?>, InjectionMetadata> _injectionMetadataMap =
+		new ConcurrentHashMap<Class<?>, InjectionMetadata>();
 
 }
