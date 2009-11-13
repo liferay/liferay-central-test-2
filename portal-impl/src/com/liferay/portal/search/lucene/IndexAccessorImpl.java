@@ -91,19 +91,21 @@ public class IndexAccessorImpl implements IndexAccessor {
 			return;
 		}
 
-		synchronized (this) {
-			if (_indexWriter == null) {
-				Directory directory = getLuceneDir();
+		if (_indexWriter == null) {
+			Directory directory = getLuceneDir();
 
-				if (IndexWriter.isLocked(directory)) {
-					IndexWriter.unlock(directory);
-				}
+			if (IndexWriter.isLocked(directory)) {
+				IndexWriter.unlock(directory);
+			}
 
-				try {
-					_initIndexWriter();
-				}
-				finally {
-					_doCleanUp();
+			try {
+				_initIndexWriter();
+			}
+			finally {
+				if (_indexWriter != null) {
+					_indexWriter.close();
+
+					_indexWriter = null;
 				}
 			}
 		}
@@ -114,29 +116,24 @@ public class IndexAccessorImpl implements IndexAccessor {
 			return;
 		}
 
-		synchronized (this) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
+		}
 
-			if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
-				_deleteFile();
-			}
-			else if (PropsValues.LUCENE_STORE_TYPE.equals(
-						_LUCENE_STORE_TYPE_JDBC)) {
+		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
+			_deleteFile();
+		}
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(
+					_LUCENE_STORE_TYPE_JDBC)) {
 
-				_deleteJdbc();
-			}
-			else if (PropsValues.LUCENE_STORE_TYPE.equals(
-						_LUCENE_STORE_TYPE_RAM)) {
-
-				_deleteRam();
-			}
-			else {
-				throw new RuntimeException(
-					"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
-			}
+			_deleteJdbc();
+		}
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
+			_deleteRam();
+		}
+		else {
+			throw new RuntimeException(
+				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
 	}
 
@@ -145,17 +142,15 @@ public class IndexAccessorImpl implements IndexAccessor {
 			return;
 		}
 
-		synchronized (this) {
-			_initIndexWriter();
+		_initIndexWriter();
 
-			try {
-				_indexWriter.deleteDocuments(term);
+		try {
+			_indexWriter.deleteDocuments(term);
 
-				_batchCount++;
-			}
-			finally {
-				_cleanUp();
-			}
+			_batchCount++;
+		}
+		finally {
+			_commit();
 		}
 	}
 
@@ -195,13 +190,11 @@ public class IndexAccessorImpl implements IndexAccessor {
 		_write(term, document);
 	}
 
-	private void _cleanUp() throws IOException {
-		synchronized (this) {
-			if ((PropsValues.LUCENE_COMMIT_BATCH_SIZE == 0) ||
-				(PropsValues.LUCENE_COMMIT_BATCH_SIZE <= _batchCount)) {
+	private void _commit() throws IOException {
+		if ((PropsValues.LUCENE_COMMIT_BATCH_SIZE == 0) ||
+			(PropsValues.LUCENE_COMMIT_BATCH_SIZE <= _batchCount)) {
 
-				_doCleanUp();
-			}
+			_doCommit();
 		}
 	}
 
@@ -261,12 +254,11 @@ public class IndexAccessorImpl implements IndexAccessor {
 	private void _deleteRam() {
 	}
 
-	private void _doCleanUp() throws IOException {
+	private void _doCommit() throws IOException {
 		if (_indexWriter != null) {
-			_indexWriter.close();
+			_indexWriter.commit();
 		}
 
-		_indexWriter = null;
 		_batchCount = 0;
 	}
 
@@ -388,7 +380,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 			public void run() {
 				try {
-					_doCleanUp();
+					_doCommit();
 				}
 				catch (IOException ioe) {
 					_log.error("Could not run scheduled commit", ioe);
@@ -509,32 +501,30 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private void _write(Term term, Document document) throws IOException {
-		synchronized (this) {
-			_initIndexWriter();
+		_initIndexWriter();
 
-			try {
-				if (term != null) {
-					_indexWriter.updateDocument(term, document);
-				}
-				else {
-					_indexWriter.addDocument(document);
-				}
-
-				_optimizeCount++;
-
-				if ((PropsValues.LUCENE_OPTIMIZE_INTERVAL == 0) ||
-					(_optimizeCount >= PropsValues.LUCENE_OPTIMIZE_INTERVAL)) {
-
-					_indexWriter.optimize();
-
-					_optimizeCount = 0;
-				}
-
-				_batchCount++;
+		try {
+			if (term != null) {
+				_indexWriter.updateDocument(term, document);
 			}
-			finally {
-				_cleanUp();
+			else {
+				_indexWriter.addDocument(document);
 			}
+
+			_optimizeCount++;
+
+			if ((PropsValues.LUCENE_OPTIMIZE_INTERVAL == 0) ||
+				(_optimizeCount >= PropsValues.LUCENE_OPTIMIZE_INTERVAL)) {
+
+				_indexWriter.optimize();
+
+				_optimizeCount = 0;
+			}
+
+			_batchCount++;
+		}
+		finally {
+			_commit();
 		}
 	}
 
