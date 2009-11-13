@@ -81,9 +81,11 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 
 	<c:choose>
 		<c:when test='<%= tabs2.equals("email-from") %>'>
-			<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" type="text" value="<%= emailFromName %>" />
+			<aui:fieldset>
+				<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" type="text" value="<%= emailFromName %>" />
 
-			<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.equals("event-reminder-email") %>'>
 			<aui:fieldset>
