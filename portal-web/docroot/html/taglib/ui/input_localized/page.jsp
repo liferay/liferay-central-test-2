@@ -164,10 +164,58 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 		'liferay-auto-fields',
 		'liferay-panel-floating',
 		function (A) {
+			var updateLanguageFlag = function(event) {
+				var target = event.target;
+
+				var selectedValue = target.val();
+
+				var newName = '<portlet:namespace /><%= name %>_';
+
+				var currentRow = target.ancestor('.lfr-form-row');
+
+				var img = currentRow.all('img.language-flag');
+				var imgSrc = 'spacer';
+
+				if (selectedValue) {
+					newName ='<portlet:namespace /><%= name %>_' + selectedValue;
+
+					imgSrc = 'language/' + selectedValue;
+				}
+
+				var inputField = currentRow.one('.language-value');
+
+				if (inputField) {
+					inputField.attr('name', newName);
+					inputField.attr('id', newName);
+				}
+
+				if (img) {
+					img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
+				}
+			};
+
 			<c:if test="<%= !disabled %>">
 				new Liferay.AutoFields(
 					{
-						contentBox: '#<%= randomNamespace %>languageSelector .lfr-panel-content'
+						contentBox: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
+						on: {
+							'autorow:clone': function(event) {
+								var instance = this;
+
+								var row = event.row.get('contentBox');
+
+								var select = row.one('select');
+								var img = row.one('img.language-flag');
+
+								if (select) {
+									select.on('change', updateLanguageFlag);
+								}
+
+								if (img) {
+									img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/spacer.png');
+								}
+							}
+						}
 					}
 				).render();
 			</c:if>
@@ -175,49 +223,35 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 			var panel = new Liferay.PanelFloating(
 				{
 					container: '#<%= randomNamespace %>languageSelector',
+					isCollapsible: false,
+					on: {
+						hide: function(event) {
+							var instance = this;
+
+							var container = instance.get('container');
+
+							container.appendTo(document.<portlet:namespace />fm);
+						},
+						show: function(event) {
+							var instance = this;
+
+							var container = instance.get('container');
+							var positionHelper = instance._positionHelper;
+
+							if (container.parent() != positionHelper) {
+								positionHelper.append(container);
+							}
+						}
+					},
 					trigger: '#<%= randomNamespace %>languageSelectorTrigger',
 					width: 500,
-					isCollapsible: false
 				}
 			);
 
 			var languageSelector = A.one('#<%= randomNamespace %>languageSelector select');
 
 			if (languageSelector) {
-				languageSelector.on(
-					'change',
-					function(event) {
-						var target = event.target;
-						var targetEl = target.getDOM();
-
-						var selectedOption = targetEl[targetEl.selectedIndex];
-						var selectedValue = selectedOption.value;
-
-						var newName = '<portlet:namespace /><%= name %>_';
-
-						var currentRow = target.ancestor('.lfr-form-row');
-
-						var img = currentRow.all('img.language-flag');
-						var imgSrc = 'spacer';
-
-						if (selectedValue) {
-							newName ='<portlet:namespace /><%= name %>_' + selectedValue;
-
-							imgSrc = 'language/' + selectedValue;
-						}
-
-						var inputField = currentRow.one('.language-value');
-
-						if (inputField) {
-							inputField.attr('name', newName);
-							inputField.attr('id', newName);
-						}
-
-						if (img) {
-							img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
-						}
-					}
-				);
+				languageSelector.on('change', updateLanguageFlag);
 			}
 		}
 	);
