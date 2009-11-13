@@ -24,6 +24,10 @@
 
 <%@ include file="/html/portlet/breadcrumb/init.jsp" %>
 
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
+
 <liferay-portlet:preview
 	portletName="<%= portletResource %>"
 	queryString="struts_action=/breadcrumb/view"
@@ -31,34 +35,30 @@
 
 <div class="separator"><!-- --></div>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="display-style" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />displayStyle">
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+
+	<aui:fieldset>
+		<aui:select name="displayStyle">
 
 			<%
 			for (int i = 1; i <= 2; i++) {
 			%>
 
-				<option <%= (displayStyle == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+				<aui:option label="<%= i %>" selected="<%= displayStyle == i %>" />
 
 			<%
 			}
 			%>
+		</aui:select>
+	</aui:fieldset>
 
-		</select>
-	</td>
-</tr>
-</table>
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
 
-<br />
-
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-</form>
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
