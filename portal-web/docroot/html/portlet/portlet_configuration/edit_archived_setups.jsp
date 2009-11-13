@@ -38,6 +38,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_archived_setups");
 portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 portletURL.setParameter("portletResource", portletResource);
 %>
 
