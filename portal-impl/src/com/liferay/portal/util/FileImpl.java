@@ -75,6 +75,8 @@ import org.mozilla.intl.chardet.nsPSMDetector;
  */
 public class FileImpl implements com.liferay.portal.kernel.util.File {
 
+	private static final int _BUFFER = 4096;
+
 	public static FileImpl getInstance() {
 		return _instance;
 	}
@@ -763,11 +765,26 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public void write(String fileName, InputStream is) throws IOException {
-		write(fileName, getBytes(is));
+		write(new File(fileName), is);
 	}
 
 	public void write(File file, InputStream is) throws IOException {
-		write(file, getBytes(is));
+		if (file.getParent() != null) {
+			mkdirs(file.getParent());
+		}
+
+		FileOutputStream fos = new FileOutputStream(file);
+
+		try {
+			byte[] bytes = new byte[_BUFFER];
+
+			while ((is.read(bytes)) != -1) {
+				fos.write(bytes);
+			}
+		}
+		finally {
+			fos.close();
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FileImpl.class);
