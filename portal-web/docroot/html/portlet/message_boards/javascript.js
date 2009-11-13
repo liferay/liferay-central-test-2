@@ -141,7 +141,8 @@ AUI().add(
 
 							if (value != Liferay.Language.get('font')) {
 								instance.insertTag('font', value);
-								target.getDOM().selectedIndex = 0;
+
+								target.set('selectedIndex', 0);
 							}
 						}
 					},
@@ -154,7 +155,8 @@ AUI().add(
 
 							if (value != Liferay.Language.get('size')) {
 								instance.insertTag('size', value);
-								target.getDOM().selectedIndex = 0;
+
+								target.set('selectedIndex', 0);
 							}
 						},
 						groupEnd: true
