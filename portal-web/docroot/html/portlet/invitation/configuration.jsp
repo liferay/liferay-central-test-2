@@ -26,6 +26,7 @@
 
 <%
 String portletResource = ParamUtil.getString(request, "portletResource");
+String redirect = ParamUtil.getString(request, "redirect");
 
 PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 
@@ -50,84 +51,71 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:error key="emailMessageBody" message="please-enter-a-valid-body" />
-<liferay-ui:error key="emailMessageSubject" message="please-enter-a-valid-subject" />
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="subject" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />emailMessageSubject" type="text" value="<%= emailMessageSubject %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="body" />
-	</td>
-	<td>
-		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+	<liferay-ui:error key="emailMessageBody" message="please-enter-a-valid-body" />
+	<liferay-ui:error key="emailMessageSubject" message="please-enter-a-valid-subject" />
 
-		<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
-	</td>
-</tr>
-</table>
+	<aui:fieldset>
+		<aui:input cssClass="lfr-input-text-container" label="subject" name="emailMessageSubject" type="text" value="<%= emailMessageSubject %>" />
 
-<br />
+		<aui:field-wrapper label="body">
+			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-<strong><liferay-ui:message key="definition-of-terms" /></strong>
+			<aui:input name="<%= editorParam %>" type="hidden" />
+		</aui:field-wrapper>
+	</aui:fieldset>
 
-<br /><br />
+	<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<strong>[$FROM_ADDRESS$]</strong>
-	</td>
-	<td>
-		The address of the email sender
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$FROM_NAME$]</strong>
-	</td>
-	<td>
-		The name of the email sender
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$PAGE_URL$]</strong>
-	</td>
-	<td>
-		<%= PortalUtil.getLayoutFullURL(layout, themeDisplay) %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<strong>[$PORTAL_URL$]</strong>
-	</td>
-	<td>
-		<%= company.getVirtualHost() %>
-	</td>
-</tr>
-</table>
+	<br /><br />
 
-<br />
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<strong>[$FROM_ADDRESS$]</strong>
+		</td>
+		<td>
+			The address of the email sender
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<strong>[$FROM_NAME$]</strong>
+		</td>
+		<td>
+			The name of the email sender
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<strong>[$PAGE_URL$]</strong>
+		</td>
+		<td>
+			<%= PortalUtil.getLayoutFullURL(layout, themeDisplay) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<strong>[$PORTAL_URL$]</strong>
+		</td>
+		<td>
+			<%= company.getVirtualHost() %>
+		</td>
+	</tr>
+	</table>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+	<br />
 
-</form>
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.invitation.edit_configuration.jsp";
