@@ -70,7 +70,7 @@ public class LocaleUtil {
 	private LocaleUtil() {
 		_locale = new Locale("en", "US");
 
-		_isoCountries = (String[])Locale.getISOCountries().clone();
+		_isoCountries = Locale.getISOCountries().clone();
 
 		for (int i = 0; i < _isoCountries.length; i++) {
 			_isoCountries[i] = _isoCountries[i].toUpperCase();
@@ -78,7 +78,7 @@ public class LocaleUtil {
 
 		Arrays.sort(_isoCountries);
 
-		_isoLanguages = (String[])Locale.getISOLanguages().clone();
+		_isoLanguages = Locale.getISOLanguages().clone();
 
 		for (int i = 0; i < _isoLanguages.length; i++) {
 			_isoLanguages[i] = _isoLanguages[i].toLowerCase();
