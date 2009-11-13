@@ -36,11 +36,6 @@ public class AssetEntryFinderUtil {
 		return getFinder().countEntries(entryQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findByTagId(
-		long tagId) throws com.liferay.portal.SystemException {
-		return getFinder().findByTagId(tagId);
-	}
-
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findEntries(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.SystemException {

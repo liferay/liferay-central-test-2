@@ -150,11 +150,6 @@ public class AssetEntryLocalServiceUtil {
 		return getService().getEntries(entryQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getEntries(
-		long tagId) throws com.liferay.portal.SystemException {
-		return getService().getEntries(tagId);
-	}
-
 	public static int getEntriesCount(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)
 		throws com.liferay.portal.SystemException {

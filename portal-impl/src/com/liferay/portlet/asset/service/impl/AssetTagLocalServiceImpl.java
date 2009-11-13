@@ -25,18 +25,14 @@ package com.liferay.portlet.asset.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -207,11 +203,6 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	public void deleteTag(AssetTag tag)
 		throws PortalException, SystemException {
 
-		// Entries
-
-		List<AssetEntry> entries = assetEntryLocalService.getEntries(
-			tag.getTagId());
-
 		// Properties
 
 		assetTagPropertyLocalService.deleteTagProperties(tag.getTagId());
@@ -225,10 +216,6 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		// Tag
 
 		assetTagPersistence.remove(tag);
-
-		// ReIndex
-
-		reIndex(entries);
 	}
 
 	public void deleteTag(long tagId) throws PortalException, SystemException {
@@ -479,19 +466,6 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 
 	protected String[] getTagNames(List <AssetTag>tags) {
 		return StringUtil.split(ListUtil.toString(tags, "name"));
-	}
-
-	protected void reIndex(List<AssetEntry> entries)
-		throws PortalException, SystemException {
-
-		for (AssetEntry assetEntry : entries) {
-			ClassName className = ClassNameLocalServiceUtil.getClassName(
-				assetEntry.getClassNameId());
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
-				className.getValue());
-			indexer.reIndex(className.getValue(), assetEntry.getClassPK());
-		}
 	}
 
 	protected void validate(String name) throws PortalException {

@@ -122,18 +122,6 @@
 				tagId = ?
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetEntryFinder.findByTagId">
-		<![CDATA[
-			SELECT
-				{AssetEntry.*}
-			FROM
-				AssetEntry
-			INNER JOIN
-				AssetEntries_AssetTags ON
-					(AssetEntries_AssetTags.entryId = AssetEntry.entryId) AND
-					(AssetEntries_AssetTags.tagId = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.countByG_C_N">
 		<![CDATA[
 			SELECT
