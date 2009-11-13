@@ -190,11 +190,13 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				A.io(
 					'<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',
 					{
-						data: A.toQueryString({
-							className: className,
-							ids: ids,
-							active: active
-						}),
+						data: A.toQueryString(
+							{
+								active: active,
+								className: className,
+								ids: ids
+							}
+						),
 						method: 'POST',
 						on: {
 							success: callback
