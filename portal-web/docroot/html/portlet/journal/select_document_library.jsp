@@ -141,7 +141,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-	String rowHREF = themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
+	String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
 
 	// Title
 
@@ -175,6 +175,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append(renderResponse.getNamespace());
 	sb.append("selectDocumentLibrary('");
 	sb.append(themeDisplay.getPortalURL());
+	sb.append(themeDisplay.getPathContext());
 	sb.append("/document/");
 	sb.append(groupId);
 	sb.append(StringPool.SLASH);

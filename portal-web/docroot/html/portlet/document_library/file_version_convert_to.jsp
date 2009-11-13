@@ -50,7 +50,7 @@ for (int i = 0; i < conversions.length; i++) {
 		<liferay-ui:icon
 			image='<%= "../file_system/small/" + conversion %>'
 			message="<%= conversion.toUpperCase() %>"
-			url='<%= themeDisplay.getPortalURL() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileVersion.getVersion() + "&targetExtension=" + conversion %>'
+			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle()) + "?version=" + fileVersion.getVersion() + "&targetExtension=" + conversion %>'
 			label="<%= true %>"
 		/>
 	</td>
