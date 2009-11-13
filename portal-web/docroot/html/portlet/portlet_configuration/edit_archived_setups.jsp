@@ -32,7 +32,13 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
-PortletURL portletURL = renderResponse.createActionURL();
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/portlet_configuration/edit_archived_setups");
+portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("portletResource", portletResource);
 %>
 
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">

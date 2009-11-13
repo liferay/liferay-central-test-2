@@ -95,9 +95,7 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(
-					actionRequest,
-					"portlet.portlet_configuration.edit_archived_setups");
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
