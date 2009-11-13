@@ -35,6 +35,7 @@ import com.liferay.util.SystemProperties;
 import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -44,6 +45,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 
@@ -773,17 +775,24 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			mkdirs(file.getParent());
 		}
 
-		FileOutputStream fos = new FileOutputStream(file);
+		if (!(is instanceof BufferedInputStream)) {
+			is = new BufferedInputStream(is);
+		}
+
+		OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
 
 		try {
-			byte[] bytes = new byte[_BUFFER];
+			int c = is.read();
 
-			while ((is.read(bytes)) != -1) {
-				fos.write(bytes);
+			while (c != -1) {
+				os.write(c);
+
+				c = is.read();
 			}
 		}
 		finally {
-			fos.close();
+			os.close();
+			is.close();
 		}
 	}
 
