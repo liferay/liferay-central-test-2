@@ -30,7 +30,6 @@ import com.liferay.documentlibrary.util.Hook;
 import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -64,7 +63,6 @@ import java.io.InputStream;
 
 import java.util.Date;
 
-@AutoInject
 /**
  * <a href="DLLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *

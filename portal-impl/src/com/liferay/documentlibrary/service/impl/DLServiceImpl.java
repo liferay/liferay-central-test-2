@@ -30,7 +30,6 @@ import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.documentlibrary.util.Indexer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.service.ServiceContext;
@@ -39,7 +38,6 @@ import java.io.File;
 
 import java.util.Date;
 
-@AutoInject
 /**
  * <a href="DLServiceImpl.java.html"><b><i>View Source</i></b></a>
  *

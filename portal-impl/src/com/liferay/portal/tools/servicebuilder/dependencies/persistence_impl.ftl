@@ -19,7 +19,6 @@ import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
@@ -64,7 +63,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-@AutoInject
 /**
  * <a href="${entity.name}PersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
