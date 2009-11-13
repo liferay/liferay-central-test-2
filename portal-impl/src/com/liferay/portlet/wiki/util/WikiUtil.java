@@ -303,6 +303,7 @@ public class WikiUtil {
 
 		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
 
+		nodes = ListUtil.copy(nodes);
 		nodes = _orderNodes(nodes, visibleNodes);
 
 		Iterator<WikiNode> itr = nodes.iterator();
