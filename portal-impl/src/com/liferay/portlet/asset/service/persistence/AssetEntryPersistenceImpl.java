@@ -24,7 +24,6 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
@@ -80,7 +79,6 @@ import java.util.Set;
  * @see       AssetEntryUtil
  * @generated
  */
-@AutoInject
 public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	implements AssetEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetEntryImpl.class.getName();

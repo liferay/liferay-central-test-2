@@ -24,7 +24,6 @@ package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -69,7 +68,6 @@ import java.util.List;
  * @see       SocialActivityUtil
  * @generated
  */
-@AutoInject
 public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialActivity>
 	implements SocialActivityPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialActivityImpl.class.getName();

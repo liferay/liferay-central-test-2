@@ -32,7 +32,6 @@ import com.liferay.mail.service.MailService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.AutoInject;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
@@ -113,7 +112,6 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
-@AutoInject
 public abstract class MBMessageLocalServiceBaseImpl
 	implements MBMessageLocalService {
 	public MBMessage addMBMessage(MBMessage mbMessage)
