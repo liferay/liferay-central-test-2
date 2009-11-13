@@ -829,6 +829,13 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateStatus(
+		long userId, long resourcePrimKey, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateStatus(userId, resourcePrimKey, status);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateStatus(
 		long userId, com.liferay.portlet.journal.model.JournalArticle article,
 		int status, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)

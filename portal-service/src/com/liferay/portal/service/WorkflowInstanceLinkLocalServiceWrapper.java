@@ -130,12 +130,20 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 			groupId, className, classPK);
 	}
 
+	public java.lang.String getStatus(long companyId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _workflowInstanceLinkLocalService.getStatus(companyId, groupId,
+			className, classPK);
+	}
+
 	public com.liferay.portal.model.WorkflowInstanceLink getWorkflowInstanceLink(
-		long companyId, long groupId, long classNameId, long classPK)
+		long companyId, long groupId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _workflowInstanceLinkLocalService.getWorkflowInstanceLink(companyId,
-			groupId, classNameId, classPK);
+			groupId, className, classPK);
 	}
 
 	public void startWorkflowInstance(long companyId, long groupId,

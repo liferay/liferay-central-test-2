@@ -29,6 +29,7 @@
 <%@ page import="com.liferay.portal.kernel.xml.Node" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portal.kernel.xml.XPath" %>
+<%@ page import="com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>

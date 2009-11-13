@@ -150,6 +150,8 @@ public class ServiceContextFactory {
 
 		// Workflow
 
+		serviceContext.setStartWorkflow(true);
+
 		int status = ParamUtil.getInteger(
 			portletRequest, "status", StatusConstants.APPROVED);
 

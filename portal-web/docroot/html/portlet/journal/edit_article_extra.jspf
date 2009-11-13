@@ -242,14 +242,20 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			if (article == null) {
 				status = "new";
 			}
-			else if (article.isExpired()) {
-				status = "expired";
-			}
-			else if (article.isApproved()) {
-				status = "approved";
-			}
 			else {
-				status = "not-approved";
+				status = WorkflowInstanceLinkLocalServiceUtil.getStatus(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey());
+
+				if (status == null) {
+					if (article.isExpired()) {
+						status = "expired";
+					}
+					else if (article.isApproved()) {
+						status = "approved";
+					}
+					else {
+						status = "not-approved";
+					}
+				}
 			}
 			%>
 

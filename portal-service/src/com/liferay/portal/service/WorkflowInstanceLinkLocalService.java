@@ -112,8 +112,14 @@ public interface WorkflowInstanceLinkLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getStatus(long companyId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.WorkflowInstanceLink getWorkflowInstanceLink(
-		long companyId, long groupId, long classNameId, long classPK)
+		long companyId, long groupId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

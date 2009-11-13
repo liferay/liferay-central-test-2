@@ -22,9 +22,11 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.NoSuchWorkflowInstanceLinkException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.workflow.ContextConstants;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.model.User;
@@ -34,6 +36,8 @@ import com.liferay.portal.service.base.WorkflowInstanceLinkLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="WorkflowInstanceLinkLocalServiceImpl.java.html"><b><i>View Source
@@ -78,10 +82,8 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			long classNameId = PortalUtil.getClassNameId(className);
-
 			WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
-				companyId, groupId, classNameId, classPK);
+				companyId, groupId, className, classPK);
 
 			deleteWorkflowInstanceLink(workflowInstanceLink);
 		}
@@ -89,9 +91,33 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		}
 	}
 
-	public WorkflowInstanceLink getWorkflowInstanceLink(
-			long companyId, long groupId, long classNameId, long classPK)
+	public String getStatus(
+			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
+
+		try {
+			WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
+				companyId, groupId, className, classPK);
+
+			long workflowInstanceId =
+				workflowInstanceLink.getWorkflowInstanceId();
+
+			WorkflowInstance workflowInstance =
+				WorkflowInstanceManagerUtil.getWorkflowInstance(
+					workflowInstanceId);
+
+			return workflowInstance.getCurrentNodeName();
+		}
+		catch (NoSuchWorkflowInstanceLinkException nswile) {
+			return null;
+		}
+	}
+
+	public WorkflowInstanceLink getWorkflowInstanceLink(
+			long companyId, long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		return workflowInstanceLinkPersistence.findByG_C_C_C(
 			groupId, companyId, classNameId, classPK);
@@ -114,16 +140,23 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			int workflowDefinitionVersion =
 				workflowDefinitionLink.getWorkflowDefinitionVersion();
 
+			Map<String, Object> context = new HashMap<String, Object>();
+
+			context.put(ContextConstants.COMPANY_ID, companyId);
+			context.put(ContextConstants.GROUP_ID, groupId);
+			context.put(ContextConstants.ENTRY_CLASS_NAME, className);
+			context.put(ContextConstants.ENTRY_CLASS_PK, classPK);
+
 			WorkflowInstance workflowInstance =
 				WorkflowInstanceManagerUtil.startWorkflowInstance(
 					userId, workflowDefinitionName, workflowDefinitionVersion,
-					null, null);
+					null, context);
 
 			addWorkflowInstanceLink(
 				userId, companyId, groupId, classNameId, classPK,
 				workflowInstance.getWorkflowInstanceId());
 		}
-		catch (NoSuchWorkflowInstanceLinkException nswile) {
+		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
 			return;
 		}
 	}

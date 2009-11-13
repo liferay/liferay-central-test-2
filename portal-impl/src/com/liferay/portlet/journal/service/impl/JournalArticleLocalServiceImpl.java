@@ -1984,6 +1984,15 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle updateStatus(
+			long userId, long resourcePrimKey, int status)
+		throws PortalException, SystemException {
+
+		JournalArticle article = getLatestArticle(resourcePrimKey);
+
+		return updateStatus(userId, article, status, null, null);
+	}
+
+	public JournalArticle updateStatus(
 			long userId, JournalArticle article, int status, String articleURL,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {

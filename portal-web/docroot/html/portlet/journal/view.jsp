@@ -162,16 +162,18 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Status
 
-				String status = null;
+				String status = WorkflowInstanceLinkLocalServiceUtil.getStatus(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey());
 
-				if (article.isExpired()) {
-					status = "expired";
-				}
-				else if (article.isApproved()) {
-					status = "approved";
-				}
-				else {
-					status = "not-approved";
+				if (status == null) {
+					if (article.isExpired()) {
+						status = "expired";
+					}
+					else if (article.isApproved()) {
+						status = "approved";
+					}
+					else {
+						status = "not-approved";
+					}
 				}
 
 				row.addText(LanguageUtil.get(pageContext, status), rowURL);
