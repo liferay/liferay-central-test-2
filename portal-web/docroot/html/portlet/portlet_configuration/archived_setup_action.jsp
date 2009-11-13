@@ -31,20 +31,13 @@ Object[] objects = (Object[])row.getObject();
 
 PortletItem portletItem = (PortletItem)objects[0];
 String portletResource = (String)objects[1];
-
-PortletURL redirectURL = renderResponse.createRenderURL();
-
-redirectURL.setWindowState(WindowState.MAXIMIZED);
-
-redirectURL.setParameter("struts_action", "/portlet_configuration/edit_archived_setups");
-redirectURL.setParameter("portletResource", portletResource);
 %>
 
 <liferay-ui:icon-menu>
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="restoreURL">
 		<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
-		<portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="portletResource" value="<%= portletResource %>" />
 		<portlet:param name="name" value="<%= portletItem.getName() %>" />
 	</portlet:actionURL>
@@ -54,7 +47,7 @@ redirectURL.setParameter("portletResource", portletResource);
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="portletResource" value="<%= portletResource %>" />
 		<portlet:param name="portletItemId" value="<%= String.valueOf(portletItem.getPortletItemId()) %>" />
 	</portlet:actionURL>
