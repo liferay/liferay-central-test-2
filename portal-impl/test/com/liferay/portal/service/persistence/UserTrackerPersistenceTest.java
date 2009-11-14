@@ -42,8 +42,7 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (UserTrackerPersistence)PortalBeanLocatorUtil.locate(UserTrackerPersistence.class.getName() +
-				".impl");
+		_persistence = (UserTrackerPersistence)PortalBeanLocatorUtil.locate(UserTrackerPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

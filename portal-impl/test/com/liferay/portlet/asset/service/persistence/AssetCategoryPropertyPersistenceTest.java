@@ -45,8 +45,7 @@ public class AssetCategoryPropertyPersistenceTest
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AssetCategoryPropertyPersistence)PortalBeanLocatorUtil.locate(AssetCategoryPropertyPersistence.class.getName() +
-				".impl");
+		_persistence = (AssetCategoryPropertyPersistence)PortalBeanLocatorUtil.locate(AssetCategoryPropertyPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

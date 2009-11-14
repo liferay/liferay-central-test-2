@@ -44,8 +44,7 @@ public class AnnouncementsDeliveryPersistenceTest
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName() +
-				".impl");
+		_persistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

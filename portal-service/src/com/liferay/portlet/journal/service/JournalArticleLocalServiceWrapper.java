@@ -651,6 +651,16 @@ public class JournalArticleLocalServiceWrapper
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long userId, java.lang.String keywords,
+		java.lang.String type,
+		java.util.List<com.liferay.portal.kernel.search.BooleanClause> booleanClauses,
+		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _journalArticleLocalService.search(companyId, groupId, userId,
+			keywords, type, booleanClauses, sorts, start, end);
+	}
+
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, java.lang.String keywords,
 		java.lang.String type, com.liferay.portal.kernel.search.Sort sort,
 		int start, int end) throws com.liferay.portal.SystemException {
 		return _journalArticleLocalService.search(companyId, groupId, userId,
@@ -663,16 +673,6 @@ public class JournalArticleLocalServiceWrapper
 		int start, int end) throws com.liferay.portal.SystemException {
 		return _journalArticleLocalService.search(companyId, groupId, userId,
 			keywords, type, sorts, start, end);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords,
-		java.lang.String type,
-		java.util.List<com.liferay.portal.kernel.search.BooleanClause> booleanClauses,
-		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return _journalArticleLocalService.search(companyId, groupId, userId,
-			keywords, type, booleanClauses, sorts, start, end);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
@@ -815,14 +815,6 @@ public class JournalArticleLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		long userId, long resourcePrimKey, int status)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _journalArticleLocalService.updateStatus(userId,
-			resourcePrimKey, status);
-	}
-
-	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
 		long userId, com.liferay.portlet.journal.model.JournalArticle article,
 		int status, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -830,6 +822,14 @@ public class JournalArticleLocalServiceWrapper
 			com.liferay.portal.SystemException {
 		return _journalArticleLocalService.updateStatus(userId, article,
 			status, articleURL, serviceContext);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
+		long userId, long resourcePrimKey, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _journalArticleLocalService.updateStatus(userId,
+			resourcePrimKey, status);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateStatus(

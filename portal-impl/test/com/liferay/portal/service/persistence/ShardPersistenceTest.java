@@ -41,8 +41,7 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ShardPersistence)PortalBeanLocatorUtil.locate(ShardPersistence.class.getName() +
-				".impl");
+		_persistence = (ShardPersistence)PortalBeanLocatorUtil.locate(ShardPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

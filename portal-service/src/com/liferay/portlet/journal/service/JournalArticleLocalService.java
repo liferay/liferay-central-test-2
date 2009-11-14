@@ -501,6 +501,14 @@ public interface JournalArticleLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long userId, java.lang.String keywords,
+		java.lang.String type,
+		java.util.List<com.liferay.portal.kernel.search.BooleanClause> booleanClauses,
+		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, java.lang.String keywords,
 		java.lang.String type, com.liferay.portal.kernel.search.Sort sort,
 		int start, int end) throws com.liferay.portal.SystemException;
 
@@ -509,14 +517,6 @@ public interface JournalArticleLocalService {
 		long groupId, long userId, java.lang.String keywords,
 		java.lang.String type, com.liferay.portal.kernel.search.Sort[] sorts,
 		int start, int end) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long userId, java.lang.String keywords,
-		java.lang.String type,
-		java.util.List<com.liferay.portal.kernel.search.BooleanClause> booleanClauses,
-		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
-		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
@@ -617,14 +617,14 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		long userId, long resourcePrimKey, int status)
+		long userId, com.liferay.portlet.journal.model.JournalArticle article,
+		int status, java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		long userId, com.liferay.portlet.journal.model.JournalArticle article,
-		int status, java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long userId, long resourcePrimKey, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

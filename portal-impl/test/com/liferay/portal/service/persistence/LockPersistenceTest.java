@@ -42,8 +42,7 @@ public class LockPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (LockPersistence)PortalBeanLocatorUtil.locate(LockPersistence.class.getName() +
-				".impl");
+		_persistence = (LockPersistence)PortalBeanLocatorUtil.locate(LockPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

@@ -44,8 +44,7 @@ public class JournalArticleResourcePersistenceTest
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName() +
-				".impl");
+		_persistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

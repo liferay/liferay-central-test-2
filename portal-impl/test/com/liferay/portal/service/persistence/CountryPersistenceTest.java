@@ -41,8 +41,7 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (CountryPersistence)PortalBeanLocatorUtil.locate(CountryPersistence.class.getName() +
-				".impl");
+		_persistence = (CountryPersistence)PortalBeanLocatorUtil.locate(CountryPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

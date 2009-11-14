@@ -41,8 +41,7 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (PortletPersistence)PortalBeanLocatorUtil.locate(PortletPersistence.class.getName() +
-				".impl");
+		_persistence = (PortletPersistence)PortalBeanLocatorUtil.locate(PortletPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

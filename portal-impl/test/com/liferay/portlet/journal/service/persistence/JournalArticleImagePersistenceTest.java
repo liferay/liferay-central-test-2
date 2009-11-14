@@ -43,8 +43,7 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName() +
-				".impl");
+		_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

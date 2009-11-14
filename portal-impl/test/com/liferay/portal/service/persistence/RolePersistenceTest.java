@@ -41,8 +41,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (RolePersistence)PortalBeanLocatorUtil.locate(RolePersistence.class.getName() +
-				".impl");
+		_persistence = (RolePersistence)PortalBeanLocatorUtil.locate(RolePersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

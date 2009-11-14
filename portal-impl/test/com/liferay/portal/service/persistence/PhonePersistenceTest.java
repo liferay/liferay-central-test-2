@@ -42,8 +42,7 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (PhonePersistence)PortalBeanLocatorUtil.locate(PhonePersistence.class.getName() +
-				".impl");
+		_persistence = (PhonePersistence)PortalBeanLocatorUtil.locate(PhonePersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

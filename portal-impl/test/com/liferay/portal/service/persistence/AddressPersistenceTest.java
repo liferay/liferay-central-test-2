@@ -42,8 +42,7 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AddressPersistence)PortalBeanLocatorUtil.locate(AddressPersistence.class.getName() +
-				".impl");
+		_persistence = (AddressPersistence)PortalBeanLocatorUtil.locate(AddressPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

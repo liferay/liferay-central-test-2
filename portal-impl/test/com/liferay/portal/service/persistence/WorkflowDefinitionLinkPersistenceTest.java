@@ -44,8 +44,7 @@ public class WorkflowDefinitionLinkPersistenceTest
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (WorkflowDefinitionLinkPersistence)PortalBeanLocatorUtil.locate(WorkflowDefinitionLinkPersistence.class.getName() +
-				".impl");
+		_persistence = (WorkflowDefinitionLinkPersistence)PortalBeanLocatorUtil.locate(WorkflowDefinitionLinkPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

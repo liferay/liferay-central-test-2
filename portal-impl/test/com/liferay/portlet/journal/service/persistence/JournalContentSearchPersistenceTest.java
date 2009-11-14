@@ -43,8 +43,7 @@ public class JournalContentSearchPersistenceTest extends BasePersistenceTestCase
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (JournalContentSearchPersistence)PortalBeanLocatorUtil.locate(JournalContentSearchPersistence.class.getName() +
-				".impl");
+		_persistence = (JournalContentSearchPersistence)PortalBeanLocatorUtil.locate(JournalContentSearchPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {

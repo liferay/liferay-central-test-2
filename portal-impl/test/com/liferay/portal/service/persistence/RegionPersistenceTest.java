@@ -41,8 +41,7 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (RegionPersistence)PortalBeanLocatorUtil.locate(RegionPersistence.class.getName() +
-				".impl");
+		_persistence = (RegionPersistence)PortalBeanLocatorUtil.locate(RegionPersistence.class.getName());
 	}
 
 	public void testCreate() throws Exception {
