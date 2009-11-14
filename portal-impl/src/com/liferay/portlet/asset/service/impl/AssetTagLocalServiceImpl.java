@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -485,13 +484,11 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		for (AssetEntry entry : entries) {
-			ClassName className = ClassNameLocalServiceUtil.getClassName(
-				entry.getClassNameId());
+			String className = PortalUtil.getClassName(entry.getClassNameId());
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
-				className.getValue());
+			Indexer indexer = IndexerRegistryUtil.getIndexer(className);
 
-			indexer.reIndex(className.getValue(), entry.getClassPK());
+			indexer.reIndex(className, entry.getClassPK());
 		}
 	}
 
