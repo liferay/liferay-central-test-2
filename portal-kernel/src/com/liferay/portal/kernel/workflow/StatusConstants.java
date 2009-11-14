@@ -27,7 +27,7 @@ package com.liferay.portal.kernel.workflow;
  *
  * @author Jorge Ferrer
  */
-public interface StatusConstants {
+public class StatusConstants {
 
 	public static final int ANY = -1;
 
@@ -39,6 +39,66 @@ public interface StatusConstants {
 
 	public static final int EXPIRED = 3;
 
+	public static final String LABEL_ANY = "any";
+
+	public static final String LABEL_APPROVED = "approved";
+
+	public static final String LABEL_DENIED = "denied";
+
+	public static final String LABEL_DRAFT = "draft";
+
+	public static final String LABEL_EXPIRED = "expired";
+
+	public static final String LABEL_PENDING = "pending";
+
 	public static final int PENDING = 1;
+
+	public static int fromLabel(String status) {
+		if (status.equals(LABEL_ANY)) {
+			return ANY;
+		}
+		else if (status.equals(LABEL_APPROVED)) {
+			return APPROVED;
+		}
+		else if (status.equals(LABEL_DENIED)) {
+			return DENIED;
+		}
+		else if (status.equals(LABEL_DRAFT)) {
+			return DRAFT;
+		}
+		else if (status.equals(LABEL_EXPIRED)) {
+			return EXPIRED;
+		}
+		else if (status.equals(LABEL_PENDING)) {
+			return PENDING;
+		}
+		else {
+			return ANY;
+		}
+	}
+
+	public static String toLabel(int status) {
+		if (status == ANY) {
+			return LABEL_ANY;
+		}
+		else if (status == APPROVED) {
+			return LABEL_APPROVED;
+		}
+		else if (status == DENIED) {
+			return LABEL_DENIED;
+		}
+		else if (status == DRAFT) {
+			return LABEL_DRAFT;
+		}
+		else if (status == EXPIRED) {
+			return LABEL_EXPIRED;
+		}
+		else if (status == PENDING) {
+			return LABEL_PENDING;
+		}
+		else {
+			return LABEL_ANY;
+		}
+	}
 
 }

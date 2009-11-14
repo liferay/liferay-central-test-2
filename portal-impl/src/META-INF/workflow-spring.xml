@@ -92,7 +92,7 @@
 		<property name="workflowTaskManager" ref="com.liferay.portal.workflow.WorkflowTaskManagerProxyBean" />
 	</bean>
 
-	<!-- Destinations -->
+	<!-- Messaging -->
 
 	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/workflow_definition" />
@@ -112,17 +112,11 @@
 	<bean id="destination.workflow_task" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/workflow_task" />
 	</bean>
-	
-	<!-- Listeners -->
-	
 	<bean id="messageListener.workflow_status" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">
 		<property name="manager">
 			<bean class="com.liferay.portal.workflow.WorkflowStatusManagerImpl" />
 		</property>
 	</bean>
-	
-	<!-- Configurator -->
-	
 	<bean id="messagingConfigurator.workflow" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
 			<list>

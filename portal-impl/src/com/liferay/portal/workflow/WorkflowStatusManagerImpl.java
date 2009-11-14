@@ -38,18 +38,16 @@ public class WorkflowStatusManagerImpl implements WorkflowStatusManager {
 
 	public void updateStatus(
 			long companyId, long groupId, long userId, String className,
-			long classPK, String status)
+			long classPK, int status)
 		throws WorkflowException {
-
-		int statusCode = parse(status);
 
 		try {
 			if (JournalArticle.class.getName().equals(className)) {
 				JournalArticleLocalServiceUtil.updateStatus(
-					userId, classPK, statusCode);
+					userId, classPK, status);
 			}
 
-			if (statusCode == StatusConstants.APPROVED) {
+			if (status == StatusConstants.APPROVED) {
 				WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLink(
 					companyId, groupId, className, classPK);
 			}
@@ -57,26 +55,6 @@ public class WorkflowStatusManagerImpl implements WorkflowStatusManager {
 		catch (Exception e) {
 			throw new WorkflowException(e);
 		}
-	}
-
-	public static int parse(String status) {
-		if ("approved".equals(status)) {
-			return StatusConstants.APPROVED;
-		}
-		else if ("denied".equals(status)) {
-			return StatusConstants.DENIED;
-		}
-		else if ("draft".equals(status)) {
-			return StatusConstants.DRAFT;
-		}
-		else if ("expired".equals(status)) {
-			return StatusConstants.EXPIRED;
-		}
-		else if ("pending".equals(status)) {
-			return StatusConstants.PENDING;
-		}
-
-		return StatusConstants.ANY;
 	}
 
 }

@@ -130,7 +130,7 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 			groupId, className, classPK);
 	}
 
-	public java.lang.String getStatus(long companyId, long groupId,
+	public int getStatus(long companyId, long groupId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

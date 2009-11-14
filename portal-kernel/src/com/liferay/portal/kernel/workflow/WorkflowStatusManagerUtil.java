@@ -31,7 +31,7 @@ public class WorkflowStatusManagerUtil {
 
 	public static void updateStatus(
 			long companyId, long groupId, long userId, String className,
-			long classPK, String status)
+			long classPK, int status)
 		throws WorkflowException {
 
 		_workflowStatusManager.updateStatus(

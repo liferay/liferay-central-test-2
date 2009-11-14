@@ -23,7 +23,6 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
-import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowStatusManager;
 
 /**
@@ -36,9 +35,8 @@ public class WorkflowStatusManagerProxyBean
 	extends BaseProxyBean implements WorkflowStatusManager {
 
 	public void updateStatus(
-			long companyId, long groupId, long userId, String className,
-			long classPK, String status)
-		throws WorkflowException {
+		long companyId, long groupId, long userId, String className,
+		long classPK, int status) {
 
 		throw new UnsupportedOperationException();
 	}

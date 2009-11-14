@@ -1498,28 +1498,6 @@ public class JournalArticleLocalServiceImpl
 
 	public Hits search(
 			long companyId, long groupId, long userId, String keywords,
-			String type, Sort sort, int start, int end)
-		throws SystemException {
-
-		return search(
-			companyId, groupId, userId, keywords, type, new Sort[] {sort},
-			start, end);
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, String keywords,
-			String type, Sort[] sorts, int start, int end)
-		throws SystemException {
-
-		List<BooleanClause> booleanClauses = null;
-
-		return search(
-			companyId, groupId, userId, keywords, type, booleanClauses, sorts,
-			start, end);
-	}
-
-	public Hits search(
-			long companyId, long groupId, long userId, String keywords,
 			String type, List<BooleanClause> booleanClauses, Sort[] sorts,
 			int start, int end)
 		throws SystemException {
@@ -1572,6 +1550,28 @@ public class JournalArticleLocalServiceImpl
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+
+	public Hits search(
+			long companyId, long groupId, long userId, String keywords,
+			String type, Sort sort, int start, int end)
+		throws SystemException {
+
+		return search(
+			companyId, groupId, userId, keywords, type, new Sort[] {sort},
+			start, end);
+	}
+
+	public Hits search(
+			long companyId, long groupId, long userId, String keywords,
+			String type, Sort[] sorts, int start, int end)
+		throws SystemException {
+
+		List<BooleanClause> booleanClauses = null;
+
+		return search(
+			companyId, groupId, userId, keywords, type, booleanClauses, sorts,
+			start, end);
 	}
 
 	public List<JournalArticle> search(
@@ -1984,15 +1984,6 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticle updateStatus(
-			long userId, long resourcePrimKey, int status)
-		throws PortalException, SystemException {
-
-		JournalArticle article = getLatestArticle(resourcePrimKey);
-
-		return updateStatus(userId, article, status, null, null);
-	}
-
-	public JournalArticle updateStatus(
 			long userId, JournalArticle article, int status, String articleURL,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -2087,6 +2078,15 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return article;
+	}
+
+	public JournalArticle updateStatus(
+			long userId, long resourcePrimKey, int status)
+		throws PortalException, SystemException {
+
+		JournalArticle article = getLatestArticle(resourcePrimKey);
+
+		return updateStatus(userId, article, status, null, null);
 	}
 
 	public JournalArticle updateStatus(
