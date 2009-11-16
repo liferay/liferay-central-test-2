@@ -139,6 +139,10 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		return status;
 	}
 
+	public void setDisplayDateGT(Date displayDateGT) {
+		this.displayDateGT = displayDateGT;
+	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}

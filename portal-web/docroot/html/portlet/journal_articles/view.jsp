@@ -79,6 +79,7 @@ double version = ParamUtil.getDouble(request, "version");
 		}
 
 		searchTerms.setStatus(status);
+		searchTerms.setDisplayDateGT(DateUtil.newDate());
 		%>
 
 		<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
