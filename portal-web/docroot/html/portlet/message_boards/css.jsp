@@ -141,6 +141,21 @@ td.user-info {
 	font-weight: bold;
 }
 
+.portlet-message-boards .statisticsPanel {
+	margin: 1em;
+}
+
+.portlet-message-boards .statisticsPanel dt{
+	float: left;
+	font-weight: bold;
+	margin-right: 1em;
+}
+
+.portlet-message-boards .statisticsPanelContainer {
+	border-width: 0;
+}
+
+
 .portlet-message-boards .toggle_id_message_boards_view_message_thread {
 	border: 1px solid #ccc;
 	margin: 5px 0px 0px 0px;

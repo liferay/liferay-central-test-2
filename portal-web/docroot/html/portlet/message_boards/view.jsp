@@ -26,7 +26,6 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
-String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -63,7 +62,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/message_boards/view");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 %>
 
@@ -798,20 +796,16 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 	</c:when>
 	<c:when test='<%= tabs1.equals("statistics") %>'>
-		<liferay-ui:tabs
-			names="general,top-posters"
-			param="tabs2"
-			url="<%= portletURL.toString() %>"
-		/>
+		<liferay-ui:panel-container cssClass="statisticsPanelContainer" id="statistics" extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
+			<liferay-ui:panel cssClass="statisticsPanel" id="general" title='<%= LanguageUtil.get(pageContext, "general") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+				<dl>
+					<dt><liferay-ui:message key="num-of-categories" />:</dt><dd><%= numberFormat.format(categoryDisplay.getAllCategoriesCount()) %></dd>
+					<dt><liferay-ui:message key="num-of-posts" />:</dt><dd><%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId, StatusConstants.APPROVED)) %></dd>
+					<dt><liferay-ui:message key="num-of-participants" />:</dt><dd><%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersByGroupIdCount(scopeGroupId)) %></dd> 
+				</dl>
+			</liferay-ui:panel>
 
-		<c:choose>
-			<c:when test='<%= tabs2.equals("general") %>'>
-				<liferay-ui:message key="num-of-categories" />: <%= numberFormat.format(categoryDisplay.getAllCategoriesCount()) %><br />
-				<liferay-ui:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId, StatusConstants.APPROVED)) %><br />
-				<liferay-ui:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersByGroupIdCount(scopeGroupId)) %>
-			</c:when>
-			<c:when test='<%= tabs2.equals("top-posters") %>'>
-
+			<liferay-ui:panel cssClass="statisticsPanel" id="topPosters" title='<%= LanguageUtil.get(pageContext, "top-posters") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 				<%
 				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, "there-are-no-top-posters");
 
@@ -841,8 +835,8 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:when>
-		</c:choose>
+			</liferay-ui:panel>
+		</liferay-ui:panel-container>
 
 		<%
 		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
