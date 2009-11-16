@@ -801,7 +801,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 				<dl>
 					<dt><liferay-ui:message key="num-of-categories" />:</dt><dd><%= numberFormat.format(categoryDisplay.getAllCategoriesCount()) %></dd>
 					<dt><liferay-ui:message key="num-of-posts" />:</dt><dd><%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId, StatusConstants.APPROVED)) %></dd>
-					<dt><liferay-ui:message key="num-of-participants" />:</dt><dd><%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersByGroupIdCount(scopeGroupId)) %></dd> 
+					<dt><liferay-ui:message key="num-of-participants" />:</dt><dd><%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersByGroupIdCount(scopeGroupId)) %></dd>
 				</dl>
 			</liferay-ui:panel>
 
