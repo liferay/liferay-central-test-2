@@ -147,18 +147,20 @@ public class DeployUtil {
 			tmpDir + "/liferay/com/liferay/portal/deploy/dependencies/" +
 				resource);
 
-		File parentFile = file.getParentFile();
+		if (!file.exists()) {
+			File parentFile = file.getParentFile();
 
-		if (parentFile != null) {
-			parentFile.mkdirs();
+			if (parentFile != null) {
+				parentFile.mkdirs();
+			}
+
+			byte[] bytes = FileUtil.getBytes(
+				getClass().getResourceAsStream("dependencies/" + resource));
+
+			OutputStream os = new FileOutputStream(file);
+
+			os.write(bytes);
 		}
-
-		byte[] bytes = FileUtil.getBytes(
-			getClass().getResourceAsStream("dependencies/" + resource));
-
-		OutputStream os = new FileOutputStream(file);
-
-		os.write(bytes);
 
 		return FileUtil.getAbsolutePath(file);
 	}
