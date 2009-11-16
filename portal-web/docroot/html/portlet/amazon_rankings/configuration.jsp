@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/amazon_rankings/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 String isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 isbns = StringUtil.split(ParamUtil.getString(request, "isbns", isbnsString), StringPool.SPACE);
@@ -32,43 +34,49 @@ isbns = StringUtil.split(ParamUtil.getString(request, "isbns", isbnsString), Str
 isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:error exception="<%= ValidatorException.class %>">
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<%
-	ValidatorException ve = (ValidatorException)errorException;
-	%>
+	<liferay-ui:error exception="<%= ValidatorException.class %>">
 
-	<liferay-ui:message key="the-following-are-invalid-isbn-numbers" />
+		<%
+		ValidatorException ve = (ValidatorException)errorException;
+		%>
 
-	<%
-	Enumeration enu = ve.getFailedKeys();
+		<liferay-ui:message key="the-following-are-invalid-isbn-numbers" />
 
-	while (enu.hasMoreElements()) {
-		String isbn = (String)enu.nextElement();
-	%>
+		<%
+		Enumeration enu = ve.getFailedKeys();
 
-		<strong><%= isbn %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
+		while (enu.hasMoreElements()) {
+			String isbn = (String)enu.nextElement();
+		%>
 
-	<%
-	}
-	%>
+			<strong><%= isbn %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
 
-</liferay-ui:error>
+		<%
+		}
+		%>
 
-<liferay-ui:message key="add-all-isbn-numbers-separated-by-spaces" />
+	</liferay-ui:error>
 
-<br /><br />
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="add-all-isbn-numbers-separated-by-spaces" />
+	</div>
 
-<textarea class="lfr-textarea" name="<portlet:namespace />isbns" wrap="soft"><%= isbnsString %></textarea>
+	<aui:fieldset>
+		<aui:input cssClass="lfr-textarea-container" label="" name="isbns" type="textarea" value="<%= isbnsString %>" />
+	</aui:fieldset>
 
-<br /><br />
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-</form>
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
