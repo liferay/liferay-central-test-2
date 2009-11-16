@@ -35,10 +35,6 @@ public interface AssetTagFinder {
 		java.lang.String[] tagProperties)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetTag> findByC_C(
-		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> findByEntryId(
 		long entryId) throws com.liferay.portal.SystemException;
 
@@ -46,6 +42,10 @@ public interface AssetTagFinder {
 		java.lang.String name)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchTagException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetTag> findByC_C(
+		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> findByG_C_N(
 		long groupId, long classNameId, java.lang.String name)

@@ -41,12 +41,6 @@ public class AssetTagFinderUtil {
 		return getFinder().countByG_N_P(groupId, name, tagProperties);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByC_C(
-		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_C(classNameId, classPK);
-	}
-
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByEntryId(
 		long entryId) throws com.liferay.portal.SystemException {
 		return getFinder().findByEntryId(entryId);
@@ -57,6 +51,12 @@ public class AssetTagFinderUtil {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.asset.NoSuchTagException {
 		return getFinder().findByG_N(groupId, name);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByC_C(
+		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByC_C(classNameId, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByG_C_N(

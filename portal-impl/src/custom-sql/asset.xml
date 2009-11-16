@@ -156,26 +156,6 @@
 				(AssetTag.name LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByC_C">
-		<![CDATA[
-			SELECT
-				{AssetTag.*}
-			FROM
-				AssetTag
-			INNER JOIN
-				AssetEntries_AssetTags ON
-					(AssetEntries_AssetTags.tagId = AssetTag.tagId) AND
-					(AssetEntries_AssetTags.entryId IN (
-						SELECT
-							entryId
-						FROM
-							AssetEntry
-						WHERE
-							(AssetEntry.classNameId = ?) AND
-							(AssetEntry.classPK = ?)
-					))
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByEntryId">
 		<![CDATA[
 			SELECT
@@ -197,6 +177,26 @@
 			WHERE
 				(AssetTag.groupId = ?) AND
 				(lower(AssetTag.name) = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByC_C">
+		<![CDATA[
+			SELECT
+				{AssetTag.*}
+			FROM
+				AssetTag
+			INNER JOIN
+				AssetEntries_AssetTags ON
+					(AssetEntries_AssetTags.tagId = AssetTag.tagId) AND
+					(AssetEntries_AssetTags.entryId IN (
+						SELECT
+							entryId
+						FROM
+							AssetEntry
+						WHERE
+							(AssetEntry.classNameId = ?) AND
+							(AssetEntry.classPK = ?)
+					))
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByG_C_N">
