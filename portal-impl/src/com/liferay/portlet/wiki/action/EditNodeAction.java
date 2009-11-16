@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.wiki.action;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -141,9 +139,7 @@ public class EditNodeAction extends PortletAction {
 		updatePreferences(actionRequest, oldName, StringPool.BLANK);
 	}
 
-	protected String getNodeName(long nodeId)
-		throws PortalException, SystemException {
-
+	protected String getNodeName(long nodeId) throws Exception {
 		WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 
 		return node.getName();
