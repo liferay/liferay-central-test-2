@@ -796,8 +796,8 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 	</c:when>
 	<c:when test='<%= tabs1.equals("statistics") %>'>
-		<liferay-ui:panel-container cssClass="statisticsPanelContainer" id="statistics" extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
-			<liferay-ui:panel cssClass="statisticsPanel" id="general" title='<%= LanguageUtil.get(pageContext, "general") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel-container cssClass="statistics-panel" id="statistics" extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
+			<liferay-ui:panel cssClass="statistics-panel-content" id="general" title='<%= LanguageUtil.get(pageContext, "general") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 				<dl>
 					<dt><liferay-ui:message key="num-of-categories" />:</dt><dd><%= numberFormat.format(categoryDisplay.getAllCategoriesCount()) %></dd>
 					<dt><liferay-ui:message key="num-of-posts" />:</dt><dd><%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId, StatusConstants.APPROVED)) %></dd>
@@ -805,7 +805,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 				</dl>
 			</liferay-ui:panel>
 
-			<liferay-ui:panel cssClass="statisticsPanel" id="topPosters" title='<%= LanguageUtil.get(pageContext, "top-posters") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+			<liferay-ui:panel cssClass="statistics-panel-content" id="topPosters" title='<%= LanguageUtil.get(pageContext, "top-posters") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 				<%
 				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, "there-are-no-top-posters");
 

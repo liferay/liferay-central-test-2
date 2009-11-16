@@ -141,20 +141,19 @@ td.user-info {
 	font-weight: bold;
 }
 
-.portlet-message-boards .statisticsPanel {
+.portlet-message-boards .statistics-panel {
+	border-width: 0;
+}
+
+.portlet-message-boards .statistics-panel-content {
 	margin: 1em;
 }
 
-.portlet-message-boards .statisticsPanel dt{
+.portlet-message-boards .statistics-panel-content dt{
 	float: left;
 	font-weight: bold;
 	margin-right: 1em;
 }
-
-.portlet-message-boards .statisticsPanelContainer {
-	border-width: 0;
-}
-
 
 .portlet-message-boards .toggle_id_message_boards_view_message_thread {
 	border: 1px solid #ccc;
