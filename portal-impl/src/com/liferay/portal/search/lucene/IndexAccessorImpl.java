@@ -91,24 +91,13 @@ public class IndexAccessorImpl implements IndexAccessor {
 			return;
 		}
 
-		if (_indexWriter == null) {
-			Directory directory = getLuceneDir();
+		Directory directory = getLuceneDir();
 
-			if (IndexWriter.isLocked(directory)) {
-				IndexWriter.unlock(directory);
-			}
-
-			try {
-				_initIndexWriter();
-			}
-			finally {
-				if (_indexWriter != null) {
-					_indexWriter.close();
-
-					_indexWriter = null;
-				}
-			}
+		if (IndexWriter.isLocked(directory)) {
+			IndexWriter.unlock(directory);
 		}
+
+		_initIndexWriter();
 	}
 
 	public void delete() {
