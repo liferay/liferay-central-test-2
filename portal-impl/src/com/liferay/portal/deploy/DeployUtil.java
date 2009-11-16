@@ -39,7 +39,6 @@ import com.liferay.util.ant.DeleteTask;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
@@ -154,20 +153,13 @@ public class DeployUtil {
 			parentFile.mkdirs();
 		}
 
-		byte[] bytes = new byte[8192];
-		
-		InputStream is =
-			getClass().getResourceAsStream("dependencies/" + resource);
+		byte[] bytes = FileUtil.getBytes(
+			getClass().getResourceAsStream("dependencies/" + resource));
 
 		OutputStream os = new FileOutputStream(file);
 
-		int result = -1;
-		while((result = is.read(bytes)) != -1) {
-			os.write(bytes, 0 , result);
-		}
+		os.write(bytes);
 
-		is.close();
-		os.close();
 		return FileUtil.getAbsolutePath(file);
 	}
 
