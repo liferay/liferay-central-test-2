@@ -48,9 +48,7 @@ public class IgnoreFilter extends BasePortalFilter {
 			_log.warn("Access denied for " + remoteAddr);
 		}
 
-		response.sendError(
-			HttpServletResponse.SC_FORBIDDEN,
-			"Access denied for " + remoteAddr);
+		response.sendError(HttpServletResponse.SC_NOT_FOUND);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(IgnoreFilter.class);
