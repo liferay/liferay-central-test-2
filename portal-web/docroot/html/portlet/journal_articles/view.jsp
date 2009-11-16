@@ -78,7 +78,7 @@ double version = ParamUtil.getDouble(request, "version");
 			searchTerms.setStructureId(structureId);
 		}
 
-		searchTerms.setStatus("approved");
+		searchTerms.setStatus(status);
 		%>
 
 		<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
