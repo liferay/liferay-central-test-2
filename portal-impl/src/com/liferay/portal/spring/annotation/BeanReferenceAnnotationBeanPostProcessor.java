@@ -24,7 +24,6 @@ package com.liferay.portal.spring.annotation;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
 
-import java.beans.PropertyDescriptor;
 
 import java.lang.reflect.Field;
 
@@ -32,11 +31,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ReflectionUtils;
 
 /**
@@ -47,18 +45,12 @@ import org.springframework.util.ReflectionUtils;
  * @author Shuyang Zhou
  */
 public class BeanReferenceAnnotationBeanPostProcessor
-	implements BeanFactoryAware, InstantiationAwareBeanPostProcessor {
+	implements BeanFactoryAware, BeanPostProcessor {
 
 	public Object postProcessAfterInitialization(Object bean, String beanName)
 		throws BeansException {
 
 		return bean;
-	}
-
-	public boolean postProcessAfterInstantiation(Object bean, String beanName)
-		throws BeansException {
-
-		return true;
 	}
 
 	public Object postProcessBeforeInitialization(Object bean, String beanName)
@@ -67,22 +59,6 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		_autoInject(bean, beanName, bean.getClass());
 
 		return bean;
-	}
-
-	public Object postProcessBeforeInstantiation(
-			Class beanClass, String beanName)
-		throws BeansException {
-
-		return null;
-	}
-
-	public PropertyValues postProcessPropertyValues(
-			PropertyValues propertyValues,
-			PropertyDescriptor[] propertyDescriptors, Object bean,
-			String beanName)
-		throws BeansException {
-
-		return propertyValues;
 	}
 
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
