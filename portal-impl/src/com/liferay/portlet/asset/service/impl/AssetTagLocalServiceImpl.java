@@ -471,9 +471,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		return StringUtil.split(ListUtil.toString(tags, "name"));
 	}
 
-	protected void reIndex(List<AssetEntry> entries)
-		throws PortalException, SystemException {
-
+	protected void reIndex(List<AssetEntry> entries) throws PortalException {
 		for (AssetEntry entry : entries) {
 			String className = PortalUtil.getClassName(entry.getClassNameId());
 
