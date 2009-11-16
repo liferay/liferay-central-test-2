@@ -24,7 +24,6 @@ package com.liferay.portal.spring.annotation;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
 
-
 import java.lang.reflect.Field;
 
 import java.util.HashMap;
