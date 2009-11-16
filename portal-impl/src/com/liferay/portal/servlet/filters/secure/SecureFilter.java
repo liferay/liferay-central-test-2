@@ -117,8 +117,8 @@ public class SecureFilter extends BasePortalFilter {
 			}
 		}
 		else {
-			if (_log.isErrorEnabled()) {
-				_log.error("Access denied for " + remoteAddr);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Access denied for " + remoteAddr);
 			}
 
 			response.sendError(
