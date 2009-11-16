@@ -69,6 +69,10 @@ if (folder != null) {
 
 		curFolder = curFolder.toEscapedModel();
 
+		if (!DLFolderPermission.contains(permissionChecker, scopeGroupId, curFolder.getFolderId(), ActionKeys.ADD_FOLDER)) {
+			continue;
+		}
+
 		ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
