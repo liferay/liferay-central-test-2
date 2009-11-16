@@ -280,9 +280,15 @@ public class LuceneHelperImpl implements LuceneHelper {
 		IndexAccessor indexAccessor = _indexAccessorMap.get(companyId);
 
 		if (indexAccessor == null) {
-			indexAccessor = new IndexAccessorImpl(companyId);
+			synchronized (this) {
+				indexAccessor = _indexAccessorMap.get(companyId);
 
-			_indexAccessorMap.put(companyId, indexAccessor);
+				if (indexAccessor == null) {
+					indexAccessor = new IndexAccessorImpl(companyId);
+
+					_indexAccessorMap.put(companyId, indexAccessor);
+				}
+			}
 		}
 
 		return indexAccessor;
