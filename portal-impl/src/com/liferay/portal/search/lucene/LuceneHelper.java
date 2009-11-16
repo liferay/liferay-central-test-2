@@ -52,8 +52,6 @@ public interface LuceneHelper {
 			BooleanQuery booleanQuery, String field, String value, boolean like)
 		throws ParseException;
 
-	public void checkLuceneDir(long companyId);
-
 	public void delete(long companyId);
 
 	public void deleteDocuments(long companyId, Term term) throws IOException;
@@ -70,6 +68,8 @@ public interface LuceneHelper {
 			int fragmentLength, String fragmentSuffix, String preTag,
 			String postTag)
 		throws IOException;
+
+	public void shutdown();
 
 	public void updateDocument(long companyId, Term term, Document document)
 		throws IOException;

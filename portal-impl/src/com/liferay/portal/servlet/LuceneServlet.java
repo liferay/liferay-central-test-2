@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.search.lucene.CleanUpJob;
-import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
@@ -85,9 +84,6 @@ public class LuceneServlet extends HttpServlet {
 				_indexers.add(
 					new ObjectValuePair<LuceneIndexer, Thread>(
 						indexer, indexerThread));
-			}
-			else {
-				LuceneHelperUtil.checkLuceneDir(companyId);
 			}
 
 			if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP) {

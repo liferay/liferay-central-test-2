@@ -54,7 +54,6 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -175,10 +174,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				companyId, virtualHost, mx, homeURL, name, legalName, legalId,
 				legalType, sicCode, tickerSymbol, industry, type, size);
 
-			// Lucene
-
-			LuceneHelperUtil.checkLuceneDir(company.getCompanyId());
-
 			// Demo settings
 
 			if (webId.equals("liferay.net")) {
@@ -210,12 +205,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 					throw new SystemException(pe);
 				}
 			}
-		}
-		else {
-
-			// Lucene
-
-			LuceneHelperUtil.checkLuceneDir(company.getCompanyId());
 		}
 
 		long companyId = company.getCompanyId();

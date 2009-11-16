@@ -34,9 +34,7 @@ import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
-import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
-import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.security.lang.PortalSecurityManager;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.tools.DBUpgrader;
@@ -60,9 +58,6 @@ public class StartupAction extends SimpleAction {
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
-		}
-		finally {
-			LuceneHelperUtil.checkLuceneDir(CompanyConstants.SYSTEM);
 		}
 	}
 

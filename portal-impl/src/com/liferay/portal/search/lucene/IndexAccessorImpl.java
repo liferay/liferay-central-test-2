@@ -74,6 +74,8 @@ public class IndexAccessorImpl implements IndexAccessor {
 	public IndexAccessorImpl(long companyId) {
 		_companyId = companyId;
 
+		_checkLuceneDir();
+		_initIndexWriter();
 		_initCommitScheduler();
 		_initDialect();
 	}
@@ -86,24 +88,22 @@ public class IndexAccessorImpl implements IndexAccessor {
 		_write(null, document);
 	}
 
-	public void checkLuceneDir() throws IOException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
+	public void close() {
+		try {
+			_indexWriter.close();
 		}
-
-		Directory directory = getLuceneDir();
-
-		if (IndexWriter.isLocked(directory)) {
-			IndexWriter.unlock(directory);
+		catch(Exception e) {
+			_log.error(
+				"Closing Lucene writer failed for " + _companyId, e);
 		}
-
-		_initIndexWriter();
 	}
 
 	public void delete() {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
+
+		close();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
@@ -124,14 +124,14 @@ public class IndexAccessorImpl implements IndexAccessor {
 			throw new RuntimeException(
 				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
+
+		_initIndexWriter();
 	}
 
 	public void deleteDocuments(Term term) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
-
-		_initIndexWriter();
 
 		try {
 			_indexWriter.deleteDocuments(term);
@@ -177,6 +177,23 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 
 		_write(term, document);
+	}
+
+	private void _checkLuceneDir() {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		try {
+			Directory directory = getLuceneDir();
+
+			if (IndexWriter.isLocked(directory)) {
+				IndexWriter.unlock(directory);
+			}
+		}
+		catch (Exception e) {
+			_log.error("Check Lucene directory failed for " + _companyId, e);
+		}
 	}
 
 	private void _commit() throws IOException {
@@ -430,14 +447,18 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
-	private void _initIndexWriter() throws IOException {
-		if (_indexWriter == null) {
+	private void _initIndexWriter() {
+		try {
 			_indexWriter = new IndexWriter(
 				getLuceneDir(), LuceneHelperUtil.getAnalyzer(),
 				IndexWriter.MaxFieldLength.LIMITED);
 
 			_indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
 			_indexWriter.setRAMBufferSizeMB(PropsValues.LUCENE_BUFFER_SIZE);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Initializing Lucene writer failed for " + _companyId, e);
 		}
 	}
 
@@ -490,8 +511,6 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private void _write(Term term, Document document) throws IOException {
-		_initIndexWriter();
-
 		try {
 			if (term != null) {
 				_indexWriter.updateDocument(term, document);

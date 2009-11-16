@@ -106,7 +106,6 @@ public class LuceneIndexer implements Runnable {
 
 		try {
 			LuceneHelperUtil.delete(_companyId);
-			LuceneHelperUtil.checkLuceneDir(_companyId);
 
 			List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(
 				_companyId);

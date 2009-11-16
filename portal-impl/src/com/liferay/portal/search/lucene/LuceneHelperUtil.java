@@ -155,10 +155,6 @@ public class LuceneHelperUtil {
 		getLuceneHelper().addTerm(booleanQuery, field, value, like);
 	}
 
-	public static void checkLuceneDir(long companyId) {
-		getLuceneHelper().checkLuceneDir(companyId);
-	}
-
 	public static void delete(long companyId) {
 		getLuceneHelper().delete(companyId);
 	}
@@ -210,6 +206,10 @@ public class LuceneHelperUtil {
 		throws IOException {
 
 		getLuceneHelper().updateDocument(companyId, term, document);
+	}
+
+	public static void shutdown() {
+		getLuceneHelper().shutdown();
 	}
 
 	public void setLuceneHelper(LuceneHelper luceneHelper) {

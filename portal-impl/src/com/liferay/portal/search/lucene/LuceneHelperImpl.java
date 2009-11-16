@@ -158,17 +158,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
-	public void checkLuceneDir(long companyId) {
-		try {
-			IndexAccessor indexAccessor = _getIndexAccessor(companyId);
-
-			indexAccessor.checkLuceneDir();
-		}
-		catch (IOException ioe) {
-			_log.error("Check Lucene directory failed for " + companyId, ioe);
-		}
-	}
-
 	public void delete(long companyId) {
 		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
 
@@ -266,6 +255,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
 
 		indexAccessor.updateDocument(term, document);
+	}
+
+	public void shutdown() {
+		for (IndexAccessor indexAccessor : _indexAccessorMap.values()) {
+			indexAccessor.close();
+		}
 	}
 
 	private LuceneHelperImpl() {

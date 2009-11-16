@@ -37,7 +37,7 @@ public interface IndexAccessor {
 
 	public void addDocument(Document document) throws IOException;
 
-	public void checkLuceneDir() throws IOException;
+	public void close();
 
 	public void delete() ;
 
