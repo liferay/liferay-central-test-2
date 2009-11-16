@@ -294,15 +294,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	public List<AssetTag> getTags(long classNameId, long classPK)
 		throws SystemException {
 
-		AssetEntry entry = assetEntryPersistence.fetchByC_C(
-			classNameId, classPK);
-
-		if (entry == null) {
-			return new ArrayList<AssetTag>();
-		}
-		else {
-			return getEntryTags(entry.getEntryId());
-		}
+		return assetTagFinder.findByC_C(classNameId, classPK);
 	}
 
 	public List<AssetTag> getTags(long groupId, long classNameId, String name)
