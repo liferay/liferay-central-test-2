@@ -3372,6 +3372,7 @@ sent-mail=送信済みメール
 server-id=サーバー ID
 server-name=サーバー名
 server-port=サーバーポート
+server-url=サーバーURL (Automatic Translation)
 server=サーバー
 servers=サーバー (Automatic Translation)
 service-url=サービスURL

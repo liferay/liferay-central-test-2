@@ -3372,6 +3372,7 @@ sent-mail=보낸 우편물
 server-id=서버 ID
 server-name=서버 이름
 server-port=서버 항구
+server-url=서버 URL (Automatic Translation)
 server=서버
 servers=서버 (Automatic Translation)
 service-url=서비스URL

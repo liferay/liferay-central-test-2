@@ -3372,6 +3372,7 @@ sent-mail=Courrier envoyé
 server-id=Identification de serveur
 server-name=Nom Du Serveur
 server-port=Port de serveur
+server-url=URL de serveur (Automatic Translation)
 server=Serveur
 servers=Serveurs (Automatic Translation)
 service-url=URL de service

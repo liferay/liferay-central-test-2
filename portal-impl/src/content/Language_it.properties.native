@@ -3371,6 +3371,7 @@ sent-mail=Invia Mail
 server-id=Identificazione dell'assistente
 server-name=Nome del Server
 server-port=Orificio di assistente
+server-url=URL dell'assistente (Automatic Translation)
 server=Server
 servers=Assistenti (Automatic Translation)
 service-url=URL del Servizio

@@ -3372,6 +3372,7 @@ sent-mail=Αποστολή Ταχυδρομείου
 server-id=Ταυτότητα κεντρικών υπολογιστών
 server-name=Όνομα κεντρικών υπολογιστών
 server-port=Λιμένας κεντρικών υπολογιστών
+server-url=Κεντρικός υπολογιστής URL (Automatic Translation)
 server=Κεντρικός υπολογιστής
 servers=Κεντρικοί υπολογιστές (Automatic Translation)
 service-url=Υπηρεσία URL
