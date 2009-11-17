@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -221,7 +222,7 @@ public class ExportImportAction extends EditConfigurationAction {
 
 			ServletResponseUtil.sendFile(
 				response, fileName, fcos.getFileInputStream(),
-				(int)fcos.getSize(), "application/zip");
+				(int)fcos.getSize(), ContentTypes.APPLICATION_ZIP);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}

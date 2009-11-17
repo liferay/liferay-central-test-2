@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -136,7 +137,8 @@ public class ExportPagesAction extends PortletAction {
 					PortalUtil.getHttpServletResponse(actionResponse);
 
 				ServletResponseUtil.sendFile(
-					response, fileName, fcos.getFileInputStream());
+					response, fileName, fcos.getFileInputStream(),
+					(int)fcos.getSize(), ContentTypes.APPLICATION_ZIP);
 			}
 			finally {
 				fcos.cleanUp();
