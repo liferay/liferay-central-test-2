@@ -63,6 +63,7 @@ public class MessagingProxyAdvice {
 
 		MethodSignature methodSignature =
 			(MethodSignature)proceedingJoinPoint.getSignature();
+
 		return new ProxyRequest(
 			methodSignature.getMethod(), proceedingJoinPoint.getArgs());
 	}
