@@ -313,10 +313,11 @@ public class InstallPluginAction extends PortletAction {
 	protected void reloadRepositories(ActionRequest actionRequest)
 		throws Exception {
 
-		RepositoryReport report = PluginPackageUtil.reloadRepositories();
+		RepositoryReport repositoryReport =
+			PluginPackageUtil.reloadRepositories();
 
 		SessionMessages.add(
-			actionRequest, WebKeys.PLUGIN_REPOSITORY_REPORT, report);
+			actionRequest, WebKeys.PLUGIN_REPOSITORY_REPORT, repositoryReport);
 	}
 
 	protected void remoteDeploy(ActionRequest actionRequest) throws Exception {
