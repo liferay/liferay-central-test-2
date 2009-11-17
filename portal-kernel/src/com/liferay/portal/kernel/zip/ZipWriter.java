@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.zip;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -74,24 +73,22 @@ public class ZipWriter implements Serializable {
 
 		_zos.putNextEntry(entry);
 
-		// LPS-6009
-
 		if (StreamUtil.USE_NIO) {
-			int count;
+			ReadableByteChannel readableByteChannel = Channels.newChannel(is);
+			WritableByteChannel writableByteChannel = Channels.newChannel(_zos);
+
+			StreamUtil.transfer(readableByteChannel, writableByteChannel);
+
+			StreamUtil.cleanUp(readableByteChannel);
+		}
+		else {
+			int count = -1;
 
 			while ((count = is.read(_data, 0, _BUFFER)) != -1) {
 				_zos.write(_data, 0, count);
 			}
 
 			StreamUtil.cleanUp(is);
-		}
-		else {
-			ReadableByteChannel inputChannel = Channels.newChannel(is);
-			WritableByteChannel outputChannel = Channels.newChannel(_zos);
-
-			StreamUtil.transfer(inputChannel, outputChannel);
-
-			StreamUtil.cleanUp(inputChannel);
 		}
 
 		_zos.closeEntry();

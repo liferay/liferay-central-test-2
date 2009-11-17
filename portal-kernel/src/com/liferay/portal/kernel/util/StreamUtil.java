@@ -137,7 +137,20 @@ public class StreamUtil {
 			bufferSize = BUFFER_SIZE;
 		}
 
-		if (!USE_NIO) {
+		if (USE_NIO) {
+			ReadableByteChannel readableByteChannel = Channels.newChannel(
+				inputStream);
+			WritableByteChannel writableByteChannel = Channels.newChannel(
+				outputStream);
+
+			try {
+				transfer(readableByteChannel, writableByteChannel, bufferSize);
+			}
+			finally {
+				cleanUp(readableByteChannel, writableByteChannel);
+			}
+		}
+		else {
 			try {
 				byte[] bytes = new byte[bufferSize];
 
@@ -151,45 +164,35 @@ public class StreamUtil {
 				cleanUp(inputStream, outputStream);
 			}
 		}
-		else {
-			ReadableByteChannel inputChannel = Channels.newChannel(
-				inputStream);
-			WritableByteChannel outputChannel = Channels.newChannel(
-				outputStream);
-
-			try {
-				transfer(inputChannel, outputChannel, bufferSize);
-			}
-			finally {
-				cleanUp(inputChannel, outputChannel);
-			}
-		}
 	}
 
 	public static void transfer(
-			ReadableByteChannel inputChannel, WritableByteChannel outputChannel)
+			ReadableByteChannel readableByteChannel,
+			WritableByteChannel writableByteChannel)
 		throws IOException {
 
-		transfer(inputChannel, outputChannel, BUFFER_SIZE);
+		transfer(readableByteChannel, writableByteChannel, BUFFER_SIZE);
 	}
 
 	public static void transfer(
-			ReadableByteChannel inputChannel, WritableByteChannel outputChannel,
-			int bufferSize)
+			ReadableByteChannel readableByteChannel,
+			WritableByteChannel writableByteChannel, int bufferSize)
 		throws IOException {
 
-		ByteBuffer buffer = ByteBuffer.allocateDirect(bufferSize);
+		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(bufferSize);
 
-		while (inputChannel.read(buffer) != -1) {
-			buffer.flip();
-			outputChannel.write(buffer);
-			buffer.compact();
+		while (readableByteChannel.read(byteBuffer) != -1) {
+			byteBuffer.flip();
+
+			writableByteChannel.write(byteBuffer);
+
+			byteBuffer.compact();
 		}
 
-		buffer.flip();
+		byteBuffer.flip();
 
-		while (buffer.hasRemaining()) {
-			outputChannel.write(buffer);
+		while (byteBuffer.hasRemaining()) {
+			writableByteChannel.write(byteBuffer);
 		}
 	}
 
