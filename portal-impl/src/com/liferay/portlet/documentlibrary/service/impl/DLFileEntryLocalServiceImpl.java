@@ -114,10 +114,8 @@ public class DLFileEntryLocalServiceImpl
 			}
 		}
 
-		InputStream is = null;
-
 		try {
-			is = new BufferedInputStream(new FileInputStream(file));
+			InputStream is = new BufferedInputStream(new FileInputStream(file));
 
 			return addFileEntry(
 				null, userId, groupId, folderId, name, title, description,
@@ -125,16 +123,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
-		}
-		finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			}
-			catch (IOException ioe) {
-				_log.error(ioe);
-			}
 		}
 	}
 
@@ -761,9 +749,8 @@ public class DLFileEntryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		InputStream is = null;
-
 		try {
+			InputStream is = null;
 			long size = 0;
 
 			if ((file != null) && (file.length() > 0)) {
@@ -777,16 +764,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
-		}
-		finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			}
-			catch (IOException ioe) {
-				_log.error(ioe);
-			}
 		}
 	}
 
