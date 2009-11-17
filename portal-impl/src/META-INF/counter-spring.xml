@@ -19,4 +19,7 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil">
+		<property name="persistence" ref="com.liferay.counter.service.persistence.CounterPersistence" />
+	</bean>
 </beans>
