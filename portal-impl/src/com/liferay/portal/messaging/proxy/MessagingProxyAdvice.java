@@ -99,7 +99,10 @@ public class MessagingProxyAdvice {
 		ProxyResponse proxyResponse = (ProxyResponse)messageSender.send(
 			proxyRequest);
 
-		if (proxyResponse.hasError()) {
+		if (proxyResponse == null) {
+			return null;
+		}
+		else if (proxyResponse.hasError()) {
 			throw proxyResponse.getException();
 		}
 		else {
