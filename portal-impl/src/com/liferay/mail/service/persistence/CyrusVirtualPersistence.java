@@ -25,13 +25,9 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusVirtualException;
 import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
-import com.liferay.portal.kernel.dao.orm.Query;
-import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.model.Dummy;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.service.persistence.BasePersistence;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,135 +35,18 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
-public class CyrusVirtualPersistence extends BasePersistenceImpl<Dummy> {
-
-	public static String FIND_BY_USER_ID =
-		"SELECT cyrusVirtual FROM CyrusVirtual cyrusVirtual WHERE userId = ?";
+public interface CyrusVirtualPersistence extends BasePersistence<Dummy> {
 
 	public CyrusVirtual findByPrimaryKey(String emailAddress)
-		throws NoSuchCyrusVirtualException, SystemException {
+		throws NoSuchCyrusVirtualException, SystemException;
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (CyrusVirtual)session.load(CyrusVirtual.class, emailAddress);
-		}
-		catch (ObjectNotFoundException onfe) {
-			throw new NoSuchCyrusVirtualException();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<CyrusVirtual> findByUserId(long userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Query q = session.createQuery(FIND_BY_USER_ID);
-
-			q.setString(0, String.valueOf(userId));
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public List<CyrusVirtual> findByUserId(long userId) throws SystemException;
 
 	public void remove(String emailAddress)
-		throws NoSuchCyrusVirtualException, SystemException {
+		throws NoSuchCyrusVirtualException, SystemException;
 
-		Session session = null;
+	public void removeByUserId(long userId) throws SystemException;
 
-		try {
-			session = openSession();
-
-			CyrusVirtual virtual = (CyrusVirtual)session.load(
-				CyrusVirtual.class, emailAddress);
-
-			session.delete(virtual);
-
-			session.flush();
-		}
-		catch (ObjectNotFoundException onfe) {
-			throw new NoSuchCyrusVirtualException();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void removeByUserId(long userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Query q = session.createQuery(FIND_BY_USER_ID);
-
-			q.setString(0, String.valueOf(userId));
-
-			Iterator<CyrusVirtual> itr = q.iterate();
-
-			while (itr.hasNext()) {
-				CyrusVirtual virtual = itr.next();
-
-				session.delete(virtual);
-			}
-
-			closeSession(session);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void update(CyrusVirtual virtual) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			try {
-				CyrusVirtual virtualModel = (CyrusVirtual)session.load(
-					CyrusVirtual.class, virtual.getEmailAddress());
-
-				virtualModel.setUserId(virtual.getUserId());
-
-				session.flush();
-			}
-			catch (ObjectNotFoundException onfe) {
-				CyrusVirtual virtualModel = new CyrusVirtual(
-					virtual.getEmailAddress(), virtual.getUserId());
-
-				session.save(virtualModel);
-
-				session.flush();
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public void update(CyrusVirtual virtual) throws SystemException;
 
 }

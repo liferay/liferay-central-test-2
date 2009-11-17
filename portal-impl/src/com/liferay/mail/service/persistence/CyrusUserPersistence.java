@@ -25,95 +25,22 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusUserException;
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
-import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.model.Dummy;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
  * <a href="CyrusUserPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CyrusUserPersistence extends BasePersistenceImpl<Dummy> {
+public interface CyrusUserPersistence extends BasePersistence<Dummy> {
 
 	public CyrusUser findByPrimaryKey(long userId)
-		throws NoSuchCyrusUserException, SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			return (CyrusUser)session.load(
-				CyrusUser.class, String.valueOf(userId));
-		}
-		catch (ObjectNotFoundException onfe) {
-			throw new NoSuchCyrusUserException();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+		throws NoSuchCyrusUserException, SystemException;
 
 	public void remove(long userId)
-		throws NoSuchCyrusUserException, SystemException {
+		throws NoSuchCyrusUserException, SystemException;
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CyrusUser user = (CyrusUser)session.load(
-				CyrusUser.class, String.valueOf(userId));
-
-			session.delete(user);
-
-			session.flush();
-		}
-		catch (ObjectNotFoundException onfe) {
-			throw new NoSuchCyrusUserException();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public void update(CyrusUser user) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			try {
-				CyrusUser userModel = (CyrusUser)session.load(
-					CyrusUser.class, String.valueOf(user.getUserId()));
-
-				userModel.setPassword(user.getPassword());
-
-				session.flush();
-			}
-			catch (ObjectNotFoundException onfe) {
-				CyrusUser userModel = new CyrusUser(
-					user.getUserId(), user.getPassword());
-
-				session.save(userModel);
-
-				session.flush();
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public void update(CyrusUser user) throws SystemException;
 
 }

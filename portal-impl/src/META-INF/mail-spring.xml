@@ -7,8 +7,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
 	<bean id="com.liferay.mail.service.MailService" class="com.liferay.mail.service.impl.MailServiceImpl" />
-	<bean id="com.liferay.mail.service.persistence.CyrusUserPersistence" class="com.liferay.mail.service.persistence.CyrusUserPersistence" parent="basePersistence" />
-	<bean id="com.liferay.mail.service.persistence.CyrusVirtualPersistence" class="com.liferay.mail.service.persistence.CyrusVirtualPersistence" parent="basePersistence" />
+	<bean id="com.liferay.mail.service.persistence.CyrusUserPersistence" class="com.liferay.mail.service.persistence.CyrusUserPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.mail.service.persistence.CyrusVirtualPersistence" class="com.liferay.mail.service.persistence.CyrusVirtualPersistenceImpl" parent="basePersistence" />
 
 	<!-- Messaging -->
 
