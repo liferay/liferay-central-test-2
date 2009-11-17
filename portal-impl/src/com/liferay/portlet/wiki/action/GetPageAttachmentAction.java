@@ -112,25 +112,18 @@ public class GetPageAttachmentAction extends PortletAction {
 			fileName = fileName.substring(pos + 1);
 		}
 
-		InputStream is = null;
+		WikiPage page = WikiPageServiceUtil.getPage(nodeId, title);
 
-		try {
-			WikiPage page = WikiPageServiceUtil.getPage(nodeId, title);
+		String path = page.getAttachmentsDir() + "/" + fileName;
 
-			String path = page.getAttachmentsDir() + "/" + fileName;
+		InputStream is = DLLocalServiceUtil.getFileAsStream(
+			page.getCompanyId(), CompanyConstants.SYSTEM, path);
+		int contentLength = (int)DLServiceUtil.getFileSize(
+			page.getCompanyId(), CompanyConstants.SYSTEM, path);
+		String contentType = MimeTypesUtil.getContentType(fileName);
 
-			is = DLLocalServiceUtil.getFileAsStream(
-				page.getCompanyId(), CompanyConstants.SYSTEM, path);
-			int contentLength = (int)DLServiceUtil.getFileSize(
-				page.getCompanyId(), CompanyConstants.SYSTEM, path);
-			String contentType = MimeTypesUtil.getContentType(fileName);
-
-			ServletResponseUtil.sendFile(
-				response, fileName, is, contentLength, contentType);
-		}
-		finally {
-			ServletResponseUtil.cleanUp(is);
-		}
+		ServletResponseUtil.sendFile(
+			response, fileName, is, contentLength, contentType);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

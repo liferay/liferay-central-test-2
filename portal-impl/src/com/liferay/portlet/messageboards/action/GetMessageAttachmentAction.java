@@ -99,25 +99,18 @@ public class GetMessageAttachmentAction extends PortletAction {
 			long messageId, String fileName, HttpServletResponse response)
 		throws Exception {
 
-		InputStream is = null;
+		MBMessage message = MBMessageServiceUtil.getMessage(messageId);
 
-		try {
-			MBMessage message = MBMessageServiceUtil.getMessage(messageId);
+		String path = message.getAttachmentsDir() + "/" + fileName;
 
-			String path = message.getAttachmentsDir() + "/" + fileName;
+		InputStream is = DLLocalServiceUtil.getFileAsStream(
+			message.getCompanyId(), CompanyConstants.SYSTEM, path);
+		int contentLength = (int)DLServiceUtil.getFileSize(
+			message.getCompanyId(), CompanyConstants.SYSTEM, path);
+		String contentType = MimeTypesUtil.getContentType(fileName);
 
-			is = DLLocalServiceUtil.getFileAsStream(
-				message.getCompanyId(), CompanyConstants.SYSTEM, path);
-			int contentLength = (int)DLServiceUtil.getFileSize(
-				message.getCompanyId(), CompanyConstants.SYSTEM, path);
-			String contentType = MimeTypesUtil.getContentType(fileName);
-
-			ServletResponseUtil.sendFile(
-				response, fileName, is, contentLength, contentType);
-		}
-		finally {
-			ServletResponseUtil.cleanUp(is);
-		}
+		ServletResponseUtil.sendFile(
+			response, fileName, is, contentLength, contentType);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

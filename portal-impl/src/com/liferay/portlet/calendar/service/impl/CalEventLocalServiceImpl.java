@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -77,7 +78,6 @@ import com.liferay.portlet.calendar.util.CalUtil;
 import com.liferay.portlet.calendar.util.Indexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.util.TimeZoneSensitive;
-import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -929,7 +929,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			throw new SystemException(e);
 		}
 		finally {
-			ServletResponseUtil.cleanUp(os);
+			StreamUtil.cleanUp(os);
 		}
 	}
 

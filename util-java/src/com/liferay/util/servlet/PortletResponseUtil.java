@@ -29,11 +29,11 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -138,7 +138,7 @@ public class PortletResponseUtil {
 			}
 		}
 		finally {
-			ServletResponseUtil.cleanUp(os);
+			StreamUtil.cleanUp(os);
 		}
 	}
 
@@ -152,38 +152,20 @@ public class PortletResponseUtil {
 			MimeResponse mimeResponse, InputStream is, int contentLength)
 		throws IOException {
 
-		OutputStream os = null;
+		if (mimeResponse.isCommitted()) {
+			return;
+		}
 
-		try {
-			if (!mimeResponse.isCommitted()) {
-				if (contentLength > 0) {
-					if (mimeResponse instanceof ResourceResponse) {
-						ResourceResponse resourceResponse =
-							(ResourceResponse)mimeResponse;
+		if (contentLength > 0) {
+			if (mimeResponse instanceof ResourceResponse) {
+				ResourceResponse resourceResponse =
+					(ResourceResponse)mimeResponse;
 
-						resourceResponse.setContentLength(contentLength);
-					}
-				}
-
-				os = new BufferedOutputStream(
-					mimeResponse.getPortletOutputStream());
-
-				if (!(is instanceof BufferedInputStream)) {
-					is = new BufferedInputStream(is);
-				}
-
-				int c = is.read();
-
-				while (c != -1) {
-					os.write(c);
-
-					c = is.read();
-				}
+				resourceResponse.setContentLength(contentLength);
 			}
 		}
-		finally {
-			ServletResponseUtil.cleanUp(os, is);
-		}
+
+		StreamUtil.transfer(is, mimeResponse.getPortletOutputStream());
 	}
 
 	protected static void setHeaders(

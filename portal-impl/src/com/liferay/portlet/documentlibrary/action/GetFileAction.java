@@ -155,124 +155,118 @@ public class GetFileAction extends PortletAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		InputStream is = null;
+		long companyId = themeDisplay.getCompanyId();
+		long userId = themeDisplay.getUserId();
 
-		try {
-			long companyId = themeDisplay.getCompanyId();
-			long userId = themeDisplay.getUserId();
+		if (name.startsWith("DLFE-")) {
+			name = name.substring("DLFE-".length());
+		}
 
-			if (name.startsWith("DLFE-")) {
-				name = name.substring("DLFE-".length());
+		name = FileUtil.stripExtension(name);
+
+		DLFileEntry fileEntry = null;
+
+		if (Validator.isNotNull(uuid) && (groupId > 0)) {
+			try {
+				fileEntry =
+					DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
+						uuid, groupId);
+
+				folderId = fileEntry.getFolderId();
+				name = fileEntry.getName();
 			}
-
-			name = FileUtil.stripExtension(name);
-
-			DLFileEntry fileEntry = null;
-
-			if (Validator.isNotNull(uuid) && (groupId > 0)) {
-				try {
-					fileEntry = DLFileEntryLocalServiceUtil.
-						getFileEntryByUuidAndGroupId(uuid, groupId);
-
-					folderId = fileEntry.getFolderId();
-					name = fileEntry.getName();
-				}
-				catch (Exception e) {
-				}
+			catch (Exception e) {
 			}
+		}
 
-			if (fileShortcutId <= 0) {
-				if (Validator.isNotNull(name)) {
-					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-						groupId, folderId, name);
-
-					title = fileEntry.getTitle();
-				}
-				else if (Validator.isNotNull(title)) {
-					fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByTitle(
-						groupId, folderId, title);
-
-					name = fileEntry.getName();
-				}
-
-				DLFileEntryPermission.check(
-					themeDisplay.getPermissionChecker(), fileEntry,
-					ActionKeys.VIEW);
-			}
-			else {
-				DLFileShortcut fileShortcut =
-					DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
-
-				folderId = fileShortcut.getToFolderId();
-				name = fileShortcut.getToName();
-
+		if (fileShortcutId <= 0) {
+			if (Validator.isNotNull(name)) {
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 					groupId, folderId, name);
+
+				title = fileEntry.getTitle();
+			}
+			else if (Validator.isNotNull(title)) {
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByTitle(
+					groupId, folderId, title);
+
+				name = fileEntry.getName();
 			}
 
-			if (version == 0) {
-				if (fileEntry.getVersion() > 0) {
-					version = fileEntry.getVersion();
-				}
-				else {
-					throw new NoSuchFileEntryException();
-				}
-			}
-
-			is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				companyId, userId, groupId, folderId, name, version);
-
-			boolean converted = false;
-
-			String fileName = fileEntry.getTitle();
-
-			if (Validator.isNotNull(targetExtension)) {
-				String id = DocumentConversionUtil.getTempFileId(
-					fileEntry.getFileEntryId(), version);
-
-				String sourceExtension = FileUtil.getExtension(fileName);
-
-				InputStream convertedIS = DocumentConversionUtil.convert(
-					id, is, sourceExtension, targetExtension);
-
-				if ((convertedIS != null) && (convertedIS != is)) {
-					StringBuilder sb = new StringBuilder();
-
-					sb.append(FileUtil.stripExtension(fileEntry.getTitle()));
-					sb.append(StringPool.PERIOD);
-					sb.append(targetExtension);
-
-					fileName = sb.toString();
-
-					is = convertedIS;
-
-					converted = true;
-				}
-			}
-
-			int contentLength = 0;
-
-			if (!converted) {
-				if (version >= fileEntry.getVersion()) {
-					contentLength = fileEntry.getSize();
-				}
-				else {
-					DLFileVersion fileVersion =
-						DLFileVersionLocalServiceUtil.getFileVersion(
-							groupId, folderId, name, version);
-
-					contentLength = fileVersion.getSize();
-				}
-			}
-
-			String contentType = MimeTypesUtil.getContentType(fileName);
-
-			ServletResponseUtil.sendFile(
-				response, fileName, is, contentLength, contentType);
+			DLFileEntryPermission.check(
+				themeDisplay.getPermissionChecker(), fileEntry,
+				ActionKeys.VIEW);
 		}
-		finally {
-			ServletResponseUtil.cleanUp(is);
+		else {
+			DLFileShortcut fileShortcut =
+				DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
+
+			folderId = fileShortcut.getToFolderId();
+			name = fileShortcut.getToName();
+
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				groupId, folderId, name);
 		}
+
+		if (version == 0) {
+			if (fileEntry.getVersion() > 0) {
+				version = fileEntry.getVersion();
+			}
+			else {
+				throw new NoSuchFileEntryException();
+			}
+		}
+
+		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
+			companyId, userId, groupId, folderId, name, version);
+
+		boolean converted = false;
+
+		String fileName = fileEntry.getTitle();
+
+		if (Validator.isNotNull(targetExtension)) {
+			String id = DocumentConversionUtil.getTempFileId(
+				fileEntry.getFileEntryId(), version);
+
+			String sourceExtension = FileUtil.getExtension(fileName);
+
+			InputStream convertedIS = DocumentConversionUtil.convert(
+				id, is, sourceExtension, targetExtension);
+
+			if ((convertedIS != null) && (convertedIS != is)) {
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(FileUtil.stripExtension(fileEntry.getTitle()));
+				sb.append(StringPool.PERIOD);
+				sb.append(targetExtension);
+
+				fileName = sb.toString();
+
+				is = convertedIS;
+
+				converted = true;
+			}
+		}
+
+		int contentLength = 0;
+
+		if (!converted) {
+			if (version >= fileEntry.getVersion()) {
+				contentLength = fileEntry.getSize();
+			}
+			else {
+				DLFileVersion fileVersion =
+					DLFileVersionLocalServiceUtil.getFileVersion(
+						groupId, folderId, name, version);
+
+				contentLength = fileVersion.getSize();
+			}
+		}
+
+		String contentType = MimeTypesUtil.getContentType(fileName);
+
+		ServletResponseUtil.sendFile(
+			response, fileName, is, contentLength, contentType);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

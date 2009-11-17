@@ -107,8 +107,6 @@ public class ExportArticleAction extends PortletAction {
 			HttpServletResponse response)
 		throws Exception {
 
-		InputStream is = null;
-
 		try {
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
@@ -143,7 +141,7 @@ public class ExportArticleAction extends PortletAction {
 			sb.append("</body>");
 			sb.append("</html>");
 
-			is = new ByteArrayInputStream(
+			InputStream is = new ByteArrayInputStream(
 				sb.toString().getBytes(StringPool.UTF8));
 
 			String title = articleDisplay.getTitle();
@@ -185,9 +183,6 @@ public class ExportArticleAction extends PortletAction {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-		finally {
-			ServletResponseUtil.cleanUp(is);
 		}
 	}
 

@@ -29,11 +29,11 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,46 +53,27 @@ import org.apache.commons.lang.CharUtils;
  */
 public class ServletResponseUtil {
 
-	public static void cleanUp(InputStream is) {
-		try {
-			if (is != null) {
-				is.close();
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
+	/**
+	 * @deprecated {@link StreamUtil#cleanUp(InputStream)}
+	 */
+	public static void cleanUp(InputStream inputStream) {
+		StreamUtil.cleanUp(inputStream);
 	}
 
-	public static void cleanUp(OutputStream os) {
-		try {
-			if (os != null) {
-				os.flush();
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		try {
-			if (os != null) {
-				os.close();
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
+	/**
+	 * @deprecated {@link StreamUtil#cleanUp(OutputStream)}
+	 */
+	public static void cleanUp(OutputStream outputStream) {
+		StreamUtil.cleanUp(outputStream);
 	}
 
-	public static void cleanUp(OutputStream os, InputStream is) {
-		cleanUp(os);
-		cleanUp(is);
+	/**
+	 * @deprecated {@link StreamUtil#cleanUp(InputStream, OutputStream)}
+	 */
+	public static void cleanUp(
+		OutputStream outputStream, InputStream inputStream) {
+
+		StreamUtil.cleanUp(inputStream, outputStream);
 	}
 
 	public static void sendFile(
@@ -187,7 +168,7 @@ public class ServletResponseUtil {
 			}
 		}
 		finally {
-			cleanUp(os);
+			StreamUtil.cleanUp(os);
 		}
 	}
 
@@ -201,32 +182,15 @@ public class ServletResponseUtil {
 			HttpServletResponse response, InputStream is, int contentLength)
 		throws IOException {
 
-		OutputStream os = null;
-
-		try {
-			if (!response.isCommitted()) {
-				if (contentLength > 0) {
-					response.setContentLength(contentLength);
-				}
-
-				os = new BufferedOutputStream(response.getOutputStream());
-
-				if (!(is instanceof BufferedInputStream)) {
-					is = new BufferedInputStream(is);
-				}
-
-				int c = is.read();
-
-				while (c != -1) {
-					os.write(c);
-
-					c = is.read();
-				}
-			}
+		if (response.isCommitted()) {
+			return;
 		}
-		finally {
-			cleanUp(os, is);
+
+		if (contentLength > 0) {
+			response.setContentLength(contentLength);
 		}
+
+		StreamUtil.transfer(is, response.getOutputStream());
 	}
 
 	protected static void setHeaders(

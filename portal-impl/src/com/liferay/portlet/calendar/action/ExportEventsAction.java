@@ -64,7 +64,6 @@ public class ExportEventsAction extends PortletAction {
 		throws Exception {
 
 		File file = null;
-		InputStream is = null;
 
 		try {
 			ThemeDisplay themeDisplay =
@@ -83,7 +82,7 @@ public class ExportEventsAction extends PortletAction {
 					themeDisplay.getScopeGroupId(), exportFileName);
 			}
 
-			is = new BufferedInputStream(new FileInputStream(file));
+			InputStream is = new BufferedInputStream(new FileInputStream(file));
 
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
@@ -97,8 +96,6 @@ public class ExportEventsAction extends PortletAction {
 			_log.error(e, e);
 		}
 		finally {
-			ServletResponseUtil.cleanUp(is);
-
 			FileUtil.delete(file);
 		}
 	}

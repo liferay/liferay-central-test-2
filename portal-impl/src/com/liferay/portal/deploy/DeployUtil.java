@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,7 +40,6 @@ import com.liferay.util.ant.DeleteTask;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * <a href="DeployUtil.java.html"><b><i>View Source</i></b></a>
@@ -154,12 +154,9 @@ public class DeployUtil {
 				parentFile.mkdirs();
 			}
 
-			byte[] bytes = FileUtil.getBytes(
-				getClass().getResourceAsStream("dependencies/" + resource));
-
-			OutputStream os = new FileOutputStream(file);
-
-			os.write(bytes);
+			StreamUtil.transfer(
+				getClass().getResourceAsStream("dependencies/" + resource),
+				new FileOutputStream(file));
 		}
 
 		return FileUtil.getAbsolutePath(file);

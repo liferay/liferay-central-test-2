@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -339,20 +338,9 @@ public class S3Hook extends BaseHook {
 					SystemProperties.get(SystemProperties.TMP_DIR) +
 						File.separator + UUID.timeUUID());
 
-				InputStream is = null;
+				FileUtil.write(tempFile, oldS3Object.getDataInputStream());
 
-				try {
-					is = oldS3Object.getDataInputStream();
-
-					FileUtil.write(tempFile, is);
-				}
-				catch (Exception e) {
-				}
-				finally {
-					ServletResponseUtil.cleanUp(is);
-				}
-
-				is = new FileInputStream(tempFile);
+				InputStream is = new FileInputStream(tempFile);
 
 				String newPrefix = getKey(companyId, newRepositoryId);
 
@@ -438,20 +426,9 @@ public class S3Hook extends BaseHook {
 					SystemProperties.get(SystemProperties.TMP_DIR) +
 						File.separator + UUID.timeUUID());
 
-				InputStream is = null;
+				FileUtil.write(tempFile, oldS3Object.getDataInputStream());
 
-				try {
-					is = oldS3Object.getDataInputStream();
-
-					FileUtil.write(tempFile, is);
-				}
-				catch (Exception e) {
-				}
-				finally {
-					ServletResponseUtil.cleanUp(is);
-				}
-
-				is = new FileInputStream(tempFile);
+				InputStream is = new FileInputStream(tempFile);
 
 				String newPrefix = getKey(companyId, repositoryId, newFileName);
 

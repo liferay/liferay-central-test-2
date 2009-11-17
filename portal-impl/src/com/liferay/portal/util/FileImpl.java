@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -35,7 +36,6 @@ import com.liferay.util.SystemProperties;
 import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -45,7 +45,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 
@@ -76,8 +75,6 @@ import org.mozilla.intl.chardet.nsPSMDetector;
  * @author Alexander Chow
  */
 public class FileImpl implements com.liferay.portal.kernel.util.File {
-
-	private static final int _BUFFER = 4096;
 
 	public static FileImpl getInstance() {
 		return _instance;
@@ -390,42 +387,15 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return getBytes(is, -1);
 	}
 
-	public byte[] getBytes(InputStream is, int bufferSize) throws IOException {
-		ByteArrayOutputStream baos = null;
+	public byte[] getBytes(InputStream inputStream, int bufferSize)
+		throws IOException {
 
-		if (bufferSize <= 0) {
-			baos = new ByteArrayOutputStream();
-		}
-		else {
-			baos = new ByteArrayOutputStream(bufferSize);
-		}
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		boolean createBuffered = false;
+		StreamUtil.transfer(inputStream, byteArrayOutputStream, bufferSize);
 
-		try {
-			if (!(is instanceof BufferedInputStream)) {
-				is = new BufferedInputStream(is);
-
-				createBuffered = true;
-			}
-
-			int c = is.read();
-
-			while (c != -1) {
-				baos.write(c);
-
-				c = is.read();
-			}
-		}
-		finally {
-			if (createBuffered) {
-				is.close();
-			}
-		}
-
-		baos.close();
-
-		return baos.toByteArray();
+		return byteArrayOutputStream.toByteArray();
 	}
 
 	public String getExtension(String fileName) {
@@ -775,25 +745,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			mkdirs(file.getParent());
 		}
 
-		if (!(is instanceof BufferedInputStream)) {
-			is = new BufferedInputStream(is);
-		}
-
-		OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
-
-		try {
-			int c = is.read();
-
-			while (c != -1) {
-				os.write(c);
-
-				c = is.read();
-			}
-		}
-		finally {
-			os.close();
-			is.close();
-		}
+		StreamUtil.transfer(is, new FileOutputStream(file));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FileImpl.class);

@@ -85,9 +85,6 @@ public class GetMethodImpl implements Method {
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
-		finally {
-			ServletResponseUtil.cleanUp(is);
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(GetMethodImpl.class);

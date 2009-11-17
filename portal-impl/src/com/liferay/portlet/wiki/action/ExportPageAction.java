@@ -129,93 +129,83 @@ public class ExportPageAction extends PortletAction {
 			HttpServletResponse response)
 		throws Exception {
 
-		InputStream is = null;
+		WikiPage page = WikiPageServiceUtil.getPage(nodeId, title, version);
+
+		String content = page.getContent();
+
+		String attachmentURLPrefix =
+			themeDisplay.getPathMain() + "/wiki/get_page_attachment?" +
+				"p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + nodeId +
+					"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
 
 		try {
-			WikiPage page = WikiPageServiceUtil.getPage(nodeId, title, version);
-
-			String content = page.getContent();
-
-			String attachmentURLPrefix =
-				themeDisplay.getPathMain() + "/wiki/get_page_attachment?" +
-					"p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + nodeId +
-						"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
-
-			try {
-				content = WikiUtil.convert(
-					page, viewPageURL, editPageURL, attachmentURLPrefix);
-			}
-			catch (Exception e) {
-				_log.error(
-					"Error formatting the wiki page " + page.getPageId() +
-						" with the format " + page.getFormat(), e);
-			}
-
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("<html>");
-
-			sb.append("<head>");
-			sb.append("<meta content=\"");
-			sb.append(ContentTypes.TEXT_HTML_UTF8);
-			sb.append("\" http-equiv=\"content-type\" />");
-			sb.append("<base href=\"");
-			sb.append(themeDisplay.getPortalURL());
-			sb.append("\" />");
-			sb.append("</head>");
-
-			sb.append("<body>");
-
-			sb.append("<h1>");
-			sb.append(title);
-			sb.append("</h1>");
-			sb.append(content);
-
-			sb.append("</body>");
-			sb.append("</html>");
-
-			is = new ByteArrayInputStream(
-				sb.toString().getBytes(StringPool.UTF8));
-
-			String sourceExtension = "html";
-
-			sb = new StringBuilder();
-
-			sb.append(title);
-			sb.append(StringPool.PERIOD);
-			sb.append(sourceExtension);
-
-			String fileName = sb.toString();
-
-			if (Validator.isNotNull(targetExtension)) {
-				String id = page.getUuid();
-
-				InputStream convertedIS = DocumentConversionUtil.convert(
-					id, is, sourceExtension, targetExtension);
-
-				if ((convertedIS != null) && (convertedIS != is)) {
-					sb = new StringBuilder();
-
-					sb.append(title);
-					sb.append(StringPool.PERIOD);
-					sb.append(targetExtension);
-
-					fileName = sb.toString();
-
-					is = convertedIS;
-				}
-			}
-
-			String contentType = MimeTypesUtil.getContentType(fileName);
-
-			ServletResponseUtil.sendFile(response, fileName, is, contentType);
+			content = WikiUtil.convert(
+				page, viewPageURL, editPageURL, attachmentURLPrefix);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.error(
+				"Error formatting the wiki page " + page.getPageId() +
+					" with the format " + page.getFormat(), e);
 		}
-		finally {
-			ServletResponseUtil.cleanUp(is);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<html>");
+
+		sb.append("<head>");
+		sb.append("<meta content=\"");
+		sb.append(ContentTypes.TEXT_HTML_UTF8);
+		sb.append("\" http-equiv=\"content-type\" />");
+		sb.append("<base href=\"");
+		sb.append(themeDisplay.getPortalURL());
+		sb.append("\" />");
+		sb.append("</head>");
+
+		sb.append("<body>");
+
+		sb.append("<h1>");
+		sb.append(title);
+		sb.append("</h1>");
+		sb.append(content);
+
+		sb.append("</body>");
+		sb.append("</html>");
+
+		InputStream is = new ByteArrayInputStream(
+			sb.toString().getBytes(StringPool.UTF8));
+
+		String sourceExtension = "html";
+
+		sb = new StringBuilder();
+
+		sb.append(title);
+		sb.append(StringPool.PERIOD);
+		sb.append(sourceExtension);
+
+		String fileName = sb.toString();
+
+		if (Validator.isNotNull(targetExtension)) {
+			String id = page.getUuid();
+
+			InputStream convertedIS = DocumentConversionUtil.convert(
+				id, is, sourceExtension, targetExtension);
+
+			if ((convertedIS != null) && (convertedIS != is)) {
+				sb = new StringBuilder();
+
+				sb.append(title);
+				sb.append(StringPool.PERIOD);
+				sb.append(targetExtension);
+
+				fileName = sb.toString();
+
+				is = convertedIS;
+			}
 		}
+
+		String contentType = MimeTypesUtil.getContentType(fileName);
+
+		ServletResponseUtil.sendFile(response, fileName, is, contentType);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
