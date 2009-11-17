@@ -20,57 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.documentlibrary.service.impl;
+package com.liferay.documentlibrary.util;
 
-import com.liferay.documentlibrary.DirectoryNameException;
-import com.liferay.documentlibrary.service.DLLocalService;
-import com.liferay.documentlibrary.service.DLService;
-import com.liferay.documentlibrary.util.Hook;
-import com.liferay.documentlibrary.util.Indexer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.File;
+import java.io.InputStream;
 
 import java.util.Date;
 
 /**
- * <a href="DLServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="HookProxyImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Michael Young
  */
-public class DLServiceImpl implements DLService {
-
-	public static final String GROUP_NAME = DLServiceImpl.class.getName();
-
-	public static final String[] GROUP_NAME_ARRAY = new String[] { GROUP_NAME };
-
-	public static final String VERSION = "_VERSION_";
+public class HookProxyImpl implements Hook {
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		if ((dirName == null || dirName.equals("/")) ||
-			(dirName.indexOf("\\\\") != -1) ||
-			(dirName.indexOf("//") != -1) ||
-			(dirName.indexOf(":") != -1) ||
-			(dirName.indexOf("*") != -1) ||
-			(dirName.indexOf("?") != -1) ||
-			(dirName.indexOf("\"") != -1) ||
-			(dirName.indexOf("<") != -1) ||
-			(dirName.indexOf(">") != -1) ||
-			(dirName.indexOf("|") != -1) ||
-			(dirName.indexOf("&") != -1) ||
-			(dirName.indexOf("[") != -1) ||
-			(dirName.indexOf("]") != -1) ||
-			(dirName.indexOf("'") != -1)) {
-
-			throw new DirectoryNameException(dirName);
-		}
+		Hook hook = HookFactory.getInstance();
 
 		hook.addDirectory(companyId, repositoryId, dirName);
 	}
@@ -81,7 +53,7 @@ public class DLServiceImpl implements DLService {
 			Date modifiedDate, ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, true, bytes);
+		Hook hook = HookFactory.getInstance();
 
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
@@ -94,16 +66,37 @@ public class DLServiceImpl implements DLService {
 			Date modifiedDate, ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, true, file);
+		Hook hook = HookFactory.getInstance();
 
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
 			properties, modifiedDate, serviceContext, file);
 	}
 
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
+		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
+
+		hook.addFile(
+			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
+			properties, modifiedDate, serviceContext, is);
+	}
+
+	public void checkRoot(long companyId) throws SystemException {
+		Hook hook = HookFactory.getInstance();
+
+		hook.checkRoot(companyId);
+	}
+
 	public void deleteDirectory(
 			long companyId, String portletId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
 
 		hook.deleteDirectory(companyId, portletId, repositoryId, dirName);
 	}
@@ -113,6 +106,8 @@ public class DLServiceImpl implements DLService {
 			String fileName)
 		throws PortalException, SystemException {
 
+		Hook hook = HookFactory.getInstance();
+
 		hook.deleteFile(companyId, portletId, repositoryId, fileName);
 	}
 
@@ -121,12 +116,16 @@ public class DLServiceImpl implements DLService {
 			String fileName, double versionNumber)
 		throws PortalException, SystemException {
 
+		Hook hook = HookFactory.getInstance();
+
 		hook.deleteFile(
 			companyId, portletId, repositoryId, fileName, versionNumber);
 	}
 
 	public byte[] getFile(long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
 
 		return hook.getFile(companyId, repositoryId, fileName);
 	}
@@ -136,12 +135,36 @@ public class DLServiceImpl implements DLService {
 			double versionNumber)
 		throws PortalException, SystemException {
 
+		Hook hook = HookFactory.getInstance();
+
 		return hook.getFile(companyId, repositoryId, fileName, versionNumber);
+	}
+
+	public InputStream getFileAsStream(
+			long companyId, long repositoryId, String fileName)
+		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
+
+		return hook.getFileAsStream(companyId, repositoryId, fileName);
+	}
+
+	public InputStream getFileAsStream(
+			long companyId, long repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
+
+		return hook.getFileAsStream(
+			companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
 
 		return hook.getFileNames(companyId, repositoryId, dirName);
 	}
@@ -150,24 +173,39 @@ public class DLServiceImpl implements DLService {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
+		Hook hook = HookFactory.getInstance();
+
 		return hook.getFileSize(companyId, repositoryId, fileName);
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
-		try {
-			Indexer indexer = new Indexer();
+	public boolean hasFile(
+			long companyId, long repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException {
 
-			indexer.reIndex(ids);
-		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
+		Hook hook = HookFactory.getInstance();
+
+		return hook.hasFile(companyId, repositoryId, fileName, versionNumber);
+	}
+
+	public void move(String srcDir, String destDir) throws SystemException {
+		Hook hook = HookFactory.getInstance();
+
+		hook.move(srcDir, destDir);
+	}
+
+	public void reIndex(String[] ids) throws SearchException {
+		Hook hook = HookFactory.getInstance();
+
+		hook.reIndex(ids);
 	}
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
+
+		Hook hook = HookFactory.getInstance();
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, newRepositoryId,
@@ -181,7 +219,7 @@ public class DLServiceImpl implements DLService {
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, true, bytes);
+		Hook hook = HookFactory.getInstance();
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
@@ -196,7 +234,7 @@ public class DLServiceImpl implements DLService {
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, true, file);
+		Hook hook = HookFactory.getInstance();
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
@@ -206,18 +244,29 @@ public class DLServiceImpl implements DLService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reIndex)
+			String fileName, double versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
+		Hook hook = HookFactory.getInstance();
+
 		hook.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName, newFileName,
-			reIndex);
+			companyId, portletId, groupId, repositoryId, fileName,
+			versionNumber, sourceFileName, fileEntryId, properties,
+			modifiedDate, serviceContext, is);
 	}
 
-	@BeanReference(name = "com.liferay.documentlibrary.service.DLLocalService")
-	protected DLLocalService dlLocalService;
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException {
 
-	@BeanReference(name = "com.liferay.documentlibrary.util.HookProxyBean")
-	protected Hook hook;
+		Hook hook = HookFactory.getInstance();
+
+		hook.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			newFileName, reindex);
+	}
 
 }

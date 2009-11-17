@@ -27,7 +27,6 @@ import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.util.Hook;
-import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -79,24 +78,18 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		validate(fileName, validateFileExtension, is);
 
-		Hook hook = HookFactory.getInstance();
-
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
 			properties, modifiedDate, serviceContext, is);
 	}
 
 	public void checkRoot(long companyId) throws SystemException {
-		Hook hook = HookFactory.getInstance();
-
 		hook.checkRoot(companyId);
 	}
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
-
-		Hook hook = HookFactory.getInstance();
 
 		return hook.getFileAsStream(companyId, repositoryId, fileName);
 	}
@@ -105,8 +98,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
-
-		Hook hook = HookFactory.getInstance();
 
 		return hook.getFileAsStream(
 			companyId, repositoryId, fileName, versionNumber);
@@ -117,14 +108,10 @@ public class DLLocalServiceImpl implements DLLocalService {
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		Hook hook = HookFactory.getInstance();
-
 		return hook.hasFile(companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public void move(String srcDir, String destDir) throws SystemException {
-		Hook hook = HookFactory.getInstance();
-
 		hook.move(srcDir, destDir);
 	}
 
@@ -221,8 +208,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 		if (validateFileExtension) {
 			validate(fileName, sourceFileName, is);
 		}
-
-		Hook hook = HookFactory.getInstance();
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
@@ -348,16 +333,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	@BeanReference(name = _GROUP_LOCAL_SERVICE)
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService")
 	protected GroupLocalService groupLocalService;
 
-	@BeanReference(name = _DL_FOLDER_SERVICE)
+	@BeanReference(
+		name = "com.liferay.portlet.documentlibrary.service.DLFolderService")
 	protected DLFolderService dlFolderService;
 
-	private static final String _GROUP_LOCAL_SERVICE =
-		"com.liferay.portal.service.GroupLocalService";
-
-	private static final String _DL_FOLDER_SERVICE =
-		"com.liferay.portlet.documentlibrary.service.DLFolderService";
+	@BeanReference(name = "com.liferay.documentlibrary.util.HookProxyBean")
+	protected Hook hook;
 
 }
