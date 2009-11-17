@@ -138,13 +138,6 @@ public interface Hook {
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException;
 
-	public void updateFileImpl(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException;
-
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName, boolean reindex)

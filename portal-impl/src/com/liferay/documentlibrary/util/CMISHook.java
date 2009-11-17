@@ -66,13 +66,13 @@ public class CMISHook extends BaseHook {
 		CMISUtil.createFolder(repositoryFolderEntry, dirName);
 	}
 
-	public void addFileImpl(
+	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException {
 
-		updateFileImpl(
+		updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			DEFAULT_VERSION, null, fileEntryId, properties, modifiedDate,
 			serviceContext, is);
@@ -293,7 +293,7 @@ public class CMISHook extends BaseHook {
 		}
 	}
 
-	public void updateFileImpl(
+	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,

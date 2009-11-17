@@ -114,7 +114,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
-	public void addFileImpl(
+	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
@@ -667,7 +667,7 @@ public class JCRHook extends BaseHook {
 		}
 	}
 
-	public void updateFileImpl(
+	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,

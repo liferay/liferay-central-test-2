@@ -60,9 +60,19 @@ public abstract class BaseHook implements Hook {
 
 		InputStream is = new ByteArrayInputStream(bytes);
 
-		addFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			fileEntryId, properties, modifiedDate, serviceContext, is);
+		try {
+			addFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				fileEntryId, properties, modifiedDate, serviceContext, is);
+		}
+		finally {
+			try {
+				is.close();
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
 	public void addFile(
@@ -83,26 +93,19 @@ public abstract class BaseHook implements Hook {
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
 		}
+		finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
-	public void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
-
-		HookWriterThread writer = new HookWriterThread(this);
-
-		writer.addFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			fileEntryId, properties, modifiedDate, serviceContext, is);
-
-		Thread thread = new Thread(writer);
-
-		thread.start();
-	}
-
-	public abstract void addFileImpl(
+	public abstract void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
@@ -205,10 +208,20 @@ public abstract class BaseHook implements Hook {
 
 		InputStream is = new ByteArrayInputStream(bytes);
 
-		updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, is);
+		try {
+			updateFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				versionNumber, sourceFileName, fileEntryId, properties,
+				modifiedDate, serviceContext, is);
+		}
+		finally {
+			try {
+				is.close();
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
 	public void updateFile(
@@ -231,28 +244,19 @@ public abstract class BaseHook implements Hook {
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
 		}
+		finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
-
-		HookWriterThread writer = new HookWriterThread(this);
-
-		writer.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, is);
-
-		Thread thread = new Thread(writer);
-
-		thread.start();
-	}
-
-	public abstract void updateFileImpl(
+	public abstract void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
