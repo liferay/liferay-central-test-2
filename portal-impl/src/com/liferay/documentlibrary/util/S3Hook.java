@@ -84,7 +84,7 @@ public class S3Hook extends BaseHook {
 		long companyId, long repositoryId, String dirName) {
 	}
 
-	public void addFile(
+	public void addFileImpl(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
@@ -376,7 +376,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
-	public void updateFile(
+	public void updateFileImpl(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,

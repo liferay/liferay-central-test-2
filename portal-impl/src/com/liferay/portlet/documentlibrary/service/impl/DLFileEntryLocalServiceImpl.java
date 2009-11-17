@@ -127,16 +127,6 @@ public class DLFileEntryLocalServiceImpl
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
 		}
-		finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			}
-			catch (IOException ioe) {
-				_log.error(ioe);
-			}
-		}
 	}
 
 	public DLFileEntry addFileEntry(
@@ -778,16 +768,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
-		}
-		finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			}
-			catch (IOException ioe) {
-				_log.error(ioe);
-			}
 		}
 	}
 
