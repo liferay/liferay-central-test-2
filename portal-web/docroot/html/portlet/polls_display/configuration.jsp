@@ -25,24 +25,24 @@
 <%@ include file="/html/portlet/polls_display/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 questionId = ParamUtil.getLong(request, "questionId", questionId);
 
 List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:error exception="<%= NoSuchQuestionException.class %>" message="the-question-could-not-be-found" />
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="question" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />questionId">
-			<option value=""></option>
+	<liferay-ui:error exception="<%= NoSuchQuestionException.class %>" message="the-question-could-not-be-found" />
+
+	<aui:fieldset>
+		<aui:select label="question" name="questionId">
+			<aui:option value="" />
 
 			<%
 			for (int i = 0; i < questions.size(); i++) {
@@ -51,19 +51,18 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 				question = question.toEscapedModel();
 			%>
 
-				<option <%= (questionId == question.getQuestionId()) ? "selected" : "" %> value="<%= question.getQuestionId() %>"><%= question.getTitle(locale) %></option>
+				<aui:option label="<%= question.getTitle(locale) %>" selected="<%= questionId == question.getQuestionId() %>" value="<%= question.getQuestionId() %>" />
 
 			<%
 			}
 			%>
 
-		</select>
-	</td>
-</tr>
-</table>
+		</aui:select>
+	</aui:fieldset>
 
-<br />
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-</form>
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
