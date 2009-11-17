@@ -194,62 +194,55 @@ public class DocumentServlet extends HttpServlet {
 			}
 		}
 
-		InputStream is = null;
+		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
+			permissionChecker.getCompanyId(), permissionChecker.getUserId(),
+			groupId, folderId, name, version);
 
-		try {
-			is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
-				groupId, folderId, name, version);
+		boolean converted = false;
 
-			boolean converted = false;
+		if (Validator.isNotNull(targetExtension)) {
+			String id = DocumentConversionUtil.getTempFileId(
+				fileEntry.getFileEntryId(), version);
 
-			if (Validator.isNotNull(targetExtension)) {
-				String id = DocumentConversionUtil.getTempFileId(
-					fileEntry.getFileEntryId(), version);
+			String sourceExtension = FileUtil.getExtension(fileName);
 
-				String sourceExtension = FileUtil.getExtension(fileName);
+			InputStream convertedIS = DocumentConversionUtil.convert(
+				id, is, sourceExtension, targetExtension);
 
-				InputStream convertedIS = DocumentConversionUtil.convert(
-					id, is, sourceExtension, targetExtension);
+			if ((convertedIS != null) && (convertedIS != is)) {
+				StringBuilder sb = new StringBuilder();
 
-				if ((convertedIS != null) && (convertedIS != is)) {
-					StringBuilder sb = new StringBuilder();
+				sb.append(FileUtil.stripExtension(fileName));
+				sb.append(StringPool.PERIOD);
+				sb.append(targetExtension);
 
-					sb.append(FileUtil.stripExtension(fileName));
-					sb.append(StringPool.PERIOD);
-					sb.append(targetExtension);
+				fileName = sb.toString();
 
-					fileName = sb.toString();
+				is = convertedIS;
 
-					is = convertedIS;
-
-					converted = true;
-				}
+				converted = true;
 			}
+		}
 
-			int contentLength = 0;
+		int contentLength = 0;
 
-			if (!converted) {
-				if (version >= fileEntry.getVersion()) {
-					contentLength = fileEntry.getSize();
-				}
-				else {
-					DLFileVersion fileVersion =
-						DLFileVersionLocalServiceUtil.getFileVersion(
-							groupId, folderId, name, version);
-
-					contentLength = fileVersion.getSize();
-				}
+		if (!converted) {
+			if (version >= fileEntry.getVersion()) {
+				contentLength = fileEntry.getSize();
 			}
+			else {
+				DLFileVersion fileVersion =
+					DLFileVersionLocalServiceUtil.getFileVersion(
+						groupId, folderId, name, version);
 
-			String contentType = MimeTypesUtil.getContentType(fileName);
+				contentLength = fileVersion.getSize();
+			}
+		}
 
-			ServletResponseUtil.sendFile(
-				response, fileName, is, contentLength, contentType);
-		}
-		finally {
-			ServletResponseUtil.cleanUp(is);
-		}
+		String contentType = MimeTypesUtil.getContentType(fileName);
+
+		ServletResponseUtil.sendFile(
+			response, fileName, is, contentLength, contentType);
 	}
 
 }
