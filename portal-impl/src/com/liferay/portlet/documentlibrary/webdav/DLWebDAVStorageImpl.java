@@ -641,11 +641,13 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				serviceContext.setAssetTagNames(assetTagNames);
 
+				file = FileUtil.createTempFile(FileUtil.getExtension(name));
+
+				FileUtil.write(file, request.getInputStream());
+
 				DLFileEntryServiceUtil.updateFileEntry(
 					groupId, parentFolderId, parentFolderId, name, title, title,
-					description, extraSettings,
-					FileUtil.getBytes(request.getInputStream()),
-					serviceContext);
+					description, extraSettings, file, serviceContext);
 			}
 			catch (NoSuchFileEntryException nsfee) {
 				file = FileUtil.createTempFile(FileUtil.getExtension(name));

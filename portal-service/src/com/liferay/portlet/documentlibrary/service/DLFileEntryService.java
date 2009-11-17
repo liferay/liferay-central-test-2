@@ -142,6 +142,15 @@ public interface DLFileEntryService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
+		long groupId, long folderId, long newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		java.io.File file,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public boolean verifyFileEntryLock(long groupId, long folderId,
 		java.lang.String name, java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException,

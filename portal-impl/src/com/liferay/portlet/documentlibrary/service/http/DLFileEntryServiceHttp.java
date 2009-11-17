@@ -857,6 +857,98 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		long newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		java.io.File file,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = new LongWrapper(newFolderId);
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = sourceFileName;
+
+			if (sourceFileName == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = title;
+
+			if (title == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = description;
+
+			if (description == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = extraSettings;
+
+			if (extraSettings == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = file;
+
+			if (file == null) {
+				paramObj8 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj9 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj9 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
+					"updateFileEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.documentlibrary.model.DLFileEntry)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static boolean verifyFileEntryLock(HttpPrincipal httpPrincipal,
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String lockUuid)

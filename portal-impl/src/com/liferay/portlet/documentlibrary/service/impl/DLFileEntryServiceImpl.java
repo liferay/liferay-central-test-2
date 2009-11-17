@@ -316,6 +316,44 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return fileEntry;
 	}
 
+	public DLFileEntry updateFileEntry(
+			long groupId, long folderId, long newFolderId, String name,
+			String sourceFileName, String title, String description,
+			String extraSettings, File file, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.UPDATE);
+
+		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
+
+		if (!hasLock) {
+
+			// Lock
+
+			lockFileEntry(groupId, folderId, name);
+		}
+
+		DLFileEntry fileEntry = null;
+
+		try {
+			fileEntry = dlFileEntryLocalService.updateFileEntry(
+				getUserId(), groupId, folderId, newFolderId, name,
+				sourceFileName, title, description, extraSettings, file,
+				serviceContext);
+		}
+		finally {
+			if (!hasLock) {
+
+				// Unlock
+
+				unlockFileEntry(groupId, folderId, name);
+			}
+		}
+
+		return fileEntry;
+	}
+
 	public boolean verifyFileEntryLock(
 			long groupId, long folderId, String name, String lockUuid)
 		throws PortalException, SystemException {
