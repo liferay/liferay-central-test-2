@@ -63,12 +63,8 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 
 	</liferay-ui:error>
 
-	<div class="portlet-msg-info">
-		<liferay-ui:message key="add-all-isbn-numbers-separated-by-spaces" />
-	</div>
-
 	<aui:fieldset>
-		<aui:input cssClass="lfr-textarea-container" label="" name="isbns" type="textarea" value="<%= isbnsString %>" />
+		<aui:input cssClass="lfr-textarea-container" label="add-all-isbn-numbers-separated-by-spaces" name="isbns" type="textarea" value="<%= isbnsString %>" wrap="soft" />
 	</aui:fieldset>
 
 	<aui:button-row>
