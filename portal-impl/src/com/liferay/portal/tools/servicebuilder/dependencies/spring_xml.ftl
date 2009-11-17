@@ -4,6 +4,7 @@
 
 		<#include "spring_xml_session.ftl">
 	</#if>
+
 	<#if entity.hasRemoteService()>
 		<#assign sessionType = "">
 
