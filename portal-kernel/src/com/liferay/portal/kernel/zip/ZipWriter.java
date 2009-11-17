@@ -25,13 +25,18 @@ package com.liferay.portal.kernel.zip;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
 
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -69,15 +74,25 @@ public class ZipWriter implements Serializable {
 
 		_zos.putNextEntry(entry);
 
-		BufferedInputStream bis = new BufferedInputStream(is, _BUFFER);
+		// LPS-6009
 
-		int count;
+		if (StreamUtil.USE_NIO) {
+			int count;
 
-		while ((count = bis.read(_data, 0, _BUFFER)) != -1) {
-			_zos.write(_data, 0, count);
+			while ((count = is.read(_data, 0, _BUFFER)) != -1) {
+				_zos.write(_data, 0, count);
+			}
+
+			StreamUtil.cleanUp(is);
 		}
+		else {
+			ReadableByteChannel inputChannel = Channels.newChannel(is);
+			WritableByteChannel outputChannel = Channels.newChannel(_zos);
 
-		bis.close();
+			StreamUtil.transfer(inputChannel, outputChannel);
+
+			StreamUtil.cleanUp(inputChannel);
+		}
 
 		_zos.closeEntry();
 	}

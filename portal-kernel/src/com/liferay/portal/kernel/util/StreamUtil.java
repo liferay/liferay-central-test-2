@@ -29,6 +29,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import java.nio.ByteBuffer;
+import java.nio.channels.Channel;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
+
 /**
  * <a href="StreamUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,6 +46,29 @@ public class StreamUtil {
 		System.getProperty(
 			"com.liferay.portal.kernel.util.StreamUtil.buffer.size"),
 		8192);
+
+	public static final boolean USE_NIO = GetterUtil.getBoolean(
+		System.getProperty(
+			"com.liferay.portal.kernel.util.StreamUtil.use.nio"),
+		false);
+
+	public static void cleanUp(Channel channel) {
+		try {
+			if (channel != null) {
+				channel.close();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+	}
+
+	public static void cleanUp(Channel inputChannel, Channel outputChannel) {
+		cleanUp(inputChannel);
+		cleanUp(outputChannel);
+	}
 
 	public static void cleanUp(InputStream inputStream) {
 		try {
@@ -108,17 +137,51 @@ public class StreamUtil {
 			bufferSize = BUFFER_SIZE;
 		}
 
-		try {
-			byte[] bytes = new byte[bufferSize];
+		if (!USE_NIO) {
+			try {
+				byte[] bytes = new byte[bufferSize];
 
-			int value = -1;
+				int value = -1;
 
-			while ((value = inputStream.read(bytes)) != -1) {
-				outputStream.write(bytes, 0 , value);
+				while ((value = inputStream.read(bytes)) != -1) {
+					outputStream.write(bytes, 0 , value);
+				}
+			}
+			finally {
+				cleanUp(inputStream, outputStream);
 			}
 		}
-		finally {
-			cleanUp(inputStream, outputStream);
+		else {
+			ReadableByteChannel inputChannel = Channels.newChannel(
+				inputStream);
+			WritableByteChannel outputChannel = Channels.newChannel(
+				outputStream);
+
+			try {
+				transfer(inputChannel, outputChannel);
+			}
+			finally {
+				cleanUp(inputChannel, outputChannel);
+			}
+		}
+	}
+
+	public static void transfer(
+			ReadableByteChannel inputChannel, WritableByteChannel outputChannel)
+		throws IOException {
+
+		ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
+
+		while (inputChannel.read(buffer) != -1) {
+			buffer.flip();
+			outputChannel.write(buffer);
+			buffer.compact();
+		}
+
+		buffer.flip();
+
+		while (buffer.hasRemaining()) {
+			outputChannel.write(buffer);
 		}
 	}
 
