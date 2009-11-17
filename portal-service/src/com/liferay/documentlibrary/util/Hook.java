@@ -24,6 +24,8 @@ package com.liferay.documentlibrary.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
+import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -32,6 +34,7 @@ import java.io.InputStream;
 
 import java.util.Date;
 
+@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="Hook.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,18 +47,21 @@ public interface Hook {
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException;
 
+	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException;
 
+	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, File file)
 		throws PortalException, SystemException;
 
+	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
@@ -112,11 +118,13 @@ public interface Hook {
 
 	public void reIndex(String[] ids) throws SearchException;
 
+	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException;
 
+	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
@@ -124,6 +132,7 @@ public interface Hook {
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException;
 
+	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
@@ -131,6 +140,7 @@ public interface Hook {
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException;
 
+	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
@@ -138,6 +148,7 @@ public interface Hook {
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException;
 
+	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName, boolean reindex)

@@ -33,6 +33,9 @@ public interface DestinationNames {
 
 	public static final String CONVERT_PROCESS = "liferay/convert_process";
 
+	public static final String DOCUMENT_LIBRARY_HOOK =
+		"liferay/document_library_hook";
+
 	/**
 	 * This is a special destination. Binding a message listener to this
 	 * destination will allow it to listen to messages sent to all destinations.
