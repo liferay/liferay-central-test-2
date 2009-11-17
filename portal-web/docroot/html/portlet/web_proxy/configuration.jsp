@@ -37,7 +37,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:fieldset>
 		<aui:input cssClass="lfr-input-text-container" label="url" name="initUrl" value="<%= initUrl %>" />
 
-		<aui:input cssClass="lfr-input-text-container" name="scope" value="<%= scope %>" />
+		<aui:input cssClass="lfr-input-text-container" label="<%= LanguageUtil.get(pageContext, "scope") + " (" + LanguageUtil.get(pageContext, "regex") + ")" %>" name="scope" value="<%= scope %>" />
 		
 		<aui:input cssClass="lfr-input-text-container" name="proxyHost" value="<%= proxyHost %>" />
 		
@@ -57,7 +57,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationDomain" value="<%= proxyAuthenticationDomain %>" />
 
-		<aui:input cssClass="lfr-textarea-container" name="stylesheet" type="textarea" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" value="<%= stylesheet %>" wrap="soft" />
+		<aui:input cssClass="lfr-textarea-container" name="stylesheet" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" value="<%= stylesheet %>" wrap="soft" />
 	</aui:fieldset>
 
 	<aui:button-row>
