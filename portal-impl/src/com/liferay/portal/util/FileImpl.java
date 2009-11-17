@@ -48,8 +48,6 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 
-import java.nio.channels.FileChannel;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -156,15 +154,9 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 
 			try {
-				FileChannel srcChannel =
-					new FileInputStream(source).getChannel();
-				FileChannel dstChannel =
-					new FileOutputStream(destination).getChannel();
-
-				dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
-
-				srcChannel.close();
-				dstChannel.close();
+				StreamUtil.transfer(
+					new FileInputStream(source),
+					new FileOutputStream(destination));
 			}
 			catch (IOException ioe) {
 				_log.error(ioe.getMessage());
