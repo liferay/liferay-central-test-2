@@ -156,7 +156,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<aui:input name="toName" type="hidden" value="<%= toName %>" />
 
 	<c:if test="<%= fileShortcut != null %>">
-		<h3 class="file-entry-title"><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle()) %></h3>
+		<h3 class="file-entry-title"><%= LanguageUtil.format(pageContext, "shortcut-to-x", fileShortcut.getToTitle()) %></h3>
 	</c:if>
 
 	<liferay-ui:error exception="<%= FileShortcutPermissionException.class %>" message="you-do-not-have-permission-to-create-a-shortcut-to-the-selected-document" />
