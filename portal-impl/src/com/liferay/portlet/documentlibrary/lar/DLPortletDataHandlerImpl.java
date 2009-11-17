@@ -123,15 +123,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				fileEntry.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName());
 
-			try {
-				context.addZipEntry(
-					getFileEntryBinPath(context, fileEntry),
-					FileUtil.getBytes(is));
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
-
+			context.addZipEntry(getFileEntryBinPath(context, fileEntry), is);
 			context.addZipEntry(path, fileEntry);
 
 			if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
