@@ -55,8 +55,6 @@ public class BeanReferenceAnnotationBeanPostProcessor
 	public Object postProcessBeforeInitialization(Object bean, String beanName)
 		throws BeansException {
 
-		_beans.put(beanName, bean);
-
 		_autoInject(bean, beanName, bean.getClass());
 
 		return bean;
@@ -97,6 +95,8 @@ public class BeanReferenceAnnotationBeanPostProcessor
 
 			if (referencedBean == null) {
 				referencedBean = _beanFactory.getBean(referencedBeanName);
+
+				_beans.put(referencedBeanName, referencedBean);
 			}
 
 			ReflectionUtils.makeAccessible(field);
