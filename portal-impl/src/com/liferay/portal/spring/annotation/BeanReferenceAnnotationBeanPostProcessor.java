@@ -56,6 +56,7 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		throws BeansException {
 
 		_beans.put(beanName, bean);
+
 		_autoInject(bean, beanName, bean.getClass());
 
 		return bean;
