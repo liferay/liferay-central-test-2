@@ -41,7 +41,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 	<liferay-ui:error exception="<%= NoSuchQuestionException.class %>" message="the-question-could-not-be-found" />
 
 	<c:choose>
-        <c:when test="<%= questions.size() > 0 %>">
+        <c:when test="<%= !questions.isEmpty() %>">
             <aui:fieldset>
                 <aui:select label="question" name="questionId">
                     <aui:option value="" />
@@ -66,12 +66,11 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
             <div class="portlet-msg-info">
                 <liferay-ui:message key="there-are-no-available-questions-for-selection" />
             </div>
-
         </c:otherwise>
 	</c:choose>
 
 	<aui:button-row>
-		<aui:button disabled="<%= questions.size() == 0 %>" name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+		<aui:button disabled="<%= questions.isEmpty() %>" name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
