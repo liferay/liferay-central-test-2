@@ -24,106 +24,48 @@
 
 <%@ include file="/html/portlet/web_proxy/init.jsp" %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="url" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />initUrl" value="<%= initUrl %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="scope" /> (<liferay-ui:message key="regex" />)
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />scope" value="<%= scope %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="proxy-host" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />proxyHost" value="<%= proxyHost %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="proxy-port" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />proxyPort" value="<%= proxyPort %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="proxy-authentication" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />proxyAuthentication">
-			<option <%= proxyAuthentication.equals("none") ? "selected" : "" %> value="none"><liferay-ui:message key="none" /></option>
-			<option <%= proxyAuthentication.equals("basic") ? "selected" : "" %> value="basic"><liferay-ui:message key="basic" /></option>
-			<option <%= proxyAuthentication.equals("ntlm") ? "selected" : "" %> value="ntlm"><liferay-ui:message key="ntlm" /></option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="proxy-authentication-username" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />proxyAuthenticationUsername" value="<%= proxyAuthenticationUsername %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="proxy-authentication-password" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />proxyAuthenticationPassword" value="<%= proxyAuthenticationPassword %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="proxy-authentication-host" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />proxyAuthenticationHost" value="<%= proxyAuthenticationHost %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="proxy-authentication-domain" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />proxyAuthenticationDomain" value="<%= proxyAuthenticationDomain %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="stylesheet" />
-	</td>
-	<td>
-		<textarea class="lfr-textarea" name="<portlet:namespace />stylesheet" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= stylesheet %></textarea>
-	</td>
-</tr>
-</table>
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<br />
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	
+	<aui:fieldset>
+		<aui:input cssClass="lfr-input-text-container" label="url" name="initUrl" value="<%= initUrl %>" />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+		<aui:input cssClass="lfr-input-text-container" name="scope" value="<%= scope %>" />
+		
+		<aui:input cssClass="lfr-input-text-container" name="proxyHost" value="<%= proxyHost %>" />
+		
+		<aui:input cssClass="lfr-input-text-container" name="proxyPort" value="<%= proxyPort %>" />	
 
-</form>
+		<aui:select name="proxyAuthentication">
+			<aui:option label="none" selected='<%= proxyAuthentication.equals("none") %>' />
+			<aui:option label="basic" selected='<%= proxyAuthentication.equals("basic") %>' />
+			<aui:option label="ntlm" selected='<%= proxyAuthentication.equals("ntlm") %>' />
+		</aui:select>
+
+		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationUsername" value="<%= proxyAuthenticationUsername %>" />
+
+		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationPassword" value="<%= proxyAuthenticationPassword %>" />
+
+		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationHost" value="<%= proxyAuthenticationHost %>" />
+
+		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationDomain" value="<%= proxyAuthenticationDomain %>" />
+
+		<aui:input cssClass="lfr-textarea-container" name="stylesheet" type="textarea" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" value="<%= stylesheet %>" wrap="soft" />
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
