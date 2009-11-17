@@ -42,7 +42,6 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.base.AssetCategoryLocalServiceBaseImpl;
 import com.liferay.util.Autocomplete;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -212,15 +211,7 @@ public class AssetCategoryLocalServiceImpl
 	public List<AssetCategory> getCategories(long classNameId, long classPK)
 		throws SystemException {
 
-		AssetEntry entry = assetEntryPersistence.fetchByC_C(
-			classNameId, classPK);
-
-		if (entry == null) {
-			return new ArrayList<AssetCategory>();
-		}
-		else {
-			return getEntryCategories(entry.getEntryId());
-		}
+		return assetCategoryFinder.findByC_C(classNameId, classPK);
 	}
 
 	public List<AssetCategory> getCategories(String className, long classPK)

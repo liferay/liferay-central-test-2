@@ -34,11 +34,9 @@ import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetCategory;
-import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.asset.model.AssetTag;
-import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
@@ -148,20 +146,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addAssetCategories(Class<?> classObj, long classPK)
 		throws PortalException, SystemException {
 
-		AssetEntry assetEntry = null;
-
-		try {
-			assetEntry = AssetEntryLocalServiceUtil.getEntry(
+		List<AssetCategory> assetCategories =
+			AssetCategoryLocalServiceUtil.getCategories(
 				classObj.getName(), classPK);
-		}
-		catch (NoSuchEntryException nsee) {
-
-			// LEP-4979
-
-			return;
-		}
-
-		List<AssetCategory> assetCategories = assetEntry.getCategories();
 
 		if (assetCategories.isEmpty()) {
 			return;
@@ -186,28 +173,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addAssetTags(Class<?> classObj, long classPK)
 		throws PortalException, SystemException {
 
-		AssetEntry assetEntry = null;
+		String[] tagNames = AssetTagLocalServiceUtil.getTagNames(
+			classObj.getName(), classPK);
 
-		try {
-			assetEntry = AssetEntryLocalServiceUtil.getEntry(
-				classObj.getName(), classPK);
-		}
-		catch (NoSuchEntryException nsee) {
-
-			// LEP-4979
-
-			return;
-		}
-
-		List<AssetTag> assetTags = assetEntry.getTags();
-
-		if (assetTags.size() == 0) {
+		if (tagNames.length == 0) {
 			return;
 		}
 
 		_assetTagNamesMap.put(
-			getPrimaryKeyString(classObj, classPK),
-			StringUtil.split(ListUtil.toString(assetTags, "name")));
+			getPrimaryKeyString(classObj, classPK), tagNames);
 	}
 
 	public void addAssetTags(

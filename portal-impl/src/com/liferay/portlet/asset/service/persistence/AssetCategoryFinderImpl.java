@@ -62,6 +62,9 @@ public class AssetCategoryFinderImpl
 	public static String FIND_BY_G_N =
 		AssetCategoryFinder.class.getName() + ".findByG_N";
 
+	public static String FIND_BY_C_C =
+		AssetCategoryFinder.class.getName() + ".findByC_C";
+
 	public static String FIND_BY_G_N_P =
 		AssetCategoryFinder.class.getName() + ".findByG_N_P";
 
@@ -218,6 +221,36 @@ public class AssetCategoryFinderImpl
 		}
 		catch (NoSuchCategoryException nsee) {
 			throw nsee;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<AssetCategory> findByC_C(long classNameId, long classPK)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_C);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("AssetCategory", AssetCategoryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+			qPos.add(classPK);
+
+			return (List<AssetCategory>)QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

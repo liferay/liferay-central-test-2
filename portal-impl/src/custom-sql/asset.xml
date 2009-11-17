@@ -58,6 +58,26 @@
 				(lower(AssetCategory.name) = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByC_C">
+		<![CDATA[
+			SELECT
+				{AssetCategory.*}
+			FROM
+				AssetCategory
+			INNER JOIN
+				AssetEntries_AssetCategories ON
+					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId) AND
+					(AssetEntries_AssetCategories.entryId IN (
+						SELECT
+							entryId
+						FROM
+							AssetEntry
+						WHERE
+							(AssetEntry.classNameId = ?) AND
+							(AssetEntry.classPK = ?)
+					))
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N_P">
 		<![CDATA[
 			SELECT
