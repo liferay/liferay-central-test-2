@@ -25,8 +25,6 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -41,7 +39,7 @@ public class StreamUtil {
 	public static final int BUFFER_SIZE = GetterUtil.getInteger(
 		System.getProperty(
 			"com.liferay.portal.kernel.util.StreamUtil.buffer.size"),
-		4096);
+		8192);
 
 	public static void cleanUp(InputStream inputStream) {
 		try {
@@ -108,14 +106,6 @@ public class StreamUtil {
 
 		if (bufferSize <= 0) {
 			bufferSize = BUFFER_SIZE;
-		}
-
-		if (!(inputStream instanceof BufferedInputStream)) {
-			inputStream = new BufferedInputStream(inputStream, bufferSize);
-		}
-
-		if (!(outputStream instanceof BufferedOutputStream)) {
-			outputStream = new BufferedOutputStream(outputStream, bufferSize);
 		}
 
 		try {
