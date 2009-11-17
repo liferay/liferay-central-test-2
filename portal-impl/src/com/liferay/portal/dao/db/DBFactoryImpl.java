@@ -187,11 +187,15 @@ public class DBFactoryImpl implements DBFactory {
 	}
 
 	public void setDB(Object dialect) {
-		_db = getDB(dialect);
+		if (_db != null) {
+			_db = getDB(dialect);
+		}
 	}
 
 	public void setDB(String type) {
-		_db = getDB(type);
+		if (_db != null) {
+			_db = getDB(type);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DBFactoryImpl.class);
