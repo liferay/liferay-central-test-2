@@ -53,29 +53,6 @@ import org.apache.commons.lang.CharUtils;
  */
 public class ServletResponseUtil {
 
-	/**
-	 * @deprecated {@link StreamUtil#cleanUp(InputStream)}
-	 */
-	public static void cleanUp(InputStream inputStream) {
-		StreamUtil.cleanUp(inputStream);
-	}
-
-	/**
-	 * @deprecated {@link StreamUtil#cleanUp(OutputStream)}
-	 */
-	public static void cleanUp(OutputStream outputStream) {
-		StreamUtil.cleanUp(outputStream);
-	}
-
-	/**
-	 * @deprecated {@link StreamUtil#cleanUp(InputStream, OutputStream)}
-	 */
-	public static void cleanUp(
-		OutputStream outputStream, InputStream inputStream) {
-
-		StreamUtil.cleanUp(inputStream, outputStream);
-	}
-
 	public static void sendFile(
 			HttpServletResponse response, String fileName, byte[] bytes)
 		throws IOException {
