@@ -158,7 +158,7 @@ public class StreamUtil {
 				outputStream);
 
 			try {
-				transfer(inputChannel, outputChannel);
+				transfer(inputChannel, outputChannel, bufferSize);
 			}
 			finally {
 				cleanUp(inputChannel, outputChannel);
@@ -170,7 +170,15 @@ public class StreamUtil {
 			ReadableByteChannel inputChannel, WritableByteChannel outputChannel)
 		throws IOException {
 
-		ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
+		transfer(inputChannel, outputChannel, BUFFER_SIZE);
+	}
+
+	public static void transfer(
+			ReadableByteChannel inputChannel, WritableByteChannel outputChannel,
+			int bufferSize)
+		throws IOException {
+
+		ByteBuffer buffer = ByteBuffer.allocateDirect(bufferSize);
 
 		while (inputChannel.read(buffer) != -1) {
 			buffer.flip();
