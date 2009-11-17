@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -120,16 +121,7 @@ public class PortletRequestUtil {
 		if (is != null) {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-			int c = -1;
-
-			try {
-				while ((c = is.read()) != -1) {
-					baos.write(c);
-				}
-			}
-			finally {
-				is.close();
-			}
+			StreamUtil.transfer(is, baos);
 
 			byte[] bytes = baos.toByteArray();
 
