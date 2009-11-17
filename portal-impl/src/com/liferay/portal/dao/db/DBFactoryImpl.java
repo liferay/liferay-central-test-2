@@ -187,13 +187,13 @@ public class DBFactoryImpl implements DBFactory {
 	}
 
 	public void setDB(Object dialect) {
-		if (_db != null) {
+		if (_db == null) {
 			_db = getDB(dialect);
 		}
 	}
 
 	public void setDB(String type) {
-		if (_db != null) {
+		if (_db == null) {
 			_db = getDB(type);
 		}
 	}
