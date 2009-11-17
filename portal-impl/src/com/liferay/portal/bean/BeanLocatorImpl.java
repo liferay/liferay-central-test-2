@@ -64,19 +64,19 @@ public class BeanLocatorImpl implements BeanLocator {
 		}
 
 		if (name.endsWith(VELOCITY_SUFFIX)) {
-			String originalName = name.substring(
-				0, name.length() - VELOCITY_SUFFIX.length());
-
-			Object bean = _velocityBeans.get(originalName);
+			Object bean = _velocityBeans.get(name);
 
 			if (bean == null) {
+				String originalName = name.substring(
+					0, name.length() - VELOCITY_SUFFIX.length());
+
 				bean = _applicationContext.getBean(originalName);
 
 				bean = Proxy.newProxyInstance(
 					_classLoader, bean.getClass().getInterfaces(),
 					new VelocityBeanHandler(bean, _classLoader));
 
-				_velocityBeans.put(originalName, bean);
+				_velocityBeans.put(name, bean);
 			}
 
 			return bean;
