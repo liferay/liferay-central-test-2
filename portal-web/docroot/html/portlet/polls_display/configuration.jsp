@@ -40,28 +40,38 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 
 	<liferay-ui:error exception="<%= NoSuchQuestionException.class %>" message="the-question-could-not-be-found" />
 
-	<aui:fieldset>
-		<aui:select label="question" name="questionId">
-			<aui:option value="" />
+	<c:choose>
+        <c:when test="<%= questions.size() > 0 %>">
+            <aui:fieldset>
+                <aui:select label="question" name="questionId">
+                    <aui:option value="" />
 
-			<%
-			for (int i = 0; i < questions.size(); i++) {
-				PollsQuestion question = (PollsQuestion)questions.get(i);
+                    <%
+                    for (int i = 0; i < questions.size(); i++) {
+                        PollsQuestion question = (PollsQuestion)questions.get(i);
 
-				question = question.toEscapedModel();
-			%>
+                        question = question.toEscapedModel();
+                    %>
 
-				<aui:option label="<%= question.getTitle(locale) %>" selected="<%= questionId == question.getQuestionId() %>" value="<%= question.getQuestionId() %>" />
+                        <aui:option label="<%= question.getTitle(locale) %>" selected="<%= questionId == question.getQuestionId() %>" value="<%= question.getQuestionId() %>" />
 
-			<%
-			}
-			%>
+                    <%
+                    }
+                    %>
 
-		</aui:select>
-	</aui:fieldset>
+                </aui:select>
+            </aui:fieldset>
+        </c:when>
+        <c:otherwise>
+            <div class="portlet-msg-info">
+                <liferay-ui:message key="there-are-no-available-questions-for-selection" />
+            </div>
+
+        </c:otherwise>
+	</c:choose>
 
 	<aui:button-row>
-		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+		<aui:button disabled="<%= questions.size() == 0 %>" name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
