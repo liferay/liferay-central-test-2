@@ -25,69 +25,51 @@
 <%@ include file="/html/portlet/asset_tags_navigation/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFactories();
 %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<table class="lfr-table">
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<tr>
-	<td>
-		<liferay-ui:message key="show-asset-count" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showAssetCount" defaultValue="<%= showAssetCount %>" />
-	</td>
-</tr>
-<tr id="<portlet:namespace />classNameId">
-	<td>
-		<liferay-ui:message key="asset-type" /> <liferay-ui:icon-help message="asset-type-asset-count-help" />
-	</td>
-	<td>
-		<select id="<portlet:namespace />classNameId" name="<portlet:namespace />classNameId">
-			<option <%= classNameId == 0 %> value="0"><liferay-ui:message key="any" /></option>
+	<aui:fieldset>
+		<aui:input inlineLabel="left" name="showAssetCount" type="checkbox" value="<%= showAssetCount %>" />
 
-			<%
-			for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
-			%>
+		<div id="<portlet:namespace />assetCountOptions">
+			<aui:select helpMessage="asset-type-asset-count-help" inlineLabel="left" label="asset-type" name="classNameId">
+				<aui:option label="any" value="<%= classNameId == 0 %>" />
 
-				<option <%= (classNameId == assetRendererFactory.getClassNameId()) ? "selected" : "" %> value="<%= assetRendererFactory.getClassNameId() %>"><liferay-ui:message key='<%= "model.resource." + assetRendererFactory.getClassName() %>' /></option>
+				<%
+				for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
+				%>
 
-			<%
-			}
-			%>
+					<aui:option label='<%= "model.resource." + assetRendererFactory.getClassName() %>' selected="<%= classNameId == assetRendererFactory.getClassNameId() %>" value="<%= assetRendererFactory.getClassNameId() %>" />
 
-		</select>
-	</td>
-</tr>
-<tr id="<portlet:namespace />displayStyle">
-	<td>
-		<liferay-ui:message key="display-style" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />displayStyle">
-			<option <%= (displayStyle.equals("number")) ? "selected" : "" %> value="number"><liferay-ui:message key="number" /></option>
-			<option <%= (displayStyle.equals("cloud")) ? "selected" : "" %> value="cloud"><liferay-ui:message key="cloud" /></option>
-		</select>
-	</td>
-</tr>
-<tr id="<portlet:namespace />showZeroAssetCount">
-	<td>
-		<liferay-ui:message key="show-tags-with-zero-assets" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showZeroAssetCount" defaultValue="<%= showZeroAssetCount %>" />
-	</td>
-</tr>
-</table>
+				<%
+				}
+				%>
 
-<br />
+			</aui:select>
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+			<aui:select inlineLabel="left" name="displayStyle">
+				<aui:option label="number" selected='<%= displayStyle.equals("number") %>' />
+				<aui:option label="cloud" selected='<%= displayStyle.equals("cloud") %>' />
+			</aui:select>
 
-</form>
+			<aui:input inlineLabel="left" label="show-tags-with-zero-assets"  name="showZeroAssetCount" type="checkbox" value="<%= showZeroAssetCount %>" />
+		</div>
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <script type="text/javascript">
 	jQuery(
@@ -95,19 +77,13 @@ List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFa
 			var showAssetCount = jQuery('#<portlet:namespace />showAssetCountCheckbox');
 
 			function showHiddenFields() {
-				var classNameId = jQuery('#<portlet:namespace />classNameId');
-				var displayStyle = jQuery('#<portlet:namespace />displayStyle');
-				var showZeroAssetCount = jQuery('#<portlet:namespace />showZeroAssetCount');
+				var assetCountOptions = jQuery('#<portlet:namespace />assetCountOptions');
 
 				if (showAssetCount.is(':checked')) {
-					classNameId.show();
-					displayStyle.show();
-					showZeroAssetCount.show();
+					assetCountOptions.show();
 				}
 				else {
-					classNameId.hide();
-					displayStyle.hide();
-					showZeroAssetCount.hide();
+					assetCountOptions.hide();
 				}
 			}
 
