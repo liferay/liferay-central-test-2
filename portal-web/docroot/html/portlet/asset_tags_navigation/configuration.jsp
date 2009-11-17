@@ -40,7 +40,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFa
 		<aui:input inlineLabel="left" name="showAssetCount" type="checkbox" value="<%= showAssetCount %>" />
 
 		<div id="<portlet:namespace />assetCountOptions">
-			<aui:select helpMessage="asset-type-asset-count-help" inlineLabel="left" label="asset-type" name="classNameId">
+			<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="classNameId">
 				<aui:option label="any" value="<%= classNameId == 0 %>" />
 
 				<%
@@ -55,7 +55,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFa
 
 			</aui:select>
 
-			<aui:select inlineLabel="left" name="displayStyle">
+			<aui:select name="displayStyle">
 				<aui:option label="number" selected='<%= displayStyle.equals("number") %>' />
 				<aui:option label="cloud" selected='<%= displayStyle.equals("cloud") %>' />
 			</aui:select>
