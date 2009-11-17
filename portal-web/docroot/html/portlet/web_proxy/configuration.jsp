@@ -33,15 +33,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	
+
 	<aui:fieldset>
 		<aui:input cssClass="lfr-input-text-container" label="url" name="initUrl" value="<%= initUrl %>" />
 
-		<aui:input cssClass="lfr-input-text-container" label="<%= LanguageUtil.get(pageContext, "scope") + " (" + LanguageUtil.get(pageContext, "regex") + ")" %>" name="scope" value="<%= scope %>" />
-		
+		<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "scope") + " (" + LanguageUtil.get(pageContext, "regex") + ")" %>' name="scope" value="<%= scope %>" />
+
 		<aui:input cssClass="lfr-input-text-container" name="proxyHost" value="<%= proxyHost %>" />
-		
-		<aui:input cssClass="lfr-input-text-container" name="proxyPort" value="<%= proxyPort %>" />	
+
+		<aui:input cssClass="lfr-input-text-container" name="proxyPort" value="<%= proxyPort %>" />
 
 		<aui:select name="proxyAuthentication">
 			<aui:option label="none" selected='<%= proxyAuthentication.equals("none") %>' />
