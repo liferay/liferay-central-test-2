@@ -32,9 +32,15 @@ questionId = ParamUtil.getLong(request, "questionId", questionId);
 List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 %>
 
+<script type="text/javascript">
+    function <portlet:namespace />saveConfiguration() {
+        submitForm(document.<portlet:namespace />fm);
+	}
+</script>
+
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
@@ -70,7 +76,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 	</c:choose>
 
 	<aui:button-row>
-		<aui:button disabled="<%= questions.isEmpty() %>" name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+		<aui:button disabled="<%= questions.isEmpty() %>" name="saveButton" type="submit" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>

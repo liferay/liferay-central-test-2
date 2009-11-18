@@ -38,6 +38,12 @@ if (organizationId > 0) {
 }
 %>
 
+<script type="text/javascript">
+    function <portlet:namespace />saveConfiguration() {
+        submitForm(document.<portlet:namespace />fm);
+	}
+</script>
+
 <portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="organizationSelectorURL">
 	<portlet:param name="struts_action" value="/portlet_configuration/select_organization" />
 	<portlet:param name="tabs1" value="organizations" />
@@ -73,7 +79,7 @@ if (organizationId > 0) {
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
@@ -130,7 +136,7 @@ if (organizationId > 0) {
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+		<aui:button name="saveButton" type="submit" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
