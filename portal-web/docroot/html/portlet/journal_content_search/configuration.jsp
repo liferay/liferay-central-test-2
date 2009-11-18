@@ -46,14 +46,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 			for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
 			%>
 
-				<aui:option label="<%= LanguageUtil.get(pageContext, JournalArticleConstants.TYPES[i]) %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" value="<%= JournalArticleConstants.TYPES[i] %>" />
+				<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
 
 			<%
 			}
 			%>
 		</aui:select>
 
-		<aui:input checked="<%= showListed %>" inlineLabel="left" label="only-show-results-for-web-content-listed-in-a-web-content-display-portlet" name="showListed" onClick='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "targetPortletId.disabled = this.checked;" %>' type="checkbox" value="<%= showListed %>" />
+		<aui:input inlineLabel="left" label="only-show-results-for-web-content-listed-in-a-web-content-display-portlet" name="showListed" onClick='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "targetPortletId.disabled = this.checked;" %>' type="checkbox" value="<%= showListed %>" />
 
 		<aui:input cssClass="lfr-input-text-container" disabled="<%= showListed %>" inlneLabel="left" name="targetPortletId" type="text" />
 	</aui:fieldset>
