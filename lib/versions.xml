@@ -2474,6 +2474,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/tomcat-coyote.jar</file-name>
+		<version>6.0.18</version>
+		<project-name>Tomcat</project-name>
+		<project-url>http://tomcat.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/unoil.jar</file-name>
 		<version>2.3.0</version>
 		<project-name>OpenOffice.org Java Uno</project-name>

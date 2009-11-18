@@ -33,7 +33,7 @@ import org.apache.catalina.connector.Request;
 public class PortalConnector extends Connector {
 
 	public PortalConnector(Connector connector) throws Exception {
-		super(connector.getProtocolHandlerClassName());
+		super(connector.getProtocol());
 
 		_copyConnector(connector);
 	}
@@ -47,6 +47,8 @@ public class PortalConnector extends Connector {
 	}
 
 	private void _copyConnector(Connector connector) {
+		this.protocolHandler = connector.getProtocolHandler();
+
 		setAllowTrace(connector.getAllowTrace());
 		setEmptySessionPath(connector.getEmptySessionPath());
 		setEnableLookups(connector.getEnableLookups());
