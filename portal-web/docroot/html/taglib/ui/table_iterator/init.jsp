@@ -33,7 +33,6 @@ String rowValign = (String)request.getAttribute("liferay-ui:table-iterator:rowVa
 String rowBreak = (String)request.getAttribute("liferay-ui:table-iterator:rowBreak");
 String width = (String)request.getAttribute("liferay-ui:table-iterator:width");
 
-
 // LEP-4752
 
 if (rowLength == 0) {
