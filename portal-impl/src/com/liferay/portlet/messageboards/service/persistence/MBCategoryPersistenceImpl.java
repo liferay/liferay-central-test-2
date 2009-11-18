@@ -453,7 +453,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbCategory.uuid IS NULL OR ");
+					}
+
 					query.append("mbCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -524,7 +532,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbCategory.uuid IS NULL OR ");
+					}
+
 					query.append("mbCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -650,7 +666,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query.append("mbCategory.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(mbCategory.uuid IS NULL OR ");
+				}
+
 				query.append("mbCategory.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -768,7 +792,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbCategory.uuid IS NULL OR ");
+					}
+
 					query.append("mbCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1834,7 +1866,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbCategory.uuid IS NULL OR ");
+					}
+
 					query.append("mbCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1889,7 +1929,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					query.append("mbCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbCategory.uuid IS NULL OR ");
+					}
+
 					query.append("mbCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

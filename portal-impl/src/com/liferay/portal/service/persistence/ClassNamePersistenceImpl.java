@@ -383,7 +383,15 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 					query.append("className.value IS NULL");
 				}
 				else {
+					if (value.equals(StringPool.BLANK)) {
+						query.append("(className.value IS NULL OR ");
+					}
+
 					query.append("className.value = ?");
+
+					if (value.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -598,7 +606,15 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 					query.append("className.value IS NULL");
 				}
 				else {
+					if (value.equals(StringPool.BLANK)) {
+						query.append("(className.value IS NULL OR ");
+					}
+
 					query.append("className.value = ?");
+
+					if (value.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

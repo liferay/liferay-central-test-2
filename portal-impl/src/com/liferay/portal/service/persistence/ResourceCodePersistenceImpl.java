@@ -662,7 +662,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 					query.append("resourceCode.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceCode.name IS NULL OR ");
+					}
+
 					query.append("resourceCode.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -728,7 +736,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 					query.append("resourceCode.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceCode.name IS NULL OR ");
+					}
+
 					query.append("resourceCode.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -849,7 +865,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				query.append("resourceCode.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(resourceCode.name IS NULL OR ");
+				}
+
 				query.append("resourceCode.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -971,7 +995,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 					query.append("resourceCode.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceCode.name IS NULL OR ");
+					}
+
 					query.append("resourceCode.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1256,7 +1288,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 					query.append("resourceCode.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceCode.name IS NULL OR ");
+					}
+
 					query.append("resourceCode.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1319,7 +1359,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 					query.append("resourceCode.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceCode.name IS NULL OR ");
+					}
+
 					query.append("resourceCode.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

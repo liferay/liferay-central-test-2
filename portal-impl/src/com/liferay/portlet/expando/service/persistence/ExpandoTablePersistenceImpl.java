@@ -728,7 +728,15 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 					query.append("expandoTable.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(expandoTable.name IS NULL OR ");
+					}
+
 					query.append("expandoTable.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1026,7 +1034,15 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 					query.append("expandoTable.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(expandoTable.name IS NULL OR ");
+					}
+
 					query.append("expandoTable.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

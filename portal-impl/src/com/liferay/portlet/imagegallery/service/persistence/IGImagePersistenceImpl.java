@@ -578,7 +578,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					query.append("igImage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igImage.uuid IS NULL OR ");
+					}
+
 					query.append("igImage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -647,7 +655,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					query.append("igImage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igImage.uuid IS NULL OR ");
+					}
+
 					query.append("igImage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -771,7 +787,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append("igImage.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(igImage.uuid IS NULL OR ");
+				}
+
 				query.append("igImage.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -886,7 +910,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					query.append("igImage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igImage.uuid IS NULL OR ");
+					}
+
 					query.append("igImage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2226,7 +2258,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					query.append("igImage.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(igImage.name IS NULL OR ");
+					}
+
 					query.append("igImage.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2309,7 +2349,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					query.append("igImage.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(igImage.name IS NULL OR ");
+					}
+
 					query.append("igImage.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2459,7 +2507,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append("igImage.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(igImage.name IS NULL OR ");
+				}
+
 				query.append("igImage.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2744,7 +2800,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					query.append("igImage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igImage.uuid IS NULL OR ");
+					}
+
 					query.append("igImage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2799,7 +2863,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					query.append("igImage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igImage.uuid IS NULL OR ");
+					}
+
 					query.append("igImage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -3216,7 +3288,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					query.append("igImage.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(igImage.name IS NULL OR ");
+					}
+
 					query.append("igImage.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

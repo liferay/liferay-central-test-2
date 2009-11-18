@@ -399,7 +399,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(
+							"(serviceComponent.buildNamespace IS NULL OR ");
+					}
+
 					query.append("serviceComponent.buildNamespace = ?");
+
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -470,7 +479,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(
+							"(serviceComponent.buildNamespace IS NULL OR ");
+					}
+
 					query.append("serviceComponent.buildNamespace = ?");
+
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -602,7 +620,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				query.append("serviceComponent.buildNamespace IS NULL");
 			}
 			else {
+				if (buildNamespace.equals(StringPool.BLANK)) {
+					query.append("(serviceComponent.buildNamespace IS NULL OR ");
+				}
+
 				query.append("serviceComponent.buildNamespace = ?");
+
+				if (buildNamespace.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -722,7 +748,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(
+							"(serviceComponent.buildNamespace IS NULL OR ");
+					}
+
 					query.append("serviceComponent.buildNamespace = ?");
+
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -968,7 +1003,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(
+							"(serviceComponent.buildNamespace IS NULL OR ");
+					}
+
 					query.append("serviceComponent.buildNamespace = ?");
+
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1023,7 +1067,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					query.append("serviceComponent.buildNamespace IS NULL");
 				}
 				else {
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(
+							"(serviceComponent.buildNamespace IS NULL OR ");
+					}
+
 					query.append("serviceComponent.buildNamespace = ?");
+
+					if (buildNamespace.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

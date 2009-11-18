@@ -1178,7 +1178,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 					query.append("shoppingItem.sku IS NULL");
 				}
 				else {
+					if (sku.equals(StringPool.BLANK)) {
+						query.append("(shoppingItem.sku IS NULL OR ");
+					}
+
 					query.append("shoppingItem.sku = ?");
+
+					if (sku.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1637,7 +1645,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 					query.append("shoppingItem.sku IS NULL");
 				}
 				else {
+					if (sku.equals(StringPool.BLANK)) {
+						query.append("(shoppingItem.sku IS NULL OR ");
+					}
+
 					query.append("shoppingItem.sku = ?");
+
+					if (sku.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

@@ -2777,7 +2777,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 					query.append("expandoValue.data IS NULL");
 				}
 				else {
+					if (data.equals(StringPool.BLANK)) {
+						query.append("(expandoValue.data IS NULL OR ");
+					}
+
 					query.append("expandoValue.data = ?");
+
+					if (data.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2864,7 +2872,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 					query.append("expandoValue.data IS NULL");
 				}
 				else {
+					if (data.equals(StringPool.BLANK)) {
+						query.append("(expandoValue.data IS NULL OR ");
+					}
+
 					query.append("expandoValue.data = ?");
+
+					if (data.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -3020,7 +3036,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				query.append("expandoValue.data IS NULL");
 			}
 			else {
+				if (data.equals(StringPool.BLANK)) {
+					query.append("(expandoValue.data IS NULL OR ");
+				}
+
 				query.append("expandoValue.data = ?");
+
+				if (data.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -3796,7 +3820,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 					query.append("expandoValue.data IS NULL");
 				}
 				else {
+					if (data.equals(StringPool.BLANK)) {
+						query.append("(expandoValue.data IS NULL OR ");
+					}
+
 					query.append("expandoValue.data = ?");
+
+					if (data.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

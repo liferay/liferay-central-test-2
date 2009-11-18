@@ -488,7 +488,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					query.append("calEvent.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(calEvent.uuid IS NULL OR ");
+					}
+
 					query.append("calEvent.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -558,7 +566,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					query.append("calEvent.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(calEvent.uuid IS NULL OR ");
+					}
+
 					query.append("calEvent.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -684,7 +700,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query.append("calEvent.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(calEvent.uuid IS NULL OR ");
+				}
+
 				query.append("calEvent.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -800,7 +824,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					query.append("calEvent.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(calEvent.uuid IS NULL OR ");
+					}
+
 					query.append("calEvent.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1663,7 +1695,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					query.append("calEvent.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(calEvent.type IS NULL OR ");
+					}
+
 					query.append("calEvent.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1741,7 +1781,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					query.append("calEvent.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(calEvent.type IS NULL OR ");
+					}
+
 					query.append("calEvent.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1880,7 +1928,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query.append("calEvent.type IS NULL");
 			}
 			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append("(calEvent.type IS NULL OR ");
+				}
+
 				query.append("calEvent.type = ?");
+
+				if (type.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2426,7 +2482,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					query.append("calEvent.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(calEvent.uuid IS NULL OR ");
+					}
+
 					query.append("calEvent.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2481,7 +2545,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					query.append("calEvent.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(calEvent.uuid IS NULL OR ");
+					}
+
 					query.append("calEvent.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2686,7 +2758,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					query.append("calEvent.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(calEvent.type IS NULL OR ");
+					}
+
 					query.append("calEvent.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

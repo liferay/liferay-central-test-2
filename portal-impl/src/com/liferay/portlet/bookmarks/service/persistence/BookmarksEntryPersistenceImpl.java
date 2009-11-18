@@ -465,7 +465,15 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(bookmarksEntry.uuid IS NULL OR ");
+					}
+
 					query.append("bookmarksEntry.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -536,7 +544,15 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(bookmarksEntry.uuid IS NULL OR ");
+					}
+
 					query.append("bookmarksEntry.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -663,7 +679,15 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				query.append("bookmarksEntry.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(bookmarksEntry.uuid IS NULL OR ");
+				}
+
 				query.append("bookmarksEntry.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -781,7 +805,15 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(bookmarksEntry.uuid IS NULL OR ");
+					}
+
 					query.append("bookmarksEntry.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1875,7 +1907,15 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(bookmarksEntry.uuid IS NULL OR ");
+					}
+
 					query.append("bookmarksEntry.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1930,7 +1970,15 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					query.append("bookmarksEntry.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(bookmarksEntry.uuid IS NULL OR ");
+					}
+
 					query.append("bookmarksEntry.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

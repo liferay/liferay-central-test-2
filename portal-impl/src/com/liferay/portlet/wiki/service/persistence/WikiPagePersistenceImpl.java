@@ -608,7 +608,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.uuid IS NULL OR ");
+					}
+
 					query.append("wikiPage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -679,7 +687,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.uuid IS NULL OR ");
+					}
+
 					query.append("wikiPage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -806,7 +822,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append("wikiPage.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(wikiPage.uuid IS NULL OR ");
+				}
+
 				query.append("wikiPage.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -923,7 +947,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.uuid IS NULL OR ");
+					}
+
 					query.append("wikiPage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1273,7 +1305,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.format IS NULL");
 				}
 				else {
+					if (format.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.format IS NULL OR ");
+					}
+
 					query.append("wikiPage.format = ?");
+
+					if (format.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1344,7 +1384,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.format IS NULL");
 				}
 				else {
+					if (format.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.format IS NULL OR ");
+					}
+
 					query.append("wikiPage.format = ?");
+
+					if (format.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1471,7 +1519,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append("wikiPage.format IS NULL");
 			}
 			else {
+				if (format.equals(StringPool.BLANK)) {
+					query.append("(wikiPage.format IS NULL OR ");
+				}
+
 				query.append("wikiPage.format = ?");
+
+				if (format.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1557,7 +1613,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.title IS NULL OR ");
+					}
+
 					query.append("wikiPage.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1636,7 +1700,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.title IS NULL OR ");
+					}
+
 					query.append("wikiPage.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1776,7 +1848,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append("wikiPage.title IS NULL");
 			}
 			else {
+				if (title.equals(StringPool.BLANK)) {
+					query.append("(wikiPage.title IS NULL OR ");
+				}
+
 				query.append("wikiPage.title = ?");
+
+				if (title.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2150,7 +2230,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.parentTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.parentTitle = ?");
+
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2229,7 +2317,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.parentTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.parentTitle = ?");
+
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2370,7 +2466,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append("wikiPage.parentTitle IS NULL");
 			}
 			else {
+				if (parentTitle.equals(StringPool.BLANK)) {
+					query.append("(wikiPage.parentTitle IS NULL OR ");
+				}
+
 				query.append("wikiPage.parentTitle = ?");
+
+				if (parentTitle.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2458,7 +2562,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.redirectTitle IS NULL");
 				}
 				else {
+					if (redirectTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.redirectTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.redirectTitle = ?");
+
+					if (redirectTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2537,7 +2649,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.redirectTitle IS NULL");
 				}
 				else {
+					if (redirectTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.redirectTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.redirectTitle = ?");
+
+					if (redirectTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2678,7 +2798,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append("wikiPage.redirectTitle IS NULL");
 			}
 			else {
+				if (redirectTitle.equals(StringPool.BLANK)) {
+					query.append("(wikiPage.redirectTitle IS NULL OR ");
+				}
+
 				query.append("wikiPage.redirectTitle = ?");
+
+				if (redirectTitle.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2808,7 +2936,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.title IS NULL OR ");
+					}
+
 					query.append("wikiPage.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2912,7 +3048,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.title IS NULL OR ");
+					}
+
 					query.append("wikiPage.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2997,7 +3141,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.title IS NULL OR ");
+					}
+
 					query.append("wikiPage.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -3150,7 +3302,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append("wikiPage.title IS NULL");
 			}
 			else {
+				if (title.equals(StringPool.BLANK)) {
+					query.append("(wikiPage.title IS NULL OR ");
+				}
+
 				query.append("wikiPage.title = ?");
+
+				if (title.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" AND ");
@@ -3252,7 +3412,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.parentTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.parentTitle = ?");
+
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -3338,7 +3506,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.parentTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.parentTitle = ?");
+
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -3493,7 +3669,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append("wikiPage.parentTitle IS NULL");
 			}
 			else {
+				if (parentTitle.equals(StringPool.BLANK)) {
+					query.append("(wikiPage.parentTitle IS NULL OR ");
+				}
+
 				query.append("wikiPage.parentTitle = ?");
+
+				if (parentTitle.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -3788,7 +3972,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.uuid IS NULL OR ");
+					}
+
 					query.append("wikiPage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -3843,7 +4035,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.uuid IS NULL OR ");
+					}
+
 					query.append("wikiPage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -3950,7 +4150,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.format IS NULL");
 				}
 				else {
+					if (format.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.format IS NULL OR ");
+					}
+
 					query.append("wikiPage.format = ?");
+
+					if (format.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -4008,7 +4216,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.title IS NULL OR ");
+					}
+
 					query.append("wikiPage.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -4124,7 +4340,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.parentTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.parentTitle = ?");
+
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -4185,7 +4409,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.redirectTitle IS NULL");
 				}
 				else {
+					if (redirectTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.redirectTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.redirectTitle = ?");
+
+					if (redirectTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -4250,7 +4482,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.title IS NULL OR ");
+					}
+
 					query.append("wikiPage.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -4321,7 +4561,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.title IS NULL OR ");
+					}
+
 					query.append("wikiPage.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -4396,7 +4644,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					query.append("wikiPage.parentTitle IS NULL");
 				}
 				else {
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append("(wikiPage.parentTitle IS NULL OR ");
+					}
+
 					query.append("wikiPage.parentTitle = ?");
+
+					if (parentTitle.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

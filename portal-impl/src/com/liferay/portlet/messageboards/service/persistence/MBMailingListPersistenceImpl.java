@@ -485,7 +485,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMailingList.uuid IS NULL OR ");
+					}
+
 					query.append("mbMailingList.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -551,7 +559,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMailingList.uuid IS NULL OR ");
+					}
+
 					query.append("mbMailingList.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -672,7 +688,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				query.append("mbMailingList.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(mbMailingList.uuid IS NULL OR ");
+				}
+
 				query.append("mbMailingList.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -783,7 +807,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMailingList.uuid IS NULL OR ");
+					}
+
 					query.append("mbMailingList.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1385,7 +1417,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMailingList.uuid IS NULL OR ");
+					}
+
 					query.append("mbMailingList.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1440,7 +1480,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 					query.append("mbMailingList.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMailingList.uuid IS NULL OR ");
+					}
+
 					query.append("mbMailingList.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

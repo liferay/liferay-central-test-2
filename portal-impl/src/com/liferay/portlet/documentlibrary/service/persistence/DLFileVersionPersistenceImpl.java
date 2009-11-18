@@ -470,7 +470,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileVersion.name IS NULL OR ");
+					}
+
 					query.append("dlFileVersion.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -557,7 +565,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileVersion.name IS NULL OR ");
+					}
+
 					query.append("dlFileVersion.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -714,7 +730,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				query.append("dlFileVersion.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(dlFileVersion.name IS NULL OR ");
+				}
+
 				query.append("dlFileVersion.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -858,7 +882,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileVersion.name IS NULL OR ");
+					}
+
 					query.append("dlFileVersion.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -970,7 +1002,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileVersion.name IS NULL OR ");
+					}
+
 					query.append("dlFileVersion.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1063,7 +1103,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileVersion.name IS NULL OR ");
+					}
+
 					query.append("dlFileVersion.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1233,7 +1281,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				query.append("dlFileVersion.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(dlFileVersion.name IS NULL OR ");
+				}
+
 				query.append("dlFileVersion.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" AND ");
@@ -1499,7 +1555,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileVersion.name IS NULL OR ");
+					}
+
 					query.append("dlFileVersion.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1570,7 +1634,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileVersion.name IS NULL OR ");
+					}
+
 					query.append("dlFileVersion.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1647,7 +1719,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					query.append("dlFileVersion.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileVersion.name IS NULL OR ");
+					}
+
 					query.append("dlFileVersion.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

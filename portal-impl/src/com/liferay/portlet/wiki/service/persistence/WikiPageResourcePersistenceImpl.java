@@ -425,7 +425,15 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 					query.append("wikiPageResource.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPageResource.title IS NULL OR ");
+					}
+
 					query.append("wikiPageResource.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -648,7 +656,15 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 					query.append("wikiPageResource.title IS NULL");
 				}
 				else {
+					if (title.equals(StringPool.BLANK)) {
+						query.append("(wikiPageResource.title IS NULL OR ");
+					}
+
 					query.append("wikiPageResource.title = ?");
+
+					if (title.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

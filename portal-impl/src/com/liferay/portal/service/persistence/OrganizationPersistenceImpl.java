@@ -1329,7 +1329,15 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 					query.append("organization.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(organization.name IS NULL OR ");
+					}
+
 					query.append("organization.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1733,7 +1741,15 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 					query.append("organization.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(organization.name IS NULL OR ");
+					}
+
 					query.append("organization.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

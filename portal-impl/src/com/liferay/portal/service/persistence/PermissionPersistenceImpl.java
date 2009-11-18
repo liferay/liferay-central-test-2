@@ -707,7 +707,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 					query.append("permission.actionId IS NULL");
 				}
 				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append("(permission.actionId IS NULL OR ");
+					}
+
 					query.append("permission.actionId = ?");
+
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -983,7 +991,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 					query.append("permission.actionId IS NULL");
 				}
 				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append("(permission.actionId IS NULL OR ");
+					}
+
 					query.append("permission.actionId = ?");
+
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

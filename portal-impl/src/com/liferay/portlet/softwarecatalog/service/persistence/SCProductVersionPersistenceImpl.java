@@ -715,8 +715,17 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 					query.append("scProductVersion.directDownloadURL IS NULL");
 				}
 				else {
+					if (directDownloadURL.equals(StringPool.BLANK)) {
+						query.append(
+							"(scProductVersion.directDownloadURL IS NULL OR ");
+					}
+
 					query.append(
 						"scProductVersion.lower(directDownloadURL) = ?");
+
+					if (directDownloadURL.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1000,8 +1009,17 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 					query.append("scProductVersion.directDownloadURL IS NULL");
 				}
 				else {
+					if (directDownloadURL.equals(StringPool.BLANK)) {
+						query.append(
+							"(scProductVersion.directDownloadURL IS NULL OR ");
+					}
+
 					query.append(
 						"scProductVersion.lower(directDownloadURL) = ?");
+
+					if (directDownloadURL.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

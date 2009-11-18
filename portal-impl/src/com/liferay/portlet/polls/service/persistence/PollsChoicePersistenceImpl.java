@@ -420,7 +420,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					query.append("pollsChoice.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(pollsChoice.uuid IS NULL OR ");
+					}
+
 					query.append("pollsChoice.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -491,7 +499,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					query.append("pollsChoice.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(pollsChoice.uuid IS NULL OR ");
+					}
+
 					query.append("pollsChoice.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -618,7 +634,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 				query.append("pollsChoice.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(pollsChoice.uuid IS NULL OR ");
+				}
+
 				query.append("pollsChoice.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1002,7 +1026,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					query.append("pollsChoice.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(pollsChoice.name IS NULL OR ");
+					}
+
 					query.append("pollsChoice.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1244,7 +1276,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					query.append("pollsChoice.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(pollsChoice.uuid IS NULL OR ");
+					}
+
 					query.append("pollsChoice.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1350,7 +1390,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					query.append("pollsChoice.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(pollsChoice.name IS NULL OR ");
+					}
+
 					query.append("pollsChoice.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

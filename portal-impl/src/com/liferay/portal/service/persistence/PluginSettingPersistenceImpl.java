@@ -713,7 +713,15 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 					query.append("pluginSetting.pluginId IS NULL");
 				}
 				else {
+					if (pluginId.equals(StringPool.BLANK)) {
+						query.append("(pluginSetting.pluginId IS NULL OR ");
+					}
+
 					query.append("pluginSetting.pluginId = ?");
+
+					if (pluginId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -722,7 +730,15 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 					query.append("pluginSetting.pluginType IS NULL");
 				}
 				else {
+					if (pluginType.equals(StringPool.BLANK)) {
+						query.append("(pluginSetting.pluginType IS NULL OR ");
+					}
+
 					query.append("pluginSetting.pluginType = ?");
+
+					if (pluginType.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1012,7 +1028,15 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 					query.append("pluginSetting.pluginId IS NULL");
 				}
 				else {
+					if (pluginId.equals(StringPool.BLANK)) {
+						query.append("(pluginSetting.pluginId IS NULL OR ");
+					}
+
 					query.append("pluginSetting.pluginId = ?");
+
+					if (pluginId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1021,7 +1045,15 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 					query.append("pluginSetting.pluginType IS NULL");
 				}
 				else {
+					if (pluginType.equals(StringPool.BLANK)) {
+						query.append("(pluginSetting.pluginType IS NULL OR ");
+					}
+
 					query.append("pluginSetting.pluginType = ?");
+
+					if (pluginType.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

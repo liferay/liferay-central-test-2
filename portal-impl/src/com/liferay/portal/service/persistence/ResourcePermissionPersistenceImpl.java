@@ -738,7 +738,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.name IS NULL OR ");
+					}
+
 					query.append("resourcePermission.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -819,7 +827,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.name IS NULL OR ");
+					}
+
 					query.append("resourcePermission.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -969,7 +985,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				query.append("resourcePermission.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(resourcePermission.name IS NULL OR ");
+				}
+
 				query.append("resourcePermission.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" AND ");
@@ -1063,7 +1087,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.name IS NULL OR ");
+					}
+
 					query.append("resourcePermission.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1076,7 +1108,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.primKey IS NULL OR ");
+					}
+
 					query.append("resourcePermission.primKey = ?");
+
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1160,7 +1200,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.name IS NULL OR ");
+					}
+
 					query.append("resourcePermission.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1173,7 +1221,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.primKey IS NULL OR ");
+					}
+
 					query.append("resourcePermission.primKey = ?");
+
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1329,7 +1385,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				query.append("resourcePermission.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(resourcePermission.name IS NULL OR ");
+				}
+
 				query.append("resourcePermission.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" AND ");
@@ -1342,7 +1406,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				query.append("resourcePermission.primKey IS NULL");
 			}
 			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append("(resourcePermission.primKey IS NULL OR ");
+				}
+
 				query.append("resourcePermission.primKey = ?");
+
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1483,7 +1555,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.name IS NULL OR ");
+					}
+
 					query.append("resourcePermission.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1496,7 +1576,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.primKey IS NULL OR ");
+					}
+
 					query.append("resourcePermission.primKey = ?");
+
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1813,7 +1901,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.name IS NULL OR ");
+					}
+
 					query.append("resourcePermission.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1887,7 +1983,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.name IS NULL OR ");
+					}
+
 					query.append("resourcePermission.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1900,7 +2004,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.primKey IS NULL OR ");
+					}
+
 					query.append("resourcePermission.primKey = ?");
+
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1974,7 +2086,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.name IS NULL OR ");
+					}
+
 					query.append("resourcePermission.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1987,7 +2107,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					query.append("resourcePermission.primKey IS NULL");
 				}
 				else {
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append("(resourcePermission.primKey IS NULL OR ");
+					}
+
 					query.append("resourcePermission.primKey = ?");
+
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

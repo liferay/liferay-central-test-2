@@ -1098,7 +1098,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					query.append("group_.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(group_.name IS NULL OR ");
+					}
+
 					query.append("group_.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1224,7 +1232,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					query.append("group_.friendlyURL IS NULL");
 				}
 				else {
+					if (friendlyURL.equals(StringPool.BLANK)) {
+						query.append("(group_.friendlyURL IS NULL OR ");
+					}
+
 					query.append("group_.friendlyURL = ?");
+
+					if (friendlyURL.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1770,7 +1786,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					query.append("group_.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(group_.name IS NULL OR ");
+					}
+
 					query.append("group_.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1920,7 +1944,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					query.append("group_.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(group_.name IS NULL OR ");
+					}
+
 					query.append("group_.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2300,7 +2332,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					query.append("group_.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(group_.name IS NULL OR ");
+					}
+
 					query.append("group_.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2361,7 +2401,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					query.append("group_.friendlyURL IS NULL");
 				}
 				else {
+					if (friendlyURL.equals(StringPool.BLANK)) {
+						query.append("(group_.friendlyURL IS NULL OR ");
+					}
+
 					query.append("group_.friendlyURL = ?");
+
+					if (friendlyURL.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2547,7 +2595,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					query.append("group_.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(group_.name IS NULL OR ");
+					}
+
 					query.append("group_.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2623,7 +2679,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					query.append("group_.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(group_.name IS NULL OR ");
+					}
+
 					query.append("group_.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

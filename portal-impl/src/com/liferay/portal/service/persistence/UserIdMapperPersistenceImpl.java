@@ -725,7 +725,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					query.append("userIdMapper.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(userIdMapper.type IS NULL OR ");
+					}
+
 					query.append("userIdMapper.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -844,7 +852,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					query.append("userIdMapper.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(userIdMapper.type IS NULL OR ");
+					}
+
 					query.append("userIdMapper.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -853,7 +869,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					query.append("userIdMapper.externalUserId IS NULL");
 				}
 				else {
+					if (externalUserId.equals(StringPool.BLANK)) {
+						query.append("(userIdMapper.externalUserId IS NULL OR ");
+					}
+
 					query.append("userIdMapper.externalUserId = ?");
+
+					if (externalUserId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1140,7 +1164,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					query.append("userIdMapper.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(userIdMapper.type IS NULL OR ");
+					}
+
 					query.append("userIdMapper.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1197,7 +1229,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					query.append("userIdMapper.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(userIdMapper.type IS NULL OR ");
+					}
+
 					query.append("userIdMapper.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1206,7 +1246,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					query.append("userIdMapper.externalUserId IS NULL");
 				}
 				else {
+					if (externalUserId.equals(StringPool.BLANK)) {
+						query.append("(userIdMapper.externalUserId IS NULL OR ");
+					}
+
 					query.append("userIdMapper.externalUserId = ?");
+
+					if (externalUserId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

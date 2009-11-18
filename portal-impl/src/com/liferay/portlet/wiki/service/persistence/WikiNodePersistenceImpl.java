@@ -468,7 +468,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiNode.uuid IS NULL OR ");
+					}
+
 					query.append("wikiNode.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -537,7 +545,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiNode.uuid IS NULL OR ");
+					}
+
 					query.append("wikiNode.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -662,7 +678,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				query.append("wikiNode.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(wikiNode.uuid IS NULL OR ");
+				}
+
 				query.append("wikiNode.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -777,7 +801,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiNode.uuid IS NULL OR ");
+					}
+
 					query.append("wikiNode.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1412,7 +1444,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					query.append("wikiNode.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(wikiNode.name IS NULL OR ");
+					}
+
 					query.append("wikiNode.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1664,7 +1704,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiNode.uuid IS NULL OR ");
+					}
+
 					query.append("wikiNode.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1719,7 +1767,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					query.append("wikiNode.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(wikiNode.uuid IS NULL OR ");
+					}
+
 					query.append("wikiNode.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1877,7 +1933,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					query.append("wikiNode.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(wikiNode.name IS NULL OR ");
+					}
+
 					query.append("wikiNode.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

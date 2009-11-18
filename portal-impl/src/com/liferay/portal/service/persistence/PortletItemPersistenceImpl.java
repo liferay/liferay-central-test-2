@@ -727,7 +727,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 					query.append("portletItem.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append("(portletItem.portletId IS NULL OR ");
+					}
+
 					query.append("portletItem.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -808,7 +816,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 					query.append("portletItem.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append("(portletItem.portletId IS NULL OR ");
+					}
+
 					query.append("portletItem.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -957,7 +973,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				query.append("portletItem.portletId IS NULL");
 			}
 			else {
+				if (portletId.equals(StringPool.BLANK)) {
+					query.append("(portletItem.portletId IS NULL OR ");
+				}
+
 				query.append("portletItem.portletId = ?");
+
+				if (portletId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" AND ");
@@ -1095,7 +1119,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 					query.append("portletItem.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(portletItem.name IS NULL OR ");
+					}
+
 					query.append("portletItem.lower(name) = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1104,7 +1136,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 					query.append("portletItem.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append("(portletItem.portletId IS NULL OR ");
+					}
+
 					query.append("portletItem.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1416,7 +1456,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 					query.append("portletItem.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append("(portletItem.portletId IS NULL OR ");
+					}
+
 					query.append("portletItem.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1489,7 +1537,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 					query.append("portletItem.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(portletItem.name IS NULL OR ");
+					}
+
 					query.append("portletItem.lower(name) = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1498,7 +1554,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 					query.append("portletItem.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append("(portletItem.portletId IS NULL OR ");
+					}
+
 					query.append("portletItem.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

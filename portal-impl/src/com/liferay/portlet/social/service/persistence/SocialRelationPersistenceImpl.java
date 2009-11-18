@@ -539,7 +539,15 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 					query.append("socialRelation.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(socialRelation.uuid IS NULL OR ");
+					}
+
 					query.append("socialRelation.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -605,7 +613,15 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 					query.append("socialRelation.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(socialRelation.uuid IS NULL OR ");
+					}
+
 					query.append("socialRelation.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -726,7 +742,15 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				query.append("socialRelation.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(socialRelation.uuid IS NULL OR ");
+				}
+
 				query.append("socialRelation.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2882,7 +2906,15 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 					query.append("socialRelation.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(socialRelation.uuid IS NULL OR ");
+					}
+
 					query.append("socialRelation.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

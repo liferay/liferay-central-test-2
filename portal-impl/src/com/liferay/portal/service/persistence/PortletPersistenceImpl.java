@@ -660,7 +660,15 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 					query.append("portlet.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append("(portlet.portletId IS NULL OR ");
+					}
+
 					query.append("portlet.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -935,7 +943,15 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 					query.append("portlet.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append("(portlet.portletId IS NULL OR ");
+					}
+
 					query.append("portlet.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

@@ -709,7 +709,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(portletPreferences.portletId IS NULL OR ");
+					}
+
 					query.append("portletPreferences.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -783,7 +792,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(portletPreferences.portletId IS NULL OR ");
+					}
+
 					query.append("portletPreferences.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -920,7 +938,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				query.append("portletPreferences.portletId IS NULL");
 			}
 			else {
+				if (portletId.equals(StringPool.BLANK)) {
+					query.append("(portletPreferences.portletId IS NULL OR ");
+				}
+
 				query.append("portletPreferences.portletId = ?");
+
+				if (portletId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1356,7 +1382,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(portletPreferences.portletId IS NULL OR ");
+					}
+
 					query.append("portletPreferences.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1658,7 +1693,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(portletPreferences.portletId IS NULL OR ");
+					}
+
 					query.append("portletPreferences.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1795,7 +1839,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					query.append("portletPreferences.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(portletPreferences.portletId IS NULL OR ");
+					}
+
 					query.append("portletPreferences.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

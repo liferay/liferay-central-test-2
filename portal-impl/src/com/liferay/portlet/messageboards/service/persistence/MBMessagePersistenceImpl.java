@@ -726,7 +726,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMessage.uuid IS NULL OR ");
+					}
+
 					query.append("mbMessage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -796,7 +804,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMessage.uuid IS NULL OR ");
+					}
+
 					query.append("mbMessage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -922,7 +938,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append("mbMessage.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(mbMessage.uuid IS NULL OR ");
+				}
+
 				query.append("mbMessage.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1039,7 +1063,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMessage.uuid IS NULL OR ");
+					}
+
 					query.append("mbMessage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -6290,7 +6322,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMessage.uuid IS NULL OR ");
+					}
+
 					query.append("mbMessage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -6345,7 +6385,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 					query.append("mbMessage.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(mbMessage.uuid IS NULL OR ");
+					}
+
 					query.append("mbMessage.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

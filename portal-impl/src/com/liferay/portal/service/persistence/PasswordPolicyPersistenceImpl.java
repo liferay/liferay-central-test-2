@@ -602,7 +602,15 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 					query.append("passwordPolicy.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(passwordPolicy.name IS NULL OR ");
+					}
+
 					query.append("passwordPolicy.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -889,7 +897,15 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 					query.append("passwordPolicy.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(passwordPolicy.name IS NULL OR ");
+					}
+
 					query.append("passwordPolicy.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

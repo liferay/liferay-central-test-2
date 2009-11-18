@@ -861,7 +861,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 					query.append("userTracker.sessionId IS NULL");
 				}
 				else {
+					if (sessionId.equals(StringPool.BLANK)) {
+						query.append("(userTracker.sessionId IS NULL OR ");
+					}
+
 					query.append("userTracker.sessionId = ?");
+
+					if (sessionId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -927,7 +935,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 					query.append("userTracker.sessionId IS NULL");
 				}
 				else {
+					if (sessionId.equals(StringPool.BLANK)) {
+						query.append("(userTracker.sessionId IS NULL OR ");
+					}
+
 					query.append("userTracker.sessionId = ?");
+
+					if (sessionId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1051,7 +1067,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				query.append("userTracker.sessionId IS NULL");
 			}
 			else {
+				if (sessionId.equals(StringPool.BLANK)) {
+					query.append("(userTracker.sessionId IS NULL OR ");
+				}
+
 				query.append("userTracker.sessionId = ?");
+
+				if (sessionId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1366,7 +1390,15 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 					query.append("userTracker.sessionId IS NULL");
 				}
 				else {
+					if (sessionId.equals(StringPool.BLANK)) {
+						query.append("(userTracker.sessionId IS NULL OR ");
+					}
+
 					query.append("userTracker.sessionId = ?");
+
+					if (sessionId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

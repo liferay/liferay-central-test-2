@@ -750,7 +750,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					query.append("role.subtype IS NULL");
 				}
 				else {
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append("(role.subtype IS NULL OR ");
+					}
+
 					query.append("role.subtype = ?");
+
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -819,7 +827,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					query.append("role.subtype IS NULL");
 				}
 				else {
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append("(role.subtype IS NULL OR ");
+					}
+
 					query.append("role.subtype = ?");
+
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -943,7 +959,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				query.append("role.subtype IS NULL");
 			}
 			else {
+				if (subtype.equals(StringPool.BLANK)) {
+					query.append("(role.subtype IS NULL OR ");
+				}
+
 				query.append("role.subtype = ?");
+
+				if (subtype.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1062,7 +1086,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					query.append("role.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(role.name IS NULL OR ");
+					}
+
 					query.append("role.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1153,7 +1185,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					query.append("role.subtype IS NULL");
 				}
 				else {
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append("(role.subtype IS NULL OR ");
+					}
+
 					query.append("role.subtype = ?");
+
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1230,7 +1270,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					query.append("role.subtype IS NULL");
 				}
 				else {
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append("(role.subtype IS NULL OR ");
+					}
+
 					query.append("role.subtype = ?");
+
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1366,7 +1414,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				query.append("role.subtype IS NULL");
 			}
 			else {
+				if (subtype.equals(StringPool.BLANK)) {
+					query.append("(role.subtype IS NULL OR ");
+				}
+
 				query.append("role.subtype = ?");
+
+				if (subtype.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1790,7 +1846,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					query.append("role.subtype IS NULL");
 				}
 				else {
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append("(role.subtype IS NULL OR ");
+					}
+
 					query.append("role.subtype = ?");
+
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1849,7 +1913,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					query.append("role.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(role.name IS NULL OR ");
+					}
+
 					query.append("role.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1909,7 +1981,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					query.append("role.subtype IS NULL");
 				}
 				else {
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append("(role.subtype IS NULL OR ");
+					}
+
 					query.append("role.subtype = ?");
+
+					if (subtype.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

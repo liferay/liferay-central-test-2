@@ -1012,7 +1012,15 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 					query.append("tasksProposal.classPK IS NULL");
 				}
 				else {
+					if (classPK.equals(StringPool.BLANK)) {
+						query.append("(tasksProposal.classPK IS NULL OR ");
+					}
+
 					query.append("tasksProposal.classPK = ?");
+
+					if (classPK.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1361,7 +1369,15 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 					query.append("tasksProposal.classPK IS NULL");
 				}
 				else {
+					if (classPK.equals(StringPool.BLANK)) {
+						query.append("(tasksProposal.classPK IS NULL OR ");
+					}
+
 					query.append("tasksProposal.classPK = ?");
+
+					if (classPK.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

@@ -659,7 +659,15 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 					query.append("resource.primKey IS NULL");
 				}
 				else {
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append("(resource.primKey IS NULL OR ");
+					}
+
 					query.append("resource.primKey = ?");
+
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -934,7 +942,15 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 					query.append("resource.primKey IS NULL");
 				}
 				else {
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append("(resource.primKey IS NULL OR ");
+					}
+
 					query.append("resource.primKey = ?");
+
+					if (primKey.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

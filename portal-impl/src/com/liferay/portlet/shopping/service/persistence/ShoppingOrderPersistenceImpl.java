@@ -769,7 +769,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 					query.append("shoppingOrder.number IS NULL");
 				}
 				else {
+					if (number.equals(StringPool.BLANK)) {
+						query.append("(shoppingOrder.number IS NULL OR ");
+					}
+
 					query.append("shoppingOrder.number = ?");
+
+					if (number.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -886,7 +894,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 					query.append("shoppingOrder.ppTxnId IS NULL");
 				}
 				else {
+					if (ppTxnId.equals(StringPool.BLANK)) {
+						query.append("(shoppingOrder.ppTxnId IS NULL OR ");
+					}
+
 					query.append("shoppingOrder.ppTxnId = ?");
+
+					if (ppTxnId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -983,7 +999,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 					query.append("shoppingOrder.ppPaymentStatus IS NULL");
 				}
 				else {
+					if (ppPaymentStatus.equals(StringPool.BLANK)) {
+						query.append(
+							"(shoppingOrder.ppPaymentStatus IS NULL OR ");
+					}
+
 					query.append("shoppingOrder.ppPaymentStatus = ?");
+
+					if (ppPaymentStatus.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1068,7 +1093,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 					query.append("shoppingOrder.ppPaymentStatus IS NULL");
 				}
 				else {
+					if (ppPaymentStatus.equals(StringPool.BLANK)) {
+						query.append(
+							"(shoppingOrder.ppPaymentStatus IS NULL OR ");
+					}
+
 					query.append("shoppingOrder.ppPaymentStatus = ?");
+
+					if (ppPaymentStatus.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1223,7 +1257,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 				query.append("shoppingOrder.ppPaymentStatus IS NULL");
 			}
 			else {
+				if (ppPaymentStatus.equals(StringPool.BLANK)) {
+					query.append("(shoppingOrder.ppPaymentStatus IS NULL OR ");
+				}
+
 				query.append("shoppingOrder.ppPaymentStatus = ?");
+
+				if (ppPaymentStatus.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1518,7 +1560,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 					query.append("shoppingOrder.number IS NULL");
 				}
 				else {
+					if (number.equals(StringPool.BLANK)) {
+						query.append("(shoppingOrder.number IS NULL OR ");
+					}
+
 					query.append("shoppingOrder.number = ?");
+
+					if (number.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1572,7 +1622,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 					query.append("shoppingOrder.ppTxnId IS NULL");
 				}
 				else {
+					if (ppTxnId.equals(StringPool.BLANK)) {
+						query.append("(shoppingOrder.ppTxnId IS NULL OR ");
+					}
+
 					query.append("shoppingOrder.ppTxnId = ?");
+
+					if (ppTxnId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1639,7 +1697,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 					query.append("shoppingOrder.ppPaymentStatus IS NULL");
 				}
 				else {
+					if (ppPaymentStatus.equals(StringPool.BLANK)) {
+						query.append(
+							"(shoppingOrder.ppPaymentStatus IS NULL OR ");
+					}
+
 					query.append("shoppingOrder.ppPaymentStatus = ?");
+
+					if (ppPaymentStatus.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

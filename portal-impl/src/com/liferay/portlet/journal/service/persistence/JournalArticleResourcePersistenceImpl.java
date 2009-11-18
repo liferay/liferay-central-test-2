@@ -693,7 +693,16 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 					query.append("journalArticleResource.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalArticleResource.articleId IS NULL OR ");
+					}
+
 					query.append("journalArticleResource.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -975,7 +984,16 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 					query.append("journalArticleResource.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalArticleResource.articleId IS NULL OR ");
+					}
+
 					query.append("journalArticleResource.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

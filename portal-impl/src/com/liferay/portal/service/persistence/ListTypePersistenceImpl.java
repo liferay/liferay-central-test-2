@@ -332,7 +332,15 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 					query.append("listType.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(listType.type IS NULL OR ");
+					}
+
 					query.append("listType.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -401,7 +409,15 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 					query.append("listType.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(listType.type IS NULL OR ");
+					}
+
 					query.append("listType.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -526,7 +542,15 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 				query.append("listType.type IS NULL");
 			}
 			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append("(listType.type IS NULL OR ");
+				}
+
 				query.append("listType.type = ?");
+
+				if (type.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -745,7 +769,15 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 					query.append("listType.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(listType.type IS NULL OR ");
+					}
+
 					query.append("listType.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

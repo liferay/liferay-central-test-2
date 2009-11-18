@@ -418,7 +418,15 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 					query.append("shard.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(shard.name IS NULL OR ");
+					}
+
 					query.append("shard.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -755,7 +763,15 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 					query.append("shard.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(shard.name IS NULL OR ");
+					}
+
 					query.append("shard.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

@@ -972,7 +972,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
+					if (key.equals(StringPool.BLANK)) {
+						query.append("(assetCategoryProperty.key IS NULL OR ");
+					}
+
 					query.append("assetCategoryProperty.key = ?");
+
+					if (key.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1050,7 +1058,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
+					if (key.equals(StringPool.BLANK)) {
+						query.append("(assetCategoryProperty.key IS NULL OR ");
+					}
+
 					query.append("assetCategoryProperty.key = ?");
+
+					if (key.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1193,7 +1209,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				query.append("assetCategoryProperty.key IS NULL");
 			}
 			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append("(assetCategoryProperty.key IS NULL OR ");
+				}
+
 				query.append("assetCategoryProperty.key = ?");
+
+				if (key.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1317,7 +1341,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
+					if (key.equals(StringPool.BLANK)) {
+						query.append("(assetCategoryProperty.key IS NULL OR ");
+					}
+
 					query.append("assetCategoryProperty.key = ?");
+
+					if (key.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1669,7 +1701,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
+					if (key.equals(StringPool.BLANK)) {
+						query.append("(assetCategoryProperty.key IS NULL OR ");
+					}
+
 					query.append("assetCategoryProperty.key = ?");
+
+					if (key.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1731,7 +1771,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					query.append("assetCategoryProperty.key IS NULL");
 				}
 				else {
+					if (key.equals(StringPool.BLANK)) {
+						query.append("(assetCategoryProperty.key IS NULL OR ");
+					}
+
 					query.append("assetCategoryProperty.key = ?");
+
+					if (key.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

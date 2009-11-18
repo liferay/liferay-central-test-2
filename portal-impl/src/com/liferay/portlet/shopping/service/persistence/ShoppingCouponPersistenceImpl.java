@@ -685,7 +685,15 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 					query.append("shoppingCoupon.code IS NULL");
 				}
 				else {
+					if (code.equals(StringPool.BLANK)) {
+						query.append("(shoppingCoupon.code IS NULL OR ");
+					}
+
 					query.append("shoppingCoupon.code = ?");
+
+					if (code.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -964,7 +972,15 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 					query.append("shoppingCoupon.code IS NULL");
 				}
 				else {
+					if (code.equals(StringPool.BLANK)) {
+						query.append("(shoppingCoupon.code IS NULL OR ");
+					}
+
 					query.append("shoppingCoupon.code = ?");
+
+					if (code.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

@@ -2100,7 +2100,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					query.append("layout.friendlyURL IS NULL");
 				}
 				else {
+					if (friendlyURL.equals(StringPool.BLANK)) {
+						query.append("(layout.friendlyURL IS NULL OR ");
+					}
+
 					query.append("layout.friendlyURL = ?");
+
+					if (friendlyURL.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2203,7 +2211,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					query.append("layout.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(layout.type IS NULL OR ");
+					}
+
 					query.append("layout.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2288,7 +2304,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					query.append("layout.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(layout.type IS NULL OR ");
+					}
+
 					query.append("layout.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2441,7 +2465,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				query.append("layout.type IS NULL");
 			}
 			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append("(layout.type IS NULL OR ");
+				}
+
 				query.append("layout.type = ?");
+
+				if (type.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -3104,7 +3136,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					query.append("layout.friendlyURL IS NULL");
 				}
 				else {
+					if (friendlyURL.equals(StringPool.BLANK)) {
+						query.append("(layout.friendlyURL IS NULL OR ");
+					}
+
 					query.append("layout.friendlyURL = ?");
+
+					if (friendlyURL.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -3175,7 +3215,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					query.append("layout.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(layout.type IS NULL OR ");
+					}
+
 					query.append("layout.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

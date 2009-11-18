@@ -431,7 +431,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					query.append("pollsQuestion.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(pollsQuestion.uuid IS NULL OR ");
+					}
+
 					query.append("pollsQuestion.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -501,7 +509,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					query.append("pollsQuestion.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(pollsQuestion.uuid IS NULL OR ");
+					}
+
 					query.append("pollsQuestion.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -627,7 +643,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query.append("pollsQuestion.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(pollsQuestion.uuid IS NULL OR ");
+				}
+
 				query.append("pollsQuestion.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -744,7 +768,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					query.append("pollsQuestion.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(pollsQuestion.uuid IS NULL OR ");
+					}
+
 					query.append("pollsQuestion.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1247,7 +1279,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					query.append("pollsQuestion.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(pollsQuestion.uuid IS NULL OR ");
+					}
+
 					query.append("pollsQuestion.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1302,7 +1342,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					query.append("pollsQuestion.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(pollsQuestion.uuid IS NULL OR ");
+					}
+
 					query.append("pollsQuestion.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

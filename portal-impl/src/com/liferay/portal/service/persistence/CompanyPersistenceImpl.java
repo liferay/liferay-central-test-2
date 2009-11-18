@@ -479,7 +479,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					query.append("company.webId IS NULL");
 				}
 				else {
+					if (webId.equals(StringPool.BLANK)) {
+						query.append("(company.webId IS NULL OR ");
+					}
+
 					query.append("company.webId = ?");
+
+					if (webId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -591,7 +599,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					query.append("company.virtualHost IS NULL");
 				}
 				else {
+					if (virtualHost.equals(StringPool.BLANK)) {
+						query.append("(company.virtualHost IS NULL OR ");
+					}
+
 					query.append("company.virtualHost = ?");
+
+					if (virtualHost.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -702,7 +718,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					query.append("company.mx IS NULL");
 				}
 				else {
+					if (mx.equals(StringPool.BLANK)) {
+						query.append("(company.mx IS NULL OR ");
+					}
+
 					query.append("company.mx = ?");
+
+					if (mx.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1281,7 +1305,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					query.append("company.webId IS NULL");
 				}
 				else {
+					if (webId.equals(StringPool.BLANK)) {
+						query.append("(company.webId IS NULL OR ");
+					}
+
 					query.append("company.webId = ?");
+
+					if (webId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1335,7 +1367,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					query.append("company.virtualHost IS NULL");
 				}
 				else {
+					if (virtualHost.equals(StringPool.BLANK)) {
+						query.append("(company.virtualHost IS NULL OR ");
+					}
+
 					query.append("company.virtualHost = ?");
+
+					if (virtualHost.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1389,7 +1429,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					query.append("company.mx IS NULL");
 				}
 				else {
+					if (mx.equals(StringPool.BLANK)) {
+						query.append("(company.mx IS NULL OR ");
+					}
+
 					query.append("company.mx = ?");
+
+					if (mx.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

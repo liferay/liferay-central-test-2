@@ -533,7 +533,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.uuid IS NULL OR ");
+					}
+
 					query.append("assetCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -603,7 +611,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.uuid IS NULL OR ");
+					}
+
 					query.append("assetCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -729,7 +745,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append("assetCategory.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(assetCategory.uuid IS NULL OR ");
+				}
+
 				query.append("assetCategory.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -846,7 +870,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.uuid IS NULL OR ");
+					}
+
 					query.append("assetCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1461,7 +1493,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.name IS NULL OR ");
+					}
+
 					query.append("assetCategory.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1539,7 +1579,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.name IS NULL OR ");
+					}
+
 					query.append("assetCategory.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1679,7 +1727,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append("assetCategory.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(assetCategory.name IS NULL OR ");
+				}
+
 				query.append("assetCategory.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2052,7 +2108,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.name IS NULL OR ");
+					}
+
 					query.append("assetCategory.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2128,7 +2192,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.name IS NULL OR ");
+					}
+
 					query.append("assetCategory.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2268,7 +2340,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append("assetCategory.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(assetCategory.name IS NULL OR ");
+				}
+
 				query.append("assetCategory.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" AND ");
@@ -2540,7 +2620,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.uuid IS NULL OR ");
+					}
+
 					query.append("assetCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2595,7 +2683,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.uuid IS NULL OR ");
+					}
+
 					query.append("assetCategory.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2755,7 +2851,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.name IS NULL OR ");
+					}
+
 					query.append("assetCategory.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2868,7 +2972,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					query.append("assetCategory.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(assetCategory.name IS NULL OR ");
+					}
+
 					query.append("assetCategory.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

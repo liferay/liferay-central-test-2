@@ -548,7 +548,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -614,7 +623,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -738,7 +756,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				query.append("journalContentSearch.articleId IS NULL");
 			}
 			else {
+				if (articleId.equals(StringPool.BLANK)) {
+					query.append("(journalContentSearch.articleId IS NULL OR ");
+				}
+
 				query.append("journalContentSearch.articleId = ?");
+
+				if (articleId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1091,7 +1117,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1165,7 +1200,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1302,7 +1346,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				query.append("journalContentSearch.articleId IS NULL");
 			}
 			else {
+				if (articleId.equals(StringPool.BLANK)) {
+					query.append("(journalContentSearch.articleId IS NULL OR ");
+				}
+
 				query.append("journalContentSearch.articleId = ?");
+
+				if (articleId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1693,7 +1745,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1775,7 +1836,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1925,7 +1995,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				query.append("journalContentSearch.articleId IS NULL");
 			}
 			else {
+				if (articleId.equals(StringPool.BLANK)) {
+					query.append("(journalContentSearch.articleId IS NULL OR ");
+				}
+
 				query.append("journalContentSearch.articleId = ?");
+
+				if (articleId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2023,7 +2101,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.portletId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2113,7 +2200,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.portletId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2277,7 +2373,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				query.append("journalContentSearch.portletId IS NULL");
 			}
 			else {
+				if (portletId.equals(StringPool.BLANK)) {
+					query.append("(journalContentSearch.portletId IS NULL OR ");
+				}
+
 				query.append("journalContentSearch.portletId = ?");
+
+				if (portletId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2427,7 +2531,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.portletId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2436,7 +2549,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2719,7 +2841,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2836,7 +2967,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2970,7 +3110,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -3047,7 +3196,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.portletId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -3129,7 +3287,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.portletId IS NULL");
 				}
 				else {
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.portletId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.portletId = ?");
+
+					if (portletId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -3138,7 +3305,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					query.append("journalContentSearch.articleId IS NULL");
 				}
 				else {
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(
+							"(journalContentSearch.articleId IS NULL OR ");
+					}
+
 					query.append("journalContentSearch.articleId = ?");
+
+					if (articleId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

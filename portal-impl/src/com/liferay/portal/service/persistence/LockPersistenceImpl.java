@@ -407,7 +407,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append("lock.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(lock.uuid IS NULL OR ");
+					}
+
 					query.append("lock.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -472,7 +480,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append("lock.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(lock.uuid IS NULL OR ");
+					}
+
 					query.append("lock.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -590,7 +606,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append("lock.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(lock.uuid IS NULL OR ");
+				}
+
 				query.append("lock.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -958,7 +982,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append("lock.className IS NULL");
 				}
 				else {
+					if (className.equals(StringPool.BLANK)) {
+						query.append("(lock.className IS NULL OR ");
+					}
+
 					query.append("lock.className = ?");
+
+					if (className.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -967,7 +999,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append("lock.key IS NULL");
 				}
 				else {
+					if (key.equals(StringPool.BLANK)) {
+						query.append("(lock.key IS NULL OR ");
+					}
+
 					query.append("lock.key = ?");
+
+					if (key.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1200,7 +1240,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append("lock.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(lock.uuid IS NULL OR ");
+					}
+
 					query.append("lock.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1310,7 +1358,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append("lock.className IS NULL");
 				}
 				else {
+					if (className.equals(StringPool.BLANK)) {
+						query.append("(lock.className IS NULL OR ");
+					}
+
 					query.append("lock.className = ?");
+
+					if (className.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1319,7 +1375,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append("lock.key IS NULL");
 				}
 				else {
+					if (key.equals(StringPool.BLANK)) {
+						query.append("(lock.key IS NULL OR ");
+					}
+
 					query.append("lock.key = ?");
+
+					if (key.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

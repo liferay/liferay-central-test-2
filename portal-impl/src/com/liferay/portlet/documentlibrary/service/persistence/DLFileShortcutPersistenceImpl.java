@@ -507,7 +507,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.uuid IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -573,7 +581,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.uuid IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -694,7 +710,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append("dlFileShortcut.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(dlFileShortcut.uuid IS NULL OR ");
+				}
+
 				query.append("dlFileShortcut.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -805,7 +829,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.uuid IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1471,7 +1503,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
+					if (toName.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.toName IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.toName = ?");
+
+					if (toName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1552,7 +1592,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
+					if (toName.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.toName IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.toName = ?");
+
+					if (toName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1701,7 +1749,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append("dlFileShortcut.toName IS NULL");
 			}
 			else {
+				if (toName.equals(StringPool.BLANK)) {
+					query.append("(dlFileShortcut.toName IS NULL OR ");
+				}
+
 				query.append("dlFileShortcut.toName = ?");
+
+				if (toName.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1793,7 +1849,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
+					if (toName.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.toName IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.toName = ?");
+
+					if (toName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1882,7 +1946,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
+					if (toName.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.toName IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.toName = ?");
+
+					if (toName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2044,7 +2116,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append("dlFileShortcut.toName IS NULL");
 			}
 			else {
+				if (toName.equals(StringPool.BLANK)) {
+					query.append("(dlFileShortcut.toName IS NULL OR ");
+				}
+
 				query.append("dlFileShortcut.toName = ?");
+
+				if (toName.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" AND ");
@@ -2302,7 +2382,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.uuid IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2357,7 +2445,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.uuid IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2546,7 +2642,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
+					if (toName.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.toName IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.toName = ?");
+
+					if (toName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2617,7 +2721,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					query.append("dlFileShortcut.toName IS NULL");
 				}
 				else {
+					if (toName.equals(StringPool.BLANK)) {
+						query.append("(dlFileShortcut.toName IS NULL OR ");
+					}
+
 					query.append("dlFileShortcut.toName = ?");
+
+					if (toName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");

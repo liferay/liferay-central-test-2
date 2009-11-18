@@ -398,7 +398,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					query.append("resourceAction.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceAction.name IS NULL OR ");
+					}
+
 					query.append("resourceAction.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -469,7 +477,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					query.append("resourceAction.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceAction.name IS NULL OR ");
+					}
+
 					query.append("resourceAction.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -597,7 +613,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				query.append("resourceAction.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(resourceAction.name IS NULL OR ");
+				}
+
 				query.append("resourceAction.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -715,7 +739,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					query.append("resourceAction.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceAction.name IS NULL OR ");
+					}
+
 					query.append("resourceAction.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -724,7 +756,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					query.append("resourceAction.actionId IS NULL");
 				}
 				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append("(resourceAction.actionId IS NULL OR ");
+					}
+
 					query.append("resourceAction.actionId = ?");
+
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -964,7 +1004,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					query.append("resourceAction.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceAction.name IS NULL OR ");
+					}
+
 					query.append("resourceAction.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1019,7 +1067,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					query.append("resourceAction.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(resourceAction.name IS NULL OR ");
+					}
+
 					query.append("resourceAction.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1028,7 +1084,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					query.append("resourceAction.actionId IS NULL");
 				}
 				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append("(resourceAction.actionId IS NULL OR ");
+					}
+
 					query.append("resourceAction.actionId = ?");
+
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

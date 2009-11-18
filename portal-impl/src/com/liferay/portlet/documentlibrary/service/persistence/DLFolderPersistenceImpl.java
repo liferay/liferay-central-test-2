@@ -522,7 +522,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.uuid IS NULL OR ");
+					}
+
 					query.append("dlFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -592,7 +600,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.uuid IS NULL OR ");
+					}
+
 					query.append("dlFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -718,7 +734,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query.append("dlFolder.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(dlFolder.uuid IS NULL OR ");
+				}
+
 				query.append("dlFolder.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -834,7 +858,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.uuid IS NULL OR ");
+					}
+
 					query.append("dlFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1726,7 +1758,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.name IS NULL OR ");
+					}
+
 					query.append("dlFolder.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1804,7 +1844,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.name IS NULL OR ");
+					}
+
 					query.append("dlFolder.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1944,7 +1992,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query.append("dlFolder.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(dlFolder.name IS NULL OR ");
+				}
+
 				query.append("dlFolder.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2077,7 +2133,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.name IS NULL OR ");
+					}
+
 					query.append("dlFolder.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2348,7 +2412,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.uuid IS NULL OR ");
+					}
+
 					query.append("dlFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2403,7 +2475,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.uuid IS NULL OR ");
+					}
+
 					query.append("dlFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2618,7 +2698,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.name IS NULL OR ");
+					}
+
 					query.append("dlFolder.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2687,7 +2775,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					query.append("dlFolder.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFolder.name IS NULL OR ");
+					}
+
 					query.append("dlFolder.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

@@ -691,7 +691,15 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 					query.append("announcementsDelivery.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(announcementsDelivery.type IS NULL OR ");
+					}
+
 					query.append("announcementsDelivery.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -969,7 +977,15 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 					query.append("announcementsDelivery.type IS NULL");
 				}
 				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append("(announcementsDelivery.type IS NULL OR ");
+					}
+
 					query.append("announcementsDelivery.type = ?");
+
+					if (type.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

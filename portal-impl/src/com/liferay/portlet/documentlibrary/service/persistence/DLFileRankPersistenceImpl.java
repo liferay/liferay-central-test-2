@@ -988,7 +988,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					query.append("dlFileRank.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileRank.name IS NULL OR ");
+					}
+
 					query.append("dlFileRank.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1066,7 +1074,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					query.append("dlFileRank.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileRank.name IS NULL OR ");
+					}
+
 					query.append("dlFileRank.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1204,7 +1220,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				query.append("dlFileRank.name IS NULL");
 			}
 			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append("(dlFileRank.name IS NULL OR ");
+				}
+
 				query.append("dlFileRank.name = ?");
+
+				if (name.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1346,7 +1370,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					query.append("dlFileRank.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileRank.name IS NULL OR ");
+					}
+
 					query.append("dlFileRank.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1704,7 +1736,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					query.append("dlFileRank.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileRank.name IS NULL OR ");
+					}
+
 					query.append("dlFileRank.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1777,7 +1817,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					query.append("dlFileRank.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(dlFileRank.name IS NULL OR ");
+					}
+
 					query.append("dlFileRank.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

@@ -503,7 +503,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					query.append("igFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igFolder.uuid IS NULL OR ");
+					}
+
 					query.append("igFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -573,7 +581,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					query.append("igFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igFolder.uuid IS NULL OR ");
+					}
+
 					query.append("igFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -699,7 +715,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query.append("igFolder.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(igFolder.uuid IS NULL OR ");
+				}
+
 				query.append("igFolder.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -815,7 +839,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					query.append("igFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igFolder.uuid IS NULL OR ");
+					}
+
 					query.append("igFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1753,7 +1785,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					query.append("igFolder.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(igFolder.name IS NULL OR ");
+					}
+
 					query.append("igFolder.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2017,7 +2057,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					query.append("igFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igFolder.uuid IS NULL OR ");
+					}
+
 					query.append("igFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2072,7 +2120,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					query.append("igFolder.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(igFolder.uuid IS NULL OR ");
+					}
+
 					query.append("igFolder.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2295,7 +2351,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					query.append("igFolder.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(igFolder.name IS NULL OR ");
+					}
+
 					query.append("igFolder.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

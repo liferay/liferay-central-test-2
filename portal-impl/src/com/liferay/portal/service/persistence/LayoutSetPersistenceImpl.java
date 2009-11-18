@@ -691,7 +691,15 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 					query.append("layoutSet.virtualHost IS NULL");
 				}
 				else {
+					if (virtualHost.equals(StringPool.BLANK)) {
+						query.append("(layoutSet.virtualHost IS NULL OR ");
+					}
+
 					query.append("layoutSet.virtualHost = ?");
+
+					if (virtualHost.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1082,7 +1090,15 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 					query.append("layoutSet.virtualHost IS NULL");
 				}
 				else {
+					if (virtualHost.equals(StringPool.BLANK)) {
+						query.append("(layoutSet.virtualHost IS NULL OR ");
+					}
+
 					query.append("layoutSet.virtualHost = ?");
+
+					if (virtualHost.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

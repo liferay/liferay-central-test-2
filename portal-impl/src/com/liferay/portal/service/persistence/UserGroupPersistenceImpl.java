@@ -1001,7 +1001,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					query.append("userGroup.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(userGroup.name IS NULL OR ");
+					}
+
 					query.append("userGroup.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1350,7 +1358,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					query.append("userGroup.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(userGroup.name IS NULL OR ");
+					}
+
 					query.append("userGroup.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

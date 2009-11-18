@@ -1320,7 +1320,15 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 					query.append("scProductEntry.repoGroupId IS NULL");
 				}
 				else {
+					if (repoGroupId.equals(StringPool.BLANK)) {
+						query.append("(scProductEntry.repoGroupId IS NULL OR ");
+					}
+
 					query.append("scProductEntry.lower(repoGroupId) = ?");
+
+					if (repoGroupId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1329,7 +1337,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 					query.append("scProductEntry.repoArtifactId IS NULL");
 				}
 				else {
+					if (repoArtifactId.equals(StringPool.BLANK)) {
+						query.append(
+							"(scProductEntry.repoArtifactId IS NULL OR ");
+					}
+
 					query.append("scProductEntry.lower(repoArtifactId) = ?");
+
+					if (repoArtifactId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1731,7 +1748,15 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 					query.append("scProductEntry.repoGroupId IS NULL");
 				}
 				else {
+					if (repoGroupId.equals(StringPool.BLANK)) {
+						query.append("(scProductEntry.repoGroupId IS NULL OR ");
+					}
+
 					query.append("scProductEntry.lower(repoGroupId) = ?");
+
+					if (repoGroupId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1740,7 +1765,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 					query.append("scProductEntry.repoArtifactId IS NULL");
 				}
 				else {
+					if (repoArtifactId.equals(StringPool.BLANK)) {
+						query.append(
+							"(scProductEntry.repoArtifactId IS NULL OR ");
+					}
+
 					query.append("scProductEntry.lower(repoArtifactId) = ?");
+
+					if (repoArtifactId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

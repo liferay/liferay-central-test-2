@@ -453,7 +453,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					query.append("country.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(country.name IS NULL OR ");
+					}
+
 					query.append("country.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -568,7 +576,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					query.append("country.a2 IS NULL");
 				}
 				else {
+					if (a2.equals(StringPool.BLANK)) {
+						query.append("(country.a2 IS NULL OR ");
+					}
+
 					query.append("country.a2 = ?");
+
+					if (a2.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -683,7 +699,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					query.append("country.a3 IS NULL");
 				}
 				else {
+					if (a3.equals(StringPool.BLANK)) {
+						query.append("(country.a3 IS NULL OR ");
+					}
+
 					query.append("country.a3 = ?");
+
+					if (a3.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1178,7 +1202,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					query.append("country.name IS NULL");
 				}
 				else {
+					if (name.equals(StringPool.BLANK)) {
+						query.append("(country.name IS NULL OR ");
+					}
+
 					query.append("country.name = ?");
+
+					if (name.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1232,7 +1264,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					query.append("country.a2 IS NULL");
 				}
 				else {
+					if (a2.equals(StringPool.BLANK)) {
+						query.append("(country.a2 IS NULL OR ");
+					}
+
 					query.append("country.a2 = ?");
+
+					if (a2.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1286,7 +1326,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					query.append("country.a3 IS NULL");
 				}
 				else {
+					if (a3.equals(StringPool.BLANK)) {
+						query.append("(country.a3 IS NULL OR ");
+					}
+
 					query.append("country.a3 = ?");
+
+					if (a3.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

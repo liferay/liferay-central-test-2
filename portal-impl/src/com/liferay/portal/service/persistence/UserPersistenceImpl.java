@@ -703,7 +703,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(user.uuid IS NULL OR ");
+					}
+
 					query.append("user.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -768,7 +776,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(user.uuid IS NULL OR ");
+					}
+
 					query.append("user.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -886,7 +902,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append("user.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(user.uuid IS NULL OR ");
+				}
+
 				query.append("user.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1298,7 +1322,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.emailAddress IS NULL");
 				}
 				else {
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append("(user.emailAddress IS NULL OR ");
+					}
+
 					query.append("user.emailAddress = ?");
+
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1363,7 +1395,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.emailAddress IS NULL");
 				}
 				else {
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append("(user.emailAddress IS NULL OR ");
+					}
+
 					query.append("user.emailAddress = ?");
+
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1482,7 +1522,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append("user.emailAddress IS NULL");
 			}
 			else {
+				if (emailAddress.equals(StringPool.BLANK)) {
+					query.append("(user.emailAddress IS NULL OR ");
+				}
+
 				query.append("user.emailAddress = ?");
+
+				if (emailAddress.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1587,7 +1635,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.openId IS NULL");
 				}
 				else {
+					if (openId.equals(StringPool.BLANK)) {
+						query.append("(user.openId IS NULL OR ");
+					}
+
 					query.append("user.openId = ?");
+
+					if (openId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2039,7 +2095,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.screenName IS NULL");
 				}
 				else {
+					if (screenName.equals(StringPool.BLANK)) {
+						query.append("(user.screenName IS NULL OR ");
+					}
+
 					query.append("user.screenName = ?");
+
+					if (screenName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2161,7 +2225,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.emailAddress IS NULL");
 				}
 				else {
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append("(user.emailAddress IS NULL OR ");
+					}
+
 					query.append("user.emailAddress = ?");
+
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2439,7 +2511,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(user.uuid IS NULL OR ");
+					}
+
 					query.append("user.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2588,7 +2668,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.emailAddress IS NULL");
 				}
 				else {
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append("(user.emailAddress IS NULL OR ");
+					}
+
 					query.append("user.emailAddress = ?");
+
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2642,7 +2730,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.openId IS NULL");
 				}
 				else {
+					if (openId.equals(StringPool.BLANK)) {
+						query.append("(user.openId IS NULL OR ");
+					}
+
 					query.append("user.openId = ?");
+
+					if (openId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2858,7 +2954,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.screenName IS NULL");
 				}
 				else {
+					if (screenName.equals(StringPool.BLANK)) {
+						query.append("(user.screenName IS NULL OR ");
+					}
+
 					query.append("user.screenName = ?");
+
+					if (screenName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2919,7 +3023,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					query.append("user.emailAddress IS NULL");
 				}
 				else {
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append("(user.emailAddress IS NULL OR ");
+					}
+
 					query.append("user.emailAddress = ?");
+
+					if (emailAddress.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

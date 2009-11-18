@@ -433,7 +433,15 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 					query.append("announcementsEntry.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(announcementsEntry.uuid IS NULL OR ");
+					}
+
 					query.append("announcementsEntry.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -504,7 +512,15 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 					query.append("announcementsEntry.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(announcementsEntry.uuid IS NULL OR ");
+					}
+
 					query.append("announcementsEntry.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -632,7 +648,15 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				query.append("announcementsEntry.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(announcementsEntry.uuid IS NULL OR ");
+				}
+
 				query.append("announcementsEntry.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1746,7 +1770,15 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 					query.append("announcementsEntry.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(announcementsEntry.uuid IS NULL OR ");
+					}
+
 					query.append("announcementsEntry.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");

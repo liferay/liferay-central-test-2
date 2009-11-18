@@ -549,7 +549,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.uuid IS NULL OR ");
+					}
+
 					query.append("journalTemplate.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -619,7 +627,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.uuid IS NULL OR ");
+					}
+
 					query.append("journalTemplate.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -745,7 +761,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				query.append("journalTemplate.uuid IS NULL");
 			}
 			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append("(journalTemplate.uuid IS NULL OR ");
+				}
+
 				query.append("journalTemplate.uuid = ?");
+
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -862,7 +886,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.uuid IS NULL OR ");
+					}
+
 					query.append("journalTemplate.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -1212,7 +1244,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.templateId IS NULL OR ");
+					}
+
 					query.append("journalTemplate.templateId = ?");
+
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1282,7 +1322,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.templateId IS NULL OR ");
+					}
+
 					query.append("journalTemplate.templateId = ?");
+
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1410,7 +1458,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				query.append("journalTemplate.templateId IS NULL");
 			}
 			else {
+				if (templateId.equals(StringPool.BLANK)) {
+					query.append("(journalTemplate.templateId IS NULL OR ");
+				}
+
 				query.append("journalTemplate.templateId = ?");
+
+				if (templateId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -1640,7 +1696,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.templateId IS NULL OR ");
+					}
+
 					query.append("journalTemplate.templateId = ?");
+
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1732,7 +1796,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.structureId IS NULL");
 				}
 				else {
+					if (structureId.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.structureId IS NULL OR ");
+					}
+
 					query.append("journalTemplate.structureId = ?");
+
+					if (structureId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1810,7 +1882,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.structureId IS NULL");
 				}
 				else {
+					if (structureId.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.structureId IS NULL OR ");
+					}
+
 					query.append("journalTemplate.structureId = ?");
+
+					if (structureId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -1950,7 +2030,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				query.append("journalTemplate.structureId IS NULL");
 			}
 			else {
+				if (structureId.equals(StringPool.BLANK)) {
+					query.append("(journalTemplate.structureId IS NULL OR ");
+				}
+
 				query.append("journalTemplate.structureId = ?");
+
+				if (structureId.equals(StringPool.BLANK)) {
+					query.append(")");
+				}
 			}
 
 			query.append(" ");
@@ -2214,7 +2302,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.uuid IS NULL OR ");
+					}
+
 					query.append("journalTemplate.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2269,7 +2365,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.uuid IS NULL");
 				}
 				else {
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.uuid IS NULL OR ");
+					}
+
 					query.append("journalTemplate.uuid = ?");
+
+					if (uuid.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" AND ");
@@ -2376,7 +2480,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.templateId IS NULL OR ");
+					}
+
 					query.append("journalTemplate.templateId = ?");
+
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2482,7 +2594,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.templateId IS NULL");
 				}
 				else {
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.templateId IS NULL OR ");
+					}
+
 					query.append("journalTemplate.templateId = ?");
+
+					if (templateId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
@@ -2543,7 +2663,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					query.append("journalTemplate.structureId IS NULL");
 				}
 				else {
+					if (structureId.equals(StringPool.BLANK)) {
+						query.append("(journalTemplate.structureId IS NULL OR ");
+					}
+
 					query.append("journalTemplate.structureId = ?");
+
+					if (structureId.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
 				}
 
 				query.append(" ");
