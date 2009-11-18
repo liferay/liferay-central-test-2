@@ -87,6 +87,9 @@ public class Log4JUtil {
 	}
 
 	public static void setLevel(String name, String priority) {
+		Logger logger = Logger.getLogger(name);
+
+		logger.setLevel(Level.toLevel(priority));
 
 		java.util.logging.Logger jdkLogger = java.util.logging.Logger.getLogger(
 			name);
