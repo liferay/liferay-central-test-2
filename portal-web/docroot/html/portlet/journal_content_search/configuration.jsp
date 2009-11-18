@@ -51,6 +51,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<%
 			}
 			%>
+
 		</aui:select>
 
 		<aui:input inlineLabel="left" label="only-show-results-for-web-content-listed-in-a-web-content-display-portlet" name="showListed" onClick='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "targetPortletId.disabled = this.checked;" %>' type="checkbox" value="<%= showListed %>" />
