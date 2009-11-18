@@ -24,52 +24,64 @@
 
 <script type="text/javascript">
 	function <portlet:namespace />handleEntry(entryId) {
-		var entry = jQuery('#<portlet:namespace/>' + entryId);
-		var container = entry.parent();
+		var entry = AUI().one('#<portlet:namespace/>' + entryId);
 
-		if (container.hasClass('unread-entries')) {
-			<portlet:namespace />markEntry(entry, entryId);
-		}
-		else {
-			<portlet:namespace />toggleContent(entry);
+		if (entry) {
+			var container = entry.get('parentNode');
+
+			if (container) {
+				if (container.hasClass('unread-entries')) {
+					<portlet:namespace />markEntry(entry, entryId);
+				}
+				else {
+					<portlet:namespace />toggleContent(entry);
+				}
+			}
 		}
 	}
 
 	function <portlet:namespace />markEntry(entry, entryId) {
 		Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagConstants.HIDDEN %>});
 
-		var readContainer = jQuery('#p_p_id<portlet:namespace /> .read-entries');
-		var control = entry.find('.control-entry a');
+		var readContainer = AUI().all('#p_p_id<portlet:namespace /> .read-entries');
+		var control = entry.all('.control-entry a');
 
-		entry.hide(
-			'normal',
-			function() {
-				entry.appendTo(readContainer);
+		if (readContainer) {
+			readContainer.append(entry);
+		}
 
-				control.html('<liferay-ui:message key="show" />');
-			}
-		);
+		if (control) {
+			control.html('<liferay-ui:message key="show" />');
+		}
 
-		entry.show('normal');
+		entry.show();
 	}
 
 	function <portlet:namespace />toggleContent(entry) {
-		var content = entry.find('.entry-content');
-		var control = entry.find('.control-entry a');
+		var content = entry.all('.entry-content');
+		var control = entry.all('.control-entry a');
 
 		if (entry.hasClass('visable')) {
 			entry.removeClass('visable');
 
-			content.hide();
+			if (content) {
+				content.hide();
+			}
 
-			control.html('<liferay-ui:message key="show" />');
+			if (control) {
+				control.html('<liferay-ui:message key="show" />');
+			}
 		}
 		else {
 			entry.addClass('visable');
 
-			content.show();
+			if (content) {
+				content.show();
+			}
 
-			control.html('<liferay-ui:message key="hide" />');
+			if (control) {
+				control.html('<liferay-ui:message key="hide" />');
+			}
 		}
 	}
 </script>
@@ -110,8 +122,12 @@ hasResults = hasResults || (total > 0);
 <c:if test="<%= !hasResults && portletName.equals(PortletKeys.ALERTS) && !PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY) %>">
 	<script type="text/javascript">
 		AUI().ready(
-			function() {
-				jQuery('#p_p_id<portlet:namespace />').hide();
+			function(A) {
+				var portlet = A.one('#p_p_id<portlet:namespace />');
+
+				if (portlet) {
+					portlet.hide();
+				}
 			}
 		);
 	</script>

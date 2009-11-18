@@ -89,10 +89,6 @@
 	padding: 2px 2px 2px 30px;
 }
 
-.portlet-announcements .read-entries .entry-content, .portlet-alerts .read-entries .entry-content {
-	display: none;
-}
-
 .portlet-announcements .entry-scope {
 	color: #555;
 	display: block;
