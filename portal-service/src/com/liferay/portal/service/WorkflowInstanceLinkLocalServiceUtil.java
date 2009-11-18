@@ -128,11 +128,11 @@ public class WorkflowInstanceLinkLocalServiceUtil {
 			.deleteWorkflowInstanceLink(companyId, groupId, className, classPK);
 	}
 
-	public static java.lang.String getStatus(long companyId, long groupId,
+	public static java.lang.String getState(long companyId, long groupId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getStatus(companyId, groupId, className, classPK);
+		return getService().getState(companyId, groupId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.WorkflowInstanceLink getWorkflowInstanceLink(

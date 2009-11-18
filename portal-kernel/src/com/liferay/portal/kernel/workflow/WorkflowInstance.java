@@ -41,8 +41,6 @@ public interface WorkflowInstance {
 
 	public Map<String, Object> getContext();
 
-	public String getCurrentNodeName();
-
 	public Date getEndDate();
 
 	public WorkflowInstance getParentWorkflowInstance();
@@ -50,6 +48,8 @@ public interface WorkflowInstance {
 	public long getParentWorkflowInstanceId();
 
 	public Date getStartDate();
+
+	public String getState();
 
 	public String getWorkflowDefinitionName();
 

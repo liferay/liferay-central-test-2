@@ -27,7 +27,6 @@ import com.liferay.portal.NoSuchWorkflowInstanceLinkException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.workflow.ContextConstants;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.model.User;
@@ -92,23 +91,18 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		}
 	}
 
-	public String getStatus(
+	public String getState(
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		try {
-			WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
-				companyId, groupId, className, classPK);
+		WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
+			companyId, groupId, className, classPK);
 
-			WorkflowInstance workflowInstance =
-				WorkflowInstanceManagerUtil.getWorkflowInstance(
-					workflowInstanceLink.getWorkflowInstanceId());
+		WorkflowInstance workflowInstance =
+			WorkflowInstanceManagerUtil.getWorkflowInstance(
+				workflowInstanceLink.getWorkflowInstanceId());
 
-			return workflowInstance.getCurrentNodeName();
-		}
-		catch (NoSuchWorkflowInstanceLinkException nswile) {
-			return StatusConstants.LABEL_ANY;
-		}
+		return workflowInstance.getState();
 	}
 
 	public WorkflowInstanceLink getWorkflowInstanceLink(

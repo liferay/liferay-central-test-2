@@ -242,26 +242,35 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			if (article == null) {
 				status = "new";
 			}
+			else if (article.isExpired()) {
+				status = "expired";
+			}
+			else if (article.isApproved()) {
+				status = "approved";
+			}
 			else {
-				status = WorkflowInstanceLinkLocalServiceUtil.getStatus(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey());
-
-				if (status.equals(StatusConstants.LABEL_ANY)) {
-					if (article.isExpired()) {
-						status = "expired";
-					}
-					else if (article.isApproved()) {
-						status = "approved";
-					}
-					else {
-						status = "not-approved";
-					}
-				}
+				status = "not-approved";
 			}
 			%>
 
 			<strong class="journal-article-status journal-article-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></strong>
 
 			<c:if test="<%= article != null %>">
+				<%
+				try {
+					String state = WorkflowInstanceLinkLocalServiceUtil.getState(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey());
+				%>
+					<br /><br />
+
+					<liferay-ui:message key="workflow-state" />
+
+					<strong><%= state %></strong>
+				<%
+				}
+				catch (NoSuchWorkflowInstanceLinkException nswile) {
+				}
+				%>
+
 				<br /><br />
 
 				<span class="nobr">

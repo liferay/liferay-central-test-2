@@ -26,29 +26,26 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 
 /**
- * <a href="WorkflowInstanceCurrentNodeNameComparator.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="WorkflowInstanceStateComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WorkflowInstanceCurrentNodeNameComparator
-	extends OrderByComparator {
+public class WorkflowInstanceStateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC =
-		"currentNodeName ASC, workflowInstanceId ASC";
+	public static String ORDER_BY_ASC = "state ASC, workflowInstanceId ASC";
 
-	public static String ORDER_BY_DESC =
-		"currentNodeName DESC, workflowInstanceId DESC";
+	public static String ORDER_BY_DESC = "state DESC, workflowInstanceId DESC";
 
 	public static String[] ORDER_BY_FIELDS = {
-		"currentNodeName", "workflowInstanceId"
+		"state", "workflowInstanceId"
 	};
 
-	public WorkflowInstanceCurrentNodeNameComparator() {
+	public WorkflowInstanceStateComparator() {
 		this(false);
 	}
 
-	public WorkflowInstanceCurrentNodeNameComparator(boolean asc) {
+	public WorkflowInstanceStateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -56,10 +53,10 @@ public class WorkflowInstanceCurrentNodeNameComparator
 		WorkflowInstance workflowInstance1 = (WorkflowInstance)obj1;
 		WorkflowInstance workflowInstance2 = (WorkflowInstance)obj2;
 
-		String currentNodeName1 = workflowInstance1.getCurrentNodeName();
-		String currentNodeName2 = workflowInstance2.getCurrentNodeName();
+		String state1 = workflowInstance1.getState();
+		String state2 = workflowInstance2.getState();
 
-		int value = currentNodeName1.compareTo(currentNodeName2);
+		int value = state1.compareTo(state2);
 
 		if (value == 0) {
 			Long workflowInstanceId1 =
