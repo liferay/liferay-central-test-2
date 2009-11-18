@@ -22,36 +22,31 @@
  */
 %>
 
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
+
 <%@ include file="/html/portlet/xsl_content/init.jsp" %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:error key="xmlURL" message="please-enter-a-valid-xml-url" />
-<liferay-ui:error key="xslURL" message="please-enter-a-valid-xsl-url" />
-<liferay-ui:error key="transformation" message="an-error-occurred-while-processing-your-xml-and-xsl" />
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="xml-url" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />xmlURL" type="text" value="<%= xmlURL %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="xsl-url" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />xslURL" type="text" value="<%= xslURL %>" />
-	</td>
-</tr>
-</table>
+	<liferay-ui:error key="xmlURL" message="please-enter-a-valid-xml-url" />
+	<liferay-ui:error key="xslURL" message="please-enter-a-valid-xsl-url" />
+	<liferay-ui:error key="transformation" message="an-error-occurred-while-processing-your-xml-and-xsl" />
 
-<br />
+	<aui:fieldset>
+		<aui:input cssClass="lfr-input-text-container" label="xml-url" name="xmlURL" type="text" value="<%= xmlURL %>" />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+		<aui:input cssClass="lfr-input-text-container" label="xsl-url" name="xslURL" type="text" value="<%= xslURL %>" />
+	</aui:fieldset>
 
-</form>
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
