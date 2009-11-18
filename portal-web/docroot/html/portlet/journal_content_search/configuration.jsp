@@ -24,58 +24,43 @@
 
 <%@ include file="/html/portlet/journal_content_search/init.jsp" %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
 
-<liferay-ui:message key="define-the-behavior-of-this-search" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<br /><br />
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="web-content-type" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />type">
-			<option value=""></option>
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="define-the-behavior-of-this-search" />
+	</div>
+
+	<aui:fieldset>
+		<aui:select label="web-content-type" name="type">
+			<aui:option value="" />
 
 			<%
 			for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
 			%>
 
-				<option <%= type.equals(JournalArticleConstants.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleConstants.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleConstants.TYPES[i]) %></option>
+				<aui:option label="<%= LanguageUtil.get(pageContext, JournalArticleConstants.TYPES[i]) %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" value="<%= JournalArticleConstants.TYPES[i] %>" />
 
 			<%
 			}
 			%>
+		</aui:select>
 
-		</select>
-	</td>
-</tr>
-</table>
+		<aui:input checked="<%= showListed %>" inlineLabel="left" label="only-show-results-for-web-content-listed-in-a-web-content-display-portlet" name="showListed" onClick='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "targetPortletId.disabled = this.checked;" %>' type="checkbox" value="<%= showListed %>" />
 
-<br />
+		<aui:input cssClass="lfr-input-text-container" disabled="<%= showListed %>" inlneLabel="left" name="targetPortletId" type="text" />
+	</aui:fieldset>
 
-<liferay-ui:message key="only-show-results-for-web-content-listed-in-a-web-content-display-portlet" />
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
 
-<input <%= showListed ? "checked" : "" %> name="<portlet:namespace />showListed" type="checkbox" onClick="document.<portlet:namespace />fm.<portlet:namespace />targetPortletId.disabled = this.checked;" />
-
-<br /><br />
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="target-portlet-id" />
-	</td>
-	<td>
-		<input class="lfr-input-text" <%= showListed ? "disabled" : "" %> name="<portlet:namespace />targetPortletId" type="text" value="<%= targetPortletId %>" />
-	</td>
-</tr>
-</table>
-
-<br />
-
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-</form>
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
