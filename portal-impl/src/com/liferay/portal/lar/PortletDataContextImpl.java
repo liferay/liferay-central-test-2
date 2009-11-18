@@ -144,7 +144,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public void addAssetCategories(Class<?> classObj, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<AssetCategory> assetCategories =
 			AssetCategoryLocalServiceUtil.getCategories(
@@ -171,7 +171,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public void addAssetTags(Class<?> classObj, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String[] tagNames = AssetTagLocalServiceUtil.getTagNames(
 			classObj.getName(), classPK);

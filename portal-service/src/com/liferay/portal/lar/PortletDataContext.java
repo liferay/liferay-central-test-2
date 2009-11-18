@@ -58,13 +58,13 @@ public interface PortletDataContext extends Serializable {
 	public static final String ROOT_PATH_PORTLETS = "/portlets/";
 
 	public void addAssetCategories(Class<?> classObj, long classPK)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public void addAssetCategories(
-			String className, long classPK, long[] assetCategoryIds);
+		String className, long classPK, long[] assetCategoryIds);
 
 	public void addAssetTags(Class<?> classObj, long classPK)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public void addAssetTags(
 		String className, long classPK, String[] assetTagNames);
