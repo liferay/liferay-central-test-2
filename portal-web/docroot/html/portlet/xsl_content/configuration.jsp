@@ -22,15 +22,21 @@
  */
 %>
 
+<%@ include file="/html/portlet/xsl_content/init.jsp" %>
+
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<%@ include file="/html/portlet/xsl_content/init.jsp" %>
+<script type="text/javascript">
+    function <portlet:namespace />saveConfiguration() {
+        submitForm(document.<portlet:namespace />fm);
+	}
+</script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
@@ -45,7 +51,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+		<aui:button name="saveButton" type="submit" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
