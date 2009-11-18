@@ -304,10 +304,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <script type="text/javascript">
 	<portlet:namespace />init();
-
-	document.<portlet:namespace />fm.<portlet:namespace />endDateHour.disabled = true;
-	document.<portlet:namespace />fm.<portlet:namespace />endDateMinute.disabled = true;
-	document.<portlet:namespace />fm.<portlet:namespace />endDateAmPm.disabled = true;
 </script>
 
 <%
