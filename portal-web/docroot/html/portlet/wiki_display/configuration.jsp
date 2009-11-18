@@ -25,48 +25,41 @@
 <%@ include file="/html/portlet/wiki_display/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 nodeId = ParamUtil.getLong(request, "nodeId", nodeId);
 
 List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-node-could-not-be-found" />
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="node" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />nodeId">
-			<option value=""></option>
+	<liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-node-could-not-be-found" />
+
+	<aui:fieldset>
+		<aui:select label="node" name="nodeId">
+			<aui:option value="" />
 
 			<%
 			for (int i = 0; i < nodes.size(); i++) {
 				WikiNode node = (WikiNode)nodes.get(i);
 			%>
 
-				<option <%= (nodeId == node.getNodeId()) ? "selected" : "" %> value="<%= node.getNodeId() %>"><%= node.getName() %></option>
+				<aui:option label="<%= node.getName() %>" selected="<%= nodeId == node.getNodeId() %>" value="<%= node.getNodeId() %>" />
 
 			<%
 			}
 			%>
 
-		</select>
-	</td>
-</tr>
+		</aui:select>
 
-<c:choose>
-	<c:when test="<%= nodeId > 0 %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="page" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />title">
+		<c:choose>
+			<c:when test="<%= nodeId > 0 %>">
+				<aui:select label="page" name="title">
 
 					<%
 					int total = WikiPageLocalServiceUtil.getPagesCount(nodeId, true);
@@ -77,25 +70,23 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 						WikiPage wikiPage = (WikiPage)pages.get(i);
 					%>
 
-						<option <%= (wikiPage.getTitle().equals(title) || (Validator.isNull(title) && wikiPage.getTitle().equals(WikiPageConstants.FRONT_PAGE))) ? "selected" : "" %> value="<%= wikiPage.getTitle() %>"><%= wikiPage.getTitle() %></option>
+						<aui:option label="<%= wikiPage.getTitle() %>" selected="<%= wikiPage.getTitle().equals(title) || (Validator.isNull(title) && wikiPage.getTitle().equals(WikiPageConstants.FRONT_PAGE)) %>" />
 
 					<%
 					}
 					%>
 
-				</select>
-			</td>
-		</tr>
-	</c:when>
-	<c:otherwise>
-		<input name="<portlet:namespace />title" type="hidden" value="<%= WikiPageConstants.FRONT_PAGE %>" />
-	</c:otherwise>
-</c:choose>
+				</aui:select>
+			</c:when>
+			<c:otherwise>
+				<aui:input name="title" type="hidden" value="<%= WikiPageConstants.FRONT_PAGE %>" />
+			</c:otherwise>
+		</c:choose>
+	</aui:fieldset>
 
-</table>
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
 
-<br />
-
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-</form>
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
