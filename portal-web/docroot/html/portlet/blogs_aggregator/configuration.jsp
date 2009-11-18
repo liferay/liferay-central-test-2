@@ -39,8 +39,8 @@ if (organizationId > 0) {
 %>
 
 <portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="organizationSelectorURL">
-    <portlet:param name="struts_action" value="/portlet_configuration/select_organization" />
-    <portlet:param name="tabs1" value="organizations" />
+	<portlet:param name="struts_action" value="/portlet_configuration/select_organization" />
+	<portlet:param name="tabs1" value="organizations" />
 </portlet:renderURL>
 
 <script type="text/javascript">
@@ -85,7 +85,7 @@ if (organizationId > 0) {
 		</aui:select>
 
 		<div id="<portlet:namespace />UsersSelectionOptions">
-			<aui:field-wrapper label="organization" >
+			<aui:field-wrapper label="organization">
 				<span id="<portlet:namespace />organizationName"><%= HtmlUtil.escape(organizationName) %></span>
 
 				<aui:button name="selectOrganizationButton" onClick='<%= renderResponse.getNamespace() + "openOrganizationSelector();" %>' type="button" value="select" />
@@ -143,6 +143,7 @@ if (organizationId > 0) {
 
 			function showHiddenFields() {
 				var usersSelectionOptions = jQuery('#<portlet:namespace />UsersSelectionOptions');
+
 				if (selectionMethod.val() == 'users') {
 					usersSelectionOptions.show();
 				}
