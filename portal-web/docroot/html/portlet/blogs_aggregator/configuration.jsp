@@ -38,9 +38,14 @@ if (organizationId > 0) {
 }
 %>
 
+<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="organizationSelectorURL">
+    <portlet:param name="struts_action" value="/portlet_configuration/select_organization" />
+    <portlet:param name="tabs1" value="organizations" />
+</portlet:renderURL>
+
 <script type="text/javascript">
 	function <portlet:namespace />openOrganizationSelector() {
-		var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+		var organizationWindow = window.open('<%= organizationSelectorURL %>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
 		organizationWindow.focus();
 	}
