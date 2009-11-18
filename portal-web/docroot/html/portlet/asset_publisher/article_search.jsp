@@ -168,19 +168,23 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 	window.before(
 		"<portlet:namespace />selectAsset",
 		function() {
-			var fm = jQuery(document.<portlet:namespace />fm);
+			var fm = AUI().one(document.<portlet:namespace />fm);
 
-			fm.attr("action", <portlet:namespace />configurationActionURL);
+			if (fm) {
+				fm.attr("action", <portlet:namespace />configurationActionURL);
+			}
 		}
 	);
 
 	AUI().ready(
 		function() {
-			var fm = jQuery(document.<portlet:namespace />fm);
+			var fm = AUI().one(document.<portlet:namespace />fm);
 
-			<portlet:namespace />configurationActionURL = fm.attr("action");
+			if (fm) {
+				<portlet:namespace />configurationActionURL = fm.attr("action");
 
-			fm.attr("action", '<%= portletURL.toString() %>');
+				fm.attr("action", '<%= portletURL.toString() %>');
+			}
 		}
 	);
 
