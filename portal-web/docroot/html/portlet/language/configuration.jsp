@@ -28,9 +28,17 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
+<script type="text/javascript">
+    function <portlet:namespace />saveConfiguration() {
+        document.<portlet:namespace />fm.<portlet:namespace />languageIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentLanguageIds);
+
+        submitForm(document.<portlet:namespace />fm);
+	}
+</script>
+
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
@@ -92,7 +100,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button name="saveButton" onClick='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "languageIds.value = Liferay.Util.listSelect(document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "currentLanguageIds); submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
+		<aui:button name="saveButton" type="submit" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
