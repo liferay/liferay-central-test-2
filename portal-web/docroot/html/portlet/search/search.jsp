@@ -71,7 +71,7 @@ String format = ParamUtil.getString(request, "format");
 </div>
 
 <%
-List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), includeSystemPortlets, false);
 
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
