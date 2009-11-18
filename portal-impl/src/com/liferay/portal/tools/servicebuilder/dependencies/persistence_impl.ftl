@@ -681,6 +681,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								else {
 							</#if>
 
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
+									<#else>
+										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
+									</#if>
+								}
+							</#if>
+
 							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
 								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
 									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
@@ -693,6 +703,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								<#else>
 									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
 								</#if>
+							</#if>
+
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									query.append(")");
+								}
 							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
@@ -854,6 +870,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								else {
 							</#if>
 
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
+									<#else>
+										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
+									</#if>
+								}
+							</#if>
+
 							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
 								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
 									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
@@ -866,6 +892,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								<#else>
 									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
 								</#if>
+							</#if>
+
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									query.append(")");
+								}
 							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
@@ -1110,6 +1142,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							else {
 						</#if>
 
+						<#if finderCol.type == "String">
+							if (${finderCol.name}.equals(StringPool.BLANK)) {
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
+								<#else>
+									query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
+								</#if>
+							}
+						</#if>
+
 						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
 							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
 								query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
@@ -1122,6 +1164,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							<#else>
 								query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
 							</#if>
+						</#if>
+
+						<#if finderCol.type == "String">
+							if (${finderCol.name}.equals(StringPool.BLANK)) {
+								query.append(")");
+							}
 						</#if>
 
 						<#if !finderCol.isPrimitiveType()>
@@ -1364,6 +1412,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								else {
 							</#if>
 
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
+									<#else>
+										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
+									</#if>
+								}
+							</#if>
+
 							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
 								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
 									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
@@ -1376,6 +1434,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								<#else>
 									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
 								</#if>
+							</#if>
+
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									query.append(")");
+								}
 							</#if>
 
 							<#if !finderCol.isPrimitiveType()>
@@ -1756,6 +1820,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							else {
 						</#if>
 
+						<#if finderCol.type == "String">
+							if (${finderCol.name}.equals(StringPool.BLANK)) {
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
+								<#else>
+									query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
+								</#if>
+							}
+						</#if>
+
 						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
 							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
 								query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
@@ -1768,6 +1842,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							<#else>
 								query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
 							</#if>
+						</#if>
+
+						<#if finderCol.type == "String">
+							if (${finderCol.name}.equals(StringPool.BLANK)) {
+								query.append(")");
+							}
 						</#if>
 
 						<#if !finderCol.isPrimitiveType()>
