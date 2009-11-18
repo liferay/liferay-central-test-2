@@ -256,15 +256,18 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			<strong class="journal-article-status journal-article-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></strong>
 
 			<c:if test="<%= article != null %>">
+
 				<%
 				try {
 					String state = WorkflowInstanceLinkLocalServiceUtil.getState(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey());
 				%>
+
 					<br /><br />
 
 					<liferay-ui:message key="workflow-state" />
 
 					<strong><%= state %></strong>
+
 				<%
 				}
 				catch (NoSuchWorkflowInstanceLinkException nswile) {
