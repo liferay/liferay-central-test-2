@@ -262,9 +262,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Role role = rolePersistence.findByC_N(
 			group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
 
-		for (int i = 0; i < userIds.length; i++) {
-			long userId = userIds[i];
-
+		for (long userId : userIds) {
 			userGroupRoleLocalService.addUserGroupRoles(
 				userId, groupId, new long[] {role.getRoleId()});
 		}
@@ -294,9 +292,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Role role = rolePersistence.findByC_N(
 			group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 
-		for (int i = 0; i < userIds.length; i++) {
-			long userId = userIds[i];
-
+		for (long userId : userIds) {
 			userGroupRoleLocalService.addUserGroupRoles(
 				userId, groupId, new long[] {role.getRoleId()});
 		}
