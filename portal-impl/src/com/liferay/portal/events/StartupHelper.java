@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -105,8 +104,15 @@ public class StartupHelper {
 				_log.debug("Initializing upgrade " + upgradeProcessClassName);
 			}
 
-			UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
-				upgradeProcessClassName);
+			UpgradeProcess upgradeProcess = null;
+
+			try {
+				upgradeProcess = (UpgradeProcess)Class.forName(
+					upgradeProcessClassName).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 
 			if (upgradeProcess == null) {
 				_log.error(upgradeProcessClassName + " cannot be found");
