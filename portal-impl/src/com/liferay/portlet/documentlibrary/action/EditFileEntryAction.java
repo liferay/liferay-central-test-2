@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
@@ -42,12 +43,14 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
-import com.liferay.portlet.documentlibrary.FolderPermissionException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.form.FileEntryForm;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 import java.io.File;
 
@@ -115,7 +118,6 @@ public class EditFileEntryAction extends PortletAction {
 					 e instanceof DuplicateFolderNameException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
-				 	 e instanceof FolderPermissionException ||
 					 e instanceof NoSuchFolderException ||
 					 e instanceof SourceFileNameException) {
 
@@ -229,9 +231,13 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Add file entry
 
-			DLFileEntry entry = DLFileEntryServiceUtil.addFileEntry(
-				groupId, folderId, sourceFileName, title, description,
-				extraSettings, file, serviceContext);
+			DLFolderPermission.check(
+				themeDisplay.getPermissionChecker(), groupId, folderId,
+				ActionKeys.ADD_DOCUMENT);
+
+			DLFileEntry entry = DLFileEntryLocalServiceUtil.addFileEntry(
+				themeDisplay.getUserId(), groupId, folderId, sourceFileName,
+				title, description, extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
@@ -241,9 +247,14 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Update file entry
 
-			DLFileEntryServiceUtil.updateFileEntry(
-				groupId, folderId, newFolderId, name, sourceFileName, 
-				title, description, extraSettings, file, serviceContext);
+			DLFileEntryPermission.check(
+				themeDisplay.getPermissionChecker(), groupId, folderId, name,
+				ActionKeys.UPDATE);
+
+			DLFileEntryLocalServiceUtil.updateFileEntry(
+				themeDisplay.getUserId(), groupId, folderId, newFolderId, name,
+				sourceFileName, title, description, extraSettings, file,
+				serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

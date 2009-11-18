@@ -207,8 +207,6 @@ portletURL.setParameter("name", name);
 
 	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-	<liferay-ui:error exception="<%= FolderPermissionException.class %>" message="you-do-not-have-permission-to-create-a-document-into-the-selected-folder" />
-
 	<liferay-ui:asset-tags-error />
 
 	<aui:model-context bean="<%= fileEntry %>" model="<%= DLFileEntry.class %>" />

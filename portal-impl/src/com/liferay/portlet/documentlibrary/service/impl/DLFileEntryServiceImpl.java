@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.documentlibrary.FolderPermissionException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -288,14 +287,6 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		DLFileEntryPermission.check(
 			getPermissionChecker(), groupId, folderId, name, ActionKeys.UPDATE);
 
-		if (folderId != newFolderId && 
-			!DLFolderPermission.contains(
-				getPermissionChecker(), groupId, newFolderId,
-				ActionKeys.ADD_DOCUMENT)) {
-
-			throw new FolderPermissionException();
-		}
-
 		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
 
 		if (!hasLock) {
@@ -333,14 +324,6 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		DLFileEntryPermission.check(
 			getPermissionChecker(), groupId, folderId, name, ActionKeys.UPDATE);
-
-		if (folderId != newFolderId && 
-			!DLFolderPermission.contains(
-				getPermissionChecker(), groupId, newFolderId,
-				ActionKeys.ADD_DOCUMENT)) {
-
-			throw new FolderPermissionException();
-		}
 
 		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
 

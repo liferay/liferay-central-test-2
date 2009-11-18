@@ -36,7 +36,6 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.documentlibrary.FolderPermissionException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
@@ -343,14 +342,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		DLFolderPermission.check(
 			getPermissionChecker(), folder, ActionKeys.UPDATE);
-
-		DLFolder parentFolder = dlFolderLocalService.getFolder(parentFolderId);
-		
-		if (!DLFolderPermission.contains(
-			getPermissionChecker(), parentFolder, ActionKeys.ADD_FOLDER)) {
-
-			throw new FolderPermissionException();
-		}
 
 		boolean hasLock = lockLocalService.hasLock(
 			getUserId(), DLFolder.class.getName(), folderId);

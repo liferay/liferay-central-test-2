@@ -78,7 +78,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-folder-name" />
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-folder-name" />
 	<liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
-	<liferay-ui:error exception="<%= FolderPermissionException.class %>" message="you-do-not-have-permission-to-create-a-folder-into-the-selected-folder" />
 
 	<aui:model-context bean="<%= folder %>" model="<%= DLFolder.class %>" />
 
