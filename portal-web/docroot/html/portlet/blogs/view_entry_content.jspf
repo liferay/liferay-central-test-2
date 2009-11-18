@@ -22,7 +22,7 @@
  */
 %>
 
-<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
+<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && ((entry.getStatus() == StatusConstants.APPROVED) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
 	<div class="entry <%= (entry.getStatus() == StatusConstants.APPROVED) ? "" : "draft" %>">
 		<div class="entry-content">
 
