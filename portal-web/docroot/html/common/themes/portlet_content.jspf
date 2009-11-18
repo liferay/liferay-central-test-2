@@ -34,3 +34,12 @@
 		<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + tilesPortletContent %>" />
 	</c:otherwise>
 </c:choose>
+<c:if test='<%= ParamUtil.getBoolean(request, "wsrp") %>'>
+	<script type="text/javascript">
+		AUI().ready(
+			function() {
+				Liferay.Portlet.changeConfigurationURL('<portlet:namespace />', '<%= portletDisplay.getURLConfiguration() %>');
+			}
+		);	
+	</script>
+</c:if>
