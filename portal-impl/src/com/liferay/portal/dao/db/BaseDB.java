@@ -23,13 +23,17 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.db.Index;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.SimpleCounter;
 
@@ -44,8 +48,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 import javax.naming.NamingException;
 
@@ -112,6 +122,11 @@ public abstract class BaseDB implements DB {
 			"../sql/" + fileName + "/" + fileName + "-" + getServerName() +
 				".sql",
 			template);
+	}
+
+	@SuppressWarnings("unused")
+	public List<Index> getIndexes() throws SQLException {
+		return Collections.EMPTY_LIST;
 	}
 
 	public String getTemplateFalse() {
@@ -368,8 +383,77 @@ public abstract class BaseDB implements DB {
 		_supportsStringCaseSensitiveQuery = supportsStringCaseSensitiveQuery;
 	}
 
+	public void updateIndexes(
+			String tablesSQL, String indexesSQL, String indexesProperties,
+			boolean dropIndexes)
+		throws IOException, SQLException {
+
+		List<Index> indexes = getIndexes();
+
+		Set<String> validIndexNames = null;
+
+		if (dropIndexes) {
+			validIndexNames = dropIndexes(
+				tablesSQL, indexesSQL, indexesProperties, indexes);
+		}
+		else {
+			validIndexNames = new HashSet<String>();
+
+			for (Index index : indexes) {
+				String indexName = index.getIndexName().toUpperCase();
+
+				validIndexNames.add(indexName);
+			}
+		}
+
+		addIndexes(indexesSQL, validIndexNames);
+	}
+
 	protected BaseDB(String type) {
 		_type = type;
+	}
+
+	protected void addIndexes(String indexesSQL, Set<String> validIndexNames)
+		throws IOException {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Adding indexes");
+		}
+
+		DB db = DBFactoryUtil.getDB();
+
+		BufferedReader bufferedReader = new BufferedReader(new StringReader(
+			indexesSQL));
+
+		String sql = null;
+
+		while ((sql = bufferedReader.readLine()) != null) {
+			if (Validator.isNull(sql)) {
+				continue;
+			}
+
+			int y = sql.indexOf(" on ");
+			int x = sql.lastIndexOf(" ", y - 1);
+
+			String indexName = sql.substring(x + 1, y);
+
+			if (validIndexNames.contains(indexName)) {
+				continue;
+			}
+
+			if (_log.isInfoEnabled()) {
+				_log.info(sql);
+			}
+
+			try {
+				db.runSQL(sql);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
+				}
+			}
+		}
 	}
 
 	protected abstract String buildCreateFileContent(
@@ -489,6 +573,92 @@ public abstract class BaseDB implements DB {
 		}
 
 		return s;
+	}
+
+	protected Set<String> dropIndexes(
+			String tablesSQL, String indexesSQL, String indexesProperties,
+			List<Index> indexes)
+		throws IOException, SQLException {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Dropping stale indexes");
+		}
+
+		Set<String> validIndexNames = new HashSet<String>();
+
+		if (indexes.isEmpty()) {
+			return validIndexNames;
+		}
+
+		DB db = DBFactoryUtil.getDB();
+
+		String type = db.getType();
+
+		String tablesSQLLowerCase = tablesSQL.toLowerCase();
+		String indexesSQLLowerCase = indexesSQL.toLowerCase();
+
+		Properties indexesPropertiesObj = PropertiesUtil.load(
+			indexesProperties);
+
+		Enumeration<String> enu =
+			(Enumeration<String>)indexesPropertiesObj.propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String key = enu.nextElement();
+
+			String value = indexesPropertiesObj.getProperty(key);
+
+			indexesPropertiesObj.setProperty(key.toLowerCase(), value);
+		}
+
+		for (Index index : indexes) {
+			String indexNameUpperCase = index.getIndexName().toUpperCase();
+			String indexNameLowerCase = indexNameUpperCase.toLowerCase();
+			String tableName = index.getTableName();
+			String tableNameLowerCase = tableName.toLowerCase();
+			boolean unique = index.isUnique();
+
+			validIndexNames.add(indexNameUpperCase);
+
+			if (indexesPropertiesObj.containsKey(indexNameLowerCase)) {
+				if (unique &&
+					indexesSQLLowerCase.contains(
+						"create unique index " + indexNameLowerCase + " ")) {
+
+					continue;
+				}
+
+				if (!unique &&
+					indexesSQLLowerCase.contains(
+						"create index " + indexNameLowerCase + " ")) {
+
+					continue;
+				}
+			}
+			else {
+				if (!tablesSQLLowerCase.contains(
+						"create table " + tableNameLowerCase + " (")) {
+
+					continue;
+				}
+			}
+
+			validIndexNames.remove(indexNameUpperCase);
+
+			String sql = "drop index " + indexNameUpperCase;
+
+			if (type.equals(DB.TYPE_MYSQL) || type.equals(DB.TYPE_SQLSERVER)) {
+				sql += " on " + tableName;
+			}
+
+			if (_log.isInfoEnabled()) {
+				_log.info(sql);
+			}
+
+			db.runSQL(sql);
+		}
+
+		return validIndexNames;
 	}
 
 	protected String evaluateVM(String template) throws Exception {

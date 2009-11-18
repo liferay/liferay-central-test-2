@@ -25,6 +25,8 @@ package com.liferay.portal.tools;
 import com.liferay.portal.events.StartupHelperUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
@@ -105,7 +107,7 @@ public class DBUpgrader {
 
 		// Delete temporary images
 
-		StartupHelperUtil.deleteTempImages();
+		_deleteTempImages();
 
 		// Clear the caches only if the upgrade process was run
 
@@ -142,5 +144,24 @@ public class DBUpgrader {
 
 		CacheRegistry.setActive(true);
 	}
+
+	private static void _deleteTempImages() {
+		try {
+			DB db = DBFactoryUtil.getDB();
+
+			db.runSQL(_DELETE_TEMP_IMAGES_1);
+			db.runSQL(_DELETE_TEMP_IMAGES_2);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static final String _DELETE_TEMP_IMAGES_1 =
+		"delete from Image where imageId IN (SELECT articleImageId FROM " +
+			"JournalArticleImage where tempImage = TRUE)";
+
+	private static final String _DELETE_TEMP_IMAGES_2 =
+		"delete from JournalArticleImage where tempImage = TRUE";
 
 }

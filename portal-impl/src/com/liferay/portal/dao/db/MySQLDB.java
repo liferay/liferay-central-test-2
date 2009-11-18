@@ -23,6 +23,8 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.Index;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsValues;
@@ -30,6 +32,14 @@ import com.liferay.portal.util.PropsValues;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="MySQLDB.java.html"><b><i>View Source</i></b></a>
@@ -52,6 +62,44 @@ public class MySQLDB extends BaseDB {
 		template = StringUtil.replace(template, "\\'", "''");
 
 		return template;
+	}
+
+	public List<Index> getIndexes() throws SQLException {
+		List<Index> indexes = new ArrayList<Index>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select distinct(index_name), table_name, non_unique ");
+			sb.append("from information_schema.statistics where ");
+			sb.append("index_schema = database() and (index_name like ");
+			sb.append("'LIFERAY_%' or index_name like 'IX_%')");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String indexName = rs.getString("index_name");
+				String tableName = rs.getString("table_name");
+				boolean unique = !rs.getBoolean("non_unique");
+
+				indexes.add(new Index(indexName, tableName, unique));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return indexes;
 	}
 
 	public boolean isSupportsDateMilliseconds() {

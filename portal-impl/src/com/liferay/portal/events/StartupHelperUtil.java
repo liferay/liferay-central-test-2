@@ -34,10 +34,6 @@ import com.liferay.portal.verify.VerifyException;
  */
 public class StartupHelperUtil {
 
-	public static void deleteTempImages() {
-		getStartupHelper().deleteTempImages();
-	}
-
 	public static StartupHelper getStartupHelper() {
 		return _startupHelper;
 	}

@@ -23,12 +23,22 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.Index;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="OracleDB.java.html"><b><i>View Source</i></b></a>
@@ -112,6 +122,49 @@ public class OracleDB extends BaseDB {
 
 		FileUtil.write(
 			"../sql/" + fileName + "/" + fileName + "-oracle.sql", oracle);
+	}
+
+	public List<Index> getIndexes() throws SQLException {
+		List<Index> indexes = new ArrayList<Index>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select index_name, table_name, uniqueness from ");
+			sb.append("user_indexes where index_name like 'LIFERAY_%' or ");
+			sb.append("index_name like 'IX_%'");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String indexName = rs.getString("index_name");
+				String tableName = rs.getString("table_name");
+				String uniqueness = rs.getString("uniqueness");
+
+				boolean unique = true;
+
+				if (uniqueness.equalsIgnoreCase("NONUNIQUE")) {
+					unique = false;
+				}
+
+				indexes.add(new Index(indexName, tableName, unique));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return indexes;
 	}
 
 	protected OracleDB() {

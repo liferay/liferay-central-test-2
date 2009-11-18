@@ -23,12 +23,23 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.Index;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="SQLServerDB.java.html"><b><i>View Source</i></b></a>
@@ -55,6 +66,52 @@ public class SQLServerDB extends BaseDB {
 			new String[] {"\\", "''", "\"", "\n", "\r"});
 
 		return template;
+	}
+
+	public List<Index> getIndexes() throws SQLException {
+		List<Index> indexes = new ArrayList<Index>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			DatabaseMetaData metaData = con.getMetaData();
+
+			if (metaData.getDatabaseMajorVersion() <= _SQL_SERVER_2000) {
+				return null;
+			}
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select sys.tables.name as table_name, ");
+			sb.append("sys.indexes.name as index_name, is_unique from ");
+			sb.append("sys.indexes inner join sys.tables on ");
+			sb.append("sys.tables.object_id = sys.indexes.object_id where ");
+			sb.append("sys.indexes.name like 'LIFERAY_%' or sys.indexes.name ");
+			sb.append("like 'IX_%'");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String indexName = rs.getString("index_name");
+				String tableName = rs.getString("table_name");
+				boolean unique = !rs.getBoolean("is_unique");
+
+				indexes.add(new Index(indexName, tableName, unique));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return indexes;
 	}
 
 	public boolean isSupportsAlterColumnType() {
@@ -139,6 +196,8 @@ public class SQLServerDB extends BaseDB {
 		" nvarchar(2000)", " ntext", " nvarchar",
 		"  identity(1,1)", "go"
 	};
+
+	private static final int _SQL_SERVER_2000 = 8;
 
 	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
 

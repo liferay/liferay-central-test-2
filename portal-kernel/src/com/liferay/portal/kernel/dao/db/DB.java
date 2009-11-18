@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import java.util.List;
+
 import javax.naming.NamingException;
 
 /**
@@ -85,6 +87,8 @@ public interface DB {
 
 	public void buildSQLFile(String fileName) throws IOException;
 
+	public List<Index> getIndexes() throws SQLException;
+
 	public String getTemplateFalse();
 
 	public String getTemplateTrue();
@@ -125,5 +129,10 @@ public interface DB {
 
 	public void setSupportsStringCaseSensitiveQuery(
 		boolean supportsStringCaseSensitiveQuery);
+
+	public void updateIndexes(
+			String tablesSQL, String indexesSQL, String indexesProperties,
+			boolean dropStaleIndexes)
+		throws IOException, SQLException;
 
 }

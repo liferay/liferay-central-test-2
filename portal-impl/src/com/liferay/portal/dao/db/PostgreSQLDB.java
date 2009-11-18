@@ -23,12 +23,22 @@
 package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.Index;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="PostgreSQLDB.java.html"><b><i>View Source</i></b></a>
@@ -50,6 +60,49 @@ public class PostgreSQLDB extends BaseDB {
 		template = reword(template);
 
 		return template;
+	}
+
+	public List<Index> getIndexes() throws SQLException {
+		List<Index> indexes = new ArrayList<Index>();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select indexname, tablename, indexdef from pg_indexes ");
+			sb.append("where indexname like 'liferay_%' or indexname like ");
+			sb.append("'ix_%'");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String indexName = rs.getString("indexname");
+				String tableName = rs.getString("tablename");
+				String indexSQL = rs.getString("indexdef").toLowerCase().trim();
+
+				boolean unique = true;
+
+				if (indexSQL.startsWith("create index ")) {
+					unique = false;
+				}
+
+				indexes.add(new Index(indexName, tableName, unique));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return indexes;
 	}
 
 	protected PostgreSQLDB() {
