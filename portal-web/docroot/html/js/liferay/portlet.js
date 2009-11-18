@@ -151,10 +151,6 @@ Liferay.Portlet = {
 		);
 	},
 
-	changeConfigurationURL: function(portletId, href) {
-	    jQuery('#p_p_id' + portletId).find('.portlet-configuration-icon a:first,.portlet-configuration a:first').attr('href', href);
-	},
-	
 	close: function(portlet, skipConfirm, options) {
 		var instance = this;
 
