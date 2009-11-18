@@ -29,10 +29,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <script type="text/javascript">
-    function <portlet:namespace />saveConfiguration() {
-        document.<portlet:namespace />fm.<portlet:namespace />languageIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentLanguageIds);
+	function <portlet:namespace />saveConfiguration() {
+		document.<portlet:namespace />fm.<portlet:namespace />languageIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentLanguageIds);
 
-        submitForm(document.<portlet:namespace />fm);
+		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
