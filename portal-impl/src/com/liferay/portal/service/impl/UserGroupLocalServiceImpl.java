@@ -283,6 +283,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		groupPersistence.removeUserGroups(groupId, userGroupIds);
+		userGroupGroupRoleLocalService.deleteUserGroupGroupRoles(
+			userGroupIds, groupId);
 
 		PermissionCacheUtil.clearCache();
 	}
