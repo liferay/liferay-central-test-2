@@ -68,6 +68,16 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		}
 		%>
 
+		<input id="<%= randomNamespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
+		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
+
+		<div class="<%= inputPermissionsShowConfigure ? "aui-helper-hidden" : "" %>">
+			<label class="inline-label" for="<%= namespace %>inputPermissionsPublic"><input <%= inputPermissionsPublicChecked ? "checked" : "" %> id="<%= namespace %>inputPermissionsPublic" name="<%= namespace %>inputPermissionsPublic" onclick="<%= randomNamespace %>updatePermissionsGuestView()" type="checkbox" /> <liferay-ui:message key="public" /> <liferay-ui:icon-help message="public-means-that-all-users,-including-guests,-will-be-able-to-view-the-content" /></label>
+
+			<a href="javascript:<%= randomNamespace %>inputPermissionsConfigure();" id="<%= randomNamespace %>inputPermissionsConfigureLink" style="margin-left: 10px;"><liferay-ui:message key="configure" /> &raquo;</a>
+			<a class="aui-helper-hidden" href="javascript:<%= randomNamespace %>inputPermissionsDismiss();" id="<%= randomNamespace %>inputPermissionsDismissLink" style="margin-left: 10px;">&laquo; <liferay-ui:message key="dismiss" /></a>
+		</div>
+
 		<table class="lfr-table <%= inputPermissionsShowConfigure ? "" : "aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsTable">
 		<tr>
 			<th style="text-align: right;">
@@ -114,6 +124,12 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 			if (inputPermissionsShowMore || communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
 				showAction = true;
 			}
+
+			String guestOnClick = StringPool.BLANK;
+
+			if (action.equals(ActionKeys.VIEW)) {
+				guestOnClick = "onclick=" + "\"" + randomNamespace + "updatePermissionsPublic()\"";
+			}
 		%>
 
 			<tr class="<%= showAction ? "" : "aui-helper-hidden" %>" id="<%= randomNamespace %>inputPermissionsAction<%= action %>">
@@ -132,7 +148,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 				<td style="text-align: right;">
 					<label class="hidden-label" for="<%= namespace %>guestPermissions"><%= LanguageUtil.format(pageContext, "give-x-permission-to-guest-members", ResourceActionsUtil.getAction(pageContext, action)) %></label>
 
-					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> id="<%= namespace %>guestPermissions" name="<%= namespace %>guestPermissions" type="checkbox" value="<%= action %>">
+					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> id="<%= namespace %>guestPermissions" name="<%= namespace %>guestPermissions" <%= guestOnClick %> type="checkbox" value="<%= action %>">
 				</td>
 			</tr>
 
@@ -142,23 +158,45 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		</table>
 
-		<input id="<%= randomNamespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>" />
-		<input id="<%= randomNamespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>" />
-
-		<div class="<%= inputPermissionsShowConfigure ? "aui-helper-hidden" : "" %>" id="<%= randomNamespace %>inputPermissionsConfigureLink">
-			<label class="inline-label" for="<%= namespace %>inputPermissionsPublic"><input <%= inputPermissionsPublicChecked ? "checked" : "" %> id="<%= namespace %>inputPermissionsPublic" name="<%= namespace %>inputPermissionsPublic" type="checkbox" /> <liferay-ui:message key="public" /></label>
-
-			<a href="javascript:<%= randomNamespace %>inputPermissionsConfigure();" style="margin-left: 10px;"><liferay-ui:message key="configure" /> &raquo;</a>
-		</div>
-
 		<div class="<%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "aui-helper-hidden" : "" %>" id="<%= randomNamespace %>inputPermissionsMoreLink">
 			<a href="javascript:<%= randomNamespace %>inputPermissionsMore();"><liferay-ui:message key="more" /> &raquo;</a>
 		</div>
 
 		<script type="text/javascript">
+			function <%= randomNamespace %>inputPermissionsDismiss() {
+				<%= randomNamespace %>updatePermissionsGuestView();
+
+				AUI().one("#<%= randomNamespace %>inputPermissionsConfigureLink").show();
+				AUI().one("#<%= randomNamespace %>inputPermissionsTable").hide();
+				AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").hide();
+
+				<%
+				for (int i = 0; i < supportedActions.size(); i++) {
+					String action = (String)supportedActions.get(i);
+
+					if (communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
+				%>
+
+						AUI().one("#<%= randomNamespace %>inputPermissionsAction<%= action %>").hide();
+
+				<%
+					}
+				}
+				%>
+
+				AUI().one("#<%= randomNamespace %>inputPermissionsDismissLink").hide();
+				AUI().one("#<%= randomNamespace %>inputPermissionsShowConfigure").val("false");
+			}
+
 			function <%= randomNamespace %>inputPermissionsConfigure() {
+				<%= randomNamespace %>updatePermissionsGuestView();
+
+				AUI().one("#<%= randomNamespace %>inputPermissionsDismissLink").show();
 				AUI().one("#<%= randomNamespace %>inputPermissionsTable").show();
-				AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").show();
+
+				if (AUI().one("#<%= randomNamespace %>inputPermissionsShowMore").val() != "true") {
+					AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").show();
+				}
 
 				<%
 				for (int i = 0; i < supportedActions.size(); i++) {
@@ -196,6 +234,33 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 				AUI().one("#<%= randomNamespace %>inputPermissionsMoreLink").hide();
 				AUI().one("#<%= randomNamespace %>inputPermissionsShowMore").val("true");
+			}
+
+			function <%= randomNamespace %>updatePermissionsCommunity(value) {
+				var publicCheckbox = AUI().one("#<%= namespace %>inputPermissionsPublic");
+				var guestViewCheckbox = AUI().one('input[name="<%= namespace %>guestPermissions"][value="' + value + '"]');
+
+				if (guestViewCheckbox) {
+					guestViewCheckbox.set("checked", publicCheckbox.get("checked"));
+				}
+			}
+
+			function <%= randomNamespace %>updatePermissionsGuestView() {
+				var publicCheckbox = AUI().one("#<%= namespace %>inputPermissionsPublic");
+				var guestViewCheckbox = AUI().one('input[name="<%= namespace %>guestPermissions"][value="VIEW"]');
+
+				if (guestViewCheckbox) {
+					guestViewCheckbox.set("checked", publicCheckbox.get("checked"));
+				}
+			}
+
+			function <%= randomNamespace %>updatePermissionsPublic() {
+				var publicCheckbox = AUI().one("#<%= namespace %>inputPermissionsPublic");
+				var guestViewCheckbox = AUI().one('input[name="<%= namespace %>guestPermissions"][value="VIEW"]');
+
+				if (publicCheckbox) {
+					publicCheckbox.set("checked", guestViewCheckbox.get("checked"));
+				}
 			}
 		</script>
 	</c:when>
