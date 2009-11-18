@@ -219,6 +219,10 @@ public class PortletPreferencesLocalServiceImpl
 					ownerId, ownerType, plid, portletId);
 
 			if (portletPreferences == null) {
+				if ((portlet != null) && portlet.isUndeployedPortlet()) {
+					return new PortletPreferencesImpl();
+				}
+
 				portletPreferences =
 					portletPreferencesLocalService.addPortletPreferences(
 						companyId, ownerId, ownerType, plid, portletId, portlet,

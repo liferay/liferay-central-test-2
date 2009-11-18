@@ -49,7 +49,7 @@ try {
 			throw new NoSuchResourceException();
 		}
 	}
-	else {
+	else if (!portlet.isUndeployedPortlet()) {
 		ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
 	}
 }
@@ -960,7 +960,7 @@ else {
 					isStatic: '<%= staticVar %>',
 					namespacedId: 'p_p_id<%= UnicodeFormatter.toString(renderResponseImpl.getNamespace()) %>',
 					portletId: '<%= UnicodeFormatter.toString(portletDisplay.getId()) %>',
-					refreshURL: '<%= PortletURLUtil.getRefreshURL(request, themeDisplay) %>'
+					refreshURL: '<%= UnicodeFormatter.toString(PortletURLUtil.getRefreshURL(request, themeDisplay)) %>'
 				}
 			);
 		</script>
