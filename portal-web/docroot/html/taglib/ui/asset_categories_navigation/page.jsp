@@ -26,12 +26,26 @@
 
 <%
 boolean hidePortletWhenEmpty = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-navigation:hidePortletWhenEmpty"));
+long[] vocabularyIds = (long[])request.getAttribute("liferay-ui:asset-tags-navigation:vocabularyIds");
 
 long categoryId = ParamUtil.getLong(request, "categoryId");
 
 List<AssetVocabulary> vocabularies = null;
 
-vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
+if (vocabularyIds == null) {
+	vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
+}
+else {
+	vocabularies = new ArrayList<AssetVocabulary>();
+
+	for (long vocabularyId : vocabularyIds) {
+		try {
+			vocabularies.add(AssetVocabularyServiceUtil.getVocabulary(vocabularyId));
+		}
+		catch (NoSuchVocabularyException nsve) {
+		}
+	}
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 %>

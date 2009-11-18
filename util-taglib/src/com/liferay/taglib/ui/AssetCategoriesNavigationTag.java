@@ -43,12 +43,18 @@ public class AssetCategoriesNavigationTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:asset-tags-navigation:hidePortletWhenEmpty",
 			String.valueOf(_hidePortletWhenEmpty));
+		request.setAttribute(
+			"liferay-ui:asset-tags-navigation:vocabularyIds", _vocabularyIds);
 
 		return EVAL_BODY_BUFFERED;
 	}
 
 	public void setHidePortletWhenEmpty(boolean hidePortletWhenEmpty) {
 		_hidePortletWhenEmpty = hidePortletWhenEmpty;
+	}
+
+	public void setVocabularyIds(long[] vocabularyIds) {
+		_vocabularyIds = vocabularyIds;
 	}
 
 	protected String getDefaultPage() {
@@ -59,5 +65,6 @@ public class AssetCategoriesNavigationTag extends IncludeTag {
 		"/html/taglib/ui/asset_categories_navigation/page.jsp";
 
 	private boolean _hidePortletWhenEmpty;
+	private long[] _vocabularyIds;
 
 }

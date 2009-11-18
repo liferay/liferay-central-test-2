@@ -24,6 +24,16 @@
 
 <%@ include file="/html/portlet/asset_categories_navigation/init.jsp" %>
 
-<liferay-ui:asset-categories-navigation
-	hidePortletWhenEmpty="<%= true %>"
-/>
+<c:choose>
+	<c:when test="<%= allAssetVocabularies %>">
+		<liferay-ui:asset-categories-navigation
+			hidePortletWhenEmpty="<%= true %>"
+				/>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:asset-categories-navigation
+			hidePortletWhenEmpty="<%= true %>"
+			vocabularyIds="<%= assetVocabularyIds %>"
+		/>
+	</c:otherwise>
+</c:choose>

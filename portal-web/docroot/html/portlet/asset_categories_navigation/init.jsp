@@ -24,6 +24,10 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil" %>
+
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
 
@@ -31,5 +35,21 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+}
+
+List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(scopeGroupId);
+
+long[] availableAssetVocabularyIds = new long[vocabularies.size()];
+
+for (int i = 0; i < vocabularies.size(); i++) {
+	availableAssetVocabularyIds[i] = vocabularies.get(i).getVocabularyId();
+}
+
+boolean allAssetVocabularies = GetterUtil.getBoolean(preferences.getValue("all-asset-vocabularies", Boolean.TRUE.toString()));
+
+long[] assetVocabularyIds = availableAssetVocabularyIds;
+
+if (!allAssetVocabularies && preferences.getValues("asset-vocabulary-ids", null) != null) {
+	assetVocabularyIds = GetterUtil.getLongValues(preferences.getValues("asset-vocabulary-ids", null));
 }
 %>
