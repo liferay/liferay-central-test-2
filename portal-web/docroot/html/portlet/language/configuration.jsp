@@ -24,16 +24,19 @@
 
 <%@ include file="/html/portlet/language/init.jsp" %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="languages" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />languageIds" type="hidden" value="" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+
+	<aui:fieldset>
+		<aui:legend label="languages" />
+		<aui:input name="languageIds" type="hidden" />
 
 		<%
 		Set availableLanguageIdsSet = SetUtil.fromArray(availableLanguageIds);
@@ -77,30 +80,20 @@
 			leftList="<%= leftList %>"
 			rightList="<%= rightList %>"
 		/>
-	</td>
-</tr>
-</table>
+	</aui:fieldset>
 
-<br />
+	<aui:fieldset>
+		<aui:select name="displayStyle">
+			<aui:option label="icon" selected="<%= displayStyle == LanguageTag.LIST_ICON %>" value="<%= LanguageTag.LIST_ICON %>" />
+			<aui:option label="long-text" selected="<%= displayStyle == LanguageTag.LIST_LONG_TEXT %>" value="<%= LanguageTag.LIST_LONG_TEXT %>" />
+			<aui:option label="short-text" selected="<%= displayStyle == LanguageTag.LIST_SHORT_TEXT %>" value="<%= LanguageTag.LIST_SHORT_TEXT %>" />
+			<aui:option label="select-box" selected="<%= displayStyle == LanguageTag.SELECT_BOX %>" value="<%= LanguageTag.SELECT_BOX %>" />
+		</aui:select>
+	</aui:fieldset>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="display-style" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />displayStyle">
-			<option <%= (displayStyle == LanguageTag.LIST_ICON) ? "selected" : "" %> value="<%= LanguageTag.LIST_ICON %>"><liferay-ui:message key="icon" /></option>
-			<option <%= (displayStyle == LanguageTag.LIST_LONG_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_LONG_TEXT %>"><liferay-ui:message key="long-text" /></option>
-			<option <%= (displayStyle == LanguageTag.LIST_SHORT_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_SHORT_TEXT %>"><liferay-ui:message key="short-text" /></option>
-			<option <%= (displayStyle == LanguageTag.SELECT_BOX) ? "selected" : "" %> value="<%= LanguageTag.SELECT_BOX %>"><liferay-ui:message key="select-box" /></option>
-		</select>
-	</td>
-</tr>
-</table>
+	<aui:button-row>
+		<aui:button name="saveButton" onClick='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "languageIds.value = Liferay.Util.listSelect(document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "currentLanguageIds); submitForm(document." + renderResponse.getNamespace() + "fm);" %>' type="button" value="save" />
 
-<br />
-
-<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />languageIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentLanguageIds); submitForm(document.<portlet:namespace />fm);" />
-
-</form>
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
