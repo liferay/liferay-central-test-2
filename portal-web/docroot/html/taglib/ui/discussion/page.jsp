@@ -112,20 +112,31 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			}
 
 			AUI().ready(
-				function() {
-					var form = jQuery(document.<%= formName %>);
+				'input-handler',
+				function(A) {
+					var form = A.one(document.<%= formName %>);
 
-					form.find('textarea').bind(
-						'blur change click focus input keyup',
-						function(event) {
-							var id = this.id;
+					if (form) {
+						var textareas = form.all('textarea');
 
-							var buttonId = id.replace(/Body/, 'Button');
-							var currentValue = jQuery.trim(this.value);
+						if (textareas) {
+							textareas.on(
+								'input',
+								function(event) {
+									var textarea = event.currentTarget;
+									var currentValue = A.Lang.trim(textarea.val());
 
-							jQuery('#' + buttonId).attr('disabled', !currentValue.length);
+									var id = textarea.get('id');
+									var buttonId = id.replace(/Body/, 'Button');
+									var button = A.one('#' + buttonId);
+
+									if (button) {
+										button.set('disabled', !currentValue.length);
+									}
+								}
+							);
 						}
-					);
+					}
 				}
 			);
 		</script>
