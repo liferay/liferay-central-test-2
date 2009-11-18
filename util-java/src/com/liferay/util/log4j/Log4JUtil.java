@@ -32,7 +32,6 @@ import java.util.Set;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.helpers.NullEnumeration;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import org.dom4j.Document;
@@ -51,51 +50,43 @@ public class Log4JUtil {
 			return;
 		}
 
-		if (Logger.getRootLogger().getAllAppenders() instanceof
-				NullEnumeration) {
+		DOMConfigurator.configure(url);
 
-			DOMConfigurator.configure(url);
+		Set<String> currentLoggerNames = new HashSet<String>();
+
+		Enumeration<Logger> enu = LogManager.getCurrentLoggers();
+
+		while (enu.hasMoreElements()) {
+			Logger logger = enu.nextElement();
+
+			currentLoggerNames.add(logger.getName());
 		}
-		else {
-			Set<String> currentLoggerNames = new HashSet<String>();
 
-			Enumeration<Logger> enu = LogManager.getCurrentLoggers();
+		try {
+			SAXReader reader = new SAXReader();
 
-			while (enu.hasMoreElements()) {
-				Logger logger = enu.nextElement();
+			Document doc = reader.read(url);
 
-				currentLoggerNames.add(logger.getName());
+			Element root = doc.getRootElement();
+
+			Iterator<Element> itr = root.elements("category").iterator();
+
+			while (itr.hasNext()) {
+				Element category = itr.next();
+
+				String name = category.attributeValue("name");
+				String priority =
+					category.element("priority").attributeValue("value");
+
+				setLevel(name, priority);
 			}
-
-			try {
-				SAXReader reader = new SAXReader();
-
-				Document doc = reader.read(url);
-
-				Element root = doc.getRootElement();
-
-				Iterator<Element> itr = root.elements("category").iterator();
-
-				while (itr.hasNext()) {
-					Element category = itr.next();
-
-					String name = category.attributeValue("name");
-					String priority =
-						category.element("priority").attributeValue("value");
-
-					setLevel(name, priority);
-				}
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public static void setLevel(String name, String priority) {
-		Logger logger = Logger.getLogger(name);
-
-		logger.setLevel(Level.toLevel(priority));
 
 		java.util.logging.Logger jdkLogger = java.util.logging.Logger.getLogger(
 			name);
