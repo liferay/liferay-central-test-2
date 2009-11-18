@@ -42,6 +42,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.DuplicateFolderNameException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FileShortcutPermissionException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FolderNameException" %>
+<%@ page import="com.liferay.portlet.documentlibrary.FolderPermissionException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.NoSuchFileEntryException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.NoSuchFolderException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
