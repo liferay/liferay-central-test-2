@@ -243,7 +243,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 				status = "new";
 			}
 			else {
-				status = StatusConstants.toLabel(WorkflowInstanceLinkLocalServiceUtil.getStatus(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey()));
+				status = WorkflowInstanceLinkLocalServiceUtil.getStatus(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey());
 
 				if (status.equals(StatusConstants.LABEL_ANY)) {
 					if (article.isExpired()) {

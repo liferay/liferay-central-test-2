@@ -92,7 +92,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		}
 	}
 
-	public int getStatus(
+	public String getStatus(
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -104,11 +104,10 @@ public class WorkflowInstanceLinkLocalServiceImpl
 				WorkflowInstanceManagerUtil.getWorkflowInstance(
 					workflowInstanceLink.getWorkflowInstanceId());
 
-			return StatusConstants.fromLabel(
-				workflowInstance.getCurrentNodeName());
+			return workflowInstance.getCurrentNodeName();
 		}
 		catch (NoSuchWorkflowInstanceLinkException nswile) {
-			return StatusConstants.ANY;
+			return StatusConstants.LABEL_ANY;
 		}
 	}
 

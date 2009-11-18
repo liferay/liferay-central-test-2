@@ -162,7 +162,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Status
 
-				String status = StatusConstants.toLabel(WorkflowInstanceLinkLocalServiceUtil.getStatus(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey()));
+				String status = WorkflowInstanceLinkLocalServiceUtil.getStatus(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getResourcePrimKey());
 
 				if (status.equals(StatusConstants.LABEL_ANY)) {
 					if (article.isExpired()) {
