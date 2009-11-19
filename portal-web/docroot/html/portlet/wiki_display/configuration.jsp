@@ -33,8 +33,8 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 %>
 
 <script type="text/javascript">
-    function <portlet:namespace />saveConfiguration() {
-        submitForm(document.<portlet:namespace />fm);
+	function <portlet:namespace />saveConfiguration() {
+		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
