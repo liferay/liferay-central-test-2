@@ -835,6 +835,7 @@ public abstract class BaseDB implements DB {
 	}
 
 	protected String removeNull(String content) {
+		content = StringUtil.replace(content, " is null", " IS NULL");
 		content = StringUtil.replace(content, " not null", " not_null");
 		content = StringUtil.replace(content, " null", "");
 		content = StringUtil.replace(content, " not_null", " not null");
