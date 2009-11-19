@@ -570,6 +570,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 																if (tagsSelector) {
 																	tagsSelector.show();
 																}
+
 																if (categoriesSelector) {
 																	categoriesSelector.hide();
 																}
@@ -578,6 +579,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 																if (tagsSelector) {
 																	tagsSelector.hide();
 																}
+
 																if (categoriesSelector) {
 																	categoriesSelector.show();
 																}
