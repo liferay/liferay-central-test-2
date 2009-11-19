@@ -27,7 +27,6 @@ import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -164,13 +163,13 @@ public class MainServlet extends ActionServlet {
 
 			startupAction.run(null);
 		}
-		catch (RuntimeException re) {
-			ShutdownUtil.shutdown(0);
+		catch (Exception e) {
+			_log.error(e, e);
 
-			throw new ServletException(re);
-		}
-		catch (ActionException ae) {
-			_log.error(ae, ae);
+			System.out.println(
+				"Stopping the server due to unexpected startup errors");
+
+			System.exit(0);
 		}
 
 		// Velocity
