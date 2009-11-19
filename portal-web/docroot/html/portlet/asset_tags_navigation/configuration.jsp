@@ -31,8 +31,8 @@ List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFa
 %>
 
 <script type="text/javascript">
-    function <portlet:namespace />saveConfiguration() {
-        submitForm(document.<portlet:namespace />fm);
+	function <portlet:namespace />saveConfiguration() {
+		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
