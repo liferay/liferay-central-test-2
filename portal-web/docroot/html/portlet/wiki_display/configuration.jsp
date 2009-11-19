@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 nodeId = ParamUtil.getLong(request, "nodeId", nodeId);
 
-List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
+List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 %>
 
 <script type="text/javascript">
@@ -49,25 +49,25 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 	<aui:fieldset>
 		<c:choose>
 			<c:when test="<%= !nodes.isEmpty() %>">
-					<aui:select label="node" name="nodeId">
-						<aui:option value="" />
+				<aui:select label="node" name="nodeId">
+					<aui:option value="" />
 
-						<%
-						for (int i = 0; i < nodes.size(); i++) {
-							WikiNode node = (WikiNode)nodes.get(i);
-						%>
+					<%
+					for (WikiNode node : nodes) {
+						node = node.toEscapedModel();
+					%>
 
-							<aui:option label="<%= node.getName() %>" selected="<%= nodeId == node.getNodeId() %>" value="<%= node.getNodeId() %>" />
+						<aui:option label="<%= node.getName() %>" selected="<%= nodeId == node.getNodeId() %>" value="<%= node.getNodeId() %>" />
 
-						<%
-						}
-						%>
+					<%
+					}
+					%>
 
-					</aui:select>
+				</aui:select>
 			</c:when>
 			<c:otherwise>
 				<div class="portlet-msg-info">
-					<liferay-ui:message key="there-are-no-available-wiki-nodes-for-selection" />
+					<liferay-ui:message key="there-are-no-available-nodes-for-selection" />
 				</div>
 			</c:otherwise>
 		</c:choose>

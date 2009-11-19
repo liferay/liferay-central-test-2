@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 questionId = ParamUtil.getLong(request, "questionId", questionId);
 
-List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
+List<PollsQuestion> questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 %>
 
 <script type="text/javascript">
@@ -53,9 +53,7 @@ List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 					<aui:option value="" />
 
 					<%
-					for (int i = 0; i < questions.size(); i++) {
-						PollsQuestion question = (PollsQuestion)questions.get(i);
-
+					for (PollsQuestion question : questions) {
 						question = question.toEscapedModel();
 					%>
 

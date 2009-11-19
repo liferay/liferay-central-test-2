@@ -202,8 +202,8 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 			<liferay-ui:search-container
 				delta="<%= fileEntriesPerPage %>"
-				iteratorURL="<%= portletURL %>"
 				emptyResultsMessage="there-are-no-documents"
+				iteratorURL="<%= portletURL %>"
 			>
 				<liferay-ui:search-container-results
 					results="<%= DLFileEntryLocalServiceUtil.getGroupFileEntries(scopeGroupId, groupFileEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"

@@ -26,8 +26,8 @@
 	curParam="cur2"
 	delta="<%= fileEntriesPerPage %>"
 	headerNames="<%= StringUtil.merge(fileEntryColumns) %>"
-	iteratorURL="<%= portletURL %>"
 	emptyResultsMessage="there-are-no-documents-in-this-folder"
+	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results>
 
