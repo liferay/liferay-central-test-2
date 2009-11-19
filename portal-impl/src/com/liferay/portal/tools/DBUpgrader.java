@@ -145,16 +145,11 @@ public class DBUpgrader {
 		CacheRegistry.setActive(true);
 	}
 
-	private static void _deleteTempImages() {
-		try {
-			DB db = DBFactoryUtil.getDB();
+	private static void _deleteTempImages() throws Exception {
+		DB db = DBFactoryUtil.getDB();
 
-			db.runSQL(_DELETE_TEMP_IMAGES_1);
-			db.runSQL(_DELETE_TEMP_IMAGES_2);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		db.runSQL(_DELETE_TEMP_IMAGES_1);
+		db.runSQL(_DELETE_TEMP_IMAGES_2);
 	}
 
 	private static final String _DELETE_TEMP_IMAGES_1 =

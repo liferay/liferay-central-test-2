@@ -24,7 +24,6 @@ package com.liferay.portal.dao.db;
 
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactory;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
@@ -67,7 +66,7 @@ public class DBFactoryImpl implements DBFactory {
 				Dialect dialect = (Dialect)Class.forName(
 					PropsValues.HIBERNATE_DIALECT).newInstance();
 
-				DBFactoryUtil.setDB(dialect);
+				setDB(dialect);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -189,12 +188,36 @@ public class DBFactoryImpl implements DBFactory {
 	public void setDB(Object dialect) {
 		if (_db == null) {
 			_db = getDB(dialect);
+
+			if (_db == null) {
+				_log.error(
+					"No DB implementation exists for " +
+						dialect.getClass().getName());
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Using DB implementation " + _db.getClass().getName() +
+							" for " + dialect.getClass().getName());
+				}
+			}
 		}
 	}
 
 	public void setDB(String type) {
 		if (_db == null) {
 			_db = getDB(type);
+
+			if (_db == null) {
+				_log.error("No DB implementation exists for " + type);
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Using DB implementation " + _db.getClass().getName() +
+							" for " + type);
+				}
+			}
 		}
 	}
 
