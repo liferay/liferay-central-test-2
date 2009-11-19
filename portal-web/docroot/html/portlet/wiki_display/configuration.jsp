@@ -47,21 +47,30 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 	<liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-node-could-not-be-found" />
 
 	<aui:fieldset>
-		<aui:select label="node" name="nodeId">
-			<aui:option value="" />
+		<c:choose>
+			<c:when test="<%= !nodes.isEmpty() %>">
+					<aui:select label="node" name="nodeId">
+						<aui:option value="" />
 
-			<%
-			for (int i = 0; i < nodes.size(); i++) {
-				WikiNode node = (WikiNode)nodes.get(i);
-			%>
+						<%
+						for (int i = 0; i < nodes.size(); i++) {
+							WikiNode node = (WikiNode)nodes.get(i);
+						%>
 
-				<aui:option label="<%= node.getName() %>" selected="<%= nodeId == node.getNodeId() %>" value="<%= node.getNodeId() %>" />
+							<aui:option label="<%= node.getName() %>" selected="<%= nodeId == node.getNodeId() %>" value="<%= node.getNodeId() %>" />
 
-			<%
-			}
-			%>
+						<%
+						}
+						%>
 
-		</aui:select>
+					</aui:select>
+			</c:when>
+			<c:otherwise>
+				<div class="portlet-msg-info">
+					<liferay-ui:message key="there-are-no-available-wiki-nodes-for-selection" />
+				</div>
+			</c:otherwise>
+		</c:choose>
 
 		<c:choose>
 			<c:when test="<%= nodeId > 0 %>">
@@ -91,7 +100,7 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="save" />
+		<aui:button disabled="<%= nodes.isEmpty() %>" name="saveButton" type="submit" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>

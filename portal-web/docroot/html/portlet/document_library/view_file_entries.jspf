@@ -27,6 +27,7 @@
 	delta="<%= fileEntriesPerPage %>"
 	headerNames="<%= StringUtil.merge(fileEntryColumns) %>"
 	iteratorURL="<%= portletURL %>"
+	emptyResultsMessage="there-are-no-documents-in-this-folder"
 >
 	<liferay-ui:search-container-results>
 
