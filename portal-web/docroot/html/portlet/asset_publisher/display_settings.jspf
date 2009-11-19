@@ -274,41 +274,58 @@
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			var selectDisplayStyle = jQuery('#<portlet:namespace />displayStyle');
+		function(A) {
+			var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
 
 			function showHiddenFields () {
-				var hiddenFields = jQuery('.hidden-field');
-				var abstractLength = jQuery('#abstractLength');
-				var showAssetTitle = jQuery('#showAssetTitle');
-				var showContextLink = jQuery('#showContextLink');
-				var assetLinkBehaviour = jQuery('#assetLinkBehaviour');
-				var selectDisplayStyle = jQuery('#<portlet:namespace />displayStyle');
+				var abstractLength = A.one('#abstractLength');
+				var assetLinkBehaviour = A.one('#assetLinkBehaviour');
+				var hiddenFields = A.all('.hidden-field');
+				var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
+				var showAssetTitle = A.one('#showAssetTitle');
+				var showContextLink = A.one('#showContextLink');
 
-				hiddenFields.hide();
+				if (hiddenFields) {
+					hiddenFields.hide();
+				}
 
-				if (selectDisplayStyle.val() == 'full-content') {
-					showAssetTitle.show();
-					showContextLink.show();
-				}
-				else if (selectDisplayStyle.val() == 'abstracts') {
-					abstractLength.show();
-					assetLinkBehaviour.show();
-				}
-				else {
-					assetLinkBehaviour.show();
+				if (selectDisplayStyle) {
+					if (selectDisplayStyle.val() == 'full-content') {
+						if (showAssetTitle) {
+							showAssetTitle.show();
+						}
+						if (showContextLink) {
+							showContextLink.show();
+						}
+					}
+					else if (selectDisplayStyle.val() == 'abstracts') {
+						if (abstractLength) {
+							abstractLength.show();
+						}
+						if (assetLinkBehaviour) {
+							assetLinkBehaviour.show();
+						}
+					}
+					else {
+						if (assetLinkBehaviour) {
+							assetLinkBehaviour.show();
+						}
+					}
 				}
 			}
 
 			showHiddenFields();
 
-			selectDisplayStyle.change(
-				function(event) {
-					showHiddenFields();
-				}
-			);
+			if (selectDisplayStyle) {
+				selectDisplayStyle.on(
+					'change',
+					function(event) {
+						showHiddenFields();
+					}
+				);
 
-			Liferay.Util.focusFormField(selectDisplayStyle);
+				Liferay.Util.focusFormField(selectDisplayStyle);
+			}
 		}
 	);
 </script>

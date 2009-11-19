@@ -541,7 +541,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							AUI().ready(
 								'liferay-auto-fields',
 								'liferay-categories-selector',
-								function () {
+								function (A) {
 									Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 									Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 
@@ -553,41 +553,51 @@ configurationActionURL.setParameter("portletResource", portletResource);
 									).render();
 
 									var initQueryNameFields = function(selectFields) {
-										selectFields = selectFields || jQuery('.asset-query-name');
+										selectFields = selectFields || A.all('.asset-query-name');
 
-										selectFields.each(
-											function() {
-												var select = jQuery(this);
-												var row = jQuery(this.parentNode.parentNode);
+										if (selectFields) {
+											selectFields.each(
+												function(select) {
+													var row = select.get('parentNode').get('parentNode');
 
-												select.change(
-													function(event) {
-														var tagsSelector = row.find('.tags-selector');
-														var categoriesSelector = row.find('.categories-selector');
+													select.on(
+														'change',
+														function(event) {
+															var tagsSelector = row.all('.tags-selector');
+															var categoriesSelector = row.all('.categories-selector');
 
-														if (select.val() == 'assetTags') {
-															tagsSelector.show();
-															categoriesSelector.hide();
+															if (select.val() == 'assetTags') {
+																if (tagsSelector) {
+																	tagsSelector.show();
+																}
+																if (categoriesSelector) {
+																	categoriesSelector.hide();
+																}
+															}
+															else {
+																if (tagsSelector) {
+																	tagsSelector.hide();
+																}
+																if (categoriesSelector) {
+																	categoriesSelector.show();
+																}
+															}
 														}
-														else {
-															tagsSelector.hide();
-															categoriesSelector.show();
-														}
-													}
-												);
-											}
-										);
+													);
+												}
+											);
+										}
 									};
 
 									autoFields.on(
 										'autorow:clone',
 										function(event) {
-											var row = jQuery(event.row.get('contentBox').getDOM());
+											var row = event.row.get('contentBox');
 											var guid = event.guid;
 
-											initQueryNameFields(row.find('.asset-query-name'));
+											initQueryNameFields(row.all('.asset-query-name'));
 
-											var firstCategoriesInput = row.find('.categories-selector > input:visible:first');
+											var firstCategoriesInput = row.one('.categories-selector > input');
 
 											var categoriesRandomNamespace = (firstCategoriesInput.attr('name') || firstCategoriesInput.attr('id') || '').substring(0,5);
 
@@ -600,19 +610,22 @@ configurationActionURL.setParameter("portletResource", portletResource);
 												}
 											);
 
-											var firstTagsInput = row.find('.tags-selector > input:visible:first');
-											var tagsRandomNamespace = (firstTagsInput.attr('name') || firstTagsInput.attr('id') || '').substring(0, 5);
+											var firstTagsInput = row.one('.tags-selector > input');
 
-											new Liferay.AssetTagsSelector(
-												{
-													instanceVar: tagsRandomNamespace,
-													seed: guid,
-													hiddenInput:  '<portlet:namespace/>queryTagNames',
-													summarySpan: tagsRandomNamespace + 'assetTagsSummary',
-													textInput: tagsRandomNamespace + 'assetTagNames',
-													focus: false
-												}
-											);
+											if (firstTagsInput) {
+												var tagsRandomNamespace = (firstTagsInput.attr('name') || firstTagsInput.attr('id') || '').substring(0, 5);
+
+												new Liferay.AssetTagsSelector(
+													{
+														instanceVar: tagsRandomNamespace,
+														seed: guid,
+														hiddenInput:  '<portlet:namespace/>queryTagNames',
+														summarySpan: tagsRandomNamespace + 'assetTagsSummary',
+														textInput: tagsRandomNamespace + 'assetTagNames',
+														focus: false
+													}
+												);
+											}
 										}
 									);
 
