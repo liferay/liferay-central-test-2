@@ -365,6 +365,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		userGroupRoleLocalService.deleteUserGroupRolesByGroupId(groupId);
 
+		// User group roles
+
+		userGroupGroupRoleLocalService.deleteUserGroupGroupRolesByGroupId(
+			groupId);
+
 		// Membership requests
 
 		membershipRequestLocalService.deleteMembershipRequests(

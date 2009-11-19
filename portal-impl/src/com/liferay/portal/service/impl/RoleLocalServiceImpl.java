@@ -197,6 +197,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 			userGroupRoleLocalService.deleteUserGroupRolesByRoleId(
 				role.getRoleId());
+
+			userGroupGroupRoleLocalService.deleteUserGroupGroupRolesByRoleId(
+				role.getRoleId());
 		}
 
 		// Role
