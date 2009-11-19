@@ -105,9 +105,6 @@ public interface PortletLocalService {
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactories();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplays();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

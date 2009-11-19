@@ -118,10 +118,6 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		_portletLocalService.destroyPortlet(portlet);
 	}
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactories() {
-		return _portletLocalService.getAssetRendererFactories();
-	}
-
 	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplays() {
 		return _portletLocalService.getCustomAttributesDisplays();
 	}

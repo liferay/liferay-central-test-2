@@ -31,14 +31,12 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
-import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetTagProperty;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -47,10 +45,8 @@ import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.PortletURL;
@@ -133,22 +129,6 @@ public class AssetUtil {
 		sb.append(ListUtil.toString(categories, "name"));
 
 		return sb.toString();
-	}
-
-	public static AssetRendererFactory getAssetRendererFactoryByClassName(
-		String className) {
-
-		return _instance._assetRendererFactoriesMapByClassName.get(className);
-	}
-
-	public static AssetRendererFactory getAssetRendererFactoryByType(
-		String type) {
-
-		return _instance._assetRendererFactoriesMapByType.get(type);
-	}
-
-	public static List<AssetRendererFactory> getAssetRendererFactories() {
-		return PortletLocalServiceUtil.getAssetRendererFactories();
 	}
 
 	public static Set<String> getLayoutTagNames(HttpServletRequest request) {
@@ -275,32 +255,6 @@ public class AssetUtil {
 		}
 	}
 
-	private AssetUtil() {
-		_assetRendererFactoriesMapByClassName =
-			new HashMap<String, AssetRendererFactory>();
-		_assetRendererFactoriesMapByType =
-			new HashMap<String, AssetRendererFactory>();
-
-		List<AssetRendererFactory> assetRendererFactories =
-			getAssetRendererFactories();
-
-		for (AssetRendererFactory assetRendererFactory :
-				assetRendererFactories) {
-
-			_assetRendererFactoriesMapByClassName.put(
-				assetRendererFactory.getClassName(), assetRendererFactory);
-			_assetRendererFactoriesMapByType.put(
-				assetRendererFactory.getType(), assetRendererFactory);
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(AssetUtil.class);
-
-	private static AssetUtil _instance = new AssetUtil();
-
-	private Map<String, AssetRendererFactory>
-		_assetRendererFactoriesMapByClassName;
-	private Map<String, AssetRendererFactory>
-		_assetRendererFactoriesMapByType;
 
 }

@@ -44,7 +44,7 @@ String className = StringPool.BLANK;
 long classPK = 0;
 
 try {
-	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByType(type);
+	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByType(type);
 	AssetRenderer assetRenderer = null;
 
 	if (Validator.isNotNull(urlTitle)) {

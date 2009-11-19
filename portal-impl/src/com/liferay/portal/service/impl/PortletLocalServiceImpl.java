@@ -68,7 +68,6 @@ import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletQNameUtil;
-import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.expando.model.CustomAttributesDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -165,32 +164,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		_clearCaches();
-	}
-
-	public List<AssetRendererFactory> getAssetRendererFactories() {
-		List<AssetRendererFactory> assetRendererFactories =
-			new ArrayList<AssetRendererFactory>(
-				_assetRendererFactoryPortlets.size());
-
-		Iterator<Map.Entry<String, Portlet>> itr =
-			_assetRendererFactoryPortlets.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Portlet> entry = itr.next();
-
-			Portlet portlet = entry.getValue();
-
-			List<AssetRendererFactory> portletAssetRendererFactories =
-				portlet.getAssetRendererFactoryInstances();
-
-			if ((portletAssetRendererFactories != null) &&
-				(!portletAssetRendererFactories.isEmpty())) {
-
-				assetRendererFactories.addAll(portletAssetRendererFactories);
-			}
-		}
-
-		return assetRendererFactories;
 	}
 
 	public List<CustomAttributesDisplay> getCustomAttributesDisplays() {
@@ -467,7 +440,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		_portletsPool.clear();
 		_companyPortletsPool.clear();
 		_portletIdsByStrutsPath.clear();
-		_assetRendererFactoryPortlets .clear();
 		_friendlyURLMapperPortlets.clear();
 
 		Map<String, Portlet> portletsPool = _getPortletsPool();
@@ -1150,13 +1122,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 					assetRendererFactoryClasses.add(
 						assetRendererFactoryClassEl.getText());
-				}
-
-				if (portletModel.getAssetRendererFactoryClasses().isEmpty()) {
-					_assetRendererFactoryPortlets.remove(portletId);
-				}
-				else {
-					_assetRendererFactoryPortlets.put(portletId, portletModel);
 				}
 
 				List<String> customAttributesDisplayClasses =
@@ -1944,8 +1909,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		new ConcurrentHashMap<Long, Map<String, Portlet>>();
 	private static Map<String, String> _portletIdsByStrutsPath =
 		new ConcurrentHashMap<String, String>();
-	private static Map<String, Portlet> _assetRendererFactoryPortlets =
-		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _customAttributesDisplayPortlets =
 		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =

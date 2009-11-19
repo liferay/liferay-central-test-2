@@ -48,6 +48,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -57,7 +58,6 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.base.AssetEntryLocalServiceBaseImpl;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.portlet.asset.util.AssetEntryValidator;
-import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -215,7 +215,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
 
 				for (AssetRendererFactory rendererFactory :
-						AssetUtil.getAssetRendererFactories()) {
+						AssetRendererFactoryRegistryUtil.
+							getAssetRendererFactories()) {
 
 					TermQuery termQuery = TermQueryFactoryUtil.create(
 						Field.PORTLET_ID, rendererFactory.getPortletId());

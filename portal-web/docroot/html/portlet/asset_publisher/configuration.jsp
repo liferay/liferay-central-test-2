@@ -31,7 +31,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
 
-AssetRendererFactory rendererFactory = AssetUtil.getAssetRendererFactoryByClassName(typeSelection);
+AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
 
 PortletURL configurationRenderURL = renderResponse.createRenderURL();
 
@@ -174,7 +174,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<option value=""><liferay-ui:message key="select-existing" /></option>
 
 							<%
-							for (AssetRendererFactory curRendererFactory : AssetUtil.getAssetRendererFactories()) {
+							for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
 								if (curRendererFactory.isSelectable()) {
 								%>
 

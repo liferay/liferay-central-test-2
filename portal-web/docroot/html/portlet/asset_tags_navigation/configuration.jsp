@@ -27,7 +27,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFactories();
+List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
 %>
 
 <script type="text/javascript">

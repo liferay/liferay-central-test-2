@@ -65,7 +65,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse portletResponse, String[] allAssetTagNames, String className) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByClassName(className);
+	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 
 	PortletURL addPortletURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)portletResponse);
 

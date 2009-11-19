@@ -86,6 +86,7 @@ import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.PortletURLListenerFactory;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.expando.model.CustomAttributesDisplay;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
@@ -164,6 +165,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		for (PortletURLListener portletURLListener : portletURLListeners) {
 			PortletURLListenerFactory.destroy(portletURLListener);
+		}
+
+		List<AssetRendererFactory> assetRendererFactories =
+			portlet.getAssetRendererFactoryInstances();
+
+		if (assetRendererFactories != null) {
+			AssetRendererFactoryRegistryUtil.unregister(
+				assetRendererFactories);
 		}
 
 		Indexer indexer = portlet.getIndexerInstance();
@@ -643,6 +652,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			assetRendererFactoryInstance.setPortletId(portlet.getPortletId());
 
 			assetRendererFactoryInstances.add(assetRendererFactoryInstance);
+
+			AssetRendererFactoryRegistryUtil.register(
+				assetRendererFactoryInstance);
 		}
 
 		List<CustomAttributesDisplay> customAttributesDisplayInstances =

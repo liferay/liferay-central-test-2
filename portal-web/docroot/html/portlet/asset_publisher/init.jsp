@@ -32,6 +32,7 @@
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portlet.PortalPreferences" %>
 <%@ page import="com.liferay.portlet.PortletContextImpl" %>
+<%@ page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchTagException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchTagPropertyException" %>
@@ -158,12 +159,13 @@ if (!defaultScope) {
 	}
 }
 
-List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFactories();
+Collection<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
+Iterator<AssetRendererFactory> itr = assetRendererFactories.iterator();
 
 long[] availableClassNameIds = new long[assetRendererFactories.size()];
 
-for (int i = 0; i < assetRendererFactories.size(); i++) {
-	availableClassNameIds[i] = assetRendererFactories.get(i).getClassNameId();
+for (int i = 0; itr.hasNext(); i++){
+	availableClassNameIds[i] = itr.next().getClassNameId();
 }
 
 boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-type", Boolean.TRUE.toString()));

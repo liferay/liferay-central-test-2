@@ -55,7 +55,7 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 		continue;
 	}
 
-	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByClassName(assetEntry.getClassName());
+	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(assetEntry.getClassName());
 	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
 
 	String title = assetEntry.getTitle();

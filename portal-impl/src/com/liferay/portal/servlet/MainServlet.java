@@ -98,6 +98,8 @@ import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
@@ -274,6 +276,33 @@ public class MainServlet extends ActionServlet {
 
 			ThemeLocalServiceUtil.init(
 				servletContext, null, true, xmls, pluginPackage);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Asset Renderer Factory
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Asset Renderer Factory");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				List<AssetRendererFactory> assetRendererFactories =
+					portlet.getAssetRendererFactoryInstances();
+
+				if (assetRendererFactories == null) {
+					continue;
+				}
+
+				AssetRendererFactoryRegistryUtil.register(
+					portlet.getAssetRendererFactoryInstances());
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);

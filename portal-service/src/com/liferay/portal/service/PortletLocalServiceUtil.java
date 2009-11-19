@@ -121,10 +121,6 @@ public class PortletLocalServiceUtil {
 		getService().destroyPortlet(portlet);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactories() {
-		return getService().getAssetRendererFactories();
-	}
-
 	public static java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplays() {
 		return getService().getCustomAttributesDisplays();
 	}
