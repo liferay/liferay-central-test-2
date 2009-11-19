@@ -167,14 +167,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			PortletURLListenerFactory.destroy(portletURLListener);
 		}
 
-		List<AssetRendererFactory> assetRendererFactories =
-			portlet.getAssetRendererFactoryInstances();
-
-		if (assetRendererFactories != null) {
-			AssetRendererFactoryRegistryUtil.unregister(
-				assetRendererFactories);
-		}
-
 		Indexer indexer = portlet.getIndexerInstance();
 
 		if (indexer != null) {
@@ -200,6 +192,13 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			portlet.getSocialRequestInterpreterInstance());
 
 		WebDAVUtil.deleteStorage(portlet.getWebDAVStorageInstance());
+
+		List<AssetRendererFactory> assetRendererFactories =
+			portlet.getAssetRendererFactoryInstances();
+
+		if (assetRendererFactories != null) {
+			AssetRendererFactoryRegistryUtil.unregister(assetRendererFactories);
+		}
 
 		PortletInstanceFactoryUtil.destroy(portlet);
 

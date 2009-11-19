@@ -103,7 +103,7 @@ else if (!groupByClass) {
 <%
 }
 else {
-	Collection<AssetRendererFactory> groupAssetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
+	List<AssetRendererFactory> groupAssetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
 
 	for (AssetRendererFactory groupAssetRendererFactory : groupAssetRendererFactories) {
 		long[] groupClassNameIds = {groupAssetRendererFactory.getClassNameId()};

@@ -214,10 +214,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			else {
 				BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
 
-				for (AssetRendererFactory rendererFactory :
-						AssetRendererFactoryRegistryUtil.
-							getAssetRendererFactories()) {
+				List<AssetRendererFactory> rendererFactories =
+					AssetRendererFactoryRegistryUtil.
+						getAssetRendererFactories();
 
+				for (AssetRendererFactory rendererFactory : rendererFactories) {
 					TermQuery termQuery = TermQueryFactoryUtil.create(
 						Field.PORTLET_ID, rendererFactory.getPortletId());
 

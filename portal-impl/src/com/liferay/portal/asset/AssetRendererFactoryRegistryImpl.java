@@ -22,10 +22,11 @@
 
 package com.liferay.portal.asset;
 
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistry;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -49,27 +50,24 @@ public class AssetRendererFactoryRegistryImpl
 		return _factoriesMapByClassType.get(type);
 	}
 
-	public Collection<AssetRendererFactory> getAssetRendererFactories() {
-		return _factoriesMapByClassName.values();
+	public List<AssetRendererFactory> getAssetRendererFactories() {
+		return ListUtil.fromCollection(_factoriesMapByClassName.values());
 	}
 
 	public void register(AssetRendererFactory assetRendererFactory) {
 		_factoriesMapByClassName.put(
 			assetRendererFactory.getClassName(), assetRendererFactory);
-
 		_factoriesMapByClassType.put(
 			assetRendererFactory.getType(), assetRendererFactory);
 	}
 
 	public void unregister(AssetRendererFactory assetRendererFactory) {
 		_factoriesMapByClassName.remove(assetRendererFactory.getClassName());
-
 		_factoriesMapByClassType.remove(assetRendererFactory.getType());
 	}
 
 	private Map<String, AssetRendererFactory> _factoriesMapByClassName =
 		new ConcurrentHashMap<String, AssetRendererFactory>();
-
 	private Map<String, AssetRendererFactory> _factoriesMapByClassType =
 		new ConcurrentHashMap<String, AssetRendererFactory>();
 

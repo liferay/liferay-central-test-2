@@ -281,33 +281,6 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// Asset Renderer Factory
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Asset Renderer Factory");
-		}
-
-		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				List<AssetRendererFactory> assetRendererFactories =
-					portlet.getAssetRendererFactoryInstances();
-
-				if (assetRendererFactories == null) {
-					continue;
-				}
-
-				AssetRendererFactoryRegistryUtil.register(
-					portlet.getAssetRendererFactoryInstances());
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		// Indexer
 
 		if (_log.isDebugEnabled()) {
@@ -511,6 +484,33 @@ public class MainServlet extends ActionServlet {
 				webDAVStorage.setToken(portlet.getWebDAVStorageToken());
 
 				WebDAVUtil.addStorage(webDAVStorage);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Asset renderer factory
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Asset renderer factory");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				List<AssetRendererFactory> assetRendererFactories =
+					portlet.getAssetRendererFactoryInstances();
+
+				if (assetRendererFactories == null) {
+					continue;
+				}
+
+				AssetRendererFactoryRegistryUtil.register(
+					portlet.getAssetRendererFactoryInstances());
 			}
 		}
 		catch (Exception e) {

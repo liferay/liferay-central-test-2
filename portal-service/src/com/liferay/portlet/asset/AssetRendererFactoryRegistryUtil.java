@@ -24,7 +24,6 @@ package com.liferay.portlet.asset;
 
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,6 +35,10 @@ import java.util.List;
  */
 public class AssetRendererFactoryRegistryUtil {
 
+	public static List<AssetRendererFactory> getAssetRendererFactories() {
+		return getRegistry().getAssetRendererFactories();
+	}
+
 	public static AssetRendererFactory getAssetRendererFactoryByClassName(
 		String className) {
 
@@ -46,10 +49,6 @@ public class AssetRendererFactoryRegistryUtil {
 		String type) {
 
 		return getRegistry().getAssetRendererFactoryByType(type);
-	}
-
-	public static Collection<AssetRendererFactory> getAssetRendererFactories() {
-		return getRegistry().getAssetRendererFactories();
 	}
 
 	public static AssetRendererFactoryRegistry getRegistry() {
