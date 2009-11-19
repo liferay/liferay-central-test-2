@@ -47,7 +47,7 @@ public class PortalConnector extends Connector {
 	}
 
 	private void _copyConnector(Connector connector) {
-		this.protocolHandler = connector.getProtocolHandler();
+		protocolHandler = connector.getProtocolHandler();
 
 		setAllowTrace(connector.getAllowTrace());
 		setEmptySessionPath(connector.getEmptySessionPath());
