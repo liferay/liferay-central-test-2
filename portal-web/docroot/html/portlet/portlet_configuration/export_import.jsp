@@ -76,7 +76,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "export";
 
-		submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>');
+		submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>&etag=0');
 	}
 
 	function <portlet:namespace />importData() {

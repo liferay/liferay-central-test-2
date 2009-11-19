@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.filters.etag;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.util.servlet.filters.CacheResponse;
@@ -39,23 +40,35 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ETagFilter extends BasePortalFilter {
 
+	private static final String ETAG = "etag";
+
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
 
-		CacheResponse cacheResponse = new CacheResponse(
-			response, StringPool.UTF8);
+		boolean etag = ParamUtil.getBoolean(request, ETAG, true);
 
-		processFilter(
-			ETagFilter.class, request, cacheResponse, filterChain);
+		if (etag) {
+			CacheResponse cacheResponse = new CacheResponse(
+				response, StringPool.UTF8);
 
-		CacheResponseData cacheResponseData = new CacheResponseData(
-			cacheResponse.getData(), cacheResponse.getContentType(),
-			cacheResponse.getHeaders());
+			processFilter(
+				ETagFilter.class, request, cacheResponse, filterChain);
 
-		if (!ETagUtil.processETag(request, response, cacheResponse.getData())) {
-			CacheResponseUtil.write(response, cacheResponseData);
+			CacheResponseData cacheResponseData = new CacheResponseData(
+				cacheResponse.getData(), cacheResponse.getContentType(),
+				cacheResponse.getHeaders());
+
+			if (!ETagUtil.processETag(
+					request, response, cacheResponse.getData())) {
+
+				CacheResponseUtil.write(response, cacheResponseData);
+			}
+		}
+		else {
+			processFilter(
+				ETagFilter.class, request, response, filterChain);
 		}
 	}
 
