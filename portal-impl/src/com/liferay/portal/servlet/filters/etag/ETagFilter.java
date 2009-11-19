@@ -37,17 +37,17 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="ETagFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Eduardo Lundgren
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
 public class ETagFilter extends BasePortalFilter {
-
-	private static final String ETAG = "etag";
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
 
-		boolean etag = ParamUtil.getBoolean(request, ETAG, true);
+		boolean etag = ParamUtil.getBoolean(request, _ETAG, true);
 
 		if (etag) {
 			CacheResponse cacheResponse = new CacheResponse(
@@ -71,5 +71,7 @@ public class ETagFilter extends BasePortalFilter {
 				ETagFilter.class, request, response, filterChain);
 		}
 	}
+
+	private static final String _ETAG = "etag";
 
 }
