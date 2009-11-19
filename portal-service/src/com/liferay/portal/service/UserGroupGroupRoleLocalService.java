@@ -129,7 +129,7 @@ public interface UserGroupGroupRoleLocalService {
 	public void deleteUserGroupGroupRolesByRoleId(long roleId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteUserGroupGroupRolesByuserGroupId(long userGroupId)
+	public void deleteUserGroupGroupRolesByUserGroupId(long userGroupId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

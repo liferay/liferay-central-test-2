@@ -154,9 +154,9 @@ public class UserGroupGroupRoleLocalServiceUtil {
 		getService().deleteUserGroupGroupRolesByRoleId(roleId);
 	}
 
-	public static void deleteUserGroupGroupRolesByuserGroupId(long userGroupId)
+	public static void deleteUserGroupGroupRolesByUserGroupId(long userGroupId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteUserGroupGroupRolesByuserGroupId(userGroupId);
+		getService().deleteUserGroupGroupRolesByUserGroupId(userGroupId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroupGroupRole> getUserGroupGroupRoles(
