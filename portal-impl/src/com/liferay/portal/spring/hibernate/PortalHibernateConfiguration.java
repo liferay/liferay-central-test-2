@@ -87,7 +87,8 @@ public class PortalHibernateConfiguration
 				configuration.setProperty("hibernate.dialect", dialect);
 			}
 
-			configuration.setProperties(PropsUtil.getProperties());
+			configuration.setProperties(
+				PropsUtil.getProperties("hibernate.", false));
 		}
 		catch (Exception e1) {
 			_log.error(e1, e1);
