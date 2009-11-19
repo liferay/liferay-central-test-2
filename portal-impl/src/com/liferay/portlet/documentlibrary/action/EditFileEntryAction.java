@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
@@ -47,10 +46,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.form.FileEntryForm;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
-import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 import java.io.File;
 
@@ -231,30 +227,21 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Add file entry
 
-			DLFolderPermission.check(
-				themeDisplay.getPermissionChecker(), groupId, folderId,
-				ActionKeys.ADD_DOCUMENT);
-
-			DLFileEntry entry = DLFileEntryLocalServiceUtil.addFileEntry(
-				themeDisplay.getUserId(), groupId, folderId, sourceFileName,
-				title, description, extraSettings, file, serviceContext);
+			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
+				groupId, folderId, sourceFileName, title, description,
+				extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
-				entry.getFileEntryId(), -1);
+				fileEntry.getFileEntryId(), -1);
 		}
 		else {
 
 			// Update file entry
 
-			DLFileEntryPermission.check(
-				themeDisplay.getPermissionChecker(), groupId, folderId, name,
-				ActionKeys.UPDATE);
-
-			DLFileEntryLocalServiceUtil.updateFileEntry(
-				themeDisplay.getUserId(), groupId, folderId, newFolderId, name,
-				sourceFileName, title, description, extraSettings, file,
-				serviceContext);
+			DLFileEntryServiceUtil.updateFileEntry(
+				groupId, folderId, newFolderId, name, sourceFileName, title,
+				description, extraSettings, file, serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(
