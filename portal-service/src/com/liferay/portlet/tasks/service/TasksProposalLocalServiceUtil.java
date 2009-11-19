@@ -218,7 +218,8 @@ public class TasksProposalLocalServiceUtil {
 	}
 
 	public static void deleteProposals(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().deleteProposals(groupId);
 	}
 

@@ -215,7 +215,8 @@ public class TasksProposalLocalServiceWrapper
 	}
 
 	public void deleteProposals(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		_tasksProposalLocalService.deleteProposals(groupId);
 	}
 

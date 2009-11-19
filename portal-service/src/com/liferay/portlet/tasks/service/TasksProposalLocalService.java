@@ -171,7 +171,8 @@ public interface TasksProposalLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteProposals(long groupId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
