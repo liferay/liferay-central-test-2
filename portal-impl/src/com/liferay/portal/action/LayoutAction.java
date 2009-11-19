@@ -157,8 +157,7 @@ public class LayoutAction extends Action {
 						redirectParam;
 				}
 
-				String url = PortalUtil.getLayoutURL(
-					requestedLayout, themeDisplay);
+				String url = PortalUtil.getCurrentURL(request);
 
 				PortletURL loginURL = LoginUtil.getLoginURL(
 					request, themeDisplay.getPlid());
