@@ -28,7 +28,7 @@
 	<c:when test="<%= allAssetVocabularies %>">
 		<liferay-ui:asset-categories-navigation
 			hidePortletWhenEmpty="<%= true %>"
-				/>
+		/>
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:asset-categories-navigation

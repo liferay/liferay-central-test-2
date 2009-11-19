@@ -28,9 +28,25 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
+<script type="text/javascript">
+	function <portlet:namespace />saveConfiguration() {
+		if (document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentAssetVocabularyIds);
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	AUI().ready(
+		function () {
+			Liferay.Util.toggleSelectBox('<portlet:namespace />allAssetVocabularies', 'false', '<portlet:namespace />assetVocabulariesBoxes');
+		}
+	);
+</script>
+
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
@@ -89,24 +105,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' type="button" value="save" />
+		<aui:button name="saveButton" type="submit" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
 </aui:form>
-
-<script type="text/javascript">
-	function <portlet:namespace />saveSelectBoxes() {
-		if (document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds) {
-			document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentAssetVocabularyIds);
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	AUI().ready(
-		function () {
-			Liferay.Util.toggleSelectBox('<portlet:namespace />allAssetVocabularies', 'false', '<portlet:namespace />assetVocabulariesBoxes');
-		}
-	);
-</script>

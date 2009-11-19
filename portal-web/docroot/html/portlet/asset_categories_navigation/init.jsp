@@ -42,7 +42,9 @@ List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupVocabula
 long[] availableAssetVocabularyIds = new long[vocabularies.size()];
 
 for (int i = 0; i < vocabularies.size(); i++) {
-	availableAssetVocabularyIds[i] = vocabularies.get(i).getVocabularyId();
+	AssetVocabulary vocabulary = vocabularies.get(i);
+
+	availableAssetVocabularyIds[i] = vocabulary.getVocabularyId();
 }
 
 boolean allAssetVocabularies = GetterUtil.getBoolean(preferences.getValue("all-asset-vocabularies", Boolean.TRUE.toString()));
