@@ -45,7 +45,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFa
 	<aui:fieldset>
 		<aui:input inlineLabel="left" name="showAssetCount" type="checkbox" value="<%= showAssetCount %>" />
 
-		<div id="<portlet:namespace />assetCountOptions">
+		<div class="aui-helper-hidden" id="<portlet:namespace />assetCountOptions">
 			<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="classNameId">
 				<aui:option label="any" value="<%= classNameId == 0 %>" />
 
@@ -78,24 +78,27 @@ List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFa
 </aui:form>
 
 <script type="text/javascript">
-	jQuery(
-		function() {
-			var showAssetCount = jQuery('#<portlet:namespace />showAssetCountCheckbox');
+	AUI().ready(
+		function(A) {
+			var showAssetCount = A.one('#<portlet:namespace />showAssetCountCheckbox');
 
 			function showHiddenFields() {
-				var assetCountOptions = jQuery('#<portlet:namespace />assetCountOptions');
+				var assetCountOptions = A.one('#<portlet:namespace />assetCountOptions');
 
-				if (showAssetCount.is(':checked')) {
-					assetCountOptions.show();
-				}
-				else {
-					assetCountOptions.hide();
+				if (showAssetCount && assetCountOptions) {
+					if (showAssetCount.get('checked')) {
+						assetCountOptions.show();
+					}
+					else {
+						assetCountOptions.hide();
+					}
 				}
 			}
 
 			showHiddenFields();
 
-			showAssetCount.change(
+			showAssetCount.on(
+				'change',
 				function(event) {
 					showHiddenFields();
 				}
