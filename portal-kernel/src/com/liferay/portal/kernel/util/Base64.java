@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -162,8 +161,7 @@ public class Base64 {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(32000);
 
 		try {
-			ObjectOutputStream os = new ObjectOutputStream(
-				new BufferedOutputStream(baos));
+			ObjectOutputStream os = new ObjectOutputStream(baos);
 
 			os.flush();
 			os.writeObject(o);
