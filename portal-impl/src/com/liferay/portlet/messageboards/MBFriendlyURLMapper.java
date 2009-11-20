@@ -49,7 +49,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String friendlyURLPath = null;
 
 		String topLink = GetterUtil.getString(
-				portletURL.getParameter("topLink"));
+			portletURL.getParameter("topLink"));
 
 		String strutsAction = GetterUtil.getString(
 			portletURL.getParameter("struts_action"));
@@ -71,6 +71,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 				if (Validator.isNotNull(topLink) &&
 					!topLink.equals("message-boards-home")) {
+
 					friendlyURLPath += StringPool.SLASH + topLink;
 				}
 

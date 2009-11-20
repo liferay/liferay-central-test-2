@@ -28,12 +28,10 @@
 String topLink = ParamUtil.getString(request, "topLink", "message-boards-home");
 
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
+
 long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
-
 boolean viewCategory = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-viewCategory"));
-
-boolean showBannedUsers = MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -75,10 +73,9 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setParameter("topLink", "statistics");
 			%>
 
-			<liferay-ui:icon cssClass='<%= "top-link" + (showBannedUsers ? StringPool.BLANK : " last") %>' image="../aui/clipboard" message="statistics" label="<%= true %>" url='<%= topLink.equals("statistics") ? StringPool.BLANK : portletURL.toString() %>'/>
+			<liferay-ui:icon cssClass='<%= "top-link" + (MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) ? StringPool.BLANK : " last") %>' image="../aui/clipboard" message="statistics" label="<%= true %>" url='<%= topLink.equals("statistics") ? StringPool.BLANK : portletURL.toString() %>'/>
 
-
-			<c:if test="<%= showBannedUsers %>">
+			<c:if test="<%= MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) %>">
 
 				<%
 				portletURL.setParameter("topLink", "banned-users");

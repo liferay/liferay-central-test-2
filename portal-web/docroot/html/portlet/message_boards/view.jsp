@@ -65,7 +65,6 @@ portletURL.setParameter("topLink", topLink);
 portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
-
 %>
 
 <liferay-util:include page="/html/portlet/message_boards/top_links.jsp" />
