@@ -184,11 +184,11 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 				boolean selectedCommunity = false;
 
- 				if (layout != null) {
-	 				if (layout.getGroupId() == myPlace.getGroupId()) {
+				if (layout != null) {
+					if (layout.getGroupId() == myPlace.getGroupId()) {
 						selectedCommunity = true;
 					}
-	 			}
+				}
 
 				boolean selectedPlace = false;
 

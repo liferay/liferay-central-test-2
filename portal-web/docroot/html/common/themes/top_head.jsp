@@ -235,7 +235,7 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 											this.src = "<%= themeDisplay.getPathThemeImages() %>/spacer.png"
 										) :
 											(
-											 (
+												(
 													(this.currentStyle.backgroundImage.toLowerCase().indexOf('.png') > -1) ||
 													(this.className && ([''].concat(this.className.split(' ')).concat(['']).join('|').indexOf('|png|')) > -1)
 												) ?
