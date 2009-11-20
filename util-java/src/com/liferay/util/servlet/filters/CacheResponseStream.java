@@ -22,7 +22,6 @@
 
 package com.liferay.util.servlet.filters;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -36,7 +35,7 @@ import javax.servlet.ServletOutputStream;
 public class CacheResponseStream extends ServletOutputStream {
 
 	public CacheResponseStream(OutputStream os) {
-		_dos = new DataOutputStream(os);
+		_os = os;
 	}
 
 	public void close() throws IOException {
@@ -50,18 +49,18 @@ public class CacheResponseStream extends ServletOutputStream {
 	}
 
 	public void write(int b) throws IOException {
-		_dos.write(b);
+		_os.write(b);
 	}
 
 	public void write(byte[] b) throws IOException {
-		_dos.write(b);
+		_os.write(b);
 	}
 
 	public void write(byte[] b, int off, int len) throws IOException {
-		_dos.write(b, off, len);
+		_os.write(b, off, len);
 	}
 
 	private boolean _closed;
-	private DataOutputStream _dos = null;
+	private OutputStream _os = null;
 
 }
