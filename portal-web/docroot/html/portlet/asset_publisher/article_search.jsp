@@ -166,12 +166,12 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 	Liferay.Util.actsAsAspect(window);
 
 	window.before(
-		"<portlet:namespace />selectAsset",
+		'<portlet:namespace />selectAsset',
 		function() {
 			var fm = AUI().one(document.<portlet:namespace />fm);
 
 			if (fm) {
-				fm.attr("action", <portlet:namespace />configurationActionURL);
+				fm.attr('action', <portlet:namespace />configurationActionURL);
 			}
 		}
 	);
@@ -181,9 +181,9 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 			var fm = AUI().one(document.<portlet:namespace />fm);
 
 			if (fm) {
-				<portlet:namespace />configurationActionURL = fm.attr("action");
+				<portlet:namespace />configurationActionURL = fm.attr('action');
 
-				fm.attr("action", '<%= portletURL.toString() %>');
+				fm.attr('action', '<%= portletURL.toString() %>');
 			}
 		}
 	);
