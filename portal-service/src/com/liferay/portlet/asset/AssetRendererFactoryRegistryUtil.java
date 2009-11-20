@@ -36,27 +36,31 @@ import java.util.List;
 public class AssetRendererFactoryRegistryUtil {
 
 	public static List<AssetRendererFactory> getAssetRendererFactories() {
-		return getRegistry().getAssetRendererFactories();
+		return getAssetRendererFactoryRegistry().getAssetRendererFactories();
 	}
 
 	public static AssetRendererFactory getAssetRendererFactoryByClassName(
 		String className) {
 
-		return getRegistry().getAssetRendererFactoryByClassName(className);
+		return getAssetRendererFactoryRegistry().
+			getAssetRendererFactoryByClassName(className);
 	}
 
 	public static AssetRendererFactory getAssetRendererFactoryByType(
 		String type) {
 
-		return getRegistry().getAssetRendererFactoryByType(type);
+		return getAssetRendererFactoryRegistry().getAssetRendererFactoryByType(
+			type);
 	}
 
-	public static AssetRendererFactoryRegistry getRegistry() {
-		return _registry;
+	public static AssetRendererFactoryRegistry
+		getAssetRendererFactoryRegistry() {
+
+		return _assetRendererFactoryRegistry;
 	}
 
 	public static void register(AssetRendererFactory assetRendererFactory) {
-		getRegistry().register(assetRendererFactory);
+		getAssetRendererFactoryRegistry().register(assetRendererFactory);
 	}
 
 	public static void register(
@@ -70,7 +74,7 @@ public class AssetRendererFactoryRegistryUtil {
 	}
 
 	public static void unregister(AssetRendererFactory assetRendererFactory) {
-		getRegistry().unregister(assetRendererFactory);
+		getAssetRendererFactoryRegistry().unregister(assetRendererFactory);
 	}
 
 	public static void unregister(
@@ -83,10 +87,12 @@ public class AssetRendererFactoryRegistryUtil {
 		}
 	}
 
-	public void setRegistry(AssetRendererFactoryRegistry registry) {
-		_registry = registry;
+	public void setAssetRendererFactoryRegistry(
+		AssetRendererFactoryRegistry assetRendererFactoryRegistry) {
+
+		_assetRendererFactoryRegistry = assetRendererFactoryRegistry;
 	}
 
-	private static AssetRendererFactoryRegistry _registry;
+	private static AssetRendererFactoryRegistry _assetRendererFactoryRegistry;
 
 }

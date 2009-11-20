@@ -32,16 +32,16 @@ import java.util.List;
  */
 public class WorkflowHandlerRegistryUtil {
 
-	public static WorkflowHandlerRegistry getRegistry() {
-		return _registry;
+	public static WorkflowHandler getWorkflowHandler(String className) {
+		return getWorkflowHandlerRegistry().getWorkflowHandler(className);
 	}
 
-	public static WorkflowHandler getWorkflowHandler(String className) {
-		return getRegistry().getWorkflowHandler(className);
+	public static WorkflowHandlerRegistry getWorkflowHandlerRegistry() {
+		return _workflowHandlerRegistry;
 	}
 
 	public static List<WorkflowHandler> getWorkflowHandlers() {
-		return getRegistry().getWorkflowHandlers();
+		return getWorkflowHandlerRegistry().getWorkflowHandlers();
 	}
 
 	public static void register(List<WorkflowHandler> workflowHandlers) {
@@ -51,7 +51,7 @@ public class WorkflowHandlerRegistryUtil {
 	}
 
 	public static void register(WorkflowHandler workflowHandler) {
-		getRegistry().register(workflowHandler);
+		getWorkflowHandlerRegistry().register(workflowHandler);
 	}
 
 	public static void unregister(List<WorkflowHandler> workflowHandlers) {
@@ -62,13 +62,15 @@ public class WorkflowHandlerRegistryUtil {
 	}
 
 	public static void unregister(WorkflowHandler workflowHandler) {
-		getRegistry().unregister(workflowHandler);
+		getWorkflowHandlerRegistry().unregister(workflowHandler);
 	}
 
-	public void setRegistry(WorkflowHandlerRegistry registry) {
-		_registry = registry;
+	public void setWorkflowHandlerRegistry(
+		WorkflowHandlerRegistry workflowHandlerRegistry) {
+
+		_workflowHandlerRegistry = workflowHandlerRegistry;
 	}
 
-	private static WorkflowHandlerRegistry _registry;
+	private static WorkflowHandlerRegistry _workflowHandlerRegistry;
 
 }
