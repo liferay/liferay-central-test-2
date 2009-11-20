@@ -36,7 +36,7 @@ import com.liferay.portlet.asset.model.AssetRendererFactory;
 public abstract class BaseWokflowHandler implements WorkflowHandler {
 
 	public long getClassNameId() {
-		return classNameId;
+		return _classNameId;
 	}
 
 	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
@@ -52,6 +52,6 @@ public abstract class BaseWokflowHandler implements WorkflowHandler {
 		}
 	}
 
-	private long classNameId = PortalUtil.getClassNameId(getClassName());
+	private long _classNameId = PortalUtil.getClassNameId(getClassName());
 
 }
