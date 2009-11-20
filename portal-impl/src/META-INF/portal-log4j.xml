@@ -89,7 +89,7 @@
 	</category>
 
 	<category name="com.liferay.portal.dao.db.BaseDB">
-		<priority value="DEBUG" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.dao.jdbc.aop">
