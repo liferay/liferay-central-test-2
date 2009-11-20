@@ -36,8 +36,8 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-
 import java.io.InputStreamReader;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -111,9 +111,10 @@ public class SharepointServlet extends HttpServlet {
 
 		try {
 			InputStream is = request.getInputStream();
+
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
 			String url = br.readLine();
-			
 
 			String[] params = url.split(StringPool.AMPERSAND);
 
