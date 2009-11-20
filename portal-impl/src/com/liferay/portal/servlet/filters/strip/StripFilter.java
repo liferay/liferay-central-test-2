@@ -271,9 +271,7 @@ public class StripFilter extends BasePortalFilter {
 						byte[] scriptContentBytes = scriptContent.getBytes(
 							StringPool.UTF8);
 
-						for (byte curByte : scriptContentBytes) {
-							newBytes.write(curByte);
-						}
+						newBytes.write(scriptContentBytes);
 
 						state = _STATE_FOUND_ELEMENT;
 					}
@@ -309,9 +307,7 @@ public class StripFilter extends BasePortalFilter {
 						byte[] styleContentBytes = styleContent.getBytes(
 							StringPool.UTF8);
 
-						for (byte curByte : styleContentBytes) {
-							newBytes.write(curByte);
-						}
+						newBytes.write(styleContentBytes);
 
 						state = _STATE_FOUND_ELEMENT;
 					}
