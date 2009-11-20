@@ -692,6 +692,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.testhook">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.util.JNDIUtil">
 		<priority value="ERROR" />
 	</category>
