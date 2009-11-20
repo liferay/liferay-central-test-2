@@ -48,12 +48,8 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
-		String tabs1 = GetterUtil.getString(portletURL.getParameter("tabs1"));
-		String tabs2 = GetterUtil.getString(portletURL.getParameter("tabs2"));
-
-		if (Validator.isNotNull(tabs2)) {
-			return null;
-		}
+		String topLink = GetterUtil.getString(
+				portletURL.getParameter("topLink"));
 
 		String strutsAction = GetterUtil.getString(
 			portletURL.getParameter("struts_action"));
@@ -73,11 +69,12 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			else {
 				friendlyURLPath = "/message_boards";
 
-				if (Validator.isNotNull(tabs1) && !tabs1.equals("categories")) {
-					friendlyURLPath += StringPool.SLASH + tabs1;
+				if (Validator.isNotNull(topLink) &&
+					!topLink.equals("message-boards-home")) {
+					friendlyURLPath += StringPool.SLASH + topLink;
 				}
 
-				portletURL.addParameterIncludedInPath("tabs1");
+				portletURL.addParameterIncludedInPath("topLink");
 
 				if (categoryId.equals("0")) {
 					portletURL.addParameterIncludedInPath("mbCategoryId");
@@ -170,16 +167,16 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			addParam(params, "struts_action", "/message_boards/view_message");
 			addParam(params, "messageId", messageId);
 		}
-		else if (type.equals("my_posts") || type.equals("my_subscriptions") ||
-				 type.equals("recent_posts") || type.equals("statistics") ||
-				 type.equals("banned_users")) {
+		else if (type.equals("my-posts") || type.equals("my-subscriptions") ||
+				 type.equals("recent-posts") || type.equals("statistics") ||
+				 type.equals("banned-users")) {
 
 			addParam(params, "struts_action", "/message_boards/view");
-			addParam(params, "tabs1", type);
+			addParam(params, "topLink", type);
 		}
 		else if (type.equals("search")) {
 			addParam(params, "struts_action", "/message_boards/search");
-			addParam(params, "tabs1", "categories");
+			addParam(params, "topLink", "message-boards-home");
 		}
 
 		if (friendlyURLPath.indexOf("maximized", x) != -1) {

@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
+String topLink = ParamUtil.getString(request, "topLink", "message-boards-home");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -61,16 +61,17 @@ if (themeDisplay.isSignedIn()) {
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/message_boards/view");
-portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("topLink", topLink);
 portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
+
+request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
+
 %>
 
-<liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
-
-<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/message_boards/search" /></liferay-portlet:renderURL>
+<liferay-util:include page="/html/portlet/message_boards/top_links.jsp" />
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("categories") %>'>
+	<c:when test='<%= topLink.equals("message-boards-home") %>'>
 		<c:if test="<%= category == null %>">
 			<div class="category-subscriptions">
 				<div class="category-subscription-types">
@@ -104,11 +105,67 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 			</div>
 		</c:if>
 
-		<aui:form action="<%= searchURL %>" method="get" name="fm1" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-			<aui:input name="searchCategoryIds" type="hidden" value="<%= categoryId %>" />
+		<%
+		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
+		boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_MESSAGE);
+		boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+
+		if (showAddMessageButton && !themeDisplay.isSignedIn()) {
+			if (!allowAnonymousPosting) {
+				showAddMessageButton = false;
+			}
+		}
+		%>
+
+		<c:if test="<%= showAddCategoryButton || showAddMessageButton || showPermissionsButton %>">
+			<div class="category-buttons">
+				<c:if test="<%= showAddCategoryButton %>">
+					<portlet:renderURL var="editCategoryURL">
+						<portlet:param name="struts_action" value="/message_boards/edit_category" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" />
+					</portlet:renderURL>
+
+					<aui:button onClick='<%= editCategoryURL %>' value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
+				</c:if>
+
+				<c:if test="<%= showAddMessageButton %>">
+					<portlet:renderURL var="editMessageURL">
+						<portlet:param name="struts_action" value="/message_boards/edit_message" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+						<portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" />
+					</portlet:renderURL>
+
+					<aui:button onClick='<%= editMessageURL %>' value="post-new-thread" />
+				</c:if>
+
+				<c:if test="<%= showPermissionsButton %>">
+
+					<%
+					String modelResource = "com.liferay.portlet.messageboards";
+					String modelResourceDescription = themeDisplay.getScopeGroupName();
+					String resourcePrimKey = String.valueOf(scopeGroupId);
+
+					if (category != null) {
+						modelResource = MBCategory.class.getName();
+						modelResourceDescription = category.getName();
+						resourcePrimKey = String.valueOf(category.getCategoryId());
+					}
+					%>
+
+					<liferay-security:permissionsURL
+						modelResource="<%= modelResource %>"
+						modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
+						resourcePrimKey="<%= resourcePrimKey %>"
+						var="permissionsURL"
+					/>
+
+					<aui:button onClick="<%= permissionsURL %>" value="permissions" />
+				</c:if>
+			</div>
+		</c:if>
+
+		<liferay-ui:panel-container id="MessageBoardsPanels" extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
 
 			<%
 			List<String> headerNames = new ArrayList<String>();
@@ -238,83 +295,16 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 				resultRows.add(row);
 			}
-
-			boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
-			boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
-			showSearchCategory = showSearchCategory && (results.size() > 0);
 			%>
 
-			<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearchCategory %>">
-				<div>
-					<c:if test="<%= showSearchCategory %>">
-						<aui:input cssClass="input-text-search" id="keywords1" label="" name="keywords" size="30" type="text" />
-
-						<aui:button type="submit" value="search-categories" />
-					</c:if>
-
-					<c:if test="<%= showAddCategoryButton %>">
-						<aui:button onClick='<%= renderResponse.getNamespace() + "addCategory();" %>' value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
-					</c:if>
-
-					<c:if test="<%= showPermissionsButton %>">
-
-						<%
-						String modelResource = "com.liferay.portlet.messageboards";
-						String modelResourceDescription = themeDisplay.getScopeGroupName();
-						String resourcePrimKey = String.valueOf(scopeGroupId);
-
-						if (category != null) {
-							modelResource = MBCategory.class.getName();
-							modelResourceDescription = category.getName();
-							resourcePrimKey = String.valueOf(category.getCategoryId());
-						}
-						%>
-
-						<liferay-security:permissionsURL
-							modelResource="<%= modelResource %>"
-							modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
-							resourcePrimKey="<%= resourcePrimKey %>"
-							var="permissionsURL"
-						/>
-
-						<aui:button onClick="<%= permissionsURL %>" value="permissions" />
-					</c:if>
-				</div>
-
-				<br />
+			<c:if test="<%= total > 0 %>">
+				<liferay-ui:panel id="subCategoriesPanel" title='<%= LanguageUtil.get(pageContext, category != null ? "subcategories" : "categories") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				</liferay-ui:panel>
 			</c:if>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</aui:form>
-
-		<script type="text/javascript">
-			function <portlet:namespace />addCategory() {
-				var url = '<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
-
-				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
-					url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm1.<portlet:namespace />keywords.value;
-				}
-
-				submitForm(document.hrefFm, url);
-			}
-
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-			</c:if>
-		</script>
-
-		<br />
-
-		<aui:form action="<%= searchURL %>" method="get" name="fm2" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-			<aui:input name="searchCategoryId" type="hidden" value="<%= categoryId %>" />
-
-			<liferay-ui:tabs names="threads" />
 
 			<%
-			List<String> headerNames = new ArrayList<String>();
+			headerNames = new ArrayList<String>();
 
 			headerNames.add("thread");
 			headerNames.add("status");
@@ -324,17 +314,17 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 			headerNames.add("last-post");
 			headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			int total = MBThreadLocalServiceUtil.getThreadsCount(scopeGroupId, categoryId, StatusConstants.APPROVED);
+			total = MBThreadLocalServiceUtil.getThreadsCount(scopeGroupId, categoryId, StatusConstants.APPROVED);
 
 			searchContainer.setTotal(total);
 
-			List results = MBThreadLocalServiceUtil.getThreads(scopeGroupId, categoryId, StatusConstants.APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getThreads(scopeGroupId, categoryId, StatusConstants.APPROVED, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
-			List resultRows = searchContainer.getResultRows();
+			resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
 				MBThread thread = (MBThread)results.get(i);
@@ -436,54 +426,12 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 				resultRows.add(row);
 			}
-
-			boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_MESSAGE);
-
-			if (showAddMessageButton && !themeDisplay.isSignedIn()) {
-				if (!allowAnonymousPosting) {
-					showAddMessageButton = false;
-				}
-			}
-
-			showSearchThread = showSearchThread && (results.size() > 0);
 			%>
 
-			<c:if test="<%= showAddMessageButton || showSearchThread %>">
-				<div>
-					<c:if test="<%= showSearchThread %>">
-						<aui:input cssClass="input-text-search" id="keywords2" label="" name="keywords" size="30" type="text" />
-
-						<aui:button type="submit" value="search-this-category" />
-					</c:if>
-
-					<c:if test="<%= showAddMessageButton %>">
-						<aui:button onClick='<%= renderResponse.getNamespace() + "addMessage();" %>' value="post-new-thread" />
-					</c:if>
-				</div>
-
-				<br />
-			</c:if>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		</aui:form>
-
-		<script type="text/javascript">
-			function <portlet:namespace />addMessage() {
-				var url = '<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
-
-				if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
-					url += '&<portlet:namespace />subject=' + document.<portlet:namespace />fm2.<portlet:namespace />keywords.value;
-				}
-
-				submitForm(document.hrefFm, url);
-			}
-
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-			</c:if>
-		</script>
+			<liferay-ui:panel id="threadsPanel" title='<%= LanguageUtil.get(pageContext, "threads") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			</liferay-ui:panel>
+		</liferay-ui:panel-container>
 
 		<%
 		if (category != null) {
@@ -493,13 +441,14 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 			MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
 		}
 		%>
+
 	</c:when>
-	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
+	<c:when test='<%= topLink.equals("my-posts") || topLink.equals("my-subscriptions") || topLink.equals("recent-posts") %>'>
 
 		<%
 		long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
 
-		if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
+		if ((topLink.equals("my-posts") || topLink.equals("my-subscriptions")) && themeDisplay.isSignedIn()) {
 			groupThreadsUserId = user.getUserId();
 		}
 
@@ -508,7 +457,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		}
 		%>
 
-		<c:if test='<%= tabs1.equals("recent_posts") && (groupThreadsUserId > 0) %>'>
+		<c:if test='<%= topLink.equals("recent-posts") && (groupThreadsUserId > 0) %>'>
 			<div class="portlet-msg-info">
 				<liferay-ui:message key="filter-by-user" />: <%= PortalUtil.getUserName(groupThreadsUserId, StringPool.BLANK) %>
 			</div>
@@ -518,7 +467,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		int totalCategories = 0;
 		%>
 
-		<c:if test='<%= tabs1.equals("my_subscriptions") %>'>
+		<c:if test='<%= topLink.equals("my-subscriptions") %>'>
 
 			<%
 			List<String> headerNames = new ArrayList<String>();
@@ -620,13 +569,13 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 		String emptyResultsMessage = null;
 
-		if (tabs1.equals("my_posts")) {
+		if (topLink.equals("my-posts")) {
 			emptyResultsMessage = "you-do-not-have-any-posts";
 		}
-		else if (tabs1.equals("my_subscriptions")) {
+		else if (topLink.equals("my-subscriptions")) {
 			emptyResultsMessage = "you-are-not-subscribed-to-any-threads";
 		}
-		else if (tabs1.equals("recent_posts")) {
+		else if (topLink.equals("recent-posts")) {
 			emptyResultsMessage = "there-are-no-recent-posts";
 		}
 
@@ -634,7 +583,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 		List results = null;
 
-		if (tabs1.equals("my_posts")) {
+		if (topLink.equals("my-posts")) {
 			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED);
 
 			searchContainer.setTotal(total);
@@ -643,7 +592,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 			searchContainer.setResults(results);
 		}
-		else if (tabs1.equals("my_subscriptions")) {
+		else if (topLink.equals("my-subscriptions")) {
 			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED, true);
 
 			searchContainer.setTotal(total);
@@ -652,7 +601,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 			searchContainer.setResults(results);
 		}
-		else if (tabs1.equals("recent_posts")) {
+		else if (topLink.equals("recent-posts")) {
 			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED, false, false);
 
 			searchContainer.setTotal(total);
@@ -753,13 +702,13 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		}
 		%>
 
-		<c:if test='<%= tabs1.equals("my_subscriptions") %>'>
+		<c:if test='<%= topLink.equals("my-subscriptions") %>'>
 			<br />
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<c:if test='<%= tabs1.equals("recent_posts") %>'>
+		<c:if test='<%= topLink.equals("recent-posts") %>'>
 
 			<%
 			String rssURL = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + scopeGroupId;
@@ -790,12 +739,12 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		</c:if>
 
 		<%
-		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), portletURL.toString());
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(topLink, StringPool.UNDERLINE, StringPool.DASH)), request);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(topLink, TextFormatter.O)), portletURL.toString());
 		%>
 
 	</c:when>
-	<c:when test='<%= tabs1.equals("statistics") %>'>
+	<c:when test='<%= topLink.equals("statistics") %>'>
 		<liferay-ui:panel-container cssClass="statistics-panel" id="statistics" extended="<%= Boolean.FALSE %>" persistState="<%= true %>">
 			<liferay-ui:panel cssClass="statistics-panel-content" id="general" title='<%= LanguageUtil.get(pageContext, "general") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 				<dl>
@@ -855,12 +804,12 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		</liferay-ui:panel-container>
 
 		<%
-		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), portletURL.toString());
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(topLink, StringPool.UNDERLINE, StringPool.DASH)), request);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(topLink, TextFormatter.O)), portletURL.toString());
 		%>
 
 	</c:when>
-	<c:when test='<%= tabs1.equals("banned_users") %>'>
+	<c:when test='<%= topLink.equals("banned-users") %>'>
 
 		<%
 		List<String> headerNames = new ArrayList<String>();
@@ -923,8 +872,8 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 		<%
-		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), portletURL.toString());
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(topLink, StringPool.UNDERLINE, StringPool.DASH)), request);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(topLink, TextFormatter.O)), portletURL.toString());
 		%>
 
 	</c:when>

@@ -61,7 +61,7 @@
 
 						<portlet:renderURL var="recentPostsURL">
 							<portlet:param name="struts_action" value="/message_boards/view" />
-							<portlet:param name="tabs1" value="recent_posts" />
+							<portlet:param name="topLink" value="recent-posts" />
 							<portlet:param name="groupThreadsUserId" value="<%= String.valueOf(userDisplay.getUserId()) %>" />
 						</portlet:renderURL>
 

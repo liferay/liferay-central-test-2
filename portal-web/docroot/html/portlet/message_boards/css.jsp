@@ -24,6 +24,20 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-message-boards .category-buttons {
+	clear: both;
+	margin-bottom: 1em;
+}
+
+.portlet-message-boards .category-subscriptions {
+	clear: both;
+	overflow: hidden;
+}
+
+.portlet-message-boards .category-subscription-types {
+	float: right;
+}
+
 .portlet-message-boards .code {
 	background: #fff;
 	border: 1px solid #777;
@@ -64,6 +78,10 @@
 	font-size: large;
 	font-weight: normal;
 	padding: 5px;
+}
+
+.portlet-message-boards #MessageBoardsPanels {
+	border-width: 0;
 }
 
 .portlet-message-boards .message-container {
@@ -211,10 +229,32 @@ td.user-info {
 	margin-left: 20px;
 }
 
-.portlet-message-boards .category-subscriptions {
-	overflow: hidden;
+.portlet-message-boards #threadsPanel {
+	margin-top: 2em;
 }
 
-.portlet-message-boards .category-subscription-types {
+.portlet-message-boards .top-links .category-search {
 	float: right;
+	margin: 0 0 0.5em 0.5em;
+}
+
+.portlet-message-boards .top-links-container {
+	clear: both;
+}
+
+.portlet-message-boards .top-links {
+	float: right;
+}
+
+.portlet-message-boards .top-links .top-link {
+	border-right: 1px solid #bbb;
+	padding-right: 0.5em;
+}
+
+.portlet-message-boards .top-links .top-link.last {
+	border: none;
+}
+
+.portlet-message-boards .top-links .top-links-navigation {
+	float: left;
 }
