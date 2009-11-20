@@ -25,13 +25,13 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String title = (String)request.getAttribute("liferay-ui:panel:title");
-String id = (String)request.getAttribute("liferay-ui:panel:id");
 boolean collapsible = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:collapsible"));
-String defaultState = (String)request.getAttribute("liferay-ui:panel:defaultState");
-boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:persistState"));
-boolean extended = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:extended"));
 String cssClass = (String)request.getAttribute("liferay-ui:panel:cssClass");
+String defaultState = (String)request.getAttribute("liferay-ui:panel:defaultState");
+boolean extended = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:extended"));
+String id = (String)request.getAttribute("liferay-ui:panel:id");
+boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:persistState"));
+String title = (String)request.getAttribute("liferay-ui:panel:title");
 
 IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute("liferay-ui:panel-container:panel-count");
 

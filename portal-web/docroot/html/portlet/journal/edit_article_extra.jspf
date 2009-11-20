@@ -44,8 +44,8 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "basic") %>'
 	align="right"
 >
-	<liferay-ui:panel-container id='<%= portletDisplay.getNamespace() + "journalExtras" %>' persistState="<%= true %>" extended="<%= Boolean.FALSE %>" cssClass="journal-extras">
-		<liferay-ui:panel id="<%= formStructureId %>" title="<%= formStructureTitle %>" defaultState="open" persistState="<%= true %>" extended="<%= false %>">
+	<liferay-ui:panel-container cssClass="journal-extras" extended="<%= false %>" id='<%= portletDisplay.getNamespace() + "journalExtras" %>' persistState="<%= true %>">
+		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="<%= formStructureId %>" persistState="<%= true %>" title="<%= formStructureTitle %>">
 			<div class="journal-form-presentation-label">
 				<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 				<aui:input name="structureName" type="hidden" value="<%= structureName %>" />
@@ -152,7 +152,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			</div>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel id="<%= formTemplateId %>" title="<%= formTemplateTitle %>" defaultState="open" persistState="<%= true %>" extended="<%= false %>">
+		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="<%= formTemplateId %>" persistState="<%= true %>" title="<%= formTemplateTitle %>">
 			<div class="journal-form-presentation-label">
 				<c:choose>
 					<c:when test="<%= templates.size() == 0 %>">
@@ -212,7 +212,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			</div>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel id="<%= workflowId %>" title="<%= workflowTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="<%= workflowId %>" persistState="<%= true %>" title="<%= workflowTitle %>">
 			<c:if test="<%= article != null %>">
 				<aui:select name="version" onChange='<%= renderResponse.getNamespace() + "changeVersionView(this.value);" %>'>
 
@@ -296,7 +296,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			</c:if>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel id="<%= categorizationId %>" title="<%= categorizationTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="<%= categorizationId %>" persistState="<%= true %>" title="<%= categorizationTitle %>">
 			<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
 			<aui:select name="type">
@@ -321,7 +321,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			<aui:input inlineLabel="left" label="searchable" name="indexable" />
 		</liferay-ui:panel>
 
-		<liferay-ui:panel id="<%= scheduleId %>" title="<%= scheduleTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="<%= scheduleId %>" persistState="<%= true %>" title="<%= scheduleTitle %>">
 			<liferay-ui:error exception="<%= ArticleDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
 			<liferay-ui:error exception="<%= ArticleExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 

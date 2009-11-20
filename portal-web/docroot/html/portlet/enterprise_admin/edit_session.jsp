@@ -105,8 +105,8 @@ userTracker = userTracker.toEscapedModel();
 					<%= userTracker.getRemoteAddr() %> / <%= userTracker.getRemoteHost() %>
 				</aui:field-wrapper>
 
-				<liferay-ui:panel-container id="sessionDetails" extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
-					<liferay-ui:panel id="accessedURL" title='<%= LanguageUtil.get(pageContext, "accessed-urls") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= false %>">
+				<liferay-ui:panel-container extended="<%= true %>" id="sessionDetails" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="accessedURL" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "accessed-urls") %>'>
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 							<%
@@ -138,7 +138,7 @@ userTracker = userTracker.toEscapedModel();
 							</table>
 					</liferay-ui:panel>
 
-					<liferay-ui:panel id="sessionAttributes" title='<%= LanguageUtil.get(pageContext, "session-attributes") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= false %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="sessionAttributes" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "session-attributes") %>'>
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 							<%

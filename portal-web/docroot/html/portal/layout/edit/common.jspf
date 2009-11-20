@@ -37,8 +37,8 @@ String robotsId = portletDisplay.getNamespace() + "robots";
 String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 %>
 
-<liferay-ui:panel-container id="<%= userSettingsId %>" persistState="<%= true %>" extended="<%= Boolean.TRUE %>" cssClass="page-extra-settings">
-	<liferay-ui:panel id="<%= metaTagsId %>" title="<%= metaTagsTitle %>" defaultState="closed">
+<liferay-ui:panel-container cssClass="page-extra-settings" extended="<%= true %>" id="<%= userSettingsId %>" persistState="<%= true %>">
+	<liferay-ui:panel defaultState="closed" id="<%= metaTagsId %>" title="<%= metaTagsTitle %>">
 		<table class="lfr-table">
 		<tr>
 			<td></td>
@@ -184,7 +184,7 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 		</table>
 	</liferay-ui:panel>
 
-	<liferay-ui:panel id="<%= javascriptId %>" title="<%= javascriptTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= true %>">
+	<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="<%= javascriptId %>" persistState="<%= true %>" title="<%= javascriptTitle %>">
 		<table class="lfr-table">
 		<tr>
 			<td>
@@ -230,7 +230,7 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 		String sitemapTitle = LanguageUtil.get(pageContext, "sitemap-protocol");
 		%>
 
-		<liferay-ui:panel id="<%= robotsId %>" title="<%= robotsTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="<%= robotsId %>" persistState="<%= true %>" title="<%= robotsTitle %>">
 
 			<%
 			boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);

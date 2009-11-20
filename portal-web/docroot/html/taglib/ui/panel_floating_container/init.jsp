@@ -25,14 +25,14 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String id = (String)request.getAttribute("liferay-ui:panel-floating-container:id");
-String trigger = (String)request.getAttribute("liferay-ui:panel-floating-container:trigger");
 boolean accordion = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:accordion"));
-boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:persistState"));
+String cssClass = (String)request.getAttribute("liferay-ui:panel-floating-container:cssClass");
+Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-floating-container:extended");
+String id = (String)request.getAttribute("liferay-ui:panel-floating-container:id");
 boolean paging = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:paging"));
 String pagingElements = (String)request.getAttribute("liferay-ui:panel-floating-container:pagingElements");
+boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:persistState"));
 int resultsPerPage = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:panel-floating-container:resultsPerPage"));
+String trigger = (String)request.getAttribute("liferay-ui:panel-floating-container:trigger");
 int width = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:panel-floating-container:width"));
-Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-floating-container:extended");
-String cssClass = (String)request.getAttribute("liferay-ui:panel-floating-container:cssClass");
 %>

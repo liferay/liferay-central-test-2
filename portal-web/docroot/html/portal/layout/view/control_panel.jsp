@@ -179,9 +179,9 @@ if (Validator.isNotNull(ppid)) {
 										</c:if>
 									</h2>
 
-									<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>">
+									<liferay-ui:panel-floating-container id="groupSelectorPanel" paging="<%= true %>" trigger=".lfr-group-selector">
 										<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
-											<liferay-ui:panel id="globalPanel" title='<%= LanguageUtil.get(pageContext, "shared") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="globalPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shared") %>'>
 												<ul>
 													<li>
 														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
@@ -196,7 +196,7 @@ if (Validator.isNotNull(ppid)) {
 										%>
 
 										<c:if test="<%= !manageableGroups.isEmpty() %>">
-											<liferay-ui:panel id="communityPanel" title='<%= LanguageUtil.get(pageContext, "communities") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="communityPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "communities") %>'>
 												<ul>
 
 													<%
@@ -222,7 +222,7 @@ if (Validator.isNotNull(ppid)) {
 										</c:if>
 
 										<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-											<liferay-ui:panel id="organizationsPanel" title='<%= LanguageUtil.get(pageContext, "organizations") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="organizationsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
 												<ul>
 
 													<%

@@ -700,7 +700,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			String abstractTitle = LanguageUtil.get(pageContext, "abstract");
 			%>
 
-			<liferay-ui:panel id="<%= abstractId %>" title="<%= abstractTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
+			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="<%= abstractId %>" persistState="<%= true %>" title="<%= abstractTitle %>">
 				<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
 				<%

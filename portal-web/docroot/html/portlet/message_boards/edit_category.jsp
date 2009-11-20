@@ -153,8 +153,8 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 		<br />
 
-		<liferay-ui:panel-container id="mailingList" extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
-			<liferay-ui:panel id="mailingListPanel" title='<%= LanguageUtil.get(pageContext, "mailing-list") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel-container extended="<%= true %>" id="mailingList" persistState="<%= true %>">
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="mailingListPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "mailing-list") %>'>
 
 				<aui:model-context bean="<%= mailingList %>" model="<%= MBMailingList.class %>" />
 

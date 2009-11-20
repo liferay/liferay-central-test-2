@@ -161,8 +161,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 		<c:choose>
 			<c:when test='<%= selectionStyle.equals("manual") %>'>
-				<liferay-ui:panel-container id='assetPublisherConfiguration' extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
-					<liferay-ui:panel id='assetPublisherSelection' title='<%= LanguageUtil.get(pageContext, "selection") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+				<liferay-ui:panel-container extended="<%= true %>" id='assetPublisherConfiguration' persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherSelection' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "selection") %>'>
 
 						<%
 						String portletId = portletResource;
@@ -303,7 +303,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherDisplaySettings' title='<%= LanguageUtil.get(pageContext, "display-settings") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherDisplaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
 						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>
@@ -315,8 +315,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 			</c:when>
 			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
-				<liferay-ui:panel-container id='assetPublisherConfiguration' extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
-					<liferay-ui:panel id='assetPublisherSources' title='<%= LanguageUtil.get(pageContext, "source") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+				<liferay-ui:panel-container extended="<%= true %>" id='assetPublisherConfiguration' persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherSources' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
 						<liferay-ui:message key="scope" />
 
 						<select name="<portlet:namespace />defaultScope" id="<portlet:namespace />defaultScope">
@@ -430,7 +430,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							/>
 						</div>
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "filter[action]") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherQueryLogic' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter[action]") %>'>
 						<liferay-ui:asset-tags-error />
 
 						<div id="<portlet:namespace />queryRules">
@@ -511,7 +511,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 												<div class="aui-ctrl-holder tags-selector" style="display:<%= Validator.equals(queryName, "assetTags") ? "block;" : "none;" %>">
 													<liferay-ui:asset-tags-selector
 														hiddenInput='<%= "queryTagNames" + index %>'
-														curTags='<%=  Validator.equals(queryName, "assetTags") ? queryValues : null %>'
+														curTags='<%= Validator.equals(queryName, "assetTags") ? queryValues : null %>'
 														focus="<%= false %>"
 													/>
 												</div>
@@ -621,7 +621,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 													{
 														instanceVar: tagsRandomNamespace,
 														seed: guid,
-														hiddenInput:  '<portlet:namespace/>queryTagNames',
+														hiddenInput: '<portlet:namespace/>queryTagNames',
 														summarySpan: tagsRandomNamespace + 'assetTagsSummary',
 														textInput: tagsRandomNamespace + 'assetTagNames',
 														focus: false
@@ -642,7 +642,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<liferay-ui:input-checkbox param="mergeUrlTags" defaultValue="<%= mergeUrlTags %>" />
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherGroupBy' title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherGroupBy' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
 						<liferay-ui:message key="order-by-column" /> 1
 
 						<select name="<portlet:namespace />orderByColumn1">
@@ -714,7 +714,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						</select>
 
 					</liferay-ui:panel>
-					<liferay-ui:panel id='assetPublisherDisplaySettings' title='<%= LanguageUtil.get(pageContext, "display-settings") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='assetPublisherDisplaySettings' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
 						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>

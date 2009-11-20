@@ -61,8 +61,8 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 
 	<aui:model-context bean="<%= passwordPolicy %>" model="<%= PasswordPolicy.class %>" />
 
-	<liferay-ui:panel-container id="editPasswordPolicy" extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
-		<liferay-ui:panel id="passwordPolicyGeneral" title='<%= LanguageUtil.get(pageContext, "general") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+	<liferay-ui:panel-container extended="<%= true %>" id="editPasswordPolicy" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="passwordPolicyGeneral" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "general") %>'>
 
 			<aui:fieldset>
 				<aui:input disabled="<%= defaultPolicy %>" name="name" />
@@ -92,7 +92,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel id="passwordSyntaxChecking" title='<%= LanguageUtil.get(pageContext, "password-syntax-checking") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="passwordSyntaxChecking" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "password-syntax-checking") %>'>
 			<aui:fieldset>
 
 				<aui:input helpMessage="syntax-checking-enabled-help" inlineLabel="left" label="syntax-checking-enabled" name="checkSyntax" />
@@ -105,7 +105,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel id="passwordHistory" title='<%= LanguageUtil.get(pageContext, "password-history") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="passwordHistory" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "password-history") %>'>
 			<aui:fieldset>
 
 				<aui:input helpMessage="history-enabled-help" inlineLabel="left" label="history-enabled" name="history" />
@@ -128,7 +128,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel id="passwordExpiration" title='<%= LanguageUtil.get(pageContext, "password-expiration") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="passwordExpiration" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "password-expiration") %>'>
 			<aui:fieldset>
 
 				<aui:input helpMessage="expiration-enabled-help" inlineLabel="left" label="expiration-enabled" name="expireable" />
@@ -167,7 +167,7 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel id="passwordLockout" title='<%= LanguageUtil.get(pageContext, "lockout") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="passwordLockout" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "lockout") %>'>
 			<aui:fieldset>
 				<aui:input helpMessage="lockout-enabled-help" inlineLabel="left" label="lockout-enabled" name="lockout" />
 
@@ -205,7 +205,6 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 				</div>
 			</aui:fieldset>
 		</liferay-ui:panel>
-
 	</liferay-ui:panel-container>
 
 	<aui:button-row>

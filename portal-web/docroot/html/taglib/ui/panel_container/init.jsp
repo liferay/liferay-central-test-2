@@ -25,9 +25,9 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String id = (String)request.getAttribute("liferay-ui:panel-container:id");
 boolean accordion = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-container:accordion"));
-boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-container:persistState"));
-Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
 String cssClass = (String)request.getAttribute("liferay-ui:panel-container:cssClass");
+Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
+String id = (String)request.getAttribute("liferay-ui:panel-container:id");
+boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-container:persistState"));
 %>
