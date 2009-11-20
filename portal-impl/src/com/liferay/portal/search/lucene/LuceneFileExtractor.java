@@ -56,8 +56,7 @@ public class LuceneFileExtractor {
 	}
 
 	public Field getFile(String field, byte[] bytes, String fileExt) {
-		InputStream is = new BufferedInputStream(
-			new ByteArrayInputStream(bytes));
+		InputStream is = new ByteArrayInputStream(bytes);
 
 		return getFile(field, is, fileExt);
 	}
