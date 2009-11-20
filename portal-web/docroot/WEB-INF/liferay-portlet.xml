@@ -124,6 +124,7 @@
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>
 		<asset-renderer-factory>com.liferay.portlet.journal.asset.JournalArticleAssetRendererFactory</asset-renderer-factory>
+		<workflow-handler>com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler</workflow-handler>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
