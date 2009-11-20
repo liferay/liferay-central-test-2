@@ -1564,7 +1564,7 @@ public class PropsValues {
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.USERS_DELETE));
 
-	public static final String USERS_EMAIL_ADDRESS_AUTO_SUFFIX = PropsUtil.get(
+	public static String USERS_EMAIL_ADDRESS_AUTO_SUFFIX = PropsUtil.get(
 		PropsKeys.USERS_EMAIL_ADDRESS_AUTO_SUFFIX);
 
 	public static final String USERS_EMAIL_ADDRESS_GENERATOR = PropsUtil.get(
