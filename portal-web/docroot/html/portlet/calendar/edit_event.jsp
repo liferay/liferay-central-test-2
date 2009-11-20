@@ -55,10 +55,6 @@ if (event != null) {
 	}
 }
 
-endDate.set(Calendar.HOUR_OF_DAY, 23);
-endDate.set(Calendar.MINUTE, 59);
-endDate.set(Calendar.SECOND, 59);
-
 int durationHour = BeanParamUtil.getInteger(event, request, "durationHour", 1);
 int durationMinute = BeanParamUtil.getInteger(event, request, "durationMinute");
 String type = BeanParamUtil.getString(event, request, "type");
@@ -245,7 +241,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 					<%--<aui:input inlineLabel="right" label="occurrence-s" maxlength="3" name="endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>" />--%>
 
-					<aui:input checked="<%= endDateType == 2 %>" cssClass="input-container" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="2" />
+					<aui:input checked="<%= endDateType == 2 %>" cssClass="input-container" inlineField="<%= true %>" label="until-inclusive" name="endDateType" type="radio" value="2" />
 
 					<aui:input label="" name="endDate" value="<%= endDate %>" />
 				</aui:field-wrapper>
@@ -304,12 +300,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <script type="text/javascript">
 	<portlet:namespace />init();
-
-	<%-- LEP-6018 --%>
-
-	document.<portlet:namespace />fm.<portlet:namespace />endDateHour.disabled = true;
-	document.<portlet:namespace />fm.<portlet:namespace />endDateMinute.disabled = true;
-	document.<portlet:namespace />fm.<portlet:namespace />endDateAmPm.disabled = true;
 </script>
 
 <%
