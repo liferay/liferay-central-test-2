@@ -196,6 +196,12 @@ COMMIT_TRANSACTION;
 
 update MBThread set status = 1;
 
+alter table Release_ add servletContextName VARCHAR(75);
+
+COMMIT_TRANSACTION;
+
+update Release_ set servletContextName = 'portal';
+
 alter table ShoppingItem add groupId LONG;
 
 create table UserGroupGroupRole (

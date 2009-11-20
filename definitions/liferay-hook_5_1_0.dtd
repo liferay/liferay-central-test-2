@@ -71,6 +71,7 @@ session.phishing.protected.attributes
 terms.of.use.required
 theme.css.fast.load
 theme.images.fast.load
+upgrade.processes
 users.screen.name.always.autogenerate
 users.screen.name.generator
 users.screen.name.validator

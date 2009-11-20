@@ -1151,6 +1151,10 @@ public interface PropsKeys {
 
 	public static final String REDIRECT_URL_SECURITY_MODE = "redirect.url.security.mode";
 
+	public static final String RELEASE_INFO_BUILD_NUMBER = "release.info.build.number";
+
+	public static final String RELEASE_INFO_PREVIOUS_BUILD_NUMBER = "release.info.previous.build.number";
+	
 	public static final String REQUEST_SHARED_ATTRIBUTES = "request.shared.attributes";
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";

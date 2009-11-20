@@ -22,6 +22,7 @@
 
 package com.liferay.portal.deploy.hot;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
@@ -44,6 +45,7 @@ import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -60,6 +62,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.model.Release;
 import com.liferay.portal.security.auth.AuthFailure;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
@@ -71,12 +74,14 @@ import com.liferay.portal.security.auth.ScreenNameValidator;
 import com.liferay.portal.security.auth.ScreenNameValidatorFactory;
 import com.liferay.portal.security.ldap.AttributesTransformer;
 import com.liferay.portal.security.ldap.AttributesTransformerFactory;
+import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.spring.aop.ServiceHookAdvice;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.MultiMessageResourcesFactory;
+import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -1126,6 +1131,13 @@ public class HookHotDeployListener
 
 			ScreenNameValidatorFactory.setInstance(screenNameValidator);
 		}
+
+		if (portalProperties.containsKey(PropsKeys.RELEASE_INFO_BUILD_NUMBER) ||
+			portalProperties.containsKey(PropsKeys.UPGRADE_PROCESSES)) {
+
+			updateRelease(
+				servletContextName, portletClassLoader, portalProperties);
+		}
 	}
 
 	protected void resetPortalProperties(
@@ -1260,6 +1272,63 @@ public class HookHotDeployListener
 		}
 
 		CacheUtil.clearCache();
+	}
+
+	protected void updateRelease(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		int buildNumber = GetterUtil.getInteger(
+			portalProperties.getProperty(PropsKeys.RELEASE_INFO_BUILD_NUMBER));
+
+		if (buildNumber <= 0) {
+			_log.error(
+				"Skipping upgrade processes for " + servletContextName +
+					" because \"release.info.build.number\" is not specified");
+
+			return;
+		}
+
+		Release release = null;
+
+		try {
+			release = ReleaseLocalServiceUtil.getRelease(
+				servletContextName, buildNumber);
+		}
+		catch (PortalException pe) {
+			int previousBuildNumber = GetterUtil.getInteger(
+				portalProperties.getProperty(
+					PropsKeys.RELEASE_INFO_PREVIOUS_BUILD_NUMBER),
+				buildNumber);
+
+			release = ReleaseLocalServiceUtil.addRelease(
+				servletContextName, previousBuildNumber);
+		}
+
+		if (buildNumber == release.getBuildNumber()) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Skipping upgrade processes for " + servletContextName +
+						" because it is already up to date");
+			}
+		}
+		else if (buildNumber < release.getBuildNumber()) {
+			throw new UpgradeException(
+				"Skipping upgrade processes for " + servletContextName +
+					" because you are trying to upgrade with an older version");
+		}
+		else {
+			String[] upgradeProcessClassNames = StringUtil.split(
+				portalProperties.getProperty(PropsKeys.UPGRADE_PROCESSES));
+
+			UpgradeProcessUtil.upgradeProcess(
+				release.getBuildNumber(), upgradeProcessClassNames,
+				portletClassLoader);
+		}
+
+		ReleaseLocalServiceUtil.updateRelease(
+			release.getReleaseId(), buildNumber, null, true);
 	}
 
 	private static final String[] _PROPS_KEYS_EVENTS = new String[] {

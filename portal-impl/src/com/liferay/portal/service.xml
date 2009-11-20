@@ -1212,10 +1212,17 @@
 
 		<!-- Other fields -->
 
+		<column name="servletContextName" type="String" />
 		<column name="buildNumber" type="int" />
 		<column name="buildDate" type="Date" />
 		<column name="verified" type="boolean" />
 		<column name="testString" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="ServletContextName" return-type="Release">
+			<finder-column name="servletContextName" />
+		</finder>
 	</entity>
 	<entity name="Resource" local-service="true" remote-service="true">
 

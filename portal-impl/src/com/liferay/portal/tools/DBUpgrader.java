@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.events.StartupHelperUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.model.ReleaseConstants;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
@@ -120,7 +122,18 @@ public class DBUpgrader {
 
 		// Verify
 
-		Release release = ReleaseLocalServiceUtil.getRelease();
+		Release release = null;
+
+		try {
+			release = ReleaseLocalServiceUtil.getRelease(
+				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME,
+				ReleaseInfo.getBuildNumber());
+		}
+		catch (PortalException pe) {
+			release = ReleaseLocalServiceUtil.addRelease(
+				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME,
+				ReleaseInfo.getBuildNumber());
+		}
 
 		StartupHelperUtil.verifyProcess(release.isVerified());
 
@@ -138,7 +151,9 @@ public class DBUpgrader {
 			verified = true;
 		}
 
-		ReleaseLocalServiceUtil.updateRelease(verified);
+		ReleaseLocalServiceUtil.updateRelease(
+			release.getReleaseId(), ReleaseInfo.getBuildNumber(),
+			ReleaseInfo.getBuildDate(), verified);
 
 		// Enable database caching after verify
 

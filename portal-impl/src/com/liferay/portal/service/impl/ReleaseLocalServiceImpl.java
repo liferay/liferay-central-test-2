@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseConstants;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
@@ -51,15 +52,35 @@ import java.util.Date;
  */
 public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
-	public Release addRelease() throws SystemException {
-		Release release = releasePersistence.create(
-			ReleaseConstants.DEFAULT_ID);
+	public Release addRelease(String servletContextName, int buildNumber)
+		throws SystemException {
+
+		Release release = null;
+
+		if (servletContextName.equals(
+				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME)) {
+
+			release = releasePersistence.create(
+				ReleaseConstants.DEFAULT_ID);
+		}
+		else {
+			long releaseId = counterLocalService.increment();
+
+			release = releasePersistence.create(releaseId);
+		}
 
 		Date now = new Date();
 
 		release.setCreateDate(now);
 		release.setModifiedDate(now);
-		release.setTestString(ReleaseConstants.TEST_STRING);
+		release.setServletContextName(servletContextName);
+		release.setBuildNumber(buildNumber);
+
+		if (servletContextName.equals(
+				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME)) {
+
+			release.setTestString(ReleaseConstants.TEST_STRING);
+		}
 
 		releasePersistence.update(release, false);
 
@@ -105,6 +126,8 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 			ps = con.prepareStatement(_GET_BUILD_NUMBER);
 
+			ps.setLong(1, ReleaseConstants.DEFAULT_ID);
+
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -141,7 +164,11 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 			testSupportsStringCaseSensitiveQuery();
 
-			return getRelease().getBuildNumber();
+			Release release = getRelease(
+				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME,
+				ReleaseInfo.getBuildNumber());
+
+			return release.getBuildNumber();
 		}
 		else {
 			throw new NoSuchReleaseException(
@@ -149,23 +176,41 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		}
 	}
 
-	public Release getRelease() throws SystemException {
-		Release release = releasePersistence.fetchByPrimaryKey(
-			ReleaseConstants.DEFAULT_ID);
+	public Release getRelease(String servletContextName, int buildNumber)
+		throws PortalException, SystemException {
 
-		if (release == null) {
-			release = releaseLocalService.addRelease();
+		if (Validator.isNull(servletContextName)) {
+			throw new IllegalArgumentException(
+				"Servlet context name cannot be null");
+		}
+
+		servletContextName = servletContextName.toLowerCase();
+
+		Release release = null;
+
+		if (servletContextName.equals(
+				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME)) {
+
+			release = releasePersistence.findByPrimaryKey(
+				ReleaseConstants.DEFAULT_ID);
+		}
+		else {
+			release = releasePersistence.findByServletContextName(
+				servletContextName);
 		}
 
 		return release;
 	}
 
-	public Release updateRelease(boolean verified) throws SystemException {
-		Release release = getRelease();
+	public Release updateRelease(
+			long releaseId, int buildNumber, Date buildDate, boolean verified)
+		throws PortalException, SystemException {
+
+		Release release = releasePersistence.findByPrimaryKey(releaseId);
 
 		release.setModifiedDate(new Date());
-		release.setBuildNumber(ReleaseInfo.getBuildNumber());
-		release.setBuildDate(ReleaseInfo.getBuildDate());
+		release.setBuildNumber(buildNumber);
+		release.setBuildDate(buildDate);
 		release.setVerified(verified);
 
 		releasePersistence.update(release, false);
@@ -235,7 +280,8 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 			ps = con.prepareStatement(_TEST_DATABASE_STRING_CASE_SENSITIVITY);
 
-			ps.setString(1, testString);
+			ps.setLong(1, ReleaseConstants.DEFAULT_ID);
+			ps.setString(2, testString);
 
 			rs = ps.executeQuery();
 
@@ -256,10 +302,10 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 	}
 
 	private static final String _GET_BUILD_NUMBER =
-		"select buildNumber from Release_";
+		"select buildNumber from Release_ where releaseId = ?";
 
 	private static final String _TEST_DATABASE_STRING_CASE_SENSITIVITY =
-		"select count(*) from Release_ where testString = ?";
+		"select count(*) from Release_ where releaseId = ? and testString = ?";
 
 	private static Log _log =
 		LogFactoryUtil.getLog(ReleaseLocalServiceImpl.class);
