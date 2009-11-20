@@ -953,9 +953,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="startDate" type="Date" />
-		<field name="endDate" type="Date">
-			<hint name="show-time">false</hint>
-		</field>
+		<field name="endDate" type="Date" />
 		<field name="durationHour" type="int" />
 		<field name="durationMinute" type="int" />
 		<field name="allDay" type="boolean" />
