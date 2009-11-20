@@ -1564,15 +1564,14 @@ public class PropsValues {
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.USERS_DELETE));
 
-	public static String USERS_EMAIL_ADDRESS_AUTO_SUFFIX = PropsUtil.get(
+	public static final String USERS_EMAIL_ADDRESS_AUTO_SUFFIX = PropsUtil.get(
 		PropsKeys.USERS_EMAIL_ADDRESS_AUTO_SUFFIX);
 
 	public static final String USERS_EMAIL_ADDRESS_GENERATOR = PropsUtil.get(
 		PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR);
 
-	public static final boolean USERS_EMAIL_ADDRESS_REQUIRED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED));
+	public static boolean USERS_EMAIL_ADDRESS_REQUIRED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED));
 
 	public static final String[] USERS_FORM_ADD_IDENTIFICATION =
 		PropsUtil.getArray(PropsKeys.USERS_FORM_ADD_IDENTIFICATION);
