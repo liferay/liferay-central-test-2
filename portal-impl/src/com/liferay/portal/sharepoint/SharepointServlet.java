@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.sharepoint.methods.Method;
@@ -35,9 +36,11 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
+import java.io.InputStreamReader;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -110,27 +113,10 @@ public class SharepointServlet extends HttpServlet {
 		}
 
 		try {
-			InputStream is = new BufferedInputStream(request.getInputStream());
-
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			BufferedOutputStream bos = new BufferedOutputStream(baos);
-
-			int c = is.read();
-
-			while (c != -1) {
-				bos.write(c);
-
-				if (c == CharPool.NEW_LINE) {
-					break;
-				}
-
-				c = is.read();
-			}
-
-			bos.flush();
-			bos.close();
-
-			String url = new String(baos.toByteArray());
+			InputStream is = request.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			String url = br.readLine();
+			
 
 			String[] params = url.split(StringPool.AMPERSAND);
 
@@ -147,21 +133,9 @@ public class SharepointServlet extends HttpServlet {
 				sharepointRequest.addParam(key, value);
 			}
 
-			c = is.read();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-			baos = new ByteArrayOutputStream();
-			bos = new BufferedOutputStream(baos);
-
-			while (c != -1) {
-				bos.write(c);
-
-				c = is.read();
-			}
-
-			is.close();
-
-			bos.flush();
-			bos.close();
+			StreamUtil.transfer(is, baos);
 
 			sharepointRequest.setBytes(baos.toByteArray());
 		}
