@@ -596,6 +596,7 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="servletContextName" />
 			<basic name="buildNumber" />
 			<basic name="buildDate">
 				<temporal>TIMESTAMP</temporal>

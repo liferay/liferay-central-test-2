@@ -32,13 +32,16 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
@@ -69,6 +72,12 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	public static final String FINDER_CLASS_NAME_ENTITY = ReleaseImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME = new FinderPath(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
+			ReleaseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByServletContextName", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_SERVLETCONTEXTNAME = new FinderPath(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
+			ReleaseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByServletContextName", new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -79,6 +88,9 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	public void cacheResult(Release release) {
 		EntityCacheUtil.putResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseImpl.class, release.getPrimaryKey(), release);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+			new Object[] { release.getServletContextName() }, release);
 	}
 
 	public void cacheResult(List<Release> releases) {
@@ -189,6 +201,11 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)release;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+			new Object[] { releaseModelImpl.getOriginalServletContextName() });
+
 		EntityCacheUtil.removeResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseImpl.class, release.getPrimaryKey());
 
@@ -198,6 +215,10 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	public Release updateImpl(com.liferay.portal.model.Release release,
 		boolean merge) throws SystemException {
 		release = toUnwrappedModel(release);
+
+		boolean isNew = release.isNew();
+
+		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)release;
 
 		Session session = null;
 
@@ -220,6 +241,20 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		EntityCacheUtil.putResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseImpl.class, release.getPrimaryKey(), release);
 
+		if (!isNew &&
+				(!Validator.equals(release.getServletContextName(),
+					releaseModelImpl.getOriginalServletContextName()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+				new Object[] { releaseModelImpl.getOriginalServletContextName() });
+		}
+
+		if (isNew ||
+				(!Validator.equals(release.getServletContextName(),
+					releaseModelImpl.getOriginalServletContextName()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+				new Object[] { release.getServletContextName() }, release);
+		}
+
 		return release;
 	}
 
@@ -236,6 +271,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		releaseImpl.setReleaseId(release.getReleaseId());
 		releaseImpl.setCreateDate(release.getCreateDate());
 		releaseImpl.setModifiedDate(release.getModifiedDate());
+		releaseImpl.setServletContextName(release.getServletContextName());
 		releaseImpl.setBuildNumber(release.getBuildNumber());
 		releaseImpl.setBuildDate(release.getBuildDate());
 		releaseImpl.setVerified(release.isVerified());
@@ -297,6 +333,127 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		}
 
 		return release;
+	}
+
+	public Release findByServletContextName(String servletContextName)
+		throws NoSuchReleaseException, SystemException {
+		Release release = fetchByServletContextName(servletContextName);
+
+		if (release == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Release exists with the key {");
+
+			msg.append("servletContextName=" + servletContextName);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchReleaseException(msg.toString());
+		}
+
+		return release;
+	}
+
+	public Release fetchByServletContextName(String servletContextName)
+		throws SystemException {
+		return fetchByServletContextName(servletContextName, true);
+	}
+
+	public Release fetchByServletContextName(String servletContextName,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { servletContextName };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT release FROM Release release WHERE ");
+
+				if (servletContextName == null) {
+					query.append("release.servletContextName IS NULL");
+				}
+				else {
+					if (servletContextName.equals(StringPool.BLANK)) {
+						query.append("(release.servletContextName IS NULL OR ");
+					}
+
+					query.append("release.servletContextName = ?");
+
+					if (servletContextName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (servletContextName != null) {
+					qPos.add(servletContextName);
+				}
+
+				List<Release> list = q.list();
+
+				result = list;
+
+				Release release = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+						finderArgs, list);
+				}
+				else {
+					release = list.get(0);
+
+					cacheResult(release);
+
+					if ((release.getServletContextName() == null) ||
+							!release.getServletContextName()
+										.equals(servletContextName)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+							finderArgs, release);
+					}
+				}
+
+				return release;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+						finderArgs, new ArrayList<Release>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (Release)result;
+			}
+		}
 	}
 
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
@@ -420,10 +577,80 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		return list;
 	}
 
+	public void removeByServletContextName(String servletContextName)
+		throws NoSuchReleaseException, SystemException {
+		Release release = findByServletContextName(servletContextName);
+
+		remove(release);
+	}
+
 	public void removeAll() throws SystemException {
 		for (Release release : findAll()) {
 			remove(release);
 		}
+	}
+
+	public int countByServletContextName(String servletContextName)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { servletContextName };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SERVLETCONTEXTNAME,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(release) ");
+				query.append("FROM Release release WHERE ");
+
+				if (servletContextName == null) {
+					query.append("release.servletContextName IS NULL");
+				}
+				else {
+					if (servletContextName.equals(StringPool.BLANK)) {
+						query.append("(release.servletContextName IS NULL OR ");
+					}
+
+					query.append("release.servletContextName = ?");
+
+					if (servletContextName.equals(StringPool.BLANK)) {
+						query.append(")");
+					}
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (servletContextName != null) {
+					qPos.add(servletContextName);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SERVLETCONTEXTNAME,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {

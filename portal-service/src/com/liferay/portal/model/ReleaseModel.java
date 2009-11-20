@@ -66,6 +66,10 @@ public interface ReleaseModel extends BaseModel<Release> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	public String getServletContextName();
+
+	public void setServletContextName(String servletContextName);
+
 	public int getBuildNumber();
 
 	public void setBuildNumber(int buildNumber);

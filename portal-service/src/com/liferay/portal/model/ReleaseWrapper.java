@@ -76,6 +76,14 @@ public class ReleaseWrapper implements Release {
 		_release.setModifiedDate(modifiedDate);
 	}
 
+	public java.lang.String getServletContextName() {
+		return _release.getServletContextName();
+	}
+
+	public void setServletContextName(java.lang.String servletContextName) {
+		_release.setServletContextName(servletContextName);
+	}
+
 	public int getBuildNumber() {
 		return _release.getBuildNumber();
 	}

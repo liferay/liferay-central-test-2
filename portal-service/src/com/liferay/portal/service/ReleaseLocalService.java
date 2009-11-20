@@ -96,7 +96,8 @@ public interface ReleaseLocalService {
 		com.liferay.portal.model.Release release, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Release addRelease()
+	public com.liferay.portal.model.Release addRelease(
+		java.lang.String servletContextName, int buildNumber)
 		throws com.liferay.portal.SystemException;
 
 	public void createTablesAndPopulate()
@@ -108,9 +109,13 @@ public interface ReleaseLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.Release getRelease()
-		throws com.liferay.portal.SystemException;
+	public com.liferay.portal.model.Release getRelease(
+		java.lang.String servletContextName, int buildNumber)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Release updateRelease(boolean verified)
-		throws com.liferay.portal.SystemException;
+	public com.liferay.portal.model.Release updateRelease(long releaseId,
+		int buildNumber, java.util.Date buildDate, boolean verified)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

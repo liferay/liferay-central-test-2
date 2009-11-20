@@ -118,6 +118,27 @@ public class ReleaseUtil {
 		return getPersistence().fetchByPrimaryKey(releaseId);
 	}
 
+	public static com.liferay.portal.model.Release findByServletContextName(
+		java.lang.String servletContextName)
+		throws com.liferay.portal.NoSuchReleaseException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findByServletContextName(servletContextName);
+	}
+
+	public static com.liferay.portal.model.Release fetchByServletContextName(
+		java.lang.String servletContextName)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByServletContextName(servletContextName);
+	}
+
+	public static com.liferay.portal.model.Release fetchByServletContextName(
+		java.lang.String servletContextName, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByServletContextName(servletContextName,
+			retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Release> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
@@ -134,8 +155,21 @@ public class ReleaseUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
+	public static void removeByServletContextName(
+		java.lang.String servletContextName)
+		throws com.liferay.portal.NoSuchReleaseException,
+			com.liferay.portal.SystemException {
+		getPersistence().removeByServletContextName(servletContextName);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByServletContextName(
+		java.lang.String servletContextName)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByServletContextName(servletContextName);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

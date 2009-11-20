@@ -67,12 +67,13 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 			{ "releaseId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "servletContextName", new Integer(Types.VARCHAR) },
 			{ "buildNumber", new Integer(Types.INTEGER) },
 			{ "buildDate", new Integer(Types.TIMESTAMP) },
 			{ "verified", new Integer(Types.BOOLEAN) },
 			{ "testString", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN,testString VARCHAR(1024) null)";
+	public static final String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,servletContextName VARCHAR(75) null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN,testString VARCHAR(1024) null)";
 	public static final String TABLE_SQL_DROP = "drop table Release_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -90,6 +91,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		model.setReleaseId(soapModel.getReleaseId());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setServletContextName(soapModel.getServletContextName());
 		model.setBuildNumber(soapModel.getBuildNumber());
 		model.setBuildDate(soapModel.getBuildDate());
 		model.setVerified(soapModel.getVerified());
@@ -150,6 +152,22 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		_modifiedDate = modifiedDate;
 	}
 
+	public String getServletContextName() {
+		return GetterUtil.getString(_servletContextName);
+	}
+
+	public void setServletContextName(String servletContextName) {
+		_servletContextName = servletContextName;
+
+		if (_originalServletContextName == null) {
+			_originalServletContextName = servletContextName;
+		}
+	}
+
+	public String getOriginalServletContextName() {
+		return GetterUtil.getString(_originalServletContextName);
+	}
+
 	public int getBuildNumber() {
 		return _buildNumber;
 	}
@@ -199,6 +217,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 			model.setReleaseId(getReleaseId());
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
+			model.setServletContextName(HtmlUtil.escape(getServletContextName()));
 			model.setBuildNumber(getBuildNumber());
 			model.setBuildDate(getBuildDate());
 			model.setVerified(getVerified());
@@ -231,6 +250,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		clone.setReleaseId(getReleaseId());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setServletContextName(getServletContextName());
 		clone.setBuildNumber(getBuildNumber());
 		clone.setBuildDate(getBuildDate());
 		clone.setVerified(getVerified());
@@ -290,6 +310,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", servletContextName=");
+		sb.append(getServletContextName());
 		sb.append(", buildNumber=");
 		sb.append(getBuildNumber());
 		sb.append(", buildDate=");
@@ -323,6 +345,10 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>servletContextName</column-name><column-value><![CDATA[");
+		sb.append(getServletContextName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>buildNumber</column-name><column-value><![CDATA[");
 		sb.append(getBuildNumber());
 		sb.append("]]></column-value></column>");
@@ -347,6 +373,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	private long _releaseId;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _servletContextName;
+	private String _originalServletContextName;
 	private int _buildNumber;
 	private Date _buildDate;
 	private boolean _verified;

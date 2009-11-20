@@ -104,9 +104,10 @@ public class ReleaseLocalServiceWrapper implements ReleaseLocalService {
 		return _releaseLocalService.updateRelease(release, merge);
 	}
 
-	public com.liferay.portal.model.Release addRelease()
+	public com.liferay.portal.model.Release addRelease(
+		java.lang.String servletContextName, int buildNumber)
 		throws com.liferay.portal.SystemException {
-		return _releaseLocalService.addRelease();
+		return _releaseLocalService.addRelease(servletContextName, buildNumber);
 	}
 
 	public void createTablesAndPopulate()
@@ -120,14 +121,19 @@ public class ReleaseLocalServiceWrapper implements ReleaseLocalService {
 		return _releaseLocalService.getBuildNumberOrCreate();
 	}
 
-	public com.liferay.portal.model.Release getRelease()
-		throws com.liferay.portal.SystemException {
-		return _releaseLocalService.getRelease();
+	public com.liferay.portal.model.Release getRelease(
+		java.lang.String servletContextName, int buildNumber)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _releaseLocalService.getRelease(servletContextName, buildNumber);
 	}
 
-	public com.liferay.portal.model.Release updateRelease(boolean verified)
-		throws com.liferay.portal.SystemException {
-		return _releaseLocalService.updateRelease(verified);
+	public com.liferay.portal.model.Release updateRelease(long releaseId,
+		int buildNumber, java.util.Date buildDate, boolean verified)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _releaseLocalService.updateRelease(releaseId, buildNumber,
+			buildDate, verified);
 	}
 
 	public ReleaseLocalService getWrappedReleaseLocalService() {

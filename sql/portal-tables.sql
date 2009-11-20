@@ -1119,6 +1119,7 @@ create table Release_ (
 	releaseId LONG not null primary key,
 	createDate DATE null,
 	modifiedDate DATE null,
+	servletContextName VARCHAR(75) null,
 	buildNumber INTEGER,
 	buildDate DATE null,
 	verified BOOLEAN,

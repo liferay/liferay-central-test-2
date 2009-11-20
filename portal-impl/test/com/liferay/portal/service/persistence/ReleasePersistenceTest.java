@@ -76,6 +76,7 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 
 		newRelease.setCreateDate(nextDate());
 		newRelease.setModifiedDate(nextDate());
+		newRelease.setServletContextName(randomString());
 		newRelease.setBuildNumber(nextInt());
 		newRelease.setBuildDate(nextDate());
 		newRelease.setVerified(randomBoolean());
@@ -90,6 +91,8 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newRelease.getCreateDate()));
 		assertEquals(Time.getShortTimestamp(existingRelease.getModifiedDate()),
 			Time.getShortTimestamp(newRelease.getModifiedDate()));
+		assertEquals(existingRelease.getServletContextName(),
+			newRelease.getServletContextName());
 		assertEquals(existingRelease.getBuildNumber(),
 			newRelease.getBuildNumber());
 		assertEquals(Time.getShortTimestamp(existingRelease.getBuildDate()),
@@ -171,6 +174,7 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 
 		release.setCreateDate(nextDate());
 		release.setModifiedDate(nextDate());
+		release.setServletContextName(randomString());
 		release.setBuildNumber(nextInt());
 		release.setBuildDate(nextDate());
 		release.setVerified(randomBoolean());

@@ -486,6 +486,7 @@
 		<field name="releaseId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="servletContextName" type="String" />
 		<field name="buildNumber" type="int" />
 		<field name="buildDate" type="Date" />
 		<field name="verified" type="boolean" />

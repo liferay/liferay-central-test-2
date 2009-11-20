@@ -106,9 +106,10 @@ public class ReleaseLocalServiceUtil {
 		return getService().updateRelease(release, merge);
 	}
 
-	public static com.liferay.portal.model.Release addRelease()
+	public static com.liferay.portal.model.Release addRelease(
+		java.lang.String servletContextName, int buildNumber)
 		throws com.liferay.portal.SystemException {
-		return getService().addRelease();
+		return getService().addRelease(servletContextName, buildNumber);
 	}
 
 	public static void createTablesAndPopulate()
@@ -122,14 +123,20 @@ public class ReleaseLocalServiceUtil {
 		return getService().getBuildNumberOrCreate();
 	}
 
-	public static com.liferay.portal.model.Release getRelease()
-		throws com.liferay.portal.SystemException {
-		return getService().getRelease();
+	public static com.liferay.portal.model.Release getRelease(
+		java.lang.String servletContextName, int buildNumber)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getRelease(servletContextName, buildNumber);
 	}
 
 	public static com.liferay.portal.model.Release updateRelease(
-		boolean verified) throws com.liferay.portal.SystemException {
-		return getService().updateRelease(verified);
+		long releaseId, int buildNumber, java.util.Date buildDate,
+		boolean verified)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateRelease(releaseId, buildNumber, buildDate, verified);
 	}
 
 	public static ReleaseLocalService getService() {
