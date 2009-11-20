@@ -78,20 +78,19 @@ public class NtlmFilter extends BasePortalFilter {
 
 			ntlmFilter.init(filterConfig);
 
-			Properties properties = PropsUtil.getProperties(
-				"jcifs.", false);
+			Properties properties = PropsUtil.getProperties("jcifs.", false);
 
 			Iterator<Map.Entry<Object, Object>> itr =
 				properties.entrySet().iterator();
 
-		    while (itr.hasNext()) {
-			    Map.Entry<Object, Object> entry = itr.next();
+			while (itr.hasNext()) {
+				Map.Entry<Object, Object> entry = itr.next();
 
-			    String key = (String)entry.getKey();
-			    String value = (String)entry.getValue();
+				String key = (String)entry.getKey();
+				String value = (String)entry.getValue();
 
-			    Config.setProperty(key, value);
-		    }
+				Config.setProperty(key, value);
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
