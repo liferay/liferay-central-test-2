@@ -190,27 +190,33 @@ public class HookHotDeployListener
 
 		resetPortalProperties(servletContextName, portalProperties, false);
 
-		if (portalProperties.contains(PropsKeys.DL_HOOK_IMPL)) {
+		if (portalProperties.containsKey(PropsKeys.DL_HOOK_IMPL)) {
 			com.liferay.documentlibrary.util.HookFactory.setInstance(null);
 		}
 
-		if (portalProperties.contains(PropsKeys.IMAGE_HOOK_IMPL)) {
+		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {
 			com.liferay.portal.image.HookFactory.setInstance(null);
 		}
 
-		if (portalProperties.contains(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
+		if (portalProperties.containsKey(
+				PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
+
 			AttributesTransformerFactory.setInstance(null);
 		}
 
-		if (portalProperties.contains(PropsKeys.MAIL_HOOK_IMPL)) {
+		if (portalProperties.containsKey(PropsKeys.MAIL_HOOK_IMPL)) {
 			com.liferay.mail.util.HookFactory.setInstance(null);
 		}
 
-		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_GENERATOR)) {
+		if (portalProperties.containsKey(
+				PropsKeys.USERS_SCREEN_NAME_GENERATOR)) {
+
 			ScreenNameGeneratorFactory.setInstance(null);
 		}
 
-		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_VALIDATOR)) {
+		if (portalProperties.containsKey(
+				PropsKeys.USERS_SCREEN_NAME_VALIDATOR)) {
+
 			ScreenNameValidatorFactory.setInstance(null);
 		}
 	}
@@ -1010,7 +1016,7 @@ public class HookHotDeployListener
 
 		resetPortalProperties(servletContextName, portalProperties, true);
 
-		if (portalProperties.contains(PropsKeys.DL_HOOK_IMPL)) {
+		if (portalProperties.containsKey(PropsKeys.DL_HOOK_IMPL)) {
 			String dlHookClassName = portalProperties.getProperty(
 				PropsKeys.DL_HOOK_IMPL);
 
@@ -1028,7 +1034,7 @@ public class HookHotDeployListener
 			com.liferay.documentlibrary.util.HookFactory.setInstance(dlHook);
 		}
 
-		if (portalProperties.contains(PropsKeys.IMAGE_HOOK_IMPL)) {
+		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {
 			String imageHookClassName = portalProperties.getProperty(
 				PropsKeys.IMAGE_HOOK_IMPL);
 
@@ -1046,7 +1052,9 @@ public class HookHotDeployListener
 			com.liferay.portal.image.HookFactory.setInstance(imageHook);
 		}
 
-		if (portalProperties.contains(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
+		if (portalProperties.containsKey(
+				PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
+
 			String attributesTransformerClassName =
 				portalProperties.getProperty(
 					PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL);
@@ -1065,7 +1073,7 @@ public class HookHotDeployListener
 			AttributesTransformerFactory.setInstance(attributesTransformer);
 		}
 
-		if (portalProperties.contains(PropsKeys.MAIL_HOOK_IMPL)) {
+		if (portalProperties.containsKey(PropsKeys.MAIL_HOOK_IMPL)) {
 			String mailHookClassName = portalProperties.getProperty(
 				PropsKeys.MAIL_HOOK_IMPL);
 
@@ -1083,7 +1091,9 @@ public class HookHotDeployListener
 			com.liferay.mail.util.HookFactory.setInstance(mailHook);
 		}
 
-		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_GENERATOR)) {
+		if (portalProperties.containsKey(
+				PropsKeys.USERS_SCREEN_NAME_GENERATOR)) {
+
 			String screenNameGeneratorClassName = portalProperties.getProperty(
 				PropsKeys.USERS_SCREEN_NAME_GENERATOR);
 
@@ -1099,7 +1109,9 @@ public class HookHotDeployListener
 			ScreenNameGeneratorFactory.setInstance(screenNameGenerator);
 		}
 
-		if (portalProperties.contains(PropsKeys.USERS_SCREEN_NAME_VALIDATOR)) {
+		if (portalProperties.containsKey(
+				PropsKeys.USERS_SCREEN_NAME_VALIDATOR)) {
+
 			String screenNameValidatorClassName = portalProperties.getProperty(
 				PropsKeys.USERS_SCREEN_NAME_VALIDATOR);
 
