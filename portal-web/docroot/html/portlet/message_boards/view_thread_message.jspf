@@ -167,7 +167,7 @@
 
 				<%
 				boolean showAnswerFlag = false;
-				boolean hasReplyPermission = MBCategoryPermission.contains(permissionChecker, scopeGroupId, category.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE);
+				boolean hasReplyPermission = MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE);
 
 				if (!message.isRoot()) {
 					MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
