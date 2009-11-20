@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.filters.strip;
 
+import com.liferay.portal.kernel.servlet.StringServletOutputStream;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.ByteArrayOutputStream;
@@ -119,7 +120,7 @@ public class StripResponse extends HttpServletResponseWrapper {
 	}
 
 	protected ServletOutputStream createOutputStream() {
-		return new StripStream(_baos);
+		return new StringServletOutputStream(_baos);
 	}
 
 	private ByteArrayOutputStream _baos = new ByteArrayOutputStream();
