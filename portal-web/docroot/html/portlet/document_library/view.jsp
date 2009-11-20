@@ -110,7 +110,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 						</c:if>
 
 						<c:if test="<%= foldersCount > 0 %>">
-							<liferay-ui:panel collapsible="<%= true extended="<%= true %>" id="subFoldersPanel" %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>'>
+							<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>'>
 								<liferay-ui:search-container
 									curParam="cur1"
 									delta="<%= foldersPerPage %>"
