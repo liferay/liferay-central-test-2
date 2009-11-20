@@ -118,7 +118,7 @@ public class StripResponse extends HttpServletResponseWrapper {
 		if(_baos != null) {
 			return _baos.toByteArray();
 		}
-		return new byte[0];
+		return null;
 	}
 
 	protected ServletOutputStream createOutputStream() {
