@@ -278,19 +278,21 @@
 			var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
 
 			function showHiddenFields () {
-				var abstractLength = A.one('#abstractLength');
 				var assetLinkBehaviour = A.one('#assetLinkBehaviour');
 				var hiddenFields = A.all('.hidden-field');
 				var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
-				var showAssetTitle = A.one('#showAssetTitle');
-				var showContextLink = A.one('#showContextLink');
 
 				if (hiddenFields) {
 					hiddenFields.hide();
 				}
 
 				if (selectDisplayStyle) {
-					if (selectDisplayStyle.val() == 'full-content') {
+					var displayStyle = selectDisplayStyle.val();
+
+					if (displayStyle == 'full-content') {
+						var showAssetTitle = A.one('#showAssetTitle');
+						var showContextLink = A.one('#showContextLink');
+
 						if (showAssetTitle) {
 							showAssetTitle.show();
 						}
@@ -299,16 +301,15 @@
 							showContextLink.show();
 						}
 					}
-					else if (selectDisplayStyle.val() == 'abstracts') {
-						if (abstractLength) {
-							abstractLength.show();
+					else {
+						if (displayStyle == 'abstracts') {
+							var abstractLength = A.one('#abstractLength');
+
+							if (abstractLength) {
+								abstractLength.show();
+							}
 						}
 
-						if (assetLinkBehaviour) {
-							assetLinkBehaviour.show();
-						}
-					}
-					else {
 						if (assetLinkBehaviour) {
 							assetLinkBehaviour.show();
 						}
@@ -319,12 +320,7 @@
 			showHiddenFields();
 
 			if (selectDisplayStyle) {
-				selectDisplayStyle.on(
-					'change',
-					function(event) {
-						showHiddenFields();
-					}
-				);
+				selectDisplayStyle.on('change', showHiddenFields);
 
 				Liferay.Util.focusFormField(selectDisplayStyle);
 			}

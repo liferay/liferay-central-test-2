@@ -558,7 +558,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 										if (selectFields) {
 											selectFields.each(
 												function(select) {
-													var row = select.get('parentNode').get('parentNode');
+													var row = select.get('parentNode.parentNode');
 
 													select.on(
 														'change',
