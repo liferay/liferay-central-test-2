@@ -97,12 +97,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 
 			showHiddenFields();
 
-			showAssetCount.on(
-				'change',
-				function(event) {
-					showHiddenFields();
-				}
-			);
+			showAssetCount.on('change', showHiddenFields);
 		}
 	);
 </script>
