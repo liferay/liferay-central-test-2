@@ -2236,6 +2236,7 @@ merge-with-parent-category=親カテゴリとマージする
 merge-with-parent-folder=親フォルダとマージする
 merge=併合
 message-added-email=メッセージ追加通知
+message-boards-home=伝言板は家へ帰る (Automatic Translation)
 message-boards-message-anonymous-help=ここをチェックすれば、このメッセージは匿名として投稿されます。
 message-boards-message-question-help=ここをチェックすれば、このメッセージに対する返信は返信済みとしてマークされます。
 message-headers=メッセージのヘッダ

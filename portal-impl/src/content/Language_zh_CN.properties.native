@@ -2236,6 +2236,7 @@ merge-with-parent-category=以父项类别合并
 merge-with-parent-folder=以父项文件夹合并
 merge=合并
 message-added-email=添加消息的电子邮件
+message-boards-home=留言簿回家 (Automatic Translation)
 message-boards-message-anonymous-help=如果选中此项，则此消息将匿名发布。
 message-boards-message-question-help=如果选中此项，则此消息随后的回复可以被标记为答复。
 message-headers=消息标题

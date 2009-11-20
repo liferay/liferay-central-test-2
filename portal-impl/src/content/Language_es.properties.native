@@ -2235,6 +2235,7 @@ merge-with-parent-category=Fusionar con categoría padre
 merge-with-parent-folder=Fusionar con la carpeta padre
 merge=Fusión
 message-added-email=Notificación de mensaje añadido
+message-boards-home=Los tableros de mensaje se dirigen (Automatic Translation)
 message-boards-message-anonymous-help=Si esta opción está seleccionada, el mensaje se mostrará como anónimo.
 message-boards-message-question-help=Si esta opción está seleccionada, las contestaciones a este mensaje se pueden marcar como respuestas.
 message-headers=Cabeceras del mensaje

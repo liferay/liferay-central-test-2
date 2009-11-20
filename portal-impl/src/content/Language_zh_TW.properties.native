@@ -2236,6 +2236,7 @@ merge-with-parent-category=合併以父母類別
 merge-with-parent-folder=合併與父母文件夾
 merge=合併
 message-added-email=消息增加的電子郵件
+message-boards-home=留言簿回家 (Automatic Translation)
 message-boards-message-anonymous-help=如果這被檢查，则這則消息將被宣布匿名。
 message-boards-message-question-help=如果這被檢查，则給這則消息的隨後回復可以被標記作为答復。
 message-headers=訊息標題
