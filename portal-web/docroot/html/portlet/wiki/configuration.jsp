@@ -196,7 +196,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 
 				<aui:input cssClass="lfr-textarea-container" label="body" name="<%= bodyEditorParam %>" type="textarea" value="<%= bodyEditorBody %>" />
 
-				<aui:input cssClass="lfr-textarea-container" label="signature" name="<%= signatureEditorParam %>"  type="textarea" value="<%= signatureEditorBody %>" wrap="soft" />
+				<aui:input cssClass="lfr-textarea-container" label="signature" name="<%= signatureEditorParam %>" type="textarea" value="<%= signatureEditorBody %>" wrap="soft" />
 			</aui:fieldset>
 
 			<strong><liferay-ui:message key="definition-of-terms" /></strong>

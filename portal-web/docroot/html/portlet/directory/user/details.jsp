@@ -55,7 +55,7 @@ for (int i = 1; i<organizations.size(); i++) {
 			</dd>
 		</c:if>
 
-		<c:if test="<%=  PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
+		<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
 			<dt>
 				<liferay-ui:message key="birthday" />
 			</dt>

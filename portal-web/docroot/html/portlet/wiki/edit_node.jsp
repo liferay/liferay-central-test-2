@@ -62,9 +62,9 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	</div>
 
 	<aui:fieldset>
-		<aui:input name="name"  />
+		<aui:input name="name" />
 
-		<aui:input name="description"  />
+		<aui:input name="description" />
 
 		<c:if test="<%= node == null %>">
 			<aui:field-wrapper label="permissions">

@@ -162,7 +162,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 
 <table class="lfr-table" width="100%">
 <tr>
-	<c:if test="<%=  !group.isLayoutPrototype() %>">
+	<c:if test="<%= !group.isLayoutPrototype() %>">
 		<td valign="top">
 			<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
 				<liferay-util:param name="treeId" value="layoutsTree" />
@@ -175,7 +175,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 		PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, renderResponse);
 		%>
 
-		<c:if test="<%=  !group.isLayoutPrototype() %>">
+		<c:if test="<%= !group.isLayoutPrototype() %>">
 			<c:choose>
 				<c:when test="<%= selLayout != null %>">
 					<%= LanguageUtil.get(pageContext, "edit-" + (privateLayout ? "private" : "public") + "-page") %>: <liferay-ui:breadcrumb selLayout="<%= selLayout %>" selLayoutParam="selPlid" portletURL="<%= breadcrumbURL %>" />

@@ -202,13 +202,13 @@ if (selectionStyle.equals("dynamic")) {
 		if (Validator.equals(queryName, "assetCategories")) {
 			long[] assetCategoryIds = GetterUtil.getLongValues(queryValues);
 
-			if (queryContains  && queryAndOperator) {
+			if (queryContains && queryAndOperator) {
 				allAssetCategoryIds = assetCategoryIds;
 			}
-			else if (queryContains  && !queryAndOperator) {
+			else if (queryContains && !queryAndOperator) {
 				anyAssetCategoryIds = assetCategoryIds;
 			}
-			else if (!queryContains  && queryAndOperator) {
+			else if (!queryContains && queryAndOperator) {
 				notAllAssetCategoryIds = assetCategoryIds;
 			}
 			else {
@@ -246,7 +246,7 @@ if (assetCategoryId > 0) {
 
 	assetCategoryName = assetCategory.getName();
 
-	AssetVocabulary assetVocabulary =  AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
 
 	assetVocabularyName = assetVocabulary.getName();
 

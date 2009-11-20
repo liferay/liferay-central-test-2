@@ -755,7 +755,7 @@ numberFormat.setMinimumIntegerDigits(2);
 							for (String supportedLanguage: ScriptingUtil.getSupportedLanguages()) {
 							%>
 
-								<option <%= supportedLanguage.equals(language) ? "selected" : "" %> value="<%= supportedLanguage %>"><%= TextFormatter.format(supportedLanguage,  TextFormatter.J) %></option>
+								<option <%= supportedLanguage.equals(language) ? "selected" : "" %> value="<%= supportedLanguage %>"><%= TextFormatter.format(supportedLanguage, TextFormatter.J) %></option>
 
 							<%
 							}

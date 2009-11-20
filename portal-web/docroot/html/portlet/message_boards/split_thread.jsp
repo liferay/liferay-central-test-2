@@ -147,7 +147,7 @@ boolean quote = false;
 				</script>
 			</aui:field-wrapper>
 		</div>
-   </aui:fieldset>
+ </aui:fieldset>
 
 	<aui:button-row>
 		<aui:button type="submit" value="ok" />

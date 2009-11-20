@@ -37,7 +37,7 @@ if (categoryId != 0) {
 
 	categoryName = assetCategory.getName();
 
-	AssetVocabulary assetVocabulary =  AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
 
 	vocabularyName = assetVocabulary.getName();
 }

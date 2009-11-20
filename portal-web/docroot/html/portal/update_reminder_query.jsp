@@ -64,7 +64,7 @@
 
 		<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
 			<div id="customQuestionDiv">
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user %>" field="reminderQueryQuestion"  fieldParam="reminderQueryCustomQuestion" />
+				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user %>" field="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
 			</div>
 		</c:if>
 	</div>

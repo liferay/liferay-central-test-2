@@ -183,7 +183,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			String taglibOpenGroupWindow = "var toGroupWindow = window.open('" + selectGroupURL + "','toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();";
 			%>
 
-			<aui:button  onClick='<%= taglibOpenGroupWindow %>' value="select" />
+			<aui:button onClick='<%= taglibOpenGroupWindow %>' value="select" />
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="document">

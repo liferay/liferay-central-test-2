@@ -71,7 +71,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 		<c:if test="<%= !layoutPrototype.isNew() %>">
 			<aui:field-wrapper label="configuration">
-				<liferay-portlet:actionURL var="viewURL"  portletName="<%= PortletKeys.MY_PLACES %>">
+				<liferay-portlet:actionURL var="viewURL" portletName="<%= PortletKeys.MY_PLACES %>">
 					<portlet:param name="struts_action" value="/my_places/view" />
 					<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototype.getGroup().getGroupId()) %>" />
 					<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />

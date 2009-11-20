@@ -79,7 +79,7 @@ else {
 
 <aui:fieldset>
 
-   <%
+ <%
 	for (int i = 0; i < phonesIndexes.length; i++) {
 		int phonesIndex = phonesIndexes[i];
 

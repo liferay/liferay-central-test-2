@@ -75,7 +75,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 			<%= HtmlUtil.escape(pluginId) %>
 		</aui:field-wrapper>
 
-		<aui:input disabled="<%= pluginId.equals(PortletKeys.ENTERPRISE_ADMIN) %>" inlineLabel="left" name="active" type="checkbox" value="<%= active %>"  />
+		<aui:input disabled="<%= pluginId.equals(PortletKeys.ENTERPRISE_ADMIN) %>" inlineLabel="left" name="active" type="checkbox" value="<%= active %>" />
 
 		<aui:input cssClass="lfr-textarea-container" helpMessage="enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page" name="roles" type="textarea" value='<%= StringUtil.merge(rolesArray, "\n") %>' />
 	</aui:fieldset>

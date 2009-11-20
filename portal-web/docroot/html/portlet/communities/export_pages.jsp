@@ -212,7 +212,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 </style>
 
 <aui:form action='<%= portletURL.toString() + "&etag=0" %>' method="post" name="exportPagesFm">
-	<aui:input name="<%=  Constants.CMD %>" type="hidden" value="<%= cmd %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="pagesRedirect" type="hidden" value="<%= pagesRedirect %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />

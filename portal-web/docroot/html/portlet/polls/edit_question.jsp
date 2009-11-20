@@ -167,7 +167,7 @@ if (choiceName > 0) {
 
 					<aui:input name="<%= EditQuestionAction.CHOICE_NAME_PREFIX + c %>" type="hidden" value="<%= c %>" />
 
-					<aui:input fieldParam="<%= paramName %>"  label="<%= c + StringPool.PERIOD %>" name="description" />
+					<aui:input fieldParam="<%= paramName %>" label="<%= c + StringPool.PERIOD %>" name="description" />
 
 					<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i >= oldChoicesCount)) %>">
 						<aui:button onClick='<%= renderResponse.getNamespace() + "deletePollChoice(" + i + ");" %>' value="delete" />

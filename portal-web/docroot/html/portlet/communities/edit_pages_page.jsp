@@ -213,7 +213,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 			</td>
 		</tr>
 
-		<c:if test="<%=  !group.isLayoutPrototype() %>">
+		<c:if test="<%= !group.isLayoutPrototype() %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="hidden" />
@@ -225,7 +225,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		</c:if>
 
 		<c:choose>
-			<c:when test="<%= PortalUtil.isLayoutFriendliable(selLayout)  && !group.isLayoutPrototype() %>">
+			<c:when test="<%= PortalUtil.isLayoutFriendliable(selLayout) && !group.isLayoutPrototype() %>">
 				<tr>
 					<td>
 						<liferay-ui:message key="friendly-url" />

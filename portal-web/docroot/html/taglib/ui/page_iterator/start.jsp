@@ -65,7 +65,7 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
-<c:if test='<%= type.equals("regular")  && !themeDisplay.isFacebook() %>'>
+<c:if test='<%= type.equals("regular") && !themeDisplay.isFacebook() %>'>
 	<script type="text/javascript">
 		function <%= namespace %><%= curParam %>updateCur(box) {
 			var cur = AUI().one(box).val();

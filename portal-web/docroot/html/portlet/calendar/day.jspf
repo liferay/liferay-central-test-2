@@ -32,7 +32,7 @@ dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMMM d, yyyy", 
 	<div class="event-selector">
 
 		<%
-		String taglibOnChange = "location.href = '" +  portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
+		String taglibOnChange = "location.href = '" + portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
 		%>
 
 		<aui:select label="" name="eventType" onChange="<%= taglibOnChange %>">

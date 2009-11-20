@@ -190,7 +190,7 @@ catch (Exception e) {
 			</div>
 
 			<c:if test="<%= !last %>">
-				<div class="separator"><!--  --></div>
+				<div class="separator"><!-- --></div>
 			</c:if>
 		</div>
 	</c:when>

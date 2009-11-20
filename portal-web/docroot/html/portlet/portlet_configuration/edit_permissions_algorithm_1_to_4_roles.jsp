@@ -214,7 +214,7 @@ else if (tabs2.equals("organization-roles")) {
 			<br />
 
 			<div class="aui-button-holder">
-				<input  class="previous"<%= roleIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos - 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+				<input class="previous"<%= roleIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos - 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
 
 				<input class="next" <%= roleIdsPos + 1 < roleIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos + 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
 

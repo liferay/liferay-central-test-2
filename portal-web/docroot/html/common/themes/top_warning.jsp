@@ -24,7 +24,7 @@
 
 <%
 
-// This file is deprecated.  Use top_messages.jsp instead.
+// This file is deprecated. Use top_messages.jsp instead.
 
 %>
 

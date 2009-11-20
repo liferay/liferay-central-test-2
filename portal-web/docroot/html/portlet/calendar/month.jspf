@@ -41,7 +41,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("h:mma", local
 	<div class="event-selector">
 
 		<%
-		String taglibOnChange = "location.href = '" +  portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
+		String taglibOnChange = "location.href = '" + portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
 		%>
 
 		<aui:select label="" name="eventType" onChange="<%= taglibOnChange %>">
@@ -112,7 +112,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("h:mma", local
 	<tr class="portlet-section-header results-header">
 
 		<%
-		for (int i = 0; i < 7;  i++) {
+		for (int i = 0; i < 7; i++) {
 			int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
 		%>
 

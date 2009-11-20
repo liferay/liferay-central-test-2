@@ -54,7 +54,7 @@ else {
 
 <liferay-ui:search-container>
 	<liferay-ui:search-container-results
-		results="<%= deliveries  %>"
+		results="<%= deliveries %>"
 	/>
 
 	<liferay-ui:search-container-row

@@ -119,7 +119,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 					String taglibOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataList');" ;
 					%>
 
-					<aui:input  checked="<%= true %>" inlineLabel="right" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" type="checkbox" onchange="<%= taglibOnChange %>" />
+					<aui:input checked="<%= true %>" inlineLabel="right" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" type="checkbox" onchange="<%= taglibOnChange %>" />
 
 					<div id="<portlet:namespace />portletDataList">
 						<ul>

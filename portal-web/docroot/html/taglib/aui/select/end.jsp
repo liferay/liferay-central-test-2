@@ -38,7 +38,7 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 	</span>
 
 	<c:if test='<%= inlineLabel.equals("right") %>'>
-		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK  %>" for="<%= name %>">
+		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" for="<%= name %>">
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">

@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
-Organization organization =  (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
 long logoId = organization.getLogoId();
 %>

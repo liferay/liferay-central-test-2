@@ -26,7 +26,7 @@
 
 <%
 String className = ParamUtil.getString(request, "className");
-long classPK =  ParamUtil.getLong(request, "classPK");
+long classPK = ParamUtil.getLong(request, "classPK");
 String contentTitle = ParamUtil.getString(request, "contentTitle");
 String contentURL = ParamUtil.getString(request, "contentURL");
 long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
@@ -64,7 +64,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 
 		jQuery.ajax(
 				{
-					url:  '<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>',
+					url: '<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>',
 					data: {
 						className: '<%= HtmlUtil.escape(className) %>',
 						classPK: '<%= classPK %>',

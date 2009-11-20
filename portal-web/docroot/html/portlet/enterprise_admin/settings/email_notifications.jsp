@@ -30,11 +30,11 @@
 String adminEmailFromName = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_EMAIL_FROM_NAME + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME));
 String adminEmailFromAddress = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS));
 
-boolean adminEmailUserAddedEnable = ParamUtil.getBoolean(request, "emailUserAddedEnable",  PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED));
+boolean adminEmailUserAddedEnable = ParamUtil.getBoolean(request, "emailUserAddedEnable", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED));
 String adminEmailUserAddedSubject = ParamUtil.getString(request, "emailUserAddedSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT));
 String adminEmailUserAddedBody = ParamUtil.getString(request, "emailUserAddedBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY));
 
-boolean adminEmailPasswordSentEnable = ParamUtil.getBoolean(request, "emailPasswordSentEnable",  PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED));
+boolean adminEmailPasswordSentEnable = ParamUtil.getBoolean(request, "emailPasswordSentEnable", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED));
 String adminEmailPasswordSentSubject = ParamUtil.getString(request, "emailPasswordSentSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
 String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY));
 %>

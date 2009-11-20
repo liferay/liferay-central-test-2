@@ -41,7 +41,7 @@
 			<td>
 
 				<%
-				String taglibOnChange = "location.href = '" +  portletURL + "&" + renderResponse.getNamespace() + "year=' + this.value;";
+				String taglibOnChange = "location.href = '" + portletURL + "&" + renderResponse.getNamespace() + "year=' + this.value;";
 				%>
 
 				<aui:select label="" name="yearSelector" onChange="<%= taglibOnChange %>">
@@ -69,7 +69,7 @@
 	<td align="right">
 
 		<%
-		taglibOnChange = "location.href = '" +  portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
+		taglibOnChange = "location.href = '" + portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
 		%>
 
 		<aui:select label="" name="eventType" onChange="<%= taglibOnChange %>">

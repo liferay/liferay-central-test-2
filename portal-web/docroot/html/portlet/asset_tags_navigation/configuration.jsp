@@ -66,7 +66,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 				<aui:option label="cloud" selected='<%= displayStyle.equals("cloud") %>' />
 			</aui:select>
 
-			<aui:input inlineLabel="left" label="show-tags-with-zero-assets"  name="showZeroAssetCount" type="checkbox" value="<%= showZeroAssetCount %>" />
+			<aui:input inlineLabel="left" label="show-tags-with-zero-assets" name="showZeroAssetCount" type="checkbox" value="<%= showZeroAssetCount %>" />
 		</div>
 	</aui:fieldset>
 

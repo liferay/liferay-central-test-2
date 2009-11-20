@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.kernel.plugin.RemotePluginPackageRepository"  %>
+<%@ page import="com.liferay.portal.kernel.plugin.RemotePluginPackageRepository" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.DocumentComparator" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>

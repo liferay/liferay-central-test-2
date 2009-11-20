@@ -35,7 +35,7 @@
 				var panel = new Liferay.Panel(
 					{
 						panel: '#<%= id %>',
-						collapsible: <%= collapsible  %>,
+						collapsible: <%= collapsible %>,
 						persistState: <%= persistState %>
 					}
 				);

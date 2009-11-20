@@ -86,7 +86,7 @@ int weekNumber = 1;
 	<tr class="portlet-section-header results-header">
 
 		<%
-		for (int i = 0; i < 7;  i++) {
+		for (int i = 0; i < 7; i++) {
 			int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
 
 			String className = StringPool.BLANK;

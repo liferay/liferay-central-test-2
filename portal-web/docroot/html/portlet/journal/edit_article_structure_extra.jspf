@@ -161,7 +161,7 @@
 	</div>
 
 	<div dataType="image">
-		<input class="principal-field-element lfr-input-text flexible" size="40"  type="file" value="" />
+		<input class="principal-field-element lfr-input-text flexible" size="40" type="file" value="" />
 	</div>
 
 	<div dataType="image_gallery">

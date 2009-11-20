@@ -42,7 +42,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		message="<%= message %>"
 		url="javascript:;"
 		label="<%= label %>"
-		cssClass="<%= randomNamespace  %>"
+		cssClass="<%= randomNamespace %>"
 	/>
 </div>
 

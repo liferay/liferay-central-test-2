@@ -72,7 +72,7 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 		<liferay-ui:search-container-column-text
 			name="ignore"
 		>
-			<input <%= publicRenderParameterConfiguration.isIgnore() ? "checked=\"true\"" :  "" %> id="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" name="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" type="checkbox" />
+			<input <%= publicRenderParameterConfiguration.isIgnore() ? "checked=\"true\"" : "" %> id="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" name="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" type="checkbox" />
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text

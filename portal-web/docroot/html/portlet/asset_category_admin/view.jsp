@@ -43,11 +43,11 @@
 
 			<span class="vocabulary-actions">
 				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_VOCABULARY) %>">
-					<input class="add-vocabulary-button" id="add-vocabulary-button" name="add-vocabulary-button" type="button"  value="<liferay-ui:message key="add-vocabulary" />">
+					<input class="add-vocabulary-button" id="add-vocabulary-button" name="add-vocabulary-button" type="button" value="<liferay-ui:message key="add-vocabulary" />">
 				</c:if>
 
 				<c:if test="<%= AssetPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_CATEGORY) %>">
-					<input class="add-category-button" id="add-category-button" name="add-category-button" type="button"  value="<liferay-ui:message key="add-category" />">
+					<input class="add-category-button" id="add-category-button" name="add-category-button" type="button" value="<liferay-ui:message key="add-category" />">
 				</c:if>
 
 				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS) %>">
