@@ -159,13 +159,12 @@ if (!defaultScope) {
 	}
 }
 
-Collection<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
-Iterator<AssetRendererFactory> itr = assetRendererFactories.iterator();
+List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
 
 long[] availableClassNameIds = new long[assetRendererFactories.size()];
 
-for (int i = 0; itr.hasNext(); i++){
-	availableClassNameIds[i] = itr.next().getClassNameId();
+for (int i = 0; i < assetRendererFactories.size(); i++) {
+	availableClassNameIds[i] = assetRendererFactories.get(i).getClassNameId();
 }
 
 boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-type", Boolean.TRUE.toString()));
