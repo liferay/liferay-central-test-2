@@ -81,7 +81,7 @@ int tabIndex = 1;
 %>
 
 <script type="text/javascript">
-	var xmlIndent = "<% StringPool.DOUBLE_SPACE %>";
+	var xmlIndent = "<%= StringPool.DOUBLE_SPACE %>";
 
 	function <portlet:namespace />downloadStructureContent() {
 		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_structure_content";
