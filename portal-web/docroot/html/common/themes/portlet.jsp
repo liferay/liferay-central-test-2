@@ -141,6 +141,10 @@ containerStyles = sb.toString();
 		<c:choose>
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:wrap-portlet page="portlet.jsp">
+					<c:if test='<%= ParamUtil.getBoolean(request, "wsrp") %>'>
+						<div id="wsrp-configuration-url"><%= portletDisplay.getURLConfiguration() %></div>
+					</c:if>
+
 					<div class="portlet-content-container" <%= containerStyles %>>
 						<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 					</div>
