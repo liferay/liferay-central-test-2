@@ -20,38 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
+package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
-import com.liferay.portlet.asset.model.AssetRenderer;
-import com.liferay.portlet.asset.model.AssetRendererFactory;
+import java.util.List;
 
 /**
- * <a href="BaseWokflowHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowHandlerRegistry.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Bruno Farache
  * @author Marcellus Tavares
  */
-public abstract class BaseWokflowHandler implements WorkflowHandler {
+public interface WorkflowHandlerRegistry {
 
-	public long getClassNameId() {
-		return _classNameId;
-	}
+	public WorkflowHandler getWorkflowHandler(String className);
 
-	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
-		AssetRendererFactory rendererFactory =
-			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
-				getClassName());
+	public List<WorkflowHandler> getWorkflowHandlers();
 
-		if (rendererFactory != null) {
-			return rendererFactory.getAssetRenderer(classPK);
-		}
-		else {
-			return null;
-		}
-	}
+	public void register(WorkflowHandler workflowHandler);
 
-	private long _classNameId = PortalUtil.getClassNameId(getClassName());
+	public void unregister(WorkflowHandler workflowHandler);
 
 }

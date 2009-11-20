@@ -1127,11 +1127,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> customAttributesDisplayClasses =
 					portletModel.getCustomAttributesDisplayClasses();
 
-				Iterator<Element> itr3 = portlet.elements(
-					"custom-attributes-display").iterator();
+				itr2 = portlet.elements("custom-attributes-display").iterator();
 
-				while (itr3.hasNext()) {
-					Element customAttributesDisplayClassEl = itr3.next();
+				while (itr2.hasNext()) {
+					Element customAttributesDisplayClassEl = itr2.next();
 
 					customAttributesDisplayClasses.add(
 						customAttributesDisplayClassEl.getText());
@@ -1150,11 +1149,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> workflowHandlerClasses =
 					portletModel.getWorkflowHandlerClasses();
 
-				Iterator<Element> itr4 = portlet.elements(
-					"workflow-handler").iterator();
+				itr2 = portlet.elements("workflow-handler").iterator();
 
-				while (itr4.hasNext()) {
-					Element workflowHandlerClassEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element workflowHandlerClassEl = itr2.next();
 
 					workflowHandlerClasses.add(
 						workflowHandlerClassEl.getText());
@@ -1222,10 +1220,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> headerPortalCssList =
 					portletModel.getHeaderPortalCss();
 
-				itr4 = portlet.elements("header-portal-css").iterator();
+				itr2 = portlet.elements("header-portal-css").iterator();
 
-				while (itr4.hasNext()) {
-					Element headerPortalCssEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element headerPortalCssEl = itr2.next();
 
 					headerPortalCssList.add(headerPortalCssEl.getText());
 				}
@@ -1238,10 +1236,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				list.addAll(portlet.elements("header-css"));
 				list.addAll(portlet.elements("header-portlet-css"));
 
-				itr4 = list.iterator();
+				itr2 = list.iterator();
 
-				while (itr4.hasNext()) {
-					Element headerPortletCssEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element headerPortletCssEl = itr2.next();
 
 					headerPortletCssList.add(headerPortletCssEl.getText());
 				}
@@ -1249,10 +1247,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> headerPortalJavaScriptList =
 					portletModel.getHeaderPortalJavaScript();
 
-				itr4 = portlet.elements("header-portal-javascript").iterator();
+				itr2 = portlet.elements("header-portal-javascript").iterator();
 
-				while (itr4.hasNext()) {
-					Element headerPortalJavaScriptEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element headerPortalJavaScriptEl = itr2.next();
 
 					headerPortalJavaScriptList.add(
 						headerPortalJavaScriptEl.getText());
@@ -1266,10 +1264,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				list.addAll(portlet.elements("header-javascript"));
 				list.addAll(portlet.elements("header-portlet-javascript"));
 
-				itr4 = list.iterator();
+				itr2 = list.iterator();
 
-				while (itr4.hasNext()) {
-					Element headerPortletJavaScriptEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element headerPortletJavaScriptEl = itr2.next();
 
 					headerPortletJavaScriptList.add(
 						headerPortletJavaScriptEl.getText());
@@ -1278,10 +1276,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> footerPortalCssList =
 					portletModel.getFooterPortalCss();
 
-				itr4 = portlet.elements("footer-portal-css").iterator();
+				itr2 = portlet.elements("footer-portal-css").iterator();
 
-				while (itr4.hasNext()) {
-					Element footerPortalCssEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element footerPortalCssEl = itr2.next();
 
 					footerPortalCssList.add(footerPortalCssEl.getText());
 				}
@@ -1289,10 +1287,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> footerPortletCssList =
 					portletModel.getFooterPortletCss();
 
-				itr4 = portlet.elements("footer-portlet-css").iterator();
+				itr2 = portlet.elements("footer-portlet-css").iterator();
 
-				while (itr4.hasNext()) {
-					Element footerPortletCssEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element footerPortletCssEl = itr2.next();
 
 					footerPortletCssList.add(footerPortletCssEl.getText());
 				}
@@ -1300,10 +1298,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> footerPortalJavaScriptList =
 					portletModel.getFooterPortalJavaScript();
 
-				itr4 = portlet.elements("footer-portal-javascript").iterator();
+				itr2 = portlet.elements("footer-portal-javascript").iterator();
 
-				while (itr4.hasNext()) {
-					Element footerPortalJavaScriptEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element footerPortalJavaScriptEl = itr2.next();
 
 					footerPortalJavaScriptList.add(
 						footerPortalJavaScriptEl.getText());
@@ -1312,10 +1310,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> footerPortletJavaScriptList =
 					portletModel.getFooterPortletJavaScript();
 
-				itr4 = portlet.elements("footer-portlet-javascript").iterator();
+				itr2 = portlet.elements("footer-portlet-javascript").iterator();
 
-				while (itr4.hasNext()) {
-					Element footerPortletJavaScriptEl = itr4.next();
+				while (itr2.hasNext()) {
+					Element footerPortletJavaScriptEl = itr2.next();
 
 					footerPortletJavaScriptList.add(
 						footerPortletJavaScriptEl.getText());

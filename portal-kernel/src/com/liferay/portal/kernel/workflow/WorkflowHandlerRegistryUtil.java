@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
+package com.liferay.portal.kernel.workflow;
 
 import java.util.List;
 
@@ -32,6 +32,10 @@ import java.util.List;
  */
 public class WorkflowHandlerRegistryUtil {
 
+	public static WorkflowHandlerRegistry getRegistry() {
+		return _registry;
+	}
+
 	public static WorkflowHandler getWorkflowHandler(String className) {
 		return getRegistry().getWorkflowHandler(className);
 	}
@@ -40,22 +44,14 @@ public class WorkflowHandlerRegistryUtil {
 		return getRegistry().getWorkflowHandlers();
 	}
 
-	public static WorkflowHandlerRegistry getRegistry() {
-		return _registry;
-	}
-
-	public static void register(WorkflowHandler workflowHandler) {
-		getRegistry().register(workflowHandler);
-	}
-
 	public static void register(List<WorkflowHandler> workflowHandlers) {
 		for (WorkflowHandler workflowHandler : workflowHandlers) {
 			register(workflowHandler);
 		}
 	}
 
-	public static void unregister(WorkflowHandler workflowHandler) {
-		getRegistry().unregister(workflowHandler);
+	public static void register(WorkflowHandler workflowHandler) {
+		getRegistry().register(workflowHandler);
 	}
 
 	public static void unregister(List<WorkflowHandler> workflowHandlers) {
@@ -63,6 +59,10 @@ public class WorkflowHandlerRegistryUtil {
 		for (WorkflowHandler workflowHandler : workflowHandlers) {
 			unregister(workflowHandler);
 		}
+	}
+
+	public static void unregister(WorkflowHandler workflowHandler) {
+		getRegistry().unregister(workflowHandler);
 	}
 
 	public void setRegistry(WorkflowHandlerRegistry registry) {

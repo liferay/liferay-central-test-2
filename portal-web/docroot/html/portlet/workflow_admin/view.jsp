@@ -65,7 +65,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 				/>
 
 				<liferay-ui:search-container-row
-					className="com.liferay.portal.workflow.WorkflowHandler"
+					className="com.liferay.portal.kernel.workflow.WorkflowHandler"
 					modelVar="workflowHandler"
 				>
 

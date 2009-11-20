@@ -23,6 +23,8 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.workflow.WorkflowHandler;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistry;
 
 import java.util.List;
 import java.util.Map;

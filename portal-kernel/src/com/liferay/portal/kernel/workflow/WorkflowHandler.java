@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
-
-import com.liferay.portlet.asset.model.AssetRenderer;
+package com.liferay.portal.kernel.workflow;
 
 /**
  * <a href="WorkflowHandler.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +33,5 @@ public interface WorkflowHandler {
 	public String getClassName();
 
 	public long getClassNameId();
-
-	public AssetRenderer getAssetRenderer(long classPK) throws Exception;
 
 }

@@ -194,6 +194,11 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil" class="com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil">
+		<property name="registry">
+			<bean class="com.liferay.portal.workflow.WorkflowHandlerRegistryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.xml.SAXReader" class="com.liferay.portal.xml.SAXReaderImpl" />
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
 		<property name="SAXReader" ref="com.liferay.portal.kernel.xml.SAXReader" />
@@ -288,11 +293,6 @@
 	<bean id="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" class="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil">
 		<property name="registry">
 			<bean class="com.liferay.portal.asset.AssetRendererFactoryRegistryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.workflow.WorkflowHandlerRegistryUtil" class="com.liferay.portal.workflow.WorkflowHandlerRegistryUtil">
-		<property name="registry">
-			<bean class="com.liferay.portal.workflow.WorkflowHandlerRegistryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil">

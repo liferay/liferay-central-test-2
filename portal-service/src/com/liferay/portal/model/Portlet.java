@@ -224,7 +224,7 @@ public interface Portlet extends PortletModel {
 	public void setWorkflowHandlerClasses(
 		java.util.List<String> workflowHandlerClasses);
 
-	public java.util.List<com.liferay.portal.workflow.WorkflowHandler> getWorkflowHandlerInstances();
+	public java.util.List<com.liferay.portal.kernel.workflow.WorkflowHandler> getWorkflowHandlerInstances();
 
 	public java.lang.String getDefaultPreferences();
 

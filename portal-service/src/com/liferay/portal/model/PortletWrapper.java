@@ -495,7 +495,7 @@ public class PortletWrapper implements Portlet {
 		_portlet.setWorkflowHandlerClasses(workflowHandlerClasses);
 	}
 
-	public java.util.List<com.liferay.portal.workflow.WorkflowHandler> getWorkflowHandlerInstances() {
+	public java.util.List<com.liferay.portal.kernel.workflow.WorkflowHandler> getWorkflowHandlerInstances() {
 		return _portlet.getWorkflowHandlerInstances();
 	}
 

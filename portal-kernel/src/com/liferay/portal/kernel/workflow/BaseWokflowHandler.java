@@ -20,25 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
+package com.liferay.portal.kernel.workflow;
 
-import java.util.List;
+import com.liferay.portal.util.PortalUtil;
 
 /**
- * <a href="WorkflowHandlerRegistry.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BaseWokflowHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  * @author Marcellus Tavares
  */
-public interface WorkflowHandlerRegistry {
+public abstract class BaseWokflowHandler implements WorkflowHandler {
 
-	public WorkflowHandler getWorkflowHandler(String className);
+	public long getClassNameId() {
+		return _classNameId;
+	}
 
-	public List<WorkflowHandler> getWorkflowHandlers();
-
-	public void register(WorkflowHandler workflowHandler);
-
-	public void unregister(WorkflowHandler workflowHandler);
+	private long _classNameId = PortalUtil.getClassNameId(getClassName());
 
 }

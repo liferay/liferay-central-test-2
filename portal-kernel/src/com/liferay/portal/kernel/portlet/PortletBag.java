@@ -28,7 +28,9 @@ import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
+import com.liferay.portal.kernel.workflow.WorkflowHandler;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -76,6 +78,8 @@ public interface PortletBag extends Cloneable {
 	public ServletContext getServletContext();
 
 	public URLEncoder getURLEncoderInstance();
+
+	public List<WorkflowHandler> getWorkflowHandlerInstances();
 
 	public void setPortletInstance(Portlet portletInstance);
 

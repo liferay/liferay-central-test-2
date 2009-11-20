@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.model.Plugin;
@@ -58,7 +59,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.WebDAVStorage;
-import com.liferay.portal.workflow.WorkflowHandler;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.PortletQNameUtil;
@@ -1122,8 +1122,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets the name of the classes that represent asset types associated to
-	 * the portlet.
+	 * Sets the name of the classes that represent asset types associated to the
+	 * portlet.
 	 *
 	 * @param assetRendererFactoryClasses the names of the classes that
 	 *		  represent asset types associated to the portlet
@@ -1251,7 +1251,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * to the portlet.
 	 *
 	 * @param workflowHandlerClasses the names of the classes that represent
-	 * 	      workflow handlers associated to the portlet
+	 *		  workflow handlers associated to the portlet
 	 */
 	public void setWorkflowHandlerClasses(List<String> workflowHandlerClasses) {
 		_workflowHandlerClasses = workflowHandlerClasses;
@@ -1268,10 +1268,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		if (_portletApp.isWARFile()) {
-			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
-				getRootPortletId());
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-			return portletBagImpl.getWorkflowHandlerInstances();
+			return portletBag.getWorkflowHandlerInstances();
 		}
 
 		List<WorkflowHandler> workflowHandlerInstances =
