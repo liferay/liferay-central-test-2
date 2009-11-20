@@ -402,7 +402,7 @@ public class HookHotDeployListener
 				serviceImplClass.getConstructor(new Class[] {serviceTypeClass});
 
 			Object serviceImplInstance = serviceImplConstructor.newInstance(
-				PortalBeanLocatorUtil.locate(serviceType + ".impl"));
+				PortalBeanLocatorUtil.locate(serviceType));
 
 			serviceImplInstance = Proxy.newProxyInstance(
 				portletClassLoader, new Class[] {serviceTypeClass},
