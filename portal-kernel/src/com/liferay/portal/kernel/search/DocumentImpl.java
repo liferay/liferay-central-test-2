@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -63,8 +62,7 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addFile(String name, byte[] bytes, String fileExt) {
-		InputStream is = new BufferedInputStream(
-			new ByteArrayInputStream(bytes));
+		InputStream is = new ByteArrayInputStream(bytes);
 
 		addFile(name, is, fileExt);
 	}

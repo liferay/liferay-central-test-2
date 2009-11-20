@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -187,8 +186,7 @@ public class Base64 {
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 		try {
-			ObjectInputStream is = new ObjectInputStream(
-				new BufferedInputStream(bais));
+			ObjectInputStream is = new ObjectInputStream(bais);
 
 			return is.readObject();
 		}
