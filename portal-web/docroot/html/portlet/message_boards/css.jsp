@@ -229,7 +229,7 @@ td.user-info {
 	margin-left: 20px;
 }
 
-.portlet-message-boards #threadsPanel {
+.portlet-message-boards .threads-panel {
 	margin-top: 2em;
 }
 
@@ -252,7 +252,7 @@ td.user-info {
 }
 
 .portlet-message-boards .top-links .top-link.last {
-	border: none;
+	border-width: 0;
 }
 
 .portlet-message-boards .top-links .top-links-navigation {

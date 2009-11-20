@@ -428,7 +428,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			}
 			%>
 
-			<liferay-ui:panel id="threadsPanel" title='<%= LanguageUtil.get(pageContext, "threads") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+			<liferay-ui:panel id="threadsPanel" title='<%= LanguageUtil.get(pageContext, "threads") %>' collapsible="<%= true %>" cssClass="threads-panel" persistState="<%= true %>" extended="<%= true %>">
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 			</liferay-ui:panel>
 		</liferay-ui:panel-container>
