@@ -508,6 +508,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.upgrade.UpgradeProcessUtil">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.util">
 		<priority value="ERROR" />
 	</category>
