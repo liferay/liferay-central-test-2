@@ -71,17 +71,17 @@ if (Validator.isNull(xsd)) {
 	}
 }
 
-// Bug with dom4j requires you to remove "\r\n" and " " or else root.elements()
+// Bug with dom4j requires you to remove "\r\n" and "  " or else root.elements()
 // and root.content() will return different number of objects
 
-xsd = StringUtil.replace(xsd, "\r\n", "");
-xsd = StringUtil.replace(xsd, " ", "");
+xsd = StringUtil.replace(xsd, StringPool.RETURN_NEW_LINE, StringPool.BLANK);
+xsd = StringUtil.replace(xsd, StringPool.DOUBLE_SPACE, StringPool.BLANK);
 
 int tabIndex = 1;
 %>
 
 <script type="text/javascript">
-	var xmlIndent = " ";
+	var xmlIndent = "<% StringPool.DOUBLE_SPACE %>";
 
 	function <portlet:namespace />downloadStructureContent() {
 		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_structure_content";

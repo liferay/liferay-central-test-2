@@ -77,6 +77,8 @@ public class StringPool {
 
 	public static final String DOUBLE_SLASH = "//";
 
+	public static final String DOUBLE_SPACE = "  ";
+
 	public static final String EQUAL = "=";
 
 	public static final String GREATER_THAN = ">";
