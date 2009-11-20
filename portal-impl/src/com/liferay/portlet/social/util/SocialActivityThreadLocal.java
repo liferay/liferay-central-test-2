@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.social.util;
 
+import com.liferay.portal.kernel.util.InitialThreadLocal;
+
 /**
  * <a href="SocialActivityThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,21 +32,14 @@ package com.liferay.portlet.social.util;
 public class SocialActivityThreadLocal {
 
 	public static boolean isEnabled() {
-		Boolean enabled = _threadLocal.get();
-
-		if (enabled != null) {
-			return enabled.booleanValue();
-		}
-		else {
-			return true;
-		}
+		return _enabled.get().booleanValue();
 	}
 
 	public static void setEnabled(boolean enabled) {
-		_threadLocal.set(enabled);
+		_enabled.set(enabled);
 	}
 
-	private static ThreadLocal<Boolean> _threadLocal =
-		new ThreadLocal<Boolean>();
+	private static ThreadLocal<Boolean> _enabled =
+		new InitialThreadLocal<Boolean>(true);
 
 }

@@ -29,22 +29,29 @@ package com.liferay.portal.kernel.util;
  */
 public class NotificationThreadLocal {
 
+	public static boolean isEnabled() {
+		return _enabled.get().booleanValue();
+	}
+
+	/**
+	 * @deprecated {@link #isEnabled}
+	 */
 	public static boolean isNotificationEnabled() {
-		Boolean enabled = _threadLocal.get();
-
-		if (enabled != null) {
-			return enabled.booleanValue();
-		}
-		else {
-			return true;
-		}
+		return isEnabled();
 	}
 
-	public static void setNotificationEnabled(boolean enabled) {
-		_threadLocal.set(enabled);
+	public static void setEnabled(boolean enabled) {
+		_enabled.set(enabled);
 	}
 
-	private static ThreadLocal<Boolean> _threadLocal =
-		new ThreadLocal<Boolean>();
+	/**
+	 * @deprecated {@link #setEnabled(boolean)}
+	 */
+	public static void setNotificationEnabled(boolean notificationEnabled) {
+		setEnabled(notificationEnabled);
+	}
+
+	private static ThreadLocal<Boolean> _enabled =
+		new InitialThreadLocal<Boolean>(true);
 
 }

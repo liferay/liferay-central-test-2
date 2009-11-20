@@ -47,12 +47,12 @@ public class BlockingPortalCache implements PortalCache {
 			return obj;
 		}
 
-		CompeteLatch lastCompeteLatch = _competeLatchThreadLocal.get();
+		CompeteLatch lastCompeteLatch = _competeLatch.get();
 
 		if (lastCompeteLatch != null) {
 			lastCompeteLatch.done();
 
-			_competeLatchThreadLocal.set(null);
+			_competeLatch.set(null);
 		}
 
 		CompeteLatch currentCompeteLatch = _competeLatchMap.get(key);
@@ -68,12 +68,12 @@ public class BlockingPortalCache implements PortalCache {
 			}
 		}
 
-		_competeLatchThreadLocal.set(currentCompeteLatch);
+		_competeLatch.set(currentCompeteLatch);
 
 		if (!currentCompeteLatch.compete()) {
 			currentCompeteLatch.await();
 
-			_competeLatchThreadLocal.set(null);
+			_competeLatch.set(null);
 
 			obj = _portalCache.get(key);
 		}
@@ -92,12 +92,12 @@ public class BlockingPortalCache implements PortalCache {
 
 		_portalCache.put(key, obj);
 
-		CompeteLatch competeLatch = _competeLatchThreadLocal.get();
+		CompeteLatch competeLatch = _competeLatch.get();
 
 		if (competeLatch != null) {
 			competeLatch.done();
 
-			_competeLatchThreadLocal.set(null);
+			_competeLatch.set(null);
 		}
 
 		_competeLatchMap.remove(key);
@@ -114,12 +114,12 @@ public class BlockingPortalCache implements PortalCache {
 
 		_portalCache.put(key, obj, timeToLive);
 
-		CompeteLatch competeLatch = _competeLatchThreadLocal.get();
+		CompeteLatch competeLatch = _competeLatch.get();
 
 		if (competeLatch != null) {
 			competeLatch.done();
 
-			_competeLatchThreadLocal.set(null);
+			_competeLatch.set(null);
 		}
 
 		_competeLatchMap.remove(key);
@@ -136,12 +136,12 @@ public class BlockingPortalCache implements PortalCache {
 
 		_portalCache.put(key, obj);
 
-		CompeteLatch competeLatch = _competeLatchThreadLocal.get();
+		CompeteLatch competeLatch = _competeLatch.get();
 
 		if (competeLatch != null) {
 			competeLatch.done();
 
-			_competeLatchThreadLocal.set(null);
+			_competeLatch.set(null);
 		}
 
 		_competeLatchMap.remove(key);
@@ -158,12 +158,12 @@ public class BlockingPortalCache implements PortalCache {
 
 		_portalCache.put(key, obj, timeToLive);
 
-		CompeteLatch competeLatch = _competeLatchThreadLocal.get();
+		CompeteLatch competeLatch = _competeLatch.get();
 
 		if (competeLatch != null) {
 			competeLatch.done();
 
-			_competeLatchThreadLocal.set(null);
+			_competeLatch.set(null);
 		}
 
 		_competeLatchMap.remove(key);
@@ -179,9 +179,8 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.clear();
 	}
 
-	private static ThreadLocal<CompeteLatch> _competeLatchThreadLocal =
+	private static ThreadLocal<CompeteLatch> _competeLatch =
 		new ThreadLocal<CompeteLatch>();
-
 	private final ConcurrentMap<String, CompeteLatch> _competeLatchMap =
 		new ConcurrentHashMap<String, CompeteLatch>();
 	private final PortalCache _portalCache;

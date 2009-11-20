@@ -51,7 +51,6 @@ public class PermissionThreadLocal {
 
 	private static ThreadLocal<Boolean> _addResource =
 		new InitialThreadLocal<Boolean>(true);
-
 	private static ThreadLocal<PermissionChecker> _permissionChecker =
 		new ThreadLocal<PermissionChecker>();
 

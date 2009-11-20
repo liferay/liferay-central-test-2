@@ -167,7 +167,7 @@ public class ShardAdvice {
 	public Object invokeGlobally(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		_globalCallThreadLocal.set(new Object());
+		_globalCall.set(new Object());
 
 		try {
 			if (_log.isInfoEnabled()) {
@@ -184,7 +184,7 @@ public class ShardAdvice {
 			}
 		}
 		finally {
-			_globalCallThreadLocal.set(null);
+			_globalCall.set(null);
 		}
 
 		return null;
@@ -215,7 +215,7 @@ public class ShardAdvice {
 			return proceedingJoinPoint.proceed();
 		}
 
-		if (_globalCallThreadLocal.get() == null) {
+		if (_globalCall.get() == null) {
 			_setShardNameByCompany();
 
 			String shardName = _getShardName();
@@ -275,13 +275,12 @@ public class ShardAdvice {
 	}
 
 	private Stack<String> _getCompanyServiceStack() {
-		Stack<String> companyServiceStack =
-			_companyServiceStackThreadLocal.get();
+		Stack<String> companyServiceStack = _companyServiceStack.get();
 
 		if (companyServiceStack == null) {
 			companyServiceStack = new Stack<String>();
 
-			_companyServiceStackThreadLocal.set(companyServiceStack);
+			_companyServiceStack.set(companyServiceStack);
 		}
 
 		return companyServiceStack;
@@ -306,7 +305,7 @@ public class ShardAdvice {
 	}
 
 	private String _getShardName() {
-		return _shardNameThreadLocal.get();
+		return _shardName.get();
 	}
 
 	private String _getSignature(ProceedingJoinPoint proceedingJoinPoint) {
@@ -322,7 +321,7 @@ public class ShardAdvice {
 	}
 
 	private void _setShardName(String shardName) {
-		_shardNameThreadLocal.set(shardName);
+		_shardName.set(shardName);
 	}
 
 	private void _setShardNameByCompany() throws Throwable {
@@ -358,11 +357,10 @@ public class ShardAdvice {
 
 	private static Log _log = LogFactoryUtil.getLog(ShardAdvice.class);
 
-	private static ThreadLocal<Stack<String>> _companyServiceStackThreadLocal =
+	private static ThreadLocal<Stack<String>> _companyServiceStack =
 		new ThreadLocal<Stack<String>>();
-	private static ThreadLocal<Object> _globalCallThreadLocal =
-		new ThreadLocal<Object>();
-	private static ThreadLocal<String> _shardNameThreadLocal =
+	private static ThreadLocal<Object> _globalCall = new ThreadLocal<Object>();
+	private static ThreadLocal<String> _shardName =
 		new InitialThreadLocal<String>(PropsValues.SHARD_DEFAULT_NAME);
 
 	private ShardDataSourceTargetSource _shardDataSourceTargetSource;

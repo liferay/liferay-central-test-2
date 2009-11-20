@@ -39,7 +39,7 @@ import org.springframework.aop.TargetSource;
 public class ShardSessionFactoryTargetSource implements TargetSource {
 
 	public SessionFactory getSessionFactory() {
-		return _sessionFactoryThreadLocal.get();
+		return _sessionFactory.get();
 	}
 
 	public Object getTarget() throws Exception {
@@ -58,7 +58,7 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 	}
 
 	public void setSessionFactory(String shardName) {
-		_sessionFactoryThreadLocal.set(_sessionFactories.get(shardName));
+		_sessionFactory.set(_sessionFactories.get(shardName));
 	}
 
 	public void setSessionFactories(
@@ -67,9 +67,7 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 		_sessionFactories = sessionFactories;
 	}
 
-	private static Map<String, SessionFactory> _sessionFactories;
-
-	private static ThreadLocal<SessionFactory> _sessionFactoryThreadLocal =
+	private static ThreadLocal<SessionFactory> _sessionFactory =
 		new ThreadLocal<SessionFactory>() {
 
 		protected SessionFactory initialValue() {
@@ -77,5 +75,7 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 		}
 
 	};
+
+	private static Map<String, SessionFactory> _sessionFactories;
 
 }

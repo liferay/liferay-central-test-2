@@ -108,7 +108,7 @@ public class ServiceHookAdvice {
 	private static Log _log = LogFactoryUtil.getLog(ServiceHookAdvice.class);
 
 	private static ThreadLocal<Boolean> _immediatelyProceed =
-		new InitialThreadLocal<Boolean>(Boolean.FALSE);
+		new InitialThreadLocal<Boolean>(false);
 	private static Map<String, Object> _services =
 		new ConcurrentHashMap<String, Object>();
 

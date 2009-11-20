@@ -38,7 +38,7 @@ import org.springframework.aop.TargetSource;
 public class ShardDataSourceTargetSource implements TargetSource {
 
 	public DataSource getDataSource() {
-		return _dataSourceThreadLocal.get();
+		return _dataSource.get();
 	}
 
 	public Object getTarget() throws Exception {
@@ -57,16 +57,14 @@ public class ShardDataSourceTargetSource implements TargetSource {
 	}
 
 	public void setDataSource(String shardName) {
-		_dataSourceThreadLocal.set(_dataSources.get(shardName));
+		_dataSource.set(_dataSources.get(shardName));
 	}
 
 	public void setDataSources(Map<String, DataSource> dataSources) {
 		_dataSources = dataSources;
 	}
 
-	private static Map<String, DataSource> _dataSources;
-
-	private static ThreadLocal<DataSource> _dataSourceThreadLocal =
+	private static ThreadLocal<DataSource> _dataSource =
 		new ThreadLocal<DataSource>() {
 
 		protected DataSource initialValue() {
@@ -74,5 +72,7 @@ public class ShardDataSourceTargetSource implements TargetSource {
 		}
 
 	};
+
+	private static Map<String, DataSource> _dataSources;
 
 }

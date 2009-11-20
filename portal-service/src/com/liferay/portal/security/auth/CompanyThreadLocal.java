@@ -24,6 +24,8 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.model.CompanyConstants;
 
 /**
  * <a href="CompanyThreadLocal.java.html"><b><i>View Source</i></b></a>
@@ -33,18 +35,13 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class CompanyThreadLocal {
 
 	public static long getCompanyId() {
-		Long companyId = _threadLocal.get();
+		long companyId = _companyId.get();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("getCompanyId " + companyId);
 		}
 
-		if (companyId != null) {
-			return companyId.longValue();
-		}
-		else {
-			return 0;
-		}
+		return companyId;
 	}
 
 	public static void setCompanyId(long companyId) {
@@ -53,15 +50,16 @@ public class CompanyThreadLocal {
 		}
 
 		if (companyId > 0) {
-			_threadLocal.set(companyId);
+			_companyId.set(companyId);
 		}
 		else {
-			_threadLocal.set(null);
+			_companyId.set(CompanyConstants.SYSTEM);
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CompanyThreadLocal.class);
 
-	private static ThreadLocal<Long> _threadLocal = new ThreadLocal<Long>();
+	private static ThreadLocal<Long> _companyId = new InitialThreadLocal<Long>(
+		CompanyConstants.SYSTEM);
 
 }

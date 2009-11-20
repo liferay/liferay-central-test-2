@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.ldap;
 
+import com.liferay.portal.kernel.util.InitialThreadLocal;
+
 /**
  * <a href="LDAPUserTransactionThreadLocal.java.html"><b><i>View Source</i></b>
  * </a>
@@ -31,21 +33,14 @@ package com.liferay.portal.security.ldap;
 public class LDAPUserTransactionThreadLocal {
 
 	public static boolean isOriginatesFromLDAP() {
-		Boolean originatesFromLDAP = _threadLocal.get();
-
-		if (originatesFromLDAP != null) {
-			return originatesFromLDAP.booleanValue();
-		}
-		else {
-			return false;
-		}
+		return _originatesFromLDAP.get().booleanValue();
 	}
 
 	public static void setOriginatesFromLDAP(boolean originatesFromLDAP) {
-		_threadLocal.set(originatesFromLDAP);
+		_originatesFromLDAP.set(originatesFromLDAP);
 	}
 
-	private static ThreadLocal<Boolean> _threadLocal =
-		new ThreadLocal<Boolean>();
+	private static ThreadLocal<Boolean> _originatesFromLDAP =
+		new InitialThreadLocal<Boolean>(false);
 
 }

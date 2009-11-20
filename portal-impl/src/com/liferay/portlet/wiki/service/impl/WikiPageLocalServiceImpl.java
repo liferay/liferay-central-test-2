@@ -221,7 +221,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
+		if (!minorEdit && NotificationThreadLocal.isEnabled()) {
 			notifySubscribers(node, page, serviceContext, false);
 		}
 
@@ -1061,7 +1061,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
+		if (!minorEdit && NotificationThreadLocal.isEnabled()) {
 			notifySubscribers(node, page, serviceContext, true);
 		}
 

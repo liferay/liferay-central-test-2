@@ -33,14 +33,14 @@ import java.util.Map;
 public class FriendlyURLMapperThreadLocal {
 
 	public static Map<String, String> getPRPIdentifiers() {
-		return _threadLocal.get();
+		return _prpIdentifiers.get();
 	}
 
 	public static void setPRPIdentifiers(Map<String, String> prpIdentifiers) {
-		_threadLocal.set(prpIdentifiers);
+		_prpIdentifiers.set(prpIdentifiers);
 	}
 
-	private static ThreadLocal<Map<String, String>> _threadLocal =
+	private static ThreadLocal<Map<String, String>> _prpIdentifiers =
 		new ThreadLocal<Map<String, String>>();
 
 }

@@ -40,24 +40,24 @@ import org.springframework.aop.TargetSource;
 public class DynamicDataSourceTargetSource implements TargetSource {
 
 	public Stack<String> getMethodStack() {
-		Stack<String> methodStack = _methodStackThreadLocal.get();
+		Stack<String> methodStack = _methodStack.get();
 
 		if (methodStack == null) {
 			methodStack = new Stack<String>();
 
-			_methodStackThreadLocal.set(methodStack);
+			_methodStack.set(methodStack);
 		}
 
 		return methodStack;
 	}
 
 	public Operation getOperation() {
-		Operation operation = _operationTypeThreadLocal.get();
+		Operation operation = _operationType.get();
 
 		if (operation == null) {
 			operation = Operation.WRITE;
 
-			_operationTypeThreadLocal.set(operation);
+			_operationType.set(operation);
 		}
 
 		return operation;
@@ -115,7 +115,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		}
 
 		if (!inOperation() || (operation == Operation.WRITE)) {
-			_operationTypeThreadLocal.set(operation);
+			_operationType.set(operation);
 		}
 	}
 
@@ -136,9 +136,9 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 	private static Log _log =
 		LogFactoryUtil.getLog(DynamicDataSourceTargetSource.class);
 
-	private static ThreadLocal<Stack<String>> _methodStackThreadLocal =
+	private static ThreadLocal<Stack<String>> _methodStack =
 		new ThreadLocal<Stack<String>>();
-	private static ThreadLocal<Operation> _operationTypeThreadLocal =
+	private static ThreadLocal<Operation> _operationType =
 		new ThreadLocal<Operation>();
 
 	private DataSource _readDataSource;

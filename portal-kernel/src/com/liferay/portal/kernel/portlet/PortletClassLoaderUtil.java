@@ -30,14 +30,13 @@ package com.liferay.portal.kernel.portlet;
 public class PortletClassLoaderUtil {
 
 	public static ClassLoader getClassLoader() {
-		return _threadLocal.get();
+		return _classLoader;
 	}
 
 	public static void setClassLoader(ClassLoader classLoader) {
-		_threadLocal.set(classLoader);
+		_classLoader = classLoader;
 	}
 
-	private static ThreadLocal<ClassLoader> _threadLocal =
-		new ThreadLocal<ClassLoader>();
+	private static ClassLoader _classLoader;
 
 }

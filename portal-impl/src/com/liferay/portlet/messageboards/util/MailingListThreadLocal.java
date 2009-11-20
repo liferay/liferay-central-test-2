@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.util.InitialThreadLocal;
+
 /**
  * <a href="MailingListThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,21 +32,14 @@ package com.liferay.portlet.messageboards.util;
 public class MailingListThreadLocal {
 
 	public static boolean isSourceMailingList() {
-		Boolean sourceMailingList = _threadLocal.get();
-
-		if (sourceMailingList != null) {
-			return sourceMailingList.booleanValue();
-		}
-		else {
-			return false;
-		}
+		return _sourceMailingList.get().booleanValue();
 	}
 
 	public static void setSourceMailingList(boolean sourceMailingList) {
-		_threadLocal.set(sourceMailingList);
+		_sourceMailingList.set(sourceMailingList);
 	}
 
-	private static ThreadLocal<Boolean> _threadLocal =
-		new ThreadLocal<Boolean>();
+	private static ThreadLocal<Boolean> _sourceMailingList =
+		new InitialThreadLocal<Boolean>(false);
 
 }

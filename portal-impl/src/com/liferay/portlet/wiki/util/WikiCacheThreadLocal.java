@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.util;
 
+import com.liferay.portal.kernel.util.InitialThreadLocal;
+
 /**
  * <a href="WikiCacheThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,21 +32,14 @@ package com.liferay.portlet.wiki.util;
 public class WikiCacheThreadLocal {
 
 	public static boolean isClearCache() {
-		Boolean clearCache = _threadLocal.get();
-
-		if (clearCache != null) {
-			return clearCache.booleanValue();
-		}
-		else {
-			return true;
-		}
+		return _clearCache.get().booleanValue();
 	}
 
 	public static void setClearCache(boolean clearCache) {
-		_threadLocal.set(clearCache);
+		_clearCache.set(clearCache);
 	}
 
-	private static ThreadLocal<Boolean> _threadLocal =
-		new ThreadLocal<Boolean>();
+	private static ThreadLocal<Boolean> _clearCache =
+		new InitialThreadLocal<Boolean>(true);
 
 }

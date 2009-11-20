@@ -30,19 +30,20 @@ package com.liferay.portal.kernel.audit;
 public class AuditRequestThreadLocal {
 
 	public static AuditRequestThreadLocal getAuditThreadLocal() {
-		AuditRequestThreadLocal auditRequestThreadLocal = _threadLocal.get();
+		AuditRequestThreadLocal auditRequestThreadLocal =
+			_auditRequestThreadLocal.get();
 
 		if (auditRequestThreadLocal == null) {
 			auditRequestThreadLocal = new AuditRequestThreadLocal();
 
-			_threadLocal.set(auditRequestThreadLocal);
+			_auditRequestThreadLocal.set(auditRequestThreadLocal);
 		}
 
 		return auditRequestThreadLocal;
 	}
 
 	public static void removeAuditThreadLocal() {
-		_threadLocal.remove();
+		_auditRequestThreadLocal.remove();
 	}
 
 	public String getClientHost() {
@@ -109,8 +110,8 @@ public class AuditRequestThreadLocal {
 		_sessionID = sessionID;
 	}
 
-	private static ThreadLocal<AuditRequestThreadLocal> _threadLocal =
-		new ThreadLocal<AuditRequestThreadLocal>();
+	private static ThreadLocal<AuditRequestThreadLocal>
+		_auditRequestThreadLocal = new ThreadLocal<AuditRequestThreadLocal>();
 
 	private String _clientHost;
 	private String _clientIP;

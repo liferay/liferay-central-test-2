@@ -30,14 +30,14 @@ package com.liferay.portal.kernel.util;
 public class ProgressTrackerThreadLocal {
 
 	public static ProgressTracker getProgressTracker() {
-		return _threadLocal.get();
+		return _progressTracker.get();
 	}
 
 	public static void setProgressTracker(ProgressTracker progressTracker) {
-		_threadLocal.set(progressTracker);
+		_progressTracker.set(progressTracker);
 	}
 
-	private static ThreadLocal<ProgressTracker> _threadLocal =
+	private static ThreadLocal<ProgressTracker> _progressTracker =
 		new ThreadLocal<ProgressTracker>();
 
 }
