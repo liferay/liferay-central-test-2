@@ -49,7 +49,7 @@ img, .png {
 								this.src = "$images_folder/spacer.png"
 							) :
 								(
-								   (
+									(
 										(this.currentStyle.backgroundImage.toLowerCase().indexOf('.png') > -1) ||
 										(this.className && ([''].concat(this.className.split(' ')).concat(['']).join('|').indexOf('|png|')) > -1)
 									) ?
