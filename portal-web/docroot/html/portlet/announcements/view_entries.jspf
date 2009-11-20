@@ -61,8 +61,8 @@
 		var content = entry.all('.entry-content');
 		var control = entry.all('.control-entry a');
 
-		if (entry.hasClass('visable')) {
-			entry.removeClass('visable');
+		if (entry.hasClass('visible')) {
+			entry.removeClass('visible');
 
 			if (content) {
 				content.hide();
@@ -73,7 +73,7 @@
 			}
 		}
 		else {
-			entry.addClass('visable');
+			entry.addClass('visible');
 
 			if (content) {
 				content.show();
