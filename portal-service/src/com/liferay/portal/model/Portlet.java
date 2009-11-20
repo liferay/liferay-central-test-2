@@ -219,6 +219,13 @@ public interface Portlet extends PortletModel {
 
 	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplayInstances();
 
+	public java.util.List<String> getWorkflowHandlerClasses();
+
+	public void setWorkflowHandlerClasses(
+		java.util.List<String> workflowHandlerClasses);
+
+	public java.util.List<com.liferay.portal.workflow.WorkflowHandler> getWorkflowHandlerInstances();
+
 	public java.lang.String getDefaultPreferences();
 
 	public void setDefaultPreferences(java.lang.String defaultPreferences);

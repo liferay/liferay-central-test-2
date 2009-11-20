@@ -75,6 +75,8 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
+import com.liferay.portal.workflow.WorkflowHandler;
+import com.liferay.portal.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.CustomUserAttributes;
 import com.liferay.portlet.PortletBagImpl;
@@ -198,6 +200,13 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		if (assetRendererFactories != null) {
 			AssetRendererFactoryRegistryUtil.unregister(assetRendererFactories);
+		}
+
+		List<WorkflowHandler> workflowHandlers =
+			portlet.getWorkflowHandlerInstances();
+
+		if (workflowHandlers != null) {
+			WorkflowHandlerRegistryUtil.unregister(workflowHandlers);
 		}
 
 		PortletInstanceFactoryUtil.destroy(portlet);
@@ -683,6 +692,27 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				customAttributesDisplayInstance);
 		}
 
+		List<WorkflowHandler> workflowHandlerInstances =
+			new ArrayList<WorkflowHandler>();
+
+		for (String workflowHandlerClass :
+				portlet.getWorkflowHandlerClasses()) {
+
+			WorkflowHandler workflowHandlerInstance =
+				(WorkflowHandler)portletClassLoader.loadClass(
+					workflowHandlerClass).newInstance();
+
+			workflowHandlerInstance =
+				(WorkflowHandler)Proxy.newProxyInstance(portletClassLoader,
+				new Class[] {WorkflowHandler.class},
+					new ContextClassLoaderBeanHandler(
+						workflowHandlerInstance, portletClassLoader));
+
+			workflowHandlerInstances.add(workflowHandlerInstance);
+
+			WorkflowHandlerRegistryUtil.register(workflowHandlerInstance);
+		}
+
 		PreferencesValidator preferencesValidatorInstance = null;
 
 		if (Validator.isNotNull(portlet.getPreferencesValidator())) {
@@ -735,7 +765,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
 			webDAVStorageInstance, controlPanelEntryInstance,
 			assetRendererFactoryInstances, customAttributesDisplayInstances,
-			preferencesValidatorInstance, resourceBundles);
+			workflowHandlerInstances, preferencesValidatorInstance,
+			resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 

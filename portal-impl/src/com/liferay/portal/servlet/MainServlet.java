@@ -93,6 +93,8 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
+import com.liferay.portal.workflow.WorkflowHandler;
+import com.liferay.portal.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
@@ -509,7 +511,33 @@ public class MainServlet extends ActionServlet {
 				}
 
 				AssetRendererFactoryRegistryUtil.register(
-					portlet.getAssetRendererFactoryInstances());
+					assetRendererFactories);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Workflow handler
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Workflow handler");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				List<WorkflowHandler> workflowHandlers =
+					portlet.getWorkflowHandlerInstances();
+
+				if (workflowHandlers == null) {
+					continue;
+				}
+
+				WorkflowHandlerRegistryUtil.register(workflowHandlers);
 			}
 		}
 		catch (Exception e) {

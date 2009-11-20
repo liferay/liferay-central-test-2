@@ -486,6 +486,19 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getCustomAttributesDisplayInstances();
 	}
 
+	public java.util.List<String> getWorkflowHandlerClasses() {
+		return _portlet.getWorkflowHandlerClasses();
+	}
+
+	public void setWorkflowHandlerClasses(
+		java.util.List<String> workflowHandlerClasses) {
+		_portlet.setWorkflowHandlerClasses(workflowHandlerClasses);
+	}
+
+	public java.util.List<com.liferay.portal.workflow.WorkflowHandler> getWorkflowHandlerInstances() {
+		return _portlet.getWorkflowHandlerInstances();
+	}
+
 	public java.lang.String getDefaultPreferences() {
 		return _portlet.getDefaultPreferences();
 	}

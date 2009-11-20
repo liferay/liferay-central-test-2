@@ -290,6 +290,11 @@
 			<bean class="com.liferay.portal.asset.AssetRendererFactoryRegistryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.workflow.WorkflowHandlerRegistryUtil" class="com.liferay.portal.workflow.WorkflowHandlerRegistryUtil">
+		<property name="registry">
+			<bean class="com.liferay.portal.workflow.WorkflowHandlerRegistryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil">
 		<property name="expandoBridgeFactory">
 			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryImpl" />

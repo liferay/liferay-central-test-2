@@ -58,6 +58,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.WebDAVStorage;
+import com.liferay.portal.workflow.WorkflowHandler;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.PortletQNameUtil;
@@ -104,6 +105,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setActive(true);
 		_assetRendererFactoryClasses = new ArrayList<String>();
 		_customAttributesDisplayClasses = new ArrayList<String>();
+		_workflowHandlerClasses = new ArrayList<String>();
 		_headerPortalCss = new ArrayList<String>();
 		_headerPortletCss = new ArrayList<String>();
 		_headerPortalJavaScript = new ArrayList<String>();
@@ -142,7 +144,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String webDAVStorageClass, String controlPanelEntryCategory,
 		double controlPanelEntryWeight, String controlPanelClass,
 		List<String> assetRendererFactoryClasses,
-		List<String> customAttributesDisplayClasses, String defaultPreferences,
+		List<String> customAttributesDisplayClasses,
+		List<String> workflowHandlerClasses, String defaultPreferences,
 		String preferencesValidator, boolean preferencesCompanyWide,
 		boolean preferencesUniquePerLayout, boolean preferencesOwnedByGroup,
 		boolean useDefaultTemplate, boolean showPortletAccessDenied,
@@ -199,6 +202,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_controlPanelEntryClass = controlPanelClass;
 		_assetRendererFactoryClasses = assetRendererFactoryClasses;
 		_customAttributesDisplayClasses = customAttributesDisplayClasses;
+		_workflowHandlerClasses = workflowHandlerClasses;
 		_defaultPreferences = defaultPreferences;
 		_preferencesValidator = preferencesValidator;
 		_preferencesCompanyWide = preferencesCompanyWide;
@@ -1229,6 +1233,58 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		return customAttributesDisplayInstances;
+	}
+
+	/**
+	 * Gets the names of the classes that represent workflow handlers associated
+	 * to the portlet.
+	 *
+	 * @return the names of the classes that represent workflow handlers
+	 *		   associated to the portlet
+	 */
+	public List<String> getWorkflowHandlerClasses() {
+		return _workflowHandlerClasses;
+	}
+
+	/**
+	 * Sets the name of the classes that represent workflow handlers associated
+	 * to the portlet.
+	 *
+	 * @param workflowHandlerClasses the names of the classes that represent
+	 * 	      workflow handlers associated to the portlet
+	 */
+	public void setWorkflowHandlerClasses(List<String> workflowHandlerClasses) {
+		_workflowHandlerClasses = workflowHandlerClasses;
+	}
+
+	/**
+	 * Gets the workflow handler instances of the portlet.
+	 *
+	 * @return the workflow handler instances of the portlet
+	 */
+	public List<WorkflowHandler> getWorkflowHandlerInstances() {
+		if (getWorkflowHandlerClasses().isEmpty()) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getWorkflowHandlerInstances();
+		}
+
+		List<WorkflowHandler> workflowHandlerInstances =
+			new ArrayList<WorkflowHandler>();
+
+		for (String workflowHandlerClass : getWorkflowHandlerClasses()) {
+			WorkflowHandler workflowHandlerInstance =
+				(WorkflowHandler)InstancePool.get(workflowHandlerClass);
+
+			workflowHandlerInstances.add(workflowHandlerInstance);
+		}
+
+		return workflowHandlerInstances;
 	}
 
 	/**
@@ -2941,14 +2997,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getWebDAVStorageClass(), getControlPanelEntryCategory(),
 			getControlPanelEntryWeight(), getControlPanelEntryClass(),
 			getAssetRendererFactoryClasses(),
-			getCustomAttributesDisplayClasses(), getDefaultPreferences(),
-			getPreferencesValidator(), isPreferencesCompanyWide(),
-			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
-			isUseDefaultTemplate(), isShowPortletAccessDenied(),
-			isShowPortletInactive(), isActionURLRedirect(),
-			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
-			isPopUpPrint(), isLayoutCacheable(), isInstanceable(),
-			isScopeable(), getUserPrincipalStrategy(),
+			getCustomAttributesDisplayClasses(), getWorkflowHandlerClasses(),
+			getDefaultPreferences(), getPreferencesValidator(),
+			isPreferencesCompanyWide(),	isPreferencesUniquePerLayout(),
+			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
+			isShowPortletAccessDenied(), isShowPortletInactive(),
+			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
+			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
+			isInstanceable(), isScopeable(), getUserPrincipalStrategy(),
 			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
 			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
 			getHeaderPortletCss(), getHeaderPortalJavaScript(),
@@ -3173,6 +3229,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * associated with the portlet.
 	 */
 	private List<String> _customAttributesDisplayClasses;
+
+	/**
+	 * The names of the classes that represents workflow handlers associated
+	 * with the portlet.
+	 */
+	private List<String> _workflowHandlerClasses;
 
 	/**
 	 * True if the portlet uses the default template.

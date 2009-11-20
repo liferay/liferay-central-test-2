@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.webdav.WebDAVStorage;
+import com.liferay.portal.workflow.WorkflowHandler;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.expando.model.CustomAttributesDisplay;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
@@ -76,6 +77,7 @@ public class PortletBagImpl implements PortletBag {
 		ControlPanelEntry controlPanelEntryInstance,
 		List<AssetRendererFactory> assetRendererFactoryInstances,
 		List<CustomAttributesDisplay> customAttributesDisplayInstances,
+		List<WorkflowHandler> workflowHandlerInstances,
 		PreferencesValidator preferencesValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
 
@@ -98,6 +100,7 @@ public class PortletBagImpl implements PortletBag {
 		_controlPanelEntryInstance = controlPanelEntryInstance;
 		_assetRendererFactoryInstances = assetRendererFactoryInstances;
 		_customAttributesDisplayInstances = customAttributesDisplayInstances;
+		_workflowHandlerInstances = workflowHandlerInstances;
 		_preferencesValidatorInstance = preferencesValidatorInstance;
 		_resourceBundles = resourceBundles;
 	}
@@ -114,7 +117,8 @@ public class PortletBagImpl implements PortletBag {
 			getSocialRequestInterpreterInstance(), getWebDAVStorageInstance(),
 			getControlPanelEntryInstance(), getAssetRendererFactoryInstances(),
 			getCustomAttributesDisplayInstances(),
-			getPreferencesValidatorInstance(), getResourceBundles());
+			getWorkflowHandlerInstances(), getPreferencesValidatorInstance(),
+			getResourceBundles());
 	}
 
 	public List<AssetRendererFactory> getAssetRendererFactoryInstances() {
@@ -131,6 +135,10 @@ public class PortletBagImpl implements PortletBag {
 
 	public List<CustomAttributesDisplay> getCustomAttributesDisplayInstances() {
 		return _customAttributesDisplayInstances;
+	}
+
+	public List<WorkflowHandler> getWorkflowHandlerInstances() {
+		return _workflowHandlerInstances;
 	}
 
 	public FriendlyURLMapper getFriendlyURLMapperInstance() {
@@ -229,6 +237,7 @@ public class PortletBagImpl implements PortletBag {
 	private ConfigurationAction _configurationActionInstance;
 	private ControlPanelEntry _controlPanelEntryInstance;
 	private List<CustomAttributesDisplay> _customAttributesDisplayInstances;
+	private List<WorkflowHandler> _workflowHandlerInstances;
 	private FriendlyURLMapper _friendlyURLMapperInstance;
 	private Indexer _indexerInstance;
 	private OpenSearch _openSearchInstance;

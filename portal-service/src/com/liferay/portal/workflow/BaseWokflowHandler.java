@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,20 +19,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.workflow;
 
-<%@ page import="com.liferay.portal.NoSuchWorkflowDefinitionLinkException" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil" %>
-<%@ page import="com.liferay.portal.workflow.WorkflowHandler" %>
-<%@ page import="com.liferay.portal.workflow.WorkflowHandlerRegistryUtil" %>
-<%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
-<%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
-<%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
-<%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
-<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
-<%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
-<%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
+import com.liferay.portlet.asset.model.AssetRenderer;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
+
+/**
+ * <a href="BaseWokflowHandler.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ * @author Marcellus Tavares
+ */
+public abstract class BaseWokflowHandler implements WorkflowHandler {
+
+	public long getClassNameId() {
+		return classNameId;
+	}
+
+	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
+		AssetRendererFactory rendererFactory =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				getClassName());
+
+		if (rendererFactory != null) {
+			return rendererFactory.getAssetRenderer(classPK);
+		}
+		else {
+			return null;
+		}
+	}
+
+	private long classNameId = PortalUtil.getClassNameId(getClassName());
+
+}

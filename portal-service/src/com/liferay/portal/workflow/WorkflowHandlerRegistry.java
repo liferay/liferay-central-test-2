@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,20 +19,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.workflow;
 
-<%@ page import="com.liferay.portal.NoSuchWorkflowDefinitionLinkException" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil" %>
-<%@ page import="com.liferay.portal.workflow.WorkflowHandler" %>
-<%@ page import="com.liferay.portal.workflow.WorkflowHandlerRegistryUtil" %>
-<%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
-<%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
-<%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
-<%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
-<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
-<%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
-<%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+import java.util.List;
+
+/**
+ * <a href="WorkflowHandlerRegistry.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Bruno Farache
+ * @author Marcellus Tavares
+ */
+public interface WorkflowHandlerRegistry {
+
+	public WorkflowHandler getWorkflowHandler(String className);
+
+	public List<WorkflowHandler> getWorkflowHandlers();
+
+	public void register(WorkflowHandler workflowHandler);
+
+	public void unregister(WorkflowHandler workflowHandler);
+
+}
