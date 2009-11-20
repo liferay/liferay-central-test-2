@@ -624,6 +624,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 
 		<antcall target="all" />
 
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
 		<parallel>
 			<exec dir="${app.server.tomcat.bin.dir}" executable="startup.bat" resolveexecutable="true" />
 
