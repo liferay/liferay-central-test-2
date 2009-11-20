@@ -164,7 +164,9 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 long[] availableClassNameIds = new long[assetRendererFactories.size()];
 
 for (int i = 0; i < assetRendererFactories.size(); i++) {
-	availableClassNameIds[i] = assetRendererFactories.get(i).getClassNameId();
+	AssetRendererFactory assetRendererFactory = assetRendererFactories.get(i);
+
+	availableClassNameIds[i] = assetRendererFactory.getClassNameId();
 }
 
 boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-type", Boolean.TRUE.toString()));
