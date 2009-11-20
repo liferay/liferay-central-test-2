@@ -33,9 +33,14 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.filters.DynamicFilterConfig;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -43,6 +48,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jcifs.Config;
 import jcifs.UniAddress;
 
 import jcifs.http.NtlmHttpFilter;
@@ -71,6 +77,21 @@ public class NtlmFilter extends BasePortalFilter {
 			NtlmHttpFilter ntlmFilter = new NtlmHttpFilter();
 
 			ntlmFilter.init(filterConfig);
+
+			Properties properties = PropsUtil.getProperties(
+				"jcifs.", false);
+
+			Iterator<Map.Entry<Object, Object>> itr =
+				properties.entrySet().iterator();
+
+		    while (itr.hasNext()) {
+			    Map.Entry<Object, Object> entry = itr.next();
+
+			    String key = (String)entry.getKey();
+			    String value = (String)entry.getValue();
+
+			    Config.setProperty(key, value);
+		    }
 		}
 		catch (Exception e) {
 			_log.error(e, e);
