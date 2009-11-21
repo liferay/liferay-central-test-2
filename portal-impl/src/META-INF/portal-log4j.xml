@@ -744,6 +744,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.sun">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.sun.faces">
 		<priority value="ERROR" />
 	</category>
@@ -869,10 +873,6 @@
 	</category>
 
 	<category name="org.springframework">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.sun">
 		<priority value="ERROR" />
 	</category>
 
