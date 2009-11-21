@@ -23,9 +23,8 @@
 package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
@@ -35,11 +34,10 @@ import com.liferay.portal.service.ClassNameLocalServiceUtil;
 public class UpgradeGroup extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		ClassName className = ClassNameLocalServiceUtil.getClassName(
-			Group.class.getName());
+		long classNameId = PortalUtil.getClassNameId(Group.class.getName());
 
 		runSQL(
-			"update Group_ set classNameId = " + className.getClassNameId() +
+			"update Group_ set classNameId = " + classNameId +
 				", classPK = groupId where classNameId = 0");
 	}
 

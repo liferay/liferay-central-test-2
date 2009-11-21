@@ -25,10 +25,9 @@ package com.liferay.portal.upgrade.v5_3_0;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,12 +52,12 @@ public class UpgradeGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ClassName layoutClassName = ClassNameLocalServiceUtil.getClassName(
+			long classNameId = PortalUtil.getClassNameId(
 				Layout.class.getName());
 
 			ps = con.prepareStatement(
 				"select groupId, classPK from Group_ where classNameId = " +
-					layoutClassName.getClassNameId());
+					classNameId);
 
 			rs = ps.executeQuery();
 

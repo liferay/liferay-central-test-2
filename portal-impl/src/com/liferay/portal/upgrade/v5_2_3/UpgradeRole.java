@@ -23,9 +23,8 @@
 package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="UpgradeRole.java.html"><b><i>View Source</i></b></a>
@@ -35,11 +34,10 @@ import com.liferay.portal.service.ClassNameLocalServiceUtil;
 public class UpgradeRole extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		ClassName className = ClassNameLocalServiceUtil.getClassName(
-			Role.class.getName());
+		long classNameId = PortalUtil.getClassNameId(Role.class.getName());
 
 		runSQL(
-			"update Role_ set classNameId = " + className.getClassNameId() +
+			"update Role_ set classNameId = " + classNameId +
 				", classPK = roleId where classNameId = 0");
 	}
 
