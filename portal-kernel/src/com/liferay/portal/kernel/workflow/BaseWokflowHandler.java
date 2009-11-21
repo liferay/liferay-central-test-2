@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.util.PortalUtil;
-
 /**
  * <a href="BaseWokflowHandler.java.html"><b><i>View Source</i></b></a>
  *
