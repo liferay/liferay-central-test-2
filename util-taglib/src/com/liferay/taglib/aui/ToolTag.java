@@ -22,7 +22,6 @@
 
 package com.liferay.taglib.aui;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
@@ -34,9 +33,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ToolTag extends TagSupport {
 
 	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
 		if (_icon == null) {
 			_icon = _id;
 		}
