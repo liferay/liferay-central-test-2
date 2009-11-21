@@ -150,16 +150,15 @@ public class RemotePluginPackageRepository {
 		}
 	}
 
-	private String _repositoryURL;
-
 	private Map<String, PluginPackage> _artifactURLIndex =
-		new HashMap<String, PluginPackage>();
-	private Map<String, PluginPackage> _moduleIdIndex =
 		new HashMap<String, PluginPackage>();
 	private Map<String, List<PluginPackage>> _groupAndArtifactIndex =
 		new HashMap<String, List<PluginPackage>>();
+	private Map<String, PluginPackage> _moduleIdIndex =
+		new HashMap<String, PluginPackage>();
 	private List<PluginPackage> _pluginPackages =
 		new ArrayList<PluginPackage>();
+	private String _repositoryURL;
 	private Properties _settings = null;
 	private Set<String> _tags = new TreeSet<String>();
 

@@ -96,11 +96,11 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class PluginPackageUtil {
 
-	public static final String REPOSITORY_XML_FILENAME_PREFIX =
-		"liferay-plugin-repository";
-
 	public static final String REPOSITORY_XML_FILENAME_EXTENSION =
 		"xml";
+
+	public static final String REPOSITORY_XML_FILENAME_PREFIX =
+		"liferay-plugin-repository";
 
 	public static void endPluginPackageInstallation(String preliminaryContext) {
 		_instance._endPluginPackageInstallation(preliminaryContext);
@@ -120,6 +120,10 @@ public class PluginPackageUtil {
 		return _instance._getInstalledPluginPackages();
 	}
 
+	public static Date getLastUpdateDate() {
+		return _instance._getLastUpdateDate();
+	}
+
 	public static PluginPackage getLatestAvailablePluginPackage(
 			String groupId, String artifactId)
 		throws SystemException {
@@ -131,10 +135,6 @@ public class PluginPackageUtil {
 		String groupId, String artifactId) {
 
 		return _instance._getLatestInstalledPluginPackage(groupId, artifactId);
-	}
-
-	public static Date getLastUpdateDate() {
-		return _instance._getLastUpdateDate();
 	}
 
 	public static PluginPackage getPluginPackageByModuleId(
@@ -195,26 +195,18 @@ public class PluginPackageUtil {
 		return _instance._readPluginPackageProperties(displayName, props);
 	}
 
+	public static PluginPackage readPluginPackageXml(Element pluginPackageEl) {
+		return _instance._readPluginPackageXml(pluginPackageEl);
+	}
+
 	public static PluginPackage readPluginPackageXml(String xml)
 		throws DocumentException {
 
 		return _instance._readPluginPackageXml(xml);
 	}
 
-	public static PluginPackage readPluginPackageXml(Element pluginPackageEl) {
-		return _instance._readPluginPackageXml(pluginPackageEl);
-	}
-
 	public static void refreshUpdatesAvailableCache() {
 		_instance._refreshUpdatesAvailableCache();
-	}
-
-	public static void reIndex() throws SystemException {
-		_instance._reIndex();
-	}
-
-	public static RepositoryReport reloadRepositories() throws SystemException {
-		return _instance._reloadRepositories();
 	}
 
 	public static void registerInstalledPluginPackage(
@@ -227,6 +219,14 @@ public class PluginPackageUtil {
 		String preliminaryContext) {
 
 		_instance._registerPluginPackageInstallation(preliminaryContext);
+	}
+
+	public static void reIndex() throws SystemException {
+		_instance._reIndex();
+	}
+
+	public static RepositoryReport reloadRepositories() throws SystemException {
+		return _instance._reloadRepositories();
 	}
 
 	public static Hits search(
@@ -358,6 +358,10 @@ public class PluginPackageUtil {
 		return _installedPluginPackages.getSortedPluginPackages();
 	}
 
+	private Date _getLastUpdateDate() {
+		return _lastUpdateDate;
+	}
+
 	private PluginPackage _getLatestAvailablePluginPackage(
 			String groupId, String artifactId)
 		throws SystemException {
@@ -373,10 +377,6 @@ public class PluginPackageUtil {
 
 		return _installedPluginPackages.getLatestPluginPackage(
 			groupId, artifactId);
-	}
-
-	private Date _getLastUpdateDate() {
-		return _lastUpdateDate;
 	}
 
 	private PluginPackage _getPluginPackageByModuleId(
@@ -840,7 +840,6 @@ public class PluginPackageUtil {
 
 		return licenses;
 	}
-
 	private List<String> _readList(Element parentEl, String name) {
 		List<String> result = new ArrayList<String>();
 
@@ -858,7 +857,6 @@ public class PluginPackageUtil {
 
 		return result;
 	}
-
 	private PluginPackage _readPluginPackageProperties(
 		String displayName, Properties properties) {
 
@@ -994,17 +992,6 @@ public class PluginPackageUtil {
 
 		return pluginPackage;
 	}
-
-	private PluginPackage _readPluginPackageXml(String xml)
-		throws DocumentException {
-
-		Document doc = SAXReaderUtil.read(xml);
-
-		Element root = doc.getRootElement();
-
-		return _readPluginPackageXml(root);
-	}
-
 	private PluginPackage _readPluginPackageXml(Element pluginPackageEl) {
 		String name = pluginPackageEl.elementText("name");
 
@@ -1054,7 +1041,15 @@ public class PluginPackageUtil {
 
 		return pluginPackage;
 	}
+	private PluginPackage _readPluginPackageXml(String xml)
+		throws DocumentException {
 
+		Document doc = SAXReaderUtil.read(xml);
+
+		Element root = doc.getRootElement();
+
+		return _readPluginPackageXml(root);
+	}
 	private Properties _readProperties(Element parentEl, String name) {
 		Properties result = new Properties();
 
@@ -1102,6 +1097,23 @@ public class PluginPackageUtil {
 
 	private void _refreshUpdatesAvailableCache() {
 		_updateAvailable = null;
+	}
+
+	private void _registerInstalledPluginPackage(
+		PluginPackage pluginPackage) {
+
+		_installedPluginPackages.addPluginPackage(pluginPackage);
+
+		_updateAvailable = null;
+
+		_indexPluginPackage(pluginPackage);
+	}
+
+	private void _registerPluginPackageInstallation(
+		String preliminaryContext) {
+
+		_installedPluginPackages.registerPluginPackageInstallation(
+			preliminaryContext);
 	}
 
 	private void _reIndex() throws SystemException {
@@ -1177,23 +1189,6 @@ public class PluginPackageUtil {
 		_reIndex();
 
 		return repositoryReport;
-	}
-
-	private void _registerInstalledPluginPackage(
-		PluginPackage pluginPackage) {
-
-		_installedPluginPackages.addPluginPackage(pluginPackage);
-
-		_updateAvailable = null;
-
-		_indexPluginPackage(pluginPackage);
-	}
-
-	private void _registerPluginPackageInstallation(
-		String preliminaryContext) {
-
-		_installedPluginPackages.registerPluginPackageInstallation(
-			preliminaryContext);
 	}
 
 	private Hits _search(
@@ -1319,12 +1314,12 @@ public class PluginPackageUtil {
 
 	private static PluginPackageUtil _instance = new PluginPackageUtil();
 
-	private LocalPluginPackageRepository _installedPluginPackages;
-	private Map<String, RemotePluginPackageRepository> _repositoryCache;
 	private Set<String> _availableTagsCache;
+	private LocalPluginPackageRepository _installedPluginPackages;
 	private Date _lastUpdateDate;
-	private Boolean _updateAvailable;
+	private Map<String, RemotePluginPackageRepository> _repositoryCache;
 	private boolean _settingUpdateAvailable;
+	private Boolean _updateAvailable;
 
 	private class UpdateAvailableRunner implements Runnable {
 

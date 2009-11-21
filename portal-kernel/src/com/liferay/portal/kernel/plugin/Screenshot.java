@@ -45,7 +45,7 @@ public class Screenshot {
 		_thumbnailURL = thumbnailURL;
 	}
 
-	private String _thumbnailURL;
 	private String _largeImageURL;
+	private String _thumbnailURL;
 
 }
