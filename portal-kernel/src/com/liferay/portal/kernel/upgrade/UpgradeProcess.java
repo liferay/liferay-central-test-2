@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 
 import java.io.IOException;
 
@@ -122,8 +121,14 @@ public abstract class UpgradeProcess {
 	public void upgrade(Class<?> upgradeProcessClass)
 		throws UpgradeException {
 
-		UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
-			upgradeProcessClass.getName());
+		UpgradeProcess upgradeProcess = null;
+
+		try {
+			upgradeProcess = (UpgradeProcess)upgradeProcessClass.newInstance();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 
 		upgradeProcess.upgrade();
 	}
