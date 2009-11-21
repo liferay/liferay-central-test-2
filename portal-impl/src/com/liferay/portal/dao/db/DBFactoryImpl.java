@@ -54,6 +54,7 @@ import org.hibernate.dialect.SybaseDialect;
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
  */
+@SuppressWarnings("deprecation")
 public class DBFactoryImpl implements DBFactory {
 
 	public DB getDB() {

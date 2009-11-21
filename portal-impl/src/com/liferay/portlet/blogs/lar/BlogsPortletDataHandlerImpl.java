@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.blogs.lar;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -149,7 +148,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected void exportEntry(
 			PortletDataContext context, Element root, BlogsEntry entry)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!context.isWithinDateRange(entry.getModifiedDate())) {
 			return;
