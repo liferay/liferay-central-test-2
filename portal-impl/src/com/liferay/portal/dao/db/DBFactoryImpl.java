@@ -38,14 +38,14 @@ import org.hibernate.dialect.IngresDialect;
 import org.hibernate.dialect.InterbaseDialect;
 import org.hibernate.dialect.JDataStoreDialect;
 import org.hibernate.dialect.MySQLDialect;
-import org.hibernate.dialect.Oracle10gDialect;
 import org.hibernate.dialect.Oracle8iDialect;
 import org.hibernate.dialect.Oracle9Dialect;
-import org.hibernate.dialect.Oracle9iDialect;
-import org.hibernate.dialect.OracleDialect;
 import org.hibernate.dialect.PostgreSQLDialect;
 import org.hibernate.dialect.SAPDBDialect;
 import org.hibernate.dialect.SQLServerDialect;
+import org.hibernate.dialect.Sybase11Dialect;
+import org.hibernate.dialect.SybaseASE15Dialect;
+import org.hibernate.dialect.SybaseAnywhereDialect;
 import org.hibernate.dialect.SybaseDialect;
 
 /**
@@ -111,11 +111,8 @@ public class DBFactoryImpl implements DBFactory {
 		else if (dialect instanceof MySQLDialect) {
 			db = MySQLDB.getInstance();
 		}
-		else if (dialect instanceof OracleDialect ||
-				 dialect instanceof Oracle8iDialect ||
-				 dialect instanceof Oracle9Dialect ||
-				 dialect instanceof Oracle9iDialect ||
-				 dialect instanceof Oracle10gDialect) {
+		else if (dialect instanceof Oracle8iDialect ||
+				 dialect instanceof Oracle9Dialect) {
 
 			db = OracleDB.getInstance();
 		}
@@ -125,13 +122,15 @@ public class DBFactoryImpl implements DBFactory {
 		else if (dialect instanceof SAPDBDialect) {
 			db = SAPDB.getInstance();
 		}
-		else if (dialect instanceof SybaseDialect) {
-			if (dialect instanceof SQLServerDialect) {
-				db = SQLServerDB.getInstance();
-			}
-			else {
-				db = SybaseDB.getInstance();
-			}
+		else if (dialect instanceof SQLServerDialect) {
+			db = SQLServerDB.getInstance();
+		}
+		else if (dialect instanceof SybaseDialect ||
+				 dialect instanceof Sybase11Dialect ||
+				 dialect instanceof SybaseAnywhereDialect ||
+				 dialect instanceof SybaseASE15Dialect) {
+
+			db = SybaseDB.getInstance();
 		}
 
 		return db;

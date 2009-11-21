@@ -32,12 +32,14 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.hibernate.dialect.DB2400Dialect;
 import org.hibernate.dialect.Dialect;
-import org.hibernate.dialect.DialectFactory;
-import org.hibernate.dialect.SybaseDialect;
+import org.hibernate.dialect.SybaseASE15Dialect;
+import org.hibernate.dialect.resolver.DialectFactory;
 
 /**
  * <a href="DialectDetector.java.html"><b><i>View Source</i></b></a>
@@ -92,14 +94,14 @@ public class DialectDetector {
 			}
 
 			if (dbName.equals("ASE") && (dbMajorVersion == 15)) {
-				dialect = new SybaseDialect();
+				dialect = new SybaseASE15Dialect();
 			}
 			else if (dbName.startsWith("DB2") && (dbMajorVersion == 9)) {
 				dialect = new DB2Dialect();
 			}
 			else {
-				dialect = DialectFactory.determineDialect(
-					dbName, dbMajorVersion);
+				dialect = DialectFactory.buildDialect(
+					new Properties(), connection);
 			}
 		}
 		catch (Exception e) {

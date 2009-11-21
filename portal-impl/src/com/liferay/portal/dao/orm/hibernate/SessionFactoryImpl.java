@@ -74,16 +74,14 @@ public class SessionFactoryImpl implements SessionFactory {
 		}
 
 		if (_log.isDebugEnabled()) {
-			LiferayClassicSession classicSession =
-				(LiferayClassicSession)session;
+			if (session instanceof org.hibernate.impl.SessionImpl) {
+				org.hibernate.impl.SessionImpl sessionImpl =
+					(org.hibernate.impl.SessionImpl)session;
 
-			org.hibernate.impl.SessionImpl sessionImpl =
-				(org.hibernate.impl.SessionImpl)
-					classicSession.getHibernateClassicSession();
-
-			_log.debug(
-				"Session is using connection release mode " +
-					sessionImpl.getConnectionReleaseMode());
+				_log.debug(
+					"Session is using connection release mode " +
+						sessionImpl.getConnectionReleaseMode());
+			}
 		}
 
 		return transformSession(session);

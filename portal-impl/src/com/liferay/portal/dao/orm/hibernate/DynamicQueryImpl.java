@@ -66,11 +66,6 @@ public class DynamicQueryImpl implements DynamicQuery {
 		org.hibernate.Session hibernateSession =
 			(org.hibernate.Session)session.getWrappedSession();
 
-		if (hibernateSession instanceof LiferaySession) {
-			hibernateSession =
-				((LiferaySession)hibernateSession).getHibernateSession();
-		}
-
 		_criteria = _detachedCriteria.getExecutableCriteria(hibernateSession);
 
 		if ((_start != null) && (_end != null)) {

@@ -1536,7 +1536,7 @@
 	</library>
 	<library>
 		<file-name>portal/hibernate3.jar</file-name>
-		<version>3.3.1</version>
+		<version>3.3.2</version>
 		<project-name>Hibernate</project-name>
 		<project-url>http://www.hibernate.org</project-url>
 		<licenses>

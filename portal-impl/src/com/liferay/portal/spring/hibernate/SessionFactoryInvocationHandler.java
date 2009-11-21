@@ -22,8 +22,6 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.dao.orm.hibernate.LiferayClassicSession;
-
 import java.lang.Object;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -93,14 +91,7 @@ public class SessionFactoryInvocationHandler implements InvocationHandler {
 	}
 
 	protected Session wrapLiferaySession(Session session) {
-		if (session.getClass().getName().equals(
-				LiferayClassicSession.class.getName())) {
-
-			return session;
-		}
-		else {
-			return new LiferayClassicSession(session);
-		}
+		return session;
 	}
 
 	private final SessionFactory _sessionFactory;
