@@ -165,7 +165,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 				queryString, parameterMap, firstResult, maxResults,
 				flushModeType, sqlQuery, entityClass);
 
-			if (object instanceof Collection) {
+			if (object instanceof Collection<?>) {
 				Collection<Object> collection = (Collection<Object>)object;
 
 				if (collection.size() == 1) {
@@ -214,7 +214,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		if (!_scalars.isEmpty()) {
 			Collections.sort(_scalars);
 
-			if (list.get(0) instanceof Collection) {
+			if (list.get(0) instanceof Collection<?>) {
 				List<Object> newList = new ArrayList<Object>();
 
 				for (Collection<Object> collection :
@@ -258,9 +258,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 				list = newList;
 			}
-			else if ((_scalars.size() == 1) &&
-					 (list.get(0) instanceof Object)) {
-
+			else if ((_scalars.size() == 1)) {
 				List<Object> newList = new ArrayList<Object>();
 
 				for (Object value : list) {
@@ -272,7 +270,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 				list = newList;
 			}
 		}
-		else if (list.get(0) instanceof Collection) {
+		else if (list.get(0) instanceof Collection<?>) {
 			List<Object> newList = new ArrayList<Object>();
 
 			for (Collection<Object> collection :
