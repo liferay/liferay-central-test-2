@@ -96,7 +96,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 					>
 
 						<%
-						long classNameId = workflowHandler.getClassNameId();
+						long classNameId = PortalUtil.getClassNameId(workflowHandler.getClassName());
 						%>
 
 						<aui:select label="" name='<%= "workflowDefinitionName@" + classNameId %>'>
