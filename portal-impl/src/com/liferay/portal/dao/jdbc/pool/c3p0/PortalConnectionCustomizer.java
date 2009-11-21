@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.pool.c3p0;
+package com.liferay.portal.dao.jdbc.pool.c3p0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
