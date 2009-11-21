@@ -34,92 +34,92 @@ import java.util.Properties;
  */
 public interface PluginPackage {
 
+	public String getArtifactId();
+
+	public String getArtifactURL();
+
+	public String getAuthor();
+
+	public String getChangeLog();
+
+	public String getContext();
+
+	public Properties getDeploymentSettings();
+
+	public String getDownloadURL();
+
+	public String getGroupId();
+
+	public List<License> getLicenses();
+
+	public List<String> getLiferayVersions();
+
+	public String getLongDescription();
+
+	public Date getModifiedDate();
+
 	public String getModuleId();
 
 	public String getName();
 
-	public void setName(String name);
-
-	public String getRecommendedDeploymentContext();
-
-	public void setRecommendedDeploymentContext(String deploymentContext);
-
-	public Date getModifiedDate();
-
-	public void setModifiedDate(Date modifiedDate);
-
-	public String getAuthor();
-
-	public void setAuthor(String author);
-
-	public List<String> getTypes();
-
-	public void setTypes(List<String> types);
-
-	public List<String> getTags();
-
-	public void setTags(List<String> tags);
-
-	public List<License> getLicenses();
-
-	public void setLicenses(List<License> licenses);
-
-	public List<String> getLiferayVersions();
-
-	public void setLiferayVersions(List<String> liferayVersions);
-
-	public String getShortDescription();
-
-	public void setShortDescription(String shortDescription);
-
-	public String getLongDescription();
-
-	public void setLongDescription(String longDescription);
-
-	public String getChangeLog();
-
-	public void setChangeLog(String changeLog);
-
-	public void setScreenshots(List<Screenshot> screenshots);
-
-	public List<Screenshot> getScreenshots();
+	public String getPackageId();
 
 	public String getPageURL();
 
-	public void setPageURL(String pageURL);
-
-	public String getDownloadURL();
-
-	public void setDownloadURL(String downloadURL);
-
-	public String getRepositoryURL();
+	public String getRecommendedDeploymentContext();
 
 	public RemotePluginPackageRepository getRepository();
 
-	public void setRepository(RemotePluginPackageRepository repository);
+	public String getRepositoryURL();
 
-	public String getContext();
+	public List<Screenshot> getScreenshots();
 
-	public void setContext(String context);
+	public String getShortDescription();
 
-	public String getArtifactURL();
+	public List<String> getTags();
 
-	public String getArtifactId();
-
-	public String getGroupId();
-
-	public String getPackageId();
+	public List<String> getTypes();
 
 	public String getVersion();
-
-	public Properties getDeploymentSettings();
-
-	public void setDeploymentSettings(Properties properties);
 
 	public boolean isLaterVersionThan(PluginPackage pluginPackage);
 
 	public boolean isPreviousVersionThan(PluginPackage pluginPackage);
 
 	public boolean isSameVersionAs(PluginPackage pluginPackage);
+
+	public void setAuthor(String author);
+
+	public void setChangeLog(String changeLog);
+
+	public void setContext(String context);
+
+	public void setDeploymentSettings(Properties properties);
+
+	public void setDownloadURL(String downloadURL);
+
+	public void setLicenses(List<License> licenses);
+
+	public void setLiferayVersions(List<String> liferayVersions);
+
+	public void setLongDescription(String longDescription);
+
+	public void setModifiedDate(Date modifiedDate);
+
+	public void setName(String name);
+
+	public void setPageURL(String pageURL);
+
+	public void setRecommendedDeploymentContext(String deploymentContext);
+
+	public void setRepository(RemotePluginPackageRepository repository);
+
+	public void setScreenshots(List<Screenshot> screenshots);
+
+	public void setShortDescription(String shortDescription);
+
+	public void setTags(List<String> tags);
+
+	public void setTypes(List<String> types);
 
 }

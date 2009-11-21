@@ -111,32 +111,6 @@ public class Version implements Comparable<Version> {
 				version.getBuildNumber()));
 	}
 
-	protected Version(String version) {
-		StringTokenizer st = new StringTokenizer(version, _SEPARATOR);
-
-		_major = st.nextToken();
-
-		if (st.hasMoreTokens()) {
-			_minor = st.nextToken();
-		}
-
-		if (st.hasMoreTokens()) {
-			_bugFix = st.nextToken();
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		while (st.hasMoreTokens()) {
-			sb.append(st.nextToken());
-
-			if (st.hasMoreTokens()) {
-				sb.append(_SEPARATOR);
-			}
-		}
-
-		_buildNumber = sb.toString();
-	}
-
 	public int compareTo(Version version) {
 		if (version == null) {
 			return 1;
@@ -294,7 +268,31 @@ public class Version implements Comparable<Version> {
 		return _toString(_major, _minor, _bugFix, _buildNumber);
 	}
 
-	private static final String _SEPARATOR = StringPool.PERIOD;
+	protected Version(String version) {
+		StringTokenizer st = new StringTokenizer(version, _SEPARATOR);
+
+		_major = st.nextToken();
+
+		if (st.hasMoreTokens()) {
+			_minor = st.nextToken();
+		}
+
+		if (st.hasMoreTokens()) {
+			_bugFix = st.nextToken();
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		while (st.hasMoreTokens()) {
+			sb.append(st.nextToken());
+
+			if (st.hasMoreTokens()) {
+				sb.append(_SEPARATOR);
+			}
+		}
+
+		_buildNumber = sb.toString();
+	}
 
 	private static boolean _contains(
 		String containerString, String numberString) {
@@ -341,6 +339,8 @@ public class Version implements Comparable<Version> {
 
 		return sb.toString();
 	}
+
+	private static final String _SEPARATOR = StringPool.PERIOD;
 
 	private static Map<String, Version> _versions =
 		new ConcurrentHashMap<String, Version>();

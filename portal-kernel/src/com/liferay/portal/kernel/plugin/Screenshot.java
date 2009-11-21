@@ -29,20 +29,20 @@ package com.liferay.portal.kernel.plugin;
  */
 public class Screenshot {
 
-	public String getThumbnailURL() {
-		return _thumbnailURL;
-	}
-
-	public void setThumbnailURL(String thumbnailURL) {
-		_thumbnailURL = thumbnailURL;
-	}
-
 	public String getLargeImageURL() {
 		return _largeImageURL;
 	}
 
+	public String getThumbnailURL() {
+		return _thumbnailURL;
+	}
+
 	public void setLargeImageURL(String largeImageURL) {
 		_largeImageURL = largeImageURL;
+	}
+
+	public void setThumbnailURL(String thumbnailURL) {
+		_thumbnailURL = thumbnailURL;
 	}
 
 	private String _thumbnailURL;

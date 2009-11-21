@@ -49,26 +49,6 @@ public class RemotePluginPackageRepository {
 		_repositoryURL = repositoryURL;
 	}
 
-	public String getRepositoryURL() {
-		return _repositoryURL;
-	}
-
-	public List<PluginPackage> getPluginPackages() {
-		return _pluginPackages;
-	}
-
-	public Properties getSettings() {
-		return _settings;
-	}
-
-	public void setSettings(Properties settings) {
-		_settings = settings;
-	}
-
-	public Set<String> getTags() {
-		return _tags;
-	}
-
 	public void addPluginPackage(PluginPackage pluginPackage) {
 
 		// Avoid duplicates
@@ -104,6 +84,22 @@ public class RemotePluginPackageRepository {
 			groupId + StringPool.SLASH + artifactId);
 	}
 
+	public List<PluginPackage> getPluginPackages() {
+		return _pluginPackages;
+	}
+
+	public String getRepositoryURL() {
+		return _repositoryURL;
+	}
+
+	public Properties getSettings() {
+		return _settings;
+	}
+
+	public Set<String> getTags() {
+		return _tags;
+	}
+
 	public void removePlugin(PluginPackage pluginPackage) {
 		_artifactURLIndex.remove(pluginPackage.getArtifactURL());
 		_moduleIdIndex.remove(pluginPackage.getModuleId());
@@ -111,6 +107,10 @@ public class RemotePluginPackageRepository {
 			pluginPackage.getGroupId(), pluginPackage.getArtifactId(),
 			pluginPackage.getModuleId());
 		_pluginPackages.remove(pluginPackage);
+	}
+
+	public void setSettings(Properties settings) {
+		_settings = settings;
 	}
 
 	private void _addToGroupAndArtifactIndex(
@@ -151,6 +151,7 @@ public class RemotePluginPackageRepository {
 	}
 
 	private String _repositoryURL;
+
 	private Map<String, PluginPackage> _artifactURLIndex =
 		new HashMap<String, PluginPackage>();
 	private Map<String, PluginPackage> _moduleIdIndex =

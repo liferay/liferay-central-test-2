@@ -33,20 +33,20 @@ public class License {
 		return _name;
 	}
 
-	public void setName(String name) {
-		_name = name;
+	public String getUrl() {
+		return _url;
 	}
 
 	public boolean isOsiApproved() {
 		return _osiApproved;
 	}
 
-	public void setOsiApproved(boolean osiApproved) {
-		_osiApproved = osiApproved;
+	public void setName(String name) {
+		_name = name;
 	}
 
-	public String getUrl() {
-		return _url;
+	public void setOsiApproved(boolean osiApproved) {
+		_osiApproved = osiApproved;
 	}
 
 	public void setUrl(String url) {
