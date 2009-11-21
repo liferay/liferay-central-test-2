@@ -22,8 +22,8 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.kernel.plugin.Version;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.Version;
 
 import java.util.Map;
 import java.util.StringTokenizer;

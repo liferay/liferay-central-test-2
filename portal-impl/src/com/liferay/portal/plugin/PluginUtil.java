@@ -38,21 +38,13 @@ import java.util.List;
  */
 public class PluginUtil {
 
-	public static List restrictPlugins(List plugins, User user)
-		throws SystemException {
-
-		return restrictPlugins(plugins, user.getCompanyId(), user.getUserId());
-	}
-
-	public static List restrictPlugins(
-			List plugins, long companyId, long userId)
+	public static List<? extends Plugin> restrictPlugins(
+			List<? extends Plugin> plugins, long companyId, long userId)
 		throws SystemException {
 
 		List<Plugin> visiblePlugins = new ArrayList<Plugin>(plugins.size());
 
-		for (int i = 0; i < plugins.size(); i++) {
-			Plugin plugin = (Plugin)plugins.get(i);
-
+		for (Plugin plugin : plugins) {
 			PluginSetting pluginSetting =
 				PluginSettingLocalServiceUtil.getPluginSetting(
 					companyId, plugin.getPluginId(), plugin.getPluginType());
@@ -65,6 +57,13 @@ public class PluginUtil {
 		}
 
 		return visiblePlugins;
+	}
+
+	public static List<? extends Plugin> restrictPlugins(
+			List<? extends Plugin> plugins, User user)
+		throws SystemException {
+
+		return restrictPlugins(plugins, user.getCompanyId(), user.getUserId());
 	}
 
 }

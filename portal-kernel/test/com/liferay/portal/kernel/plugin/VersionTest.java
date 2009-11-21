@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.plugin;
 
 import com.liferay.portal.kernel.test.TestCase;
 

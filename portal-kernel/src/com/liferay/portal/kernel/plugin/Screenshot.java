@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,15 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.kernel.plugin;
 
-<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.kernel.plugin.Version" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageException" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>
+/**
+ * <a href="Screenshot.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public class Screenshot {
 
-<%
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-%>
+	public String getThumbnailURL() {
+		return _thumbnailURL;
+	}
+
+	public void setThumbnailURL(String thumbnailURL) {
+		_thumbnailURL = thumbnailURL;
+	}
+
+	public String getLargeImageURL() {
+		return _largeImageURL;
+	}
+
+	public void setLargeImageURL(String largeImageURL) {
+		_largeImageURL = largeImageURL;
+	}
+
+	private String _thumbnailURL;
+	private String _largeImageURL;
+
+}

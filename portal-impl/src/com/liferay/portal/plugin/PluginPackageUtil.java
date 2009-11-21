@@ -25,8 +25,11 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.plugin.License;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
+import com.liferay.portal.kernel.plugin.Screenshot;
+import com.liferay.portal.kernel.plugin.Version;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -57,9 +60,6 @@ import com.liferay.portal.model.Plugin;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.License;
-import com.liferay.util.Screenshot;
-import com.liferay.util.Version;
 
 import java.io.IOException;
 

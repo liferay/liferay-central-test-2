@@ -60,13 +60,13 @@ public interface PluginPackage {
 
 	public void setTags(List<String> tags);
 
-	public List getLicenses();
+	public List<License> getLicenses();
 
-	public void setLicenses(List licenses);
+	public void setLicenses(List<License> licenses);
 
-	public List getLiferayVersions();
+	public List<String> getLiferayVersions();
 
-	public void setLiferayVersions(List liferayVersions);
+	public void setLiferayVersions(List<String> liferayVersions);
 
 	public String getShortDescription();
 
@@ -80,9 +80,9 @@ public interface PluginPackage {
 
 	public void setChangeLog(String changeLog);
 
-	public void setScreenshots(List screenshots);
+	public void setScreenshots(List<Screenshot> screenshots);
 
-	public List getScreenshots();
+	public List<Screenshot> getScreenshots();
 
 	public String getPageURL();
 

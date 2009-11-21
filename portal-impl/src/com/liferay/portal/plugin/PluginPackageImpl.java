@@ -22,8 +22,10 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.kernel.plugin.License;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
+import com.liferay.portal.kernel.plugin.Screenshot;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -41,7 +43,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  *
  * @author Jorge Ferrer
  */
-public class PluginPackageImpl implements Comparable, PluginPackage {
+public class PluginPackageImpl
+	implements Comparable<PluginPackage>, PluginPackage {
 
 	public static final String STATUS_ALL = "all";
 
@@ -142,19 +145,19 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		_tags = tags;
 	}
 
-	public List getLicenses() {
+	public List<License> getLicenses() {
 		return _licenses;
 	}
 
-	public void setLicenses(List licenses) {
+	public void setLicenses(List<License> licenses) {
 		_licenses = licenses;
 	}
 
-	public List getLiferayVersions() {
+	public List<String> getLiferayVersions() {
 		return _liferayVersions;
 	}
 
-	public void setLiferayVersions(List liferayVersions) {
+	public void setLiferayVersions(List<String> liferayVersions) {
 		_liferayVersions = liferayVersions;
 	}
 
@@ -182,11 +185,11 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		_changeLog = changeLog;
 	}
 
-	public List getScreenshots() {
+	public List<Screenshot> getScreenshots() {
 		return _screenshots;
 	}
 
-	public void setScreenshots(List screenshots) {
+	public void setScreenshots(List<Screenshot> screenshots) {
 		_screenshots = screenshots;
 	}
 
@@ -266,13 +269,7 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		_deploymentSettings = deploymentSettings;
 	}
 
-	public int compareTo(Object obj) {
-		if (!(obj instanceof PluginPackage)) {
-			return -1;
-		}
-
-		PluginPackage pluginPackage = (PluginPackage)obj;
-
+	public int compareTo(PluginPackage pluginPackage) {
 		return getName().compareTo(pluginPackage.getName());
 	}
 
@@ -319,12 +316,12 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 	private String _author;
 	private List<String> _types = new ArrayList<String>();
 	private List<String> _tags = new ArrayList<String>();
-	private List _licenses = new ArrayList();
-	private List _liferayVersions = new ArrayList();
+	private List<License> _licenses = new ArrayList<License>();
+	private List<String> _liferayVersions = new ArrayList<String>();
 	private String _shortDescription = StringPool.BLANK;
 	private String _longDescription = StringPool.BLANK;
 	private String _changeLog = StringPool.BLANK;
-	private List _screenshots = new ArrayList();
+	private List<Screenshot> _screenshots = new ArrayList<Screenshot>();
 	private String _pageURL;
 	private String _downloadURL;
 	private RemotePluginPackageRepository _repository;

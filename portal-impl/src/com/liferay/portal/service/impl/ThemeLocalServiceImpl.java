@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.image.SpriteProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.plugin.Version;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -52,7 +53,6 @@ import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ContextReplace;
-import com.liferay.util.Version;
 
 import java.io.File;
 
@@ -182,7 +182,8 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 		List<Theme> themes = getThemes(companyId);
 
-		themes = PluginUtil.restrictPlugins(themes, companyId, userId);
+		themes = (List<Theme>)PluginUtil.restrictPlugins(
+			themes, companyId, userId);
 
 		Iterator<Theme> itr = themes.iterator();
 

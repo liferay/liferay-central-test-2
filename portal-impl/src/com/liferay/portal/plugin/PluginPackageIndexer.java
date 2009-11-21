@@ -22,6 +22,7 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.kernel.plugin.License;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.DocumentSummary;
@@ -33,7 +34,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.util.License;
 
 import java.util.Date;
 import java.util.List;
@@ -54,10 +54,11 @@ public class PluginPackageIndexer implements Indexer {
 
 	public static void addPluginPackage(
 			String moduleId, String name, String version, Date modifiedDate,
-			String author, List<String> types, List<String> tags, List licenses,
-			List liferayVersions, String shortDescription,
-			String longDescription, String changeLog, String pageURL,
-			String repositoryURL, String status, String installedVersion)
+			String author, List<String> types, List<String> tags,
+			List<License> licenses, List<String> liferayVersions,
+			String shortDescription, String longDescription, String changeLog,
+			String pageURL, String repositoryURL, String status,
+			String installedVersion)
 		throws SearchException {
 
 		Document doc = getPluginPackageDocument(
@@ -75,10 +76,11 @@ public class PluginPackageIndexer implements Indexer {
 
 	public static Document getPluginPackageDocument(
 		String moduleId, String name, String version, Date modifiedDate,
-		String author, List<String> types, List<String> tags, List licenses,
-		List liferayVersions, String shortDescription,
-		String longDescription, String changeLog, String pageURL,
-		String repositoryURL, String status, String installedVersion) {
+		String author, List<String> types, List<String> tags,
+		List<License> licenses, List<String> liferayVersions,
+		String shortDescription, String longDescription, String changeLog,
+		String pageURL, String repositoryURL, String status,
+		String installedVersion) {
 
 		ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
 
@@ -113,7 +115,7 @@ public class PluginPackageIndexer implements Indexer {
 		boolean osiLicense = false;
 
 		for (int i = 0; i < licenses.size(); i++) {
-			License license = (License)licenses.get(i);
+			License license = licenses.get(i);
 
 			licenseNames[i] = license.getName();
 
@@ -152,10 +154,11 @@ public class PluginPackageIndexer implements Indexer {
 
 	public static void updatePluginPackage(
 			String moduleId, String name, String version, Date modifiedDate,
-			String author, List<String> types, List<String> tags, List licenses,
-			List liferayVersions, String shortDescription,
-			String longDescription, String changeLog, String pageURL,
-			String repositoryURL, String status, String installedVersion)
+			String author, List<String> types, List<String> tags,
+			List<License> licenses, List<String> liferayVersions,
+			String shortDescription, String longDescription, String changeLog,
+			String pageURL, String repositoryURL, String status,
+			String installedVersion)
 		throws SearchException {
 
 		Document doc = getPluginPackageDocument(

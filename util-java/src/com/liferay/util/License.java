@@ -26,35 +26,7 @@ package com.liferay.util;
  * <a href="License.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @deprecated {@link com.liferay.portal.kernel.plugin.License}
  */
-public class License {
-
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public boolean isOsiApproved() {
-		return _osiApproved;
-	}
-
-	public void setOsiApproved(boolean osiApproved) {
-		_osiApproved = osiApproved;
-	}
-
-	public String getUrl() {
-		return _url;
-	}
-
-	public void setUrl(String url) {
-		_url = url;
-	}
-
-	private String _name;
-	private boolean _osiApproved;
-	private String _url;
-
+public class License extends com.liferay.portal.kernel.plugin.License {
 }

@@ -26,26 +26,7 @@ package com.liferay.util;
  * <a href="Screenshot.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @deprecated {@link com.liferay.portal.kernel.plugin.Screenshot}
  */
-public class Screenshot {
-
-	public String getThumbnailURL() {
-		return _thumbnailURL;
-	}
-
-	public void setThumbnailURL(String thumbnailURL) {
-		_thumbnailURL = thumbnailURL;
-	}
-
-	public String getLargeImageURL() {
-		return _largeImageURL;
-	}
-
-	public void setLargeImageURL(String largeImageURL) {
-		_largeImageURL = largeImageURL;
-	}
-
-	private String _thumbnailURL;
-	private String _largeImageURL;
-
+public class Screenshot extends com.liferay.portal.kernel.plugin.Screenshot {
 }

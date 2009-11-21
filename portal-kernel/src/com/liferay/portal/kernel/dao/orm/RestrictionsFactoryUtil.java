@@ -32,7 +32,7 @@ import java.util.Map;
  */
 public class RestrictionsFactoryUtil {
 
-	public static Criterion allEq(Map propertyNameValues) {
+	public static Criterion allEq(Map<String, Criterion> propertyNameValues) {
 		return getRestrictionsFactory().allEq(propertyNameValues);
 	}
 
@@ -93,7 +93,7 @@ public class RestrictionsFactoryUtil {
 		return getRestrictionsFactory().ilike(propertyName, value);
 	}
 
-	public static Criterion in(String propertyName, Collection values) {
+	public static Criterion in(String propertyName, Collection<Object> values) {
 		return getRestrictionsFactory().in(propertyName, values);
 	}
 

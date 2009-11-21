@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,15 +19,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.kernel.plugin;
 
-<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.kernel.plugin.Version" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageException" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>
+/**
+ * <a href="License.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public class License {
 
-<%
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-%>
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public boolean isOsiApproved() {
+		return _osiApproved;
+	}
+
+	public void setOsiApproved(boolean osiApproved) {
+		_osiApproved = osiApproved;
+	}
+
+	public String getUrl() {
+		return _url;
+	}
+
+	public void setUrl(String url) {
+		_url = url;
+	}
+
+	private String _name;
+	private boolean _osiApproved;
+	private String _url;
+
+}
