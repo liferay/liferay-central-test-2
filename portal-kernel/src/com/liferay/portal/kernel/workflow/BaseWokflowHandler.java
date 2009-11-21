@@ -31,11 +31,4 @@ import com.liferay.portal.util.PortalUtil;
  * @author Marcellus Tavares
  */
 public abstract class BaseWokflowHandler implements WorkflowHandler {
-
-	public long getClassNameId() {
-		return _classNameId;
-	}
-
-	private long _classNameId = PortalUtil.getClassNameId(getClassName());
-
 }

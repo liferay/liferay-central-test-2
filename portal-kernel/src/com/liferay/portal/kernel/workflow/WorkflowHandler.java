@@ -32,6 +32,4 @@ public interface WorkflowHandler {
 
 	public String getClassName();
 
-	public long getClassNameId();
-
 }
