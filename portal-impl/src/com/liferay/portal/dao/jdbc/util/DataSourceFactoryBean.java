@@ -125,7 +125,10 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 	protected DataSource createDataSourceC3PO(Properties properties)
 		throws Exception {
 
-		DataSource dataSource = new ComboPooledDataSource();
+		ComboPooledDataSource comboPooledDataSource =
+			new ComboPooledDataSource();
+
+		comboPooledDataSource.setIdentityToken(_propertyPrefix);
 
 		Enumeration<String> enu =
 			(Enumeration<String>)properties.propertyNames();
@@ -147,10 +150,10 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 				key = "user";
 			}
 
-			BeanUtils.setProperty(dataSource, key, value);
+			BeanUtils.setProperty(comboPooledDataSource, key, value);
 		}
 
-		return dataSource;
+		return comboPooledDataSource;
 	}
 
 	protected DataSource createDataSourceDBCP(Properties properties)

@@ -96,6 +96,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.dao.jdbc.pool">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
 		<priority value="ERROR" />
 	</category>
