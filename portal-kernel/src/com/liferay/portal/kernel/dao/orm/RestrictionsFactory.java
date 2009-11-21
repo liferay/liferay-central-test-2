@@ -32,7 +32,7 @@ import java.util.Map;
  */
 public interface RestrictionsFactory {
 
-	public Criterion allEq(Map propertyNameValues);
+	public Criterion allEq(Map<String, Criterion> propertyNameValues);
 
 	public Criterion and(Criterion lhs, Criterion rhs);
 
@@ -56,7 +56,7 @@ public interface RestrictionsFactory {
 
 	public Criterion ilike(String propertyName, Object value);
 
-	public Criterion in(String propertyName, Collection values);
+	public Criterion in(String propertyName, Collection<Object> values);
 
 	public Criterion in(String propertyName, Object[] values);
 

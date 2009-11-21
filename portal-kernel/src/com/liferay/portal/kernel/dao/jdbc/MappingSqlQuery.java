@@ -31,6 +31,7 @@ import java.util.List;
  */
 public interface MappingSqlQuery {
 
+	@SuppressWarnings("unchecked")
 	public List execute(Object[] params);
 
 }

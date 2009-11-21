@@ -176,7 +176,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 			_property.gtSome(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
-	public Criterion in(Collection values) {
+	public Criterion in(Collection<Object> values) {
 		return new CriterionImpl(_property.in(values));
 	}
 

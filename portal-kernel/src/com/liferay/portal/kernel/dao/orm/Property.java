@@ -79,7 +79,7 @@ public interface Property extends Projection {
 
 	public Criterion gtSome(DynamicQuery subselect);
 
-	public Criterion in(Collection values);
+	public Criterion in(Collection<Object> values);
 
 	public Criterion in(DynamicQuery subselect);
 

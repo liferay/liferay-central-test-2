@@ -38,12 +38,16 @@ public interface Query {
 
 	public int executeUpdate() throws ORMException;
 
+	@SuppressWarnings("unchecked")
 	public Iterator iterate() throws ORMException;
 
+	@SuppressWarnings("unchecked")
 	public Iterator iterate(boolean modifiable) throws ORMException;
 
+	@SuppressWarnings("unchecked")
 	public List list() throws ORMException;
 
+	@SuppressWarnings("unchecked")
 	public List list(boolean unmodifiable) throws ORMException;
 
 	public ScrollableResults scroll() throws ORMException;

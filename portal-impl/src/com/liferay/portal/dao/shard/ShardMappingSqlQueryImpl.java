@@ -42,6 +42,7 @@ public class ShardMappingSqlQueryImpl extends MappingSqlQueryImpl {
 		super(dataSource, sql, types, rowMapper);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List execute(Object[] params) {
 		setDataSource(ShardUtil.getDataSource());
 

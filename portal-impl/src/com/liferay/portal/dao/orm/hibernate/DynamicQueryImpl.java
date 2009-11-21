@@ -79,10 +79,12 @@ public class DynamicQueryImpl implements DynamicQuery {
 		return _detachedCriteria;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List list() {
 		return list(true);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List list(boolean unmodifiable) {
 		List list = _criteria.list();
 

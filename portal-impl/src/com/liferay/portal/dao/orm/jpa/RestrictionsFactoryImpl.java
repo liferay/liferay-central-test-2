@@ -57,7 +57,7 @@ import java.util.Map;
  */
 public class RestrictionsFactoryImpl implements RestrictionsFactory {
 
-	public Criterion allEq(Map propertyNameValues) {
+	public Criterion allEq(Map<String, Criterion> propertyNameValues) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -105,7 +105,7 @@ public class RestrictionsFactoryImpl implements RestrictionsFactory {
 		throw new UnsupportedOperationException();
 	}
 
-	public Criterion in(String propertyName, Collection values) {
+	public Criterion in(String propertyName, Collection<Object> values) {
 		throw new UnsupportedOperationException();
 	}
 

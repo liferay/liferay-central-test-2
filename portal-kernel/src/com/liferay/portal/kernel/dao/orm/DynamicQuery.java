@@ -37,8 +37,10 @@ public interface DynamicQuery {
 
 	public void compile(Session session);
 
+	@SuppressWarnings("unchecked")
 	public List list();
 
+	@SuppressWarnings("unchecked")
 	public List list(boolean unmodifiable);
 
 	public void setLimit(int start, int end);

@@ -37,7 +37,7 @@ import java.util.Map;
  */
 public class RestrictionsFactoryImpl implements RestrictionsFactory {
 
-	public Criterion allEq(Map propertyNameValues) {
+	public Criterion allEq(Map<String, Criterion> propertyNameValues) {
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.allEq(propertyNameValues));
 	}
@@ -104,7 +104,7 @@ public class RestrictionsFactoryImpl implements RestrictionsFactory {
 			org.hibernate.criterion.Restrictions.ilike(propertyName, value));
 	}
 
-	public Criterion in(String propertyName, Collection values) {
+	public Criterion in(String propertyName, Collection<Object> values) {
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.in(propertyName, values));
 	}
