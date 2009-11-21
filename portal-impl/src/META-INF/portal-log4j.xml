@@ -260,6 +260,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.scheduler.quartz.PortalJobStore">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl">
 		<priority value="ERROR" />
 	</category>
