@@ -59,7 +59,7 @@ public class UpgradePermission extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_GET_PERMISSION_SQL);
+			ps = con.prepareStatement(_GET_PERMISSION_IDS_1);
 
 			ps.setString(1, actionId);
 			ps.setString(2, resourceName);
@@ -190,7 +190,7 @@ public class UpgradePermission extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_GET_ROLES_PERMISSIONS_SQL);
+			ps = con.prepareStatement(_GET_ROLE_IDS);
 
 			ps.setString(1, roleName);
 
@@ -216,7 +216,7 @@ public class UpgradePermission extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_GET_USERS_PERMISSIONS_SQL);
+			ps = con.prepareStatement(_GET_PERMISSION_IDS_2);
 
 			ps.setLong(1, scope);
 
@@ -277,7 +277,7 @@ public class UpgradePermission extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_GET_PERMISSION_SQL);
+			ps = con.prepareStatement(_GET_PERMISSION_IDS_1);
 
 			ps.setString(1, oldActionId);
 			ps.setString(2, resourceName);
@@ -296,26 +296,6 @@ public class UpgradePermission extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static final String _GET_PERMISSION_SQL =
-		"select Permission_.permissionId from Permission_ inner join " +
-			"Resource_ on Resource_.resourceId = Permission_.resourceId " +
-				"inner join ResourceCode on ResourceCode.codeId = " +
-					"Resource_.codeId where Permission_.actionId = ? and " +
-						"ResourceCode.name = ?";
-
-	private static final String _GET_ROLES_PERMISSIONS_SQL =
-		"select Roles_Permissions.roleId from Roles_Permissions inner join " +
-			"Role_ on Role_.roleId = Roles_Permissions.roleId where " +
-				"Role_.name = ?";
-
-	private static final String _GET_USERS_PERMISSIONS_SQL =
-		"select Users_Permissions.permissionId from Users_Permissions inner " +
-			"join Permission_ on Permission_.permissionId = " +
-				"Users_Permissions.permissionId inner join Resource_ on " +
-					"Resource_.resourceId = Permission_.resourceId inner " +
-						"join ResourceCode on ResourceCode.codeId = " +
-							"Resource_.codeId where ResourceCode.scope = ?";
 
 	private static Object[][] _DELETE_PERMISSIONS = new Object[][] {
 		new Object[] {
@@ -352,6 +332,26 @@ public class UpgradePermission extends UpgradeProcess {
 			"VIEW_USER", Organization.class
 		}
 	};
+
+	private static final String _GET_PERMISSION_IDS_1 =
+		"select Permission_.permissionId from Permission_ inner join " +
+			"Resource_ on Resource_.resourceId = Permission_.resourceId " +
+				"inner join ResourceCode on ResourceCode.codeId = " +
+					"Resource_.codeId where Permission_.actionId = ? and " +
+						"ResourceCode.name = ?";
+
+	private static final String _GET_PERMISSION_IDS_2 =
+		"select Users_Permissions.permissionId from Users_Permissions inner " +
+			"join Permission_ on Permission_.permissionId = " +
+				"Users_Permissions.permissionId inner join Resource_ on " +
+					"Resource_.resourceId = Permission_.resourceId inner " +
+						"join ResourceCode on ResourceCode.codeId = " +
+							"Resource_.codeId where ResourceCode.scope = ?";
+
+	private static final String _GET_ROLE_IDS =
+		"select Roles_Permissions.roleId from Roles_Permissions inner join " +
+			"Role_ on Role_.roleId = Roles_Permissions.roleId where " +
+				"Role_.name = ?";
 
 	private static Object[][] _UPDATE_PERMISSIONS = new Object[][] {
 		new Object[] {

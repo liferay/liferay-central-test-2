@@ -22,11 +22,9 @@
 
 package com.liferay.portal.upgrade.v5_3_0;
 
-import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.sql.Connection;
@@ -42,6 +40,33 @@ public class UpgradeGroup extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		updateParentGroupId();
+	}
+
+	protected long getLayoutGroupId(long plid) throws Exception {
+		long groupId = 0;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_LAYOUT_GROUP_ID);
+
+			ps.setLong(1, plid);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				groupId = rs.getLong("groupId");
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return groupId;
 	}
 
 	protected void updateParentGroupId() throws Exception {
@@ -65,21 +90,19 @@ public class UpgradeGroup extends UpgradeProcess {
 				long groupId = rs.getLong("groupId");
 				long classPK = rs.getLong("classPK");
 
-				try {
-					Layout layout = LayoutLocalServiceUtil.getLayout(classPK);
+				long layoutGroupId = getLayoutGroupId(classPK);
 
-					runSQL(
-						"update Group_ set parentGroupId = " +
-							layout.getGroupId() + " where groupId = " +
-								groupId);
-				}
-				catch (NoSuchLayoutException nsle) {
-				}
+				runSQL(
+					"update Group_ set parentGroupId = " + layoutGroupId +
+						" where groupId = " + groupId);
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
+
+	private static final String _GET_LAYOUT_GROUP_ID =
+		"select groupId from Layout where plid = ?";
 
 }
