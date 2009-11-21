@@ -579,7 +579,7 @@ file.
 
 		<ant dir="portal-kernel" target="test" inheritAll="false" />
 
-		<ant dir="util-java" target="test" inheritAll="false" />
+		<!--<ant dir="util-java" target="test" inheritAll="false" />-->
 	</target>
 
 	<target name="test-db">
