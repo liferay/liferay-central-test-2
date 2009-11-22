@@ -22,6 +22,8 @@
 
 package com.liferay.portal.dao.db;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.Index;
@@ -139,6 +141,10 @@ public abstract class BaseDB implements DB {
 
 	public String getType() {
 		return _type;
+	}
+
+	public long increment() throws SystemException {
+		return CounterLocalServiceUtil.increment();
 	}
 
 	public boolean isSupportsAlterColumnName() {

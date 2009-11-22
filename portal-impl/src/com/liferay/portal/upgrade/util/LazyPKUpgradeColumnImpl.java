@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.upgrade.StagnantRowException;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 
@@ -50,7 +49,7 @@ public class LazyPKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 			newValue = (Long)valueMapper.getNewValue(oldValue);
 		}
 		catch (StagnantRowException sre) {
-			newValue = new Long(CounterLocalServiceUtil.increment());
+			newValue = new Long(increment());
 
 			valueMapper.mapValue(oldValue, newValue);
 		}

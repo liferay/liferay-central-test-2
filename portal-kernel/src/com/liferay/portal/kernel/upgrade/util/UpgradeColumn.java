@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.upgrade.util;
 
+import com.liferay.portal.SystemException;
+
 /**
  * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,6 +33,8 @@ package com.liferay.portal.kernel.upgrade.util;
 public interface UpgradeColumn {
 
 	public String getName();
+
+	public long increment() throws SystemException;
 
 	public boolean isApplicable(String name);
 

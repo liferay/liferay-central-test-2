@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_2_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -78,7 +77,7 @@ public class UpgradeTags extends UpgradeProcess {
 				String name = rs.getString("name");
 				long vocabularyId = rs.getLong("vocabularyId");
 
-				newEntryId = CounterLocalServiceUtil.increment();
+				newEntryId = increment();
 
 				ps = con.prepareStatement(
 					"insert into TagsEntry (entryId, groupId, companyId, " +
@@ -140,7 +139,7 @@ public class UpgradeTags extends UpgradeProcess {
 				String key = rs.getString("key_");
 				String value = rs.getString("value");
 
-				long newPropertyId = CounterLocalServiceUtil.increment();
+				long newPropertyId = increment();
 
 				ps = con.prepareStatement(
 					"insert into TagsProperty (propertyId, companyId, " +

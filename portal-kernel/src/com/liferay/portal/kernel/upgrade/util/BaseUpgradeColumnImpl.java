@@ -22,6 +22,10 @@
 
 package com.liferay.portal.kernel.upgrade.util;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+
 /**
  * <a href="BaseUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,6 +44,12 @@ public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 
 	public String getName() {
 		return _name;
+	}
+
+	public long increment() throws SystemException {
+		DB db = DBFactoryUtil.getDB();
+
+		return db.increment();
 	}
 
 	public boolean isApplicable(String name) {

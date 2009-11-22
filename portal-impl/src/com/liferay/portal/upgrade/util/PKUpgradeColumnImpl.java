@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
@@ -59,7 +58,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		Long newValue = new Long(CounterLocalServiceUtil.increment());
+		Long newValue = new Long(increment());
 
 		if (_trackValues) {
 			_valueMapper.mapValue(oldValue, newValue);

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.dao.db;
 
+import com.liferay.portal.SystemException;
+
 import java.io.IOException;
 
 import java.sql.Connection;
@@ -94,6 +96,8 @@ public interface DB {
 	public String getTemplateTrue();
 
 	public String getType();
+
+	public long increment() throws SystemException;
 
 	public boolean isSupportsAlterColumnName();
 

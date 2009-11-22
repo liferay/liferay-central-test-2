@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
@@ -153,7 +152,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			User user = UserLocalServiceUtil.getUser(userId);
 			Date now = new Date();
 
-			long fileVersionId = CounterLocalServiceUtil.increment();
+			long fileVersionId = increment();
 
 			DLFileVersion fileVersion = new DLFileVersionImpl();
 

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
@@ -122,7 +121,7 @@ public class UpgradeExpando extends UpgradeProcess {
 				long companyId = rs.getLong("companyId");
 				long classPK = rs.getLong("classPK");
 
-				long scRowId = CounterLocalServiceUtil.increment();
+				long scRowId = increment();
 
 				ps = con.prepareStatement(
 					"insert into ExpandoRow (rowId_, companyId, tableId, " +
@@ -137,7 +136,7 @@ public class UpgradeExpando extends UpgradeProcess {
 
 				ps.close();
 
-				long snRowId = CounterLocalServiceUtil.increment();
+				long snRowId = increment();
 
 				ps = con.prepareStatement(
 					"insert into ExpandoRow (rowId_, companyId, tableId, " +
@@ -191,7 +190,7 @@ public class UpgradeExpando extends UpgradeProcess {
 				long companyId = rs.getLong("companyId");
 				long classNameId = rs.getLong("classNameId");
 
-				long scTableId = CounterLocalServiceUtil.increment();
+				long scTableId = increment();
 
 				ps = con.prepareStatement(
 					"insert into ExpandoTable (tableId, companyId, " +
@@ -206,7 +205,7 @@ public class UpgradeExpando extends UpgradeProcess {
 
 				ps.close();
 
-				long snTableId = CounterLocalServiceUtil.increment();
+				long snTableId = increment();
 
 				ps = con.prepareStatement(
 					"insert into ExpandoTable (tableId, companyId, " +

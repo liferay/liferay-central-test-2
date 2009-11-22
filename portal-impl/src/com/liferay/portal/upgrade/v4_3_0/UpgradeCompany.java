@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -101,13 +100,13 @@ public class UpgradeCompany extends UpgradeProcess {
 	}
 
 	protected long upgradeWebId(String webId) throws Exception {
-		long companyId = CounterLocalServiceUtil.increment();
+		long companyId = increment();
 
 		for (int j = 0; j < _TABLES.length; j++) {
 			runSQL(getUpdateSQL(_TABLES[j], companyId, webId));
 		}
 
-		long accountId = CounterLocalServiceUtil.increment();
+		long accountId = increment();
 
 		runSQL(
 			"update Account_ set accountId = '" + accountId +

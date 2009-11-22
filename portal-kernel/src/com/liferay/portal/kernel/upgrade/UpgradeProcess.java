@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.upgrade;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -51,6 +52,12 @@ public abstract class UpgradeProcess {
 		// process.
 
 		return 0;
+	}
+
+	public long increment() throws SystemException {
+		DB db = DBFactoryUtil.getDB();
+
+		return db.increment();
 	}
 
 	public boolean isSupportsAlterColumnName() {
