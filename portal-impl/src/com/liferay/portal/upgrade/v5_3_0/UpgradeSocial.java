@@ -30,13 +30,11 @@ import com.liferay.portal.kernel.upgrade.util.DateUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.v5_3_0.util.SocialActivityTable;
 import com.liferay.portal.upgrade.v5_3_0.util.SocialRelationTable;
 import com.liferay.portal.upgrade.v5_3_0.util.SocialRequestTable;
+import com.liferay.portal.util.PortalUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,6 +87,65 @@ public class UpgradeSocial extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
+	protected Object[] getGroup(long groupId) throws Exception {
+		Object[] group = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_GROUP);
+
+			ps.setLong(1, groupId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long classNameId = rs.getLong("classNameId");
+				long classPK = rs.getLong("classPK");
+
+				group = new Object[] {classNameId, classPK};
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return group;
+	}
+
+	protected Object[] getLayout(long plid) throws Exception {
+		Object[] layout = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_LAYOUT);
+
+			ps.setLong(1, plid);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+
+				layout = new Object[] {groupId};
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return layout;
+	}
+
 	protected void updateGroupId() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -122,19 +179,38 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected void updateGroupId(long groupId) throws Exception {
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Object[] group = getGroup(groupId);
 
-		if (group.isLayout()) {
-			Layout layout = LayoutLocalServiceUtil.getLayout(
-				group.getClassPK());
-
-			long layoutGroupId = layout.getGroupId();
-
-			runSQL(
-				"update SocialActivity set groupId = " + layoutGroupId +
-					" where groupId = " + groupId);
+		if (group == null) {
+			return;
 		}
+
+		long classNameId = (Long)group[0];
+
+		if (classNameId != PortalUtil.getClassNameId(Layout.class.getName())) {
+			return;
+		}
+
+		long classPK = (Long)group[1];
+
+		Object[] layout = getLayout(classPK);
+
+		if (layout == null) {
+			return;
+		}
+
+		long layoutGroupId = (Long)layout[0];
+
+		runSQL(
+			"update SocialActivity set groupId = " + layoutGroupId +
+				" where groupId = " + groupId);
 	}
+
+	private static final String _GET_GROUP =
+		"select classNameId, classPK from Group_ where groupId = ?";
+
+	private static final String _GET_LAYOUT =
+		"select groupId from Layout where plid = ?";
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeSocial.class);
 
