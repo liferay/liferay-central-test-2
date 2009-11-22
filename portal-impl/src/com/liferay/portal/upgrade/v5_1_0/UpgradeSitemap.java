@@ -22,13 +22,10 @@
 
 package com.liferay.portal.upgrade.v5_1_0;
 
-import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
@@ -75,17 +72,19 @@ public class UpgradeSitemap extends UpgradeProcess {
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				try {
-					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+				Object[] layout = getLayout(plid);
+
+				if (layout != null) {
+					long companyId = (Long)layout[0];
 
 					String newPreferences = upgradePreferences(
-						layout.getCompanyId(), ownerId, ownerType, plid,
-						portletId, preferences);
+						companyId, ownerId, ownerType, plid, portletId,
+						preferences);
 
 					updatePortletPreferences(
 						portletPreferencesId, newPreferences);
 				}
-				catch (NoSuchLayoutException nsle) {
+				else {
 					deletePortletPreferences(portletPreferencesId);
 				}
 			}
@@ -93,6 +92,36 @@ public class UpgradeSitemap extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected Object[] getLayout(long plid) throws Exception {
+		Object[] layout = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_LAYOUT);
+
+			ps.setLong(1, plid);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+				long layoutId = rs.getLong("layoutId");
+
+				layout = new Object[] {companyId, layoutId};
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return layout;
 	}
 
 	protected void updatePortletPreferences(
@@ -131,13 +160,13 @@ public class UpgradeSitemap extends UpgradeProcess {
 			preferences.getValue("root-plid", StringPool.BLANK));
 
 		if (rootPlid > 0) {
-			try {
-				Layout layout = LayoutLocalServiceUtil.getLayout(rootPlid);
+			Object[] layout = getLayout(rootPlid);
+
+			if (layout != null) {
+				long layoutId = (Long)layout[1];
 
 				preferences.setValue(
-					"root-layout-id", String.valueOf(layout.getLayoutId()));
-			}
-			catch (NoSuchLayoutException nsle) {
+					"root-layout-id", String.valueOf(layoutId));
 			}
 		}
 
@@ -145,5 +174,8 @@ public class UpgradeSitemap extends UpgradeProcess {
 
 		return PortletPreferencesSerializer.toXML(preferences);
 	}
+
+	private static final String _GET_LAYOUT =
+		"select companyId, layoutId from Layout where plid = ?";
 
 }

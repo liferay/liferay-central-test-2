@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -76,6 +74,37 @@ public class UpgradeLayout extends UpgradeProcess {
 		}
 	}
 
+	protected Object[] getLayout(long plid) throws Exception {
+		Object[] layout = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_LAYOUT);
+
+			ps.setLong(1, plid);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+				boolean privateLayout = rs.getBoolean("privateLayout");
+				long layoutId = rs.getLong("layoutId");
+
+				layout = new Object[] {groupId, privateLayout, layoutId};
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return layout;
+	}
+
 	protected String upgradeTypeSettings(String typeSettings) throws Exception {
 		UnicodeProperties props = new UnicodeProperties(true);
 
@@ -84,16 +113,24 @@ public class UpgradeLayout extends UpgradeProcess {
 		long linkToPlid = GetterUtil.getLong(props.getProperty("linkToPlid"));
 
 		if (linkToPlid > 0) {
-			Layout layout = LayoutLocalServiceUtil.getLayout(linkToPlid);
+			Object[] layout = getLayout(linkToPlid);
 
-			props.remove("linkToPlid");
-			props.put("groupId", String.valueOf(layout.getGroupId()));
-			props.put(
-				"privateLayout", String.valueOf(layout.isPrivateLayout()));
-			props.put("linkToLayoutId", String.valueOf(layout.getLayoutId()));
+			if (layout != null) {
+				long groupId = (Long)layout[0];
+				boolean privateLayout = (Boolean)layout[1];
+				long layoutId = (Long)layout[2];
+
+				props.remove("linkToPlid");
+				props.put("groupId", String.valueOf(groupId));
+				props.put("privateLayout", String.valueOf(privateLayout));
+				props.put("linkToLayoutId", String.valueOf(layoutId));
+			}
 		}
 
 		return props.toString();
 	}
+
+	private static final String _GET_LAYOUT =
+		"select groupId, privateLayout, layoutId from Layout where plid = ?";
 
 }
