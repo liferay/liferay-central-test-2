@@ -159,6 +159,10 @@ td.user-info {
 	font-weight: bold;
 }
 
+.portlet-message-boards .message-boards-panels {
+	border-width: 0;
+}
+
 .portlet-message-boards .statistics-panel {
 	border-width: 0;
 }
