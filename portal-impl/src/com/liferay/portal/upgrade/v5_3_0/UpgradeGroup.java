@@ -42,8 +42,8 @@ public class UpgradeGroup extends UpgradeProcess {
 		updateParentGroupId();
 	}
 
-	protected long getLayoutGroupId(long plid) throws Exception {
-		long groupId = 0;
+	protected Object[] getLayout(long plid) throws Exception {
+		Object[] layout = null;
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -52,21 +52,23 @@ public class UpgradeGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_GET_LAYOUT_GROUP_ID);
+			ps = con.prepareStatement(_GET_LAYOUT);
 
 			ps.setLong(1, plid);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				groupId = rs.getLong("groupId");
+				long groupId = rs.getLong("groupId");
+
+				layout = new Object[] {groupId};
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		return groupId;
+		return layout;
 	}
 
 	protected void updateParentGroupId() throws Exception {
@@ -90,11 +92,15 @@ public class UpgradeGroup extends UpgradeProcess {
 				long groupId = rs.getLong("groupId");
 				long classPK = rs.getLong("classPK");
 
-				long layoutGroupId = getLayoutGroupId(classPK);
+				Object[] layout = getLayout(classPK);
 
-				runSQL(
-					"update Group_ set parentGroupId = " + layoutGroupId +
-						" where groupId = " + groupId);
+				if (layout != null) {
+					long layoutGroupId = (Long)layout[0];
+
+					runSQL(
+						"update Group_ set parentGroupId = " + layoutGroupId +
+							" where groupId = " + groupId);
+				}
 			}
 		}
 		finally {
@@ -102,7 +108,7 @@ public class UpgradeGroup extends UpgradeProcess {
 		}
 	}
 
-	private static final String _GET_LAYOUT_GROUP_ID =
+	private static final String _GET_LAYOUT =
 		"select groupId from Layout where plid = ?";
 
 }

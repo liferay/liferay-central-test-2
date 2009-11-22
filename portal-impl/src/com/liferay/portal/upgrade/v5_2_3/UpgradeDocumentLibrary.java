@@ -22,15 +22,12 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileRankTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileShortcutTable;
@@ -131,6 +128,35 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		updatePortletPreferences();
 	}
 
+	protected Object[] getLayout(long plid) throws Exception {
+		Object[] layout = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_LAYOUT);
+
+			ps.setLong(1, plid);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+
+				layout = new Object[] {companyId};
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return layout;
+	}
+
 	protected void updateGroupId() throws Exception {
 		StringBuilder sb = new StringBuilder();
 
@@ -186,17 +212,19 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				try {
-					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+				Object[] layout = getLayout(plid);
+
+				if (layout != null) {
+					long companyId = (Long)layout[0];
 
 					String newPreferences = upgradePreferences(
-						layout.getCompanyId(), ownerId, ownerType, plid,
-						portletId, preferences);
+						companyId, ownerId, ownerType, plid, portletId,
+						preferences);
 
 					updatePortletPreferences(
 						portletPreferencesId, newPreferences);
 				}
-				catch (NoSuchLayoutException nsle) {
+				else {
 					deletePortletPreferences(portletPreferencesId);
 				}
 			}
@@ -247,5 +275,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		return PortletPreferencesSerializer.toXML(preferences);
 	}
+
+	private static final String _GET_LAYOUT =
+		"select companyId from Layout where plid = ?";
 
 }
