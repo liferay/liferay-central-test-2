@@ -694,19 +694,6 @@ Liferay.Util = {
 				function(A) {
 					var editableTitle = new A.Editable(
 						{
-							node: title[0],
-							formatOutput: function(value) {
-								var instance = this;
-
-								value = instance._toHTML(value);
-
-								var cruft = instance._LFR_cruft || [];
-
-								cruft = cruft.join('');
-
-								return cruft + value;
-							},
-
 							after: {
 								contentTextChange: function(event) {
 									var instance = this;
@@ -730,7 +717,20 @@ Liferay.Util = {
 
 									instance._LFR_cruft = value.match(re);
 								}
-							}
+							},
+							cssClass: 'lfr-portlet-title-editable',
+							formatOutput: function(value) {
+								var instance = this;
+
+								value = instance._toHTML(value);
+
+								var cruft = instance._LFR_cruft || [];
+
+								cruft = cruft.join('');
+
+								return cruft + value;
+							},
+							node: title[0]
 						}
 					);
 				}
