@@ -28,13 +28,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 
 import java.sql.Connection;
@@ -97,6 +93,36 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 			"36", "com.liferay.portlet.wiki", new String[] {"ADD_NODE"});
 	}
 
+	protected Object[] getLayout(long plid) throws Exception {
+		Object[] layout = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_LAYOUT);
+
+			ps.setLong(1, plid);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+				long companyId = rs.getLong("companyId");
+
+				layout = new Object[] {groupId, companyId};
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return layout;
+	}
+
 	protected long getPortletPermissionsCount(
 			String actionId, long resourceId, String modelName)
 		throws Exception {
@@ -147,22 +173,26 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 			primKey.substring(
 				0, primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+		Object[] layout = getLayout(plid);
+
+		if (layout == null) {
+			return;
+		}
+
+		long groupId = (Long)layout[0];
+		long companyId = (Long)layout[1];
 
 		Resource resource = ResourceLocalServiceUtil.addResource(
-			layout.getCompanyId(), modelName, scope,
-			String.valueOf(layout.getGroupId()));
+			companyId, modelName, scope, String.valueOf(groupId));
 
 		long portletPermissionCount = getPortletPermissionsCount(
 			actionId, resource.getResourceId(), modelName);
 
 		if (portletPermissionCount == 0) {
-			Permission permission = PermissionLocalServiceUtil.getPermission(
-				permissionId);
-
-			permission.setResourceId(resource.getResourceId());
-
-			PermissionLocalServiceUtil.updatePermission(permission);
+			runSQL(
+				"update Permission_ set resourceId = " +
+					resource.getResourceId() + " where permissionId = " +
+						permissionId);
 		}
 		else {
 			runSQL(
@@ -235,6 +265,9 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
+
+	private static final String _GET_LAYOUT =
+		"select groupId, companyId from Layout where plid = ?";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		UpgradePortletPermissions.class);
