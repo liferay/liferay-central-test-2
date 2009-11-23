@@ -22,21 +22,18 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+
 import java.lang.Object;
+import java.lang.String;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
-
 /**
- * <a href="SessionFactoryInvocationHandler.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="SessionInvocationHandler.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * See http://support.liferay.com/browse/LEP-2996.
@@ -44,10 +41,14 @@ import org.springframework.orm.hibernate3.SessionFactoryUtils;
  *
  * @author Brian Wing Shun Chan
  */
-public class SessionFactoryInvocationHandler implements InvocationHandler {
+public class SessionInvocationHandler implements InvocationHandler {
 
-	public SessionFactoryInvocationHandler(SessionFactory sessionFactory) {
-		_sessionFactory = sessionFactory;
+	public SessionInvocationHandler(Session session) {
+		_session = session;
+	}
+
+	public Session getSession() {
+		return _session;
 	}
 
 	public Object invoke(Object proxy, Method method, Object[] args)
@@ -55,21 +56,23 @@ public class SessionFactoryInvocationHandler implements InvocationHandler {
 
 		String methodName = method.getName();
 
-		if (methodName.equals(_GET_CURRENT_SESSION)) {
+		if (methodName.equals(_CONNECTION)) {
+			Thread currentThread = Thread.currentThread();
+
+			ClassLoader contextClassLoader =
+				currentThread.getContextClassLoader();
+
 			try {
-				Session session = (Session)SessionFactoryUtils.doGetSession(
-					(SessionFactory)proxy, false);
+				ClassLoader portalClassLoader =
+					PortalClassLoaderUtil.getClassLoader();
 
-				return wrapSession(session);
-			}
-			catch (IllegalStateException ise) {
-				throw new HibernateException(ise.getMessage());
-			}
-		}
-		else if (methodName.equals(_OPEN_SESSION)) {
-			Session session = (Session)method.invoke(_sessionFactory, args);
+				currentThread.setContextClassLoader(portalClassLoader);
 
-			return wrapSession(session);
+				return _session.connection();
+			}
+			finally {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
 		}
 		else if (methodName.equals(_EQUALS)) {
 			if (proxy == args[0]) {
@@ -84,32 +87,19 @@ public class SessionFactoryInvocationHandler implements InvocationHandler {
 		}
 
 		try {
-			return method.invoke(_sessionFactory, args);
+			return method.invoke(_session, args);
 		}
 		catch (InvocationTargetException ite) {
 			throw ite.getTargetException();
 		}
 	}
 
-	protected Session wrapSession(Session session) {
-		if (Proxy.isProxyClass(session.getClass())) {
-			return session;
-		}
-		else {
-			return (Session)Proxy.newProxyInstance(
-				Session.class.getClassLoader(), new Class[] {Session.class},
-				new SessionInvocationHandler(session));
-		}
-	}
+	private static final String _CONNECTION = "connection";
 
 	private static final String _EQUALS = "equals";
 
-	private static final String _GET_CURRENT_SESSION = "getCurrentSession";
-
 	private static final String _HASHCODE = "hashCode";
 
-	private static final String _OPEN_SESSION = "openSession";
-
-	private final SessionFactory _sessionFactory;
+	private final Session _session;
 
 }

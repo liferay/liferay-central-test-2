@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.spring.hibernate.SessionInvocationHandler;
 import com.liferay.portal.util.PropsValues;
 
 import java.lang.reflect.Proxy;
@@ -59,8 +60,7 @@ public class SessionFactoryImpl implements SessionFactory {
 	}
 
 	public Session openNewSession(Connection connection) throws ORMException {
-		return transformSession(
-			_sessionFactoryImplementor.openSession(connection));
+		return wrapSession(_sessionFactoryImplementor.openSession(connection));
 	}
 
 	public Session openSession() throws ORMException {
@@ -74,17 +74,19 @@ public class SessionFactoryImpl implements SessionFactory {
 		}
 
 		if (_log.isDebugEnabled()) {
-			if (session instanceof org.hibernate.impl.SessionImpl) {
-				org.hibernate.impl.SessionImpl sessionImpl =
-					(org.hibernate.impl.SessionImpl)session;
+			SessionInvocationHandler sessionInvocationHandler =
+				(SessionInvocationHandler)Proxy.getInvocationHandler(session);
 
-				_log.debug(
-					"Session is using connection release mode " +
-						sessionImpl.getConnectionReleaseMode());
-			}
+			org.hibernate.impl.SessionImpl sessionImpl =
+				(org.hibernate.impl.SessionImpl)
+					sessionInvocationHandler.getSession();
+
+			_log.debug(
+				"Session is using connection release mode " +
+					sessionImpl.getConnectionReleaseMode());
 		}
 
-		return transformSession(session);
+		return wrapSession(session);
 	}
 
 	public void setSessionFactoryClassLoader(
@@ -99,7 +101,7 @@ public class SessionFactoryImpl implements SessionFactory {
 		_sessionFactoryImplementor = sessionFactoryImplementor;
 	}
 
-	protected Session transformSession(org.hibernate.Session session) {
+	protected Session wrapSession(org.hibernate.Session session) {
 		Session liferaySession = new SessionImpl(session);
 
 		if (_sessionFactoryClassLoader != null) {
