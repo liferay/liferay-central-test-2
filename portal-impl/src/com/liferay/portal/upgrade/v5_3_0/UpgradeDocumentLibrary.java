@@ -55,8 +55,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	protected void addFileVersion(
 			long groupId, long companyId, long userId, String userName,
-			long folderId, String name, String title, String description,
-			double version, int size)
+			long folderId, String name, double version, int size)
 		throws Exception {
 
 		Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -70,14 +69,14 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("insert into DLFileEntry (fileVersionId, groupId, ");
+			sb.append("insert into DLFileVersion (fileVersionId, groupId, ");
 			sb.append("companyId, userId, userName, createDate, folderId, ");
-			sb.append("name, title, description, version, size_, status, ");
-			sb.append("statusByUserId, statusByUserName, statusDate) values (");
-			sb.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			sb.append("name, version, size_, status, statusByUserId, ");
+			sb.append("statusByUserName, statusDate) values (?, ?, ?, ?, ?, ");
+			sb.append("?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 			String sql = sb.toString();
-
+System.out.println("## sql " + sql);
 			ps = con.prepareStatement(sql);
 
 			ps.setLong(1, increment());
@@ -88,14 +87,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			ps.setTimestamp(6, now);
 			ps.setLong(7, folderId);
 			ps.setString(8, name);
-			ps.setString(9, title);
-			ps.setString(10, description);
-			ps.setDouble(11, version);
-			ps.setInt(12, size);
-			ps.setInt(13, StatusConstants.APPROVED);
-			ps.setLong(14, userId);
-			ps.setString(15, userName);
-			ps.setTimestamp(16, now);
+			ps.setDouble(9, version);
+			ps.setInt(10, size);
+			ps.setInt(11, StatusConstants.APPROVED);
+			ps.setLong(12, userId);
+			ps.setString(13, userName);
+			ps.setTimestamp(14, now);
 
 			ps.executeUpdate();
 		}
@@ -123,8 +120,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String userName = rs.getString("userName");
 				long folderId = rs.getLong("folderId");
 				String name = rs.getString("name");
-				String title = rs.getString("title");
-				String description = rs.getString("description");
 				double version = rs.getDouble("version");
 				int size = rs.getInt("size_");
 
@@ -147,8 +142,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				}
 
 				addFileVersion(
-					groupId, companyId, userId, userName, folderId, name, title,
-					description, version, size);
+					groupId, companyId, userId, userName, folderId, name,
+					version, size);
 			}
 		}
 		finally {
