@@ -106,10 +106,6 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Ignore Filter</filter-name>
-		<filter-class>com.liferay.portal.servlet.filters.ignore.IgnoreFilter</filter-class>
-	</filter>
-	<filter>
 		<filter-name>I18n Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.i18n.I18nFilter</filter-class>
 	</filter>
@@ -209,10 +205,6 @@
 			<param-value>false</param-value>
 		</init-param>
 	</filter>
-	<filter-mapping>
-		<filter-name>Ignore Filter</filter-name>
-		<url-pattern>*.vm</url-pattern>
-	</filter-mapping>
 	<filter-mapping>
 		<filter-name>URL Rewrite Filter</filter-name>
 		<url-pattern>/*</url-pattern>
