@@ -73,8 +73,8 @@ public class MinifierUtil {
 
 		try {
 			JavaScriptCompressor javaScriptCompressor =
-				new JavaScriptCompressor(new StringReader(content),
-					new JavaScriptErrorReporter());
+				new JavaScriptCompressor(
+					new StringReader(content), new JavaScriptErrorReporter());
 
 			javaScriptCompressor.compress(
 					stringWriter, _JS_LINE_BREAK, _JS_MUNGE, _JS_VERBOSE,
