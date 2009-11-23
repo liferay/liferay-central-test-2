@@ -207,10 +207,10 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	private static final String _GET_GROUP =
-		"select classNameId, classPK from Group_ where groupId = ?";
+		"select * from Group_ where groupId = ?";
 
 	private static final String _GET_LAYOUT =
-		"select groupId from Layout where plid = ?";
+		"select * from Layout where plid = ?";
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeSocial.class);
 

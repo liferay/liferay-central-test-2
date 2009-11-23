@@ -62,16 +62,6 @@ public class UpgradeCompany extends UpgradeProcess {
 			companyIdMapper.mapValue(webId, new Long(companyId));
 		}
 
-		// Delay checking of Lucene and Document Library. See LEP-3492.
-
-		/*for (int i = 0; i < companyIds.length; i++) {
-			long companyId = companyIds[i];
-
-			LuceneHelperUtil.checkLuceneDir(companyId);
-
-			DLLocalServiceUtil.checkRoot(companyId);
-		}*/
-
 		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 			CompanyTable.TABLE_NAME, CompanyTable.TABLE_COLUMNS);
 

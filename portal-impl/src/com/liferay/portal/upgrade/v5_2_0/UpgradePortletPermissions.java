@@ -267,7 +267,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 	}
 
 	private static final String _GET_LAYOUT =
-		"select groupId, companyId from Layout where plid = ?";
+		"select * from Layout where plid = ?";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		UpgradePortletPermissions.class);

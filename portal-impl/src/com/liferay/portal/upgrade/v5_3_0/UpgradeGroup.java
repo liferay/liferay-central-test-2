@@ -109,6 +109,6 @@ public class UpgradeGroup extends UpgradeProcess {
 	}
 
 	private static final String _GET_LAYOUT =
-		"select groupId from Layout where plid = ?";
+		"select * from Layout where plid = ?";
 
 }

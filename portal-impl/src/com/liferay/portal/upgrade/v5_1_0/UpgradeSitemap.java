@@ -176,6 +176,6 @@ public class UpgradeSitemap extends UpgradeProcess {
 	}
 
 	private static final String _GET_LAYOUT =
-		"select companyId, layoutId from Layout where plid = ?";
+		"select * from Layout where plid = ?";
 
 }

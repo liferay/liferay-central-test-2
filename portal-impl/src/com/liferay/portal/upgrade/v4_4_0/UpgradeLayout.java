@@ -131,6 +131,6 @@ public class UpgradeLayout extends UpgradeProcess {
 	}
 
 	private static final String _GET_LAYOUT =
-		"select groupId, privateLayout, layoutId from Layout where plid = ?";
+		"select * from Layout where plid = ?";
 
 }
