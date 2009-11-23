@@ -123,7 +123,6 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 		</div>
 	</aui:fieldset>
 
-
 	<aui:button-row>
 		<aui:button name="saveButton" type="submit" value="save" />
 
