@@ -25,8 +25,6 @@
 <%@ include file="/html/portlet/site_map/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 LayoutLister layoutLister = new LayoutLister();
 
 String rootNodeName = StringPool.BLANK;
@@ -35,21 +33,17 @@ LayoutView layoutView = layoutLister.getLayoutView(layout.getGroupId(), layout.i
 List layoutList = layoutView.getList();
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />saveConfiguration() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-</script>
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
-
-<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-
-	<aui:fieldset>
-		<aui:select label="root-layout" name="rootLayoutId">
-			<aui:option value="" />
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="root-layout" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />rootLayoutId">
+			<option value=""></option>
 
 			<%
 			for (int i = 0; i < layoutList.size(); i++) {
@@ -84,42 +78,73 @@ List layoutList = layoutView.getList();
 				if (rootLayout != null) {
 			%>
 
-				<aui:option label="<%= name %>" selected="<%= rootLayoutId == rootLayout.getLayoutId() %>" value="<%= rootLayout.getLayoutId() %>" />
+					<option <%= (rootLayoutId == rootLayout.getLayoutId()) ? "selected" : "" %> value="<%= rootLayout.getLayoutId() %>"><%= name %></option>
 
 			<%
 				}
 			}
 			%>
 
-		</aui:select>
-
-		<aui:select name="displayDepth">
-			<aui:option label="unlimited" value="0" />
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="display-depth" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />displayDepth">
+			<option value="0"><liferay-ui:message key="unlimited" /></option>
 
 			<%
 			for (int i = 1; i <= 20; i++) {
 			%>
 
-				<aui:option label="<%= i %>" selected="<%= displayDepth == i %>" />
+				<option <%= (displayDepth == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
 
 			<%
 			}
 			%>
 
-		</aui:select>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="include-root-in-tree" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="includeRootInTree" defaultValue="<%= includeRootInTree %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="show-current-page" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="showCurrentPage" defaultValue="<%= showCurrentPage %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="use-html-title" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="useHtmlTitle" defaultValue="<%= useHtmlTitle %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="show-hidden-pages" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="showHiddenPages" defaultValue="<%= showHiddenPages %>" />
+	</td>
+</tr>
+</table>
 
-		<aui:input inlineLabel="left" name="includeRootInTree" type="checkbox" value="<%= includeRootInTree %>" />
+<br />
 
-		<aui:input inlineLabel="left" name="showCurrentPage" type="checkbox" value="<%= showCurrentPage %>" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
-		<aui:input inlineLabel="left" name="useHtmlTitle" type="checkbox" value="<%= useHtmlTitle %>" />
-
-		<aui:input inlineLabel="left" name="showHiddenPages" type="checkbox" value="<%= showHiddenPages %>" />
-	</aui:fieldset>
-
-	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="save" />
-
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
-	</aui:button-row>
-</aui:form>
+</form>
