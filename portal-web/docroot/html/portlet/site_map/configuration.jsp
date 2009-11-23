@@ -36,8 +36,8 @@ List layoutList = layoutView.getList();
 %>
 
 <script type="text/javascript">
-    function <portlet:namespace />saveConfiguration() {
-        submitForm(document.<portlet:namespace />fm);
+	function <portlet:namespace />saveConfiguration() {
+		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
@@ -113,7 +113,7 @@ List layoutList = layoutView.getList();
 		<aui:input inlineLabel="left" name="showCurrentPage" type="checkbox" value="<%= showCurrentPage %>" />
 
 		<aui:input inlineLabel="left" name="useHtmlTitle" type="checkbox" value="<%= useHtmlTitle %>" />
-		
+
 		<aui:input inlineLabel="left" name="showHiddenPages" type="checkbox" value="<%= showHiddenPages %>" />
 	</aui:fieldset>
 
