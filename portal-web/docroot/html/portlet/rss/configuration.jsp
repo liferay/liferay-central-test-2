@@ -75,10 +75,6 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
 	}
 
-	function <portlet:namespace />saveConfiguration() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-	
 	function <portlet:namespace />selectAsset(resourcePrimKey, resourceTitle, assetOrder) {
 		if (assetOrder == 1) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-footer-article';
@@ -105,159 +101,226 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 	}
 </script>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />typeSelection" type="hidden" value="" />
+<input name="<portlet:namespace />resourcePrimKey" type="hidden" value="" />
+<input name="<portlet:namespace />resourceTitle" type="hidden" value="" />
+<input name="<portlet:namespace />assetOrder" type="hidden" value="<%= assetOrder %>" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="typeSelection" type="hidden" value="" />
-	<aui:input name="resourcePrimKey" type="hidden" value="" />
-	<aui:input name="assetOrder" type="hidden" value="" />
-
-	<c:choose>
-		<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
-			<liferay-ui:error exception="<%= ValidatorException.class %>">
-
-				<%
-				ValidatorException ve = (ValidatorException)errorException;
-				%>
-
-				<liferay-ui:message key="the-following-are-invalid-urls" />
-
-				<%
-				Enumeration enu = ve.getFailedKeys();
-
-				while (enu.hasMoreElements()) {
-					String url = (String)enu.nextElement();
-				%>
-
-					<strong><%= url %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
-
-				<%
-				}
-				%>
-
-			</liferay-ui:error>
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="title" />
-				</td>
-				<td>
-					<liferay-ui:message key="url" />
-				</td>
-				<td>
-					<aui:a href="javascript:;" onclick='<%= renderResponse.getNamespace() + "addRssRow(this.parentNode.parentNode.parentNode);" %>'><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></aui:a>
-				</td>
-			</tr>
+<c:choose>
+	<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
+		<liferay-ui:error exception="<%= ValidatorException.class %>">
 
 			<%
-			for (int i = 0; i < urls.length; i++) {
-				String title = StringPool.BLANK;
-
-				if (i < titles.length) {
-					title = titles[i];
-				}
+			ValidatorException ve = (ValidatorException)errorException;
 			%>
 
-				<tr>
-					<td>
-						<aui:input inlineLabel="left" label="" name="title" type="text" value="<%= title %>" />
-					</td>
-					<td>
-						<aui:input cssClass="lfr-input-text-container" inlineLabel="left" label="" name="url" type="text" value="<%= urls[i] %>" />
-					</td>
-					<td>
-						<aui:a href="javascript:;" onclick="jQuery(this.parentNode.parentNode).remove();" ><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></aui:a>
-					</td>
-				</tr>
+			<liferay-ui:message key="the-following-are-invalid-urls" />
+
+			<%
+			Enumeration enu = ve.getFailedKeys();
+
+			while (enu.hasMoreElements()) {
+				String url = (String)enu.nextElement();
+			%>
+
+				<strong><%= url %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
 
 			<%
 			}
 			%>
 
-			</table>
+		</liferay-ui:error>
 
-			<aui:fieldset>
-				<aui:input inlineLabel="left" name="showFeedTitle" type="checkbox" value="<%= showFeedTitle %>" />
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="title" />
+			</td>
+			<td>
+				<liferay-ui:message key="url" />
+			</td>
+			<td>
+				<a href="javascript:;" onclick="<portlet:namespace />addRssRow(this.parentNode.parentNode.parentNode);"><img alt="<liferay-ui:message key="add-location" />" src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></a>
+			</td>
+		</tr>
 
-				<aui:input inlineLabel="left" name="showFeedPublishedDate" type="checkbox" value="<%= showFeedPublishedDate %>" />
+		<%
+		for (int i = 0; i < urls.length; i++) {
+			String title = StringPool.BLANK;
 
-				<aui:input inlineLabel="left" name="showFeedDescription" type="checkbox" value="<%= showFeedDescription %>" />
+			if (i < titles.length) {
+				title = titles[i];
+			}
+		%>
+
+			<tr>
+				<td>
+					<input name="<portlet:namespace />title" type="text" value="<%= title %>" />
+				</td>
+				<td>
+					<input class="lfr-input-text" name="<portlet:namespace />url" type="text" value="<%= urls[i] %>" />
+				</td>
+				<td>
+					<a href="javascript:;" onclick="jQuery(this.parentNode.parentNode).remove();"><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
+				</td>
+			</tr>
+
+		<%
+		}
+		%>
+
+		</table>
+
+		<br />
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="show-feed-title" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="showFeedTitle" defaultValue="<%= showFeedTitle %>" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="show-feed-published-date" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="showFeedPublishedDate" defaultValue="<%= showFeedPublishedDate %>" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="show-feed-description" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="showFeedDescription" defaultValue="<%= showFeedDescription %>" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="show-feed-image" />
+			</td>
+			<td>
 
 				<%
 				String taglibShowFeedImageOnClick = "if (this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';} else {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}";
 				%>
 
-				<aui:input inlineLabel="left" name="showFeedImage" onClick="<%= taglibShowFeedImageOnClick %>" type="checkbox" value="<%= showFeedImage %>" />
-
-				<aui:input inlineLabel="left" name="showFeedItemAuthor" type="checkbox" value="<%= showFeedItemAuthor %>" />	
-
-				<aui:select label="num-of-entries-per-feed" name="entriesPerFeed">
+				<liferay-ui:input-checkbox param="showFeedImage" defaultValue="<%= showFeedImage %>" onClick="<%= taglibShowFeedImageOnClick %>" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="show-feed-item-author" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="showFeedItemAuthor" defaultValue="<%= showFeedItemAuthor %>" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="num-of-entries-per-feed" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />entriesPerFeed">
 
 					<%
 					for (int i = 1; i < 10; i++) {
 					%>
 
-						<aui:option label="<%= i %>" selected="<%= i == entriesPerFeed %>" />
+						<option <%= (i == entriesPerFeed) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
 
 					<%
 					}
 					%>
 
-				</aui:select>
-
-				<aui:select label="num-of-expanded-entries-per-feed" name="expandedEntriesPerFeed">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="num-of-expanded-entries-per-feed" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />expandedEntriesPerFeed">
 
 					<%
 					for (int i = 0; i < 10; i++) {
 					%>
 
-						<aui:option label="<%= i %>" selected="<%= i == expandedEntriesPerFeed %>"/>
+						<option <%= (i == expandedEntriesPerFeed) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
 
 					<%
 					}
 					%>
 
-				</aui:select>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="feed-image-alignment" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />feedImageAlignment" <%= !showFeedImage ? "disabled" : "" %>>
+					<option <%= feedImageAlignment.equals("left") ? "selected" : "" %> value="left"><liferay-ui:message key="left" /></option>
+					<option <%= feedImageAlignment.equals("right") ? "selected" : "" %> value="right"><liferay-ui:message key="right" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="header-web-content" />
+			</td>
+			<td>
+				<%= headerArticleResouceTitle %>
 
-				<aui:select disabled="<%= !showFeedImage %>" name="feedImageAlignment">
-					<aui:option label="left" selected='<%= feedImageAlignment.equals("left") %>' />
-					<aui:option label="right" selected='<%= feedImageAlignment.equals("right") %>' />
-				</aui:select>
+				<input type="button" value="<liferay-ui:message key="select" />" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' />
 
-				<aui:field-wrapper label="header-web-content">
-					<%= footerArticleResouceTitle %>
+				<input type="button" value="<liferay-ui:message key="remove" />" onClick='<%= renderResponse.getNamespace() + "removeSelectionForHeader();" %>' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="footer-web-content" />
+			</td>
+			<td>
+				<%= footerArticleResouceTitle %>
 
-					<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' type="button" value="select" />
+				<input type="button" value="<liferay-ui:message key="select" />" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' />
 
-					<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' type="button" value="remove" />
-				</aui:field-wrapper>
+				<input type="button" value="<liferay-ui:message key="remove" />" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' />
+			</td>
+		</tr>
+		</table>
 
-				<aui:field-wrapper label="footer-web-content">
-					<%= footerArticleResouceTitle %>
+		<br />
 
-					<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' type="button" value="select" />
+		<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+	</c:when>
+	<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
+		<input name="<portlet:namespace />assetType" type="hidden" value="<%= JournalArticle.class.getName() %>" />
 
-					<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' type="button" value="remove" />
-				</aui:field-wrapper>
+		<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + JournalArticle.class.getName() %>' />
 
-				<aui:button-row>
-					<aui:button name="saveButton" type="submit" value="save" />
+		<br /><br />
 
-					<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
-				</aui:button-row>
-			</aui:fieldset>
-		</c:when>
-		<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
-			<aui:input name="assetType" type="hidden" value="<%= JournalArticle.class.getName() %>" />
+		<%@ include file="/html/portlet/rss/select_journal_article.jspf" %>
+	</c:when>
+</c:choose>
 
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + JournalArticle.class.getName() %>' />
-
-			<br /><br />
-
-			<%@ include file="/html/portlet/rss/select_journal_article.jspf" %>
-		</c:when>
-	</c:choose>
-</aui:form>
+</form>
