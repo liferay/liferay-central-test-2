@@ -35,6 +35,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />openFolderSelector() {
+		var folderWindow = window.open('<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=830');
+
+		folderWindow.focus();		
+	}
+
 	function <portlet:namespace />removeFolder() {
 		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = "<%= DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>";
 
@@ -44,6 +50,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 		nameEl.innerHTML = "";
 	}
 
+	function <portlet:namespace />saveConfiguration() {
+		document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns);
+		document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns); 
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+	
 	function <%= PortalUtil.getPortletNamespace(portletResource) %>selectFolder(rootFolderId, rootFolderName) {
 		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = rootFolderId;
 
@@ -54,78 +67,42 @@ String redirect = ParamUtil.getString(request, "redirect");
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />rootFolderId" type="hidden" value="<%= rootFolderId %>" />
-<input name="<portlet:namespace />folderColumns" type="hidden" value="" />
-<input name="<portlet:namespace />fileEntryColumns" type="hidden" value="" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="rootFolderId" type="hidden" value="<%= rootFolderId %>" />
+	<aui:input name="folderColumns" type="hidden" value="" />
+	<aui:input name="fileEntryColumns" type="hidden" value="" />
 
-<liferay-ui:tabs names="folders-listing" />
+	<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="root-folder" />
-	</td>
-	<td>
-		<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /><portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
-		<%= rootFolderName %></a>
+	<aui:fieldset>
+		<liferay-ui:tabs names="folders-listing" />
 
-		<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=830'); void(''); folderWindow.focus();">
+		<aui:field-wrapper label="root-folder">
+			<portlet:renderURL var="viewFolderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+				<portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' />
+				<portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" />
+			</portlet:renderURL>
 
-		<input type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="show-breadcrumbs" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showBreadcrumbs" defaultValue="<%= showBreadcrumbs %>" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="show-search" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showFoldersSearch" defaultValue="<%= showFoldersSearch %>" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="show-subfolders" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showSubfolders" defaultValue="<%= showSubfolders %>" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="folders-per-page" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="show-columns" />
-	</td>
-	<td>
+			<aui:a href="<%= viewFolderURL %>" id="rootFolderName"><%= rootFolderName %></aui:a>
+
+			<aui:button name="openFolderSelectorButton" onClick='<%= renderResponse.getNamespace() + "openFolderSelector();" %>' type="button" value="select" />
+
+			<aui:button name="removeFolder" onClick='<%= renderResponse.getNamespace() + "removeFolder();"  %>' value="remove" />
+		</aui:field-wrapper>
+
+		<aui:input inlineLabel="left" name="showBreadcrumbs" type="checkbox" value="<%= showBreadcrumbs %>" />
+
+		<aui:input inlineLabel="left" label="show-search" name="showFoldersSearch" type="checkbox" value="<%= showFoldersSearch %>" />
+
+		<aui:input inlineLabel="left" name="showSubfolders" type="checkbox" value="<%= showSubfolders %>" />
+
+		<aui:input name="foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
+
+		<aui:field-wrapper label="show-columns" />
 
 		<%
 		Set availableFolderColumns = SetUtil.fromArray(StringUtil.split(allFolderColumns));
@@ -169,41 +146,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 			leftList="<%= leftList %>"
 			rightList="<%= rightList %>"
 		/>
-	</td>
-</tr>
-</table>
 
-<br />
-
-<liferay-ui:tabs names="documents-listing" />
-
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="show-search" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showFileEntriesSearch" defaultValue="<%= showFileEntriesSearch %>" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="documents-per-page" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
 		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="show-columns" />
-	</td>
-	<td>
+
+		<liferay-ui:tabs names="documents-listing" />
+
+		<aui:input inlineLabel="left" label="show-search" name="showFileEntriesSearch" type="checkbox" value="<%= showFileEntriesSearch %>" />
+
+		<aui:input label="documents-per-page" name="fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
+
+		<aui:field-wrapper label="show-columns" />
 
 		<%
 		Set availableFileEntryColumns = SetUtil.fromArray(StringUtil.split(allFileEntryColumns));
@@ -247,29 +199,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 			leftList="<%= leftList %>"
 			rightList="<%= rightList %>"
 		/>
-	</td>
-</tr>
-</table>
 
-<br />
+		<br />
 
-<liferay-ui:tabs names="ratings" />
+		<liferay-ui:tabs names="ratings" />
 
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="enable-comment-ratings" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
-	</td>
-</tr>
-</table>
+		<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+	</aui:fieldset>
 
-<br />
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value="save" />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns); document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns); submitForm(document.<portlet:namespace />fm);" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-</form>
+		<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
