@@ -55,8 +55,8 @@ if (organizationId > 0) {
 		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
 	}
 
-    function <portlet:namespace />saveConfiguration() {
-        submitForm(document.<portlet:namespace />fm);
+	function <portlet:namespace />saveConfiguration() {
+		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />selectOrganization(organizationId, name) {
