@@ -35,12 +35,12 @@ import com.liferay.portal.verify.VerifyException;
  */
 public class StartupHelperUtil {
 
-	public static StartupHelper getStartupHelper() {
-		return _startupHelper;
-	}
-
 	public static void createTablesAndPopulate() throws SystemException {
 		getStartupHelper().createTablesAndPopulate();
+	}
+
+	public static StartupHelper getStartupHelper() {
+		return _startupHelper;
 	}
 
 	public static void setDropIndexes(boolean dropIndexes) {

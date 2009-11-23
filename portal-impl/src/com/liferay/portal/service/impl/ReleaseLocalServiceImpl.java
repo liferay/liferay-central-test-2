@@ -103,7 +103,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 			if (!GetterUtil.getBoolean(
 					PropsUtil.get(PropsKeys.SCHEMA_RUN_MINIMAL)) &&
-						!ShardUtil.isEnabled()) {
+				!ShardUtil.isEnabled()) {
 
 				db.runSQLTemplate("portal-data-sample.vm", false);
 			}
@@ -163,6 +163,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		if (GetterUtil.getBoolean(
 				PropsUtil.get(PropsKeys.SCHEMA_RUN_ENABLED))) {
 
+			//releaseLocalService.createTablesAndPopulate();
 			StartupHelperUtil.createTablesAndPopulate();
 
 			testSupportsStringCaseSensitiveQuery();

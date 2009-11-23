@@ -47,7 +47,6 @@ import com.liferay.portal.verify.VerifyProcessUtil;
 public class StartupHelper {
 
 	public void createTablesAndPopulate() throws SystemException {
-
 		ReleaseLocalServiceUtil.createTablesAndPopulate();
 	}
 
