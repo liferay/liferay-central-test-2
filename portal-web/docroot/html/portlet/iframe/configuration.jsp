@@ -26,9 +26,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-%>
 
-<%
 String htmlAttributes =
 	"alt=" + alt + "\n" +
 	"border=" + border + "\n" +
@@ -56,21 +54,21 @@ String htmlAttributes =
 			var auth = jQuery('#<portlet:namespace />auth');
 
 			function toggleAuthOptions() {
-				var authType = jQuery('#<portlet:namespace />authType');
-				var formFields = jQuery('#<portlet:namespace />formFields');
-				var basicFields = jQuery('#<portlet:namespace />basicFields');
+				var authenticationOptions = jQuery('#<portlet:namespace />authenticationOptions');
+				var formAuthOptions = jQuery('#<portlet:namespace />formAuthOptions');
+				var basicAuthOptions = jQuery('#<portlet:namespace />basicAuthOptions');
 				var currentLoginMsg = jQuery('#<portlet:namespace />currentLoginMsg');
 
 				if (auth.val() == 'true') {
-					authType.show();
+					authenticationOptions.show();
 					currentLoginMsg.show();
 
 					toggleAuthTypeOptions();
 				}
 				else {
-					authType.hide();
-					formFields.hide();
-					basicFields.hide();
+					authenticationOptions.hide();
+					formAuthOptions.hide();
+					basicAuthOptions.hide();
 					currentLoginMsg.hide();
 				}
 			}
@@ -78,22 +76,22 @@ String htmlAttributes =
 			var authType = jQuery('select[@name=<portlet:namespace />authType]');
 
 			function toggleAuthTypeOptions() {
-				var formFields = jQuery('#<portlet:namespace />formFields');
-				var basicFields = jQuery('#<portlet:namespace />basicFields');
+				var formAuthOptions = jQuery('#<portlet:namespace />formAuthOptions');
+				var basicAuthOptions = jQuery('#<portlet:namespace />basicAuthOptions');
 
 				if (authType.val() == 'form') {
-					formFields.show();
-					formFields.find('input').attr('disabled', false);
+					formAuthOptions.show();
+					formAuthOptions.find('input').attr('disabled', false);
 
-					basicFields.hide();
-					basicFields.find('input').attr('disabled', true);
+					basicAuthOptions.hide();
+					basicAuthOptions.find('input').attr('disabled', true);
 				}
 				else {
-					formFields.hide();
-					formFields.find('input').attr('disabled', true);
+					formAuthOptions.hide();
+					formAuthOptions.find('input').attr('disabled', true);
 
-					basicFields.show();
-					basicFields.find('input').attr('disabled', false);
+					basicAuthOptions.show();
+					basicAuthOptions.find('input').attr('disabled', false);
 				}
 			}
 
@@ -113,9 +111,9 @@ String htmlAttributes =
 		}
 	);
 
-    function <portlet:namespace />saveConfiguration() {
-        submitForm(document.<portlet:namespace />fm);
-    }
+	function <portlet:namespace />saveConfiguration() {
+		submitForm(document.<portlet:namespace />fm);
+	}
 </script>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -126,7 +124,8 @@ String htmlAttributes =
 
 	<aui:fieldset>
 		<aui:legend label="general" />
-		<span id="<portlet:namespace />context-path-text" style='<%= relative ? "" : "display: none;" %>'>...<%= themeDisplay.getPathContext() %></span><aui:input cssClass="lfr-input-text-container" label="source-url" name="src" type="text" value="<%= src %>"/>
+
+		<aui:input cssClass="lfr-input-text-container" label="source-url" name="src" type="text" value="<%= src %>" />
 
 		<aui:input inlineLabel="left" label="relative-to-context-path" name="relative" type="checkbox" value="<%= relative %>" />
 	</aui:fieldset>
@@ -147,78 +146,52 @@ String htmlAttributes =
 
 		<aui:input inlineLabel="left" label="authenticate" name="auth" type="checkbox" value="<%= auth %>" />
 
-		<div id="<portlet:namespace />authType">
+		<div id="<portlet:namespace />authenticationOptions">
 			<aui:select label="authentication-type" name="authType">
-				<aui:option label="Basic" selected='<%= authType.equals("basic") %>' value="basic" />
-				<aui:option label="Form" selected='<%= authType.equals("form") %>' value="form" />
+				<aui:option label="basic" selected='<%= authType.equals("basic") %>' />
+				<aui:option label="form" selected='<%= authType.equals("form") %>' />
 			</aui:select>
 		</div>
 
-		<div id="<portlet:namespace />formFields">
-			<div id="<portlet:namespace />formMethod">
-				<aui:select name="formMethod">
-					<aui:option label="Get" selected='<%= formMethod.equals("get") %>' />
-					<aui:option label="Post" selected='<%= formMethod.equals("post") %>' />
-				</aui:select>
-			</div>
+		<div id="<portlet:namespace />formAuthOptions">
+			<aui:select name="formMethod">
+				<aui:option label="get" selected='<%= formMethod.equals("get") %>' />
+				<aui:option label="post" selected='<%= formMethod.equals("post") %>' />
+			</aui:select>
 
-			<div id="<portlet:namespace />userName">
-				<aui:field-wrapper inlineLabel="left" label="userName">
-					<table class="lfr-table">
-					<tr id="<portlet:namespace />userName">
-						<td>
-							<liferay-ui:message key="field-name" />
-						</td>
-						<td>
-							<liferay-ui:message key="value" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<aui:input cssClass="lfr-input-text-container" label="" name="userNameField"  size="10" type="text" value="<%= userNameField %>"/>
-						</td>
-						<td>
-							<aui:input cssClass="lfr-input-text-container" label="" name="userName" size="10" type="text" value="<%= userName %>" />
-						</td>
-					</tr>
-					</table>
-				</aui:field-wrapper>
-			</div>
+			<aui:field-wrapper label="user-name">
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<aui:input cssClass="lfr-input-text-container" label="field-name" name="userNameField" type="text" value="<%= userNameField %>" />
+					</td>
+					<td>
+						<aui:input cssClass="lfr-input-text-container" label="value" name="userName" type="text" value="<%= userName %>" />
+					</td>
+				</tr>
+				</table>
+			</aui:field-wrapper>
 
-			<div id="<portlet:namespace />password">
-				<aui:field-wrapper inlineLabel="left" name="password">
-					<table class="lfr-table">
-					<tr id="<portlet:namespace />userName">
-						<td>
-							<liferay-ui:message key="field-name" />
-						</td>
-						<td>
-							<liferay-ui:message key="value" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<aui:input cssClass="lfr-input-text-container" label="" name="passwordField" size="10" type="text" value="<%= passwordField %>" />
-						</td>
-						<td>
-							<aui:input cssClass="lfr-input-text-container" label="" name="password" size="10" type="text" value="<%= password %>" />
-						</td>
-					</tr>
-					</table>
+			<aui:field-wrapper name="password">
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<aui:input cssClass="lfr-input-text-container" label="field-name" name="passwordField" type="text" value="<%= passwordField %>" />
+					</td>
+					<td>
+						<aui:input cssClass="lfr-input-text-container" label="value" name="password" type="text" value="<%= password %>" />
+					</td>
+				</tr>
+				</table>
 
-					<aui:input cssClass="lfr-input-text-container" name="hiddenVariables" type="text" value="<%= hiddenVariables %>" />
-				</aui:field-wrapper>
-			</div>
+				<aui:input cssClass="lfr-input-text-container" name="hiddenVariables" type="text" value="<%= hiddenVariables %>" />
+			</aui:field-wrapper>
 		</div>
 
-		<div id="<portlet:namespace />basicFields">
-			<div id="<portlet:namespace />userName">
-				<aui:input cssClass="lfr-input-text-container" name="userName" size="10" type="text" value="<%= userName %>" />
-			</div>
+		<div id="<portlet:namespace />basicAuthOptions">
+			<aui:input cssClass="lfr-input-text-container" name="userName" type="text" value="<%= userName %>" />
 
-			<div id="<portlet:namespace />password">
-				<aui:input cssClass="lfr-input-text-container" name="password" type="text" value="<%= password %>" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" name="password" type="text" value="<%= password %>" />
 		</div>
 	</aui:fieldset>
 
