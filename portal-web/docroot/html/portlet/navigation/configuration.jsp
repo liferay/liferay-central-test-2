@@ -25,16 +25,8 @@
 <%@ include file="/html/portlet/navigation/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSetting("bullet-style-options"));
 %>
-
-<script type="text/javascript">
-	function <portlet:namespace />saveConfiguration() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-</script>
 
 <liferay-portlet:preview
 	portletName="<%= portletResource %>"
@@ -43,92 +35,131 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 
 <div class="separator"><!-- --></div>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-
-	<aui:fieldset>
-		<aui:select name="displayStyle">
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="display-style" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />displayStyle" id="<portlet:namespace />displayStyle">
 
 			<%
 			for (int i = 1; i <= 6; i++) {
 			%>
 
-				<aui:option label="<%= i %>" selected="<%= displayStyle.equals(String.valueOf(i)) %>" />
+				<option <%= (displayStyle.equals(String.valueOf(i))) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
 
 			<%
 			}
 			%>
 
-				<aui:option label="custom" selected='<%= displayStyle.equals("[custom]") %>' value="[custom]" />
-		</aui:select>
-
-		<aui:select name="bulletStyle">
+			<option <%= displayStyle.equals("[custom]") ? "selected" : "" %> value="[custom]"><liferay-ui:message key="custom" /></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="bullet-style" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />bulletStyle">
 
 			<%
 			for (int i = 0; i < bulletStyleOptions.length; i++) {
 			%>
 
-				<aui:option label="<%= bulletStyleOptions[i] %>" selected="<%= bulletStyleOptions[i].equals(bulletStyle) %>" />
+				<option <%= (bulletStyleOptions[i].equals(bulletStyle)) ? "selected" : "" %> value="<%= bulletStyleOptions[i] %>"><%= bulletStyleOptions[i] %></option>
 
 			<%
 			}
 			%>
 
 			<c:if test="<%= bulletStyleOptions.length == 0 %>">
-				<aui:option label="(default)" value="" />
+				<option value="">(<liferay-ui:message key="default" />)</option>
 			</c:if>
-		</aui:select>
-	</aui:fieldset>
+		</select>
+	</td>
+</tr>
+</table>
 
-	<aui:fieldset>
-		<div id="<portlet:namespace/>customDisplayOptions">
-			<aui:select label="header" name="headerType">
-				<aui:option label="none" selected='<%= headerType.equals("none") %>' />
-				<aui:option label="portlet-title" selected='<%= headerType.equals("portlet-title") %>' />
-				<aui:option label="root-layout" selected='<%= headerType.equals("root-layout") %>' />
-				<aui:option label="breadcrumb" selected='<%= headerType.equals("breadcrumb") %>' />
-			</aui:select>
+<table id="<portlet:namespace/>customDisplayStyle">
+<tr>
+	<td>
+		<br />
 
-			<aui:select label="root-layout" name="rootLayoutType">
-				<aui:option label="parent-at-level" selected='<%= rootLayoutType.equals("absolute") %>' value="absolute" />
-				<aui:option label="relative-parent-up-by" selected='<%= rootLayoutType.equals("relative") %>' value="relative" />
-			</aui:select>
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="header" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />headerType">
+					<option <%= headerType.equals("none") ? "selected" : "" %> value="none"><liferay-ui:message key="none" /></option>
+					<option <%= headerType.equals("portlet-title") ? "selected" : "" %> value="portlet-title"><liferay-ui:message key="portlet-title" /></option>
+					<option <%= headerType.equals("root-layout") ? "selected" : "" %> value="root-layout"><liferay-ui:message key="root-layout" /></option>
+					<option <%= headerType.equals("breadcrumb") ? "selected" : "" %> value="breadcrumb"><liferay-ui:message key="breadcrumb" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="root-layout" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />rootLayoutType">
+					<option <%= rootLayoutType.equals("absolute") ? "selected" : "" %> value="absolute"><liferay-ui:message key="parent-at-level" /></option>
+					<option <%= rootLayoutType.equals("relative") ? "selected" : "" %> value="relative"><liferay-ui:message key="relative-parent-up-by" /></option>
+				</select>
+				<select name="<portlet:namespace />rootLayoutLevel">
 
-			<aui:select label="root-layout-level" name="rootLayoutLevel">
+					<%
+					for (int i = 0; i <= 4; i++) {
+					%>
 
-				<%
-				for (int i = 0; i <= 4; i++) {
-				%>
+						<option <%= (rootLayoutLevel == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
 
-					<aui:option label="<%= i %>" selected="<%= rootLayoutLevel == i %>" />
+					<%
+					}
+					%>
 
-				<%
-				}
-				%>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="included-layouts" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />includedLayouts">
+					<option <%= includedLayouts.equals("auto") ? "selected" : "" %> value="auto"><liferay-ui:message key="auto" /></option>
+					<option <%= includedLayouts.equals("all") ? "selected" : "" %> value="all"><liferay-ui:message key="all" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="nested-children" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />nestedChildren">
+					<option <%= nestedChildren ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+					<option <%= !nestedChildren ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+				</select>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
 
-			</aui:select>
+<br />
 
-			<aui:select name="includedLayouts">
-				<aui:option label="auto" selected='<%= includedLayouts.equals("auto") %>' />
-				<aui:option label="all" selected='<%= includedLayouts.equals("all") %>' />
-			</aui:select>
+<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
-			<aui:select name="nestedChildren">
-				<aui:option label="yes" selected="<%= nestedChildren %>" value="1" />
-				<aui:option label="no" selected="<%= !nestedChildren %>" value="0" />
-			</aui:select>
-		</div>
-	</aui:fieldset>
-
-	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="save" />
-
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
-	</aui:button-row>
-</aui:form>
+</form>
 
 <script type="text/javascript">
 	AUI().ready(
@@ -144,10 +175,10 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 				var displayStyle = jQuery(this).val();
 
 				if (displayStyle == '[custom]') {
-					jQuery("#<portlet:namespace/>customDisplayOptions").show();
+					jQuery("#<portlet:namespace/>customDisplayStyle").show();
 				}
 				else {
-					jQuery("#<portlet:namespace/>customDisplayOptions").hide();
+					jQuery("#<portlet:namespace/>customDisplayStyle").hide();
 				}
 			}
 
