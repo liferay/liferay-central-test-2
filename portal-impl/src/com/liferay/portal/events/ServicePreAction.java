@@ -1242,13 +1242,14 @@ public class ServicePreAction extends Action {
 
 		if (layout != null) {
 			if (company.isCommunityLogo()) {
-
 				long logoId = 0;
 
-				if (layout.isIconImage()){
+				if (layout.isIconImage()) {
 					logoId = layout.getIconImageId();
-				}else{
+				}
+				else{
 					LayoutSet layoutSet = layout.getLayoutSet();
+
 					if (layoutSet.isLogo()) {
 						logoId = layoutSet.getLogoId();
 					}
