@@ -22,6 +22,7 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.verify.VerifyException;
 
@@ -36,6 +37,10 @@ public class StartupHelperUtil {
 
 	public static StartupHelper getStartupHelper() {
 		return _startupHelper;
+	}
+
+	public static void createTablesAndPopulate() throws SystemException {
+		getStartupHelper().createTablesAndPopulate();
 	}
 
 	public static void setDropIndexes(boolean dropIndexes) {

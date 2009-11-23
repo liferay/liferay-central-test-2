@@ -45,6 +45,15 @@ public class ShardUtil {
 		return _shardSelector;
 	}
 
+	public static boolean isEnabled() {
+		if (_shardAdvice != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static String popCompanyService() {
 		String value = null;
 

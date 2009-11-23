@@ -25,6 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.dao.shard.ShardUtil;
+import com.liferay.portal.events.StartupHelperUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
@@ -89,6 +91,10 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 	public void createTablesAndPopulate() throws SystemException {
 		try {
+			if (_log.isInfoEnabled()) {
+				_log.info("Create tables and populate with default data");
+			}
+
 			DB db = DBFactoryUtil.getDB();
 
 			db.runSQLTemplate("portal-tables.sql", false);
@@ -96,7 +102,8 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			db.runSQLTemplate("portal-data-counter.sql", false);
 
 			if (!GetterUtil.getBoolean(
-					PropsUtil.get(PropsKeys.SCHEMA_RUN_MINIMAL))) {
+					PropsUtil.get(PropsKeys.SCHEMA_RUN_MINIMAL)) &&
+						!ShardUtil.isEnabled()) {
 
 				db.runSQLTemplate("portal-data-sample.vm", false);
 			}
@@ -156,11 +163,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		if (GetterUtil.getBoolean(
 				PropsUtil.get(PropsKeys.SCHEMA_RUN_ENABLED))) {
 
-			if (_log.isInfoEnabled()) {
-				_log.info("Create tables and populate with default data");
-			}
-
-			releaseLocalService.createTablesAndPopulate();
+			StartupHelperUtil.createTablesAndPopulate();
 
 			testSupportsStringCaseSensitiveQuery();
 
