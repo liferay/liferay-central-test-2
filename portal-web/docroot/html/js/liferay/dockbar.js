@@ -78,7 +78,6 @@ AUI().use(
 					instance.addMenu(
 						{
 							boundingBox: '#' + instance._namespace + 'addContentContainer',
-							contentBox: '#' + instance._namespace + 'addContentContainer > ul',
 							trigger: '#' + instance._namespace + 'addContent',
 							name: 'addContent'
 						}
@@ -87,7 +86,6 @@ AUI().use(
 					instance.addMenu(
 						{
 							boundingBox: '#' + instance._namespace + 'manageContentContainer',
-							contentBox: '#' + instance._namespace + 'manageContentContainer > ul',
 							trigger: '#' + instance._namespace + 'manageContent',
 							name: 'manageContent'
 						}
@@ -96,19 +94,22 @@ AUI().use(
 					instance.addMenu(
 						{
 							boundingBox: '#' + instance._namespace + 'myPlacesContainer',
-							contentBox: '#' + instance._namespace + 'myPlacesContainer > ul',
 							trigger: '#' + instance._namespace + 'myPlaces',
 							name: 'myPlaces'
 						}
 					);
 
-					instance.addMenu(
-						{
-							boundingBox: '#' + instance._namespace + 'userOptionsContainer',
-							trigger: '#' + instance._namespace + 'userAvatar',
-							name: 'userOptions'
-						}
-					);
+					var userOptionsContainer = A.get('#' + instance._namespace + 'userOptionsContainer');
+
+					if (userOptionsContainer) {
+						instance.addMenu(
+							{
+								boundingBox: userOptionsContainer,
+								trigger: '#' + instance._namespace + 'userAvatar',
+								name: 'userOptions'
+							}
+						);
+					}
 
 					var addApplication = jQuery('#' + instance._namespace + 'addApplication');
 
@@ -272,11 +273,15 @@ AUI().use(
 					A.mix(
 						options,
 						{
-							showOn: 'mouseenter',
+							hideDelay: 500,
 							hideOn: 'mouseleave',
-							hideDelay: 500
+							showOn: 'mouseenter'
 						}
 					);
+
+					if (options.boundingBox && !('contentBox' in options)) {
+						options.contentBox = options.boundingBox + '> .aui-menu-content';
+					}
 
 					var menu = new A.ContextOverlay(options);
 
@@ -288,6 +293,17 @@ AUI().use(
 							var instance = this;
 
 							Liferay.Dockbar.MenuManager.hideAll();
+
+							instance.get('trigger').addClass('menu-button-active');
+						}
+					);
+
+					menu.on(
+						'hide',
+						function(event) {
+							var instance = this;
+
+							instance.get('trigger').removeClass('menu-button-active');
 						}
 					);
 

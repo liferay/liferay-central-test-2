@@ -46,50 +46,56 @@ if (layout != null) {
 					</span>
 				</a>
 
-				<div class="add-content-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />addContentContainer">
-					<ul>
-						<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) && !group.isLayoutPrototype() %>">
-							<li class="first add-page">
-								<a href="javascript:;" id="addPage">
-									<liferay-ui:message key="page" />
-								</a>
-							</li>
-						</c:if>
+				<div class="aui-menu add-content-menu aui-contextoverlay-hidden" id="<portlet:namespace />addContentContainer">
+					<div class="aui-menu-content">
+						<ul>
+							<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) && !group.isLayoutPrototype() %>">
+								<li class="first add-page">
+									<a href="javascript:;" id="addPage">
+										<liferay-ui:message key="page" />
+									</a>
+								</li>
+							</c:if>
 
-						<c:if test="<%= !themeDisplay.isStateMaximized() %>">
-							<li class="last common-items">
-								<h4><liferay-ui:message key="applications" /></h4>
+							<c:if test="<%= !themeDisplay.isStateMaximized() %>">
+								<li class="last common-items">
+									<div class="aui-menugroup">
+										<div class="aui-menugroup-content">
+											<h4><liferay-ui:message key="applications" /></h4>
 
-								<ul>
-									<li class="first">
-										<a href="javascript:;" class="app-shortcut" rel="56">
-											<%= PortalUtil.getPortletTitle("56", locale) %>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;" class="app-shortcut" rel="101">
-											<%= PortalUtil.getPortletTitle("101", locale) %>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;" class="app-shortcut" rel="3">
-											<%= PortalUtil.getPortletTitle("3", locale) %>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:;" class="app-shortcut" rel="71">
-											<%= PortalUtil.getPortletTitle("71", locale) %>
-										</a>
-									</li>
-									<li class="add-application last">
-										<a href="javascript:;" id="<portlet:namespace />addApplication">
-											<liferay-ui:message key="more" />...
-										</a>
-									</li>
-								</ul>
-							</li>
-						</c:if>
-					</ul>
+											<ul>
+												<li class="first web-content">
+													<a href="javascript:;" class="app-shortcut" rel="56">
+														<%= PortalUtil.getPortletTitle("56", locale) %>
+													</a>
+												</li>
+												<li class="asset-publisher">
+													<a href="javascript:;" class="app-shortcut" rel="101">
+														<%= PortalUtil.getPortletTitle("101", locale) %>
+													</a>
+												</li>
+												<li class="search">
+													<a href="javascript:;" class="app-shortcut" rel="3">
+														<%= PortalUtil.getPortletTitle("3", locale) %>
+													</a>
+												</li>
+												<li class="navigation">
+													<a href="javascript:;" class="app-shortcut" rel="71">
+														<%= PortalUtil.getPortletTitle("71", locale) %>
+													</a>
+												</li>
+												<li class="add-application last more-applications">
+													<a href="javascript:;" id="<portlet:namespace />addApplication">
+														<liferay-ui:message key="more" />&hellip;
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+							</c:if>
+						</ul>
+					</div>
 				</div>
 			</li>
 		</c:if>
@@ -102,48 +108,50 @@ if (layout != null) {
 					</span>
 				</a>
 
-				<div class="manage-content-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />manageContentContainer">
-					<ul>
-						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-							<li class="first">
-								<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
-									<liferay-ui:message key="page" />
-								</a>
-							</li>
-						</c:if>
+				<div class="aui-menu manage-content-menu aui-contextoverlay-hidden" id="<portlet:namespace />manageContentContainer">
+					<div class="aui-menu-content">
+						<ul>
+							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
+								<li class="first manage-page">
+									<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
+										<liferay-ui:message key="page" />
+									</a>
+								</li>
+							</c:if>
 
-						<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
-							<li>
-								<a href="javascript:;" id="pageTemplate">
-									<liferay-ui:message key="page-layout" />
-								</a>
-							</li>
-						</c:if>
+							<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
+								<li class="page-layout">
+									<a href="javascript:;" id="pageTemplate">
+										<liferay-ui:message key="page-layout" />
+									</a>
+								</li>
+							</c:if>
 
-						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
-							<li>
-								<a href="<%= HtmlUtil.escape(HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "selPlid", "-1")) %>">
-									<liferay-ui:message key="sitemap" />
-								</a>
-							</li>
-						</c:if>
+							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
+								<li class="sitemap">
+									<a href="<%= HtmlUtil.escape(HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "selPlid", "-1")) %>">
+										<liferay-ui:message key="sitemap" />
+									</a>
+								</li>
+							</c:if>
 
-						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
-							<li>
-								<a href="<%= HtmlUtil.escape(HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "tabs1", "settings")) %>">
-									<liferay-ui:message key="settings" />
-								</a>
-							</li>
-						</c:if>
+							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
+								<li class="settings">
+									<a href="<%= HtmlUtil.escape(HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "tabs1", "settings")) %>">
+										<liferay-ui:message key="settings" />
+									</a>
+								</li>
+							</c:if>
 
-						<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
-							<li class="last control-panel-link" id="<portlet:namespace />controlPanel">
-								<a href="<%= themeDisplay.getURLControlPanel() %>">
-									<liferay-ui:message key="control-panel" />
-								</a>
-							</li>
-						</c:if>
-					</ul>
+							<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
+								<li class="control-panel last" id="<portlet:namespace />controlPanel">
+									<a href="<%= themeDisplay.getURLControlPanel() %>">
+										<liferay-ui:message key="control-panel" />
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
 				</div>
 			</li>
 		</c:if>
@@ -156,8 +164,10 @@ if (layout != null) {
 					</span>
 				</a>
 
-				<div class="staging-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />stagingContainer">
-					<liferay-ui:staging />
+				<div class="aui-menu staging-menu aui-contextoverlay-hidden" id="<portlet:namespace />stagingContainer">
+					<div class="aui-menu-content">
+						<liferay-ui:staging />
+					</div>
 				</div>
 			</li>
 		</c:if>
@@ -184,8 +194,10 @@ if (layout != null) {
 					</span>
 				</a>
 
-				<div class="my-places-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />myPlacesContainer">
-					<liferay-ui:my-places />
+				<div class="aui-menu my-places-menu aui-contextoverlay-hidden" id="<portlet:namespace />myPlacesContainer">
+					<div class="aui-menu-content">
+						<liferay-ui:my-places />
+					</div>
 				</div>
 			</li>
 		</c:if>
@@ -204,49 +216,51 @@ if (layout != null) {
 			</span>
 
 			<c:if test="<%= themeDisplay.isImpersonated() %>">
-				<div class="menu-container aui-contextoverlay-hidden" id="<portlet:namespace />userOptionsContainer">
-					<div class="notice-message portlet-msg-info">
-						<c:choose>
-							<c:when test="<%= themeDisplay.isSignedIn() %>">
-								<%= LanguageUtil.format(pageContext, "you-are-impersonating-x", new Object[] {user.getFullName()}) %>
-							</c:when>
-							<c:otherwise>
-								<liferay-ui:message key="you-are-impersonating-the-guest-user" />
-							</c:otherwise>
-						</c:choose>
-					</div>
+				<div class="aui-menu impersonation-menu aui-contextoverlay-hidden" id="<portlet:namespace />userOptionsContainer">
+					<div class="aui-menu-content">
+						<div class="notice-message portlet-msg-info">
+							<c:choose>
+								<c:when test="<%= themeDisplay.isSignedIn() %>">
+									<%= LanguageUtil.format(pageContext, "you-are-impersonating-x", new Object[] {user.getFullName()}) %>
+								</c:when>
+								<c:otherwise>
+									<liferay-ui:message key="you-are-impersonating-the-guest-user" />
+								</c:otherwise>
+							</c:choose>
+						</div>
 
-					<ul>
-						<li>
-							<a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= realUser.getFullName() %>)</a>
-						</li>
-
-						<%
-						Locale realUserLocale = realUser.getLocale();
-						Locale userLocale = user.getLocale();
-						%>
-
-						<c:if test="<%= !realUserLocale.equals(userLocale) %>">
+						<ul>
+							<li>
+								<a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= realUser.getFullName() %>)</a>
+							</li>
 
 							<%
-							String doAsUserLanguageId = null;
-							String changeLanguageMessage = null;
-
-							if (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry())) {
-								doAsUserLanguageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
-								changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-x's-preferred-language-(x)", new String[] {user.getFullName(), userLocale.getDisplayLanguage(realUserLocale)});
-							}
-							else {
-								doAsUserLanguageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();
-								changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-your-preferred-language-(x)", realUserLocale.getDisplayLanguage(realUserLocale));
-							}
+							Locale realUserLocale = realUser.getLocale();
+							Locale userLocale = user.getLocale();
 							%>
 
-							<li class="current-user-language">
-								<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", doAsUserLanguageId) %>"><%= changeLanguageMessage %></a>
-							</li>
-						</c:if>
-					</ul>
+							<c:if test="<%= !realUserLocale.equals(userLocale) %>">
+
+								<%
+								String doAsUserLanguageId = null;
+								String changeLanguageMessage = null;
+
+								if (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry())) {
+									doAsUserLanguageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
+									changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-x's-preferred-language-(x)", new String[] {user.getFullName(), userLocale.getDisplayLanguage(realUserLocale)});
+								}
+								else {
+									doAsUserLanguageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();
+									changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-your-preferred-language-(x)", realUserLocale.getDisplayLanguage(realUserLocale));
+								}
+								%>
+
+								<li class="current-user-language">
+									<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", doAsUserLanguageId) %>"><%= changeLanguageMessage %></a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
 				</div>
 			</c:if>
 		</li>

@@ -2,7 +2,7 @@
 	background: #f1f8ff;
 	border-bottom: 1px solid #9fccff;
 	font-size: 13px;
-	padding: 5px;
+	padding: 1px 5px;
 	position: relative;
 	z-index: 300;
 }
@@ -33,7 +33,6 @@
 
 .dockbar ul {
 	margin: 0;
-	overflow: hidden;
 	padding: 0;
 }
 
@@ -85,16 +84,25 @@ html > .lfr-dockbar-pinned {
 	color: #999;
 }
 
-.dockbar .menu-container .notice-message {
+.aui-menu .notice-message {
 	background-image: none;
 	margin: 3px;
 	padding: 6px;
 }
 
-.dockbar .menu-container {
-	background: #fff;
+.aui-menu {
 	position: absolute;
 	width: auto;
+}
+
+.aui-menu-content {
+	background: #fff;
+}
+
+.aui-menu-content li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .aui-dockbarmenu-hidden {
@@ -118,10 +126,6 @@ html > .lfr-dockbar-pinned {
 
 .ie6 .aui-toolbar li, .ie7 .aui-toolbar li {
 	display: inline;
-}
-
-.aui-toolbar .has-submenu.selected {
-	background-color: #fff;
 }
 
 .aui-toolbar-separator {
@@ -182,86 +186,35 @@ html > .lfr-dockbar-pinned {
 	left: 50px;
 }
 
-.dockbar .menu-container {
-	background: #fff url(../images/forms/button.png) repeat-x scroll 0 100%;
-	border: 1px solid;
-	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
-}
-
-.dockbar .menu-container h4 {
-	font-size: 1em;
-	font-weight: bold;
-	margin: 5px 5px 0;
-}
-
-.dockbar .menu-container ul {
-	min-width: 150px;
-}
-
-.dockbar .menu-container li {
-	border-bottom: 1px solid #DEDEDE;
-	display: block;
-	margin: 0;
-	padding: 2px;
-}
-
-.dockbar .menu-container li.last {
-	border-bottom-width: 0;
-}
-
-.dockbar .menu-container li ul {
-	display: block;
-	min-width: 0;
-	padding: 5px;
-}
-
-.dockbar .menu-container li a {
-	display: block;
-	padding: 2px 5px;
-	text-decoration: none;
-}
-
-.dockbar .menu-container li a:hover {
-	background-color: #828F95;
-	color: #fff;
-}
-
-.dockbar .my-places-container {
+.my-places-menu {
 	max-width: 350px;
 }
 
-.ie6 .dockbar .my-places-container {
-	width: 350px;
-}
-
-.my-places-container ul, .my-places-container li {
+.my-places-menu ul, .my-places-menu li {
 	display: block;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.dockbar .my-places-container a {
+.my-places-menu a {
 	overflow: hidden;
 	text-align: right;
 	white-space: nowrap;
+	display: block;
 }
 
-.ie6 .dockbar .my-places-container a {
-	zoom: 1;
-}
-
-.dockbar .my-places-container .current-site a {
+.my-places-menu .current-site a {
 	background: #A8D6ED url(../images/arrows/01_right.png) no-repeat scroll 2px 30%;
 	padding-left: 20px;
 }
 
-.dockbar .my-places-container .site-name {
+.my-places-menu .site-name {
 	cursor: pointer;
 	float: left;
 }
 
-.dockbar .my-places-container .site-type {
+.my-places-menu .site-type {
 	color: #777;
 	float: right;
 	font-size: 0.8em;
@@ -269,12 +222,29 @@ html > .lfr-dockbar-pinned {
 	margin-left: 10px;
 }
 
-.dockbar .my-places-container a:hover .site-type {
+.my-places-menu a:hover .site-type {
 	color: #fff;
 }
 
-.ie7 .dockbar .my-places-container .site-type {
+.ie7 .my-places-menu a {
+	overflow: visible;
+	text-align: left;
+}
+
+.ie7 .my-places-menu .site-name {
 	float: none;
+}
+
+.ie7 .my-places-menu .site-type {
+	float: none;
+}
+
+.ie6 .my-places-menu {
+	width: 200px;
+}
+
+.ie6 .my-places-menu a {
+	height: 1%;
 }
 
 .dockbar .toggle-controls a {
@@ -286,14 +256,10 @@ html > .lfr-dockbar-pinned {
 	background-image: url(../images/dockbar/unchecked.png);
 }
 
-.dockbar .control-panel {
-	background: url(../images/dockbar/control_panel.png) no-repeat 0 50%;
-	padding-left: 20px;
-}
-
 .dockbar .menu-button {
-	background: url(../images/arrows/05_down.png) no-repeat 100% 90%;
-	padding-right: 13px;
+	background: url(../images/arrows/05_down.png) no-repeat 93% 50%;
+	display: inline-block;
+	padding: 5px 20px 5px 5px;
 	text-decoration: none;
 }
 
@@ -303,7 +269,7 @@ html > .lfr-dockbar-pinned {
 }
 
 .dockbar .add-content .menu-button span {
-	background-image: url(../images/dockbar/add.png);
+	background-image: url(../images/common/add.png);
 }
 
 .dockbar .manage-content .menu-button span {
