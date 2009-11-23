@@ -193,6 +193,7 @@ body.live-view {
 /* ---------- Banner ---------- */
 
 #banner {
+	position: relative;
 }
 
 #banner .logo {
@@ -205,11 +206,13 @@ body.live-view {
 
 #banner .sign-in {
 	background: url(../images/common/key.png) no-repeat 3px 50%;
-	color: #fff;
 	float: right;
-	margin-right: 5%;
-	margin-top: 35px;
+	font-weight: bold;
+	margin-top: 20px;
 	padding: 5px 5px 5px 25px;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 /* ---------- Alerts and popups ---------- */
