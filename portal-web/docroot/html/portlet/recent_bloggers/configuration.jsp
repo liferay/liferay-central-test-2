@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/recent_bloggers/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 String organizationName = StringPool.BLANK;
 
 Organization organization = null;
@@ -37,6 +39,12 @@ if (organizationId > 0) {
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />openOrganizationSelector() {
+		var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+
+		organizationWindow.focus();
+	}
+
 	function <portlet:namespace />removeOrganization() {
 		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = "";
 
@@ -45,6 +53,10 @@ if (organizationId > 0) {
 		nameEl.innerHTML = "";
 
 		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
+	}
+
+    function <portlet:namespace />saveConfiguration() {
+        submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />selectOrganization(organizationId, name) {
@@ -58,78 +70,61 @@ if (organizationId > 0) {
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="selection-method" />
-	</td>
-	<td>
-		<select id="<portlet:namespace />selectionMethod" name="<portlet:namespace />selectionMethod">
-			<option <%= (selectionMethod.equals("users")) ? "selected" : "" %> value="users"><liferay-ui:message key="users" /></option>
-			<option <%= (selectionMethod.equals("scope")) ? "selected" : "" %> value="scope"><liferay-ui:message key="scope" /></option>
-		</select>
-	</td>
-</tr>
-<tr id="<portlet:namespace />organization">
-	<td>
-		<liferay-ui:message key="organization" />
-	</td>
-	<td>
-		<span id="<portlet:namespace />organizationName"><%= HtmlUtil.escape(organizationName) %></span>
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
 
-		<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
+	<aui:fieldset>
+		<aui:select name="selectionMethod">
+			<aui:option label="users" selected='<%= selectionMethod.equals("users") %>' />
+			<aui:option label="scope" selected='<%= selectionMethod.equals("scope") %>' />
+		</aui:select>
 
-		<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="display-style" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />displayStyle">
-			<option <%= (displayStyle.equals("user-name-and-image")) ? "selected" : "" %> value="user-name-and-image"><liferay-ui:message key="user-name-and-image" /></option>
-			<option <%= (displayStyle.equals("user-name")) ? "selected" : "" %> value="user-name"><liferay-ui:message key="user-name" /></option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="maximum-bloggers-to-display" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />max">
-			<option <%= max == 1 ? "selected" : "" %> value="1">1</option>
-			<option <%= max == 2 ? "selected" : "" %> value="2">2</option>
-			<option <%= max == 3 ? "selected" : "" %> value="3">3</option>
-			<option <%= max == 4 ? "selected" : "" %> value="4">4</option>
-			<option <%= max == 5 ? "selected" : "" %> value="5">5</option>
-			<option <%= max == 10 ? "selected" : "" %> value="10">10</option>
-			<option <%= max == 15 ? "selected" : "" %> value="15">15</option>
-			<option <%= max == 20 ? "selected" : "" %> value="20">20</option>
-			<option <%= max == 25 ? "selected" : "" %> value="25">25</option>
-			<option <%= max == 30 ? "selected" : "" %> value="30">30</option>
-			<option <%= max == 40 ? "selected" : "" %> value="40">40</option>
-			<option <%= max == 50 ? "selected" : "" %> value="50">50</option>
-			<option <%= max == 60 ? "selected" : "" %> value="60">60</option>
-			<option <%= max == 70 ? "selected" : "" %> value="70">70</option>
-			<option <%= max == 80 ? "selected" : "" %> value="80">80</option>
-			<option <%= max == 90 ? "selected" : "" %> value="90">90</option>
-			<option <%= max == 100 ? "selected" : "" %> value="100">100</option>
-		</select>
-	</td>
-</tr>
-</table>
+		<div id="<portlet:namespace />UsersSelectionOptions">
+			<aui:field-wrapper label="organization">
+				<span id="<portlet:namespace />organizationName"><%= HtmlUtil.escape(organizationName) %></span>
 
-<br />
+				<aui:button name="selectOrganizationButton" onClick='<%= renderResponse.getNamespace() + "openOrganizationSelector();" %>' type="button" value="select" />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+				<aui:button disabled="<%= organizationId <= 0 %>" name="removeOrganizationButton" type="button" value="remove" onClick='<%= renderResponse.getNamespace() + "removeOrganization();" %>' />
+			</aui:field-wrapper>
+		</div>
 
-</form>
+		<aui:select name="displayStyle">
+			<aui:option label="user-name-and-image" selected='<%= displayStyle.equals("user-name-and-image") %>' />
+			<aui:option label="user-name" selected='<%= displayStyle.equals("user-name") %>' />
+		</aui:select>
+
+		<aui:select label="maximum-bloggers-to-display" name="max">
+			<aui:option label="1" selected="<%= max == 1 %>" />
+			<aui:option label="2" selected="<%= max == 2 %>" />
+			<aui:option label="3" selected="<%= max == 3 %>" />
+			<aui:option label="4" selected="<%= max == 4 %>" />
+			<aui:option label="5" selected="<%= max == 5 %>" />
+			<aui:option label="10" selected="<%= max == 10 %>" />
+			<aui:option label="15" selected="<%= max == 15 %>" />
+			<aui:option label="20" selected="<%= max == 20 %>" />
+			<aui:option label="25" selected="<%= max == 25 %>" />
+			<aui:option label="30" selected="<%= max == 30 %>" />
+			<aui:option label="40" selected="<%= max == 40 %>" />
+			<aui:option label="50" selected="<%= max == 50 %>" />
+			<aui:option label="60" selected="<%= max == 60 %>" />
+			<aui:option label="70" selected="<%= max == 70 %>" />
+			<aui:option label="80" selected="<%= max == 80 %>" />
+			<aui:option label="90" selected="<%= max == 90 %>" />
+			<aui:option label="100" selected="<%= max == 100 %>" />
+		</aui:select>
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <script type="text/javascript">
 	AUI().ready(
@@ -137,13 +132,13 @@ if (organizationId > 0) {
 			var selectionMethod = jQuery('#<portlet:namespace />selectionMethod');
 
 			function showHiddenFields() {
-				var organization = jQuery('#<portlet:namespace />organization');
+				var usersSelectionOptions = jQuery('#<portlet:namespace />UsersSelectionOptions');
 
 				if (selectionMethod.val() == 'users') {
-					organization.show();
+					usersSelectionOptions.show();
 				}
 				else {
-					organization.hide();
+					usersSelectionOptions.hide();
 				}
 			}
 
