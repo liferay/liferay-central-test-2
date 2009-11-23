@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.util.BlogsUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,8 +69,7 @@ public class BlogsEntryUrlTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	protected String getUrlTitle(long entryId, String title) {
-		String urlTitle = BlogsEntryLocalServiceUtil.getUrlTitle(
-			entryId, title);
+		String urlTitle = BlogsUtil.getUrlTitle(entryId, title);
 
 		String newUrlTitle = new String(urlTitle);
 

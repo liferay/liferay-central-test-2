@@ -229,9 +229,6 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getUrlTitle(long entryId, java.lang.String title);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndex(com.liferay.portlet.blogs.model.BlogsEntry entry,
 		boolean update) throws com.liferay.portal.SystemException;
 

@@ -51,6 +51,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
@@ -680,6 +681,20 @@ public class JournalUtil {
 		}
 
 		return tokens;
+	}
+
+	public static String getUrlTitle(long id, String title) {
+		title = title.trim().toLowerCase();
+
+		if (Validator.isNull(title) || Validator.isNumber(title) ||
+			title.equals("rss")) {
+
+			return String.valueOf(id);
+		}
+		else {
+			return FriendlyURLNormalizer.normalize(
+				title, _URL_TITLE_REPLACE_CHARS);
+		}
 	}
 
 	public static String mergeArticleContent(
@@ -1363,6 +1378,10 @@ public class JournalUtil {
 
 		path.pop();
 	}
+
+	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
+		'.', '/'
+	};
 
 	private static Log _log = LogFactoryUtil.getLog(JournalUtil.class);
 

@@ -288,11 +288,6 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getOrganizationEntriesCount(organizationId, status);
 	}
 
-	public static java.lang.String getUrlTitle(long entryId,
-		java.lang.String title) {
-		return getService().getUrlTitle(entryId, title);
-	}
-
 	public static void reIndex(
 		com.liferay.portlet.blogs.model.BlogsEntry entry, boolean update)
 		throws com.liferay.portal.SystemException {

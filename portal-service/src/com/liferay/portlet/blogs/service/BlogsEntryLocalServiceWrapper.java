@@ -287,10 +287,6 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 			status);
 	}
 
-	public java.lang.String getUrlTitle(long entryId, java.lang.String title) {
-		return _blogsEntryLocalService.getUrlTitle(entryId, title);
-	}
-
 	public void reIndex(com.liferay.portlet.blogs.model.BlogsEntry entry,
 		boolean update) throws com.liferay.portal.SystemException {
 		_blogsEntryLocalService.reIndex(entry, update);

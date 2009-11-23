@@ -48,7 +48,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -58,6 +57,7 @@ import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
+import com.liferay.portlet.blogs.util.BlogsUtil;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -483,20 +483,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			organizationId, new Date(), status);
 	}
 
-	public String getUrlTitle(long entryId, String title) {
-		title = title.trim().toLowerCase();
-
-		if (Validator.isNull(title) || Validator.isNumber(title) ||
-			title.equals("rss")) {
-
-			return String.valueOf(entryId);
-		}
-		else {
-			return FriendlyURLNormalizer.normalize(
-				title, _URL_TITLE_REPLACE_CHARS);
-		}
-	}
-
 	public void reIndex(BlogsEntry entry, boolean update)
 		throws SystemException {
 
@@ -807,7 +793,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long entryId, long groupId, String title)
 		throws SystemException {
 
-		String urlTitle = getUrlTitle(entryId, title);
+		String urlTitle = BlogsUtil.getUrlTitle(entryId, title);
 
 		String newUrlTitle = urlTitle;
 
@@ -1058,10 +1044,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			throw new EntryContentException();
 		}
 	}
-
-	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
-		'.', '/'
-	};
 
 	private static Log _log =
 		LogFactoryUtil.getLog(BlogsEntryLocalServiceImpl.class);

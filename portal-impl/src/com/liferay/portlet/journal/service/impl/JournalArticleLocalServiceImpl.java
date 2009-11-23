@@ -67,7 +67,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -2516,7 +2515,7 @@ public class JournalArticleLocalServiceImpl
 			long id, long groupId, String articleId, String title)
 		throws PortalException, SystemException {
 
-		String urlTitle = getUrlTitle(id, title);
+		String urlTitle = JournalUtil.getUrlTitle(id, title);
 
 		String newUrlTitle = urlTitle;
 
@@ -2538,20 +2537,6 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return newUrlTitle;
-	}
-
-	protected String getUrlTitle(long id, String title) {
-		title = title.trim().toLowerCase();
-
-		if (Validator.isNull(title) || Validator.isNumber(title) ||
-			title.equals("rss")) {
-
-			return String.valueOf(id);
-		}
-		else {
-			return FriendlyURLNormalizer.normalize(
-				title, _URL_TITLE_REPLACE_CHARS);
-		}
 	}
 
 	protected void reIndexArticles(long companyId) throws SystemException {
@@ -2853,10 +2838,6 @@ public class JournalArticleLocalServiceImpl
 
 	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
 		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
-
-	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
-		'.', '/'
-	};
 
 	private static Log _log =
 		LogFactoryUtil.getLog(JournalArticleLocalServiceImpl.class);
