@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.yahoo.platform.yui.compressor.CssCompressor;
 import com.liferay.yahoo.platform.yui.compressor.JavaScriptCompressor;
 
-import java.io.BufferedReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 
