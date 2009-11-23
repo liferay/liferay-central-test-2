@@ -2385,7 +2385,7 @@
 	</library>
 	<library>
 		<file-name>portal/slf4j-api.jar</file-name>
-		<version>1.5.6</version>
+		<version>1.5.8</version>
 		<project-name>SLF4J</project-name>
 		<project-url>http://www.slf4j.org</project-url>
 		<licenses>
@@ -2397,7 +2397,7 @@
 	</library>
 	<library>
 		<file-name>portal/slf4j-log4j12.jar</file-name>
-		<version>1.5.6</version>
+		<version>1.5.8</version>
 		<project-name>SLF4J</project-name>
 		<project-url>http://www.slf4j.org</project-url>
 		<licenses>
