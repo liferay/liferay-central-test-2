@@ -38,20 +38,20 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 public class TransactionAwareConfiguration extends LocalSessionFactoryBean {
 
 	protected SessionFactory wrapSessionFactoryIfNecessary(
-		SessionFactory target) {
+		SessionFactory sessionFactory) {
 
 		// LEP-2996
 
 		Class<?> sessionFactoryInterface = SessionFactory.class;
 
-		if (target instanceof SessionFactoryImplementor) {
+		if (sessionFactory instanceof SessionFactoryImplementor) {
 			sessionFactoryInterface = SessionFactoryImplementor.class;
 		}
 
 		return (SessionFactory)Proxy.newProxyInstance(
 			sessionFactoryInterface.getClassLoader(),
 			new Class[] {sessionFactoryInterface},
-			new SessionFactoryInvocationHandler(target));
+			new SessionFactoryInvocationHandler(sessionFactory));
 	}
 
 }
