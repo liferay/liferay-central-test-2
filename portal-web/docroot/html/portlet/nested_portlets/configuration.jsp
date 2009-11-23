@@ -24,75 +24,85 @@
 
 <%@ include file="/html/portlet/nested_portlets/init.jsp" %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-
-<fieldset class="aui-block-labels">
-	<legend><liferay-ui:message key="layout-template" /></legend>
-
-	<table border="0" cellpadding="0" cellspacing="10" style="margin-top: 10px;" width="100%">
-
-	<%
-	int CELLS_PER_ROW = 4;
-
-	String layoutTemplateId = preferences.getValue("layout-template-id", PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
-
-	List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
-
-	layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
-
-	List unsupportedLayoutTemplates = ListUtil.fromArray(PropsUtil.getArray(PropsKeys.NESTED_PORTLETS_LAYOUT_TEMPLATE_UNSUPPORTED));
-
-	for (int i = 0; i < layoutTemplates.size(); i++) {
-		LayoutTemplate curLayoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
-
-		if (unsupportedLayoutTemplates.contains(curLayoutTemplate.getLayoutTemplateId())) {
-			layoutTemplates.remove(i);
-		}
-	}
-
-	for (int i = 0; i < layoutTemplates.size(); i++) {
-		LayoutTemplate curLayoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
-	%>
-
-		<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
-			<tr>
-		</c:if>
-
-		<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
-			<img onclick="document.getElementById('<portlet:namespace />layoutTemplateId<%= i %>').checked = true;" src="<%= curLayoutTemplate.getContextPath() %><%= curLayoutTemplate.getThumbnailPath() %>" /><br />
-
-			<input <%= layoutTemplateId.equals(curLayoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> id="<portlet:namespace />layoutTemplateId<%= i %>" name="<portlet:namespace />layoutTemplateId" type="radio" value="<%= curLayoutTemplate.getLayoutTemplateId() %>" />
-
-			<label for="layoutTemplateId<%= i %>"><%= curLayoutTemplate.getName() %></label>
-		</td>
-
-		<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">
-			</tr>
-		</c:if>
-
-	<%
-	}
-	%>
-
-	</table>
-</fieldset>
-
 <%
-boolean portletDecorateDefault = GetterUtil.getBoolean(theme.getSetting("portlet-setup-show-borders-default"), true);
-
-boolean portletSetupShowBorders = GetterUtil.getBoolean(preferences.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
+String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<fieldset class="aui-block-labels">
-	<legend><liferay-ui:message key="display-settings" /></legend>
+<script type="text/javascript">
+    function <portlet:namespace />saveConfiguration() {
+        submitForm(document.<portlet:namespace />fm);
+	}
+</script>
 
-	<div class="aui-ctrl-holder">
-		<label><liferay-ui:message key="show-borders" /> <liferay-ui:input-checkbox param="portletSetupShowBorders" defaultValue="<%= portletSetupShowBorders %>" /></label>
-	</div>
-</fieldset>
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<br />
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+	<aui:fieldset>
+		<aui:legend label="layout-template" />
 
-</form>
+		<table border="0" cellpadding="0" cellspacing="10" style="margin-top: 10px;" width="100%">
+
+		<%
+		int CELLS_PER_ROW = 4;
+
+		String layoutTemplateId = preferences.getValue("layout-template-id", PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
+
+		List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
+
+		layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
+
+		List unsupportedLayoutTemplates = ListUtil.fromArray(PropsUtil.getArray(PropsKeys.NESTED_PORTLETS_LAYOUT_TEMPLATE_UNSUPPORTED));
+
+		for (int i = 0; i < layoutTemplates.size(); i++) {
+			LayoutTemplate curLayoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
+
+			if (unsupportedLayoutTemplates.contains(curLayoutTemplate.getLayoutTemplateId())) {
+				layoutTemplates.remove(i);
+			}
+		}
+
+		for (int i = 0; i < layoutTemplates.size(); i++) {
+			LayoutTemplate curLayoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
+		%>
+
+			<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
+				<tr>
+			</c:if>
+
+			<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
+				<img onclick="document.getElementById('<portlet:namespace />layoutTemplateId<%= i %>').checked = true;" src="<%= curLayoutTemplate.getContextPath() %><%= curLayoutTemplate.getThumbnailPath() %>" /><br />
+
+				<aui:input checked="<%= layoutTemplateId.equals(curLayoutTemplate.getLayoutTemplateId()) %>" id='<%= "layoutTemplateId" + i %>' label="<%= curLayoutTemplate.getName() %>" name="layoutTemplateId" type="radio" value="<%= curLayoutTemplate.getLayoutTemplateId() %>" />
+			</td>
+
+			<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">
+				</tr>
+			</c:if>
+
+		<%
+		}
+		%>
+
+		</table>
+	</aui:fieldset>
+
+	<%
+	boolean portletDecorateDefault = GetterUtil.getBoolean(theme.getSetting("portlet-setup-show-borders-default"), true);
+
+	boolean portletSetupShowBorders = GetterUtil.getBoolean(preferences.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
+	%>
+
+	<aui:fieldset>
+		<aui:legend label="display-settings" />
+
+		<aui:input inlineLabel="left" label="show-borders" name="portletSetupShowBorders" type="checkbox" value="<%= portletSetupShowBorders %>" />
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
