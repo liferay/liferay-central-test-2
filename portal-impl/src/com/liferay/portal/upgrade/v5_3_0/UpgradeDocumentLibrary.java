@@ -76,7 +76,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			sb.append("?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 			String sql = sb.toString();
-System.out.println("## sql " + sql);
+
 			ps = con.prepareStatement(sql);
 
 			ps.setLong(1, increment());
