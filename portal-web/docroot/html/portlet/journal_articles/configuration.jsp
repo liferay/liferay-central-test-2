@@ -78,15 +78,18 @@ if (Validator.isNotNull(structureId)) {
 	}
 </script>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" id="<portlet:namespace />fm1" method="post" name="<portlet:namespace />fm1">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
+<input name="<portlet:namespace />structureId" type="hidden" value="<%= HtmlUtil.escapeAttribute(structureId) %>" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm1">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur %>' />
-	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
-
-	<aui:fieldset>
-		<aui:select label="community" name="groupId" onChange='<%= "submitForm(document." + renderResponse.getNamespace() + "fm1);"%>'>
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="community" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />groupId" onChange="submitForm(document.<portlet:namespace />fm1);">
 
 			<%
 			List<Group> myPlaces = user.getMyPlaces();
@@ -103,36 +106,54 @@ if (Validator.isNotNull(structureId)) {
 				}
 			%>
 
-				<aui:option label="<%= groupName %>" selected="<%= groupId == group.getGroupId() %>" value="<%= group.getGroupId() %>" />
+				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= HtmlUtil.escape(groupName) %></option>
 
 			<%
 			}
 			%>
 
-		</aui:select>
-
-		<aui:select label="web-content-type" name="type" onChange='<%= renderResponse.getNamespace() + "save();" %>'>
-			<aui:option value="" />
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="web-content-type" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />type" onChange="<portlet:namespace />save();">
+			<option value=""></option>
 
 			<%
 			for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
 			%>
 
-				<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
+				<option <%= type.equals(JournalArticleConstants.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleConstants.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleConstants.TYPES[i]) %></option>
 
 			<%
 			}
 			%>
 
-		</aui:select>
-
-		<aui:select label="display-url" name="pageURL" onChange='<%= renderResponse.getNamespace()+"save();" %>'>
-			<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
-			<aui:option label="normal" selected='<%= pageURL.equals("normal") %>' />
-			<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' />
-		</aui:select>
-
-		<aui:select label="display-per-page" name="pageDelta" onChange='<%= renderResponse.getNamespace()+"save();" %>'>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="display-url" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />pageURL" onChange="<portlet:namespace />save();">
+			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><liferay-ui:message key="maximized" /></option>
+			<option <%= pageURL.equals("normal") ? "selected" : "" %> value="normal"><liferay-ui:message key="normal" /></option>
+			<option <%= pageURL.equals("popUp") ? "selected" : "" %> value="popUp"><liferay-ui:message key="pop-up" /></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="display-per-page" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />pageDelta" onChange="<portlet:namespace />save();">
 
 			<%
 			String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
@@ -140,109 +161,127 @@ if (Validator.isNotNull(structureId)) {
 			for (int i = 0; i < pageDeltaValues.length; i++) {
 			%>
 
-				<aui:option label="<%= pageDeltaValues[i] %>" selected="<%= pageDelta == GetterUtil.getInteger(pageDeltaValues[i]) %>" />
+				<option <%= (pageDelta == GetterUtil.getInteger(pageDeltaValues[i])) ? "selected" : "" %> value="<%= pageDeltaValues[i] %>"><%= pageDeltaValues[i] %></option>
 
 			<%
 			}
 			%>
 
-		</aui:select>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="order-by-column" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />orderByCol" onChange="<portlet:namespace />save();">
+			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><liferay-ui:message key="display-date" /></option>
+			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><liferay-ui:message key="create-date" /></option>
+			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><liferay-ui:message key="modified-date" /></option>
+			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><liferay-ui:message key="web-content-title" /></option>
+			<option <%= orderByCol.equals("id") ? "selected" : "" %> value="id"><liferay-ui:message key="id" /></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="order-by-type" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />orderByType" onChange="<portlet:namespace />save();">
+			<option <%= orderByType.equals("asc") ? "selected" : "" %> value="asc"><liferay-ui:message key="ascending" /></option>
+			<option <%= orderByType.equals("desc") ? "selected" : "" %> value="desc"><liferay-ui:message key="descending" /></option>
+		</select>
+	</td>
+</tr>
+</table>
 
-		<aui:select label="order-by-column" name="orderByCol" onChange='<%= renderResponse.getNamespace()+"save();" %>'>
-			<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
-			<aui:option label="create-date" selected='<%= orderByCol.equals("create-date") %>' />
-			<aui:option label="modified-date" selected='<%= orderByCol.equals("modified-date") %>' />
-			<aui:option label="title" selected='<%= orderByCol.equals("title") %>' />
-			<aui:option label="id" selected='<%= orderByCol.equals("id") %>' />
-		</aui:select>
+<br />
 
-		<aui:select label="order-by-type" name="orderByType" onChange='<%= renderResponse.getNamespace()+"save();" %>'>
-			<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' />
-			<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' />
-		</aui:select>
-	</aui:fieldset>
+<div class="portlet-msg-info">
+	<c:choose>
+		<c:when test="<%= Validator.isNull(structureId) %>">
+			<liferay-ui:message key="select-a-structure-to-filter-the-web-content-list-by-a-structure" />
+		</c:when>
+		<c:otherwise>
+			<%= LanguageUtil.format(pageContext, "filter-web-content-list-by-structure-x", structureId) %> <a href="javascript:<portlet:namespace />removeStructure();"><liferay-ui:message key="click-to-remove-filter" /></a>
+		</c:otherwise>
+	</c:choose>
+</div>
 
-	<div class="portlet-msg-info">
-		<c:choose>
-			<c:when test="<%= Validator.isNull(structureId) %>">
-				<liferay-ui:message key="select-a-structure-to-filter-the-web-content-list-by-a-structure" />
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.format(pageContext, "filter-web-content-list-by-structure-x", structureId) %> <a href="javascript:<portlet:namespace />removeStructure();"><liferay-ui:message key="click-to-remove-filter" /></a>
-			</c:otherwise>
-		</c:choose>
-	</div>
-</aui:form>
+</form>
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
-	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur %>' />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 
-	<liferay-ui:tabs names="structures" />
+<liferay-ui:tabs names="structures" />
 
-	<%
-	DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
+<%
+DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
 
-	dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
+dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
 
-	StructureSearch searchContainer = new StructureSearch(dynamicRenderRequest, portletURL);
-	%>
+StructureSearch searchContainer = new StructureSearch(dynamicRenderRequest, portletURL);
+%>
 
-	<liferay-ui:search-form
-		page="/html/portlet/journal/structure_search.jsp"
-		searchContainer="<%= searchContainer %>"
-	/>
+<liferay-ui:search-form
+	page="/html/portlet/journal/structure_search.jsp"
+	searchContainer="<%= searchContainer %>"
+/>
 
-	<br />
+<br />
 
-	<%
-	StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
-	%>
+<%
+StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
+%>
 
-	<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
+<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
 
-	<%
-	List resultRows = searchContainer.getResultRows();
+<%
+List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.size(); i++) {
-		JournalStructure structure = (JournalStructure)results.get(i);
+for (int i = 0; i < results.size(); i++) {
+	JournalStructure structure = (JournalStructure)results.get(i);
 
-		structure = structure.toEscapedModel();
+	structure = structure.toEscapedModel();
 
-		ResultRow row = new ResultRow(structure, structure.getStructureId(), i);
+	ResultRow row = new ResultRow(structure, structure.getStructureId(), i);
 
-		StringBuilder sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 
-		sb.append("javascript:");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectStructure('");
-		sb.append(structure.getStructureId());
-		sb.append("');");
+	sb.append("javascript:");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectStructure('");
+	sb.append(structure.getStructureId());
+	sb.append("');");
 
-		String rowHREF = sb.toString();
+	String rowHREF = sb.toString();
 
-		// Structure id
+	// Structure id
 
-		row.addText(structure.getStructureId(), rowHREF);
+	row.addText(structure.getStructureId(), rowHREF);
 
-		// Name and description
+	// Name and description
 
-		sb = new StringBuilder();
+	sb = new StringBuilder();
 
-		sb.append(structure.getName());
+	sb.append(structure.getName());
 
-		if (Validator.isNotNull(structure.getDescription())) {
-			sb.append("<br />");
-			sb.append(structure.getDescription());
-		}
-
-		row.addText(sb.toString(), rowHREF);
-
-		// Add result row
-
-		resultRows.add(row);
+	if (Validator.isNotNull(structure.getDescription())) {
+		sb.append("<br />");
+		sb.append(structure.getDescription());
 	}
-	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</aui:form>
+	row.addText(sb.toString(), rowHREF);
+
+	// Add result row
+
+	resultRows.add(row);
+}
+%>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+</form>
