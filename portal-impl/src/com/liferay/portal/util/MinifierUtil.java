@@ -56,7 +56,7 @@ public class MinifierUtil {
 
 		try {
 			CssCompressor cssCompressor = new CssCompressor(
-				new BufferedReader(new StringReader(content)));
+				new StringReader(content));
 
 			cssCompressor.compress(stringWriter, _CSS_LINE_BREAK);
 		}
@@ -74,8 +74,7 @@ public class MinifierUtil {
 
 		try {
 			JavaScriptCompressor javaScriptCompressor =
-				new JavaScriptCompressor(
-					new BufferedReader(new StringReader(content)),
+				new JavaScriptCompressor(new StringReader(content),
 					new JavaScriptErrorReporter());
 
 			javaScriptCompressor.compress(
