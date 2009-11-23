@@ -26,7 +26,6 @@
 
 <%
 String cur = ParamUtil.getString(request, "cur");
-String redirect = ParamUtil.getString(request, "redirect");
 
 JournalArticle article = null;
 
@@ -47,8 +46,6 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 type = ParamUtil.getString(request, "type", type);
 %>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
-<liferay-portlet:actionURL portletConfiguration="true" var="viewOrgURL" />
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
 <script type="text/javascript">
@@ -80,210 +77,259 @@ type = ParamUtil.getString(request, "type", type);
 	}
 </script>
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm1">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur" + cur %>' />
-	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
-	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" id="<portlet:namespace />fm1" method="post" name="<portlet:namespace />fm1">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
+<input name="<portlet:namespace />articleId" type="hidden" value="<%= HtmlUtil.escapeAttribute(articleId) %>" />
+<input name="<portlet:namespace />templateId" type="hidden" value="<%= HtmlUtil.escapeAttribute(templateId) %>" />
 
-	<aui:fieldset>
-		<aui:field-wrapper label="portlet-id">
-			<%= portletResource %>
-		</aui:field-wrapper>
-	</aui:fieldset>
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="portlet-id" />:
+	</td>
+	<td>
+		<%= portletResource %>
+	</td>
+</tr>
+</table>
 
-	<br />
+<br />
 
-	<c:if test="<%= article != null %>">
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="displaying-content" />: <%= articleId %>
-		</div>
+<c:if test="<%= article != null %>">
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="displaying-content" />: <%= articleId %>
+	</div>
 
-		<%
-		String structureId = article.getStructureId();
+	<%
+	String structureId = article.getStructureId();
 
-		if (Validator.isNotNull(structureId)) {
-			List templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
+	if (Validator.isNotNull(structureId)) {
+		List templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
 
-			if (templates.size() > 0) {
-				if (Validator.isNull(templateId)) {
-					templateId = article.getTemplateId();
-				}
-		%>
-
-		<aui:fieldset>
-			<liferay-ui:message key="override-default-template" />
-
-			<liferay-ui:table-iterator
-				list="<%= templates %>"
-				listType="com.liferay.portlet.journal.model.JournalTemplate"
-				rowLength="3"
-				rowPadding="30"
-			>
-
-			<%
-			boolean templateChecked = false;
-
-			if (templateId.equals(tableIteratorObj.getTemplateId())) {
-				templateChecked = true;
+		if (templates.size() > 0) {
+			if (Validator.isNull(templateId)) {
+				templateId = article.getTemplateId();
 			}
+	%>
 
-			if ((tableIteratorPos.intValue() == 0) && Validator.isNull(templateId)) {
-				templateChecked = true;
-			}
-			%>
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="override-default-template" />
+				</td>
+				<td>
+					<liferay-ui:table-iterator
+						list="<%= templates %>"
+						listType="com.liferay.portlet.journal.model.JournalTemplate"
+						rowLength="3"
+						rowPadding="30"
+					>
 
-			<porlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewOrgURL" >
-				<portlet:param name="struts_action" value="/journal/edit_template" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" />
-				<portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" />
-			</porlet:renderURL>
-						
-			<aui:a href="<%= viewOrgURL %>" id="tableIteratorObjName"><%= tableIteratorObj.getName() %></aui:a>
+						<%
+						boolean templateChecked = false;
 
-			<c:if test="<%= tableIteratorObj.isSmallImage() %>">
-				<br />
+						if (templateId.equals(tableIteratorObj.getTemplateId())) {
+							templateChecked = true;
+						}
 
-				<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(tableIteratorObj.getSmallImageId()) %>" vspace="0" />
+						if ((tableIteratorPos.intValue() == 0) && Validator.isNull(templateId)) {
+							templateChecked = true;
+						}
+						%>
+
+						<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />radioTemplateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" onClick="document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = this.value; <portlet:namespace />save();">
+
+						<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.JOURNAL %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></liferay-portlet:renderURL>">
+						<%= HtmlUtil.escape(tableIteratorObj.getName()) %>
+						</a>
+
+						<c:if test="<%= tableIteratorObj.isSmallImage() %>">
+							<br />
+
+							<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(tableIteratorObj.getSmallImageId()) %>" vspace="0" />
 						</c:if>
-			</liferay-ui:table-iterator>
-		</aui:fieldset>
+					</liferay-ui:table-iterator>
+				</td>
+			</tr>
+			</table>
 
-		<br />
+			<br />
 
-		<%
-			}
+	<%
 		}
-		%>
-		<aui:fieldset>
-			<aui:input inlineLabel="left" name="showAvailableLocales" type="checkbox" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+	}
+	%>
 
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="show-available-locales" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<liferay-ui:message key="convert-to" />
 
 			<c:if test="<%= !openOfficeServerEnabled %>">
 				<liferay-ui:icon-help message="enabling-openoffice-integration-provides-document-conversion-functionality" />
 			</c:if>
-		</aui:fieldset>
+		</td>
+		<td>
+			<table class="lfr-table">
+			<tr valign="middle">
 
-		<aui:fieldset>
+				<%
+				for (String conversion : conversions) {
+				%>
 
-			<%
-			for (String conversion : conversions) {
-			%>
+					<td>
+						<input <%= ArrayUtil.contains(extensions, conversion) ? "checked": "" %> <%= !openOfficeServerEnabled ? "disabled" : "" %> name="<portlet:namespace />extensions" type="checkbox" value="<%= conversion %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+					</td>
+					<td>
+						<%= conversion.toUpperCase() %>
+					</td>
 
-			<aui:input disabled="<%= !openOfficeServerEnabled %>" name="extensions" onClick='<%= renderResponse.getNamespace() + "save();" %>' type="checkbox" value="<%= conversion %>" />
+				<%
+				}
+				%>
 
-			<%= conversion.toUpperCase() %>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="enable-print" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enablePrint" defaultValue="<%= enablePrint %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="enable-ratings" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+		</td>
+	</tr>
 
-			<%
-			}
-			%>
-
-		</aui:fieldset>
-
-		<aui:fieldset>
-			<aui:input inlineLabel="left" name="enablePrint" type="checkbox" value="<%= enablePrint %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
-
-			<aui:input inlineLable="left" name="enableRatings" value="<%= enableRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
-
-			<c:if test="<%= PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED %>">
-
-				<aui:input inlineLabel="left" name="enableComments" value="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
-
-				<aui:input inlineLabel="left" name="enableCommentRatings" value="<%= enableCommentRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
-			</c:if>
-		</aui:fieldset>
+	<c:if test="<%= PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="enable-comments" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="enable-comment-ratings" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+			</td>
+		</tr>
 	</c:if>
-</aui:form>
+
+	</table>
+</c:if>
+
+</form>
 
 <c:if test="<%= Validator.isNotNull(articleId) %>">
 	<div class="separator"><!-- --></div>
 </c:if>
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
-	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur" + cur %>' />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 
-	<liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
 
-	<%
-	DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
+<%
+DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
 
-	dynamicRenderRequest.setParameter("type", type);
-	dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
+dynamicRenderRequest.setParameter("type", type);
+dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
 
-	ArticleSearch searchContainer = new ArticleSearch(dynamicRenderRequest, portletURL);
-	%>
+ArticleSearch searchContainer = new ArticleSearch(dynamicRenderRequest, portletURL);
+%>
 
-	<liferay-ui:search-form
-		page="/html/portlet/journal/article_search.jsp"
-		searchContainer="<%= searchContainer %>"
-	>
-		<liferay-ui:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-		<liferay-ui:param name="type" value="<%= type %>" />
-	</liferay-ui:search-form>
+<liferay-ui:search-form
+	page="/html/portlet/journal/article_search.jsp"
+	searchContainer="<%= searchContainer %>"
+>
+	<liferay-ui:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+	<liferay-ui:param name="type" value="<%= type %>" />
+</liferay-ui:search-form>
 
-	<br />
+<br />
 
-	<%
-	OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
+<%
+OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
-	ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
-	%>
+ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
+%>
 
-	<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
+<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
 
-	<%
-	List resultRows = searchContainer.getResultRows();
+<%
+List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.size(); i++) {
-		JournalArticle curArticle = (JournalArticle)results.get(i);
+for (int i = 0; i < results.size(); i++) {
+	JournalArticle curArticle = (JournalArticle)results.get(i);
 
-		curArticle = curArticle.toEscapedModel();
+	curArticle = curArticle.toEscapedModel();
 
-		ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
+	ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
 
-		StringBuilder sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 
-		sb.append("javascript:");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectArticle('");
-		sb.append(curArticle.getArticleId());
-		sb.append("');");
+	sb.append("javascript:");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectArticle('");
+	sb.append(curArticle.getArticleId());
+	sb.append("');");
 
-		String rowHREF = sb.toString();
+	String rowHREF = sb.toString();
 
-		// Article id
+	// Article id
 
-		row.addText(curArticle.getArticleId(), rowHREF);
+	row.addText(curArticle.getArticleId(), rowHREF);
 
-		// Title
+	// Title
 
-		row.addText(curArticle.getTitle(), rowHREF);
+	row.addText(curArticle.getTitle(), rowHREF);
 
-		// Version
+	// Version
 
-		row.addText(String.valueOf(curArticle.getVersion()), rowHREF);
+	row.addText(String.valueOf(curArticle.getVersion()), rowHREF);
 
-		// Modified date
+	// Modified date
 
-		row.addText(dateFormatDate.format(curArticle.getModifiedDate()), rowHREF);
+	row.addText(dateFormatDate.format(curArticle.getModifiedDate()), rowHREF);
 
-		// Display date
+	// Display date
 
-		row.addText(dateFormatDate.format(curArticle.getDisplayDate()), rowHREF);
+	row.addText(dateFormatDate.format(curArticle.getDisplayDate()), rowHREF);
 
-		// Author
+	// Author
 
-		row.addText(PortalUtil.getUserName(curArticle.getUserId(), curArticle.getUserName()), rowHREF);
+	row.addText(PortalUtil.getUserName(curArticle.getUserId(), curArticle.getUserName()), rowHREF);
 
-		// Add result row
+	// Add result row
 
-		resultRows.add(row);
-	}
-	%>
+	resultRows.add(row);
+}
+%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</aui:form>
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+</form>
