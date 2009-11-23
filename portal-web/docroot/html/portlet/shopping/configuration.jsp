@@ -82,10 +82,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>"/>
-	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>"/>
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>"/>
-	<aui:input name="ccTypes" type="hidden" value=""/>
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="ccTypes" type="hidden" value="" />
 
 	<liferay-ui:tabs
 		names="payment-settings,shipping-calculation,insurance-calculation,emails"
@@ -199,20 +199,20 @@ String redirect = ParamUtil.getString(request, "redirect");
 					for (int i = 0; i < 5; i++) {
 						double shippingRangeA = ShoppingPreferences.INSURANCE_RANGE[shippingRange++];
 						double shippingRangeB = ShoppingPreferences.INSURANCE_RANGE[shippingRange++];
+
+						String shippingRangeLabel = currencyFormat.format(shippingRangeA);
+
+						if (!Double.isInfinite(shippingRangeB)) {
+							shippingRangeLabel += "-";
+							shippingRangeLabel += currencyFormat.format(shippingRangeB);
+						}
+						else {
+							shippingRangeLabel += " ";
+							shippingRangeLabel += LanguageUtil.get(pageContext, "and over");
+						}
 					%>
 
-					<%= currencyFormat.format(shippingRangeA) %>
-
-					<c:if test="<%= !Double.isInfinite(shippingRangeB) %>">
-						- <%= currencyFormat.format(shippingRangeB) %>
-					</c:if>
-
-					<c:if test="<%= Double.isInfinite(shippingRangeB) %>">
-						and over
-					</c:if>
-
-					<aui:input label="" maxlength="6" name='<%= "shipping" + i %>' size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>" />
-
+						<aui:input label="<%= shippingRangeLabel %>" maxlength="6" name='<%= "shipping" + i %>' size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>" />
 
 					<%
 					}
@@ -240,19 +240,20 @@ String redirect = ParamUtil.getString(request, "redirect");
 					for (int i = 0; i < 5; i++) {
 						double insuranceRangeA = ShoppingPreferences.INSURANCE_RANGE[insuranceRange++];
 						double insuranceRangeB = ShoppingPreferences.INSURANCE_RANGE[insuranceRange++];
+
+						String insuranceRangeLabel = currencyFormat.format(insuranceRangeA);
+
+						if (!Double.isInfinite(insuranceRangeB)) {
+							insuranceRangeLabel += "-";
+							insuranceRangeLabel += currencyFormat.format(insuranceRangeB);
+						}
+						else {
+							insuranceRangeLabel += " ";
+							insuranceRangeLabel += LanguageUtil.get(pageContext, "and over");
+						}
 					%>
 
-					<%= currencyFormat.format(insuranceRangeA) %>
-
-					<c:if test="<%= !Double.isInfinite(insuranceRangeB) %>">
-						- <%= currencyFormat.format(insuranceRangeB) %>
-					</c:if>
-
-					<c:if test="<%= Double.isInfinite(insuranceRangeB) %>">
-						and over
-					</c:if>
-
-					<aui:input label="" maxlength="6" name='<%= "insurance" + i %>' size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>"/>
+						<aui:input label="<%= insuranceRangeLabel %>" maxlength="6" name='<%= "insurance" + i %>' size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>" />
 
 					<%
 					}
@@ -300,104 +301,104 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 							<aui:input name="<%= editorParam %>" type="hidden" value="" />
 						</aui:field-wrapper>
-
-						<br />
-
-						<strong><liferay-ui:message key="definition-of-terms" /></strong>
-
-						<br /><br />
-
-						<table class="lfr-table">
-						<tr>
-							<td>
-								<strong>[$FROM_ADDRESS$]</strong>
-							</td>
-							<td>
-								<%= emailFromAddress %>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$FROM_NAME$]</strong>
-							</td>
-							<td>
-								<%= emailFromName %>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_BILLING_ADDRESS$]</strong>
-							</td>
-							<td>
-								The order billing address
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_CURRENCY$]</strong>
-							</td>
-							<td>
-								The order currency
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_NUMBER$]</strong>
-							</td>
-							<td>
-								The order ID
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_SHIPPING_ADDRESS$]</strong>
-							</td>
-							<td>
-								The order shipping address
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$ORDER_TOTAL$]</strong>
-							</td>
-							<td>
-								The order total
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$PORTAL_URL$]</strong>
-							</td>
-							<td>
-								<%= company.getVirtualHost() %>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$PORTLET_NAME$]</strong>
-							</td>
-							<td>
-								<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$TO_ADDRESS$]</strong>
-							</td>
-							<td>
-								The address of the email recipient
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<strong>[$TO_NAME$]</strong>
-							</td>
-							<td>
-								The name of the email recipient
-							</td>
-						</tr>
-						</table>
 					</aui:fieldset>
+
+					<strong><liferay-ui:message key="definition-of-terms" /></strong>
+
+					<br /><br />
+
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<strong>[$FROM_ADDRESS$]</strong>
+						</td>
+						<td>
+							<%= emailFromAddress %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$FROM_NAME$]</strong>
+						</td>
+						<td>
+							<%= emailFromName %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$ORDER_BILLING_ADDRESS$]</strong>
+						</td>
+						<td>
+							The order billing address
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$ORDER_CURRENCY$]</strong>
+						</td>
+						<td>
+							The order currency
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$ORDER_NUMBER$]</strong>
+						</td>
+						<td>
+							The order ID
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$ORDER_SHIPPING_ADDRESS$]</strong>
+						</td>
+						<td>
+							The order shipping address
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$ORDER_TOTAL$]</strong>
+						</td>
+						<td>
+							The order total
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$PORTAL_URL$]</strong>
+						</td>
+						<td>
+							<%= company.getVirtualHost() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$PORTLET_NAME$]</strong>
+						</td>
+						<td>
+							<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$TO_ADDRESS$]</strong>
+						</td>
+						<td>
+							The address of the email recipient
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$TO_NAME$]</strong>
+						</td>
+						<td>
+							The name of the email recipient
+						</td>
+					</tr>
+					</table>
+
+					<br />
 				</c:when>
 				<c:otherwise>
 					<aui:fieldset>
