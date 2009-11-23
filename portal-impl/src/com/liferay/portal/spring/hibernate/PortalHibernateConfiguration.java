@@ -90,9 +90,11 @@ public class PortalHibernateConfiguration
 
 			Properties hibernateProperties =
 				PropsUtil.getProperties("hibernate.", false);
+
 			hibernateProperties.setProperty(
 				"net.sf.ehcache.configurationResourceName",
 				PropsUtil.get("net.sf.ehcache.configurationResourceName"));
+
 			configuration.setProperties(hibernateProperties);
 		}
 		catch (Exception e1) {
