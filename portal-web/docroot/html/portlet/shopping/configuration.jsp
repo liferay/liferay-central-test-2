@@ -78,345 +78,479 @@ String redirect = ParamUtil.getString(request, "redirect");
 	}
 </script>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs3) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+<input name="<portlet:namespace />ccTypes" type="hidden" value="" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
-	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="ccTypes" type="hidden" value="" />
+<liferay-ui:tabs
+	names="payment-settings,shipping-calculation,insurance-calculation,emails"
+	param="tabs2"
+	url="<%= portletURL %>"
+/>
 
-	<liferay-ui:tabs
-		names="payment-settings,shipping-calculation,insurance-calculation,emails"
-		param="tabs2"
-		url="<%= portletURL %>"
-	/>
+<c:choose>
+	<c:when test='<%= tabs2.equals("payment-settings") %>'>
+		<liferay-ui:message key="enter-a-paypal-email-address-to-send-all-payments-to-paypal" /> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<strong>" + themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/shopping/notify</strong>", false) %>
 
-	<c:choose>
-		<c:when test='<%= tabs2.equals("payment-settings") %>'>
-			<div class="portlet-msg-info">
-				<liferay-ui:message key="enter-a-paypal-email-address-to-send-all-payments-to-paypal" /> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<strong>" + themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/shopping/notify</strong>", false) %>
-			</div>
+		<br /><br />
 
-			<div class="portlet-msg-info">
-				<liferay-ui:message key="enter-a-blank-paypal-email-address-to-disable-paypal" />
-			</div>
+		<liferay-ui:message key="enter-a-blank-paypal-email-address-to-disable-paypal" />
 
-			<aui:fieldset>
-				<aui:input cssClass="lfr-input-text-container" label="paypal-email-address" name="payPalEmailAddress" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>" />
+		<br /><br />
 
-				<aui:field-wrapper label="credit-cards">
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="paypal-email-address" />
+			</td>
+			<td>
+				<input class="lfr-input-text" name="<portlet:namespace />payPalEmailAddress" type="text" value="<%= shoppingPrefs.getPayPalEmailAddress() %>" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="credit-cards" />
+			</td>
+			<td>
 
-					<%
+				<%
 
-					String[] ccTypes1 = ShoppingPreferences.CC_TYPES;
-					String[] ccTypes2 = shoppingPrefs.getCcTypes();
+				String[] ccTypes1 = ShoppingPreferences.CC_TYPES;
+				String[] ccTypes2 = shoppingPrefs.getCcTypes();
 
-					// Left list
+				// Left list
 
-					List leftList = new ArrayList();
+				List leftList = new ArrayList();
 
-					for (int i = 0; i < ccTypes2.length; i++) {
-						String ccType = (String)ccTypes2[i];
+				for (int i = 0; i < ccTypes2.length; i++) {
+					String ccType = (String)ccTypes2[i];
 
-						leftList.add(new KeyValuePair(ccType, LanguageUtil.get(pageContext, "cc_" + ccType)));
+					leftList.add(new KeyValuePair(ccType, LanguageUtil.get(pageContext, "cc_" + ccType)));
+				}
+
+				// Right list
+
+				List rightList = new ArrayList();
+
+				for (int i = 0; i < ccTypes1.length; i++) {
+					String ccType = (String)ccTypes1[i];
+
+					if (!ArrayUtil.contains(ccTypes2, ccType)) {
+						rightList.add(new KeyValuePair(ccType, LanguageUtil.get(pageContext, "cc_" + ccType)));
 					}
+				}
+				%>
 
-					// Right list
-
-					List rightList = new ArrayList();
-
-					for (int i = 0; i < ccTypes1.length; i++) {
-						String ccType = (String)ccTypes1[i];
-
-						if (!ArrayUtil.contains(ccTypes2, ccType)) {
-							rightList.add(new KeyValuePair(ccType, LanguageUtil.get(pageContext, "cc_" + ccType)));
-						}
-					}
-					%>
-
-					<liferay-ui:input-move-boxes
-						leftTitle="current"
-						rightTitle="available"
-						leftBoxName="current_cc_types"
-						rightBoxName="available_cc_types"
-						leftReorder="true"
-						leftList="<%= leftList %>"
-						rightList="<%= rightList %>"
-					/>
-				</aui:field-wrapper>
-
-				<aui:select label="currency" name="currencyId">
+				<liferay-ui:input-move-boxes
+					leftTitle="current"
+					rightTitle="available"
+					leftBoxName="current_cc_types"
+					rightBoxName="available_cc_types"
+					leftReorder="true"
+					leftList="<%= leftList %>"
+					rightList="<%= rightList %>"
+				/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="currency" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />currencyId">
 
 					<%
 					for (int i = 0; i < ShoppingPreferences.CURRENCY_IDS.length; i++) {
 					%>
 
-						<aui:option label="<%= ShoppingPreferences.CURRENCY_IDS[i] %>" selected="<%= shoppingPrefs.getCurrencyId().equals(ShoppingPreferences.CURRENCY_IDS[i]) %>" />
+						<option <%= shoppingPrefs.getCurrencyId().equals(ShoppingPreferences.CURRENCY_IDS[i]) ? "selected" : "" %> value="<%= ShoppingPreferences.CURRENCY_IDS[i] %>"><%= ShoppingPreferences.CURRENCY_IDS[i] %></option>
 
 					<%
 					}
 					%>
 
-				</aui:select>
-
-				<aui:select name="taxState">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="tax-state" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />taxState">
 
 					<%
 					for (int i = 0; i < StateUtil.STATES.length; i++) {
 					%>
 
-						<aui:option label="<%= StateUtil.STATES[i].getName() %>" selected="<%= shoppingPrefs.getTaxState().equals(StateUtil.STATES[i].getId()) %>" value="<%= StateUtil.STATES[i].getId() %>" />
+						<option <%= shoppingPrefs.getTaxState().equals(StateUtil.STATES[i].getId()) ? "selected" : "" %> value="<%= StateUtil.STATES[i].getId() %>"><%= StateUtil.STATES[i].getName() %></option>
 
 					<%
 					}
 					%>
 
-				</aui:select>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="tax-rate" />
+			</td>
+			<td>
+				<input maxlength="7" name="<portlet:namespace />taxRate" type="text" size="7" value="<%= taxFormat.format(shoppingPrefs.getTaxRate()) %>" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="minimum-order" />
+			</td>
+			<td>
+				<input maxlength="7" name="<portlet:namespace />minOrder" type="text" size="7" value="<%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>" />
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("shipping-calculation") %>'>
+		<liferay-ui:message key="calculate-a-flat-shipping-amount-based-on-the-total-amount-of-the-purchase" /> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase" />
 
-				<aui:input maxlength="7" name="taxRate" type="text" size="7" value="<%= taxFormat.format(shoppingPrefs.getTaxRate()) %>" />
+		<br /><br />
 
-				<aui:input label="minimum-order" maxlength="7" name="minOrder" type="text" size="7" value="<%= doubleFormat.format(shoppingPrefs.getMinOrder()) %>" />
-			</aui:fieldset>
-		</c:when>
-		<c:when test='<%= tabs2.equals("shipping-calculation") %>'>
-			<div class="portlet-msg-info">
-				<liferay-ui:message key="calculate-a-flat-shipping-amount-based-on-the-total-amount-of-the-purchase" /> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="calculate-the-shipping-based-on-a-percentage-of-the-total-amount-of-the-purchase" />
-			</div>
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="formula" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />shippingFormula">
+					<option <%= shoppingPrefs.getShippingFormula().equals("flat") ? "selected" : "" %> value="flat"><liferay-ui:message key="flat-amount" /></option>
+					<option <%= shoppingPrefs.getShippingFormula().equals("percentage") ? "selected" : "" %> value="percentage"><liferay-ui:message key="percentage" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="values" />
+			</td>
+			<td>
+				<table class="lfr-table">
 
-			<aui:fieldset>
-				<aui:select label="formula" name="shippingFormula">
-					<aui:option label="flat-amount" selected='<%= shoppingPrefs.getShippingFormula().equals("flat") %>' value="flat" />
-					<aui:option label="percentage" selected='<%= shoppingPrefs.getShippingFormula().equals("percentage") %>' />
-				</aui:select>
+				<%
+				int shippingRange = 0;
 
-				<aui:field-wrapper label="values">
+				for (int i = 0; i < 5; i++) {
+					double shippingRangeA = ShoppingPreferences.INSURANCE_RANGE[shippingRange++];
+					double shippingRangeB = ShoppingPreferences.INSURANCE_RANGE[shippingRange++];
+				%>
 
-					<%
-					int shippingRange = 0;
+					<tr>
+						<td>
+							<%= currencyFormat.format(shippingRangeA) %>
 
-					for (int i = 0; i < 5; i++) {
-						double shippingRangeA = ShoppingPreferences.INSURANCE_RANGE[shippingRange++];
-						double shippingRangeB = ShoppingPreferences.INSURANCE_RANGE[shippingRange++];
+							<c:if test="<%= !Double.isInfinite(shippingRangeB) %>">
+								- <%= currencyFormat.format(shippingRangeB) %>
+							</c:if>
 
-						String shippingRangeLabel = currencyFormat.format(shippingRangeA);
+							<c:if test="<%= Double.isInfinite(shippingRangeB) %>">
+								and over
+							</c:if>
+						</td>
+						<td>
+							<input maxlength="6" name="<portlet:namespace />shipping<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>" />
+						</td>
+					</tr>
 
-						if (!Double.isInfinite(shippingRangeB)) {
-							shippingRangeLabel += "-";
-							shippingRangeLabel += currencyFormat.format(shippingRangeB);
-						}
-						else {
-							shippingRangeLabel += " ";
-							shippingRangeLabel += LanguageUtil.get(pageContext, "and over");
-						}
-					%>
+				<%
+				}
+				%>
 
-						<aui:input label="<%= shippingRangeLabel %>" maxlength="6" name='<%= "shipping" + i %>' size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getShipping()[i]) %>" />
+				</table>
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("insurance-calculation") %>'>
+		<liferay-ui:message key="calculate-a-flat-insurance-amount-based-on-the-total-amount-of-the-purchase" /> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchase" />
 
-					<%
-					}
-					%>
+		<br /><br />
 
-				</aui:field-wrapper>
-			</aui:fieldset>
-		</c:when>
-		<c:when test='<%= tabs2.equals("insurance-calculation") %>'>
-			<div class="portlet-msg-info">
-				<liferay-ui:message key="calculate-a-flat-insurance-amount-based-on-the-total-amount-of-the-purchase" /> <span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="calculate-the-insurance-based-on-a-percentage-of-the-total-amount-of-the-purchase" />
-			</div>
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="formula" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />insuranceFormula">
+					<option <%= shoppingPrefs.getInsuranceFormula().equals("flat") ? "selected" : "" %> value="flat"><liferay-ui:message key="flat-amount" /></option>
+					<option <%= shoppingPrefs.getInsuranceFormula().equals("percentage") ? "selected" : "" %> value="percentage"><liferay-ui:message key="percentage" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="values" />
+			</td>
+			<td>
+				<table class="lfr-table">
 
-			<aui:fieldset>
-				<aui:select label="formula" name="insuranceFormula">
-					<aui:option label="flat-amount" selected='<%= shoppingPrefs.getInsuranceFormula().equals("flat") %>' value="flat" />
-					<aui:option label="percentage" selected='<%= shoppingPrefs.getInsuranceFormula().equals("percentage") %>' />
-				</aui:select>
+				<%
+				int insuranceRange = 0;
 
-				<aui:field-wrapper label="values">
+				for (int i = 0; i < 5; i++) {
+					double insuranceRangeA = ShoppingPreferences.INSURANCE_RANGE[insuranceRange++];
+					double insuranceRangeB = ShoppingPreferences.INSURANCE_RANGE[insuranceRange++];
+				%>
 
-					<%
-					int insuranceRange = 0;
+					<tr>
+						<td>
+							<%= currencyFormat.format(insuranceRangeA) %>
 
-					for (int i = 0; i < 5; i++) {
-						double insuranceRangeA = ShoppingPreferences.INSURANCE_RANGE[insuranceRange++];
-						double insuranceRangeB = ShoppingPreferences.INSURANCE_RANGE[insuranceRange++];
+							<c:if test="<%= !Double.isInfinite(insuranceRangeB) %>">
+								- <%= currencyFormat.format(insuranceRangeB) %>
+							</c:if>
 
-						String insuranceRangeLabel = currencyFormat.format(insuranceRangeA);
+							<c:if test="<%= Double.isInfinite(insuranceRangeB) %>">
+								and over
+							</c:if>
+						</td>
+						<td>
+							<input maxlength="6" name="<portlet:namespace />insurance<%= i %>" size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>" />
+						</td>
+					</tr>
 
-						if (!Double.isInfinite(insuranceRangeB)) {
-							insuranceRangeLabel += "-";
-							insuranceRangeLabel += currencyFormat.format(insuranceRangeB);
-						}
-						else {
-							insuranceRangeLabel += " ";
-							insuranceRangeLabel += LanguageUtil.get(pageContext, "and over");
-						}
-					%>
+				<%
+				}
+				%>
 
-						<aui:input label="<%= insuranceRangeLabel %>" maxlength="6" name='<%= "insurance" + i %>' size="6" type="text" value="<%= GetterUtil.getString(shoppingPrefs.getInsurance()[i]) %>" />
+				</table>
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("emails") %>'>
+		<liferay-ui:tabs
+			names="email-from,confirmation-email,shipping-email"
+			param="tabs3"
+			url="<%= portletURL.toString() %>"
+		/>
 
-					<%
-					}
-					%>
+		<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
+		<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
+		<liferay-ui:error key="emailOrderShippingBody" message="please-enter-a-valid-body" />
+		<liferay-ui:error key="emailOrderShippingSubject" message="please-enter-a-valid-subject" />
+		<liferay-ui:error key="emailOrderConfirmationBody" message="please-enter-a-valid-body" />
+		<liferay-ui:error key="emailOrderConfirmationSubject" message="please-enter-a-valid-subject" />
 
-				</aui:field-wrapper>
-			</aui:fieldset>
-		</c:when>
-		<c:when test='<%= tabs2.equals("emails") %>'>
-			<liferay-ui:tabs
-				names="email-from,confirmation-email,shipping-email"
-				param="tabs3"
-				url="<%= portletURL.toString() %>"
-			/>
-
-			<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
-			<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
-			<liferay-ui:error key="emailOrderShippingBody" message="please-enter-a-valid-body" />
-			<liferay-ui:error key="emailOrderShippingSubject" message="please-enter-a-valid-subject" />
-			<liferay-ui:error key="emailOrderConfirmationBody" message="please-enter-a-valid-body" />
-			<liferay-ui:error key="emailOrderConfirmationSubject" message="please-enter-a-valid-subject" />
-
-			<c:choose>
-				<c:when test='<%= tabs3.endsWith("-email") %>'>
-					<aui:fieldset>
+		<c:choose>
+			<c:when test='<%= tabs3.endsWith("-email") %>'>
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="enabled" />
+					</td>
+					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
-								<aui:input inlineLabel="left" label="enabled" name="emailOrderConfirmationEnabled" type="checkbox" value="<%= shoppingPrefs.getEmailOrderConfirmationEnabled() %>" />
+								<liferay-ui:input-checkbox param="emailOrderConfirmationEnabled" defaultValue="<%= shoppingPrefs.getEmailOrderConfirmationEnabled() %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("shipping-email") %>'>
-								<aui:input inlineLabel="left" label="enabled" name="emailOrderShippingEnabled" type="checkbox" value="<%= shoppingPrefs.getEmailOrderShippingEnabled() %>" />
+								<liferay-ui:input-checkbox param="emailOrderShippingEnabled" defaultValue="<%= shoppingPrefs.getEmailOrderShippingEnabled() %>" />
 							</c:when>
 						</c:choose>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="subject" />
+					</td>
+					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
-								<aui:input cssClass="lfr-input-text-container" label="subject" name="emailOrderConfirmationSubject" type="text" value="<%= emailOrderConfirmationSubject %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />emailOrderConfirmationSubject" type="text" value="<%= HtmlUtil.escape(emailOrderConfirmationSubject) %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("shipping-email") %>'>
-								<aui:input cssClass="lfr-input-text-container" label="subject" name="emailOrderShippingSubject" type="text" value="<%= emailOrderShippingSubject %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />emailOrderShippingSubject" type="text" value="<%= HtmlUtil.escape(emailOrderShippingSubject) %>" />
 							</c:when>
 						</c:choose>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="body" />
+					</td>
+					<td>
+						<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-						<aui:field-wrapper label="body">
-							<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+						<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
+					</td>
+				</tr>
+				</table>
 
-							<aui:input name="<%= editorParam %>" type="hidden" value="" />
-						</aui:field-wrapper>
-					</aui:fieldset>
+				<br />
 
-					<strong><liferay-ui:message key="definition-of-terms" /></strong>
+				<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
-					<br /><br />
+				<br /><br />
 
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<strong>[$FROM_ADDRESS$]</strong>
-						</td>
-						<td>
-							<%= emailFromAddress %>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$FROM_NAME$]</strong>
-						</td>
-						<td>
-							<%= emailFromName %>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$ORDER_BILLING_ADDRESS$]</strong>
-						</td>
-						<td>
-							The order billing address
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$ORDER_CURRENCY$]</strong>
-						</td>
-						<td>
-							The order currency
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$ORDER_NUMBER$]</strong>
-						</td>
-						<td>
-							The order ID
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$ORDER_SHIPPING_ADDRESS$]</strong>
-						</td>
-						<td>
-							The order shipping address
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$ORDER_TOTAL$]</strong>
-						</td>
-						<td>
-							The order total
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$PORTAL_URL$]</strong>
-						</td>
-						<td>
-							<%= company.getVirtualHost() %>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$PORTLET_NAME$]</strong>
-						</td>
-						<td>
-							<%= ((RenderResponseImpl)renderResponse).getTitle() %>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$TO_ADDRESS$]</strong>
-						</td>
-						<td>
-							The address of the email recipient
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>[$TO_NAME$]</strong>
-						</td>
-						<td>
-							The name of the email recipient
-						</td>
-					</tr>
-					</table>
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<strong>[$FROM_ADDRESS$]</strong>
+					</td>
+					<td>
+						<%= emailFromAddress %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$FROM_NAME$]</strong>
+					</td>
+					<td>
+						<%= emailFromName %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$ORDER_BILLING_ADDRESS$]</strong>
+					</td>
+					<td>
+						The order billing address
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$ORDER_CURRENCY$]</strong>
+					</td>
+					<td>
+						The order currency
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$ORDER_NUMBER$]</strong>
+					</td>
+					<td>
+						The order ID
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$ORDER_SHIPPING_ADDRESS$]</strong>
+					</td>
+					<td>
+						The order shipping address
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$ORDER_TOTAL$]</strong>
+					</td>
+					<td>
+						The order total
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$PORTAL_URL$]</strong>
+					</td>
+					<td>
+						<%= company.getVirtualHost() %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$PORTLET_NAME$]</strong>
+					</td>
+					<td>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$TO_ADDRESS$]</strong>
+					</td>
+					<td>
+						The address of the email recipient
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>[$TO_NAME$]</strong>
+					</td>
+					<td>
+						The name of the email recipient
+					</td>
+				</tr>
+				</table>
+			</c:when>
+			<c:otherwise>
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="name" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= HtmlUtil.escape(emailFromName) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="address" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= HtmlUtil.escape(emailFromAddress) %>" />
+					</td>
+				</tr>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+</c:choose>
 
-					<br />
-				</c:when>
-				<c:otherwise>
-					<aui:fieldset>
-						<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" type="text" value="<%= emailFromName %>" />
+<br />
 
-						<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" type="text" value="<%= emailFromAddress %>" />
-					</aui:fieldset>
-				</c:otherwise>
-			</c:choose>
-		</c:when>
-	</c:choose>
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-	<aui:button-row>
-		<aui:button name="saveButton" type="submit" value="save" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
-	</aui:button-row>
-</aui:form>
+</form>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.shopping.edit_configuration.jsp";
