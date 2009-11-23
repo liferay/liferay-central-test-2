@@ -38,7 +38,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	function <portlet:namespace />openFolderSelector() {
 		var folderWindow = window.open('<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=830');
 
-		folderWindow.focus();		
+		folderWindow.focus();
 	}
 
 	function <portlet:namespace />removeFolder() {
@@ -48,15 +48,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		nameEl.href = "";
 		nameEl.innerHTML = "";
+
+		document.getElementById("<portlet:namespace />removeFolderButton").disabled = true;
 	}
 
 	function <portlet:namespace />saveConfiguration() {
 		document.<portlet:namespace />fm.<portlet:namespace />folderColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFolderColumns);
-		document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns); 
+		document.<portlet:namespace />fm.<portlet:namespace />fileEntryColumns.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentFileEntryColumns);
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-	
+
 	function <%= PortalUtil.getPortletNamespace(portletResource) %>selectFolder(rootFolderId, rootFolderName) {
 		document.<portlet:namespace />fm.<portlet:namespace />rootFolderId.value = rootFolderId;
 
@@ -64,6 +66,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		nameEl.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>&<portlet:namespace />folderId=" + rootFolderId;
 		nameEl.innerHTML = rootFolderName + "&nbsp;";
+
+		document.getElementById("<portlet:namespace />removeFolderButton").disabled = false;
 	}
 </script>
 
@@ -79,7 +83,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
 	<aui:fieldset>
-		<liferay-ui:tabs names="folders-listing" />
+		<aui:legend label="folders-listing" />
 
 		<aui:field-wrapper label="root-folder">
 			<portlet:renderURL var="viewFolderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
@@ -89,9 +93,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 			<aui:a href="<%= viewFolderURL %>" id="rootFolderName"><%= rootFolderName %></aui:a>
 
-			<aui:button name="openFolderSelectorButton" onClick='<%= renderResponse.getNamespace() + "openFolderSelector();" %>' type="button" value="select" />
+			<aui:button name="selectFolderButton" onClick='<%= renderResponse.getNamespace() + "openFolderSelector();" %>' type="button" value="select" />
 
-			<aui:button name="removeFolder" onClick='<%= renderResponse.getNamespace() + "removeFolder();"  %>' value="remove" />
+			<aui:button disabled="<%= rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>" name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();"  %>' value="remove" />
 		</aui:field-wrapper>
 
 		<aui:input inlineLabel="left" name="showBreadcrumbs" type="checkbox" value="<%= showBreadcrumbs %>" />
@@ -102,107 +106,109 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<aui:input name="foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
 
-		<aui:field-wrapper label="show-columns" />
+		<aui:field-wrapper label="show-columns">
 
-		<%
-		Set availableFolderColumns = SetUtil.fromArray(StringUtil.split(allFolderColumns));
+			<%
+			Set availableFolderColumns = SetUtil.fromArray(StringUtil.split(allFolderColumns));
 
-		// Left list
+			// Left list
 
-		List leftList = new ArrayList();
+			List leftList = new ArrayList();
 
-		for (int i = 0; i < folderColumns.length; i++) {
-			String folderColumn = folderColumns[i];
+			for (int i = 0; i < folderColumns.length; i++) {
+				String folderColumn = folderColumns[i];
 
-			leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
-		}
-
-		// Right list
-
-		List rightList = new ArrayList();
-
-		Arrays.sort(folderColumns);
-
-		Iterator itr = availableFolderColumns.iterator();
-
-		while (itr.hasNext()) {
-			String folderColumn = (String)itr.next();
-
-			if (Arrays.binarySearch(folderColumns, folderColumn) < 0) {
-				rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+				leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
 			}
-		}
 
-		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
-		%>
+			// Right list
 
-		<liferay-ui:input-move-boxes
-			formName="fm"
-			leftTitle="current"
-			rightTitle="available"
-			leftBoxName="currentFolderColumns"
-			rightBoxName="availableFolderColumns"
-			leftReorder="true"
-			leftList="<%= leftList %>"
-			rightList="<%= rightList %>"
-		/>
+			List rightList = new ArrayList();
+
+			Arrays.sort(folderColumns);
+
+			Iterator itr = availableFolderColumns.iterator();
+
+			while (itr.hasNext()) {
+				String folderColumn = (String)itr.next();
+
+				if (Arrays.binarySearch(folderColumns, folderColumn) < 0) {
+					rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+				}
+			}
+
+			rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+			%>
+
+			<liferay-ui:input-move-boxes
+				formName="fm"
+				leftTitle="current"
+				rightTitle="available"
+				leftBoxName="currentFolderColumns"
+				rightBoxName="availableFolderColumns"
+				leftReorder="true"
+				leftList="<%= leftList %>"
+				rightList="<%= rightList %>"
+			/>
+		</aui:field-wrapper>
 
 		<br />
 
-		<liferay-ui:tabs names="documents-listing" />
+		<aui:legend label="documents-listing" />
 
 		<aui:input inlineLabel="left" label="show-search" name="showFileEntriesSearch" type="checkbox" value="<%= showFileEntriesSearch %>" />
 
 		<aui:input label="documents-per-page" name="fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
 
-		<aui:field-wrapper label="show-columns" />
+		<aui:field-wrapper label="show-columns">
 
-		<%
-		Set availableFileEntryColumns = SetUtil.fromArray(StringUtil.split(allFileEntryColumns));
+			<%
+			Set availableFileEntryColumns = SetUtil.fromArray(StringUtil.split(allFileEntryColumns));
 
-		// Left list
+			// Left list
 
-		leftList = new ArrayList();
+			List leftList = new ArrayList();
 
-		for (int i = 0; i < fileEntryColumns.length; i++) {
-			String fileEntryColumn = fileEntryColumns[i];
+			for (int i = 0; i < fileEntryColumns.length; i++) {
+				String fileEntryColumn = fileEntryColumns[i];
 
-			leftList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
-		}
-
-		// Right list
-
-		rightList = new ArrayList();
-
-		Arrays.sort(fileEntryColumns);
-
-		itr = availableFileEntryColumns.iterator();
-
-		while (itr.hasNext()) {
-			String fileEntryColumn = (String)itr.next();
-
-			if (Arrays.binarySearch(fileEntryColumns, fileEntryColumn) < 0) {
-				rightList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
+				leftList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
 			}
-		}
 
-		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
-		%>
+			// Right list
 
-		<liferay-ui:input-move-boxes
-			formName="fm"
-			leftTitle="current"
-			rightTitle="available"
-			leftBoxName="currentFileEntryColumns"
-			rightBoxName="availableFileEntryColumns"
-			leftReorder="true"
-			leftList="<%= leftList %>"
-			rightList="<%= rightList %>"
-		/>
+			List rightList = new ArrayList();
+
+			Arrays.sort(fileEntryColumns);
+
+			Iterator itr = availableFileEntryColumns.iterator();
+
+			while (itr.hasNext()) {
+				String fileEntryColumn = (String)itr.next();
+
+				if (Arrays.binarySearch(fileEntryColumns, fileEntryColumn) < 0) {
+					rightList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
+				}
+			}
+
+			rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+			%>
+
+			<liferay-ui:input-move-boxes
+				formName="fm"
+				leftTitle="current"
+				rightTitle="available"
+				leftBoxName="currentFileEntryColumns"
+				rightBoxName="availableFileEntryColumns"
+				leftReorder="true"
+				leftList="<%= leftList %>"
+				rightList="<%= rightList %>"
+			/>
+		</aui:field-wrapper>
 
 		<br />
 
-		<liferay-ui:tabs names="ratings" />
+		<aui:legend label="ratings" />
 
 		<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
 	</aui:fieldset>
@@ -210,6 +216,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:button-row>
 		<aui:button name="saveButton" type="submit" value="save" />
 
-		<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 	</aui:button-row>
 </aui:form>
