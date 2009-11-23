@@ -31,8 +31,8 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 %>
 
 <script type="text/javascript">
-    function <portlet:namespace />saveConfiguration() {
-        submitForm(document.<portlet:namespace />fm);
+	function <portlet:namespace />saveConfiguration() {
+		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
@@ -84,8 +84,8 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 	</aui:fieldset>
 
 	<aui:fieldset>
-		<div id="<portlet:namespace/>customDisplayStyle">
-			<aui:select label="header" name="headerType" >
+		<div id="<portlet:namespace/>customDisplayOptions">
+			<aui:select label="header" name="headerType">
 				<aui:option label="none" selected='<%= headerType.equals("none") %>' />
 				<aui:option label="portlet-title" selected='<%= headerType.equals("portlet-title") %>' />
 				<aui:option label="root-layout" selected='<%= headerType.equals("root-layout") %>' />
@@ -97,7 +97,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 				<aui:option label="relative-parent-up-by" selected='<%= rootLayoutType.equals("relative") %>' value="relative" />
 			</aui:select>
 
-			<aui:select label="root-layout-level" name="rootLayoutLevel" >
+			<aui:select label="root-layout-level" name="rootLayoutLevel">
 
 				<%
 				for (int i = 0; i <= 4; i++) {
@@ -145,10 +145,10 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 				var displayStyle = jQuery(this).val();
 
 				if (displayStyle == '[custom]') {
-					jQuery("#<portlet:namespace/>customDisplayStyle").show();
+					jQuery("#<portlet:namespace/>customDisplayOptions").show();
 				}
 				else {
-					jQuery("#<portlet:namespace/>customDisplayStyle").hide();
+					jQuery("#<portlet:namespace/>customDisplayOptions").hide();
 				}
 			}
 
