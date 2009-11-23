@@ -123,7 +123,7 @@ containerStyles = sb.toString();
 		<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 	</c:when>
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">
-		<div>
+		<div class="portlet-body">
 			<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
 				<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + tilesPortletContent %>" />
 			</c:if>
@@ -162,30 +162,42 @@ containerStyles = sb.toString();
 								<span class="portlet-title-default"><%= portletDisplay.getTitle() %></span>
 
 								<span class="portlet-actions">
-									<span class="portlet-css lfr-js-required">
-										- <a href="<%= portletDisplay.getURLPortletCss() %>"><liferay-ui:message key="look-and-feel" /></a>
+									<span class="portlet-action portlet-css lfr-js-required">
+										<span class="portlet-action-separator">-</span>
+
+										<a href="<%= portletDisplay.getURLPortletCss() %>" title="<liferay-ui:message key="look-and-feel" />"><liferay-ui:message key="look-and-feel" /></a>
 									</span>
 
-									<span class="portlet-configuration">
-										- <a href="<%= portletDisplay.getURLConfiguration() %>"><liferay-ui:message key="configuration" /></a>
+									<span class="portlet-action portlet-configuration">
+										<span class="portlet-action-separator">-</span>
+
+										<a href="<%= portletDisplay.getURLConfiguration() %>" title="<liferay-ui:message key="configuration" />"><liferay-ui:message key="configuration" /></a>
 									</span>
 
 									<c:if test="<%= portletDisplay.isShowEditIcon() %>">
-										<span class="portlet-edit">
-											- <a href="<%= portletDisplay.getURLEdit() %>"><liferay-ui:message key="preferences" /></a>
+										<span class="portlet-action portlet-edit">
+											<span class="portlet-action-separator">-</span>
+
+											<a href="<%= portletDisplay.getURLEdit() %>" title="<liferay-ui:message key="preferences" />"><liferay-ui:message key="preferences" /></a>
 										</span>
 									</c:if>
 
 									<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
-										<span class="portlet-close">
-											- <a href="<%= portletDisplay.getURLClose() %>"><liferay-ui:message key="close" /></a>
+										<span class="portlet-action portlet-close">
+											<span class="portlet-action-separator">-</span>
+
+											<a href="<%= portletDisplay.getURLClose() %>" title="<liferay-ui:message key="close" />"><liferay-ui:message key="close" /></a>
 										</span>
 									</c:if>
 								</span>
 							</c:if>
 
 							<c:if test="<%= portletDisplay.isShowBackIcon() %>">
-								- <a href="<%= portletDisplay.getURLBack() %>"><liferay-ui:message key="back" /></a>
+								<span class="portlet-action portlet-back">
+									<span class="portlet-action-separator">-</span>
+
+									<a href="<%= portletDisplay.getURLBack() %>" title="<liferay-ui:message key="back" />"><liferay-ui:message key="back" /></a>
+								</span>
 							</c:if>
 						</div>
 					</c:if>
