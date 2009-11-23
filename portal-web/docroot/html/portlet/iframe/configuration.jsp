@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/iframe/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+%>
+
+<%
 String htmlAttributes =
 	"alt=" + alt + "\n" +
 	"border=" + border + "\n" +
@@ -108,185 +112,128 @@ String htmlAttributes =
 			);
 		}
 	);
+
+    function <portlet:namespace />saveConfiguration() {
+        submitForm(document.<portlet:namespace />fm);
+    }
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<fieldset>
-	<legend><liferay-ui:message key="general" /></legend>
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="source-url" />
-		</td>
-		<td>
-			<span id="<portlet:namespace />context-path-text" style='<%= relative ? "" : "display: none;" %>'>...<%= themeDisplay.getPathContext() %></span> <input class="lfr-input-text" name="<portlet:namespace />src" type="text" value="<%= src %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="relative-to-context-path" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="relative" defaultValue="<%= relative %>" />
-		</td>
-	</tr>
-	</table>
-</fieldset>
+	<aui:fieldset>
+		<aui:legend label="general" />
+		<span id="<portlet:namespace />context-path-text" style='<%= relative ? "" : "display: none;" %>'>...<%= themeDisplay.getPathContext() %></span><aui:input cssClass="lfr-input-text-container" label="source-url" name="src" type="text" value="<%= src %>"/>
 
-<fieldset>
-	<legend><liferay-ui:message key="authentication" /></legend>
+		<aui:input inlineLabel="left" label="relative-to-context-path" name="relative" type="checkbox" value="<%= relative %>" />
+	</aui:fieldset>
 
-	<div class="portlet-msg-info" id="<portlet:namespace />currentLoginMsg">
-		<c:choose>
-			<c:when test="<%= IFrameUtil.isPasswordTokenEnabled(renderRequest) %>">
-				<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid-and-password" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid" />
-			</c:otherwise>
-		</c:choose>
-	</div>
+	<aui:fieldset>
+		<aui:legend label="authentication" />
 
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="authenticate" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="auth" defaultValue="<%= auth %>" />
-		</td>
-	</tr>
-	<tr id="<portlet:namespace />authType">
-		<td>
-			<liferay-ui:message key="authentication-type" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />authType">
-				<option <%= (authType.equals("basic")) ? "selected" : "" %> value="basic">Basic</option>
-				<option <%= (authType.equals("form")) ? "selected" : "" %> value="form">Form</option>
-			</select>
-		</td>
-	</tr>
-	<tbody id="<portlet:namespace />formFields">
-		<tr id="<portlet:namespace />formMethod">
-			<td>
-				<liferay-ui:message key="form-method" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />formMethod">
-					<option <%= (formMethod.equals("get")) ? "selected" : "" %> value="get">Get</option>
-					<option <%= (formMethod.equals("post")) ? "selected" : "" %> value="post">Post</option>
-				</select>
-			</td>
-		</tr>
-		<tr id="<portlet:namespace />userName">
-			<td>
-				<liferay-ui:message key="user-name" />
-			</td>
-			<td>
-				<table class="lfr-table">
-				<tr id="<portlet:namespace />userName">
-					<td>
-						<liferay-ui:message key="field-name" />
-					</td>
-					<td>
-						<liferay-ui:message key="value" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />userNameField" size="10" type="text" value="<%= userNameField %>" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />userName" size="10" type="text" value="<%= userName %>" />
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-		<tr id="<portlet:namespace />password">
-			<td>
-				<liferay-ui:message key="password" />
-			</td>
-			<td>
-				<table class="lfr-table">
-				<tr id="<portlet:namespace />userName">
-					<td>
-						<liferay-ui:message key="field-name" />
-					</td>
-					<td>
-						<liferay-ui:message key="value" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />passwordField" size="10" type="text" value="<%= passwordField %>" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />password" size="10" type="text" value="<%= password %>" />
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="hidden-variables" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />hiddenVariables" type="text" value="<%= hiddenVariables %>" />
-			</td>
-		</tr>
-	</tbody>
-	<tbody id="<portlet:namespace />basicFields">
-		<tr id="<portlet:namespace />userName">
-			<td>
-				<liferay-ui:message key="user-name" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />userName" size="10" type="text" value="<%= userName %>" />
-			</td>
-		</tr>
-		<tr id="<portlet:namespace />password">
-			<td>
-				<liferay-ui:message key="password" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />password" type="text" value="<%= password %>" />
-			</td>
-		</tr>
-	</tbody>
-	</table>
-</fieldset>
+		<div class="portlet-msg-info" id="<portlet:namespace />currentLoginMsg">
+			<c:choose>
+				<c:when test="<%= IFrameUtil.isPasswordTokenEnabled(renderRequest) %>">
+					<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid-and-password" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="you-may-use-the-tokens-email-address-screen-name-userid" />
+				</c:otherwise>
+			</c:choose>
+		</div>
 
-<fieldset>
-	<legend><liferay-ui:message key="advanced" /></legend>
+		<aui:input inlineLabel="left" label="authenticate" name="auth" type="checkbox" value="<%= auth %>" />
 
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="html-attributes" />
-		</td>
-		<td>
-			<textarea class="lfr-textarea" name="<portlet:namespace />htmlAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
-		</td>
-	</tr>
-	</table>
-</fieldset>
+		<div id="<portlet:namespace />authType">
+			<aui:select label="authentication-type" name="authType">
+				<aui:option label="Basic" selected='<%= authType.equals("basic") %>' value="basic" />
+				<aui:option label="Form" selected='<%= authType.equals("form") %>' value="form" />
+			</aui:select>
+		</div>
 
-<br />
+		<div id="<portlet:namespace />formFields">
+			<div id="<portlet:namespace />formMethod">
+				<aui:select name="formMethod">
+					<aui:option label="Get" selected='<%= formMethod.equals("get") %>' />
+					<aui:option label="Post" selected='<%= formMethod.equals("post") %>' />
+				</aui:select>
+			</div>
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+			<div id="<portlet:namespace />userName">
+				<aui:field-wrapper inlineLabel="left" label="userName">
+					<table class="lfr-table">
+					<tr id="<portlet:namespace />userName">
+						<td>
+							<liferay-ui:message key="field-name" />
+						</td>
+						<td>
+							<liferay-ui:message key="value" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="" name="userNameField"  size="10" type="text" value="<%= userNameField %>"/>
+						</td>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="" name="userName" size="10" type="text" value="<%= userName %>" />
+						</td>
+					</tr>
+					</table>
+				</aui:field-wrapper>
+			</div>
 
-</form>
+			<div id="<portlet:namespace />password">
+				<aui:field-wrapper inlineLabel="left" name="password">
+					<table class="lfr-table">
+					<tr id="<portlet:namespace />userName">
+						<td>
+							<liferay-ui:message key="field-name" />
+						</td>
+						<td>
+							<liferay-ui:message key="value" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="" name="passwordField" size="10" type="text" value="<%= passwordField %>" />
+						</td>
+						<td>
+							<aui:input cssClass="lfr-input-text-container" label="" name="password" size="10" type="text" value="<%= password %>" />
+						</td>
+					</tr>
+					</table>
+
+					<aui:input cssClass="lfr-input-text-container" name="hiddenVariables" type="text" value="<%= hiddenVariables %>" />
+				</aui:field-wrapper>
+			</div>
+		</div>
+
+		<div id="<portlet:namespace />basicFields">
+			<div id="<portlet:namespace />userName">
+				<aui:input cssClass="lfr-input-text-container" name="userName" size="10" type="text" value="<%= userName %>" />
+			</div>
+
+			<div id="<portlet:namespace />password">
+				<aui:input cssClass="lfr-input-text-container" name="password" type="text" value="<%= password %>" />
+			</div>
+		</div>
+	</aui:fieldset>
+
+	<aui:fieldset>
+		<aui:legend label="advanced" />
+
+		<aui:input cssClass="lfr-textarea-container" name="htmlAttributes" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" value="<%= htmlAttributes %>" wrap="soft" />
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
