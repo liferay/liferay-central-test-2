@@ -88,14 +88,8 @@ public class StringBundler {
 		return this;
 	}
 
-	public int length() {
-		int length = 0;
-
-		for (int i = 0; i < _arrayIndex; i++) {
-			length += _array[i].length();
-		}
-
-		return length;
+	public int index() {
+		return _arrayIndex;
 	}
 
 	public String stringAt(int index) {
@@ -121,9 +115,13 @@ public class StringBundler {
 			}
 		}
 		else {
-			int length = length();
+			int length = 0;
 
-			StringBundler sb = new StringBundler(length);
+			for (int i = 0; i < _arrayIndex; i++) {
+				length += _array[i].length();
+			}
+
+			StringBuilder sb = new StringBuilder(length);
 
 			for (int i = 0; i < _arrayIndex; i++) {
 				sb.append(_array[i]);
