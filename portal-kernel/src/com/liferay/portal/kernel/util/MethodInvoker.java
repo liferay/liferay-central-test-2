@@ -137,8 +137,8 @@ public class MethodInvoker {
 				argClass = _primitiveTypeMap.get(argumentClassNames[i]);
 
 				if (argClass == null) {
-					argClass = contextClassLoader.loadClass(
-						argumentClassNames[i]);
+					argClass = Class.forName(
+						argumentClassNames[i], true, contextClassLoader);
 				}
 			}
 			else {
