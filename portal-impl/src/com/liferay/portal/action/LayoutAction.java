@@ -148,8 +148,10 @@ public class LayoutAction extends Action {
 					authLoginURL = PropsValues.AUTH_LOGIN_URL;
 				}
 
-				if (Validator.isNotNull(PropsValues.AUTH_LOGIN_PORTLET_NAME) &&
-					Validator.isNotNull(authLoginURL)) {
+				String url = PortalUtil.getCurrentURL(request);
+
+				if (Validator.isNotNull(
+					PropsValues.AUTH_LOGIN_PORTLET_NAME)) {
 
 					redirectParam =
 						PortalUtil.getPortletNamespace(
@@ -157,20 +159,24 @@ public class LayoutAction extends Action {
 						redirectParam;
 				}
 
-				String url = PortalUtil.getCurrentURL(request);
+				if (Validator.isNotNull(authLoginURL)) {
+				    authLoginURL = HttpUtil.setParameter(
+					    authLoginURL, redirectParam, url);
+				}
+				else {
+					PortletURL loginURL = LoginUtil.getLoginURL(
+						request, themeDisplay.getPlid());
 
-				PortletURL loginURL = LoginUtil.getLoginURL(
-					request, themeDisplay.getPlid());
+					loginURL.setParameter(redirectParam, url);
 
-				loginURL.setParameter(redirectParam, url);
-
-				String redirect = loginURL.toString();
-
-				if (_log.isDebugEnabled()) {
-					_log.debug("Redirect requested layout to " + redirect);
+					authLoginURL = loginURL.toString();
 				}
 
-				response.sendRedirect(redirect);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Redirect requested layout to " + authLoginURL);
+				}
+
+				response.sendRedirect(authLoginURL);
 			}
 			else {
 				String redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
