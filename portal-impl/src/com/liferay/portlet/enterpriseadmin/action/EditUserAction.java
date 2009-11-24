@@ -45,6 +45,7 @@ import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.WebsiteURLException;
+import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -343,11 +344,11 @@ public class EditUserAction extends PortletAction {
 		user = UserServiceUtil.addUser(
 			themeDisplay.getCompanyId(), autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, openId,
-			LocaleUtil.getDefault(), firstName, middleName, lastName,
-			prefixId, suffixId, male, birthdayMonth, birthdayDay,
-			birthdayYear, jobTitle, groupIds, organizationIds,
-			roleIds, userGroupIds, sendEmail, addresses, emailAddresses,
-			phones, websites, announcementsDeliveries, serviceContext);
+			LocaleUtil.getDefault(), firstName, middleName, lastName, prefixId,
+			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
+			addresses, emailAddresses, phones, websites,
+			announcementsDeliveries, serviceContext);
 
 		if (!userGroupRoles.isEmpty()) {
 			for (UserGroupRole userGroupRole : userGroupRoles) {
@@ -359,13 +360,12 @@ public class EditUserAction extends PortletAction {
 				StringPool.BLANK, false, reminderQueryQuestion,
 				reminderQueryAnswer, screenName, emailAddress, openId,
 				languageId, timeZoneId, greeting, comments, firstName,
-				middleName, lastName, prefixId, suffixId, male,
-				birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
-				facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-				twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-				roleIds, userGroupRoles, userGroupIds, addresses,
-				emailAddresses, phones, websites, announcementsDeliveries,
-				serviceContext);
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, smsSn, aimSn, facebookSn, icqSn,
+				jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
+				groupIds, organizationIds, roleIds, userGroupRoles,
+				userGroupIds, addresses, emailAddresses, phones, websites,
+				announcementsDeliveries, serviceContext);
 		}
 
 		// Layout set prototypes
@@ -462,45 +462,65 @@ public class EditUserAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String reminderQueryQuestion = ParamUtil.getString(
-			actionRequest, "reminderQueryQuestion");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		User user = PortalUtil.getSelectedUser(actionRequest);
+
+		Contact contact = user.getContact();
+
+		Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
+
+		birthdayCal.setTime(contact.getBirthday());
+
+		String reminderQueryQuestion = BeanParamUtil.getString(
+			user, request, "reminderQueryQuestion");
 
 		if (reminderQueryQuestion.equals(EnterpriseAdminUtil.CUSTOM_QUESTION)) {
-			reminderQueryQuestion = ParamUtil.getString(
-				actionRequest, "reminderQueryCustomQuestion");
+			reminderQueryQuestion = BeanParamUtil.getString(
+				user, request, "reminderQueryCustomQuestion");
 		}
 
-		String reminderQueryAnswer = ParamUtil.getString(
-			actionRequest, "reminderQueryAnswer");
-		String screenName = ParamUtil.getString(actionRequest, "screenName");
-		String emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress");
-		String openId = ParamUtil.getString(actionRequest, "openId");
-		String languageId = ParamUtil.getString(actionRequest, "languageId");
-		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
-		String greeting = ParamUtil.getString(actionRequest, "greeting");
-		String firstName = ParamUtil.getString(actionRequest, "firstName");
-		String middleName = ParamUtil.getString(actionRequest, "middleName");
-		String lastName = ParamUtil.getString(actionRequest, "lastName");
-		int prefixId = ParamUtil.getInteger(actionRequest, "prefixId");
-		int suffixId = ParamUtil.getInteger(actionRequest, "suffixId");
-		boolean male = ParamUtil.getBoolean(actionRequest, "male", true);
+		String reminderQueryAnswer = BeanParamUtil.getString(
+			user, request, "reminderQueryAnswer");
+		String screenName = BeanParamUtil.getString(
+			user, request, "screenName");
+		String emailAddress = BeanParamUtil.getString(
+			user, request, "emailAddress");
+		String openId = BeanParamUtil.getString(user, request, "openId");
+		String languageId = BeanParamUtil.getString(
+			user, request, "languageId");
+		String timeZoneId = BeanParamUtil.getString(
+			user, request, "timeZoneId");
+		String greeting = BeanParamUtil.getString(user, request, "greeting");
+		String firstName = BeanParamUtil.getString(user, request, "firstName");
+		String middleName = BeanParamUtil.getString(
+			user, request, "middleName");
+		String lastName = BeanParamUtil.getString(user, request, "lastName");
+		int prefixId = BeanParamUtil.getInteger(user, request, "prefixId");
+		int suffixId = BeanParamUtil.getInteger(user, request, "suffixId");
+		boolean male = BeanParamUtil.getBoolean(user, request, "male", true);
 		int birthdayMonth = ParamUtil.getInteger(
-			actionRequest, "birthdayMonth");
-		int birthdayDay = ParamUtil.getInteger(actionRequest, "birthdayDay");
-		int birthdayYear = ParamUtil.getInteger(actionRequest, "birthdayYear");
-		String comments = ParamUtil.getString(actionRequest, "comments");
-		String smsSn = ParamUtil.getString(actionRequest, "smsSn");
-		String aimSn = ParamUtil.getString(actionRequest, "aimSn");
-		String facebookSn = ParamUtil.getString(actionRequest, "facebookSn");
-		String icqSn = ParamUtil.getString(actionRequest, "icqSn");
-		String jabberSn = ParamUtil.getString(actionRequest, "jabberSn");
-		String msnSn = ParamUtil.getString(actionRequest, "msnSn");
-		String mySpaceSn = ParamUtil.getString(actionRequest, "mySpaceSn");
-		String skypeSn = ParamUtil.getString(actionRequest, "skypeSn");
-		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
-		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
-		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
+			actionRequest, "birthdayMonth", birthdayCal.get(Calendar.MONTH));
+		int birthdayDay = ParamUtil.getInteger(
+			actionRequest, "birthdayDay", birthdayCal.get(Calendar.DATE));
+		int birthdayYear = ParamUtil.getInteger(
+			actionRequest, "birthdayYear", birthdayCal.get(Calendar.YEAR));
+		String comments = BeanParamUtil.getString(user, request, "comments");
+		String smsSn = BeanParamUtil.getString(contact, request, "smsSn");
+		String aimSn = BeanParamUtil.getString(contact, request, "aimSn");
+		String facebookSn = BeanParamUtil.getString(
+			contact, request, "facebookSn");
+		String icqSn = BeanParamUtil.getString(contact, request, "icqSn");
+		String jabberSn = BeanParamUtil.getString(contact, request, "jabberSn");
+		String msnSn = BeanParamUtil.getString(contact, request, "msnSn");
+		String mySpaceSn = BeanParamUtil.getString(
+			contact, request, "mySpaceSn");
+		String skypeSn = BeanParamUtil.getString(contact, request, "skypeSn");
+		String twitterSn = BeanParamUtil.getString(
+			contact, request, "twitterSn");
+		String ymSn = BeanParamUtil.getString(contact, request, "ymSn");
+		String jobTitle = BeanParamUtil.getString(user, request, "jobTitle");
 		long[] groupIds = getLongArray(
 			actionRequest, "groupsSearchContainerPrimaryKeys");
 		long[] organizationIds = getLongArray(
@@ -525,45 +545,10 @@ public class EditUserAction extends PortletAction {
 
 		String oldScreenName = StringPool.BLANK;
 
-		User user = PortalUtil.getSelectedUser(actionRequest);
-
-		Contact contact = user.getContact();
-
-		Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
-
-		birthdayCal.setTime(contact.getBirthday());
-
-		screenName = ParamUtil.getString(
-			actionRequest, "screenName", user.getScreenName());
-		emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress", user.getEmailAddress());
-		firstName = ParamUtil.getString(
-			actionRequest, "firstName", user.getFirstName());
-		middleName = ParamUtil.getString(
-			actionRequest, "middleName", user.getMiddleName());
-		lastName = ParamUtil.getString(
-			actionRequest, "lastName", user.getLastName());
-		prefixId = ParamUtil.getInteger(
-			actionRequest, "prefixId", contact.getPrefixId());
-		suffixId = ParamUtil.getInteger(
-			actionRequest, "suffixId", contact.getSuffixId());
-		male = ParamUtil.getBoolean(actionRequest, "male", user.isMale());
-		birthdayMonth = ParamUtil.getInteger(
-			actionRequest, "birthdayMonth",
-			birthdayCal.get(Calendar.MONTH));
-		birthdayDay = ParamUtil.getInteger(
-			actionRequest, "birthdayDay", birthdayCal.get(Calendar.DATE));
-		birthdayYear = ParamUtil.getInteger(
-			actionRequest, "birthdayYear", birthdayCal.get(Calendar.YEAR));
-		jobTitle = ParamUtil.getString(
-			actionRequest, "jobTitle", user.getJobTitle());
-
 		String oldPassword = AdminUtil.getUpdateUserPassword(
 			actionRequest, user.getUserId());
-		String newPassword1 = ParamUtil.getString(
-			actionRequest, "password1");
-		String newPassword2 = ParamUtil.getString(
-			actionRequest, "password2");
+		String newPassword1 = ParamUtil.getString(actionRequest, "password1");
+		String newPassword2 = ParamUtil.getString(actionRequest, "password2");
 		boolean passwordReset = ParamUtil.getBoolean(
 			actionRequest, "passwordReset");
 
@@ -572,13 +557,13 @@ public class EditUserAction extends PortletAction {
 		user = UserServiceUtil.updateUser(
 			user.getUserId(), oldPassword, newPassword1, newPassword2,
 			passwordReset, reminderQueryQuestion, reminderQueryAnswer,
-			screenName, emailAddress, openId, languageId, timeZoneId,
-			greeting, comments, firstName, middleName, lastName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
-			aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-			twitterSn, ymSn, jobTitle, groupIds, organizationIds, roleIds,
-			userGroupRoles, userGroupIds, addresses, emailAddresses, phones,
-			websites, announcementsDeliveries, serviceContext);
+			screenName, emailAddress, openId, languageId, timeZoneId,greeting,
+			comments, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
+			jobTitle, groupIds, organizationIds, roleIds, userGroupRoles,
+			userGroupIds, addresses, emailAddresses, phones, websites,
+			announcementsDeliveries, serviceContext);
 
 		boolean deletePortrait = ParamUtil.getBoolean(
 			actionRequest, "deletePortrait");
@@ -595,16 +580,13 @@ public class EditUserAction extends PortletAction {
 
 			// Reset the locale
 
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				actionRequest);
 			HttpSession session = request.getSession();
 
 			session.removeAttribute(Globals.LOCALE_KEY);
 
 			// Clear cached portlet responses
 
-			PortletSession portletSession =
-				actionRequest.getPortletSession();
+			PortletSession portletSession = actionRequest.getPortletSession();
 
 			InvokerPortletImpl.clearResponses(portletSession);
 
