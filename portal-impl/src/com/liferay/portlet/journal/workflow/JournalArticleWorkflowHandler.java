@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.workflow;
 
 import com.liferay.portal.kernel.workflow.BaseWokflowHandler;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 /**
  * <a href="JournalArticleWorkflowHandler.java.html"><b><i>View Source</i></b>
@@ -38,6 +39,14 @@ public class JournalArticleWorkflowHandler extends BaseWokflowHandler {
 
 	public String getClassName() {
 		return CLASS_NAME;
+	}
+
+	public JournalArticle updateStatus(
+			long userId, long resourcePrimKey, int status)
+		throws Exception {
+
+		return JournalArticleLocalServiceUtil.updateStatus(
+			userId, resourcePrimKey, status);
 	}
 
 }

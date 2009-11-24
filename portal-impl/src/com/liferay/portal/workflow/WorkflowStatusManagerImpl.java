@@ -22,12 +22,10 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.workflow.WorkflowException;
+import com.liferay.portal.kernel.workflow.WorkflowHandler;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowStatusManager;
-import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
-import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 /**
  * <a href="WorkflowStatusManagerImpl.java.html"><b><i>View Source</i></b></a>
@@ -42,15 +40,10 @@ public class WorkflowStatusManagerImpl implements WorkflowStatusManager {
 		throws WorkflowException {
 
 		try {
-			if (JournalArticle.class.getName().equals(className)) {
-				JournalArticleLocalServiceUtil.updateStatus(
-					userId, classPK, status);
-			}
+			WorkflowHandler workflowHandler =
+				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
-			if (status == StatusConstants.APPROVED) {
-				WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLink(
-					companyId, groupId, className, classPK);
-			}
+			workflowHandler.updateStatus(userId, classPK, status);
 		}
 		catch (Exception e) {
 			throw new WorkflowException(e);
