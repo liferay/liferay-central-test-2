@@ -84,6 +84,11 @@ String portletId = portletDisplay.getId();
 PortletURL portletURL = renderResponse.createRenderURL();
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
+
+if (!paginationType.equals("none")) {
+	searchContainer.setDelta(delta);
+	searchContainer.setDeltaConfigurable(false);
+}
 %>
 
 <c:if test='<%= (assetCategoryId > 0) && selectionStyle.equals("dynamic") %>'>
