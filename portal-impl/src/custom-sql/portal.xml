@@ -17,7 +17,7 @@
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.countByC_N_D">
 		<![CDATA[
 			SELECT
-				COUNT(*) AS COUNT_VALUE
+				Group_.groupId AS groupId
 			FROM
 				Group_
 			[$JOIN$]

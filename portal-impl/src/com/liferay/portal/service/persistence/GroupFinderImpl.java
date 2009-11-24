@@ -39,10 +39,12 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <a href="GroupFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -182,18 +184,22 @@ public class GroupFinderImpl
 		try {
 			session = openSession();
 
-			int count = countByC_N_D(
-				session, companyId, name, description, params1);
+			Set<Long> count = new HashSet<Long>();
+
+			count.addAll(
+				countByC_N_D(session, companyId, name, description, params1));
 
 			if (Validator.isNotNull(userId)) {
-				count += countByC_N_D(
-					session, companyId, name, description, params2);
+				count.addAll(
+					countByC_N_D(
+						session, companyId, name, description, params2));
 
-				count += countByC_N_D(
-					session, companyId, name, description, params3);
+				count.addAll(
+					countByC_N_D(
+						session, companyId, name, description, params3));
 			}
 
-			return count;
+			return count.size();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -500,7 +506,7 @@ public class GroupFinderImpl
 		return 0;
 	}
 
-	protected int countByC_N_D(
+	protected List<Long> countByC_N_D(
 		Session session, long companyId, String name, String description,
 		LinkedHashMap<String, Object> params) {
 
@@ -511,7 +517,7 @@ public class GroupFinderImpl
 
 		SQLQuery q = session.createSQLQuery(sql);
 
-		q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+		q.addScalar("groupId", Type.LONG);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -522,17 +528,7 @@ public class GroupFinderImpl
 		qPos.add(description);
 		qPos.add(description);
 
-		Iterator<Long> itr = q.list().iterator();
-
-		if (itr.hasNext()) {
-			Long count = itr.next();
-
-			if (count != null) {
-				return count.intValue();
-			}
-		}
-
-		return 0;
+		return q.list();
 	}
 
 	protected String getJoin(LinkedHashMap<String, Object> params) {
