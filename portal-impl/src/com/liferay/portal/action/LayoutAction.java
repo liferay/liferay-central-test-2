@@ -141,7 +141,16 @@ public class LayoutAction extends Action {
 				WebKeys.REQUESTED_LAYOUT);
 
 			if (requestedLayout != null) {
+				String currentURL = PortalUtil.getCurrentURL(request);
+
 				String redirectParam = "redirect";
+
+				if (Validator.isNotNull(PropsValues.AUTH_LOGIN_PORTLET_NAME)) {
+					redirectParam =
+						PortalUtil.getPortletNamespace(
+							PropsValues.AUTH_LOGIN_PORTLET_NAME) +
+						redirectParam;
+				}
 
 				String authLoginURL = PortalUtil.getCommunityLoginURL(
 					themeDisplay);
@@ -150,32 +159,21 @@ public class LayoutAction extends Action {
 					authLoginURL = PropsValues.AUTH_LOGIN_URL;
 				}
 
-				String url = PortalUtil.getCurrentURL(request);
-
-				if (Validator.isNotNull(
-					PropsValues.AUTH_LOGIN_PORTLET_NAME)) {
-
-					redirectParam =
-						PortalUtil.getPortletNamespace(
-							PropsValues.AUTH_LOGIN_PORTLET_NAME) +
-						redirectParam;
-				}
-
 				if (PrefsPropsUtil.getBoolean(
-					themeDisplay.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED,
-					PropsValues.CAS_AUTH_ENABLED)) {
+						themeDisplay.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED,
+						PropsValues.CAS_AUTH_ENABLED)) {
 
 					authLoginURL = themeDisplay.getURLSignIn();
 				}
 				else if (Validator.isNotNull(authLoginURL)) {
-				    authLoginURL = HttpUtil.setParameter(
-					    authLoginURL, redirectParam, url);
+					authLoginURL = HttpUtil.setParameter(
+						authLoginURL, redirectParam, currentURL);
 				}
 				else {
 					PortletURL loginURL = LoginUtil.getLoginURL(
 						request, themeDisplay.getPlid());
 
-					loginURL.setParameter(redirectParam, url);
+					loginURL.setParameter(redirectParam, currentURL);
 
 					authLoginURL = loginURL.toString();
 				}
