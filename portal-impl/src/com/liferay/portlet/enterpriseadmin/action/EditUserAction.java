@@ -125,12 +125,6 @@ public class EditUserAction extends PortletAction {
 			if (cmd.equals(Constants.ADD)) {
 				user = addUser(actionRequest);
 			}
-			else if (cmd.equals(Constants.UPDATE)) {
-				Object[] returnValue = updateUser(actionRequest);
-
-				user = (User)returnValue[0];
-				oldScreenName = ((String)returnValue[1]);
-			}
 			else if (cmd.equals(Constants.DEACTIVATE) ||
 					 cmd.equals(Constants.DELETE) ||
 					 cmd.equals(Constants.RESTORE)) {
@@ -139,6 +133,12 @@ public class EditUserAction extends PortletAction {
 			}
 			else if (cmd.equals("deleteRole")) {
 				deleteRole(actionRequest);
+			}
+			else if (cmd.equals(Constants.UPDATE)) {
+				Object[] returnValue = updateUser(actionRequest);
+
+				user = (User)returnValue[0];
+				oldScreenName = ((String)returnValue[1]);
 			}
 			else if (cmd.equals("unlock")) {
 				user = updateLockout(actionRequest);
@@ -368,8 +368,6 @@ public class EditUserAction extends PortletAction {
 				announcementsDeliveries, serviceContext);
 		}
 
-		// Layout set prototypes
-
 		long publicLayoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "publicLayoutSetPrototypeId");
 		long privateLayoutSetPrototypeId = ParamUtil.getLong(
@@ -462,65 +460,81 @@ public class EditUserAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
 		User user = PortalUtil.getSelectedUser(actionRequest);
 
 		Contact contact = user.getContact();
+
+		String oldPassword = AdminUtil.getUpdateUserPassword(
+			actionRequest, user.getUserId());
+		String newPassword1 = ParamUtil.getString(actionRequest, "password1");
+		String newPassword2 = ParamUtil.getString(actionRequest, "password2");
+		boolean passwordReset = ParamUtil.getBoolean(
+			actionRequest, "passwordReset");
+
+		String reminderQueryQuestion = BeanParamUtil.getString(
+			user, actionRequest, "reminderQueryQuestion");
+
+		if (reminderQueryQuestion.equals(EnterpriseAdminUtil.CUSTOM_QUESTION)) {
+			reminderQueryQuestion = BeanParamUtil.getString(
+				user, actionRequest, "reminderQueryCustomQuestion");
+		}
+
+		String reminderQueryAnswer = BeanParamUtil.getString(
+			user, actionRequest, "reminderQueryAnswer");
+		String oldScreenName = user.getScreenName();
+		String screenName = BeanParamUtil.getString(
+			user, actionRequest, "screenName");
+		String emailAddress = BeanParamUtil.getString(
+			user, actionRequest, "emailAddress");
+		String openId = BeanParamUtil.getString(user, actionRequest, "openId");
+		String languageId = BeanParamUtil.getString(
+			user, actionRequest, "languageId");
+		String timeZoneId = BeanParamUtil.getString(
+			user, actionRequest, "timeZoneId");
+		String greeting = BeanParamUtil.getString(
+			user, actionRequest, "greeting");
+		String firstName = BeanParamUtil.getString(
+			user, actionRequest, "firstName");
+		String middleName = BeanParamUtil.getString(
+			user, actionRequest, "middleName");
+		String lastName = BeanParamUtil.getString(
+			user, actionRequest, "lastName");
+		int prefixId = BeanParamUtil.getInteger(
+			user, actionRequest, "prefixId");
+		int suffixId = BeanParamUtil.getInteger(
+			user, actionRequest, "suffixId");
+		boolean male = BeanParamUtil.getBoolean(
+			user, actionRequest, "male", true);
 
 		Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
 
 		birthdayCal.setTime(contact.getBirthday());
 
-		String reminderQueryQuestion = BeanParamUtil.getString(
-			user, request, "reminderQueryQuestion");
-
-		if (reminderQueryQuestion.equals(EnterpriseAdminUtil.CUSTOM_QUESTION)) {
-			reminderQueryQuestion = BeanParamUtil.getString(
-				user, request, "reminderQueryCustomQuestion");
-		}
-
-		String reminderQueryAnswer = BeanParamUtil.getString(
-			user, request, "reminderQueryAnswer");
-		String screenName = BeanParamUtil.getString(
-			user, request, "screenName");
-		String emailAddress = BeanParamUtil.getString(
-			user, request, "emailAddress");
-		String openId = BeanParamUtil.getString(user, request, "openId");
-		String languageId = BeanParamUtil.getString(
-			user, request, "languageId");
-		String timeZoneId = BeanParamUtil.getString(
-			user, request, "timeZoneId");
-		String greeting = BeanParamUtil.getString(user, request, "greeting");
-		String firstName = BeanParamUtil.getString(user, request, "firstName");
-		String middleName = BeanParamUtil.getString(
-			user, request, "middleName");
-		String lastName = BeanParamUtil.getString(user, request, "lastName");
-		int prefixId = BeanParamUtil.getInteger(user, request, "prefixId");
-		int suffixId = BeanParamUtil.getInteger(user, request, "suffixId");
-		boolean male = BeanParamUtil.getBoolean(user, request, "male", true);
 		int birthdayMonth = ParamUtil.getInteger(
 			actionRequest, "birthdayMonth", birthdayCal.get(Calendar.MONTH));
 		int birthdayDay = ParamUtil.getInteger(
 			actionRequest, "birthdayDay", birthdayCal.get(Calendar.DATE));
 		int birthdayYear = ParamUtil.getInteger(
 			actionRequest, "birthdayYear", birthdayCal.get(Calendar.YEAR));
-		String comments = BeanParamUtil.getString(user, request, "comments");
-		String smsSn = BeanParamUtil.getString(contact, request, "smsSn");
-		String aimSn = BeanParamUtil.getString(contact, request, "aimSn");
+		String comments = BeanParamUtil.getString(
+			user, actionRequest, "comments");
+		String smsSn = BeanParamUtil.getString(contact, actionRequest, "smsSn");
+		String aimSn = BeanParamUtil.getString(contact, actionRequest, "aimSn");
 		String facebookSn = BeanParamUtil.getString(
-			contact, request, "facebookSn");
-		String icqSn = BeanParamUtil.getString(contact, request, "icqSn");
-		String jabberSn = BeanParamUtil.getString(contact, request, "jabberSn");
-		String msnSn = BeanParamUtil.getString(contact, request, "msnSn");
+			contact, actionRequest, "facebookSn");
+		String icqSn = BeanParamUtil.getString(contact, actionRequest, "icqSn");
+		String jabberSn = BeanParamUtil.getString(
+			contact, actionRequest, "jabberSn");
+		String msnSn = BeanParamUtil.getString(contact, actionRequest, "msnSn");
 		String mySpaceSn = BeanParamUtil.getString(
-			contact, request, "mySpaceSn");
-		String skypeSn = BeanParamUtil.getString(contact, request, "skypeSn");
+			contact, actionRequest, "mySpaceSn");
+		String skypeSn = BeanParamUtil.getString(
+			contact, actionRequest, "skypeSn");
 		String twitterSn = BeanParamUtil.getString(
-			contact, request, "twitterSn");
-		String ymSn = BeanParamUtil.getString(contact, request, "ymSn");
-		String jobTitle = BeanParamUtil.getString(user, request, "jobTitle");
+			contact, actionRequest, "twitterSn");
+		String ymSn = BeanParamUtil.getString(contact, actionRequest, "ymSn");
+		String jobTitle = BeanParamUtil.getString(
+			user, actionRequest, "jobTitle");
 		long[] groupIds = getLongArray(
 			actionRequest, "groupsSearchContainerPrimaryKeys");
 		long[] organizationIds = getLongArray(
@@ -543,17 +557,6 @@ public class EditUserAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
 
-		String oldScreenName = StringPool.BLANK;
-
-		String oldPassword = AdminUtil.getUpdateUserPassword(
-			actionRequest, user.getUserId());
-		String newPassword1 = ParamUtil.getString(actionRequest, "password1");
-		String newPassword2 = ParamUtil.getString(actionRequest, "password2");
-		boolean passwordReset = ParamUtil.getBoolean(
-			actionRequest, "passwordReset");
-
-		String tempOldScreenName = user.getScreenName();
-
 		user = UserServiceUtil.updateUser(
 			user.getUserId(), oldPassword, newPassword1, newPassword2,
 			passwordReset, reminderQueryQuestion, reminderQueryAnswer,
@@ -565,6 +568,10 @@ public class EditUserAction extends PortletAction {
 			userGroupIds, addresses, emailAddresses, phones, websites,
 			announcementsDeliveries, serviceContext);
 
+		if (oldScreenName.equals(user.getScreenName())) {
+			oldScreenName = StringPool.BLANK;
+		}
+
 		boolean deletePortrait = ParamUtil.getBoolean(
 			actionRequest, "deletePortrait");
 
@@ -572,14 +579,12 @@ public class EditUserAction extends PortletAction {
 			UserServiceUtil.deletePortrait(user.getUserId());
 		}
 
-		if (!tempOldScreenName.equals(user.getScreenName())) {
-			oldScreenName = tempOldScreenName;
-		}
-
 		if (user.getUserId() == themeDisplay.getUserId()) {
 
 			// Reset the locale
 
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
 			HttpSession session = request.getSession();
 
 			session.removeAttribute(Globals.LOCALE_KEY);
@@ -598,8 +603,6 @@ public class EditUserAction extends PortletAction {
 					PortletSession.APPLICATION_SCOPE);
 			}
 		}
-
-		// Layout set prototypes
 
 		long publicLayoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "publicLayoutSetPrototypeId");
