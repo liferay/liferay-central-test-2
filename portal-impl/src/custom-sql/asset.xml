@@ -9,17 +9,17 @@
 				AssetCategory
 			INNER JOIN
 				AssetEntries_AssetTags ON
-					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId) AND
-					(AssetEntries_AssetCategories.entryId IN (
-						SELECT
-							entryId
-						FROM
-							AssetEntry
-						WHERE
-							(AssetEntry.groupId = ?) AND
-							(AssetEntry.classNameId = ?)
-					))
+					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId)
 			WHERE
+				(AssetEntries_AssetCategories.entryId IN (
+					SELECT
+						entryId
+					FROM
+						AssetEntry
+					WHERE
+						(AssetEntry.groupId = ?) AND
+						(AssetEntry.classNameId = ?)
+				)) AND
 				(AssetCategory.name LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
@@ -66,16 +66,17 @@
 				AssetCategory
 			INNER JOIN
 				AssetEntries_AssetCategories ON
-					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId) AND
-					(AssetEntries_AssetCategories.entryId IN (
-						SELECT
-							entryId
-						FROM
-							AssetEntry
-						WHERE
-							(AssetEntry.classNameId = ?) AND
-							(AssetEntry.classPK = ?)
-					))
+					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId)
+			WHERE
+				(AssetEntries_AssetCategories.entryId IN (
+					SELECT
+						entryId
+					FROM
+						AssetEntry
+					WHERE
+						(AssetEntry.classNameId = ?) AND
+						(AssetEntry.classPK = ?)
+				))
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N_P">
@@ -150,17 +151,17 @@
 				AssetTag
 			INNER JOIN
 				AssetEntries_AssetTags ON
-					(AssetEntries_AssetTags.tagId = AssetTag.tagId) AND
-					(AssetEntries_AssetTags.entryId IN (
-						SELECT
-							entryId
-						FROM
-							AssetEntry
-						WHERE
-							(AssetEntry.groupId = ?) AND
-							(AssetEntry.classNameId = ?)
-					))
+					(AssetEntries_AssetTags.tagId = AssetTag.tagId)
 			WHERE
+				(AssetEntries_AssetTags.entryId IN (
+					SELECT
+						entryId
+					FROM
+						AssetEntry
+					WHERE
+						(AssetEntry.groupId = ?) AND
+						(AssetEntry.classNameId = ?)
+				)) AND
 				(AssetTag.name LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
@@ -207,16 +208,17 @@
 				AssetTag
 			INNER JOIN
 				AssetEntries_AssetTags ON
-					(AssetEntries_AssetTags.tagId = AssetTag.tagId) AND
-					(AssetEntries_AssetTags.entryId IN (
-						SELECT
-							entryId
-						FROM
-							AssetEntry
-						WHERE
-							(AssetEntry.classNameId = ?) AND
-							(AssetEntry.classPK = ?)
-					))
+					(AssetEntries_AssetTags.tagId = AssetTag.tagId)
+			WHERE
+				(AssetEntries_AssetTags.entryId IN (
+					SELECT
+						entryId
+					FROM
+						AssetEntry
+					WHERE
+						(AssetEntry.classNameId = ?) AND
+						(AssetEntry.classPK = ?)
+				))
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByG_C_N">
@@ -227,17 +229,17 @@
 				AssetTag
 			INNER JOIN
 				AssetEntries_AssetTags ON
-					(AssetEntries_AssetTags.tagId = AssetTag.tagId) AND
-					(AssetEntries_AssetTags.entryId IN (
-						SELECT
-							entryId
-						FROM
-							AssetEntry
-						WHERE
-							(AssetEntry.groupId = ?) AND
-							(AssetEntry.classNameId = ?)
-					))
+					(AssetEntries_AssetTags.tagId = AssetTag.tagId)
 			WHERE
+				(AssetEntries_AssetTags.entryId IN (
+					SELECT
+						entryId
+					FROM
+						AssetEntry
+					WHERE
+						(AssetEntry.groupId = ?) AND
+						(AssetEntry.classNameId = ?)
+				)) AND
 				(AssetTag.name LIKE ? OR ? IS NULL)
 			ORDER BY
 				AssetTag.name ASC
