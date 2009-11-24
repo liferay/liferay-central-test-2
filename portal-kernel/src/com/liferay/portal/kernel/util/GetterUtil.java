@@ -33,6 +33,8 @@ import java.util.Date;
  */
 public class GetterUtil {
 
+	public static String[] BOOLEANS = {"true", "t", "y", "on", "1"};
+
 	public static final boolean DEFAULT_BOOLEAN = false;
 
 	public static final boolean[] DEFAULT_BOOLEAN_VALUES = new boolean[0];
@@ -59,7 +61,105 @@ public class GetterUtil {
 
 	public static final String DEFAULT_STRING = StringPool.BLANK;
 
-	public static String[] BOOLEANS = {"true", "t", "y", "on", "1"};
+	public static boolean get(String value, boolean defaultValue) {
+		if (value != null) {
+			try {
+				value = value.trim();
+
+				if (value.equalsIgnoreCase(BOOLEANS[0]) ||
+					value.equalsIgnoreCase(BOOLEANS[1]) ||
+					value.equalsIgnoreCase(BOOLEANS[2]) ||
+					value.equalsIgnoreCase(BOOLEANS[3]) ||
+					value.equalsIgnoreCase(BOOLEANS[4])) {
+
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+
+		return defaultValue;
+	}
+
+	public static Date get(String value, DateFormat df, Date defaultValue) {
+		try {
+			Date date = df.parse(value.trim());
+
+			if (date != null) {
+				return date;
+			}
+		}
+		catch (Exception e) {
+		}
+
+		return defaultValue;
+	}
+
+	public static double get(String value, double defaultValue) {
+		try {
+			return Double.parseDouble(_trim(value));
+		}
+		catch (Exception e) {
+		}
+
+		return defaultValue;
+	}
+
+	public static float get(String value, float defaultValue) {
+		try {
+			return Float.parseFloat(_trim(value));
+		}
+		catch (Exception e) {
+		}
+
+		return defaultValue;
+	}
+
+	public static int get(String value, int defaultValue) {
+		try {
+			return Integer.parseInt(_trim(value));
+		}
+		catch (Exception e) {
+		}
+
+		return defaultValue;
+	}
+
+	public static long get(String value, long defaultValue) {
+		try {
+			return Long.parseLong(_trim(value));
+		}
+		catch (Exception e) {
+		}
+
+		return defaultValue;
+	}
+
+	public static short get(String value, short defaultValue) {
+		try {
+			return Short.parseShort(_trim(value));
+		}
+		catch (Exception e) {
+		}
+
+		return defaultValue;
+	}
+
+	public static String get(String value, String defaultValue) {
+		if (value != null) {
+			value = value.trim();
+			value = StringUtil.replace(
+				value, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
+
+			return value;
+		}
+
+		return defaultValue;
+	}
 
 	public static boolean getBoolean(String value) {
 		return getBoolean(value, DEFAULT_BOOLEAN);
@@ -239,106 +339,6 @@ public class GetterUtil {
 
 	public static String getString(String value, String defaultValue) {
 		return get(value, defaultValue);
-	}
-
-	public static boolean get(String value, boolean defaultValue) {
-		if (value != null) {
-			try {
-				value = value.trim();
-
-				if (value.equalsIgnoreCase(BOOLEANS[0]) ||
-					value.equalsIgnoreCase(BOOLEANS[1]) ||
-					value.equalsIgnoreCase(BOOLEANS[2]) ||
-					value.equalsIgnoreCase(BOOLEANS[3]) ||
-					value.equalsIgnoreCase(BOOLEANS[4])) {
-
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-			catch (Exception e) {
-			}
-		}
-
-		return defaultValue;
-	}
-
-	public static Date get(String value, DateFormat df, Date defaultValue) {
-		try {
-			Date date = df.parse(value.trim());
-
-			if (date != null) {
-				return date;
-			}
-		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
-	}
-
-	public static double get(String value, double defaultValue) {
-		try {
-			return Double.parseDouble(_trim(value));
-		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
-	}
-
-	public static float get(String value, float defaultValue) {
-		try {
-			return Float.parseFloat(_trim(value));
-		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
-	}
-
-	public static int get(String value, int defaultValue) {
-		try {
-			return Integer.parseInt(_trim(value));
-		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
-	}
-
-	public static long get(String value, long defaultValue) {
-		try {
-			return Long.parseLong(_trim(value));
-		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
-	}
-
-	public static short get(String value, short defaultValue) {
-		try {
-			return Short.parseShort(_trim(value));
-		}
-		catch (Exception e) {
-		}
-
-		return defaultValue;
-	}
-
-	public static String get(String value, String defaultValue) {
-		if (value != null) {
-			value = value.trim();
-			value = StringUtil.replace(
-				value, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
-
-			return value;
-		}
-
-		return defaultValue;
 	}
 
 	private static String _trim(String value) {

@@ -32,6 +32,40 @@ public class GetterUtil_IW {
 		return _instance;
 	}
 
+	public boolean get(java.lang.String value, boolean defaultValue) {
+		return GetterUtil.get(value, defaultValue);
+	}
+
+	public java.util.Date get(java.lang.String value, java.text.DateFormat df,
+		java.util.Date defaultValue) {
+		return GetterUtil.get(value, df, defaultValue);
+	}
+
+	public double get(java.lang.String value, double defaultValue) {
+		return GetterUtil.get(value, defaultValue);
+	}
+
+	public float get(java.lang.String value, float defaultValue) {
+		return GetterUtil.get(value, defaultValue);
+	}
+
+	public int get(java.lang.String value, int defaultValue) {
+		return GetterUtil.get(value, defaultValue);
+	}
+
+	public long get(java.lang.String value, long defaultValue) {
+		return GetterUtil.get(value, defaultValue);
+	}
+
+	public short get(java.lang.String value, short defaultValue) {
+		return GetterUtil.get(value, defaultValue);
+	}
+
+	public java.lang.String get(java.lang.String value,
+		java.lang.String defaultValue) {
+		return GetterUtil.get(value, defaultValue);
+	}
+
 	public boolean getBoolean(java.lang.String value) {
 		return GetterUtil.getBoolean(value);
 	}
@@ -149,40 +183,6 @@ public class GetterUtil_IW {
 	public java.lang.String getString(java.lang.String value,
 		java.lang.String defaultValue) {
 		return GetterUtil.getString(value, defaultValue);
-	}
-
-	public boolean get(java.lang.String value, boolean defaultValue) {
-		return GetterUtil.get(value, defaultValue);
-	}
-
-	public java.util.Date get(java.lang.String value, java.text.DateFormat df,
-		java.util.Date defaultValue) {
-		return GetterUtil.get(value, df, defaultValue);
-	}
-
-	public double get(java.lang.String value, double defaultValue) {
-		return GetterUtil.get(value, defaultValue);
-	}
-
-	public float get(java.lang.String value, float defaultValue) {
-		return GetterUtil.get(value, defaultValue);
-	}
-
-	public int get(java.lang.String value, int defaultValue) {
-		return GetterUtil.get(value, defaultValue);
-	}
-
-	public long get(java.lang.String value, long defaultValue) {
-		return GetterUtil.get(value, defaultValue);
-	}
-
-	public short get(java.lang.String value, short defaultValue) {
-		return GetterUtil.get(value, defaultValue);
-	}
-
-	public java.lang.String get(java.lang.String value,
-		java.lang.String defaultValue) {
-		return GetterUtil.get(value, defaultValue);
 	}
 
 	private GetterUtil_IW() {

@@ -44,14 +44,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DAOParamUtil {
 
-	// Servlet Request
-
 	public static boolean getBoolean(HttpServletRequest request, String param) {
 		return GetterUtil.getBoolean(getString(request, param));
 	}
 
+	public static boolean getBoolean(
+		PortletRequest portletRequest, String param) {
+
+		return GetterUtil.getBoolean(getString(portletRequest, param));
+	}
+
 	public static int getInteger(HttpServletRequest request, String param) {
 		return GetterUtil.getInteger(getString(request, param));
+	}
+
+	public static int getInteger(PortletRequest portletRequest, String param) {
+		return GetterUtil.getInteger(getString(portletRequest, param));
 	}
 
 	public static String getISODate(HttpServletRequest request, String param) {
@@ -83,77 +91,6 @@ public class DAOParamUtil {
 		else {
 			return null;
 		}
-	}
-
-	public static String getLike(HttpServletRequest request, String param) {
-		return getLike(request, param, null, true);
-	}
-
-	public static String getLike(
-		HttpServletRequest request, String param, String defaultValue) {
-
-		return getLike(request, param, defaultValue, true);
-	}
-
-	public static String getLike(
-		HttpServletRequest request, String param, boolean toLowerCase) {
-
-		return getLike(request, param, null, toLowerCase);
-	}
-
-	public static String getLike(
-		HttpServletRequest request, String param, String defaultValue,
-		boolean toLowerCase) {
-
-		String value = request.getParameter(param);
-
-		if (value != null) {
-			value = value.trim();
-
-			if (toLowerCase) {
-				value = value.toLowerCase();
-			}
-		}
-
-		if (Validator.isNull(value)) {
-			value = defaultValue;
-		}
-		else {
-			value = StringPool.PERCENT + value + StringPool.PERCENT;
-		}
-
-		return value;
-	}
-
-	public static long getLong(HttpServletRequest request, String param) {
-		return GetterUtil.getLong(getString(request, param));
-	}
-
-	public static short getShort(HttpServletRequest request, String param) {
-		return GetterUtil.getShort(getString(request, param));
-	}
-
-	public static String getString(HttpServletRequest request, String param) {
-		String value = ParamUtil.getString(request, param);
-
-		if (Validator.isNull(value)) {
-			return null;
-		}
-		else {
-			return value;
-		}
-	}
-
-	// Portlet Request
-
-	public static boolean getBoolean(
-		PortletRequest portletRequest, String param) {
-
-		return GetterUtil.getBoolean(getString(portletRequest, param));
-	}
-
-	public static int getInteger(PortletRequest portletRequest, String param) {
-		return GetterUtil.getInteger(getString(portletRequest, param));
 	}
 
 	public static String getISODate(
@@ -189,20 +126,60 @@ public class DAOParamUtil {
 		}
 	}
 
-	public static String getLike(PortletRequest portletRequest, String param) {
-		return getLike(portletRequest, param, null, true);
+	public static String getLike(HttpServletRequest request, String param) {
+		return getLike(request, param, null, true);
 	}
 
 	public static String getLike(
-		PortletRequest portletRequest, String param, String defaultValue) {
+		HttpServletRequest request, String param, boolean toLowerCase) {
 
-		return getLike(portletRequest, param, defaultValue, true);
+		return getLike(request, param, null, toLowerCase);
+	}
+
+	public static String getLike(
+		HttpServletRequest request, String param, String defaultValue) {
+
+		return getLike(request, param, defaultValue, true);
+	}
+
+	public static String getLike(
+		HttpServletRequest request, String param, String defaultValue,
+		boolean toLowerCase) {
+
+		String value = request.getParameter(param);
+
+		if (value != null) {
+			value = value.trim();
+
+			if (toLowerCase) {
+				value = value.toLowerCase();
+			}
+		}
+
+		if (Validator.isNull(value)) {
+			value = defaultValue;
+		}
+		else {
+			value = StringPool.PERCENT + value + StringPool.PERCENT;
+		}
+
+		return value;
+	}
+
+	public static String getLike(PortletRequest portletRequest, String param) {
+		return getLike(portletRequest, param, null, true);
 	}
 
 	public static String getLike(
 		PortletRequest portletRequest, String param, boolean toLowerCase) {
 
 		return getLike(portletRequest, param, null, toLowerCase);
+	}
+
+	public static String getLike(
+		PortletRequest portletRequest, String param, String defaultValue) {
+
+		return getLike(portletRequest, param, defaultValue, true);
 	}
 
 	public static String getLike(
@@ -229,12 +206,31 @@ public class DAOParamUtil {
 		return value;
 	}
 
+	public static long getLong(HttpServletRequest request, String param) {
+		return GetterUtil.getLong(getString(request, param));
+	}
+
 	public static long getLong(PortletRequest portletRequest, String param) {
 		return GetterUtil.getLong(getString(portletRequest, param));
 	}
 
+	public static short getShort(HttpServletRequest request, String param) {
+		return GetterUtil.getShort(getString(request, param));
+	}
+
 	public static short getShort(PortletRequest portletRequest, String param) {
 		return GetterUtil.getShort(getString(portletRequest, param));
+	}
+
+	public static String getString(HttpServletRequest request, String param) {
+		String value = ParamUtil.getString(request, param);
+
+		if (Validator.isNull(value)) {
+			return null;
+		}
+		else {
+			return value;
+		}
 	}
 
 	public static String getString(

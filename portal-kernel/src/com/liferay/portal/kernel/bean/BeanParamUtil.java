@@ -25,6 +25,8 @@ package com.liferay.portal.kernel.bean;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 
+import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -49,6 +51,22 @@ public class BeanParamUtil {
 		return ParamUtil.get(request, param, defaultValue);
 	}
 
+	public static boolean getBoolean(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getBoolean(
+			bean, portletRequest, param, GetterUtil.DEFAULT_BOOLEAN);
+	}
+
+	public static boolean getBoolean(
+		Object bean, PortletRequest portletRequest, String param,
+		boolean defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getBoolean(bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
+	}
+
 	public static double getDouble(
 		Object bean, HttpServletRequest request, String param) {
 
@@ -64,6 +82,22 @@ public class BeanParamUtil {
 		return ParamUtil.get(request, param, defaultValue);
 	}
 
+	public static double getDouble(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getDouble(
+			bean, portletRequest, param, GetterUtil.DEFAULT_DOUBLE);
+	}
+
+	public static double getDouble(
+		Object bean, PortletRequest portletRequest, String param,
+		double defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getDouble(bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
+	}
+
 	public static int getInteger(
 		Object bean, HttpServletRequest request, String param) {
 
@@ -77,6 +111,22 @@ public class BeanParamUtil {
 		defaultValue = BeanPropertiesUtil.getInteger(bean, param, defaultValue);
 
 		return ParamUtil.get(request, param, defaultValue);
+	}
+
+	public static int getInteger(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getInteger(
+			bean, portletRequest, param, GetterUtil.DEFAULT_INTEGER);
+	}
+
+	public static int getInteger(
+		Object bean, PortletRequest portletRequest, String param,
+		int defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getInteger(bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
 	}
 
 	public static long getLong(
@@ -95,6 +145,22 @@ public class BeanParamUtil {
 
 	}
 
+	public static long getLong(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getLong(bean, portletRequest, param, GetterUtil.DEFAULT_LONG);
+	}
+
+	public static long getLong(
+		Object bean, PortletRequest portletRequest, String param,
+		long defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getLong(bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
+
+	}
+
 	public static String getString(
 		Object bean, HttpServletRequest request, String param) {
 
@@ -108,6 +174,23 @@ public class BeanParamUtil {
 		defaultValue = BeanPropertiesUtil.getString(bean, param, defaultValue);
 
 		return ParamUtil.get(request, param, defaultValue);
+
+	}
+
+	public static String getString(
+		Object bean, PortletRequest portletRequest, String param) {
+
+		return getString(
+			bean, portletRequest, param, GetterUtil.DEFAULT_STRING);
+	}
+
+	public static String getString(
+		Object bean, PortletRequest portletRequest, String param,
+		String defaultValue) {
+
+		defaultValue = BeanPropertiesUtil.getString(bean, param, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, defaultValue);
 
 	}
 

@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.util;
 
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,6 +54,26 @@ public class PrefsParamUtil {
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
+	public static boolean getBoolean(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param) {
+
+		return getBoolean(
+			preferences, portletRequest, param, GetterUtil.DEFAULT_BOOLEAN);
+	}
+
+	public static boolean getBoolean(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param, boolean defaultValue) {
+
+		String preferencesValue = preferences.getValue(param, null);
+
+		boolean getterUtilValue = GetterUtil.getBoolean(
+			preferencesValue, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, getterUtilValue);
+	}
+
 	public static double getDouble(
 		PortletPreferences preferences, HttpServletRequest request,
 		String param) {
@@ -71,6 +92,26 @@ public class PrefsParamUtil {
 			preferencesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
+	}
+
+	public static double getDouble(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param) {
+
+		return getDouble(
+			preferences, portletRequest, param, GetterUtil.DEFAULT_DOUBLE);
+	}
+
+	public static double getDouble(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param, double defaultValue) {
+
+		String preferencesValue = preferences.getValue(param, null);
+
+		double getterUtilValue = GetterUtil.getDouble(
+			preferencesValue, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, getterUtilValue);
 	}
 
 	public static int getInteger(
@@ -93,6 +134,26 @@ public class PrefsParamUtil {
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
+	public static int getInteger(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param) {
+
+		return getInteger(
+			preferences, portletRequest, param, GetterUtil.DEFAULT_INTEGER);
+	}
+
+	public static int getInteger(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param, int defaultValue) {
+
+		String preferencesValue = preferences.getValue(param, null);
+
+		int getterUtilValue = GetterUtil.getInteger(
+			preferencesValue, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, getterUtilValue);
+	}
+
 	public static long getLong(
 		PortletPreferences preferences, HttpServletRequest request,
 		String param) {
@@ -110,6 +171,26 @@ public class PrefsParamUtil {
 			preferencesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
+	}
+
+	public static long getLong(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param) {
+
+		return getLong(
+			preferences, portletRequest, param, GetterUtil.DEFAULT_LONG);
+	}
+
+	public static long getLong(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param, long defaultValue) {
+
+		String preferencesValue = preferences.getValue(param, null);
+
+		long getterUtilValue = GetterUtil.getLong(
+			preferencesValue, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, getterUtilValue);
 	}
 
 	public static String getString(
@@ -130,6 +211,26 @@ public class PrefsParamUtil {
 			preferencesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
+	}
+
+	public static String getString(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param) {
+
+		return getString(
+			preferences, portletRequest, param, GetterUtil.DEFAULT_STRING);
+	}
+
+	public static String getString(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String param, String defaultValue) {
+
+		String preferencesValue = preferences.getValue(param, null);
+
+		String getterUtilValue = GetterUtil.getString(
+			preferencesValue, defaultValue);
+
+		return ParamUtil.get(portletRequest, param, getterUtilValue);
 	}
 
 }
