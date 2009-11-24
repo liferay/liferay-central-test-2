@@ -31,12 +31,14 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
@@ -619,7 +621,7 @@ public class PortletURLImpl
 	}
 
 	protected String generateToString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(32);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -888,7 +890,11 @@ public class PortletURLImpl
 			_removePublicRenderParameters.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			if (sb.lastIndexOf(StringPool.AMPERSAND) != (sb.length() - 1)) {
+			String lastString = sb.stringAt(sb.index() - 1);
+
+			if (lastString.charAt(lastString.length() - 1) !=
+					CharPool.AMPERSAND) {
+
 				sb.append(StringPool.AMPERSAND);
 			}
 
@@ -1006,11 +1012,16 @@ public class PortletURLImpl
 				(!_windowState.equals(LiferayWindowState.EXCLUSIVE)) &&
 				(!_windowState.equals(LiferayWindowState.POP_UP))) {
 
-				if (sb.lastIndexOf(StringPool.AMPERSAND) != (sb.length() - 1)) {
+				String lastString = sb.stringAt(sb.index() - 1);
+
+				if (lastString.charAt(lastString.length() - 1) !=
+						CharPool.AMPERSAND) {
+
 					sb.append(StringPool.AMPERSAND);
 				}
 
-				sb.append("#p_").append(_portletId);
+				sb.append("#p_");
+				sb.append(_portletId);
 			}
 		}
 
@@ -1123,7 +1134,8 @@ public class PortletURLImpl
 
 				sb.append("wsrp-fragmentID");
 				sb.append(StringPool.EQUAL);
-				sb.append("#p_").append(_portletId);
+				sb.append("#p_");
+				sb.append(_portletId);
 				sb.append(StringPool.AMPERSAND);
 			}
 		}
