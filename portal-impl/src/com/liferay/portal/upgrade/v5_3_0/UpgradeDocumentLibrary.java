@@ -24,8 +24,6 @@ package com.liferay.portal.upgrade.v5_3_0;
 
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
@@ -189,8 +187,5 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
 
 }
