@@ -184,22 +184,22 @@ public class GroupFinderImpl
 		try {
 			session = openSession();
 
-			Set<Long> count = new HashSet<Long>();
+			Set<Long> groupIds = new HashSet<Long>();
 
-			count.addAll(
+			groupIds.addAll(
 				countByC_N_D(session, companyId, name, description, params1));
 
 			if (Validator.isNotNull(userId)) {
-				count.addAll(
+				groupIds.addAll(
 					countByC_N_D(
 						session, companyId, name, description, params2));
 
-				count.addAll(
+				groupIds.addAll(
 					countByC_N_D(
 						session, companyId, name, description, params3));
 			}
 
-			return count.size();
+			return groupIds.size();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
