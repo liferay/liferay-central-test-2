@@ -31,12 +31,10 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.LazyStringBuilder;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -621,7 +619,7 @@ public class PortletURLImpl
 	}
 
 	protected String generateToString() {
-		LazyStringBuilder lsb = new LazyStringBuilder(32);
+		StringBuilder sb = new StringBuilder();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -669,14 +667,14 @@ public class PortletURLImpl
 		}
 
 		if (Validator.isNull(_layoutFriendlyURL)) {
-			lsb.append(portalURL);
-			lsb.append(themeDisplay.getPathMain());
-			lsb.append("/portal/layout?");
+			sb.append(portalURL);
+			sb.append(themeDisplay.getPathMain());
+			sb.append("/portal/layout?");
 
-			lsb.append("p_l_id");
-			lsb.append(StringPool.EQUAL);
-			lsb.append(processValue(key, _plid));
-			lsb.append(StringPool.AMPERSAND);
+			sb.append("p_l_id");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, _plid));
+			sb.append(StringPool.AMPERSAND);
 		}
 		else {
 
@@ -687,11 +685,11 @@ public class PortletURLImpl
 			if (!_layoutFriendlyURL.startsWith(Http.HTTP_WITH_SLASH) &&
 				!_layoutFriendlyURL.startsWith(Http.HTTPS_WITH_SLASH)) {
 
-				lsb.append(portalURL);
+				sb.append(portalURL);
 			}
 
 			if (!themeDisplay.isFacebook()) {
-				lsb.append(_layoutFriendlyURL);
+				sb.append(_layoutFriendlyURL);
 			}
 
 			String friendlyURLPath = getPortletFriendlyURLPath();
@@ -701,15 +699,15 @@ public class PortletURLImpl
 					int pos = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 
 					if (pos != -1) {
-						lsb.append(friendlyURLPath.substring(pos));
+						sb.append(friendlyURLPath.substring(pos));
 					}
 					else {
-						lsb.append(friendlyURLPath);
+						sb.append(friendlyURLPath);
 					}
 				}
 				else {
-					lsb.append("/-");
-					lsb.append(friendlyURLPath);
+					sb.append("/-");
+					sb.append(friendlyURLPath);
 				}
 
 				if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
@@ -733,93 +731,93 @@ public class PortletURLImpl
 				addParameterIncludedInPath("p_p_col_count");
 			}
 
-			lsb.append(StringPool.QUESTION);
+			sb.append(StringPool.QUESTION);
 		}
 
 		if (!isParameterIncludedInPath("p_p_id")) {
-			lsb.append("p_p_id");
-			lsb.append(StringPool.EQUAL);
-			lsb.append(processValue(key, _portletId));
-			lsb.append(StringPool.AMPERSAND);
+			sb.append("p_p_id");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, _portletId));
+			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (!isParameterIncludedInPath("p_p_lifecycle")) {
-			lsb.append("p_p_lifecycle");
-			lsb.append(StringPool.EQUAL);
+			sb.append("p_p_lifecycle");
+			sb.append(StringPool.EQUAL);
 
 			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				lsb.append(processValue(key, "1"));
+				sb.append(processValue(key, "1"));
 			}
 			else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				lsb.append(processValue(key, "0"));
+				sb.append(processValue(key, "0"));
 			}
 			else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				lsb.append(processValue(key, "2"));
+				sb.append(processValue(key, "2"));
 			}
 
-			lsb.append(StringPool.AMPERSAND);
+			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (!isParameterIncludedInPath("p_p_state")) {
 			if (_windowState != null) {
-				lsb.append("p_p_state");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, _windowState.toString()));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("p_p_state");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, _windowState.toString()));
+				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_mode")) {
 			if (_portletMode != null) {
-				lsb.append("p_p_mode");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, _portletMode.toString()));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("p_p_mode");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, _portletMode.toString()));
+				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_resource_id")) {
 			if (_resourceID != null) {
-				lsb.append("p_p_resource_id");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, _resourceID));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("p_p_resource_id");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, _resourceID));
+				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_cacheability")) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				lsb.append("p_p_cacheability");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, _cacheability));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("p_p_cacheability");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, _cacheability));
+				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_id")) {
 			if (Validator.isNotNull(portletDisplay.getColumnId())) {
-				lsb.append("p_p_col_id");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, portletDisplay.getColumnId()));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("p_p_col_id");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, portletDisplay.getColumnId()));
+				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_pos")) {
 			if (portletDisplay.getColumnPos() > 0) {
-				lsb.append("p_p_col_pos");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, portletDisplay.getColumnPos()));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("p_p_col_pos");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, portletDisplay.getColumnPos()));
+				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_count")) {
 			if (portletDisplay.getColumnCount() > 0) {
-				lsb.append("p_p_col_count");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, portletDisplay.getColumnCount()));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("p_p_col_count");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, portletDisplay.getColumnCount()));
+				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
@@ -827,10 +825,10 @@ public class PortletURLImpl
 			try {
 				Company company = PortalUtil.getCompany(_request);
 
-				lsb.append("doAsUserId");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(company.getKeyObj(), _doAsUserId));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("doAsUserId");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(company.getKeyObj(), _doAsUserId));
+				sb.append(StringPool.AMPERSAND);
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -840,10 +838,10 @@ public class PortletURLImpl
 			String doAsUserId = themeDisplay.getDoAsUserId();
 
 			if (Validator.isNotNull(doAsUserId)) {
-				lsb.append("doAsUserId");
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, doAsUserId));
-				lsb.append(StringPool.AMPERSAND);
+				sb.append("doAsUserId");
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, doAsUserId));
+				sb.append(StringPool.AMPERSAND);
 			}
 		}
 
@@ -854,10 +852,10 @@ public class PortletURLImpl
 		}
 
 		if (Validator.isNotNull(doAsUserLanguageId)) {
-			lsb.append("doAsUserLanguageId");
-			lsb.append(StringPool.EQUAL);
-			lsb.append(processValue(key, doAsUserLanguageId));
-			lsb.append(StringPool.AMPERSAND);
+			sb.append("doAsUserLanguageId");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, doAsUserLanguageId));
+			sb.append(StringPool.AMPERSAND);
 		}
 
 		long doAsGroupId = _doAsGroupId;
@@ -867,10 +865,10 @@ public class PortletURLImpl
 		}
 
 		if (doAsGroupId > 0) {
-			lsb.append("doAsGroupId");
-			lsb.append(StringPool.EQUAL);
-			lsb.append(processValue(key, doAsGroupId));
-			lsb.append(StringPool.AMPERSAND);
+			sb.append("doAsGroupId");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, doAsGroupId));
+			sb.append(StringPool.AMPERSAND);
 		}
 
 		long refererPlid = _refererPlid;
@@ -880,28 +878,26 @@ public class PortletURLImpl
 		}
 
 		if (refererPlid > 0) {
-			lsb.append("refererPlid");
-			lsb.append(StringPool.EQUAL);
-			lsb.append(processValue(key, refererPlid));
-			lsb.append(StringPool.AMPERSAND);
+			sb.append("refererPlid");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, refererPlid));
+			sb.append(StringPool.AMPERSAND);
 		}
 
 		Iterator<Map.Entry<String, String[]>> itr =
 			_removePublicRenderParameters.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			String lastString = lsb.getStringAt(lsb.getStringCount()-1);
-			if (lastString.charAt(lastString.length() - 1) !=
-				CharPool.AMPERSAND) {
-				lsb.append(StringPool.AMPERSAND);
+			if (sb.lastIndexOf(StringPool.AMPERSAND) != (sb.length() - 1)) {
+				sb.append(StringPool.AMPERSAND);
 			}
 
 			Map.Entry<String, String[]> entry = itr.next();
 
-			lsb.append(entry.getKey());
-			lsb.append(StringPool.EQUAL);
-			lsb.append(processValue(key, entry.getValue()[0]));
-			lsb.append(StringPool.AMPERSAND);
+			sb.append(entry.getKey());
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, entry.getValue()[0]));
+			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (_copyCurrentRenderParameters) {
@@ -987,21 +983,21 @@ public class PortletURLImpl
 					!name.startsWith(
 						PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
 
-					lsb.append(getNamespace());
+					sb.append(getNamespace());
 				}
 
-				lsb.append(name);
-				lsb.append(StringPool.EQUAL);
-				lsb.append(processValue(key, values[i]));
+				sb.append(name);
+				sb.append(StringPool.EQUAL);
+				sb.append(processValue(key, values[i]));
 
 				if ((i + 1 < values.length) || itr.hasNext()) {
-					lsb.append(StringPool.AMPERSAND);
+					sb.append(StringPool.AMPERSAND);
 				}
 			}
 		}
 
 		if (_encrypt) {
-			lsb.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
+			sb.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
 		}
 
 		if (PropsValues.PORTLET_URL_ANCHOR_ENABLE) {
@@ -1010,17 +1006,15 @@ public class PortletURLImpl
 				(!_windowState.equals(LiferayWindowState.EXCLUSIVE)) &&
 				(!_windowState.equals(LiferayWindowState.POP_UP))) {
 
-				String lastString = lsb.getStringAt(lsb.getStringCount() - 1);
-				if (lastString.charAt(lastString.length() - 1) !=
-					CharPool.AMPERSAND) {
-					lsb.append(StringPool.AMPERSAND);
+				if (sb.lastIndexOf(StringPool.AMPERSAND) != (sb.length() - 1)) {
+					sb.append(StringPool.AMPERSAND);
 				}
 
-				lsb.append("#p_").append(_portletId);
+				sb.append("#p_").append(_portletId);
 			}
 		}
 
-		String result = lsb.toString();
+		String result = sb.toString();
 
 		if (result.endsWith(StringPool.AMPERSAND) ||
 			result.endsWith(StringPool.QUESTION)) {
