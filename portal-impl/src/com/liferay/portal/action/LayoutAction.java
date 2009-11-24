@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
@@ -56,6 +57,7 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestFactory;
@@ -159,7 +161,13 @@ public class LayoutAction extends Action {
 						redirectParam;
 				}
 
-				if (Validator.isNotNull(authLoginURL)) {
+				if (PrefsPropsUtil.getBoolean(
+					themeDisplay.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED,
+					PropsValues.CAS_AUTH_ENABLED)) {
+
+					authLoginURL = themeDisplay.getURLSignIn();
+				}
+				else if (Validator.isNotNull(authLoginURL)) {
 				    authLoginURL = HttpUtil.setParameter(
 					    authLoginURL, redirectParam, url);
 				}
