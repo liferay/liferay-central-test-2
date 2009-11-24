@@ -47,7 +47,10 @@ public class UnicodeFormatter {
 		byte hi = (byte)(c >>> 8);
 		byte lo = (byte)(c & 0xff);
 
-		return byteToHex(hi) + byteToHex(lo);
+		char[] array = {HEX_DIGIT[(hi >> 4) & 0x0f], HEX_DIGIT[hi & 0x0f],
+			HEX_DIGIT[(lo >> 4) & 0x0f], HEX_DIGIT[lo & 0x0f]};
+
+		return new String(array);
 	}
 
 	public static String parseString(String hexString) {
