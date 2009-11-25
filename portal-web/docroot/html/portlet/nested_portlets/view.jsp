@@ -25,21 +25,23 @@
 <%@ include file="/html/portlet/nested_portlets/init.jsp" %>
 
 <c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-	<div class="portlet-msg-info" id="<portlet:namespace />nested-portlets-msg" style="display: none;">
+	<div class="aui-helper-hidden portlet-msg-info" id="<portlet:namespace />nested-portlets-msg">
 		<liferay-ui:message key="drag-portlets-below-to-nest-them" />
 	</div>
 
 	<script type="text/javascript">
 		AUI().ready(
-			function() {
-				var portletWrapper = jQuery('#portlet-wrapper-<%= portletDisplay.getId() %>');
+			function(A) {
+				var portletWrapper = A.one('#portlet-wrapper-<%= portletDisplay.getId() %>');
 
-				var message = portletWrapper.find('#<portlet:namespace />nested-portlets-msg');
+				if (portletWrapper) {
+					var message = portletWrapper.one('#<portlet:namespace />nested-portlets-msg');
 
-				var nestedPortlets = portletWrapper.find('.portlet, .portlet-borderless-container');
+					var nestedPortlet = portletWrapper.one('.portlet, .portlet-borderless-container');
 
-				if (!nestedPortlets.length) {
-					message.show();
+					if (!nestedPortlet) {
+						message.show();
+					}
 				}
 			}
 		);
