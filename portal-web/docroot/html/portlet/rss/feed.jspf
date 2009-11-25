@@ -142,7 +142,7 @@ catch (Exception e) {
 
 						<span class="feed-entry-title"><a href="<%= entryLink %>" target="_new"><%= entry.getTitle() %></a></span>
 
-						<div class="feed-entry-content" style='<%= (windowState.equals(WindowState.MAXIMIZED) || (j < expandedEntriesPerFeed)) ? "" : "display: none;" %>'>
+						<div class="feed-entry-content <%= (windowState.equals(WindowState.MAXIMIZED) || (j < expandedEntriesPerFeed)) ? "" : "aui-helper-hidden" %>">
 							<c:if test="<%= entry.getPublishedDate() != null %>">
 								<div class="feed-date">
 									<%= dateFormatDateTime.format(entry.getPublishedDate()) %>

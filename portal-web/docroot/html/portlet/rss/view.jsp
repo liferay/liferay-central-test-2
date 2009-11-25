@@ -59,24 +59,35 @@ for (int i = 0; i < urls.length; i++) {
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
+		function(A) {
 			var minusAlt = '<liferay-ui:message key="collapse" />';
 			var minusImage = '01_minus.png';
-			var plusAlt = '<liferay-ui:message key="expande" />';
+			var plusAlt = '<liferay-ui:message key="expand" />';
 			var plusImage = '01_plus.png';
-			jQuery(".<portlet:namespace />entry-expander").click(
-				function() {
-					if (this.src.indexOf('minus.png') > -1) {
-						jQuery(".feed-entry-content", this.parentNode).slideUp();
 
-						this.alt = this.alt.replace(minusAlt, plusAlt);
-						this.src = this.src.replace(minusImage, plusImage);// themeDisplay.getPathThemeImages() + "/arrows/01_plus.png";
-					}
-					else {
-						jQuery(".feed-entry-content", this.parentNode).slideDown();
+			A.all('.<portlet:namespace />entry-expander').on(
+				'click',
+				function(event) {
+					var expander = event.currentTarget;
+					var feedContent = expander.get('parentNode').one('.feed-entry-content');
 
-						this.alt = this.alt.replace(plusAlt, minusAlt);
-						this.src = this.src.replace(plusImage, minusImage); //themeDisplay.getPathThemeImages() + "/arrows/01_minus.png";
+					if (feedContent) {
+						var altText = expander.attr('alt');
+						var src = expander.attr('src');
+
+						if (src.indexOf('minus.png') > -1) {
+							altText = altText.replace(minusAlt, plusAlt);
+							src = src.replace(minusImage, plusImage);
+						}
+						else {
+							altText = altText.replace(plusAlt, minusAlt);
+							src = src.replace(plusImage, minusImage);
+						}
+
+						feedContent.toggle();
+
+						expander.attr('alt', altText);
+						expander.attr('src', src);
 					}
 				}
 			);

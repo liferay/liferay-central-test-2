@@ -60,7 +60,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 		row.cells[0].innerHTML = "<input name=\"<portlet:namespace />title\" />";
 		row.cells[1].innerHTML = "<input name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;\" />";
-		row.cells[2].innerHTML = "<a href=\"javascript:;\" onclick=\"jQuery(this.parentNode.parentNode).remove();\"><img alt=\"<liferay-ui:message key="unsubscribe" />\" src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
+		row.cells[2].innerHTML = "<a class=\"remove-subscription\" href=\"javascript:;\"><img alt=\"<liferay-ui:message key="unsubscribe" />\" src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
 
 		table.appendChild(row);
 	}
@@ -133,7 +133,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 		</liferay-ui:error>
 
-		<table class="lfr-table">
+		<table class="lfr-table" id="<portlet:namespace />subscriptions">
 		<tr>
 			<td>
 				<liferay-ui:message key="title" />
@@ -163,7 +163,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 					<input class="lfr-input-text" name="<portlet:namespace />url" type="text" value="<%= urls[i] %>" />
 				</td>
 				<td>
-					<a href="javascript:;" onclick="jQuery(this.parentNode.parentNode).remove();"><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
+					<a class="remove-subscription" href="javascript:;"><img alt="<liferay-ui:message key="unsubscribe" />" src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
 				</td>
 			</tr>
 
@@ -172,6 +172,24 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		%>
 
 		</table>
+
+		<script type="text/javascript" charset="utf-8">
+			AUI().ready(
+				function(A) {
+					var subscriptionsTable = A.one('#<portlet:namespace />subscriptions');
+
+					if (subscriptionsTable) {
+						subscriptionsTable.delegate(
+							'click',
+							function(event) {
+								event.currentTarget.get('parentNode.parentNode').remove();
+							},
+							'.remove-subscription'
+						);
+					}
+				}
+			);
+		</script>
 
 		<br />
 
