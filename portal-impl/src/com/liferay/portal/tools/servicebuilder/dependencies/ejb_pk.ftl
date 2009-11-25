@@ -1,6 +1,7 @@
 package ${packagePath}.service.persistence;
 
 import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -149,7 +150,7 @@ public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>,
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(${entity.PKList?size * 5});
 
 		sb.append(StringPool.OPEN_CURLY_BRACE);
 

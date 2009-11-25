@@ -60,6 +60,7 @@ import de.hunsicker.jalopy.storage.ConventionKeys;
 import de.hunsicker.jalopy.storage.Environment;
 
 import freemarker.ext.beans.BeansWrapper;
+import freemarker.log.Logger;
 import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateModelException;
 
@@ -2497,9 +2498,9 @@ public class ServiceBuilder {
 			"referenceList", _mergeReferenceList(entity.getReferenceList()));
 
 		// Content
-
+		Logger.selectLoggerLibrary(Logger.LIBRARY_NONE);
 		String content = _processTemplate(_tplPersistenceImpl, context);
-
+		Logger.selectLoggerLibrary(Logger.LIBRARY_AUTO);
 		// Write file
 
 		File ejbFile = new File(

@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -566,7 +567,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(${entity.regularColList?size * 2 + 1});
 
 		<#list entity.regularColList as column>
 			<#if column_index == 0>
@@ -586,7 +587,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(${entity.regularColList?size * 3 + 4});
 
 		sb.append("<model><model-name>");
 		sb.append("${packagePath}.model.${entity.name}");
