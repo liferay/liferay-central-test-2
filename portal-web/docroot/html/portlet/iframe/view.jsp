@@ -80,9 +80,11 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 
 			src += path;
 
-			var iframe = jQuery('#<portlet:namespace />iframe');
+			var iframe = AUI().one('#<portlet:namespace />iframe');
 
-			iframe.attr('src', src);
+			if (iframe) {
+				iframe.attr('src', src);
+			}
 		}
 	}
 
@@ -173,9 +175,9 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 	function <portlet:namespace />updateHash(url) {
 		document.location.hash = url;
 
-		var maximize = jQuery('#p_p_id<portlet:namespace /> .portlet-maximize-icon a');
+		var maximize = AUI().one('#p_p_id<portlet:namespace /> .portlet-maximize-icon a');
 
-		if (maximize.length != 0) {
+		if (maximize) {
 			var href = maximize.attr('href');
 
 			if (href.indexOf('#') != -1) {
@@ -185,9 +187,9 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 			maximize.attr('href', href + '#' + url);
 		}
 
-		var restore = jQuery('#p_p_id<portlet:namespace /> a.portlet-icon-back');
+		var restore = AUI().one('#p_p_id<portlet:namespace /> a.portlet-icon-back');
 
-		if (restore.length != 0) {
+		if (restore) {
 			var href = restore.attr('href');
 
 			if (href.indexOf('#') != -1) {

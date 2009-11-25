@@ -47,65 +47,81 @@ String htmlAttributes =
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			var authCheckbox = jQuery('#<portlet:namespace />authCheckbox');
-			var auth = jQuery('#<portlet:namespace />auth');
+		function(A) {
+			var authCheckbox = A.one('#<portlet:namespace />authCheckbox');
+			var auth = A.one('#<portlet:namespace />auth');
 
 			function toggleAuthOptions() {
-				var authType = jQuery('#<portlet:namespace />authType');
-				var formFields = jQuery('#<portlet:namespace />formFields');
-				var basicFields = jQuery('#<portlet:namespace />basicFields');
-				var currentLoginMsg = jQuery('#<portlet:namespace />currentLoginMsg');
+				var authType = A.one('#<portlet:namespace />authType');
+				var formFields = A.one('#<portlet:namespace />formFields');
+				var basicFields = A.one('#<portlet:namespace />basicFields');
+				var currentLoginMsg = A.one('#<portlet:namespace />currentLoginMsg');
 
-				if (auth.val() == 'true') {
-					authType.show();
-					currentLoginMsg.show();
+				if (auth) {
+					if (auth.val() == 'true') {
+						if (authType) {
+							authType.show();
+						}
 
-					toggleAuthTypeOptions();
-				}
-				else {
-					authType.hide();
-					formFields.hide();
-					basicFields.hide();
-					currentLoginMsg.hide();
-				}
-			}
+						if (currentLoginMsg) {
+							currentLoginMsg.show();
+						}
 
-			var authType = jQuery('select[@name=<portlet:namespace />authType]');
+						toggleAuthTypeOptions();
+					}
+					else {
+						if (authType) {
+							authType.hide();
+						}
 
-			function toggleAuthTypeOptions() {
-				var formFields = jQuery('#<portlet:namespace />formFields');
-				var basicFields = jQuery('#<portlet:namespace />basicFields');
+						if (formFields) {
+							formFields.hide();
+						}
 
-				if (authType.val() == 'form') {
-					formFields.show();
-					formFields.find('input').attr('disabled', false);
+						if (basicFields) {
+							basicFields.hide();
+						}
 
-					basicFields.hide();
-					basicFields.find('input').attr('disabled', true);
-				}
-				else {
-					formFields.hide();
-					formFields.find('input').attr('disabled', true);
-
-					basicFields.show();
-					basicFields.find('input').attr('disabled', false);
+						if (currentLoginMsg) {
+							currentLoginMsg.hide();
+						}
+					}
 				}
 			}
 
-			toggleAuthOptions();
+			var authType = A.one('select[name=<portlet:namespace />authType]');
 
-			authCheckbox.click(
-				function(event) {
-					toggleAuthOptions();
-				}
-			);
+			if (authType) {
+				function toggleAuthTypeOptions() {
+					var formFields = A.one('#<portlet:namespace />formFields');
+					var basicFields = A.one('#<portlet:namespace />basicFields');
 
-			authType.change(
-				function(event) {
-					toggleAuthTypeOptions();
+					if (formFields && basicFields) {
+						if (authType.val() == 'form') {
+							formFields.show();
+							formFields.all('input').set('disabled', false);
+
+							basicFields.hide();
+							basicFields.all('input').set('disabled', true);
+						}
+						else {
+							formFields.hide();
+							formFields.all('input').set('disabled', true);
+
+							basicFields.show();
+							basicFields.all('input').set('disabled', false);
+						}
+					}
 				}
-			);
+
+				toggleAuthOptions();
+
+				authType.on('change', toggleAuthOptions);
+
+				if (authCheckbox) {
+					authCheckbox.on('click', toggleAuthOptions);
+				}
+			}
 		}
 	);
 </script>
@@ -122,7 +138,7 @@ String htmlAttributes =
 			<liferay-ui:message key="source-url" />
 		</td>
 		<td>
-			<span id="<portlet:namespace />context-path-text" style='<%= relative ? "" : "display: none;" %>'>...<%= themeDisplay.getPathContext() %></span> <input class="lfr-input-text" name="<portlet:namespace />src" type="text" value="<%= src %>" />
+			<span class="<%= relative ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />context-path-text">...<%= themeDisplay.getPathContext() %></span> <input class="lfr-input-text" name="<portlet:namespace />src" type="text" value="<%= src %>" />
 		</td>
 	</tr>
 	<tr>
