@@ -244,6 +244,7 @@ td.user-info {
 
 .portlet-message-boards .top-links-container {
 	clear: both;
+	overflow: auto;
 }
 
 .portlet-message-boards .top-links {

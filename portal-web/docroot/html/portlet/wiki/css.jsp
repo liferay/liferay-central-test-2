@@ -328,6 +328,7 @@
 
 .portlet-wiki .top-links-container {
 	clear: both;
+	overflow: auto;
 }
 
 .portlet-wiki .top-links-nodes {
