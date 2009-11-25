@@ -84,10 +84,10 @@ public class StringBundler {
 	}
 
 	public StringBundler append(String s) {
-		if(s == null) {
-			s = "null";
+		if (s == null) {
+			s = StringPool.NULL;
 		}
-		
+
 		if (_arrayIndex >= _array.length) {
 			expandCapacity();
 		}
