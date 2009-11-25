@@ -55,7 +55,12 @@ public class StringBundler {
 	}
 
 	public StringBundler append(boolean b) {
-		return append(Boolean.valueOf(b).toString());
+		if (b) {
+			return append(_TRUE);
+		}
+		else {
+			return append(_FALSE);
+		}
 	}
 
 	public StringBundler append(double d) {
@@ -142,6 +147,10 @@ public class StringBundler {
 	}
 
 	private static final int _DEFAULT_ARRAY_CAPACITY = 16;
+
+	private static final String _FALSE = "false";
+
+	private static final String _TRUE = "true";
 
 	private String[] _array;
 	private int _arrayIndex;
