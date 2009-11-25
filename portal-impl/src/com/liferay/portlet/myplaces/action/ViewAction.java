@@ -28,12 +28,16 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -124,8 +128,7 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		return LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
-			1);
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 	}
 
 	protected String getRedirect(
@@ -149,10 +152,13 @@ public class ViewAction extends PortletAction {
 
 		String redirect = null;
 
-		if (layouts.size() > 0) {
-			Layout layout = layouts.get(0);
-
-			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+		for (Iterator iter = layouts.iterator(); iter.hasNext();) {
+			Layout element = (Layout) iter.next();
+			if(LayoutPermissionUtil.contains(PermissionThreadLocal
+						.getPermissionChecker(), element, ActionKeys.VIEW)){
+				redirect = PortalUtil.getLayoutURL(element, themeDisplay);
+				break;
+			}
 		}
 
 		return redirect;
