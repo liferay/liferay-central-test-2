@@ -133,27 +133,29 @@ if (organizationId > 0) {
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			var selectionMethod = jQuery('#<portlet:namespace />selectionMethod');
+		function(A) {
+			var selectionMethod = A.one('#<portlet:namespace />selectionMethod');
 
-			function showHiddenFields() {
-				var organization = jQuery('#<portlet:namespace />organization');
+			if (selectionMethod) {
+				function showHiddenFields() {
+					var organization = A.one('#<portlet:namespace />organization');
 
-				if (selectionMethod.val() == 'users') {
-					organization.show();
+					if (organization) {
+						var action = 'hide';
+
+						if (selectionMethod.val() == 'users') {
+							action = 'show';
+						}
+
+						organization[action]();
+					}
+
 				}
-				else {
-					organization.hide();
-				}
+
+				showHiddenFields();
+
+				selectionMethod.on('change', showHiddenFields);
 			}
-
-			showHiddenFields();
-
-			selectionMethod.change(
-				function(event) {
-					showHiddenFields();
-				}
-			);
 		}
 	);
 </script>
