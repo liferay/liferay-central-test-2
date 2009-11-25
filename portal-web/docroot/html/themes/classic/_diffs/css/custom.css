@@ -396,7 +396,7 @@ body.lfr-has-sidebar {
 	background: #ccc9c9 url(../images/application/menu_bg.png) repeat-x 0 0;
 	border: 1px solid;
 	border-color: #aeafb1 #777879 #777879 #aeafb1;
-	padding: 2px 0 2px 0;
+	padding: 2px 0;
 }
 
 .aui-menu-content {
@@ -405,7 +405,7 @@ body.lfr-has-sidebar {
 
 .aui-menugroup-content h4 {
 	background: #d2d6de;
-	border: 0;
+	border-width: 0;
 	color: #5b677d;
 	font-size: 1em;
 	font-weight: bold;
@@ -748,10 +748,10 @@ body.lfr-has-sidebar {
 	
 .aui-menu-content {
 	-moz-border-radius-bottomleft: 4px;
-	-moz-border-radius-bottomright: 4px;
 	-webkit-border-radius-bottomleft: 4px;
-	-webkit-border-radius-bottomright: 4px;
 	border-radius-bottomleft: 4px;
+	-moz-border-radius-bottomright: 4px;
+	-webkit-border-radius-bottomright: 4px;
 	border-radius-bottomright: 4px;
 }
 
