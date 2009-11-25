@@ -73,8 +73,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 			(SessionInvocationHandler)Proxy.getInvocationHandler(
 				hibernateSession);
 
-		hibernateSession =
-			(org.hibernate.Session)sessionInvocationHandler.getSession();
+		hibernateSession = sessionInvocationHandler.getSession();
 
 		_criteria = _detachedCriteria.getExecutableCriteria(hibernateSession);
 

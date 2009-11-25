@@ -51,6 +51,7 @@ public class SessionInvocationHandler implements InvocationHandler {
 		return _session;
 	}
 
+	@SuppressWarnings("deprecation")
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 
