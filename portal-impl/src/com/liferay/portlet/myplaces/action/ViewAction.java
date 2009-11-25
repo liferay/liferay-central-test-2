@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -37,7 +37,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -152,11 +151,15 @@ public class ViewAction extends PortletAction {
 
 		String redirect = null;
 
-		for (Iterator iter = layouts.iterator(); iter.hasNext();) {
-			Layout element = (Layout) iter.next();
-			if(LayoutPermissionUtil.contains(PermissionThreadLocal
-						.getPermissionChecker(), element, ActionKeys.VIEW)){
-				redirect = PortalUtil.getLayoutURL(element, themeDisplay);
+		for (Layout layout : layouts) {
+			PermissionChecker permissionChecker =
+				themeDisplay.getPermissionChecker();
+
+			if (LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.VIEW)){
+
+				redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+
 				break;
 			}
 		}
