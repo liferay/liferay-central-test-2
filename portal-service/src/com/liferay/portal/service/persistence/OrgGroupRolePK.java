@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -150,7 +151,7 @@ public class OrgGroupRolePK implements Comparable<OrgGroupRolePK>, Serializable 
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(15);
 
 		sb.append(StringPool.OPEN_CURLY_BRACE);
 

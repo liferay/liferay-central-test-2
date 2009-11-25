@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -441,8 +442,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT portletItem FROM PortletItem portletItem WHERE ");
 
@@ -506,8 +506,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT portletItem FROM PortletItem portletItem WHERE ");
 
@@ -578,17 +583,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		List<PortletItem> list = findByG_C(groupId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No PortletItem exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchPortletItemException(msg.toString());
 		}
 		else {
@@ -605,17 +605,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No PortletItem exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchPortletItemException(msg.toString());
 		}
 		else {
@@ -635,8 +630,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT portletItem FROM PortletItem portletItem WHERE ");
 
@@ -714,8 +714,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT portletItem FROM PortletItem portletItem WHERE ");
 
@@ -803,8 +802,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 10;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT portletItem FROM PortletItem portletItem WHERE ");
 
@@ -897,20 +901,14 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No PortletItem exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("portletId=" + portletId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchPortletItemException(msg.toString());
 		}
 		else {
@@ -927,20 +925,14 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No PortletItem exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("portletId=" + portletId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchPortletItemException(msg.toString());
 		}
 		else {
@@ -960,8 +952,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 10;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT portletItem FROM PortletItem portletItem WHERE ");
 
@@ -1050,21 +1047,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				classNameId);
 
 		if (portletItem == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No PortletItem exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(", ");
 			msg.append("portletId=" + portletId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1106,8 +1097,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(15);
 				query.append(
 					"SELECT portletItem FROM PortletItem portletItem WHERE ");
 
@@ -1283,8 +1273,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT portletItem FROM PortletItem portletItem ");
 
 				if (obc != null) {
@@ -1385,8 +1380,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(portletItem) ");
 				query.append("FROM PortletItem portletItem WHERE ");
 
@@ -1443,8 +1437,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT COUNT(portletItem) ");
 				query.append("FROM PortletItem portletItem WHERE ");
 
@@ -1524,8 +1517,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(16);
 				query.append("SELECT COUNT(portletItem) ");
 				query.append("FROM PortletItem portletItem WHERE ");
 

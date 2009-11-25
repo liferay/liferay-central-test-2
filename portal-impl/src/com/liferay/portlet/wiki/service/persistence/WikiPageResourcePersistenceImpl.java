@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -369,15 +370,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		WikiPageResource wikiPageResource = fetchByN_T(nodeId, title);
 
 		if (wikiPageResource == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No WikiPageResource exists with the key {");
-
 			msg.append("nodeId=" + nodeId);
-
 			msg.append(", ");
 			msg.append("title=" + title);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -412,8 +409,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT wikiPageResource FROM WikiPageResource wikiPageResource WHERE ");
 
@@ -559,8 +555,13 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT wikiPageResource FROM WikiPageResource wikiPageResource ");
 
@@ -643,8 +644,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(wikiPageResource) ");
 				query.append("FROM WikiPageResource wikiPageResource WHERE ");
 

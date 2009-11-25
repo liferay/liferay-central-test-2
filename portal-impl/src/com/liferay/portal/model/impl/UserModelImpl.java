@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -745,7 +746,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -825,7 +826,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(112);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.User");

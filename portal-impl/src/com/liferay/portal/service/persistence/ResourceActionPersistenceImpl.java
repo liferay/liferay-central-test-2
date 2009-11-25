@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -389,8 +390,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append(
 					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
 
@@ -468,8 +468,17 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 6;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (9 > arrayCapacity) {
+					arrayCapacity = 9;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
 
@@ -555,14 +564,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		List<ResourceAction> list = findByName(name, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ResourceAction exists with the key {");
-
 			msg.append("name=" + name);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchResourceActionException(msg.toString());
 		}
 		else {
@@ -577,14 +582,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		List<ResourceAction> list = findByName(name, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ResourceAction exists with the key {");
-
 			msg.append("name=" + name);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchResourceActionException(msg.toString());
 		}
 		else {
@@ -604,8 +605,17 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 6;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (9 > arrayCapacity) {
+				arrayCapacity = 9;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
 
@@ -687,15 +697,11 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		ResourceAction resourceAction = fetchByN_A(name, actionId);
 
 		if (resourceAction == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No ResourceAction exists with the key {");
-
 			msg.append("name=" + name);
-
 			msg.append(", ");
 			msg.append("actionId=" + actionId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -730,8 +736,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(14);
 				query.append(
 					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
 
@@ -898,8 +903,17 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (4 > arrayCapacity) {
+					arrayCapacity = 4;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT resourceAction FROM ResourceAction resourceAction ");
 
@@ -995,8 +1009,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(resourceAction) ");
 				query.append("FROM ResourceAction resourceAction WHERE ");
 
@@ -1058,8 +1071,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(12);
 				query.append("SELECT COUNT(resourceAction) ");
 				query.append("FROM ResourceAction resourceAction WHERE ");
 

@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.UserGroupRoleSoap;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
@@ -216,7 +217,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
@@ -230,7 +231,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.UserGroupRole");

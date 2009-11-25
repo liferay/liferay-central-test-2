@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.CountrySoap;
 import com.liferay.portal.service.ServiceContext;
@@ -303,7 +304,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{countryId=");
 		sb.append(getCountryId());
@@ -325,7 +326,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Country");

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
@@ -441,7 +442,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{roleId=");
 		sb.append(getRoleId());
@@ -467,7 +468,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Role");

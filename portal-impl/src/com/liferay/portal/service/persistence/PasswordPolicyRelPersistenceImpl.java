@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -436,8 +437,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
@@ -496,8 +496,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
@@ -563,14 +568,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No PasswordPolicyRel exists with the key {");
-
 			msg.append("passwordPolicyId=" + passwordPolicyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchPasswordPolicyRelException(msg.toString());
 		}
 		else {
@@ -587,14 +588,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No PasswordPolicyRel exists with the key {");
-
 			msg.append("passwordPolicyId=" + passwordPolicyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchPasswordPolicyRelException(msg.toString());
 		}
 		else {
@@ -614,8 +611,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
@@ -675,15 +677,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		PasswordPolicyRel passwordPolicyRel = fetchByC_C(classNameId, classPK);
 
 		if (passwordPolicyRel == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No PasswordPolicyRel exists with the key {");
-
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -720,8 +718,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
@@ -794,18 +791,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				classNameId, classPK);
 
 		if (passwordPolicyRel == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No PasswordPolicyRel exists with the key {");
-
 			msg.append("passwordPolicyId=" + passwordPolicyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -844,8 +836,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
@@ -982,8 +973,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel ");
 
@@ -1083,8 +1079,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(passwordPolicyRel) ");
 				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
@@ -1133,8 +1128,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(passwordPolicyRel) ");
 				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 
@@ -1190,8 +1184,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT COUNT(passwordPolicyRel) ");
 				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
 

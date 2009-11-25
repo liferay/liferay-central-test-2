@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -456,8 +457,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -535,8 +535,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 6;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (9 > arrayCapacity) {
+					arrayCapacity = 9;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -622,14 +631,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		List<BookmarksEntry> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -644,14 +649,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		List<BookmarksEntry> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -670,8 +671,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 6;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (9 > arrayCapacity) {
+				arrayCapacity = 9;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -753,15 +763,11 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		BookmarksEntry bookmarksEntry = fetchByUUID_G(uuid, groupId);
 
 		if (bookmarksEntry == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(", ");
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -796,8 +802,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -897,8 +902,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -961,8 +965,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (6 > arrayCapacity) {
+					arrayCapacity = 6;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1033,14 +1046,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		List<BookmarksEntry> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1055,14 +1064,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		List<BookmarksEntry> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1082,8 +1087,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (6 > arrayCapacity) {
+				arrayCapacity = 6;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1158,8 +1172,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1228,8 +1241,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (8 > arrayCapacity) {
+					arrayCapacity = 8;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1306,17 +1328,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		List<BookmarksEntry> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1332,17 +1349,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1362,8 +1374,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (8 > arrayCapacity) {
+				arrayCapacity = 8;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1444,8 +1465,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1514,8 +1534,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (8 > arrayCapacity) {
+					arrayCapacity = 8;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1592,17 +1621,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		List<BookmarksEntry> list = findByG_F(groupId, folderId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("folderId=" + folderId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1618,17 +1642,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BookmarksEntry exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("folderId=" + folderId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1648,8 +1667,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (8 > arrayCapacity) {
+				arrayCapacity = 8;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1781,8 +1809,17 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (4 > arrayCapacity) {
+					arrayCapacity = 4;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT bookmarksEntry FROM BookmarksEntry bookmarksEntry ");
 
@@ -1898,8 +1935,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(bookmarksEntry) ");
 				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -1961,8 +1997,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(bookmarksEntry) ");
 				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -2029,8 +2064,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(bookmarksEntry) ");
 				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -2076,8 +2110,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(bookmarksEntry) ");
 				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 
@@ -2130,8 +2163,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(bookmarksEntry) ");
 				query.append("FROM BookmarksEntry bookmarksEntry WHERE ");
 

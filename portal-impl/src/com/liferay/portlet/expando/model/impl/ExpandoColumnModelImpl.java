@@ -25,6 +25,7 @@ package com.liferay.portlet.expando.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -278,7 +279,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{columnId=");
 		sb.append(getColumnId());
@@ -300,7 +301,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.expando.model.ExpandoColumn");

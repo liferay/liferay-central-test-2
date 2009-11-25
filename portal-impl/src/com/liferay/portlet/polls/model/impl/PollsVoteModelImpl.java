@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.model.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -284,7 +285,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{voteId=");
 		sb.append(getVoteId());
@@ -302,7 +303,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.polls.model.PollsVote");

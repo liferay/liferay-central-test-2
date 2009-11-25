@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -410,8 +411,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
 
@@ -469,8 +469,13 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
 
@@ -535,14 +540,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		List<PluginSetting> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No PluginSetting exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchPluginSettingException(msg.toString());
 		}
 		else {
@@ -559,14 +560,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No PluginSetting exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchPluginSettingException(msg.toString());
 		}
 		else {
@@ -586,8 +583,13 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
 
@@ -648,18 +650,13 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 				pluginType);
 
 		if (pluginSetting == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No PluginSetting exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("pluginId=" + pluginId);
-
 			msg.append(", ");
 			msg.append("pluginType=" + pluginType);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -700,8 +697,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(13);
 				query.append(
 					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
 
@@ -870,8 +866,13 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT pluginSetting FROM PluginSetting pluginSetting ");
 
@@ -961,8 +962,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(pluginSetting) ");
 				query.append("FROM PluginSetting pluginSetting WHERE ");
 
@@ -1015,8 +1015,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(14);
 				query.append("SELECT COUNT(pluginSetting) ");
 				query.append("FROM PluginSetting pluginSetting WHERE ");
 

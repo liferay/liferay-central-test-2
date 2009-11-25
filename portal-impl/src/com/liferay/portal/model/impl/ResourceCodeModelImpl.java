@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceCodeSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -269,7 +270,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{codeId=");
 		sb.append(getCodeId());
@@ -285,7 +286,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.ResourceCode");

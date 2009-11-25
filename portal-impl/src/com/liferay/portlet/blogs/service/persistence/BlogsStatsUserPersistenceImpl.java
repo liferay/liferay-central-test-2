@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -440,8 +441,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -503,8 +503,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -574,14 +583,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -596,14 +601,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -623,8 +624,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -698,8 +708,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -761,8 +770,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -832,14 +850,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -854,14 +868,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -881,8 +891,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -948,15 +967,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		BlogsStatsUser blogsStatsUser = fetchByG_U(groupId, userId);
 
 		if (blogsStatsUser == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -991,8 +1006,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1077,8 +1091,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1146,8 +1159,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (7 > arrayCapacity) {
+					arrayCapacity = 7;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1223,17 +1245,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("entryCount=" + entryCount);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -1249,17 +1266,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("entryCount=" + entryCount);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -1279,8 +1291,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (7 > arrayCapacity) {
+				arrayCapacity = 7;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1362,8 +1383,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1431,8 +1451,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (7 > arrayCapacity) {
+					arrayCapacity = 7;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1508,17 +1537,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("entryCount=" + entryCount);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -1534,17 +1558,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No BlogsStatsUser exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("entryCount=" + entryCount);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
@@ -1564,8 +1583,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (7 > arrayCapacity) {
+				arrayCapacity = 7;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1696,8 +1724,17 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser ");
 
@@ -1812,8 +1849,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(blogsStatsUser) ");
 				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1859,8 +1895,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(blogsStatsUser) ");
 				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1906,8 +1941,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(blogsStatsUser) ");
 				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -1962,8 +1996,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(blogsStatsUser) ");
 				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 
@@ -2018,8 +2051,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(blogsStatsUser) ");
 				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
 

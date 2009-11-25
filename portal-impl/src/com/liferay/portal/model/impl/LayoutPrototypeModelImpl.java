@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutPrototypeSoap;
@@ -361,7 +362,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{layoutPrototypeId=");
 		sb.append(getLayoutPrototypeId());
@@ -381,7 +382,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.LayoutPrototype");

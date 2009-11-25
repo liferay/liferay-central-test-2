@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -357,15 +358,11 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		WebDAVProps webDAVProps = fetchByC_C(classNameId, classPK);
 
 		if (webDAVProps == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No WebDAVProps exists with the key {");
-
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -402,8 +399,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT webDAVProps FROM WebDAVProps webDAVProps WHERE ");
 
@@ -533,8 +529,13 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT webDAVProps FROM WebDAVProps webDAVProps ");
 
 				if (obc != null) {
@@ -619,8 +620,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(webDAVProps) ");
 				query.append("FROM WebDAVProps webDAVProps WHERE ");
 

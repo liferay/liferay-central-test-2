@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -400,8 +401,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
@@ -459,8 +459,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
@@ -524,14 +529,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		List<AnnouncementsDelivery> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No AnnouncementsDelivery exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchDeliveryException(msg.toString());
 		}
 		else {
@@ -547,14 +548,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No AnnouncementsDelivery exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchDeliveryException(msg.toString());
 		}
 		else {
@@ -574,8 +571,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
@@ -635,15 +637,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		AnnouncementsDelivery announcementsDelivery = fetchByU_T(userId, type);
 
 		if (announcementsDelivery == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No AnnouncementsDelivery exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(", ");
 			msg.append("type=" + type);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -678,8 +676,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
 
@@ -825,8 +822,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery ");
 
@@ -915,8 +917,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(announcementsDelivery) ");
 				query.append(
 					"FROM AnnouncementsDelivery announcementsDelivery WHERE ");
@@ -963,8 +964,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(announcementsDelivery) ");
 				query.append(
 					"FROM AnnouncementsDelivery announcementsDelivery WHERE ");

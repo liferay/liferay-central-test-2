@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletItemSoap;
@@ -369,7 +370,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{portletItemId=");
 		sb.append(getPortletItemId());
@@ -397,7 +398,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.PortletItem");

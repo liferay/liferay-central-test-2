@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupSoap;
@@ -435,7 +436,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{groupId=");
 		sb.append(getGroupId());
@@ -469,7 +470,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Group");

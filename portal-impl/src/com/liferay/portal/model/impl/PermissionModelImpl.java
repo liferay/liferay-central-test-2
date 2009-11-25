@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PermissionSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -262,7 +263,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{permissionId=");
 		sb.append(getPermissionId());
@@ -278,7 +279,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Permission");

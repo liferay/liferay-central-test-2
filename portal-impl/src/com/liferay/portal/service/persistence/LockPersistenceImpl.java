@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -399,8 +400,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT lock FROM Lock lock WHERE ");
 
 				if (uuid == null) {
@@ -472,8 +472,13 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 6;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT lock FROM Lock lock WHERE ");
 
 				if (uuid == null) {
@@ -550,14 +555,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		List<Lock> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Lock exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLockException(msg.toString());
 		}
 		else {
@@ -572,14 +573,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		List<Lock> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Lock exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLockException(msg.toString());
 		}
 		else {
@@ -598,8 +595,13 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 6;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT lock FROM Lock lock WHERE ");
 
 			if (uuid == null) {
@@ -680,8 +682,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT lock FROM Lock lock WHERE ");
 
 				if (expirationDate == null) {
@@ -745,8 +746,13 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 4;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT lock FROM Lock lock WHERE ");
 
 				if (expirationDate == null) {
@@ -815,14 +821,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		List<Lock> list = findByExpirationDate(expirationDate, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Lock exists with the key {");
-
 			msg.append("expirationDate=" + expirationDate);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLockException(msg.toString());
 		}
 		else {
@@ -838,14 +840,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Lock exists with the key {");
-
 			msg.append("expirationDate=" + expirationDate);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLockException(msg.toString());
 		}
 		else {
@@ -865,8 +863,13 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 4;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT lock FROM Lock lock WHERE ");
 
 			if (expirationDate == null) {
@@ -931,15 +934,11 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		Lock lock = fetchByC_K(className, key);
 
 		if (lock == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Lock exists with the key {");
-
 			msg.append("className=" + className);
-
 			msg.append(", ");
 			msg.append("key=" + key);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -974,8 +973,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT lock FROM Lock lock WHERE ");
 
 				if (className == null) {
@@ -1135,8 +1133,13 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT lock FROM Lock lock ");
 
 				if (obc != null) {
@@ -1231,8 +1234,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(lock) ");
 				query.append("FROM Lock lock WHERE ");
 
@@ -1294,8 +1296,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append("SELECT COUNT(lock) ");
 				query.append("FROM Lock lock WHERE ");
 
@@ -1349,8 +1350,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(12);
 				query.append("SELECT COUNT(lock) ");
 				query.append("FROM Lock lock WHERE ");
 

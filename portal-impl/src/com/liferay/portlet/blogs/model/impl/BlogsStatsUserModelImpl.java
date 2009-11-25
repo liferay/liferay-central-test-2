@@ -25,6 +25,7 @@ package com.liferay.portlet.blogs.model.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -348,7 +349,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{statsUserId=");
 		sb.append(getStatsUserId());
@@ -374,7 +375,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.blogs.model.BlogsStatsUser");

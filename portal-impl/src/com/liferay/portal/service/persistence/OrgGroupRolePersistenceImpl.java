@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -347,8 +348,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT orgGroupRole FROM OrgGroupRole orgGroupRole WHERE ");
 
@@ -406,8 +406,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT orgGroupRole FROM OrgGroupRole orgGroupRole WHERE ");
 
@@ -471,14 +476,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		List<OrgGroupRole> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No OrgGroupRole exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchOrgGroupRoleException(msg.toString());
 		}
 		else {
@@ -493,14 +494,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		List<OrgGroupRole> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No OrgGroupRole exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchOrgGroupRoleException(msg.toString());
 		}
 		else {
@@ -520,8 +517,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT orgGroupRole FROM OrgGroupRole orgGroupRole WHERE ");
 
@@ -589,8 +591,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT orgGroupRole FROM OrgGroupRole orgGroupRole WHERE ");
 
@@ -648,8 +649,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT orgGroupRole FROM OrgGroupRole orgGroupRole WHERE ");
 
@@ -713,14 +719,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		List<OrgGroupRole> list = findByRoleId(roleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No OrgGroupRole exists with the key {");
-
 			msg.append("roleId=" + roleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchOrgGroupRoleException(msg.toString());
 		}
 		else {
@@ -735,14 +737,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		List<OrgGroupRole> list = findByRoleId(roleId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No OrgGroupRole exists with the key {");
-
 			msg.append("roleId=" + roleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchOrgGroupRoleException(msg.toString());
 		}
 		else {
@@ -762,8 +760,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT orgGroupRole FROM OrgGroupRole orgGroupRole WHERE ");
 
@@ -882,8 +885,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT orgGroupRole FROM OrgGroupRole orgGroupRole ");
 
@@ -971,8 +979,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(orgGroupRole) ");
 				query.append("FROM OrgGroupRole orgGroupRole WHERE ");
 
@@ -1018,8 +1025,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(orgGroupRole) ");
 				query.append("FROM OrgGroupRole orgGroupRole WHERE ");
 

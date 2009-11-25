@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.PhoneSoap;
@@ -359,7 +360,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{phoneId=");
 		sb.append(getPhoneId());
@@ -391,7 +392,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Phone");

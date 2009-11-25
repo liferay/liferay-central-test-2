@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.EmailAddress;
@@ -417,8 +418,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -480,8 +480,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -552,14 +561,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		List<EmailAddress> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -576,14 +581,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -603,8 +604,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -678,8 +688,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -741,8 +750,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -812,14 +830,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		List<EmailAddress> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -834,14 +848,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		List<EmailAddress> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -861,8 +871,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -938,8 +957,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1007,8 +1025,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (7 > arrayCapacity) {
+					arrayCapacity = 7;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1085,17 +1112,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		List<EmailAddress> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -1112,17 +1134,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -1142,8 +1159,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (7 > arrayCapacity) {
+				arrayCapacity = 7;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1225,8 +1251,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1301,8 +1326,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 7;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (9 > arrayCapacity) {
+					arrayCapacity = 9;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1386,20 +1420,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -1416,20 +1444,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -1449,8 +1471,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 7;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (9 > arrayCapacity) {
+				arrayCapacity = 9;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1539,8 +1570,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1624,8 +1654,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 9;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (11 > arrayCapacity) {
+					arrayCapacity = 11;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1715,23 +1754,16 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 				classPK, primary, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("primary=" + primary);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -1748,23 +1780,16 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 				classPK, primary, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No EmailAddress exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("primary=" + primary);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEmailAddressException(msg.toString());
 		}
 		else {
@@ -1785,8 +1810,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 9;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (11 > arrayCapacity) {
+				arrayCapacity = 11;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT emailAddress FROM EmailAddress emailAddress WHERE ");
 
@@ -1929,8 +1963,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT emailAddress FROM EmailAddress emailAddress ");
 
@@ -2047,8 +2090,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(emailAddress) ");
 				query.append("FROM EmailAddress emailAddress WHERE ");
 
@@ -2094,8 +2136,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(emailAddress) ");
 				query.append("FROM EmailAddress emailAddress WHERE ");
 
@@ -2144,8 +2185,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(emailAddress) ");
 				query.append("FROM EmailAddress emailAddress WHERE ");
 
@@ -2200,8 +2240,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT COUNT(emailAddress) ");
 				query.append("FROM EmailAddress emailAddress WHERE ");
 
@@ -2263,8 +2302,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append("SELECT COUNT(emailAddress) ");
 				query.append("FROM EmailAddress emailAddress WHERE ");
 

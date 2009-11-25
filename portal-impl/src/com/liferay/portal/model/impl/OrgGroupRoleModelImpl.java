@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.OrgGroupRole;
 import com.liferay.portal.model.OrgGroupRoleSoap;
 import com.liferay.portal.service.persistence.OrgGroupRolePK;
@@ -206,7 +207,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{organizationId=");
 		sb.append(getOrganizationId());
@@ -220,7 +221,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.OrgGroupRole");

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -357,8 +358,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
@@ -416,8 +416,13 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
@@ -482,14 +487,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		List<OrgGroupPermission> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No OrgGroupPermission exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
@@ -506,14 +507,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No OrgGroupPermission exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
@@ -534,8 +531,13 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
@@ -603,8 +605,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
@@ -662,8 +663,13 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
@@ -729,14 +735,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No OrgGroupPermission exists with the key {");
-
 			msg.append("permissionId=" + permissionId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
@@ -753,14 +755,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No OrgGroupPermission exists with the key {");
-
 			msg.append("permissionId=" + permissionId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
@@ -781,8 +779,13 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
 
@@ -901,8 +904,13 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission ");
 
@@ -992,8 +1000,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(orgGroupPermission) ");
 				query.append(
 					"FROM OrgGroupPermission orgGroupPermission WHERE ");
@@ -1040,8 +1047,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(orgGroupPermission) ");
 				query.append(
 					"FROM OrgGroupPermission orgGroupPermission WHERE ");

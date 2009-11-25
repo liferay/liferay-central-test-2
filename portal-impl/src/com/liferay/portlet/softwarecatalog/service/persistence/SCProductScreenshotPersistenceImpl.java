@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -455,8 +456,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append(
 					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
@@ -519,8 +519,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (6 > arrayCapacity) {
+					arrayCapacity = 6;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
@@ -593,14 +602,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SCProductScreenshot exists with the key {");
-
 			msg.append("productEntryId=" + productEntryId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchProductScreenshotException(msg.toString());
 		}
 		else {
@@ -617,14 +622,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SCProductScreenshot exists with the key {");
-
 			msg.append("productEntryId=" + productEntryId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchProductScreenshotException(msg.toString());
 		}
 		else {
@@ -644,8 +645,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (6 > arrayCapacity) {
+				arrayCapacity = 6;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
@@ -712,12 +722,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		SCProductScreenshot scProductScreenshot = fetchByThumbnailId(thumbnailId);
 
 		if (scProductScreenshot == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SCProductScreenshot exists with the key {");
-
 			msg.append("thumbnailId=" + thumbnailId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -752,8 +759,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append(
 					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
@@ -822,12 +828,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		SCProductScreenshot scProductScreenshot = fetchByFullImageId(fullImageId);
 
 		if (scProductScreenshot == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SCProductScreenshot exists with the key {");
-
 			msg.append("fullImageId=" + fullImageId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -862,8 +865,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append(
 					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
@@ -933,15 +935,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				priority);
 
 		if (scProductScreenshot == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No SCProductScreenshot exists with the key {");
-
 			msg.append("productEntryId=" + productEntryId);
-
 			msg.append(", ");
 			msg.append("priority=" + priority);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -978,8 +976,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
 
@@ -1114,8 +1111,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (4 > arrayCapacity) {
+					arrayCapacity = 4;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot ");
 
@@ -1229,8 +1235,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(scProductScreenshot) ");
 				query.append(
 					"FROM SCProductScreenshot scProductScreenshot WHERE ");
@@ -1277,8 +1282,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(scProductScreenshot) ");
 				query.append(
 					"FROM SCProductScreenshot scProductScreenshot WHERE ");
@@ -1325,8 +1329,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(scProductScreenshot) ");
 				query.append(
 					"FROM SCProductScreenshot scProductScreenshot WHERE ");
@@ -1376,8 +1379,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(scProductScreenshot) ");
 				query.append(
 					"FROM SCProductScreenshot scProductScreenshot WHERE ");

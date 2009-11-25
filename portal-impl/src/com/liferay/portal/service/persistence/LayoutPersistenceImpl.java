@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -585,8 +586,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -648,8 +648,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (6 > arrayCapacity) {
+					arrayCapacity = 6;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -718,14 +727,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		List<Layout> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -740,14 +745,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		List<Layout> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -766,8 +767,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (6 > arrayCapacity) {
+				arrayCapacity = 6;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT layout FROM Layout layout WHERE ");
 
 			query.append("layout.groupId = ?");
@@ -840,8 +850,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.companyId = ?");
@@ -903,8 +912,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (6 > arrayCapacity) {
+					arrayCapacity = 6;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.companyId = ?");
@@ -973,14 +991,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		List<Layout> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -995,14 +1009,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		List<Layout> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -1021,8 +1031,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (6 > arrayCapacity) {
+				arrayCapacity = 6;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT layout FROM Layout layout WHERE ");
 
 			query.append("layout.companyId = ?");
@@ -1087,12 +1106,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		Layout layout = fetchByDLFolderId(dlFolderId);
 
 		if (layout == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("dlFolderId=" + dlFolderId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1126,8 +1142,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.dlFolderId = ?");
@@ -1195,12 +1210,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		Layout layout = fetchByIconImageId(iconImageId);
 
 		if (layout == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("iconImageId=" + iconImageId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1235,8 +1247,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.iconImageId = ?");
@@ -1314,8 +1325,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -1383,8 +1393,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (8 > arrayCapacity) {
+					arrayCapacity = 8;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -1459,17 +1478,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		List<Layout> list = findByG_P(groupId, privateLayout, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -1485,17 +1499,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -1515,8 +1524,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (8 > arrayCapacity) {
+				arrayCapacity = 8;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT layout FROM Layout layout WHERE ");
 
 			query.append("layout.groupId = ?");
@@ -1587,18 +1605,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		Layout layout = fetchByG_P_L(groupId, privateLayout, layoutId);
 
 		if (layout == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("layoutId=" + layoutId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1636,8 +1649,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -1730,8 +1742,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -1808,8 +1819,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 7;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (10 > arrayCapacity) {
+					arrayCapacity = 10;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -1892,20 +1912,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("parentLayoutId=" + parentLayoutId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -1922,20 +1936,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("parentLayoutId=" + parentLayoutId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -1955,8 +1963,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 7;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (10 > arrayCapacity) {
+				arrayCapacity = 10;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT layout FROM Layout layout WHERE ");
 
 			query.append("layout.groupId = ?");
@@ -2033,18 +2050,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		Layout layout = fetchByG_P_F(groupId, privateLayout, friendlyURL);
 
 		if (layout == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("friendlyURL=" + friendlyURL);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -2084,8 +2096,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(13);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -2195,8 +2206,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(13);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -2288,8 +2298,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 10;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (13 > arrayCapacity) {
+					arrayCapacity = 13;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT layout FROM Layout layout WHERE ");
 
 				query.append("layout.groupId = ?");
@@ -2386,20 +2405,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		List<Layout> list = findByG_P_T(groupId, privateLayout, type, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("type=" + type);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -2416,20 +2429,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Layout exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("type=" + type);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
@@ -2449,8 +2456,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 10;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (13 > arrayCapacity) {
+				arrayCapacity = 13;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT layout FROM Layout layout WHERE ");
 
 			query.append("layout.groupId = ?");
@@ -2600,8 +2616,17 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (4 > arrayCapacity) {
+					arrayCapacity = 4;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT layout FROM Layout layout ");
 
 				if (obc != null) {
@@ -2744,8 +2769,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 
@@ -2791,8 +2815,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 
@@ -2838,8 +2861,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 
@@ -2885,8 +2907,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 
@@ -2935,8 +2956,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 
@@ -2992,8 +3012,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 
@@ -3055,8 +3074,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 
@@ -3119,8 +3137,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 
@@ -3198,8 +3215,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT COUNT(layout) ");
 				query.append("FROM Layout layout WHERE ");
 

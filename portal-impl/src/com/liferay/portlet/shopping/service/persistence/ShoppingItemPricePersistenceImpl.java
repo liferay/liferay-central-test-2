@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -348,8 +349,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append(
 					"SELECT shoppingItemPrice FROM ShoppingItemPrice shoppingItemPrice WHERE ");
 
@@ -412,8 +412,17 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (6 > arrayCapacity) {
+					arrayCapacity = 6;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT shoppingItemPrice FROM ShoppingItemPrice shoppingItemPrice WHERE ");
 
@@ -484,14 +493,10 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 		List<ShoppingItemPrice> list = findByItemId(itemId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ShoppingItemPrice exists with the key {");
-
 			msg.append("itemId=" + itemId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchItemPriceException(msg.toString());
 		}
 		else {
@@ -507,14 +512,10 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ShoppingItemPrice exists with the key {");
-
 			msg.append("itemId=" + itemId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchItemPriceException(msg.toString());
 		}
 		else {
@@ -534,8 +535,17 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (6 > arrayCapacity) {
+				arrayCapacity = 6;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT shoppingItemPrice FROM ShoppingItemPrice shoppingItemPrice WHERE ");
 
@@ -661,8 +671,17 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (4 > arrayCapacity) {
+					arrayCapacity = 4;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT shoppingItemPrice FROM ShoppingItemPrice shoppingItemPrice ");
 
@@ -751,8 +770,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(shoppingItemPrice) ");
 				query.append("FROM ShoppingItemPrice shoppingItemPrice WHERE ");
 

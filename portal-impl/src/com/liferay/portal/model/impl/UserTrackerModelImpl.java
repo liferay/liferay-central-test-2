@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -300,7 +301,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{userTrackerId=");
 		sb.append(getUserTrackerId());
@@ -324,7 +325,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.UserTracker");

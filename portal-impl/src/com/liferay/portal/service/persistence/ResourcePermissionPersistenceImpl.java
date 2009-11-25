@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -476,8 +477,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -535,8 +535,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -601,14 +606,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		List<ResourcePermission> list = findByRoleId(roleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ResourcePermission exists with the key {");
-
 			msg.append("roleId=" + roleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchResourcePermissionException(msg.toString());
 		}
 		else {
@@ -625,14 +626,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ResourcePermission exists with the key {");
-
 			msg.append("roleId=" + roleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchResourcePermissionException(msg.toString());
 		}
 		else {
@@ -652,8 +649,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -725,8 +727,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -814,8 +815,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 10;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -908,20 +914,14 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No ResourcePermission exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(", ");
 			msg.append("scope=" + scope);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchResourcePermissionException(msg.toString());
 		}
 		else {
@@ -938,20 +938,14 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No ResourcePermission exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(", ");
 			msg.append("scope=" + scope);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchResourcePermissionException(msg.toString());
 		}
 		else {
@@ -972,8 +966,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 10;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -1074,8 +1073,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(15);
 				query.append(
 					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -1187,8 +1185,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 15;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -1302,23 +1305,16 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				primKey, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No ResourcePermission exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(", ");
 			msg.append("scope=" + scope);
-
 			msg.append(", ");
 			msg.append("primKey=" + primKey);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchResourcePermissionException(msg.toString());
 		}
 		else {
@@ -1335,23 +1331,16 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				primKey, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No ResourcePermission exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(", ");
 			msg.append("scope=" + scope);
-
 			msg.append(", ");
 			msg.append("primKey=" + primKey);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchResourcePermissionException(msg.toString());
 		}
 		else {
@@ -1372,8 +1361,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 15;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -1483,24 +1477,17 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				name, scope, primKey, roleId);
 
 		if (resourcePermission == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(11);
 			msg.append("No ResourcePermission exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(", ");
 			msg.append("scope=" + scope);
-
 			msg.append(", ");
 			msg.append("primKey=" + primKey);
-
 			msg.append(", ");
 			msg.append("roleId=" + roleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1542,8 +1529,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(17);
 				query.append(
 					"SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ");
 
@@ -1726,8 +1712,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT resourcePermission FROM ResourcePermission resourcePermission ");
 
@@ -1834,8 +1825,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(resourcePermission) ");
 				query.append(
 					"FROM ResourcePermission resourcePermission WHERE ");
@@ -1887,8 +1877,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT COUNT(resourcePermission) ");
 				query.append(
 					"FROM ResourcePermission resourcePermission WHERE ");
@@ -1969,8 +1958,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(16);
 				query.append("SELECT COUNT(resourcePermission) ");
 				query.append(
 					"FROM ResourcePermission resourcePermission WHERE ");
@@ -2072,8 +2060,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(18);
 				query.append("SELECT COUNT(resourcePermission) ");
 				query.append(
 					"FROM ResourcePermission resourcePermission WHERE ");

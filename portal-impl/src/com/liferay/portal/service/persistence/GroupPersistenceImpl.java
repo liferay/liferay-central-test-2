@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -692,8 +693,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.companyId = ?");
@@ -754,8 +754,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.companyId = ?");
@@ -823,14 +832,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Group exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchGroupException(msg.toString());
 		}
 		else {
@@ -845,14 +850,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Group exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchGroupException(msg.toString());
 		}
 		else {
@@ -871,8 +872,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT group_ FROM Group group_ WHERE ");
 
 			query.append("group_.companyId = ?");
@@ -936,12 +946,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByLiveGroupId(liveGroupId);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Group exists with the key {");
-
 			msg.append("liveGroupId=" + liveGroupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -975,8 +982,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.liveGroupId = ?");
@@ -1043,15 +1049,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_N(companyId, name);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Group exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1086,8 +1088,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.companyId = ?");
@@ -1177,15 +1178,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_F(companyId, friendlyURL);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Group exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("friendlyURL=" + friendlyURL);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1220,8 +1217,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.companyId = ?");
@@ -1321,8 +1317,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.type = ?");
@@ -1389,8 +1384,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (7 > arrayCapacity) {
+					arrayCapacity = 7;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.type = ?");
@@ -1464,17 +1468,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByT_A(type, active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Group exists with the key {");
-
 			msg.append("type=" + type);
-
 			msg.append(", ");
 			msg.append("active=" + active);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchGroupException(msg.toString());
 		}
 		else {
@@ -1489,17 +1488,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByT_A(type, active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Group exists with the key {");
-
 			msg.append("type=" + type);
-
 			msg.append(", ");
 			msg.append("active=" + active);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchGroupException(msg.toString());
 		}
 		else {
@@ -1519,8 +1513,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (7 > arrayCapacity) {
+				arrayCapacity = 7;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT group_ FROM Group group_ WHERE ");
 
 			query.append("group_.type = ?");
@@ -1590,18 +1593,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_C_C(companyId, classNameId, classPK);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Group exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1638,8 +1636,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.companyId = ?");
@@ -1720,18 +1717,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_L_N(companyId, liveGroupId, name);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Group exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("liveGroupId=" + liveGroupId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1770,8 +1762,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(12);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.companyId = ?");
@@ -1869,21 +1860,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_C_L_N(companyId, classNameId, liveGroupId, name);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No Group exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("liveGroupId=" + liveGroupId);
-
 			msg.append(", ");
 			msg.append("name=" + name);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1924,8 +1909,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(14);
 				query.append("SELECT group_ FROM Group group_ WHERE ");
 
 				query.append("group_.companyId = ?");
@@ -2087,8 +2071,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT group_ FROM Group group_ ");
 
 				if (obc != null) {
@@ -2224,8 +2217,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(group_) ");
 				query.append("FROM Group group_ WHERE ");
 
@@ -2271,8 +2263,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(group_) ");
 				query.append("FROM Group group_ WHERE ");
 
@@ -2319,8 +2310,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(group_) ");
 				query.append("FROM Group group_ WHERE ");
 
@@ -2388,8 +2378,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(group_) ");
 				query.append("FROM Group group_ WHERE ");
 
@@ -2458,8 +2447,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(group_) ");
 				query.append("FROM Group group_ WHERE ");
 
@@ -2514,8 +2502,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT COUNT(group_) ");
 				query.append("FROM Group group_ WHERE ");
 
@@ -2578,8 +2565,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT COUNT(group_) ");
 				query.append("FROM Group group_ WHERE ");
 
@@ -2658,8 +2644,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(13);
 				query.append("SELECT COUNT(group_) ");
 				query.append("FROM Group group_ WHERE ");
 
@@ -2796,8 +2781,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += 2;
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETORGANIZATIONS);
 
 				if (obc != null) {
@@ -3147,8 +3141,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += 2;
+				}
+
+				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETPERMISSIONS);
 
 				if (obc != null) {
@@ -3489,8 +3488,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += 2;
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETROLES);
 
 				if (obc != null) {
@@ -3824,8 +3832,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += 2;
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETUSERGROUPS);
 
 				if (obc != null) {
@@ -4170,8 +4187,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += 2;
+				}
+
+				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETUSERS);
 
 				if (obc != null) {

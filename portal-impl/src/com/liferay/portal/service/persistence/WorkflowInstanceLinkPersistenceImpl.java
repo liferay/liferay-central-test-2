@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -388,21 +389,15 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				companyId, classNameId, classPK);
 
 		if (workflowInstanceLink == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No WorkflowInstanceLink exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -441,8 +436,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append(
 					"SELECT workflowInstanceLink FROM WorkflowInstanceLink workflowInstanceLink WHERE ");
 
@@ -586,8 +580,13 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT workflowInstanceLink FROM WorkflowInstanceLink workflowInstanceLink ");
 
@@ -676,8 +675,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append("SELECT COUNT(workflowInstanceLink) ");
 				query.append(
 					"FROM WorkflowInstanceLink workflowInstanceLink WHERE ");

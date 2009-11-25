@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.model.WorkflowInstanceLinkSoap;
@@ -375,7 +376,7 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{workflowInstanceLinkId=");
 		sb.append(getWorkflowInstanceLinkId());
@@ -403,7 +404,7 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.WorkflowInstanceLink");

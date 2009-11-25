@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -506,8 +507,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -584,8 +584,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 6;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (8 > arrayCapacity) {
+					arrayCapacity = 8;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -670,14 +679,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		List<JournalStructure> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -692,14 +697,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		List<JournalStructure> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -718,8 +719,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 6;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (8 > arrayCapacity) {
+				arrayCapacity = 8;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -800,15 +810,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		JournalStructure journalStructure = fetchByUUID_G(uuid, groupId);
 
 		if (journalStructure == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(", ");
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -843,8 +849,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -943,8 +948,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1006,8 +1010,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1077,14 +1090,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		List<JournalStructure> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -1100,14 +1109,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -1126,8 +1131,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1201,8 +1215,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1280,8 +1293,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 6;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (8 > arrayCapacity) {
+					arrayCapacity = 8;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1367,14 +1389,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		List<JournalStructure> list = findByStructureId(structureId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("structureId=" + structureId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -1390,14 +1408,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("structureId=" + structureId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -1417,8 +1431,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 6;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (8 > arrayCapacity) {
+				arrayCapacity = 8;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1499,15 +1522,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		JournalStructure journalStructure = fetchByG_S(groupId, structureId);
 
 		if (journalStructure == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("structureId=" + structureId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1542,8 +1561,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1644,8 +1662,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1732,8 +1749,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 8;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (10 > arrayCapacity) {
+					arrayCapacity = 10;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -1827,17 +1853,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("parentStructureId=" + parentStructureId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -1854,17 +1875,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No JournalStructure exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("parentStructureId=" + parentStructureId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
@@ -1884,8 +1900,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 8;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (10 > arrayCapacity) {
+				arrayCapacity = 10;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalStructure FROM JournalStructure journalStructure WHERE ");
 
@@ -2032,8 +2057,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalStructure FROM JournalStructure journalStructure ");
 
@@ -2156,8 +2190,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(journalStructure) ");
 				query.append("FROM JournalStructure journalStructure WHERE ");
 
@@ -2219,8 +2252,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(journalStructure) ");
 				query.append("FROM JournalStructure journalStructure WHERE ");
 
@@ -2287,8 +2319,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(journalStructure) ");
 				query.append("FROM JournalStructure journalStructure WHERE ");
 
@@ -2334,8 +2365,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(journalStructure) ");
 				query.append("FROM JournalStructure journalStructure WHERE ");
 
@@ -2398,8 +2428,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(journalStructure) ");
 				query.append("FROM JournalStructure journalStructure WHERE ");
 
@@ -2468,8 +2497,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(journalStructure) ");
 				query.append("FROM JournalStructure journalStructure WHERE ");
 

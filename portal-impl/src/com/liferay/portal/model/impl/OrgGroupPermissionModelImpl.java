@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.OrgGroupPermissionSoap;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
@@ -207,7 +208,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{organizationId=");
 		sb.append(getOrganizationId());
@@ -221,7 +222,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.OrgGroupPermission");

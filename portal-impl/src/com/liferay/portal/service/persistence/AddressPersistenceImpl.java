@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Address;
@@ -441,8 +442,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -503,8 +503,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -572,14 +581,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -594,14 +599,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -621,8 +622,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT address FROM Address address WHERE ");
 
 			query.append("address.companyId = ?");
@@ -693,8 +703,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.userId = ?");
@@ -755,8 +764,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.userId = ?");
@@ -824,14 +842,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Address exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -846,14 +860,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Address exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -872,8 +882,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT address FROM Address address WHERE ");
 
 			query.append("address.userId = ?");
@@ -947,8 +966,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -1015,8 +1033,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (7 > arrayCapacity) {
+					arrayCapacity = 7;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -1090,17 +1117,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -1116,17 +1138,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -1146,8 +1163,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (7 > arrayCapacity) {
+				arrayCapacity = 7;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT address FROM Address address WHERE ");
 
 			query.append("address.companyId = ?");
@@ -1227,8 +1253,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -1302,8 +1327,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 7;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (9 > arrayCapacity) {
+					arrayCapacity = 9;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -1385,20 +1419,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -1415,20 +1443,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -1448,8 +1470,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 7;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (9 > arrayCapacity) {
+				arrayCapacity = 9;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT address FROM Address address WHERE ");
 
 			query.append("address.companyId = ?");
@@ -1536,8 +1567,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -1620,8 +1650,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 9;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (11 > arrayCapacity) {
+					arrayCapacity = 11;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -1709,23 +1748,16 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				mailing, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("mailing=" + mailing);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -1742,23 +1774,16 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				mailing, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("mailing=" + mailing);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -1778,8 +1803,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 9;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (11 > arrayCapacity) {
+				arrayCapacity = 11;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT address FROM Address address WHERE ");
 
 			query.append("address.companyId = ?");
@@ -1872,8 +1906,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -1956,8 +1989,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 9;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (11 > arrayCapacity) {
+					arrayCapacity = 11;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT address FROM Address address WHERE ");
 
 				query.append("address.companyId = ?");
@@ -2045,23 +2087,16 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				primary, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("primary=" + primary);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -2078,23 +2113,16 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				primary, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No Address exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("primary=" + primary);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchAddressException(msg.toString());
 		}
 		else {
@@ -2114,8 +2142,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 9;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (11 > arrayCapacity) {
+				arrayCapacity = 11;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT address FROM Address address WHERE ");
 
 			query.append("address.companyId = ?");
@@ -2255,8 +2292,17 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT address FROM Address address ");
 
 				if (obc != null) {
@@ -2379,8 +2425,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(address) ");
 				query.append("FROM Address address WHERE ");
 
@@ -2426,8 +2471,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(address) ");
 				query.append("FROM Address address WHERE ");
 
@@ -2476,8 +2520,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(address) ");
 				query.append("FROM Address address WHERE ");
 
@@ -2532,8 +2575,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT COUNT(address) ");
 				query.append("FROM Address address WHERE ");
 
@@ -2595,8 +2637,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append("SELECT COUNT(address) ");
 				query.append("FROM Address address WHERE ");
 
@@ -2664,8 +2705,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append("SELECT COUNT(address) ");
 				query.append("FROM Address address WHERE ");
 

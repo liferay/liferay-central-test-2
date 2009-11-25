@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.ListTypeSoap;
 
@@ -211,7 +212,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{listTypeId=");
 		sb.append(getListTypeId());
@@ -225,7 +226,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.ListType");

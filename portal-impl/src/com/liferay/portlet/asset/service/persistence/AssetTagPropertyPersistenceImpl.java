@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -434,8 +435,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -497,8 +497,17 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -569,14 +578,10 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		List<AssetTagProperty> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No AssetTagProperty exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchTagPropertyException(msg.toString());
 		}
 		else {
@@ -593,14 +598,10 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No AssetTagProperty exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchTagPropertyException(msg.toString());
 		}
 		else {
@@ -620,8 +621,17 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -695,8 +705,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -758,8 +767,17 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -829,14 +847,10 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		List<AssetTagProperty> list = findByTagId(tagId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No AssetTagProperty exists with the key {");
-
 			msg.append("tagId=" + tagId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchTagPropertyException(msg.toString());
 		}
 		else {
@@ -851,14 +865,10 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		List<AssetTagProperty> list = findByTagId(tagId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No AssetTagProperty exists with the key {");
-
 			msg.append("tagId=" + tagId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchTagPropertyException(msg.toString());
 		}
 		else {
@@ -878,8 +888,17 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -953,8 +972,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -1039,8 +1057,17 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 8;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (10 > arrayCapacity) {
+					arrayCapacity = 10;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -1132,17 +1159,12 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		List<AssetTagProperty> list = findByC_K(companyId, key, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No AssetTagProperty exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("key=" + key);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchTagPropertyException(msg.toString());
 		}
 		else {
@@ -1159,17 +1181,12 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No AssetTagProperty exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("key=" + key);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchTagPropertyException(msg.toString());
 		}
 		else {
@@ -1189,8 +1206,17 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 8;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (10 > arrayCapacity) {
+				arrayCapacity = 10;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -1277,15 +1303,11 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		AssetTagProperty assetTagProperty = fetchByT_K(tagId, key);
 
 		if (assetTagProperty == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No AssetTagProperty exists with the key {");
-
 			msg.append("tagId=" + tagId);
-
 			msg.append(", ");
 			msg.append("key=" + key);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1320,8 +1342,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -1471,8 +1492,17 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT assetTagProperty FROM AssetTagProperty assetTagProperty ");
 
@@ -1580,8 +1610,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(assetTagProperty) ");
 				query.append("FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -1627,8 +1656,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(assetTagProperty) ");
 				query.append("FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -1674,8 +1702,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(assetTagProperty) ");
 				query.append("FROM AssetTagProperty assetTagProperty WHERE ");
 
@@ -1742,8 +1769,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(assetTagProperty) ");
 				query.append("FROM AssetTagProperty assetTagProperty WHERE ");
 

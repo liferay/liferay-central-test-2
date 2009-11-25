@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.SubscriptionSoap;
@@ -361,7 +362,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{subscriptionId=");
 		sb.append(getSubscriptionId());
@@ -387,7 +388,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Subscription");

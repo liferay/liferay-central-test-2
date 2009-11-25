@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ListType;
@@ -324,8 +325,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT listType FROM ListType listType WHERE ");
 
 				if (type == null) {
@@ -401,8 +401,17 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 6;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (8 > arrayCapacity) {
+					arrayCapacity = 8;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT listType FROM ListType listType WHERE ");
 
 				if (type == null) {
@@ -486,14 +495,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		List<ListType> list = findByType(type, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ListType exists with the key {");
-
 			msg.append("type=" + type);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchListTypeException(msg.toString());
 		}
 		else {
@@ -508,14 +513,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		List<ListType> list = findByType(type, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ListType exists with the key {");
-
 			msg.append("type=" + type);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchListTypeException(msg.toString());
 		}
 		else {
@@ -534,8 +535,17 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 6;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (8 > arrayCapacity) {
+				arrayCapacity = 8;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT listType FROM ListType listType WHERE ");
 
 			if (type == null) {
@@ -672,8 +682,17 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT listType FROM ListType listType ");
 
 				if (obc != null) {
@@ -760,8 +779,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(listType) ");
 				query.append("FROM ListType listType WHERE ");
 

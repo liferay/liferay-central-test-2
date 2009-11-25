@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.PasswordPolicyRelSoap;
@@ -281,7 +282,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{passwordPolicyRelId=");
 		sb.append(getPasswordPolicyRelId());
@@ -297,7 +298,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.PasswordPolicyRel");

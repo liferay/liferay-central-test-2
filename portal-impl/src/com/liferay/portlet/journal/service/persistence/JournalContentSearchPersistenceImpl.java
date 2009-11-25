@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -539,8 +540,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -614,8 +614,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 6;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -696,14 +701,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		List<JournalContentSearch> list = findByArticleId(articleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("articleId=" + articleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -720,14 +721,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("articleId=" + articleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -747,8 +744,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 6;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -833,8 +835,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -899,8 +900,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -972,17 +978,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -999,17 +1000,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -1029,8 +1025,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1104,8 +1105,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1187,8 +1187,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 8;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1276,17 +1281,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -1303,17 +1303,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -1333,8 +1328,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 8;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1426,8 +1426,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1500,8 +1499,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 7;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1579,20 +1583,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				layoutId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("layoutId=" + layoutId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -1609,20 +1607,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				layoutId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("layoutId=" + layoutId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -1643,8 +1635,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 7;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1728,8 +1725,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1819,8 +1815,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 10;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -1914,20 +1915,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				articleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -1944,20 +1939,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				articleId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -1978,8 +1967,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 10;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -2080,8 +2074,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(12);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -2179,8 +2172,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 12;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -2281,23 +2279,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				layoutId, portletId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("layoutId=" + layoutId);
-
 			msg.append(", ");
 			msg.append("portletId=" + portletId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -2315,23 +2306,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				layoutId, portletId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(9);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("layoutId=" + layoutId);
-
 			msg.append(", ");
 			msg.append("portletId=" + portletId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
@@ -2352,8 +2336,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 12;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -2448,24 +2437,17 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				privateLayout, layoutId, portletId, articleId);
 
 		if (journalContentSearch == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(11);
 			msg.append("No JournalContentSearch exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("privateLayout=" + privateLayout);
-
 			msg.append(", ");
 			msg.append("layoutId=" + layoutId);
-
 			msg.append(", ");
 			msg.append("portletId=" + portletId);
-
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -2510,8 +2492,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(17);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ");
 
@@ -2698,8 +2679,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalContentSearch FROM JournalContentSearch journalContentSearch ");
 
@@ -2831,8 +2817,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(journalContentSearch) ");
 				query.append(
 					"FROM JournalContentSearch journalContentSearch WHERE ");
@@ -2898,8 +2883,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(journalContentSearch) ");
 				query.append(
 					"FROM JournalContentSearch journalContentSearch WHERE ");
@@ -2953,8 +2937,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(journalContentSearch) ");
 				query.append(
 					"FROM JournalContentSearch journalContentSearch WHERE ");
@@ -3027,8 +3010,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT COUNT(journalContentSearch) ");
 				query.append(
 					"FROM JournalContentSearch journalContentSearch WHERE ");
@@ -3092,8 +3074,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append("SELECT COUNT(journalContentSearch) ");
 				query.append(
 					"FROM JournalContentSearch journalContentSearch WHERE ");
@@ -3174,8 +3155,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(13);
 				query.append("SELECT COUNT(journalContentSearch) ");
 				query.append(
 					"FROM JournalContentSearch journalContentSearch WHERE ");
@@ -3265,8 +3245,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(18);
 				query.append("SELECT COUNT(journalContentSearch) ");
 				query.append(
 					"FROM JournalContentSearch journalContentSearch WHERE ");

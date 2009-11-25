@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -247,7 +248,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{resourceId=");
 		sb.append(getResourceId());
@@ -261,7 +262,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Resource");

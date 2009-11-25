@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -417,8 +418,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append(
 					"SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ");
 
@@ -481,8 +481,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (6 > arrayCapacity) {
+					arrayCapacity = 6;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ");
 
@@ -553,14 +562,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		List<TasksProposal> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No TasksProposal exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchProposalException(msg.toString());
 		}
 		else {
@@ -575,14 +580,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		List<TasksProposal> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No TasksProposal exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchProposalException(msg.toString());
 		}
 		else {
@@ -602,8 +603,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (6 > arrayCapacity) {
+				arrayCapacity = 6;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ");
 
@@ -678,8 +688,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ");
 
@@ -748,8 +757,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (8 > arrayCapacity) {
+					arrayCapacity = 8;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ");
 
@@ -826,17 +844,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		List<TasksProposal> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No TasksProposal exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchProposalException(msg.toString());
 		}
 		else {
@@ -852,17 +865,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No TasksProposal exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(", ");
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchProposalException(msg.toString());
 		}
 		else {
@@ -882,8 +890,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (8 > arrayCapacity) {
+				arrayCapacity = 8;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ");
 
@@ -956,15 +973,11 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		TasksProposal tasksProposal = fetchByC_C(classNameId, classPK);
 
 		if (tasksProposal == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No TasksProposal exists with the key {");
-
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -999,8 +1012,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(11);
 				query.append(
 					"SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ");
 
@@ -1151,8 +1163,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (4 > arrayCapacity) {
+					arrayCapacity = 4;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT tasksProposal FROM TasksProposal tasksProposal ");
 
@@ -1255,8 +1276,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(tasksProposal) ");
 				query.append("FROM TasksProposal tasksProposal WHERE ");
 
@@ -1302,8 +1322,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(tasksProposal) ");
 				query.append("FROM TasksProposal tasksProposal WHERE ");
 
@@ -1356,8 +1375,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(tasksProposal) ");
 				query.append("FROM TasksProposal tasksProposal WHERE ");
 

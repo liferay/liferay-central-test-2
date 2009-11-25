@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -606,8 +607,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -684,8 +684,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 6;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (8 > arrayCapacity) {
+					arrayCapacity = 8;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -770,14 +779,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -792,14 +797,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -818,8 +819,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 6;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (8 > arrayCapacity) {
+				arrayCapacity = 8;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -900,15 +910,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		SocialRequest socialRequest = fetchByUUID_G(uuid, groupId);
 
 		if (socialRequest == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("uuid=" + uuid);
-
 			msg.append(", ");
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -943,8 +949,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(10);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1043,8 +1048,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1106,8 +1110,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1177,14 +1190,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -1200,14 +1209,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -1227,8 +1232,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1302,8 +1316,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1365,8 +1378,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1436,14 +1458,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -1458,14 +1476,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -1485,8 +1499,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1560,8 +1583,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1623,8 +1645,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1695,14 +1726,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("receiverUserId=" + receiverUserId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -1718,14 +1745,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("receiverUserId=" + receiverUserId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -1745,8 +1768,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1820,8 +1852,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1889,8 +1920,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (7 > arrayCapacity) {
+					arrayCapacity = 7;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -1966,17 +2006,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByU_S(userId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(", ");
 			msg.append("status=" + status);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -1992,17 +2027,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(", ");
 			msg.append("status=" + status);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -2022,8 +2052,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (7 > arrayCapacity) {
+				arrayCapacity = 7;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -2105,8 +2144,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -2174,8 +2212,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (7 > arrayCapacity) {
+					arrayCapacity = 7;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -2251,17 +2298,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByR_S(receiverUserId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("receiverUserId=" + receiverUserId);
-
 			msg.append(", ");
 			msg.append("status=" + status);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -2277,17 +2319,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("receiverUserId=" + receiverUserId);
-
 			msg.append(", ");
 			msg.append("status=" + status);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -2307,8 +2344,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (7 > arrayCapacity) {
+				arrayCapacity = 7;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -2382,24 +2428,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				classPK, type, receiverUserId);
 
 		if (socialRequest == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(11);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("type=" + type);
-
 			msg.append(", ");
 			msg.append("receiverUserId=" + receiverUserId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -2439,8 +2478,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(13);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -2547,8 +2585,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(13);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -2638,8 +2675,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 11;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (13 > arrayCapacity) {
+					arrayCapacity = 13;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -2735,26 +2781,18 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				classPK, type, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(11);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("type=" + type);
-
 			msg.append(", ");
 			msg.append("status=" + status);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -2771,26 +2809,18 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				classPK, type, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(11);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("type=" + type);
-
 			msg.append(", ");
 			msg.append("status=" + status);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -2810,8 +2840,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 11;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (13 > arrayCapacity) {
+				arrayCapacity = 13;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -2912,8 +2951,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(13);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -3003,8 +3041,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 11;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (13 > arrayCapacity) {
+					arrayCapacity = 13;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -3100,26 +3147,18 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				receiverUserId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(11);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("type=" + type);
-
 			msg.append(", ");
 			msg.append("receiverUserId=" + receiverUserId);
-
 			msg.append(", ");
 			msg.append("status=" + status);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -3137,26 +3176,18 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				receiverUserId, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(11);
 			msg.append("No SocialRequest exists with the key {");
-
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(", ");
 			msg.append("type=" + type);
-
 			msg.append(", ");
 			msg.append("receiverUserId=" + receiverUserId);
-
 			msg.append(", ");
 			msg.append("status=" + status);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchRequestException(msg.toString());
 		}
 		else {
@@ -3178,8 +3209,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 11;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (13 > arrayCapacity) {
+				arrayCapacity = 13;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
 
@@ -3328,8 +3368,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRequest FROM SocialRequest socialRequest ");
 
@@ -3481,8 +3530,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -3544,8 +3592,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(9);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -3612,8 +3659,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -3659,8 +3705,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -3707,8 +3752,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -3754,8 +3798,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -3810,8 +3853,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -3867,8 +3909,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(12);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -3942,8 +3983,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(12);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 
@@ -4017,8 +4057,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(12);
 				query.append("SELECT COUNT(socialRequest) ");
 				query.append("FROM SocialRequest socialRequest WHERE ");
 

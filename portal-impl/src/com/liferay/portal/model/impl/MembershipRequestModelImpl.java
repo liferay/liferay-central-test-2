@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.MembershipRequestSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -336,7 +337,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{membershipRequestId=");
 		sb.append(getMembershipRequestId());
@@ -364,7 +365,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.MembershipRequest");

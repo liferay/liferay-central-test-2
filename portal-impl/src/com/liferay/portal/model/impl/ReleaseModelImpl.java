@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -302,7 +303,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{releaseId=");
 		sb.append(getReleaseId());
@@ -326,7 +327,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Release");

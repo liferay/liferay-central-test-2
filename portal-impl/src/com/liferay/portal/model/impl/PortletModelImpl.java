@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -275,7 +276,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{id=");
 		sb.append(getId());
@@ -293,7 +294,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Portlet");

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.BrowserTracker;
@@ -347,12 +348,9 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		BrowserTracker browserTracker = fetchByUserId(userId);
 
 		if (browserTracker == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No BrowserTracker exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -386,8 +384,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT browserTracker FROM BrowserTracker browserTracker WHERE ");
 
@@ -510,8 +507,13 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT browserTracker FROM BrowserTracker browserTracker ");
 
@@ -594,8 +596,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(browserTracker) ");
 				query.append("FROM BrowserTracker browserTracker WHERE ");
 

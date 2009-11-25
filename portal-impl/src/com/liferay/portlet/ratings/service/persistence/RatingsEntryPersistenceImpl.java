@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -398,8 +399,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
 
@@ -463,8 +463,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
 
@@ -534,17 +539,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		List<RatingsEntry> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No RatingsEntry exists with the key {");
-
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -560,17 +560,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No RatingsEntry exists with the key {");
-
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -590,8 +585,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
 
@@ -657,18 +657,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		RatingsEntry ratingsEntry = fetchByU_C_C(userId, classNameId, classPK);
 
 		if (ratingsEntry == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(7);
 			msg.append("No RatingsEntry exists with the key {");
-
 			msg.append("userId=" + userId);
-
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -705,8 +700,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append(
 					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
 
@@ -843,8 +837,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry ");
 
@@ -937,8 +936,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(ratingsEntry) ");
 				query.append("FROM RatingsEntry ratingsEntry WHERE ");
 
@@ -993,8 +991,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append("SELECT COUNT(ratingsEntry) ");
 				query.append("FROM RatingsEntry ratingsEntry WHERE ");
 

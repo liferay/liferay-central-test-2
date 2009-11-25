@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -461,7 +462,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -505,7 +506,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.blogs.model.BlogsEntry");

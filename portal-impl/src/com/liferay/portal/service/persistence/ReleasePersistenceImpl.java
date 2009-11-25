@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -340,12 +341,9 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		Release release = fetchByServletContextName(servletContextName);
 
 		if (release == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No Release exists with the key {");
-
 			msg.append("servletContextName=" + servletContextName);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -380,8 +378,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT release FROM Release release WHERE ");
 
 				if (servletContextName == null) {
@@ -519,8 +516,13 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT release FROM Release release ");
 
 				if (obc != null) {
@@ -603,8 +605,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(release) ");
 				query.append("FROM Release release WHERE ");
 

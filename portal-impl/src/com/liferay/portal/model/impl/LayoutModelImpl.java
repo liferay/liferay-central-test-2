@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -558,7 +559,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{plid=");
 		sb.append(getPlid());
@@ -612,7 +613,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Layout");

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.LayoutPrototype;
@@ -357,8 +358,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(3);
 				query.append(
 					"SELECT layoutPrototype FROM LayoutPrototype layoutPrototype WHERE ");
 
@@ -416,8 +416,13 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT layoutPrototype FROM LayoutPrototype layoutPrototype WHERE ");
 
@@ -482,14 +487,10 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		List<LayoutPrototype> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No LayoutPrototype exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutPrototypeException(msg.toString());
 		}
 		else {
@@ -506,14 +507,10 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No LayoutPrototype exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutPrototypeException(msg.toString());
 		}
 		else {
@@ -533,8 +530,13 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT layoutPrototype FROM LayoutPrototype layoutPrototype WHERE ");
 
@@ -604,8 +606,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT layoutPrototype FROM LayoutPrototype layoutPrototype WHERE ");
 
@@ -669,8 +670,13 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 5;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT layoutPrototype FROM LayoutPrototype layoutPrototype WHERE ");
 
@@ -741,17 +747,12 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		List<LayoutPrototype> list = findByC_A(companyId, active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No LayoutPrototype exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("active=" + active);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutPrototypeException(msg.toString());
 		}
 		else {
@@ -768,17 +769,12 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(5);
 			msg.append("No LayoutPrototype exists with the key {");
-
 			msg.append("companyId=" + companyId);
-
 			msg.append(", ");
 			msg.append("active=" + active);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchLayoutPrototypeException(msg.toString());
 		}
 		else {
@@ -798,8 +794,13 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 5;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT layoutPrototype FROM LayoutPrototype layoutPrototype WHERE ");
 
@@ -924,8 +925,13 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT layoutPrototype FROM LayoutPrototype layoutPrototype ");
 
@@ -1014,8 +1020,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(layoutPrototype) ");
 				query.append("FROM LayoutPrototype layoutPrototype WHERE ");
 
@@ -1064,8 +1069,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(6);
 				query.append("SELECT COUNT(layoutPrototype) ");
 				query.append("FROM LayoutPrototype layoutPrototype WHERE ");
 

@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -544,7 +545,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -576,7 +577,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.polls.model.PollsQuestion");

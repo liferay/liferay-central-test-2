@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.AddressSoap;
@@ -436,7 +437,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{addressId=");
 		sb.append(getAddressId());
@@ -480,7 +481,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public String toXmlString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Address");

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -387,8 +388,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(5);
 				query.append(
 					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
 
@@ -450,8 +450,17 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 3;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (5 > arrayCapacity) {
+					arrayCapacity = 5;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
 
@@ -521,14 +530,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		List<ShoppingCoupon> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ShoppingCoupon exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchCouponException(msg.toString());
 		}
 		else {
@@ -543,14 +548,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		List<ShoppingCoupon> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ShoppingCoupon exists with the key {");
-
 			msg.append("groupId=" + groupId);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
 			throw new NoSuchCouponException(msg.toString());
 		}
 		else {
@@ -570,8 +571,17 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			int arrayCapacity = 3;
 
+			if (obc != null) {
+				arrayCapacity += (obc.getOrderByFields().length * 4);
+			}
+
+			if (5 > arrayCapacity) {
+				arrayCapacity = 5;
+			}
+
+			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
 
@@ -637,12 +647,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		ShoppingCoupon shoppingCoupon = fetchByCode(code);
 
 		if (shoppingCoupon == null) {
-			StringBuilder msg = new StringBuilder();
-
+			StringBundler msg = new StringBundler(3);
 			msg.append("No ShoppingCoupon exists with the key {");
-
 			msg.append("code=" + code);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -676,8 +683,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(8);
 				query.append(
 					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
 
@@ -820,8 +826,17 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				int arrayCapacity = 1;
 
+				if (obc != null) {
+					arrayCapacity += (obc.getOrderByFields().length * 4);
+				}
+
+				if (3 > arrayCapacity) {
+					arrayCapacity = 3;
+				}
+
+				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon ");
 
@@ -916,8 +931,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(4);
 				query.append("SELECT COUNT(shoppingCoupon) ");
 				query.append("FROM ShoppingCoupon shoppingCoupon WHERE ");
 
@@ -963,8 +977,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
-
+				StringBundler query = new StringBundler(7);
 				query.append("SELECT COUNT(shoppingCoupon) ");
 				query.append("FROM ShoppingCoupon shoppingCoupon WHERE ");
 
