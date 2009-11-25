@@ -143,12 +143,12 @@ if (organizationId > 0) {
 </aui:form>
 
 <script type="text/javascript">
-	jQuery(
-		function() {
-			var selectionMethod = jQuery('#<portlet:namespace />selectionMethod');
+	AUI().ready(
+		function(A) {
+			var selectionMethod = A.one('#<portlet:namespace />selectionMethod');
 
 			function showHiddenFields() {
-				var usersSelectionOptions = jQuery('#<portlet:namespace />UsersSelectionOptions');
+				var usersSelectionOptions = A.one('#<portlet:namespace />UsersSelectionOptions');
 
 				if (selectionMethod.val() == 'users') {
 					usersSelectionOptions.show();
@@ -160,11 +160,7 @@ if (organizationId > 0) {
 
 			showHiddenFields();
 
-			selectionMethod.change(
-				function(event) {
-					showHiddenFields();
-				}
-			);
+			selectionMethod.on('change', showHiddenFields);
 		}
 	);
 </script>
