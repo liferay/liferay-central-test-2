@@ -121,7 +121,8 @@ public class LoginTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[2]/a/span[1]")) {
+				if (selenium.isElementPresent(
+							"//div/div[4]/div/ul/li[2]/a/span[1]")) {
 					break;
 				}
 			}
@@ -131,7 +132,8 @@ public class LoginTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a/span[1]"));
+		selenium.click(RuntimeVariables.replace(
+				"//div/div[4]/div/ul/li[2]/a/span[1]"));
 		selenium.waitForPageToLoad("30000");
 	}
 }
