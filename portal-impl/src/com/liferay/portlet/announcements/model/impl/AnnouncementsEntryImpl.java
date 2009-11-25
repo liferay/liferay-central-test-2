@@ -22,17 +22,50 @@
 
 package com.liferay.portlet.announcements.model.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 
 /**
  * <a href="AnnouncementsEntryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class AnnouncementsEntryImpl
 	extends AnnouncementsEntryModelImpl implements AnnouncementsEntry {
 
 	public AnnouncementsEntryImpl() {
+	}
+
+	public long getGroupId() throws PortalException, SystemException {
+		long groupId = 0;
+
+		long classPK = getClassPK();
+
+		if (classPK > 0) {
+			String className = getClassName();
+
+			if (className.equals(Group.class.getName())) {
+				Group group = GroupLocalServiceUtil.getGroup(classPK);
+
+				groupId = group.getGroupId();
+			}
+			else if (className.equals(Organization.class.getName())) {
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(classPK);
+
+				Group group = organization.getGroup();
+
+				groupId = group.getGroupId();
+			}
+		}
+
+		return groupId;
 	}
 
 }

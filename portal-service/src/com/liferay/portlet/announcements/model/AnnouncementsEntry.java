@@ -48,4 +48,7 @@ package com.liferay.portlet.announcements.model;
  * @generated
  */
 public interface AnnouncementsEntry extends AnnouncementsEntryModel {
+	public long getGroupId()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

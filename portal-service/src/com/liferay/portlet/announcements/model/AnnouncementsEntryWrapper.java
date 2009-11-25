@@ -267,6 +267,12 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		return _announcementsEntry.toXmlString();
 	}
 
+	public long getGroupId()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _announcementsEntry.getGroupId();
+	}
+
 	public AnnouncementsEntry getWrappedAnnouncementsEntry() {
 		return _announcementsEntry;
 	}
