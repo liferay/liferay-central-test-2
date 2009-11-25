@@ -24,11 +24,11 @@
 
 <script type="text/javascript">
 	function <portlet:namespace />hideDateRange() {
-		jQuery("#<portlet:namespace />startEndDate").hide();
+		AUI().one('#<portlet:namespace />startEndDate').hide();
 	}
 
 	function <portlet:namespace />showDateRange() {
-		jQuery("#<portlet:namespace />startEndDate").show();
+		AUI().one('#<portlet:namespace />startEndDate').show();
 	}
 </script>
 
@@ -174,7 +174,7 @@
 
 									<br />
 
-									<ul id="<portlet:namespace />startEndDate" style="display: none;">
+									<ul class="aui-helper-hidden" id="<portlet:namespace />startEndDate">
 										<li>
 											<table class="lfr-table">
 											<tr>

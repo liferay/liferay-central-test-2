@@ -96,11 +96,22 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 	}
 
 	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
-		if (checkbox.checked) {
-			jQuery('#' + parentDivId).find("input").not(".disabled").removeAttr('disabled');
-		}
-		else {
-			jQuery('#' + parentDivId).find("input").attr("disabled", "disabled");
+		var parentDiv = AUI().one('#' + parentDivId);
+
+		var enabled = checkbox.checked;
+
+		if (parentDiv) {
+			parentDiv.all('input').each(
+				function(item, index, collection) {
+					var disabled = !enabled;
+
+					if (enabled && item.hasClass('disabled')) {
+						disabled = true;
+					}
+
+					item.set('disabled', disabled);
+				}
+			);
 		}
 	}
 </script>
@@ -310,23 +321,41 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 		</form>
 
 		<script type="text/javascript">
-			jQuery(
-				function() {
-					jQuery('.<portlet:namespace />handler-control input[type=checkbox]:not([checked])').parent().parent().parent('.<portlet:namespace />handler-control').children('.<portlet:namespace />handler-control').hide();
+			AUI().ready(
+				'selector-css3',
+				function(A) {
+					var toggleHandlerControl = function(item, index, collection) {
+						var container = item.ancestor('.<portlet:namespace />handler-control').one('ul');
 
-					jQuery('.<portlet:namespace />handler-control input[type=checkbox]').unbind('click.liferay').click(
-						'click.liferay',
-						function() {
-							var input = jQuery(this).parents('.<portlet:namespace />handler-control:first');
+						if (container) {
+							var action = 'hide';
 
-							if (this.checked) {
-								input.children('.<portlet:namespace />handler-control').show();
+							if (item.get('checked')) {
+								action = 'show';
 							}
-							else {
-								input.children('.<portlet:namespace />handler-control').hide();
-							}
+
+							container[action]();
 						}
-					);
+					};
+
+					var checkboxes = A.all('.<portlet:namespace />handler-control input[type=checkbox]');
+
+					if (checkboxes) {
+						var uncheckedBoxes = checkboxes.filter(':not(:checked)');
+
+						if (uncheckedBoxes) {
+							uncheckedBoxes.each(toggleHandlerControl);
+						}
+
+						checkboxes.detach('click');
+
+						checkboxes.on(
+							'click',
+							function(event) {
+								toggleHandlerControl(event.currentTarget);
+							}
+						);
+					}
 				}
 			);
 		</script>

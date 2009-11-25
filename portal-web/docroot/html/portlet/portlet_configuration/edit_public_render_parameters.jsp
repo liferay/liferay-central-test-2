@@ -111,23 +111,35 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 
 <script type="text/javascript">
 
-	<%
-	for (PublicRenderParameterConfiguration publicRenderParameterConfiguration : publicRenderParameterConfigurations) {
-	%>
+	AUI().ready(
+		function(A) {
+			<%
+			for (PublicRenderParameterConfiguration publicRenderParameterConfiguration : publicRenderParameterConfigurations) {
+			%>
 
-		jQuery("input#<%= publicRenderParameterConfiguration.getIgnoreKey() %>").click(
-			function() {
-				if (jQuery(this).attr("checked") == true) {
-					jQuery("select#<%= publicRenderParameterConfiguration.getMappingKey() %>").attr("disabled", "disabled");
+				var checkbox = A.one('#<%= publicRenderParameterConfiguration.getIgnoreKey() %>');
+
+				if (checkbox) {
+					checkbox.on(
+						'click',
+						function(event) {
+							var select = A.one('#<%= publicRenderParameterConfiguration.getMappingKey() %>');
+
+							if (select) {
+								var disabled = false;
+
+								if (event.currentTarget.get('checked')) {
+									disabled = true;
+								}
+
+								select.set('disabled', disabled);
+							}
+						}
+					);
 				}
-				else {
-					jQuery("select#<%= publicRenderParameterConfiguration.getMappingKey() %>").removeAttr("disabled");
-				}
+			<%
 			}
-		);
-
-	<%
-	}
-	%>
-
+			%>
+		}
+	);
 </script>
