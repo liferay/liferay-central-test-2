@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
@@ -208,7 +209,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	private String _encodeCacheKey(
 		String methodName, String[] params, Object[] args) {
 
-		StringBuilder sb = new StringBuilder();
+		int arrayCapacity = (params.length + args.length) * 2 + 3;
+		StringBundler sb = new StringBundler(arrayCapacity);
 
 		sb.append(methodName);
 		sb.append(_PARAMS_SEPARATOR);
@@ -229,19 +231,14 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	private String _encodeGroupKey(String className) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(CACHE_NAME);
-		sb.append(StringPool.PERIOD);
-		sb.append(className);
-
-		return sb.toString();
+		return CACHE_NAME.concat(StringPool.PERIOD).concat(className);
 	}
 
 	private String _encodeLocalCacheKey(
 		String className, String methodName, String[] params, Object[] args) {
 
-		StringBuilder sb = new StringBuilder();
+		int arrayCapacity = (params.length + args.length) * 2 + 5;
+		StringBundler sb = new StringBundler(arrayCapacity);
 
 		sb.append(className);
 		sb.append(StringPool.PERIOD);

@@ -24,6 +24,7 @@ package com.liferay.portal.servlet.filters.cache;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.servlet.filters.CacheResponseData;
@@ -71,7 +72,7 @@ public class CacheUtil {
 	}
 
 	private static String _encodeKey(long companyId, String key) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);

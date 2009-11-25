@@ -287,25 +287,14 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	private String _encodeGroupKey(String className) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(CACHE_NAME);
-		sb.append(StringPool.PERIOD);
-		sb.append(className);
-
-		return sb.toString();
+		return CACHE_NAME.concat(StringPool.PERIOD).concat(className);
 	}
 
 	private String _encodeLocalCacheKey(
 		Class<?> classObj, Serializable primaryKeyObj) {
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(classObj.getName());
-		sb.append(StringPool.PERIOD);
-		sb.append(primaryKeyObj);
-
-		return sb.toString();
+		return classObj.getName()
+			.concat(StringPool.PERIOD)
+			.concat(primaryKeyObj.toString());
 	}
 
 	private PortalCache _getPortalCache(String className) {

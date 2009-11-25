@@ -25,6 +25,7 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
@@ -139,7 +140,7 @@ public class PermissionCacheUtil {
 	}
 
 	private static String _encodeKey(long userId, long groupId) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);
@@ -154,7 +155,7 @@ public class PermissionCacheUtil {
 		long userId, long groupId, String name, String primKey,
 		String actionId) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(11);
 
 		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);

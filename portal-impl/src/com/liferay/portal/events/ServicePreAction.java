@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -951,40 +952,42 @@ public class ServicePreAction extends Action {
 		String friendlyURLPrivateUserPath =
 			PortalUtil.getPathFriendlyURLPrivateUser();
 		String friendlyURLPublicPath = PortalUtil.getPathFriendlyURLPublic();
-		String imagePath = cdnHost + PortalUtil.getPathImage();
+		String imagePath = cdnHost.concat(PortalUtil.getPathImage());
 		String mainPath = PortalUtil.getPathMain();
 
 		String i18nPath = (String)request.getAttribute(WebKeys.I18N_PATH);
 
 		if (Validator.isNotNull(i18nPath)) {
 			if (Validator.isNotNull(contextPath)) {
+				String newContextPath = contextPath.concat(i18nPath);
 				friendlyURLPrivateGroupPath = StringUtil.replaceFirst(
-					friendlyURLPrivateGroupPath, contextPath,
-					contextPath + i18nPath);
+					friendlyURLPrivateGroupPath, contextPath, newContextPath);
 				friendlyURLPrivateUserPath = StringUtil.replaceFirst(
-					friendlyURLPrivateUserPath, contextPath,
-					contextPath + i18nPath);
+					friendlyURLPrivateUserPath, contextPath, newContextPath);
 				friendlyURLPublicPath = StringUtil.replaceFirst(
-					friendlyURLPublicPath, contextPath,
-					contextPath + i18nPath);
+					friendlyURLPublicPath, contextPath, newContextPath);
 				mainPath = StringUtil.replaceFirst(
-					mainPath, contextPath, contextPath + i18nPath);
+					mainPath, contextPath, newContextPath);
 			}
 			else {
 				friendlyURLPrivateGroupPath =
-					i18nPath + friendlyURLPrivateGroupPath;
+					i18nPath.concat(friendlyURLPrivateGroupPath);
 				friendlyURLPrivateUserPath =
-					i18nPath + friendlyURLPrivateUserPath;
-				friendlyURLPublicPath = i18nPath + friendlyURLPublicPath;
-				mainPath = i18nPath + mainPath;
+					i18nPath.concat(friendlyURLPrivateUserPath);
+				friendlyURLPublicPath = i18nPath.concat(friendlyURLPublicPath);
+				mainPath = i18nPath.concat(mainPath);
 			}
 		}
 
 		// Company logo
 
-		String companyLogo =
-			imagePath + "/company_logo?img_id=" + company.getLogoId() + "&t=" +
-				ImageServletTokenUtil.getToken(company.getLogoId());
+		String companyLogo = new StringBundler(5)
+			.append(imagePath)
+			.append("/company_logo?img_id=")
+			.append(company.getLogoId())
+			.append("&t=")
+			.append(ImageServletTokenUtil.getToken(company.getLogoId()))
+			.toString();
 
 		Image companyLogoImage = ImageLocalServiceUtil.getCompanyLogo(
 			company.getLogoId());
@@ -1170,7 +1173,7 @@ public class ServicePreAction extends Action {
 					layout = null;
 				}
 				else if (!isViewableCommunity) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler(6);
 
 					sb.append("User ");
 					sb.append(user.getUserId());
@@ -1265,9 +1268,13 @@ public class ServicePreAction extends Action {
 				}
 
 				if (logoId > 0) {
-					layoutSetLogo =
-						imagePath + "/layout_set_logo?img_id=" + logoId +
-							"&t=" + ImageServletTokenUtil.getToken(logoId);
+					layoutSetLogo = new StringBundler(5)
+						.append(imagePath)
+						.append("/layout_set_logo?img_id=")
+						.append(logoId)
+						.append("&t=")
+						.append(ImageServletTokenUtil.getToken(logoId))
+						.toString();
 
 					Image layoutSetLogoImage =
 						ImageLocalServiceUtil.getCompanyLogo(logoId);
@@ -1486,18 +1493,19 @@ public class ServicePreAction extends Action {
 		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(request));
 		themeDisplay.setStateMaximized(LiferayWindowState.isMaximized(request));
 		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(request));
-		themeDisplay.setPathApplet(contextPath + "/applets");
-		themeDisplay.setPathCms(contextPath + "/cms");
+		themeDisplay.setPathApplet(contextPath.concat("/applets"));
+		themeDisplay.setPathCms(contextPath.concat("/cms"));
 		themeDisplay.setPathContext(contextPath);
-		themeDisplay.setPathFlash(contextPath + "/flash");
+		themeDisplay.setPathFlash(contextPath.concat("/flash"));
 		themeDisplay.setPathFriendlyURLPrivateGroup(
 			friendlyURLPrivateGroupPath);
 		themeDisplay.setPathFriendlyURLPrivateUser(friendlyURLPrivateUserPath);
 		themeDisplay.setPathFriendlyURLPublic(friendlyURLPublicPath);
 		themeDisplay.setPathImage(imagePath);
-		themeDisplay.setPathJavaScript(cdnHost + contextPath + "/html/js");
+		themeDisplay.setPathJavaScript(
+			cdnHost.concat(contextPath).concat("/html/js"));
 		themeDisplay.setPathMain(mainPath);
-		themeDisplay.setPathSound(contextPath + "/html/sound");
+		themeDisplay.setPathSound(contextPath.concat("/html/sound"));
 
 		// URLs
 
@@ -1511,7 +1519,8 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignOutIcon(signedIn);
 		themeDisplay.setShowStagingIcon(false);
 
-		String urlControlPanel = friendlyURLPrivateGroupPath + "/control_panel";
+		String urlControlPanel =
+			friendlyURLPrivateGroupPath.concat("/control_panel");
 
 		if (Validator.isNotNull(doAsUserId)) {
 			urlControlPanel = HttpUtil.addParameter(
@@ -1574,8 +1583,9 @@ public class ServicePreAction extends Action {
 					themeDisplay.setShowLayoutTemplatesIcon(true);
 
 					themeDisplay.setURLAddContent(
-						"Liferay.LayoutConfiguration.toggle('" +
-							PortletKeys.LAYOUT_CONFIGURATION + "');");
+						"Liferay.LayoutConfiguration.toggle('"
+						.concat(PortletKeys.LAYOUT_CONFIGURATION)
+						.concat("');"));
 
 					themeDisplay.setURLLayoutTemplates(
 						"Liferay.LayoutConfiguration.showTemplates();");
@@ -1689,7 +1699,7 @@ public class ServicePreAction extends Action {
 				PortletKeys.MY_ACCOUNT);
 
 			String myAccountRedirect = ParamUtil.getString(
-				request, myAccountNamespace + "backURL", currentURL);
+				request, myAccountNamespace.concat("backURL"), currentURL);
 
 			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupConstants.CONTROL_PANEL);
@@ -1732,9 +1742,9 @@ public class ServicePreAction extends Action {
 			themeDisplay.setShowStagingIcon(false);
 		}
 
-		themeDisplay.setURLPortal(portalURL + contextPath);
+		themeDisplay.setURLPortal(portalURL.concat(contextPath));
 
-		String urlSignIn = mainPath + "/portal/login";
+		String urlSignIn = mainPath.concat("/portal/login");
 
 		if (layout != null) {
 			urlSignIn = HttpUtil.addParameter(
@@ -1743,7 +1753,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLSignIn(urlSignIn);
 
-		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
+		themeDisplay.setURLSignOut(mainPath.concat("/portal/logout"));
 
 		PortletURL updateManagerURL = new PortletURLImpl(
 			request, PortletKeys.UPDATE_MANAGER, plid,
