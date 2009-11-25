@@ -163,27 +163,29 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			var selects = jQuery('#<portlet:namespace/>displayStyle');
+		function(A) {
+			var select = A.one('#<portlet:namespace/>displayStyle');
 
 			var toggleCustomFields = function() {
-				var select = jQuery(this);
+				var customDisplayStyle = A.one('#<portlet:namespace/>customDisplayStyle');
+				var displayStyle = select.val();
 
-				var div = select.parent().next();
-				var value = select.find('option:selected').val();
+				if (customDisplayStyle) {
+					var action = 'hide';
 
-				var displayStyle = jQuery(this).val();
+					if (displayStyle == '[custom]') {
+						action = 'show';
+					}
 
-				if (displayStyle == '[custom]') {
-					jQuery("#<portlet:namespace/>customDisplayStyle").show();
-				}
-				else {
-					jQuery("#<portlet:namespace/>customDisplayStyle").hide();
+					customDisplayStyle[action]();
 				}
 			}
 
-			selects.change(toggleCustomFields);
-			selects.each(toggleCustomFields);
+			if (select) {
+				select.on('change', toggleCustomFields);
+
+				toggleCustomFields();
+			}
 		}
 	)
 </script>
