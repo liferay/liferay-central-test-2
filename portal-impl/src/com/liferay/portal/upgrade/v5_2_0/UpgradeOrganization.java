@@ -70,7 +70,11 @@ public class UpgradeOrganization extends UpgradeProcess {
 		updateLocationResources();
 	}
 
-	protected void updateCodeId(long companyId, int scope) throws Exception {
+	protected long getCodeId(long companyId, String name, int scope)
+		throws Exception {
+
+		long codeId = 0;
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -83,47 +87,33 @@ public class UpgradeOrganization extends UpgradeProcess {
 					"name = ? and scope = ?");
 
 			ps.setLong(1, companyId);
-			ps.setString(2, "com.liferay.portal.model.Location");
+			ps.setString(2, name);
 			ps.setInt(3, scope);
 
 			rs = ps.executeQuery();
 
-			long oldCodeId = 0;
-
 			if (rs.next()) {
-				oldCodeId = rs.getLong("codeId");
+				codeId = rs.getLong("codeId");
 			}
-
-			ps.setString(2, "com.liferay.portal.model.Organization");
-
-			rs = ps.executeQuery();
-
-			long newCodeId = 0;
-
-			if (rs.next()) {
-				newCodeId = rs.getLong("codeId");
-			}
-
-			ps.close();
-
-			ps = con.prepareStatement(
-				"update Resource_ set codeId = ? where codeId = ?");
-
-			ps.setLong(1, newCodeId);
-			ps.setLong(2, oldCodeId);
-
-			ps.executeUpdate();
-
-			ps.close();
-
-			ps = con.prepareStatement(
-				"delete from ResourceCode where codeId = " + oldCodeId);
-
-			ps.executeUpdate();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		return codeId;
+	}
+
+	protected void updateCodeId(long companyId, int scope) throws Exception {
+		long oldCodeId = getCodeId(
+			companyId, "com.liferay.portal.model.Location", scope);
+		long newCodeId = getCodeId(
+			companyId, "com.liferay.portal.model.Organization", scope);
+
+		runSQL(
+			"update Resource_ set codeId = " + newCodeId + " where codeId = " +
+				oldCodeId);
+
+		runSQL("delete from ResourceCode where codeId = " + oldCodeId);
 	}
 
 	protected void updateLocationResources() throws Exception {

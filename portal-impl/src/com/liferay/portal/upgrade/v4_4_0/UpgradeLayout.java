@@ -56,17 +56,33 @@ public class UpgradeLayout extends UpgradeProcess {
 				long plid = rs.getLong("plid");
 				String typeSettings = rs.getString("typeSettings");
 
-				String newTypeSettings = upgradeTypeSettings(typeSettings);
+				UnicodeProperties typeSettingsProperties =
+					new UnicodeProperties(true);
 
-				ps = con.prepareStatement(
-					"update Layout set typeSettings = ? where plid = " +
-						plid);
+				typeSettingsProperties.load(typeSettings);
 
-				ps.setString(1, newTypeSettings);
+				long linkToPlid = GetterUtil.getLong(
+					typeSettingsProperties.getProperty("linkToPlid"));
 
-				ps.executeUpdate();
+				if (linkToPlid > 0) {
+					Object[] layout = getLayout(linkToPlid);
 
-				ps.close();
+					if (layout != null) {
+						long groupId = (Long)layout[0];
+						boolean privateLayout = (Boolean)layout[1];
+						long layoutId = (Long)layout[2];
+
+						typeSettingsProperties.remove("linkToPlid");
+						typeSettingsProperties.put(
+							"groupId", String.valueOf(groupId));
+						typeSettingsProperties.put(
+							"privateLayout", String.valueOf(privateLayout));
+						typeSettingsProperties.put(
+							"linkToLayoutId", String.valueOf(layoutId));
+					}
+				}
+
+				updateTypeSettings(plid, typeSettingsProperties.toString());
 			}
 		}
 		finally {
@@ -105,29 +121,25 @@ public class UpgradeLayout extends UpgradeProcess {
 		return layout;
 	}
 
-	protected String upgradeTypeSettings(String typeSettings) throws Exception {
-		UnicodeProperties props = new UnicodeProperties(true);
+	protected void updateTypeSettings(long plid, String typeSettings)
+		throws Exception {
 
-		props.load(typeSettings);
+		Connection con = null;
+		PreparedStatement ps = null;
 
-		long linkToPlid = GetterUtil.getLong(props.getProperty("linkToPlid"));
+		try {
+			con = DataAccess.getConnection();
 
-		if (linkToPlid > 0) {
-			Object[] layout = getLayout(linkToPlid);
+			ps = con.prepareStatement(
+				"update Layout set typeSettings = ? where plid = " + plid);
 
-			if (layout != null) {
-				long groupId = (Long)layout[0];
-				boolean privateLayout = (Boolean)layout[1];
-				long layoutId = (Long)layout[2];
+			ps.setString(1, typeSettings);
 
-				props.remove("linkToPlid");
-				props.put("groupId", String.valueOf(groupId));
-				props.put("privateLayout", String.valueOf(privateLayout));
-				props.put("linkToLayoutId", String.valueOf(layoutId));
-			}
+			ps.executeUpdate();
 		}
-
-		return props.toString();
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
 	}
 
 	private static final String _GET_LAYOUT =

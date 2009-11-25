@@ -60,7 +60,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
 
 		try {
 			con = DataAccess.getConnection();
@@ -95,7 +94,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			ps.executeUpdate();
 		}
 		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 

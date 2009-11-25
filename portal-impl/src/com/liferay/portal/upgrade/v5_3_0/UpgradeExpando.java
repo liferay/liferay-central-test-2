@@ -37,10 +37,10 @@ import java.sql.ResultSet;
 public class UpgradeExpando extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		upgradeTables();
+		updateTables();
 	}
 
-	protected void upgradeColumns(
+	protected void updateColumns(
 			long scTableId, long snTableId, long wolTableId)
 		throws Exception {
 
@@ -76,20 +76,13 @@ public class UpgradeExpando extends UpgradeProcess {
 					scColumnId = wolColumnId;
 				}
 
-				ps = con.prepareStatement(
-					"update ExpandoColumn set tableId = ? where tableId = ? " +
-						"and name = ?");
-
-				ps.setLong(1, newTableId);
-				ps.setLong(2, wolTableId);
-				ps.setString(3, name);
-
-				ps.executeUpdate();
-
-				ps.close();
+				runSQL(
+					"update ExpandoColumn set tableId = " + newTableId +
+						" where tableId = " + wolTableId + " and name = '" +
+							name + "'");
 			}
 
-			upgradeRows(
+			updateRows(
 				scColumnId, scTableId, snColumnId, snTableId, wolTableId);
 		}
 		finally {
@@ -97,7 +90,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeRows(
+	protected void updateRows(
 			long scColumnId, long scTableId, long snColumnId, long snTableId,
 			long wolTableId)
 		throws Exception {
@@ -123,44 +116,21 @@ public class UpgradeExpando extends UpgradeProcess {
 
 				long scRowId = increment();
 
-				ps = con.prepareStatement(
+				runSQL(
 					"insert into ExpandoRow (rowId_, companyId, tableId, " +
-						"classPK) values (?, ?, ?, ?)");
-
-				ps.setLong(1, scRowId);
-				ps.setLong(2, companyId);
-				ps.setLong(3, scTableId);
-				ps.setLong(4, classPK);
-
-				ps.executeUpdate();
-
-				ps.close();
+						"classPK) values (" + scRowId + ", " + companyId +
+							", " + scTableId + ", " + classPK + ")");
 
 				long snRowId = increment();
 
-				ps = con.prepareStatement(
+				runSQL(
 					"insert into ExpandoRow (rowId_, companyId, tableId, " +
-						"classPK) values (?, ?, ?, ?)");
+						"classPK) values (" + snRowId + ", " + companyId +
+							", " + snTableId + ", " + classPK + ")");
 
-				ps.setLong(1, snRowId);
-				ps.setLong(2, companyId);
-				ps.setLong(3, snTableId);
-				ps.setLong(4, classPK);
+				runSQL("delete from ExpandoRow where tableId = " + wolTableId);
 
-				ps.executeUpdate();
-
-				ps.close();
-
-				ps = con.prepareStatement(
-					"delete from ExpandoRow where tableId = ?");
-
-				ps.setLong(1, wolTableId);
-
-				ps.executeUpdate();
-
-				ps.close();
-
-				upgradeValues(
+				updateValues(
 					scColumnId, scRowId, scTableId, snColumnId, snRowId,
 					snTableId, wolRowId, wolTableId);
 			}
@@ -170,7 +140,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeTables() throws Exception {
+	protected void updateTables() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -192,44 +162,22 @@ public class UpgradeExpando extends UpgradeProcess {
 
 				long scTableId = increment();
 
-				ps = con.prepareStatement(
+				runSQL(
 					"insert into ExpandoTable (tableId, companyId, " +
-						"classNameId, name) values (?, ?, ?, ?)");
-
-				ps.setLong(1, scTableId);
-				ps.setLong(2, companyId);
-				ps.setLong(3, classNameId);
-				ps.setString(4, "SC");
-
-				ps.executeUpdate();
-
-				ps.close();
+						"classNameId, name) values (" + scTableId + ", " +
+							companyId + ", " + classNameId + ", 'SC')");
 
 				long snTableId = increment();
 
-				ps = con.prepareStatement(
+				runSQL(
 					"insert into ExpandoTable (tableId, companyId, " +
-						"classNameId, name) values (?, ?, ?, ?)");
+						"classNameId, name) values (" + snTableId + ", " +
+							companyId + ", " + classNameId + ", 'SN')");
 
-				ps.setLong(1, snTableId);
-				ps.setLong(2, companyId);
-				ps.setLong(3, classNameId);
-				ps.setString(4, "SN");
+				runSQL(
+					"delete from ExpandoTable where tableId = " + wolTableId);
 
-				ps.executeUpdate();
-
-				ps.close();
-
-				ps = con.prepareStatement(
-					"delete from ExpandoTable where tableId = ?");
-
-				ps.setLong(1, wolTableId);
-
-				ps.executeUpdate();
-
-				ps.close();
-
-				upgradeColumns(scTableId, snTableId, wolTableId);
+				updateColumns(scTableId, snTableId, wolTableId);
 			}
 		}
 		finally {
@@ -237,7 +185,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeValues(
+	protected void updateValues(
 			long scColumnId, long scRowId, long scTableId, long snColumnId,
 			long snRowId, long snTableId, long wolRowId, long wolTableId)
 		throws Exception {
@@ -273,17 +221,10 @@ public class UpgradeExpando extends UpgradeProcess {
 					newTableId = snTableId;
 				}
 
-				ps = con.prepareStatement(
-					"update ExpandoValue set tableId = ?, rowId_ = ? where " +
-						"valueId = ?");
-
-				ps.setLong(1, newTableId);
-				ps.setLong(2, newRowId);
-				ps.setLong(3, valueId);
-
-				ps.executeUpdate();
-
-				ps.close();
+				runSQL(
+					"update ExpandoValue set tableId = " + newTableId +
+						", rowId_ = " + newRowId + " where " + "valueId = " +
+							valueId);
 			}
 		}
 		finally {

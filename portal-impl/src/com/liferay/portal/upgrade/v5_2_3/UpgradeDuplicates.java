@@ -343,23 +343,23 @@ public class UpgradeDuplicates extends UpgradeProcess {
 			Object[][] extraColumns, DependencyManager dependencyManager)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("Checking for duplicate data from ");
-		sb.append(tableName);
-		sb.append(" for unique index (");
-
-		for (int i = 0; i < columns.length; i++) {
-			sb.append(columns[i][0]);
-
-			if ((i + 1) < columns.length) {
-				sb.append(", ");
-			}
-		}
-
-		sb.append(")");
-
 		if (_log.isInfoEnabled()) {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("Checking for duplicate data from ");
+			sb.append(tableName);
+			sb.append(" for unique index (");
+
+			for (int i = 0; i < columns.length; i++) {
+				sb.append(columns[i][0]);
+
+				if ((i + 1) < columns.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append(")");
+
 			_log.info(sb.toString());
 		}
 
@@ -377,7 +377,7 @@ public class UpgradeDuplicates extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder();
 
 			sb.append("select ");
 			sb.append(primaryKeyName);
@@ -469,35 +469,21 @@ public class UpgradeDuplicates extends UpgradeProcess {
 				}
 
 				if (duplicate) {
-					sb = new StringBuilder();
-
-					sb.append("delete from ");
-					sb.append(tableName);
-					sb.append(" where ");
-					sb.append(primaryKeyName);
-					sb.append(" = ?");
-
-					sql = sb.toString();
-
-					ps = con.prepareStatement(sql);
-
-					ps.setLong(1, primaryKeyValue);
-
-					ps.executeUpdate();
-
-					ps.close();
+					runSQL(
+						"delete from " + tableName + " where " +
+							primaryKeyName + " = " + primaryKeyValue);
 
 					if (dependencyManager != null) {
-						sb = new StringBuilder();
-
-						sb.append("Resolving duplicate data from ");
-						sb.append(tableName);
-						sb.append(" with primary keys ");
-						sb.append(primaryKeyValue);
-						sb.append(" and ");
-						sb.append(previousPrimaryKeyValue);
-
 						if (_log.isInfoEnabled()) {
+							sb = new StringBuilder();
+
+							sb.append("Resolving duplicate data from ");
+							sb.append(tableName);
+							sb.append(" with primary keys ");
+							sb.append(primaryKeyValue);
+							sb.append(" and ");
+							sb.append(previousPrimaryKeyValue);
+
 							_log.info(sb.toString());
 						}
 

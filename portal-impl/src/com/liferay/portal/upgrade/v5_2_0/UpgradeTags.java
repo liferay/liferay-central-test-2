@@ -44,6 +44,76 @@ import java.util.Map;
  */
 public class UpgradeTags extends UpgradeProcess {
 
+	protected void addEntry(
+			long entryId, long groupId, long companyId, long userId,
+			String userName, Timestamp createDate, Timestamp modifiedDate,
+			long parentEntryId, String name, long vocabularyId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"insert into TagsEntry (entryId, groupId, companyId, userId, " +
+					"userName, createDate, modifiedDate, parentEntryId, " +
+						"name, vocabularyId) values (?, ?, ?, ?, ?, ?, ?, ?, " +
+							"?, ?)");
+
+			ps.setLong(1, entryId);
+			ps.setLong(2, groupId);
+			ps.setLong(3, companyId);
+			ps.setLong(4, userId);
+			ps.setString(5, userName);
+			ps.setTimestamp(6, createDate);
+			ps.setTimestamp(7, modifiedDate);
+			ps.setLong(8, parentEntryId);
+			ps.setString(9, name);
+			ps.setLong(10, vocabularyId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void addProperty(
+			long propertyId, long companyId, long userId, String userName,
+			Timestamp createDate, Timestamp modifiedDate, long entryId,
+			String key, String value)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"insert into TagsProperty (propertyId, companyId, userId, " +
+					"userName, createDate, modifiedDate, entryId, key_, " +
+						"value) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			ps.setLong(1, propertyId);
+			ps.setLong(2, companyId);
+			ps.setLong(3, userId);
+			ps.setString(4, userName);
+			ps.setTimestamp(5, createDate);
+			ps.setTimestamp(6, modifiedDate);
+			ps.setLong(7, entryId);
+			ps.setString(8, key);
+			ps.setString(9, value);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
 	protected long copyEntry(long groupId, long entryId) throws Exception {
 		String key = groupId + StringPool.UNDERLINE + entryId;
 
@@ -79,26 +149,10 @@ public class UpgradeTags extends UpgradeProcess {
 
 				newEntryId = increment();
 
-				ps = con.prepareStatement(
-					"insert into TagsEntry (entryId, groupId, companyId, " +
-						"userId, userName, createDate, modifiedDate, " +
-							"parentEntryId, name, vocabularyId) values (?, " +
-								"?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-				ps.setLong(1, newEntryId);
-				ps.setLong(2, groupId);
-				ps.setLong(3, companyId);
-				ps.setLong(4, userId);
-				ps.setString(5, userName);
-				ps.setTimestamp(6, createDate);
-				ps.setTimestamp(7, modifiedDate);
-				ps.setLong(8, parentEntryId);
-				ps.setString(9, name);
-				ps.setLong(10, vocabularyId);
-
-				ps.executeUpdate();
-
-				ps.close();
+				addEntry(
+					newEntryId, groupId, companyId, userId, userName,
+					createDate, modifiedDate, parentEntryId, name,
+					vocabularyId);
 
 				copyProperties(entryId, newEntryId);
 
@@ -141,25 +195,9 @@ public class UpgradeTags extends UpgradeProcess {
 
 				long newPropertyId = increment();
 
-				ps = con.prepareStatement(
-					"insert into TagsProperty (propertyId, companyId, " +
-						"userId, userName, createDate, modifiedDate, " +
-							"entryId, key_, value) values (?, ?, ?, ?, ?, ?, " +
-								"?, ?, ?)");
-
-				ps.setLong(1, newPropertyId);
-				ps.setLong(2, companyId);
-				ps.setLong(3, userId);
-				ps.setString(4, userName);
-				ps.setTimestamp(5, createDate);
-				ps.setTimestamp(6, modifiedDate);
-				ps.setLong(7, newEntryId);
-				ps.setString(8, key);
-				ps.setString(9, value);
-
-				ps.executeUpdate();
-
-				ps.close();
+				addProperty(
+					newPropertyId, companyId, userId, userName, createDate,
+					modifiedDate, newEntryId, key, value);
 			}
 		}
 		finally {
@@ -183,31 +221,14 @@ public class UpgradeTags extends UpgradeProcess {
 			while (rs.next()) {
 				long entryId = rs.getLong("entryId");
 
-				ps = con.prepareStatement(
-					"delete from TagsAssets_TagsEntries where entryId = ?");
+				runSQL(
+					"delete from TagsAssets_TagsEntries where entryId = " +
+						entryId);
 
-				ps.setLong(1, entryId);
-
-				ps.executeUpdate();
-
-				ps.close();
-
-				ps = con.prepareStatement(
-					"delete from TagsProperty where entryId = ?");
-
-				ps.setLong(1, entryId);
-
-				ps.executeUpdate();
-
-				ps.close();
+				runSQL("delete from TagsProperty where entryId = " + entryId);
 			}
 
-			ps = con.prepareStatement(
-				"delete from TagsEntry where groupId = 0");
-
-			ps.executeUpdate();
-
-			ps.close();
+			runSQL("delete from TagsEntry where groupId = 0");
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -238,15 +259,9 @@ public class UpgradeTags extends UpgradeProcess {
 			while (rs.next()) {
 				long resourcePrimKey = rs.getLong("resourcePrimKey");
 
-				ps = con.prepareStatement(
-					"update TagsAsset set visible = ? where classPK = ?");
-
-				ps.setBoolean(1, false);
-				ps.setLong(2, resourcePrimKey);
-
-				ps.executeUpdate();
-
-				ps.close();
+				runSQL(
+					"update TagsAsset set visible = FALSE where classPK = " +
+						resourcePrimKey);
 			}
 		}
 		finally {
@@ -278,16 +293,9 @@ public class UpgradeTags extends UpgradeProcess {
 
 				long newEntryId = copyEntry(groupId, entryId);
 
-				ps = con.prepareStatement(
+				runSQL(
 					"insert into TagsAssets_TagsEntries (assetId, entryId) " +
-						"values (?, ?)");
-
-				ps.setLong(1, assetId);
-				ps.setLong(2, newEntryId);
-
-				ps.executeUpdate();
-
-				ps.close();
+						"values (" + assetId + ", " + newEntryId + ")");
 			}
 		}
 		finally {

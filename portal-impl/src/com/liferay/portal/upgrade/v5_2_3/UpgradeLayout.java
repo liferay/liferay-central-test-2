@@ -60,7 +60,7 @@ public class UpgradeLayout extends UpgradeProcess {
 				String typeSettings = rs.getString("typeSettings");
 
 				UnicodeProperties typeSettingsProperties =
-					new UnicodeProperties();
+					new UnicodeProperties(true);
 
 				typeSettingsProperties.load(typeSettings);
 
@@ -119,21 +119,19 @@ public class UpgradeLayout extends UpgradeProcess {
 
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
 
 		try {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"update Layout set typeSettings = ? where plid = ?");
+				"update Layout set typeSettings = ? where plid = " + plid);
 
 			ps.setString(1, typeSettings);
-			ps.setLong(2, plid);
 
 			ps.executeUpdate();
 		}
 		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 

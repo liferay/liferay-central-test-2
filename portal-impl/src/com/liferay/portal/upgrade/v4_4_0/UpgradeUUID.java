@@ -38,28 +38,28 @@ import java.sql.ResultSet;
 public class UpgradeUUID extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		upgradeTable("BlogsEntry", "entryId");
-		upgradeTable("BookmarksEntry", "entryId");
-		upgradeTable("BookmarksFolder", "folderId");
-		upgradeTable("DLFileEntry", "fileEntryId");
-		upgradeTable("DLFileShortcut", "fileShortcutId");
-		upgradeTable("DLFolder", "folderId");
-		upgradeTable("CalEvent", "eventId");
-		upgradeTable("IGFolder", "folderId");
-		upgradeTable("IGImage", "imageId");
-		upgradeTable("JournalArticle", "id_");
-		upgradeTable("JournalStructure", "id_");
-		upgradeTable("JournalTemplate", "id_");
-		upgradeTable("MBCategory", "categoryId");
-		upgradeTable("MBMessage", "messageId");
-		upgradeTable("PollsChoice", "choiceId");
-		upgradeTable("PollsQuestion", "questionId");
-		upgradeTable("User_", "userId");
-		upgradeTable("WikiNode", "nodeId");
-		upgradeTable("WikiPage", "pageId");
+		updateTable("BlogsEntry", "entryId");
+		updateTable("BookmarksEntry", "entryId");
+		updateTable("BookmarksFolder", "folderId");
+		updateTable("DLFileEntry", "fileEntryId");
+		updateTable("DLFileShortcut", "fileShortcutId");
+		updateTable("DLFolder", "folderId");
+		updateTable("CalEvent", "eventId");
+		updateTable("IGFolder", "folderId");
+		updateTable("IGImage", "imageId");
+		updateTable("JournalArticle", "id_");
+		updateTable("JournalStructure", "id_");
+		updateTable("JournalTemplate", "id_");
+		updateTable("MBCategory", "categoryId");
+		updateTable("MBMessage", "messageId");
+		updateTable("PollsChoice", "choiceId");
+		updateTable("PollsQuestion", "questionId");
+		updateTable("User_", "userId");
+		updateTable("WikiNode", "nodeId");
+		updateTable("WikiPage", "pageId");
 	}
 
-	protected void upgradeTable(String tableName, String pkColName)
+	protected void updateTable(String tableName, String pkColName)
 		throws Exception {
 
 		Connection con = null;
@@ -80,13 +80,9 @@ public class UpgradeUUID extends UpgradeProcess {
 
 				String uuid = PortalUUIDUtil.generate();
 
-				ps = con.prepareStatement(
+				runSQL(
 					"update " + tableName + " set uuid_ = '" + uuid +
 						"' where " + pkColName + " = " + pkColValue);
-
-				ps.executeUpdate();
-
-				ps.close();
 			}
 		}
 		finally {

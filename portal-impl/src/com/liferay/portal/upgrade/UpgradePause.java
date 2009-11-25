@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
  */
 public class UpgradePause extends UpgradeProcess {
 
-	public void upgrade() {
+	protected void doUpgrade() throws Exception {
 		System.exit(0);
 	}
 

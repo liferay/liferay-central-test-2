@@ -77,7 +77,9 @@ public class UpgradePermission extends UpgradeProcess {
 				defaultUserId + ", Groups_Permissions.permissionId from " +
 					"Groups_Permissions where groupId = " + guestGroupId);
 
-		deletePortletPermissionIds(guestGroupId);
+		for (long plid : getPlids(guestGroupId)) {
+			deletePortletPermissionIds(plid, guestGroupId);
+		}
 
 		deletePermissionIds(
 			Layout.class.getName(), "Layout", "plid", guestGroupId);
@@ -186,7 +188,7 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 	}
 
-	protected void deletePortletPermissionIds(long guestGroupId)
+	protected void deletePortletPermissionIds(long plid, long guestGroupId)
 		throws Exception {
 
 		Connection con = null;
@@ -196,24 +198,20 @@ public class UpgradePermission extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			for (long plid : getPlids(guestGroupId)) {
-				ps = con.prepareStatement(
-					"select primKey from Resource_ where primKey like ?");
+			ps = con.prepareStatement(
+				"select primKey from Resource_ where primKey like ?");
 
-				ps.setString(1, plid + PortletConstants.LAYOUT_SEPARATOR + "%");
+			ps.setString(1, plid + PortletConstants.LAYOUT_SEPARATOR + "%");
 
-				rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
-				while (rs.next()) {
-					String primKey = rs.getString("primKey");
+			while (rs.next()) {
+				String primKey = rs.getString("primKey");
 
-					List<Long> permissionIds = getPermissionIds(
-						primKey, guestGroupId);
+				List<Long> permissionIds = getPermissionIds(
+					primKey, guestGroupId);
 
-					deletePermissionIds(permissionIds, guestGroupId);
-				}
-
-				ps.close();
+				deletePermissionIds(permissionIds, guestGroupId);
 			}
 		}
 		finally {

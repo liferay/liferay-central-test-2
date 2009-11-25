@@ -73,15 +73,7 @@ public class UpgradeJournal extends UpgradeProcess {
 					continue;
 				}
 
-				ps = con.prepareStatement(
-					"update JournalArticle set content = ? where id_ = ?");
-
-				ps.setString(1, newContent);
-				ps.setLong(2, id);
-
-				ps.executeUpdate();
-
-				ps.close();
+				updateJournalArticleContent(id, newContent);
 			}
 		}
 		finally {
@@ -134,6 +126,28 @@ public class UpgradeJournal extends UpgradeProcess {
 		runSQL(
 			"delete from JournalArticleImage where elInstanceId is null or " +
 				"elInstanceId = ''");
+	}
+
+	protected void updateJournalArticleContent(long id, String content)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update JournalArticle set content = ? where id_ = ?");
+
+			ps.setString(1, content);
+			ps.setLong(2, id);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
 	}
 
 	protected void updateJournalArticleImageInstanceId(

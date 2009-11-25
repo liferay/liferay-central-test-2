@@ -37,12 +37,41 @@ import java.sql.ResultSet;
 public class UpgradeWebForm extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
+		long oldClassNameId = getClassNameId(_OLD_WEBFORM_CLASS_NAME);
+
+		if (oldClassNameId == 0) {
+			return;
+		}
+
+		long newClassNameId = getClassNameId(_NEW_WEBFORM_CLASS_NAME);
+
+		if (newClassNameId == 0) {
+			runSQL(
+				"update ClassName_ set value = '" +
+					_NEW_WEBFORM_CLASS_NAME + "' where value = '" +
+						_OLD_WEBFORM_CLASS_NAME + "'");
+		}
+		else {
+			runSQL(
+				"update ExpandoTable set classNameId = '" + newClassNameId +
+					"' where classNameId = '" + oldClassNameId + "'");
+
+			runSQL(
+				"update ExpandoValue set classNameId = '" + newClassNameId +
+					"' where classNameId = '" + oldClassNameId + "'");
+
+			runSQL(
+				"delete from ClassName_ where value = '" +
+					_OLD_WEBFORM_CLASS_NAME + "'");
+		}
+	}
+
+	protected long getClassNameId(String className) throws Exception {
+		long classNameId = 0;
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
-		long oldClassNameId = 0;
-		long newClassNameId = 0;
 
 		try {
 			con = DataAccess.getConnection();
@@ -50,71 +79,19 @@ public class UpgradeWebForm extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"select classNameId from ClassName_ where value = ?");
 
-			ps.setString(1, _OLD_WEBFORM_CLASS_NAME);
+			ps.setString(1, className);
 
 			rs = ps.executeQuery();
 
-			if (!rs.next()) {
-				ps.close();
-
-				return;
+			if (rs.next()) {
+				classNameId = rs.getLong("classNameId");
 			}
-
-			oldClassNameId = rs.getLong("classNameId");
-
-			ps = con.prepareStatement(
-				"select classNameId from ClassName_ where value = ?");
-
-			ps.setString(1, _NEW_WEBFORM_CLASS_NAME);
-
-			rs = ps.executeQuery();
-
-			if (!rs.next()) {
-				ps = con.prepareStatement(
-					"update ClassName_ set value = ? where value = ?");
-
-				ps.setString(1, _NEW_WEBFORM_CLASS_NAME);
-				ps.setString(2, _OLD_WEBFORM_CLASS_NAME);
-
-				ps.executeUpdate();
-
-				ps.close();
-
-				return;
-			}
-
-			newClassNameId = rs.getLong("classNameId");
-
-			ps = con.prepareStatement(
-				"update ExpandoTable set classNameId = ? where " +
-					"classNameId = ?");
-
-			ps.setLong(1, newClassNameId);
-			ps.setLong(2, oldClassNameId);
-
-			ps.executeUpdate();
-
-			ps = con.prepareStatement(
-				"update ExpandoValue set classNameId = ? where " +
-					"classNameId = ?");
-
-			ps.setLong(1, newClassNameId);
-			ps.setLong(2, oldClassNameId);
-
-			ps.executeUpdate();
-
-			ps = con.prepareStatement(
-				"delete from ClassName_ where value = ?");
-
-			ps.setString(1, _OLD_WEBFORM_CLASS_NAME);
-
-			ps.executeUpdate();
-
-			ps.close();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		return classNameId;
 	}
 
 	private static final String _NEW_WEBFORM_CLASS_NAME =

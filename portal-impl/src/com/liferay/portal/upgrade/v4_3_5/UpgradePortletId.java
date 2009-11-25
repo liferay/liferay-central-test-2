@@ -51,9 +51,9 @@ public class UpgradePortletId extends UpgradeProcess {
 			String oldRootPortletId = portletIds[0];
 			String newRootPortletId = portletIds[1];
 
-			upgradePortlet(oldRootPortletId, newRootPortletId);
-			upgradeResource(oldRootPortletId, newRootPortletId);
-			upgradeResourceCode(oldRootPortletId, newRootPortletId);
+			updatePortlet(oldRootPortletId, newRootPortletId);
+			updateResource(oldRootPortletId, newRootPortletId);
+			updateResourceCode(oldRootPortletId, newRootPortletId);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		};
 	}
 
-	protected void upgradeLayout(
+	protected void updateLayout(
 			long plid, String oldPortletId, String newPortletId)
 		throws Exception {
 
@@ -93,18 +93,10 @@ public class UpgradePortletId extends UpgradeProcess {
 			while (rs.next()) {
 				String typeSettings = rs.getString("typeSettings");
 
-				String newTypeSettings = upgradeTypeSettings(
+				String newTypeSettings = StringUtil.replace(
 					typeSettings, oldPortletId, newPortletId);
 
-				ps = con.prepareStatement(
-					"update Layout set typeSettings = ? where plid = " +
-						plid);
-
-				ps.setString(1, newTypeSettings);
-
-				ps.executeUpdate();
-
-				ps.close();
+				updateTypeSettings(plid, newTypeSettings);
 			}
 		}
 		finally {
@@ -112,7 +104,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradePortlet(
+	protected void updatePortlet(
 			String oldRootPortletId, String newRootPortletId)
 		throws Exception {
 
@@ -121,16 +113,7 @@ public class UpgradePortletId extends UpgradeProcess {
 				"' where portletId = '" + oldRootPortletId + "'");
 	}
 
-	protected void upgradePortletPreferences(
-			String oldPortletId, String newPortletId)
-		throws Exception {
-
-		runSQL(
-			"update PortletPreferences set portletId = '" + newPortletId +
-				"' where portletId = '" + oldPortletId + "'");
-	}
-
-	protected void upgradeResource(
+	protected void updateResource(
 			String oldRootPortletId, String newRootPortletId)
 		throws Exception {
 
@@ -144,11 +127,10 @@ public class UpgradePortletId extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"select primKey from Resource_ where primKey like ?");
 
-			String primKeyLike =
+			ps.setString(
+				1,
 				"%" + PortletConstants.LAYOUT_SEPARATOR + oldRootPortletId +
-					PortletConstants.INSTANCE_SEPARATOR + "%";
-
-			ps.setString(1, primKeyLike);
+					PortletConstants.INSTANCE_SEPARATOR + "%");
 
 			rs = ps.executeQuery();
 
@@ -181,8 +163,12 @@ public class UpgradePortletId extends UpgradeProcess {
 					newRootPortletId + PortletConstants.INSTANCE_SEPARATOR +
 						instanceId;
 
-				upgradeLayout(plid, oldPortletId, newPortletId);
-				upgradePortletPreferences(oldPortletId, newPortletId);
+				updateLayout(plid, oldPortletId, newPortletId);
+
+				runSQL(
+					"update PortletPreferences set portletId = '" +
+						newPortletId + "' where portletId = '" + oldPortletId +
+							"'");
 			}
 		}
 		finally {
@@ -190,7 +176,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeResourceCode(
+	protected void updateResourceCode(
 			String oldRootPortletId, String newRootPortletId)
 		throws Exception {
 
@@ -199,11 +185,25 @@ public class UpgradePortletId extends UpgradeProcess {
 				"' where name = '" + oldRootPortletId + "'");
 	}
 
-	protected String upgradeTypeSettings(
-			String typeSettings, String oldPortletId, String newPortletId)
+	protected void updateTypeSettings(long plid, String typeSettings)
 		throws Exception {
 
-		return StringUtil.replace(typeSettings, oldPortletId, newPortletId);
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update Layout set typeSettings = ? where plid = " + plid);
+
+			ps.setString(1, typeSettings);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
 	}
 
 }
