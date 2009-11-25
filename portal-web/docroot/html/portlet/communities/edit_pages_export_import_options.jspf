@@ -46,7 +46,7 @@
 	}
 
 	function <portlet:namespace />hideDateRange() {
-		AUI().one("#<portlet:namespace />startEndDate").hide();
+		AUI().one('#<portlet:namespace />startEndDate').hide();
 	}
 
 	function <portlet:namespace />importLess() {
@@ -68,7 +68,7 @@
 	}
 
 	function <portlet:namespace />showDateRange() {
-		AUI().one("#<portlet:namespace />startEndDate").show();
+		AUI().one('#<portlet:namespace />startEndDate').show();
 	}
 
 	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
