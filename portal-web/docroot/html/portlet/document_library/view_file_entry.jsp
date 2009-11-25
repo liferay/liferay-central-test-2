@@ -119,56 +119,74 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 <script type="text/javascript">
 	function <portlet:namespace />compare() {
-		var rowIds = jQuery('input[name=<portlet:namespace />rowIds]:checked');
-		var sourceVersion = jQuery('input[name="<portlet:namespace />sourceVersion"]');
-		var targetVersion = jQuery('input[name="<portlet:namespace />targetVersion"]');
+		AUI().use(
+			'selector-css3',
+			function(A) {
+				var rowIds = A.all('input[name=<portlet:namespace />rowIds]:checked');
+				var sourceVersion = A.one('input[name="<portlet:namespace />sourceVersion"]');
+				var targetVersion = A.one('input[name="<portlet:namespace />targetVersion"]');
 
-		if (rowIds.length == 1) {
-			sourceVersion.val(rowIds[0].value);
-		}
-		else if (rowIds.length == 2) {
-			sourceVersion.val(rowIds[1].value);
-			targetVersion.val(rowIds[0].value);
-		}
+				var rowIdsSize = rowIds.size();
 
-		submitForm(document.<portlet:namespace />fm1);
+				if (rowIdsSize == 1) {
+					if (sourceVersion) {
+						sourceVersion.val(rowIds.item(0).val());
+					}
+				}
+				else if (rowIdsSize == 2) {
+					if (sourceVersion) {
+						sourceVersion.val(rowIds.item(1).val());
+					}
+
+					if (targetVersion) {
+						targetVersion.val(rowIds.item(0).val());
+					}
+				}
+
+				submitForm(document.<portlet:namespace />fm1);
+			}
+		);
 	}
 
 	function <portlet:namespace />initRowsChecked() {
-		var rowIds = jQuery('input[name=<portlet:namespace />rowIds]');
+		var rowIds = AUI().all('input[name=<portlet:namespace />rowIds]');
 
-		var found = 0;
-
-		for (i = 0; i < rowIds.length; i++) {
-			if (rowIds[i].checked && (found < 2)) {
-				found++;
+		rowIds.each(
+			function(item, index, collection) {
+				if (index >= 2) {
+					item.set('checked', false);
+				}
 			}
-			else {
-				rowIds[i].checked = false;
-			}
-		}
+		);
 	}
 
 	function <portlet:namespace />updateRowsChecked(element) {
-		var rowsChecked = jQuery('input[name=<portlet:namespace />rowIds]:checked');
+		AUI().use(
+			'selector-css3',
+			function(A) {
+				var rowsChecked = A.all('input[name=<portlet:namespace />rowIds]:checked');
 
-		if (rowsChecked.length > 2) {
-			if (rowsChecked[2] == element) {
-				rowsChecked[1].checked = false;
+				if (rowsChecked.size() > 2) {
+					var index = 2;
+
+					if (rowsChecked.item(2).compareTo(element)) {
+						index = 1;
+					}
+
+					rowsChecked.item(index).set('checked', false);
+				}
 			}
-			else {
-				rowsChecked[2].checked = false;
-			}
-		}
+		);
 	}
 
 	AUI().ready(
 		function() {
 			<portlet:namespace />initRowsChecked();
 
-			jQuery('input[name=<portlet:namespace />rowIds]').click(
-				function() {
-					<portlet:namespace />updateRowsChecked(this);
+			AUI().all('input[name=<portlet:namespace />rowIds]').on(
+				'click',
+				function(event) {
+					<portlet:namespace />updateRowsChecked(event.currentTarget);
 				}
 			);
 		}

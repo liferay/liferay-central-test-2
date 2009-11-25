@@ -332,24 +332,36 @@ portletURL.setParameter("name", name);
 	</c:if>
 
 	AUI().ready(
-		function() {
-			jQuery("#<portlet:namespace />file").change(
-				function() {
-					var value = jQuery(this).val();
+		function(A) {
+			var validateFile = function(fileField) {
+				var value = fileField.val();
 
-					if ((value != null) && (value != "")) {
-						var extension = value.substring(value.lastIndexOf(".")).toLowerCase();
+				if (value) {
+					var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
+					var validExtensions = ['<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), "', '") %>'];
 
-						var validExtensions = new Array('<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), "', '") %>');
+					if ((A.Array.indexOf(validExtensions, '*') == -1) &&
+						(A.Array.indexOf(validExtensions, extension) == -1)) {
 
-						if ((jQuery.inArray("*", validExtensions) == -1) && (jQuery.inArray(extension, validExtensions) == -1)) {
-							alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
+						alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
 
-							jQuery(this).val("");
-						}
+						fileField.val('');
 					}
 				}
-			).change();
+			};
+
+			var fileField = A.one('#<portlet:namespace />file')
+
+			if (fileField) {
+				fileField.on(
+					'change',
+					function(event) {
+						validateFile(event.currentTarget);
+					}
+				);
+
+				validateFile(fileField);
+			}
 		}
 	);
 </script>
