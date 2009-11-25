@@ -43,8 +43,16 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 		nameEl.href = "";
 		nameEl.innerHTML = "";
 
-		jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").hide();
-		jQuery("#<portlet:namespace />mergeWithParentCategoryCheckbox").attr("checked", false);
+		var mergeWithParent = AUI().one('#<portlet:namespace />merge-with-parent-checkbox-div');
+		var mergeWithParentCategory = AUI().one('#<portlet:namespace />mergeWithParentCategoryCheckbox');
+
+		if (mergeWithParent) {
+			mergeWithParent.hide();
+		}
+
+		if (mergeWithParentCategory) {
+			mergeWithParentCategory.set('checked', false);
+		}
 	}
 
 	function <portlet:namespace />saveCategory() {
@@ -61,7 +69,11 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 		nameEl.innerHTML = parentCategoryName + "&nbsp;";
 
 		if (parentCategoryId != <%= ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>) {
-			jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").show();
+			var mergeWithParent = AUI().one('#<portlet:namespace />merge-with-parent-checkbox-div');
+
+			if (mergeWithParent) {
+				mergeWithParent.show();
+			}
 		}
 	}
 </script>
