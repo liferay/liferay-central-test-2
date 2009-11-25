@@ -123,12 +123,17 @@
 
 		<script type="text/javascript">
 			AUI().ready(
-				function() {
-					jQuery('#<portlet:namespace />password').keypress(
-						function(event) {
-							Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
-						}
-					);
+				function(A) {
+					var password = A.one('#<portlet:namespace />password');
+
+					if (password) {
+						password.on(
+							'keypress',
+							function(event) {
+								Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
+							}
+						);
+					}
 				}
 			);
 
