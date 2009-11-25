@@ -96,25 +96,36 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			for (var i = 1; i < 4; i++) {
-				jQuery("#<portlet:namespace />file" + i).change(
-					function() {
-						var value = jQuery(this).val();
+		function(A) {
+			var validateFile = function(fileField) {
+				var value = fileField.val();
 
-						if ((value != null) && (value != "")) {
-							var extension = value.substring(value.lastIndexOf(".")).toLowerCase();
+				if (value) {
+					var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
+					var validExtensions = ['<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), "', '") %>'];
 
-							var validExtensions = new Array('<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), "', '") %>');
+					if ((A.Array.indexOf(validExtensions, '*') == -1) &&
+						(A.Array.indexOf(validExtensions, extension) == -1)) {
 
-							if ((jQuery.inArray("*", validExtensions) == -1) && (jQuery.inArray(extension, validExtensions) == -1)) {
-								alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
+						alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>');
 
-								jQuery(this).val("");
-							}
-						}
+						fileField.val('');
 					}
-				).change();
+				}
+			};
+
+			var onFileChange = function(event) {
+				validateFile(event.currentTarget);
+			};
+
+			for (var i = 1; i < 4; i++) {
+				var fileField = A.one('#<portlet:namespace />file' + i);
+
+				if (fileField) {
+					fileField.on('change', onFileChange);
+
+					validateFile(fileField);
+				}
 			}
 		}
 	);
