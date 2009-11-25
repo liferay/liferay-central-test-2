@@ -95,7 +95,11 @@ if (choiceName > 0) {
 		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
 		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
 
-		jQuery(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]).toggleClass('disabled');
+		var imageInputId = AUI().one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
+
+		if (imageInputId) {
+			imageInputId.toggleClass('disabled');
+		}
 	}
 
 	function <portlet:namespace />saveQuestion() {
