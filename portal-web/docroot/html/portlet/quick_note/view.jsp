@@ -96,14 +96,17 @@
 
 									event.newVal = instance._toText(event.newVal);
 
-									jQuery.ajax(
+									A.io(
+										'<%= themeDisplay.getPathMain() %>/quick_note/save',
 										{
-											url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
-											data: {
-												p_l_id: '<%= plid %>',
-												portletId: '<%= portletDisplay.getId() %>',
-												data: newValue
-											}
+											data: A.toQueryString(
+												{
+													p_l_id: '<%= plid %>',
+													portletId: '<%= portletDisplay.getId() %>',
+													data: newValue
+												}
+											),
+											method: 'POST'
 										}
 									);
 								}
