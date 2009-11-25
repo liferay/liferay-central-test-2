@@ -52,60 +52,63 @@
 <c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
 	<script type="text/javascript">
 		AUI().ready(
-			function() {
-				jQuery('#<portlet:namespace />pad .note-color').click(
-					function() {
-						var box = jQuery(this);
+			'editable',
+			function(A) {
+				var quickNotePad = A.one('#<portlet:namespace />pad');
 
-						var bgColor = box.css('background-color');
+				if (quickNotePad) {
+					quickNotePad.all('.note-color').on(
+						'click',
+						function(event) {
+							var box = event.currentTarget;
 
-						jQuery('#<portlet:namespace />pad').css('background-color', bgColor);
+							var bgColor = box.getStyle('backgroundColor');
 
-						jQuery.ajax(
-							{
-								type: 'POST',
-								url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
-								data: {
-									p_l_id: '<%= plid %>',
-									portletId: '<%= portletDisplay.getId() %>',
-									color: bgColor
-								}
-							}
-						);
-					}
-				);
+							quickNotePad.setStyle('backgroundColor', bgColor);
 
-				AUI().use(
-					'editable',
-					function(A) {
-						new A.Editable(
-							{
-								node: '#<portlet:namespace />note',
-								inputType: 'textarea',
-								on: {
-									contentTextChange: function(event) {
-										var instance = this;
-
-										if (!event.initial) {
-											var newValue = event.newVal.replace(/\n/gi, '<br />');
-
-											event.newVal = instance._toText(event.newVal);
-
-											jQuery.ajax(
-												{
-													url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
-													data: {
-														p_l_id: '<%= plid %>',
-														portletId: '<%= portletDisplay.getId() %>',
-														data: newValue
-													}
-												}
-											);
+							A.io(
+								'<%= themeDisplay.getPathMain() %>/quick_note/save',
+								{
+									data: A.toQueryString(
+										{
+											color: bgColor,
+											portletId: '<%= portletDisplay.getId() %>',
+											p_l_id: '<%= plid %>'
 										}
-									}
+									),
+									method: 'POST'
+								}
+							);
+						}
+					);
+				}
+
+				new A.Editable(
+					{
+						node: '#<portlet:namespace />note',
+						inputType: 'textarea',
+						on: {
+							contentTextChange: function(event) {
+								var instance = this;
+
+								if (!event.initial) {
+									var newValue = event.newVal.replace(/\n/gi, '<br />');
+
+									event.newVal = instance._toText(event.newVal);
+
+									jQuery.ajax(
+										{
+											url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
+											data: {
+												p_l_id: '<%= plid %>',
+												portletId: '<%= portletDisplay.getId() %>',
+												data: newValue
+											}
+										}
+									);
 								}
 							}
-						);
+						}
 					}
 				);
 			}
