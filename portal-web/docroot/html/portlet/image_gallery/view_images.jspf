@@ -60,7 +60,7 @@
 		var buttonsId = "<portlet:namespace />buttons_" + id;
 		var categorizationId = "<portlet:namespace />categorizacionContainer_" + id;
 
-		var categorization = jQuery("#" + categorizationId);
+		var categorization = AUI().one("#" + categorizationId);
 
 		var html = "<div class='image-content'>";
 		html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
