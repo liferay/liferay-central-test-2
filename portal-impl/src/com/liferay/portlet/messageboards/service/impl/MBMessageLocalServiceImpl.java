@@ -1994,6 +1994,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		messagingObj.put("companyId", message.getCompanyId());
 		messagingObj.put("userId", message.getUserId());
+		messagingObj.put("groupId", group.getGroupId());
 		messagingObj.put("categoryIds", StringUtil.merge(categoryIds));
 		messagingObj.put("threadId", message.getThreadId());
 		messagingObj.put("fromName", fromName);
