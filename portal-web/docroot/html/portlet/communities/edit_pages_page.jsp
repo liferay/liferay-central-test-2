@@ -153,7 +153,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						}
 						%>
 
-						<input id="<portlet:namespace />name_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onNameChanged();" />
+						<input class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />name_temp" size="30" type="text" onChange="<portlet:namespace />onNameChanged();" />
 					</td>
 				</tr>
 				<tr>
@@ -178,7 +178,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						}
 						%>
 
-						<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
+						<input class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />title_temp" size="30" type="text" onChange="<portlet:namespace />onTitleChanged();" />
 					</td>
 				</tr>
 				<tr>
@@ -354,7 +354,7 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 	String curLayoutType = PropsValues.LAYOUT_TYPES[i];
 %>
 
-	<tr class="layout-type-form layout-type-form-<%= curLayoutType %>" style="display: <%= type.equals(PropsValues.LAYOUT_TYPES[i]) ? "block" : "none" %>;">
+	<tr class="layout-type-form layout-type-form-<%= curLayoutType %> <%= type.equals(PropsValues.LAYOUT_TYPES[i]) ? "" : "aui-helper-hidden" %>">
 		<td>
 
 			<%
@@ -408,39 +408,51 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 	}
 
 	function <portlet:namespace />toggleLayoutTypeFields(type) {
-		jQuery(".layout-type-form").hide();
-		jQuery(".layout-type-form input").attr("disabled", true);
-		jQuery(".layout-type-form select").attr("disabled", true);
-		jQuery(".layout-type-form textarea").attr("disabled", true);
+		var layoutTypeForms = AUI().all('.layout-type-form');
+		var currentType = 'layout-type-form-' + type;
 
-		jQuery(".layout-type-form-" + type).show();
-		jQuery(".layout-type-form-" + type + " input").attr("disabled", false);
-		jQuery(".layout-type-form-" + type + " select").attr("disabled", false);
-		jQuery(".layout-type-form-" + type + " textarea").attr("disabled", false);
+		layoutTypeForms.each(
+			function(item, index, collection) {
+				var action = 'hide';
+				var disabled = true;
+
+				if (item.hasClass(currentType)) {
+					action = 'show';
+					disabled = false;
+				}
+
+				item[action]();
+
+				item.all('input, select, textarea').set('disabled', disabled);
+			}
+		);
 	}
 
 	function <portlet:namespace />updateLanguage() {
+		var nameNode = AUI().one('#<portlet:namespace />name_temp');
+		var titleNode = AUI().one('#<portlet:namespace />title_temp');
+
 		if (lastLanguageId != "<%= defaultLanguageId %>") {
 			if (nameChanged) {
-				var nameValue = jQuery("#<portlet:namespace />name_temp").attr("value");
+				var nameValue = (nameNode && nameNode.val()) || '';
 
-				if (nameValue == null) {
-					nameValue = "";
+				var lastLanguageNameNode = AUI().one('#<portlet:namespace />name_' + lastLanguageId);
+
+				if (lastLanguageNameNode) {
+					lastLanguageNameNode.val(nameValue);
 				}
-
-				jQuery("#<portlet:namespace />name_" + lastLanguageId).attr("value", nameValue);
 
 				nameChanged = false;
 			}
 
 			if (titleChanged) {
-				var titleValue = jQuery("#<portlet:namespace />title_temp").attr("value");
+				var titleValue = (titleNode && titleNode.val()) || '';
 
-				if (titleValue == null) {
-					titleValue = "";
+				var lastLanguageTitleNode = AUI().one('#<portlet:namespace />title_' + lastLanguageId);
+
+				if (lastLanguageTitleNode) {
+					lastLanguageTitleNode.val(titleValue);
 				}
-
-				jQuery("#<portlet:namespace />title_" + lastLanguageId).attr("value", titleValue);
 
 				titleChanged = false;
 			}
@@ -456,15 +468,20 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 			}
 		}
 
+		var action = 'hide';
+
 		if (selLanguageId != "") {
 			<portlet:namespace />updateLanguageTemps(selLanguageId);
 
-			jQuery("#<portlet:namespace />name_temp").show();
-			jQuery("#<portlet:namespace />title_temp").show();
+			action = 'show';
 		}
-		else {
-			jQuery("#<portlet:namespace />name_temp").hide();
-			jQuery("#<portlet:namespace />title_temp").hide();
+
+		if (nameNode) {
+			nameNode[action]();
+		}
+
+		if (titleNode) {
+			titleNode[action]();
 		}
 
 		lastLanguageId = selLanguageId;
@@ -474,42 +491,42 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 
 	function <portlet:namespace />updateLanguageTemps(lang) {
 		if (lang != "<%= defaultLanguageId %>") {
-			var nameValue = jQuery("#<portlet:namespace />name_" + lang).attr("value");
-			var titleValue = jQuery("#<portlet:namespace />title_" + lang).attr("value");
-			var defaultNameValue = jQuery("#<portlet:namespace />name_<%= defaultLanguageId %>").attr("value");
-			var defaultTitleValue = jQuery("#<portlet:namespace />title_<%= defaultLanguageId %>").attr("value");
+			var nameNode = AUI().one('#<portlet:namespace />name_' + lang);
+			var titleNode = AUI().one('#<portlet:namespace />title_' + lang);
+			var defaultName = AUI().one('#<portlet:namespace />name_<%= defaultLanguageId %>');
+			var defaultTitle = AUI().one('#<portlet:namespace />title_<%= defaultLanguageId %>');
 
-			if (defaultNameValue == null) {
-				defaultNameValue = "";
-			}
+			var nameValue = (nameNode && nameNode.val()) || '';
+			var titleValue = (titleNode && titleNode.val()) || '';
+			var defaultNameValue = (defaultName && defaultName.val()) || '';
+			var defaultTitleValue = (defaultTitle && defaultTitle.val()) || '';
 
-			if (defaultTitleValue == null) {
-				defaultTitleValue = "";
-			}
+			var nameTempNode = AUI().one('#<portlet:namespace />name_temp');
+			var titleTempNode = AUI().one('#<portlet:namespace />title_temp');
 
-			if ((nameValue == null) || (nameValue == "")) {
-				jQuery("#<portlet:namespace />name_temp").attr("value", defaultNameValue);
-			}
-			else {
-				jQuery("#<portlet:namespace />name_temp").attr("value", nameValue);
+			if (nameTempNode) {
+				nameTempNode.val(nameValue || defaultNameValue);
 			}
 
-			if ((titleValue == null) || (titleValue == "")) {
-				jQuery("#<portlet:namespace />title_temp").attr("value", defaultTitleValue);
-			}
-			else {
-				jQuery("#<portlet:namespace />title_temp").attr("value", titleValue);
+			if (titleTempNode) {
+				titleTempNode.val(titleValue || defaultTitleValue);
 			}
 		}
 	}
 
-	<portlet:namespace />toggleLayoutTypeFields('<%= selLayout.getType() %>');
+	AUI().use(
+		'aui-base',
+		function(A) {
+			<portlet:namespace />toggleLayoutTypeFields('<%= selLayout.getType() %>');
 
-	<portlet:namespace />updateLanguageTemps(lastLanguageId);
+			<portlet:namespace />updateLanguageTemps(lastLanguageId);
 
-	jQuery("#<portlet:namespace />type").change(
-		function() {
-			<portlet:namespace />toggleLayoutTypeFields(this.value);
+			A.one("#<portlet:namespace />type").on(
+				'change',
+				function(event) {
+					<portlet:namespace />toggleLayoutTypeFields(event.currentTarget.val());
+				}
+			);
 		}
 	)
 </script>

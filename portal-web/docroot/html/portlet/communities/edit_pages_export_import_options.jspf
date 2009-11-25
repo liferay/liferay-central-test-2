@@ -46,7 +46,7 @@
 	}
 
 	function <portlet:namespace />hideDateRange() {
-		jQuery("#<portlet:namespace />startEndDate").hide();
+		AUI().one("#<portlet:namespace />startEndDate").hide();
 	}
 
 	function <portlet:namespace />importLess() {
@@ -68,15 +68,26 @@
 	}
 
 	function <portlet:namespace />showDateRange() {
-		jQuery("#<portlet:namespace />startEndDate").show();
+		AUI().one("#<portlet:namespace />startEndDate").show();
 	}
 
 	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
-		if (checkbox.checked) {
-			jQuery('#' + parentDivId).find("input").not(".disabled").removeAttr('disabled');
-		}
-		else {
-			jQuery('#' + parentDivId).find("input").attr("disabled", "disabled");
+		var parentDiv = AUI().one('#' + parentDivId);
+
+		var enabled = checkbox.checked;
+
+		if (parentDiv) {
+			parentDiv.all('input').each(
+				function(item, index, collection) {
+					var disabled = !enabled;
+
+					if (enabled && item.hasClass('disabled')) {
+						disabled = true;
+					}
+
+					item.set('disabled', disabled);
+				}
+			);
 		}
 	}
 </script>
@@ -200,7 +211,7 @@
 
 											<br />
 
-											<ul id="<portlet:namespace />startEndDate" style="display: none;">
+											<ul class="aui-helper-hidden" id="<portlet:namespace />startEndDate">
 												<li>
 													<table class="lfr-table">
 													<tr>

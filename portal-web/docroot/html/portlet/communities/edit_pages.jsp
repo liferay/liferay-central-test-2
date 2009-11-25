@@ -329,11 +329,16 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 
 	function <portlet:namespace />removePage(box) {
-		var selectEl = jQuery(box);
+		var selectEl = AUI().one(box);
 
 		var layoutId = <%= ((refererLayout == null) ? layout.getLayoutId() : refererLayout.getLayoutId()) %>;
+		var currentValue = null;
 
-		if (layoutId == selectEl.find('option:selected').attr('value')) {
+		if (selectEl) {
+			currentValue = selectEl.val();
+		}
+
+		if (layoutId == currentValue) {
 			alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
 		}
 		else {
@@ -387,21 +392,17 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, sectionParam, sectionName) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
 
-		var themeRadio = jQuery(document.<portlet:namespace />fm.<portlet:namespace />themeId);
+		var themeRadio = AUI().one(document.<portlet:namespace />fm.<portlet:namespace />themeId);
 
-		if (themeRadio.length > 1) {
-			themeRadio = themeRadio.filter(':checked');
+		if (themeRadio) {
+			themeRadio.val(themeId);
 		}
 
-		themeRadio.val(themeId);
+		var colorSchemeRadio = AUI().one(document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId);
 
-		var colorSchemeRadio = jQuery(document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId);
-
-		if (colorSchemeRadio.length > 1) {
-			colorSchemeRadio = colorSchemeRadio.filter(':checked');
+		if (colorSchemeRadio) {
+			colorSchemeRadio.val(colorSchemeId);
 		}
-
-		colorSchemeRadio.val(colorSchemeId);
 
 		if ((sectionParam != null) && (sectionName != null)) {
 			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&" + sectionParam + "=" + sectionName;

@@ -23,22 +23,50 @@
 %>
 
 <script type="text/javascript">
-	var selectedPages = jQuery('#<portlet:namespace />scope_selected_pages').is(':checked');
+	AUI().ready(
+		function(A) {
+			var selectedPages = A.one('#<portlet:namespace />scope_selected_pages');
 
-	if (selectedPages && <%= !publish %>) {
-		<portlet:namespace />hideTabs();
-	}
+			if (selectedPages && selectedPages.get('checked') && <%= !publish %>) {
+				<portlet:namespace />hideTabs();
+			}
+		}
+	);
 
 	function <portlet:namespace />hideTabs() {
-		jQuery('#<portlet:namespace />exportPagesTabsoptionsTabsId').hide();
-		jQuery('#<portlet:namespace />exportPagesTabsschedulerTabsId').hide();
-		jQuery('#<portlet:namespace />exportPagesTabsremote-optionsTabsId').hide();
+		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
+		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
+		var remoteOptionsTab = AUI().one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
+
+		if (optionsTab) {
+			optionsTab.hide();
+		}
+
+		if (schedulerTab) {
+			schedulerTab.hide();
+		}
+
+		if (remoteOptionsTab) {
+			remoteOptionsTab.hide();
+		}
 	}
 
 	function <portlet:namespace />showTabs() {
-		jQuery('#<portlet:namespace />exportPagesTabsoptionsTabsId').show();
-		jQuery('#<portlet:namespace />exportPagesTabsschedulerTabsId').show();
-		jQuery('#<portlet:namespace />exportPagesTabsremote-optionsTabsId').show();
+		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
+		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
+		var remoteOptionsTab = AUI().one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
+
+		if (optionsTab) {
+			optionsTab.show();
+		}
+
+		if (schedulerTab) {
+			schedulerTab.show();
+		}
+
+		if (remoteOptionsTab) {
+			remoteOptionsTab.show();
+		}
 	}
 </script>
 

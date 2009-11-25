@@ -175,14 +175,14 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 				AUI().ready(
 					function() {
 						<c:if test="<%= !layoutPrototypes.isEmpty() %>">
-							var layoutPrototypeIdSelect = jQuery('#<portlet:namespace />layoutPrototypeId');
+							var layoutPrototypeIdSelect = AUI().one('#<portlet:namespace />layoutPrototypeId');
 
-							function showHiddenFields () {
-								var hiddenFields = jQuery('.hidden-field');
+							function showHiddenFields() {
+								var hiddenFields = AUI().all('.hidden-field');
 
 								hiddenFields.hide();
 
-								if (layoutPrototypeIdSelect.val() == '') {
+								if (layoutPrototypeIdSelect && layoutPrototypeIdSelect.val() == '') {
 									hiddenFields.show();
 								}
 								else {
@@ -192,11 +192,14 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 							showHiddenFields();
 
-							layoutPrototypeIdSelect.change(
-								function(event) {
-									showHiddenFields();
-								}
-							);
+							if (layoutPrototypeIdSelect) {
+								layoutPrototypeIdSelect.on(
+									'change',
+									function(event) {
+										showHiddenFields();
+									}
+								);
+							}
 						</c:if>
 
 						Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);

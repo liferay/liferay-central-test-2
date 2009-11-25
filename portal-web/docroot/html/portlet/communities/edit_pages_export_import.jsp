@@ -151,22 +151,40 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			jQuery('.<portlet:namespace />handler-control input[type=checkbox]:not([checked])').parent().parent().parent('.<portlet:namespace />handler-control').children('.<portlet:namespace />handler-control').hide();
+		'selector-css3',
+		function(A) {
+			var toggleHandlerControl = function(item, index, collection) {
+				var container = item.ancestor('.<portlet:namespace />handler-control').one('ul');
 
-			jQuery('.<portlet:namespace />handler-control input[type=checkbox]').unbind('click.liferay').bind(
-				'click.liferay',
-				function() {
-					var input = jQuery(this).parents('.<portlet:namespace />handler-control:first');
+				if (container) {
+					var action = 'hide';
 
-					if (this.checked) {
-						input.children('.<portlet:namespace />handler-control').show();
+					if (item.get('checked')) {
+						action = 'show';
 					}
-					else {
-						input.children('.<portlet:namespace />handler-control').hide();
-					}
+
+					container[action]();
 				}
-			);
+			};
+
+			var checkboxes = A.all('.<portlet:namespace />handler-control input[type=checkbox]');
+
+			if (checkboxes) {
+				var uncheckedBoxes = checkboxes.filter(':not(:checked)');
+
+				if (uncheckedBoxes) {
+					uncheckedBoxes.each(toggleHandlerControl);
+				}
+
+				checkboxes.detach('click');
+
+				checkboxes.on(
+					'click',
+					function(event) {
+						toggleHandlerControl(event.currentTarget);
+					}
+				);
+			}
 		}
 	);
 </script>

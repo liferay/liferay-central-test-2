@@ -60,9 +60,11 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= scheduleCMD %>';
 
-		var addButton = jQuery('#<portlet:namespace />addButton');
+		var addButton = AUI().one('#<portlet:namespace />addButton');
 
-		addButton.attr("disabled", true);
+		if (addButton) {
+			addButton.set('disabled', true);
+		}
 
 		AUI().use(
 			'io',
@@ -127,19 +129,37 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 	}
 
 	function <portlet:namespace />updateScheduledPublishEventsDiv() {
-		jQuery.ajax(
-			{
-				url: '<%= scheduledPublishEventsURL %>',
-				success: function(html) {
-					var scheduledPublishEventsDiv = jQuery('#<portlet:namespace />scheduledPublishEventsDiv');
+		AUI().use(
+			'io',
+			function(A) {
+				var form = A.get(document.<portlet:namespace />exportPagesFm);
 
-					scheduledPublishEventsDiv.empty();
-					scheduledPublishEventsDiv.append(html);
+				var uri = form.getAttribute('action');
 
-					var addButton = jQuery('#<portlet:namespace />addButton');
+				A.io(
+					'<%= scheduledPublishEventsURL %>',
+					{
+						form: {
+							id: form
+						},
+						method: 'POST',
+						on: {
+							success: function(id, obj) {
+								var scheduledPublishEventsDiv = A.one('#<portlet:namespace />scheduledPublishEventsDiv');
 
-					addButton.attr("disabled", false);
-				}
+								if (scheduledPublishEventsDiv) {
+									scheduledPublishEventsDiv.html(obj.responseText);
+								}
+
+								var addButton = A.one('#<portlet:namespace />addButton');
+
+								if (addButton) {
+									addButton.set('disabled', false);
+								}
+							}
+						}
+					}
+				);
 			}
 		);
 	}

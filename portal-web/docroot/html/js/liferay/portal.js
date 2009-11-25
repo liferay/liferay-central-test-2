@@ -9,13 +9,14 @@ Liferay.Portal.Tabs = {
 		tab.addClass('aui-selected');
 
 		panel.show();
+		panel.removeClass('aui-helper-hidden');
 
 		var index = names.indexOf(id);
 		names.splice(index, 1);
 
 		for (var i = 0; i < names.length; i++) {
 			el = jQuery('#' + namespace + names[i] + 'TabsSection');
-			el.hide();
+			el.addClass('aui-helper-hidden');
 		}
 	}
 };
