@@ -959,21 +959,22 @@ public class ServicePreAction extends Action {
 
 		if (Validator.isNotNull(i18nPath)) {
 			if (Validator.isNotNull(contextPath)) {
-				String newContextPath = contextPath.concat(i18nPath);
+				String i18nContextPath = contextPath.concat(i18nPath);
+
 				friendlyURLPrivateGroupPath = StringUtil.replaceFirst(
-					friendlyURLPrivateGroupPath, contextPath, newContextPath);
+					friendlyURLPrivateGroupPath, contextPath, i18nContextPath);
 				friendlyURLPrivateUserPath = StringUtil.replaceFirst(
-					friendlyURLPrivateUserPath, contextPath, newContextPath);
+					friendlyURLPrivateUserPath, contextPath, i18nContextPath);
 				friendlyURLPublicPath = StringUtil.replaceFirst(
-					friendlyURLPublicPath, contextPath, newContextPath);
+					friendlyURLPublicPath, contextPath, i18nContextPath);
 				mainPath = StringUtil.replaceFirst(
-					mainPath, contextPath, newContextPath);
+					mainPath, contextPath, i18nContextPath);
 			}
 			else {
-				friendlyURLPrivateGroupPath =
-					i18nPath.concat(friendlyURLPrivateGroupPath);
-				friendlyURLPrivateUserPath =
-					i18nPath.concat(friendlyURLPrivateUserPath);
+				friendlyURLPrivateGroupPath = i18nPath.concat(
+					friendlyURLPrivateGroupPath);
+				friendlyURLPrivateUserPath = i18nPath.concat(
+					friendlyURLPrivateUserPath);
 				friendlyURLPublicPath = i18nPath.concat(friendlyURLPublicPath);
 				mainPath = i18nPath.concat(mainPath);
 			}
@@ -981,13 +982,15 @@ public class ServicePreAction extends Action {
 
 		// Company logo
 
-		String companyLogo = new StringBundler(5)
-			.append(imagePath)
-			.append("/company_logo?img_id=")
-			.append(company.getLogoId())
-			.append("&t=")
-			.append(ImageServletTokenUtil.getToken(company.getLogoId()))
-			.toString();
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(imagePath);
+		sb.append("/company_logo?img_id=");
+		sb.append(company.getLogoId());
+		sb.append("&t=");
+		sb.append(ImageServletTokenUtil.getToken(company.getLogoId()));
+
+		String companyLogo = sb.toString();
 
 		Image companyLogoImage = ImageLocalServiceUtil.getCompanyLogo(
 			company.getLogoId());
@@ -1173,7 +1176,7 @@ public class ServicePreAction extends Action {
 					layout = null;
 				}
 				else if (!isViewableCommunity) {
-					StringBundler sb = new StringBundler(6);
+					sb = new StringBundler(6);
 
 					sb.append("User ");
 					sb.append(user.getUserId());
@@ -1268,13 +1271,15 @@ public class ServicePreAction extends Action {
 				}
 
 				if (logoId > 0) {
-					layoutSetLogo = new StringBundler(5)
-						.append(imagePath)
-						.append("/layout_set_logo?img_id=")
-						.append(logoId)
-						.append("&t=")
-						.append(ImageServletTokenUtil.getToken(logoId))
-						.toString();
+					sb = new StringBundler(5);
+
+					sb.append(imagePath);
+					sb.append("/layout_set_logo?img_id=");
+					sb.append(logoId);
+					sb.append("&t=");
+					sb.append(ImageServletTokenUtil.getToken(logoId));
+
+					layoutSetLogo = sb.toString();
 
 					Image layoutSetLogoImage =
 						ImageLocalServiceUtil.getCompanyLogo(logoId);
@@ -1519,8 +1524,8 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignOutIcon(signedIn);
 		themeDisplay.setShowStagingIcon(false);
 
-		String urlControlPanel =
-			friendlyURLPrivateGroupPath.concat("/control_panel");
+		String urlControlPanel = friendlyURLPrivateGroupPath.concat(
+			"/control_panel");
 
 		if (Validator.isNotNull(doAsUserId)) {
 			urlControlPanel = HttpUtil.addParameter(
@@ -1583,9 +1588,8 @@ public class ServicePreAction extends Action {
 					themeDisplay.setShowLayoutTemplatesIcon(true);
 
 					themeDisplay.setURLAddContent(
-						"Liferay.LayoutConfiguration.toggle('"
-						.concat(PortletKeys.LAYOUT_CONFIGURATION)
-						.concat("');"));
+						"Liferay.LayoutConfiguration.toggle('".concat(
+							PortletKeys.LAYOUT_CONFIGURATION).concat("');"));
 
 					themeDisplay.setURLLayoutTemplates(
 						"Liferay.LayoutConfiguration.showTemplates();");

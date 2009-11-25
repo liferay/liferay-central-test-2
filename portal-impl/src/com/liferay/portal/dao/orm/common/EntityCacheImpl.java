@@ -292,9 +292,9 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 	private String _encodeLocalCacheKey(
 		Class<?> classObj, Serializable primaryKeyObj) {
-		return classObj.getName()
-			.concat(StringPool.PERIOD)
-			.concat(primaryKeyObj.toString());
+
+		return classObj.getName().concat(StringPool.PERIOD).concat(
+			primaryKeyObj.toString());
 	}
 
 	private PortalCache _getPortalCache(String className) {

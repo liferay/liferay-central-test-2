@@ -209,8 +209,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	private String _encodeCacheKey(
 		String methodName, String[] params, Object[] args) {
 
-		int arrayCapacity = (params.length + args.length) * 2 + 3;
-		StringBundler sb = new StringBundler(arrayCapacity);
+		StringBundler sb = new StringBundler(
+			(params.length + args.length) * 2 + 3);
 
 		sb.append(methodName);
 		sb.append(_PARAMS_SEPARATOR);
@@ -237,8 +237,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	private String _encodeLocalCacheKey(
 		String className, String methodName, String[] params, Object[] args) {
 
-		int arrayCapacity = (params.length + args.length) * 2 + 5;
-		StringBundler sb = new StringBundler(arrayCapacity);
+		StringBundler sb = new StringBundler(
+			(params.length + args.length) * 2 + 5);
 
 		sb.append(className);
 		sb.append(StringPool.PERIOD);
