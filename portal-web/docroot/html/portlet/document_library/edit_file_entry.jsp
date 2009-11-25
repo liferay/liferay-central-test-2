@@ -350,15 +350,14 @@ portletURL.setParameter("name", name);
 				}
 			};
 
+			var onFileChange = function(event) {
+				validateFile(event.currentTarget);
+			};
+
 			var fileField = A.one('#<portlet:namespace />file')
 
 			if (fileField) {
-				fileField.on(
-					'change',
-					function(event) {
-						validateFile(event.currentTarget);
-					}
-				);
+				fileField.on('change', onFileChange);
 
 				validateFile(fileField);
 			}
