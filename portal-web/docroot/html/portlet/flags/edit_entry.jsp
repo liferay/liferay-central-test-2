@@ -52,40 +52,59 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 	);
 
 	function <portlet:namespace />flag() {
-		var reason = jQuery('#<portlet:namespace />reason').val();
+		AUI().use(
+			'dialog',
+			function(A) {
+				var reasonNode = A.one('#<portlet:namespace />reason');
+				var reason = (reasonNode && reasonNode.val()) || '';
 
-		if (reason == 'other') {
-			reason = jQuery('#<portlet:namespace />otherReason').val() || '<liferay-ui:message key="no-reason-specified" />';
-		}
+				if (reason == 'other') {
+					var otherReasonNode = A.one('#<portlet:namespace />otherReason');
 
-		var reporterEmailAddress = jQuery('#<portlet:namespace />reporterEmailAddress').val() || "";
-
-		jQuery('#<portlet:namespace />flagsPopup').html('<div class="loading-animation" />');
-
-		jQuery.ajax(
-				{
-					url: '<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>',
-					data: {
-						className: '<%= HtmlUtil.escape(className) %>',
-						classPK: '<%= classPK %>',
-						reporterEmailAddress: reporterEmailAddress,
-						reportedUserId: '<%= reportedUserId %>',
-						contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
-						contentURL: '<%= HtmlUtil.escape(contentURL) %>',
-						reason: reason
-					},
-					success: function() {
-						var confirmationMessage = jQuery('#<portlet:namespace />confirmation');
-
-						jQuery('#<portlet:namespace />flagsPopup').html(confirmationMessage.html());
-					},
-					error: function() {
-						var errorMessage = jQuery('#<portlet:namespace />error');
-
-						jQuery('#<portlet:namespace />flagsPopup').html(errorMessage.html());
-					}
+					reason = (otherReasonNode && otherReasonNode.val()) || '<liferay-ui:message key="no-reason-specified" />';
 				}
-			);
+
+				var reporterEmailAddressNode = A.one('#<portlet:namespace />reporterEmailAddress');
+				var reporterEmailAddress = (reporterEmailAddressNode && reporterEmailAddressNode.val()) || '';
+
+				var flagsPopupNode = A.one('#<portlet:namespace />flagsPopup');
+				var errorMessageNode = A.one('#<portlet:namespace />error');
+				var confirmationMessageNode = A.one('#<portlet:namespace />confirmation');
+
+				var errorMessage = (errorMessageNode && errorMessageNode.html()) || '';
+				var confirmationMessage = (confirmationMessageNode && confirmationMessageNode.html()) || '';
+
+				if (flagsPopupNode) {
+					A.DialogManager.refreshByChild(
+						flagsPopupNode,
+						{
+							cfg: {
+								data: A.toQueryString(
+									{
+										className: '<%= HtmlUtil.escape(className) %>',
+										classPK: '<%= classPK %>',
+										contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
+										contentURL: '<%= HtmlUtil.escape(contentURL) %>',
+										reason: reason,
+										reportedUserId: '<%= reportedUserId %>',
+										reporterEmailAddress: reporterEmailAddress
+									}
+								),
+								on: {
+									failure: function() {
+										this.get('host').setStdModContent('body', errorMessage);
+									},
+									success: function() {
+										this.get('host').setStdModContent('body', confirmationMessage);
+									}
+								}
+							},
+							uri: '<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>'
+						}
+					);
+				}
+			}
+		);
 	}
 </script>
 
@@ -137,12 +156,12 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 	</form>
 </div>
 
-<div id="<portlet:namespace />confirmation" style="display: none;">
+<div class="aui-helper-hidden" id="<portlet:namespace />confirmation">
 	<p><strong><liferay-ui:message key="thank-you-for-your-report" /></strong></p>
 
 	<p><%= LanguageUtil.format(pageContext, "although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone", company.getName()) %></p>
 </div>
 
-<div id="<portlet:namespace />error" style="display: none;">
+<div class="aui-helper-hidden" id="<portlet:namespace />error">
 	<p><strong><liferay-ui:message key="an-error-occurred-while-sending-the-report.-please-try-again-in-a-few-minutes" /></strong></p>
 </div>
