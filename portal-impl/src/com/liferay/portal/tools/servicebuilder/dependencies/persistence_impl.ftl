@@ -42,7 +42,6 @@ import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -651,120 +650,94 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					try {
 						session = openSession();
-						<#assign arrayCapacity = 0>
-						<#list 1..2 as index>
-							<#if index = 2>
-								StringBundler query = new StringBundler(${arrayCapacity});
+
+						StringBuilder query = new StringBuilder();
+
+						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
+
+						<#list finderColsList as finderCol>
+							<#if !finderCol.isPrimitiveType()>
+								if (${finderCol.name} == null) {
+									<#if finderCol.comparator == "=">
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NULL");
+										</#if>
+									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+										</#if>
+									<#else>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+										</#if>
+									</#if>
+								}
+								else {
 							</#if>
-							<#attempt>
-								query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
-								<#assign arrayCapacity = arrayCapacity + 1>
-								<#list finderColsList as finderCol>
-									<#if !finderCol.isPrimitiveType()>
-										if (${finderCol.name} == null) {
-											<#if finderCol.comparator == "=">
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} IS NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
-											<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
-											<#else>
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
-											</#if>
-										}
-										else {
-									</#if>
 
-									<#if finderCol.type == "String">
-										if (${finderCol.name}.equals(StringPool.BLANK)) {
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										}
-									</#if>
-
-									<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
 									<#else>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
+										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
 									</#if>
+								}
+							</#if>
 
-									<#if finderCol.type == "String">
-										if (${finderCol.name}.equals(StringPool.BLANK)) {
-											query.append(")");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										}
-									</#if>
-
-									<#if !finderCol.isPrimitiveType()>
-										}
-									</#if>
-
-									<#if finderCol_has_next>
-										query.append(" AND ");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-										query.append(" AND ${finder.where} ");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#else>
-										query.append(" ");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									</#if>
-								</#list>
-
-								<#if entity.getOrder()??>
-									query.append("ORDER BY ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-									<#assign orderList = entity.getOrder().getColumns()>
-
-									<#list orderList as order>
-										<#if entity.hasCompoundPK() && order.isPrimary()>
-											query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
-									</#list>
+							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
 								</#if>
-								<#if index = 1>
-									${fail}
+							<#else>
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
 								</#if>
-							<#recover>
-							</#attempt>
+							</#if>
+
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									query.append(")");
+								}
+							</#if>
+
+							<#if !finderCol.isPrimitiveType()>
+								}
+							</#if>
+
+							<#if finderCol_has_next>
+								query.append(" AND ");
+							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
+								query.append(" AND ${finder.where} ");
+							<#else>
+								query.append(" ");
+							</#if>
 						</#list>
+
+						<#if entity.getOrder()??>
+							query.append("ORDER BY ");
+
+							<#assign orderList = entity.getOrder().getColumns()>
+
+							<#list orderList as order>
+								<#if entity.hasCompoundPK() && order.isPrimary()>
+									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								<#else>
+									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								</#if>
+							</#list>
+						</#if>
+
 						Query q = session.createQuery(query.toString());
 
 						QueryPos qPos = QueryPos.getInstance(q);
@@ -866,152 +839,118 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					try {
 						session = openSession();
-						<#assign arrayCapacity = 0>
-						<#list 1..2 as index>
-							<#if index = 2>
-								int arrayCapacity = ${arrayCapacity};
-								if (obc != null) {
-									arrayCapacity += obc.getOrderByFields().length * 4;
+
+						StringBuilder query = new StringBuilder();
+
+						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
+
+						<#list finderColsList as finderCol>
+							<#if !finderCol.isPrimitiveType()>
+								if (${finderCol.name} == null) {
+									<#if finderCol.comparator == "=">
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NULL");
+										</#if>
+									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+										</#if>
+									<#else>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+										</#if>
+									</#if>
 								}
-								<#if entity.getOrder()??>
-									<#assign orderList = entity.getOrder().getColumns()>
-									<#assign elsePathCapacity = orderList?size + 1 + arrayCapacity>
-
-									if (${elsePathCapacity} > arrayCapacity) {
-										arrayCapacity = ${elsePathCapacity};
-									}
-								</#if>
-								StringBundler query = new StringBundler(arrayCapacity);
+								else {
 							</#if>
-							<#attempt>
-								query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
-								<#assign arrayCapacity = arrayCapacity + 1>
-								<#list finderColsList as finderCol>
-									<#if !finderCol.isPrimitiveType()>
-										if (${finderCol.name} == null) {
-											<#if finderCol.comparator == "=">
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} IS NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
-											<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
-											<#else>
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
-											</#if>
-										}
-										else {
-									</#if>
 
-									<#if finderCol.type == "String">
-										if (${finderCol.name}.equals(StringPool.BLANK)) {
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										}
-									</#if>
-
-									<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
 									<#else>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
+										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
 									</#if>
+								}
+							</#if>
 
-									<#if finderCol.type == "String">
-										if (${finderCol.name}.equals(StringPool.BLANK)) {
-											query.append(")");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										}
-									</#if>
+							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								</#if>
+							<#else>
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
+								</#if>
+							</#if>
 
-									<#if !finderCol.isPrimitiveType()>
-										}
-									</#if>
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									query.append(")");
+								}
+							</#if>
 
-									<#if finderCol_has_next>
-										query.append(" AND ");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-										query.append(" AND ${finder.where} ");
-										<#assign arrayCapacity = arrayCapacity + 1>
+							<#if !finderCol.isPrimitiveType()>
+								}
+							</#if>
+
+							<#if finderCol_has_next>
+								query.append(" AND ");
+							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
+								query.append(" AND ${finder.where} ");
+							<#else>
+								query.append(" ");
+							</#if>
+						</#list>
+
+						if (obc != null) {
+							query.append("ORDER BY ");
+
+							String[] orderByFields = obc.getOrderByFields();
+
+							for (int i = 0; i < orderByFields.length; i++) {
+								query.append("${entity.alias}.");
+								query.append(orderByFields[i]);
+
+								if (obc.isAscending()) {
+									query.append(" ASC");
+								}
+								else {
+									query.append(" DESC");
+								}
+
+								if ((i + 1) < orderByFields.length) {
+									query.append(", ");
+								}
+							}
+						}
+
+						<#if entity.getOrder()??>
+							else {
+								query.append("ORDER BY ");
+
+								<#assign orderList = entity.getOrder().getColumns()>
+
+								<#list orderList as order>
+									<#if entity.hasCompoundPK() && order.isPrimary()>
+										query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 									<#else>
-										query.append(" ");
-										<#assign arrayCapacity = arrayCapacity + 1>
+										query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 									</#if>
 								</#list>
+							}
+						</#if>
 
-								if (obc != null) {
-									query.append("ORDER BY ");
-									String[] orderByFields = obc.getOrderByFields();
-
-									for (int i = 0; i < orderByFields.length; i++) {
-										query.append("${entity.alias}.");
-										query.append(orderByFields[i]);
-
-										if (obc.isAscending()) {
-											query.append(" ASC");
-										}
-										else {
-											query.append(" DESC");
-										}
-
-										if ((i + 1) < orderByFields.length) {
-											query.append(", ");
-										}
-									}
-								}
-
-								<#if entity.getOrder()??>
-									else {
-										query.append("ORDER BY ");
-										<#assign orderList = entity.getOrder().getColumns()>
-
-										<#list orderList as order>
-											<#if entity.hasCompoundPK() && order.isPrimary()>
-												query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-											<#else>
-												query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-											</#if>
-										</#list>
-									}
-								</#if>
-								<#if index = 1>
-									${fail}
-								</#if>
-							<#recover>
-							</#attempt>
-						</#list>
 						Query q = session.createQuery(query.toString());
 
 						QueryPos qPos = QueryPos.getInstance(q);
@@ -1077,31 +1016,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				0, 1, obc);
 
 				if (list.isEmpty()) {
-					<#assign arrayCapacity = 0>
-					<#list 1..2 as index>
-						<#if index = 2>
-							StringBundler msg = new StringBundler(${arrayCapacity});
+					StringBuilder msg = new StringBuilder();
+
+					msg.append("No ${entity.name} exists with the key {");
+
+					<#list finderColsList as finderCol>
+						msg.append("${finderCol.name}=" + ${finderCol.name});
+
+						<#if finderCol_has_next>
+							msg.append(", ");
+						<#else>
+							msg.append(StringPool.CLOSE_CURLY_BRACE);
 						</#if>
-						<#attempt>
-							msg.append("No ${entity.name} exists with the key {");
-							<#assign arrayCapacity = arrayCapacity + 1>
-							<#list finderColsList as finderCol>
-								msg.append("${finderCol.name}=" + ${finderCol.name});
-								<#assign arrayCapacity = arrayCapacity + 1>
-								<#if finderCol_has_next>
-									msg.append(", ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-								<#else>
-									msg.append(StringPool.CLOSE_CURLY_BRACE);
-									<#assign arrayCapacity = arrayCapacity + 1>
-								</#if>
-							</#list>
-							<#if index = 1>
-								${fail}
-							</#if>
-						<#recover>
-						</#attempt>
 					</#list>
+
 					throw new ${noSuchEntity}Exception(msg.toString());
 				}
 				else {
@@ -1137,31 +1065,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				count - 1, count, obc);
 
 				if (list.isEmpty()) {
-					<#assign arrayCapacity = 0>
-					<#list 1..2 as index>
-						<#if index = 2>
-							StringBundler msg = new StringBundler(${arrayCapacity});
+					StringBuilder msg = new StringBuilder();
+
+					msg.append("No ${entity.name} exists with the key {");
+
+					<#list finderColsList as finderCol>
+						msg.append("${finderCol.name}=" + ${finderCol.name});
+
+						<#if finderCol_has_next>
+							msg.append(", ");
+						<#else>
+							msg.append(StringPool.CLOSE_CURLY_BRACE);
 						</#if>
-						<#attempt>
-							msg.append("No ${entity.name} exists with the key {");
-							<#assign arrayCapacity = arrayCapacity + 1>
-							<#list finderColsList as finderCol>
-								msg.append("${finderCol.name}=" + ${finderCol.name});
-								<#assign arrayCapacity = arrayCapacity + 1>
-								<#if finderCol_has_next>
-									msg.append(", ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-								<#else>
-									msg.append(StringPool.CLOSE_CURLY_BRACE);
-									<#assign arrayCapacity = arrayCapacity + 1>
-								</#if>
-							</#list>
-							<#if index = 1>
-								${fail}
-							</#if>
-						<#recover>
-						</#attempt>
 					</#list>
+
 					throw new ${noSuchEntity}Exception(msg.toString());
 				}
 				else {
@@ -1194,152 +1111,118 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				try {
 					session = openSession();
-					<#assign arrayCapacity = 0>
-					<#list 1..2 as index>
-						<#if index = 2>
-							int arrayCapacity = ${arrayCapacity};
-							if (obc != null) {
-								arrayCapacity += obc.getOrderByFields().length * 4;
+
+					StringBuilder query = new StringBuilder();
+
+					query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
+
+					<#list finderColsList as finderCol>
+						<#if !finderCol.isPrimitiveType()>
+							if (${finderCol.name} == null) {
+								<#if finderCol.comparator == "=">
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} IS NULL");
+									</#if>
+								<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+									</#if>
+								<#else>
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+									</#if>
+								</#if>
 							}
-							<#if entity.getOrder()??>
-								<#assign orderList = entity.getOrder().getColumns()>
-								<#assign elsePathCapacity = orderList?size + 1 + arrayCapacity>
-
-								if (${elsePathCapacity} > arrayCapacity) {
-									arrayCapacity = ${elsePathCapacity};
-								}
-							</#if>
-							StringBundler query = new StringBundler(arrayCapacity);
+							else {
 						</#if>
-						<#attempt>
-							query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
-							<#assign arrayCapacity = arrayCapacity + 1>
-							<#list finderColsList as finderCol>
-								<#if !finderCol.isPrimitiveType()>
-									if (${finderCol.name} == null) {
-										<#if finderCol.comparator == "=">
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("${entity.alias}.${finderCol.name} IS NULL");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										<#else>
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										</#if>
-									}
-									else {
-								</#if>
 
-								<#if finderCol.type == "String">
-									if (${finderCol.name}.equals(StringPool.BLANK)) {
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
-									}
-								</#if>
-
-								<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#else>
-										query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									</#if>
+						<#if finderCol.type == "String">
+							if (${finderCol.name}.equals(StringPool.BLANK)) {
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
 								<#else>
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#else>
-										query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									</#if>
+									query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
 								</#if>
+							}
+						</#if>
 
-								<#if finderCol.type == "String">
-									if (${finderCol.name}.equals(StringPool.BLANK)) {
-										query.append(")");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									}
-								</#if>
+						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+								query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+							<#else>
+								query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
+							</#if>
+						<#else>
+							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+								query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+							<#else>
+								query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
+							</#if>
+						</#if>
 
-								<#if !finderCol.isPrimitiveType()>
-									}
-								</#if>
+						<#if finderCol.type == "String">
+							if (${finderCol.name}.equals(StringPool.BLANK)) {
+								query.append(")");
+							}
+						</#if>
 
-								<#if finderCol_has_next>
-									query.append(" AND ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-								<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-									query.append(" AND ${finder.where} ");
-									<#assign arrayCapacity = arrayCapacity + 1>
+						<#if !finderCol.isPrimitiveType()>
+							}
+						</#if>
+
+						<#if finderCol_has_next>
+							query.append(" AND ");
+						<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
+							query.append(" AND ${finder.where} ");
+						<#else>
+							query.append(" ");
+						</#if>
+					</#list>
+
+					if (obc != null) {
+						query.append("ORDER BY ");
+
+						String[] orderByFields = obc.getOrderByFields();
+
+						for (int i = 0; i < orderByFields.length; i++) {
+							query.append("${entity.alias}.");
+							query.append(orderByFields[i]);
+
+							if (obc.isAscending()) {
+								query.append(" ASC");
+							}
+							else {
+								query.append(" DESC");
+							}
+
+							if ((i + 1) < orderByFields.length) {
+								query.append(", ");
+							}
+						}
+					}
+
+					<#if entity.getOrder()??>
+						else {
+							query.append("ORDER BY ");
+
+							<#assign orderList = entity.getOrder().getColumns()>
+
+							<#list orderList as order>
+								<#if entity.hasCompoundPK() && order.isPrimary()>
+									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 								<#else>
-									query.append(" ");
-									<#assign arrayCapacity = arrayCapacity + 1>
+									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 								</#if>
 							</#list>
+						}
+					</#if>
 
-							if (obc != null) {
-								query.append("ORDER BY ");
-								String[] orderByFields = obc.getOrderByFields();
-
-								for (int i = 0; i < orderByFields.length; i++) {
-									query.append("${entity.alias}.");
-									query.append(orderByFields[i]);
-
-									if (obc.isAscending()) {
-										query.append(" ASC");
-									}
-									else {
-										query.append(" DESC");
-									}
-
-									if ((i + 1) < orderByFields.length) {
-										query.append(", ");
-									}
-								}
-							}
-
-							<#if entity.getOrder()??>
-								else {
-									query.append("ORDER BY ");
-									<#assign orderList = entity.getOrder().getColumns()>
-
-									<#list orderList as order>
-										<#if entity.hasCompoundPK() && order.isPrimary()>
-											query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-										<#else>
-											query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-										</#if>
-									</#list>
-								}
-							</#if>
-							<#if index = 1>
-								${fail}
-							</#if>
-						<#recover>
-						</#attempt>
-					</#list>
 					Query q = session.createQuery(query.toString());
 
 					QueryPos qPos = QueryPos.getInstance(q);
@@ -1411,35 +1294,24 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				);
 
 				if ( ${entity.varName} == null) {
-					<#assign arrayCapacity = 0>
-					<#list 1..2 as index>
-						<#if index = 2>
-							StringBundler msg = new StringBundler(${arrayCapacity});
-						</#if>
-						<#attempt>
-							msg.append("No ${entity.name} exists with the key {");
-							<#assign arrayCapacity = arrayCapacity + 1>
-							<#list finderColsList as finderCol>
-								msg.append("${finderCol.name}=" + ${finderCol.name});
-								<#assign arrayCapacity = arrayCapacity + 1>
-								<#if finderCol_has_next>
-									msg.append(", ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-								<#else>
-									msg.append(StringPool.CLOSE_CURLY_BRACE);
-									<#assign arrayCapacity = arrayCapacity + 1>
-								</#if>
-							</#list>
+					StringBuilder msg = new StringBuilder();
 
-							if (_log.isWarnEnabled()) {
-								_log.warn(msg.toString());
-							}
-							<#if index = 1>
-								${fail}
-							</#if>
-						<#recover>
-						</#attempt>
+					msg.append("No ${entity.name} exists with the key {");
+
+					<#list finderColsList as finderCol>
+						msg.append("${finderCol.name}=" + ${finderCol.name});
+
+						<#if finderCol_has_next>
+							msg.append(", ");
+						<#else>
+							msg.append(StringPool.CLOSE_CURLY_BRACE);
+						</#if>
 					</#list>
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(msg.toString());
+					}
+
 					throw new ${noSuchEntity}Exception(msg.toString());
 				}
 
@@ -1509,121 +1381,94 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						<#assign arrayCapacity = 0>
-						<#list 1..2 as index>
-							<#if index = 2>
-								StringBundler query = new StringBundler(${arrayCapacity});
+						StringBuilder query = new StringBuilder();
+
+						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
+
+						<#list finderColsList as finderCol>
+							<#if !finderCol.isPrimitiveType()>
+								if (${finderCol.name} == null) {
+									<#if finderCol.comparator == "=">
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NULL");
+										</#if>
+
+									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+										</#if>
+									<#else>
+										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+										<#else>
+											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+										</#if>
+									</#if>
+								}
+								else {
 							</#if>
-							<#attempt>
-								query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
-								<#assign arrayCapacity = arrayCapacity + 1>
-								<#list finderColsList as finderCol>
-									<#if !finderCol.isPrimitiveType()>
-										if (${finderCol.name} == null) {
-											<#if finderCol.comparator == "=">
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} IS NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
 
-											<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
-											<#else>
-												<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-													query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												<#else>
-													query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-													<#assign arrayCapacity = arrayCapacity + 1>
-												</#if>
-											</#if>
-										}
-										else {
-									</#if>
-
-									<#if finderCol.type == "String">
-										if (${finderCol.name}.equals(StringPool.BLANK)) {
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										}
-									</#if>
-
-									<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
 									<#else>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
+										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
 									</#if>
+								}
+							</#if>
 
-									<#if finderCol.type == "String">
-										if (${finderCol.name}.equals(StringPool.BLANK)) {
-											query.append(")");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										}
-									</#if>
-
-									<#if !finderCol.isPrimitiveType()>
-										}
-									</#if>
-
-									<#if finderCol_has_next>
-										query.append(" AND ");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-										query.append(" AND ${finder.where} ");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#else>
-										query.append(" ");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									</#if>
-								</#list>
-
-								<#if entity.getOrder()??>
-									query.append("ORDER BY ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-									<#assign orderList = entity.getOrder().getColumns()>
-
-									<#list orderList as order>
-										<#if entity.hasCompoundPK() && order.isPrimary()>
-											query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
-									</#list>
+							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
 								</#if>
-								<#if index = 1>
-									${fail}
+							<#else>
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+								<#else>
+									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
 								</#if>
-							<#recover>
-							</#attempt>
+							</#if>
+
+							<#if finderCol.type == "String">
+								if (${finderCol.name}.equals(StringPool.BLANK)) {
+									query.append(")");
+								}
+							</#if>
+
+							<#if !finderCol.isPrimitiveType()>
+								}
+							</#if>
+
+							<#if finderCol_has_next>
+								query.append(" AND ");
+							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
+								query.append(" AND ${finder.where} ");
+							<#else>
+								query.append(" ");
+							</#if>
 						</#list>
+
+						<#if entity.getOrder()??>
+							query.append("ORDER BY ");
+
+							<#assign orderList = entity.getOrder().getColumns()>
+
+							<#list orderList as order>
+								<#if entity.hasCompoundPK() && order.isPrimary()>
+									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								<#else>
+									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								</#if>
+							</#list>
+						</#if>
+
 						Query q = session.createQuery(query.toString());
 
 						QueryPos qPos = QueryPos.getInstance(q);
@@ -1768,68 +1613,48 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			try {
 				session = openSession();
 
-				<#assign arrayCapacity = 0>
-				<#list 1..2 as index>
-					<#if index = 2>
-						int arrayCapacity = ${arrayCapacity};
-						if (obc != null) {
-							arrayCapacity += obc.getOrderByFields().length * 4;
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("${entity.alias}.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
 						}
-						<#if entity.getOrder()??>
-							<#assign orderList = entity.getOrder().getColumns()>
-							<#assign elsePathCapacity = orderList?size + 1 + arrayCapacity>
-
-							if (${elsePathCapacity} > arrayCapacity) {
-								arrayCapacity = ${elsePathCapacity};
-							}
-						</#if>
-						StringBundler query = new StringBundler(arrayCapacity);
-					</#if>
-					<#attempt>
-						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} ");
-						<#assign arrayCapacity = arrayCapacity + 1>
-						if (obc != null) {
-							query.append("ORDER BY ");
-							String[] orderByFields = obc.getOrderByFields();
-
-							for (int i = 0; i < orderByFields.length; i++) {
-								query.append("${entity.alias}.");
-								query.append(orderByFields[i]);
-
-								if (obc.isAscending()) {
-									query.append(" ASC");
-								}
-								else {
-									query.append(" DESC");
-								}
-
-								if ((i + 1) < orderByFields.length) {
-									query.append(", ");
-								}
-							}
+						else {
+							query.append(" DESC");
 						}
 
-						<#if entity.getOrder()??>
-							else {
-								query.append("ORDER BY ");
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
 
-								<#assign orderList = entity.getOrder().getColumns()>
+				<#if entity.getOrder()??>
+					else {
+						query.append("ORDER BY ");
 
-								<#list orderList as order>
-									<#if entity.hasCompoundPK() && order.isPrimary()>
-										query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-									<#else>
-										query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-									</#if>
-								</#list>
-							}
-						</#if>
-						<#if index = 1>
-							${fail}
-						</#if>
-					<#recover>
-					</#attempt>
-				</#list>
+						<#assign orderList = entity.getOrder().getColumns()>
+
+						<#list orderList as order>
+							<#if entity.hasCompoundPK() && order.isPrimary()>
+								query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+							<#else>
+								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+							</#if>
+						</#list>
+					}
+				</#if>
+
 				Query q = session.createQuery(query.toString());
 
 				if (obc == null) {
@@ -1964,106 +1789,80 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				try {
 					session = openSession();
 
-					<#assign arrayCapacity = 0>
-					<#list 1..2 as index>
-						<#if index = 2>
-							StringBundler query = new StringBundler(${arrayCapacity});
+					StringBuilder query = new StringBuilder();
+
+					query.append("SELECT COUNT(${entity.alias}) ");
+					query.append("FROM ${entity.name} ${entity.alias} WHERE ");
+
+					<#list finderColsList as finderCol>
+						<#if !finderCol.isPrimitiveType()>
+							if (${finderCol.name} == null) {
+								<#if finderCol.comparator == "=">
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} IS NULL");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} IS NULL");
+									</#if>
+								<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
+									</#if>
+								<#else>
+									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+										query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
+									<#else>
+										query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
+									</#if>
+								</#if>
+							}
+							else {
 						</#if>
-						<#attempt>
-							query.append("SELECT COUNT(${entity.alias}) ");
-							<#assign arrayCapacity = arrayCapacity + 1>
-							query.append("FROM ${entity.name} ${entity.alias} WHERE ");
-							<#assign arrayCapacity = arrayCapacity + 1>
-							<#list finderColsList as finderCol>
-								<#if !finderCol.isPrimitiveType()>
-									if (${finderCol.name} == null) {
-										<#if finderCol.comparator == "=">
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("${entity.alias}.${finderCol.name} IS NULL");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										<#else>
-											<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-												query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											<#else>
-												query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-												<#assign arrayCapacity = arrayCapacity + 1>
-											</#if>
-										</#if>
-									}
-									else {
-								</#if>
 
-								<#if finderCol.type == "String">
-									if (${finderCol.name}.equals(StringPool.BLANK)) {
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										<#else>
-											query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-											<#assign arrayCapacity = arrayCapacity + 1>
-										</#if>
-									}
-								</#if>
-
-								<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#else>
-										query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									</#if>
+						<#if finderCol.type == "String">
+							if (${finderCol.name}.equals(StringPool.BLANK)) {
+								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+									query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
 								<#else>
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									<#else>
-										query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									</#if>
+									query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
 								</#if>
+							}
+						</#if>
 
-								<#if finderCol.type == "String">
-									if (${finderCol.name}.equals(StringPool.BLANK)) {
-										query.append(")");
-										<#assign arrayCapacity = arrayCapacity + 1>
-									}
-								</#if>
-
-								<#if !finderCol.isPrimitiveType()>
-									}
-								</#if>
-
-								<#if finderCol_has_next>
-									query.append(" AND ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-								<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-									query.append(" AND ${finder.where} ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-								<#else>
-									query.append(" ");
-									<#assign arrayCapacity = arrayCapacity + 1>
-								</#if>
-							</#list>
-							<#if index = 1>
-								${fail}
+						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+								query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
+							<#else>
+								query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
 							</#if>
-						<#recover>
-						</#attempt>
+						<#else>
+							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+								query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
+							<#else>
+								query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
+							</#if>
+						</#if>
+
+						<#if finderCol.type == "String">
+							if (${finderCol.name}.equals(StringPool.BLANK)) {
+								query.append(")");
+							}
+						</#if>
+
+						<#if !finderCol.isPrimitiveType()>
+							}
+						</#if>
+
+						<#if finderCol_has_next>
+							query.append(" AND ");
+						<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
+							query.append(" AND ${finder.where} ");
+						<#else>
+							query.append(" ");
+						</#if>
 					</#list>
+
 					Query q = session.createQuery(query.toString());
 
 					QueryPos qPos = QueryPos.getInstance(q);
@@ -2208,48 +2007,28 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					try {
 						session = openSession();
-						<#assign arrayCapacity = 0>
-						<#list 1..2 as index>
-							<#if index = 2>
-								int arrayCapacity = ${arrayCapacity};
-								if (obc != null) {
-									arrayCapacity += 2;
-								}
-								<#if tempEntity.getOrder()??>
-									<#assign orderList = tempEntity.getOrder().getColumns()>
-									<#assign elsePathCapacity = orderList?size + 1 + arrayCapacity>
 
-									if (${elsePathCapacity} > arrayCapacity) {
-										arrayCapacity = ${elsePathCapacity};
-									}
-								</#if>
-								StringBundler sb = new StringBundler(arrayCapacity);
-							</#if>
-							<#attempt>
-								sb.append(_SQL_GET${tempEntity.names?upper_case});
-								<#assign arrayCapacity = arrayCapacity + 1>
-								if (obc != null) {
-									sb.append("ORDER BY ");
-									sb.append(obc.getOrderBy());
-								}
+						StringBuilder sb = new StringBuilder();
 
-								<#if tempEntity.getOrder()??>
-									else {
-										sb.append("ORDER BY ");
+						sb.append(_SQL_GET${tempEntity.names?upper_case});
 
-										<#assign orderList = tempEntity.getOrder().getColumns()>
+						if (obc != null) {
+							sb.append("ORDER BY ");
+							sb.append(obc.getOrderBy());
+						}
 
-										<#list orderList as order>
-											sb.append("${tempEntity.table}.${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-										</#list>
-									}
-								</#if>
-								<#if index = 1>
-									${fail}
-								</#if>
-							<#recover>
-							</#attempt>
-						</#list>
+						<#if tempEntity.getOrder()??>
+							else {
+								sb.append("ORDER BY ");
+
+								<#assign orderList = tempEntity.getOrder().getColumns()>
+
+								<#list orderList as order>
+									sb.append("${tempEntity.table}.${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+								</#list>
+							}
+						</#if>
+
 						String sql = sb.toString();
 
 						SQLQuery q = session.createSQLQuery(sql);
