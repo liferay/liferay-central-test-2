@@ -184,12 +184,6 @@ public interface AnnouncementsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long getGroupId(
-		com.liferay.portlet.announcements.model.AnnouncementsEntry entry)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getUserEntries(
 		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;

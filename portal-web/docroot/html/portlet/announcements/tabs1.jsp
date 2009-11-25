@@ -36,24 +36,8 @@ tabs1URL.setParameter("tabs1", tabs1);
 
 String tabs1Names = "entries";
 
-Group group = themeDisplay.getScopeGroup();
-
-Organization organization = null;
-
-if (group.isOrganization()) {
-	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
-}
-
 if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) {
 	tabs1Names += ",manage-entries";
-}
-else if ((group.isCommunity()) && (GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS))) {
-	tabs1Names += ",manage-entries";
-}
-else if ((group.isOrganization()) && (organization != null)) {
-	if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-		tabs1Names += ",manage-entries";
-	}
 }
 %>
 

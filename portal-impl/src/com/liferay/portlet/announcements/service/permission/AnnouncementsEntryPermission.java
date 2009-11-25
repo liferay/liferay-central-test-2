@@ -77,20 +77,8 @@ public class AnnouncementsEntryPermission {
 			return true;
 		}
 
-		long groupId = 0;
-
-		long classPK = entry.getClassPK();
-
-		if (classPK > 0) {
-			try {
-				groupId = AnnouncementsEntryLocalServiceUtil.getGroupId(entry);
-			}
-			catch (Exception e) {
-			}
-		}
-
 		return permissionChecker.hasPermission(
-			groupId, AnnouncementsEntry.class.getName(), entry.getEntryId(),
+			0, AnnouncementsEntry.class.getName(), entry.getEntryId(),
 			actionId);
 	}
 

@@ -65,7 +65,6 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
- * @author Wesley Gong
  */
 public class AnnouncementsEntryLocalServiceImpl
 	extends AnnouncementsEntryLocalServiceBaseImpl {
@@ -277,33 +276,6 @@ public class AnnouncementsEntryLocalServiceImpl
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, alert, flagValue);
-	}
-
-	public long getGroupId(AnnouncementsEntry entry)
-		throws PortalException, SystemException {
-
-		long groupId = 0;
-
-		String className = entry.getClassName();
-		long classPK = entry.getClassPK();
-
-		if (classPK > 0) {
-			if (className.equals(Group.class.getName())) {
-				Group group = groupPersistence.findByPrimaryKey(classPK);
-
-				groupId = group.getGroupId();
-			}
-			else if (className.equals(Organization.class.getName())) {
-				Organization organization =
-					organizationPersistence.findByPrimaryKey(classPK);
-
-				Group group = organization.getGroup();
-
-				groupId = group.getGroupId();
-			}
-		}
-
-		return groupId;
 	}
 
 	public List<AnnouncementsEntry> getUserEntries(

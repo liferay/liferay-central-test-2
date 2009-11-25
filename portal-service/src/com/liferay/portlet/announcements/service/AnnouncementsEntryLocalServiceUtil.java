@@ -237,13 +237,6 @@ public class AnnouncementsEntryLocalServiceUtil {
 			alert, flagValue);
 	}
 
-	public static long getGroupId(
-		com.liferay.portlet.announcements.model.AnnouncementsEntry entry)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getGroupId(entry);
-	}
-
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getUserEntries(
 		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {

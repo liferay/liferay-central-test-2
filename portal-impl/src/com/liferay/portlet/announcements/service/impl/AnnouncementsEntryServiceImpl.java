@@ -47,7 +47,6 @@ import com.liferay.portlet.announcements.service.permission.AnnouncementsEntryPe
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Wesley Gong
  */
 public class AnnouncementsEntryServiceImpl
 	extends AnnouncementsEntryServiceBaseImpl {
@@ -64,49 +63,48 @@ public class AnnouncementsEntryServiceImpl
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!PortletPermissionUtil.contains(
-				permissionChecker, plid, PortletKeys.ANNOUNCEMENTS,
-				ActionKeys.ADD_ENTRY)) {
+		PortletPermissionUtil.check(
+			permissionChecker, plid, PortletKeys.ANNOUNCEMENTS,
+			ActionKeys.ADD_ENTRY);
 
-			if (classNameId == 0) {
-				if (!permissionChecker.isOmniadmin()) {
-					throw new PrincipalException();
-				}
+		if (classNameId == 0) {
+			if (!permissionChecker.isOmniadmin()) {
+				throw new PrincipalException();
 			}
-			else {
-				String className = PortalUtil.getClassName(classNameId);
+		}
+		else {
+			String className = PortalUtil.getClassName(classNameId);
 
-				if (className.equals(Group.class.getName()) &&
-					!GroupPermissionUtil.contains(
-						permissionChecker, classPK,
-						ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+			if (className.equals(Group.class.getName()) &&
+				!GroupPermissionUtil.contains(
+					permissionChecker, classPK,
+					ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 
-					throw new PrincipalException();
-				}
+				throw new PrincipalException();
+			}
 
-				if (className.equals(Organization.class.getName()) &&
-					!OrganizationPermissionUtil.contains(
-						permissionChecker, classPK,
-						ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+			if (className.equals(Organization.class.getName()) &&
+				!OrganizationPermissionUtil.contains(
+					permissionChecker, classPK,
+					ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 
-					throw new PrincipalException();
-				}
+				throw new PrincipalException();
+			}
 
-				if (className.equals(Role.class.getName()) &&
-					!RolePermissionUtil.contains(
-						permissionChecker, classPK,
-						ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+			if (className.equals(Role.class.getName()) &&
+				!RolePermissionUtil.contains(
+					permissionChecker, classPK,
+					ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 
-					throw new PrincipalException();
-				}
+				throw new PrincipalException();
+			}
 
-				if (className.equals(UserGroup.class.getName()) &&
-					!UserGroupPermissionUtil.contains(
-						permissionChecker, classPK,
-						ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+			if (className.equals(UserGroup.class.getName()) &&
+				!UserGroupPermissionUtil.contains(
+					permissionChecker, classPK,
+					ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 
-					throw new PrincipalException();
-				}
+				throw new PrincipalException();
 			}
 		}
 
