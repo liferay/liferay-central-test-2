@@ -167,62 +167,62 @@
 
 				<c:if test="<%= editable %>">
 
-                    <%
-                    boolean showAnswerFlag = false;
-                    boolean hasReplyPermission = MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE);
+					<%
+					boolean showAnswerFlag = false;
+					boolean hasReplyPermission = MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE);
 
-                    if (!message.isRoot()) {
-                        MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+					if (!message.isRoot()) {
+						MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 
-                        showAnswerFlag = MBMessagePermission.contains(permissionChecker, rootMessage, ActionKeys.UPDATE) && !MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) && (MBMessageFlagLocalServiceUtil.hasQuestionFlag(rootMessage.getMessageId()) || MBMessageFlagLocalServiceUtil.hasAnswerFlag(rootMessage.getMessageId()));
-                    }
-                    %>
+						showAnswerFlag = MBMessagePermission.contains(permissionChecker, rootMessage, ActionKeys.UPDATE) && !MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) && (MBMessageFlagLocalServiceUtil.hasQuestionFlag(rootMessage.getMessageId()) || MBMessageFlagLocalServiceUtil.hasAnswerFlag(rootMessage.getMessageId()));
+					}
+					%>
 
-                    <c:if test="<%= editable && (showAnswerFlag || hasReplyPermission) %>">
-                        <ul class="edit-controls lfr-component">
-                            <c:if test="<%= showAnswerFlag %>">
-                                <li id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
+					<c:if test="<%= showAnswerFlag || hasReplyPermission %>">
+						<ul class="edit-controls lfr-component">
+							<c:if test="<%= showAnswerFlag %>">
+								<li id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
 
-                                    <%
-                                    String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
-                                    %>
+									<%
+									String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
+									%>
 
-                                    <liferay-ui:icon
-                                        image="checked"
-                                        message="mark-as-an-answer"
-                                        url="<%= taglibMarkAsAnswerURL %>"
-                                        label="<%= true %>"
-                                    />
-                                </li>
-                            </c:if>
+									<liferay-ui:icon
+										image="checked"
+										message="mark-as-an-answer"
+										url="<%= taglibMarkAsAnswerURL %>"
+										label="<%= true %>"
+									/>
+								</li>
+							</c:if>
 
-                            <c:if test="<%= hasReplyPermission %>">
-                                <li>
-                                    <portlet:renderURL var="replyURL">
-                                        <portlet:param name="struts_action" value="/message_boards/edit_message" />
-                                        <portlet:param name="redirect" value="<%= currentURL %>" />
-                                        <portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
-                                        <portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
-                                        <portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-                                    </portlet:renderURL>
+							<c:if test="<%= hasReplyPermission %>">
+								<li>
+									<portlet:renderURL var="replyURL">
+										<portlet:param name="struts_action" value="/message_boards/edit_message" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
+										<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+										<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+									</portlet:renderURL>
 
-                                    <liferay-ui:icon image="reply" url="<%= replyURL %>" label="<%= true %>" />
-                                </li>
-                                <li>
-                                    <portlet:renderURL var="quoteURL">
-                                        <portlet:param name="struts_action" value="/message_boards/edit_message" />
-                                        <portlet:param name="redirect" value="<%= currentURL %>" />
-                                        <portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
-                                        <portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
-                                        <portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-                                        <portlet:param name="quote" value="true" />
-                                    </portlet:renderURL>
+									<liferay-ui:icon image="reply" url="<%= replyURL %>" label="<%= true %>" />
+								</li>
+								<li>
+									<portlet:renderURL var="quoteURL">
+										<portlet:param name="struts_action" value="/message_boards/edit_message" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
+										<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+										<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+										<portlet:param name="quote" value="true" />
+									</portlet:renderURL>
 
-                                    <liferay-ui:icon image="quote" message="reply-with-quote" url="<%= quoteURL %>" label="<%= true %>" />
-                                </li>
-                            </c:if>
-                        </ul>
-                    </c:if>
+									<liferay-ui:icon image="quote" message="reply-with-quote" url="<%= quoteURL %>" label="<%= true %>" />
+								</li>
+							</c:if>
+						</ul>
+					</c:if>
 				</c:if>
 			</div>
 
