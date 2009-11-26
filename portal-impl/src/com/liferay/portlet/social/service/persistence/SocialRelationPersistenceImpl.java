@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -531,7 +530,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -604,13 +604,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 6;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -689,10 +684,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -707,10 +706,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -730,13 +733,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		try {
 			session = openSession();
 
-			int arrayCapacity = 6;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -819,7 +817,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -877,13 +876,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -947,10 +941,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -966,10 +964,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -989,13 +991,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1063,7 +1060,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1121,13 +1119,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1191,10 +1184,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByUserId1(userId1, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId1=" + userId1);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -1209,10 +1206,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByUserId1(userId1, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId1=" + userId1);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -1232,13 +1233,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1306,7 +1302,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1364,13 +1361,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1434,10 +1426,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByUserId2(userId2, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId2=" + userId2);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -1452,10 +1448,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByUserId2(userId2, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId2=" + userId2);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -1475,13 +1475,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1548,7 +1543,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1606,13 +1602,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1676,10 +1667,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByType(type, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -1694,10 +1689,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByType(type, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -1716,13 +1715,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1792,7 +1786,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1856,13 +1851,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -1932,12 +1922,17 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByC_T(companyId, type, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -1953,12 +1948,17 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -1978,13 +1978,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -2058,7 +2053,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -2122,13 +2118,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -2198,12 +2189,17 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByU1_T(userId1, type, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId1=" + userId1);
+
 			msg.append(", ");
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -2219,12 +2215,17 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId1=" + userId1);
+
 			msg.append(", ");
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -2244,13 +2245,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -2324,7 +2320,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -2388,13 +2385,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -2464,12 +2456,17 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		List<SocialRelation> list = findByU2_T(userId2, type, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId2=" + userId2);
+
 			msg.append(", ");
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -2485,12 +2482,17 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId2=" + userId2);
+
 			msg.append(", ");
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchRelationException(msg.toString());
 		}
 		else {
@@ -2510,13 +2512,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -2582,13 +2579,18 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		SocialRelation socialRelation = fetchByU1_U2_T(userId1, userId2, type);
 
 		if (socialRelation == null) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SocialRelation exists with the key {");
+
 			msg.append("userId1=" + userId1);
+
 			msg.append(", ");
 			msg.append("userId2=" + userId2);
+
 			msg.append(", ");
 			msg.append("type=" + type);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -2625,7 +2627,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation WHERE ");
 
@@ -2762,13 +2765,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT socialRelation FROM SocialRelation socialRelation ");
 
@@ -2899,7 +2897,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 
@@ -2960,7 +2959,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 
@@ -3006,7 +3006,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 
@@ -3052,7 +3053,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 
@@ -3098,7 +3100,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 
@@ -3146,7 +3149,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 
@@ -3198,7 +3202,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 
@@ -3250,7 +3255,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 
@@ -3305,7 +3311,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(socialRelation) ");
 				query.append("FROM SocialRelation socialRelation WHERE ");
 

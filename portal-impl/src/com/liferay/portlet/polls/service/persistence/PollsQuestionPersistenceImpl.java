@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -423,7 +422,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -500,17 +500,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				int arrayCapacity = 6;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -595,10 +586,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		List<PollsQuestion> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No PollsQuestion exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchQuestionException(msg.toString());
 		}
 		else {
@@ -613,10 +608,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		List<PollsQuestion> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No PollsQuestion exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchQuestionException(msg.toString());
 		}
 		else {
@@ -635,17 +634,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		try {
 			session = openSession();
 
-			int arrayCapacity = 6;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -726,11 +716,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		PollsQuestion pollsQuestion = fetchByUUID_G(uuid, groupId);
 
 		if (pollsQuestion == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No PollsQuestion exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(", ");
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -765,7 +759,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -864,7 +859,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -926,17 +922,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -1006,10 +993,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		List<PollsQuestion> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No PollsQuestion exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchQuestionException(msg.toString());
 		}
 		else {
@@ -1024,10 +1015,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		List<PollsQuestion> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No PollsQuestion exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchQuestionException(msg.toString());
 		}
 		else {
@@ -1047,17 +1042,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -1182,17 +1168,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion ");
 
@@ -1293,7 +1270,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(pollsQuestion) ");
 				query.append("FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -1355,7 +1333,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(pollsQuestion) ");
 				query.append("FROM PollsQuestion pollsQuestion WHERE ");
 
@@ -1422,7 +1401,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(pollsQuestion) ");
 				query.append("FROM PollsQuestion pollsQuestion WHERE ");
 

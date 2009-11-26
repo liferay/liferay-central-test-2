@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -441,7 +440,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -499,13 +499,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -569,10 +564,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		List<Subscription> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Subscription exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -587,10 +586,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		List<Subscription> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Subscription exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -610,13 +613,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -686,7 +684,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -750,13 +749,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -827,12 +821,17 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		List<Subscription> list = findByU_C(userId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Subscription exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -849,12 +848,17 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Subscription exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -874,13 +878,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -956,7 +955,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -1027,13 +1027,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				int arrayCapacity = 7;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -1111,14 +1106,20 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Subscription exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -1135,14 +1136,20 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Subscription exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchSubscriptionException(msg.toString());
 		}
 		else {
@@ -1162,13 +1169,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		try {
 			session = openSession();
 
-			int arrayCapacity = 7;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -1242,15 +1244,21 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				classNameId, classPK);
 
 		if (subscription == null) {
-			StringBundler msg = new StringBundler(9);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Subscription exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1289,7 +1297,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT subscription FROM Subscription subscription WHERE ");
 
@@ -1433,13 +1442,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT subscription FROM Subscription subscription ");
 
@@ -1544,7 +1548,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(subscription) ");
 				query.append("FROM Subscription subscription WHERE ");
 
@@ -1593,7 +1598,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(subscription) ");
 				query.append("FROM Subscription subscription WHERE ");
 
@@ -1648,7 +1654,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(subscription) ");
 				query.append("FROM Subscription subscription WHERE ");
 
@@ -1710,7 +1717,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(subscription) ");
 				query.append("FROM Subscription subscription WHERE ");
 

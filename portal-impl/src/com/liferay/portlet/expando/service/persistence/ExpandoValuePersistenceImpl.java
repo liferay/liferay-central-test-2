@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -556,7 +555,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -620,17 +620,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (7 > arrayCapacity) {
-					arrayCapacity = 7;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -702,10 +693,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByTableId(tableId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -720,10 +715,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByTableId(tableId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -742,17 +741,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (7 > arrayCapacity) {
-				arrayCapacity = 7;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -828,7 +818,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -892,17 +883,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (7 > arrayCapacity) {
-					arrayCapacity = 7;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -974,10 +956,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByColumnId(columnId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("columnId=" + columnId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -992,10 +978,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByColumnId(columnId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("columnId=" + columnId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -1015,17 +1005,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (7 > arrayCapacity) {
-				arrayCapacity = 7;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1100,7 +1081,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1164,17 +1146,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (7 > arrayCapacity) {
-					arrayCapacity = 7;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1246,10 +1219,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByRowId(rowId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("rowId=" + rowId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -1264,10 +1241,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByRowId(rowId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("rowId=" + rowId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -1286,17 +1267,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (7 > arrayCapacity) {
-				arrayCapacity = 7;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1372,7 +1344,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1442,17 +1415,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (9 > arrayCapacity) {
-					arrayCapacity = 9;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1530,12 +1494,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByT_C(tableId, columnId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("columnId=" + columnId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -1551,12 +1520,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("columnId=" + columnId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -1576,17 +1550,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (9 > arrayCapacity) {
-				arrayCapacity = 9;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1668,7 +1633,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1738,17 +1704,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (9 > arrayCapacity) {
-					arrayCapacity = 9;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1826,12 +1783,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByT_CPK(tableId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -1847,12 +1809,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -1872,17 +1839,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (9 > arrayCapacity) {
-				arrayCapacity = 9;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -1964,7 +1922,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2034,17 +1993,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (9 > arrayCapacity) {
-					arrayCapacity = 9;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2122,12 +2072,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByT_R(tableId, rowId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("rowId=" + rowId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -2143,12 +2098,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("rowId=" + rowId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -2168,17 +2128,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (9 > arrayCapacity) {
-				arrayCapacity = 9;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2252,11 +2203,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		ExpandoValue expandoValue = fetchByC_R(columnId, rowId);
 
 		if (expandoValue == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("columnId=" + columnId);
+
 			msg.append(", ");
 			msg.append("rowId=" + rowId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -2291,7 +2246,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2378,7 +2334,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2448,17 +2405,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (9 > arrayCapacity) {
-					arrayCapacity = 9;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2536,12 +2484,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -2557,12 +2510,17 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -2582,17 +2540,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (9 > arrayCapacity) {
-				arrayCapacity = 9;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2666,13 +2615,18 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		ExpandoValue expandoValue = fetchByT_C_C(tableId, columnId, classPK);
 
 		if (expandoValue == null) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("columnId=" + columnId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -2709,7 +2663,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(11);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2805,7 +2760,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(14);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -2899,17 +2855,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 10;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (14 > arrayCapacity) {
-					arrayCapacity = 14;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -3009,14 +2956,20 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByT_C_D(tableId, columnId, data, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("columnId=" + columnId);
+
 			msg.append(", ");
 			msg.append("data=" + data);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -3033,14 +2986,20 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ExpandoValue exists with the key {");
+
 			msg.append("tableId=" + tableId);
+
 			msg.append(", ");
 			msg.append("columnId=" + columnId);
+
 			msg.append(", ");
 			msg.append("data=" + data);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchValueException(msg.toString());
 		}
 		else {
@@ -3060,17 +3019,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			int arrayCapacity = 10;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (14 > arrayCapacity) {
-				arrayCapacity = 14;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
 
@@ -3224,17 +3174,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT expandoValue FROM ExpandoValue expandoValue ");
 
@@ -3384,7 +3325,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3430,7 +3372,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3476,7 +3419,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3523,7 +3467,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3576,7 +3521,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3628,7 +3574,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3680,7 +3627,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3735,7 +3683,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3790,7 +3739,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 
@@ -3853,7 +3803,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(11);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(expandoValue) ");
 				query.append("FROM ExpandoValue expandoValue WHERE ");
 

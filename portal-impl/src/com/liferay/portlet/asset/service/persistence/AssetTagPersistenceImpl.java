@@ -46,7 +46,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -354,7 +353,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT assetTag FROM AssetTag assetTag WHERE ");
 
 				query.append("assetTag.groupId = ?");
@@ -415,17 +415,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT assetTag FROM AssetTag assetTag WHERE ");
 
 				query.append("assetTag.groupId = ?");
@@ -494,10 +485,14 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		List<AssetTag> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetTag exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchTagException(msg.toString());
 		}
 		else {
@@ -512,10 +507,14 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		List<AssetTag> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetTag exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchTagException(msg.toString());
 		}
 		else {
@@ -534,17 +533,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT assetTag FROM AssetTag assetTag WHERE ");
 
 			query.append("assetTag.groupId = ?");
@@ -666,17 +656,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT assetTag FROM AssetTag assetTag ");
 
 				if (obc != null) {
@@ -763,7 +744,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(assetTag) ");
 				query.append("FROM AssetTag assetTag WHERE ");
 
@@ -867,13 +849,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder sb = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += 2;
-				}
-
-				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETASSETENTRIES);
 
 				if (obc != null) {

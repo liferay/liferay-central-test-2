@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -407,9 +406,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		Country country = fetchByName(name);
 
 		if (country == null) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Country exists with the key {");
+
 			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -443,7 +445,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT country FROM Country country WHERE ");
 
 				if (name == null) {
@@ -526,9 +529,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		Country country = fetchByA2(a2);
 
 		if (country == null) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Country exists with the key {");
+
 			msg.append("a2=" + a2);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -562,7 +568,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT country FROM Country country WHERE ");
 
 				if (a2 == null) {
@@ -645,9 +652,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		Country country = fetchByA3(a3);
 
 		if (country == null) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Country exists with the key {");
+
 			msg.append("a3=" + a3);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -681,7 +691,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT country FROM Country country WHERE ");
 
 				if (a3 == null) {
@@ -771,7 +782,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT country FROM Country country WHERE ");
 
 				query.append("country.active = ?");
@@ -832,17 +844,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT country FROM Country country WHERE ");
 
 				query.append("country.active = ?");
@@ -910,10 +913,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		List<Country> list = findByActive(active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Country exists with the key {");
+
 			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCountryException(msg.toString());
 		}
 		else {
@@ -928,10 +935,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		List<Country> list = findByActive(active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Country exists with the key {");
+
 			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCountryException(msg.toString());
 		}
 		else {
@@ -950,17 +961,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT country FROM Country country WHERE ");
 
 			query.append("country.active = ?");
@@ -1082,17 +1084,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT country FROM Country country ");
 
 				if (obc != null) {
@@ -1200,7 +1193,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(country) ");
 				query.append("FROM Country country WHERE ");
 
@@ -1261,7 +1255,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(country) ");
 				query.append("FROM Country country WHERE ");
 
@@ -1322,7 +1317,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(country) ");
 				query.append("FROM Country country WHERE ");
 
@@ -1383,7 +1379,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(country) ");
 				query.append("FROM Country country WHERE ");
 

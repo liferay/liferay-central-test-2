@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -391,7 +390,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
 
@@ -470,17 +470,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				int arrayCapacity = 6;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (9 > arrayCapacity) {
-					arrayCapacity = 9;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
 
@@ -569,10 +560,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ServiceComponent exists with the key {");
+
 			msg.append("buildNamespace=" + buildNamespace);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchServiceComponentException(msg.toString());
 		}
 		else {
@@ -589,10 +584,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ServiceComponent exists with the key {");
+
 			msg.append("buildNamespace=" + buildNamespace);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchServiceComponentException(msg.toString());
 		}
 		else {
@@ -612,17 +611,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		try {
 			session = openSession();
 
-			int arrayCapacity = 6;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (9 > arrayCapacity) {
-				arrayCapacity = 9;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
 
@@ -706,11 +696,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				buildNumber);
 
 		if (serviceComponent == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No ServiceComponent exists with the key {");
+
 			msg.append("buildNamespace=" + buildNamespace);
+
 			msg.append(", ");
 			msg.append("buildNumber=" + buildNumber);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -745,7 +739,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(11);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
 
@@ -898,17 +893,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (4 > arrayCapacity) {
-					arrayCapacity = 4;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT serviceComponent FROM ServiceComponent serviceComponent ");
 
@@ -1008,7 +994,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(serviceComponent) ");
 				query.append("FROM ServiceComponent serviceComponent WHERE ");
 
@@ -1071,7 +1058,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(serviceComponent) ");
 				query.append("FROM ServiceComponent serviceComponent WHERE ");
 

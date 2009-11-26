@@ -47,7 +47,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -420,7 +419,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT permission FROM Permission permission WHERE ");
 
@@ -478,13 +478,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT permission FROM Permission permission WHERE ");
 
@@ -549,10 +544,14 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		List<Permission> list = findByResourceId(resourceId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Permission exists with the key {");
+
 			msg.append("resourceId=" + resourceId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPermissionException(msg.toString());
 		}
 		else {
@@ -569,10 +568,14 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Permission exists with the key {");
+
 			msg.append("resourceId=" + resourceId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPermissionException(msg.toString());
 		}
 		else {
@@ -592,13 +595,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT permission FROM Permission permission WHERE ");
 
 			query.append("permission.resourceId = ?");
@@ -657,11 +655,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		Permission permission = fetchByA_R(actionId, resourceId);
 
 		if (permission == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Permission exists with the key {");
+
 			msg.append("actionId=" + actionId);
+
 			msg.append(", ");
 			msg.append("resourceId=" + resourceId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -696,7 +698,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT permission FROM Permission permission WHERE ");
 
@@ -842,13 +845,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT permission FROM Permission permission ");
 
 				if (obc != null) {
@@ -936,7 +934,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(permission) ");
 				query.append("FROM Permission permission WHERE ");
 
@@ -983,7 +982,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(permission) ");
 				query.append("FROM Permission permission WHERE ");
 
@@ -1107,17 +1107,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder sb = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += 2;
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETGROUPS);
 
 				if (obc != null) {
@@ -1454,17 +1445,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder sb = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += 2;
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETROLES);
 
 				if (obc != null) {
@@ -1799,13 +1781,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder sb = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += 2;
-				}
-
-				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETUSERS);
 
 				if (obc != null) {

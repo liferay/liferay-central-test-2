@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -719,7 +718,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				if (uuid == null) {
@@ -796,17 +796,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 6;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (9 > arrayCapacity) {
-					arrayCapacity = 9;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				if (uuid == null) {
@@ -891,10 +882,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -909,10 +904,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -931,17 +930,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 6;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (9 > arrayCapacity) {
-				arrayCapacity = 9;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			if (uuid == null) {
@@ -1022,11 +1012,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		MBMessage mbMessage = fetchByUUID_G(uuid, groupId);
 
 		if (mbMessage == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(", ");
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1061,7 +1055,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(11);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				if (uuid == null) {
@@ -1160,7 +1155,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -1222,17 +1218,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (6 > arrayCapacity) {
-					arrayCapacity = 6;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -1302,10 +1289,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -1320,10 +1311,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -1342,17 +1337,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (6 > arrayCapacity) {
-				arrayCapacity = 6;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.groupId = ?");
@@ -1426,7 +1412,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.companyId = ?");
@@ -1488,17 +1475,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (6 > arrayCapacity) {
-					arrayCapacity = 6;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.companyId = ?");
@@ -1568,10 +1546,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -1586,10 +1568,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -1609,17 +1595,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (6 > arrayCapacity) {
-				arrayCapacity = 6;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.companyId = ?");
@@ -1693,7 +1670,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -1755,17 +1733,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (6 > arrayCapacity) {
-					arrayCapacity = 6;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -1835,10 +1804,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByThreadId(threadId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -1853,10 +1826,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByThreadId(threadId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -1876,17 +1853,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (6 > arrayCapacity) {
-				arrayCapacity = 6;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.threadId = ?");
@@ -1960,7 +1928,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -2022,17 +1991,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (6 > arrayCapacity) {
-					arrayCapacity = 6;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -2102,10 +2062,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByThreadReplies(threadId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -2121,10 +2085,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -2144,17 +2112,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (6 > arrayCapacity) {
-				arrayCapacity = 6;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.threadId = ?");
@@ -2228,7 +2187,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -2296,17 +2256,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -2382,12 +2333,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -2402,12 +2358,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_U(groupId, userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -2427,17 +2388,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.groupId = ?");
@@ -2519,7 +2471,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -2587,17 +2540,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -2673,12 +2617,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_C(groupId, categoryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -2694,12 +2643,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -2719,17 +2673,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.groupId = ?");
@@ -2811,7 +2756,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -2879,17 +2825,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -2965,12 +2902,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_S(groupId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -2985,12 +2927,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_S(groupId, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -3010,17 +2957,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.groupId = ?");
@@ -3102,7 +3040,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.companyId = ?");
@@ -3170,17 +3109,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.companyId = ?");
@@ -3256,12 +3186,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByC_S(companyId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -3277,12 +3212,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -3302,17 +3242,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.companyId = ?");
@@ -3394,7 +3325,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.classNameId = ?");
@@ -3462,17 +3394,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.classNameId = ?");
@@ -3548,12 +3471,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -3569,12 +3497,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -3594,17 +3527,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.classNameId = ?");
@@ -3686,7 +3610,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -3754,17 +3679,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -3840,12 +3756,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByT_P(threadId, parentMessageId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("parentMessageId=" + parentMessageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -3861,12 +3782,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("parentMessageId=" + parentMessageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -3886,17 +3812,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.threadId = ?");
@@ -3978,7 +3895,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -4046,17 +3964,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -4132,12 +4041,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByT_S(threadId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -4152,12 +4066,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByT_S(threadId, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -4177,17 +4096,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.threadId = ?");
@@ -4269,7 +4179,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -4337,17 +4248,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.threadId = ?");
@@ -4423,12 +4325,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByTR_S(threadId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -4444,12 +4351,17 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -4469,17 +4381,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.threadId = ?");
@@ -4561,7 +4464,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -4635,17 +4539,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 7;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (10 > arrayCapacity) {
-					arrayCapacity = 10;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -4727,14 +4622,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_U_S(groupId, userId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -4750,14 +4651,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -4777,17 +4684,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 7;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (10 > arrayCapacity) {
-				arrayCapacity = 10;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.groupId = ?");
@@ -4875,7 +4773,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -4950,17 +4849,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 7;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (10 > arrayCapacity) {
-					arrayCapacity = 10;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -5044,14 +4934,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(", ");
 			msg.append("threadId=" + threadId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -5068,14 +4964,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(", ");
 			msg.append("threadId=" + threadId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -5095,17 +4997,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 7;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (10 > arrayCapacity) {
-				arrayCapacity = 10;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.groupId = ?");
@@ -5193,7 +5086,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -5268,17 +5162,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 7;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (10 > arrayCapacity) {
-					arrayCapacity = 10;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -5362,14 +5247,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -5386,14 +5277,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -5413,17 +5310,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 7;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (10 > arrayCapacity) {
-				arrayCapacity = 10;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.groupId = ?");
@@ -5511,7 +5399,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.classNameId = ?");
@@ -5586,17 +5475,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 7;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (10 > arrayCapacity) {
-					arrayCapacity = 10;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.classNameId = ?");
@@ -5680,14 +5560,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -5704,14 +5590,20 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -5731,17 +5623,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 7;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (10 > arrayCapacity) {
-				arrayCapacity = 10;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.classNameId = ?");
@@ -5830,7 +5713,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(12);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -5914,17 +5798,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 9;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (12 > arrayCapacity) {
-					arrayCapacity = 12;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 				query.append("mbMessage.groupId = ?");
@@ -6014,16 +5889,23 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(9);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(", ");
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -6040,16 +5922,23 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(9);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(", ");
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
@@ -6069,17 +5958,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 9;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (12 > arrayCapacity) {
-				arrayCapacity = 12;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
 
 			query.append("mbMessage.groupId = ?");
@@ -6222,17 +6102,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (4 > arrayCapacity) {
-					arrayCapacity = 4;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT mbMessage FROM MBMessage mbMessage ");
 
 				if (obc != null) {
@@ -6442,7 +6313,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6504,7 +6376,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6571,7 +6444,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6617,7 +6491,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6663,7 +6538,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6709,7 +6585,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6755,7 +6632,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6810,7 +6688,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6864,7 +6743,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6918,7 +6798,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -6973,7 +6854,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -7028,7 +6910,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -7082,7 +6965,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -7136,7 +7020,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -7191,7 +7076,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -7252,7 +7138,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -7313,7 +7200,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -7374,7 +7262,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 
@@ -7436,7 +7325,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessage) ");
 				query.append("FROM MBMessage mbMessage WHERE ");
 

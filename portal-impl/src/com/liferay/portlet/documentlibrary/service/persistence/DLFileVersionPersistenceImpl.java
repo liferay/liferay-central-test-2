@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -454,7 +453,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(14);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -548,17 +548,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				int arrayCapacity = 10;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (14 > arrayCapacity) {
-					arrayCapacity = 14;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -659,14 +650,20 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No DLFileVersion exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
 			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
@@ -683,14 +680,20 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No DLFileVersion exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
 			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
@@ -710,17 +713,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		try {
 			session = openSession();
 
-			int arrayCapacity = 10;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (14 > arrayCapacity) {
-				arrayCapacity = 14;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -817,15 +811,21 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				version);
 
 		if (dlFileVersion == null) {
-			StringBundler msg = new StringBundler(9);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No DLFileVersion exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
 			msg.append("name=" + name);
+
 			msg.append(", ");
 			msg.append("version=" + version);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -865,7 +865,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(16);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -984,7 +985,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(16);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -1084,17 +1086,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				int arrayCapacity = 12;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (16 > arrayCapacity) {
-					arrayCapacity = 16;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -1201,16 +1194,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(9);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No DLFileVersion exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
 			msg.append("name=" + name);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
@@ -1227,16 +1227,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(9);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No DLFileVersion exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("folderId=" + folderId);
+
 			msg.append(", ");
 			msg.append("name=" + name);
+
 			msg.append(", ");
 			msg.append("status=" + status);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
@@ -1257,17 +1264,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		try {
 			session = openSession();
 
-			int arrayCapacity = 12;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (16 > arrayCapacity) {
-				arrayCapacity = 16;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -1427,17 +1425,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion ");
 
@@ -1549,7 +1538,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(11);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(dlFileVersion) ");
 				query.append("FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -1627,7 +1617,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(13);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(dlFileVersion) ");
 				query.append("FROM DLFileVersion dlFileVersion WHERE ");
 
@@ -1711,7 +1702,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(13);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(dlFileVersion) ");
 				query.append("FROM DLFileVersion dlFileVersion WHERE ");
 

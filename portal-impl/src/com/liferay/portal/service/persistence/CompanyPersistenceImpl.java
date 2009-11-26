@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -433,9 +432,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		Company company = fetchByWebId(webId);
 
 		if (company == null) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Company exists with the key {");
+
 			msg.append("webId=" + webId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -469,7 +471,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT company FROM Company company WHERE ");
 
 				if (webId == null) {
@@ -548,9 +551,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		Company company = fetchByVirtualHost(virtualHost);
 
 		if (company == null) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Company exists with the key {");
+
 			msg.append("virtualHost=" + virtualHost);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -585,7 +591,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT company FROM Company company WHERE ");
 
 				if (virtualHost == null) {
@@ -664,9 +671,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		Company company = fetchByMx(mx);
 
 		if (company == null) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Company exists with the key {");
+
 			msg.append("mx=" + mx);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -700,7 +710,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT company FROM Company company WHERE ");
 
 				if (mx == null) {
@@ -779,9 +790,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		Company company = fetchByLogoId(logoId);
 
 		if (company == null) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Company exists with the key {");
+
 			msg.append("logoId=" + logoId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -815,7 +829,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT company FROM Company company WHERE ");
 
 				query.append("company.logoId = ?");
@@ -885,7 +900,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT company FROM Company company WHERE ");
 
 				query.append("company.system = ?");
@@ -942,13 +958,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT company FROM Company company WHERE ");
 
 				query.append("company.system = ?");
@@ -1010,10 +1021,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		List<Company> list = findBySystem(system, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Company exists with the key {");
+
 			msg.append("system=" + system);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCompanyException(msg.toString());
 		}
 		else {
@@ -1028,10 +1043,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		List<Company> list = findBySystem(system, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Company exists with the key {");
+
 			msg.append("system=" + system);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCompanyException(msg.toString());
 		}
 		else {
@@ -1050,13 +1069,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT company FROM Company company WHERE ");
 
 			query.append("company.system = ?");
@@ -1172,13 +1186,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT company FROM Company company ");
 
 				if (obc != null) {
@@ -1287,7 +1296,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(company) ");
 				query.append("FROM Company company WHERE ");
 
@@ -1348,7 +1358,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(company) ");
 				query.append("FROM Company company WHERE ");
 
@@ -1409,7 +1420,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(company) ");
 				query.append("FROM Company company WHERE ");
 
@@ -1470,7 +1482,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(company) ");
 				query.append("FROM Company company WHERE ");
 
@@ -1516,7 +1529,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(company) ");
 				query.append("FROM Company company WHERE ");
 

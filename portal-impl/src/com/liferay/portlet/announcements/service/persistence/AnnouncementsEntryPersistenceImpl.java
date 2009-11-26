@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -425,7 +424,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -503,17 +503,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				int arrayCapacity = 6;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (9 > arrayCapacity) {
-					arrayCapacity = 9;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -599,10 +590,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		List<AnnouncementsEntry> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AnnouncementsEntry exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -617,10 +612,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		List<AnnouncementsEntry> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AnnouncementsEntry exists with the key {");
+
 			msg.append("uuid=" + uuid);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -640,17 +639,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			int arrayCapacity = 6;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (9 > arrayCapacity) {
-				arrayCapacity = 9;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -740,7 +730,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -803,17 +794,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (6 > arrayCapacity) {
-					arrayCapacity = 6;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -884,10 +866,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		List<AnnouncementsEntry> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AnnouncementsEntry exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -903,10 +889,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AnnouncementsEntry exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -926,17 +916,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (6 > arrayCapacity) {
-				arrayCapacity = 6;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -1013,7 +994,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -1082,17 +1064,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (8 > arrayCapacity) {
-					arrayCapacity = 8;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -1170,12 +1143,17 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AnnouncementsEntry exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1191,12 +1169,17 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AnnouncementsEntry exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1216,17 +1199,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (8 > arrayCapacity) {
-				arrayCapacity = 8;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -1309,7 +1283,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -1385,17 +1360,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				int arrayCapacity = 7;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (10 > arrayCapacity) {
-					arrayCapacity = 10;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -1480,14 +1446,20 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				alert, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AnnouncementsEntry exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(", ");
 			msg.append("alert=" + alert);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1504,14 +1476,20 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				alert, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AnnouncementsEntry exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(", ");
 			msg.append("alert=" + alert);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
@@ -1531,17 +1509,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			int arrayCapacity = 7;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (10 > arrayCapacity) {
-				arrayCapacity = 10;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
 
@@ -1679,17 +1648,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (4 > arrayCapacity) {
-					arrayCapacity = 4;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry ");
 
@@ -1800,7 +1760,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(announcementsEntry) ");
 				query.append(
 					"FROM AnnouncementsEntry announcementsEntry WHERE ");
@@ -1862,7 +1823,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(announcementsEntry) ");
 				query.append(
 					"FROM AnnouncementsEntry announcementsEntry WHERE ");
@@ -1912,7 +1874,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(announcementsEntry) ");
 				query.append(
 					"FROM AnnouncementsEntry announcementsEntry WHERE ");
@@ -1968,7 +1931,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(announcementsEntry) ");
 				query.append(
 					"FROM AnnouncementsEntry announcementsEntry WHERE ");

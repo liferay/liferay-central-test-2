@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.MembershipRequest;
@@ -381,7 +380,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -443,17 +443,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -524,10 +515,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		List<MembershipRequest> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MembershipRequest exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -544,10 +539,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MembershipRequest exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -567,17 +566,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -651,7 +641,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -713,17 +704,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -794,10 +776,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		List<MembershipRequest> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MembershipRequest exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -814,10 +800,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MembershipRequest exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -837,17 +827,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -923,7 +904,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -991,17 +973,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (7 > arrayCapacity) {
-					arrayCapacity = 7;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -1078,12 +1051,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		List<MembershipRequest> list = findByG_S(groupId, statusId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MembershipRequest exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("statusId=" + statusId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -1100,12 +1078,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MembershipRequest exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("statusId=" + statusId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMembershipRequestException(msg.toString());
 		}
 		else {
@@ -1125,17 +1108,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (7 > arrayCapacity) {
-				arrayCapacity = 7;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
 
@@ -1266,17 +1240,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT membershipRequest FROM MembershipRequest membershipRequest ");
 
@@ -1377,7 +1342,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(membershipRequest) ");
 				query.append("FROM MembershipRequest membershipRequest WHERE ");
 
@@ -1423,7 +1389,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(membershipRequest) ");
 				query.append("FROM MembershipRequest membershipRequest WHERE ");
 
@@ -1471,7 +1438,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(membershipRequest) ");
 				query.append("FROM MembershipRequest membershipRequest WHERE ");
 

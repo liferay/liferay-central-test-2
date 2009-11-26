@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -372,9 +371,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		Shard shard = fetchByName(name);
 
 		if (shard == null) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Shard exists with the key {");
+
 			msg.append("name=" + name);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -408,7 +410,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT shard FROM Shard shard WHERE ");
 
 				if (name == null) {
@@ -487,11 +490,15 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		Shard shard = fetchByC_C(classNameId, classPK);
 
 		if (shard == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Shard exists with the key {");
+
 			msg.append("classNameId=" + classNameId);
+
 			msg.append(", ");
 			msg.append("classPK=" + classPK);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -528,7 +535,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT shard FROM Shard shard WHERE ");
 
 				query.append("shard.classNameId = ?");
@@ -656,13 +664,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT shard FROM Shard shard ");
 
 				if (obc != null) {
@@ -751,7 +754,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(shard) ");
 				query.append("FROM Shard shard WHERE ");
 
@@ -815,7 +819,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(shard) ");
 				query.append("FROM Shard shard WHERE ");
 

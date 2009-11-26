@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -378,7 +377,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT portlet FROM Portlet portlet WHERE ");
 
 				query.append("portlet.companyId = ?");
@@ -435,13 +435,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT portlet FROM Portlet portlet WHERE ");
 
 				query.append("portlet.companyId = ?");
@@ -503,10 +498,14 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		List<Portlet> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Portlet exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPortletException(msg.toString());
 		}
 		else {
@@ -521,10 +520,14 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		List<Portlet> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Portlet exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchPortletException(msg.toString());
 		}
 		else {
@@ -543,13 +546,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT portlet FROM Portlet portlet WHERE ");
 
 			query.append("portlet.companyId = ?");
@@ -607,11 +605,15 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		Portlet portlet = fetchByC_P(companyId, portletId);
 
 		if (portlet == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Portlet exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("portletId=" + portletId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -646,7 +648,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT portlet FROM Portlet portlet WHERE ");
 
 				query.append("portlet.companyId = ?");
@@ -790,13 +793,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT portlet FROM Portlet portlet ");
 
 				if (obc != null) {
@@ -884,7 +882,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(portlet) ");
 				query.append("FROM Portlet portlet WHERE ");
 
@@ -931,7 +930,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(portlet) ");
 				query.append("FROM Portlet portlet WHERE ");
 

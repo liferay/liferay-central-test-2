@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -491,7 +490,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -549,13 +549,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -620,10 +615,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		List<JournalArticleImage> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleImage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -640,10 +639,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleImage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -663,13 +666,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -737,7 +735,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -795,13 +794,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -866,10 +860,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		List<JournalArticleImage> list = findByTempImage(tempImage, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleImage exists with the key {");
+
 			msg.append("tempImage=" + tempImage);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -886,10 +884,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleImage exists with the key {");
+
 			msg.append("tempImage=" + tempImage);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -909,13 +911,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -987,7 +984,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -1077,13 +1075,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				int arrayCapacity = 10;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -1177,14 +1170,20 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				version, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleImage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
 			msg.append("version=" + version);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -1201,14 +1200,20 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				version, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleImage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
 			msg.append("version=" + version);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleImageException(msg.toString());
 		}
 		else {
@@ -1228,13 +1233,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		try {
 			session = openSession();
 
-			int arrayCapacity = 10;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -1323,19 +1323,27 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				articleId, version, elInstanceId, elName, languageId);
 
 		if (journalArticleImage == null) {
-			StringBundler msg = new StringBundler(13);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleImage exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
+
 			msg.append(", ");
 			msg.append("version=" + version);
+
 			msg.append(", ");
 			msg.append("elInstanceId=" + elInstanceId);
+
 			msg.append(", ");
 			msg.append("elName=" + elName);
+
 			msg.append(", ");
 			msg.append("languageId=" + languageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1383,7 +1391,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(25);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ");
 
@@ -1610,13 +1619,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalArticleImage FROM JournalArticleImage journalArticleImage ");
 
@@ -1722,7 +1726,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(journalArticleImage) ");
 				query.append(
 					"FROM JournalArticleImage journalArticleImage WHERE ");
@@ -1769,7 +1774,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(journalArticleImage) ");
 				query.append(
 					"FROM JournalArticleImage journalArticleImage WHERE ");
@@ -1821,7 +1827,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(11);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(journalArticleImage) ");
 				query.append(
 					"FROM JournalArticleImage journalArticleImage WHERE ");
@@ -1908,7 +1915,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(26);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(journalArticleImage) ");
 				query.append(
 					"FROM JournalArticleImage journalArticleImage WHERE ");

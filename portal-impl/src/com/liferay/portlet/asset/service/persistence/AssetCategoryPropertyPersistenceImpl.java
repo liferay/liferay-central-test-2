@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -437,7 +436,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -499,17 +499,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -580,10 +571,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		List<AssetCategoryProperty> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetCategoryProperty exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryPropertyException(msg.toString());
 		}
 		else {
@@ -600,10 +595,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetCategoryProperty exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryPropertyException(msg.toString());
 		}
 		else {
@@ -623,17 +622,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -707,7 +697,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -769,17 +760,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -851,10 +833,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetCategoryProperty exists with the key {");
+
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryPropertyException(msg.toString());
 		}
 		else {
@@ -871,10 +857,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetCategoryProperty exists with the key {");
+
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryPropertyException(msg.toString());
 		}
 		else {
@@ -894,17 +884,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -978,7 +959,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -1063,17 +1045,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				int arrayCapacity = 8;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (10 > arrayCapacity) {
-					arrayCapacity = 10;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -1165,12 +1138,17 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		List<AssetCategoryProperty> list = findByC_K(companyId, key, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetCategoryProperty exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("key=" + key);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryPropertyException(msg.toString());
 		}
 		else {
@@ -1187,12 +1165,17 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetCategoryProperty exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(", ");
 			msg.append("key=" + key);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchCategoryPropertyException(msg.toString());
 		}
 		else {
@@ -1213,17 +1196,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		try {
 			session = openSession();
 
-			int arrayCapacity = 8;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (10 > arrayCapacity) {
-				arrayCapacity = 10;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -1311,11 +1285,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				key);
 
 		if (assetCategoryProperty == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No AssetCategoryProperty exists with the key {");
+
 			msg.append("categoryId=" + categoryId);
+
 			msg.append(", ");
 			msg.append("key=" + key);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1350,7 +1328,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
 
@@ -1500,17 +1479,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty ");
 
@@ -1621,7 +1591,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(assetCategoryProperty) ");
 				query.append(
 					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
@@ -1668,7 +1639,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(assetCategoryProperty) ");
 				query.append(
 					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
@@ -1715,7 +1687,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(assetCategoryProperty) ");
 				query.append(
 					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
@@ -1784,7 +1757,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(assetCategoryProperty) ");
 				query.append(
 					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");

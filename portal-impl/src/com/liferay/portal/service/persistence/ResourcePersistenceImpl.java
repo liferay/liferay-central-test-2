@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -376,7 +375,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT resource FROM Resource resource WHERE ");
 
 				query.append("resource.codeId = ?");
@@ -433,13 +433,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT resource FROM Resource resource WHERE ");
 
 				query.append("resource.codeId = ?");
@@ -502,10 +497,14 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		List<Resource> list = findByCodeId(codeId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Resource exists with the key {");
+
 			msg.append("codeId=" + codeId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
@@ -520,10 +519,14 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		List<Resource> list = findByCodeId(codeId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Resource exists with the key {");
+
 			msg.append("codeId=" + codeId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
@@ -542,13 +545,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT resource FROM Resource resource WHERE ");
 
 			query.append("resource.codeId = ?");
@@ -606,11 +604,15 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		Resource resource = fetchByC_P(codeId, primKey);
 
 		if (resource == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No Resource exists with the key {");
+
 			msg.append("codeId=" + codeId);
+
 			msg.append(", ");
 			msg.append("primKey=" + primKey);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -645,7 +647,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT resource FROM Resource resource WHERE ");
 
 				query.append("resource.codeId = ?");
@@ -789,13 +792,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT resource FROM Resource resource ");
 
 				if (obc != null) {
@@ -883,7 +881,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(resource) ");
 				query.append("FROM Resource resource WHERE ");
 
@@ -930,7 +929,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(resource) ");
 				query.append("FROM Resource resource WHERE ");
 

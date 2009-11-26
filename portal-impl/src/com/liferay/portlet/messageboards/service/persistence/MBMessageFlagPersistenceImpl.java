@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -492,7 +491,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -550,13 +550,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -620,10 +615,14 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		List<MBMessageFlag> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -638,10 +637,14 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		List<MBMessageFlag> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -661,13 +664,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -735,7 +733,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -793,13 +792,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -864,10 +858,14 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		List<MBMessageFlag> list = findByThreadId(threadId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -884,10 +882,14 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -907,13 +909,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -981,7 +978,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1039,13 +1037,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1110,10 +1103,14 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		List<MBMessageFlag> list = findByMessageId(messageId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("messageId=" + messageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -1130,10 +1127,14 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("messageId=" + messageId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -1153,13 +1154,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1227,7 +1223,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1291,13 +1288,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1368,12 +1360,17 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		List<MBMessageFlag> list = findByT_F(threadId, flag, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("flag=" + flag);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -1390,12 +1387,17 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("flag=" + flag);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -1415,13 +1417,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1497,7 +1494,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1561,13 +1559,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1638,12 +1631,17 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		List<MBMessageFlag> list = findByM_F(messageId, flag, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("messageId=" + messageId);
+
 			msg.append(", ");
 			msg.append("flag=" + flag);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -1660,12 +1658,17 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("messageId=" + messageId);
+
 			msg.append(", ");
 			msg.append("flag=" + flag);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -1685,13 +1688,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1767,7 +1765,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1838,13 +1837,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				int arrayCapacity = 7;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -1921,14 +1915,20 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		List<MBMessageFlag> list = findByU_T_F(userId, threadId, flag, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("flag=" + flag);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -1945,14 +1945,20 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("threadId=" + threadId);
+
 			msg.append(", ");
 			msg.append("flag=" + flag);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
@@ -1972,13 +1978,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		try {
 			session = openSession();
 
-			int arrayCapacity = 7;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -2050,13 +2051,18 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		MBMessageFlag mbMessageFlag = fetchByU_M_F(userId, messageId, flag);
 
 		if (mbMessageFlag == null) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No MBMessageFlag exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("messageId=" + messageId);
+
 			msg.append(", ");
 			msg.append("flag=" + flag);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -2093,7 +2099,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -2230,13 +2237,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag ");
 
@@ -2356,7 +2358,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessageFlag) ");
 				query.append("FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -2402,7 +2405,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessageFlag) ");
 				query.append("FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -2448,7 +2452,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessageFlag) ");
 				query.append("FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -2494,7 +2499,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessageFlag) ");
 				query.append("FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -2548,7 +2554,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessageFlag) ");
 				query.append("FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -2603,7 +2610,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessageFlag) ");
 				query.append("FROM MBMessageFlag mbMessageFlag WHERE ");
 
@@ -2664,7 +2672,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(mbMessageFlag) ");
 				query.append("FROM MBMessageFlag mbMessageFlag WHERE ");
 

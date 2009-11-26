@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -339,7 +338,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
 
@@ -397,13 +397,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
 
@@ -469,10 +464,14 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserTrackerPath exists with the key {");
+
 			msg.append("userTrackerId=" + userTrackerId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerPathException(msg.toString());
 		}
 		else {
@@ -489,10 +488,14 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserTrackerPath exists with the key {");
+
 			msg.append("userTrackerId=" + userTrackerId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerPathException(msg.toString());
 		}
 		else {
@@ -512,13 +515,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
 
@@ -637,13 +635,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath ");
 
@@ -728,7 +721,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userTrackerPath) ");
 				query.append("FROM UserTrackerPath userTrackerPath WHERE ");
 

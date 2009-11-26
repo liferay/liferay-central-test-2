@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -400,7 +399,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ");
 
@@ -458,13 +458,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ");
 
@@ -529,10 +524,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		List<JournalArticleResource> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleResource exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleResourceException(msg.toString());
 		}
 		else {
@@ -549,10 +548,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleResource exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchArticleResourceException(msg.toString());
 		}
 		else {
@@ -572,13 +575,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ");
 
@@ -639,11 +637,15 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 				articleId);
 
 		if (journalArticleResource == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No JournalArticleResource exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("articleId=" + articleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -678,7 +680,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ");
 
@@ -826,13 +829,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource ");
 
@@ -923,7 +921,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(journalArticleResource) ");
 				query.append(
 					"FROM JournalArticleResource journalArticleResource WHERE ");
@@ -971,7 +970,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(journalArticleResource) ");
 				query.append(
 					"FROM JournalArticleResource journalArticleResource WHERE ");

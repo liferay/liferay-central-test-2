@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -468,7 +467,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -530,17 +530,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -610,10 +601,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		List<TasksReview> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -628,10 +623,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		List<TasksReview> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -650,17 +649,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -734,7 +724,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -796,17 +787,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -876,10 +858,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		List<TasksReview> list = findByProposalId(proposalId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -895,10 +881,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -918,17 +908,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -994,11 +975,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		TasksReview tasksReview = fetchByU_P(userId, proposalId);
 
 		if (tasksReview == null) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -1035,7 +1020,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1120,7 +1106,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1188,17 +1175,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (7 > arrayCapacity) {
-					arrayCapacity = 7;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1274,12 +1252,17 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		List<TasksReview> list = findByP_S(proposalId, stage, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(", ");
 			msg.append("stage=" + stage);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -1295,12 +1278,17 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(", ");
 			msg.append("stage=" + stage);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -1320,17 +1308,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (7 > arrayCapacity) {
-				arrayCapacity = 7;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1413,7 +1392,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(9);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1489,17 +1469,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 7;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (9 > arrayCapacity) {
-					arrayCapacity = 9;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1583,14 +1554,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(", ");
 			msg.append("stage=" + stage);
+
 			msg.append(", ");
 			msg.append("completed=" + completed);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -1607,14 +1584,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(7);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(", ");
 			msg.append("stage=" + stage);
+
 			msg.append(", ");
 			msg.append("completed=" + completed);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -1634,17 +1617,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 7;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (9 > arrayCapacity) {
-				arrayCapacity = 9;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1733,7 +1707,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(11);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1817,17 +1792,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 9;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (11 > arrayCapacity) {
-					arrayCapacity = 11;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -1917,16 +1883,23 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				rejected, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(9);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(", ");
 			msg.append("stage=" + stage);
+
 			msg.append(", ");
 			msg.append("completed=" + completed);
+
 			msg.append(", ");
 			msg.append("rejected=" + rejected);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -1943,16 +1916,23 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				rejected, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(9);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No TasksReview exists with the key {");
+
 			msg.append("proposalId=" + proposalId);
+
 			msg.append(", ");
 			msg.append("stage=" + stage);
+
 			msg.append(", ");
 			msg.append("completed=" + completed);
+
 			msg.append(", ");
 			msg.append("rejected=" + rejected);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchReviewException(msg.toString());
 		}
 		else {
@@ -1972,17 +1952,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 9;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (11 > arrayCapacity) {
-				arrayCapacity = 11;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT tasksReview FROM TasksReview tasksReview WHERE ");
 
@@ -2125,17 +2096,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT tasksReview FROM TasksReview tasksReview ");
 
 				if (obc != null) {
@@ -2257,7 +2219,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(tasksReview) ");
 				query.append("FROM TasksReview tasksReview WHERE ");
 
@@ -2303,7 +2266,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(tasksReview) ");
 				query.append("FROM TasksReview tasksReview WHERE ");
 
@@ -2352,7 +2316,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(tasksReview) ");
 				query.append("FROM TasksReview tasksReview WHERE ");
 
@@ -2406,7 +2371,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(tasksReview) ");
 				query.append("FROM TasksReview tasksReview WHERE ");
 
@@ -2462,7 +2428,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(8);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(tasksReview) ");
 				query.append("FROM TasksReview tasksReview WHERE ");
 
@@ -2524,7 +2491,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(10);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(tasksReview) ");
 				query.append("FROM TasksReview tasksReview WHERE ");
 

@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -366,7 +365,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -424,13 +424,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -495,10 +490,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		List<UserTracker> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserTracker exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -515,10 +514,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserTracker exists with the key {");
+
 			msg.append("companyId=" + companyId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -538,13 +541,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -612,7 +610,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -670,13 +669,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -740,10 +734,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		List<UserTracker> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserTracker exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -758,10 +756,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		List<UserTracker> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserTracker exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -781,13 +783,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -855,7 +852,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -928,13 +926,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 6;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -1014,10 +1007,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		List<UserTracker> list = findBySessionId(sessionId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserTracker exists with the key {");
+
 			msg.append("sessionId=" + sessionId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -1034,10 +1031,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserTracker exists with the key {");
+
 			msg.append("sessionId=" + sessionId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
@@ -1057,13 +1058,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 6;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userTracker FROM UserTracker userTracker WHERE ");
 
@@ -1197,13 +1193,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT userTracker FROM UserTracker userTracker ");
 
 				if (obc != null) {
@@ -1296,7 +1287,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userTracker) ");
 				query.append("FROM UserTracker userTracker WHERE ");
 
@@ -1342,7 +1334,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userTracker) ");
 				query.append("FROM UserTracker userTracker WHERE ");
 
@@ -1388,7 +1381,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userTracker) ");
 				query.append("FROM UserTracker userTracker WHERE ");
 

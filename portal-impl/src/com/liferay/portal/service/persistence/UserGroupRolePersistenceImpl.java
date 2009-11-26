@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -405,7 +404,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -463,13 +463,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -533,10 +528,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -551,10 +550,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -574,13 +577,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -648,7 +646,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -706,13 +705,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -776,10 +770,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -794,10 +792,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -817,13 +819,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -891,7 +888,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -949,13 +947,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1019,10 +1012,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByRoleId(roleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("roleId=" + roleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -1037,10 +1034,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByRoleId(roleId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("roleId=" + roleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -1060,13 +1061,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1134,7 +1130,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1198,13 +1195,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1275,12 +1267,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByU_G(userId, groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -1297,12 +1294,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("userId=" + userId);
+
 			msg.append(", ");
 			msg.append("groupId=" + groupId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -1323,13 +1325,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1403,7 +1400,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1467,13 +1465,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1544,12 +1537,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByG_R(groupId, roleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("roleId=" + roleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -1566,12 +1564,17 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No UserGroupRole exists with the key {");
+
 			msg.append("groupId=" + groupId);
+
 			msg.append(", ");
 			msg.append("roleId=" + roleId);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
@@ -1592,13 +1595,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append(
 				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1723,13 +1721,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append(
 					"SELECT userGroupRole FROM UserGroupRole userGroupRole ");
 
@@ -1837,7 +1830,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userGroupRole) ");
 				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1883,7 +1877,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userGroupRole) ");
 				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1929,7 +1924,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userGroupRole) ");
 				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
@@ -1975,7 +1971,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userGroupRole) ");
 				query.append("FROM UserGroupRole userGroupRole WHERE ");
 
@@ -2027,7 +2024,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(userGroupRole) ");
 				query.append("FROM UserGroupRole userGroupRole WHERE ");
 

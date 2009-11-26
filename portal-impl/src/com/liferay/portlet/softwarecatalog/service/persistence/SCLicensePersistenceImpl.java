@@ -46,7 +46,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -372,7 +371,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
 				query.append("scLicense.active = ?");
@@ -433,17 +433,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 3;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (5 > arrayCapacity) {
-					arrayCapacity = 5;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
 				query.append("scLicense.active = ?");
@@ -512,10 +503,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		List<SCLicense> list = findByActive(active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SCLicense exists with the key {");
+
 			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
@@ -530,10 +525,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		List<SCLicense> list = findByActive(active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(3);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SCLicense exists with the key {");
+
 			msg.append("active=" + active);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
@@ -552,17 +551,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 3;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (5 > arrayCapacity) {
-				arrayCapacity = 5;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
 			query.append("scLicense.active = ?");
@@ -637,7 +627,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
 				query.append("scLicense.active = ?");
@@ -704,17 +695,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 5;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (7 > arrayCapacity) {
-					arrayCapacity = 7;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
 				query.append("scLicense.active = ?");
@@ -789,12 +771,17 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		List<SCLicense> list = findByA_R(active, recommended, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SCLicense exists with the key {");
+
 			msg.append("active=" + active);
+
 			msg.append(", ");
 			msg.append("recommended=" + recommended);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
@@ -810,12 +797,17 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(5);
+			StringBuilder msg = new StringBuilder();
+
 			msg.append("No SCLicense exists with the key {");
+
 			msg.append("active=" + active);
+
 			msg.append(", ");
 			msg.append("recommended=" + recommended);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
 			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
@@ -835,17 +827,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		try {
 			session = openSession();
 
-			int arrayCapacity = 5;
+			StringBuilder query = new StringBuilder();
 
-			if (obc != null) {
-				arrayCapacity += (obc.getOrderByFields().length * 4);
-			}
-
-			if (7 > arrayCapacity) {
-				arrayCapacity = 7;
-			}
-
-			StringBundler query = new StringBundler(arrayCapacity);
 			query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
 
 			query.append("scLicense.active = ?");
@@ -975,17 +958,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder query = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += (obc.getOrderByFields().length * 4);
-				}
-
-				if (3 > arrayCapacity) {
-					arrayCapacity = 3;
-				}
-
-				StringBundler query = new StringBundler(arrayCapacity);
 				query.append("SELECT scLicense FROM SCLicense scLicense ");
 
 				if (obc != null) {
@@ -1079,7 +1053,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(scLicense) ");
 				query.append("FROM SCLicense scLicense WHERE ");
 
@@ -1128,7 +1103,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(6);
+				StringBuilder query = new StringBuilder();
+
 				query.append("SELECT COUNT(scLicense) ");
 				query.append("FROM SCLicense scLicense WHERE ");
 
@@ -1238,17 +1214,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				int arrayCapacity = 1;
+				StringBuilder sb = new StringBuilder();
 
-				if (obc != null) {
-					arrayCapacity += 2;
-				}
-
-				if (4 > arrayCapacity) {
-					arrayCapacity = 4;
-				}
-
-				StringBundler sb = new StringBundler(arrayCapacity);
 				sb.append(_SQL_GETSCPRODUCTENTRIES);
 
 				if (obc != null) {
