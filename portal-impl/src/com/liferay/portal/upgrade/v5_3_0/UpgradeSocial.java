@@ -174,7 +174,7 @@ public class UpgradeSocial extends UpgradeProcess {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con, ps);
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 

@@ -202,6 +202,7 @@ public class CounterPersistenceImpl
 				rangeMin = rs.getLong(1);
 				rangeMax = rangeMin + PropsValues.COUNTER_INCREMENT;
 
+				rs.close();
 				ps.close();
 
 				ps = connection.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
@@ -213,6 +214,7 @@ public class CounterPersistenceImpl
 				rangeMin = _DEFAULT_CURRENT_ID;
 				rangeMax = rangeMin + PropsValues.COUNTER_INCREMENT;
 
+				rs.close();
 				ps.close();
 
 				ps = connection.prepareStatement(_SQL_INSERT);
@@ -331,6 +333,7 @@ public class CounterPersistenceImpl
 				newValue = currentId + 1;
 				long rangeMax = currentId + register.getRangeSize();
 
+				rs.close();
 				ps.close();
 
 				ps = connection.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
