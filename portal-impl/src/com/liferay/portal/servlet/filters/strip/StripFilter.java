@@ -148,26 +148,20 @@ public class StripFilter extends BasePortalFilter {
 
 			if ((oldByteArray != null) && (oldByteArray.length > 0)) {
 				byte[] newByteArray = null;
-				int newByteArrayPos = 0;
 
 				if (_log.isDebugEnabled()) {
 					_log.debug("Stripping content of type " + contentType);
 				}
 
 				if (contentType.indexOf("text/") != -1) {
-					Object[] value = strip(oldByteArray);
-
-					newByteArray = (byte[])value[0];
-					newByteArrayPos = (Integer)value[1];
+					newByteArray = strip(oldByteArray);
 				}
 				else {
 					newByteArray = oldByteArray;
-					newByteArrayPos = oldByteArray.length;
 				}
 
 				if (!ETagUtil.processETag(request, response, newByteArray)) {
-					ServletResponseUtil.write(
-						response, newByteArray, newByteArrayPos);
+					ServletResponseUtil.write(response, newByteArray);
 				}
 			}
 		}
@@ -182,7 +176,7 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
-	protected Object[] strip(byte[] oldByteArray) throws IOException {
+	protected byte[] strip(byte[] oldByteArray) throws IOException {
 		ByteArrayOutputStream newBytes = new ByteArrayOutputStream(
 			oldByteArray.length);
 
@@ -373,22 +367,6 @@ public class StripFilter extends BasePortalFilter {
 		}
 
 		byte[] newByteArray = newBytes.toByteArray();
-		int newByteArrayPos = newBytes.size();
-
-		if (newByteArrayPos > 1) {
-			for (int i = newByteArrayPos - 1; i > 0; i--) {
-				byte b = newByteArray[i];
-
-				char c = (char)b;
-
-				if (Validator.isWhitespace(c)) {
-					newByteArrayPos--;
-				}
-				else {
-					break;
-				}
-			}
-		}
 
 		if (state == _STATE_MINIFY_SCRIPT) {
 			_log.error("Missing </script>");
@@ -397,7 +375,7 @@ public class StripFilter extends BasePortalFilter {
 			_log.error("Missing </style>");
 		}
 
-		return new Object[] {newByteArray, newByteArrayPos};
+		return newByteArray;
 	}
 
 	private static final String _CDATA_CLOSE = "/*]]>*/";
