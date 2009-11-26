@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.KMPSearch;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.servlet.filters.etag.ETagUtil;
@@ -214,6 +213,44 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
+	protected int processCSS(
+			byte[] oldByteArray, ByteArrayOutputStream newBytes,
+			int currentIndex)
+		throws IOException {
+
+		int beginIndex = currentIndex + _MARKER_STYLE_OPEN.length + 1;
+		int closeTagIndex =
+			KMPSearch.search(
+				oldByteArray, beginIndex, _MARKER_STYLE_CLOSE,
+				_MARKER_STYLE_CLOSE_NEXTS);
+
+		if (closeTagIndex == -1) {
+			_log.error("Missing </style>");
+			return currentIndex + 1;
+		}
+
+		int newBeginIndex = closeTagIndex + _MARKER_STYLE_CLOSE.length;
+		newBeginIndex += countContinuousWhiteSpace(oldByteArray, newBeginIndex);
+
+		String styleContent =
+			new String(oldByteArray, beginIndex, closeTagIndex - beginIndex);
+
+		if (Validator.isNull(styleContent)) {
+			return newBeginIndex;
+		}
+
+		styleContent = MinifierUtil.minifyCss(styleContent);
+
+		if (Validator.isNull(styleContent)) {
+			return newBeginIndex;
+		}
+
+		newBytes.write(_STYLE_TYPE_CSS);
+		newBytes.write(styleContent.getBytes());
+		newBytes.write(_MARKER_STYLE_CLOSE);
+		return newBeginIndex;
+	}
+
 	protected int processJavaScript(
 			byte[] oldByteArray, ByteArrayOutputStream newBytes,
 			int currentIndex, byte[] openTag)
@@ -263,8 +300,6 @@ public class StripFilter extends BasePortalFilter {
 
 		boolean removeStartingWhitespace = true;
 
-		ByteArrayOutputStream styleBytes = new ByteArrayOutputStream();
-
 		for (int i = 0; i < oldByteArray.length; i++) {
 			byte b = oldByteArray[i];
 
@@ -306,7 +341,10 @@ public class StripFilter extends BasePortalFilter {
 						continue;
 					}
 					else if (hasMarker(oldByteArray, i, _MARKER_STYLE_OPEN)) {
-						state = _STATE_MINIFY_STYLE;
+
+						i = processCSS(oldByteArray, newBytes, i) - 1;
+						state = _STATE_NORMAL;
+						continue;
 					}
 				}
 				else if (state == _STATE_IGNORE) {
@@ -314,42 +352,6 @@ public class StripFilter extends BasePortalFilter {
 						hasMarker(oldByteArray, i, _MARKER_TEXTAREA_CLOSE)) {
 
 						state = _STATE_NORMAL;
-					}
-				}
-				else if (state == _STATE_MINIFY_STYLE) {
-					if (hasMarker(oldByteArray, i, _MARKER_STYLE_CLOSE)) {
-						state = _STATE_NORMAL;
-
-						String styleContent = styleBytes.toString(
-							StringPool.UTF8);
-
-						styleBytes = new ByteArrayOutputStream();
-
-						styleContent = styleContent.substring(
-							_STYLE_TYPE_CSS.length()).trim();
-
-						if (Validator.isNull(styleContent)) {
-							i += _MARKER_STYLE_CLOSE.length;
-
-							continue;
-						}
-
-						styleContent = MinifierUtil.minifyCss(styleContent);
-
-						if (Validator.isNull(styleContent)) {
-							i += _MARKER_STYLE_CLOSE.length;
-
-							continue;
-						}
-
-						styleContent = _STYLE_TYPE_CSS + styleContent;
-
-						byte[] styleContentBytes = styleContent.getBytes(
-							StringPool.UTF8);
-
-						newBytes.write(styleContentBytes);
-
-						state = _STATE_FOUND_ELEMENT;
 					}
 				}
 			}
@@ -401,21 +403,10 @@ public class StripFilter extends BasePortalFilter {
 				}
 			}
 
-			if (state == _STATE_MINIFY_STYLE) {
-				styleBytes.write(b);
-			}
-			else {
-				newBytes.write(b);
-			}
+			newBytes.write(b);
 		}
 
-		byte[] newByteArray = newBytes.toByteArray();
-
-		if (state == _STATE_MINIFY_STYLE) {
-			_log.error("Missing </style>");
-		}
-
-		return newByteArray;
+		return newBytes.toByteArray();
 	}
 
 	private static final byte[] _CDATA_CLOSE = "/*]]>*/".getBytes();
@@ -442,10 +433,13 @@ public class StripFilter extends BasePortalFilter {
 	private static final int[] _MARKER_SCRIPT_CLOSE_NEXTS =
 		KMPSearch.generateNexts(_MARKER_SCRIPT_CLOSE);
 
-	private static final char[] _MARKER_STYLE_OPEN =
-		"style type=\"text/css\">".toCharArray();
+	private static final byte[] _MARKER_STYLE_OPEN =
+		"style type=\"text/css\">".getBytes();
 
-	private static final char[] _MARKER_STYLE_CLOSE = "/style>".toCharArray();
+	private static final byte[] _MARKER_STYLE_CLOSE = "</style>".getBytes();
+
+	private static final int[] _MARKER_STYLE_CLOSE_NEXTS =
+		KMPSearch.generateNexts(_MARKER_STYLE_CLOSE);
 
 	private static final char[] _MARKER_TABLE_CLOSE = "/table>".toCharArray();
 
@@ -472,11 +466,10 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final int _STATE_IGNORE = 1;
 
-	private static final int _STATE_MINIFY_STYLE = 5;
-
 	private static final int _STATE_NORMAL = 0;
 
-	private static final String _STYLE_TYPE_CSS = "<style type=\"text/css\">";
+	private static final byte[] _STYLE_TYPE_CSS =
+		"<style type=\"text/css\">".getBytes();
 
 	private static final String _STRIP = "strip";
 
