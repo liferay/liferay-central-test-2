@@ -68,7 +68,6 @@ public class WorkflowHandlerRegistryUtil {
 	}
 
 	public static void unregister(List<WorkflowHandler> workflowHandlers) {
-
 		for (WorkflowHandler workflowHandler : workflowHandlers) {
 			unregister(workflowHandler);
 		}
