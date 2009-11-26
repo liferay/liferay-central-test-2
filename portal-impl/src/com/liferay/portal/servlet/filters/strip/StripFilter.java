@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.KMPSearch;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -49,11 +50,48 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Shuyang Zhou
  */
 public class StripFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER =
 		StripFilter.class.getName() + "SKIP_FILTER";
+
+	protected int countContinuousWhiteSpace(byte[] oldByteArray, int offset) {
+		int count = 0;
+		for(int i = offset ; i < oldByteArray.length ; i++) {
+			char c = (char) oldByteArray[i];
+			if ((c == CharPool.NEW_LINE) ||
+				(c == CharPool.RETURN) ||
+				(c == CharPool.TAB)) {
+				count++;
+			}
+			else{
+				return count;
+			}
+		}
+		return count;
+	}
+
+	protected boolean hasMarker(byte[] oldByteArray, int pos, byte[] marker) {
+		if ((pos + marker.length) >= oldByteArray.length) {
+			return false;
+		}
+
+		for (int i = 0; i < marker.length; i++) {
+			byte c = marker[i];
+
+			byte oldC = oldByteArray[pos + i + 1];
+
+			if ((c != oldC) &&
+				(Character.toUpperCase(c) != oldC)) {
+
+				return false;
+			}
+		}
+
+		return true;
+	}
 
 	protected boolean hasMarker(byte[] oldByteArray, int pos, char[] marker) {
 		if ((pos + marker.length) >= oldByteArray.length) {
@@ -176,6 +214,47 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
+	protected int processJavaScript(
+			byte[] oldByteArray, ByteArrayOutputStream newBytes,
+			int currentIndex, byte[] openTag)
+		throws IOException {
+
+		int beginIndex = currentIndex + openTag.length + 1;
+		int closeTagIndex =
+			KMPSearch.search(
+				oldByteArray, beginIndex, _MARKER_SCRIPT_CLOSE,
+				_MARKER_SCRIPT_CLOSE_NEXTS);
+
+		if (closeTagIndex == -1) {
+			_log.error("Missing </script>");
+			return currentIndex + 1;
+		}
+
+		int newBeginIndex = closeTagIndex + _MARKER_SCRIPT_CLOSE.length;
+		newBeginIndex += countContinuousWhiteSpace(oldByteArray, newBeginIndex);
+
+		String scriptContent =
+			new String(oldByteArray, beginIndex, closeTagIndex - beginIndex);
+
+		if (Validator.isNull(scriptContent)) {
+			return newBeginIndex;
+		}
+
+		scriptContent = MinifierUtil.minifyJavaScript(scriptContent);
+
+		if (Validator.isNull(scriptContent)) {
+			return newBeginIndex;
+		}
+
+		newBytes.write(_SCRIPT_TYPE_JAVASCRIPT);
+		newBytes.write(_CDATA_OPEN);
+		newBytes.write(scriptContent.getBytes());
+		newBytes.write(_CDATA_CLOSE);
+		newBytes.write(_MARKER_SCRIPT_CLOSE);
+
+		return newBeginIndex;
+	}
+
 	protected byte[] strip(byte[] oldByteArray) throws IOException {
 		ByteArrayOutputStream newBytes = new ByteArrayOutputStream(
 			oldByteArray.length);
@@ -184,7 +263,6 @@ public class StripFilter extends BasePortalFilter {
 
 		boolean removeStartingWhitespace = true;
 
-		ByteArrayOutputStream scriptBytes = new ByteArrayOutputStream();
 		ByteArrayOutputStream styleBytes = new ByteArrayOutputStream();
 
 		for (int i = 0; i < oldByteArray.length; i++) {
@@ -214,10 +292,18 @@ public class StripFilter extends BasePortalFilter {
 						state = _STATE_FOUND_ELEMENT;
 					}
 					else if (hasMarker(
-								oldByteArray, i, _MARKER_JAVASCRIPT_OPEN) ||
-							 hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN)) {
+								oldByteArray, i, _MARKER_JAVASCRIPT_OPEN)) {
+						i = processJavaScript(oldByteArray, newBytes, i,
+							_MARKER_JAVASCRIPT_OPEN) - 1;
+						state = _STATE_NORMAL;
+						continue;
+					}
+					else if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN)) {
 
-						state = _STATE_MINIFY_SCRIPT;
+						i = processJavaScript(oldByteArray, newBytes, i,
+							_MARKER_SCRIPT_OPEN) - 1;
+						state = _STATE_NORMAL;
+						continue;
 					}
 					else if (hasMarker(oldByteArray, i, _MARKER_STYLE_OPEN)) {
 						state = _STATE_MINIFY_STYLE;
@@ -228,46 +314,6 @@ public class StripFilter extends BasePortalFilter {
 						hasMarker(oldByteArray, i, _MARKER_TEXTAREA_CLOSE)) {
 
 						state = _STATE_NORMAL;
-					}
-				}
-				else if (state == _STATE_MINIFY_SCRIPT) {
-					if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_CLOSE)) {
-						state = _STATE_NORMAL;
-
-						String scriptContent = scriptBytes.toString(
-							StringPool.UTF8);
-
-						scriptBytes = new ByteArrayOutputStream();
-
-						int pos = scriptContent.indexOf(CharPool.GREATER_THAN);
-
-						scriptContent = scriptContent.substring(pos + 1).trim();
-
-						if (Validator.isNull(scriptContent)) {
-							i += _MARKER_SCRIPT_CLOSE.length;
-
-							continue;
-						}
-
-						scriptContent = MinifierUtil.minifyJavaScript(
-							scriptContent);
-
-						if (Validator.isNull(scriptContent)) {
-							i += _MARKER_SCRIPT_CLOSE.length;
-
-							continue;
-						}
-
-						scriptContent =
-							_SCRIPT_TYPE_JAVASCRIPT + _CDATA_OPEN +
-								scriptContent + _CDATA_CLOSE;
-
-						byte[] scriptContentBytes = scriptContent.getBytes(
-							StringPool.UTF8);
-
-						newBytes.write(scriptContentBytes);
-
-						state = _STATE_FOUND_ELEMENT;
 					}
 				}
 				else if (state == _STATE_MINIFY_STYLE) {
@@ -355,10 +401,7 @@ public class StripFilter extends BasePortalFilter {
 				}
 			}
 
-			if (state == _STATE_MINIFY_SCRIPT) {
-				scriptBytes.write(b);
-			}
-			else if (state == _STATE_MINIFY_STYLE) {
+			if (state == _STATE_MINIFY_STYLE) {
 				styleBytes.write(b);
 			}
 			else {
@@ -368,26 +411,23 @@ public class StripFilter extends BasePortalFilter {
 
 		byte[] newByteArray = newBytes.toByteArray();
 
-		if (state == _STATE_MINIFY_SCRIPT) {
-			_log.error("Missing </script>");
-		}
-		else if (state == _STATE_MINIFY_STYLE) {
+		if (state == _STATE_MINIFY_STYLE) {
 			_log.error("Missing </style>");
 		}
 
 		return newByteArray;
 	}
 
-	private static final String _CDATA_CLOSE = "/*]]>*/";
+	private static final byte[] _CDATA_CLOSE = "/*]]>*/".getBytes();
 
-	private static final String _CDATA_OPEN = "/*<![CDATA[*/";
+	private static final byte[] _CDATA_OPEN = "/*<![CDATA[*/".getBytes();
 
 	private static final char[] _MARKER_DIV_CLOSE = "/div>".toCharArray();
 
 	private static final char[] _MARKER_FORM_CLOSE = "/form>".toCharArray();
 
-	private static final char[] _MARKER_JAVASCRIPT_OPEN =
-		"script type=\"text/javascript\">".toCharArray();
+	private static final byte[] _MARKER_JAVASCRIPT_OPEN =
+		"script type=\"text/javascript\">".getBytes();
 
 	private static final char[] _MARKER_LI_CLOSE = "/li>".toCharArray();
 
@@ -395,9 +435,12 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final char[] _MARKER_PRE_OPEN = "pre>".toCharArray();
 
-	private static final char[] _MARKER_SCRIPT_OPEN = "script>".toCharArray();
+	private static final byte[] _MARKER_SCRIPT_OPEN = "script>".getBytes();
 
-	private static final char[] _MARKER_SCRIPT_CLOSE = "/script>".toCharArray();
+	private static final byte[] _MARKER_SCRIPT_CLOSE = "</script>".getBytes();
+
+	private static final int[] _MARKER_SCRIPT_CLOSE_NEXTS =
+		KMPSearch.generateNexts(_MARKER_SCRIPT_CLOSE);
 
 	private static final char[] _MARKER_STYLE_OPEN =
 		"style type=\"text/css\">".toCharArray();
@@ -422,14 +465,12 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final char[] _MARKER_UL_CLOSE = "/ul>".toCharArray();
 
-	private static final String _SCRIPT_TYPE_JAVASCRIPT =
-		"<script type=\"text/javascript\">";
+	private static final byte[] _SCRIPT_TYPE_JAVASCRIPT =
+		"<script type=\"text/javascript\">".getBytes();
 
 	private static final int _STATE_FOUND_ELEMENT = 3;
 
 	private static final int _STATE_IGNORE = 1;
-
-	private static final int _STATE_MINIFY_SCRIPT = 4;
 
 	private static final int _STATE_MINIFY_STYLE = 5;
 
