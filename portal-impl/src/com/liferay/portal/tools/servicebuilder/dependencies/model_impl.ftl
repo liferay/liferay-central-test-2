@@ -134,19 +134,19 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	<#list entity.columnList as column>
 		<#if column.mappingTable??>
-			public static final boolean FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)} =
-
 			<#assign entityShortName = stringUtil.shorten(entity.name, 10, "")>
 
 			<#if stringUtil.startsWith(column.mappingTable, entityShortName)>
-				GetterUtil.getBoolean(${propsUtil}.get("value.object.finder.cache.enabled.${column.mappingTable}"), true)
+				public static final String TABLE_${stringUtil.upperCase(column.mappingTable)} = "${column.mappingTable}";
+
+				public static final boolean FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)} = GetterUtil.getBoolean(${propsUtil}.get("value.object.finder.cache.enabled.${column.mappingTable}"), true);
 			<#else>
 				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
-				${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
-			</#if>
+				public static final String TABLE_${stringUtil.upperCase(column.mappingTable)} = ${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)};
 
-			;
+				public static final boolean FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)} = ${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)};
+			</#if>
 		</#if>
 	</#list>
 

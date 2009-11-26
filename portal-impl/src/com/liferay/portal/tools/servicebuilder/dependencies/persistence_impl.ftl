@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -300,7 +301,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					throw processException(e);
 				}
 				finally {
-					FinderCacheUtil.clearCache("${column.mappingTable}");
+					FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 				}
 			</#if>
 		</#list>
@@ -651,9 +652,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBuilder query = new StringBuilder();
+						StringBundler query = new StringBundler();
 
-						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
+						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
@@ -719,13 +720,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								query.append(" AND ");
 							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
 								query.append(" AND ${finder.where} ");
-							<#else>
-								query.append(" ");
 							</#if>
 						</#list>
 
 						<#if entity.getOrder()??>
-							query.append("ORDER BY ");
+							query.append(" ORDER BY ");
 
 							<#assign orderList = entity.getOrder().getColumns()>
 
@@ -840,9 +839,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBuilder query = new StringBuilder();
+						StringBundler query = new StringBundler();
 
-						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
+						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
@@ -908,13 +907,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								query.append(" AND ");
 							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
 								query.append(" AND ${finder.where} ");
-							<#else>
-								query.append(" ");
 							</#if>
 						</#list>
 
 						if (obc != null) {
-							query.append("ORDER BY ");
+							query.append(" ORDER BY ");
 
 							String[] orderByFields = obc.getOrderByFields();
 
@@ -937,7 +934,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						<#if entity.getOrder()??>
 							else {
-								query.append("ORDER BY ");
+								query.append(" ORDER BY ");
 
 								<#assign orderList = entity.getOrder().getColumns()>
 
@@ -1016,7 +1013,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				0, 1, obc);
 
 				if (list.isEmpty()) {
-					StringBuilder msg = new StringBuilder();
+					StringBundler msg = new StringBundler();
 
 					msg.append("No ${entity.name} exists with the key {");
 
@@ -1065,7 +1062,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				count - 1, count, obc);
 
 				if (list.isEmpty()) {
-					StringBuilder msg = new StringBuilder();
+					StringBundler msg = new StringBundler();
 
 					msg.append("No ${entity.name} exists with the key {");
 
@@ -1112,9 +1109,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				try {
 					session = openSession();
 
-					StringBuilder query = new StringBuilder();
+					StringBundler query = new StringBundler();
 
-					query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
+					query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 					<#list finderColsList as finderCol>
 						<#if !finderCol.isPrimitiveType()>
@@ -1180,13 +1177,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							query.append(" AND ");
 						<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
 							query.append(" AND ${finder.where} ");
-						<#else>
-							query.append(" ");
 						</#if>
 					</#list>
 
 					if (obc != null) {
-						query.append("ORDER BY ");
+						query.append(" ORDER BY ");
 
 						String[] orderByFields = obc.getOrderByFields();
 
@@ -1209,7 +1204,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					<#if entity.getOrder()??>
 						else {
-							query.append("ORDER BY ");
+							query.append(" ORDER BY ");
 
 							<#assign orderList = entity.getOrder().getColumns()>
 
@@ -1294,7 +1289,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				);
 
 				if ( ${entity.varName} == null) {
-					StringBuilder msg = new StringBuilder();
+					StringBundler msg = new StringBundler();
 
 					msg.append("No ${entity.name} exists with the key {");
 
@@ -1381,9 +1376,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBuilder query = new StringBuilder();
+						StringBundler query = new StringBundler();
 
-						query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ");
+						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
@@ -1450,13 +1445,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								query.append(" AND ");
 							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
 								query.append(" AND ${finder.where} ");
-							<#else>
-								query.append(" ");
 							</#if>
 						</#list>
 
 						<#if entity.getOrder()??>
-							query.append("ORDER BY ");
+							query.append(" ORDER BY ");
 
 							<#assign orderList = entity.getOrder().getColumns()>
 
@@ -1613,12 +1606,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} ");
+				query.append(_SQL_SELECT_${entity.alias?upper_case});
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1641,7 +1634,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				<#if entity.getOrder()??>
 					else {
-						query.append("ORDER BY ");
+						query.append(" ORDER BY ");
 
 						<#assign orderList = entity.getOrder().getColumns()>
 
@@ -1789,10 +1782,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				try {
 					session = openSession();
 
-					StringBuilder query = new StringBuilder();
+					StringBundler query = new StringBundler();
 
-					query.append("SELECT COUNT(${entity.alias}) ");
-					query.append("FROM ${entity.name} ${entity.alias} WHERE ");
+					query.append(_SQL_COUNT_${entity.alias?upper_case}_WHERE);
 
 					<#list finderColsList as finderCol>
 						<#if !finderCol.isPrimitiveType()>
@@ -1858,8 +1850,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							query.append(" AND ");
 						<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
 							query.append(" AND ${finder.where} ");
-						<#else>
-							query.append(" ");
 						</#if>
 					</#list>
 
@@ -1922,7 +1912,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			try {
 				session = openSession();
 
-				Query q = session.createQuery("SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias}");
+				Query q = session.createQuery(_SQL_COUNT_${entity.alias?upper_case});
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1965,7 +1955,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#if>
 
 				<#if column.mappingTable??>
-					"${column.mappingTable}",
+					${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)},
 				<#else>
 					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
 				</#if>
@@ -2008,18 +1998,18 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBuilder sb = new StringBuilder();
+						StringBundler sb = new StringBundler();
 
 						sb.append(_SQL_GET${tempEntity.names?upper_case});
 
 						if (obc != null) {
-							sb.append("ORDER BY ");
+							sb.append(" ORDER BY ");
 							sb.append(obc.getOrderBy());
 						}
 
 						<#if tempEntity.getOrder()??>
 							else {
-								sb.append("ORDER BY ");
+								sb.append(" ORDER BY ");
 
 								<#assign orderList = tempEntity.getOrder().getColumns()>
 
@@ -2070,7 +2060,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#if>
 
 				<#if column.mappingTable??>
-					"${column.mappingTable}",
+					${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)},
 				<#else>
 					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
 				</#if>
@@ -2148,7 +2138,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#if>
 
 				<#if column.mappingTable??>
-					"${column.mappingTable}",
+					${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)},
 				<#else>
 					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
 				</#if>
@@ -2244,7 +2234,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2256,7 +2246,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2270,7 +2260,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2284,7 +2274,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2296,7 +2286,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2308,7 +2298,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2320,7 +2310,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2334,7 +2324,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2348,7 +2338,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2375,7 +2365,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 
@@ -2395,7 +2385,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						throw processException(e);
 					}
 					finally {
-						FinderCacheUtil.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache(${entity.name}ModelImpl.TABLE_${stringUtil.upperCase(column.mappingTable)});
 					}
 				}
 			</#if>
@@ -2861,6 +2851,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		}
 	</#if>
+
+	private static final String _SQL_SELECT_${entity.alias?upper_case} = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias}";
+
+	private static final String _SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ";
+
+	private static final String _SQL_COUNT_${entity.alias?upper_case} = "SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias}";
+
+	private static final String _SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias} WHERE ";
 
 	<#list entity.columnList as column>
 		<#if column.isCollection()>
