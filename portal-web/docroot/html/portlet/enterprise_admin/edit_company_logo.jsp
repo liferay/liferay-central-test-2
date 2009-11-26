@@ -40,7 +40,7 @@
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" />
 		</portlet:actionURL>
 
-		<aui:form action="<%= editCompanyLogoURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit="submitForm(this); return false;">
+		<aui:form action="<%= editCompanyLogoURL %>" enctype="multipart/form-data" method="post" name="fm">
 			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
 			<aui:fieldset>

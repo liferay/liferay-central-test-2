@@ -67,7 +67,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 		</liferay-portlet:renderURL>
 
 		<div class="folder-search">
-			<aui:form action="<%= searchURL %>" method="get" name="searchFm" onSubmit="submitForm(this); return false;">
+			<aui:form action="<%= searchURL %>" method="get" name="searchFm">
 				<liferay-portlet:renderURLParams varImpl="searchURL" />
 				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 				<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />

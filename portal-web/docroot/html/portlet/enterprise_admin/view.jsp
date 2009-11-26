@@ -219,7 +219,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	}
 </script>
 
-<aui:form action="<%= portletURLString %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+<aui:form action="<%= portletURLString %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />

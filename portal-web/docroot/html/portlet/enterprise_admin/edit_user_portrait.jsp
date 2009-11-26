@@ -44,7 +44,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" />
 		</portlet:actionURL>
 
-		<aui:form action="<%= editUserPortraitURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit="submitForm(this); return false;">
+		<aui:form action="<%= editUserPortraitURL %>" enctype="multipart/form-data" method="post" name="fm">
 			<aui:input name="p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
 
 			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />

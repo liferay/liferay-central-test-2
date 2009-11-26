@@ -192,7 +192,11 @@ String curSection = mainSections[0];
 	</liferay-util:include>
 </c:if>
 
-<aui:form method="post" name="fm">
+<%
+String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser == null) ? Constants.ADD : Constants.UPDATE) + "');";
+%>
+
+<aui:form method="post" name="fm" onSubmit="<%= taglibOnSubmit %>">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
@@ -263,12 +267,7 @@ String curSection = mainSections[0];
 					<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
 
 					<aui:button-row>
-
-						<%
-						String taglibOnClick = renderResponse.getNamespace() + "saveUser('" + ((selUser == null) ? Constants.ADD : Constants.UPDATE) + "');";
-						%>
-
-						<aui:button onClick="<%= taglibOnClick %>" value="save" />
+						<aui:button type="submit" value="save" />
 
 						<aui:button onClick="<%= backURL %>" value="cancel" />
 					</aui:button-row>

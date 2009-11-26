@@ -67,19 +67,24 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 %>
 
-<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+<script type="text/javascript">
+	function <portlet:namespace />publish() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-this-portlet") %>')) {
+			submitForm(document.<portlet:namespace />fm);
+		}
+	}
+</script>
+
+if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-this-portlet") %>')) { submitForm(document.<portlet:namespace />fm
+
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "publish(); return false;" %>'>
 	<aui:input name="pagesRedirect" type="hidden" value="<%= pagesRedirect %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 
 	<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
 
 	<aui:button-row>
-
-		<%
-		String taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-this-portlet") + "')) { submitForm(document." + renderResponse.getNamespace() + "fm); }'";
-		%>
-
-		<aui:button name="publishBtn" onClick="<%= taglibOnClick %>" value="publish" />
+		<aui:button name="publishBtn" type="submit" value="publish" />
 
 		<aui:button onClick="AUI().DialogManager.closeByChild(this);" value="cancel" />
 	</aui:button-row>

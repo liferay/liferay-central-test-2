@@ -56,7 +56,7 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" />
 		</portlet:actionURL>
 
-		<aui:form action="<%= editOrganizationLogoURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit="submitForm(this); return false;">
+		<aui:form action="<%= editOrganizationLogoURL %>" enctype="multipart/form-data" method="post" name="fm">
 			<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 			<aui:input name="publicLayoutSetId" type="hidden" value="<%= publicLayoutSetId %>" />
 

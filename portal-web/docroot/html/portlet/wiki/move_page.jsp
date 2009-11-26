@@ -59,7 +59,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 	<portlet:param name="struts_action" value="/wiki/move_page" />
 </portlet:actionURL>
 
-<aui:form action="<%= movePageURL %>" method="post" name="fm">
+<aui:form action="<%= movePageURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "changeParent();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
@@ -167,16 +167,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 				%>
 
 				<aui:button-row>
-
-					<%
-					if (newParentAvailable) {
-					%>
-
-						<aui:button name="changeParentButton" onClick='<%= renderResponse.getNamespace() + "changeParent();" %>' value="change-parent" />
-
-					<%
-					}
-					%>
+					<aui:button disabled="<%= !newParentAvailable %>" name="changeParentButton" type="submit" value="change-parent" />
 
 					<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
 				</aui:button-row>

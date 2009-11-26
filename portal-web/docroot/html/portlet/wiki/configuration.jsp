@@ -68,7 +68,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 	}
 	%>
 
-	function <portlet:namespace />save() {
+	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.equals("display-settings") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
 			document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
@@ -80,7 +80,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "save(); return false;" %>'>
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveConfiguration(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />

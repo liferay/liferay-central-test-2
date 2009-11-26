@@ -46,17 +46,11 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 }
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />savePlugin() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-</script>
-
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPluginURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_plugin" />
 </portlet:actionURL>
 
-<aui:form action="<%= editPluginURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "savePlugin(); return false;" %>'>
+<aui:form action="<%= editPluginURL %>" method="post" name="fm">
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="pluginId" type="hidden" value="<%= pluginId %>" />
 	<aui:input name="pluginType" type="hidden" value="<%= pluginType %>" />

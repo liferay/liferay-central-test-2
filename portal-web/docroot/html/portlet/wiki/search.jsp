@@ -49,7 +49,7 @@ boolean createNewPage = true;
 	<portlet:param name="struts_action" value="/wiki/search" />
 </liferay-portlet:renderURL>
 
-<aui:form action="<%= searchURL %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+<aui:form action="<%= searchURL %>" method="get" name="fm">
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 

@@ -38,7 +38,7 @@ portletURL.setParameter("struts_action", "/layout_prototypes/view");
 	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
 
-<aui:form action="<%= portletURL.toString() %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+<aui:form action="<%= portletURL.toString() %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
