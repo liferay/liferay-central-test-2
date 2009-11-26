@@ -64,6 +64,7 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 				_escapeXml = true;
 				_inlineLabel = false;
 				_name = "fm";
+				_onSubmit = null;
 				_startPage = null;
 			}
 		}
@@ -85,6 +86,7 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 			request.setAttribute(
 				"aui:form:inlineLabel", String.valueOf(_inlineLabel));
 			request.setAttribute("aui:form:name", _name);
+			request.setAttribute("aui:form:onSubmit", _onSubmit);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -149,6 +151,10 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 		_name = name;
 	}
 
+	public void setOnSubmit(String onSubmit) {
+		_onSubmit = onSubmit;
+	}
+
 	public void setStartPage(String startPage) {
 		_startPage = startPage;
 	}
@@ -165,6 +171,7 @@ public class FormTag extends TagSupport implements DynamicAttributes {
 	private boolean _escapeXml = true;
 	private boolean _inlineLabel;
 	private String _name = "fm";
+	private String _onSubmit;
 	private String _startPage;
 
 }

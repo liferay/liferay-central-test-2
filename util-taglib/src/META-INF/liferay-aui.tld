@@ -245,6 +245,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>onSubmit</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>startPage</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
