@@ -49,7 +49,7 @@ type = ParamUtil.getString(request, "type", type);
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
 <script type="text/javascript">
-	function <portlet:namespace />save() {
+	function <portlet:namespace />saveConfiguration() {
 		AUI().use(
 			'io',
 			function(A) {
@@ -139,7 +139,7 @@ type = ParamUtil.getString(request, "type", type);
 						}
 						%>
 
-						<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />radioTemplateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" onClick="document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = this.value; <portlet:namespace />save();">
+						<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />radioTemplateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" onClick="document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = this.value; <portlet:namespace />saveConfiguration();">
 
 						<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.JOURNAL %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></liferay-portlet:renderURL>">
 						<%= HtmlUtil.escape(tableIteratorObj.getName()) %>
@@ -168,7 +168,7 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:message key="show-available-locales" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+			<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
 		</td>
 	</tr>
 	<tr>
@@ -188,7 +188,7 @@ type = ParamUtil.getString(request, "type", type);
 				%>
 
 					<td>
-						<input <%= ArrayUtil.contains(extensions, conversion) ? "checked": "" %> <%= !openOfficeServerEnabled ? "disabled" : "" %> name="<portlet:namespace />extensions" type="checkbox" value="<%= conversion %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+						<input <%= ArrayUtil.contains(extensions, conversion) ? "checked": "" %> <%= !openOfficeServerEnabled ? "disabled" : "" %> name="<portlet:namespace />extensions" type="checkbox" value="<%= conversion %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
 					</td>
 					<td>
 						<%= conversion.toUpperCase() %>
@@ -207,7 +207,7 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:message key="enable-print" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param="enablePrint" defaultValue="<%= enablePrint %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+			<liferay-ui:input-checkbox param="enablePrint" defaultValue="<%= enablePrint %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
 		</td>
 	</tr>
 	<tr>
@@ -215,7 +215,7 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:message key="enable-ratings" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
 		</td>
 	</tr>
 
@@ -225,7 +225,7 @@ type = ParamUtil.getString(request, "type", type);
 				<liferay-ui:message key="enable-comments" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
 			</td>
 		</tr>
 		<tr>
@@ -233,7 +233,7 @@ type = ParamUtil.getString(request, "type", type);
 				<liferay-ui:message key="enable-comment-ratings" />
 			</td>
 			<td>
-				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" onClick='<%= renderResponse.getNamespace() + "saveConfiguration();" %>' />
 			</td>
 		</tr>
 	</c:if>

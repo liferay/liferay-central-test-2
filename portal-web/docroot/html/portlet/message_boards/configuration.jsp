@@ -68,7 +68,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 	}
 	%>
 
-	function <portlet:namespace />save() {
+	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.equals("user-ranks") || tabs2.equals("thread-priorities") %>'>
 			<portlet:namespace />updateLanguage();
 		</c:if>
@@ -77,7 +77,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />save(); return false;">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />

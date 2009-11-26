@@ -51,7 +51,7 @@ if (Validator.isNotNull(structureId)) {
 		submitForm(document.<portlet:namespace />fm1);
 	}
 
-	function <portlet:namespace />save() {
+	function <portlet:namespace />saveConfiguration() {
 		AUI().use(
 			'io',
 			function(A) {
@@ -120,7 +120,7 @@ if (Validator.isNotNull(structureId)) {
 		<liferay-ui:message key="web-content-type" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />type" onChange="<portlet:namespace />save();">
+		<select name="<portlet:namespace />type" onChange="<portlet:namespace />saveConfiguration();">
 			<option value=""></option>
 
 			<%
@@ -141,7 +141,7 @@ if (Validator.isNotNull(structureId)) {
 		<liferay-ui:message key="display-url" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />pageURL" onChange="<portlet:namespace />save();">
+		<select name="<portlet:namespace />pageURL" onChange="<portlet:namespace />saveConfiguration();">
 			<option <%= pageURL.equals("maximized") ? "selected" : "" %> value="maximized"><liferay-ui:message key="maximized" /></option>
 			<option <%= pageURL.equals("normal") ? "selected" : "" %> value="normal"><liferay-ui:message key="normal" /></option>
 			<option <%= pageURL.equals("popUp") ? "selected" : "" %> value="popUp"><liferay-ui:message key="pop-up" /></option>
@@ -153,7 +153,7 @@ if (Validator.isNotNull(structureId)) {
 		<liferay-ui:message key="display-per-page" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />pageDelta" onChange="<portlet:namespace />save();">
+		<select name="<portlet:namespace />pageDelta" onChange="<portlet:namespace />saveConfiguration();">
 
 			<%
 			String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
@@ -175,7 +175,7 @@ if (Validator.isNotNull(structureId)) {
 		<liferay-ui:message key="order-by-column" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />orderByCol" onChange="<portlet:namespace />save();">
+		<select name="<portlet:namespace />orderByCol" onChange="<portlet:namespace />saveConfiguration();">
 			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><liferay-ui:message key="display-date" /></option>
 			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><liferay-ui:message key="create-date" /></option>
 			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><liferay-ui:message key="modified-date" /></option>
@@ -189,7 +189,7 @@ if (Validator.isNotNull(structureId)) {
 		<liferay-ui:message key="order-by-type" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />orderByType" onChange="<portlet:namespace />save();">
+		<select name="<portlet:namespace />orderByType" onChange="<portlet:namespace />saveConfiguration();">
 			<option <%= orderByType.equals("asc") ? "selected" : "" %> value="asc"><liferay-ui:message key="ascending" /></option>
 			<option <%= orderByType.equals("desc") ? "selected" : "" %> value="desc"><liferay-ui:message key="descending" /></option>
 		</select>
