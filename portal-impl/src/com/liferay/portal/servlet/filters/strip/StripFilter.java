@@ -292,6 +292,58 @@ public class StripFilter extends BasePortalFilter {
 		return newBeginIndex;
 	}
 
+	protected int processPre(
+			byte[] oldByteArray, ByteArrayOutputStream newBytes,
+			int currentIndex)
+		throws IOException {
+
+		int beginIndex = currentIndex + _MARKER_PRE_OPEN.length + 1;
+		int closeTagIndex =
+			KMPSearch.search(
+				oldByteArray, beginIndex, _MARKER_PRE_CLOSE,
+				_MARKER_PRE_CLOSE_NEXTS);
+
+		if (closeTagIndex == -1) {
+			_log.error("Missing </pre>");
+			return currentIndex + 1;
+		}
+
+		newBytes.write("<pre>".getBytes());
+		newBytes.write(oldByteArray, beginIndex, closeTagIndex - beginIndex);
+		newBytes.write(_MARKER_PRE_CLOSE);
+
+		int newBeginIndex = closeTagIndex + _MARKER_PRE_CLOSE.length;
+		newBeginIndex += countContinuousWhiteSpace(oldByteArray, newBeginIndex);
+
+		return newBeginIndex;
+	}
+
+	protected int processTextArea(
+			byte[] oldByteArray, ByteArrayOutputStream newBytes,
+			int currentIndex)
+		throws IOException {
+
+		int beginIndex = currentIndex + _MARKER_TEXTAREA_OPEN.length + 1;
+		int closeTagIndex =
+			KMPSearch.search(
+				oldByteArray, beginIndex, _MARKER_TEXTAREA_CLOSE,
+				_MARKER_TEXTAREA_CLOSE_NEXTS);
+
+		if (closeTagIndex == -1) {
+			_log.error("Missing </textArea>");
+			return currentIndex + 1;
+		}
+
+		newBytes.write("<textarea ".getBytes());
+		newBytes.write(oldByteArray, beginIndex, closeTagIndex - beginIndex);
+		newBytes.write(_MARKER_TEXTAREA_CLOSE);
+
+		int newBeginIndex = closeTagIndex + _MARKER_TEXTAREA_CLOSE.length;
+		newBeginIndex += countContinuousWhiteSpace(oldByteArray, newBeginIndex);
+
+		return newBeginIndex;
+	}
+
 	protected byte[] strip(byte[] oldByteArray) throws IOException {
 		ByteArrayOutputStream newBytes = new ByteArrayOutputStream(
 			oldByteArray.length);
@@ -307,10 +359,18 @@ public class StripFilter extends BasePortalFilter {
 
 			if (c == CharPool.LESS_THAN) {
 				if (state == _STATE_NORMAL) {
-					if (hasMarker(oldByteArray, i, _MARKER_PRE_OPEN) ||
-						hasMarker(oldByteArray, i, _MARKER_TEXTAREA_OPEN)) {
+					if (hasMarker(oldByteArray, i, _MARKER_PRE_OPEN)) {
 
-						state = _STATE_IGNORE;
+						i = processPre(oldByteArray, newBytes, i) - 1;
+						state = _STATE_NORMAL;
+						continue;
+					}
+					else if (hasMarker(
+						oldByteArray, i, _MARKER_TEXTAREA_OPEN)) {
+
+						i = processTextArea(oldByteArray, newBytes, i) - 1;
+						state = _STATE_NORMAL;
+						continue;
 					}
 					else if (hasMarker(oldByteArray, i, _MARKER_DIV_CLOSE) ||
 							 hasMarker(oldByteArray, i, _MARKER_FORM_CLOSE) ||
@@ -345,13 +405,6 @@ public class StripFilter extends BasePortalFilter {
 						i = processCSS(oldByteArray, newBytes, i) - 1;
 						state = _STATE_NORMAL;
 						continue;
-					}
-				}
-				else if (state == _STATE_IGNORE) {
-					if (hasMarker(oldByteArray, i, _MARKER_PRE_CLOSE) ||
-						hasMarker(oldByteArray, i, _MARKER_TEXTAREA_CLOSE)) {
-
-						state = _STATE_NORMAL;
 					}
 				}
 			}
@@ -422,9 +475,12 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final char[] _MARKER_LI_CLOSE = "/li>".toCharArray();
 
-	private static final char[] _MARKER_PRE_CLOSE = "/pre>".toCharArray();
+	private static final byte[] _MARKER_PRE_CLOSE = "</pre>".getBytes();
 
-	private static final char[] _MARKER_PRE_OPEN = "pre>".toCharArray();
+	private static final int[] _MARKER_PRE_CLOSE_NEXTS =
+		KMPSearch.generateNexts(_MARKER_PRE_CLOSE);
+
+	private static final byte[] _MARKER_PRE_OPEN = "pre>".getBytes();
 
 	private static final byte[] _MARKER_SCRIPT_OPEN = "script>".getBytes();
 
@@ -451,11 +507,14 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final char[] _MARKER_TR_OPEN = "tr>".toCharArray();
 
-	private static final char[] _MARKER_TEXTAREA_CLOSE =
-		"/textarea>".toCharArray();
+	private static final byte[] _MARKER_TEXTAREA_CLOSE =
+		"</textarea>".getBytes();
 
-	private static final char[] _MARKER_TEXTAREA_OPEN =
-		"textarea ".toCharArray();
+	private static final int[] _MARKER_TEXTAREA_CLOSE_NEXTS =
+		KMPSearch.generateNexts(_MARKER_TEXTAREA_CLOSE);
+
+	private static final byte[] _MARKER_TEXTAREA_OPEN =
+		"textarea ".getBytes();
 
 	private static final char[] _MARKER_UL_CLOSE = "/ul>".toCharArray();
 
@@ -463,8 +522,6 @@ public class StripFilter extends BasePortalFilter {
 		"<script type=\"text/javascript\">".getBytes();
 
 	private static final int _STATE_FOUND_ELEMENT = 3;
-
-	private static final int _STATE_IGNORE = 1;
 
 	private static final int _STATE_NORMAL = 0;
 
