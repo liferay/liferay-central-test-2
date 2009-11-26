@@ -31,7 +31,7 @@ String action = GetterUtil.getString((String)request.getAttribute("aui:form:acti
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:form:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:form:dynamicAttributes");
 boolean inlineLabels = GetterUtil.getBoolean((String)request.getAttribute("aui:form:inlineLabels"));
-String name = randomNamespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
+String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
 String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:onSubmit"));
 %>
 
