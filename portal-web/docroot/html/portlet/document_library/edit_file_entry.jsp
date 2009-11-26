@@ -306,9 +306,7 @@ portletURL.setParameter("name", name);
 		</c:if>
 
 		<aui:button-row>
-			<c:if test="<%= !(isLocked.booleanValue() && !hasLock.booleanValue()) %>">
-				<aui:button type="submit" value="save" />
-			</c:if>
+			<aui:button disabled="<%= !(isLocked.booleanValue() && !hasLock.booleanValue()) %>" type="submit" value="save" />
 
 			<c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
 				<c:choose>
