@@ -62,7 +62,8 @@ public class StripFilter extends BasePortalFilter {
 			char c = (char) oldByteArray[i];
 			if ((c == CharPool.NEW_LINE) ||
 				(c == CharPool.RETURN) ||
-				(c == CharPool.TAB)) {
+				(c == CharPool.TAB) ||
+				Character.isWhitespace(c)) {
 				count++;
 			}
 			else{
@@ -348,8 +349,6 @@ public class StripFilter extends BasePortalFilter {
 		ByteArrayOutputStream newBytes = new ByteArrayOutputStream(
 			oldByteArray.length);
 
-		int state = _STATE_NORMAL;
-
 		boolean removeStartingWhitespace = true;
 
 		for (int i = 0; i < oldByteArray.length; i++) {
@@ -358,100 +357,61 @@ public class StripFilter extends BasePortalFilter {
 			char c = (char)b;
 
 			if (c == CharPool.LESS_THAN) {
-				if (state == _STATE_NORMAL) {
-					if (hasMarker(oldByteArray, i, _MARKER_PRE_OPEN)) {
+				if (hasMarker(oldByteArray, i, _MARKER_PRE_OPEN)) {
 
-						i = processPre(oldByteArray, newBytes, i) - 1;
-						state = _STATE_NORMAL;
-						continue;
-					}
-					else if (hasMarker(
-						oldByteArray, i, _MARKER_TEXTAREA_OPEN)) {
-
-						i = processTextArea(oldByteArray, newBytes, i) - 1;
-						state = _STATE_NORMAL;
-						continue;
-					}
-					else if (hasMarker(oldByteArray, i, _MARKER_DIV_CLOSE) ||
-							 hasMarker(oldByteArray, i, _MARKER_FORM_CLOSE) ||
-							 hasMarker(oldByteArray, i, _MARKER_LI_CLOSE) ||
-							 hasMarker(oldByteArray, i, _MARKER_SCRIPT_CLOSE) ||
-							 hasMarker(oldByteArray, i, _MARKER_STYLE_CLOSE) ||
-							 hasMarker(oldByteArray, i, _MARKER_TABLE_CLOSE) ||
-							 hasMarker(oldByteArray, i, _MARKER_TD_CLOSE) ||
-							 hasMarker(oldByteArray, i, _MARKER_TD_OPEN) ||
-							 hasMarker(oldByteArray, i, _MARKER_TR_CLOSE) ||
-							 hasMarker(oldByteArray, i, _MARKER_TR_OPEN) ||
-							 hasMarker(oldByteArray, i, _MARKER_UL_CLOSE)) {
-
-						state = _STATE_FOUND_ELEMENT;
-					}
-					else if (hasMarker(
-								oldByteArray, i, _MARKER_JAVASCRIPT_OPEN)) {
-						i = processJavaScript(oldByteArray, newBytes, i,
-							_MARKER_JAVASCRIPT_OPEN) - 1;
-						state = _STATE_NORMAL;
-						continue;
-					}
-					else if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN)) {
-
-						i = processJavaScript(oldByteArray, newBytes, i,
-							_MARKER_SCRIPT_OPEN) - 1;
-						state = _STATE_NORMAL;
-						continue;
-					}
-					else if (hasMarker(oldByteArray, i, _MARKER_STYLE_OPEN)) {
-
-						i = processCSS(oldByteArray, newBytes, i) - 1;
-						state = _STATE_NORMAL;
-						continue;
-					}
+					i = processPre(oldByteArray, newBytes, i) - 1;
+					continue;
 				}
-			}
-			else if (c == CharPool.GREATER_THAN) {
-				if (state == _STATE_FOUND_ELEMENT) {
-					state = _STATE_NORMAL;
+				else if (hasMarker(oldByteArray, i, _MARKER_TEXTAREA_OPEN)) {
 
-					newBytes.write(b);
+					i = processTextArea(oldByteArray, newBytes, i) - 1;
+					continue;
+				}
+				else if (hasMarker(oldByteArray, i, _MARKER_JAVASCRIPT_OPEN)) {
+					i = processJavaScript(oldByteArray, newBytes, i,
+						_MARKER_JAVASCRIPT_OPEN) - 1;
+					continue;
+				}
+				else if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN)) {
 
-					while ((i + 1) < oldByteArray.length) {
-						char nextChar = (char)oldByteArray[i + 1];
+					i = processJavaScript(oldByteArray, newBytes, i,
+						_MARKER_SCRIPT_OPEN) - 1;
+					continue;
+				}
+				else if (hasMarker(oldByteArray, i, _MARKER_STYLE_OPEN)) {
 
-						if (Validator.isWhitespace(nextChar)) {
-							i++;
-						}
-						else {
-							break;
-						}
-					}
-
+					i = processCSS(oldByteArray, newBytes, i) - 1;
 					continue;
 				}
 			}
+			else if (c == CharPool.GREATER_THAN) {
+				newBytes.write(c);
+				i = i + countContinuousWhiteSpace(oldByteArray, i+1);
+				continue;
+			}
 
-			if (state == _STATE_NORMAL) {
-				if ((i + 1) < oldByteArray.length) {
-					if (removeStartingWhitespace) {
-						if (Validator.isWhitespace(c)) {
-							continue;
-						}
-						else {
-							removeStartingWhitespace = false;
-						}
+			if ((i + 1) < oldByteArray.length) {
+				if (removeStartingWhitespace) {
+					if (Validator.isWhitespace(c)) {
+						continue;
 					}
+					else {
+						removeStartingWhitespace = false;
+					}
+				}
 
-					if ((c == CharPool.NEW_LINE) ||
-						(c == CharPool.RETURN) ||
-						(c == CharPool.TAB)) {
+				if ((c == CharPool.NEW_LINE) ||
+					(c == CharPool.RETURN) ||
+					(c == CharPool.TAB)) {
 
-						char nextChar = (char)oldByteArray[i + 1];
+					char nextChar = (char)oldByteArray[i + 1];
 
-						if ((nextChar == CharPool.NEW_LINE) ||
-							(nextChar == CharPool.RETURN) ||
-							(nextChar == CharPool.TAB)) {
+					if ((nextChar == CharPool.NEW_LINE) ||
+						(nextChar == CharPool.RETURN) ||
+						(nextChar == CharPool.TAB) ||
+						(nextChar == CharPool.LESS_THAN)) {
 
-							continue;
-						}
+						continue;
 					}
 				}
 			}
@@ -466,16 +426,10 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final byte[] _CDATA_OPEN = "/*<![CDATA[*/".getBytes();
 
-	private static final char[] _MARKER_DIV_CLOSE = "/div>".toCharArray();
-
-	private static final char[] _MARKER_FORM_CLOSE = "/form>".toCharArray();
-
 	private static final byte[] _MARKER_JAVASCRIPT_OPEN =
 		"script type=\"text/javascript\">".getBytes();
 
-	private static final char[] _MARKER_LI_CLOSE = "/li>".toCharArray();
-
-	private static final byte[] _MARKER_PRE_CLOSE = "</pre>".getBytes();
+	private static final byte[] _MARKER_PRE_CLOSE = "/pre>".getBytes();
 
 	private static final int[] _MARKER_PRE_CLOSE_NEXTS =
 		KMPSearch.generateNexts(_MARKER_PRE_CLOSE);
@@ -497,18 +451,8 @@ public class StripFilter extends BasePortalFilter {
 	private static final int[] _MARKER_STYLE_CLOSE_NEXTS =
 		KMPSearch.generateNexts(_MARKER_STYLE_CLOSE);
 
-	private static final char[] _MARKER_TABLE_CLOSE = "/table>".toCharArray();
-
-	private static final char[] _MARKER_TD_CLOSE = "/td>".toCharArray();
-
-	private static final char[] _MARKER_TD_OPEN = "td>".toCharArray();
-
-	private static final char[] _MARKER_TR_CLOSE = "/tr>".toCharArray();
-
-	private static final char[] _MARKER_TR_OPEN = "tr>".toCharArray();
-
 	private static final byte[] _MARKER_TEXTAREA_CLOSE =
-		"</textarea>".getBytes();
+		"/textarea>".getBytes();
 
 	private static final int[] _MARKER_TEXTAREA_CLOSE_NEXTS =
 		KMPSearch.generateNexts(_MARKER_TEXTAREA_CLOSE);
@@ -516,14 +460,8 @@ public class StripFilter extends BasePortalFilter {
 	private static final byte[] _MARKER_TEXTAREA_OPEN =
 		"textarea ".getBytes();
 
-	private static final char[] _MARKER_UL_CLOSE = "/ul>".toCharArray();
-
 	private static final byte[] _SCRIPT_TYPE_JAVASCRIPT =
 		"<script type=\"text/javascript\">".getBytes();
-
-	private static final int _STATE_FOUND_ELEMENT = 3;
-
-	private static final int _STATE_NORMAL = 0;
 
 	private static final byte[] _STYLE_TYPE_CSS =
 		"<style type=\"text/css\">".getBytes();
