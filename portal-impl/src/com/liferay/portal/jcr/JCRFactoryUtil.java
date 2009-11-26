@@ -65,7 +65,7 @@ public class JCRFactoryUtil {
 		getJCRFactory().prepare();
 	}
 
-	public static void shutdown() throws RepositoryException {
+	public static void shutdown() {
 		getJCRFactory().shutdown();
 	}
 
