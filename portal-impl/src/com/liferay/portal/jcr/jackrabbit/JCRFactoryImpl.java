@@ -37,7 +37,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.jcr.Credentials;
-import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
@@ -76,7 +75,7 @@ public class JCRFactoryImpl implements JCRFactory {
 		Session session = null;
 
 		try {
-			session = _repository.login(credentials, workspaceName);
+			session = _transientRepository.login(credentials, workspaceName);
 		}
 		catch (RepositoryException re) {
 			_log.error("Could not login to the workspace " + workspaceName);
@@ -151,9 +150,7 @@ public class JCRFactoryImpl implements JCRFactory {
 
 	public void shutdown() {
 		if (_initialized) {
-			TransientRepository repository = (TransientRepository)_repository;
-
-			repository.shutdown();
+			_transientRepository.shutdown();
 		}
 
 		_initialized = false;
@@ -161,7 +158,7 @@ public class JCRFactoryImpl implements JCRFactory {
 
 	protected JCRFactoryImpl() throws Exception {
 		try {
-			_repository = new TransientRepository(
+			_transientRepository = new TransientRepository(
 				CONFIG_FILE_PATH, REPOSITORY_HOME);
 		}
 		catch (Exception e) {
@@ -180,7 +177,7 @@ public class JCRFactoryImpl implements JCRFactory {
 
 	private static Log _log = LogFactoryUtil.getLog(JCRFactoryImpl.class);
 
-	private Repository _repository;
 	private boolean _initialized;
+	private TransientRepository _transientRepository;
 
 }
