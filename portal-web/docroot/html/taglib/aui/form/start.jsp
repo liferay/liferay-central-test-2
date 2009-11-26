@@ -25,22 +25,22 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+
 String action = GetterUtil.getString((String)request.getAttribute("aui:form:action"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:form:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:form:dynamicAttributes");
 boolean inlineLabels = GetterUtil.getBoolean((String)request.getAttribute("aui:form:inlineLabels"));
-String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
+String name = randomNamespace + GetterUtil.getString((String)request.getAttribute("aui:form:name"));
 String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:onSubmit"));
-
-String	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 %>
 
 <c:if test="<%= Validator.isNull(onSubmit) %>">
 	<script type="text/javascript">
-		function <%= randomId + namespace %>saveForm() {
+		function <%= randomNamespace %>saveForm() {
 			submitForm(document.<%= namespace %>fm);
 		}
 	</script>
 </c:if>
 
-<form action="<%= action %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= name %>" name="<%= name %>" onSubmit="<%= Validator.isNull(onSubmit) ? (randomId + namespace + "saveForm(); return false;") : onSubmit %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<form action="<%= action %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= name %>" name="<%= name %>" onSubmit="<%= Validator.isNull(onSubmit) ? (randomNamespace + "saveForm(); return false;") : onSubmit %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
