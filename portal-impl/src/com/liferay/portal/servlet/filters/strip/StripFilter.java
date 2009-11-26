@@ -83,28 +83,7 @@ public class StripFilter extends BasePortalFilter {
 
 			byte oldC = oldByteArray[pos + i + 1];
 
-			if ((c != oldC) &&
-				(Character.toUpperCase(c) != oldC)) {
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	protected boolean hasMarker(byte[] oldByteArray, int pos, char[] marker) {
-		if ((pos + marker.length) >= oldByteArray.length) {
-			return false;
-		}
-
-		for (int i = 0; i < marker.length; i++) {
-			char c = marker[i];
-
-			char oldC = (char)oldByteArray[pos + i + 1];
-
-			if ((c != oldC) &&
-				(Character.toUpperCase(c) != oldC)) {
+			if ((c != oldC) && (Character.toUpperCase(c) != oldC)) {
 
 				return false;
 			}
@@ -309,11 +288,11 @@ public class StripFilter extends BasePortalFilter {
 			return currentIndex + 1;
 		}
 
-		newBytes.write("<pre>".getBytes());
-		newBytes.write(oldByteArray, beginIndex, closeTagIndex - beginIndex);
-		newBytes.write(_MARKER_PRE_CLOSE);
-
 		int newBeginIndex = closeTagIndex + _MARKER_PRE_CLOSE.length;
+
+		newBytes.write(
+			oldByteArray, currentIndex, newBeginIndex -currentIndex);
+
 		newBeginIndex += countContinuousWhiteSpace(oldByteArray, newBeginIndex);
 
 		return newBeginIndex;
@@ -335,11 +314,11 @@ public class StripFilter extends BasePortalFilter {
 			return currentIndex + 1;
 		}
 
-		newBytes.write("<textarea ".getBytes());
-		newBytes.write(oldByteArray, beginIndex, closeTagIndex - beginIndex);
-		newBytes.write(_MARKER_TEXTAREA_CLOSE);
-
 		int newBeginIndex = closeTagIndex + _MARKER_TEXTAREA_CLOSE.length;
+		
+		newBytes.write(
+			oldByteArray, currentIndex, newBeginIndex - currentIndex);
+
 		newBeginIndex += countContinuousWhiteSpace(oldByteArray, newBeginIndex);
 
 		return newBeginIndex;
@@ -347,11 +326,11 @@ public class StripFilter extends BasePortalFilter {
 
 	protected byte[] strip(byte[] oldByteArray) throws IOException {
 		ByteArrayOutputStream newBytes = new ByteArrayOutputStream(
-			oldByteArray.length);
+			(int) (oldByteArray.length * TARGET_COMPRESS_RATE));
 
-		boolean removeStartingWhitespace = true;
-
-		for (int i = 0; i < oldByteArray.length; i++) {
+		int count = countContinuousWhiteSpace(oldByteArray, 0);
+		
+		for (int i = count; i < oldByteArray.length; i++) {
 			byte b = oldByteArray[i];
 
 			char c = (char)b;
@@ -391,14 +370,6 @@ public class StripFilter extends BasePortalFilter {
 			}
 
 			if ((i + 1) < oldByteArray.length) {
-				if (removeStartingWhitespace) {
-					if (Validator.isWhitespace(c)) {
-						continue;
-					}
-					else {
-						removeStartingWhitespace = false;
-					}
-				}
 
 				if ((c == CharPool.NEW_LINE) ||
 					(c == CharPool.RETURN) ||
@@ -465,6 +436,8 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final byte[] _STYLE_TYPE_CSS =
 		"<style type=\"text/css\">".getBytes();
+
+	private static final double TARGET_COMPRESS_RATE = 0.7;
 
 	private static final String _STRIP = "strip";
 
