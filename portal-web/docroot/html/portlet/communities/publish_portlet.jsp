@@ -75,8 +75,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </script>
 
-if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-this-portlet") %>')) { submitForm(document.<portlet:namespace />fm
-
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "publish(); return false;" %>'>
 	<aui:input name="pagesRedirect" type="hidden" value="<%= pagesRedirect %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />

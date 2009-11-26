@@ -49,7 +49,7 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("nodeId", String.valueOf(nodeId));
 %>
 
-<script>
+<script type="text/javascript">
 	function <portlet:namespace />importPages() {
 		<%= uploadProgressId %>.startProgress();
 		<%= importProgressId %>.startProgress();
