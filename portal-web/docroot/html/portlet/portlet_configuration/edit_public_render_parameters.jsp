@@ -110,9 +110,9 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 </form>
 
 <script type="text/javascript">
-
 	AUI().ready(
 		function(A) {
+
 			<%
 			for (PublicRenderParameterConfiguration publicRenderParameterConfiguration : publicRenderParameterConfigurations) {
 			%>
@@ -140,6 +140,7 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 			<%
 			}
 			%>
+
 		}
 	);
 </script>
