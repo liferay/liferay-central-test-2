@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.workflow;
 
-import com.liferay.portal.kernel.workflow.BaseWokflowHandler;
+import com.liferay.portal.workflow.BaseWokflowHandler;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -42,11 +42,11 @@ public class JournalArticleWorkflowHandler extends BaseWokflowHandler {
 	}
 
 	public JournalArticle updateStatus(
-			long userId, long resourcePrimKey, int status)
+			long companyId, long groupId, long userId, long classPK, int status)
 		throws Exception {
 
 		return JournalArticleLocalServiceUtil.updateStatus(
-			userId, resourcePrimKey, status);
+			userId, classPK, status);
 	}
 
 }

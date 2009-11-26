@@ -52,6 +52,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -349,9 +350,14 @@ public class JournalArticleLocalServiceImpl
 		// Workflow
 
 		if (serviceContext.isStartWorkflow()) {
-			workflowInstanceLinkLocalService.startWorkflowInstance(
-				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), resourcePrimKey);
+			try {
+				WorkflowHandlerRegistryUtil.startWorkflowInstance(
+					user.getCompanyId(), groupId, userId,
+					JournalArticle.class.getName(), resourcePrimKey, article);
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
 		}
 
 		return article;

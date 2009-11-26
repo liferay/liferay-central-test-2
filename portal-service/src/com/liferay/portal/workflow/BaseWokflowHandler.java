@@ -20,7 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.workflow;
+package com.liferay.portal.workflow;
+
+import com.liferay.portal.kernel.workflow.WorkflowHandler;
+import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 
 /**
  * <a href="BaseWokflowHandler.java.html"><b><i>View Source</i></b></a>
@@ -29,4 +32,14 @@ package com.liferay.portal.kernel.workflow;
  * @author Marcellus Tavares
  */
 public abstract class BaseWokflowHandler implements WorkflowHandler {
+
+	public void startWorkflowInstance(
+			long companyId, long groupId, long userId, long classPK,
+			Object model)
+		throws Exception {
+
+		WorkflowInstanceLinkLocalServiceUtil.startWorkflowInstance(
+			companyId, groupId, userId, getClassName(), classPK);
+	}
+
 }

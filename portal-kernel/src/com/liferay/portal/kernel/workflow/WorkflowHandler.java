@@ -32,7 +32,13 @@ public interface WorkflowHandler {
 
 	public String getClassName();
 
-	public Object updateStatus(long userId, long classPK, int status)
+	public void startWorkflowInstance(
+			long companyId, long groupId, long userId, long classPK,
+			Object model)
+		throws Exception;
+
+	public Object updateStatus(
+			long companyId, long groupId, long userId, long classPK, int status)
 		throws Exception;
 
 }

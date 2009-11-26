@@ -23,7 +23,6 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowStatusManager;
 
@@ -40,10 +39,8 @@ public class WorkflowStatusManagerImpl implements WorkflowStatusManager {
 		throws WorkflowException {
 
 		try {
-			WorkflowHandler workflowHandler =
-				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
-			workflowHandler.updateStatus(userId, classPK, status);
+			WorkflowHandlerRegistryUtil.updateStatus(
+				companyId, groupId, userId, className, classPK, status);
 		}
 		catch (Exception e) {
 			throw new WorkflowException(e);

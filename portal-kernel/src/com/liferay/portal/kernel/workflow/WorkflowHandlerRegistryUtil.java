@@ -54,6 +54,19 @@ public class WorkflowHandlerRegistryUtil {
 		getWorkflowHandlerRegistry().register(workflowHandler);
 	}
 
+	public static void startWorkflowInstance(
+			long companyId, long groupId, long userId, String className,
+			long classPK, Object model)
+		throws Exception {
+
+		WorkflowHandler workflowHandler = getWorkflowHandler(className);
+
+		if (workflowHandler != null) {
+			workflowHandler.startWorkflowInstance(
+				companyId, groupId, userId, classPK, model);
+		}
+	}
+
 	public static void unregister(List<WorkflowHandler> workflowHandlers) {
 
 		for (WorkflowHandler workflowHandler : workflowHandlers) {
@@ -63,6 +76,21 @@ public class WorkflowHandlerRegistryUtil {
 
 	public static void unregister(WorkflowHandler workflowHandler) {
 		getWorkflowHandlerRegistry().unregister(workflowHandler);
+	}
+
+	public static Object updateStatus(
+			long companyId, long groupId, long userId, String className,
+			long classPK, int status)
+		throws Exception {
+
+		WorkflowHandler workflowHandler = getWorkflowHandler(className);
+
+		if (workflowHandler != null) {
+			return workflowHandler.updateStatus(
+				companyId, groupId, userId, classPK, status);
+		}
+
+		return null;
 	}
 
 	public void setWorkflowHandlerRegistry(
