@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -399,14 +400,11 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLERESOURCE_WHERE);
 
 				query.append("journalArticleResource.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -458,17 +456,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLERESOURCE_WHERE);
 
 				query.append("journalArticleResource.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -524,7 +519,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		List<JournalArticleResource> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticleResource exists with the key {");
 
@@ -548,7 +543,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticleResource exists with the key {");
 
@@ -575,17 +570,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLERESOURCE_WHERE);
 
 			query.append("journalArticleResource.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -637,7 +629,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 				articleId);
 
 		if (journalArticleResource == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticleResource exists with the key {");
 
@@ -680,10 +672,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLERESOURCE_WHERE);
 
 				query.append("journalArticleResource.groupId = ?");
 
@@ -704,8 +695,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -829,13 +818,12 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticleResource FROM JournalArticleResource journalArticleResource ");
+				query.append(_SQL_SELECT_JOURNALARTICLERESOURCE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -921,15 +909,11 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticleResource) ");
-				query.append(
-					"FROM JournalArticleResource journalArticleResource WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLERESOURCE_WHERE);
 
 				query.append("journalArticleResource.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -970,11 +954,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticleResource) ");
-				query.append(
-					"FROM JournalArticleResource journalArticleResource WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLERESOURCE_WHERE);
 
 				query.append("journalArticleResource.groupId = ?");
 
@@ -995,8 +977,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1040,8 +1020,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(journalArticleResource) FROM JournalArticleResource journalArticleResource");
+				Query q = session.createQuery(_SQL_COUNT_JOURNALARTICLERESOURCE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1103,5 +1082,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_JOURNALARTICLERESOURCE = "SELECT journalArticleResource FROM JournalArticleResource journalArticleResource";
+	private static final String _SQL_SELECT_JOURNALARTICLERESOURCE_WHERE = "SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ";
+	private static final String _SQL_COUNT_JOURNALARTICLERESOURCE = "SELECT COUNT(journalArticleResource) FROM JournalArticleResource journalArticleResource";
+	private static final String _SQL_COUNT_JOURNALARTICLERESOURCE_WHERE = "SELECT COUNT(journalArticleResource) FROM JournalArticleResource journalArticleResource WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(JournalArticleResourcePersistenceImpl.class);
 }

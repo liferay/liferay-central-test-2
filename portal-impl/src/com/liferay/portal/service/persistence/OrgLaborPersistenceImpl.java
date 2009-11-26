@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -340,15 +341,13 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT orgLabor FROM OrgLabor orgLabor WHERE ");
+				query.append(_SQL_SELECT_ORGLABOR_WHERE);
 
 				query.append("orgLabor.organizationId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("orgLabor.organizationId ASC, ");
 				query.append("orgLabor.typeId ASC");
@@ -403,16 +402,14 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT orgLabor FROM OrgLabor orgLabor WHERE ");
+				query.append(_SQL_SELECT_ORGLABOR_WHERE);
 
 				query.append("orgLabor.organizationId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -434,7 +431,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("orgLabor.organizationId ASC, ");
 					query.append("orgLabor.typeId ASC");
@@ -474,7 +471,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		List<OrgLabor> list = findByOrganizationId(organizationId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No OrgLabor exists with the key {");
 
@@ -497,7 +494,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No OrgLabor exists with the key {");
 
@@ -524,16 +521,14 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT orgLabor FROM OrgLabor orgLabor WHERE ");
+			query.append(_SQL_SELECT_ORGLABOR_WHERE);
 
 			query.append("orgLabor.organizationId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -555,7 +550,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("orgLabor.organizationId ASC, ");
 				query.append("orgLabor.typeId ASC");
@@ -648,12 +643,12 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT orgLabor FROM OrgLabor orgLabor ");
+				query.append(_SQL_SELECT_ORGLABOR);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -675,7 +670,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("orgLabor.organizationId ASC, ");
 					query.append("orgLabor.typeId ASC");
@@ -739,14 +734,11 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(orgLabor) ");
-				query.append("FROM OrgLabor orgLabor WHERE ");
+				query.append(_SQL_COUNT_ORGLABOR_WHERE);
 
 				query.append("orgLabor.organizationId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -786,8 +778,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(orgLabor) FROM OrgLabor orgLabor");
+				Query q = session.createQuery(_SQL_COUNT_ORGLABOR);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -933,5 +924,9 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_ORGLABOR = "SELECT orgLabor FROM OrgLabor orgLabor";
+	private static final String _SQL_SELECT_ORGLABOR_WHERE = "SELECT orgLabor FROM OrgLabor orgLabor WHERE ";
+	private static final String _SQL_COUNT_ORGLABOR = "SELECT COUNT(orgLabor) FROM OrgLabor orgLabor";
+	private static final String _SQL_COUNT_ORGLABOR_WHERE = "SELECT COUNT(orgLabor) FROM OrgLabor orgLabor WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(OrgLaborPersistenceImpl.class);
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -357,7 +358,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		WebDAVProps webDAVProps = fetchByC_C(classNameId, classPK);
 
 		if (webDAVProps == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WebDAVProps exists with the key {");
 
@@ -402,18 +403,15 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT webDAVProps FROM WebDAVProps webDAVProps WHERE ");
+				query.append(_SQL_SELECT_WEBDAVPROPS_WHERE);
 
 				query.append("webDAVProps.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("webDAVProps.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -533,12 +531,12 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT webDAVProps FROM WebDAVProps webDAVProps ");
+				query.append(_SQL_SELECT_WEBDAVPROPS);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -619,18 +617,15 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(webDAVProps) ");
-				query.append("FROM WebDAVProps webDAVProps WHERE ");
+				query.append(_SQL_COUNT_WEBDAVPROPS_WHERE);
 
 				query.append("webDAVProps.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("webDAVProps.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -672,8 +667,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(webDAVProps) FROM WebDAVProps webDAVProps");
+				Query q = session.createQuery(_SQL_COUNT_WEBDAVPROPS);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -819,5 +813,9 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_WEBDAVPROPS = "SELECT webDAVProps FROM WebDAVProps webDAVProps";
+	private static final String _SQL_SELECT_WEBDAVPROPS_WHERE = "SELECT webDAVProps FROM WebDAVProps webDAVProps WHERE ";
+	private static final String _SQL_COUNT_WEBDAVPROPS = "SELECT COUNT(webDAVProps) FROM WebDAVProps webDAVProps";
+	private static final String _SQL_COUNT_WEBDAVPROPS_WHERE = "SELECT COUNT(webDAVProps) FROM WebDAVProps webDAVProps WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(WebDAVPropsPersistenceImpl.class);
 }

@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -310,7 +311,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 
 		shrinkTree(assetCategory);
@@ -524,10 +525,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetCategory.uuid IS NULL");
@@ -544,9 +544,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 
@@ -602,10 +600,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetCategory.uuid IS NULL");
@@ -622,10 +619,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -647,7 +642,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategory.name ASC");
 				}
@@ -688,7 +683,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		List<AssetCategory> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -710,7 +705,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		List<AssetCategory> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -736,10 +731,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 			if (uuid == null) {
 				query.append("assetCategory.uuid IS NULL");
@@ -756,10 +750,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -781,7 +773,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 			}
@@ -818,7 +810,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		AssetCategory assetCategory = fetchByUUID_G(uuid, groupId);
 
 		if (assetCategory == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -861,10 +853,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetCategory.uuid IS NULL");
@@ -885,9 +876,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append("assetCategory.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 
@@ -961,16 +950,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 
@@ -1024,17 +1010,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1056,7 +1039,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategory.name ASC");
 				}
@@ -1096,7 +1079,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -1119,7 +1102,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -1146,17 +1129,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 			query.append("assetCategory.parentCategoryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1178,7 +1158,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 			}
@@ -1221,16 +1201,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.vocabularyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 
@@ -1284,17 +1261,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.vocabularyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1316,7 +1290,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategory.name ASC");
 				}
@@ -1355,7 +1329,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		List<AssetCategory> list = findByVocabularyId(vocabularyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -1378,7 +1352,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -1405,17 +1379,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 			query.append("assetCategory.vocabularyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1437,7 +1408,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 			}
@@ -1480,10 +1451,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
 
@@ -1504,9 +1474,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 
@@ -1566,10 +1534,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
 
@@ -1590,10 +1557,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1615,7 +1580,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategory.name ASC");
 				}
@@ -1658,7 +1623,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		List<AssetCategory> list = findByP_N(parentCategoryId, name, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -1684,7 +1649,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -1714,10 +1679,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 			query.append("assetCategory.parentCategoryId = ?");
 
@@ -1738,10 +1702,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1763,7 +1725,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 			}
@@ -1812,10 +1774,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
 
@@ -1823,9 +1784,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append("assetCategory.vocabularyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 
@@ -1882,10 +1841,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
 
@@ -1893,10 +1851,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append("assetCategory.vocabularyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1918,7 +1874,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategory.name ASC");
 				}
@@ -1961,7 +1917,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -1988,7 +1944,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -2018,10 +1974,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 			query.append("assetCategory.parentCategoryId = ?");
 
@@ -2029,10 +1984,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append("assetCategory.vocabularyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2054,7 +2007,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 			}
@@ -2099,10 +2052,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (name == null) {
 					query.append("assetCategory.name IS NULL");
@@ -2123,9 +2075,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append("assetCategory.vocabularyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 
@@ -2183,10 +2133,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (name == null) {
 					query.append("assetCategory.name IS NULL");
@@ -2207,10 +2156,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append("assetCategory.vocabularyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2232,7 +2179,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategory.name ASC");
 				}
@@ -2275,7 +2222,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		List<AssetCategory> list = findByN_V(name, vocabularyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -2301,7 +2248,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategory exists with the key {");
 
@@ -2331,10 +2278,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategory FROM AssetCategory assetCategory WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 			if (name == null) {
 				query.append("assetCategory.name IS NULL");
@@ -2355,10 +2301,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append("assetCategory.vocabularyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2380,7 +2324,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategory.name ASC");
 			}
@@ -2478,13 +2422,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategory FROM AssetCategory assetCategory ");
+				query.append(_SQL_SELECT_ASSETCATEGORY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2506,7 +2449,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategory.name ASC");
 				}
@@ -2611,10 +2554,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategory) ");
-				query.append("FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetCategory.uuid IS NULL");
@@ -2630,8 +2572,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2674,10 +2614,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategory) ");
-				query.append("FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetCategory.uuid IS NULL");
@@ -2697,8 +2636,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(" AND ");
 
 				query.append("assetCategory.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2743,14 +2680,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategory) ");
-				query.append("FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2790,14 +2724,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategory) ");
-				query.append("FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.vocabularyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2838,10 +2769,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategory) ");
-				query.append("FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
 
@@ -2861,8 +2791,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2909,18 +2837,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategory) ");
-				query.append("FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				query.append("assetCategory.parentCategoryId = ?");
 
 				query.append(" AND ");
 
 				query.append("assetCategory.vocabularyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2963,10 +2888,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategory) ");
-				query.append("FROM AssetCategory assetCategory WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				if (name == null) {
 					query.append("assetCategory.name IS NULL");
@@ -2986,8 +2910,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(" AND ");
 
 				query.append("assetCategory.vocabularyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3031,8 +2953,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(assetCategory) FROM AssetCategory assetCategory");
+				Query q = session.createQuery(_SQL_COUNT_ASSETCATEGORY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3066,7 +2987,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public static final FinderPath FINDER_PATH_GET_ASSETENTRIES = new FinderPath(com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			"AssetEntries_AssetCategories", "getAssetEntries",
+			AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			"getAssetEntries",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3089,12 +3011,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETASSETENTRIES);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
@@ -3134,8 +3056,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public static final FinderPath FINDER_PATH_GET_ASSETENTRIES_SIZE = new FinderPath(com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			"AssetEntries_AssetCategories", "getAssetEntriesSize",
-			new String[] { Long.class.getName() });
+			AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			"getAssetEntriesSize", new String[] { Long.class.getName() });
 
 	public int getAssetEntriesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -3179,7 +3101,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ASSETENTRY = new FinderPath(com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			"AssetEntries_AssetCategories", "containsAssetEntry",
+			AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			"containsAssetEntry",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsAssetEntry(long pk, long assetEntryPK)
@@ -3228,7 +3151,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3242,7 +3165,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3257,7 +3180,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3273,7 +3196,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3285,7 +3208,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3298,7 +3221,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3312,7 +3235,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3327,7 +3250,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3343,7 +3266,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3371,7 +3294,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3393,7 +3316,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -3869,6 +3792,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		private SqlUpdate _sqlUpdate;
 	}
 
+	private static final String _SQL_SELECT_ASSETCATEGORY = "SELECT assetCategory FROM AssetCategory assetCategory";
+	private static final String _SQL_SELECT_ASSETCATEGORY_WHERE = "SELECT assetCategory FROM AssetCategory assetCategory WHERE ";
+	private static final String _SQL_COUNT_ASSETCATEGORY = "SELECT COUNT(assetCategory) FROM AssetCategory assetCategory";
+	private static final String _SQL_COUNT_ASSETCATEGORY_WHERE = "SELECT COUNT(assetCategory) FROM AssetCategory assetCategory WHERE ";
 	private static final String _SQL_GETASSETENTRIES = "SELECT {AssetEntry.*} FROM AssetEntry INNER JOIN AssetEntries_AssetCategories ON (AssetEntries_AssetCategories.entryId = AssetEntry.entryId) WHERE (AssetEntries_AssetCategories.categoryId = ?)";
 	private static final String _SQL_GETASSETENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetCategories WHERE categoryId = ?";
 	private static final String _SQL_CONTAINSASSETENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetCategories WHERE categoryId = ? AND entryId = ?";

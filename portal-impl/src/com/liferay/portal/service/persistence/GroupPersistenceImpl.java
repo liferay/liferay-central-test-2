@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -307,7 +308,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 
 		try {
@@ -317,7 +318,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 
 		try {
@@ -327,7 +328,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 
 		try {
@@ -337,7 +338,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 
 		try {
@@ -347,7 +348,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 
 		Session session = null;
@@ -692,15 +693,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 
@@ -754,16 +753,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -785,7 +782,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("group_.name ASC");
 				}
@@ -823,7 +820,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -845,7 +842,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -871,16 +868,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT group_ FROM Group group_ WHERE ");
+			query.append(_SQL_SELECT_GROUP__WHERE);
 
 			query.append("group_.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -902,7 +897,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 			}
@@ -936,7 +931,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByLiveGroupId(liveGroupId);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -975,15 +970,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.liveGroupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 
@@ -1043,7 +1036,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_N(companyId, name);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -1086,9 +1079,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -1109,9 +1102,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 
@@ -1177,7 +1168,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_F(companyId, friendlyURL);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -1220,9 +1211,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -1243,9 +1234,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 
@@ -1321,9 +1310,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.type = ?");
 
@@ -1331,9 +1320,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append("group_.active = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 
@@ -1389,9 +1376,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.type = ?");
 
@@ -1399,10 +1386,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append("group_.active = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1424,7 +1409,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("group_.name ASC");
 				}
@@ -1464,7 +1449,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByT_A(type, active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -1489,7 +1474,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByT_A(type, active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -1519,9 +1504,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT group_ FROM Group group_ WHERE ");
+			query.append(_SQL_SELECT_GROUP__WHERE);
 
 			query.append("group_.type = ?");
 
@@ -1529,10 +1514,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 			query.append("group_.active = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1554,7 +1537,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 			}
@@ -1590,7 +1573,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_C_C(companyId, classNameId, classPK);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -1638,9 +1621,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -1652,9 +1635,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append("group_.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 
@@ -1720,7 +1701,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_L_N(companyId, liveGroupId, name);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -1770,9 +1751,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -1797,9 +1778,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 
@@ -1869,7 +1848,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_C_L_N(companyId, classNameId, liveGroupId, name);
 
 		if (group == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Group exists with the key {");
 
@@ -1924,9 +1903,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ WHERE ");
+				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -1955,9 +1934,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("group_.name ASC");
 
@@ -2087,12 +2064,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT group_ FROM Group group_ ");
+				query.append(_SQL_SELECT_GROUP_);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2114,7 +2091,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("group_.name ASC");
 				}
@@ -2224,14 +2201,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(group_) ");
-				query.append("FROM Group group_ WHERE ");
+				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2271,14 +2245,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(group_) ");
-				query.append("FROM Group group_ WHERE ");
+				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append("group_.liveGroupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2319,10 +2290,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(group_) ");
-				query.append("FROM Group group_ WHERE ");
+				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -2342,8 +2312,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2388,10 +2356,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(group_) ");
-				query.append("FROM Group group_ WHERE ");
+				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -2411,8 +2378,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2458,18 +2423,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(group_) ");
-				query.append("FROM Group group_ WHERE ");
+				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append("group_.type = ?");
 
 				query.append(" AND ");
 
 				query.append("group_.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2514,10 +2476,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(group_) ");
-				query.append("FROM Group group_ WHERE ");
+				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -2528,8 +2489,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				query.append(" AND ");
 
 				query.append("group_.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2578,10 +2537,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(group_) ");
-				query.append("FROM Group group_ WHERE ");
+				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -2605,8 +2563,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2658,10 +2614,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(group_) ");
-				query.append("FROM Group group_ WHERE ");
+				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append("group_.companyId = ?");
 
@@ -2689,8 +2644,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2738,8 +2691,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(group_) FROM Group group_");
+				Query q = session.createQuery(_SQL_COUNT_GROUP_);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2772,8 +2724,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ORGANIZATIONS = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS, "Groups_Orgs",
-			"getOrganizations",
+			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS,
+			GroupModelImpl.TABLE_GROUPS_ORGS, "getOrganizations",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -2796,17 +2748,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETORGANIZATIONS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("Organization_.name ASC");
 				}
@@ -2846,8 +2798,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ORGANIZATIONS_SIZE = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS, "Groups_Orgs",
-			"getOrganizationsSize", new String[] { Long.class.getName() });
+			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS,
+			GroupModelImpl.TABLE_GROUPS_ORGS, "getOrganizationsSize",
+			new String[] { Long.class.getName() });
 
 	public int getOrganizationsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -2890,8 +2843,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ORGANIZATION = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS, "Groups_Orgs",
-			"containsOrganization",
+			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS,
+			GroupModelImpl.TABLE_GROUPS_ORGS, "containsOrganization",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsOrganization(long pk, long organizationPK)
@@ -2944,7 +2897,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -2958,7 +2911,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -2973,7 +2926,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -2989,7 +2942,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -3001,7 +2954,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -3014,7 +2967,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -3028,7 +2981,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -3043,7 +2996,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -3059,7 +3012,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -3087,7 +3040,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -3109,7 +3062,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Orgs");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ORGS);
 		}
 	}
 
@@ -3125,7 +3078,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			"Groups_Permissions", "getPermissions",
+			GroupModelImpl.TABLE_GROUPS_PERMISSIONS, "getPermissions",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3147,12 +3100,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETPERMISSIONS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
@@ -3192,7 +3145,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS_SIZE = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			"Groups_Permissions", "getPermissionsSize",
+			GroupModelImpl.TABLE_GROUPS_PERMISSIONS, "getPermissionsSize",
 			new String[] { Long.class.getName() });
 
 	public int getPermissionsSize(long pk) throws SystemException {
@@ -3237,7 +3190,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_PERMISSION = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			"Groups_Permissions", "containsPermission",
+			GroupModelImpl.TABLE_GROUPS_PERMISSIONS, "containsPermission",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsPermission(long pk, long permissionPK)
@@ -3286,7 +3239,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3300,7 +3253,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3315,7 +3268,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3331,7 +3284,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3343,7 +3296,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3356,7 +3309,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3370,7 +3323,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3385,7 +3338,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3401,7 +3354,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3429,7 +3382,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3451,7 +3404,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -3466,8 +3419,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ROLES = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES, "Groups_Roles",
-			"getRoles",
+			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES,
+			GroupModelImpl.TABLE_GROUPS_ROLES, "getRoles",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3489,17 +3442,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETROLES);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("Role_.name ASC");
 				}
@@ -3539,8 +3492,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ROLES_SIZE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES, "Groups_Roles",
-			"getRolesSize", new String[] { Long.class.getName() });
+			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES,
+			GroupModelImpl.TABLE_GROUPS_ROLES, "getRolesSize",
+			new String[] { Long.class.getName() });
 
 	public int getRolesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -3583,8 +3537,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ROLE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES, "Groups_Roles",
-			"containsRole",
+			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES,
+			GroupModelImpl.TABLE_GROUPS_ROLES, "containsRole",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
@@ -3630,7 +3584,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3643,7 +3597,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3657,7 +3611,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3672,7 +3626,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3684,7 +3638,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3696,7 +3650,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3709,7 +3663,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3723,7 +3677,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3738,7 +3692,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3765,7 +3719,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3786,7 +3740,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -3802,7 +3756,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 	public static final FinderPath FINDER_PATH_GET_USERGROUPS = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_USERGROUPS,
-			"Groups_UserGroups", "getUserGroups",
+			GroupModelImpl.TABLE_GROUPS_USERGROUPS, "getUserGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3824,17 +3778,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETUSERGROUPS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("UserGroup.name ASC");
 				}
@@ -3875,7 +3829,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 	public static final FinderPath FINDER_PATH_GET_USERGROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_USERGROUPS,
-			"Groups_UserGroups", "getUserGroupsSize",
+			GroupModelImpl.TABLE_GROUPS_USERGROUPS, "getUserGroupsSize",
 			new String[] { Long.class.getName() });
 
 	public int getUserGroupsSize(long pk) throws SystemException {
@@ -3920,7 +3874,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USERGROUP = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_USERGROUPS,
-			"Groups_UserGroups", "containsUserGroup",
+			GroupModelImpl.TABLE_GROUPS_USERGROUPS, "containsUserGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUserGroup(long pk, long userGroupPK)
@@ -3969,7 +3923,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -3982,7 +3936,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -3997,7 +3951,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4013,7 +3967,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4025,7 +3979,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4038,7 +3992,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4051,7 +4005,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4066,7 +4020,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4082,7 +4036,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4110,7 +4064,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4132,7 +4086,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_UserGroups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_GROUPS_USERGROUPS);
 		}
 	}
 
@@ -4147,8 +4101,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS, "Users_Groups",
-			"getUsers",
+			GroupModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
+			GroupModelImpl.TABLE_USERS_GROUPS, "getUsers",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -4170,12 +4124,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETUSERS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
@@ -4214,8 +4168,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_USERS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS, "Users_Groups",
-			"getUsersSize", new String[] { Long.class.getName() });
+			GroupModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
+			GroupModelImpl.TABLE_USERS_GROUPS, "getUsersSize",
+			new String[] { Long.class.getName() });
 
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -4258,8 +4213,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USER = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS, "Users_Groups",
-			"containsUser",
+			GroupModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
+			GroupModelImpl.TABLE_USERS_GROUPS, "containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -4305,7 +4260,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4318,7 +4273,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4332,7 +4287,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4347,7 +4302,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4359,7 +4314,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4371,7 +4326,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4384,7 +4339,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4398,7 +4353,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4413,7 +4368,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4440,7 +4395,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -4461,7 +4416,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(GroupModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -5528,6 +5483,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		private GroupPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_GROUP_ = "SELECT group_ FROM Group group_";
+	private static final String _SQL_SELECT_GROUP__WHERE = "SELECT group_ FROM Group group_ WHERE ";
+	private static final String _SQL_COUNT_GROUP_ = "SELECT COUNT(group_) FROM Group group_";
+	private static final String _SQL_COUNT_GROUP__WHERE = "SELECT COUNT(group_) FROM Group group_ WHERE ";
 	private static final String _SQL_GETORGANIZATIONS = "SELECT {Organization_.*} FROM Organization_ INNER JOIN Groups_Orgs ON (Groups_Orgs.organizationId = Organization_.organizationId) WHERE (Groups_Orgs.groupId = ?)";
 	private static final String _SQL_GETORGANIZATIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Orgs WHERE groupId = ?";
 	private static final String _SQL_CONTAINSORGANIZATION = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Orgs WHERE groupId = ? AND organizationId = ?";

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -456,10 +457,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
 					query.append("bookmarksFolder.uuid IS NULL");
@@ -476,9 +476,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -535,10 +533,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
 					query.append("bookmarksFolder.uuid IS NULL");
@@ -555,10 +552,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -580,7 +575,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("bookmarksFolder.parentFolderId ASC, ");
 					query.append("bookmarksFolder.name ASC");
@@ -622,7 +617,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		List<BookmarksFolder> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -644,7 +639,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		List<BookmarksFolder> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -670,10 +665,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 			if (uuid == null) {
 				query.append("bookmarksFolder.uuid IS NULL");
@@ -690,10 +684,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -715,7 +707,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -753,7 +745,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		BookmarksFolder bookmarksFolder = fetchByUUID_G(uuid, groupId);
 
 		if (bookmarksFolder == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -796,10 +788,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
 					query.append("bookmarksFolder.uuid IS NULL");
@@ -820,9 +811,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append("bookmarksFolder.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -897,16 +886,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -961,17 +947,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -993,7 +976,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("bookmarksFolder.parentFolderId ASC, ");
 					query.append("bookmarksFolder.name ASC");
@@ -1033,7 +1016,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		List<BookmarksFolder> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -1056,7 +1039,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -1083,17 +1066,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 			query.append("bookmarksFolder.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1115,7 +1095,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -1159,16 +1139,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -1223,17 +1200,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1255,7 +1229,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("bookmarksFolder.parentFolderId ASC, ");
 					query.append("bookmarksFolder.name ASC");
@@ -1295,7 +1269,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		List<BookmarksFolder> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -1318,7 +1292,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -1345,17 +1319,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 			query.append("bookmarksFolder.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1377,7 +1348,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -1423,10 +1394,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.groupId = ?");
 
@@ -1434,9 +1404,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append("bookmarksFolder.parentFolderId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -1493,10 +1461,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.groupId = ?");
 
@@ -1504,10 +1471,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append("bookmarksFolder.parentFolderId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1529,7 +1494,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("bookmarksFolder.parentFolderId ASC, ");
 					query.append("bookmarksFolder.name ASC");
@@ -1572,7 +1537,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -1598,7 +1563,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BookmarksFolder exists with the key {");
 
@@ -1628,10 +1593,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ");
+			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 			query.append("bookmarksFolder.groupId = ?");
 
@@ -1639,10 +1603,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append("bookmarksFolder.parentFolderId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1664,7 +1626,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("bookmarksFolder.parentFolderId ASC, ");
 				query.append("bookmarksFolder.name ASC");
@@ -1761,13 +1723,12 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder ");
+				query.append(_SQL_SELECT_BOOKMARKSFOLDER);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1789,7 +1750,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("bookmarksFolder.parentFolderId ASC, ");
 					query.append("bookmarksFolder.name ASC");
@@ -1877,10 +1838,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(bookmarksFolder) ");
-				query.append("FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
 					query.append("bookmarksFolder.uuid IS NULL");
@@ -1896,8 +1856,6 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1940,10 +1898,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(bookmarksFolder) ");
-				query.append("FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
 					query.append("bookmarksFolder.uuid IS NULL");
@@ -1963,8 +1920,6 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				query.append(" AND ");
 
 				query.append("bookmarksFolder.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2008,14 +1963,11 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(bookmarksFolder) ");
-				query.append("FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2055,14 +2007,11 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(bookmarksFolder) ");
-				query.append("FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2105,18 +2054,15 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(bookmarksFolder) ");
-				query.append("FROM BookmarksFolder bookmarksFolder WHERE ");
+				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
 				query.append("bookmarksFolder.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("bookmarksFolder.parentFolderId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2158,8 +2104,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(bookmarksFolder) FROM BookmarksFolder bookmarksFolder");
+				Query q = session.createQuery(_SQL_COUNT_BOOKMARKSFOLDER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2215,5 +2160,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _SQL_SELECT_BOOKMARKSFOLDER = "SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder";
+	private static final String _SQL_SELECT_BOOKMARKSFOLDER_WHERE = "SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ";
+	private static final String _SQL_COUNT_BOOKMARKSFOLDER = "SELECT COUNT(bookmarksFolder) FROM BookmarksFolder bookmarksFolder";
+	private static final String _SQL_COUNT_BOOKMARKSFOLDER_WHERE = "SELECT COUNT(bookmarksFolder) FROM BookmarksFolder bookmarksFolder WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(BookmarksFolderPersistenceImpl.class);
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -404,14 +405,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -463,17 +461,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -528,7 +523,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -550,7 +545,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -577,17 +572,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 			query.append("userGroupRole.id.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -646,14 +638,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -705,17 +694,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -770,7 +756,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -792,7 +778,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -819,17 +805,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 			query.append("userGroupRole.id.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -888,14 +871,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.roleId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -947,17 +927,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.roleId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1012,7 +989,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByRoleId(roleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -1034,7 +1011,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByRoleId(roleId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -1061,17 +1038,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 			query.append("userGroupRole.id.roleId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1130,18 +1104,15 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.userId = ?");
 
 				query.append(" AND ");
 
 				query.append("userGroupRole.id.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1195,10 +1166,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.userId = ?");
 
@@ -1206,10 +1176,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 
 				query.append("userGroupRole.id.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1267,7 +1235,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByU_G(userId, groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -1294,7 +1262,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -1325,10 +1293,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 			query.append("userGroupRole.id.userId = ?");
 
@@ -1336,10 +1303,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 
 			query.append("userGroupRole.id.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1400,18 +1365,15 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("userGroupRole.id.roleId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1465,10 +1427,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.groupId = ?");
 
@@ -1476,10 +1437,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 
 				query.append("userGroupRole.id.roleId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1537,7 +1496,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		List<UserGroupRole> list = findByG_R(groupId, roleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -1564,7 +1523,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroupRole exists with the key {");
 
@@ -1595,10 +1554,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ");
+			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
 
 			query.append("userGroupRole.id.groupId = ?");
 
@@ -1606,10 +1564,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 
 			query.append("userGroupRole.id.roleId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1721,13 +1677,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userGroupRole FROM UserGroupRole userGroupRole ");
+				query.append(_SQL_SELECT_USERGROUPROLE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1830,14 +1785,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userGroupRole) ");
-				query.append("FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_COUNT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1877,14 +1829,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userGroupRole) ");
-				query.append("FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_COUNT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1924,14 +1873,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userGroupRole) ");
-				query.append("FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_COUNT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.roleId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1971,18 +1917,15 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userGroupRole) ");
-				query.append("FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_COUNT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.userId = ?");
 
 				query.append(" AND ");
 
 				query.append("userGroupRole.id.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2024,18 +1967,15 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userGroupRole) ");
-				query.append("FROM UserGroupRole userGroupRole WHERE ");
+				query.append(_SQL_COUNT_USERGROUPROLE_WHERE);
 
 				query.append("userGroupRole.id.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("userGroupRole.id.roleId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2077,8 +2017,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(userGroupRole) FROM UserGroupRole userGroupRole");
+				Query q = session.createQuery(_SQL_COUNT_USERGROUPROLE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2224,5 +2163,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_USERGROUPROLE = "SELECT userGroupRole FROM UserGroupRole userGroupRole";
+	private static final String _SQL_SELECT_USERGROUPROLE_WHERE = "SELECT userGroupRole FROM UserGroupRole userGroupRole WHERE ";
+	private static final String _SQL_COUNT_USERGROUPROLE = "SELECT COUNT(userGroupRole) FROM UserGroupRole userGroupRole";
+	private static final String _SQL_COUNT_USERGROUPROLE_WHERE = "SELECT COUNT(userGroupRole) FROM UserGroupRole userGroupRole WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(UserGroupRolePersistenceImpl.class);
 }

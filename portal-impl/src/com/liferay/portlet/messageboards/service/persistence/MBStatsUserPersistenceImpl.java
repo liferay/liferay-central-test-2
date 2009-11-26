@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -412,16 +413,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbStatsUser.messageCount DESC");
 
@@ -475,17 +473,14 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -507,7 +502,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbStatsUser.messageCount DESC");
 				}
@@ -546,7 +541,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		List<MBStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBStatsUser exists with the key {");
 
@@ -568,7 +563,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		List<MBStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBStatsUser exists with the key {");
 
@@ -595,17 +590,14 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+			query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 			query.append("mbStatsUser.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -627,7 +619,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbStatsUser.messageCount DESC");
 			}
@@ -670,16 +662,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbStatsUser.messageCount DESC");
 
@@ -733,17 +722,14 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -765,7 +751,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbStatsUser.messageCount DESC");
 				}
@@ -804,7 +790,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		List<MBStatsUser> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBStatsUser exists with the key {");
 
@@ -826,7 +812,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		List<MBStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBStatsUser exists with the key {");
 
@@ -853,17 +839,14 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+			query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 			query.append("mbStatsUser.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -885,7 +868,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbStatsUser.messageCount DESC");
 			}
@@ -920,7 +903,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		MBStatsUser mbStatsUser = fetchByG_U(groupId, userId);
 
 		if (mbStatsUser == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBStatsUser exists with the key {");
 
@@ -963,10 +946,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.groupId = ?");
 
@@ -974,9 +956,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append("mbStatsUser.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbStatsUser.messageCount DESC");
 
@@ -1049,10 +1029,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.groupId = ?");
 
@@ -1060,9 +1039,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append("mbStatsUser.messageCount != ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbStatsUser.messageCount DESC");
 
@@ -1118,10 +1095,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.groupId = ?");
 
@@ -1129,10 +1105,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append("mbStatsUser.messageCount != ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1154,7 +1128,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbStatsUser.messageCount DESC");
 				}
@@ -1195,7 +1169,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		List<MBStatsUser> list = findByG_M(groupId, messageCount, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBStatsUser exists with the key {");
 
@@ -1221,7 +1195,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBStatsUser exists with the key {");
 
@@ -1251,10 +1225,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ");
+			query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
 			query.append("mbStatsUser.groupId = ?");
 
@@ -1262,10 +1235,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 			query.append("mbStatsUser.messageCount != ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1287,7 +1258,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbStatsUser.messageCount DESC");
 			}
@@ -1383,12 +1354,12 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbStatsUser FROM MBStatsUser mbStatsUser ");
+				query.append(_SQL_SELECT_MBSTATSUSER);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1410,7 +1381,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbStatsUser.messageCount DESC");
 				}
@@ -1491,14 +1462,11 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbStatsUser) ");
-				query.append("FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_COUNT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1538,14 +1506,11 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbStatsUser) ");
-				query.append("FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_COUNT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1585,18 +1550,15 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbStatsUser) ");
-				query.append("FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_COUNT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbStatsUser.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1641,18 +1603,15 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbStatsUser) ");
-				query.append("FROM MBStatsUser mbStatsUser WHERE ");
+				query.append(_SQL_COUNT_MBSTATSUSER_WHERE);
 
 				query.append("mbStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbStatsUser.messageCount != ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1694,8 +1653,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(mbStatsUser) FROM MBStatsUser mbStatsUser");
+				Query q = session.createQuery(_SQL_COUNT_MBSTATSUSER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1759,5 +1717,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_MBSTATSUSER = "SELECT mbStatsUser FROM MBStatsUser mbStatsUser";
+	private static final String _SQL_SELECT_MBSTATSUSER_WHERE = "SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ";
+	private static final String _SQL_COUNT_MBSTATSUSER = "SELECT COUNT(mbStatsUser) FROM MBStatsUser mbStatsUser";
+	private static final String _SQL_COUNT_MBSTATSUSER_WHERE = "SELECT COUNT(mbStatsUser) FROM MBStatsUser mbStatsUser WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(MBStatsUserPersistenceImpl.class);
 }

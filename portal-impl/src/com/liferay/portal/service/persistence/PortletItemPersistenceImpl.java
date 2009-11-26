@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -441,18 +442,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletItem FROM PortletItem portletItem WHERE ");
+				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
 				query.append("portletItem.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("portletItem.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -506,10 +504,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletItem FROM PortletItem portletItem WHERE ");
+				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
 				query.append("portletItem.groupId = ?");
 
@@ -517,10 +514,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append("portletItem.classNameId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -578,7 +573,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		List<PortletItem> list = findByG_C(groupId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -605,7 +600,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -635,10 +630,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT portletItem FROM PortletItem portletItem WHERE ");
+			query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
 			query.append("portletItem.groupId = ?");
 
@@ -646,10 +640,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			query.append("portletItem.classNameId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -714,10 +706,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletItem FROM PortletItem portletItem WHERE ");
+				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
 				query.append("portletItem.groupId = ?");
 
@@ -741,8 +732,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				query.append(" AND ");
 
 				query.append("portletItem.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -803,10 +792,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletItem FROM PortletItem portletItem WHERE ");
+				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
 				query.append("portletItem.groupId = ?");
 
@@ -831,10 +819,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append("portletItem.classNameId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -897,7 +883,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -927,7 +913,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -960,10 +946,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT portletItem FROM PortletItem portletItem WHERE ");
+			query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
 			query.append("portletItem.groupId = ?");
 
@@ -988,10 +973,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			query.append("portletItem.classNameId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1050,7 +1033,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				classNameId);
 
 		if (portletItem == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -1106,10 +1089,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletItem FROM PortletItem portletItem WHERE ");
+				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
 				query.append("portletItem.groupId = ?");
 
@@ -1150,8 +1132,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				query.append(" AND ");
 
 				query.append("portletItem.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1283,12 +1263,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT portletItem FROM PortletItem portletItem ");
+				query.append(_SQL_SELECT_PORTLETITEM);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1385,18 +1365,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(portletItem) ");
-				query.append("FROM PortletItem portletItem WHERE ");
+				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
 				query.append("portletItem.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("portletItem.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1443,10 +1420,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(portletItem) ");
-				query.append("FROM PortletItem portletItem WHERE ");
+				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
 				query.append("portletItem.groupId = ?");
 
@@ -1470,8 +1446,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				query.append(" AND ");
 
 				query.append("portletItem.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1524,10 +1498,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(portletItem) ");
-				query.append("FROM PortletItem portletItem WHERE ");
+				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
 				query.append("portletItem.groupId = ?");
 
@@ -1568,8 +1541,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				query.append(" AND ");
 
 				query.append("portletItem.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1619,8 +1590,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(portletItem) FROM PortletItem portletItem");
+				Query q = session.createQuery(_SQL_COUNT_PORTLETITEM);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1766,5 +1736,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_PORTLETITEM = "SELECT portletItem FROM PortletItem portletItem";
+	private static final String _SQL_SELECT_PORTLETITEM_WHERE = "SELECT portletItem FROM PortletItem portletItem WHERE ";
+	private static final String _SQL_COUNT_PORTLETITEM = "SELECT COUNT(portletItem) FROM PortletItem portletItem";
+	private static final String _SQL_COUNT_PORTLETITEM_WHERE = "SELECT COUNT(portletItem) FROM PortletItem portletItem WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(PortletItemPersistenceImpl.class);
 }

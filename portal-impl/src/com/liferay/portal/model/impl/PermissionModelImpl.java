@@ -102,8 +102,11 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 		return models;
 	}
 
+	public static final String TABLE_GROUPS_PERMISSIONS = com.liferay.portal.model.impl.GroupModelImpl.TABLE_GROUPS_PERMISSIONS;
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS;
+	public static final String TABLE_ROLES_PERMISSIONS = com.liferay.portal.model.impl.RoleModelImpl.TABLE_ROLES_PERMISSIONS;
 	public static final boolean FINDER_CACHE_ENABLED_ROLES_PERMISSIONS = com.liferay.portal.model.impl.RoleModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS;
+	public static final String TABLE_USERS_PERMISSIONS = com.liferay.portal.model.impl.UserModelImpl.TABLE_USERS_PERMISSIONS;
 	public static final boolean FINDER_CACHE_ENABLED_USERS_PERMISSIONS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Permission"));

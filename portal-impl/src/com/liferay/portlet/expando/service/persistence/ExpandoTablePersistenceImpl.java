@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -402,18 +403,15 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoTable FROM ExpandoTable expandoTable WHERE ");
+				query.append(_SQL_SELECT_EXPANDOTABLE_WHERE);
 
 				query.append("expandoTable.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("expandoTable.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -467,10 +465,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoTable FROM ExpandoTable expandoTable WHERE ");
+				query.append(_SQL_SELECT_EXPANDOTABLE_WHERE);
 
 				query.append("expandoTable.companyId = ?");
 
@@ -478,10 +475,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 				query.append("expandoTable.classNameId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -538,7 +533,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		List<ExpandoTable> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoTable exists with the key {");
 
@@ -564,7 +559,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoTable exists with the key {");
 
@@ -594,10 +589,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoTable FROM ExpandoTable expandoTable WHERE ");
+			query.append(_SQL_SELECT_EXPANDOTABLE_WHERE);
 
 			query.append("expandoTable.companyId = ?");
 
@@ -605,10 +599,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 			query.append("expandoTable.classNameId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -661,7 +653,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		ExpandoTable expandoTable = fetchByC_C_N(companyId, classNameId, name);
 
 		if (expandoTable == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoTable exists with the key {");
 
@@ -711,10 +703,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoTable FROM ExpandoTable expandoTable WHERE ");
+				query.append(_SQL_SELECT_EXPANDOTABLE_WHERE);
 
 				query.append("expandoTable.companyId = ?");
 
@@ -738,8 +729,6 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -865,13 +854,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoTable FROM ExpandoTable expandoTable ");
+				query.append(_SQL_SELECT_EXPANDOTABLE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -959,18 +947,15 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoTable) ");
-				query.append("FROM ExpandoTable expandoTable WHERE ");
+				query.append(_SQL_COUNT_EXPANDOTABLE_WHERE);
 
 				query.append("expandoTable.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("expandoTable.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1017,10 +1002,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoTable) ");
-				query.append("FROM ExpandoTable expandoTable WHERE ");
+				query.append(_SQL_COUNT_EXPANDOTABLE_WHERE);
 
 				query.append("expandoTable.companyId = ?");
 
@@ -1044,8 +1028,6 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1091,8 +1073,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(expandoTable) FROM ExpandoTable expandoTable");
+				Query q = session.createQuery(_SQL_COUNT_EXPANDOTABLE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1148,5 +1129,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_EXPANDOTABLE = "SELECT expandoTable FROM ExpandoTable expandoTable";
+	private static final String _SQL_SELECT_EXPANDOTABLE_WHERE = "SELECT expandoTable FROM ExpandoTable expandoTable WHERE ";
+	private static final String _SQL_COUNT_EXPANDOTABLE = "SELECT COUNT(expandoTable) FROM ExpandoTable expandoTable";
+	private static final String _SQL_COUNT_EXPANDOTABLE_WHERE = "SELECT COUNT(expandoTable) FROM ExpandoTable expandoTable WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ExpandoTablePersistenceImpl.class);
 }

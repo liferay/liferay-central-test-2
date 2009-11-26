@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -365,16 +366,13 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
 				query.append("shoppingCategory.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingCategory.parentCategoryId ASC, ");
 				query.append("shoppingCategory.name ASC");
@@ -429,17 +427,14 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
 				query.append("shoppingCategory.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -461,7 +456,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingCategory.parentCategoryId ASC, ");
 					query.append("shoppingCategory.name ASC");
@@ -501,7 +496,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 		List<ShoppingCategory> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCategory exists with the key {");
 
@@ -524,7 +519,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCategory exists with the key {");
 
@@ -551,17 +546,14 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
+			query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
 			query.append("shoppingCategory.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -583,7 +575,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingCategory.parentCategoryId ASC, ");
 				query.append("shoppingCategory.name ASC");
@@ -629,10 +621,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
 				query.append("shoppingCategory.groupId = ?");
 
@@ -640,9 +631,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 				query.append("shoppingCategory.parentCategoryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingCategory.parentCategoryId ASC, ");
 				query.append("shoppingCategory.name ASC");
@@ -700,10 +689,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
 				query.append("shoppingCategory.groupId = ?");
 
@@ -711,10 +699,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 				query.append("shoppingCategory.parentCategoryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -736,7 +722,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingCategory.parentCategoryId ASC, ");
 					query.append("shoppingCategory.name ASC");
@@ -780,7 +766,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCategory exists with the key {");
 
@@ -806,7 +792,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCategory exists with the key {");
 
@@ -836,10 +822,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ");
+			query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
 			query.append("shoppingCategory.groupId = ?");
 
@@ -847,10 +832,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 			query.append("shoppingCategory.parentCategoryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -872,7 +855,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingCategory.parentCategoryId ASC, ");
 				query.append("shoppingCategory.name ASC");
@@ -969,13 +952,12 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCategory FROM ShoppingCategory shoppingCategory ");
+				query.append(_SQL_SELECT_SHOPPINGCATEGORY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -997,7 +979,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingCategory.parentCategoryId ASC, ");
 					query.append("shoppingCategory.name ASC");
@@ -1067,14 +1049,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingCategory) ");
-				query.append("FROM ShoppingCategory shoppingCategory WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGCATEGORY_WHERE);
 
 				query.append("shoppingCategory.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1117,18 +1096,15 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingCategory) ");
-				query.append("FROM ShoppingCategory shoppingCategory WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGCATEGORY_WHERE);
 
 				query.append("shoppingCategory.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("shoppingCategory.parentCategoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1170,8 +1146,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(shoppingCategory) FROM ShoppingCategory shoppingCategory");
+				Query q = session.createQuery(_SQL_COUNT_SHOPPINGCATEGORY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1235,5 +1210,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SHOPPINGCATEGORY = "SELECT shoppingCategory FROM ShoppingCategory shoppingCategory";
+	private static final String _SQL_SELECT_SHOPPINGCATEGORY_WHERE = "SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ";
+	private static final String _SQL_COUNT_SHOPPINGCATEGORY = "SELECT COUNT(shoppingCategory) FROM ShoppingCategory shoppingCategory";
+	private static final String _SQL_COUNT_SHOPPINGCATEGORY_WHERE = "SELECT COUNT(shoppingCategory) FROM ShoppingCategory shoppingCategory WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ShoppingCategoryPersistenceImpl.class);
 }

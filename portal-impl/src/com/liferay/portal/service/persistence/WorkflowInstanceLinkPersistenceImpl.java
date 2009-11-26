@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -388,7 +389,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				companyId, classNameId, classPK);
 
 		if (workflowInstanceLink == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WorkflowInstanceLink exists with the key {");
 
@@ -441,10 +442,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT workflowInstanceLink FROM WorkflowInstanceLink workflowInstanceLink WHERE ");
+				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
 
 				query.append("workflowInstanceLink.groupId = ?");
 
@@ -459,8 +459,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				query.append(" AND ");
 
 				query.append("workflowInstanceLink.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -586,13 +584,12 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT workflowInstanceLink FROM WorkflowInstanceLink workflowInstanceLink ");
+				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -676,11 +673,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(workflowInstanceLink) ");
-				query.append(
-					"FROM WorkflowInstanceLink workflowInstanceLink WHERE ");
+				query.append(_SQL_COUNT_WORKFLOWINSTANCELINK_WHERE);
 
 				query.append("workflowInstanceLink.groupId = ?");
 
@@ -695,8 +690,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				query.append(" AND ");
 
 				query.append("workflowInstanceLink.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -742,8 +735,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(workflowInstanceLink) FROM WorkflowInstanceLink workflowInstanceLink");
+				Query q = session.createQuery(_SQL_COUNT_WORKFLOWINSTANCELINK);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -889,5 +881,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_WORKFLOWINSTANCELINK = "SELECT workflowInstanceLink FROM WorkflowInstanceLink workflowInstanceLink";
+	private static final String _SQL_SELECT_WORKFLOWINSTANCELINK_WHERE = "SELECT workflowInstanceLink FROM WorkflowInstanceLink workflowInstanceLink WHERE ";
+	private static final String _SQL_COUNT_WORKFLOWINSTANCELINK = "SELECT COUNT(workflowInstanceLink) FROM WorkflowInstanceLink workflowInstanceLink";
+	private static final String _SQL_COUNT_WORKFLOWINSTANCELINK_WHERE = "SELECT COUNT(workflowInstanceLink) FROM WorkflowInstanceLink workflowInstanceLink WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(WorkflowInstanceLinkPersistenceImpl.class);
 }

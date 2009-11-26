@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -255,7 +256,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 
 		try {
@@ -265,7 +266,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 
 		try {
@@ -275,7 +276,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 
 		Session session = null;
@@ -491,15 +492,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role WHERE ");
+				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				query.append("role.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("role.name ASC");
 
@@ -553,16 +552,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role WHERE ");
+				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				query.append("role.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -584,7 +581,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("role.name ASC");
 				}
@@ -622,7 +619,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		List<Role> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Role exists with the key {");
 
@@ -644,7 +641,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		List<Role> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Role exists with the key {");
 
@@ -670,16 +667,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT role FROM Role role WHERE ");
+			query.append(_SQL_SELECT_ROLE_WHERE);
 
 			query.append("role.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -701,7 +696,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("role.name ASC");
 			}
@@ -742,9 +737,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role WHERE ");
+				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				if (subtype == null) {
 					query.append("role.subtype IS NULL");
@@ -761,9 +756,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("role.name ASC");
 
@@ -819,9 +812,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role WHERE ");
+				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				if (subtype == null) {
 					query.append("role.subtype IS NULL");
@@ -838,10 +831,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -863,7 +854,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("role.name ASC");
 				}
@@ -903,7 +894,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		List<Role> list = findBySubtype(subtype, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Role exists with the key {");
 
@@ -925,7 +916,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		List<Role> list = findBySubtype(subtype, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Role exists with the key {");
 
@@ -951,9 +942,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT role FROM Role role WHERE ");
+			query.append(_SQL_SELECT_ROLE_WHERE);
 
 			if (subtype == null) {
 				query.append("role.subtype IS NULL");
@@ -970,10 +961,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -995,7 +984,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("role.name ASC");
 			}
@@ -1031,7 +1020,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		Role role = fetchByC_N(companyId, name);
 
 		if (role == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Role exists with the key {");
 
@@ -1074,9 +1063,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role WHERE ");
+				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				query.append("role.companyId = ?");
 
@@ -1097,9 +1086,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("role.name ASC");
 
@@ -1173,9 +1160,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role WHERE ");
+				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				query.append("role.type = ?");
 
@@ -1196,9 +1183,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("role.name ASC");
 
@@ -1258,9 +1243,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role WHERE ");
+				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				query.append("role.type = ?");
 
@@ -1281,10 +1266,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1306,7 +1289,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("role.name ASC");
 				}
@@ -1348,7 +1331,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		List<Role> list = findByT_S(type, subtype, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Role exists with the key {");
 
@@ -1373,7 +1356,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		List<Role> list = findByT_S(type, subtype, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Role exists with the key {");
 
@@ -1402,9 +1385,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT role FROM Role role WHERE ");
+			query.append(_SQL_SELECT_ROLE_WHERE);
 
 			query.append("role.type = ?");
 
@@ -1425,10 +1408,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1450,7 +1431,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("role.name ASC");
 			}
@@ -1488,7 +1469,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		Role role = fetchByC_C_C(companyId, classNameId, classPK);
 
 		if (role == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Role exists with the key {");
 
@@ -1536,9 +1517,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role WHERE ");
+				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				query.append("role.companyId = ?");
 
@@ -1550,9 +1531,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append("role.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("role.name ASC");
 
@@ -1676,12 +1655,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT role FROM Role role ");
+				query.append(_SQL_SELECT_ROLE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1703,7 +1682,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("role.name ASC");
 				}
@@ -1790,14 +1769,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(role) ");
-				query.append("FROM Role role WHERE ");
+				query.append(_SQL_COUNT_ROLE_WHERE);
 
 				query.append("role.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1837,10 +1813,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(role) ");
-				query.append("FROM Role role WHERE ");
+				query.append(_SQL_COUNT_ROLE_WHERE);
 
 				if (subtype == null) {
 					query.append("role.subtype IS NULL");
@@ -1856,8 +1831,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1900,10 +1873,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(role) ");
-				query.append("FROM Role role WHERE ");
+				query.append(_SQL_COUNT_ROLE_WHERE);
 
 				query.append("role.companyId = ?");
 
@@ -1923,8 +1895,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1968,10 +1938,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(role) ");
-				query.append("FROM Role role WHERE ");
+				query.append(_SQL_COUNT_ROLE_WHERE);
 
 				query.append("role.type = ?");
 
@@ -1991,8 +1960,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2039,10 +2006,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(role) ");
-				query.append("FROM Role role WHERE ");
+				query.append(_SQL_COUNT_ROLE_WHERE);
 
 				query.append("role.companyId = ?");
 
@@ -2053,8 +2019,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				query.append(" AND ");
 
 				query.append("role.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2098,8 +2062,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(role) FROM Role role");
+				Query q = session.createQuery(_SQL_COUNT_ROLE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2132,8 +2095,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES, "Groups_Roles",
-			"getGroups",
+			RoleModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES,
+			RoleModelImpl.TABLE_GROUPS_ROLES, "getGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -2155,17 +2118,17 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETGROUPS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("Group_.name ASC");
 				}
@@ -2205,8 +2168,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES, "Groups_Roles",
-			"getGroupsSize", new String[] { Long.class.getName() });
+			RoleModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES,
+			RoleModelImpl.TABLE_GROUPS_ROLES, "getGroupsSize",
+			new String[] { Long.class.getName() });
 
 	public int getGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -2249,8 +2213,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES, "Groups_Roles",
-			"containsGroup",
+			RoleModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES,
+			RoleModelImpl.TABLE_GROUPS_ROLES, "containsGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsGroup(long pk, long groupPK)
@@ -2297,7 +2261,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2310,7 +2274,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2324,7 +2288,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2339,7 +2303,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2351,7 +2315,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2363,7 +2327,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2376,7 +2340,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2391,7 +2355,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2406,7 +2370,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2433,7 +2397,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2454,7 +2418,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_GROUPS_ROLES);
 		}
 	}
 
@@ -2470,7 +2434,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			"Roles_Permissions", "getPermissions",
+			RoleModelImpl.TABLE_ROLES_PERMISSIONS, "getPermissions",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -2492,12 +2456,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETPERMISSIONS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
@@ -2537,7 +2501,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS_SIZE = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			"Roles_Permissions", "getPermissionsSize",
+			RoleModelImpl.TABLE_ROLES_PERMISSIONS, "getPermissionsSize",
 			new String[] { Long.class.getName() });
 
 	public int getPermissionsSize(long pk) throws SystemException {
@@ -2582,7 +2546,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_PERMISSION = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			"Roles_Permissions", "containsPermission",
+			RoleModelImpl.TABLE_ROLES_PERMISSIONS, "containsPermission",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsPermission(long pk, long permissionPK)
@@ -2631,7 +2595,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2645,7 +2609,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2660,7 +2624,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2676,7 +2640,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2688,7 +2652,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2701,7 +2665,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2715,7 +2679,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2730,7 +2694,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2746,7 +2710,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2774,7 +2738,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2796,7 +2760,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -2811,8 +2775,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES, "Users_Roles",
-			"getUsers",
+			RoleModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
+			RoleModelImpl.TABLE_USERS_ROLES, "getUsers",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -2834,12 +2798,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETUSERS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
@@ -2878,8 +2842,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_USERS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES, "Users_Roles",
-			"getUsersSize", new String[] { Long.class.getName() });
+			RoleModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
+			RoleModelImpl.TABLE_USERS_ROLES, "getUsersSize",
+			new String[] { Long.class.getName() });
 
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -2922,8 +2887,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USER = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES, "Users_Roles",
-			"containsUser",
+			RoleModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
+			RoleModelImpl.TABLE_USERS_ROLES, "containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -2969,7 +2934,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -2982,7 +2947,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -2996,7 +2961,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3011,7 +2976,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3023,7 +2988,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3035,7 +3000,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3048,7 +3013,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3062,7 +3027,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3077,7 +3042,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3104,7 +3069,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3125,7 +3090,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(RoleModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -3783,6 +3748,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		private RolePersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_ROLE = "SELECT role FROM Role role";
+	private static final String _SQL_SELECT_ROLE_WHERE = "SELECT role FROM Role role WHERE ";
+	private static final String _SQL_COUNT_ROLE = "SELECT COUNT(role) FROM Role role";
+	private static final String _SQL_COUNT_ROLE_WHERE = "SELECT COUNT(role) FROM Role role WHERE ";
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Roles ON (Groups_Roles.groupId = Group_.groupId) WHERE (Groups_Roles.roleId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ? AND groupId = ?";

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -455,16 +456,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.productEntryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductScreenshot.productEntryId ASC, ");
 				query.append("scProductScreenshot.priority ASC");
@@ -519,17 +517,14 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.productEntryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -551,7 +546,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scProductScreenshot.productEntryId ASC, ");
 					query.append("scProductScreenshot.priority ASC");
@@ -593,7 +588,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -617,7 +612,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -644,17 +639,14 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
+			query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 			query.append("scProductScreenshot.productEntryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -676,7 +668,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductScreenshot.productEntryId ASC, ");
 				query.append("scProductScreenshot.priority ASC");
@@ -712,7 +704,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		SCProductScreenshot scProductScreenshot = fetchByThumbnailId(thumbnailId);
 
 		if (scProductScreenshot == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -752,16 +744,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.thumbnailId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductScreenshot.productEntryId ASC, ");
 				query.append("scProductScreenshot.priority ASC");
@@ -822,7 +811,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		SCProductScreenshot scProductScreenshot = fetchByFullImageId(fullImageId);
 
 		if (scProductScreenshot == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -862,16 +851,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.fullImageId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductScreenshot.productEntryId ASC, ");
 				query.append("scProductScreenshot.priority ASC");
@@ -933,7 +919,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				priority);
 
 		if (scProductScreenshot == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -978,10 +964,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.productEntryId = ?");
 
@@ -989,9 +974,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append("scProductScreenshot.priority = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductScreenshot.productEntryId ASC, ");
 				query.append("scProductScreenshot.priority ASC");
@@ -1114,13 +1097,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot ");
+				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1142,7 +1124,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scProductScreenshot.productEntryId ASC, ");
 					query.append("scProductScreenshot.priority ASC");
@@ -1229,15 +1211,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scProductScreenshot) ");
-				query.append(
-					"FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.productEntryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1277,15 +1255,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scProductScreenshot) ");
-				query.append(
-					"FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.thumbnailId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1325,15 +1299,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scProductScreenshot) ");
-				query.append(
-					"FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.fullImageId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1376,19 +1346,15 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scProductScreenshot) ");
-				query.append(
-					"FROM SCProductScreenshot scProductScreenshot WHERE ");
+				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append("scProductScreenshot.productEntryId = ?");
 
 				query.append(" AND ");
 
 				query.append("scProductScreenshot.priority = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1430,8 +1396,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot");
+				Query q = session.createQuery(_SQL_COUNT_SCPRODUCTSCREENSHOT);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1491,5 +1456,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SCPRODUCTSCREENSHOT = "SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot";
+	private static final String _SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE = "SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ";
+	private static final String _SQL_COUNT_SCPRODUCTSCREENSHOT = "SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot";
+	private static final String _SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE = "SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(SCProductScreenshotPersistenceImpl.class);
 }

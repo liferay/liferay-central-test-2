@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -422,10 +423,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
+				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
 					query.append("pollsQuestion.uuid IS NULL");
@@ -442,9 +442,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("pollsQuestion.createDate DESC");
 
@@ -500,10 +498,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
+				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
 					query.append("pollsQuestion.uuid IS NULL");
@@ -520,10 +517,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -545,7 +540,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("pollsQuestion.createDate DESC");
 				}
@@ -586,7 +581,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		List<PollsQuestion> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -608,7 +603,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		List<PollsQuestion> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -634,10 +629,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
+			query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 			if (uuid == null) {
 				query.append("pollsQuestion.uuid IS NULL");
@@ -654,10 +648,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -679,7 +671,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("pollsQuestion.createDate DESC");
 			}
@@ -716,7 +708,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		PollsQuestion pollsQuestion = fetchByUUID_G(uuid, groupId);
 
 		if (pollsQuestion == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -759,10 +751,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
+				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
 					query.append("pollsQuestion.uuid IS NULL");
@@ -783,9 +774,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				query.append("pollsQuestion.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("pollsQuestion.createDate DESC");
 
@@ -859,16 +848,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
+				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 				query.append("pollsQuestion.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("pollsQuestion.createDate DESC");
 
@@ -922,17 +908,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
+				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 				query.append("pollsQuestion.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -954,7 +937,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("pollsQuestion.createDate DESC");
 				}
@@ -993,7 +976,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		List<PollsQuestion> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -1015,7 +998,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		List<PollsQuestion> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -1042,17 +1025,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ");
+			query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 			query.append("pollsQuestion.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1074,7 +1054,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("pollsQuestion.createDate DESC");
 			}
@@ -1168,13 +1148,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pollsQuestion FROM PollsQuestion pollsQuestion ");
+				query.append(_SQL_SELECT_POLLSQUESTION);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1196,7 +1175,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("pollsQuestion.createDate DESC");
 				}
@@ -1270,10 +1249,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(pollsQuestion) ");
-				query.append("FROM PollsQuestion pollsQuestion WHERE ");
+				query.append(_SQL_COUNT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
 					query.append("pollsQuestion.uuid IS NULL");
@@ -1289,8 +1267,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1333,10 +1309,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(pollsQuestion) ");
-				query.append("FROM PollsQuestion pollsQuestion WHERE ");
+				query.append(_SQL_COUNT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
 					query.append("pollsQuestion.uuid IS NULL");
@@ -1356,8 +1331,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query.append(" AND ");
 
 				query.append("pollsQuestion.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1401,14 +1374,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(pollsQuestion) ");
-				query.append("FROM PollsQuestion pollsQuestion WHERE ");
+				query.append(_SQL_COUNT_POLLSQUESTION_WHERE);
 
 				query.append("pollsQuestion.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1448,8 +1418,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(pollsQuestion) FROM PollsQuestion pollsQuestion");
+				Query q = session.createQuery(_SQL_COUNT_POLLSQUESTION);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1503,5 +1472,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_POLLSQUESTION = "SELECT pollsQuestion FROM PollsQuestion pollsQuestion";
+	private static final String _SQL_SELECT_POLLSQUESTION_WHERE = "SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ";
+	private static final String _SQL_COUNT_POLLSQUESTION = "SELECT COUNT(pollsQuestion) FROM PollsQuestion pollsQuestion";
+	private static final String _SQL_COUNT_POLLSQUESTION_WHERE = "SELECT COUNT(pollsQuestion) FROM PollsQuestion pollsQuestion WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(PollsQuestionPersistenceImpl.class);
 }

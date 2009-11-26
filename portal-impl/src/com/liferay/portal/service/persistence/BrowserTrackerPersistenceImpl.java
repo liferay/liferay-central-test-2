@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.BrowserTracker;
@@ -347,7 +348,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		BrowserTracker browserTracker = fetchByUserId(userId);
 
 		if (browserTracker == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BrowserTracker exists with the key {");
 
@@ -386,14 +387,11 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT browserTracker FROM BrowserTracker browserTracker WHERE ");
+				query.append(_SQL_SELECT_BROWSERTRACKER_WHERE);
 
 				query.append("browserTracker.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -510,13 +508,12 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT browserTracker FROM BrowserTracker browserTracker ");
+				query.append(_SQL_SELECT_BROWSERTRACKER);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -594,14 +591,11 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(browserTracker) ");
-				query.append("FROM BrowserTracker browserTracker WHERE ");
+				query.append(_SQL_COUNT_BROWSERTRACKER_WHERE);
 
 				query.append("browserTracker.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -641,8 +635,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(browserTracker) FROM BrowserTracker browserTracker");
+				Query q = session.createQuery(_SQL_COUNT_BROWSERTRACKER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -788,5 +781,9 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_BROWSERTRACKER = "SELECT browserTracker FROM BrowserTracker browserTracker";
+	private static final String _SQL_SELECT_BROWSERTRACKER_WHERE = "SELECT browserTracker FROM BrowserTracker browserTracker WHERE ";
+	private static final String _SQL_COUNT_BROWSERTRACKER = "SELECT COUNT(browserTracker) FROM BrowserTracker browserTracker";
+	private static final String _SQL_COUNT_BROWSERTRACKER_WHERE = "SELECT COUNT(browserTracker) FROM BrowserTracker browserTracker WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(BrowserTrackerPersistenceImpl.class);
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -409,14 +410,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
+				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 				query.append("resourceCode.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -468,17 +466,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
+				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 				query.append("resourceCode.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -534,7 +529,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		List<ResourceCode> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ResourceCode exists with the key {");
 
@@ -558,7 +553,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ResourceCode exists with the key {");
 
@@ -585,17 +580,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
+			query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 			query.append("resourceCode.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -653,10 +645,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
+				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 				if (name == null) {
 					query.append("resourceCode.name IS NULL");
@@ -672,8 +663,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -727,10 +716,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
+				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 				if (name == null) {
 					query.append("resourceCode.name IS NULL");
@@ -747,10 +735,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -807,7 +793,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		List<ResourceCode> list = findByName(name, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ResourceCode exists with the key {");
 
@@ -829,7 +815,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		List<ResourceCode> list = findByName(name, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ResourceCode exists with the key {");
 
@@ -856,10 +842,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
+			query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 			if (name == null) {
 				query.append("resourceCode.name IS NULL");
@@ -876,10 +861,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -932,7 +915,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		ResourceCode resourceCode = fetchByC_N_S(companyId, name, scope);
 
 		if (resourceCode == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ResourceCode exists with the key {");
 
@@ -982,10 +965,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceCode FROM ResourceCode resourceCode WHERE ");
+				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 				query.append("resourceCode.companyId = ?");
 
@@ -1009,8 +991,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				query.append(" AND ");
 
 				query.append("resourceCode.scope = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1136,13 +1116,12 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceCode FROM ResourceCode resourceCode ");
+				query.append(_SQL_SELECT_RESOURCECODE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1232,14 +1211,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(resourceCode) ");
-				query.append("FROM ResourceCode resourceCode WHERE ");
+				query.append(_SQL_COUNT_RESOURCECODE_WHERE);
 
 				query.append("resourceCode.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1279,10 +1255,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(resourceCode) ");
-				query.append("FROM ResourceCode resourceCode WHERE ");
+				query.append(_SQL_COUNT_RESOURCECODE_WHERE);
 
 				if (name == null) {
 					query.append("resourceCode.name IS NULL");
@@ -1298,8 +1273,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1346,10 +1319,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(resourceCode) ");
-				query.append("FROM ResourceCode resourceCode WHERE ");
+				query.append(_SQL_COUNT_RESOURCECODE_WHERE);
 
 				query.append("resourceCode.companyId = ?");
 
@@ -1373,8 +1345,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				query.append(" AND ");
 
 				query.append("resourceCode.scope = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1420,8 +1390,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(resourceCode) FROM ResourceCode resourceCode");
+				Query q = session.createQuery(_SQL_COUNT_RESOURCECODE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1567,5 +1536,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_RESOURCECODE = "SELECT resourceCode FROM ResourceCode resourceCode";
+	private static final String _SQL_SELECT_RESOURCECODE_WHERE = "SELECT resourceCode FROM ResourceCode resourceCode WHERE ";
+	private static final String _SQL_COUNT_RESOURCECODE = "SELECT COUNT(resourceCode) FROM ResourceCode resourceCode";
+	private static final String _SQL_COUNT_RESOURCECODE_WHERE = "SELECT COUNT(resourceCode) FROM ResourceCode resourceCode WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ResourceCodePersistenceImpl.class);
 }

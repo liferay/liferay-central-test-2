@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -401,14 +402,11 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
 				query.append("shoppingCart.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -460,17 +458,14 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
 				query.append("shoppingCart.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -525,7 +520,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		List<ShoppingCart> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCart exists with the key {");
 
@@ -547,7 +542,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		List<ShoppingCart> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCart exists with the key {");
 
@@ -573,17 +568,14 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
+			query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
 			query.append("shoppingCart.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -642,14 +634,11 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
 				query.append("shoppingCart.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -701,17 +690,14 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
 				query.append("shoppingCart.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -766,7 +752,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		List<ShoppingCart> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCart exists with the key {");
 
@@ -788,7 +774,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		List<ShoppingCart> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCart exists with the key {");
 
@@ -814,17 +800,14 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
+			query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
 			query.append("shoppingCart.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -875,7 +858,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		ShoppingCart shoppingCart = fetchByG_U(groupId, userId);
 
 		if (shoppingCart == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCart exists with the key {");
 
@@ -918,18 +901,15 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
 				query.append("shoppingCart.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("shoppingCart.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1049,13 +1029,12 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCart FROM ShoppingCart shoppingCart ");
+				query.append(_SQL_SELECT_SHOPPINGCART);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1145,14 +1124,11 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingCart) ");
-				query.append("FROM ShoppingCart shoppingCart WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGCART_WHERE);
 
 				query.append("shoppingCart.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1192,14 +1168,11 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingCart) ");
-				query.append("FROM ShoppingCart shoppingCart WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGCART_WHERE);
 
 				query.append("shoppingCart.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1239,18 +1212,15 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingCart) ");
-				query.append("FROM ShoppingCart shoppingCart WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGCART_WHERE);
 
 				query.append("shoppingCart.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("shoppingCart.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1292,8 +1262,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(shoppingCart) FROM ShoppingCart shoppingCart");
+				Query q = session.createQuery(_SQL_COUNT_SHOPPINGCART);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1357,5 +1326,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SHOPPINGCART = "SELECT shoppingCart FROM ShoppingCart shoppingCart";
+	private static final String _SQL_SELECT_SHOPPINGCART_WHERE = "SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ";
+	private static final String _SQL_COUNT_SHOPPINGCART = "SELECT COUNT(shoppingCart) FROM ShoppingCart shoppingCart";
+	private static final String _SQL_COUNT_SHOPPINGCART_WHERE = "SELECT COUNT(shoppingCart) FROM ShoppingCart shoppingCart WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ShoppingCartPersistenceImpl.class);
 }

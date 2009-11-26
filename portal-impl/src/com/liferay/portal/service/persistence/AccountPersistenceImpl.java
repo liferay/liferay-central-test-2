@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.ModelListener;
@@ -371,12 +372,12 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT account FROM Account account ");
+				query.append(_SQL_SELECT_ACCOUNT);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -447,8 +448,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(account) FROM Account account");
+				Query q = session.createQuery(_SQL_COUNT_ACCOUNT);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -594,5 +594,9 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_ACCOUNT = "SELECT account FROM Account account";
+	private static final String _SQL_SELECT_ACCOUNT_WHERE = "SELECT account FROM Account account WHERE ";
+	private static final String _SQL_COUNT_ACCOUNT = "SELECT COUNT(account) FROM Account account";
+	private static final String _SQL_COUNT_ACCOUNT_WHERE = "SELECT COUNT(account) FROM Account account WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(AccountPersistenceImpl.class);
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -390,10 +391,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
+				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
 					query.append("serviceComponent.buildNamespace IS NULL");
@@ -411,9 +411,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("serviceComponent.buildNamespace DESC, ");
 				query.append("serviceComponent.buildNumber DESC");
@@ -470,10 +468,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
+				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
 					query.append("serviceComponent.buildNamespace IS NULL");
@@ -491,10 +488,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -516,7 +511,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("serviceComponent.buildNamespace DESC, ");
 					query.append("serviceComponent.buildNumber DESC");
@@ -560,7 +555,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ServiceComponent exists with the key {");
 
@@ -584,7 +579,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ServiceComponent exists with the key {");
 
@@ -611,10 +606,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
+			query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
 			if (buildNamespace == null) {
 				query.append("serviceComponent.buildNamespace IS NULL");
@@ -631,10 +625,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -656,7 +648,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("serviceComponent.buildNamespace DESC, ");
 				query.append("serviceComponent.buildNumber DESC");
@@ -696,7 +688,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				buildNumber);
 
 		if (serviceComponent == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ServiceComponent exists with the key {");
 
@@ -739,10 +731,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ");
+				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
 					query.append("serviceComponent.buildNamespace IS NULL");
@@ -764,9 +755,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 				query.append("serviceComponent.buildNumber = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("serviceComponent.buildNamespace DESC, ");
 				query.append("serviceComponent.buildNumber DESC");
@@ -893,13 +882,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT serviceComponent FROM ServiceComponent serviceComponent ");
+				query.append(_SQL_SELECT_SERVICECOMPONENT);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -921,7 +909,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("serviceComponent.buildNamespace DESC, ");
 					query.append("serviceComponent.buildNumber DESC");
@@ -994,10 +982,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(serviceComponent) ");
-				query.append("FROM ServiceComponent serviceComponent WHERE ");
+				query.append(_SQL_COUNT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
 					query.append("serviceComponent.buildNamespace IS NULL");
@@ -1014,8 +1001,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1058,10 +1043,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(serviceComponent) ");
-				query.append("FROM ServiceComponent serviceComponent WHERE ");
+				query.append(_SQL_COUNT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
 					query.append("serviceComponent.buildNamespace IS NULL");
@@ -1082,8 +1066,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				query.append(" AND ");
 
 				query.append("serviceComponent.buildNumber = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1127,8 +1109,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent");
+				Query q = session.createQuery(_SQL_COUNT_SERVICECOMPONENT);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1274,5 +1255,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_SERVICECOMPONENT = "SELECT serviceComponent FROM ServiceComponent serviceComponent";
+	private static final String _SQL_SELECT_SERVICECOMPONENT_WHERE = "SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ";
+	private static final String _SQL_COUNT_SERVICECOMPONENT = "SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent";
+	private static final String _SQL_COUNT_SERVICECOMPONENT_WHERE = "SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ServiceComponentPersistenceImpl.class);
 }

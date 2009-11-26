@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -498,10 +499,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
 					query.append("dlFileShortcut.uuid IS NULL");
@@ -517,8 +517,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -572,10 +570,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
 					query.append("dlFileShortcut.uuid IS NULL");
@@ -592,10 +589,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -652,7 +647,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		List<DLFileShortcut> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -674,7 +669,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		List<DLFileShortcut> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -701,10 +696,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			if (uuid == null) {
 				query.append("dlFileShortcut.uuid IS NULL");
@@ -721,10 +715,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -777,7 +769,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		DLFileShortcut dlFileShortcut = fetchByUUID_G(uuid, groupId);
 
 		if (dlFileShortcut == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -820,10 +812,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
 					query.append("dlFileShortcut.uuid IS NULL");
@@ -843,8 +834,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(" AND ");
 
 				query.append("dlFileShortcut.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -916,18 +905,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("dlFileShortcut.folderId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -981,10 +967,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -992,10 +977,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append("dlFileShortcut.folderId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1053,7 +1036,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		List<DLFileShortcut> list = findByG_F(groupId, folderId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -1080,7 +1063,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -1110,10 +1093,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			query.append("dlFileShortcut.groupId = ?");
 
@@ -1121,10 +1103,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			query.append("dlFileShortcut.folderId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1187,10 +1167,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -1201,8 +1180,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(" AND ");
 
 				query.append("dlFileShortcut.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1259,10 +1236,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -1274,10 +1250,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append("dlFileShortcut.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1338,7 +1312,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -1368,7 +1342,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -1401,10 +1375,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			query.append("dlFileShortcut.groupId = ?");
 
@@ -1416,10 +1389,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			query.append("dlFileShortcut.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1486,10 +1457,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -1513,8 +1483,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1575,10 +1543,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -1603,10 +1570,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1669,7 +1634,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -1699,7 +1664,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -1732,10 +1697,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			query.append("dlFileShortcut.groupId = ?");
 
@@ -1760,10 +1724,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1832,10 +1794,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -1863,8 +1824,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(" AND ");
 
 				query.append("dlFileShortcut.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1929,10 +1888,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -1961,10 +1919,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append("dlFileShortcut.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2029,7 +1985,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				toName, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -2062,7 +2018,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				toName, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileShortcut exists with the key {");
 
@@ -2099,10 +2055,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ");
+			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			query.append("dlFileShortcut.groupId = ?");
 
@@ -2131,10 +2086,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			query.append("dlFileShortcut.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2252,13 +2205,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut ");
+				query.append(_SQL_SELECT_DLFILESHORTCUT);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2373,10 +2325,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileShortcut) ");
-				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
 					query.append("dlFileShortcut.uuid IS NULL");
@@ -2392,8 +2343,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2436,10 +2385,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileShortcut) ");
-				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
 					query.append("dlFileShortcut.uuid IS NULL");
@@ -2459,8 +2407,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(" AND ");
 
 				query.append("dlFileShortcut.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2505,18 +2451,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileShortcut) ");
-				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("dlFileShortcut.folderId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2561,10 +2504,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileShortcut) ");
-				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -2575,8 +2517,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(" AND ");
 
 				query.append("dlFileShortcut.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2625,10 +2565,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileShortcut) ");
-				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -2652,8 +2591,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2704,10 +2641,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileShortcut) ");
-				query.append("FROM DLFileShortcut dlFileShortcut WHERE ");
+				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 				query.append("dlFileShortcut.groupId = ?");
 
@@ -2735,8 +2671,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(" AND ");
 
 				query.append("dlFileShortcut.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2784,8 +2718,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(dlFileShortcut) FROM DLFileShortcut dlFileShortcut");
+				Query q = session.createQuery(_SQL_COUNT_DLFILESHORTCUT);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2847,5 +2780,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
+	private static final String _SQL_SELECT_DLFILESHORTCUT = "SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut";
+	private static final String _SQL_SELECT_DLFILESHORTCUT_WHERE = "SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ";
+	private static final String _SQL_COUNT_DLFILESHORTCUT = "SELECT COUNT(dlFileShortcut) FROM DLFileShortcut dlFileShortcut";
+	private static final String _SQL_COUNT_DLFILESHORTCUT_WHERE = "SELECT COUNT(dlFileShortcut) FROM DLFileShortcut dlFileShortcut WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(DLFileShortcutPersistenceImpl.class);
 }

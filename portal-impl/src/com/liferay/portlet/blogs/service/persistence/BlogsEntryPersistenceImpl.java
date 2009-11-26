@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -704,10 +705,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				if (uuid == null) {
 					query.append("blogsEntry.uuid IS NULL");
@@ -724,9 +724,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -782,10 +780,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				if (uuid == null) {
 					query.append("blogsEntry.uuid IS NULL");
@@ -802,10 +799,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -827,7 +822,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -868,7 +863,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -890,7 +885,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -916,9 +911,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			if (uuid == null) {
 				query.append("blogsEntry.uuid IS NULL");
@@ -935,10 +930,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -960,7 +953,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -997,7 +990,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		BlogsEntry blogsEntry = fetchByUUID_G(uuid, groupId);
 
 		if (blogsEntry == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -1040,10 +1033,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				if (uuid == null) {
 					query.append("blogsEntry.uuid IS NULL");
@@ -1064,9 +1056,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -1140,16 +1130,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -1203,17 +1190,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1235,7 +1219,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -1274,7 +1258,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -1296,7 +1280,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -1322,16 +1306,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1353,7 +1335,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -1396,16 +1378,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -1459,17 +1438,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1491,7 +1467,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -1530,7 +1506,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -1552,7 +1528,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -1579,16 +1555,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1610,7 +1584,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -1653,10 +1627,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -1664,9 +1637,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -1722,10 +1693,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -1733,10 +1703,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1758,7 +1726,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -1799,7 +1767,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByC_U(companyId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -1825,7 +1793,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -1855,9 +1823,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.companyId = ?");
 
@@ -1865,10 +1833,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			query.append("blogsEntry.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1890,7 +1856,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -1935,10 +1901,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -1951,9 +1916,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					query.append("blogsEntry.displayDate < ?");
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -2013,10 +1976,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -2029,10 +1991,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					query.append("blogsEntry.displayDate < ?");
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2054,7 +2014,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -2097,7 +2057,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByC_D(companyId, displayDate, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -2123,7 +2083,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -2153,9 +2113,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.companyId = ?");
 
@@ -2168,10 +2128,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append("blogsEntry.displayDate < ?");
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2193,7 +2151,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -2242,10 +2200,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -2253,9 +2210,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -2311,10 +2266,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -2322,10 +2276,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2347,7 +2299,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -2388,7 +2340,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByC_S(companyId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -2414,7 +2366,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -2444,9 +2396,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.companyId = ?");
 
@@ -2454,10 +2406,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			query.append("blogsEntry.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2479,7 +2429,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -2516,7 +2466,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		BlogsEntry blogsEntry = fetchByG_UT(groupId, urlTitle);
 
 		if (blogsEntry == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -2559,10 +2509,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -2583,9 +2532,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -2659,10 +2606,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -2675,9 +2621,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					query.append("blogsEntry.displayDate < ?");
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -2737,10 +2681,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -2753,10 +2696,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					query.append("blogsEntry.displayDate < ?");
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2778,7 +2719,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -2821,7 +2762,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByG_D(groupId, displayDate, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -2847,7 +2788,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -2877,9 +2818,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.groupId = ?");
 
@@ -2892,10 +2833,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append("blogsEntry.displayDate < ?");
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2917,7 +2856,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -2966,10 +2905,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -2977,9 +2915,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -3035,10 +2971,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -3046,10 +2981,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3071,7 +3004,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -3112,7 +3045,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByG_S(groupId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -3137,7 +3070,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByG_S(groupId, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -3167,9 +3100,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.groupId = ?");
 
@@ -3177,10 +3110,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			query.append("blogsEntry.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3202,7 +3133,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -3249,10 +3180,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -3264,9 +3194,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -3325,10 +3253,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -3340,10 +3267,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3365,7 +3290,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -3409,7 +3334,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByC_U_S(companyId, userId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -3438,7 +3363,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -3471,9 +3396,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.companyId = ?");
 
@@ -3485,10 +3410,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			query.append("blogsEntry.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3510,7 +3433,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -3561,10 +3484,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -3581,9 +3503,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -3646,10 +3566,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -3666,10 +3585,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3691,7 +3608,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -3738,7 +3655,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -3768,7 +3685,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -3801,9 +3718,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.companyId = ?");
 
@@ -3820,10 +3737,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			query.append("blogsEntry.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3845,7 +3760,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -3898,10 +3813,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -3918,9 +3832,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					query.append("blogsEntry.displayDate < ?");
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -3983,10 +3895,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -4003,10 +3914,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					query.append("blogsEntry.displayDate < ?");
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -4028,7 +3937,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -4075,7 +3984,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -4105,7 +4014,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -4138,9 +4047,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.groupId = ?");
 
@@ -4157,10 +4066,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append("blogsEntry.displayDate < ?");
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -4182,7 +4089,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -4233,10 +4140,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -4248,9 +4154,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -4308,10 +4212,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -4323,10 +4226,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -4348,7 +4249,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -4391,7 +4292,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		List<BlogsEntry> list = findByG_U_S(groupId, userId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -4420,7 +4321,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -4453,9 +4354,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.groupId = ?");
 
@@ -4467,10 +4368,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			query.append("blogsEntry.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -4492,7 +4391,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -4543,10 +4442,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -4563,9 +4461,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -4628,10 +4524,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -4648,10 +4543,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -4673,7 +4566,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -4720,7 +4613,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -4750,7 +4643,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -4783,9 +4676,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.groupId = ?");
 
@@ -4802,10 +4695,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			query.append("blogsEntry.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -4827,7 +4718,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -4880,10 +4771,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -4904,9 +4794,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 
@@ -4973,10 +4861,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -4997,10 +4884,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 				query.append("blogsEntry.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -5022,7 +4907,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -5071,7 +4956,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -5104,7 +4989,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsEntry exists with the key {");
 
@@ -5140,9 +5025,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+			query.append(_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append("blogsEntry.groupId = ?");
 
@@ -5163,10 +5048,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			query.append("blogsEntry.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -5188,7 +5071,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsEntry.displayDate DESC");
 			}
@@ -5290,12 +5173,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry ");
+				query.append(_SQL_SELECT_BLOGSENTRY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -5317,7 +5200,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsEntry.displayDate DESC");
 				}
@@ -5481,10 +5364,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				if (uuid == null) {
 					query.append("blogsEntry.uuid IS NULL");
@@ -5500,8 +5382,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5544,10 +5424,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				if (uuid == null) {
 					query.append("blogsEntry.uuid IS NULL");
@@ -5567,8 +5446,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append(" AND ");
 
 				query.append("blogsEntry.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5612,14 +5489,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5659,14 +5533,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5707,18 +5578,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("blogsEntry.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5761,10 +5629,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -5776,8 +5643,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				else {
 					query.append("blogsEntry.displayDate < ?");
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5823,18 +5688,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5877,10 +5739,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -5900,8 +5761,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5946,10 +5805,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -5961,8 +5819,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				else {
 					query.append("blogsEntry.displayDate < ?");
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6008,18 +5864,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6064,10 +5917,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -6078,8 +5930,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append(" AND ");
 
 				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6128,10 +5978,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.companyId = ?");
 
@@ -6147,8 +5996,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append(" AND ");
 
 				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6199,10 +6046,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -6218,8 +6064,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				else {
 					query.append("blogsEntry.displayDate < ?");
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6268,10 +6112,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -6282,8 +6125,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append(" AND ");
 
 				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6332,10 +6173,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -6351,8 +6191,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append(" AND ");
 
 				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6403,10 +6241,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
+				query.append(_SQL_COUNT_BLOGSENTRY_WHERE);
 
 				query.append("blogsEntry.groupId = ?");
 
@@ -6426,8 +6263,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query.append(" AND ");
 
 				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6475,8 +6310,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(blogsEntry) FROM BlogsEntry blogsEntry");
+				Query q = session.createQuery(_SQL_COUNT_BLOGSENTRY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -6546,5 +6380,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _SQL_SELECT_BLOGSENTRY = "SELECT blogsEntry FROM BlogsEntry blogsEntry";
+	private static final String _SQL_SELECT_BLOGSENTRY_WHERE = "SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ";
+	private static final String _SQL_COUNT_BLOGSENTRY = "SELECT COUNT(blogsEntry) FROM BlogsEntry blogsEntry";
+	private static final String _SQL_COUNT_BLOGSENTRY_WHERE = "SELECT COUNT(blogsEntry) FROM BlogsEntry blogsEntry WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(BlogsEntryPersistenceImpl.class);
 }

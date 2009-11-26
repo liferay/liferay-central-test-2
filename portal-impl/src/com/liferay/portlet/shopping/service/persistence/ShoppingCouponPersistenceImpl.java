@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -387,16 +388,13 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCOUPON_WHERE);
 
 				query.append("shoppingCoupon.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingCoupon.createDate ASC");
 
@@ -450,17 +448,14 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCOUPON_WHERE);
 
 				query.append("shoppingCoupon.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -482,7 +477,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingCoupon.createDate ASC");
 				}
@@ -521,7 +516,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		List<ShoppingCoupon> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCoupon exists with the key {");
 
@@ -543,7 +538,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		List<ShoppingCoupon> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCoupon exists with the key {");
 
@@ -570,17 +565,14 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
+			query.append(_SQL_SELECT_SHOPPINGCOUPON_WHERE);
 
 			query.append("shoppingCoupon.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -602,7 +594,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingCoupon.createDate ASC");
 			}
@@ -637,7 +629,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		ShoppingCoupon shoppingCoupon = fetchByCode(code);
 
 		if (shoppingCoupon == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingCoupon exists with the key {");
 
@@ -676,10 +668,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGCOUPON_WHERE);
 
 				if (code == null) {
 					query.append("shoppingCoupon.code IS NULL");
@@ -696,9 +687,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingCoupon.createDate ASC");
 
@@ -820,13 +809,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon ");
+				query.append(_SQL_SELECT_SHOPPINGCOUPON);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -848,7 +836,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingCoupon.createDate ASC");
 				}
@@ -916,14 +904,11 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingCoupon) ");
-				query.append("FROM ShoppingCoupon shoppingCoupon WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGCOUPON_WHERE);
 
 				query.append("shoppingCoupon.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -963,10 +948,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingCoupon) ");
-				query.append("FROM ShoppingCoupon shoppingCoupon WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGCOUPON_WHERE);
 
 				if (code == null) {
 					query.append("shoppingCoupon.code IS NULL");
@@ -982,8 +966,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1025,8 +1007,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(shoppingCoupon) FROM ShoppingCoupon shoppingCoupon");
+				Query q = session.createQuery(_SQL_COUNT_SHOPPINGCOUPON);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1090,5 +1071,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SHOPPINGCOUPON = "SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon";
+	private static final String _SQL_SELECT_SHOPPINGCOUPON_WHERE = "SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ";
+	private static final String _SQL_COUNT_SHOPPINGCOUPON = "SELECT COUNT(shoppingCoupon) FROM ShoppingCoupon shoppingCoupon";
+	private static final String _SQL_COUNT_SHOPPINGCOUPON_WHERE = "SELECT COUNT(shoppingCoupon) FROM ShoppingCoupon shoppingCoupon WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ShoppingCouponPersistenceImpl.class);
 }

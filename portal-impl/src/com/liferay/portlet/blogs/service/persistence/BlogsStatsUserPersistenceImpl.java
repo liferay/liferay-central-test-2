@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -440,16 +441,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 
@@ -503,17 +501,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -535,7 +530,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsStatsUser.entryCount DESC");
 				}
@@ -574,7 +569,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -596,7 +591,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -623,17 +618,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+			query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 			query.append("blogsStatsUser.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -655,7 +647,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 			}
@@ -698,16 +690,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 
@@ -761,17 +750,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -793,7 +779,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsStatsUser.entryCount DESC");
 				}
@@ -832,7 +818,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -854,7 +840,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -881,17 +867,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+			query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 			query.append("blogsStatsUser.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -913,7 +896,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 			}
@@ -948,7 +931,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		BlogsStatsUser blogsStatsUser = fetchByG_U(groupId, userId);
 
 		if (blogsStatsUser == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -991,10 +974,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.groupId = ?");
 
@@ -1002,9 +984,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append("blogsStatsUser.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 
@@ -1077,10 +1057,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.groupId = ?");
 
@@ -1088,9 +1067,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append("blogsStatsUser.entryCount != ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 
@@ -1146,10 +1123,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.groupId = ?");
 
@@ -1157,10 +1133,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append("blogsStatsUser.entryCount != ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1182,7 +1156,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsStatsUser.entryCount DESC");
 				}
@@ -1223,7 +1197,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -1249,7 +1223,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -1279,10 +1253,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+			query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 			query.append("blogsStatsUser.groupId = ?");
 
@@ -1290,10 +1263,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 			query.append("blogsStatsUser.entryCount != ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1315,7 +1286,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 			}
@@ -1362,10 +1333,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.companyId = ?");
 
@@ -1373,9 +1343,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append("blogsStatsUser.entryCount != ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 
@@ -1431,10 +1399,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.companyId = ?");
 
@@ -1442,10 +1409,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append("blogsStatsUser.entryCount != ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1467,7 +1432,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsStatsUser.entryCount DESC");
 				}
@@ -1508,7 +1473,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -1534,7 +1499,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -1564,10 +1529,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ");
+			query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
 			query.append("blogsStatsUser.companyId = ?");
 
@@ -1575,10 +1539,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 			query.append("blogsStatsUser.entryCount != ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1600,7 +1562,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("blogsStatsUser.entryCount DESC");
 			}
@@ -1696,13 +1658,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser ");
+				query.append(_SQL_SELECT_BLOGSSTATSUSER);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1724,7 +1685,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("blogsStatsUser.entryCount DESC");
 				}
@@ -1812,14 +1773,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsStatsUser) ");
-				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1859,14 +1817,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsStatsUser) ");
-				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1906,18 +1861,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsStatsUser) ");
-				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("blogsStatsUser.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1962,18 +1914,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsStatsUser) ");
-				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("blogsStatsUser.entryCount != ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2018,18 +1967,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(blogsStatsUser) ");
-				query.append("FROM BlogsStatsUser blogsStatsUser WHERE ");
+				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
 				query.append("blogsStatsUser.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("blogsStatsUser.entryCount != ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2071,8 +2017,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(blogsStatsUser) FROM BlogsStatsUser blogsStatsUser");
+				Query q = session.createQuery(_SQL_COUNT_BLOGSSTATSUSER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2126,5 +2071,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_BLOGSSTATSUSER = "SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser";
+	private static final String _SQL_SELECT_BLOGSSTATSUSER_WHERE = "SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ";
+	private static final String _SQL_COUNT_BLOGSSTATSUSER = "SELECT COUNT(blogsStatsUser) FROM BlogsStatsUser blogsStatsUser";
+	private static final String _SQL_COUNT_BLOGSSTATSUSER_WHERE = "SELECT COUNT(blogsStatsUser) FROM BlogsStatsUser blogsStatsUser WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(BlogsStatsUserPersistenceImpl.class);
 }

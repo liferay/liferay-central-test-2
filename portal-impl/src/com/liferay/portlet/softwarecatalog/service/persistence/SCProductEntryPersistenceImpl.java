@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -256,7 +257,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 
 		Session session = null;
@@ -461,16 +462,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductEntry.modifiedDate DESC, ");
 				query.append("scProductEntry.name DESC");
@@ -525,17 +523,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -557,7 +552,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scProductEntry.modifiedDate DESC, ");
 					query.append("scProductEntry.name DESC");
@@ -598,7 +593,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		List<SCProductEntry> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -620,7 +615,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		List<SCProductEntry> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -647,17 +642,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+			query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 			query.append("scProductEntry.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -679,7 +671,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductEntry.modifiedDate DESC, ");
 				query.append("scProductEntry.name DESC");
@@ -723,16 +715,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductEntry.modifiedDate DESC, ");
 				query.append("scProductEntry.name DESC");
@@ -787,17 +776,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -819,7 +805,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scProductEntry.modifiedDate DESC, ");
 					query.append("scProductEntry.name DESC");
@@ -860,7 +846,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		List<SCProductEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -884,7 +870,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -911,17 +897,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+			query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 			query.append("scProductEntry.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -943,7 +926,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductEntry.modifiedDate DESC, ");
 				query.append("scProductEntry.name DESC");
@@ -987,10 +970,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.groupId = ?");
 
@@ -998,9 +980,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append("scProductEntry.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductEntry.modifiedDate DESC, ");
 				query.append("scProductEntry.name DESC");
@@ -1057,10 +1037,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.groupId = ?");
 
@@ -1068,10 +1047,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append("scProductEntry.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1093,7 +1070,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scProductEntry.modifiedDate DESC, ");
 					query.append("scProductEntry.name DESC");
@@ -1136,7 +1113,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		List<SCProductEntry> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -1163,7 +1140,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -1193,10 +1170,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+			query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 			query.append("scProductEntry.groupId = ?");
 
@@ -1204,10 +1180,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 			query.append("scProductEntry.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1229,7 +1203,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductEntry.modifiedDate DESC, ");
 				query.append("scProductEntry.name DESC");
@@ -1267,7 +1241,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		SCProductEntry scProductEntry = fetchByRG_RA(repoGroupId, repoArtifactId);
 
 		if (scProductEntry == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -1311,10 +1285,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 				if (repoGroupId == null) {
 					query.append("scProductEntry.repoGroupId IS NULL");
@@ -1349,9 +1322,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scProductEntry.modifiedDate DESC, ");
 				query.append("scProductEntry.name DESC");
@@ -1481,13 +1452,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scProductEntry FROM SCProductEntry scProductEntry ");
+				query.append(_SQL_SELECT_SCPRODUCTENTRY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1509,7 +1479,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scProductEntry.modifiedDate DESC, ");
 					query.append("scProductEntry.name DESC");
@@ -1591,14 +1561,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scProductEntry) ");
-				query.append("FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1638,14 +1605,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scProductEntry) ");
-				query.append("FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1685,18 +1649,15 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scProductEntry) ");
-				query.append("FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
 				query.append("scProductEntry.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("scProductEntry.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1739,10 +1700,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scProductEntry) ");
-				query.append("FROM SCProductEntry scProductEntry WHERE ");
+				query.append(_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
 				if (repoGroupId == null) {
 					query.append("scProductEntry.repoGroupId IS NULL");
@@ -1776,8 +1736,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1823,8 +1781,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(scProductEntry) FROM SCProductEntry scProductEntry");
+				Query q = session.createQuery(_SQL_COUNT_SCPRODUCTENTRY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1858,7 +1815,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 	public static final FinderPath FINDER_PATH_GET_SCLICENSES = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductEntryModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			"SCLicenses_SCProductEntries", "getSCLicenses",
+			SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			"getSCLicenses",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1881,17 +1839,17 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETSCLICENSES);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("SCLicense.name ASC");
 				}
@@ -1932,8 +1890,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 	public static final FinderPath FINDER_PATH_GET_SCLICENSES_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductEntryModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			"SCLicenses_SCProductEntries", "getSCLicensesSize",
-			new String[] { Long.class.getName() });
+			SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			"getSCLicensesSize", new String[] { Long.class.getName() });
 
 	public int getSCLicensesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1977,7 +1935,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 	public static final FinderPath FINDER_PATH_CONTAINS_SCLICENSE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductEntryModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			"SCLicenses_SCProductEntries", "containsSCLicense",
+			SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			"containsSCLicense",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsSCLicense(long pk, long scLicensePK)
@@ -2026,7 +1985,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2040,7 +1999,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2055,7 +2014,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2071,7 +2030,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2083,7 +2042,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2096,7 +2055,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2110,7 +2069,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2125,7 +2084,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2141,7 +2100,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2170,7 +2129,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2192,7 +2151,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCProductEntryModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -2426,6 +2385,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		private SCProductEntryPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_SCPRODUCTENTRY = "SELECT scProductEntry FROM SCProductEntry scProductEntry";
+	private static final String _SQL_SELECT_SCPRODUCTENTRY_WHERE = "SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ";
+	private static final String _SQL_COUNT_SCPRODUCTENTRY = "SELECT COUNT(scProductEntry) FROM SCProductEntry scProductEntry";
+	private static final String _SQL_COUNT_SCPRODUCTENTRY_WHERE = "SELECT COUNT(scProductEntry) FROM SCProductEntry scProductEntry WHERE ";
 	private static final String _SQL_GETSCLICENSES = "SELECT {SCLicense.*} FROM SCLicense INNER JOIN SCLicenses_SCProductEntries ON (SCLicenses_SCProductEntries.licenseId = SCLicense.licenseId) WHERE (SCLicenses_SCProductEntries.productEntryId = ?)";
 	private static final String _SQL_GETSCLICENSESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE productEntryId = ?";
 	private static final String _SQL_CONTAINSSCLICENSE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE productEntryId = ? AND licenseId = ?";

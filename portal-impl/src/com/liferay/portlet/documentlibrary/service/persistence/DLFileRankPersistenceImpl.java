@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -438,16 +439,13 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("dlFileRank.createDate DESC");
 
@@ -501,17 +499,14 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -533,7 +528,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("dlFileRank.createDate DESC");
 				}
@@ -572,7 +567,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		List<DLFileRank> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -594,7 +589,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		List<DLFileRank> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -620,16 +615,14 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+			query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 			query.append("dlFileRank.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -651,7 +644,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("dlFileRank.createDate DESC");
 			}
@@ -694,10 +687,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.groupId = ?");
 
@@ -705,9 +697,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 				query.append("dlFileRank.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("dlFileRank.createDate DESC");
 
@@ -763,10 +753,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.groupId = ?");
 
@@ -774,10 +763,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 				query.append("dlFileRank.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -799,7 +786,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("dlFileRank.createDate DESC");
 				}
@@ -840,7 +827,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		List<DLFileRank> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -865,7 +852,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		List<DLFileRank> list = findByG_U(groupId, userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -895,9 +882,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+			query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 			query.append("dlFileRank.groupId = ?");
 
@@ -905,10 +892,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 			query.append("dlFileRank.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -930,7 +915,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("dlFileRank.createDate DESC");
 			}
@@ -975,10 +960,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.folderId = ?");
 
@@ -999,9 +983,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("dlFileRank.createDate DESC");
 
@@ -1061,10 +1043,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.folderId = ?");
 
@@ -1085,10 +1066,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1110,7 +1089,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("dlFileRank.createDate DESC");
 				}
@@ -1153,7 +1132,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		List<DLFileRank> list = findByF_N(folderId, name, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -1178,7 +1157,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		List<DLFileRank> list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -1208,9 +1187,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+			query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 			query.append("dlFileRank.folderId = ?");
 
@@ -1231,10 +1210,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1256,7 +1233,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("dlFileRank.createDate DESC");
 			}
@@ -1295,7 +1272,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		DLFileRank dlFileRank = fetchByC_U_F_N(companyId, userId, folderId, name);
 
 		if (dlFileRank == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -1349,10 +1326,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.companyId = ?");
 
@@ -1381,9 +1357,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("dlFileRank.createDate DESC");
 
@@ -1514,12 +1488,12 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT dlFileRank FROM DLFileRank dlFileRank ");
+				query.append(_SQL_SELECT_DLFILERANK);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1541,7 +1515,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("dlFileRank.createDate DESC");
 				}
@@ -1623,14 +1597,11 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileRank) ");
-				query.append("FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_COUNT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1670,18 +1641,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileRank) ");
-				query.append("FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_COUNT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("dlFileRank.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1723,10 +1691,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileRank) ");
-				query.append("FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_COUNT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.folderId = ?");
 
@@ -1746,8 +1713,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1796,10 +1761,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(dlFileRank) ");
-				query.append("FROM DLFileRank dlFileRank WHERE ");
+				query.append(_SQL_COUNT_DLFILERANK_WHERE);
 
 				query.append("dlFileRank.companyId = ?");
 
@@ -1827,8 +1791,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1876,8 +1838,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(dlFileRank) FROM DLFileRank dlFileRank");
+				Query q = session.createQuery(_SQL_COUNT_DLFILERANK);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1937,5 +1898,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_DLFILERANK = "SELECT dlFileRank FROM DLFileRank dlFileRank";
+	private static final String _SQL_SELECT_DLFILERANK_WHERE = "SELECT dlFileRank FROM DLFileRank dlFileRank WHERE ";
+	private static final String _SQL_COUNT_DLFILERANK = "SELECT COUNT(dlFileRank) FROM DLFileRank dlFileRank";
+	private static final String _SQL_COUNT_DLFILERANK_WHERE = "SELECT COUNT(dlFileRank) FROM DLFileRank dlFileRank WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(DLFileRankPersistenceImpl.class);
 }

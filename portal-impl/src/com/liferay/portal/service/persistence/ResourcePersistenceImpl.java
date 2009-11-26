@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -375,13 +376,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT resource FROM Resource resource WHERE ");
+				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
 				query.append("resource.codeId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -433,16 +432,14 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT resource FROM Resource resource WHERE ");
+				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
 				query.append("resource.codeId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -497,7 +494,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		List<Resource> list = findByCodeId(codeId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Resource exists with the key {");
 
@@ -519,7 +516,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		List<Resource> list = findByCodeId(codeId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Resource exists with the key {");
 
@@ -545,16 +542,14 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT resource FROM Resource resource WHERE ");
+			query.append(_SQL_SELECT_RESOURCE_WHERE);
 
 			query.append("resource.codeId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -604,7 +599,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		Resource resource = fetchByC_P(codeId, primKey);
 
 		if (resource == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Resource exists with the key {");
 
@@ -647,9 +642,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT resource FROM Resource resource WHERE ");
+				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
 				query.append("resource.codeId = ?");
 
@@ -669,8 +664,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -792,12 +785,12 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT resource FROM Resource resource ");
+				query.append(_SQL_SELECT_RESOURCE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -881,14 +874,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(resource) ");
-				query.append("FROM Resource resource WHERE ");
+				query.append(_SQL_COUNT_RESOURCE_WHERE);
 
 				query.append("resource.codeId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -929,10 +919,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(resource) ");
-				query.append("FROM Resource resource WHERE ");
+				query.append(_SQL_COUNT_RESOURCE_WHERE);
 
 				query.append("resource.codeId = ?");
 
@@ -952,8 +941,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -997,8 +984,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(resource) FROM Resource resource");
+				Query q = session.createQuery(_SQL_COUNT_RESOURCE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1144,5 +1130,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_RESOURCE = "SELECT resource FROM Resource resource";
+	private static final String _SQL_SELECT_RESOURCE_WHERE = "SELECT resource FROM Resource resource WHERE ";
+	private static final String _SQL_COUNT_RESOURCE = "SELECT COUNT(resource) FROM Resource resource";
+	private static final String _SQL_COUNT_RESOURCE_WHERE = "SELECT COUNT(resource) FROM Resource resource WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ResourcePersistenceImpl.class);
 }

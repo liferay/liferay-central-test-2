@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -454,14 +455,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.plid = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -513,17 +511,14 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.plid = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -578,7 +573,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		List<PortletPreferences> list = findByPlid(plid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -600,7 +595,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		List<PortletPreferences> list = findByPlid(plid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -627,17 +622,14 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+			query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 			query.append("portletPreferences.plid = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -696,10 +688,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.plid = ?");
 
@@ -720,8 +711,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -779,10 +768,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.plid = ?");
 
@@ -804,10 +792,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -867,7 +853,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		List<PortletPreferences> list = findByP_P(plid, portletId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -894,7 +880,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -925,10 +911,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+			query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 			query.append("portletPreferences.plid = ?");
 
@@ -949,10 +934,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1017,10 +1000,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.ownerId = ?");
 
@@ -1031,8 +1013,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				query.append(" AND ");
 
 				query.append("portletPreferences.plid = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1089,10 +1069,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.ownerId = ?");
 
@@ -1104,10 +1083,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append("portletPreferences.plid = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1168,7 +1145,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -1198,7 +1175,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -1232,10 +1209,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+			query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 			query.append("portletPreferences.ownerId = ?");
 
@@ -1247,10 +1223,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			query.append("portletPreferences.plid = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1307,7 +1281,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				ownerType, plid, portletId);
 
 		if (portletPreferences == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -1361,10 +1335,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.ownerId = ?");
 
@@ -1393,8 +1366,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1523,13 +1494,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT portletPreferences FROM PortletPreferences portletPreferences ");
+				query.append(_SQL_SELECT_PORTLETPREFERENCES);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1630,15 +1600,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(portletPreferences) ");
-				query.append(
-					"FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_COUNT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.plid = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1679,11 +1645,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(portletPreferences) ");
-				query.append(
-					"FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_COUNT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.plid = ?");
 
@@ -1704,8 +1668,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1752,11 +1714,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(portletPreferences) ");
-				query.append(
-					"FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_COUNT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.ownerId = ?");
 
@@ -1767,8 +1727,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				query.append(" AND ");
 
 				query.append("portletPreferences.plid = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1817,11 +1775,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(portletPreferences) ");
-				query.append(
-					"FROM PortletPreferences portletPreferences WHERE ");
+				query.append(_SQL_COUNT_PORTLETPREFERENCES_WHERE);
 
 				query.append("portletPreferences.ownerId = ?");
 
@@ -1850,8 +1806,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1899,8 +1853,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(portletPreferences) FROM PortletPreferences portletPreferences");
+				Query q = session.createQuery(_SQL_COUNT_PORTLETPREFERENCES);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2046,5 +1999,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_PORTLETPREFERENCES = "SELECT portletPreferences FROM PortletPreferences portletPreferences";
+	private static final String _SQL_SELECT_PORTLETPREFERENCES_WHERE = "SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ";
+	private static final String _SQL_COUNT_PORTLETPREFERENCES = "SELECT COUNT(portletPreferences) FROM PortletPreferences portletPreferences";
+	private static final String _SQL_COUNT_PORTLETPREFERENCES_WHERE = "SELECT COUNT(portletPreferences) FROM PortletPreferences portletPreferences WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(PortletPreferencesPersistenceImpl.class);
 }

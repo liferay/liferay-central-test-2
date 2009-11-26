@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -718,9 +719,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMessage.uuid IS NULL");
@@ -737,9 +738,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -796,9 +795,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMessage.uuid IS NULL");
@@ -815,10 +814,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -840,7 +837,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -882,7 +879,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -904,7 +901,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -930,9 +927,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			if (uuid == null) {
 				query.append("mbMessage.uuid IS NULL");
@@ -949,10 +946,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -974,7 +969,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1012,7 +1007,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		MBMessage mbMessage = fetchByUUID_G(uuid, groupId);
 
 		if (mbMessage == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1055,9 +1050,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMessage.uuid IS NULL");
@@ -1078,9 +1073,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1155,15 +1148,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1218,16 +1209,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1249,7 +1238,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -1289,7 +1278,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1311,7 +1300,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1337,16 +1326,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1368,7 +1355,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1412,15 +1399,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1475,16 +1460,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1506,7 +1489,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -1546,7 +1529,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1568,7 +1551,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1595,16 +1578,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1626,7 +1607,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1670,15 +1651,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1733,16 +1712,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1764,7 +1741,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -1804,7 +1781,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByThreadId(threadId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1826,7 +1803,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByThreadId(threadId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1853,16 +1830,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.threadId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1884,7 +1859,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1928,15 +1903,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND mbMessage.parentMessageId != 0 ");
 
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -1991,16 +1966,16 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND mbMessage.parentMessageId != 0 ");
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2022,7 +1997,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -2062,7 +2037,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByThreadReplies(threadId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -2085,7 +2060,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -2112,16 +2087,16 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.threadId = ?");
 
 			query.append(" AND mbMessage.parentMessageId != 0 ");
 
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2143,7 +2118,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -2187,9 +2162,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -2197,9 +2172,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -2256,9 +2229,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -2266,10 +2239,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2291,7 +2262,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -2333,7 +2304,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -2358,7 +2329,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_U(groupId, userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -2388,9 +2359,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.groupId = ?");
 
@@ -2398,10 +2369,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2423,7 +2392,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -2471,9 +2440,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -2481,9 +2450,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.categoryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -2540,9 +2507,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -2550,10 +2517,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.categoryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2575,7 +2540,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -2617,7 +2582,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_C(groupId, categoryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -2643,7 +2608,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -2673,9 +2638,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.groupId = ?");
 
@@ -2683,10 +2648,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.categoryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2708,7 +2671,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -2756,9 +2719,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -2766,9 +2729,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -2825,9 +2786,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -2835,10 +2796,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2860,7 +2819,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -2902,7 +2861,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_S(groupId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -2927,7 +2886,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_S(groupId, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -2957,9 +2916,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.groupId = ?");
 
@@ -2967,10 +2926,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2992,7 +2949,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -3040,9 +2997,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.companyId = ?");
 
@@ -3050,9 +3007,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -3109,9 +3064,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.companyId = ?");
 
@@ -3119,10 +3074,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3144,7 +3097,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -3186,7 +3139,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByC_S(companyId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -3212,7 +3165,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -3242,9 +3195,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.companyId = ?");
 
@@ -3252,10 +3205,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3277,7 +3228,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -3325,9 +3276,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.classNameId = ?");
 
@@ -3335,9 +3286,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -3394,9 +3343,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.classNameId = ?");
 
@@ -3404,10 +3353,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3429,7 +3376,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -3471,7 +3418,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -3497,7 +3444,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -3527,9 +3474,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.classNameId = ?");
 
@@ -3537,10 +3484,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3562,7 +3507,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -3610,9 +3555,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
@@ -3620,9 +3565,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.parentMessageId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -3679,9 +3622,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
@@ -3689,10 +3632,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.parentMessageId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3714,7 +3655,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -3756,7 +3697,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByT_P(threadId, parentMessageId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -3782,7 +3723,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -3812,9 +3753,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.threadId = ?");
 
@@ -3822,10 +3763,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.parentMessageId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3847,7 +3786,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -3895,9 +3834,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
@@ -3905,9 +3844,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -3964,9 +3901,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
@@ -3974,10 +3911,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3999,7 +3934,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -4041,7 +3976,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByT_S(threadId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -4066,7 +4001,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByT_S(threadId, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -4096,9 +4031,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.threadId = ?");
 
@@ -4106,10 +4041,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -4131,7 +4064,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -4179,9 +4112,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
@@ -4191,7 +4124,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(" AND mbMessage.parentMessageId != 0 ");
 
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -4248,9 +4181,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
@@ -4261,7 +4194,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(" AND mbMessage.parentMessageId != 0 ");
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -4283,7 +4216,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -4325,7 +4258,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByTR_S(threadId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -4351,7 +4284,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -4381,9 +4314,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.threadId = ?");
 
@@ -4394,7 +4327,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(" AND mbMessage.parentMessageId != 0 ");
 
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -4416,7 +4349,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -4464,9 +4397,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -4478,9 +4411,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -4539,9 +4470,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -4553,10 +4484,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -4578,7 +4507,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -4622,7 +4551,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		List<MBMessage> list = findByG_U_S(groupId, userId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -4651,7 +4580,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -4684,9 +4613,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.groupId = ?");
 
@@ -4698,10 +4627,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -4723,7 +4650,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -4773,9 +4700,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -4787,9 +4714,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.threadId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -4849,9 +4774,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -4863,10 +4788,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.threadId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -4888,7 +4811,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -4934,7 +4857,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -4964,7 +4887,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -4997,9 +4920,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.groupId = ?");
 
@@ -5011,10 +4934,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.threadId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -5036,7 +4957,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -5086,9 +5007,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -5100,9 +5021,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -5162,9 +5081,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -5176,10 +5095,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -5201,7 +5118,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -5247,7 +5164,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -5277,7 +5194,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -5310,9 +5227,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.groupId = ?");
 
@@ -5324,10 +5241,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -5349,7 +5264,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -5399,9 +5314,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.classNameId = ?");
 
@@ -5413,9 +5328,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -5475,9 +5388,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.classNameId = ?");
 
@@ -5489,10 +5402,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -5514,7 +5425,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -5560,7 +5471,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -5590,7 +5501,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -5623,9 +5534,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.classNameId = ?");
 
@@ -5637,10 +5548,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -5662,7 +5571,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -5713,9 +5622,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -5731,9 +5640,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -5798,9 +5705,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -5816,10 +5723,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append("mbMessage.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -5841,7 +5746,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -5889,7 +5794,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -5922,7 +5827,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -5958,9 +5863,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbMessage FROM MBMessage mbMessage WHERE ");
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append("mbMessage.groupId = ?");
 
@@ -5976,10 +5881,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append("mbMessage.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -6001,7 +5904,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbMessage.createDate ASC, ");
 				query.append("mbMessage.messageId ASC");
@@ -6102,12 +6005,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbMessage FROM MBMessage mbMessage ");
+				query.append(_SQL_SELECT_MBMESSAGE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -6129,7 +6032,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbMessage.createDate ASC, ");
 					query.append("mbMessage.messageId ASC");
@@ -6313,10 +6216,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMessage.uuid IS NULL");
@@ -6332,8 +6234,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6376,10 +6276,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMessage.uuid IS NULL");
@@ -6399,8 +6298,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(" AND ");
 
 				query.append("mbMessage.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6444,14 +6341,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6491,14 +6385,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6538,14 +6429,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6585,10 +6473,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
@@ -6632,18 +6519,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMessage.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6688,18 +6572,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMessage.categoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6743,18 +6624,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMessage.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6798,18 +6676,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMessage.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6854,18 +6729,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMessage.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6910,18 +6782,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMessage.parentMessageId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -6965,18 +6834,15 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMessage.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -7020,10 +6886,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.threadId = ?");
 
@@ -7076,10 +6941,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -7090,8 +6954,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(" AND ");
 
 				query.append("mbMessage.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -7138,10 +7000,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -7152,8 +7013,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(" AND ");
 
 				query.append("mbMessage.threadId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -7200,10 +7059,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -7214,8 +7072,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(" AND ");
 
 				query.append("mbMessage.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -7262,10 +7118,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.classNameId = ?");
 
@@ -7276,8 +7131,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(" AND ");
 
 				query.append("mbMessage.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -7325,10 +7178,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMessage) ");
-				query.append("FROM MBMessage mbMessage WHERE ");
+				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				query.append("mbMessage.groupId = ?");
 
@@ -7343,8 +7195,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(" AND ");
 
 				query.append("mbMessage.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -7390,8 +7240,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(mbMessage) FROM MBMessage mbMessage");
+				Query q = session.createQuery(_SQL_COUNT_MBMESSAGE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -7475,5 +7324,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _SQL_SELECT_MBMESSAGE = "SELECT mbMessage FROM MBMessage mbMessage";
+	private static final String _SQL_SELECT_MBMESSAGE_WHERE = "SELECT mbMessage FROM MBMessage mbMessage WHERE ";
+	private static final String _SQL_COUNT_MBMESSAGE = "SELECT COUNT(mbMessage) FROM MBMessage mbMessage";
+	private static final String _SQL_COUNT_MBMESSAGE_WHERE = "SELECT COUNT(mbMessage) FROM MBMessage mbMessage WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(MBMessagePersistenceImpl.class);
 }

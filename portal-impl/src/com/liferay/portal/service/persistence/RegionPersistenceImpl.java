@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -358,15 +359,13 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT region FROM Region region WHERE ");
+				query.append(_SQL_SELECT_REGION_WHERE);
 
 				query.append("region.countryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("region.name ASC");
 
@@ -420,16 +419,14 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT region FROM Region region WHERE ");
+				query.append(_SQL_SELECT_REGION_WHERE);
 
 				query.append("region.countryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -451,7 +448,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("region.name ASC");
 				}
@@ -489,7 +486,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		List<Region> list = findByCountryId(countryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Region exists with the key {");
 
@@ -511,7 +508,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		List<Region> list = findByCountryId(countryId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Region exists with the key {");
 
@@ -537,16 +534,14 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT region FROM Region region WHERE ");
+			query.append(_SQL_SELECT_REGION_WHERE);
 
 			query.append("region.countryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -568,7 +563,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("region.name ASC");
 			}
@@ -609,15 +604,13 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT region FROM Region region WHERE ");
+				query.append(_SQL_SELECT_REGION_WHERE);
 
 				query.append("region.active = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("region.name ASC");
 
@@ -671,16 +664,14 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT region FROM Region region WHERE ");
+				query.append(_SQL_SELECT_REGION_WHERE);
 
 				query.append("region.active = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -702,7 +693,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("region.name ASC");
 				}
@@ -740,7 +731,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		List<Region> list = findByActive(active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Region exists with the key {");
 
@@ -762,7 +753,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		List<Region> list = findByActive(active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Region exists with the key {");
 
@@ -788,16 +779,14 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT region FROM Region region WHERE ");
+			query.append(_SQL_SELECT_REGION_WHERE);
 
 			query.append("region.active = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -819,7 +808,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("region.name ASC");
 			}
@@ -863,9 +852,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT region FROM Region region WHERE ");
+				query.append(_SQL_SELECT_REGION_WHERE);
 
 				query.append("region.countryId = ?");
 
@@ -873,9 +862,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				query.append("region.active = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("region.name ASC");
 
@@ -931,9 +918,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT region FROM Region region WHERE ");
+				query.append(_SQL_SELECT_REGION_WHERE);
 
 				query.append("region.countryId = ?");
 
@@ -941,10 +928,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				query.append("region.active = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -966,7 +951,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("region.name ASC");
 				}
@@ -1006,7 +991,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		List<Region> list = findByC_A(countryId, active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Region exists with the key {");
 
@@ -1031,7 +1016,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		List<Region> list = findByC_A(countryId, active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Region exists with the key {");
 
@@ -1061,9 +1046,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT region FROM Region region WHERE ");
+			query.append(_SQL_SELECT_REGION_WHERE);
 
 			query.append("region.countryId = ?");
 
@@ -1071,10 +1056,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			query.append("region.active = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1096,7 +1079,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("region.name ASC");
 			}
@@ -1190,12 +1173,12 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT region FROM Region region ");
+				query.append(_SQL_SELECT_REGION);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1217,7 +1200,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("region.name ASC");
 				}
@@ -1291,14 +1274,11 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(region) ");
-				query.append("FROM Region region WHERE ");
+				query.append(_SQL_COUNT_REGION_WHERE);
 
 				query.append("region.countryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1338,14 +1318,11 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(region) ");
-				query.append("FROM Region region WHERE ");
+				query.append(_SQL_COUNT_REGION_WHERE);
 
 				query.append("region.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1388,18 +1365,15 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(region) ");
-				query.append("FROM Region region WHERE ");
+				query.append(_SQL_COUNT_REGION_WHERE);
 
 				query.append("region.countryId = ?");
 
 				query.append(" AND ");
 
 				query.append("region.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1441,8 +1415,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(region) FROM Region region");
+				Query q = session.createQuery(_SQL_COUNT_REGION);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1588,5 +1561,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_REGION = "SELECT region FROM Region region";
+	private static final String _SQL_SELECT_REGION_WHERE = "SELECT region FROM Region region WHERE ";
+	private static final String _SQL_COUNT_REGION = "SELECT COUNT(region) FROM Region region";
+	private static final String _SQL_COUNT_REGION_WHERE = "SELECT COUNT(region) FROM Region region WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(RegionPersistenceImpl.class);
 }

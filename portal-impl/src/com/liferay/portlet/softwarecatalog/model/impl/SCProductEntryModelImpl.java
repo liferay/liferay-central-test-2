@@ -131,6 +131,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 		return models;
 	}
 
+	public static final String TABLE_SCLICENSES_SCPRODUCTENTRIES = com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES;
 	public static final boolean FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES =
 		com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(

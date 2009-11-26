@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Contact;
@@ -352,13 +353,11 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT contact FROM Contact contact WHERE ");
+				query.append(_SQL_SELECT_CONTACT_WHERE);
 
 				query.append("contact.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -410,16 +409,14 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT contact FROM Contact contact WHERE ");
+				query.append(_SQL_SELECT_CONTACT_WHERE);
 
 				query.append("contact.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -473,7 +470,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		List<Contact> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Contact exists with the key {");
 
@@ -495,7 +492,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		List<Contact> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Contact exists with the key {");
 
@@ -522,16 +519,14 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT contact FROM Contact contact WHERE ");
+			query.append(_SQL_SELECT_CONTACT_WHERE);
 
 			query.append("contact.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -639,12 +634,12 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT contact FROM Contact contact ");
+				query.append(_SQL_SELECT_CONTACT);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -721,14 +716,11 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(contact) ");
-				query.append("FROM Contact contact WHERE ");
+				query.append(_SQL_COUNT_CONTACT_WHERE);
 
 				query.append("contact.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -768,8 +760,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(contact) FROM Contact contact");
+				Query q = session.createQuery(_SQL_COUNT_CONTACT);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -915,5 +906,9 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_CONTACT = "SELECT contact FROM Contact contact";
+	private static final String _SQL_SELECT_CONTACT_WHERE = "SELECT contact FROM Contact contact WHERE ";
+	private static final String _SQL_COUNT_CONTACT = "SELECT COUNT(contact) FROM Contact contact";
+	private static final String _SQL_COUNT_CONTACT_WHERE = "SELECT COUNT(contact) FROM Contact contact WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ContactPersistenceImpl.class);
 }

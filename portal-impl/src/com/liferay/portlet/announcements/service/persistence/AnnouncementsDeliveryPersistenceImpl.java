@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -400,14 +401,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
 
 				query.append("announcementsDelivery.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -459,17 +457,14 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
 
 				query.append("announcementsDelivery.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -524,7 +519,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		List<AnnouncementsDelivery> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsDelivery exists with the key {");
 
@@ -547,7 +542,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsDelivery exists with the key {");
 
@@ -574,17 +569,14 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
+			query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
 
 			query.append("announcementsDelivery.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -635,7 +627,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		AnnouncementsDelivery announcementsDelivery = fetchByU_T(userId, type);
 
 		if (announcementsDelivery == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsDelivery exists with the key {");
 
@@ -678,10 +670,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
 
 				query.append("announcementsDelivery.userId = ?");
 
@@ -701,8 +692,6 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -825,13 +814,12 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -915,15 +903,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(announcementsDelivery) ");
-				query.append(
-					"FROM AnnouncementsDelivery announcementsDelivery WHERE ");
+				query.append(_SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE);
 
 				query.append("announcementsDelivery.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -963,11 +947,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(announcementsDelivery) ");
-				query.append(
-					"FROM AnnouncementsDelivery announcementsDelivery WHERE ");
+				query.append(_SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE);
 
 				query.append("announcementsDelivery.userId = ?");
 
@@ -987,8 +969,6 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1032,8 +1012,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(announcementsDelivery) FROM AnnouncementsDelivery announcementsDelivery");
+				Query q = session.createQuery(_SQL_COUNT_ANNOUNCEMENTSDELIVERY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1087,5 +1066,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_ANNOUNCEMENTSDELIVERY = "SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery";
+	private static final String _SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE = "SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ";
+	private static final String _SQL_COUNT_ANNOUNCEMENTSDELIVERY = "SELECT COUNT(announcementsDelivery) FROM AnnouncementsDelivery announcementsDelivery";
+	private static final String _SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE = "SELECT COUNT(announcementsDelivery) FROM AnnouncementsDelivery announcementsDelivery WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsDeliveryPersistenceImpl.class);
 }

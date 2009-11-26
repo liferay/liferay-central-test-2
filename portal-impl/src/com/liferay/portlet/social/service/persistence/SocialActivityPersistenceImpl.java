@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -567,16 +568,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -630,17 +628,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -662,7 +657,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialActivity.createDate DESC");
 				}
@@ -701,7 +696,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		List<SocialActivity> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -723,7 +718,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		List<SocialActivity> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -750,17 +745,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 			query.append("socialActivity.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -782,7 +774,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 			}
@@ -825,16 +817,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -888,17 +877,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -920,7 +906,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialActivity.createDate DESC");
 				}
@@ -959,7 +945,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		List<SocialActivity> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -982,7 +968,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -1009,17 +995,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 			query.append("socialActivity.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1041,7 +1024,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 			}
@@ -1084,16 +1067,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -1147,17 +1127,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1179,7 +1156,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialActivity.createDate DESC");
 				}
@@ -1218,7 +1195,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		List<SocialActivity> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -1240,7 +1217,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		List<SocialActivity> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -1267,17 +1244,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 			query.append("socialActivity.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1299,7 +1273,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 			}
@@ -1334,7 +1308,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		SocialActivity socialActivity = fetchByMirrorActivityId(mirrorActivityId);
 
 		if (socialActivity == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -1374,16 +1348,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.mirrorActivityId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -1451,16 +1422,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.classNameId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -1514,17 +1482,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.classNameId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1546,7 +1511,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialActivity.createDate DESC");
 				}
@@ -1585,7 +1550,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		List<SocialActivity> list = findByClassNameId(classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -1608,7 +1573,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -1635,17 +1600,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 			query.append("socialActivity.classNameId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1667,7 +1629,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 			}
@@ -1710,16 +1672,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.receiverUserId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -1773,17 +1732,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.receiverUserId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1805,7 +1761,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialActivity.createDate DESC");
 				}
@@ -1845,7 +1801,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -1868,7 +1824,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -1895,17 +1851,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 			query.append("socialActivity.receiverUserId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1927,7 +1880,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 			}
@@ -1972,10 +1925,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.classNameId = ?");
 
@@ -1983,9 +1935,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append("socialActivity.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -2041,10 +1991,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.classNameId = ?");
 
@@ -2052,10 +2001,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append("socialActivity.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2077,7 +2024,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialActivity.createDate DESC");
 				}
@@ -2118,7 +2065,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		List<SocialActivity> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -2144,7 +2091,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -2174,10 +2121,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 			query.append("socialActivity.classNameId = ?");
 
@@ -2185,10 +2131,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append("socialActivity.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2210,7 +2154,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 			}
@@ -2258,10 +2202,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.mirrorActivityId = ?");
 
@@ -2273,9 +2216,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append("socialActivity.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -2337,10 +2278,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.mirrorActivityId = ?");
 
@@ -2352,10 +2292,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append("socialActivity.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2377,7 +2315,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialActivity.createDate DESC");
 				}
@@ -2422,7 +2360,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -2452,7 +2390,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				classPK, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -2485,10 +2423,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 			query.append("socialActivity.mirrorActivityId = ?");
 
@@ -2500,10 +2437,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append("socialActivity.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2525,7 +2460,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 			}
@@ -2566,7 +2501,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				createDate, classNameId, classPK, type, receiverUserId);
 
 		if (socialActivity == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialActivity exists with the key {");
 
@@ -2632,10 +2567,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.groupId = ?");
 
@@ -2663,9 +2597,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append("socialActivity.receiverUserId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialActivity.createDate DESC");
 
@@ -2802,13 +2734,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialActivity FROM SocialActivity socialActivity ");
+				query.append(_SQL_SELECT_SOCIALACTIVITY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2830,7 +2761,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialActivity.createDate DESC");
 				}
@@ -2948,14 +2879,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2995,14 +2923,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3042,14 +2967,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3090,14 +3012,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.mirrorActivityId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3137,14 +3056,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3185,14 +3101,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.receiverUserId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3235,18 +3148,15 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("socialActivity.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3292,10 +3202,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.mirrorActivityId = ?");
 
@@ -3306,8 +3215,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				query.append(" AND ");
 
 				query.append("socialActivity.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3357,10 +3264,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialActivity) ");
-				query.append("FROM SocialActivity socialActivity WHERE ");
+				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
 				query.append("socialActivity.groupId = ?");
 
@@ -3387,8 +3293,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				query.append(" AND ");
 
 				query.append("socialActivity.receiverUserId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3440,8 +3344,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(socialActivity) FROM SocialActivity socialActivity");
+				Query q = session.createQuery(_SQL_COUNT_SOCIALACTIVITY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3499,5 +3402,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SOCIALACTIVITY = "SELECT socialActivity FROM SocialActivity socialActivity";
+	private static final String _SQL_SELECT_SOCIALACTIVITY_WHERE = "SELECT socialActivity FROM SocialActivity socialActivity WHERE ";
+	private static final String _SQL_COUNT_SOCIALACTIVITY = "SELECT COUNT(socialActivity) FROM SocialActivity socialActivity";
+	private static final String _SQL_COUNT_SOCIALACTIVITY_WHERE = "SELECT COUNT(socialActivity) FROM SocialActivity socialActivity WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(SocialActivityPersistenceImpl.class);
 }

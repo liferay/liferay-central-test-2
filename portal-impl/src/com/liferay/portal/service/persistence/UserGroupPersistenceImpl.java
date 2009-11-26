@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -228,7 +229,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 
 		Session session = null;
@@ -417,15 +418,13 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT userGroup FROM UserGroup userGroup WHERE ");
+				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 				query.append("userGroup.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("userGroup.name ASC");
 
@@ -479,16 +478,14 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT userGroup FROM UserGroup userGroup WHERE ");
+				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 				query.append("userGroup.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -510,7 +507,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("userGroup.name ASC");
 				}
@@ -549,7 +546,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		List<UserGroup> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroup exists with the key {");
 
@@ -571,7 +568,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		List<UserGroup> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroup exists with the key {");
 
@@ -598,16 +595,14 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT userGroup FROM UserGroup userGroup WHERE ");
+			query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 			query.append("userGroup.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -629,7 +624,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("userGroup.name ASC");
 			}
@@ -674,9 +669,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT userGroup FROM UserGroup userGroup WHERE ");
+				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 				query.append("userGroup.companyId = ?");
 
@@ -684,9 +679,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append("userGroup.parentUserGroupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("userGroup.name ASC");
 
@@ -742,9 +735,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT userGroup FROM UserGroup userGroup WHERE ");
+				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 				query.append("userGroup.companyId = ?");
 
@@ -752,10 +745,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append("userGroup.parentUserGroupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -777,7 +768,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("userGroup.name ASC");
 				}
@@ -818,7 +809,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		List<UserGroup> list = findByC_P(companyId, parentUserGroupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroup exists with the key {");
 
@@ -844,7 +835,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroup exists with the key {");
 
@@ -874,9 +865,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT userGroup FROM UserGroup userGroup WHERE ");
+			query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 			query.append("userGroup.companyId = ?");
 
@@ -884,10 +875,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			query.append("userGroup.parentUserGroupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -909,7 +898,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("userGroup.name ASC");
 			}
@@ -946,7 +935,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		UserGroup userGroup = fetchByC_N(companyId, name);
 
 		if (userGroup == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserGroup exists with the key {");
 
@@ -989,9 +978,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT userGroup FROM UserGroup userGroup WHERE ");
+				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 				query.append("userGroup.companyId = ?");
 
@@ -1012,9 +1001,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("userGroup.name ASC");
 
@@ -1139,12 +1126,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT userGroup FROM UserGroup userGroup ");
+				query.append(_SQL_SELECT_USERGROUP);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1166,7 +1153,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("userGroup.name ASC");
 				}
@@ -1241,14 +1228,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userGroup) ");
-				query.append("FROM UserGroup userGroup WHERE ");
+				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
 				query.append("userGroup.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1291,18 +1275,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userGroup) ");
-				query.append("FROM UserGroup userGroup WHERE ");
+				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
 				query.append("userGroup.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("userGroup.parentUserGroupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1345,10 +1326,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userGroup) ");
-				query.append("FROM UserGroup userGroup WHERE ");
+				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
 				query.append("userGroup.companyId = ?");
 
@@ -1368,8 +1348,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1413,8 +1391,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(userGroup) FROM UserGroup userGroup");
+				Query q = session.createQuery(_SQL_COUNT_USERGROUP);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1448,7 +1425,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			"Users_UserGroups", "getUsers",
+			UserGroupModelImpl.TABLE_USERS_USERGROUPS, "getUsers",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1470,12 +1447,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETUSERS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
@@ -1515,7 +1492,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 	public static final FinderPath FINDER_PATH_GET_USERS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			"Users_UserGroups", "getUsersSize",
+			UserGroupModelImpl.TABLE_USERS_USERGROUPS, "getUsersSize",
 			new String[] { Long.class.getName() });
 
 	public int getUsersSize(long pk) throws SystemException {
@@ -1560,7 +1537,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USER = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			"Users_UserGroups", "containsUser",
+			UserGroupModelImpl.TABLE_USERS_USERGROUPS, "containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -1606,7 +1583,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1619,7 +1596,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1633,7 +1610,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1648,7 +1625,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1660,7 +1637,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1672,7 +1649,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1685,7 +1662,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1699,7 +1676,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1714,7 +1691,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1741,7 +1718,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -1762,7 +1739,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserGroupModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -2065,6 +2042,10 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		private UserGroupPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_USERGROUP = "SELECT userGroup FROM UserGroup userGroup";
+	private static final String _SQL_SELECT_USERGROUP_WHERE = "SELECT userGroup FROM UserGroup userGroup WHERE ";
+	private static final String _SQL_COUNT_USERGROUP = "SELECT COUNT(userGroup) FROM UserGroup userGroup";
+	private static final String _SQL_COUNT_USERGROUP_WHERE = "SELECT COUNT(userGroup) FROM UserGroup userGroup WHERE ";
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_UserGroups ON (Users_UserGroups.userId = User_.userId) WHERE (Users_UserGroups.userGroupId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?";

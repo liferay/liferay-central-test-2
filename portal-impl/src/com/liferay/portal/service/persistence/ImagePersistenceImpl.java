@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Image;
@@ -324,15 +325,13 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT image FROM Image image WHERE ");
+				query.append(_SQL_SELECT_IMAGE_WHERE);
 
 				query.append("image.size < ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("image.imageId ASC");
 
@@ -386,16 +385,14 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT image FROM Image image WHERE ");
+				query.append(_SQL_SELECT_IMAGE_WHERE);
 
 				query.append("image.size < ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -417,7 +414,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("image.imageId ASC");
 				}
@@ -455,7 +452,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		List<Image> list = findBySize(size, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Image exists with the key {");
 
@@ -477,7 +474,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		List<Image> list = findBySize(size, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Image exists with the key {");
 
@@ -503,16 +500,14 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT image FROM Image image WHERE ");
+			query.append(_SQL_SELECT_IMAGE_WHERE);
 
 			query.append("image.size < ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -534,7 +529,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("image.imageId ASC");
 			}
@@ -626,12 +621,12 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT image FROM Image image ");
+				query.append(_SQL_SELECT_IMAGE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -653,7 +648,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("image.imageId ASC");
 				}
@@ -714,14 +709,11 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(image) ");
-				query.append("FROM Image image WHERE ");
+				query.append(_SQL_COUNT_IMAGE_WHERE);
 
 				query.append("image.size < ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -761,8 +753,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(image) FROM Image image");
+				Query q = session.createQuery(_SQL_COUNT_IMAGE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -908,5 +899,9 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_IMAGE = "SELECT image FROM Image image";
+	private static final String _SQL_SELECT_IMAGE_WHERE = "SELECT image FROM Image image WHERE ";
+	private static final String _SQL_COUNT_IMAGE = "SELECT COUNT(image) FROM Image image";
+	private static final String _SQL_COUNT_IMAGE_WHERE = "SELECT COUNT(image) FROM Image image WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ImagePersistenceImpl.class);
 }

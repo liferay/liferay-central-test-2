@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -213,7 +214,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 
 		try {
@@ -223,7 +224,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 
 		try {
@@ -233,7 +234,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 
 		Session session = null;
@@ -419,14 +420,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT permission FROM Permission permission WHERE ");
+				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
 				query.append("permission.resourceId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -478,17 +476,14 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT permission FROM Permission permission WHERE ");
+				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
 				query.append("permission.resourceId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -544,7 +539,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		List<Permission> list = findByResourceId(resourceId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Permission exists with the key {");
 
@@ -568,7 +563,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Permission exists with the key {");
 
@@ -595,16 +590,14 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT permission FROM Permission permission WHERE ");
+			query.append(_SQL_SELECT_PERMISSION_WHERE);
 
 			query.append("permission.resourceId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -655,7 +648,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		Permission permission = fetchByA_R(actionId, resourceId);
 
 		if (permission == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Permission exists with the key {");
 
@@ -698,10 +691,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT permission FROM Permission permission WHERE ");
+				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
 				if (actionId == null) {
 					query.append("permission.actionId IS NULL");
@@ -721,8 +713,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				query.append(" AND ");
 
 				query.append("permission.resourceId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -845,12 +835,12 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT permission FROM Permission permission ");
+				query.append(_SQL_SELECT_PERMISSION);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -934,14 +924,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(permission) ");
-				query.append("FROM Permission permission WHERE ");
+				query.append(_SQL_COUNT_PERMISSION_WHERE);
 
 				query.append("permission.resourceId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -982,10 +969,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(permission) ");
-				query.append("FROM Permission permission WHERE ");
+				query.append(_SQL_COUNT_PERMISSION_WHERE);
 
 				if (actionId == null) {
 					query.append("permission.actionId IS NULL");
@@ -1005,8 +991,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				query.append(" AND ");
 
 				query.append("permission.resourceId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1050,8 +1034,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(permission) FROM Permission permission");
+				Query q = session.createQuery(_SQL_COUNT_PERMISSION);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1085,7 +1068,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			"Groups_Permissions", "getGroups",
+			PermissionModelImpl.TABLE_GROUPS_PERMISSIONS, "getGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1107,17 +1090,17 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETGROUPS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("Group_.name ASC");
 				}
@@ -1158,7 +1141,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			"Groups_Permissions", "getGroupsSize",
+			PermissionModelImpl.TABLE_GROUPS_PERMISSIONS, "getGroupsSize",
 			new String[] { Long.class.getName() });
 
 	public int getGroupsSize(long pk) throws SystemException {
@@ -1203,7 +1186,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
-			"Groups_Permissions", "containsGroup",
+			PermissionModelImpl.TABLE_GROUPS_PERMISSIONS, "containsGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsGroup(long pk, long groupPK)
@@ -1250,7 +1233,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1263,7 +1246,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1277,7 +1260,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1292,7 +1275,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1304,7 +1287,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1316,7 +1299,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1329,7 +1312,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1344,7 +1327,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1359,7 +1342,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1386,7 +1369,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1407,7 +1390,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Groups_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_GROUPS_PERMISSIONS);
 		}
 	}
 
@@ -1423,7 +1406,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_ROLES = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			"Roles_Permissions", "getRoles",
+			PermissionModelImpl.TABLE_ROLES_PERMISSIONS, "getRoles",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1445,17 +1428,17 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETROLES);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("Role_.name ASC");
 				}
@@ -1496,7 +1479,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_ROLES_SIZE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			"Roles_Permissions", "getRolesSize",
+			PermissionModelImpl.TABLE_ROLES_PERMISSIONS, "getRolesSize",
 			new String[] { Long.class.getName() });
 
 	public int getRolesSize(long pk) throws SystemException {
@@ -1541,7 +1524,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ROLE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
-			"Roles_Permissions", "containsRole",
+			PermissionModelImpl.TABLE_ROLES_PERMISSIONS, "containsRole",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
@@ -1587,7 +1570,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1600,7 +1583,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1614,7 +1597,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1629,7 +1612,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1641,7 +1624,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1653,7 +1636,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1666,7 +1649,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1680,7 +1663,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1695,7 +1678,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1722,7 +1705,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1743,7 +1726,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_ROLES_PERMISSIONS);
 		}
 	}
 
@@ -1759,7 +1742,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			"Users_Permissions", "getUsers",
+			PermissionModelImpl.TABLE_USERS_PERMISSIONS, "getUsers",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1781,12 +1764,12 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETUSERS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
@@ -1826,7 +1809,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_GET_USERS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			"Users_Permissions", "getUsersSize",
+			PermissionModelImpl.TABLE_USERS_PERMISSIONS, "getUsersSize",
 			new String[] { Long.class.getName() });
 
 	public int getUsersSize(long pk) throws SystemException {
@@ -1871,7 +1854,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USER = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			"Users_Permissions", "containsUser",
+			PermissionModelImpl.TABLE_USERS_PERMISSIONS, "containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -1917,7 +1900,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -1930,7 +1913,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -1944,7 +1927,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -1959,7 +1942,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -1971,7 +1954,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -1983,7 +1966,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -1996,7 +1979,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -2010,7 +1993,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -2025,7 +2008,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -2052,7 +2035,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -2073,7 +2056,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(PermissionModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -2724,6 +2707,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_PERMISSION = "SELECT permission FROM Permission permission";
+	private static final String _SQL_SELECT_PERMISSION_WHERE = "SELECT permission FROM Permission permission WHERE ";
+	private static final String _SQL_COUNT_PERMISSION = "SELECT COUNT(permission) FROM Permission permission";
+	private static final String _SQL_COUNT_PERMISSION_WHERE = "SELECT COUNT(permission) FROM Permission permission WHERE ";
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Permissions ON (Groups_Permissions.groupId = Group_.groupId) WHERE (Groups_Permissions.permissionId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE permissionId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?";

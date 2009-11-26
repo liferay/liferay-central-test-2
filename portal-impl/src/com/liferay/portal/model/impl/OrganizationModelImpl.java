@@ -118,7 +118,9 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 		return models;
 	}
 
+	public static final String TABLE_GROUPS_ORGS = com.liferay.portal.model.impl.GroupModelImpl.TABLE_GROUPS_ORGS;
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ORGS = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS;
+	public static final String TABLE_USERS_ORGS = com.liferay.portal.model.impl.UserModelImpl.TABLE_USERS_ORGS;
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Organization"));

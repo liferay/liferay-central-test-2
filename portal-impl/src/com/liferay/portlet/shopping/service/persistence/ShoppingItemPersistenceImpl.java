@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -510,7 +511,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		ShoppingItem shoppingItem = fetchBySmallImageId(smallImageId);
 
 		if (shoppingItem == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -550,16 +551,13 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.smallImageId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingItem.itemId ASC");
 
@@ -619,7 +617,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		ShoppingItem shoppingItem = fetchByMediumImageId(mediumImageId);
 
 		if (shoppingItem == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -659,16 +657,13 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.mediumImageId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingItem.itemId ASC");
 
@@ -728,7 +723,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		ShoppingItem shoppingItem = fetchByLargeImageId(largeImageId);
 
 		if (shoppingItem == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -768,16 +763,13 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.largeImageId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingItem.itemId ASC");
 
@@ -847,10 +839,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.groupId = ?");
 
@@ -858,9 +849,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append("shoppingItem.categoryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingItem.itemId ASC");
 
@@ -916,10 +905,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.groupId = ?");
 
@@ -927,10 +915,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append("shoppingItem.categoryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -952,7 +938,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingItem.itemId ASC");
 				}
@@ -993,7 +979,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		List<ShoppingItem> list = findByG_C(groupId, categoryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -1019,7 +1005,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -1049,10 +1035,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+			query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
 			query.append("shoppingItem.groupId = ?");
 
@@ -1060,10 +1045,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 			query.append("shoppingItem.categoryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1085,7 +1068,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingItem.itemId ASC");
 			}
@@ -1122,7 +1105,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
 
 		if (shoppingItem == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -1165,10 +1148,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.companyId = ?");
 
@@ -1189,9 +1171,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingItem.itemId ASC");
 
@@ -1316,13 +1296,12 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem ");
+				query.append(_SQL_SELECT_SHOPPINGITEM);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1344,7 +1323,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingItem.itemId ASC");
 				}
@@ -1434,14 +1413,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingItem) ");
-				query.append("FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.smallImageId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1482,14 +1458,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingItem) ");
-				query.append("FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.mediumImageId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1529,14 +1502,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingItem) ");
-				query.append("FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.largeImageId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1579,18 +1549,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingItem) ");
-				query.append("FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("shoppingItem.categoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1632,10 +1599,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingItem) ");
-				query.append("FROM ShoppingItem shoppingItem WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
 				query.append("shoppingItem.companyId = ?");
 
@@ -1655,8 +1621,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1700,8 +1664,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(shoppingItem) FROM ShoppingItem shoppingItem");
+				Query q = session.createQuery(_SQL_COUNT_SHOPPINGITEM);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1759,17 +1722,17 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETSHOPPINGITEMPRICES);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("ShoppingItemPrice.itemId ASC, ");
 					sb.append("ShoppingItemPrice.itemPriceId ASC");
@@ -1979,6 +1942,10 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		private MappingSqlQuery _mappingSqlQuery;
 	}
 
+	private static final String _SQL_SELECT_SHOPPINGITEM = "SELECT shoppingItem FROM ShoppingItem shoppingItem";
+	private static final String _SQL_SELECT_SHOPPINGITEM_WHERE = "SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ";
+	private static final String _SQL_COUNT_SHOPPINGITEM = "SELECT COUNT(shoppingItem) FROM ShoppingItem shoppingItem";
+	private static final String _SQL_COUNT_SHOPPINGITEM_WHERE = "SELECT COUNT(shoppingItem) FROM ShoppingItem shoppingItem WHERE ";
 	private static final String _SQL_GETSHOPPINGITEMPRICES = "SELECT {ShoppingItemPrice.*} FROM ShoppingItemPrice INNER JOIN ShoppingItem ON (ShoppingItem.itemId = ShoppingItemPrice.itemId) WHERE (ShoppingItem.itemId = ?)";
 	private static final String _SQL_GETSHOPPINGITEMPRICESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItemPrice WHERE itemId = ?";
 	private static final String _SQL_CONTAINSSHOPPINGITEMPRICE = "SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItemPrice WHERE itemId = ? AND itemPriceId = ?";

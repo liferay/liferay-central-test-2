@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.LayoutSetPrototype;
@@ -359,14 +360,11 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
+				query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE);
 
 				query.append("layoutSetPrototype.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -418,17 +416,14 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
+				query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE);
 
 				query.append("layoutSetPrototype.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -484,7 +479,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 		List<LayoutSetPrototype> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No LayoutSetPrototype exists with the key {");
 
@@ -508,7 +503,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No LayoutSetPrototype exists with the key {");
 
@@ -535,17 +530,14 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
+			query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE);
 
 			query.append("layoutSetPrototype.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -606,18 +598,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
+				query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE);
 
 				query.append("layoutSetPrototype.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("layoutSetPrototype.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -671,10 +660,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
+				query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE);
 
 				query.append("layoutSetPrototype.companyId = ?");
 
@@ -682,10 +670,8 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 
 				query.append("layoutSetPrototype.active = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -743,7 +729,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 		List<LayoutSetPrototype> list = findByC_A(companyId, active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No LayoutSetPrototype exists with the key {");
 
@@ -770,7 +756,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No LayoutSetPrototype exists with the key {");
 
@@ -801,10 +787,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ");
+			query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE);
 
 			query.append("layoutSetPrototype.companyId = ?");
 
@@ -812,10 +797,8 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 
 			query.append("layoutSetPrototype.active = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -927,13 +910,12 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype ");
+				query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1017,15 +999,11 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(layoutSetPrototype) ");
-				query.append(
-					"FROM LayoutSetPrototype layoutSetPrototype WHERE ");
+				query.append(_SQL_COUNT_LAYOUTSETPROTOTYPE_WHERE);
 
 				query.append("layoutSetPrototype.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1068,19 +1046,15 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(layoutSetPrototype) ");
-				query.append(
-					"FROM LayoutSetPrototype layoutSetPrototype WHERE ");
+				query.append(_SQL_COUNT_LAYOUTSETPROTOTYPE_WHERE);
 
 				query.append("layoutSetPrototype.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("layoutSetPrototype.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1122,8 +1096,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(layoutSetPrototype) FROM LayoutSetPrototype layoutSetPrototype");
+				Query q = session.createQuery(_SQL_COUNT_LAYOUTSETPROTOTYPE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1269,5 +1242,9 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_LAYOUTSETPROTOTYPE = "SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype";
+	private static final String _SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE = "SELECT layoutSetPrototype FROM LayoutSetPrototype layoutSetPrototype WHERE ";
+	private static final String _SQL_COUNT_LAYOUTSETPROTOTYPE = "SELECT COUNT(layoutSetPrototype) FROM LayoutSetPrototype layoutSetPrototype";
+	private static final String _SQL_COUNT_LAYOUTSETPROTOTYPE_WHERE = "SELECT COUNT(layoutSetPrototype) FROM LayoutSetPrototype layoutSetPrototype WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetPrototypePersistenceImpl.class);
 }

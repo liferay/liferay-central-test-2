@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -410,14 +411,11 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
+				query.append(_SQL_SELECT_PLUGINSETTING_WHERE);
 
 				query.append("pluginSetting.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -469,17 +467,14 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
+				query.append(_SQL_SELECT_PLUGINSETTING_WHERE);
 
 				query.append("pluginSetting.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -535,7 +530,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		List<PluginSetting> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PluginSetting exists with the key {");
 
@@ -559,7 +554,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PluginSetting exists with the key {");
 
@@ -586,17 +581,14 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
+			query.append(_SQL_SELECT_PLUGINSETTING_WHERE);
 
 			query.append("pluginSetting.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -648,7 +640,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 				pluginType);
 
 		if (pluginSetting == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PluginSetting exists with the key {");
 
@@ -700,10 +692,9 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ");
+				query.append(_SQL_SELECT_PLUGINSETTING_WHERE);
 
 				query.append("pluginSetting.companyId = ?");
 
@@ -740,8 +731,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -870,13 +859,12 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT pluginSetting FROM PluginSetting pluginSetting ");
+				query.append(_SQL_SELECT_PLUGINSETTING);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -961,14 +949,11 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(pluginSetting) ");
-				query.append("FROM PluginSetting pluginSetting WHERE ");
+				query.append(_SQL_COUNT_PLUGINSETTING_WHERE);
 
 				query.append("pluginSetting.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1015,10 +1000,9 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(pluginSetting) ");
-				query.append("FROM PluginSetting pluginSetting WHERE ");
+				query.append(_SQL_COUNT_PLUGINSETTING_WHERE);
 
 				query.append("pluginSetting.companyId = ?");
 
@@ -1055,8 +1039,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1104,8 +1086,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(pluginSetting) FROM PluginSetting pluginSetting");
+				Query q = session.createQuery(_SQL_COUNT_PLUGINSETTING);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1251,5 +1232,9 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_PLUGINSETTING = "SELECT pluginSetting FROM PluginSetting pluginSetting";
+	private static final String _SQL_SELECT_PLUGINSETTING_WHERE = "SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ";
+	private static final String _SQL_COUNT_PLUGINSETTING = "SELECT COUNT(pluginSetting) FROM PluginSetting pluginSetting";
+	private static final String _SQL_COUNT_PLUGINSETTING_WHERE = "SELECT COUNT(pluginSetting) FROM PluginSetting pluginSetting WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(PluginSettingPersistenceImpl.class);
 }

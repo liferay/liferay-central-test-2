@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -307,7 +308,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 
 		try {
@@ -317,7 +318,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 
 		try {
@@ -327,7 +328,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 
 		try {
@@ -337,7 +338,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 
 		try {
@@ -347,7 +348,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 
 		Session session = null;
@@ -695,9 +696,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (uuid == null) {
 					query.append("user.uuid IS NULL");
@@ -713,8 +714,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -768,9 +767,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (uuid == null) {
 					query.append("user.uuid IS NULL");
@@ -787,10 +786,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -846,7 +843,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		List<User> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -868,7 +865,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		List<User> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -894,9 +891,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT user FROM User user WHERE ");
+			query.append(_SQL_SELECT_USER_WHERE);
 
 			if (uuid == null) {
 				query.append("user.uuid IS NULL");
@@ -913,10 +910,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -975,13 +970,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				query.append("user.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1033,16 +1026,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1096,7 +1087,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		List<User> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1118,7 +1109,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		List<User> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1144,16 +1135,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT user FROM User user WHERE ");
+			query.append(_SQL_SELECT_USER_WHERE);
 
 			query.append("user.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1203,7 +1192,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		User user = fetchByContactId(contactId);
 
 		if (user == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1242,13 +1231,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				query.append("user.contactId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1314,9 +1301,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (emailAddress == null) {
 					query.append("user.emailAddress IS NULL");
@@ -1332,8 +1319,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1387,9 +1372,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (emailAddress == null) {
 					query.append("user.emailAddress IS NULL");
@@ -1406,10 +1391,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1465,7 +1448,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		List<User> list = findByEmailAddress(emailAddress, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1487,7 +1470,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		List<User> list = findByEmailAddress(emailAddress, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1514,9 +1497,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT user FROM User user WHERE ");
+			query.append(_SQL_SELECT_USER_WHERE);
 
 			if (emailAddress == null) {
 				query.append("user.emailAddress IS NULL");
@@ -1533,10 +1516,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1588,7 +1569,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		User user = fetchByOpenId(openId);
 
 		if (user == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1627,9 +1608,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (openId == null) {
 					query.append("user.openId IS NULL");
@@ -1645,8 +1626,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1707,7 +1686,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		User user = fetchByPortraitId(portraitId);
 
 		if (user == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1746,13 +1725,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				query.append("user.portraitId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1810,7 +1787,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		User user = fetchByC_U(companyId, userId);
 
 		if (user == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1853,17 +1830,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("user.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1924,7 +1899,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		User user = fetchByC_DU(companyId, defaultUser);
 
 		if (user == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -1969,17 +1944,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("user.defaultUser = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2040,7 +2013,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		User user = fetchByC_SN(companyId, screenName);
 
 		if (user == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -2083,9 +2056,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
@@ -2105,8 +2078,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2170,7 +2141,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		User user = fetchByC_EA(companyId, emailAddress);
 
 		if (user == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No User exists with the key {");
 
@@ -2213,9 +2184,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user WHERE ");
+				query.append(_SQL_SELECT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
@@ -2235,8 +2206,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2358,12 +2327,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT user FROM User user ");
+				query.append(_SQL_SELECT_USER);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2502,10 +2471,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				if (uuid == null) {
 					query.append("user.uuid IS NULL");
@@ -2521,8 +2489,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2564,14 +2530,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				query.append("user.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2611,14 +2574,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				query.append("user.contactId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2659,10 +2619,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				if (emailAddress == null) {
 					query.append("user.emailAddress IS NULL");
@@ -2678,8 +2637,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2721,10 +2678,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				if (openId == null) {
 					query.append("user.openId IS NULL");
@@ -2740,8 +2696,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2783,14 +2737,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				query.append("user.portraitId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2831,18 +2782,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("user.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2887,18 +2835,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("user.defaultUser = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2941,10 +2886,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
@@ -2964,8 +2908,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3010,10 +2952,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(user) ");
-				query.append("FROM User user WHERE ");
+				query.append(_SQL_COUNT_USER_WHERE);
 
 				query.append("user.companyId = ?");
 
@@ -3033,8 +2974,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3078,8 +3017,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(user) FROM User user");
+				Query q = session.createQuery(_SQL_COUNT_USER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3112,8 +3050,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS, "Users_Groups",
-			"getGroups",
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
+			UserModelImpl.TABLE_USERS_GROUPS, "getGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3135,17 +3073,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETGROUPS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("Group_.name ASC");
 				}
@@ -3185,8 +3123,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS, "Users_Groups",
-			"getGroupsSize", new String[] { Long.class.getName() });
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
+			UserModelImpl.TABLE_USERS_GROUPS, "getGroupsSize",
+			new String[] { Long.class.getName() });
 
 	public int getGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -3229,8 +3168,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS, "Users_Groups",
-			"containsGroup",
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS,
+			UserModelImpl.TABLE_USERS_GROUPS, "containsGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsGroup(long pk, long groupPK)
@@ -3277,7 +3216,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3290,7 +3229,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3304,7 +3243,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3319,7 +3258,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3331,7 +3270,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3343,7 +3282,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3356,7 +3295,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3371,7 +3310,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3386,7 +3325,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3413,7 +3352,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3434,7 +3373,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Groups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_GROUPS);
 		}
 	}
 
@@ -3449,8 +3388,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ORGANIZATIONS = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS, "Users_Orgs",
-			"getOrganizations",
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
+			UserModelImpl.TABLE_USERS_ORGS, "getOrganizations",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3473,17 +3412,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETORGANIZATIONS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("Organization_.name ASC");
 				}
@@ -3523,8 +3462,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ORGANIZATIONS_SIZE = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS, "Users_Orgs",
-			"getOrganizationsSize", new String[] { Long.class.getName() });
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
+			UserModelImpl.TABLE_USERS_ORGS, "getOrganizationsSize",
+			new String[] { Long.class.getName() });
 
 	public int getOrganizationsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -3567,8 +3507,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ORGANIZATION = new FinderPath(com.liferay.portal.model.impl.OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS, "Users_Orgs",
-			"containsOrganization",
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS,
+			UserModelImpl.TABLE_USERS_ORGS, "containsOrganization",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsOrganization(long pk, long organizationPK)
@@ -3621,7 +3561,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3635,7 +3575,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3650,7 +3590,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3666,7 +3606,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3678,7 +3618,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3691,7 +3631,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3705,7 +3645,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3720,7 +3660,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3736,7 +3676,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3764,7 +3704,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3786,7 +3726,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Orgs");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ORGS);
 		}
 	}
 
@@ -3802,7 +3742,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			"Users_Permissions", "getPermissions",
+			UserModelImpl.TABLE_USERS_PERMISSIONS, "getPermissions",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -3824,12 +3764,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETPERMISSIONS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
@@ -3869,7 +3809,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS_SIZE = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			"Users_Permissions", "getPermissionsSize",
+			UserModelImpl.TABLE_USERS_PERMISSIONS, "getPermissionsSize",
 			new String[] { Long.class.getName() });
 
 	public int getPermissionsSize(long pk) throws SystemException {
@@ -3914,7 +3854,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_PERMISSION = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			"Users_Permissions", "containsPermission",
+			UserModelImpl.TABLE_USERS_PERMISSIONS, "containsPermission",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsPermission(long pk, long permissionPK)
@@ -3963,7 +3903,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -3977,7 +3917,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -3992,7 +3932,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4008,7 +3948,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4020,7 +3960,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4033,7 +3973,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4047,7 +3987,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4062,7 +4002,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4078,7 +4018,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4106,7 +4046,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4128,7 +4068,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Permissions");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_PERMISSIONS);
 		}
 	}
 
@@ -4143,8 +4083,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ROLES = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES, "Users_Roles",
-			"getRoles",
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
+			UserModelImpl.TABLE_USERS_ROLES, "getRoles",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -4166,17 +4106,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETROLES);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("Role_.name ASC");
 				}
@@ -4216,8 +4156,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_GET_ROLES_SIZE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES, "Users_Roles",
-			"getRolesSize", new String[] { Long.class.getName() });
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
+			UserModelImpl.TABLE_USERS_ROLES, "getRolesSize",
+			new String[] { Long.class.getName() });
 
 	public int getRolesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -4260,8 +4201,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ROLE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES, "Users_Roles",
-			"containsRole",
+			UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES,
+			UserModelImpl.TABLE_USERS_ROLES, "containsRole",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
@@ -4307,7 +4248,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4320,7 +4261,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4334,7 +4275,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4349,7 +4290,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4361,7 +4302,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4373,7 +4314,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4386,7 +4327,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4400,7 +4341,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4415,7 +4356,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4442,7 +4383,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4463,7 +4404,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_ROLES);
 		}
 	}
 
@@ -4479,7 +4420,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_USERGROUPS = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			"Users_UserGroups", "getUserGroups",
+			UserModelImpl.TABLE_USERS_USERGROUPS, "getUserGroups",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -4501,17 +4442,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETUSERGROUPS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("UserGroup.name ASC");
 				}
@@ -4552,7 +4493,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_GET_USERGROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			"Users_UserGroups", "getUserGroupsSize",
+			UserModelImpl.TABLE_USERS_USERGROUPS, "getUserGroupsSize",
 			new String[] { Long.class.getName() });
 
 	public int getUserGroupsSize(long pk) throws SystemException {
@@ -4597,7 +4538,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USERGROUP = new FinderPath(com.liferay.portal.model.impl.UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED_USERS_USERGROUPS,
-			"Users_UserGroups", "containsUserGroup",
+			UserModelImpl.TABLE_USERS_USERGROUPS, "containsUserGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsUserGroup(long pk, long userGroupPK)
@@ -4646,7 +4587,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4659,7 +4600,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4674,7 +4615,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4690,7 +4631,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4702,7 +4643,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4715,7 +4656,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4728,7 +4669,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4743,7 +4684,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4759,7 +4700,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4787,7 +4728,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -4809,7 +4750,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache(UserModelImpl.TABLE_USERS_USERGROUPS);
 		}
 	}
 
@@ -5853,6 +5794,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		private UserPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_USER = "SELECT user FROM User user";
+	private static final String _SQL_SELECT_USER_WHERE = "SELECT user FROM User user WHERE ";
+	private static final String _SQL_COUNT_USER = "SELECT COUNT(user) FROM User user";
+	private static final String _SQL_COUNT_USER_WHERE = "SELECT COUNT(user) FROM User user WHERE ";
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Users_Groups ON (Users_Groups.groupId = Group_.groupId) WHERE (Users_Groups.userId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE userId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE userId = ? AND groupId = ?";

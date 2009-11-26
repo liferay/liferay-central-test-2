@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -555,16 +556,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -620,17 +618,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -652,7 +647,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -693,7 +688,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByTableId(tableId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -715,7 +710,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByTableId(tableId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -741,17 +736,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+			query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 			query.append("expandoValue.tableId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -773,7 +765,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -818,16 +810,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.columnId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -883,17 +872,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.columnId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -915,7 +901,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -956,7 +942,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByColumnId(columnId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -978,7 +964,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByColumnId(columnId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1005,17 +991,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+			query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 			query.append("expandoValue.columnId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1037,7 +1020,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -1081,16 +1064,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.rowId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -1146,17 +1126,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.rowId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1178,7 +1155,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -1219,7 +1196,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByRowId(rowId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1241,7 +1218,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByRowId(rowId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1267,17 +1244,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+			query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 			query.append("expandoValue.rowId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1299,7 +1273,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -1344,10 +1318,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -1355,9 +1328,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.columnId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -1415,10 +1386,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -1426,10 +1396,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.columnId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1451,7 +1419,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -1494,7 +1462,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByT_C(tableId, columnId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1520,7 +1488,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1550,10 +1518,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+			query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 			query.append("expandoValue.tableId = ?");
 
@@ -1561,10 +1528,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append("expandoValue.columnId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1586,7 +1551,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -1633,10 +1598,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -1644,9 +1608,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -1704,10 +1666,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -1715,10 +1676,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1740,7 +1699,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -1783,7 +1742,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByT_CPK(tableId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1809,7 +1768,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1839,10 +1798,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+			query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 			query.append("expandoValue.tableId = ?");
 
@@ -1850,10 +1808,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append("expandoValue.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1875,7 +1831,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -1922,10 +1878,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -1933,9 +1888,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.rowId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -1993,10 +1946,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -2004,10 +1956,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.rowId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2029,7 +1979,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -2072,7 +2022,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByT_R(tableId, rowId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2098,7 +2048,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2128,10 +2078,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+			query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 			query.append("expandoValue.tableId = ?");
 
@@ -2139,10 +2088,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append("expandoValue.rowId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2164,7 +2111,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -2203,7 +2150,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		ExpandoValue expandoValue = fetchByC_R(columnId, rowId);
 
 		if (expandoValue == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2246,10 +2193,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.columnId = ?");
 
@@ -2257,9 +2203,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.rowId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -2334,10 +2278,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.classNameId = ?");
 
@@ -2345,9 +2288,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -2405,10 +2346,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.classNameId = ?");
 
@@ -2416,10 +2356,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2441,7 +2379,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -2484,7 +2422,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2510,7 +2448,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2540,10 +2478,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+			query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 			query.append("expandoValue.classNameId = ?");
 
@@ -2551,10 +2488,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append("expandoValue.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2576,7 +2511,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -2615,7 +2550,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		ExpandoValue expandoValue = fetchByT_C_C(tableId, columnId, classPK);
 
 		if (expandoValue == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2663,10 +2598,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -2678,9 +2612,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append("expandoValue.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -2760,10 +2692,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -2788,9 +2719,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -2855,10 +2784,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -2883,10 +2811,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2908,7 +2834,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -2956,7 +2882,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		List<ExpandoValue> list = findByT_C_D(tableId, columnId, data, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2986,7 +2912,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -3019,10 +2945,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT expandoValue FROM ExpandoValue expandoValue WHERE ");
+			query.append(_SQL_SELECT_EXPANDOVALUE_WHERE);
 
 			query.append("expandoValue.tableId = ?");
 
@@ -3047,10 +2972,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3072,7 +2995,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("expandoValue.tableId ASC, ");
 				query.append("expandoValue.rowId ASC, ");
@@ -3174,13 +3097,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT expandoValue FROM ExpandoValue expandoValue ");
+				query.append(_SQL_SELECT_EXPANDOVALUE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3202,7 +3124,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("expandoValue.tableId ASC, ");
 					query.append("expandoValue.rowId ASC, ");
@@ -3325,14 +3247,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3372,14 +3291,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.columnId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3419,14 +3335,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.rowId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3467,18 +3380,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
 				query.append("expandoValue.columnId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3521,18 +3431,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
 				query.append("expandoValue.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3574,18 +3481,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
 				query.append(" AND ");
 
 				query.append("expandoValue.rowId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3627,18 +3531,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.columnId = ?");
 
 				query.append(" AND ");
 
 				query.append("expandoValue.rowId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3683,18 +3584,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("expandoValue.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3739,10 +3637,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -3753,8 +3650,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				query.append(" AND ");
 
 				query.append("expandoValue.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3803,10 +3698,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(expandoValue) ");
-				query.append("FROM ExpandoValue expandoValue WHERE ");
+				query.append(_SQL_COUNT_EXPANDOVALUE_WHERE);
 
 				query.append("expandoValue.tableId = ?");
 
@@ -3830,8 +3724,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3877,8 +3769,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(expandoValue) FROM ExpandoValue expandoValue");
+				Query q = session.createQuery(_SQL_COUNT_EXPANDOVALUE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3934,5 +3825,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_EXPANDOVALUE = "SELECT expandoValue FROM ExpandoValue expandoValue";
+	private static final String _SQL_SELECT_EXPANDOVALUE_WHERE = "SELECT expandoValue FROM ExpandoValue expandoValue WHERE ";
+	private static final String _SQL_COUNT_EXPANDOVALUE = "SELECT COUNT(expandoValue) FROM ExpandoValue expandoValue";
+	private static final String _SQL_COUNT_EXPANDOVALUE_WHERE = "SELECT COUNT(expandoValue) FROM ExpandoValue expandoValue WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ExpandoValuePersistenceImpl.class);
 }

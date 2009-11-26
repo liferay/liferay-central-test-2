@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -389,10 +390,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
+				query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
 					query.append("resourceAction.name IS NULL");
@@ -409,9 +409,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("resourceAction.name ASC, ");
 				query.append("resourceAction.bitwiseValue ASC");
@@ -468,10 +466,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
+				query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
 					query.append("resourceAction.name IS NULL");
@@ -488,10 +485,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -513,7 +508,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("resourceAction.name ASC, ");
 					query.append("resourceAction.bitwiseValue ASC");
@@ -555,7 +550,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		List<ResourceAction> list = findByName(name, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ResourceAction exists with the key {");
 
@@ -577,7 +572,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		List<ResourceAction> list = findByName(name, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ResourceAction exists with the key {");
 
@@ -604,10 +599,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
+			query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
 
 			if (name == null) {
 				query.append("resourceAction.name IS NULL");
@@ -624,10 +618,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -649,7 +641,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("resourceAction.name ASC, ");
 				query.append("resourceAction.bitwiseValue ASC");
@@ -687,7 +679,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		ResourceAction resourceAction = fetchByN_A(name, actionId);
 
 		if (resourceAction == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ResourceAction exists with the key {");
 
@@ -730,10 +722,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceAction FROM ResourceAction resourceAction WHERE ");
+				query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
 					query.append("resourceAction.name IS NULL");
@@ -767,9 +758,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("resourceAction.name ASC, ");
 				query.append("resourceAction.bitwiseValue ASC");
@@ -898,13 +887,12 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT resourceAction FROM ResourceAction resourceAction ");
+				query.append(_SQL_SELECT_RESOURCEACTION);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -926,7 +914,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("resourceAction.name ASC, ");
 					query.append("resourceAction.bitwiseValue ASC");
@@ -995,10 +983,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(resourceAction) ");
-				query.append("FROM ResourceAction resourceAction WHERE ");
+				query.append(_SQL_COUNT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
 					query.append("resourceAction.name IS NULL");
@@ -1014,8 +1001,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1058,10 +1043,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(resourceAction) ");
-				query.append("FROM ResourceAction resourceAction WHERE ");
+				query.append(_SQL_COUNT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
 					query.append("resourceAction.name IS NULL");
@@ -1094,8 +1078,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1141,8 +1123,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(resourceAction) FROM ResourceAction resourceAction");
+				Query q = session.createQuery(_SQL_COUNT_RESOURCEACTION);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1288,5 +1269,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_RESOURCEACTION = "SELECT resourceAction FROM ResourceAction resourceAction";
+	private static final String _SQL_SELECT_RESOURCEACTION_WHERE = "SELECT resourceAction FROM ResourceAction resourceAction WHERE ";
+	private static final String _SQL_COUNT_RESOURCEACTION = "SELECT COUNT(resourceAction) FROM ResourceAction resourceAction";
+	private static final String _SQL_COUNT_RESOURCEACTION_WHERE = "SELECT COUNT(resourceAction) FROM ResourceAction resourceAction WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ResourceActionPersistenceImpl.class);
 }

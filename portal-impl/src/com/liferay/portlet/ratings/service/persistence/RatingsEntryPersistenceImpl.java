@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -398,18 +399,15 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
+				query.append(_SQL_SELECT_RATINGSENTRY_WHERE);
 
 				query.append("ratingsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("ratingsEntry.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -463,10 +461,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
+				query.append(_SQL_SELECT_RATINGSENTRY_WHERE);
 
 				query.append("ratingsEntry.classNameId = ?");
 
@@ -474,10 +471,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 				query.append("ratingsEntry.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -534,7 +529,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		List<RatingsEntry> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No RatingsEntry exists with the key {");
 
@@ -560,7 +555,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No RatingsEntry exists with the key {");
 
@@ -590,10 +585,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
+			query.append(_SQL_SELECT_RATINGSENTRY_WHERE);
 
 			query.append("ratingsEntry.classNameId = ?");
 
@@ -601,10 +595,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 			query.append("ratingsEntry.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -657,7 +649,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		RatingsEntry ratingsEntry = fetchByU_C_C(userId, classNameId, classPK);
 
 		if (ratingsEntry == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No RatingsEntry exists with the key {");
 
@@ -705,10 +697,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ");
+				query.append(_SQL_SELECT_RATINGSENTRY_WHERE);
 
 				query.append("ratingsEntry.userId = ?");
 
@@ -719,8 +710,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				query.append(" AND ");
 
 				query.append("ratingsEntry.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -843,13 +832,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT ratingsEntry FROM RatingsEntry ratingsEntry ");
+				query.append(_SQL_SELECT_RATINGSENTRY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -937,18 +925,15 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(ratingsEntry) ");
-				query.append("FROM RatingsEntry ratingsEntry WHERE ");
+				query.append(_SQL_COUNT_RATINGSENTRY_WHERE);
 
 				query.append("ratingsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("ratingsEntry.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -993,10 +978,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(ratingsEntry) ");
-				query.append("FROM RatingsEntry ratingsEntry WHERE ");
+				query.append(_SQL_COUNT_RATINGSENTRY_WHERE);
 
 				query.append("ratingsEntry.userId = ?");
 
@@ -1007,8 +991,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				query.append(" AND ");
 
 				query.append("ratingsEntry.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1052,8 +1034,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(ratingsEntry) FROM RatingsEntry ratingsEntry");
+				Query q = session.createQuery(_SQL_COUNT_RATINGSENTRY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1109,5 +1090,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	protected com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence")
 	protected com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence;
+	private static final String _SQL_SELECT_RATINGSENTRY = "SELECT ratingsEntry FROM RatingsEntry ratingsEntry";
+	private static final String _SQL_SELECT_RATINGSENTRY_WHERE = "SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ";
+	private static final String _SQL_COUNT_RATINGSENTRY = "SELECT COUNT(ratingsEntry) FROM RatingsEntry ratingsEntry";
+	private static final String _SQL_COUNT_RATINGSENTRY_WHERE = "SELECT COUNT(ratingsEntry) FROM RatingsEntry ratingsEntry WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(RatingsEntryPersistenceImpl.class);
 }

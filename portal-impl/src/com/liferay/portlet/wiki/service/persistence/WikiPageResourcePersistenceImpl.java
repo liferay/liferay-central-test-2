@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -369,7 +370,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		WikiPageResource wikiPageResource = fetchByN_T(nodeId, title);
 
 		if (wikiPageResource == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPageResource exists with the key {");
 
@@ -412,10 +413,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT wikiPageResource FROM WikiPageResource wikiPageResource WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGERESOURCE_WHERE);
 
 				query.append("wikiPageResource.nodeId = ?");
 
@@ -435,8 +435,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -559,13 +557,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT wikiPageResource FROM WikiPageResource wikiPageResource ");
+				query.append(_SQL_SELECT_WIKIPAGERESOURCE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -643,10 +640,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPageResource) ");
-				query.append("FROM WikiPageResource wikiPageResource WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGERESOURCE_WHERE);
 
 				query.append("wikiPageResource.nodeId = ?");
 
@@ -666,8 +662,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -711,8 +705,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource");
+				Query q = session.createQuery(_SQL_COUNT_WIKIPAGERESOURCE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -766,5 +759,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_WIKIPAGERESOURCE = "SELECT wikiPageResource FROM WikiPageResource wikiPageResource";
+	private static final String _SQL_SELECT_WIKIPAGERESOURCE_WHERE = "SELECT wikiPageResource FROM WikiPageResource wikiPageResource WHERE ";
+	private static final String _SQL_COUNT_WIKIPAGERESOURCE = "SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource";
+	private static final String _SQL_COUNT_WIKIPAGERESOURCE_WHERE = "SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(WikiPageResourcePersistenceImpl.class);
 }

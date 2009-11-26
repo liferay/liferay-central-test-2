@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -410,15 +411,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 
@@ -472,16 +471,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -503,7 +500,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("website.createDate ASC");
 				}
@@ -541,7 +538,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		List<Website> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -563,7 +560,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		List<Website> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -590,16 +587,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT website FROM Website website WHERE ");
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 			query.append("website.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -621,7 +616,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 			}
@@ -662,15 +657,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 
@@ -724,16 +717,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -755,7 +746,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("website.createDate ASC");
 				}
@@ -793,7 +784,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		List<Website> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -815,7 +806,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		List<Website> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -841,16 +832,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT website FROM Website website WHERE ");
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 			query.append("website.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -872,7 +861,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 			}
@@ -916,9 +905,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
@@ -926,9 +915,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append("website.classNameId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 
@@ -984,9 +971,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
@@ -994,10 +981,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append("website.classNameId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1019,7 +1004,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("website.createDate ASC");
 				}
@@ -1059,7 +1044,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		List<Website> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -1085,7 +1070,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -1115,9 +1100,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT website FROM Website website WHERE ");
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 			query.append("website.companyId = ?");
 
@@ -1125,10 +1110,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append("website.classNameId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1150,7 +1133,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 			}
@@ -1196,9 +1179,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
@@ -1210,9 +1193,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append("website.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 
@@ -1271,9 +1252,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
@@ -1285,10 +1266,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append("website.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1310,7 +1289,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("website.createDate ASC");
 				}
@@ -1354,7 +1333,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -1384,7 +1363,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -1417,9 +1396,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT website FROM Website website WHERE ");
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 			query.append("website.companyId = ?");
 
@@ -1431,10 +1410,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append("website.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1456,7 +1433,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 			}
@@ -1505,9 +1482,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
@@ -1523,9 +1500,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append("website.primary = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 
@@ -1589,9 +1564,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website WHERE ");
+				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
@@ -1607,10 +1582,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append("website.primary = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1632,7 +1605,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("website.createDate ASC");
 				}
@@ -1678,7 +1651,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				primary, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -1711,7 +1684,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				primary, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Website exists with the key {");
 
@@ -1747,9 +1720,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT website FROM Website website WHERE ");
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
 			query.append("website.companyId = ?");
 
@@ -1765,10 +1738,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append("website.primary = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1790,7 +1761,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("website.createDate ASC");
 			}
@@ -1888,12 +1859,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT website FROM Website website ");
+				query.append(_SQL_SELECT_WEBSITE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1915,7 +1886,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("website.createDate ASC");
 				}
@@ -2004,14 +1975,11 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(website) ");
-				query.append("FROM Website website WHERE ");
+				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2051,14 +2019,11 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(website) ");
-				query.append("FROM Website website WHERE ");
+				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
 				query.append("website.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2101,18 +2066,15 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(website) ");
-				query.append("FROM Website website WHERE ");
+				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("website.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2157,10 +2119,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(website) ");
-				query.append("FROM Website website WHERE ");
+				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
@@ -2171,8 +2132,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				query.append(" AND ");
 
 				query.append("website.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2220,10 +2179,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(website) ");
-				query.append("FROM Website website WHERE ");
+				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
 				query.append("website.companyId = ?");
 
@@ -2238,8 +2196,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				query.append(" AND ");
 
 				query.append("website.primary = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2285,8 +2241,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(website) FROM Website website");
+				Query q = session.createQuery(_SQL_COUNT_WEBSITE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2432,5 +2387,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_WEBSITE = "SELECT website FROM Website website";
+	private static final String _SQL_SELECT_WEBSITE_WHERE = "SELECT website FROM Website website WHERE ";
+	private static final String _SQL_COUNT_WEBSITE = "SELECT COUNT(website) FROM Website website";
+	private static final String _SQL_COUNT_WEBSITE_WHERE = "SELECT COUNT(website) FROM Website website WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(WebsitePersistenceImpl.class);
 }

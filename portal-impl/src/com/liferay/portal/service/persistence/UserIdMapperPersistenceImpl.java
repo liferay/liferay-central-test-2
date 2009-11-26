@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -435,14 +436,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userIdMapper FROM UserIdMapper userIdMapper WHERE ");
+				query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
 
 				query.append("userIdMapper.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -494,17 +492,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userIdMapper FROM UserIdMapper userIdMapper WHERE ");
+				query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
 
 				query.append("userIdMapper.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -559,7 +554,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		List<UserIdMapper> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserIdMapper exists with the key {");
 
@@ -581,7 +576,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		List<UserIdMapper> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserIdMapper exists with the key {");
 
@@ -608,17 +603,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userIdMapper FROM UserIdMapper userIdMapper WHERE ");
+			query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
 
 			query.append("userIdMapper.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -669,7 +661,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		UserIdMapper userIdMapper = fetchByU_T(userId, type);
 
 		if (userIdMapper == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserIdMapper exists with the key {");
 
@@ -712,10 +704,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userIdMapper FROM UserIdMapper userIdMapper WHERE ");
+				query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
 
 				query.append("userIdMapper.userId = ?");
 
@@ -735,8 +726,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -800,7 +789,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		UserIdMapper userIdMapper = fetchByT_E(type, externalUserId);
 
 		if (userIdMapper == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserIdMapper exists with the key {");
 
@@ -843,10 +832,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userIdMapper FROM UserIdMapper userIdMapper WHERE ");
+				query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
 
 				if (type == null) {
 					query.append("userIdMapper.type IS NULL");
@@ -879,8 +867,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1007,13 +993,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userIdMapper FROM UserIdMapper userIdMapper ");
+				query.append(_SQL_SELECT_USERIDMAPPER);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1104,14 +1089,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userIdMapper) ");
-				query.append("FROM UserIdMapper userIdMapper WHERE ");
+				query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
 
 				query.append("userIdMapper.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1151,10 +1133,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userIdMapper) ");
-				query.append("FROM UserIdMapper userIdMapper WHERE ");
+				query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
 
 				query.append("userIdMapper.userId = ?");
 
@@ -1174,8 +1155,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1220,10 +1199,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userIdMapper) ");
-				query.append("FROM UserIdMapper userIdMapper WHERE ");
+				query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
 
 				if (type == null) {
 					query.append("userIdMapper.type IS NULL");
@@ -1256,8 +1234,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1303,8 +1279,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(userIdMapper) FROM UserIdMapper userIdMapper");
+				Query q = session.createQuery(_SQL_COUNT_USERIDMAPPER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1450,5 +1425,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_USERIDMAPPER = "SELECT userIdMapper FROM UserIdMapper userIdMapper";
+	private static final String _SQL_SELECT_USERIDMAPPER_WHERE = "SELECT userIdMapper FROM UserIdMapper userIdMapper WHERE ";
+	private static final String _SQL_COUNT_USERIDMAPPER = "SELECT COUNT(userIdMapper) FROM UserIdMapper userIdMapper";
+	private static final String _SQL_COUNT_USERIDMAPPER_WHERE = "SELECT COUNT(userIdMapper) FROM UserIdMapper userIdMapper WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(UserIdMapperPersistenceImpl.class);
 }

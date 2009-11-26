@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -338,14 +339,11 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
+				query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
 				query.append("userTrackerPath.userTrackerId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -397,17 +395,14 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
+				query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
 				query.append("userTrackerPath.userTrackerId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -464,7 +459,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserTrackerPath exists with the key {");
 
@@ -488,7 +483,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserTrackerPath exists with the key {");
 
@@ -515,17 +510,14 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ");
+			query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
 			query.append("userTrackerPath.userTrackerId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -635,13 +627,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTrackerPath FROM UserTrackerPath userTrackerPath ");
+				query.append(_SQL_SELECT_USERTRACKERPATH);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -721,14 +712,11 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userTrackerPath) ");
-				query.append("FROM UserTrackerPath userTrackerPath WHERE ");
+				query.append(_SQL_COUNT_USERTRACKERPATH_WHERE);
 
 				query.append("userTrackerPath.userTrackerId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -768,8 +756,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(userTrackerPath) FROM UserTrackerPath userTrackerPath");
+				Query q = session.createQuery(_SQL_COUNT_USERTRACKERPATH);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -915,5 +902,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_USERTRACKERPATH = "SELECT userTrackerPath FROM UserTrackerPath userTrackerPath";
+	private static final String _SQL_SELECT_USERTRACKERPATH_WHERE = "SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ";
+	private static final String _SQL_COUNT_USERTRACKERPATH = "SELECT COUNT(userTrackerPath) FROM UserTrackerPath userTrackerPath";
+	private static final String _SQL_COUNT_USERTRACKERPATH_WHERE = "SELECT COUNT(userTrackerPath) FROM UserTrackerPath userTrackerPath WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(UserTrackerPathPersistenceImpl.class);
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.MembershipRequest;
@@ -380,16 +381,13 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("membershipRequest.createDate DESC");
 
@@ -443,17 +441,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -475,7 +470,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("membershipRequest.createDate DESC");
 				}
@@ -515,7 +510,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		List<MembershipRequest> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -539,7 +534,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -566,17 +561,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+			query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 			query.append("membershipRequest.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -598,7 +590,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("membershipRequest.createDate DESC");
 			}
@@ -641,16 +633,13 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("membershipRequest.createDate DESC");
 
@@ -704,17 +693,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -736,7 +722,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("membershipRequest.createDate DESC");
 				}
@@ -776,7 +762,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		List<MembershipRequest> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -800,7 +786,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -827,17 +813,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+			query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 			query.append("membershipRequest.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -859,7 +842,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("membershipRequest.createDate DESC");
 			}
@@ -904,10 +887,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.groupId = ?");
 
@@ -915,9 +897,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append("membershipRequest.statusId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("membershipRequest.createDate DESC");
 
@@ -973,10 +953,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.groupId = ?");
 
@@ -984,10 +963,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append("membershipRequest.statusId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1009,7 +986,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("membershipRequest.createDate DESC");
 				}
@@ -1051,7 +1028,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		List<MembershipRequest> list = findByG_S(groupId, statusId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -1078,7 +1055,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -1108,10 +1085,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ");
+			query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
 			query.append("membershipRequest.groupId = ?");
 
@@ -1119,10 +1095,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			query.append("membershipRequest.statusId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1144,7 +1118,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("membershipRequest.createDate DESC");
 			}
@@ -1240,13 +1214,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT membershipRequest FROM MembershipRequest membershipRequest ");
+				query.append(_SQL_SELECT_MEMBERSHIPREQUEST);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1268,7 +1241,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("membershipRequest.createDate DESC");
 				}
@@ -1342,14 +1315,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(membershipRequest) ");
-				query.append("FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_COUNT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1389,14 +1359,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(membershipRequest) ");
-				query.append("FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_COUNT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1438,18 +1405,15 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(membershipRequest) ");
-				query.append("FROM MembershipRequest membershipRequest WHERE ");
+				query.append(_SQL_COUNT_MEMBERSHIPREQUEST_WHERE);
 
 				query.append("membershipRequest.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("membershipRequest.statusId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1491,8 +1455,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(membershipRequest) FROM MembershipRequest membershipRequest");
+				Query q = session.createQuery(_SQL_COUNT_MEMBERSHIPREQUEST);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1638,5 +1601,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_MEMBERSHIPREQUEST = "SELECT membershipRequest FROM MembershipRequest membershipRequest";
+	private static final String _SQL_SELECT_MEMBERSHIPREQUEST_WHERE = "SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ";
+	private static final String _SQL_COUNT_MEMBERSHIPREQUEST = "SELECT COUNT(membershipRequest) FROM MembershipRequest membershipRequest";
+	private static final String _SQL_COUNT_MEMBERSHIPREQUEST_WHERE = "SELECT COUNT(membershipRequest) FROM MembershipRequest membershipRequest WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(MembershipRequestPersistenceImpl.class);
 }

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -486,10 +487,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetVocabulary.uuid IS NULL");
@@ -506,9 +506,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetVocabulary.name ASC");
 
@@ -564,10 +562,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetVocabulary.uuid IS NULL");
@@ -584,10 +581,8 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -609,7 +604,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetVocabulary.name ASC");
 				}
@@ -650,7 +645,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		List<AssetVocabulary> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetVocabulary exists with the key {");
 
@@ -672,7 +667,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		List<AssetVocabulary> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetVocabulary exists with the key {");
 
@@ -699,10 +694,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+			query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 			if (uuid == null) {
 				query.append("assetVocabulary.uuid IS NULL");
@@ -719,10 +713,8 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -744,7 +736,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetVocabulary.name ASC");
 			}
@@ -781,7 +773,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		AssetVocabulary assetVocabulary = fetchByUUID_G(uuid, groupId);
 
 		if (assetVocabulary == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetVocabulary exists with the key {");
 
@@ -824,10 +816,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetVocabulary.uuid IS NULL");
@@ -848,9 +839,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 				query.append("assetVocabulary.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetVocabulary.name ASC");
 
@@ -924,16 +913,13 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 				query.append("assetVocabulary.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetVocabulary.name ASC");
 
@@ -987,17 +973,14 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 				query.append("assetVocabulary.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1019,7 +1002,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetVocabulary.name ASC");
 				}
@@ -1059,7 +1042,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		List<AssetVocabulary> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetVocabulary exists with the key {");
 
@@ -1083,7 +1066,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetVocabulary exists with the key {");
 
@@ -1110,17 +1093,14 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+			query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 			query.append("assetVocabulary.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1142,7 +1122,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetVocabulary.name ASC");
 			}
@@ -1185,16 +1165,13 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 				query.append("assetVocabulary.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetVocabulary.name ASC");
 
@@ -1248,17 +1225,14 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 				query.append("assetVocabulary.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1280,7 +1254,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetVocabulary.name ASC");
 				}
@@ -1320,7 +1294,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		List<AssetVocabulary> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetVocabulary exists with the key {");
 
@@ -1344,7 +1318,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetVocabulary exists with the key {");
 
@@ -1371,17 +1345,14 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+			query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 			query.append("assetVocabulary.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1403,7 +1374,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetVocabulary.name ASC");
 			}
@@ -1438,7 +1409,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		AssetVocabulary assetVocabulary = fetchByG_N(groupId, name);
 
 		if (assetVocabulary == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetVocabulary exists with the key {");
 
@@ -1481,10 +1452,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
 
 				query.append("assetVocabulary.groupId = ?");
 
@@ -1505,9 +1475,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetVocabulary.name ASC");
 
@@ -1632,13 +1600,12 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetVocabulary FROM AssetVocabulary assetVocabulary ");
+				query.append(_SQL_SELECT_ASSETVOCABULARY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1660,7 +1627,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetVocabulary.name ASC");
 				}
@@ -1747,10 +1714,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetVocabulary) ");
-				query.append("FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_COUNT_ASSETVOCABULARY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetVocabulary.uuid IS NULL");
@@ -1766,8 +1732,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1810,10 +1774,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetVocabulary) ");
-				query.append("FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_COUNT_ASSETVOCABULARY_WHERE);
 
 				if (uuid == null) {
 					query.append("assetVocabulary.uuid IS NULL");
@@ -1833,8 +1796,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				query.append(" AND ");
 
 				query.append("assetVocabulary.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1878,14 +1839,11 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetVocabulary) ");
-				query.append("FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_COUNT_ASSETVOCABULARY_WHERE);
 
 				query.append("assetVocabulary.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1925,14 +1883,11 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetVocabulary) ");
-				query.append("FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_COUNT_ASSETVOCABULARY_WHERE);
 
 				query.append("assetVocabulary.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1972,10 +1927,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetVocabulary) ");
-				query.append("FROM AssetVocabulary assetVocabulary WHERE ");
+				query.append(_SQL_COUNT_ASSETVOCABULARY_WHERE);
 
 				query.append("assetVocabulary.groupId = ?");
 
@@ -1995,8 +1949,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2040,8 +1992,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(assetVocabulary) FROM AssetVocabulary assetVocabulary");
+				Query q = session.createQuery(_SQL_COUNT_ASSETVOCABULARY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2105,5 +2056,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_ASSETVOCABULARY = "SELECT assetVocabulary FROM AssetVocabulary assetVocabulary";
+	private static final String _SQL_SELECT_ASSETVOCABULARY_WHERE = "SELECT assetVocabulary FROM AssetVocabulary assetVocabulary WHERE ";
+	private static final String _SQL_COUNT_ASSETVOCABULARY = "SELECT COUNT(assetVocabulary) FROM AssetVocabulary assetVocabulary";
+	private static final String _SQL_COUNT_ASSETVOCABULARY_WHERE = "SELECT COUNT(assetVocabulary) FROM AssetVocabulary assetVocabulary WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(AssetVocabularyPersistenceImpl.class);
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -336,7 +337,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		ClassName className = fetchByValue(value);
 
 		if (className == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ClassName exists with the key {");
 
@@ -375,9 +376,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT className FROM ClassName className WHERE ");
+				query.append(_SQL_SELECT_CLASSNAME_WHERE);
 
 				if (value == null) {
 					query.append("className.value IS NULL");
@@ -393,8 +394,6 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -514,12 +513,12 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT className FROM ClassName className ");
+				query.append(_SQL_SELECT_CLASSNAME);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -597,10 +596,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(className) ");
-				query.append("FROM ClassName className WHERE ");
+				query.append(_SQL_COUNT_CLASSNAME_WHERE);
 
 				if (value == null) {
 					query.append("className.value IS NULL");
@@ -616,8 +614,6 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -659,8 +655,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(className) FROM ClassName className");
+				Query q = session.createQuery(_SQL_COUNT_CLASSNAME);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -806,5 +801,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_CLASSNAME = "SELECT className FROM ClassName className";
+	private static final String _SQL_SELECT_CLASSNAME_WHERE = "SELECT className FROM ClassName className WHERE ";
+	private static final String _SQL_COUNT_CLASSNAME = "SELECT COUNT(className) FROM ClassName className";
+	private static final String _SQL_COUNT_CLASSNAME_WHERE = "SELECT COUNT(className) FROM ClassName className WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ClassNamePersistenceImpl.class);
 }

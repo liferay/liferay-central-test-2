@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -460,9 +461,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiNode.uuid IS NULL");
@@ -479,9 +480,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiNode.name ASC");
 
@@ -537,9 +536,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiNode.uuid IS NULL");
@@ -556,10 +555,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -581,7 +578,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiNode.name ASC");
 				}
@@ -622,7 +619,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		List<WikiNode> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiNode exists with the key {");
 
@@ -644,7 +641,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		List<WikiNode> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiNode exists with the key {");
 
@@ -670,9 +667,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+			query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 			if (uuid == null) {
 				query.append("wikiNode.uuid IS NULL");
@@ -689,10 +686,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -714,7 +709,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiNode.name ASC");
 			}
@@ -750,7 +745,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		WikiNode wikiNode = fetchByUUID_G(uuid, groupId);
 
 		if (wikiNode == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiNode exists with the key {");
 
@@ -793,9 +788,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiNode.uuid IS NULL");
@@ -816,9 +811,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append("wikiNode.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiNode.name ASC");
 
@@ -891,15 +884,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				query.append("wikiNode.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiNode.name ASC");
 
@@ -953,16 +944,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				query.append("wikiNode.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -984,7 +973,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiNode.name ASC");
 				}
@@ -1023,7 +1012,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		List<WikiNode> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiNode exists with the key {");
 
@@ -1045,7 +1034,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		List<WikiNode> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiNode exists with the key {");
 
@@ -1071,16 +1060,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+			query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 			query.append("wikiNode.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1102,7 +1089,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiNode.name ASC");
 			}
@@ -1144,15 +1131,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				query.append("wikiNode.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiNode.name ASC");
 
@@ -1206,16 +1191,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				query.append("wikiNode.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1237,7 +1220,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiNode.name ASC");
 				}
@@ -1276,7 +1259,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		List<WikiNode> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiNode exists with the key {");
 
@@ -1298,7 +1281,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		List<WikiNode> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiNode exists with the key {");
 
@@ -1324,16 +1307,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+			query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 			query.append("wikiNode.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1355,7 +1336,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiNode.name ASC");
 			}
@@ -1389,7 +1370,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		WikiNode wikiNode = fetchByG_N(groupId, name);
 
 		if (wikiNode == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiNode exists with the key {");
 
@@ -1432,9 +1413,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				query.append("wikiNode.groupId = ?");
 
@@ -1455,9 +1436,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiNode.name ASC");
 
@@ -1581,12 +1560,12 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiNode FROM WikiNode wikiNode ");
+				query.append(_SQL_SELECT_WIKINODE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1608,7 +1587,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiNode.name ASC");
 				}
@@ -1695,10 +1674,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiNode) ");
-				query.append("FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiNode.uuid IS NULL");
@@ -1714,8 +1692,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1758,10 +1734,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiNode) ");
-				query.append("FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiNode.uuid IS NULL");
@@ -1781,8 +1756,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				query.append(" AND ");
 
 				query.append("wikiNode.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1826,14 +1799,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiNode) ");
-				query.append("FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
 				query.append("wikiNode.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1873,14 +1843,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiNode) ");
-				query.append("FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
 				query.append("wikiNode.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1920,10 +1887,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiNode) ");
-				query.append("FROM WikiNode wikiNode WHERE ");
+				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
 				query.append("wikiNode.groupId = ?");
 
@@ -1943,8 +1909,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1988,8 +1952,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(wikiNode) FROM WikiNode wikiNode");
+				Query q = session.createQuery(_SQL_COUNT_WIKINODE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2047,5 +2010,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_WIKINODE = "SELECT wikiNode FROM WikiNode wikiNode";
+	private static final String _SQL_SELECT_WIKINODE_WHERE = "SELECT wikiNode FROM WikiNode wikiNode WHERE ";
+	private static final String _SQL_COUNT_WIKINODE = "SELECT COUNT(wikiNode) FROM WikiNode wikiNode";
+	private static final String _SQL_COUNT_WIKINODE_WHERE = "SELECT COUNT(wikiNode) FROM WikiNode wikiNode WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(WikiNodePersistenceImpl.class);
 }

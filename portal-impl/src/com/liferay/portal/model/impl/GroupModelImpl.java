@@ -123,14 +123,19 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 		return models;
 	}
 
+	public static final String TABLE_GROUPS_ORGS = "Groups_Orgs";
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Orgs"), true);
+	public static final String TABLE_GROUPS_PERMISSIONS = "Groups_Permissions";
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Permissions"), true);
+	public static final String TABLE_GROUPS_ROLES = "Groups_Roles";
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Roles"), true);
+	public static final String TABLE_GROUPS_USERGROUPS = "Groups_UserGroups";
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_UserGroups"), true);
+	public static final String TABLE_USERS_GROUPS = com.liferay.portal.model.impl.UserModelImpl.TABLE_USERS_GROUPS;
 	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Group"));

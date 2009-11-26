@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -241,7 +242,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 
 		Session session = null;
@@ -404,16 +405,13 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scFrameworkVersion.name DESC");
 
@@ -467,17 +465,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -499,7 +494,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scFrameworkVersion.name DESC");
 				}
@@ -539,7 +534,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		List<SCFrameworkVersion> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -563,7 +558,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -590,17 +585,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+			query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 			query.append("scFrameworkVersion.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -622,7 +614,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scFrameworkVersion.name DESC");
 			}
@@ -665,16 +657,13 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scFrameworkVersion.name DESC");
 
@@ -728,17 +717,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -760,7 +746,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scFrameworkVersion.name DESC");
 				}
@@ -800,7 +786,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		List<SCFrameworkVersion> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -824,7 +810,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -851,17 +837,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+			query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 			query.append("scFrameworkVersion.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -883,7 +866,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scFrameworkVersion.name DESC");
 			}
@@ -928,10 +911,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.groupId = ?");
 
@@ -939,9 +921,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append("scFrameworkVersion.active = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scFrameworkVersion.name DESC");
 
@@ -997,10 +977,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.groupId = ?");
 
@@ -1008,10 +987,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append("scFrameworkVersion.active = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1033,7 +1010,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scFrameworkVersion.name DESC");
 				}
@@ -1075,7 +1052,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		List<SCFrameworkVersion> list = findByG_A(groupId, active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -1102,7 +1079,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -1132,10 +1109,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+			query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
 			query.append("scFrameworkVersion.groupId = ?");
 
@@ -1143,10 +1119,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 			query.append("scFrameworkVersion.active = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1168,7 +1142,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scFrameworkVersion.name DESC");
 			}
@@ -1264,13 +1238,12 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion ");
+				query.append(_SQL_SELECT_SCFRAMEWORKVERSION);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1292,7 +1265,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scFrameworkVersion.name DESC");
 				}
@@ -1366,15 +1339,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scFrameworkVersion) ");
-				query.append(
-					"FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_COUNT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1414,15 +1383,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scFrameworkVersion) ");
-				query.append(
-					"FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_COUNT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1465,19 +1430,15 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scFrameworkVersion) ");
-				query.append(
-					"FROM SCFrameworkVersion scFrameworkVersion WHERE ");
+				query.append(_SQL_COUNT_SCFRAMEWORKVERSION_WHERE);
 
 				query.append("scFrameworkVersion.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("scFrameworkVersion.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1519,8 +1480,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(scFrameworkVersion) FROM SCFrameworkVersion scFrameworkVersion");
+				Query q = session.createQuery(_SQL_COUNT_SCFRAMEWORKVERSION);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1554,7 +1514,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 	public static final FinderPath FINDER_PATH_GET_SCPRODUCTVERSIONS = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
-			"SCFrameworkVersi_SCProductVers", "getSCProductVersions",
+			SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			"getSCProductVersions",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1577,17 +1538,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETSCPRODUCTVERSIONS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("SCProductVersion.createDate DESC");
 				}
@@ -1628,8 +1589,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 	public static final FinderPath FINDER_PATH_GET_SCPRODUCTVERSIONS_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
-			"SCFrameworkVersi_SCProductVers", "getSCProductVersionsSize",
-			new String[] { Long.class.getName() });
+			SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			"getSCProductVersionsSize", new String[] { Long.class.getName() });
 
 	public int getSCProductVersionsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1673,7 +1634,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 	public static final FinderPath FINDER_PATH_CONTAINS_SCPRODUCTVERSION = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
-			"SCFrameworkVersi_SCProductVers", "containsSCProductVersion",
+			SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			"containsSCProductVersion",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsSCProductVersion(long pk, long scProductVersionPK)
@@ -1726,7 +1688,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1740,7 +1702,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1755,7 +1717,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1771,7 +1733,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1783,7 +1745,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1796,7 +1758,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1810,7 +1772,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1825,7 +1787,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1842,7 +1804,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1873,7 +1835,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -1896,7 +1858,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+			FinderCacheUtil.clearCache(SCFrameworkVersionModelImpl.TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS);
 		}
 	}
 
@@ -2130,6 +2092,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		private SCFrameworkVersionPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_SCFRAMEWORKVERSION = "SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion";
+	private static final String _SQL_SELECT_SCFRAMEWORKVERSION_WHERE = "SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ";
+	private static final String _SQL_COUNT_SCFRAMEWORKVERSION = "SELECT COUNT(scFrameworkVersion) FROM SCFrameworkVersion scFrameworkVersion";
+	private static final String _SQL_COUNT_SCFRAMEWORKVERSION_WHERE = "SELECT COUNT(scFrameworkVersion) FROM SCFrameworkVersion scFrameworkVersion WHERE ";
 	private static final String _SQL_GETSCPRODUCTVERSIONS = "SELECT {SCProductVersion.*} FROM SCProductVersion INNER JOIN SCFrameworkVersi_SCProductVers ON (SCFrameworkVersi_SCProductVers.productVersionId = SCProductVersion.productVersionId) WHERE (SCFrameworkVersi_SCProductVers.frameworkVersionId = ?)";
 	private static final String _SQL_GETSCPRODUCTVERSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ?";
 	private static final String _SQL_CONTAINSSCPRODUCTVERSION = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ? AND productVersionId = ?";

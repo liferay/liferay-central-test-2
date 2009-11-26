@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -343,16 +344,13 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItemField FROM ShoppingItemField shoppingItemField WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGITEMFIELD_WHERE);
 
 				query.append("shoppingItemField.itemId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingItemField.itemId ASC, ");
 				query.append("shoppingItemField.name ASC");
@@ -407,17 +405,14 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItemField FROM ShoppingItemField shoppingItemField WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGITEMFIELD_WHERE);
 
 				query.append("shoppingItemField.itemId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -439,7 +434,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingItemField.itemId ASC, ");
 					query.append("shoppingItemField.name ASC");
@@ -479,7 +474,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 		List<ShoppingItemField> list = findByItemId(itemId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingItemField exists with the key {");
 
@@ -502,7 +497,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingItemField exists with the key {");
 
@@ -529,17 +524,14 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT shoppingItemField FROM ShoppingItemField shoppingItemField WHERE ");
+			query.append(_SQL_SELECT_SHOPPINGITEMFIELD_WHERE);
 
 			query.append("shoppingItemField.itemId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -561,7 +553,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingItemField.itemId ASC, ");
 				query.append("shoppingItemField.name ASC");
@@ -656,13 +648,12 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingItemField FROM ShoppingItemField shoppingItemField ");
+				query.append(_SQL_SELECT_SHOPPINGITEMFIELD);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -684,7 +675,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingItemField.itemId ASC, ");
 					query.append("shoppingItemField.name ASC");
@@ -746,14 +737,11 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingItemField) ");
-				query.append("FROM ShoppingItemField shoppingItemField WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGITEMFIELD_WHERE);
 
 				query.append("shoppingItemField.itemId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -793,8 +781,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(shoppingItemField) FROM ShoppingItemField shoppingItemField");
+				Query q = session.createQuery(_SQL_COUNT_SHOPPINGITEMFIELD);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -858,5 +845,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SHOPPINGITEMFIELD = "SELECT shoppingItemField FROM ShoppingItemField shoppingItemField";
+	private static final String _SQL_SELECT_SHOPPINGITEMFIELD_WHERE = "SELECT shoppingItemField FROM ShoppingItemField shoppingItemField WHERE ";
+	private static final String _SQL_COUNT_SHOPPINGITEMFIELD = "SELECT COUNT(shoppingItemField) FROM ShoppingItemField shoppingItemField";
+	private static final String _SQL_COUNT_SHOPPINGITEMFIELD_WHERE = "SELECT COUNT(shoppingItemField) FROM ShoppingItemField shoppingItemField WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ShoppingItemFieldPersistenceImpl.class);
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -412,13 +413,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
+				query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
 				query.append("layoutSet.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -470,16 +469,14 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
+				query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
 				query.append("layoutSet.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -534,7 +531,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		List<LayoutSet> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No LayoutSet exists with the key {");
 
@@ -556,7 +553,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		List<LayoutSet> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No LayoutSet exists with the key {");
 
@@ -583,16 +580,14 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
+			query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
 			query.append("layoutSet.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -643,7 +638,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		LayoutSet layoutSet = fetchByVirtualHost(virtualHost);
 
 		if (layoutSet == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No LayoutSet exists with the key {");
 
@@ -683,9 +678,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
+				query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
 				if (virtualHost == null) {
 					query.append("layoutSet.virtualHost IS NULL");
@@ -701,8 +696,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -763,7 +756,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		LayoutSet layoutSet = fetchByG_P(groupId, privateLayout);
 
 		if (layoutSet == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No LayoutSet exists with the key {");
 
@@ -808,17 +801,15 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT layoutSet FROM LayoutSet layoutSet WHERE ");
+				query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
 				query.append("layoutSet.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("layoutSet.privateLayout = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -938,12 +929,12 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT layoutSet FROM LayoutSet layoutSet ");
+				query.append(_SQL_SELECT_LAYOUTSET);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1034,14 +1025,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(layoutSet) ");
-				query.append("FROM LayoutSet layoutSet WHERE ");
+				query.append(_SQL_COUNT_LAYOUTSET_WHERE);
 
 				query.append("layoutSet.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1081,10 +1069,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(layoutSet) ");
-				query.append("FROM LayoutSet layoutSet WHERE ");
+				query.append(_SQL_COUNT_LAYOUTSET_WHERE);
 
 				if (virtualHost == null) {
 					query.append("layoutSet.virtualHost IS NULL");
@@ -1100,8 +1087,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1146,18 +1131,15 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(layoutSet) ");
-				query.append("FROM LayoutSet layoutSet WHERE ");
+				query.append(_SQL_COUNT_LAYOUTSET_WHERE);
 
 				query.append("layoutSet.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("layoutSet.privateLayout = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1199,8 +1181,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(layoutSet) FROM LayoutSet layoutSet");
+				Query q = session.createQuery(_SQL_COUNT_LAYOUTSET);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1346,5 +1327,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_LAYOUTSET = "SELECT layoutSet FROM LayoutSet layoutSet";
+	private static final String _SQL_SELECT_LAYOUTSET_WHERE = "SELECT layoutSet FROM LayoutSet layoutSet WHERE ";
+	private static final String _SQL_COUNT_LAYOUTSET = "SELECT COUNT(layoutSet) FROM LayoutSet layoutSet";
+	private static final String _SQL_COUNT_LAYOUTSET_WHERE = "SELECT COUNT(layoutSet) FROM LayoutSet layoutSet WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetPersistenceImpl.class);
 }

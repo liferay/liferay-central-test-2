@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -371,7 +372,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		Shard shard = fetchByName(name);
 
 		if (shard == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Shard exists with the key {");
 
@@ -410,9 +411,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT shard FROM Shard shard WHERE ");
+				query.append(_SQL_SELECT_SHARD_WHERE);
 
 				if (name == null) {
 					query.append("shard.name IS NULL");
@@ -428,8 +429,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -490,7 +489,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		Shard shard = fetchByC_C(classNameId, classPK);
 
 		if (shard == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Shard exists with the key {");
 
@@ -535,17 +534,15 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT shard FROM Shard shard WHERE ");
+				query.append(_SQL_SELECT_SHARD_WHERE);
 
 				query.append("shard.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("shard.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -664,12 +661,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT shard FROM Shard shard ");
+				query.append(_SQL_SELECT_SHARD);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -754,10 +751,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shard) ");
-				query.append("FROM Shard shard WHERE ");
+				query.append(_SQL_COUNT_SHARD_WHERE);
 
 				if (name == null) {
 					query.append("shard.name IS NULL");
@@ -773,8 +769,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -819,18 +813,15 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shard) ");
-				query.append("FROM Shard shard WHERE ");
+				query.append(_SQL_COUNT_SHARD_WHERE);
 
 				query.append("shard.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("shard.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -872,8 +863,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(shard) FROM Shard shard");
+				Query q = session.createQuery(_SQL_COUNT_SHARD);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1019,5 +1009,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_SHARD = "SELECT shard FROM Shard shard";
+	private static final String _SQL_SELECT_SHARD_WHERE = "SELECT shard FROM Shard shard WHERE ";
+	private static final String _SQL_COUNT_SHARD = "SELECT COUNT(shard) FROM Shard shard";
+	private static final String _SQL_COUNT_SHARD_WHERE = "SELECT COUNT(shard) FROM Shard shard WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ShardPersistenceImpl.class);
 }

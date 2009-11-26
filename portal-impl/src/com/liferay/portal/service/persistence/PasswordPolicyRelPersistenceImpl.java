@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -436,14 +437,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
 				query.append("passwordPolicyRel.passwordPolicyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -496,17 +494,14 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
 				query.append("passwordPolicyRel.passwordPolicyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -563,7 +558,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PasswordPolicyRel exists with the key {");
 
@@ -587,7 +582,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PasswordPolicyRel exists with the key {");
 
@@ -614,17 +609,14 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+			query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
 			query.append("passwordPolicyRel.passwordPolicyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -675,7 +667,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		PasswordPolicyRel passwordPolicyRel = fetchByC_C(classNameId, classPK);
 
 		if (passwordPolicyRel == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PasswordPolicyRel exists with the key {");
 
@@ -720,18 +712,15 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
 				query.append("passwordPolicyRel.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("passwordPolicyRel.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -794,7 +783,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				classNameId, classPK);
 
 		if (passwordPolicyRel == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PasswordPolicyRel exists with the key {");
 
@@ -844,10 +833,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
 				query.append("passwordPolicyRel.passwordPolicyId = ?");
 
@@ -858,8 +846,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				query.append(" AND ");
 
 				query.append("passwordPolicyRel.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -982,13 +968,12 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel ");
+				query.append(_SQL_SELECT_PASSWORDPOLICYREL);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1083,14 +1068,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(passwordPolicyRel) ");
-				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+				query.append(_SQL_COUNT_PASSWORDPOLICYREL_WHERE);
 
 				query.append("passwordPolicyRel.passwordPolicyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1133,18 +1115,15 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(passwordPolicyRel) ");
-				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+				query.append(_SQL_COUNT_PASSWORDPOLICYREL_WHERE);
 
 				query.append("passwordPolicyRel.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("passwordPolicyRel.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1190,10 +1169,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(passwordPolicyRel) ");
-				query.append("FROM PasswordPolicyRel passwordPolicyRel WHERE ");
+				query.append(_SQL_COUNT_PASSWORDPOLICYREL_WHERE);
 
 				query.append("passwordPolicyRel.passwordPolicyId = ?");
 
@@ -1204,8 +1182,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				query.append(" AND ");
 
 				query.append("passwordPolicyRel.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1249,8 +1225,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(passwordPolicyRel) FROM PasswordPolicyRel passwordPolicyRel");
+				Query q = session.createQuery(_SQL_COUNT_PASSWORDPOLICYREL);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1396,5 +1371,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_PASSWORDPOLICYREL = "SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel";
+	private static final String _SQL_SELECT_PASSWORDPOLICYREL_WHERE = "SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ";
+	private static final String _SQL_COUNT_PASSWORDPOLICYREL = "SELECT COUNT(passwordPolicyRel) FROM PasswordPolicyRel passwordPolicyRel";
+	private static final String _SQL_COUNT_PASSWORDPOLICYREL_WHERE = "SELECT COUNT(passwordPolicyRel) FROM PasswordPolicyRel passwordPolicyRel WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(PasswordPolicyRelPersistenceImpl.class);
 }

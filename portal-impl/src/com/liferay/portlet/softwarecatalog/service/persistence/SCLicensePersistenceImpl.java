@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -217,7 +218,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 
 		Session session = null;
@@ -371,15 +372,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
+				query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
 				query.append("scLicense.active = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scLicense.name ASC");
 
@@ -433,16 +432,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
+				query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
 				query.append("scLicense.active = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -464,7 +461,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scLicense.name ASC");
 				}
@@ -503,7 +500,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		List<SCLicense> list = findByActive(active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCLicense exists with the key {");
 
@@ -525,7 +522,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		List<SCLicense> list = findByActive(active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCLicense exists with the key {");
 
@@ -551,16 +548,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
+			query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
 			query.append("scLicense.active = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -582,7 +577,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scLicense.name ASC");
 			}
@@ -627,9 +622,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
+				query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
 				query.append("scLicense.active = ?");
 
@@ -637,9 +632,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append("scLicense.recommended = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scLicense.name ASC");
 
@@ -695,9 +688,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
+				query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
 				query.append("scLicense.active = ?");
 
@@ -705,10 +698,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append("scLicense.recommended = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -730,7 +721,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scLicense.name ASC");
 				}
@@ -771,7 +762,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		List<SCLicense> list = findByA_R(active, recommended, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCLicense exists with the key {");
 
@@ -797,7 +788,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SCLicense exists with the key {");
 
@@ -827,9 +818,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT scLicense FROM SCLicense scLicense WHERE ");
+			query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
 			query.append("scLicense.active = ?");
 
@@ -837,10 +828,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			query.append("scLicense.recommended = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -862,7 +851,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("scLicense.name ASC");
 			}
@@ -958,12 +947,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT scLicense FROM SCLicense scLicense ");
+				query.append(_SQL_SELECT_SCLICENSE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -985,7 +974,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("scLicense.name ASC");
 				}
@@ -1053,14 +1042,11 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scLicense) ");
-				query.append("FROM SCLicense scLicense WHERE ");
+				query.append(_SQL_COUNT_SCLICENSE_WHERE);
 
 				query.append("scLicense.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1103,18 +1089,15 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(scLicense) ");
-				query.append("FROM SCLicense scLicense WHERE ");
+				query.append(_SQL_COUNT_SCLICENSE_WHERE);
 
 				query.append("scLicense.active = ?");
 
 				query.append(" AND ");
 
 				query.append("scLicense.recommended = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1156,8 +1139,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(scLicense) FROM SCLicense scLicense");
+				Query q = session.createQuery(_SQL_COUNT_SCLICENSE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1191,7 +1173,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 	public static final FinderPath FINDER_PATH_GET_SCPRODUCTENTRIES = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			"SCLicenses_SCProductEntries", "getSCProductEntries",
+			SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			"getSCProductEntries",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1214,17 +1197,17 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETSCPRODUCTENTRIES);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("SCProductEntry.modifiedDate DESC, ");
 					sb.append("SCProductEntry.name DESC");
@@ -1266,8 +1249,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 	public static final FinderPath FINDER_PATH_GET_SCPRODUCTENTRIES_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			"SCLicenses_SCProductEntries", "getSCProductEntriesSize",
-			new String[] { Long.class.getName() });
+			SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			"getSCProductEntriesSize", new String[] { Long.class.getName() });
 
 	public int getSCProductEntriesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1311,7 +1294,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_SCPRODUCTENTRY = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
-			"SCLicenses_SCProductEntries", "containsSCProductEntry",
+			SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES,
+			"containsSCProductEntry",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsSCProductEntry(long pk, long scProductEntryPK)
@@ -1364,7 +1348,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1378,7 +1362,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1393,7 +1377,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1409,7 +1393,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1421,7 +1405,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1434,7 +1418,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1448,7 +1432,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1463,7 +1447,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1479,7 +1463,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1510,7 +1494,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1533,7 +1517,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache(SCLicenseModelImpl.TABLE_SCLICENSES_SCPRODUCTENTRIES);
 		}
 	}
 
@@ -1760,6 +1744,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		private SCLicensePersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_SCLICENSE = "SELECT scLicense FROM SCLicense scLicense";
+	private static final String _SQL_SELECT_SCLICENSE_WHERE = "SELECT scLicense FROM SCLicense scLicense WHERE ";
+	private static final String _SQL_COUNT_SCLICENSE = "SELECT COUNT(scLicense) FROM SCLicense scLicense";
+	private static final String _SQL_COUNT_SCLICENSE_WHERE = "SELECT COUNT(scLicense) FROM SCLicense scLicense WHERE ";
 	private static final String _SQL_GETSCPRODUCTENTRIES = "SELECT {SCProductEntry.*} FROM SCProductEntry INNER JOIN SCLicenses_SCProductEntries ON (SCLicenses_SCProductEntries.productEntryId = SCProductEntry.productEntryId) WHERE (SCLicenses_SCProductEntries.licenseId = ?)";
 	private static final String _SQL_GETSCPRODUCTENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE licenseId = ?";
 	private static final String _SQL_CONTAINSSCPRODUCTENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE licenseId = ? AND productEntryId = ?";

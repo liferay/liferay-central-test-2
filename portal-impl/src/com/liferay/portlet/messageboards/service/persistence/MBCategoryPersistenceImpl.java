@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -444,10 +445,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("mbCategory.uuid IS NULL");
@@ -464,9 +464,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -523,10 +521,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("mbCategory.uuid IS NULL");
@@ -543,10 +540,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -568,7 +563,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbCategory.parentCategoryId ASC, ");
 					query.append("mbCategory.name ASC");
@@ -610,7 +605,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -632,7 +627,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -658,9 +653,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 			if (uuid == null) {
 				query.append("mbCategory.uuid IS NULL");
@@ -677,10 +672,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -702,7 +695,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -740,7 +733,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		MBCategory mbCategory = fetchByUUID_G(uuid, groupId);
 
 		if (mbCategory == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -783,10 +776,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("mbCategory.uuid IS NULL");
@@ -807,9 +799,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append("mbCategory.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -884,16 +874,13 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -948,17 +935,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -980,7 +964,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbCategory.parentCategoryId ASC, ");
 					query.append("mbCategory.name ASC");
@@ -1020,7 +1004,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1042,7 +1026,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1069,16 +1053,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 			query.append("mbCategory.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1100,7 +1082,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -1144,16 +1126,13 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -1208,17 +1187,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1240,7 +1216,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbCategory.parentCategoryId ASC, ");
 					query.append("mbCategory.name ASC");
@@ -1280,7 +1256,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1302,7 +1278,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1329,16 +1305,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 			query.append("mbCategory.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1360,7 +1334,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -1406,10 +1380,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.groupId = ?");
 
@@ -1417,9 +1390,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append("mbCategory.parentCategoryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -1476,10 +1447,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.groupId = ?");
 
@@ -1487,10 +1457,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append("mbCategory.parentCategoryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1512,7 +1480,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbCategory.parentCategoryId ASC, ");
 					query.append("mbCategory.name ASC");
@@ -1554,7 +1522,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1580,7 +1548,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1610,9 +1578,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbCategory FROM MBCategory mbCategory WHERE ");
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 			query.append("mbCategory.groupId = ?");
 
@@ -1620,10 +1588,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			query.append("mbCategory.parentCategoryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1645,7 +1611,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbCategory.parentCategoryId ASC, ");
 				query.append("mbCategory.name ASC");
@@ -1742,12 +1708,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbCategory FROM MBCategory mbCategory ");
+				query.append(_SQL_SELECT_MBCATEGORY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1769,7 +1735,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbCategory.parentCategoryId ASC, ");
 					query.append("mbCategory.name ASC");
@@ -1857,10 +1823,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbCategory) ");
-				query.append("FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("mbCategory.uuid IS NULL");
@@ -1876,8 +1841,6 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1920,10 +1883,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbCategory) ");
-				query.append("FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
 					query.append("mbCategory.uuid IS NULL");
@@ -1943,8 +1905,6 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query.append(" AND ");
 
 				query.append("mbCategory.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1988,14 +1948,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbCategory) ");
-				query.append("FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2035,14 +1992,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbCategory) ");
-				query.append("FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2085,18 +2039,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbCategory) ");
-				query.append("FROM MBCategory mbCategory WHERE ");
+				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				query.append("mbCategory.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbCategory.parentCategoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2138,8 +2089,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(mbCategory) FROM MBCategory mbCategory");
+				Query q = session.createQuery(_SQL_COUNT_MBCATEGORY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2211,5 +2161,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _SQL_SELECT_MBCATEGORY = "SELECT mbCategory FROM MBCategory mbCategory";
+	private static final String _SQL_SELECT_MBCATEGORY_WHERE = "SELECT mbCategory FROM MBCategory mbCategory WHERE ";
+	private static final String _SQL_COUNT_MBCATEGORY = "SELECT COUNT(mbCategory) FROM MBCategory mbCategory";
+	private static final String _SQL_COUNT_MBCATEGORY_WHERE = "SELECT COUNT(mbCategory) FROM MBCategory mbCategory WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(MBCategoryPersistenceImpl.class);
 }

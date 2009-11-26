@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -436,16 +437,13 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategoryProperty.key ASC");
 
@@ -499,17 +497,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -531,7 +526,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategoryProperty.key ASC");
 				}
@@ -571,7 +566,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		List<AssetCategoryProperty> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategoryProperty exists with the key {");
 
@@ -595,7 +590,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategoryProperty exists with the key {");
 
@@ -622,17 +617,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 			query.append("assetCategoryProperty.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -654,7 +646,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategoryProperty.key ASC");
 			}
@@ -697,16 +689,13 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.categoryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategoryProperty.key ASC");
 
@@ -760,17 +749,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.categoryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -792,7 +778,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategoryProperty.key ASC");
 				}
@@ -833,7 +819,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategoryProperty exists with the key {");
 
@@ -857,7 +843,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategoryProperty exists with the key {");
 
@@ -884,17 +870,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 			query.append("assetCategoryProperty.categoryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -916,7 +899,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategoryProperty.key ASC");
 			}
@@ -959,10 +942,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.companyId = ?");
 
@@ -983,9 +965,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategoryProperty.key ASC");
 
@@ -1045,10 +1025,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.companyId = ?");
 
@@ -1069,10 +1048,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1094,7 +1071,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategoryProperty.key ASC");
 				}
@@ -1138,7 +1115,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		List<AssetCategoryProperty> list = findByC_K(companyId, key, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategoryProperty exists with the key {");
 
@@ -1165,7 +1142,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategoryProperty exists with the key {");
 
@@ -1196,10 +1173,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+			query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 			query.append("assetCategoryProperty.companyId = ?");
 
@@ -1220,10 +1196,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1245,7 +1219,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategoryProperty.key ASC");
 			}
@@ -1285,7 +1259,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				key);
 
 		if (assetCategoryProperty == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetCategoryProperty exists with the key {");
 
@@ -1328,10 +1302,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.categoryId = ?");
 
@@ -1352,9 +1325,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("assetCategoryProperty.key ASC");
 
@@ -1479,13 +1450,12 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty ");
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1507,7 +1477,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("assetCategoryProperty.key ASC");
 				}
@@ -1591,15 +1561,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategoryProperty) ");
-				query.append(
-					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1639,15 +1605,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategoryProperty) ");
-				query.append(
-					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.categoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1687,11 +1649,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategoryProperty) ");
-				query.append(
-					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.companyId = ?");
 
@@ -1711,8 +1671,6 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1757,11 +1715,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetCategoryProperty) ");
-				query.append(
-					"FROM AssetCategoryProperty assetCategoryProperty WHERE ");
+				query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
 
 				query.append("assetCategoryProperty.categoryId = ?");
 
@@ -1781,8 +1737,6 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1826,8 +1780,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(assetCategoryProperty) FROM AssetCategoryProperty assetCategoryProperty");
+				Query q = session.createQuery(_SQL_COUNT_ASSETCATEGORYPROPERTY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1889,5 +1842,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_ASSETCATEGORYPROPERTY = "SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty";
+	private static final String _SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE = "SELECT assetCategoryProperty FROM AssetCategoryProperty assetCategoryProperty WHERE ";
+	private static final String _SQL_COUNT_ASSETCATEGORYPROPERTY = "SELECT COUNT(assetCategoryProperty) FROM AssetCategoryProperty assetCategoryProperty";
+	private static final String _SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE = "SELECT COUNT(assetCategoryProperty) FROM AssetCategoryProperty assetCategoryProperty WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPropertyPersistenceImpl.class);
 }

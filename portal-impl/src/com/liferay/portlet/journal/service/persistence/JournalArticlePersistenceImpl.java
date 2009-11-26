@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -662,10 +663,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				if (uuid == null) {
 					query.append("journalArticle.uuid IS NULL");
@@ -682,9 +682,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -741,10 +739,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				if (uuid == null) {
 					query.append("journalArticle.uuid IS NULL");
@@ -761,10 +758,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -786,7 +781,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -828,7 +823,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -850,7 +845,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -876,10 +871,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			if (uuid == null) {
 				query.append("journalArticle.uuid IS NULL");
@@ -896,10 +890,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -921,7 +913,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -959,7 +951,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		JournalArticle journalArticle = fetchByUUID_G(uuid, groupId);
 
 		if (journalArticle == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -1002,10 +994,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				if (uuid == null) {
 					query.append("journalArticle.uuid IS NULL");
@@ -1026,9 +1017,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 				query.append("journalArticle.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -1103,16 +1092,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -1167,17 +1153,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1199,7 +1182,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -1239,7 +1222,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -1261,7 +1244,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -1287,17 +1270,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1319,7 +1299,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -1363,16 +1343,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -1427,17 +1404,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1459,7 +1433,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -1499,7 +1473,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -1522,7 +1496,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -1549,17 +1523,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1581,7 +1552,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -1625,16 +1596,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.smallImageId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -1689,17 +1657,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.smallImageId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1721,7 +1686,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -1761,7 +1726,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findBySmallImageId(smallImageId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -1784,7 +1749,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -1811,17 +1776,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.smallImageId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1843,7 +1805,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -1889,10 +1851,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.resourcePrimKey = ?");
 
@@ -1900,9 +1861,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 				query.append("journalArticle.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -1959,10 +1918,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.resourcePrimKey = ?");
 
@@ -1970,10 +1928,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 				query.append("journalArticle.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1995,7 +1951,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -2037,7 +1993,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByR_S(resourcePrimKey, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -2063,7 +2019,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -2093,10 +2049,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.resourcePrimKey = ?");
 
@@ -2104,10 +2059,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append("journalArticle.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2129,7 +2082,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -2175,10 +2128,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -2199,9 +2151,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -2262,10 +2212,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -2286,10 +2235,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2311,7 +2258,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -2355,7 +2302,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByG_A(groupId, articleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -2381,7 +2328,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -2411,10 +2358,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.groupId = ?");
 
@@ -2435,10 +2381,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2460,7 +2404,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -2508,10 +2452,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -2532,9 +2475,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -2595,10 +2536,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -2619,10 +2559,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2644,7 +2582,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -2688,7 +2626,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByG_S(groupId, structureId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -2714,7 +2652,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -2744,10 +2682,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.groupId = ?");
 
@@ -2768,10 +2705,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2793,7 +2728,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -2841,10 +2776,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -2865,9 +2799,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -2928,10 +2860,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -2952,10 +2883,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2977,7 +2906,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -3021,7 +2950,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByG_T(groupId, templateId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -3047,7 +2976,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -3077,10 +3006,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.groupId = ?");
 
@@ -3101,10 +3029,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3126,7 +3052,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -3174,10 +3100,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -3198,9 +3123,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -3261,10 +3184,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -3285,10 +3207,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3310,7 +3230,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -3354,7 +3274,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		List<JournalArticle> list = findByG_UT(groupId, urlTitle, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -3380,7 +3300,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -3410,10 +3330,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.groupId = ?");
 
@@ -3434,10 +3353,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3459,7 +3376,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -3499,7 +3416,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		JournalArticle journalArticle = fetchByG_A_V(groupId, articleId, version);
 
 		if (journalArticle == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -3549,10 +3466,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -3577,9 +3493,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 				query.append("journalArticle.version = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -3661,10 +3575,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -3689,9 +3602,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 				query.append("journalArticle.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -3755,10 +3666,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -3783,10 +3693,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 				query.append("journalArticle.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3808,7 +3716,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -3856,7 +3764,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -3886,7 +3794,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -3919,10 +3827,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.groupId = ?");
 
@@ -3947,10 +3854,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append("journalArticle.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3972,7 +3877,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -4026,10 +3931,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -4054,9 +3958,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 				query.append("journalArticle.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -4120,10 +4022,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -4148,10 +4049,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 				query.append("journalArticle.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -4173,7 +4072,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -4221,7 +4120,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -4251,7 +4150,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No JournalArticle exists with the key {");
 
@@ -4284,10 +4183,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT journalArticle FROM JournalArticle journalArticle WHERE ");
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
 
 			query.append("journalArticle.groupId = ?");
 
@@ -4312,10 +4210,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			query.append("journalArticle.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -4337,7 +4233,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("journalArticle.articleId ASC, ");
 				query.append("journalArticle.version DESC");
@@ -4438,13 +4334,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT journalArticle FROM JournalArticle journalArticle ");
+				query.append(_SQL_SELECT_JOURNALARTICLE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -4466,7 +4361,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("journalArticle.articleId ASC, ");
 					query.append("journalArticle.version DESC");
@@ -4612,10 +4507,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				if (uuid == null) {
 					query.append("journalArticle.uuid IS NULL");
@@ -4631,8 +4525,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4675,10 +4567,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				if (uuid == null) {
 					query.append("journalArticle.uuid IS NULL");
@@ -4698,8 +4589,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				query.append(" AND ");
 
 				query.append("journalArticle.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4743,14 +4632,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4790,14 +4676,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4837,14 +4720,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.smallImageId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4887,18 +4767,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.resourcePrimKey = ?");
 
 				query.append(" AND ");
 
 				query.append("journalArticle.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4941,10 +4818,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -4964,8 +4840,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5010,10 +4884,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -5033,8 +4906,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5079,10 +4950,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -5102,8 +4972,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5148,10 +5016,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -5171,8 +5038,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5221,10 +5086,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -5248,8 +5112,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				query.append(" AND ");
 
 				query.append("journalArticle.version = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5300,10 +5162,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -5327,8 +5188,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				query.append(" AND ");
 
 				query.append("journalArticle.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5379,10 +5238,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(journalArticle) ");
-				query.append("FROM JournalArticle journalArticle WHERE ");
+				query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
 
 				query.append("journalArticle.groupId = ?");
 
@@ -5406,8 +5264,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				query.append(" AND ");
 
 				query.append("journalArticle.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -5453,8 +5309,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(journalArticle) FROM JournalArticle journalArticle");
+				Query q = session.createQuery(_SQL_COUNT_JOURNALARTICLE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -5536,5 +5391,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
 	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence")
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
+	private static final String _SQL_SELECT_JOURNALARTICLE = "SELECT journalArticle FROM JournalArticle journalArticle";
+	private static final String _SQL_SELECT_JOURNALARTICLE_WHERE = "SELECT journalArticle FROM JournalArticle journalArticle WHERE ";
+	private static final String _SQL_COUNT_JOURNALARTICLE = "SELECT COUNT(journalArticle) FROM JournalArticle journalArticle";
+	private static final String _SQL_COUNT_JOURNALARTICLE_WHERE = "SELECT COUNT(journalArticle) FROM JournalArticle journalArticle WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(JournalArticlePersistenceImpl.class);
 }

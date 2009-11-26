@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -408,16 +409,13 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
+				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
 				query.append("workflowDefinitionLink.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append(
 					"workflowDefinitionLink.workflowDefinitionName ASC");
@@ -472,17 +470,14 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
+				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
 				query.append("workflowDefinitionLink.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -504,7 +499,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append(
 						"workflowDefinitionLink.workflowDefinitionName ASC");
@@ -545,7 +540,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		List<WorkflowDefinitionLink> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WorkflowDefinitionLink exists with the key {");
 
@@ -569,7 +564,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WorkflowDefinitionLink exists with the key {");
 
@@ -596,17 +591,14 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
+			query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
 			query.append("workflowDefinitionLink.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -628,7 +620,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append(
 					"workflowDefinitionLink.workflowDefinitionName ASC");
@@ -666,7 +658,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				companyId, classNameId);
 
 		if (workflowDefinitionLink == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WorkflowDefinitionLink exists with the key {");
 
@@ -714,10 +706,9 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
+				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
 				query.append("workflowDefinitionLink.groupId = ?");
 
@@ -729,9 +720,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 				query.append("workflowDefinitionLink.classNameId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append(
 					"workflowDefinitionLink.workflowDefinitionName ASC");
@@ -857,13 +846,12 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink ");
+				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -885,7 +873,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append(
 						"workflowDefinitionLink.workflowDefinitionName ASC");
@@ -956,15 +944,11 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(workflowDefinitionLink) ");
-				query.append(
-					"FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
+				query.append(_SQL_COUNT_WORKFLOWDEFINITIONLINK_WHERE);
 
 				query.append("workflowDefinitionLink.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1007,11 +991,9 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(workflowDefinitionLink) ");
-				query.append(
-					"FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ");
+				query.append(_SQL_COUNT_WORKFLOWDEFINITIONLINK_WHERE);
 
 				query.append("workflowDefinitionLink.groupId = ?");
 
@@ -1022,8 +1004,6 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				query.append(" AND ");
 
 				query.append("workflowDefinitionLink.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1067,8 +1047,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(workflowDefinitionLink) FROM WorkflowDefinitionLink workflowDefinitionLink");
+				Query q = session.createQuery(_SQL_COUNT_WORKFLOWDEFINITIONLINK);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1214,5 +1193,9 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_WORKFLOWDEFINITIONLINK = "SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink";
+	private static final String _SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE = "SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ";
+	private static final String _SQL_COUNT_WORKFLOWDEFINITIONLINK = "SELECT COUNT(workflowDefinitionLink) FROM WorkflowDefinitionLink workflowDefinitionLink";
+	private static final String _SQL_COUNT_WORKFLOWDEFINITIONLINK_WHERE = "SELECT COUNT(workflowDefinitionLink) FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(WorkflowDefinitionLinkPersistenceImpl.class);
 }

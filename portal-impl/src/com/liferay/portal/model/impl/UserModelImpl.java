@@ -169,14 +169,19 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		return models;
 	}
 
+	public static final String TABLE_USERS_GROUPS = "Users_Groups";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Groups"), true);
+	public static final String TABLE_USERS_ORGS = "Users_Orgs";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Orgs"), true);
+	public static final String TABLE_USERS_PERMISSIONS = "Users_Permissions";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Permissions"), true);
+	public static final String TABLE_USERS_ROLES = "Users_Roles";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Roles"), true);
+	public static final String TABLE_USERS_USERGROUPS = "Users_UserGroups";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_UserGroups"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(

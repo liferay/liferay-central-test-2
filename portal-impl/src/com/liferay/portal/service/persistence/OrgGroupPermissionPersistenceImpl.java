@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -357,14 +358,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
+				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
 				query.append("orgGroupPermission.id.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -416,17 +414,14 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
+				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
 				query.append("orgGroupPermission.id.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -482,7 +477,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		List<OrgGroupPermission> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No OrgGroupPermission exists with the key {");
 
@@ -506,7 +501,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No OrgGroupPermission exists with the key {");
 
@@ -534,17 +529,14 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
+			query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
 			query.append("orgGroupPermission.id.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -603,14 +595,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
+				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
 				query.append("orgGroupPermission.id.permissionId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -662,17 +651,14 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
+				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
 				query.append("orgGroupPermission.id.permissionId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -729,7 +715,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No OrgGroupPermission exists with the key {");
 
@@ -753,7 +739,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No OrgGroupPermission exists with the key {");
 
@@ -781,17 +767,14 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ");
+			query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
 			query.append("orgGroupPermission.id.permissionId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -901,13 +884,12 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission ");
+				query.append(_SQL_SELECT_ORGGROUPPERMISSION);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -992,15 +974,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(orgGroupPermission) ");
-				query.append(
-					"FROM OrgGroupPermission orgGroupPermission WHERE ");
+				query.append(_SQL_COUNT_ORGGROUPPERMISSION_WHERE);
 
 				query.append("orgGroupPermission.id.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1040,15 +1018,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(orgGroupPermission) ");
-				query.append(
-					"FROM OrgGroupPermission orgGroupPermission WHERE ");
+				query.append(_SQL_COUNT_ORGGROUPPERMISSION_WHERE);
 
 				query.append("orgGroupPermission.id.permissionId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1088,8 +1062,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(orgGroupPermission) FROM OrgGroupPermission orgGroupPermission");
+				Query q = session.createQuery(_SQL_COUNT_ORGGROUPPERMISSION);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1235,5 +1208,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_ORGGROUPPERMISSION = "SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission";
+	private static final String _SQL_SELECT_ORGGROUPPERMISSION_WHERE = "SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ";
+	private static final String _SQL_COUNT_ORGGROUPPERMISSION = "SELECT COUNT(orgGroupPermission) FROM OrgGroupPermission orgGroupPermission";
+	private static final String _SQL_COUNT_ORGGROUPPERMISSION_WHERE = "SELECT COUNT(orgGroupPermission) FROM OrgGroupPermission orgGroupPermission WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(OrgGroupPermissionPersistenceImpl.class);
 }

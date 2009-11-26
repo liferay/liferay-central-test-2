@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -214,7 +215,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 
 		try {
@@ -224,7 +225,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 
 		Session session = null;
@@ -426,14 +427,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetEntry FROM AssetEntry assetEntry WHERE ");
+				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
 				query.append("assetEntry.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -485,17 +483,14 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetEntry FROM AssetEntry assetEntry WHERE ");
+				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
 				query.append("assetEntry.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -550,7 +545,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		List<AssetEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetEntry exists with the key {");
 
@@ -572,7 +567,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		List<AssetEntry> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetEntry exists with the key {");
 
@@ -599,16 +594,14 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT assetEntry FROM AssetEntry assetEntry WHERE ");
+			query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
 			query.append("assetEntry.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -659,7 +652,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		AssetEntry assetEntry = fetchByC_C(classNameId, classPK);
 
 		if (assetEntry == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AssetEntry exists with the key {");
 
@@ -704,18 +697,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT assetEntry FROM AssetEntry assetEntry WHERE ");
+				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
 				query.append("assetEntry.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("assetEntry.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -835,12 +825,12 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT assetEntry FROM AssetEntry assetEntry ");
+				query.append(_SQL_SELECT_ASSETENTRY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -924,14 +914,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetEntry) ");
-				query.append("FROM AssetEntry assetEntry WHERE ");
+				query.append(_SQL_COUNT_ASSETENTRY_WHERE);
 
 				query.append("assetEntry.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -974,18 +961,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(assetEntry) ");
-				query.append("FROM AssetEntry assetEntry WHERE ");
+				query.append(_SQL_COUNT_ASSETENTRY_WHERE);
 
 				query.append("assetEntry.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("assetEntry.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1027,8 +1011,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(assetEntry) FROM AssetEntry assetEntry");
+				Query q = session.createQuery(_SQL_COUNT_ASSETENTRY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1062,7 +1045,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_GET_ASSETCATEGORIES = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			"AssetEntries_AssetCategories", "getAssetCategories",
+			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			"getAssetCategories",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1085,17 +1069,17 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETASSETCATEGORIES);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("AssetCategory.name ASC");
 				}
@@ -1136,8 +1120,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_GET_ASSETCATEGORIES_SIZE = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			"AssetEntries_AssetCategories", "getAssetCategoriesSize",
-			new String[] { Long.class.getName() });
+			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			"getAssetCategoriesSize", new String[] { Long.class.getName() });
 
 	public int getAssetCategoriesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1181,7 +1165,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ASSETCATEGORY = new FinderPath(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES,
-			"AssetEntries_AssetCategories", "containsAssetCategory",
+			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES,
+			"containsAssetCategory",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsAssetCategory(long pk, long assetCategoryPK)
@@ -1234,7 +1219,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1248,7 +1233,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1263,7 +1248,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1279,7 +1264,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1291,7 +1276,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1304,7 +1289,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1318,7 +1303,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1333,7 +1318,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1349,7 +1334,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1377,7 +1362,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1399,7 +1384,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetCategories");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES);
 		}
 	}
 
@@ -1415,7 +1400,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_GET_ASSETTAGS = new FinderPath(com.liferay.portlet.asset.model.impl.AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS,
-			"AssetEntries_AssetTags", "getAssetTags",
+			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS, "getAssetTags",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -1438,17 +1423,17 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
 				sb.append(_SQL_GETASSETTAGS);
 
 				if (obc != null) {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sb.append("ORDER BY ");
+					sb.append(" ORDER BY ");
 
 					sb.append("AssetTag.name ASC");
 				}
@@ -1489,8 +1474,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_GET_ASSETTAGS_SIZE = new FinderPath(com.liferay.portlet.asset.model.impl.AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS,
-			"AssetEntries_AssetTags", "getAssetTagsSize",
-			new String[] { Long.class.getName() });
+			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS,
+			"getAssetTagsSize", new String[] { Long.class.getName() });
 
 	public int getAssetTagsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
@@ -1534,7 +1519,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 	public static final FinderPath FINDER_PATH_CONTAINS_ASSETTAG = new FinderPath(com.liferay.portlet.asset.model.impl.AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS,
-			"AssetEntries_AssetTags", "containsAssetTag",
+			AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS,
+			"containsAssetTag",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	public boolean containsAssetTag(long pk, long assetTagPK)
@@ -1581,7 +1567,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1595,7 +1581,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1610,7 +1596,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1626,7 +1612,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1638,7 +1624,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1651,7 +1637,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1665,7 +1651,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1680,7 +1666,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1696,7 +1682,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1724,7 +1710,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -1746,7 +1732,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			throw processException(e);
 		}
 		finally {
-			FinderCacheUtil.clearCache("AssetEntries_AssetTags");
+			FinderCacheUtil.clearCache(AssetEntryModelImpl.TABLE_ASSETENTRIES_ASSETTAGS);
 		}
 	}
 
@@ -2178,6 +2164,10 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		private AssetEntryPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_ASSETENTRY = "SELECT assetEntry FROM AssetEntry assetEntry";
+	private static final String _SQL_SELECT_ASSETENTRY_WHERE = "SELECT assetEntry FROM AssetEntry assetEntry WHERE ";
+	private static final String _SQL_COUNT_ASSETENTRY = "SELECT COUNT(assetEntry) FROM AssetEntry assetEntry";
+	private static final String _SQL_COUNT_ASSETENTRY_WHERE = "SELECT COUNT(assetEntry) FROM AssetEntry assetEntry WHERE ";
 	private static final String _SQL_GETASSETCATEGORIES = "SELECT {AssetCategory.*} FROM AssetCategory INNER JOIN AssetEntries_AssetCategories ON (AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId) WHERE (AssetEntries_AssetCategories.entryId = ?)";
 	private static final String _SQL_GETASSETCATEGORIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetCategories WHERE entryId = ?";
 	private static final String _SQL_CONTAINSASSETCATEGORY = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetCategories WHERE entryId = ? AND categoryId = ?";

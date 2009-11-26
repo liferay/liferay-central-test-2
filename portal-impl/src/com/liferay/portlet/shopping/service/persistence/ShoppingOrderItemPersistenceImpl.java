@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -348,16 +349,13 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
 				query.append("shoppingOrderItem.orderId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingOrderItem.name ASC, ");
 				query.append("shoppingOrderItem.description ASC");
@@ -412,17 +410,14 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem WHERE ");
+				query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
 				query.append("shoppingOrderItem.orderId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -444,7 +439,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingOrderItem.name ASC, ");
 					query.append("shoppingOrderItem.description ASC");
@@ -484,7 +479,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 		List<ShoppingOrderItem> list = findByOrderId(orderId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingOrderItem exists with the key {");
 
@@ -507,7 +502,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No ShoppingOrderItem exists with the key {");
 
@@ -534,17 +529,14 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem WHERE ");
+			query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
 			query.append("shoppingOrderItem.orderId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -566,7 +558,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("shoppingOrderItem.name ASC, ");
 				query.append("shoppingOrderItem.description ASC");
@@ -661,13 +653,12 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem ");
+				query.append(_SQL_SELECT_SHOPPINGORDERITEM);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -689,7 +680,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("shoppingOrderItem.name ASC, ");
 					query.append("shoppingOrderItem.description ASC");
@@ -751,14 +742,11 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(shoppingOrderItem) ");
-				query.append("FROM ShoppingOrderItem shoppingOrderItem WHERE ");
+				query.append(_SQL_COUNT_SHOPPINGORDERITEM_WHERE);
 
 				query.append("shoppingOrderItem.orderId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -798,8 +786,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(shoppingOrderItem) FROM ShoppingOrderItem shoppingOrderItem");
+				Query q = session.createQuery(_SQL_COUNT_SHOPPINGORDERITEM);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -863,5 +850,9 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SHOPPINGORDERITEM = "SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem";
+	private static final String _SQL_SELECT_SHOPPINGORDERITEM_WHERE = "SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem WHERE ";
+	private static final String _SQL_COUNT_SHOPPINGORDERITEM = "SELECT COUNT(shoppingOrderItem) FROM ShoppingOrderItem shoppingOrderItem";
+	private static final String _SQL_COUNT_SHOPPINGORDERITEM_WHERE = "SELECT COUNT(shoppingOrderItem) FROM ShoppingOrderItem shoppingOrderItem WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(ShoppingOrderItemPersistenceImpl.class);
 }

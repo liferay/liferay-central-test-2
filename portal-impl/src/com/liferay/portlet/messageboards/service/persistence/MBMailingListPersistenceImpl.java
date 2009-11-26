@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -476,10 +477,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMailingList.uuid IS NULL");
@@ -495,8 +495,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -550,10 +548,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMailingList.uuid IS NULL");
@@ -570,10 +567,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -630,7 +625,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		List<MBMailingList> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMailingList exists with the key {");
 
@@ -652,7 +647,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		List<MBMailingList> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMailingList exists with the key {");
 
@@ -679,10 +674,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+			query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 			if (uuid == null) {
 				query.append("mbMailingList.uuid IS NULL");
@@ -699,10 +693,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -755,7 +747,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		MBMailingList mbMailingList = fetchByUUID_G(uuid, groupId);
 
 		if (mbMailingList == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMailingList exists with the key {");
 
@@ -798,10 +790,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMailingList.uuid IS NULL");
@@ -821,8 +812,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				query.append(" AND ");
 
 				query.append("mbMailingList.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -894,14 +883,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				query.append("mbMailingList.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -953,17 +939,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				query.append("mbMailingList.active = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1019,7 +1002,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		List<MBMailingList> list = findByActive(active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMailingList exists with the key {");
 
@@ -1041,7 +1024,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		List<MBMailingList> list = findByActive(active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMailingList exists with the key {");
 
@@ -1068,17 +1051,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+			query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 			query.append("mbMailingList.active = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1129,7 +1109,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		MBMailingList mbMailingList = fetchByG_C(groupId, categoryId);
 
 		if (mbMailingList == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBMailingList exists with the key {");
 
@@ -1174,18 +1154,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				query.append("mbMailingList.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMailingList.categoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1305,13 +1282,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbMailingList FROM MBMailingList mbMailingList ");
+				query.append(_SQL_SELECT_MBMAILINGLIST);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1408,10 +1384,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMailingList) ");
-				query.append("FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_COUNT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMailingList.uuid IS NULL");
@@ -1427,8 +1402,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1471,10 +1444,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMailingList) ");
-				query.append("FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_COUNT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
 					query.append("mbMailingList.uuid IS NULL");
@@ -1494,8 +1466,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				query.append(" AND ");
 
 				query.append("mbMailingList.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1539,14 +1509,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMailingList) ");
-				query.append("FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_COUNT_MBMAILINGLIST_WHERE);
 
 				query.append("mbMailingList.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1589,18 +1556,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbMailingList) ");
-				query.append("FROM MBMailingList mbMailingList WHERE ");
+				query.append(_SQL_COUNT_MBMAILINGLIST_WHERE);
 
 				query.append("mbMailingList.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbMailingList.categoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1642,8 +1606,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(mbMailingList) FROM MBMailingList mbMailingList");
+				Query q = session.createQuery(_SQL_COUNT_MBMAILINGLIST);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1707,5 +1670,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_MBMAILINGLIST = "SELECT mbMailingList FROM MBMailingList mbMailingList";
+	private static final String _SQL_SELECT_MBMAILINGLIST_WHERE = "SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ";
+	private static final String _SQL_COUNT_MBMAILINGLIST = "SELECT COUNT(mbMailingList) FROM MBMailingList mbMailingList";
+	private static final String _SQL_COUNT_MBMAILINGLIST_WHERE = "SELECT COUNT(mbMailingList) FROM MBMailingList mbMailingList WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(MBMailingListPersistenceImpl.class);
 }

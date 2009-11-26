@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -480,9 +481,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				if (uuid == null) {
 					query.append("calEvent.uuid IS NULL");
@@ -499,9 +500,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -558,9 +557,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				if (uuid == null) {
 					query.append("calEvent.uuid IS NULL");
@@ -577,10 +576,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -602,7 +599,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("calEvent.startDate ASC, ");
 					query.append("calEvent.title ASC");
@@ -644,7 +641,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -666,7 +663,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -692,9 +689,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 			if (uuid == null) {
 				query.append("calEvent.uuid IS NULL");
@@ -711,10 +708,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -736,7 +731,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -773,7 +768,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		CalEvent calEvent = fetchByUUID_G(uuid, groupId);
 
 		if (calEvent == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -816,9 +811,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				if (uuid == null) {
 					query.append("calEvent.uuid IS NULL");
@@ -839,9 +834,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append("calEvent.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -916,15 +909,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -979,16 +970,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1010,7 +999,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("calEvent.startDate ASC, ");
 					query.append("calEvent.title ASC");
@@ -1050,7 +1039,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1072,7 +1061,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1098,16 +1087,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 			query.append("calEvent.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1129,7 +1116,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -1171,15 +1158,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -1234,16 +1219,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1265,7 +1248,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("calEvent.startDate ASC, ");
 					query.append("calEvent.title ASC");
@@ -1305,7 +1288,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1327,7 +1310,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1353,16 +1336,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 			query.append("calEvent.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1384,7 +1365,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -1427,15 +1408,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.remindBy != ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -1490,16 +1469,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.remindBy != ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1521,7 +1498,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("calEvent.startDate ASC, ");
 					query.append("calEvent.title ASC");
@@ -1561,7 +1538,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByRemindBy(remindBy, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1583,7 +1560,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByRemindBy(remindBy, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1609,16 +1586,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 			query.append("calEvent.remindBy != ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1640,7 +1615,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -1683,9 +1658,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
 
@@ -1706,9 +1681,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -1769,9 +1742,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
 
@@ -1792,10 +1765,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1817,7 +1788,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("calEvent.startDate ASC, ");
 					query.append("calEvent.title ASC");
@@ -1861,7 +1832,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByG_T(groupId, type, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1886,7 +1857,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByG_T(groupId, type, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1916,9 +1887,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 			query.append("calEvent.groupId = ?");
 
@@ -1939,10 +1910,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1964,7 +1933,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -2013,9 +1982,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
 
@@ -2023,9 +1992,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append("calEvent.repeating = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -2082,9 +2049,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
 
@@ -2092,10 +2059,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append("calEvent.repeating = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2117,7 +2082,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("calEvent.startDate ASC, ");
 					query.append("calEvent.title ASC");
@@ -2159,7 +2124,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		List<CalEvent> list = findByG_R(groupId, repeating, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -2185,7 +2150,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -2215,9 +2180,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT calEvent FROM CalEvent calEvent WHERE ");
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 			query.append("calEvent.groupId = ?");
 
@@ -2225,10 +2190,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append("calEvent.repeating = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2250,7 +2213,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("calEvent.startDate ASC, ");
 				query.append("calEvent.title ASC");
@@ -2345,12 +2308,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT calEvent FROM CalEvent calEvent ");
+				query.append(_SQL_SELECT_CALEVENT);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2372,7 +2335,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("calEvent.startDate ASC, ");
 					query.append("calEvent.title ASC");
@@ -2473,10 +2436,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(calEvent) ");
-				query.append("FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				if (uuid == null) {
 					query.append("calEvent.uuid IS NULL");
@@ -2492,8 +2454,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2536,10 +2496,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(calEvent) ");
-				query.append("FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				if (uuid == null) {
 					query.append("calEvent.uuid IS NULL");
@@ -2559,8 +2518,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query.append(" AND ");
 
 				query.append("calEvent.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2604,14 +2561,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(calEvent) ");
-				query.append("FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				query.append("calEvent.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2651,14 +2605,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(calEvent) ");
-				query.append("FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2698,14 +2649,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(calEvent) ");
-				query.append("FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				query.append("calEvent.remindBy != ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2745,10 +2693,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(calEvent) ");
-				query.append("FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
 
@@ -2768,8 +2715,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2816,18 +2761,15 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(calEvent) ");
-				query.append("FROM CalEvent calEvent WHERE ");
+				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				query.append("calEvent.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("calEvent.repeating = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2869,8 +2811,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(calEvent) FROM CalEvent calEvent");
+				Query q = session.createQuery(_SQL_COUNT_CALEVENT);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2934,5 +2875,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _SQL_SELECT_CALEVENT = "SELECT calEvent FROM CalEvent calEvent";
+	private static final String _SQL_SELECT_CALEVENT_WHERE = "SELECT calEvent FROM CalEvent calEvent WHERE ";
+	private static final String _SQL_COUNT_CALEVENT = "SELECT COUNT(calEvent) FROM CalEvent calEvent";
+	private static final String _SQL_COUNT_CALEVENT_WHERE = "SELECT COUNT(calEvent) FROM CalEvent calEvent WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(CalEventPersistenceImpl.class);
 }

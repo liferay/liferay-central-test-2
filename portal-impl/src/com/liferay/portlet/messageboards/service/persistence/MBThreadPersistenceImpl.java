@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -418,15 +419,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -481,16 +480,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -512,7 +509,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbThread.priority DESC, ");
 					query.append("mbThread.lastPostDate DESC");
@@ -552,7 +549,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		List<MBThread> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -574,7 +571,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		List<MBThread> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -600,16 +597,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 			query.append("mbThread.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -631,7 +626,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -676,9 +671,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -686,9 +681,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append("mbThread.categoryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -745,9 +738,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -755,10 +748,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append("mbThread.categoryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -780,7 +771,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbThread.priority DESC, ");
 					query.append("mbThread.lastPostDate DESC");
@@ -822,7 +813,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		List<MBThread> list = findByG_C(groupId, categoryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -848,7 +839,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -878,9 +869,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 			query.append("mbThread.groupId = ?");
 
@@ -888,10 +879,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append("mbThread.categoryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -913,7 +902,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -960,9 +949,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -970,9 +959,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append("mbThread.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -1029,9 +1016,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -1039,10 +1026,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append("mbThread.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1064,7 +1049,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbThread.priority DESC, ");
 					query.append("mbThread.lastPostDate DESC");
@@ -1106,7 +1091,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		List<MBThread> list = findByG_S(groupId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -1131,7 +1116,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		List<MBThread> list = findByG_S(groupId, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -1161,9 +1146,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 			query.append("mbThread.groupId = ?");
 
@@ -1171,10 +1156,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append("mbThread.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1196,7 +1179,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -1245,9 +1228,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -1264,9 +1247,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 					query.append("mbThread.lastPostDate = ?");
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -1330,9 +1311,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -1349,10 +1330,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 					query.append("mbThread.lastPostDate = ?");
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1374,7 +1353,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbThread.priority DESC, ");
 					query.append("mbThread.lastPostDate DESC");
@@ -1422,7 +1401,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -1452,7 +1431,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -1485,9 +1464,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 			query.append("mbThread.groupId = ?");
 
@@ -1504,10 +1483,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				query.append("mbThread.lastPostDate = ?");
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1529,7 +1506,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -1580,9 +1557,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -1594,9 +1571,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append("mbThread.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -1656,9 +1631,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -1670,10 +1645,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append("mbThread.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1695,7 +1668,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbThread.priority DESC, ");
 					query.append("mbThread.lastPostDate DESC");
@@ -1740,7 +1713,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		List<MBThread> list = findByG_C_S(groupId, categoryId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -1769,7 +1742,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBThread exists with the key {");
 
@@ -1802,9 +1775,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbThread FROM MBThread mbThread WHERE ");
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
 			query.append("mbThread.groupId = ?");
 
@@ -1816,10 +1789,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append("mbThread.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1841,7 +1812,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("mbThread.priority DESC, ");
 				query.append("mbThread.lastPostDate DESC");
@@ -1938,12 +1909,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbThread FROM MBThread mbThread ");
+				query.append(_SQL_SELECT_MBTHREAD);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1965,7 +1936,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("mbThread.priority DESC, ");
 					query.append("mbThread.lastPostDate DESC");
@@ -2054,14 +2025,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbThread) ");
-				query.append("FROM MBThread mbThread WHERE ");
+				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2104,18 +2072,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbThread) ");
-				query.append("FROM MBThread mbThread WHERE ");
+				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbThread.categoryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2159,18 +2124,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbThread) ");
-				query.append("FROM MBThread mbThread WHERE ");
+				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbThread.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2217,10 +2179,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbThread) ");
-				query.append("FROM MBThread mbThread WHERE ");
+				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -2236,8 +2197,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				else {
 					query.append("mbThread.lastPostDate = ?");
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2286,10 +2245,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbThread) ");
-				query.append("FROM MBThread mbThread WHERE ");
+				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
 				query.append("mbThread.groupId = ?");
 
@@ -2300,8 +2258,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				query.append(" AND ");
 
 				query.append("mbThread.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2345,8 +2301,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(mbThread) FROM MBThread mbThread");
+				Query q = session.createQuery(_SQL_COUNT_MBTHREAD);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2416,5 +2371,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _SQL_SELECT_MBTHREAD = "SELECT mbThread FROM MBThread mbThread";
+	private static final String _SQL_SELECT_MBTHREAD_WHERE = "SELECT mbThread FROM MBThread mbThread WHERE ";
+	private static final String _SQL_COUNT_MBTHREAD = "SELECT COUNT(mbThread) FROM MBThread mbThread";
+	private static final String _SQL_COUNT_MBTHREAD_WHERE = "SELECT COUNT(mbThread) FROM MBThread mbThread WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(MBThreadPersistenceImpl.class);
 }

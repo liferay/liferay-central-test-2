@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -424,10 +425,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				if (uuid == null) {
 					query.append("announcementsEntry.uuid IS NULL");
@@ -444,9 +444,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsEntry.priority ASC, ");
 				query.append("announcementsEntry.modifiedDate ASC");
@@ -503,10 +501,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				if (uuid == null) {
 					query.append("announcementsEntry.uuid IS NULL");
@@ -523,10 +520,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -548,7 +543,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("announcementsEntry.priority ASC, ");
 					query.append("announcementsEntry.modifiedDate ASC");
@@ -590,7 +585,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		List<AnnouncementsEntry> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
 
@@ -612,7 +607,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		List<AnnouncementsEntry> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
 
@@ -639,10 +634,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+			query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 			if (uuid == null) {
 				query.append("announcementsEntry.uuid IS NULL");
@@ -659,10 +653,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -684,7 +676,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsEntry.priority ASC, ");
 				query.append("announcementsEntry.modifiedDate ASC");
@@ -730,16 +722,13 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsEntry.priority ASC, ");
 				query.append("announcementsEntry.modifiedDate ASC");
@@ -794,17 +783,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -826,7 +812,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("announcementsEntry.priority ASC, ");
 					query.append("announcementsEntry.modifiedDate ASC");
@@ -866,7 +852,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		List<AnnouncementsEntry> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
 
@@ -889,7 +875,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
 
@@ -916,17 +902,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+			query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 			query.append("announcementsEntry.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -948,7 +931,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsEntry.priority ASC, ");
 				query.append("announcementsEntry.modifiedDate ASC");
@@ -994,10 +977,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.classNameId = ?");
 
@@ -1005,9 +987,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append("announcementsEntry.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsEntry.priority ASC, ");
 				query.append("announcementsEntry.modifiedDate ASC");
@@ -1064,10 +1044,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.classNameId = ?");
 
@@ -1075,10 +1054,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append("announcementsEntry.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1100,7 +1077,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("announcementsEntry.priority ASC, ");
 					query.append("announcementsEntry.modifiedDate ASC");
@@ -1143,7 +1120,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
 
@@ -1169,7 +1146,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
 
@@ -1199,10 +1176,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+			query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 			query.append("announcementsEntry.classNameId = ?");
 
@@ -1210,10 +1186,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 			query.append("announcementsEntry.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1235,7 +1209,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsEntry.priority ASC, ");
 				query.append("announcementsEntry.modifiedDate ASC");
@@ -1283,10 +1257,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.classNameId = ?");
 
@@ -1298,9 +1271,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append("announcementsEntry.alert = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsEntry.priority ASC, ");
 				query.append("announcementsEntry.modifiedDate ASC");
@@ -1360,10 +1331,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.classNameId = ?");
 
@@ -1375,10 +1345,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append("announcementsEntry.alert = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1400,7 +1368,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("announcementsEntry.priority ASC, ");
 					query.append("announcementsEntry.modifiedDate ASC");
@@ -1446,7 +1414,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				alert, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
 
@@ -1476,7 +1444,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				alert, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
 
@@ -1509,10 +1477,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ");
+			query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 			query.append("announcementsEntry.classNameId = ?");
 
@@ -1524,10 +1491,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 			query.append("announcementsEntry.alert = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1549,7 +1514,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsEntry.priority ASC, ");
 				query.append("announcementsEntry.modifiedDate ASC");
@@ -1648,13 +1613,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1676,7 +1640,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("announcementsEntry.priority ASC, ");
 					query.append("announcementsEntry.modifiedDate ASC");
@@ -1760,11 +1724,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(announcementsEntry) ");
-				query.append(
-					"FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE);
 
 				if (uuid == null) {
 					query.append("announcementsEntry.uuid IS NULL");
@@ -1780,8 +1742,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1823,15 +1783,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(announcementsEntry) ");
-				query.append(
-					"FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1874,19 +1830,15 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(announcementsEntry) ");
-				query.append(
-					"FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("announcementsEntry.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1931,11 +1883,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(announcementsEntry) ");
-				query.append(
-					"FROM AnnouncementsEntry announcementsEntry WHERE ");
+				query.append(_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE);
 
 				query.append("announcementsEntry.classNameId = ?");
 
@@ -1946,8 +1896,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				query.append(" AND ");
 
 				query.append("announcementsEntry.alert = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1991,8 +1939,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(announcementsEntry) FROM AnnouncementsEntry announcementsEntry");
+				Query q = session.createQuery(_SQL_COUNT_ANNOUNCEMENTSENTRY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2056,5 +2003,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence")
 	protected com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence;
+	private static final String _SQL_SELECT_ANNOUNCEMENTSENTRY = "SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry";
+	private static final String _SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE = "SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ";
+	private static final String _SQL_COUNT_ANNOUNCEMENTSENTRY = "SELECT COUNT(announcementsEntry) FROM AnnouncementsEntry announcementsEntry";
+	private static final String _SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE = "SELECT COUNT(announcementsEntry) FROM AnnouncementsEntry announcementsEntry WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsEntryPersistenceImpl.class);
 }

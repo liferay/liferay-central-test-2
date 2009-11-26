@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -406,7 +407,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		Country country = fetchByName(name);
 
 		if (country == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Country exists with the key {");
 
@@ -445,9 +446,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT country FROM Country country WHERE ");
+				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 				if (name == null) {
 					query.append("country.name IS NULL");
@@ -464,9 +465,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("country.name ASC");
 
@@ -529,7 +528,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		Country country = fetchByA2(a2);
 
 		if (country == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Country exists with the key {");
 
@@ -568,9 +567,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT country FROM Country country WHERE ");
+				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 				if (a2 == null) {
 					query.append("country.a2 IS NULL");
@@ -587,9 +586,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("country.name ASC");
 
@@ -652,7 +649,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		Country country = fetchByA3(a3);
 
 		if (country == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Country exists with the key {");
 
@@ -691,9 +688,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT country FROM Country country WHERE ");
+				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 				if (a3 == null) {
 					query.append("country.a3 IS NULL");
@@ -710,9 +707,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("country.name ASC");
 
@@ -782,15 +777,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT country FROM Country country WHERE ");
+				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 				query.append("country.active = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("country.name ASC");
 
@@ -844,16 +837,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT country FROM Country country WHERE ");
+				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 				query.append("country.active = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -875,7 +866,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("country.name ASC");
 				}
@@ -913,7 +904,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		List<Country> list = findByActive(active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Country exists with the key {");
 
@@ -935,7 +926,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		List<Country> list = findByActive(active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Country exists with the key {");
 
@@ -961,16 +952,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT country FROM Country country WHERE ");
+			query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 			query.append("country.active = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -992,7 +981,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("country.name ASC");
 			}
@@ -1084,12 +1073,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT country FROM Country country ");
+				query.append(_SQL_SELECT_COUNTRY);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1111,7 +1100,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("country.name ASC");
 				}
@@ -1193,10 +1182,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(country) ");
-				query.append("FROM Country country WHERE ");
+				query.append(_SQL_COUNT_COUNTRY_WHERE);
 
 				if (name == null) {
 					query.append("country.name IS NULL");
@@ -1212,8 +1200,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1255,10 +1241,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(country) ");
-				query.append("FROM Country country WHERE ");
+				query.append(_SQL_COUNT_COUNTRY_WHERE);
 
 				if (a2 == null) {
 					query.append("country.a2 IS NULL");
@@ -1274,8 +1259,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1317,10 +1300,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(country) ");
-				query.append("FROM Country country WHERE ");
+				query.append(_SQL_COUNT_COUNTRY_WHERE);
 
 				if (a3 == null) {
 					query.append("country.a3 IS NULL");
@@ -1336,8 +1318,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1379,14 +1359,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(country) ");
-				query.append("FROM Country country WHERE ");
+				query.append(_SQL_COUNT_COUNTRY_WHERE);
 
 				query.append("country.active = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1426,8 +1403,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(country) FROM Country country");
+				Query q = session.createQuery(_SQL_COUNT_COUNTRY);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1573,5 +1549,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_COUNTRY = "SELECT country FROM Country country";
+	private static final String _SQL_SELECT_COUNTRY_WHERE = "SELECT country FROM Country country WHERE ";
+	private static final String _SQL_COUNT_COUNTRY = "SELECT COUNT(country) FROM Country country";
+	private static final String _SQL_COUNT_COUNTRY_WHERE = "SELECT COUNT(country) FROM Country country WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(CountryPersistenceImpl.class);
 }

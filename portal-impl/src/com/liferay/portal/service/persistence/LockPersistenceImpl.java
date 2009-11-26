@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -399,9 +400,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT lock FROM Lock lock WHERE ");
+				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (uuid == null) {
 					query.append("lock.uuid IS NULL");
@@ -417,8 +418,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -472,9 +471,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT lock FROM Lock lock WHERE ");
+				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (uuid == null) {
 					query.append("lock.uuid IS NULL");
@@ -491,10 +490,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -550,7 +547,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		List<Lock> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Lock exists with the key {");
 
@@ -572,7 +569,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		List<Lock> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Lock exists with the key {");
 
@@ -598,9 +595,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT lock FROM Lock lock WHERE ");
+			query.append(_SQL_SELECT_LOCK_WHERE);
 
 			if (uuid == null) {
 				query.append("lock.uuid IS NULL");
@@ -617,10 +614,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -680,9 +675,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT lock FROM Lock lock WHERE ");
+				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (expirationDate == null) {
 					query.append("lock.expirationDate < null");
@@ -690,8 +685,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				else {
 					query.append("lock.expirationDate < ?");
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -745,9 +738,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT lock FROM Lock lock WHERE ");
+				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (expirationDate == null) {
 					query.append("lock.expirationDate < null");
@@ -756,10 +749,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append("lock.expirationDate < ?");
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -815,7 +806,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		List<Lock> list = findByExpirationDate(expirationDate, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Lock exists with the key {");
 
@@ -838,7 +829,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Lock exists with the key {");
 
@@ -865,9 +856,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT lock FROM Lock lock WHERE ");
+			query.append(_SQL_SELECT_LOCK_WHERE);
 
 			if (expirationDate == null) {
 				query.append("lock.expirationDate < null");
@@ -876,10 +867,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append("lock.expirationDate < ?");
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -931,7 +920,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		Lock lock = fetchByC_K(className, key);
 
 		if (lock == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Lock exists with the key {");
 
@@ -974,9 +963,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT lock FROM Lock lock WHERE ");
+				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (className == null) {
 					query.append("lock.className IS NULL");
@@ -1009,8 +998,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1135,12 +1122,12 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT lock FROM Lock lock ");
+				query.append(_SQL_SELECT_LOCK);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1231,10 +1218,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(lock) ");
-				query.append("FROM Lock lock WHERE ");
+				query.append(_SQL_COUNT_LOCK_WHERE);
 
 				if (uuid == null) {
 					query.append("lock.uuid IS NULL");
@@ -1250,8 +1236,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1294,10 +1278,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(lock) ");
-				query.append("FROM Lock lock WHERE ");
+				query.append(_SQL_COUNT_LOCK_WHERE);
 
 				if (expirationDate == null) {
 					query.append("lock.expirationDate < null");
@@ -1305,8 +1288,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				else {
 					query.append("lock.expirationDate < ?");
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1349,10 +1330,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(lock) ");
-				query.append("FROM Lock lock WHERE ");
+				query.append(_SQL_COUNT_LOCK_WHERE);
 
 				if (className == null) {
 					query.append("lock.className IS NULL");
@@ -1385,8 +1365,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1432,8 +1410,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(lock) FROM Lock lock");
+				Query q = session.createQuery(_SQL_COUNT_LOCK);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1579,5 +1556,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_LOCK = "SELECT lock FROM Lock lock";
+	private static final String _SQL_SELECT_LOCK_WHERE = "SELECT lock FROM Lock lock WHERE ";
+	private static final String _SQL_COUNT_LOCK = "SELECT COUNT(lock) FROM Lock lock";
+	private static final String _SQL_COUNT_LOCK_WHERE = "SELECT COUNT(lock) FROM Lock lock WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(LockPersistenceImpl.class);
 }

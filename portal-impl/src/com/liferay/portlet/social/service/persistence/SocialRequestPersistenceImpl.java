@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -606,10 +607,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
 					query.append("socialRequest.uuid IS NULL");
@@ -626,9 +626,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -684,10 +682,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
 					query.append("socialRequest.uuid IS NULL");
@@ -704,10 +701,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -729,7 +724,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -770,7 +765,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -792,7 +787,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -818,10 +813,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			if (uuid == null) {
 				query.append("socialRequest.uuid IS NULL");
@@ -838,10 +832,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -863,7 +855,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 			}
@@ -900,7 +892,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		SocialRequest socialRequest = fetchByUUID_G(uuid, groupId);
 
 		if (socialRequest == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -943,10 +935,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
 					query.append("socialRequest.uuid IS NULL");
@@ -967,9 +958,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -1043,16 +1032,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -1106,17 +1092,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1138,7 +1121,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -1177,7 +1160,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1200,7 +1183,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1227,17 +1210,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			query.append("socialRequest.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1259,7 +1239,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 			}
@@ -1302,16 +1282,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -1365,17 +1342,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1397,7 +1371,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -1436,7 +1410,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1458,7 +1432,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1485,17 +1459,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			query.append("socialRequest.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1517,7 +1488,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 			}
@@ -1560,16 +1531,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.receiverUserId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -1623,17 +1591,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.receiverUserId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1655,7 +1620,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -1695,7 +1660,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1718,7 +1683,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1745,17 +1710,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			query.append("socialRequest.receiverUserId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1777,7 +1739,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 			}
@@ -1820,10 +1782,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
@@ -1831,9 +1792,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -1889,10 +1848,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
@@ -1900,10 +1858,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1925,7 +1881,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -1966,7 +1922,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByU_S(userId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1992,7 +1948,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2022,10 +1978,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			query.append("socialRequest.userId = ?");
 
@@ -2033,10 +1988,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append("socialRequest.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2058,7 +2011,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 			}
@@ -2105,10 +2058,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.receiverUserId = ?");
 
@@ -2116,9 +2068,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -2174,10 +2124,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.receiverUserId = ?");
 
@@ -2185,10 +2134,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2210,7 +2157,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -2251,7 +2198,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		List<SocialRequest> list = findByR_S(receiverUserId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2277,7 +2224,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2307,10 +2254,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			query.append("socialRequest.receiverUserId = ?");
 
@@ -2318,10 +2264,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append("socialRequest.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2343,7 +2287,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 			}
@@ -2382,7 +2326,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				classPK, type, receiverUserId);
 
 		if (socialRequest == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2439,10 +2383,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
@@ -2462,9 +2405,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.receiverUserId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -2547,10 +2488,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
@@ -2570,9 +2510,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -2638,10 +2576,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
@@ -2661,10 +2598,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2686,7 +2621,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -2735,7 +2670,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				classPK, type, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2771,7 +2706,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				classPK, type, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2810,10 +2745,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			query.append("socialRequest.userId = ?");
 
@@ -2833,10 +2767,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append("socialRequest.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2858,7 +2790,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 			}
@@ -2912,10 +2844,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.classNameId = ?");
 
@@ -2935,9 +2866,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.status = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 
@@ -3003,10 +2932,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.classNameId = ?");
 
@@ -3026,10 +2954,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append("socialRequest.status = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3051,7 +2977,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -3100,7 +3026,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				receiverUserId, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -3137,7 +3063,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				receiverUserId, status, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -3178,10 +3104,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT socialRequest FROM SocialRequest socialRequest WHERE ");
+			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			query.append("socialRequest.classNameId = ?");
 
@@ -3201,10 +3126,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append("socialRequest.status = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3226,7 +3149,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("socialRequest.requestId DESC");
 			}
@@ -3328,13 +3251,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT socialRequest FROM SocialRequest socialRequest ");
+				query.append(_SQL_SELECT_SOCIALREQUEST);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3356,7 +3278,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("socialRequest.requestId DESC");
 				}
@@ -3481,10 +3403,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
 					query.append("socialRequest.uuid IS NULL");
@@ -3500,8 +3421,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3544,10 +3463,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
 					query.append("socialRequest.uuid IS NULL");
@@ -3567,8 +3485,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(" AND ");
 
 				query.append("socialRequest.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3612,14 +3528,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3659,14 +3572,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3707,14 +3617,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.receiverUserId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3754,18 +3661,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
 				query.append(" AND ");
 
 				query.append("socialRequest.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3810,18 +3714,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.receiverUserId = ?");
 
 				query.append(" AND ");
 
 				query.append("socialRequest.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3867,10 +3768,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
@@ -3889,8 +3789,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(" AND ");
 
 				query.append("socialRequest.receiverUserId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -3942,10 +3840,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.userId = ?");
 
@@ -3964,8 +3861,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(" AND ");
 
 				query.append("socialRequest.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4017,10 +3912,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(socialRequest) ");
-				query.append("FROM SocialRequest socialRequest WHERE ");
+				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				query.append("socialRequest.classNameId = ?");
 
@@ -4039,8 +3933,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(" AND ");
 
 				query.append("socialRequest.status = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4088,8 +3980,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(socialRequest) FROM SocialRequest socialRequest");
+				Query q = session.createQuery(_SQL_COUNT_SOCIALREQUEST);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -4143,5 +4034,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SOCIALREQUEST = "SELECT socialRequest FROM SocialRequest socialRequest";
+	private static final String _SQL_SELECT_SOCIALREQUEST_WHERE = "SELECT socialRequest FROM SocialRequest socialRequest WHERE ";
+	private static final String _SQL_COUNT_SOCIALREQUEST = "SELECT COUNT(socialRequest) FROM SocialRequest socialRequest";
+	private static final String _SQL_COUNT_SOCIALREQUEST_WHERE = "SELECT COUNT(socialRequest) FROM SocialRequest socialRequest WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(SocialRequestPersistenceImpl.class);
 }

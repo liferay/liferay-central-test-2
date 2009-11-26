@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -338,16 +339,13 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT passwordTracker FROM PasswordTracker passwordTracker WHERE ");
+				query.append(_SQL_SELECT_PASSWORDTRACKER_WHERE);
 
 				query.append("passwordTracker.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("passwordTracker.userId DESC, ");
 				query.append("passwordTracker.createDate DESC");
@@ -402,17 +400,14 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT passwordTracker FROM PasswordTracker passwordTracker WHERE ");
+				query.append(_SQL_SELECT_PASSWORDTRACKER_WHERE);
 
 				query.append("passwordTracker.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -434,7 +429,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("passwordTracker.userId DESC, ");
 					query.append("passwordTracker.createDate DESC");
@@ -474,7 +469,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		List<PasswordTracker> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PasswordTracker exists with the key {");
 
@@ -496,7 +491,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		List<PasswordTracker> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PasswordTracker exists with the key {");
 
@@ -523,17 +518,14 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT passwordTracker FROM PasswordTracker passwordTracker WHERE ");
+			query.append(_SQL_SELECT_PASSWORDTRACKER_WHERE);
 
 			query.append("passwordTracker.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -555,7 +547,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("passwordTracker.userId DESC, ");
 				query.append("passwordTracker.createDate DESC");
@@ -650,13 +642,12 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT passwordTracker FROM PasswordTracker passwordTracker ");
+				query.append(_SQL_SELECT_PASSWORDTRACKER);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -678,7 +669,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("passwordTracker.userId DESC, ");
 					query.append("passwordTracker.createDate DESC");
@@ -740,14 +731,11 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(passwordTracker) ");
-				query.append("FROM PasswordTracker passwordTracker WHERE ");
+				query.append(_SQL_COUNT_PASSWORDTRACKER_WHERE);
 
 				query.append("passwordTracker.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -787,8 +775,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(passwordTracker) FROM PasswordTracker passwordTracker");
+				Query q = session.createQuery(_SQL_COUNT_PASSWORDTRACKER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -934,5 +921,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_PASSWORDTRACKER = "SELECT passwordTracker FROM PasswordTracker passwordTracker";
+	private static final String _SQL_SELECT_PASSWORDTRACKER_WHERE = "SELECT passwordTracker FROM PasswordTracker passwordTracker WHERE ";
+	private static final String _SQL_COUNT_PASSWORDTRACKER = "SELECT COUNT(passwordTracker) FROM PasswordTracker passwordTracker";
+	private static final String _SQL_COUNT_PASSWORDTRACKER_WHERE = "SELECT COUNT(passwordTracker) FROM PasswordTracker passwordTracker WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(PasswordTrackerPersistenceImpl.class);
 }

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -408,14 +409,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
+				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
 				query.append("mbDiscussion.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -467,17 +465,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
+				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
 				query.append("mbDiscussion.classNameId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -533,7 +528,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		List<MBDiscussion> list = findByClassNameId(classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBDiscussion exists with the key {");
 
@@ -557,7 +552,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBDiscussion exists with the key {");
 
@@ -584,17 +579,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
+			query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
 			query.append("mbDiscussion.classNameId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -645,7 +637,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		MBDiscussion mbDiscussion = fetchByThreadId(threadId);
 
 		if (mbDiscussion == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBDiscussion exists with the key {");
 
@@ -685,14 +677,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
+				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
 				query.append("mbDiscussion.threadId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -750,7 +739,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		MBDiscussion mbDiscussion = fetchByC_C(classNameId, classPK);
 
 		if (mbDiscussion == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBDiscussion exists with the key {");
 
@@ -795,18 +784,15 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ");
+				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
 				query.append("mbDiscussion.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbDiscussion.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -926,13 +912,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT mbDiscussion FROM MBDiscussion mbDiscussion ");
+				query.append(_SQL_SELECT_MBDISCUSSION);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1023,14 +1008,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbDiscussion) ");
-				query.append("FROM MBDiscussion mbDiscussion WHERE ");
+				query.append(_SQL_COUNT_MBDISCUSSION_WHERE);
 
 				query.append("mbDiscussion.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1070,14 +1052,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbDiscussion) ");
-				query.append("FROM MBDiscussion mbDiscussion WHERE ");
+				query.append(_SQL_COUNT_MBDISCUSSION_WHERE);
 
 				query.append("mbDiscussion.threadId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1120,18 +1099,15 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbDiscussion) ");
-				query.append("FROM MBDiscussion mbDiscussion WHERE ");
+				query.append(_SQL_COUNT_MBDISCUSSION_WHERE);
 
 				query.append("mbDiscussion.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbDiscussion.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1173,8 +1149,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(mbDiscussion) FROM MBDiscussion mbDiscussion");
+				Query q = session.createQuery(_SQL_COUNT_MBDISCUSSION);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1238,5 +1213,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_MBDISCUSSION = "SELECT mbDiscussion FROM MBDiscussion mbDiscussion";
+	private static final String _SQL_SELECT_MBDISCUSSION_WHERE = "SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ";
+	private static final String _SQL_COUNT_MBDISCUSSION = "SELECT COUNT(mbDiscussion) FROM MBDiscussion mbDiscussion";
+	private static final String _SQL_COUNT_MBDISCUSSION_WHERE = "SELECT COUNT(mbDiscussion) FROM MBDiscussion mbDiscussion WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(MBDiscussionPersistenceImpl.class);
 }

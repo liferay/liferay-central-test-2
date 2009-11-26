@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -358,7 +359,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		RatingsStats ratingsStats = fetchByC_C(classNameId, classPK);
 
 		if (ratingsStats == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No RatingsStats exists with the key {");
 
@@ -403,18 +404,15 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT ratingsStats FROM RatingsStats ratingsStats WHERE ");
+				query.append(_SQL_SELECT_RATINGSSTATS_WHERE);
 
 				query.append("ratingsStats.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("ratingsStats.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -534,13 +532,12 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT ratingsStats FROM RatingsStats ratingsStats ");
+				query.append(_SQL_SELECT_RATINGSSTATS);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -621,18 +618,15 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(ratingsStats) ");
-				query.append("FROM RatingsStats ratingsStats WHERE ");
+				query.append(_SQL_COUNT_RATINGSSTATS_WHERE);
 
 				query.append("ratingsStats.classNameId = ?");
 
 				query.append(" AND ");
 
 				query.append("ratingsStats.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -674,8 +668,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(ratingsStats) FROM RatingsStats ratingsStats");
+				Query q = session.createQuery(_SQL_COUNT_RATINGSSTATS);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -727,5 +720,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_RATINGSSTATS = "SELECT ratingsStats FROM RatingsStats ratingsStats";
+	private static final String _SQL_SELECT_RATINGSSTATS_WHERE = "SELECT ratingsStats FROM RatingsStats ratingsStats WHERE ";
+	private static final String _SQL_COUNT_RATINGSSTATS = "SELECT COUNT(ratingsStats) FROM RatingsStats ratingsStats";
+	private static final String _SQL_COUNT_RATINGSSTATS_WHERE = "SELECT COUNT(ratingsStats) FROM RatingsStats ratingsStats WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(RatingsStatsPersistenceImpl.class);
 }

@@ -107,6 +107,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 		return models;
 	}
 
+	public static final String TABLE_SCLICENSES_SCPRODUCTENTRIES = "SCLicenses_SCProductEntries";
 	public static final boolean FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.SCLicenses_SCProductEntries"),

@@ -121,6 +121,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 		return models;
 	}
 
+	public static final String TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS = "SCFrameworkVersi_SCProductVers";
 	public static final boolean FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.SCFrameworkVersi_SCProductVers"),

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -391,13 +392,11 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT pollsVote FROM PollsVote pollsVote WHERE ");
+				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
 				query.append("pollsVote.questionId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -449,16 +448,14 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT pollsVote FROM PollsVote pollsVote WHERE ");
+				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
 				query.append("pollsVote.questionId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -513,7 +510,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		List<PollsVote> list = findByQuestionId(questionId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsVote exists with the key {");
 
@@ -536,7 +533,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsVote exists with the key {");
 
@@ -563,16 +560,14 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT pollsVote FROM PollsVote pollsVote WHERE ");
+			query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
 			query.append("pollsVote.questionId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -631,13 +626,11 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT pollsVote FROM PollsVote pollsVote WHERE ");
+				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
 				query.append("pollsVote.choiceId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -689,16 +682,14 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT pollsVote FROM PollsVote pollsVote WHERE ");
+				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
 				query.append("pollsVote.choiceId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -753,7 +744,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		List<PollsVote> list = findByChoiceId(choiceId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsVote exists with the key {");
 
@@ -775,7 +766,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		List<PollsVote> list = findByChoiceId(choiceId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsVote exists with the key {");
 
@@ -801,16 +792,14 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT pollsVote FROM PollsVote pollsVote WHERE ");
+			query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
 			query.append("pollsVote.choiceId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -861,7 +850,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		PollsVote pollsVote = fetchByQ_U(questionId, userId);
 
 		if (pollsVote == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No PollsVote exists with the key {");
 
@@ -906,17 +895,15 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT pollsVote FROM PollsVote pollsVote WHERE ");
+				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
 				query.append("pollsVote.questionId = ?");
 
 				query.append(" AND ");
 
 				query.append("pollsVote.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1036,12 +1023,12 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT pollsVote FROM PollsVote pollsVote ");
+				query.append(_SQL_SELECT_POLLSVOTE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1131,14 +1118,11 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(pollsVote) ");
-				query.append("FROM PollsVote pollsVote WHERE ");
+				query.append(_SQL_COUNT_POLLSVOTE_WHERE);
 
 				query.append("pollsVote.questionId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1178,14 +1162,11 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(pollsVote) ");
-				query.append("FROM PollsVote pollsVote WHERE ");
+				query.append(_SQL_COUNT_POLLSVOTE_WHERE);
 
 				query.append("pollsVote.choiceId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1228,18 +1209,15 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(pollsVote) ");
-				query.append("FROM PollsVote pollsVote WHERE ");
+				query.append(_SQL_COUNT_POLLSVOTE_WHERE);
 
 				query.append("pollsVote.questionId = ?");
 
 				query.append(" AND ");
 
 				query.append("pollsVote.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1281,8 +1259,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(pollsVote) FROM PollsVote pollsVote");
+				Query q = session.createQuery(_SQL_COUNT_POLLSVOTE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1336,5 +1313,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_POLLSVOTE = "SELECT pollsVote FROM PollsVote pollsVote";
+	private static final String _SQL_SELECT_POLLSVOTE_WHERE = "SELECT pollsVote FROM PollsVote pollsVote WHERE ";
+	private static final String _SQL_COUNT_POLLSVOTE = "SELECT COUNT(pollsVote) FROM PollsVote pollsVote";
+	private static final String _SQL_COUNT_POLLSVOTE_WHERE = "SELECT COUNT(pollsVote) FROM PollsVote pollsVote WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(PollsVotePersistenceImpl.class);
 }

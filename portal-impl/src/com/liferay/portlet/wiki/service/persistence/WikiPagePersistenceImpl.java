@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -600,9 +601,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiPage.uuid IS NULL");
@@ -619,9 +620,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -679,9 +678,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiPage.uuid IS NULL");
@@ -698,10 +697,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -723,7 +720,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -766,7 +763,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -788,7 +785,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -814,9 +811,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			if (uuid == null) {
 				query.append("wikiPage.uuid IS NULL");
@@ -833,10 +830,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -858,7 +853,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -896,7 +891,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		WikiPage wikiPage = fetchByUUID_G(uuid, groupId);
 
 		if (wikiPage == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -939,9 +934,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiPage.uuid IS NULL");
@@ -962,9 +957,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append("wikiPage.groupId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -1039,15 +1032,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -1103,16 +1094,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1134,7 +1123,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -1175,7 +1164,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByNodeId(nodeId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -1197,7 +1186,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByNodeId(nodeId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -1223,16 +1212,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			query.append("wikiPage.nodeId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1254,7 +1241,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -1297,9 +1284,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				if (format == null) {
 					query.append("wikiPage.format IS NULL");
@@ -1316,9 +1303,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -1376,9 +1361,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				if (format == null) {
 					query.append("wikiPage.format IS NULL");
@@ -1395,10 +1380,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1420,7 +1403,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -1463,7 +1446,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByFormat(format, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -1485,7 +1468,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByFormat(format, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -1511,9 +1494,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			if (format == null) {
 				query.append("wikiPage.format IS NULL");
@@ -1530,10 +1513,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1555,7 +1536,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -1601,9 +1582,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -1624,9 +1605,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -1688,9 +1667,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -1711,10 +1690,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1736,7 +1713,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -1781,7 +1758,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByN_T(nodeId, title, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -1806,7 +1783,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByN_T(nodeId, title, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -1836,9 +1813,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			query.append("wikiPage.nodeId = ?");
 
@@ -1859,10 +1836,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1884,7 +1859,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -1934,9 +1909,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -1944,9 +1919,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append("wikiPage.head = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -2004,9 +1977,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -2014,10 +1987,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append("wikiPage.head = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2039,7 +2010,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -2082,7 +2053,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByN_H(nodeId, head, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -2107,7 +2078,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByN_H(nodeId, head, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -2137,9 +2108,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			query.append("wikiPage.nodeId = ?");
 
@@ -2147,10 +2118,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			query.append("wikiPage.head = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2172,7 +2141,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -2218,9 +2187,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -2241,9 +2210,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -2305,9 +2272,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -2328,10 +2295,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2353,7 +2318,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -2398,7 +2363,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByN_P(nodeId, parentTitle, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -2424,7 +2389,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -2454,9 +2419,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			query.append("wikiPage.nodeId = ?");
 
@@ -2477,10 +2442,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2502,7 +2465,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -2550,9 +2513,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -2573,9 +2536,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -2637,9 +2598,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -2660,10 +2621,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2685,7 +2644,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -2730,7 +2689,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByN_R(nodeId, redirectTitle, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -2756,7 +2715,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -2786,9 +2745,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			query.append("wikiPage.nodeId = ?");
 
@@ -2809,10 +2768,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2834,7 +2791,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -2874,7 +2831,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		WikiPage wikiPage = fetchByN_T_V(nodeId, title, version);
 
 		if (wikiPage == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -2924,9 +2881,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -2951,9 +2908,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append("wikiPage.version = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -3036,9 +2991,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -3063,9 +3018,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append("wikiPage.head = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -3129,9 +3082,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -3156,10 +3109,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append("wikiPage.head = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3181,7 +3132,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -3228,7 +3179,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByN_T_H(nodeId, title, head, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -3257,7 +3208,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -3290,9 +3241,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			query.append("wikiPage.nodeId = ?");
 
@@ -3317,10 +3268,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			query.append("wikiPage.head = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3342,7 +3291,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -3396,9 +3345,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -3423,9 +3372,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -3490,9 +3437,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -3517,10 +3464,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3542,7 +3487,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -3590,7 +3535,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		List<WikiPage> list = findByN_H_P(nodeId, head, parentTitle, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -3620,7 +3565,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No WikiPage exists with the key {");
 
@@ -3653,9 +3598,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT wikiPage FROM WikiPage wikiPage WHERE ");
+			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
 
 			query.append("wikiPage.nodeId = ?");
 
@@ -3680,10 +3625,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -3705,7 +3648,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("wikiPage.nodeId ASC, ");
 				query.append("wikiPage.title ASC, ");
@@ -3805,12 +3748,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT wikiPage FROM WikiPage wikiPage ");
+				query.append(_SQL_SELECT_WIKIPAGE);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -3832,7 +3775,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("wikiPage.nodeId ASC, ");
 					query.append("wikiPage.title ASC, ");
@@ -3963,10 +3906,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiPage.uuid IS NULL");
@@ -3982,8 +3924,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4026,10 +3966,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				if (uuid == null) {
 					query.append("wikiPage.uuid IS NULL");
@@ -4049,8 +3988,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append(" AND ");
 
 				query.append("wikiPage.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4094,14 +4031,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4141,10 +4075,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				if (format == null) {
 					query.append("wikiPage.format IS NULL");
@@ -4160,8 +4093,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4203,10 +4134,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -4226,8 +4156,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4273,18 +4201,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
 				query.append(" AND ");
 
 				query.append("wikiPage.head = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4327,10 +4252,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -4350,8 +4274,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4396,10 +4318,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -4419,8 +4340,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4469,10 +4388,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -4496,8 +4414,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append(" AND ");
 
 				query.append("wikiPage.version = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4548,10 +4464,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -4575,8 +4490,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				query.append(" AND ");
 
 				query.append("wikiPage.head = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4627,10 +4540,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(wikiPage) ");
-				query.append("FROM WikiPage wikiPage WHERE ");
+				query.append(_SQL_COUNT_WIKIPAGE_WHERE);
 
 				query.append("wikiPage.nodeId = ?");
 
@@ -4654,8 +4566,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -4701,8 +4611,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(wikiPage) FROM WikiPage wikiPage");
+				Query q = session.createQuery(_SQL_COUNT_WIKIPAGE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -4776,5 +4685,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _SQL_SELECT_WIKIPAGE = "SELECT wikiPage FROM WikiPage wikiPage";
+	private static final String _SQL_SELECT_WIKIPAGE_WHERE = "SELECT wikiPage FROM WikiPage wikiPage WHERE ";
+	private static final String _SQL_COUNT_WIKIPAGE = "SELECT COUNT(wikiPage) FROM WikiPage wikiPage";
+	private static final String _SQL_COUNT_WIKIPAGE_WHERE = "SELECT COUNT(wikiPage) FROM WikiPage wikiPage WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(WikiPagePersistenceImpl.class);
 }

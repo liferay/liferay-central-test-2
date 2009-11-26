@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -400,13 +401,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+				query.append(_SQL_SELECT_MBBAN_WHERE);
 
 				query.append("mbBan.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -458,16 +457,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+				query.append(_SQL_SELECT_MBBAN_WHERE);
 
 				query.append("mbBan.groupId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -521,7 +518,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		List<MBBan> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBBan exists with the key {");
 
@@ -543,7 +540,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		List<MBBan> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBBan exists with the key {");
 
@@ -569,16 +566,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+			query.append(_SQL_SELECT_MBBAN_WHERE);
 
 			query.append("mbBan.groupId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -635,13 +630,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+				query.append(_SQL_SELECT_MBBAN_WHERE);
 
 				query.append("mbBan.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -693,16 +686,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+				query.append(_SQL_SELECT_MBBAN_WHERE);
 
 				query.append("mbBan.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -756,7 +747,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		List<MBBan> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBBan exists with the key {");
 
@@ -778,7 +769,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		List<MBBan> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBBan exists with the key {");
 
@@ -804,16 +795,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+			query.append(_SQL_SELECT_MBBAN_WHERE);
 
 			query.append("mbBan.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -871,13 +860,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+				query.append(_SQL_SELECT_MBBAN_WHERE);
 
 				query.append("mbBan.banUserId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -929,16 +916,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+				query.append(_SQL_SELECT_MBBAN_WHERE);
 
 				query.append("mbBan.banUserId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -992,7 +977,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		List<MBBan> list = findByBanUserId(banUserId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBBan exists with the key {");
 
@@ -1014,7 +999,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		List<MBBan> list = findByBanUserId(banUserId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBBan exists with the key {");
 
@@ -1040,16 +1025,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+			query.append(_SQL_SELECT_MBBAN_WHERE);
 
 			query.append("mbBan.banUserId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1099,7 +1082,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		MBBan mbBan = fetchByG_B(groupId, banUserId);
 
 		if (mbBan == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No MBBan exists with the key {");
 
@@ -1144,17 +1127,15 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbBan FROM MBBan mbBan WHERE ");
+				query.append(_SQL_SELECT_MBBAN_WHERE);
 
 				query.append("mbBan.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbBan.banUserId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1273,12 +1254,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT mbBan FROM MBBan mbBan ");
+				query.append(_SQL_SELECT_MBBAN);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1374,14 +1355,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbBan) ");
-				query.append("FROM MBBan mbBan WHERE ");
+				query.append(_SQL_COUNT_MBBAN_WHERE);
 
 				query.append("mbBan.groupId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1421,14 +1399,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbBan) ");
-				query.append("FROM MBBan mbBan WHERE ");
+				query.append(_SQL_COUNT_MBBAN_WHERE);
 
 				query.append("mbBan.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1468,14 +1443,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbBan) ");
-				query.append("FROM MBBan mbBan WHERE ");
+				query.append(_SQL_COUNT_MBBAN_WHERE);
 
 				query.append("mbBan.banUserId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1518,18 +1490,15 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(mbBan) ");
-				query.append("FROM MBBan mbBan WHERE ");
+				query.append(_SQL_COUNT_MBBAN_WHERE);
 
 				query.append("mbBan.groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("mbBan.banUserId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1571,8 +1540,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(mbBan) FROM MBBan mbBan");
+				Query q = session.createQuery(_SQL_COUNT_MBBAN);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1636,5 +1604,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_MBBAN = "SELECT mbBan FROM MBBan mbBan";
+	private static final String _SQL_SELECT_MBBAN_WHERE = "SELECT mbBan FROM MBBan mbBan WHERE ";
+	private static final String _SQL_COUNT_MBBAN = "SELECT COUNT(mbBan) FROM MBBan mbBan";
+	private static final String _SQL_COUNT_MBBAN_WHERE = "SELECT COUNT(mbBan) FROM MBBan mbBan WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(MBBanPersistenceImpl.class);
 }

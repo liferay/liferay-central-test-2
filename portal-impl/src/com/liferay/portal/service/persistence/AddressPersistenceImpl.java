@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Address;
@@ -441,15 +442,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 
@@ -503,16 +502,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -534,7 +531,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("address.createDate ASC");
 				}
@@ -572,7 +569,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -594,7 +591,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -621,16 +618,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT address FROM Address address WHERE ");
+			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 			query.append("address.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -652,7 +647,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 			}
@@ -693,15 +688,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.userId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 
@@ -755,16 +748,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -786,7 +777,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("address.createDate ASC");
 				}
@@ -824,7 +815,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -846,7 +837,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -872,16 +863,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT address FROM Address address WHERE ");
+			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 			query.append("address.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -903,7 +892,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 			}
@@ -947,9 +936,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -957,9 +946,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append("address.classNameId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 
@@ -1015,9 +1002,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -1025,10 +1012,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append("address.classNameId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1050,7 +1035,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("address.createDate ASC");
 				}
@@ -1090,7 +1075,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		List<Address> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -1116,7 +1101,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -1146,9 +1131,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT address FROM Address address WHERE ");
+			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 			query.append("address.companyId = ?");
 
@@ -1156,10 +1141,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append("address.classNameId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1181,7 +1164,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 			}
@@ -1227,9 +1210,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -1241,9 +1224,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append("address.classPK = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 
@@ -1302,9 +1283,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -1316,10 +1297,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append("address.classPK = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1341,7 +1320,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("address.createDate ASC");
 				}
@@ -1385,7 +1364,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -1415,7 +1394,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -1448,9 +1427,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT address FROM Address address WHERE ");
+			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 			query.append("address.companyId = ?");
 
@@ -1462,10 +1441,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append("address.classPK = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1487,7 +1464,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 			}
@@ -1536,9 +1513,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -1554,9 +1531,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append("address.mailing = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 
@@ -1620,9 +1595,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -1638,10 +1613,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append("address.mailing = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1663,7 +1636,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("address.createDate ASC");
 				}
@@ -1709,7 +1682,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				mailing, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -1742,7 +1715,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				mailing, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -1778,9 +1751,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT address FROM Address address WHERE ");
+			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 			query.append("address.companyId = ?");
 
@@ -1796,10 +1769,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append("address.mailing = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1821,7 +1792,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 			}
@@ -1872,9 +1843,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -1890,9 +1861,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append("address.primary = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 
@@ -1956,9 +1925,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address WHERE ");
+				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -1974,10 +1943,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append("address.primary = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1999,7 +1966,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("address.createDate ASC");
 				}
@@ -2045,7 +2012,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				primary, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -2078,7 +2045,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				primary, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No Address exists with the key {");
 
@@ -2114,9 +2081,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append("SELECT address FROM Address address WHERE ");
+			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
 			query.append("address.companyId = ?");
 
@@ -2132,10 +2099,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append("address.primary = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -2157,7 +2122,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("address.createDate ASC");
 			}
@@ -2255,12 +2220,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT address FROM Address address ");
+				query.append(_SQL_SELECT_ADDRESS);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -2282,7 +2247,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("address.createDate ASC");
 				}
@@ -2379,14 +2344,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(address) ");
-				query.append("FROM Address address WHERE ");
+				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2426,14 +2388,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(address) ");
-				query.append("FROM Address address WHERE ");
+				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
 				query.append("address.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2476,18 +2435,15 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(address) ");
-				query.append("FROM Address address WHERE ");
+				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
 				query.append(" AND ");
 
 				query.append("address.classNameId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2532,10 +2488,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(address) ");
-				query.append("FROM Address address WHERE ");
+				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -2546,8 +2501,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				query.append(" AND ");
 
 				query.append("address.classPK = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2595,10 +2548,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(address) ");
-				query.append("FROM Address address WHERE ");
+				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -2613,8 +2565,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				query.append(" AND ");
 
 				query.append("address.mailing = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2664,10 +2614,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(address) ");
-				query.append("FROM Address address WHERE ");
+				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
 				query.append("address.companyId = ?");
 
@@ -2682,8 +2631,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				query.append(" AND ");
 
 				query.append("address.primary = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -2729,8 +2676,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(address) FROM Address address");
+				Query q = session.createQuery(_SQL_COUNT_ADDRESS);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2876,5 +2822,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_ADDRESS = "SELECT address FROM Address address";
+	private static final String _SQL_SELECT_ADDRESS_WHERE = "SELECT address FROM Address address WHERE ";
+	private static final String _SQL_COUNT_ADDRESS = "SELECT COUNT(address) FROM Address address";
+	private static final String _SQL_COUNT_ADDRESS_WHERE = "SELECT COUNT(address) FROM Address address WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(AddressPersistenceImpl.class);
 }

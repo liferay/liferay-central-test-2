@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -400,16 +401,13 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
 				query.append("announcementsFlag.entryId = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsFlag.userId ASC, ");
 				query.append("announcementsFlag.createDate ASC");
@@ -464,17 +462,14 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
 				query.append("announcementsFlag.entryId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -496,7 +491,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("announcementsFlag.userId ASC, ");
 					query.append("announcementsFlag.createDate ASC");
@@ -536,7 +531,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		List<AnnouncementsFlag> list = findByEntryId(entryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsFlag exists with the key {");
 
@@ -559,7 +554,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsFlag exists with the key {");
 
@@ -586,17 +581,14 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag WHERE ");
+			query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
 			query.append("announcementsFlag.entryId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -618,7 +610,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			}
 
 			else {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsFlag.userId ASC, ");
 				query.append("announcementsFlag.createDate ASC");
@@ -655,7 +647,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				value);
 
 		if (announcementsFlag == null) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No AnnouncementsFlag exists with the key {");
 
@@ -703,10 +695,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag WHERE ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
 				query.append("announcementsFlag.userId = ?");
 
@@ -718,9 +709,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				query.append("announcementsFlag.value = ?");
 
-				query.append(" ");
-
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				query.append("announcementsFlag.userId ASC, ");
 				query.append("announcementsFlag.createDate ASC");
@@ -846,13 +835,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag ");
+				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -874,7 +862,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				}
 
 				else {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					query.append("announcementsFlag.userId ASC, ");
 					query.append("announcementsFlag.createDate ASC");
@@ -943,14 +931,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(announcementsFlag) ");
-				query.append("FROM AnnouncementsFlag announcementsFlag WHERE ");
+				query.append(_SQL_COUNT_ANNOUNCEMENTSFLAG_WHERE);
 
 				query.append("announcementsFlag.entryId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -993,10 +978,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(announcementsFlag) ");
-				query.append("FROM AnnouncementsFlag announcementsFlag WHERE ");
+				query.append(_SQL_COUNT_ANNOUNCEMENTSFLAG_WHERE);
 
 				query.append("announcementsFlag.userId = ?");
 
@@ -1007,8 +991,6 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				query.append(" AND ");
 
 				query.append("announcementsFlag.value = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1052,8 +1034,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(announcementsFlag) FROM AnnouncementsFlag announcementsFlag");
+				Query q = session.createQuery(_SQL_COUNT_ANNOUNCEMENTSFLAG);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1107,5 +1088,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_ANNOUNCEMENTSFLAG = "SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag";
+	private static final String _SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE = "SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag WHERE ";
+	private static final String _SQL_COUNT_ANNOUNCEMENTSFLAG = "SELECT COUNT(announcementsFlag) FROM AnnouncementsFlag announcementsFlag";
+	private static final String _SQL_COUNT_ANNOUNCEMENTSFLAG_WHERE = "SELECT COUNT(announcementsFlag) FROM AnnouncementsFlag announcementsFlag WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsFlagPersistenceImpl.class);
 }

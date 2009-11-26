@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -365,14 +366,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTracker FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 				query.append("userTracker.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -424,17 +422,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTracker FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 				query.append("userTracker.companyId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -490,7 +485,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		List<UserTracker> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserTracker exists with the key {");
 
@@ -514,7 +509,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserTracker exists with the key {");
 
@@ -541,17 +536,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userTracker FROM UserTracker userTracker WHERE ");
+			query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 			query.append("userTracker.companyId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -610,14 +602,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTracker FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 				query.append("userTracker.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -669,17 +658,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTracker FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 				query.append("userTracker.userId = ?");
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -734,7 +720,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		List<UserTracker> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserTracker exists with the key {");
 
@@ -756,7 +742,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		List<UserTracker> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserTracker exists with the key {");
 
@@ -783,17 +769,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userTracker FROM UserTracker userTracker WHERE ");
+			query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 			query.append("userTracker.userId = ?");
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -852,10 +835,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTracker FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 				if (sessionId == null) {
 					query.append("userTracker.sessionId IS NULL");
@@ -871,8 +853,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -926,10 +906,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append(
-					"SELECT userTracker FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 				if (sessionId == null) {
 					query.append("userTracker.sessionId IS NULL");
@@ -946,10 +925,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 					}
 				}
 
-				query.append(" ");
-
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1007,7 +984,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		List<UserTracker> list = findBySessionId(sessionId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserTracker exists with the key {");
 
@@ -1031,7 +1008,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
+			StringBundler msg = new StringBundler();
 
 			msg.append("No UserTracker exists with the key {");
 
@@ -1058,10 +1035,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		try {
 			session = openSession();
 
-			StringBuilder query = new StringBuilder();
+			StringBundler query = new StringBundler();
 
-			query.append(
-				"SELECT userTracker FROM UserTracker userTracker WHERE ");
+			query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 			if (sessionId == null) {
 				query.append("userTracker.sessionId IS NULL");
@@ -1078,10 +1054,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				}
 			}
 
-			query.append(" ");
-
 			if (obc != null) {
-				query.append("ORDER BY ");
+				query.append(" ORDER BY ");
 
 				String[] orderByFields = obc.getOrderByFields();
 
@@ -1193,12 +1167,12 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT userTracker FROM UserTracker userTracker ");
+				query.append(_SQL_SELECT_USERTRACKER);
 
 				if (obc != null) {
-					query.append("ORDER BY ");
+					query.append(" ORDER BY ");
 
 					String[] orderByFields = obc.getOrderByFields();
 
@@ -1287,14 +1261,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userTracker) ");
-				query.append("FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_COUNT_USERTRACKER_WHERE);
 
 				query.append("userTracker.companyId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1334,14 +1305,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userTracker) ");
-				query.append("FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_COUNT_USERTRACKER_WHERE);
 
 				query.append("userTracker.userId = ?");
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1381,10 +1349,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				StringBuilder query = new StringBuilder();
+				StringBundler query = new StringBundler();
 
-				query.append("SELECT COUNT(userTracker) ");
-				query.append("FROM UserTracker userTracker WHERE ");
+				query.append(_SQL_COUNT_USERTRACKER_WHERE);
 
 				if (sessionId == null) {
 					query.append("userTracker.sessionId IS NULL");
@@ -1400,8 +1367,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 						query.append(")");
 					}
 				}
-
-				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
@@ -1443,8 +1408,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(
-						"SELECT COUNT(userTracker) FROM UserTracker userTracker");
+				Query q = session.createQuery(_SQL_COUNT_USERTRACKER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1590,5 +1554,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_USERTRACKER = "SELECT userTracker FROM UserTracker userTracker";
+	private static final String _SQL_SELECT_USERTRACKER_WHERE = "SELECT userTracker FROM UserTracker userTracker WHERE ";
+	private static final String _SQL_COUNT_USERTRACKER = "SELECT COUNT(userTracker) FROM UserTracker userTracker";
+	private static final String _SQL_COUNT_USERTRACKER_WHERE = "SELECT COUNT(userTracker) FROM UserTracker userTracker WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(UserTrackerPersistenceImpl.class);
 }
