@@ -182,6 +182,12 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 				portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
+				boolean firstCommunity = false;
+
+				if (myPlaces.indexOf(myPlace) == 0) {
+					firstCommunity = true;
+				}
+
 				boolean lastCommunity = false;
 
 				if (myPlaces.size()	== (myPlaces.indexOf(myPlace) + 1)) {
@@ -205,6 +211,10 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				}
 
 				String cssClass = "public-community";
+
+				if (firstCommunity) {
+					cssClass += " first";
+				}
 
 				if (lastCommunity) {
 					cssClass += " last";
