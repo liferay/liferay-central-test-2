@@ -113,6 +113,20 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		return workflowDefinitionLink;
 	}
 
+	public boolean hasWorkflowDefinitionLink(
+			long companyId, long groupId, long classNameId)
+		throws PortalException, SystemException {
+
+		try {
+			getWorkflowDefinitionLink(companyId, groupId, classNameId);
+
+			return true;
+		}
+		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
+			return false;
+		}
+	}
+
 	public WorkflowDefinitionLink updateWorkflowDefinitionLink(
 			long userId, long companyId, long groupId, long classNameId,
 			String workflowDefinitionName, int workflowDefinitionVersion)

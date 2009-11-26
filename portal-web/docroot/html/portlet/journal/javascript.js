@@ -1668,7 +1668,11 @@ AUI().add(
 				editButtons.detach('click');
 				languageIdSelect.detach('change');
 				repeatableButtons.detach('click');
-				saveArticleAndApproveBtn.detach('click');
+
+				if (saveArticleAndApproveBtn) {
+					saveArticleAndApproveBtn.detach('click');
+				}
+
 				saveArticleAndContinueBtn.detach('click');
 				saveArticleBtn.detach('click');
 
@@ -1715,12 +1719,14 @@ AUI().add(
 					}
 				);
 
-				saveArticleAndApproveBtn.on(
-					'click',
-					function() {
-						instance.saveArticle('approve');
-					}
-				);
+				if (saveArticleAndApproveBtn) {
+					saveArticleAndApproveBtn.on(
+						'click',
+						function() {
+							instance.saveArticle('approve');
+						}
+					);
+				}
 
 				if (downloadArticleContentBtn) {
 					downloadArticleContentBtn.detach('click');

@@ -115,6 +115,20 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			groupId, companyId, classNameId, classPK);
 	}
 
+	public boolean hasWorkflowInstanceLink(
+			long companyId, long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		try {
+			getWorkflowInstanceLink(companyId, groupId, className, classPK);
+
+			return true;
+		}
+		catch (NoSuchWorkflowInstanceLinkException nswile) {
+			return false;
+		}
+	}
+
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
 			long classPK)

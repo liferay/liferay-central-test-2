@@ -123,6 +123,12 @@ public interface WorkflowInstanceLinkLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasWorkflowInstanceLink(long companyId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void startWorkflowInstance(long companyId, long groupId,
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,

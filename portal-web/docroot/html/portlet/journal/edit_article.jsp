@@ -755,7 +755,22 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 					<aui:button name="saveArticleAndContinueBtn" value="save-and-continue" />
 
-					<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
+					<%
+					boolean showApprove = false;
+
+					if (JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE)) {
+						if (article == null) {
+							if (!WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(company.getCompanyId(), groupId, PortalUtil.getClassNameId(JournalArticle.class))) {
+								showApprove = true;
+							}
+						}
+						else if (!article.isApproved() && !WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getResourcePrimKey())) {
+							showApprove = true;
+						}
+					}
+					%>
+
+					<c:if test="<%= showApprove %>">
 						<aui:button name="saveArticleAndApproveBtn" value="save-and-approve" />
 					</c:if>
 				</c:if>

@@ -139,6 +139,14 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 			groupId, classNameId);
 	}
 
+	public boolean hasWorkflowDefinitionLink(long companyId, long groupId,
+		long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _workflowDefinitionLinkLocalService.hasWorkflowDefinitionLink(companyId,
+			groupId, classNameId);
+	}
+
 	public com.liferay.portal.model.WorkflowDefinitionLink updateWorkflowDefinitionLink(
 		long userId, long companyId, long groupId, long classNameId,
 		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)

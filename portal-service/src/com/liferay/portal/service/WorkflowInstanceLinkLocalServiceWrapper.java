@@ -146,6 +146,14 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 			groupId, className, classPK);
 	}
 
+	public boolean hasWorkflowInstanceLink(long companyId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _workflowInstanceLinkLocalService.hasWorkflowInstanceLink(companyId,
+			groupId, className, classPK);
+	}
+
 	public void startWorkflowInstance(long companyId, long groupId,
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
