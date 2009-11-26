@@ -1710,15 +1710,6 @@ AUI().add(
 					}
 				);
 
-				saveArticleAndContinueBtn.on(
-					'click',
-					function() {
-						var saveAndContinue = true;
-
-						instance.saveArticle(null, saveAndContinue);
-					}
-				);
-
 				if (saveArticleAndApproveBtn) {
 					saveArticleAndApproveBtn.on(
 						'click',
@@ -1727,6 +1718,15 @@ AUI().add(
 						}
 					);
 				}
+
+				saveArticleAndContinueBtn.on(
+					'click',
+					function() {
+						var saveAndContinue = true;
+
+						instance.saveArticle(null, saveAndContinue);
+					}
+				);
 
 				if (downloadArticleContentBtn) {
 					downloadArticleContentBtn.detach('click');

@@ -87,12 +87,12 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 	}
 
 	protected void updateWorkflowDefinitionLink(
-			ThemeDisplay themeDisplay, String value, long classNameId)
+			ThemeDisplay themeDisplay, String className, String value)
 		throws Exception {
 
 		if (Validator.isNull(value)) {
 			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
-				themeDisplay.getCompanyId(), 0, classNameId);
+				themeDisplay.getCompanyId(), 0, className);
 		}
 		else {
 			String[] values = StringUtil.split(value, StringPool.AT);
@@ -103,8 +103,7 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 
 			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
 				themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
-				classNameId, workflowDefinitionName,
-				workflowDefinitionVersion);
+				className, workflowDefinitionName, workflowDefinitionVersion);
 		}
 	}
 
@@ -123,12 +122,10 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 				continue;
 			}
 
+			String className = name.substring(_PREFIX.length(), name.length());
 			String value = ParamUtil.getString(actionRequest, name);
 
-			long classNameId = GetterUtil.getLong(
-				name.substring(_PREFIX.length(), name.length()));
-
-			updateWorkflowDefinitionLink(themeDisplay, value, classNameId);
+			updateWorkflowDefinitionLink(themeDisplay, className, value);
 		}
 	}
 

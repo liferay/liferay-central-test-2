@@ -50,11 +50,12 @@ public class WorkflowInstanceLinkLocalServiceImpl
 	extends WorkflowInstanceLinkLocalServiceBaseImpl {
 
 	public WorkflowInstanceLink addWorkflowInstanceLink(
-			long userId, long companyId, long groupId, long classNameId,
+			long userId, long companyId, long groupId, String className,
 			long classPK, long workflowInstanceId)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		long workflowInstanceLinkId = counterLocalService.increment();
@@ -135,11 +136,9 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			long classNameId = PortalUtil.getClassNameId(className);
-
 			WorkflowDefinitionLink workflowDefinitionLink =
 				workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
-					companyId, groupId, classNameId);
+					companyId, groupId, className);
 
 			String workflowDefinitionName =
 				workflowDefinitionLink.getWorkflowDefinitionName();
@@ -159,7 +158,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 					null, context);
 
 			addWorkflowInstanceLink(
-				userId, companyId, groupId, classNameId, classPK,
+				userId, companyId, groupId, className, classPK,
 				workflowInstance.getWorkflowInstanceId());
 		}
 		catch (NoSuchWorkflowDefinitionLinkException nswdle) {

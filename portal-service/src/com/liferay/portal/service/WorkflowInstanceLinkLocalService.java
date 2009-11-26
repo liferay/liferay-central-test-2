@@ -101,7 +101,7 @@ public interface WorkflowInstanceLinkLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.WorkflowInstanceLink addWorkflowInstanceLink(
-		long userId, long companyId, long groupId, long classNameId,
+		long userId, long companyId, long groupId, java.lang.String className,
 		long classPK, long workflowInstanceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

@@ -111,13 +111,13 @@ public class WorkflowInstanceLinkLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.WorkflowInstanceLink addWorkflowInstanceLink(
-		long userId, long companyId, long groupId, long classNameId,
+		long userId, long companyId, long groupId, java.lang.String className,
 		long classPK, long workflowInstanceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addWorkflowInstanceLink(userId, companyId, groupId,
-			classNameId, classPK, workflowInstanceId);
+			className, classPK, workflowInstanceId);
 	}
 
 	public static void deleteWorkflowInstanceLink(long companyId, long groupId,

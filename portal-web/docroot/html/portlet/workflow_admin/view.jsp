@@ -94,19 +94,14 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 					<liferay-ui:search-container-column-text
 						name="workflow"
 					>
-
-						<%
-						long classNameId = PortalUtil.getClassNameId(workflowHandler.getClassName());
-						%>
-
-						<aui:select label="" name='<%= "workflowDefinitionName@" + classNameId %>'>
+						<aui:select label="" name='<%= "workflowDefinitionName@" + workflowHandler.getClassName() %>'>
 							<aui:option><liferay-ui:message key="no-workflow" /></aui:option>
 
 							<%
 							WorkflowDefinitionLink workflowDefinitionLink = null;
 
 							try {
-								workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), 0, classNameId);
+								workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), 0, workflowHandler.getClassName());
 							}
 							catch (NoSuchWorkflowDefinitionLinkException nswle) {
 							}

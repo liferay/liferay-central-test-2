@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.service.base.WorkflowDefinitionLinkLocalServiceBaseImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.Date;
 
@@ -43,11 +44,12 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	extends WorkflowDefinitionLinkLocalServiceBaseImpl {
 
 	public WorkflowDefinitionLink addWorkflowDefinitionLink(
-			long userId, long companyId, long groupId, long classNameId,
+			long userId, long companyId, long groupId, String className,
 			String workflowDefinitionName, int workflowDefinitionVersion)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		long workflowDefinitionLinkId = counterLocalService.increment();
@@ -73,12 +75,12 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	}
 
 	public void deleteWorkflowDefinitionLink(
-			long companyId, long groupId, long classNameId)
+			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
 
 		try {
 			WorkflowDefinitionLink workflowDefinitionLink =
-				getWorkflowDefinitionLink(companyId, groupId, classNameId);
+				getWorkflowDefinitionLink(companyId, groupId, className);
 
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
 		}
@@ -87,8 +89,10 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	}
 
 	public WorkflowDefinitionLink getWorkflowDefinitionLink(
-			long companyId, long groupId, long classNameId)
+			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		WorkflowDefinitionLink workflowDefinitionLink = null;
 
@@ -114,11 +118,11 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	}
 
 	public boolean hasWorkflowDefinitionLink(
-			long companyId, long groupId, long classNameId)
+			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
 
 		try {
-			getWorkflowDefinitionLink(companyId, groupId, classNameId);
+			getWorkflowDefinitionLink(companyId, groupId, className);
 
 			return true;
 		}
@@ -128,11 +132,12 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	}
 
 	public WorkflowDefinitionLink updateWorkflowDefinitionLink(
-			long userId, long companyId, long groupId, long classNameId,
+			long userId, long companyId, long groupId, String className,
 			String workflowDefinitionName, int workflowDefinitionVersion)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
 		WorkflowDefinitionLink workflowDefinitionLink =
@@ -141,7 +146,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 		if (workflowDefinitionLink == null) {
 			workflowDefinitionLink = addWorkflowDefinitionLink(
-				userId, companyId, groupId, classNameId, workflowDefinitionName,
+				userId, companyId, groupId, className, workflowDefinitionName,
 				workflowDefinitionVersion);
 		}
 
