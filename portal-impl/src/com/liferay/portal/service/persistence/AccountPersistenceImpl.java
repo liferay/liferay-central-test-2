@@ -595,8 +595,6 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	private static final String _SQL_SELECT_ACCOUNT = "SELECT account FROM Account account";
-	private static final String _SQL_SELECT_ACCOUNT_WHERE = "SELECT account FROM Account account WHERE ";
 	private static final String _SQL_COUNT_ACCOUNT = "SELECT COUNT(account) FROM Account account";
-	private static final String _SQL_COUNT_ACCOUNT_WHERE = "SELECT COUNT(account) FROM Account account WHERE ";
 	private static Log _log = LogFactoryUtil.getLog(AccountPersistenceImpl.class);
 }
