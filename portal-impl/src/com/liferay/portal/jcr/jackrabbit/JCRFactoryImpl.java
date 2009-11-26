@@ -42,7 +42,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
 
-import org.apache.jackrabbit.api.JackrabbitRepository;
 import org.apache.jackrabbit.core.TransientRepository;
 
 /**
@@ -150,23 +149,11 @@ public class JCRFactoryImpl implements JCRFactory {
 		}
 	}
 
-	public void shutdown() throws RepositoryException {
+	public void shutdown() {
 		if (_initialized) {
-			Session session = null;
+			TransientRepository repository = (TransientRepository)_repository;
 
-			try {
-				session = createSession(null);
-
-				JackrabbitRepository repository =
-					(JackrabbitRepository)session.getRepository();
-
-				repository.shutdown();
-			}
-			catch (RepositoryException re) {
-				_log.error("Could not shutdown Jackrabbit");
-
-				throw re;
-			}
+			repository.shutdown();
 		}
 
 		_initialized = false;

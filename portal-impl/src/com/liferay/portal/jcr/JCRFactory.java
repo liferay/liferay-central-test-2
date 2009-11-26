@@ -48,6 +48,6 @@ public interface JCRFactory {
 
 	public void prepare() throws RepositoryException;
 
-	public void shutdown() throws RepositoryException;
+	public void shutdown();
 
 }
