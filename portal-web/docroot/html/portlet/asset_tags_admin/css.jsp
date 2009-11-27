@@ -110,10 +110,6 @@
 	background: #D3DADD;
 }
 
-.portlet-asset-tags-admin .tag-properties {
-	width: 380px;
-}
-
 .portlet-asset-tags-admin .ui-tags .nowrap {
 	empty-cells: show;
 	overflow: hidden;
@@ -157,7 +153,6 @@
 
 .portlet-asset-tags-admin .tag-edit-container .tag-edit {
 	border-right: 1px solid #D3D7DB;
-	display: none;
 	padding: 5px 5px 10px 10px;
 }
 
@@ -174,7 +169,6 @@
 }
 
 .portlet-asset-tags-admin .tag-property-row {
-	display: none;
 	white-space: nowrap;
 }
 

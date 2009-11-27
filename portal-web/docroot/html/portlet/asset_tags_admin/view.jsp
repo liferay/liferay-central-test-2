@@ -89,7 +89,7 @@
 
 		<div class="tags lfr-component"></div>
 	</td>
-	<td class="tag-edit-container">
+	<td class="aui-helper-hidden tag-edit-container">
 		<div class="results-header"><liferay-ui:message key="edit-tag" /></div>
 		<div class="tag-edit">
 			<div class="tag-close">
@@ -111,7 +111,7 @@
 
 				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag" />
 
-				<div class="tag-property-row">
+				<div class="aui-helper-hidden tag-property-row">
 					<input class="property-key" type="text" />
 
 					<input class="property-value" type="text" />

@@ -14,40 +14,43 @@ AUI().add(
 				initializer: function(portletId) {
 					var instance = this;
 
-					var tagsContainer = jQuery(instance._tagsContainerSelector);
+					var tagsContainer = A.one(instance._tagsContainerSelector);
 
 					instance.portletId = portletId;
-					instance._tagsAdminContainer = jQuery('.tags-admin-container');
+					instance._tagsAdminContainer = A.one('.tags-admin-container');
 
-					jQuery('.tag-close').click(
+					A.all('.tag-close').on(
+						'click',
 						function() {
 							instance._unselectAllTags();
 							instance._closeEditSection();
 						}
 					);
 
-					jQuery('.tag-save-properties').click(
+					A.all('.tag-save-properties').on(
+						'click',
 						function() {
 							instance._saveProperties();
 						}
 					);
 
-					instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="tag-portlet-messages" />');
-					instance._tagMessageContainer = jQuery('<div class="lfr-message-response" id="tag-messages" />');
+					instance._portletMessageContainer = A.Node.create('<div class="lfr-message-response" id="tag-portlet-messages" />');
+					instance._tagMessageContainer = A.Node.create('<div class="lfr-message-response" id="tag-messages" />');
 
 					instance._portletMessageContainer.hide();
 					instance._tagMessageContainer.hide();
 
-					instance._tagsAdminContainer.before(instance._portletMessageContainer);
-					tagsContainer.before(instance._tagMessageContainer);
+					instance._tagsAdminContainer.placeBefore(instance._portletMessageContainer);
+					tagsContainer.placeBefore(instance._tagMessageContainer);
 
-					var toolbar = jQuery('.tags-admin-toolbar');
+					var toolbar = A.all('.tags-admin-toolbar');
+					var addTagButton = A.all('.add-tag-button');
 
-					var addTagButton = jQuery('.add-tag-button');
+					var addTagLayer = A.one('.add-tag-layer');
 
 					instance._addTagOverlay = new A.ContextPanel(
 						{
-							bodyContent: A.get('.add-tag-layer'),
+							bodyContent: addTagLayer,
 							trigger: '.add-tag-button',
 							align: {
 								points: ['tr', 'br']
@@ -56,7 +59,8 @@ AUI().add(
 					)
 					.render();
 
-					jQuery('.tag-permissions-button').click(
+					A.one('.tag-permissions-button').on(
+						'click',
 						function() {
 							var tagName = instance._selectedTagName;
 							var tagId = instance._selectedTagId;
@@ -74,36 +78,31 @@ AUI().add(
 						}
 					);
 
-					jQuery('#tag-search-bar').change(
-						function(event) {
-							jQuery('#tags-admin-search-input').focus();
-							instance._reloadSearch();
-						}
-					);
-
 					var addTag = function() {
-						var addTagLayer = jQuery('.add-tag-layer');
-						var tagName = addTagLayer.find('.new-tag-name').val();
+						var inputTagNameNode = addTagLayer.one('.new-tag-name');
+						var newTagName = (inputTagNameNode && inputTagNameNode.val()) || '';
 
 						instance._hideAllMessages();
-						instance._addTag(tagName);
+						instance._addTag(newTagName);
 					};
 
-					jQuery('input.tag-save-button').click(addTag);
+					A.one('input.tag-save-button').on('click', addTag);
 
-					jQuery('.tags-admin-actions input').keyup(
+					A.all('.tags-admin-actions input').on(
+						'keyup',
 						function(event) {
 							if (event.keyCode == 13) {
-								var input = jQuery(this);
+								var input = event.currentTarget;
 
 								addTag();
 
-								return false;
+								event.halt();
 							}
 						}
 					);
 
-					jQuery('input.tag-delete-button').click(
+					A.one('input.tag-delete-button').on(
+						'click',
 						function() {
 							if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag'))) {
 								instance._deleteTag(
@@ -129,13 +128,15 @@ AUI().add(
 						}
 					);
 
-					jQuery('.close-panel').click(
+					A.all('.close-panel').on(
+						'click',
 						function() {
 							instance._hideToolbarOverlays();
 						}
 					);
 
-					jQuery('.aui-overlay input:text').keyup(
+					A.all('.aui-overlay input[type=text]').on(
+						'keyup',
 						function(event) {
 							var ESC_KEY_CODE = 27;
 							var keyCode = event.keyCode;
@@ -170,14 +171,14 @@ AUI().add(
 						{
 							name: tagName,
 							properties: [],
-							serviceContext: jQuery.toJSON(
+							serviceContext: A.JSON.stringify(
 								{
 									communityPermissions: communityPermission,
 									guestPermissions: guestPermission,
 									scopeGroupId: themeDisplay.getScopeGroupId()
 								}
 							),
-							serviceParameterTypes: jQuery.toJSON(serviceParameterTypes)
+							serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
 						},
 						function(message) {
 							var exception = message.exception;
@@ -189,8 +190,10 @@ AUI().add(
 									function() {
 										var tag = instance._selectTag(message.tagId);
 
-										if (tag.length) {
-											jQuery(instance._tagsContainerSelector).scrollTop(tag.offset().top);
+										if (tag) {
+											var scrollTop = tag.get('region').top;
+
+											A.one(instance._tagsContainerSelector).set('scrollTop', scrollTop);
 										}
 
 										instance._showSection('.tag-edit');
@@ -230,19 +233,32 @@ AUI().add(
 				_addProperty: function(baseNode, key, value) {
 					var instance = this;
 
-					var baseProperty = jQuery('div.tag-property-row:last');
-					var newProperty = baseProperty.clone();
+					var baseProperty = A.one('div.tag-property-row');
 
-					newProperty.find('.property-key').val(key);
-					newProperty.find('.property-value').val(value);
-					newProperty.insertAfter(baseNode);
-					newProperty.show();
+					if (baseProperty) {
+						var newProperty = baseProperty.cloneNode(true);
 
-					if (!key && !value) {
-						newProperty.find('input:first').addClass('lfr-auto-focus');
+						var propertyKeyNode = newProperty.one('.property-key');
+						var propertyValueNode = newProperty.one('.property-value');
+
+						if (propertyKeyNode) {
+							propertyKeyNode.val(key);
+						}
+
+						if (propertyValueNode) {
+							propertyValueNode.val(value);
+						}
+
+						baseNode.placeAfter(newProperty)
+
+						newProperty.show();
+
+						if (!key && !value) {
+							newProperty.one('input').focus();
+						}
+
+						instance._attachPropertyIconEvents(newProperty);
 					}
-
-					instance._attachPropertyIconEvents(newProperty);
 				},
 
 				_afterDrag: function(event) {
@@ -302,28 +318,37 @@ AUI().add(
 				_alternateRows: function() {
 					var instance = this;
 
-					var tagsScope = jQuery(instance._tagsContainerSelector);
+					var tagsScope = A.all(instance._tagsContainerSelector);
 
-					jQuery('li', tagsScope).removeClass('alt');
-					jQuery('li:odd', tagsScope).addClass('alt');
+					var allRows = tagsScope.all('li');
+
+					allRows.removeClass('alt');
+					allRows.odd().addClass('alt');
 				},
 
 				_attachPropertyIconEvents: function(property) {
 					var instance = this;
 
-					var row = jQuery(property);
+					var addProperty = property.one('.add-property');
+					var deleteProperty = property.one('.delete-property');
 
-					row.find('.add-property').click(
-						function() {
-							instance._addProperty(property, '', '');
-						}
-					);
+					if (addProperty) {
+						addProperty.on(
+							'click',
+							function() {
+								instance._addProperty(property, '', '');
+							}
+						);
+					}
 
-					row.find('.delete-property').click(
-						function() {
-							instance._removeProperty(property);
-						}
-					);
+					if (deleteProperty) {
+						deleteProperty.on(
+							'click',
+							function() {
+								instance._removeProperty(property);
+							}
+						);
+					}
 				},
 
 				_buildProperties: function() {
@@ -331,14 +356,18 @@ AUI().add(
 
 					var buffer = [];
 
-					jQuery('.tag-property-row:visible').each(
-						function(i, o) {
-							var propertyRow = jQuery(this);
-							var key = propertyRow.find('input.property-key').val();
-							var value = propertyRow.find('input.property-value').val();
-							var rowValue = [key, ':', value, ','].join('');
+					A.all('.tag-property-row').each(
+						function(item, index, collection) {
+							if (!item.hasClass('aui-helper-hidden')) {
+								var keyNode = item.one('input.property-key');
+								var valueNode = item.one('input.property-value');
 
-							buffer.push(rowValue);
+								if (keyNode && valueNode) {
+									var rowValue = [keyNode.val(), ':', valueNode.val(), ','].join('');
+
+									buffer.push(rowValue);
+								}
+							}
 						}
 					);
 
@@ -349,7 +378,8 @@ AUI().add(
 					var instance = this;
 
 					instance._hideSection('.tag-edit');
-					jQuery(instance._tagsContainerCellsSelector).width('auto');
+
+					A.all(instance._tagsContainerCellsSelector).setStyle('width', 'auto');
 				},
 
 				_createPermissionURL: function(modelResource, modelResourceDescription, resourcePrimKey) {
@@ -383,18 +413,20 @@ AUI().add(
 							}
 
 							var total = properties.length;
-							var totalRendered = jQuery('div.tag-property-row').length;
+							var totalRendered = A.all('div.tag-property-row').size();
 
 							if (totalRendered > total) {
 								return;
 							}
 
-							jQuery.each(
+							A.each(
 								properties,
-								function() {
-									var baseProperty = jQuery('div.tag-property-row:last');
+								function(item, index, collection) {
+									var baseRows = A.all('div.tag-property-row');
+									var lastIndex = baseRows.size() - 1;
+									var baseRow = baseRows.item(lastIndex);
 
-									instance._addProperty(baseProperty, this.key, this.value);
+									instance._addProperty(baseRow, item.key, item.value);
 								}
 							);
 						}
@@ -404,7 +436,11 @@ AUI().add(
 				_displayTags: function(callback) {
 					var instance = this;
 
-					jQuery('#tag-messages').hide();
+					var tagMessages = A.one('#tag-messages');
+
+					if (tagMessages) {
+						tagMessages.hide();
+					}
 
 					instance._getTags(
 						function(tags) {
@@ -417,20 +453,20 @@ AUI().add(
 					var instance = this;
 
 					var buffer = [];
-					var tagsContainer = A.get(instance._tagsContainerSelector);
+					var tagsContainer = A.one(instance._tagsContainerSelector);
 
 					buffer.push('<ul>');
 
-					jQuery.each(
+					A.each(
 						tags,
-						function(i) {
+						function(item, index, collection) {
 							buffer.push('<li class="tag-item results-row" ');
 							buffer.push('data-tag="');
-							buffer.push(this.name);
+							buffer.push(item.name);
 							buffer.push('" data-tagId="');
-							buffer.push(this.tagId);
+							buffer.push(item.tagId);
 							buffer.push('"><span><a href="javascript:;">');
-							buffer.push(this.name);
+							buffer.push(item.name);
 							buffer.push('</a></span>');
 							buffer.push('</li>');
 						}
@@ -452,7 +488,7 @@ AUI().add(
 					tagsItems.on(
 						'click',
 						function(event) {
-							var tagId = instance._getTagId(event.currentTarget.getDOM());
+							var tagId = instance._getTagId(event.currentTarget);
 
 							instance._selectTag(tagId);
 							instance._showSection('.tag-edit');
@@ -506,29 +542,33 @@ AUI().add(
 				_getTag: function(tagId) {
 					var instance = this;
 
-					return jQuery('li[data-tagId=' + tagId + ']')
+					return A.one('li[data-tagId="' + tagId + '"]');
 				},
 
 				_getTagId: function(exp) {
 					var instance = this;
 
-					return jQuery(exp).attr('data-tagId');
+					return A.one(exp).attr('data-tagId');
 				},
 
 				_getTagName: function(exp) {
 					var instance = this;
 
-					return jQuery(exp).attr('data-tag');
+					return A.one(exp).attr('data-tag');
 				},
 
 				_getPermissionsEnabled: function(type) {
+					var instance = this;
+
 					var buffer = [];
-					var permissionsActions = jQuery('.tag-permissions-actions');
-					var permissions = permissionsActions.find('[name$=tagPermissions]:checked');
+					var permissionsActions = A.one('.tag-permissions-actions');
+					var permissions = permissionsActions.all('[name$=tagPermissions]');
 
 					permissions.each(
-						function(i, n) {
-							buffer.push(this.value);
+						function(item, index, collection) {
+							if (item.get('checked')) {
+								buffer.push(item.val());
+							}
 						}
 					);
 
@@ -562,19 +602,27 @@ AUI().add(
 				_hideAllMessages: function() {
 					var instance = this;
 
-					instance._tagsAdminContainer.find('.lfr-message-response').hide();
+					instance._tagsAdminContainer.one('.lfr-message-response').hide();
 				},
 
 				_hideLoading: function(exp) {
 					var instance = this;
 
-					instance._tagsAdminContainer.find('div.loading-animation').remove();
+					instance._tagsAdminContainer.one('div.loading-animation').remove();
 				},
 
 				_hideSection: function(exp) {
 					var instance = this;
 
-					jQuery(exp).parent().removeClass('tag-editing');
+					var node = A.one(exp);
+
+					if (node) {
+						var parentNode = node.get('parentNode');
+
+						if (parentNode) {
+							parentNode.hide();
+						}
+					}
 				},
 
 				_hideToolbarOverlays: function() {
@@ -590,7 +638,7 @@ AUI().add(
 
 					instance._displayTags(
 						function() {
-							var tagId = instance._getTagId(instance._tagsItemsSelector + ':first');
+							instance._getTagId(instance._tagsItemsSelector);
 						}
 					);
 				},
@@ -598,19 +646,16 @@ AUI().add(
 				_merge: function(node, dropNode) {
 					var instance = this;
 
-					var nodeEl = node.getDOM();
-					var dropNodeEl = dropNode.getDOM();
-
-					var fromTagId = instance._getTagId(nodeEl);
-					var fromTagName = instance._getTagName(nodeEl);
-					var toTagId = instance._getTagId(dropNodeEl);
-					var toTagName = instance._getTagName(dropNodeEl);
+					var fromTagId = instance._getTagId(node);
+					var fromTagName = instance._getTagName(node);
+					var toTagId = instance._getTagId(dropNode);
+					var toTagName = instance._getTagName(dropNode);
 
 					var destination = toTagName;
 
 					var mergeText = Liferay.Language.get('are-you-sure-you-want-to-merge-x-into-x');
 
-					mergeText = A.substitute(mergeText, [instance._getTagName(nodeEl), destination]);
+					mergeText = A.substitute(mergeText, [instance._getTagName(node), destination]);
 
 					if (confirm(mergeText)) {
 						instance._mergeTags(
@@ -638,12 +683,7 @@ AUI().add(
 				_reloadSearch: function() {
 					var	instance = this;
 
-					var options = {};
-
-					var input = jQuery('#tags-admin-search-input');
-					var tagList = jQuery(instance._tagsItemsSelector);
-
-					options = {
+					var options = {
 						data: function(node) {
 							return node.one('span a').html();
 						},
@@ -661,7 +701,7 @@ AUI().add(
 				_removeProperty: function(property) {
 					var instance = this;
 
-					if (jQuery('div.tag-property-row').length > 2) {
+					if (A.all('div.tag-property-row').size() > 2) {
 						property.remove();
 					}
 				},
@@ -669,14 +709,15 @@ AUI().add(
 				_resetActionValues: function() {
 					var instance = this;
 
-					jQuery('.tags-admin-actions input:text').val('');
+					A.all('.tags-admin-actions input[type=text]').val('');
 				},
 
 				_saveProperties: function() {
 					var instance = this;
 
 					var tagId = instance._selectedTagId;
-					var tagName = jQuery('.tag-edit input.tag-name').val() || instance._selectedTagName;
+					var tagNameNode = A.one('.tag-edit input.tag-name');
+					var tagName = (tagNameNode && tagNameNode.val()) || instance._selectedTagName;
 					var properties = instance._buildProperties();
 
 					instance._updateTag(tagId, tagName, properties);
@@ -693,17 +734,20 @@ AUI().add(
 					instance._selectedTagId = tagId;
 					instance._selectedTagName = tagName;
 
-					if (tag.is('.selected') || !tagId) {
+					if (!tagId) {
 						return tag;
 					}
 
 					instance._unselectAllTags();
 					tag.addClass('selected');
 
-					var editContainer = jQuery('.tag-edit');
-					var tagNameField = editContainer.find('input.tag-name');
+					var editContainer = A.one('.tag-edit');
+					var tagNameField = editContainer.one('input.tag-name');
 
-					tagNameField.val(tagName);
+					if (tagNameField) {
+						tagNameField.val(tagName);
+					}
+
 					instance._displayProperties(tagId);
 
 					instance._selectedTag = tag;
@@ -711,52 +755,67 @@ AUI().add(
 					return tag;
 				},
 
-				_sendMessage: function(type, message, output, noAutoHide) {
+				_sendMessage: function(type, message) {
 					var instance = this;
 
-					var output = jQuery(output || '#tag-messages');
+					var output = instance._portletMessageContainer;
 					var typeClass = 'portlet-msg-' + type;
 
 					clearTimeout(instance._messageTimeout);
 
 					output.removeClass('portlet-msg-error portlet-msg-success');
-					output.addClass(typeClass).html(message).fadeIn('fast');
+					output.addClass(typeClass);
+					output.html(message);
+					output.show();
 
-					if (!noAutoHide) {
-						instance._messageTimeout = setTimeout(
-							function() {
-								output.fadeOut('slow',
-									function(event) {
-										instance._addTagOverlay.refreshAlign();
-									}
-								);
-							}, 7000);
-					}
+					instance._messageTimeout = setTimeout(
+						function() {
+							output.hide();
+
+							instance._addTagOverlay.refreshAlign();
+						},
+					7000);
 				},
 
 				_showLoading: function(container) {
 					var instance = this;
 
-					jQuery(container).html('<div class="loading-animation" />');
+					A.all(container).html('<div class="loading-animation" />');
 				},
 
 				_showSection: function(exp) {
 					var instance = this;
 
-					var element = jQuery(exp);
+					var element = A.one(exp);
 
-					if (!element.is(':visible')) {
-						element.parent().addClass('tag-editing');
-						element.find('input:first').focus();
-						jQuery(instance._tagsContainerCellsSelector).width('50%');
+					if (element) {
+						var parentNode = element.get('parentNode');
+
+						if (parentNode) {
+							parentNode.show();
+							element.one('input').focus();
+
+							A.all(instance._tagsContainerCellsSelector).setStyle('width', '50%');
+						}
 					}
 				},
 
 				_unselectAllTags: function() {
 					var instance = this;
 
-					jQuery(instance._tagsItemsSelector).removeClass('selected');
-					jQuery('div.tag-property-row:gt(0)').remove();
+					A.all(instance._tagsItemsSelector).removeClass('selected');
+
+					var properties = A.all('div.tag-property-row');
+
+					if (properties.size() > 1) {
+						properties.each(
+							function(item, index, collection) {
+								if (index > 0) {
+									item.remove();
+								}
+							}
+						);
+					}
 				},
 
 				_updateTag: function(tagId, name, properties, callback) {
@@ -773,16 +832,18 @@ AUI().add(
 							var exception = message.exception;
 
 							if (!exception) {
-								var selectedText = instance._selectedTag.find('> span > a');
+								var selectedText = instance._selectedTag.one('> span > a');
 
-								if (!selectedText.length) {
-									selectedText.find('> span');
+								if (!selectedText) {
+									selectedText = instance._selectedTag.one('> span');
 								}
 
-								instance._selectedTag.attr('data-tag', name);
-								selectedText.text(name);
+								if (selectedText) {
+									instance._selectedTag.attr('data-tag', name);
+									selectedText.text(name);
 
-								instance._closeEditSection();
+									instance._closeEditSection();
+								}
 							}
 							else {
 								var errorText = '';
@@ -818,6 +879,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['base', 'context-panel', 'dd', 'substitute', 'live-search']
+		requires: ['base', 'context-panel', 'dd', 'json', 'liferay-portlet-url', 'live-search', 'substitute']
 	}
 );
