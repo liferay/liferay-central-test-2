@@ -11,13 +11,13 @@ AUI().add(
 		 * OPTIONS
 		 *
 		 * Required
-		 * container {string|object}: A jQuery selector that contains the rows you wish to duplicate.
-		 * baseRows {string|object}: A jQuery selector that defines which fields are duplicated.
+		 * container {string|object}: A selector that contains the rows you wish to duplicate.
+		 * baseRows {string|object}: A selector that defines which fields are duplicated.
 		 *
 		 * Optional
 		 * fieldIndexes {string}: The name of the POST parameter that will contain a list of the order for the fields.
 		 * sortable{boolean}: Whether or not the rows should be sortable
-		 * sortableHandle{string}: A jQuery selector that defines a handle for the sortables
+		 * sortableHandle{string}: A selector that defines a handle for the sortables
 		 *
 		 */
 
