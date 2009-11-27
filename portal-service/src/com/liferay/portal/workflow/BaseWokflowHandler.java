@@ -22,8 +22,15 @@
 
 package com.liferay.portal.workflow;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
+import com.liferay.portlet.asset.model.AssetRenderer;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
+
+import javax.portlet.PortletURL;
 
 /**
  * <a href="BaseWokflowHandler.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +42,33 @@ public abstract class BaseWokflowHandler implements WorkflowHandler {
 
 	public static final String TYPE = "unknown";
 
+	public String getTitle(long classPK) throws Exception {
+		AssetRenderer renderer = getAssetRenderer(classPK);
+
+		if (renderer != null) {
+			return renderer.getTitle();
+		}
+
+		return null;
+	}
+
 	public String getType() {
 		return TYPE;
+	}
+
+	public PortletURL getURLEdit(
+			long classPK, LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws Exception {
+
+		AssetRenderer renderer = getAssetRenderer(classPK);
+
+		if (renderer != null) {
+			return renderer.getURLEdit(
+				liferayPortletRequest, liferayPortletResponse);
+		}
+
+		return null;
 	}
 
 	public void startWorkflowInstance(
@@ -46,6 +78,18 @@ public abstract class BaseWokflowHandler implements WorkflowHandler {
 
 		WorkflowInstanceLinkLocalServiceUtil.startWorkflowInstance(
 			companyId, groupId, userId, getClassName(), classPK);
+	}
+
+	protected AssetRenderer getAssetRenderer(long classPK) throws Exception {
+		AssetRendererFactory factory =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				getClassName());
+
+		if (factory != null) {
+			return factory.getAssetRenderer(classPK);
+		}
+
+		return null;
 	}
 
 }

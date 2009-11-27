@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+
+import javax.portlet.PortletURL;
+
 /**
  * <a href="WorkflowHandler.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,7 +37,14 @@ public interface WorkflowHandler {
 
 	public String getClassName();
 
+	public String getTitle(long classPK) throws Exception;
+
 	public String getType();
+
+	public PortletURL getURLEdit(
+			long classPK, LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws Exception;
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,

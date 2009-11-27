@@ -65,9 +65,39 @@ try {
 			/>
 
 			<liferay-ui:search-container-column-text
-				name="description"
-				property="description"
+				name="name"
+				property="name"
 			/>
+
+			<%
+			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
+
+			String className = (String)workflowInstance.getContext().get(ContextConstants.ENTRY_CLASS_NAME);
+			long classPK = (Long)workflowInstance.getContext().get(ContextConstants.ENTRY_CLASS_PK);
+
+			WorkflowHandler handler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
+			PortletURL rowURL = handler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+
+			if (rowURL != null) {
+				rowURL.setWindowState(WindowState.MAXIMIZED);
+				rowURL.setPortletMode(PortletMode.VIEW);
+
+				rowURL.setParameter("redirect", currentURL);
+			}
+			%>
+
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="asset-title"
+			>
+
+				<%
+				buffer.append(handler.getTitle(classPK));
+				%>
+
+			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
 				name="create-date"
