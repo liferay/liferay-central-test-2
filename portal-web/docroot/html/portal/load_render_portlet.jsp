@@ -54,11 +54,11 @@ String portletId = portlet.getPortletId();
 
 					Liferay.Portlet.addHTML(
 						{
-							url: '<%= url %>',
-							placeHolder: (placeHolder && placeHolder.getDOM()),
 							onComplete: function(portlet, portletId) {
 								portlet.refreshURL = '<%= url %>';
-							}
+							},
+							placeHolder: (placeHolder && placeHolder.getDOM()),
+							url: '<%= url %>'
 						}
 					);
 				}
