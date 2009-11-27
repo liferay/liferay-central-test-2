@@ -397,7 +397,9 @@ public class MBUtil {
 					MBMailingListLocalServiceUtil.getCategoryMailingList(
 						groupId, categoryId);
 
-				mailingListAddress = mailingList.getEmailAddress();
+				if (mailingList.isActive()) {
+					mailingListAddress = mailingList.getEmailAddress();
+				}
 			}
 			catch (Exception e) {
 			}
