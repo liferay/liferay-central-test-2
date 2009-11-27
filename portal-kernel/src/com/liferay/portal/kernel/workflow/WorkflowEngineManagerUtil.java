@@ -22,6 +22,10 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+
 import java.util.Map;
 
 /**
@@ -49,6 +53,19 @@ public class WorkflowEngineManagerUtil {
 
 	public static WorkflowEngineManager getWorkflowEngineManager() {
 		return _workflowEngineManager;
+	}
+
+	public static boolean isDeployed() {
+		Destination destination = MessageBusUtil.getMessageBus().getDestination(
+			DestinationNames.WORKFLOW_ENGINE);
+
+		if ((destination != null) &&
+			(destination.getMessageListenerCount() > 0)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public void setWorkflowEngineManager(

@@ -1,0 +1,210 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%
+String tabs1 = ParamUtil.getString(request, "tabs1", "resources");
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/workflow_admin/view");
+portletURL.setParameter("tabs1", tabs1);
+
+List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getWorkflowDefinitions(0, 100, null);
+%>
+
+<liferay-ui:tabs
+	names="resources,workflow-definitions"
+	url="<%= portletURL.toString() %>"
+/>
+
+<c:choose>
+	<c:when test='<%= tabs1.equals("resources") %>'>
+
+		<%
+		List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
+		%>
+
+		<portlet:actionURL var="editWorkflowDefinitionLinkURL">
+			<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition_link" />
+		</portlet:actionURL>
+
+		<aui:form action="<%= editWorkflowDefinitionLinkURL %>" method="post">
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+
+			<liferay-ui:search-container
+				iteratorURL="<%= portletURL %>"
+			>
+				<liferay-ui:search-container-results
+					results="<%= ListUtil.subList(workflowHandlers, searchContainer.getStart(), searchContainer.getEnd()) %>"
+					total="<%= workflowHandlers.size() %>"
+				/>
+
+				<liferay-ui:search-container-row
+					className="com.liferay.portal.kernel.workflow.WorkflowHandler"
+					modelVar="workflowHandler"
+				>
+
+					<liferay-ui:search-container-row-parameter
+						name="workflowHandler"
+						value="<%= workflowHandler %>"
+					/>
+
+					<liferay-ui:search-container-column-text
+						buffer="buffer"
+						name="resource"
+					>
+
+						<%
+						buffer.append("<img align=\"left\" border=\"0\" src=\"");
+						buffer.append(themeDisplay.getPathThemeImages());
+						buffer.append(_getIconPath(workflowHandler.getClassName()));
+						buffer.append("\" style=\"margin-right: 5px\">");
+						buffer.append("<strong>");
+						buffer.append(LanguageUtil.get(pageContext, "model.resource." + workflowHandler.getClassName()));
+						buffer.append("</strong>");
+						%>
+
+					</liferay-ui:search-container-column-text>
+
+					<liferay-ui:search-container-column-text
+						name="workflow"
+					>
+						<aui:select label="" name='<%= "workflowDefinitionName@" + workflowHandler.getClassName() %>'>
+							<aui:option><liferay-ui:message key="no-workflow" /></aui:option>
+
+							<%
+							WorkflowDefinitionLink workflowDefinitionLink = null;
+
+							try {
+								workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), 0, workflowHandler.getClassName());
+							}
+							catch (NoSuchWorkflowDefinitionLinkException nswle) {
+							}
+
+							for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
+								boolean selected = false;
+
+								if ((workflowDefinitionLink != null) && (workflowDefinitionLink.getWorkflowDefinitionName().equals(workflowDefinition.getName()))) {
+									selected = true;
+								}
+							%>
+
+								<aui:option label="<%= workflowDefinition.getName() %>" selected="<%= selected %>" value="<%= workflowDefinition.getName() + StringPool.AT + workflowDefinition.getVersion() %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+					</liferay-ui:search-container-column-text>
+
+				</liferay-ui:search-container-row>
+
+				<liferay-ui:search-iterator />
+			</liferay-ui:search-container>
+
+			<aui:button-row>
+				<aui:button type="submit" value="save" />
+			</aui:button-row>
+		</aui:form>
+	</c:when>
+	<c:when test='<%= tabs1.equals("workflow-definitions") %>'>
+		<liferay-util:include page="/html/portlet/workflow_admin/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value="view-all" />
+		</liferay-util:include>
+
+		<liferay-ui:search-container
+			emptyResultsMessage="no-workflow-definitions-are-defined"
+			iteratorURL="<%= portletURL %>"
+		>
+			<liferay-ui:search-container-results
+				results="<%= ListUtil.subList(workflowDefinitions, searchContainer.getStart(), searchContainer.getEnd()) %>"
+				total="<%= workflowDefinitions.size() %>"
+			/>
+
+			<liferay-ui:search-container-row
+				className="com.liferay.portal.kernel.workflow.WorkflowDefinition"
+				modelVar="workflowDefinition"
+			>
+
+				<liferay-ui:search-container-column-text
+					name="name"
+					value="<%= workflowDefinition.getName() %>"
+				/>
+
+				<liferay-ui:search-container-column-text
+					name="version"
+					value="<%= String.valueOf(workflowDefinition.getVersion()) %>"
+				/>
+
+				<liferay-ui:search-container-column-jsp
+					align="right"
+					path="/html/portlet/workflow_admin/workflow_definition_action.jsp"
+				/>
+			</liferay-ui:search-container-row>
+
+			<liferay-ui:search-iterator />
+		</liferay-ui:search-container>
+	</c:when>
+</c:choose>
+
+<%!
+private String _getIconPath(String className) {
+	if (className.equals(BlogsEntry.class.getName())) {
+		return "/common/page.png";
+	}
+	else if (className.equals(BookmarksEntry.class.getName())) {
+		return "/ratings/star_hover.png";
+	}
+	else if (className.equals(DLFileEntry.class.getName())) {
+		return "/document_library/page.png";
+	}
+	else if (className.equals(IGImage.class.getName())) {
+		return "/file_system/small/bmp.png";
+	}
+	else if (className.equals(JournalArticle.class.getName())) {
+		return "/common/history.png";
+	}
+	else if (className.equals(Layout.class.getName())) {
+		return "/common/page.png";
+	}
+	else if (className.equals(MBMessage.class.getName())) {
+		return "/common/conversation.png";
+	}
+	else if (className.equals(Organization.class.getName())) {
+		return "/common/organization_icon.png";
+	}
+	else if (className.equals(User.class.getName())) {
+		return "/common/user_icon.png";
+	}
+	else if (className.equals(WikiPage.class.getName())) {
+		return "/common/pages.png";
+	}
+	else {
+		return "/common/page.png";
+	}
+}
+%>

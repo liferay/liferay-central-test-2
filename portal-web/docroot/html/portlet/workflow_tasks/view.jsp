@@ -24,90 +24,13 @@
 
 <%@ include file="/html/portlet/workflow_tasks/init.jsp" %>
 
-<%
-String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
-
-boolean completed = false;
-
-if (tabs1.equals("completed")) {
-	completed = true;
-}
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("tabs1", tabs1);
-%>
-
-<liferay-ui:tabs
-	names="pending,completed"
-	url="<%= portletURL.toString() %>"
-/>
-
-<%
-try {
-%>
-
-	<liferay-ui:search-container
-		emptyResultsMessage='<%= LanguageUtil.get(pageContext, completed ? "there-are-no-completed-tasks" : "there-are-no-pending-tasks-assigned-to-you") %>'
-		iteratorURL="<%= portletURL %>"
-	>
-		<liferay-ui:search-container-results
-			results="<%= WorkflowTaskManagerUtil.getWorkflowTasksByUser(user.getUserId(), completed, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null) %>"
-			total="<%= WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(user.getUserId(), completed) %>"
-		/>
-
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.kernel.workflow.WorkflowTask"
-			modelVar="workflowTask"
-			stringKey="<%= true %>"
-		>
-			<liferay-ui:search-container-row-parameter
-				name="workflowTask"
-				value="<%= workflowTask %>"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="description"
-				property="description"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="create-date"
-				property="createDate"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="due-date"
-				property="dueDate"
-			/>
-
-			<c:if test="<%= !completed %>">
-				<liferay-ui:search-container-column-jsp
-					align="right"
-					path="/html/portlet/workflow_tasks/workflow_task_action.jsp"
-				/>
-			</c:if>
-		</liferay-ui:search-container-row>
-
-		<liferay-ui:search-iterator paginate="<%= false %>" />
-	</liferay-ui:search-container>
-
-<%
-}
-catch (WorkflowException we) {
-	if (_log.isWarnEnabled()) {
-		_log.warn("Error retrieving the tasks of user " + user.getUserId(), we);
-	}
-%>
-
-	<div class="portlet-msg-error">
-		<liferay-ui:message key="an-error-occurred-while-retrieving-the-list-of-tasks" />
-	</div>
-
-<%
-}
-%>
-
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.workflow_tasks.view.jsp");
-%>
+<c:choose>
+	<c:when test="<%= WorkflowEngineManagerUtil.isDeployed() %>">
+		<%@ include file="/html/portlet/workflow_tasks/view_tasks.jspf" %>
+	</c:when>
+	<c:otherwise>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="no-workflow-engine-is-deployed" />
+		</div>
+	</c:otherwise>
+</c:choose>
