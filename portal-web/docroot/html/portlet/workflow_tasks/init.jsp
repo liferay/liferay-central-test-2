@@ -24,7 +24,6 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTask" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil" %>

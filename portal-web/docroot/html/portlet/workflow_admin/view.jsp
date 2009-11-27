@@ -22,6 +22,8 @@
  */
 %>
 
+<%@ include file="/html/portlet/workflow_admin/init.jsp" %>
+
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "resources");
 
