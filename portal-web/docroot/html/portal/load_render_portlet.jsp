@@ -47,13 +47,15 @@ String portletId = portlet.getPortletId();
 
 		<script type="text/javascript">
 			AUI().ready(
-				function() {
+				function(A) {
 					var ns = '<%= portletDisplay.getNamespace() %>';
+
+					var placeHolder = A.one('#p_load' + ns);
 
 					Liferay.Portlet.addHTML(
 						{
 							url: '<%= url %>',
-							placeHolder: jQuery('#p_load' + ns + '')[0],
+							placeHolder: (placeHolder && placeHolder.getDOM()),
 							onComplete: function(portlet, portletId) {
 								portlet.refreshURL = '<%= url %>';
 							}

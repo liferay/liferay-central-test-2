@@ -108,7 +108,7 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 				}
 				%>
 
-				<textarea class="lfr-textarea" id="<portlet:namespace />meta-description_temp" name="TypeSettingsProperties(meta-description_temp)" onChange="<portlet:namespace />onDescriptionChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
+				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-description_temp" name="TypeSettingsProperties(meta-description_temp)" onChange="<portlet:namespace />onDescriptionChanged();" style="width: 300px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -143,7 +143,7 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 				}
 				%>
 
-				<textarea class="lfr-textarea" id="<portlet:namespace />meta-keywords_temp" name="TypeSettingsProperties(meta-keywords_temp)" onChange="<portlet:namespace />onKeywordsChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
+				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-keywords_temp" name="TypeSettingsProperties(meta-keywords_temp)" onChange="<portlet:namespace />onKeywordsChanged();" style="width: 300px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -178,7 +178,7 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 				}
 				%>
 
-				<textarea class="lfr-textarea" id="<portlet:namespace />meta-robots_temp" name="TypeSettingsProperties(meta-robots_temp)" onChange="<portlet:namespace />onRobotsChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
+				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-robots_temp" name="TypeSettingsProperties(meta-robots_temp)" onChange="<portlet:namespace />onRobotsChanged();" style="width: 300px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		</table>
@@ -297,45 +297,49 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 	}
 
 	function <portlet:namespace />updateMetaLanguage() {
+		var robotsNode = AUI().one('#<portlet:namespace />meta-robots_temp');
+		var keywordsNode = AUI().one('#<portlet:namespace />meta-keywords_temp');
+		var descriptionNode = AUI().one('#<portlet:namespace />meta-description_temp');
+
 		if (lastMetaLanguageId != "<%= defaultLanguageId %>") {
 			if (robotsChanged) {
-				var robotsValue = jQuery("#<portlet:namespace />meta-robots_temp").attr("value");
+				var robotsValue = (robotsNode && robotsNode.val()) || '';
 
-				if (robotsValue == null) {
-					robotsValue = "";
+				var lastRobotsNode = AUI().one('#<portlet:namespace />meta-robots_' + lastMetaLanguageId);
+
+				if (lastRobotsNode) {
+					lastRobotsNode.val(robotsValue);
 				}
-
-				jQuery("#<portlet:namespace />meta-robots_" + lastMetaLanguageId).attr("value", robotsValue);
 
 				robotsChanged = false;
 			}
 
 			if (keywordsChanged) {
-				var keywordsValue = jQuery("#<portlet:namespace />meta-keywords_temp").attr("value");
+				var keywordsValue = (keywordsNode && keywordsNode.val()) || '';
 
-				if (keywordsValue == null) {
-					keywordsValue = "";
+				var lastKeywordsNode = AUI().one('#<portlet:namespace />meta-keywords_' + lastMetaLanguageId);
+
+				if (lastKeywordsNode) {
+					lastKeywordsNode.val(keywordsValue);
 				}
-
-				jQuery("#<portlet:namespace />meta-keywords_" + lastMetaLanguageId).attr("value", keywordsValue);
 
 				keywordsChanged = false;
 			}
 
 			if (descriptionChanged) {
-				var descriptionValue = jQuery("#<portlet:namespace />meta-description_temp").attr("value");
+				var descriptionValue = (descriptionNode && descriptionNode.val()) || '';
 
-				if (descriptionValue == null) {
-					descriptionValue = "";
+				var lastDescriptionNode = AUI().one('#<portlet:namespace />meta-description_' + lastMetaLanguageId);
+
+				if (lastDescriptionNode) {
+					lastDescriptionNode.val(descriptionValue);
 				}
-
-				jQuery("#<portlet:namespace />meta-description_" + lastMetaLanguageId).attr("value", descriptionValue);
 
 				descriptionChanged = false;
 			}
 		}
 
-		var selLanguageId = "";
+		var selLanguageId = '';
 
 		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.length; i++) {
 			if (document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.options[i].selected) {
@@ -345,17 +349,24 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 			}
 		}
 
-		if (selLanguageId != "") {
+		var action = 'hide';
+
+		if (selLanguageId != '') {
 			<portlet:namespace />updateMetaLanguageTemps(selLanguageId);
 
-			jQuery("#<portlet:namespace />meta-robots_temp").show();
-			jQuery("#<portlet:namespace />meta-keywords_temp").show();
-			jQuery("#<portlet:namespace />meta-description_temp").show();
+			action = 'show';
 		}
-		else {
-			jQuery("#<portlet:namespace />meta-robots_temp").hide();
-			jQuery("#<portlet:namespace />meta-keywords_temp").hide();
-			jQuery("#<portlet:namespace />meta-description_temp").hide();
+
+		if (robotsNode) {
+			robotsNode[action]();
+		}
+
+		if (keywordsNode) {
+			keywordsNode[action]();
+		}
+
+		if (descriptionNode) {
+			descriptionNode[action]();
 		}
 
 		lastMetaLanguageId = selLanguageId;
@@ -365,44 +376,34 @@ String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 
 	function <portlet:namespace />updateMetaLanguageTemps(lang) {
 		if (lang != "<%= defaultLanguageId %>") {
-			var robotsValue = jQuery("#<portlet:namespace />meta-robots_" + lang).attr("value");
-			var keywordsValue = jQuery("#<portlet:namespace />meta-keywords_" + lang).attr("value");
-			var descriptionValue = jQuery("#<portlet:namespace />meta-description_" + lang).attr("value");
-			var defaultRobotsValue = jQuery("#<portlet:namespace />meta-robots_<%= defaultLanguageId %>").attr("value");
-			var defaultKeywordsValue = jQuery("#<portlet:namespace />meta-keywords_<%= defaultLanguageId %>").attr("value");
-			var defaultDescriptionValue = jQuery("#<portlet:namespace />meta-description_<%= defaultLanguageId %>").attr("value");
+			var robotsNode = AUI().one('#<portlet:namespace />meta-robots_' + lang);
+			var keywordsNode = AUI().one('#<portlet:namespace />meta-keywords_' + lang);
+			var descriptionNode = AUI().one('#<portlet:namespace />meta-description_' + lang);
+			var defaultRobotsNode = AUI().one('#<portlet:namespace />meta-robots_<%= defaultLanguageId %>');
+			var defaultKeywordsNode = AUI().one('#<portlet:namespace />meta-keywords_<%= defaultLanguageId %>');
+			var defaultDescriptionNode = AUI().one('#<portlet:namespace />meta-description_<%= defaultLanguageId %>');
 
-			if (defaultRobotsValue == null) {
-				defaultRobotsValue = "";
-			}
+			var robotsValue = (robotsNode && robotsNode.val()) || '';
+			var keywordsValue = (keywordsNode && keywordsNode.val()) || '';
+			var descriptionValue = (descriptionNode && descriptionNode.val()) || '';
+			var defaultRobotsValue = (defaultRobotsNode && defaultRobotsNode.val()) || '';
+			var defaultKeywordsValue = (defaultKeywordsNode && defaultKeywordsNode.val()) || '';
+			var defaultDescriptionValue = (defaultDescriptionNode && defaultDescriptionNode.val()) || '';
 
-			if (defaultKeywordsValue == null) {
-				defaultKeywordsValue = "";
-			}
+			var robotsTempNode = AUI().one('#<portlet:namespace />meta-robots_temp');
+			var keywordsTempNode = AUI().one('#<portlet:namespace />meta-keywords_temp');
+			var descriptionTempNode = AUI().one('#<portlet:namespace />meta-description_temp');
 
-			if (defaultDescriptionValue == null) {
-				defaultDescriptionValue = "";
-			}
-
-			if ((robotsValue == null) || (robotsValue == "")) {
-				jQuery("#<portlet:namespace />meta-robots_temp").attr("value", defaultRobotsValue);
-			}
-			else {
-				jQuery("#<portlet:namespace />meta-robots_temp").attr("value", robotsValue);
+			if (robotsTempNode) {
+				robotsTempNode.val(robotsValue || defaultRobotsValue);
 			}
 
-			if ((keywordsValue == null) || (keywordsValue == "")) {
-				jQuery("#<portlet:namespace />meta-keywords_temp").attr("value", defaultKeywordsValue);
-			}
-			else {
-				jQuery("#<portlet:namespace />meta-keywords_temp").attr("value", keywordsValue);
+			if (keywordsTempNode) {
+				keywordsTempNode.val(keywordsValue || defaultKeywordsValue)
 			}
 
-			if ((descriptionValue == null) || (descriptionValue == "")) {
-				jQuery("#<portlet:namespace />meta-description_temp").attr("value", defaultDescriptionValue);
-			}
-			else {
-				jQuery("#<portlet:namespace />meta-description_temp").attr("value", descriptionValue);
+			if (descriptionTempNode) {
+				descriptionTempNode.val(descriptionValue || defaultDescriptionValue);
 			}
 		}
 	}

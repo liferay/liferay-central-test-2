@@ -55,7 +55,7 @@
 
 		//iFrame.style.height = (winHeight - 139);
 
-		jQuery("iframe").attr("height", winHeight - 139);
+		AUI().all('iframe').setStyle('height', winHeight - 139 + 'px');
 	}
 
 	window.onresize = resizeIframe;

@@ -1856,22 +1856,6 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	height: 1%;
 }
 
-/* ---------- jQuery plugins ---------- */
-
-/* ---------- Tabs ---------- */
-
-.tabs-hide {
-	display: none;
-}
-
-.ie6 .tabs-nav {
-	display: inline-block;
-}
-
-.ie6 .tabs-nav .tabs-disabled a {
-	filter: alpha(opacity=40);
-}
-
 /* ----------- OpenID ---------- */
 
 .openid-login input[type="text"] {

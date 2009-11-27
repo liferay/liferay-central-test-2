@@ -63,7 +63,7 @@
 		</select>
 
 		<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-			<div id="customQuestionDiv">
+			<div class="aui-helper-hidden" id="customQuestionDiv">
 				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user %>" field="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
 			</div>
 		</c:if>
@@ -82,32 +82,35 @@
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			var reminderQueryQuestion = jQuery('#reminderQueryQuestion');
-			var customQuestionDiv = jQuery('#customQuestionDiv');
+		function(A) {
+			var reminderQueryQuestion = A.one('#reminderQueryQuestion');
+			var customQuestionDiv = A.one('#customQuestionDiv');
 
-			if (reminderQueryQuestion.val() != '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
-				customQuestionDiv.hide();
-			}
-
-			reminderQueryQuestion.change(
-				function(event) {
-					if (this.value == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
-						<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-							customQuestionDiv.show();
-
-							Liferay.Util.focusFormField(jQuery('#reminderQueryCustomQuestion'));
-						</c:if>
-					}
-					else {
-						customQuestionDiv.hide();
-
-						Liferay.Util.focusFormField(jQuery('#reminderQueryAnswer'));
-					}
+			if (reminderQueryQuestion && customQuestionDiv) {
+				if (reminderQueryQuestion.val() != '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+					customQuestionDiv.hide();
 				}
-			);
 
-			Liferay.Util.focusFormField(reminderQueryQuestion);
+				reminderQueryQuestion.on(
+					'change',
+					function(event) {
+						if (this.val() == '<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>') {
+							<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
+								customQuestionDiv.show();
+
+								Liferay.Util.focusFormField('#reminderQueryCustomQuestion');
+							</c:if>
+						}
+						else {
+							customQuestionDiv.hide();
+
+							Liferay.Util.focusFormField('#reminderQueryAnswer');
+						}
+					}
+				);
+
+				Liferay.Util.focusFormField(reminderQueryQuestion);
+			}
 		}
 	);
 </script>
