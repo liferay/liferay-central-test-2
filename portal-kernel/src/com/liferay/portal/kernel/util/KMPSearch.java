@@ -25,6 +25,10 @@ package com.liferay.portal.kernel.util;
 /**
  * <a href="KMPSearch.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * See http://en.wikipedia.org/wiki/Knuth-Morris-Pratt_algorithm.
+ * </p>
+ *
  * @author Shuyang Zhou
  */
 public class KMPSearch {
