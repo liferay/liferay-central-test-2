@@ -74,10 +74,10 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		var title = document.<portlet:namespace />fm.<portlet:namespace />title.value;
 		var content = window.<portlet:namespace />editor.getHTML();
 
-		var saveButton = jQuery('#<portlet:namespace />saveButton');
-		var cancelButton = jQuery('#<portlet:namespace />cancelButton');
+		var saveButton = AUI().one('#<portlet:namespace />saveButton');
+		var cancelButton = AUI().one('#<portlet:namespace />cancelButton');
 
-		var saveStatus = jQuery('#<portlet:namespace />saveStatus');
+		var saveStatus = AUI().one('#<portlet:namespace />saveStatus');
 		var saveText = '<%= UnicodeLanguageUtil.format(pageContext, "draft-saved-at-x", "[TIME]", false) %>';
 
 		if (draft) {
@@ -96,60 +96,81 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 			var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>';
 
-			jQuery.ajax(
+			AUI().io(
+				url,
 				{
-					url: url,
-					data: {
-						<portlet:namespace /><%= Constants.CMD %>: '<%= Constants.ADD %>',
-						<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
-						<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
-						<portlet:namespace />entryId: document.<portlet:namespace />fm.<portlet:namespace />entryId.value,
-						<portlet:namespace />title: title,
-						<portlet:namespace />content: content,
-						<portlet:namespace />displayDateMonth: document.<portlet:namespace />fm.<portlet:namespace />displayDateMonth.value,
-						<portlet:namespace />displayDateDay: document.<portlet:namespace />fm.<portlet:namespace />displayDateDay.value,
-						<portlet:namespace />displayDateYear: document.<portlet:namespace />fm.<portlet:namespace />displayDateYear.value,
-						<portlet:namespace />displayDateHour: document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value,
-						<portlet:namespace />displayDateMinute: document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value,
-						<portlet:namespace />displayDateAmPm: document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value,
-						<portlet:namespace />status: <%= StatusConstants.DRAFT %>,
-						<portlet:namespace />assetTagNames: document.<portlet:namespace />fm.<portlet:namespace />assetTagNames.value
-					},
-					dataType: 'json',
-					beforeSend: function() {
-						saveButton.attr('disabled', true);
-
-						saveStatus.attr('class', 'save-status portlet-msg-info pending');
-						saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "saving-draft") %>');
-					},
-					success: function(message) {
-						document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
-						document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;
-
-						saveButton.attr('disabled', false);
-
-						var tabs1BackButton = jQuery('#<portlet:namespace />tabs1TabsBack');
-
-						tabs1BackButton.attr('href', message.redirect);
-
-						cancelButton.unbind('click.liferay');
-
-						cancelButton.bind(
-							'click.liferay',
-							function() {
-								location.href = message.redirect;
+					data: AUI().toQueryString(
+						{
+							<portlet:namespace /><%= Constants.CMD %>: '<%= Constants.ADD %>',
+							<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
+							<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
+							<portlet:namespace />entryId: document.<portlet:namespace />fm.<portlet:namespace />entryId.value,
+							<portlet:namespace />title: title,
+							<portlet:namespace />content: content,
+							<portlet:namespace />displayDateMonth: document.<portlet:namespace />fm.<portlet:namespace />displayDateMonth.value,
+							<portlet:namespace />displayDateDay: document.<portlet:namespace />fm.<portlet:namespace />displayDateDay.value,
+							<portlet:namespace />displayDateYear: document.<portlet:namespace />fm.<portlet:namespace />displayDateYear.value,
+							<portlet:namespace />displayDateHour: document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value,
+							<portlet:namespace />displayDateMinute: document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value,
+							<portlet:namespace />displayDateAmPm: document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value,
+							<portlet:namespace />status: <%= StatusConstants.DRAFT %>,
+							<portlet:namespace />assetTagNames: document.<portlet:namespace />fm.<portlet:namespace />assetTagNames.value
+						}
+					),
+					method: 'POST',
+					on: {
+						failure: function() {
+							if (saveStatus) {
+								saveStatus.set('className', 'save-status portlet-msg-error');
+								saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "could-not-save-draft-to-the-server") %>');
 							}
-						);
+						},
+						start: function() {
+							if (saveButton) {
+								saveButton.attr('disabled', true);
+							}
 
-						var now = saveText.replace(/\[TIME\]/gim, (new Date()).toString());
+							if (saveStatus) {
+								saveStatus.set('className', 'save-status portlet-msg-info pending');
+								saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "saving-draft") %>');
+							}
+						},
+						success: function(id, obj) {
+							var instance = this;
 
-						saveStatus.attr('class', 'save-status portlet-msg-success');
-						saveStatus.html(now);
-					},
-					type: "POST",
-					error: function() {
-						saveStatus.attr('class', 'save-status portlet-msg-error');
-						saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "could-not-save-draft-to-the-server") %>');
+							var message = AUI().JSON.parse(obj.responseText);
+
+							document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
+							document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;
+
+							if (saveButton) {
+								saveButton.attr('disabled', false);
+							}
+
+							var tabs1BackButton = AUI().one('#<portlet:namespace />tabs1TabsBack');
+
+							if (tabs1BackButton) {
+								tabs1BackButton.attr('href', message.redirect);
+							}
+
+							if (cancelButton) {
+								cancelButton.detach('click');
+
+								cancelButton.on(
+									'click',
+									function() {
+										location.href = message.redirect;
+									}
+								);
+							}
+
+							var now = saveText.replace(/\[TIME\]/gim, (new Date()).toString());
+
+							if (saveStatus) {
+								saveStatus.set('className', 'save-status portlet-msg-success');
+								saveStatus.html(now);
+							}
+						}
 					}
 				}
 			);
@@ -165,14 +186,21 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	}
 
 	AUI().ready(
-		function() {
-			jQuery('#<portlet:namespace />cancelButton').click(
-				function() {
-					<portlet:namespace />clearSaveDraftIntervalId();
+		'io',
+		'json',
+		function(A) {
+			var cancelButton = A.one('#<portlet:namespace />cancelButton');
 
-					location.href = '<%= UnicodeFormatter.toString(redirect) %>';
-				}
-			);
+			if (cancelButton) {
+				cancelButton.on(
+					'click',
+					function() {
+						<portlet:namespace />clearSaveDraftIntervalId();
+
+						location.href = '<%= UnicodeFormatter.toString(redirect) %>';
+					}
+				);
+			}
 
 			<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
 				<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
