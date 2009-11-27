@@ -32,6 +32,8 @@ public interface WorkflowHandler {
 
 	public String getClassName();
 
+	public String getType();
+
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,
 			Object model)

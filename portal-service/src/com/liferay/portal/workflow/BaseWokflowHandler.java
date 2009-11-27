@@ -33,6 +33,12 @@ import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
  */
 public abstract class BaseWokflowHandler implements WorkflowHandler {
 
+	public static final String TYPE = "unknown";
+
+	public String getType() {
+		return TYPE;
+	}
+
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,
 			Object model)

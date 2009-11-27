@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -19,40 +20,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.journal.workflow;
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-import com.liferay.portal.workflow.BaseWokflowHandler;
-import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+.portlet-workflow-admin .unknown, .portlet-workflow-admin .content {
+	padding-left: 25px;
+}
 
-/**
- * <a href="JournalArticleWorkflowHandler.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Bruno Farache
- * @author Marcellus Tavares
- */
-public class JournalArticleWorkflowHandler extends BaseWokflowHandler {
+.portlet-workflow-admin .unknown {
+	background: url(<%= themeImagesPath %>/common/page.png);
+	background-repeat: no-repeat;
 
-	public static final String CLASS_NAME = JournalArticle.class.getName();
+}
 
-	public static final String TYPE = "content";
-
-	public String getClassName() {
-		return CLASS_NAME;
-	}
-
-	public String getType() {
-		return TYPE;
-	}
-
-	public JournalArticle updateStatus(
-			long companyId, long groupId, long userId, long classPK, int status)
-		throws Exception {
-
-		return JournalArticleLocalServiceUtil.updateStatus(
-			userId, classPK, status);
-	}
-
+.portlet-workflow-admin .content  {
+	background: url(<%= themeImagesPath %>/common/history.png);
+	background-repeat: no-repeat;
 }

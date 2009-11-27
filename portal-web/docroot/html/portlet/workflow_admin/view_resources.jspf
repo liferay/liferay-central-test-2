@@ -78,13 +78,11 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 					>
 
 						<%
-						buffer.append("<img align=\"left\" border=\"0\" src=\"");
-						buffer.append(themeDisplay.getPathThemeImages());
-						buffer.append(_getIconPath(workflowHandler.getClassName()));
-						buffer.append("\" style=\"margin-right: 5px\">");
-						buffer.append("<strong>");
+						buffer.append("<div class=\"");
+						buffer.append(workflowHandler.getType());
+						buffer.append("\">");
 						buffer.append(LanguageUtil.get(pageContext, "model.resource." + workflowHandler.getClassName()));
-						buffer.append("</strong>");
+						buffer.append("</div>");
 						%>
 
 					</liferay-ui:search-container-column-text>
@@ -170,41 +168,3 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 		</liferay-ui:search-container>
 	</c:when>
 </c:choose>
-
-<%!
-private String _getIconPath(String className) {
-	if (className.equals(BlogsEntry.class.getName())) {
-		return "/common/page.png";
-	}
-	else if (className.equals(BookmarksEntry.class.getName())) {
-		return "/ratings/star_hover.png";
-	}
-	else if (className.equals(DLFileEntry.class.getName())) {
-		return "/document_library/page.png";
-	}
-	else if (className.equals(IGImage.class.getName())) {
-		return "/file_system/small/bmp.png";
-	}
-	else if (className.equals(JournalArticle.class.getName())) {
-		return "/common/history.png";
-	}
-	else if (className.equals(Layout.class.getName())) {
-		return "/common/page.png";
-	}
-	else if (className.equals(MBMessage.class.getName())) {
-		return "/common/conversation.png";
-	}
-	else if (className.equals(Organization.class.getName())) {
-		return "/common/organization_icon.png";
-	}
-	else if (className.equals(User.class.getName())) {
-		return "/common/user_icon.png";
-	}
-	else if (className.equals(WikiPage.class.getName())) {
-		return "/common/pages.png";
-	}
-	else {
-		return "/common/page.png";
-	}
-}
-%>
