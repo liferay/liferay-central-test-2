@@ -54,7 +54,6 @@
 .portlet-asset-category-admin .vocabulary-edit-category .results-header {
 	background: #6F7D83;
 	color: #fff;
-	display: none;
 }
 
 .portlet-asset-category-admin .vocabulary-content td {
@@ -141,10 +140,6 @@
 	background: #D3DADD;
 }
 
-.portlet-asset-category-admin .vocabulary-properties {
-	width: 380px;
-}
-
 .portlet-asset-category-admin .ui-asset-categories .nowrap {
 	empty-cells: show;
 	overflow: hidden;
@@ -193,7 +188,6 @@
 }
 
 .portlet-asset-category-admin .vocabulary-edit-category .vocabulary-edit {
-	display: none;
 	padding: 5px 5px 10px 10px;
 }
 
@@ -210,7 +204,6 @@
 }
 
 .portlet-asset-category-admin .vocabulary-property-row {
-	display: none;
 	white-space: nowrap;
 }
 

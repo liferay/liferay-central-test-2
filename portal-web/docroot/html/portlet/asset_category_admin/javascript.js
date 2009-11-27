@@ -14,44 +14,40 @@ AUI().add(
 				initializer: function(portletId) {
 					var instance = this;
 
-					var childrenContainer = jQuery(instance._categoryContainerSelector);
+					var childrenContainer = A.one(instance._categoryContainerSelector);
 
 					instance.portletId = portletId;
-					instance._container = jQuery('.vocabulary-container');
+					instance._container = A.one('.vocabulary-container');
 
-					jQuery('.vocabulary-close').click(
+					A.all('.vocabulary-close').on(
+						'click',
 						function() {
 							instance._closeEditSection();
 						}
 					);
 
-					jQuery('.vocabulary-save-category-properties').click(
+					A.all('.vocabulary-save-category-properties').on(
+						'click',
 						function() {
 							instance._saveCategoryProperties();
 						}
 					);
 
-					instance._portletMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-messages" />');
-					instance._categoryMessageContainer = jQuery('<div class="lfr-message-response" id="vocabulary-category-messages" />');
+					instance._portletMessageContainer = A.Node.create('<div class="aui-helper-hidden lfr-message-response" id="vocabulary-messages" />');
+					instance._categoryMessageContainer = A.Node.create('<div class="aui-helper-hidden lfr-message-response" id="vocabulary-category-messages" />');
 
-					instance._portletMessageContainer.hide();
-					instance._categoryMessageContainer.hide();
+					instance._container.placeBefore(instance._portletMessageContainer);
+					childrenContainer.placeBefore(instance._categoryMessageContainer);
 
-					instance._container.before(instance._portletMessageContainer);
-					childrenContainer.before(instance._categoryMessageContainer);
+					var buttons = A.all('.vocabulary-buttons')
+					var toolbar = A.all('.vocabulary-toolbar');
 
-					var buttons = jQuery('.vocabulary-buttons')
-					var toolbar = jQuery('.vocabulary-toolbar');
-
-					var addCategoryLayer = jQuery('.add-category-layer');
-					var addVocabularyLayer = jQuery('.add-vocabulary-layer');
-
-					var addCategoryButton = jQuery('.add-category-button');
-					var addVocabularyButton = jQuery('.add-vocabulary-button');
+					var addCategoryLayer = A.one('.add-category-layer');
+					var addVocabularyLayer = A.one('.add-vocabulary-layer');
 
 					instance._toolbarCategoryPanel = new A.ContextPanel(
 						{
-							bodyContent: A.get('.add-category-layer'),
+							bodyContent: addCategoryLayer,
 							trigger: '.add-category-button',
 							align: {
 								points: ['tr', 'br']
@@ -62,7 +58,7 @@ AUI().add(
 
 					instance._vocabularyCategoryPanel = new A.ContextPanel(
 						{
-							bodyContent: A.get('.add-vocabulary-layer'),
+							bodyContent: addVocabularyLayer,
 							trigger: '.add-vocabulary-button',
 							align: {
 								points: ['tr', 'br']
@@ -71,24 +67,22 @@ AUI().add(
 					)
 					.render();
 
-					var selectButton = function(button) {
-						buttons.find('.button').removeClass('selected');
-						jQuery(button).addClass('selected');
-					};
-
-					toolbar.find('.add-vocabulary-button').click(
+					toolbar.all('.add-vocabulary-button').on(
+						'click',
 						function (event) {
 							instance._showToolBarVocabularySection();
 						}
 					);
 
-					toolbar.find('.add-category-button').click(
+					toolbar.all('.add-category-button').on(
+						'click',
 						function (event) {
 							instance._showToolBarCategorySection();
 						}
 					);
 
-					jQuery('.permissions-categories-button').click(
+					A.one('.permissions-categories-button').on(
+						'click',
 						function() {
 							var categoryName = instance._selectedCategoryName;
 							var categoryId = instance._selectedCategoryId;
@@ -107,7 +101,8 @@ AUI().add(
 						}
 					);
 
-					jQuery('.permissions-vocabulary-button').click(
+					A.one('.permissions-vocabulary-button').on(
+						'click',
 						function() {
 							var vocabularyName = instance._selectedVocabularyName;
 							var vocabularyId = instance._selectedVocabularyId;
@@ -126,53 +121,61 @@ AUI().add(
 						}
 					);
 
-					jQuery('#vocabulary-search-bar').change(
+					A.one('#vocabulary-select-search').on(
+						'change',
 						function(event) {
-							jQuery('#vocabulary-search-input').focus();
+							var searchInput = A.one('#vocabulary-search-input');
+
+							if (searchInput) {
+								searchInput.focus();
+							}
 
 							instance._reloadSearch();
 						}
 					);
 
 					var addCategory = function() {
-						var categoryLayer = jQuery('.add-category-layer');
-						var categoryName = categoryLayer.find('.vocabulary-category-name').val();
-						var vocabularyId = categoryLayer.find('.vocabulary-select-list option:selected').attr('value');
+						var categoryNameNode = addCategoryLayer.one('.vocabulary-category-name');
+						var vocabularySelectNode = addCategoryLayer.one('.vocabulary-select-list');
+
+						var categoryName = (categoryNameNode && categoryNameNode.val()) || '';
+						var vocabularyId = (vocabularySelectNode && vocabularySelectNode.val()) || '';
 
 						instance._hideAllMessages();
 						instance._addCategory(categoryName, vocabularyId);
 					};
 
 					var addVocabulary = function() {
-						var vocabularyLayer = jQuery('.add-vocabulary-layer');
-						var inputVocabularyName = vocabularyLayer.find('.vocabulary-name');
-						var newVocabularyName = inputVocabularyName.val();
+						var inputVocabularyNameNode = addVocabularyLayer.one('.vocabulary-name');
+						var newVocabularyName = (inputVocabularyNameNode && inputVocabularyNameNode.val()) || '';
 
 						instance._hideAllMessages();
 						instance._addVocabulary(newVocabularyName);
 					};
 
-					jQuery('input.category-save-button').click(addCategory);
-					jQuery('input.vocabulary-save-button').click(addVocabulary);
+					A.one('input.category-save-button').on('click', addCategory);
+					A.one('input.vocabulary-save-button').on('click', addVocabulary);
 
-					jQuery('.vocabulary-actions input').keyup(
+					A.all('.vocabulary-actions input').on(
+						'keyup',
 						function(event) {
 							if (event.keyCode == 13) {
-								var input = jQuery(this);
+								var input = event.currentTarget;
 
-								if (input.is('.vocabulary-category-name')) {
+								if (input.hasClass('vocabulary-category-name')) {
 									addCategory();
 								}
-								else if (input.is('.vocabulary-name')) {
+								else if (input.hasClass('vocabulary-name')) {
 									addVocabulary();
 								}
 
-								return false;
+								event.halt();
 							}
 						}
 					);
 
-					jQuery('input.vocabulary-delete-categories-button').click(
+					A.one('input.vocabulary-delete-categories-button').on(
+						'click',
 						function() {
 							if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-category'))) {
 								instance._deleteCategory(
@@ -196,7 +199,8 @@ AUI().add(
 						}
 					);
 
-					jQuery('input.vocabulary-delete-list-button').click(
+					A.one('input.vocabulary-delete-list-button').on(
+						'click',
 						function() {
 							if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
 								instance._deleteVocabulary(
@@ -219,13 +223,15 @@ AUI().add(
 						}
 					);
 
-					jQuery('.close-panel').click(
+					A.all('.close-panel').on(
+						'click',
 						function() {
 							instance._hideToolbarSections();
 						}
 					);
 
-					jQuery('.aui-overlay input:text').keyup(
+					A.all('.aui-overlay input[type=text]').on(
+						'keyup',
 						function(event) {
 							var ESC_KEY_CODE = 27;
 							var keyCode = event.keyCode;
@@ -352,7 +358,7 @@ AUI().add(
 					var instance = this;
 
 					var buffer = [];
-					var list = jQuery(instance._vocabularyContainerSelector);
+					var list = A.one(instance._vocabularyContainerSelector);
 
 					instance._showLoading('.vocabulary-categories, .vocabulary-list');
 
@@ -360,22 +366,22 @@ AUI().add(
 
 					instance._getVocabularies(
 						function(vocabularies) {
-							jQuery.each(
+							A.each(
 								vocabularies,
-								function(i) {
+								function(item, index, collection) {
 									buffer.push('<li');
 									buffer.push(' class="vocabulary-category results-row');
 
-									if (i == 0) {
+									if (index == 0) {
 										buffer.push(' selected ');
 									}
 
 									buffer.push('" data-vocabulary="');
-									buffer.push(this.name);
+									buffer.push(item.name);
 									buffer.push('" data-vocabularyId="');
-									buffer.push(this.vocabularyId);
+									buffer.push(item.vocabularyId);
 									buffer.push('"><span><a href="javascript:;">');
-									buffer.push(this.name);
+									buffer.push(item.name);
 									buffer.push('</a></span>');
 									buffer.push('</li>');
 								}
@@ -385,7 +391,7 @@ AUI().add(
 
 							list.html(buffer.join(''));
 
-							var firstVocabulary = jQuery(instance._vocabularyItemSelector + ':first');
+							var firstVocabulary = A.one(instance._vocabularyItemSelector);
 							var vocabularyName = instance._getVocabularyName(firstVocabulary);
 							var vocabularyId = instance._getVocabularyId(firstVocabulary);
 
@@ -393,11 +399,12 @@ AUI().add(
 							instance._selectedVocabularyId = vocabularyId;
 							instance._feedVocabularySelect(vocabularies, vocabularyId);
 
-							var listLinks = jQuery('li', list);
+							var listLinks = list.all('li');
 
-							listLinks.mousedown(
+							listLinks.on(
+								'mousedown',
 								function(event) {
-									var vocabularyId = instance._getVocabularyId(this);
+									var vocabularyId = instance._getVocabularyId(event.currentTarget);
 
 									instance._selectVocabulary(vocabularyId);
 								}
@@ -468,18 +475,20 @@ AUI().add(
 							}
 
 							var total = categoryProperties.length;
-							var totalRendered = jQuery('div.vocabulary-property-row').length;
+							var totalRendered = A.all('div.vocabulary-property-row').size();
 
 							if (totalRendered > total) {
 								return;
 							}
 
-							jQuery.each(
+							A.each(
 								categoryProperties,
-								function() {
-									var baseCategoryProperty = jQuery('div.vocabulary-property-row:last');
+								function(item, index, collection) {
+									var baseCategoryRows = A.all('div.vocabulary-property-row');
+									var lastIndex = baseCategoryRows.size() - 1;
+									var baseRow = baseCategoryRows.item(lastIndex);
 
-									instance._addCategoryProperty(baseCategoryProperty, this.key, this.value);
+									instance._addCategoryProperty(baseRow, item.key, item.value);
 								}
 							);
 						}
@@ -489,7 +498,11 @@ AUI().add(
 				_displayVocabularyCategories: function(vocabularyId, callback) {
 					var instance = this;
 
-					jQuery('#vocabulary-category-messages').hide();
+					var categoryMessages = A.one('#vocabulary-category-messages');
+
+					if (categoryMessages) {
+						categoryMessages.hide();
+					}
 
 					instance._getVocabularyCategories(
 						vocabularyId,
@@ -519,14 +532,14 @@ AUI().add(
 							name: categoryName,
 							vocabularyId: vocabularyId,
 							properties: [],
-							serviceContext: jQuery.toJSON(
+							serviceContext: A.JSON.stringify(
 								{
 									communityPermissions: communityPermission,
 									guestPermissions: guestPermission,
 									scopeGroupId: themeDisplay.getScopeGroupId()
 								}
 							),
-							serviceParameterTypes: jQuery.toJSON(serviceParameterTypes)
+							serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
 						},
 						function(message) {
 							var exception = message.exception;
@@ -577,19 +590,32 @@ AUI().add(
 				_addCategoryProperty: function(baseNode, key, value) {
 					var instance = this;
 
-					var baseCategoryProperty = jQuery('div.vocabulary-property-row:last');
-					var newCategoryProperty = baseCategoryProperty.clone();
+					var baseCategoryProperty = A.one('div.vocabulary-property-row');
 
-					newCategoryProperty.find('.category-property-key').val(key);
-					newCategoryProperty.find('.category-property-value').val(value);
-					newCategoryProperty.insertAfter(baseNode);
-					newCategoryProperty.show();
+					if (baseCategoryProperty) {
+						var newCategoryProperty = baseCategoryProperty.cloneNode(true);
 
-					if (!key && !value) {
-						newCategoryProperty.find('input:first').addClass('lfr-auto-focus');
+						var propertyKeyNode = newCategoryProperty.one('.category-property-key');
+						var propertyValueNode = newCategoryProperty.one('.category-property-value');
+
+						if (propertyKeyNode) {
+							propertyKeyNode.val(key);
+						}
+
+						if (propertyValueNode) {
+							propertyValueNode.val(value);
+						}
+
+						baseNode.placeAfter(newCategoryProperty)
+
+						newCategoryProperty.show();
+
+						if (!key && !value) {
+							newCategoryProperty.one('input').focus();
+						}
+
+						instance._attachCategoryPropertyIconEvents(newCategoryProperty);
 					}
-
-					instance._attachCategoryPropertyIconEvents(newCategoryProperty);
 				},
 
 				_addVocabulary: function(vocabularyName, callback) {
@@ -601,7 +627,7 @@ AUI().add(
 					Liferay.Service.Asset.AssetVocabulary.addVocabulary(
 						{
 							name: vocabularyName,
-							serviceContext: jQuery.toJSON(
+							serviceContext: A.JSON.stringify(
 								{
 									communityPermissions: communityPermission,
 									guestPermissions: guestPermission,
@@ -621,8 +647,10 @@ AUI().add(
 
 										instance._displayVocabularyCategories(instance._selectedVocabularyId);
 
-										if (vocabulary.length) {
-											jQuery(instance._vocabularyContainerSelector).scrollTop(vocabulary.offset().top);
+										if (vocabulary) {
+											var scrollTop = vocabulary.get('region').top;
+
+											A.one(instance._vocabularyContainerSelector).set('scrollTop', scrollTop);
 										}
 									}
 								);
@@ -660,28 +688,37 @@ AUI().add(
 				_alternateRows: function() {
 					var instance = this;
 
-					var categoriesScope = jQuery(instance._categoryContainerSelector);
+					var categoriesScope = A.all(instance._categoryContainerSelector);
 
-					jQuery('li', categoriesScope).removeClass('alt');
-					jQuery('li:odd', categoriesScope).addClass('alt');
+					var allRows = categoriesScope.all('li');
+
+					allRows.removeClass('alt');
+					allRows.odd().addClass('alt');
 				},
 
 				_attachCategoryPropertyIconEvents: function(categoryProperty) {
 					var instance = this;
 
-					var row = jQuery(categoryProperty);
+					var addProperty = categoryProperty.one('.add-category-property');
+					var deleteProperty = categoryProperty.one('.delete-category-property');
 
-					row.find('.add-category-property').click(
-						function() {
-							instance._addCategoryProperty(categoryProperty, '', '');
-						}
-					);
+					if (addProperty) {
+						addProperty.on(
+							'click',
+							function() {
+								instance._addCategoryProperty(categoryProperty, '', '');
+							}
+						);
+					}
 
-					row.find('.delete-category-property').click(
-						function() {
-							instance._removeCategoryProperty(categoryProperty);
-						}
-					);
+					if (deleteProperty) {
+						deleteProperty.on(
+							'click',
+							function() {
+								instance._removeCategoryProperty(categoryProperty);
+							}
+						);
+					}
 				},
 
 				_buildCategoryTreeview: function(categories, parentCategoryId) {
@@ -689,23 +726,23 @@ AUI().add(
 
 					var children = instance._filterCategory(categories, parentCategoryId);
 
-					jQuery.each(
+					A.each(
 						children,
-						function(i) {
-							var categoryId = this.categoryId;
+						function(item, index, collection) {
+							var categoryId = item.categoryId;
 							var hasChild = instance._filterCategory(categories, categoryId).length;
 
 							var node = new A.TreeNode(
 								{
 									alwaysShowHitArea: false,
-									id: 'categoryNode' + this.categoryId,
-									label: this.name,
+									id: 'categoryNode' + item.categoryId,
+									label: item.name,
 									leaf: false,
 									on: {
 										select: function(event) {
 											var nodeId = event.target.get('id');
 											var categoryId = nodeId.replace('categoryNode', '');
-											var editContainer = jQuery('.vocabulary-edit');
+											var editContainer = A.one('.vocabulary-edit');
 
 											instance._selectCategory(categoryId);
 											instance._showSection(editContainer);
@@ -733,14 +770,18 @@ AUI().add(
 
 					var buffer = [];
 
-					jQuery('.vocabulary-property-row:visible').each(
-						function(i, o) {
-							var categoryPropertyRow = jQuery(this);
-							var key = categoryPropertyRow.find('input.category-property-key').val();
-							var value = categoryPropertyRow.find('input.category-property-value').val();
-							var rowValue = [key, ':', value, ','].join('');
+					A.all('.vocabulary-property-row').each(
+						function(item, index, collection) {
+							if (!item.hasClass('aui-helper-hidden')) {
+								var keyNode = item.one('input.category-property-key');
+								var valueNode = item.one('input.category-property-value');
 
-							buffer.push(rowValue);
+								if (keyNode && valueNode) {
+									var rowValue = [keyNode.val(), ':', valueNode.val(), ','].join('');
+
+									buffer.push(rowValue);
+								}
+							}
 						}
 					);
 
@@ -752,7 +793,7 @@ AUI().add(
 
 					instance._hideSection('.vocabulary-edit');
 
-					jQuery(instance._categoryContainerCellsSelector).width('auto');
+					A.all(instance._categoryContainerCellsSelector).setStyle('width', 'auto');
 				},
 
 				_deleteCategory: function(categoryId, callback) {
@@ -780,33 +821,36 @@ AUI().add(
 				_feedVocabularySelect: function(vocabularies, defaultValue) {
 					var instance = this;
 
-					var select = jQuery('select.vocabulary-select-list');
-					var buffer = [];
+					var select = A.one('select.vocabulary-select-list');
 
-					jQuery.each(
-						vocabularies,
-						function(i) {
-							var selected = (this.vocabularyId == defaultValue);
+					if (select) {
+						var buffer = [];
 
-							buffer.push('<option');
-							buffer.push(selected ? ' selected ' : '');
-							buffer.push(' value="');
-							buffer.push(this.vocabularyId);
-							buffer.push('">');
-							buffer.push(this.name);
-							buffer.push('</option>');
-						}
-					);
+						A.each(
+							vocabularies,
+							function(item, index, collection) {
+								var selected = (item.vocabularyId == defaultValue);
 
-					select.html(buffer.join(''));
+								buffer.push('<option');
+								buffer.push(selected ? ' selected ' : '');
+								buffer.push(' value="');
+								buffer.push(item.vocabularyId);
+								buffer.push('">');
+								buffer.push(item.name);
+								buffer.push('</option>');
+							}
+						);
+
+						select.empty().append(buffer.join(''));
+					}
 				},
 
 				_filterCategory: function(categories, parentCategoryId) {
 					var instance = this;
 
-					return jQuery.grep(
+					return A.Array.filter(
 						categories,
-						function(item, i) {
+						function(item, index, collection) {
 							return (item.parentCategoryId == parentCategoryId);
 						}
 					);
@@ -842,13 +886,17 @@ AUI().add(
 				},
 
 				_getPermissionsEnabled: function(vocabularyType, type) {
+					var instance = this;
+
 					var buffer = [];
-					var permissionsActions = jQuery('.'+vocabularyType+'-permissions-actions');
-					var permissions = permissionsActions.find('[name$='+type+'Permissions]:checked');
+					var permissionsActions = A.one('.' + vocabularyType + '-permissions-actions');
+					var permissions = permissionsActions.all('[name$='+type+'Permissions]');
 
 					permissions.each(
-						function(i, n) {
-							buffer.push(this.value);
+						function(item, index, collection) {
+							if (item.get('checked')) {
+								buffer.push(item.val());
+							}
 						}
 					);
 
@@ -880,7 +928,7 @@ AUI().add(
 				_getVocabulary: function(vocabularyId) {
 					var instance = this;
 
-					return jQuery('li[data-vocabularyId=' + vocabularyId + ']')
+					return A.one('li[data-vocabularyId="' + vocabularyId + '"]');
 				},
 
 				_getVocabularyCategories: function(vocabularyId, callback) {
@@ -899,31 +947,39 @@ AUI().add(
 				_getVocabularyId: function(exp) {
 					var instance = this;
 
-					return jQuery(exp).attr('data-vocabularyId');
+					return A.one(exp).attr('data-vocabularyId');
 				},
 
 				_getVocabularyName: function(exp) {
 					var instance = this;
 
-					return jQuery(exp).attr('data-vocabulary');
+					return A.one(exp).attr('data-vocabulary');
 				},
 
 				_hideAllMessages: function() {
 					var instance = this;
 
-					instance._container.find('.lfr-message-response').hide();
+					instance._container.one('.lfr-message-response').hide();
 				},
 
 				_hideLoading: function(exp) {
 					var instance = this;
 
-					instance._container.find('div.loading-animation').remove();
+					instance._container.one('div.loading-animation').remove();
 				},
 
 				_hideSection: function(exp) {
 					var instance = this;
 
-					jQuery(exp).parent().removeClass('vocabulary-editing-tag');
+					var node = A.one(exp);
+
+					if (node) {
+						var parentNode = node.get('parentNode');
+
+						if (parentNode) {
+							parentNode.hide();
+						}
+					}
 				},
 
 				_hideToolbarSections: function() {
@@ -962,12 +1018,14 @@ AUI().add(
 						input: '#vocabulary-search-input'
 					};
 
-					var selected = jQuery('#vocabulary-select-search').val();
-					var input = jQuery('#vocabulary-search-input');
-					var vocabularyList = jQuery(instance._vocabularyItemSelector);
+					var vocabularySelectSearchNode = A.one('#vocabulary-select-search');
+					var selected = (vocabularySelectSearchNode && vocabularySelectSearchNode.val()) || '';
+
+					var input = A.one('#vocabulary-search-input');
+					var vocabularyList = A.all(instance._vocabularyItemSelector);
 
 					if (/vocabularies/.test(selected)) {
-						options = jQuery.extend(
+						A.mix(
 							options,
 							{
 								data: function(node) {
@@ -978,7 +1036,7 @@ AUI().add(
 						);
 					}
 					else {
-						options = jQuery.extend(
+						A.mix(
 							options,
 							{
 								after: {
@@ -987,14 +1045,14 @@ AUI().add(
 
 										A.each(
 											results,
-											function(search) {
-												var nodeWidget = A.Widget.getByNode(search.node);
+											function(item, index, collection) {
+												var nodeWidget = A.Widget.getByNode(item.node);
 												var nodeVisible = nodeWidget.get('boundingBox').hasClass('aui-helper-hidden');
 
 												if (!nodeVisible) {
 													nodeWidget.eachParent(
-														function(p) {
-															p.get('boundingBox').show();
+														function(parent) {
+															parent.get('boundingBox').show();
 														}
 													);
 												}
@@ -1020,7 +1078,7 @@ AUI().add(
 				_removeCategoryProperty: function(categoryProperty) {
 					var instance = this;
 
-					if (jQuery('div.vocabulary-property-row').length > 2) {
+					if (A.all('div.vocabulary-property-row').size() > 2) {
 						categoryProperty.remove();
 					}
 				},
@@ -1028,7 +1086,7 @@ AUI().add(
 				_resetActionValues: function() {
 					var instance = this;
 
-					jQuery('.vocabulary-actions input:text').val('');
+					A.all('.vocabulary-actions input[type=text]').val('');
 
 					instance._vocabularyCategoryPanel.hide();
 				},
@@ -1037,7 +1095,8 @@ AUI().add(
 					var instance = this;
 
 					var categoryId = instance._selectedCategoryId;
-					var categoryName = jQuery('input.category-name').val() || instance._selectedCategoryName;
+					var categoryNameNode = A.one('input.category-name');
+					var categoryName = (categoryNameNode && categoryNameNode.val()) || instance._selectedCategoryName;
 					var parentCategoryId = instance._selectedParentCategoryId;
 					var categoryProperties = instance._buildCategoryProperties();
 					var vocabularyId = instance._selectedVocabularyId;
@@ -1049,8 +1108,11 @@ AUI().add(
 				_selectCurrentVocabulary: function(value) {
 					var instance = this;
 
-					var option = jQuery('select.vocabulary-select-list option[value="' + value + '"]');
-					option.attr('selected', 'selected');
+					var option = A.one('select.vocabulary-select-list option[value="' + value + '"]');
+
+					if (option) {
+						option.set('selected', true);
+					}
 				},
 
 				_selectCategory: function(categoryId) {
@@ -1069,13 +1131,24 @@ AUI().add(
 						return category;
 					}
 
-					var properties = jQuery('div.vocabulary-property-row:gt(0)');
-					var editContainer = jQuery('.vocabulary-edit');
-					var categoryNameField = editContainer.find('input.category-name');
+					var properties = A.all('div.vocabulary-property-row');
+					var editContainer = A.one('.vocabulary-edit');
+					var categoryNameField = editContainer.one('input.category-name');
 
-					properties.remove();
+					if (properties.size() > 1) {
+						properties.each(
+							function(item, index, collection) {
+								if (index > 0) {
+									item.remove();
+								}
+							}
+						);
+					}
 
-					categoryNameField.val(categoryName);
+					if (categoryNameField) {
+						categoryNameField.val(categoryName);
+					}
+
 					instance._displayCategoryProperties(categoryId);
 
 					instance._selectedCategory = category;
@@ -1087,72 +1160,77 @@ AUI().add(
 					var instance = this;
 
 					var vocabulary = instance._getVocabulary(vocabularyId);
-					var vocabularyName = instance._getVocabularyName(vocabulary);
 
-					if (vocabulary.is('.selected')) {
-						return vocabulary;
+					if (vocabulary) {
+						var vocabularyName = instance._getVocabularyName(vocabulary);
+
+						if (vocabulary.hasClass('selected')) {
+							return vocabulary;
+						}
+
+						instance._hideAllMessages();
+						instance._selectedVocabularyName = vocabularyName;
+						instance._selectedVocabularyId = vocabularyId;
+						instance._selectCurrentVocabulary(vocabularyId);
+
+						instance._unselectAllVocabularies();
+						instance._closeEditSection();
+
+						vocabulary.addClass('selected');
+						instance._displayVocabularyCategories(instance._selectedVocabularyId);
 					}
-
-					instance._hideAllMessages();
-					instance._selectedVocabularyName = vocabularyName;
-					instance._selectedVocabularyId = vocabularyId;
-					instance._selectCurrentVocabulary(vocabularyId);
-
-					instance._unselectAllVocabularies();
-					instance._closeEditSection();
-
-					vocabulary.addClass('selected');
-					instance._displayVocabularyCategories(instance._selectedVocabularyId);
 
 					return vocabulary;
 				},
 
-				_sendMessage: function(type, message, output, noAutoHide) {
+				_sendMessage: function(type, message) {
 					var instance = this;
 
-					var output = jQuery(output || '#vocabulary-messages');
+					var output = instance._portletMessageContainer;
 					var typeClass = 'portlet-msg-' + type;
 
 					clearTimeout(instance._messageTimeout);
 
 					output.removeClass('portlet-msg-error portlet-msg-success');
-					output.addClass(typeClass).html(message).fadeIn('fast');
+					output.addClass(typeClass);
+					output.html(message);
+					output.show();
 
-					if (!noAutoHide) {
-						instance._messageTimeout = setTimeout(
-							function() {
-								output.fadeOut('slow',
-									function(event) {
-										instance._toolbarCategoryPanel.refreshAlign();
-										instance._vocabularyCategoryPanel.refreshAlign();
-									}
-								);
-							}, 7000);
-					}
+					instance._messageTimeout = setTimeout(
+						function() {
+							output.hide();
+
+							instance._toolbarCategoryPanel.refreshAlign();
+							instance._vocabularyCategoryPanel.refreshAlign();
+						},
+					7000);
 				},
 
 				_showLoading: function(container) {
 					var instance = this;
 
-					jQuery(container).html('<div class="loading-animation" />');
+					A.all(container).html('<div class="loading-animation" />');
 				},
 
 				_showSection: function(exp) {
 					var instance = this;
 
-					var element = jQuery(exp);
+					var element = A.one(exp);
 
-					if (!element.is(':visible')) {
-						element.parent().addClass('vocabulary-editing-tag');
-						element.find('input:first').focus();
-						jQuery(instance._categoryContainerCellsSelector).width('33%');
+					if (element) {
+						var parentNode = element.get('parentNode');
+
+						if (parentNode) {
+							parentNode.show();
+							element.one('input').focus();
+
+							A.all(instance._categoryContainerCellsSelector).setStyle('width', '33%');
+						}
 					}
 				},
 
 				_showToolBarCategorySection: function() {
 					var instance = this;
-
-					var toolbar = jQuery('.vocabulary-toolbar');
 
 					var categoryPanel = instance._toolbarCategoryPanel;
 
@@ -1186,7 +1264,7 @@ AUI().add(
 				_unselectAllVocabularies: function() {
 					var instance = this;
 
-					jQuery(instance._vocabularyItemSelector).removeClass('selected');
+					A.all(instance._vocabularyItemSelector).removeClass('selected');
 				},
 
 				_updateCategory: function(categoryId, vocabularyId, parentCategoryId, name, categoryProperties, callback) {
@@ -1267,6 +1345,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['context-panel', 'dd', 'editable', 'tree-view', 'live-search']
+		requires: ['context-panel', 'dd', 'editable', 'json', 'liferay-portlet-url', 'live-search', 'tree-view']
 	}
 );

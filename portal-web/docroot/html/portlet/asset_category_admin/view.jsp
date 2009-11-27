@@ -135,7 +135,7 @@
 
 		<div class="vocabulary-categories"></div>
 	</td>
-	<td class="vocabulary-edit-category">
+	<td class="aui-helper-hidden vocabulary-edit-category">
 		<div class="results-header"><liferay-ui:message key="edit-category" /></div>
 
 		<div class="vocabulary-edit">
@@ -158,7 +158,7 @@
 
 				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category" />
 
-				<div class="vocabulary-property-row">
+				<div class="aui-helper-hidden vocabulary-property-row">
 					<input class="category-property-key" type="text" />
 
 					<input class="category-property-value" type="text" />
