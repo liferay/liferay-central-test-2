@@ -29,12 +29,10 @@
 }
 
 .portlet-workflow-admin .unknown {
-	background: url(<%= themeImagesPath %>/common/page.png);
-	background-repeat: no-repeat;
+	background: url(<%= themeImagesPath %>/common/page.png) no-repeat;
 
 }
 
 .portlet-workflow-admin .content  {
-	background: url(<%= themeImagesPath %>/common/history.png);
-	background-repeat: no-repeat;
+	background: url(<%= themeImagesPath %>/common/history.png) no-repeat;
 }
