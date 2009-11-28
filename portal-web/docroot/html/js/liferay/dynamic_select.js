@@ -21,36 +21,37 @@ AUI().add(
 
 			instance.array = array;
 
-			jQuery.each(
-				array,
-				function(i, options) {
-					var id = options.select;
-					var select = jQuery('#' + id);
-					var selectData = options.selectData;
+			A.each(
+				function(item, index, collection) {
+					var id = item.select;
+					var select = A.one('#' + id);
+					var selectData = item.selectData;
 
-					select.attr('data-componentType', 'dynamic_select');
+					if (select) {
+						select.attr('data-componentType', 'dynamic_select');
 
-					var prevSelectVal = null;
+						var prevSelectVal = null;
 
-					if (i > 0) {
-						prevSelectVal = array[i - 1].selectVal;
-					}
-
-					selectData(
-						function(list) {
-							instance._updateSelect(i, list);
-						},
-						prevSelectVal
-					);
-
-					select.attr('name', id);
-
-					select.bind(
-						'change',
-						function() {
-							instance._callSelectData(i);
+						if (index > 0) {
+							prevSelectVal = array[index - 1].selectVal;
 						}
-					);
+
+						selectData(
+							function(list) {
+								instance._updateSelect(index, list);
+							},
+							prevSelectVal
+						);
+
+						select.attr('name', id);
+
+						select.on(
+							'change',
+							function() {
+								instance._callSelectData(index);
+							}
+						);
+					}
 				}
 			);
 		};
@@ -62,14 +63,14 @@ AUI().add(
 				var array = instance.array;
 
 				if ((i + 1) < array.length) {
-					var curSelect = jQuery('#' + array[i].select);
+					var curSelect = A.one('#' + array[i].select);
 					var nextSelectData = array[i + 1].selectData;
 
 					nextSelectData(
 						function(list) {
 							instance._updateSelect(i + 1, list);
 						},
-						curSelect.val()
+						curSelect && curSelect.val()
 					);
 				}
 			},
@@ -79,7 +80,7 @@ AUI().add(
 
 				var options = instance.array[i];
 
-				var select = jQuery('#' + options.select);
+				var select = A.one('#' + options.select);
 				var selectId = options.selectId;
 				var selectDesc = options.selectDesc;
 				var selectVal = options.selectVal;
@@ -91,11 +92,11 @@ AUI().add(
 					selectOptions.push('<option value="0"></option>');
 				}
 
-				jQuery.each(
+				A.each(
 					list,
-					function(i, obj) {
-						var key = obj[selectId];
-						var value = obj[selectDesc];
+					function(item, index, collection) {
+						var key = item[selectId];
+						var value = item[selectDesc];
 
 						selectOptions.push('<option value="' + key + '">' + value + '</option>');
 					}
@@ -103,11 +104,18 @@ AUI().add(
 
 				selectOptions = selectOptions.join('');
 
-				select.html(selectOptions);
-				select.find('option[value=' + selectVal + ']').attr('selected', 'selected');
+				if (select) {
+					select.empty().append(selectOptions);
 
-				if (Liferay.Browser.isIe()) {
-					select.css('width', 'auto');
+					var currentOption = select.one('option[value="' + selectVal + '"]');
+
+					if (currentOption) {
+						currentOption.set('selected', 'selected');
+					}
+
+					if (Liferay.Browser.isIe()) {
+						select.setStyle('width', 'auto');
+					}
 				}
 			}
 		};
