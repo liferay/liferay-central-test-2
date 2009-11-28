@@ -26,8 +26,6 @@ AUI().add(
 
 				instance._cookieKey = 'LFR_SESSION_STATE_' + themeDisplay.getUserId();
 
-				instance.banner = new jQuery;
-
 				var urlBase = themeDisplay.getPathMain() + '/portal/';
 
 				instance._sessionUrls = {
@@ -102,15 +100,17 @@ AUI().add(
 
 				document.title = instance._originalTitle;
 
-				jQuery.ajax(
+				A.io(
+					instance._sessionUrls.expire,
 					{
-						url: instance._sessionUrls.expire,
-						success: function() {
-							if (instance.redirectOnExpire) {
-								location.href = themeDisplay.getURLHome();
-							}
+						on: {
+							success: function() {
+								if (instance.redirectOnExpire) {
+									location.href = themeDisplay.getURLHome();
+								}
 
-							Liferay.fire('sessionExpired');
+								Liferay.fire('sessionExpired');
+							}
 						}
 					}
 				);
@@ -125,11 +125,7 @@ AUI().add(
 					clearInterval(instance._countdownTimer);
 				}
 
-				jQuery.ajax(
-					{
-						url: instance._sessionUrls.extend
-					}
-				);
+				A.io(instance._sessionUrls.extend);
 
 				document.title = instance._originalTitle;
 
@@ -195,9 +191,11 @@ AUI().add(
 				var instance = this;
 
 				var banner = instance.banner;
-				if (banner.length) {
-					instance._counterText = banner.find('.countdown-timer');
+
+				if (banner) {
+					instance._counterText = banner.one('.countdown-timer');
 					instance._originalTitle = document.title;
+
 					var interval = 1000;
 
 					instance._counterText.text(instance._setTime());
@@ -222,7 +220,7 @@ AUI().add(
 								}
 							}
 						},
-					interval
+						interval
 					);
 				}
 			},
@@ -236,7 +234,7 @@ AUI().add(
 					}
 				}
 				else {
-					num = jQuery.map(num, instance._formatNumber);
+					num = A.Array.map(num, instance._formatNumber);
 				}
 				return num;
 			},
@@ -280,6 +278,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['cookie', 'liferay-notice', 'substitute']
+		requires: ['collection', 'cookie', 'liferay-notice', 'io', 'substitute']
 	}
 );
