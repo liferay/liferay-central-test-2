@@ -75,12 +75,12 @@ function UploadProgress_updateIFrame(height) {
 
 	height += 40;
 
-	jQuery(uploadPollerIFrame).height(height);
+	var uploadIframe = AUI().one(uploadPollerIFrame).setStyle('height', height + 'px');
 
-	var iframeBody = jQuery(uploadPollerIFrame.contentWindow.document.body);
+	var iframeBody = AUI().one(uploadPollerIFrame.contentWindow.document.body);
 
-	iframeBody.addClass('portal-iframe').removeClass('portal-popup')
-	iframeBody.height(height);
+	iframeBody.replaceClass('portal-popup', 'portal-iframe');
+	iframeBody.setStyle('height', height + 'px');
 }
 
 function UploadProgress_updateProgress() {
