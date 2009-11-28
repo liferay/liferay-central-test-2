@@ -26,19 +26,20 @@ AUI().add(
 			instance._useCloseButton = true;
 			instance._onClose = options.onClose;
 			instance._closeText = options.closeText;
-			instance._body = jQuery('body');
+			instance._body = A.getBody();
 
 			instance._useToggleButton = false;
 			instance._hideText = '';
 			instance._showText = '';
 
 			if (options.toggleText !== false) {
-				instance.toggleText = jQuery.extend(
+				instance.toggleText = A.mix(
+					options.toggleText,
 					{
 						hide: null,
 						show: null
-					},
-				options.toggleText);
+					}
+				);
 
 				instance._useToggleButton = true;
 			}
@@ -62,24 +63,25 @@ AUI().add(
 			setClosing: function() {
 				var instance = this;
 
-				var staticAlerts = jQuery('.popup-alert-notice, .popup-alert-warning').not('[dynamic=true]');
+				var alerts = A.all('.popup-alert-notice, .popup-alert-warning');
 
-				if (staticAlerts.length) {
+				if (alerts.size()) {
 					instance._useCloseButton = true;
-					instance._addCloseButton(staticAlerts);
 
 					if (!instance._body) {
-						instance._body = jQuery('body');
+						instance._body = A.getBody();
 					}
 
-					instance._body.addClass('has-alerts')
+					instance._body.addClass('has-alerts');
+
+					alerts.each(instance._addCloseButton, instance);
 				}
 			},
 
 			_createHTML: function() {
 				var instance = this;
 
-				var notice = jQuery('<div class="' + instance._noticeClass + '" dynamic="true"><div class="popup-alert-content"></div></div>');
+				var notice = A.Node.create('<div class="' + instance._noticeClass + '" dynamic="true"><div class="popup-alert-content"></div></div>');
 
 				notice.html(instance._content);
 
@@ -108,16 +110,14 @@ AUI().add(
 
 					notice.append(html);
 
-					var closeButton = notice.find('.popup-alert-close');
-					closeButton.click(
+					var closeButton = notice.one('.popup-alert-close');
+
+					closeButton.on(
+						'click',
 						function() {
-							notice.slideUp(
-								'normal',
-								function() {
-									notice.remove();
-									instance._body.removeClass('has-alerts');
-								}
-							);
+							notice.hide();
+							notice.remove();
+							instance._body.removeClass('has-alerts');
 
 							if (instance._onClose) {
 								instance._onClose();
@@ -134,18 +134,31 @@ AUI().add(
 					instance._hideText = instance._toggleText.hide || Liferay.Language.get('hide');
 					instance._showText = instance._toggleText.show || Liferay.Language.get('show');
 
-					var toggleButton = jQuery('<a class="toggle-button" href="javascript:;"><span>' + instance._hideText + '</span></a>');
-					var toggleSpan = toggleButton.find('span');
+					var toggleButton = A.Node.create('<a class="toggle-button" href="javascript:;"><span>' + instance._hideText + '</span></a>');
+					var toggleSpan = toggleButton.one('span');
 					var height = 0;
 
-					toggleButton.toggle(
-						function() {
-							notice.slideUp();
-							toggleSpan.text(instance._showText);
-						},
-						function() {
-							notice.slideDown();
-							toggleSpan.text(instance._hideText);
+					var visible = 0;
+
+					var showText = instance._showText;
+					var hideText = instance._hideText;
+
+					toggleButton.on(
+						'click',
+						function(event) {
+							var text = showText;
+
+							if (visible == 0) {
+								text = hideText;
+
+								visible = 1;
+							}
+							else {
+								visible = 0;
+							}
+
+							notice.toggle();
+							toggleSpan.text(text);
 						}
 					);
 
