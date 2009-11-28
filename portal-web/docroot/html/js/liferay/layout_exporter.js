@@ -7,14 +7,30 @@ Liferay.LayoutExporter = {
 		var publish = options.publish;
 
 		if (obj && obj.checked) {
-			jQuery(pane).hide();
+			pane = AUI().one(pane);
+
+			if (pane) {
+				pane.hide();
+			}
 
 			if (!publish) {
-				jQuery('#publishBtn').show();
-				jQuery('#selectBtn').hide();
+				var publishBtn = AUI().one('#publishBtn');
+				var selectBtn = AUI().one('#selectBtn');
+
+				if (publishBtn) {
+					publishBtn.show();
+				}
+
+				if (selectBtn) {
+					selectBtn.hide();
+				}
 			}
 			else {
-				jQuery('#changeBtn').hide();
+				var changeBtn = AUI().one('#changeBtn');
+
+				if (changeBtn) {
+					changeBtn.hide();
+				}
 			}
 		}
 	},
@@ -22,18 +38,21 @@ Liferay.LayoutExporter = {
 	details: function(options) {
 		options = options || {};
 
-		var toggle = options.toggle;
-		var detail = options.detail;
+		var detail = AUI().one(options.detail);
+		var img = AUI().one(toggle);
 
-		var img = jQuery(toggle)[0];
+		if (detail && img) {
+			var icon = Liferay.LayoutExporter.icons.plus;
 
-		if (jQuery(detail).css('display') == 'none') {
-			jQuery(detail).slideDown('normal');
-			img.src = Liferay.LayoutExporter.icons.minus;
-		}
-		else {
-			jQuery(detail).slideUp('normal');
-			img.src = Liferay.LayoutExporter.icons.plus;
+			if (detail.hasClass('aui-helper-hidden')) {
+				detail.show();
+				icon = Liferay.LayoutExporter.icons.minus;
+			}
+			else {
+				detail.hide();
+			}
+
+			img.attr('src', icon);
 		}
 	},
 
@@ -145,14 +164,30 @@ Liferay.LayoutExporter = {
 		var publish = options.publish;
 
 		if (obj && obj.checked) {
-			jQuery(pane).show();
+			pane = AUI().one(pane);
+
+			if (pane) {
+				pane.show();
+			}
 
 			if (!publish) {
-				jQuery('#publishBtn').hide();
-				jQuery('#selectBtn').show();
+				var publishBtn = AUI().one('#publishBtn');
+				var selectBtn = AUI().one('#selectBtn');
+
+				if (publishBtn) {
+					publishBtn.hide();
+				}
+
+				if (selectBtn) {
+					selectBtn.show();
+				}
 			}
 			else {
-				jQuery('#changeBtn').show();
+				var changeBtn = AUI().one('#changeBtn');
+
+				if (changeBtn) {
+					changeBtn.show();
+				}
 			}
 		}
 	}

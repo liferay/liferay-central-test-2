@@ -108,7 +108,7 @@
 	</c:choose>
 </aui:fieldset>
 
-<div id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto; padding: 5px;">
+<div class="<%= (results.size() == 0) ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; height: 380px; overflow: auto; padding: 5px;">
 	<c:choose>
 		<c:when test="<%= !publish %>">
 			<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
