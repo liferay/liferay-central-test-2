@@ -2,21 +2,27 @@ Liferay.Portal = {};
 
 Liferay.Portal.Tabs = {
 	show: function(namespace, names, id) {
-		var tab = jQuery('#' + namespace + id + 'TabsId');
-		var panel = jQuery('#' + namespace + id + 'TabsSection');
+		var tab = AUI().one('#' + namespace + id + 'TabsId');
+		var panel = AUI().one('#' + namespace + id + 'TabsSection');
 
-		tab.siblings().removeClass('aui-selected');
-		tab.addClass('aui-selected');
+		if (tab) {
+			tab.radioClass('aui-selected');
+		}
 
-		panel.show();
-		panel.removeClass('aui-helper-hidden');
+		if (panel) {
+			panel.show();
+		}
 
 		var index = names.indexOf(id);
+
 		names.splice(index, 1);
 
 		for (var i = 0; i < names.length; i++) {
-			el = jQuery('#' + namespace + names[i] + 'TabsSection');
-			el.addClass('aui-helper-hidden');
+			el = AUI().one('#' + namespace + names[i] + 'TabsSection');
+
+			if (el) {
+				el.hide();
+			}
 		}
 	}
 };
