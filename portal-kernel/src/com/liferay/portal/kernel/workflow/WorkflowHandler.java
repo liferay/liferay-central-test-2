@@ -35,6 +35,10 @@ import javax.portlet.PortletURL;
  */
 public interface WorkflowHandler {
 
+	public static final String TYPE_CONTENT = "content";
+
+	public static final String TYPE_UNKNOWN = "unknown";
+
 	public String getClassName();
 
 	public String getTitle(long classPK) throws Exception;

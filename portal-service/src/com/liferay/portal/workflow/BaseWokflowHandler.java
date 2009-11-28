@@ -40,8 +40,6 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseWokflowHandler implements WorkflowHandler {
 
-	public static final String TYPE = "unknown";
-
 	public String getTitle(long classPK) throws Exception {
 		AssetRenderer renderer = getAssetRenderer(classPK);
 
@@ -53,7 +51,7 @@ public abstract class BaseWokflowHandler implements WorkflowHandler {
 	}
 
 	public String getType() {
-		return TYPE;
+		return TYPE_UNKNOWN;
 	}
 
 	public PortletURL getURLEdit(

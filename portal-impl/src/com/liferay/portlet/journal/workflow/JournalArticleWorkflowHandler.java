@@ -37,14 +37,12 @@ public class JournalArticleWorkflowHandler extends BaseWokflowHandler {
 
 	public static final String CLASS_NAME = JournalArticle.class.getName();
 
-	public static final String TYPE = "content";
-
 	public String getClassName() {
 		return CLASS_NAME;
 	}
 
 	public String getType() {
-		return TYPE;
+		return TYPE_CONTENT;
 	}
 
 	public JournalArticle updateStatus(
