@@ -7,84 +7,72 @@ AUI().add(
 			if (!arguments.callee._hasRun) {
 				arguments.callee._hasRun = true;
 
-				instance._window = jQuery(window);
+				instance._body = A.getBody();
+				instance._document = A.getDoc();
+				instance._window = A.getWin();
+
 				instance._active = {
 					menu: null,
 					trigger: null
 				};
 
 				if (Liferay.Layout) {
-					Liferay.Layout.on(
-						'drag:start',
-						function(event) {
-							instance._closeActiveMenu();
-						}
-					);
+					Liferay.Layout.on('drag:start', instance._closeActiveMenu, instance);
 				}
 
-				jQuery(window).bind(
-					'resize',
-					function(event) {
-						instance._positionActiveMenu();
-					}
-				);
+				instance._window.on('resize', instance._positionActiveMenu, instance);
 
-				jQuery(document).bind(
-					'click.liferay',
-					function(event) {
-						var target = jQuery(event.target);
-						var cssClass = (event.target.className || '');
-						var isTrigger = (cssClass.indexOf('lfr-actions') > -1);
-						var trigger = [];
+				var hideClass = 'aui-helper-hidden-accessible';
 
-						if (!isTrigger) {
-							trigger = target.parents('.lfr-actions');
+				instance._body.delegate(
+					'click',
+					function(event) {
+						var trigger = event.currentTarget;
+						var menu = trigger._AUI_MENU;
+
+						if (!menu) {
+							var list = trigger.one('ul');
+
+							list.one('li:last-child').addClass('last');
+
+							menu = A.Node.create('<div class="lfr-component lfr-menu-list" />');
+
+							menu._hideClass = hideClass;
+
+							menu.appendChild(list);
+							menu.hide();
+
+							instance._body.appendChild(menu);
+
+							Liferay.Util.createFlyouts(
+								{
+									container: menu.getDOM()
+								}
+							);
+
+							trigger._AUI_MENU = menu;
+						}
+
+						if (instance._active.menu && !instance._active.menu.compareTo(menu)) {
+							instance._closeActiveMenu();
+						}
+
+						if (!menu.hasClass(hideClass)) {
+							instance._closeActiveMenu();
 						}
 						else {
-							trigger = target;
+							instance._active.menu = menu;
+							instance._active.trigger = trigger;
+
+							instance._positionActiveMenu();
 						}
 
-						if (trigger.length) {
-							var menu = trigger.data('lfr-menu-list');
-
-							if (!menu) {
-								var list = trigger.find('ul:first');
-								list.find('li:last-child').addClass('last');
-
-								menu = jQuery('<div class="lfr-component lfr-menu-list" />');
-								menu.append(list);
-								menu.appendTo('body');
-								menu.hide();
-
-								Liferay.Util.createFlyouts(
-									{
-										container: menu[0]
-									}
-								);
-
-								trigger.data('lfr-menu-list', menu);
-							}
-
-							if (instance._active.menu && instance._active.menu[0] != menu[0]) {
-								instance._closeActiveMenu();
-							}
-
-							if (menu.is(':visible')) {
-								instance._closeActiveMenu();
-							}
-							else {
-								instance._active.menu = menu;
-								instance._active.trigger = trigger;
-
-								instance._positionActiveMenu();
-							}
-
-							return false;
-						}
-
-						instance._closeActiveMenu();
-					}
+						event.halt();
+					},
+					'.lfr-actions'
 				);
+
+				instance._document.on('click', instance._closeActiveMenu, instance);
 			}
 		};
 
@@ -96,7 +84,7 @@ AUI().add(
 					instance._active.menu.hide();
 					instance._active.menu = null;
 
-					instance._active.trigger.removeClass('visible');
+					instance._active.trigger.removeClass('aui-state-active');
 					instance._active.trigger = null;
 				}
 			},
@@ -108,10 +96,9 @@ AUI().add(
 				var trigger = instance._active.trigger;
 
 				if (menu) {
-					var offset = trigger.offset();
-					offset.position = 'absolute';
+					var offset = trigger.get('region');
 
-					cssClass = trigger.attr('class');
+					cssClass = trigger.attr('className');
 
 					var direction = 'auto';
 					var vertical = 'bottom';
@@ -124,19 +111,22 @@ AUI().add(
 						direction = 'left';
 					}
 
-					var menuHeight = menu.height();
-					var menuWidth = menu.width();
+					var menuHeight = menu.get('offsetHeight');
+					var menuWidth = menu.get('offsetWidth');
 
-					var triggerHeight = trigger.outerHeight();
-					var triggerWidth = trigger.outerWidth();
+					var triggerHeight = offset.height;
+					var triggerWidth = offset.width;
 
 					var menuTop = menuHeight + offset.top;
 					var menuLeft = menuWidth + offset.left;
-					var scrollTop = win.scrollTop();
-					var scrollLeft = win.scrollLeft();
 
-					var windowHeight = win.height() + scrollTop;
-					var windowWidth = win.width() + scrollLeft;
+					var scrollTop = win.get('scrollTop');
+					var scrollLeft = win.get('scrollLeft');
+
+					var windowRegion = trigger.get('viewportRegion');
+
+					var windowHeight = windowRegion.height + scrollTop;
+					var windowWidth = windowRegion.width + scrollLeft;
 
 					if (direction == 'auto') {
 						if (menuTop > windowHeight
@@ -165,10 +155,17 @@ AUI().add(
 						offset.top -= (menuHeight - triggerHeight);
 					}
 
-					menu.css(offset);
+					menu.setStyles(
+						{
+							left: offset.left + 'px',
+							position: 'absolute',
+							top: offset.top + 'px'
+						}
+					);
+
 					menu.show();
 
-					trigger.addClass('visible');
+					trigger.addClass('aui-state-active');
 
 					instance._active = {
 						menu: menu,
