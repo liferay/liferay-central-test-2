@@ -29,7 +29,7 @@ AUI().add(
 		 * OPTIONS
 		 *
 		 * Required
-		 * container {string|object}: A jQuery selector that contains the rows you wish to duplicate.
+		 * container {string|object}: A selector that contains the rows you wish to duplicate.
 		 *
 		 * Optional
 		 * location {string}: The location in the container (top or bottom) where the manager will be added. Specifying false
