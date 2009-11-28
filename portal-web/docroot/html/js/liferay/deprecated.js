@@ -21,3 +21,7 @@ Liferay.unbind = Liferay.detach;
 Liferay.Events.on = Liferay.on;
 Liferay.Events.trigger = Liferay.fire;
 Liferay.Events.unbind = Liferay.detach;
+
+// LPS-6237
+
+Liferay.Popup = function(){};
