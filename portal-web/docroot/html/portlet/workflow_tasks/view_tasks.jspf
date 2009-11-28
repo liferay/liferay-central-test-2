@@ -74,7 +74,7 @@ try {
 
 			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
 
-			String className = (String)workflowInstanceContext(ContextConstants.ENTRY_CLASS_NAME);
+			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
 			long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
 
 			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
