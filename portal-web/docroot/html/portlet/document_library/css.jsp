@@ -207,7 +207,7 @@
 
 .portlet-document-library .top-links-container {
 	clear: both;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .portlet-document-library .top-links {
