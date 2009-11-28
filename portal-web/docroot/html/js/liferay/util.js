@@ -1271,7 +1271,7 @@ function submitForm(form, action, singleSubmit) {
 			document.body.style.cursor = 'wait';
 		}
 
-		Liferay.trigger('submitForm', {form: form});
+		Liferay.fire('submitForm', {form: form});
 
 		form.submit();
 	}

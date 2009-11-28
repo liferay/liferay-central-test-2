@@ -474,7 +474,7 @@ AUI().add(
 
 										instance._saveSortables(dragNode);
 
-										Liferay.trigger(
+										Liferay.fire(
 											'navigation',
 											{
 												item: dragNode.getDOM(),
@@ -525,7 +525,7 @@ AUI().add(
 							{
 								data: data,
 								success: function() {
-									Liferay.trigger(
+									Liferay.fire(
 										'navigation',
 										{
 											item: tab.getDOM(),
@@ -637,7 +637,7 @@ AUI().add(
 
 								instance._deleteButton(listItem);
 
-								Liferay.trigger(
+								Liferay.fire(
 									'navigation',
 									{
 										item: listItem,

@@ -22,7 +22,7 @@ Liferay.Portlet.ready(
 	}
 );
 
-Liferay.bind(
+Liferay.on(
 	'allPortletsReady',
 	/*
 	This function gets loaded when everything, including the portlets, is on

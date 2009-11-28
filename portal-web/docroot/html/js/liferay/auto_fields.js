@@ -86,7 +86,7 @@ AUI().add(
 					instance.on('autorow:clone', instance._onCloneRow);
 					instance.on('autorow:delete', instance._onDeleteRow);
 
-					Liferay.bind('submitForm', A.bind(instance._syncFields, instance));
+					Liferay.on('submitForm', A.bind(instance._syncFields, instance));
 
 					instance._undoManager.on('clearList', instance._clearInactiveRows, instance);
 				},

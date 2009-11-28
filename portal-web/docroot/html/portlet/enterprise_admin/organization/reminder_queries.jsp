@@ -179,7 +179,7 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 
 	<portlet:namespace />updateReminderQueriesLanguageTemps(lastLanguageId);
 
-	Liferay.bind(
+	Liferay.on(
 		'submitForm',
 		function(event, data) {
 			<portlet:namespace />updateReminderQueriesLanguage();

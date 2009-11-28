@@ -91,7 +91,7 @@ AUI().add(
 				);
 			}
 
-			Liferay.bind(
+			Liferay.on(
 				'submitForm',
 				function(event, data) {
 					if (instance._modifiedSections) {

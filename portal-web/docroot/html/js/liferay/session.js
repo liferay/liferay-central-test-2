@@ -110,7 +110,7 @@ AUI().add(
 								location.href = themeDisplay.getURLHome();
 							}
 
-							Liferay.trigger('sessionExpired');
+							Liferay.fire('sessionExpired');
 						}
 					}
 				);

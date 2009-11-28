@@ -226,7 +226,7 @@ AUI().add(
 
 				Liferay.Util.addInputType();
 
-				Liferay.bind('closePortlet', instance._onPortletClose, instance);
+				Liferay.on('closePortlet', instance._onPortletClose, instance);
 
 				instance._portletItems = instance._dialogBody.find('div.lfr-portlet-item');
 
@@ -339,11 +339,11 @@ AUI().add(
 				);
 			},
 
-			_onPortletClose: function(event, portletData) {
+			_onPortletClose: function(event) {
 				var instance = this;
 
 				var popup = jQuery('#portal_add_content');
-				var item = popup.find('.lfr-portlet-item[plid=' + portletData.plid + '][portletId=' + portletData.portletId + '][instanceable=false]');
+				var item = popup.find('.lfr-portlet-item[plid=' + event.plid + '][portletId=' + event.portletId + '][instanceable=false]');
 
 				if (item.is('.lfr-portlet-used')) {
 					item.removeClass('lfr-portlet-used');

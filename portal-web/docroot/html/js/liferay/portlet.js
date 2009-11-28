@@ -187,7 +187,7 @@ Liferay.Portlet = {
 				column.addClass('empty');
 			}
 
-			Liferay.trigger('closePortlet', {plid: plid, portletId: portletId});
+			Liferay.fire('closePortlet', {plid: plid, portletId: portletId});
 		}
 		else {
 			self.focus();
@@ -355,7 +355,7 @@ Liferay.Portlet = {
 						);
 					}
 
-					Liferay.trigger('portletReady', {portletId: portletId, portlet: jPortlet});
+					Liferay.fire('portletReady', {portletId: portletId, portlet: jPortlet});
 
 					var list = instance.list;
 
@@ -366,7 +366,7 @@ Liferay.Portlet = {
 					}
 
 					if (!list.length) {
-						Liferay.trigger('allPortletsReady', {portletId: portletId});
+						Liferay.fire('allPortletsReady', {portletId: portletId});
 					}
 				}
 			}
@@ -414,7 +414,7 @@ Liferay.Portlet = {
 };
 
 jQuery.fn.last = function(fn) {
-	Liferay.bind(
+	Liferay.on(
 		'allPortletsReady',
 		function(event) {
 			fn();
@@ -425,7 +425,7 @@ jQuery.fn.last = function(fn) {
 // Backwards compatability
 
 Liferay.Portlet.ready = function(fn) {
-	Liferay.bind(
+	Liferay.on(
 		'portletReady',
 		function(event, data) {
 			fn(data.portletId, data.portlet);

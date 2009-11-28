@@ -1,36 +1,11 @@
-Liferay.Events = {
-	bind: function(event, func, scope) {
-		var instance = this;
+Liferay.on = function(){};
+Liferay.fire = function(){};
+Liferay.detach = function(){};
 
-		event = event + '.liferay-events';
-
-		jQuery(document).bind(
-			event,
-			function() {
-				func.apply(scope || this, arguments);
-			}
-		);
-	},
-
-	trigger: function(event, data) {
-		var instance = this;
-
-		event = event + '.liferay-events';
-
-		jQuery(document).trigger(event, data);
-	},
-
-	unbind: function(event, func) {
-		var instance = this;
-
-		event = event + '.liferay-events';
-
-		jQuery(document).unbind(event, func);
+AUI().use(
+	'attribute',
+	'oop',
+	function(A) {
+		A.augment(Liferay, A.Attribute, true);
 	}
-};
-
-// Shorthand
-
-Liferay.bind = Liferay.Events.bind;
-Liferay.trigger = Liferay.Events.trigger;
-Liferay.unbind = Liferay.Events.unbind;
+);
