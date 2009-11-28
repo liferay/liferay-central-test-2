@@ -521,21 +521,23 @@ AUI().add(
 							layoutId: tab._LFR_layoutId
 						};
 
-						jQuery.ajax(
+						A.io(
+							instance._updateURL,
 							{
-								data: data,
-								success: function() {
-									Liferay.fire(
-										'navigation',
-										{
-											item: tab.getDOM(),
-											type: 'delete'
-										}
-									);
+								data: A.toQueryString(data),
+								on: {
+									success: function() {
+										Liferay.fire(
+											'navigation',
+											{
+												item: tab,
+												type: 'delete'
+											}
+										);
 
-									tab.remove();
-								},
-								url: instance._updateURL
+										tab.remove();
+									}
+								}
 							}
 						);
 					}
