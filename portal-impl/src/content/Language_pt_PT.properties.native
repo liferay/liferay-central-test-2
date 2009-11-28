@@ -801,6 +801,7 @@ ask-x-to-be-your-friend=Ask {0} to be your friend.
 asset-entry-type=Tipo do recurso
 asset-link-behaviour=Comportamento da ligação do recurso
 asset-selection=Seleção Do Recurso
+asset-title=Título do recurso (Automatic Translation)
 asset-type-asset-count-help=A contagem do recurso com este Tag considerará somente recursos do tipo selecionado.
 asset-type=Tipo Do Recurso
 asset-types=Tipos do recurso

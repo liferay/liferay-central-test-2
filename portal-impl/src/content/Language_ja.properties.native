@@ -801,6 +801,7 @@ ask-x-to-be-your-friend={0} さんに友達になるよう依頼する。
 asset-entry-type=資産のタイプ
 asset-link-behaviour=リンクの振る舞い
 asset-selection=データ選択方法
+asset-title=資産のタイトル (Automatic Translation)
 asset-type-asset-count-help=この札との資産の計算は指定タイプの資産だけを考慮する。
 asset-type=配信データタイプ
 asset-types=資産はタイプする

@@ -800,6 +800,7 @@ ask-x-to-be-your-friend=Solicitar a {0} ser su amigo.
 asset-entry-type=Tipo de contenido
 asset-link-behaviour=Comportamiento del enlace del contenido
 asset-selection=Selección de contenidos
+asset-title=Título del activo (Automatic Translation)
 asset-type-asset-count-help=El número de contenidos con esta etiqueta sólo tendrá en cuenta los contenidos del tipo seleccionado.
 asset-type=Tipo de contenido
 asset-types=Tipos de contenidos

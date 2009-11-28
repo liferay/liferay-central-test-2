@@ -801,6 +801,7 @@ ask-x-to-be-your-friend=请求 {0} 成为您的朋友。
 asset-entry-type=财产类型
 asset-link-behaviour=财产链接行为
 asset-selection=资产选择
+asset-title=财产标题 (Automatic Translation)
 asset-type-asset-count-help=与这个标记的财产计数只将考虑选择的类型的财产。
 asset-type=资产类型
 asset-types=财产类型
