@@ -41,13 +41,14 @@ import javax.portlet.PortletURL;
 public abstract class BaseWokflowHandler implements WorkflowHandler {
 
 	public String getTitle(long classPK) throws Exception {
-		AssetRenderer renderer = getAssetRenderer(classPK);
+		AssetRenderer assetRenderer = getAssetRenderer(classPK);
 
-		if (renderer != null) {
-			return renderer.getTitle();
+		if (assetRenderer != null) {
+			return assetRenderer.getTitle();
 		}
-
-		return null;
+		else {
+			return null;
+		}
 	}
 
 	public String getType() {
@@ -59,14 +60,15 @@ public abstract class BaseWokflowHandler implements WorkflowHandler {
 			LiferayPortletResponse liferayPortletResponse)
 		throws Exception {
 
-		AssetRenderer renderer = getAssetRenderer(classPK);
+		AssetRenderer assetRenderer = getAssetRenderer(classPK);
 
-		if (renderer != null) {
-			return renderer.getURLEdit(
+		if (assetRenderer != null) {
+			return assetRenderer.getURLEdit(
 				liferayPortletRequest, liferayPortletResponse);
 		}
-
-		return null;
+		else {
+			return null;
+		}
 	}
 
 	public void startWorkflowInstance(
@@ -79,15 +81,16 @@ public abstract class BaseWokflowHandler implements WorkflowHandler {
 	}
 
 	protected AssetRenderer getAssetRenderer(long classPK) throws Exception {
-		AssetRendererFactory factory =
+		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 				getClassName());
 
-		if (factory != null) {
-			return factory.getAssetRenderer(classPK);
+		if (assetRendererFactory != null) {
+			return assetRendererFactory.getAssetRenderer(classPK);
 		}
-
-		return null;
+		else {
+			return null;
+		}
 	}
 
 }

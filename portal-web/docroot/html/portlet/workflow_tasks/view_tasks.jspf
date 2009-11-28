@@ -72,12 +72,14 @@ try {
 			<%
 			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
 
-			String className = (String)workflowInstance.getContext().get(ContextConstants.ENTRY_CLASS_NAME);
-			long classPK = (Long)workflowInstance.getContext().get(ContextConstants.ENTRY_CLASS_PK);
+			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
 
-			WorkflowHandler handler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+			String className = (String)workflowInstanceContext(ContextConstants.ENTRY_CLASS_NAME);
+			long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
 
-			PortletURL rowURL = handler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
+			PortletURL rowURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
 			if (rowURL != null) {
 				rowURL.setWindowState(WindowState.MAXIMIZED);
@@ -94,7 +96,7 @@ try {
 			>
 
 				<%
-				buffer.append(handler.getTitle(classPK));
+				buffer.append(workflowHandler.getTitle(classPK));
 				%>
 
 			</liferay-ui:search-container-column-text>
