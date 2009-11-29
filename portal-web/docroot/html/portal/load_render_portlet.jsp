@@ -50,14 +50,12 @@ String portletId = portlet.getPortletId();
 				function(A) {
 					var ns = '<%= portletDisplay.getNamespace() %>';
 
-					var placeHolder = A.one('#p_load' + ns);
-
 					Liferay.Portlet.addHTML(
 						{
 							onComplete: function(portlet, portletId) {
 								portlet.refreshURL = '<%= url %>';
 							},
-							placeHolder: (placeHolder && placeHolder.getDOM()),
+							placeHolder: A.one('#p_load' + ns),
 							url: '<%= url %>'
 						}
 					);

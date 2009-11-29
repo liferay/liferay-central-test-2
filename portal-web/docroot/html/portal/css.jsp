@@ -1161,10 +1161,6 @@
 	margin-bottom: 1.5em;
 }
 
-.portlet-minimized .portlet-content-container {
-	display: none;
-}
-
 .lfr-checkbox-preselected {
 	opacity: 0.5;
 }

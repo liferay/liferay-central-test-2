@@ -684,11 +684,11 @@ Liferay.Util = {
 		var portletId = options.portletId;
 		var url = options.url;
 
-		var title = obj.find('.portlet-title');
+		var title = obj.one('.portlet-title');
 
 		var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
 
-		if (!title.is('.not-editable') && title.length) {
+		if (title && !title.hasClass('not-editable')) {
 			AUI().use(
 				'editable',
 				function(A) {
@@ -730,7 +730,7 @@ Liferay.Util = {
 
 								return cruft + value;
 							},
-							node: title[0]
+							node: title
 						}
 					);
 				}
