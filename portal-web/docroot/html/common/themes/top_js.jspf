@@ -277,19 +277,6 @@
 		Liferay.Portlet.ready(
 			function(portletId, jQueryObj) {
 				Liferay.Util.addInputType(portletId, jQueryObj);
-
-				AUI().use(
-					'liferay-menu',
-					function(A) {
-						new Liferay.Menu(
-							{
-								button: '.lfr-actions',
-								context: jQueryObj[0],
-								trigger: '.lfr-trigger'
-							}
-						);
-					}
-				);
 			}
 		);
 
@@ -300,9 +287,10 @@
 			%>
 
 			<c:if test="<%= Validator.isNotNull(scroll) %>">
-				jQuery(document).last(
-					function() {
-						document.getElementById("<%= HtmlUtil.escape(scroll) %>").scrollIntoView();
+				Liferay.on(
+					'allPortletsReady',
+					function(event) {
+						document.getElementById('<%= HtmlUtil.escape(scroll) %>').scrollIntoView();
 					}
 				);
 			</c:if>
