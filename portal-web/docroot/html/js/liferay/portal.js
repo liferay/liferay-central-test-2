@@ -1,31 +1,37 @@
 Liferay.Portal = {};
 
 Liferay.Portal.Tabs = {
-	show: function(namespace, names, id) {
-		var tab = AUI().one('#' + namespace + id + 'TabsId');
-		var panel = AUI().one('#' + namespace + id + 'TabsSection');
-
-		if (tab) {
-			tab.radioClass('aui-selected');
-		}
-
-		if (panel) {
-			panel.show();
-		}
-
-		var index = names.indexOf(id);
-
-		names.splice(index, 1);
-
-		for (var i = 0; i < names.length; i++) {
-			el = AUI().one('#' + namespace + names[i] + 'TabsSection');
-
-			if (el) {
-				el.hide();
-			}
-		}
-	}
+	show: function() {}
 };
+
+AUI().ready(
+	function(A) {
+		Liferay.Portal.Tabs.show = function(namespace, names, id) {
+			var tab = AUI().one('#' + namespace + id + 'TabsId');
+			var panel = AUI().one('#' + namespace + id + 'TabsSection');
+
+			if (tab) {
+				tab.radioClass('aui-selected');
+			}
+
+			if (panel) {
+				panel.show();
+			}
+
+			var index = names.indexOf(id);
+
+			names.splice(index, 1);
+
+			for (var i = 0; i < names.length; i++) {
+				el = AUI().one('#' + namespace + names[i] + 'TabsSection');
+
+				if (el) {
+					el.hide();
+				}
+			}
+		};
+	}
+);
 
 (function() {
 	var elementsCache = {};
