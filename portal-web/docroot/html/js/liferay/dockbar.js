@@ -8,23 +8,29 @@ AUI().use(
 			init: function() {
 				var instance = this;
 
-				var dockBar = jQuery('#dockbar');
+				var body = A.getBody();
 
-				if (dockBar.length) {
-					dockBar.find('.pin-dockbar').click(
+				var dockBar = A.one('#dockbar');
+
+				if (dockBar) {
+					dockBar.one('.pin-dockbar').on(
+						'click',
 						function(event) {
-							A.getBody().toggleClass('lfr-dockbar-pinned');
+							body.toggleClass('lfr-dockbar-pinned');
 
-							jQuery.ajax(
+							A.io(
+								themeDisplay.getPathMain() + '/portal/session_click',
 								{
-									url: themeDisplay.getPathMain() + '/portal/session_click',
-									data: {
-										'liferay_dockbar_pinned': A.getBody().hasClass('lfr-dockbar-pinned')
-									}
+									data: A.toQueryString(
+										{
+											'liferay_dockbar_pinned': body.hasClass('lfr-dockbar-pinned')
+										}
+									),
+									method: 'POST'
 								}
 							);
 
-							return false;
+							event.halt();
 						}
 					);
 
@@ -111,103 +117,110 @@ AUI().use(
 						);
 					}
 
-					var addApplication = jQuery('#' + instance._namespace + 'addApplication');
+					var addApplication = A.one('#' + instance._namespace + 'addApplication');
 
-					addApplication.click(
-						function(event) {
-							Liferay.Dockbar.addContent.hide();
+					if (addApplication) {
+						addApplication.on(
+							'click',
+							function(event) {
+								Liferay.Dockbar.addContent.hide();
 
-							if (!Liferay.Dockbar.addApplication) {
-								instance.addUnderlay(
-									{
-										width: '255px',
-										name: 'addApplication',
-										className: 'add-application',
-										io: {
-											uri: themeDisplay.getPathMain() + '/portal/render_portlet',
-											cfg: {
-												data: {
-													p_l_id: themeDisplay.getPlid(),
-													p_p_id: 87,
-													p_p_state: 'exclusive',
-													doAsUserId: themeDisplay.getDoAsUserIdEncoded()
-												},
-												on: {
-													success: function(id, response) {
-														AUI().use(
-															'liferay-layout-configuration',
-															function(A) {
-																var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
+								if (!Liferay.Dockbar.addApplication) {
+									instance.addUnderlay(
+										{
+											width: '255px',
+											name: 'addApplication',
+											className: 'add-application',
+											io: {
+												uri: themeDisplay.getPathMain() + '/portal/render_portlet',
+												cfg: {
+													data: {
+														p_l_id: themeDisplay.getPlid(),
+														p_p_id: 87,
+														p_p_state: 'exclusive',
+														doAsUserId: themeDisplay.getDoAsUserIdEncoded()
+													},
+													on: {
+														success: function(id, response) {
+															AUI().use(
+																'liferay-layout-configuration',
+																function(A) {
+																	var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
 
-																Liferay.Dockbar.addApplication.set('bodyContent', response.responseText);
+																	Liferay.Dockbar.addApplication.set('bodyContent', response.responseText);
 
-																Liferay.LayoutConfiguration._dialogBody = jQuery(contentBox.getDOM());
+																	Liferay.LayoutConfiguration._dialogBody = contentBox;
 
-																Liferay.LayoutConfiguration._loadContent();
-															}
-														);
+																	Liferay.LayoutConfiguration._loadContent();
+																}
+															);
+														}
 													}
 												}
-											}
-										},
-										on: {
-											visibleChange: function(event) {
-												var action = 'addClass';
+											},
+											on: {
+												visibleChange: function(event) {
+													var action = 'addClass';
 
-												if (!event.newVal) {
-													action = 'removeClass';
+													if (!event.newVal) {
+														action = 'removeClass';
+													}
+													else {
+														Liferay.Util.focusFormField('#layout_configuration_content');
+													}
+
+													var body = A.getBody();
+
+													body[action]('lfr-has-sidebar');
 												}
-
-												var body = A.getBody();
-
-												body[action]('lfr-has-sidebar');
 											}
 										}
-									}
-								);
+									);
+								}
+								else {
+									Liferay.Dockbar.addApplication.show();
+								}
+
+								Liferay.Dockbar.addApplication.focus();
 							}
-							else {
-								Liferay.Dockbar.addApplication.show();
-							}
+						);
+					}
 
-							Liferay.Dockbar.addApplication.focus();
-						}
-					);
+					var pageTemplate = A.one('#pageTemplate');
 
-					var pageTemplate = jQuery('#pageTemplate');
+					if (pageTemplate) {
+						pageTemplate.on(
+							'click',
+							function(event) {
+								Liferay.Dockbar.manageContent.hide();
 
-					pageTemplate.click(
-						function(event) {
-							Liferay.Dockbar.manageContent.hide();
-
-							if (!Liferay.Dockbar.manageLayouts) {
-								instance.addUnderlay(
-									{
-										io: {
-											uri: themeDisplay.getPathMain() + '/layout_configuration/templates',
-											cfg: {
-												data: {
-													p_l_id: themeDisplay.getPlid(),
-													doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-													redirect: Liferay.currentURL
+								if (!Liferay.Dockbar.manageLayouts) {
+									instance.addUnderlay(
+										{
+											io: {
+												uri: themeDisplay.getPathMain() + '/layout_configuration/templates',
+												cfg: {
+													data: {
+														p_l_id: themeDisplay.getPlid(),
+														doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+														redirect: Liferay.currentURL
+													}
 												}
-											}
-										},
-										className: 'manage-layouts',
-										name: 'manageLayouts',
-										width: '700px'
-									}
-								);
-							}
-							else {
-								Liferay.Dockbar.manageLayouts.show();
-							}
+											},
+											className: 'manage-layouts',
+											name: 'manageLayouts',
+											width: '700px'
+										}
+									);
+								}
+								else {
+									Liferay.Dockbar.manageLayouts.show();
+								}
 
-							Liferay.Dockbar.manageLayouts.focus();
-						}
-					);
-
-					var body = A.getBody();
+								Liferay.Dockbar.manageLayouts.focus();
+							}
+						);
+					}
 
 					var isStaging = body.hasClass('staging');
 					var isLiveView = body.hasClass('live-view');
@@ -222,25 +235,31 @@ AUI().use(
 						);
 					}
 
-					instance.dockBar.find('.app-shortcut').click(
-						function(event) {
-							var portletId = this.getAttribute('rel');
+					if (instance.addContent) {
+						instance.addContent.get('boundingBox').delegate(
+							'click',
+							function(event) {
+								var item = event.currentTarget;
 
-							if ((/^\d+$/).test(portletId)) {
-								Liferay.Portlet.add(
-									{
-										portletId: portletId
-									}
-								);
-							}
+								var portletId = item.attr('rel');
 
-							if (!event.shiftKey) {
-								Liferay.Dockbar.MenuManager.hideAll();
-							}
+								if ((/^\d+$/).test(portletId)) {
+									Liferay.Portlet.add(
+										{
+											portletId: portletId
+										}
+									);
+								}
 
-							return false;
-						}
-					);
+								if (!event.shiftKey) {
+									Liferay.Dockbar.MenuManager.hideAll();
+								}
+
+								event.halt();
+							},
+							'.app-shortcut'
+						);
+					}
 				}
 			},
 
@@ -251,9 +270,9 @@ AUI().use(
 					options.text = '<a href="' + options.url + '">' + options.text + '</a>';
 				}
 
-				var item = jQuery('<li class="' + (options.className || '') + '">' + options.text + '</li>');
+				var item = A.Node.create('<li class="' + (options.className || '') + '">' + options.text + '</li>');
 
-				instance.dockBar.find('> ul').append(item);
+				instance.dockBar.one('> ul').appendChild(item);
 
 				instance._toolbarItems[options.name] = item;
 
