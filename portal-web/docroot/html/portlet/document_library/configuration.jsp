@@ -73,143 +73,145 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="rootFolderId" type="hidden" value="<%= rootFolderId %>" />
-	<aui:input name="folderColumns" type="hidden" value="" />
-	<aui:input name="fileEntryColumns" type="hidden" value="" />
+	<aui:input name="folderColumns" type="hidden" />
+	<aui:input name="fileEntryColumns" type="hidden" />
 
 	<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
-	<aui:fieldset>
-		<liferay-ui:tabs names="folders-listing" />
+	<liferay-ui:panel-container extended="<%= true %>" id="configurationPanel" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="folders" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "folders-listing") %>'>
+			<aui:fieldset>
+				<aui:field-wrapper label="root-folder">
+					<portlet:renderURL var="viewFolderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+						<portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' />
+						<portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" />
+					</portlet:renderURL>
 
-		<aui:field-wrapper label="root-folder">
-			<portlet:renderURL var="viewFolderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
-				<portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' />
-				<portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" />
-			</portlet:renderURL>
+					<aui:a href="<%= viewFolderURL %>" id="rootFolderName"><%= rootFolderName %></aui:a>
 
-			<aui:a href="<%= viewFolderURL %>" id="rootFolderName"><%= rootFolderName %></aui:a>
+					<aui:button name="openFolderSelectorButton" onClick='<%= renderResponse.getNamespace() + "openFolderSelector();" %>' type="button" value="select" />
 
-			<aui:button name="openFolderSelectorButton" onClick='<%= renderResponse.getNamespace() + "openFolderSelector();" %>' type="button" value="select" />
+					<aui:button disabled="<%= rootFolderId <= 0 %>" name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
+				</aui:field-wrapper>
 
-			<aui:button name="removeFolder" onClick='<%= renderResponse.getNamespace() + "removeFolder();"  %>' value="remove" />
-		</aui:field-wrapper>
+				<aui:input inlineLabel="left" name="showBreadcrumbs" type="checkbox" value="<%= showBreadcrumbs %>" />
 
-		<aui:input inlineLabel="left" name="showBreadcrumbs" type="checkbox" value="<%= showBreadcrumbs %>" />
+				<aui:input inlineLabel="left" label="show-search" name="showFoldersSearch" type="checkbox" value="<%= showFoldersSearch %>" />
 
-		<aui:input inlineLabel="left" label="show-search" name="showFoldersSearch" type="checkbox" value="<%= showFoldersSearch %>" />
+				<aui:input inlineLabel="left" name="showSubfolders" type="checkbox" value="<%= showSubfolders %>" />
 
-		<aui:input inlineLabel="left" name="showSubfolders" type="checkbox" value="<%= showSubfolders %>" />
+				<aui:input name="foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
 
-		<aui:input name="foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
+				<aui:field-wrapper label="show-columns">
 
-		<aui:field-wrapper label="show-columns" />
+					<%
+					Set availableFolderColumns = SetUtil.fromArray(StringUtil.split(allFolderColumns));
 
-		<%
-		Set availableFolderColumns = SetUtil.fromArray(StringUtil.split(allFolderColumns));
+					// Left list
 
-		// Left list
+					List leftList = new ArrayList();
 
-		List leftList = new ArrayList();
+					for (int i = 0; i < folderColumns.length; i++) {
+						String folderColumn = folderColumns[i];
 
-		for (int i = 0; i < folderColumns.length; i++) {
-			String folderColumn = folderColumns[i];
+						leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+					}
 
-			leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
-		}
+					// Right list
 
-		// Right list
+					List rightList = new ArrayList();
 
-		List rightList = new ArrayList();
+					Arrays.sort(folderColumns);
 
-		Arrays.sort(folderColumns);
+					Iterator itr = availableFolderColumns.iterator();
 
-		Iterator itr = availableFolderColumns.iterator();
+					while (itr.hasNext()) {
+						String folderColumn = (String)itr.next();
 
-		while (itr.hasNext()) {
-			String folderColumn = (String)itr.next();
+						if (Arrays.binarySearch(folderColumns, folderColumn) < 0) {
+							rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+						}
+					}
 
-			if (Arrays.binarySearch(folderColumns, folderColumn) < 0) {
-				rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
-			}
-		}
+					rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+					%>
 
-		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
-		%>
+					<liferay-ui:input-move-boxes
+						formName="fm"
+						leftTitle="current"
+						rightTitle="available"
+						leftBoxName="currentFolderColumns"
+						rightBoxName="availableFolderColumns"
+						leftReorder="true"
+						leftList="<%= leftList %>"
+						rightList="<%= rightList %>"
+					/>
+				</aui:field-wrapper>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-		<liferay-ui:input-move-boxes
-			formName="fm"
-			leftTitle="current"
-			rightTitle="available"
-			leftBoxName="currentFolderColumns"
-			rightBoxName="availableFolderColumns"
-			leftReorder="true"
-			leftList="<%= leftList %>"
-			rightList="<%= rightList %>"
-		/>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documents" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "documents-listing") %>'>
+			<aui:fieldset>
+				<aui:input inlineLabel="left" label="show-search" name="showFileEntriesSearch" type="checkbox" value="<%= showFileEntriesSearch %>" />
 
-		<br />
+				<aui:input label="documents-per-page" name="fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
 
-		<liferay-ui:tabs names="documents-listing" />
+				<aui:field-wrapper label="show-columns">
 
-		<aui:input inlineLabel="left" label="show-search" name="showFileEntriesSearch" type="checkbox" value="<%= showFileEntriesSearch %>" />
+					<%
+					Set availableFileEntryColumns = SetUtil.fromArray(StringUtil.split(allFileEntryColumns));
 
-		<aui:input label="documents-per-page" name="fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
+					// Left list
 
-		<aui:field-wrapper label="show-columns" />
+					List leftList = new ArrayList();
 
-		<%
-		Set availableFileEntryColumns = SetUtil.fromArray(StringUtil.split(allFileEntryColumns));
+					for (int i = 0; i < fileEntryColumns.length; i++) {
+						String fileEntryColumn = fileEntryColumns[i];
 
-		// Left list
+						leftList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
+					}
 
-		leftList = new ArrayList();
+					// Right list
 
-		for (int i = 0; i < fileEntryColumns.length; i++) {
-			String fileEntryColumn = fileEntryColumns[i];
+					List rightList = new ArrayList();
 
-			leftList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
-		}
+					Arrays.sort(fileEntryColumns);
 
-		// Right list
+					Iterator itr = availableFileEntryColumns.iterator();
 
-		rightList = new ArrayList();
+					while (itr.hasNext()) {
+						String fileEntryColumn = (String)itr.next();
 
-		Arrays.sort(fileEntryColumns);
+						if (Arrays.binarySearch(fileEntryColumns, fileEntryColumn) < 0) {
+							rightList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
+						}
+					}
 
-		itr = availableFileEntryColumns.iterator();
+					rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+					%>
 
-		while (itr.hasNext()) {
-			String fileEntryColumn = (String)itr.next();
-
-			if (Arrays.binarySearch(fileEntryColumns, fileEntryColumn) < 0) {
-				rightList.add(new KeyValuePair(fileEntryColumn, LanguageUtil.get(pageContext, fileEntryColumn)));
-			}
-		}
-
-		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
-		%>
-
-		<liferay-ui:input-move-boxes
-			formName="fm"
-			leftTitle="current"
-			rightTitle="available"
-			leftBoxName="currentFileEntryColumns"
-			rightBoxName="availableFileEntryColumns"
-			leftReorder="true"
-			leftList="<%= leftList %>"
-			rightList="<%= rightList %>"
-		/>
-
-		<br />
-
-		<liferay-ui:tabs names="ratings" />
-
-		<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
-	</aui:fieldset>
+					<liferay-ui:input-move-boxes
+						formName="fm"
+						leftTitle="current"
+						rightTitle="available"
+						leftBoxName="currentFileEntryColumns"
+						rightBoxName="availableFileEntryColumns"
+						leftReorder="true"
+						leftList="<%= leftList %>"
+						rightList="<%= rightList %>"
+					/>
+				</aui:field-wrapper>
+			</aui:fieldset>
+		</liferay-ui:panel>
+		
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="ratings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ratings") %>'>
+			<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 
 	<aui:button-row>
 		<aui:button name="saveButton" type="submit" value="save" />
 
-		<aui:button name="cancelButton" onClick="<%= PortalUtil.escapeRedirect(redirect) %>" type="button" value="cancel" />
+		<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
