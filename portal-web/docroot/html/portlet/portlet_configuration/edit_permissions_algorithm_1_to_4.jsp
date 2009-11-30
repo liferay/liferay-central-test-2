@@ -67,8 +67,8 @@ if (Validator.isNull(modelResource)) {
 PortalUtil.addPortletBreadcrumbEntry(request, selResourceDescription, null);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "permissions"), currentURL);
 
-Group group = layout.getGroup();
-long groupId = layout.getGroupId();
+Group group = themeDisplay.getScopeGroup();
+long groupId = group.getGroupId();
 
 Layout selLayout = null;
 

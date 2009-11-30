@@ -223,7 +223,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	protected void updateOrganizationPermissions(ActionRequest actionRequest)
 		throws Exception {
 
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		//Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		long organizationId = ParamUtil.getLong(
@@ -236,7 +236,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		//if (!organizationIntersection) {
 			PermissionServiceUtil.setGroupPermissions(
 				Organization.class.getName(), String.valueOf(organizationId),
-				layout.getGroupId(), actionIds, resourceId);
+				themeDisplay.getScopeGroupId(), actionIds, resourceId);
 		/*}
 		else {
 			PermissionServiceUtil.setOrgGroupPermissions(
@@ -327,8 +327,6 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	protected void updateUserGroupPermissions(ActionRequest actionRequest)
 		throws Exception {
 
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		long userGroupId = ParamUtil.getLong(
 			actionRequest, "userGroupIdsPosValue");
@@ -337,7 +335,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 		PermissionServiceUtil.setGroupPermissions(
 			UserGroup.class.getName(), String.valueOf(userGroupId),
-			layout.getGroupId(), actionIds, resourceId);
+			themeDisplay.getScopeGroupId(), actionIds, resourceId);
 	}
 
 	protected void updateUserPermissions(ActionRequest actionRequest)
