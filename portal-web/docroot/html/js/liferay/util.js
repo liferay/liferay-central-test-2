@@ -464,9 +464,10 @@ Liferay.Util = {
 				if (!interacting) {
 					el = A.get(el);
 
-					if (el) {
+					try {
 						el.focus();
 					}
+					catch (e) {}
 				}
 			}
 		);
