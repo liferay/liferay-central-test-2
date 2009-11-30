@@ -656,72 +656,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
-						<#list finderColsList as finderCol>
-							<#if !finderCol.isPrimitiveType()>
-								if (${finderCol.name} == null) {
-									<#if finderCol.comparator == "=">
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} IS NULL");
-										</#if>
-									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-										</#if>
-									<#else>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-										</#if>
-									</#if>
-								}
-								else {
-							</#if>
-
-							<#if finderCol.type == "String">
-								if (${finderCol.name}.equals(StringPool.BLANK)) {
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-									<#else>
-										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-									</#if>
-								}
-							</#if>
-
-							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-								<#else>
-									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-								</#if>
-							<#else>
-								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-								<#else>
-									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-								</#if>
-							</#if>
-
-							<#if finderCol.type == "String">
-								if (${finderCol.name}.equals(StringPool.BLANK)) {
-									query.append(")");
-								}
-							</#if>
-
-							<#if !finderCol.isPrimitiveType()>
-								}
-							</#if>
-
-							<#if finderCol_has_next>
-								query.append(" AND ");
-							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-								query.append(" AND ${finder.where} ");
-							</#if>
-						</#list>
+						<#include "persistence_impl_finder_col.ftl">
 
 						<#if entity.getOrder()??>
 							query.append(" ORDER BY ");
@@ -843,72 +778,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
-						<#list finderColsList as finderCol>
-							<#if !finderCol.isPrimitiveType()>
-								if (${finderCol.name} == null) {
-									<#if finderCol.comparator == "=">
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} IS NULL");
-										</#if>
-									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-										</#if>
-									<#else>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-										</#if>
-									</#if>
-								}
-								else {
-							</#if>
-
-							<#if finderCol.type == "String">
-								if (${finderCol.name}.equals(StringPool.BLANK)) {
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-									<#else>
-										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-									</#if>
-								}
-							</#if>
-
-							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-								<#else>
-									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-								</#if>
-							<#else>
-								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-								<#else>
-									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-								</#if>
-							</#if>
-
-							<#if finderCol.type == "String">
-								if (${finderCol.name}.equals(StringPool.BLANK)) {
-									query.append(")");
-								}
-							</#if>
-
-							<#if !finderCol.isPrimitiveType()>
-								}
-							</#if>
-
-							<#if finderCol_has_next>
-								query.append(" AND ");
-							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-								query.append(" AND ${finder.where} ");
-							</#if>
-						</#list>
+						<#include "persistence_impl_finder_col.ftl">
 
 						if (obc != null) {
 							query.append(" ORDER BY ");
@@ -1113,72 +983,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
-					<#list finderColsList as finderCol>
-						<#if !finderCol.isPrimitiveType()>
-							if (${finderCol.name} == null) {
-								<#if finderCol.comparator == "=">
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-									<#else>
-										query.append("${entity.alias}.${finderCol.name} IS NULL");
-									</#if>
-								<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-									<#else>
-										query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-									</#if>
-								<#else>
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-									<#else>
-										query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-									</#if>
-								</#if>
-							}
-							else {
-						</#if>
-
-						<#if finderCol.type == "String">
-							if (${finderCol.name}.equals(StringPool.BLANK)) {
-								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-									query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-								<#else>
-									query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-								</#if>
-							}
-						</#if>
-
-						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-								query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-							<#else>
-								query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-							</#if>
-						<#else>
-							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-								query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-							<#else>
-								query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-							</#if>
-						</#if>
-
-						<#if finderCol.type == "String">
-							if (${finderCol.name}.equals(StringPool.BLANK)) {
-								query.append(")");
-							}
-						</#if>
-
-						<#if !finderCol.isPrimitiveType()>
-							}
-						</#if>
-
-						<#if finderCol_has_next>
-							query.append(" AND ");
-						<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-							query.append(" AND ${finder.where} ");
-						</#if>
-					</#list>
+					<#include "persistence_impl_finder_col.ftl">
 
 					if (obc != null) {
 						query.append(" ORDER BY ");
@@ -1380,73 +1185,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
-						<#list finderColsList as finderCol>
-							<#if !finderCol.isPrimitiveType()>
-								if (${finderCol.name} == null) {
-									<#if finderCol.comparator == "=">
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} IS NULL");
-										</#if>
-
-									<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-										</#if>
-									<#else>
-										<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-											query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-										<#else>
-											query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-										</#if>
-									</#if>
-								}
-								else {
-							</#if>
-
-							<#if finderCol.type == "String">
-								if (${finderCol.name}.equals(StringPool.BLANK)) {
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-									<#else>
-										query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-									</#if>
-								}
-							</#if>
-
-							<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-									query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-								<#else>
-									query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-								</#if>
-							<#else>
-								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-									query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-								<#else>
-									query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-								</#if>
-							</#if>
-
-							<#if finderCol.type == "String">
-								if (${finderCol.name}.equals(StringPool.BLANK)) {
-									query.append(")");
-								}
-							</#if>
-
-							<#if !finderCol.isPrimitiveType()>
-								}
-							</#if>
-
-							<#if finderCol_has_next>
-								query.append(" AND ");
-							<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-								query.append(" AND ${finder.where} ");
-							</#if>
-						</#list>
+						<#include "persistence_impl_finder_col.ftl">
 
 						<#if entity.getOrder()??>
 							query.append(" ORDER BY ");
@@ -1786,72 +1525,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					query.append(_SQL_COUNT_${entity.alias?upper_case}_WHERE);
 
-					<#list finderColsList as finderCol>
-						<#if !finderCol.isPrimitiveType()>
-							if (${finderCol.name} == null) {
-								<#if finderCol.comparator == "=">
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.${finderCol.name} IS NULL");
-									<#else>
-										query.append("${entity.alias}.${finderCol.name} IS NULL");
-									</#if>
-								<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.${finderCol.name} IS NOT NULL");
-									<#else>
-										query.append("${entity.alias}.${finderCol.name} IS NOT NULL");
-									</#if>
-								<#else>
-									<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-										query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} null");
-									<#else>
-										query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} null");
-									</#if>
-								</#if>
-							}
-							else {
-						</#if>
-
-						<#if finderCol.type == "String">
-							if (${finderCol.name}.equals(StringPool.BLANK)) {
-								<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-									query.append("(${entity.alias}.id.${finderCol.name} IS NULL OR ");
-								<#else>
-									query.append("(${entity.alias}.${finderCol.name} IS NULL OR ");
-								</#if>
-							}
-						</#if>
-
-						<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
-							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-								query.append("${entity.alias}.id.lower(${finderCol.name}) ${finderCol.comparator} ?");
-							<#else>
-								query.append("${entity.alias}.lower(${finderCol.name}) ${finderCol.comparator} ?");
-							</#if>
-						<#else>
-							<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-								query.append("${entity.alias}.id.${finderCol.name} ${finderCol.comparator} ?");
-							<#else>
-								query.append("${entity.alias}.${finderCol.name} ${finderCol.comparator} ?");
-							</#if>
-						</#if>
-
-						<#if finderCol.type == "String">
-							if (${finderCol.name}.equals(StringPool.BLANK)) {
-								query.append(")");
-							}
-						</#if>
-
-						<#if !finderCol.isPrimitiveType()>
-							}
-						</#if>
-
-						<#if finderCol_has_next>
-							query.append(" AND ");
-						<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
-							query.append(" AND ${finder.where} ");
-						</#if>
-					</#list>
+					<#include "persistence_impl_finder_col.ftl">
 
 					Query q = session.createQuery(query.toString());
 
@@ -2851,6 +2525,54 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		}
 	</#if>
+
+	<#list entity.getFinderList() as finder>
+		<#assign finderColsList = finder.getColumns()>
+
+		<#list finderColsList as finderCol>
+			<#assign finderColConjunction = "">
+
+			<#if finderCol_has_next>
+				<#assign finderColConjunction = " AND ">
+			<#elseif finder.where?? && !validator.isNull(finder.getWhere())>
+				<#assign finderColConjunction = " AND " + finder.where>
+			</#if>
+
+			<#if !finderCol.isPrimitiveType()>
+				private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_1 =
+
+				<#if finderCol.comparator == "=">
+					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>${finderCol.name} IS NULL${finderColConjunction}"
+				<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
+					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>${finderCol.name} IS NOT NULL${finderColConjunction}"
+				<#else>
+					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>${finderCol.name} ${finderCol.comparator} NULL${finderColConjunction}"
+				</#if>
+
+				;
+			</#if>
+
+			<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
+				<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+					<#assign finderColExpression = entity.alias + ".id.lower(" + finderCol.name + ") " + finderCol.comparator + " ?">
+				<#else>
+					<#assign finderColExpression = entity.alias + ".lower(" + finderCol.name + ") " + finderCol.comparator + " ?">
+				</#if>
+			<#else>
+				<#if entity.hasCompoundPK() && finderCol.isPrimary()>
+					<#assign finderColExpression = entity.alias + ".id." + finderCol.name + " " + finderCol.comparator + " ?">
+				<#else>
+					<#assign finderColExpression = entity.alias + "." + finderCol.name + " " + finderCol.comparator + " ?">
+				</#if>
+			</#if>
+
+			private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_2 = "${finderColExpression}${finderColConjunction}";
+
+			<#if finderCol.type == "String">
+				private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_3 = "(${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>${finderCol.name} IS NULL OR ${finderColExpression})${finderColConjunction}";
+			</#if>
+		</#list>
+	</#list>
 
 	private static final String _SQL_SELECT_${entity.alias?upper_case} = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias}";
 

@@ -134,7 +134,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	<#list entity.columnList as column>
 		<#if column.mappingTable??>
-			<#assign entityShortName = stringUtil.shorten(entity.name, 10, "")>
+			<#assign entityShortName = stringUtil.shorten(entity.name, 9, "")>
 
 			<#if stringUtil.startsWith(column.mappingTable, entityShortName)>
 				public static final String TABLE_${stringUtil.upperCase(column.mappingTable)} = "${column.mappingTable}";
