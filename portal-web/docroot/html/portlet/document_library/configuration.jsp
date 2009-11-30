@@ -203,7 +203,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</aui:field-wrapper>
 			</aui:fieldset>
 		</liferay-ui:panel>
-		
+
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="ratings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ratings") %>'>
 			<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
 		</liferay-ui:panel>

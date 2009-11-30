@@ -113,7 +113,7 @@ String htmlAttributes =
 	<aui:fieldset>
 		<aui:legend label="general" />
 
-		<aui:input cssClass="lfr-input-text-container" label="source-url" name="src" prefix="<%= relative ? "..." : StringPool.BLANK %>" type="text" value="<%= src %>" />
+		<aui:input cssClass="lfr-input-text-container" label="source-url" name="src" prefix='<%= relative ? "..." : StringPool.BLANK %>' type="text" value="<%= src %>" />
 
 		<aui:input inlineLabel="left" label="relative-to-context-path" name="relative" type="checkbox" value="<%= relative %>" />
 	</aui:fieldset>

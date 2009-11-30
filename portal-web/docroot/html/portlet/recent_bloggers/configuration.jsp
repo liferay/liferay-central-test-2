@@ -127,20 +127,20 @@ if (organizationId > 0) {
 		function(A) {
 			var selectionMethod = A.one('#<portlet:namespace />selectionMethod');
 
-            function showHiddenFields() {
-                var usersSelectionOptions = A.one('#<portlet:namespace />UsersSelectionOptions');
+			function showHiddenFields() {
+				var usersSelectionOptions = A.one('#<portlet:namespace />UsersSelectionOptions');
 
-                if (selectionMethod.val() == 'users') {
-                    usersSelectionOptions.show();
+				if (selectionMethod.val() == 'users') {
+					usersSelectionOptions.show();
 				}
 				else {
 					usersSelectionOptions.hide();
 				}
 			}
 
-            showHiddenFields();
+			showHiddenFields();
 
-            selectionMethod.on('change', showHiddenFields);
+			selectionMethod.on('change', showHiddenFields);
 		}
 	);
 </script>
