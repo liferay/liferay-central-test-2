@@ -86,6 +86,32 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	public static final String TABLE_SQL_DROP = "drop table ${entity.table}";
 
+	<#if entity.getOrder()??>
+		<#assign orderByExpression = "">
+
+		<#assign orderList = entity.getOrder().getColumns()>
+
+		<#list orderList as order>
+			<#if entity.hasCompoundPK() && order.isPrimary()>
+				<#assign orderByExpression = orderByExpression + entity.alias + ".id." + order.name>
+			<#else>
+				<#assign orderByExpression = orderByExpression + entity.alias + "." + order.name>
+			</#if>
+
+			<#if order.isOrderByAscending()>
+				<#assign orderByExpression = orderByExpression + " ASC">
+			<#else>
+				<#assign orderByExpression = orderByExpression + " DESC">
+			</#if>
+
+			<#if order_has_next>
+				<#assign orderByExpression = orderByExpression + ", ">
+			</#if>
+		</#list>
+
+		public static final String ORDER_BY_SQL = " ORDER BY ${orderByExpression}";
+	</#if>
+
 	public static final String DATA_SOURCE = "${entity.dataSource}";
 
 	public static final String SESSION_FACTORY = "${entity.sessionFactory}";

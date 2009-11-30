@@ -32,6 +32,8 @@ import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
@@ -202,9 +204,49 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BasePersistenceImpl.class);
+	protected void appendOrderByComparator(
+		StringBundler query, String entityAlias, OrderByComparator obc) {
+
+		query.append(ORDER_BY_CLAUSE);
+
+		String[] orderByFields = obc.getOrderByFields();
+
+		for (int i = 0; i < orderByFields.length; i++) {
+			query.append(entityAlias);
+			query.append(orderByFields[i]);
+
+			if ((i + 1) < orderByFields.length) {
+				if (obc.isAscending()) {
+					query.append(ORDER_BY_ASC_HAS_NEXT);
+				}
+				else {
+					query.append(ORDER_BY_DESC_HAS_NEXT);
+				}
+			}
+			else {
+				if (obc.isAscending()) {
+					query.append(ORDER_BY_ASC);
+				}
+				else {
+					query.append(ORDER_BY_DESC);
+				}
+			}
+		}
+	}
 
 	protected ModelListener<T>[] listeners = new ModelListener[0];
+
+	protected static final String ORDER_BY_ASC = " ASC";
+
+	protected static final String ORDER_BY_ASC_HAS_NEXT = " ASC, ";
+
+	protected static final String ORDER_BY_CLAUSE = " ORDER BY ";
+
+	protected static final String ORDER_BY_DESC = " DESC";
+
+	protected static final String ORDER_BY_DESC_HAS_NEXT = " DESC, ";
+
+	private static Log _log = LogFactoryUtil.getLog(BasePersistenceImpl.class);
 
 	private DataSource _dataSource;
 	private Dialect _dialect;

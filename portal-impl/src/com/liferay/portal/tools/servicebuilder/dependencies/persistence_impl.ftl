@@ -254,10 +254,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 			if (${entity.varName} == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No ${entity.name} exists with the primary key " + ${entity.PKVarName});
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + ${entity.PKVarName});
 				}
 
-				throw new ${noSuchEntity}Exception("No ${entity.name} exists with the primary key " + ${entity.PKVarName});
+				throw new ${noSuchEntity}Exception(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + ${entity.PKVarName});
 			}
 
 			return remove(${entity.varName});
@@ -552,10 +552,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		if (${entity.varName} == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No ${entity.name} exists with the primary key " + ${entity.PKVarName});
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + ${entity.PKVarName});
 			}
 
-			throw new ${noSuchEntity}Exception("No ${entity.name} exists with the primary key " + ${entity.PKVarName});
+			throw new ${noSuchEntity}Exception(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + ${entity.PKVarName});
 		}
 
 		return ${entity.varName};
@@ -652,27 +652,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBundler query = new StringBundler();
+						StringBundler query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
 
 						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 						<#include "persistence_impl_finder_col.ftl">
 
 						<#if entity.getOrder()??>
-							query.append(" ORDER BY ");
-
-							<#assign orderList = entity.getOrder().getColumns()>
-
-							<#list orderList as order>
-								<#if entity.hasCompoundPK() && order.isPrimary()>
-									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-								<#else>
-									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-								</#if>
-							</#list>
+							query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
 						</#if>
 
-						Query q = session.createQuery(query.toString());
+						String sql = query.toString();
+
+						Query q = session.createQuery(sql);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -774,51 +766,32 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBundler query = new StringBundler();
+						StringBundler query = null;
+
+						if (obc != null) {
+							query = new StringBundler(${finderColsList?size + 2} + (obc.getOrderByFields().size() * 3));
+						}
+						else {
+							query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
+						}
 
 						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 						<#include "persistence_impl_finder_col.ftl">
 
 						if (obc != null) {
-							query.append(" ORDER BY ");
-
-							String[] orderByFields = obc.getOrderByFields();
-
-							for (int i = 0; i < orderByFields.length; i++) {
-								query.append("${entity.alias}.");
-								query.append(orderByFields[i]);
-
-								if (obc.isAscending()) {
-									query.append(" ASC");
-								}
-								else {
-									query.append(" DESC");
-								}
-
-								if ((i + 1) < orderByFields.length) {
-									query.append(", ");
-								}
-							}
+							appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 						}
 
 						<#if entity.getOrder()??>
 							else {
-								query.append(" ORDER BY ");
-
-								<#assign orderList = entity.getOrder().getColumns()>
-
-								<#list orderList as order>
-									<#if entity.hasCompoundPK() && order.isPrimary()>
-										query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-									<#else>
-										query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-									</#if>
-								</#list>
+								query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
 							}
 						</#if>
 
-						Query q = session.createQuery(query.toString());
+						String sql = query.toString();
+
+						Query q = session.createQuery(sql);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -883,16 +856,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				0, 1, obc);
 
 				if (list.isEmpty()) {
-					StringBundler msg = new StringBundler();
+					StringBundler msg = new StringBundler(${(finderColsList?size * 2) + 2});
 
-					msg.append("No ${entity.name} exists with the key {");
+					msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
 					<#list finderColsList as finderCol>
-						msg.append("${finderCol.name}=" + ${finderCol.name});
+						msg.append("<#if finderCol_index != 0>, </#if>${finderCol.name}=");
+						msg.append(${finderCol.name});
 
-						<#if finderCol_has_next>
-							msg.append(", ");
-						<#else>
+						<#if !finderCol_has_next>
 							msg.append(StringPool.CLOSE_CURLY_BRACE);
 						</#if>
 					</#list>
@@ -932,16 +904,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				count - 1, count, obc);
 
 				if (list.isEmpty()) {
-					StringBundler msg = new StringBundler();
+					StringBundler msg = new StringBundler(${(finderColsList?size * 2) + 2});
 
-					msg.append("No ${entity.name} exists with the key {");
+					msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
 					<#list finderColsList as finderCol>
-						msg.append("${finderCol.name}=" + ${finderCol.name});
+						msg.append("<#if finderCol_index != 0>, </#if>${finderCol.name}=");
+						msg.append(${finderCol.name});
 
-						<#if finderCol_has_next>
-							msg.append(", ");
-						<#else>
+						<#if !finderCol_has_next>
 							msg.append(StringPool.CLOSE_CURLY_BRACE);
 						</#if>
 					</#list>
@@ -979,51 +950,32 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				try {
 					session = openSession();
 
-					StringBundler query = new StringBundler();
+					StringBundler query = null;
+
+					if (obc != null) {
+						query = new StringBundler(${finderColsList?size + 2} + (obc.getOrderByFields().size() * 3));
+					}
+					else {
+						query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
+					}
 
 					query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 					<#include "persistence_impl_finder_col.ftl">
 
 					if (obc != null) {
-						query.append(" ORDER BY ");
-
-						String[] orderByFields = obc.getOrderByFields();
-
-						for (int i = 0; i < orderByFields.length; i++) {
-							query.append("${entity.alias}.");
-							query.append(orderByFields[i]);
-
-							if (obc.isAscending()) {
-								query.append(" ASC");
-							}
-							else {
-								query.append(" DESC");
-							}
-
-							if ((i + 1) < orderByFields.length) {
-								query.append(", ");
-							}
-						}
+						appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 					}
 
 					<#if entity.getOrder()??>
 						else {
-							query.append(" ORDER BY ");
-
-							<#assign orderList = entity.getOrder().getColumns()>
-
-							<#list orderList as order>
-								<#if entity.hasCompoundPK() && order.isPrimary()>
-									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-								<#else>
-									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-								</#if>
-							</#list>
+							query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
 						}
 					</#if>
 
-					Query q = session.createQuery(query.toString());
+					String sql = query.toString();
+
+					Query q = session.createQuery(sql);
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1094,16 +1046,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				);
 
 				if ( ${entity.varName} == null) {
-					StringBundler msg = new StringBundler();
+					StringBundler msg = new StringBundler(${(finderColsList?size * 2) + 2});
 
-					msg.append("No ${entity.name} exists with the key {");
+					msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
 					<#list finderColsList as finderCol>
-						msg.append("${finderCol.name}=" + ${finderCol.name});
+						msg.append("<#if finderCol_index != 0>, </#if>${finderCol.name}=");
+						msg.append(${finderCol.name});
 
-						<#if finderCol_has_next>
-							msg.append(", ");
-						<#else>
+						<#if !finderCol_has_next>
 							msg.append(StringPool.CLOSE_CURLY_BRACE);
 						</#if>
 					</#list>
@@ -1181,27 +1132,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBundler query = new StringBundler();
+						StringBundler query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
 
 						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 						<#include "persistence_impl_finder_col.ftl">
 
 						<#if entity.getOrder()??>
-							query.append(" ORDER BY ");
-
-							<#assign orderList = entity.getOrder().getColumns()>
-
-							<#list orderList as order>
-								<#if entity.hasCompoundPK() && order.isPrimary()>
-									query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-								<#else>
-									query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-								</#if>
-							</#list>
+							query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
 						</#if>
 
-						Query q = session.createQuery(query.toString());
+						String sql = query.toString();
+
+						Query q = session.createQuery(sql);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1345,49 +1288,28 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_${entity.alias?upper_case});
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 + (obc.getOrderByFields().size() * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_${entity.alias?upper_case});
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("${entity.alias}.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				<#if entity.getOrder()??>
 					else {
-						query.append(" ORDER BY ");
-
-						<#assign orderList = entity.getOrder().getColumns()>
-
-						<#list orderList as order>
-							<#if entity.hasCompoundPK() && order.isPrimary()>
-								query.append("${entity.alias}.id.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-							<#else>
-								query.append("${entity.alias}.${order.name} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-							</#if>
-						</#list>
+						sql = _SQL_SELECT_${entity.alias?upper_case}.concat(${entity.name}ModelImpl.ORDER_BY_SQL);
 					}
+				<#else>
+					sql = _SQL_SELECT_${entity.alias?upper_case};
 				</#if>
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end, false);
@@ -1521,13 +1443,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				try {
 					session = openSession();
 
-					StringBundler query = new StringBundler();
+					StringBundler query = new StringBundler(${finderColsList?size + 1});
 
 					query.append(_SQL_COUNT_${entity.alias?upper_case}_WHERE);
 
 					<#include "persistence_impl_finder_col.ftl">
 
-					Query q = session.createQuery(query.toString());
+					String sql = query.toString();
+
+					Query q = session.createQuery(sql);
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1672,28 +1596,26 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					try {
 						session = openSession();
 
-						StringBundler sb = new StringBundler();
-
-						sb.append(_SQL_GET${tempEntity.names?upper_case});
+						StringBundler query = null;
+						String sql = null;
 
 						if (obc != null) {
-							sb.append(" ORDER BY ");
-							sb.append(obc.getOrderBy());
+							query = new StringBundler(3);
+
+							query.append(_SQL_GET${tempEntity.names?upper_case});
+							query.append(ORDER_BY_CLAUSE);
+							query.append(obc.getOrderBy());
+
+							sql = query.toString();
 						}
 
 						<#if tempEntity.getOrder()??>
 							else {
-								sb.append(" ORDER BY ");
-
-								<#assign orderList = tempEntity.getOrder().getColumns()>
-
-								<#list orderList as order>
-									sb.append("${tempEntity.table}.${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
-								</#list>
+								sql = _SQL_GET${tempEntity.names?upper_case}.concat(${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.ORDER_BY_SQL);
 							}
+						<#else>
+							sql = _SQL_GET${tempEntity.names?upper_case};
 						</#if>
-
-						String sql = sb.toString();
 
 						SQLQuery q = session.createSQLQuery(sql);
 
@@ -2526,6 +2448,38 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		}
 	</#if>
 
+	private static final String _SQL_SELECT_${entity.alias?upper_case} = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias}";
+
+	<#if entity.getFinderList()?size != 0>
+		private static final String _SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ";
+	</#if>
+
+	private static final String _SQL_COUNT_${entity.alias?upper_case} = "SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias}";
+
+	<#if entity.getFinderList()?size != 0>
+		private static final String _SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias} WHERE ";
+	</#if>
+
+	<#list entity.columnList as column>
+		<#if column.isCollection()>
+			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
+
+			<#if column.isMappingManyToMany()>
+				private static final String _SQL_GET${tempEntity.names?upper_case} = "SELECT {${tempEntity.table}.*} FROM ${tempEntity.table} INNER JOIN ${column.mappingTable} ON (${column.mappingTable}.${tempEntity.PKVarName} = ${tempEntity.table}.${tempEntity.PKVarName}) WHERE (${column.mappingTable}.${entity.PKVarName} = ?)";
+
+				private static final String _SQL_GET${tempEntity.names?upper_case}SIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ?";
+
+				private static final String _SQL_CONTAINS${tempEntity.name?upper_case} = "SELECT COUNT(*) AS COUNT_VALUE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?";
+			<#elseif column.isMappingOneToMany()>
+				private static final String _SQL_GET${tempEntity.names?upper_case} = "SELECT {${tempEntity.table}.*} FROM ${tempEntity.table} INNER JOIN ${entity.table} ON (${entity.table}.${entity.PKVarName} = ${tempEntity.table}.${entity.PKVarName}) WHERE (${entity.table}.${entity.PKVarName} = ?)";
+
+				private static final String _SQL_GET${tempEntity.names?upper_case}SIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM ${tempEntity.table} WHERE ${entity.PKVarName} = ?";
+
+				private static final String _SQL_CONTAINS${tempEntity.name?upper_case} = "SELECT COUNT(*) AS COUNT_VALUE FROM ${tempEntity.table} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?";
+			</#if>
+		</#if>
+	</#list>
+
 	<#list entity.getFinderList() as finder>
 		<#assign finderColsList = finder.getColumns()>
 
@@ -2574,37 +2528,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#list>
 	</#list>
 
-	private static final String _SQL_SELECT_${entity.alias?upper_case} = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias}";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "${entity.alias}.";
 
-	<#if entity.getFinderList()?size != 0>
-		private static final String _SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ";
-	</#if>
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ${entity.name} exists with the primary key ";
 
-	private static final String _SQL_COUNT_${entity.alias?upper_case} = "SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias}";
-
-	<#if entity.getFinderList()?size != 0>
-		private static final String _SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias} WHERE ";
-	</#if>
-
-	<#list entity.columnList as column>
-		<#if column.isCollection()>
-			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
-
-			<#if column.isMappingManyToMany()>
-				private static final String _SQL_GET${tempEntity.names?upper_case} = "SELECT {${tempEntity.table}.*} FROM ${tempEntity.table} INNER JOIN ${column.mappingTable} ON (${column.mappingTable}.${tempEntity.PKVarName} = ${tempEntity.table}.${tempEntity.PKVarName}) WHERE (${column.mappingTable}.${entity.PKVarName} = ?)";
-
-				private static final String _SQL_GET${tempEntity.names?upper_case}SIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ?";
-
-				private static final String _SQL_CONTAINS${tempEntity.name?upper_case} = "SELECT COUNT(*) AS COUNT_VALUE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?";
-			<#elseif column.isMappingOneToMany()>
-				private static final String _SQL_GET${tempEntity.names?upper_case} = "SELECT {${tempEntity.table}.*} FROM ${tempEntity.table} INNER JOIN ${entity.table} ON (${entity.table}.${entity.PKVarName} = ${tempEntity.table}.${entity.PKVarName}) WHERE (${entity.table}.${entity.PKVarName} = ?)";
-
-				private static final String _SQL_GET${tempEntity.names?upper_case}SIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM ${tempEntity.table} WHERE ${entity.PKVarName} = ?";
-
-				private static final String _SQL_CONTAINS${tempEntity.name?upper_case} = "SELECT COUNT(*) AS COUNT_VALUE FROM ${tempEntity.table} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?";
-			</#if>
-		</#if>
-	</#list>
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ${entity.name} exists with the key {";
 
 	private static Log _log = LogFactoryUtil.getLog(${entity.name}PersistenceImpl.class);
 
