@@ -227,7 +227,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 					<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
 				</c:when>
-				<c:when test="<%= (modelResources != null) && !modelResources.isEmpty()) %>">
+				<c:when test="<%= (modelResources != null) && !modelResources.isEmpty() %>">
 
 					<%
 					modelResources = ListUtil.sort(modelResources, new ModelResourceComparator(locale));
