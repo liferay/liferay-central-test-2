@@ -127,7 +127,7 @@ for (int i = 0; i < permissions.size(); i++) {
 
 		List portletResources = ResourceActionsUtil.getModelPortletResources(curModelName);
 
-		if (portletResources.size() > 0) {
+		if (!portletResources.isEmpty()) {
 			curPortletName = (String)portletResources.get(0);
 		}
 	}

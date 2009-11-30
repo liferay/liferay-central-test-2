@@ -41,7 +41,7 @@ else {
 %>
 
 <c:choose>
-	<c:when test="<%= statsUsers.size() == 0 %>">
+	<c:when test="<%= statsUsers.isEmpty() %>">
 		<liferay-ui:message key="there-are-no-recent-bloggers" />
 	</c:when>
 	<c:otherwise>

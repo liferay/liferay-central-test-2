@@ -116,7 +116,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	List colorSchemes = theme2.getColorSchemes();
 
-	if (colorSchemes.size() > 0) {
+	if (!colorSchemes.isEmpty()) {
 		sb.append("<br />");
 		sb.append(LanguageUtil.get(pageContext, "color-schemes"));
 		sb.append(": ");

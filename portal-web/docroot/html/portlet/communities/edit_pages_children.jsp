@@ -47,7 +47,7 @@ else {
 
 String tabs4Names = "new-page";
 
-if ((selLayoutChildren != null) && (selLayoutChildren.size() > 0)) {
+if ((selLayoutChildren != null) && !selLayoutChildren.isEmpty()) {
 	tabs4Names += ",display-order";
 }
 

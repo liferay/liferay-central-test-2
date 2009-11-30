@@ -120,7 +120,7 @@
 	<td>
 
 		<%
-		if (images.size() > 0) {
+		if (!images.isEmpty()) {
 			IGImage image = (IGImage)images.get(0);
 		%>
 

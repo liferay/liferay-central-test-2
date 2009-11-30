@@ -136,7 +136,7 @@ partDayResults = ListUtil.sort(partDayResults, new EventTimeComparator(timeZone,
 
 List<List<CalEvent>> sortedResults = new ArrayList<List<CalEvent>>();
 
-if (partDayResults.size() > 0) {
+if (!partDayResults.isEmpty()) {
 	sortedResults.add(new ArrayList<CalEvent>());
 
 	sortedResults.get(0).add(partDayResults.get(0));
@@ -231,7 +231,7 @@ if (partDayResults.size() > 0) {
 	%>
 
 	<%
-	int eventWidth = 90 / (sortedResults.size() > 0 ? sortedResults.size() : 1);
+	int eventWidth = 90 / (sortedResults.isEmpty() ? 1 : sortedResults.size());
 
 	for (int i = 0; i < sortedResults.size(); i++) {
 		List<CalEvent> displayResults = sortedResults.get(i);

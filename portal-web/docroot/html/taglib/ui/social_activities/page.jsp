@@ -190,7 +190,7 @@ Format timeFormatDate = FastDateFormatFactoryUtil.getTime(locale, timeZone);
 			</c:if>
 		</div>
 
-		<c:if test="<%= feedEnabled && (activities.size() > 0) %>">
+		<c:if test="<%= feedEnabled && !activities.isEmpty() %>">
 			<div class="separator"><!-- --></div>
 
 			<liferay-ui:icon

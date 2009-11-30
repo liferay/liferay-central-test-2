@@ -125,7 +125,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 <liferay-ui:error exception="<%= BillingStreetException.class %>" message="please-enter-a-valid-street" />
 <liferay-ui:error exception="<%= BillingZipException.class %>" message="please-enter-a-valid-zip" />
 
-<c:if test="<%= addresses.size() > 0 %>">
+<c:if test="<%= !addresses.isEmpty() %>">
 	<select onChange="<portlet:namespace />updateAddress(this[this.selectedIndex].value, 'billing');">
 		<option value="">-- <liferay-ui:message key="my-addresses" /> --</option>
 
@@ -275,7 +275,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 
 <table class="lfr-table">
 <tr>
-	<c:if test="<%= addresses.size() > 0 %>">
+	<c:if test="<%= !addresses.isEmpty() %>">
 		<td>
 			<select onChange="<portlet:namespace />updateAddress(this[this.selectedIndex].value, 'shipping');">
 				<option value="">-- <liferay-ui:message key="my-addresses" /> --</option>

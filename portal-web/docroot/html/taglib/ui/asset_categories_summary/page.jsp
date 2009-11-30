@@ -45,7 +45,7 @@ for (AssetVocabulary vocabulary : vocabularies) {
 	List<AssetCategory> curCategories = _filterCategories(categories, vocabulary);
 %>
 
-	<c:if test="<%= curCategories.size() > 0 %>">
+	<c:if test="<%= !curCategories.isEmpty() %>">
 		<span class="taglib-asset-categories-summary">
 			<%= vocabularyName %>:
 

@@ -63,7 +63,7 @@ private void _buildLayoutView(Layout layout, String cssClass, boolean useHtmlTit
 }
 
 private void _buildSiteMap(Layout layout, List<Layout> layouts, long rootLayoutId, boolean includeRootInTree, int displayDepth, boolean showCurrentPage, boolean useHtmlTitle, boolean showHiddenPages, int curDepth, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
-	if (layouts.size() == 0) {
+	if (layouts.isEmpty()) {
 		return;
 	}
 

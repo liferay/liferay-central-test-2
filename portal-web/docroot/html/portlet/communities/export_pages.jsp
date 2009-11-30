@@ -272,7 +272,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }";
 					%>
 
-					<aui:button name="publishBtn" onClick="<%= taglibOnClick %>" value="<%= actionKey %>" style='<%= (results.size() > 0) ? "display: none;" :"" %>' />
+					<aui:button name="publishBtn" onClick="<%= taglibOnClick %>" style='<%= !results.isEmpty() ? "display: none;" : "" %>' value="<%= actionKey %>" />
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">

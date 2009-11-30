@@ -60,7 +60,7 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 				</c:if>
 			</dl>
 
-			<c:if test="<%= colorSchemes.size() > 0 %>">
+			<c:if test="<%= !colorSchemes.isEmpty() %>">
 
 				<%
 				String panelId = renderResponse.getNamespace() + "colorSchemes";

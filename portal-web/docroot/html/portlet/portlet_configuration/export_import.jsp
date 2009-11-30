@@ -278,7 +278,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 
 									List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
-									if (reviewers.size() == 0) {
+									if (reviewers.isEmpty()) {
 										if (liveGroup.isCommunity()) {
 											role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 										}

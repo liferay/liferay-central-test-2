@@ -86,7 +86,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 
 				List subfolders = DLFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
-				if (subfolders.size() > 0) {
+				if (!subfolders.isEmpty()) {
 					int subfoldersCount = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
 					buffer.append("<br /><u>");

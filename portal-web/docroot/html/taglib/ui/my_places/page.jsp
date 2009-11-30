@@ -36,7 +36,7 @@ if (max <= 0) {
 List<Group> myPlaces = user.getMyPlaces(max);
 %>
 
-<c:if test="<%= myPlaces.size() > 0 %>">
+<c:if test="<%= !myPlaces.isEmpty() %>">
 	<ul class="taglib-my-places">
 
 		<%

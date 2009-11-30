@@ -44,7 +44,7 @@ List groupNames = (List)objArray[8];
 	<span class="permission-scopes" id="<portlet:namespace />groupHTML<%= target %>">
 
 		<%
-		if (supportsFilterByGroup && (groups.size() > 0)) {
+		if (supportsFilterByGroup && !groups.isEmpty()) {
 			for (int i = 0; i < groups.size(); i++) {
 				Group group = (Group)groups.get(i);
 

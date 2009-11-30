@@ -151,7 +151,7 @@ private static PortletCategory _getRelevantPortletCategory(PortletCategory portl
 
 		curRelevantPortletCategory.setPortletIds(portletIds);
 
-		if ((curRelevantPortletCategory.getCategories().size() > 0) || (portletIds.size() > 0)) {
+		if (!curRelevantPortletCategory.getCategories().isEmpty() || !portletIds.isEmpty()) {
 			relevantPortletCategory.addCategory(curRelevantPortletCategory);
 		}
 	}

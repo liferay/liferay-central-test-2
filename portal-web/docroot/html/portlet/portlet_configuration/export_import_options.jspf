@@ -40,7 +40,7 @@
 			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>Checkbox"><liferay-ui:message key="setup" /></label>
 		</li>
 
-		<c:if test='<%= tabs2.equals("import") || tabs2.equals("staging") || (PortletItemLocalServiceUtil.getPortletItems(layout.getGroupId(), selPortlet.getRootPortletId(), com.liferay.portal.model.PortletPreferences.class.getName()).size() > 0) %>'>
+		<c:if test='<%= tabs2.equals("import") || tabs2.equals("staging") || !PortletItemLocalServiceUtil.getPortletItems(layout.getGroupId(), selPortlet.getRootPortletId(), com.liferay.portal.model.PortletPreferences.class.getName()).isEmpty() %>'>
 			<li class="tree-item">
 				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS %>" defaultValue="<%= false %>" />
 

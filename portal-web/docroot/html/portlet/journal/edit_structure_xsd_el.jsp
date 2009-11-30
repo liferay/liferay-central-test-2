@@ -111,7 +111,7 @@ if (MathUtil.isEven(count.getValue())) {
 				</td>
 			</c:if>
 
-			<c:if test="<%= el.elements().size() == 0 %>">
+			<c:if test="<%= el.elements().isEmpty() %>">
 				<td>
 
 					<%

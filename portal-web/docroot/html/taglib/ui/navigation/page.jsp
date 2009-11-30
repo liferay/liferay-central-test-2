@@ -115,7 +115,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 		layoutChildren = LayoutLocalServiceUtil.getLayouts(selLayout.getGroupId(), selLayout.isPrivateLayout(), LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 	}
 
-	if (layoutChildren.size() > 0) {
+	if (!layoutChildren.isEmpty()) {
 		StringBuilder tailSB = null;
 
 		if (!nestedChildren) {
@@ -135,7 +135,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 
 				boolean open = false;
 
-				if (includedLayouts.equals("auto") && selBranch.contains(layoutChild) && (layoutChild.getChildren().size() > 0)) {
+				if (includedLayouts.equals("auto") && selBranch.contains(layoutChild) && !layoutChild.getChildren().isEmpty()) {
 					open = true;
 				}
 

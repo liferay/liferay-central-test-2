@@ -25,7 +25,7 @@
 <%
 boolean showAddEntryButton = BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY);
 boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
-showSearch = showSearch && (results.size() > 0);
+showSearch = showSearch && !results.isEmpty();
 %>
 
 <c:if test="<%= showAddEntryButton || showPermissionsButton || showSearch %>">

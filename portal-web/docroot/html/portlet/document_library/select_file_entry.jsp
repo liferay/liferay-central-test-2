@@ -112,7 +112,7 @@ if (folder != null) {
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-	<c:if test="<%= results.size() > 0 %>">
+	<c:if test="<%= !results.isEmpty() %>">
 		<br />
 	</c:if>
 

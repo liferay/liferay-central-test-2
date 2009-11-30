@@ -106,7 +106,7 @@ type = ParamUtil.getString(request, "type", type);
 			if (Validator.isNotNull(structureId)) {
 				List templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
 
-				if (templates.size() > 0) {
+				if (!templates.isEmpty()) {
 					if (Validator.isNull(templateId)) {
 						templateId = article.getTemplateId();
 					}

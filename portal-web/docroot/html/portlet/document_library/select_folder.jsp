@@ -134,7 +134,7 @@ if (folder != null) {
 			<aui:button onClick="<%= editFolderURL %>" value='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />
 		</aui:button-row>
 
-		<c:if test="<%= results.size() > 0 %>">
+		<c:if test="<%= !results.isEmpty() %>">
 			<br />
 		</c:if>
 	</c:if>

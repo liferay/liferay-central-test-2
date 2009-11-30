@@ -29,7 +29,7 @@ List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(scopeGroupId, user.getU
 %>
 
 <c:choose>
-	<c:when test="<%= fileRanks.size() == 0 %>">
+	<c:when test="<%= fileRanks.isEmpty() %>">
 		<liferay-ui:message key="there-are-no-recent-documents" />
 	</c:when>
 	<c:otherwise>

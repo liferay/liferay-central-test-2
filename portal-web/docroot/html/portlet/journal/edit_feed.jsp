@@ -356,7 +356,7 @@ if (feed != null) {
 	</td>
 	<td>
 		<c:choose>
-			<c:when test="<%= templates.size() == 0 %>">
+			<c:when test="<%= templates.isEmpty() %>">
 				<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
 
 				<input type="button" value="<liferay-ui:message key="select" />"

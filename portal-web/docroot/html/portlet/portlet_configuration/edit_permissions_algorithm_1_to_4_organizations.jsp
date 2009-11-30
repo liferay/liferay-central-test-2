@@ -130,10 +130,10 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 
 					List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
 
-					/*if (permissions.size() == 0) {
+					/*if (permissions.isEmpty()) {
 						permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
 
-						if (permissions.size() > 0) {
+						if (!permissions.isEmpty()) {
 							organizationIntersection = true;
 						}
 					}*/
@@ -143,7 +143,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 
 					buffer.append(StringUtil.merge(actionsNames, ", "));
 
-					/*if (permissions.size() == 0) {
+					/*if (permissions.isEmpty()) {
 						row.addText(StringPool.BLANK);
 					}
 					else {

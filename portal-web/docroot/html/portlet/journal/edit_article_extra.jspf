@@ -155,7 +155,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="<%= formTemplateId %>" persistState="<%= true %>" title="<%= formTemplateTitle %>">
 			<div class="journal-form-presentation-label">
 				<c:choose>
-					<c:when test="<%= templates.size() == 0 %>">
+					<c:when test="<%= templates.isEmpty() %>">
 						<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
 
 						<div class="journal-article-required-message portlet-msg-info">

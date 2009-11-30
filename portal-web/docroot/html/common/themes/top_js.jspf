@@ -302,7 +302,7 @@
 			List<String> portletIds = layoutTypePortlet.getPortletIds();
 			%>
 
-			<c:if test="<%= portletIds.size() > 0 && !layoutTypePortlet.hasStateMax() %>">
+			<c:if test="<%= !portletIds.isEmpty() && !layoutTypePortlet.hasStateMax() %>">
 				Liferay.Portlet.list = ['<%= StringUtil.merge(portletIds.toArray(new String[portletIds.size()]), "','") %>'];
 			</c:if>
 		</c:if>

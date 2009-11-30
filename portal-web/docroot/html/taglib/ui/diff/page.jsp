@@ -37,7 +37,7 @@ List targetResults = diffResults[1];
 %>
 
 <c:choose>
-	<c:when test="<%= sourceResults.size() > 0 %>">
+	<c:when test="<%= !sourceResults.isEmpty() %>">
 		<table class="taglib-search-iterator" id="taglib-diff-results">
 		<tr>
 			<td>

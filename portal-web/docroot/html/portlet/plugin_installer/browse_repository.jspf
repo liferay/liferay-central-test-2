@@ -237,7 +237,7 @@ try {
 			if (tabs2.equals("layout-templates") || tabs2.equals("themes")) {
 				List screenshots = pluginPackage.getScreenshots();
 
-				if (screenshots.size() > 0) {
+				if (!screenshots.isEmpty()) {
 					Screenshot screenshot = (Screenshot)screenshots.get(0);
 
 					sb.append("<img align=\"left\" src=\"");

@@ -213,7 +213,7 @@ List updatablePackageIds = new ArrayList();
 						redirect="<%= currentURL %>"
 					/>
 
-					<c:if test="<%= pluginPackages.size() > 0 %>">
+					<c:if test="<%= !pluginPackages.isEmpty() %>">
 						<br />
 					</c:if>
 

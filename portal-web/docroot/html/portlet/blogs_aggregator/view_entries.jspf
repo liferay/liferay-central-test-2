@@ -23,7 +23,7 @@
 %>
 
 <c:choose>
-	<c:when test="<%= results.size() == 0 %>">
+	<c:when test="<%= results.isEmpty() %>">
 		<liferay-ui:message key="there-are-no-blogs" />
 
 		<br /><br />
@@ -67,7 +67,7 @@
 	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
 </c:if>
 
-<c:if test="<%= results.size() > 0 %>">
+<c:if test="<%= !results.isEmpty() %>">
 	<div class="search-container">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>

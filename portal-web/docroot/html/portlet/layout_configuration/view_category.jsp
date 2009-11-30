@@ -83,7 +83,7 @@ while (itr.hasNext()) {
 
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
-if ((categories.size() > 0) || (portlets.size() > 0)) {
+if (!categories.isEmpty() || !portlets.isEmpty()) {
 %>
 
 	<div class="lfr-add-content <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) ? "collapsed" : "" %>" id="<%= newCategoryPath.replace(':', '-') %>">

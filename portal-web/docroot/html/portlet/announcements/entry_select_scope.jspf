@@ -33,7 +33,7 @@
 	List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
 	%>
 
-	<c:if test="<%= groups.size() > 0 %>">
+	<c:if test="<%= !groups.isEmpty() %>">
 		<optgroup label="<liferay-ui:message key="communities" />">
 
 			<%
@@ -55,7 +55,7 @@
 	List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
 	%>
 
-	<c:if test="<%= organizations.size() > 0 %>">
+	<c:if test="<%= !organizations.isEmpty() %>">
 		<optgroup label="<liferay-ui:message key="organizations" />">
 
 			<%
@@ -77,7 +77,7 @@
 	List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
 	%>
 
-	<c:if test="<%= roles.size() > 0 %>">
+	<c:if test="<%= !roles.isEmpty() %>">
 		<optgroup label="<liferay-ui:message key="roles" />">
 
 			<%
@@ -99,7 +99,7 @@
 	List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
 	%>
 
-	<c:if test="<%= userGroups.size() > 0 %>">
+	<c:if test="<%= !userGroups.isEmpty() %>">
 		<optgroup label="<liferay-ui:message key="user-groups" />">
 
 			<%

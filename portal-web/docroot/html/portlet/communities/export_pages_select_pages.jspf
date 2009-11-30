@@ -80,13 +80,13 @@
 			String taglibOnClick = renderResponse.getNamespace() + "showTabs(); Liferay.LayoutExporter.all({pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
 			%>
 
-			<aui:input checked="<%= results.size() == 0 %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
+			<aui:input checked="<%= results.isEmpty() %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
 
 			<%
 			taglibOnClick = renderResponse.getNamespace() + "hideTabs(); Liferay.LayoutExporter.selected({pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
 			%>
 
-			<aui:input checked="<%= results.size() > 0 %>" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
+			<aui:input checked="<%= !results.isEmpty() %>" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
 		</c:when>
 		<c:otherwise>
 
@@ -94,21 +94,21 @@
 			String taglibOnClick = "Liferay.LayoutExporter.all({pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
 			%>
 
-			<aui:input checked="<%= results.size() == 0 %>" disabled="<%= selLayout != null %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
+			<aui:input checked="<%= results.isEmpty() %>" disabled="<%= selLayout != null %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
 
-			<c:if test="<%= results.size() > 0 %>">
+			<c:if test="<%= !results.isEmpty() %>">
 
 				<%
 				taglibOnClick = "Liferay.LayoutExporter.selected({pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
 				%>
 
-				<aui:input checked="<%= results.size() > 0 %>" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
+				<aui:input checked="<%= !results.isEmpty() %>" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
 			</c:if>
 		</c:otherwise>
 	</c:choose>
 </aui:fieldset>
 
-<div class="<%= (results.size() == 0) ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; height: 380px; overflow: auto; padding: 5px;">
+<div class="<%= results.isEmpty() ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; height: 380px; overflow: auto; padding: 5px;">
 	<c:choose>
 		<c:when test="<%= !publish %>">
 			<liferay-util:include page="/html/portlet/communities/tree_js.jsp">

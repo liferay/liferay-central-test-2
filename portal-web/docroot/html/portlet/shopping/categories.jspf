@@ -120,7 +120,7 @@ for (int i = 0; i < results.size(); i++) {
 
 boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
 boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
-boolean showSearch = (results.size() > 0);
+boolean showSearch = !results.isEmpty();
 %>
 
 <c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearch %>">
@@ -331,7 +331,7 @@ for (int i = 0; i < results.size(); i++) {
 }
 
 boolean showAddItemButton = ShoppingCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_ITEM);
-showSearch = results.size() > 0;
+showSearch = !results.isEmpty();
 %>
 
 <c:if test="<%= showAddItemButton || showSearch %>">

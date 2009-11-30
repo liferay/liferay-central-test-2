@@ -60,7 +60,7 @@
 
 			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category, themeDisplay);
 
-			if (portlets.size() > 0) {
+			if (!portlets.isEmpty()) {
 				String title = null;
 
 				if (category.equals(PortletCategoryKeys.MY)) {

@@ -201,7 +201,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 </liferay-ui:custom-attributes-available>
 
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) && (followRedirect || (redirectPage == null)) %>">
-	<c:if test="<%= childPages.size() > 0 %>">
+	<c:if test="<%= !childPages.isEmpty() %>">
 		<div class="child-pages">
 			<h2><liferay-ui:message key="children-pages" /></h2>
 

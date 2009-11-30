@@ -152,7 +152,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 										List subfolders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
-										if (subfolders.size() > 0) {
+										if (!subfolders.isEmpty()) {
 											int subfoldersCount = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
 											buffer.append("<br /><u>");

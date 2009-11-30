@@ -479,7 +479,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				resultRows.add(row);
 			}
 
-			if (comparableFileEntry && (results.size() > 0)) {
+			if (comparableFileEntry && !results.isEmpty()) {
 				DLFileVersion fileVersion = (DLFileVersion)results.get(0);
 			%>
 

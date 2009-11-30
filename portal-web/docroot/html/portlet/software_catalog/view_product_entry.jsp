@@ -211,7 +211,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreenshots(productEntryId);
 %>
 
-<c:if test="<%= productScreenshots.size() > 0 %>">
+<c:if test="<%= !productScreenshots.isEmpty() %>">
 	<div>
 
 		<%
