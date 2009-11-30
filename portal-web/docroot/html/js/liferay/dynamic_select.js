@@ -22,6 +22,7 @@ AUI().add(
 			instance.array = array;
 
 			A.each(
+				array,
 				function(item, index, collection) {
 					var id = item.select;
 					var select = A.one('#' + id);
