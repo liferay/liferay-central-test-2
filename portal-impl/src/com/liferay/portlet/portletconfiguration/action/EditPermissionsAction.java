@@ -223,6 +223,9 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	protected void updateOrganizationPermissions(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		//Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
@@ -326,6 +329,9 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 	protected void updateUserGroupPermissions(ActionRequest actionRequest)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		long userGroupId = ParamUtil.getLong(
