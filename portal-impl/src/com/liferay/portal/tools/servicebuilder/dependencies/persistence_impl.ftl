@@ -769,7 +769,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						StringBundler query = null;
 
 						if (obc != null) {
-							query = new StringBundler(${finderColsList?size + 2} + (obc.getOrderByFields().size() * 3));
+							query = new StringBundler(${finderColsList?size + 2} + (obc.getOrderByFields().length * 3));
 						}
 						else {
 							query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
@@ -953,7 +953,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					StringBundler query = null;
 
 					if (obc != null) {
-						query = new StringBundler(${finderColsList?size + 2} + (obc.getOrderByFields().size() * 3));
+						query = new StringBundler(${finderColsList?size + 2} + (obc.getOrderByFields().length * 3));
 					}
 					else {
 						query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
@@ -1292,7 +1292,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				String sql = null;
 
 				if (obc != null) {
-					query = new StringBundler(2 + (obc.getOrderByFields().size() * 3));
+					query = new StringBundler(2 + (obc.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_${entity.alias?upper_case});
 
