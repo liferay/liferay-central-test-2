@@ -34,7 +34,6 @@ import com.liferay.portal.util.PropsValues;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import java.util.Properties;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
@@ -88,14 +87,7 @@ public class PortalHibernateConfiguration
 				configuration.setProperty("hibernate.dialect", dialect);
 			}
 
-			Properties hibernateProperties =
-				PropsUtil.getProperties("hibernate.", false);
-
-			hibernateProperties.setProperty(
-				"net.sf.ehcache.configurationResourceName",
-				PropsUtil.get("net.sf.ehcache.configurationResourceName"));
-
-			configuration.setProperties(hibernateProperties);
+			configuration.setProperties(PropsUtil.getProperties());
 		}
 		catch (Exception e1) {
 			_log.error(e1, e1);
