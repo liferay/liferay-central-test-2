@@ -50,7 +50,7 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 <%= content %><br />
 
 <c:choose>
-	<c:when test="<%= hitLayoutIds.size() > 0 %>">
+	<c:when test="<%= !hitLayoutIds.isEmpty() %>">
 		<span style="font-size: xx-small;">
 
 		<%
