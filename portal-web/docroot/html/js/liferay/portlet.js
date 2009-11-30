@@ -515,8 +515,8 @@ Liferay.Portlet = {
 Liferay.Portlet.ready = function(fn) {
 	Liferay.on(
 		'portletReady',
-		function(event, data) {
-			fn(data.portletId, data.portlet);
+		function(event) {
+			fn(event.portletId, event.portlet);
 		}
 	);
 };
