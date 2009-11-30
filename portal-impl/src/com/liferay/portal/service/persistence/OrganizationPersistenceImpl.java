@@ -474,7 +474,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -534,7 +534,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -654,7 +654,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-			query.append("organization.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -726,9 +726,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
-
-				query.append(" AND organization.parentOrganizationId != 0 ");
+				query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -788,9 +786,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
-
-				query.append(" AND organization.parentOrganizationId != 0 ");
+				query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -910,9 +906,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-			query.append("organization.companyId = ?");
-
-			query.append(" AND organization.parentOrganizationId != 0 ");
+			query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -986,11 +980,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
+				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("organization.parentOrganizationId = ?");
+				query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1054,11 +1046,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
+				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("organization.parentOrganizationId = ?");
+				query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1187,11 +1177,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-			query.append("organization.companyId = ?");
+			query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("organization.parentOrganizationId = ?");
+			query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1300,22 +1288,17 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("organization.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(organization.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("organization.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -1557,7 +1540,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_COUNT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1601,9 +1584,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_COUNT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
-
-				query.append(" AND organization.parentOrganizationId != 0 ");
+				query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1650,11 +1631,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_COUNT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
+				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("organization.parentOrganizationId = ?");
+				query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1701,22 +1680,17 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_SQL_COUNT_ORGANIZATION_WHERE);
 
-				query.append("organization.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("organization.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(organization.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("organization.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -3185,6 +3159,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		private SqlUpdate _sqlUpdate;
 	}
 
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "organization.companyId = ?";
+	private static final String _FINDER_COLUMN_LOCATIONS_COMPANYID_2 = "organization.companyId = ? AND organization.parentOrganizationId != 0";
+	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "organization.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2 = "organization.parentOrganizationId = ?";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "organization.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "organizationname IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_2 = "organization.name = ?";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(organizationname IS NULL OR organization.name = ?)";
 	private static final String _SQL_SELECT_ORGANIZATION = "SELECT organization FROM Organization organization";
 	private static final String _SQL_SELECT_ORGANIZATION_WHERE = "SELECT organization FROM Organization organization WHERE ";
 	private static final String _SQL_COUNT_ORGANIZATION = "SELECT COUNT(organization) FROM Organization organization";

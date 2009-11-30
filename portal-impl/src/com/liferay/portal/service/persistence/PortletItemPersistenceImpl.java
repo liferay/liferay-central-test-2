@@ -446,11 +446,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
-				query.append("portletItem.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("portletItem.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -508,11 +506,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
-				query.append("portletItem.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("portletItem.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -634,11 +630,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
-			query.append("portletItem.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("portletItem.classNameId = ?");
+			query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -710,28 +704,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
-				query.append("portletItem.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_C_GROUPID_2);
 
 				if (portletId == null) {
-					query.append("portletItem.portletId IS NULL");
+					query.append(_FINDER_COLUMN_G_P_C_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append("(portletItem.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_C_PORTLETID_3);
 					}
-
-					query.append("portletItem.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_C_PORTLETID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("portletItem.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -796,28 +783,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
-				query.append("portletItem.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_C_GROUPID_2);
 
 				if (portletId == null) {
-					query.append("portletItem.portletId IS NULL");
+					query.append(_FINDER_COLUMN_G_P_C_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append("(portletItem.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_C_PORTLETID_3);
 					}
-
-					query.append("portletItem.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_C_PORTLETID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("portletItem.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -950,28 +930,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
-			query.append("portletItem.groupId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_P_C_GROUPID_2);
 
 			if (portletId == null) {
-				query.append("portletItem.portletId IS NULL");
+				query.append(_FINDER_COLUMN_G_P_C_PORTLETID_1);
 			}
 			else {
 				if (portletId.equals(StringPool.BLANK)) {
-					query.append("(portletItem.portletId IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_P_C_PORTLETID_3);
 				}
-
-				query.append("portletItem.portletId = ?");
-
-				if (portletId.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_P_C_PORTLETID_2);
 				}
 			}
 
-			query.append(" AND ");
-
-			query.append("portletItem.classNameId = ?");
+			query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1093,45 +1066,33 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
-				query.append("portletItem.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_N_P_C_GROUPID_2);
 
 				if (name == null) {
-					query.append("portletItem.name IS NULL");
+					query.append(_FINDER_COLUMN_G_N_P_C_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(portletItem.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_N_P_C_NAME_3);
 					}
-
-					query.append("portletItem.lower(name) = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_N_P_C_NAME_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (portletId == null) {
-					query.append("portletItem.portletId IS NULL");
+					query.append(_FINDER_COLUMN_G_N_P_C_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append("(portletItem.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_N_P_C_PORTLETID_3);
 					}
-
-					query.append("portletItem.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_N_P_C_PORTLETID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("portletItem.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_N_P_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1369,11 +1330,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
-				query.append("portletItem.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("portletItem.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1424,28 +1383,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
-				query.append("portletItem.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_C_GROUPID_2);
 
 				if (portletId == null) {
-					query.append("portletItem.portletId IS NULL");
+					query.append(_FINDER_COLUMN_G_P_C_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append("(portletItem.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_C_PORTLETID_3);
 					}
-
-					query.append("portletItem.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_C_PORTLETID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("portletItem.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1502,45 +1454,33 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
-				query.append("portletItem.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_N_P_C_GROUPID_2);
 
 				if (name == null) {
-					query.append("portletItem.name IS NULL");
+					query.append(_FINDER_COLUMN_G_N_P_C_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(portletItem.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_N_P_C_NAME_3);
 					}
-
-					query.append("portletItem.lower(name) = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_N_P_C_NAME_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (portletId == null) {
-					query.append("portletItem.portletId IS NULL");
+					query.append(_FINDER_COLUMN_G_N_P_C_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append("(portletItem.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_N_P_C_PORTLETID_3);
 					}
-
-					query.append("portletItem.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_N_P_C_PORTLETID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("portletItem.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_N_P_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1736,6 +1676,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "portletItem.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_CLASSNAMEID_2 = "portletItem.classNameId = ?";
+	private static final String _FINDER_COLUMN_G_P_C_GROUPID_2 = "portletItem.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_C_PORTLETID_1 = "portletItemportletId IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_P_C_PORTLETID_2 = "portletItem.portletId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_C_PORTLETID_3 = "(portletItemportletId IS NULL OR portletItem.portletId = ?) AND ";
+	private static final String _FINDER_COLUMN_G_P_C_CLASSNAMEID_2 = "portletItem.classNameId = ?";
+	private static final String _FINDER_COLUMN_G_N_P_C_GROUPID_2 = "portletItem.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_N_P_C_NAME_1 = "portletItemname IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_N_P_C_NAME_2 = "portletItem.lower(name) = ? AND ";
+	private static final String _FINDER_COLUMN_G_N_P_C_NAME_3 = "(portletItemname IS NULL OR portletItem.lower(name) = ?) AND ";
+	private static final String _FINDER_COLUMN_G_N_P_C_PORTLETID_1 = "portletItemportletId IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_N_P_C_PORTLETID_2 = "portletItem.portletId = ? AND ";
+	private static final String _FINDER_COLUMN_G_N_P_C_PORTLETID_3 = "(portletItemportletId IS NULL OR portletItem.portletId = ?) AND ";
+	private static final String _FINDER_COLUMN_G_N_P_C_CLASSNAMEID_2 = "portletItem.classNameId = ?";
 	private static final String _SQL_SELECT_PORTLETITEM = "SELECT portletItem FROM PortletItem portletItem";
 	private static final String _SQL_SELECT_PORTLETITEM_WHERE = "SELECT portletItem FROM PortletItem portletItem WHERE ";
 	private static final String _SQL_COUNT_PORTLETITEM = "SELECT COUNT(portletItem) FROM PortletItem portletItem";

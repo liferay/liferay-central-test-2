@@ -477,17 +477,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
 				if (webId == null) {
-					query.append("company.webId IS NULL");
+					query.append(_FINDER_COLUMN_WEBID_WEBID_1);
 				}
 				else {
 					if (webId.equals(StringPool.BLANK)) {
-						query.append("(company.webId IS NULL OR ");
+						query.append(_FINDER_COLUMN_WEBID_WEBID_3);
 					}
-
-					query.append("company.webId = ?");
-
-					if (webId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_WEBID_WEBID_2);
 					}
 				}
 
@@ -595,17 +592,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
 				if (virtualHost == null) {
-					query.append("company.virtualHost IS NULL");
+					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
 				}
 				else {
 					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append("(company.virtualHost IS NULL OR ");
+						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
 					}
-
-					query.append("company.virtualHost = ?");
-
-					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
 					}
 				}
 
@@ -712,17 +706,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
 				if (mx == null) {
-					query.append("company.mx IS NULL");
+					query.append(_FINDER_COLUMN_MX_MX_1);
 				}
 				else {
 					if (mx.equals(StringPool.BLANK)) {
-						query.append("(company.mx IS NULL OR ");
+						query.append(_FINDER_COLUMN_MX_MX_3);
 					}
-
-					query.append("company.mx = ?");
-
-					if (mx.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_MX_MX_2);
 					}
 				}
 
@@ -828,7 +819,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
-				query.append("company.logoId = ?");
+				query.append(_FINDER_COLUMN_LOGOID_LOGOID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -897,7 +888,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
-				query.append("company.system = ?");
+				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -953,7 +944,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
-				query.append("company.system = ?");
+				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1062,7 +1053,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 			query.append(_SQL_SELECT_COMPANY_WHERE);
 
-			query.append("company.system = ?");
+			query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1288,17 +1279,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
 				if (webId == null) {
-					query.append("company.webId IS NULL");
+					query.append(_FINDER_COLUMN_WEBID_WEBID_1);
 				}
 				else {
 					if (webId.equals(StringPool.BLANK)) {
-						query.append("(company.webId IS NULL OR ");
+						query.append(_FINDER_COLUMN_WEBID_WEBID_3);
 					}
-
-					query.append("company.webId = ?");
-
-					if (webId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_WEBID_WEBID_2);
 					}
 				}
 
@@ -1347,17 +1335,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
 				if (virtualHost == null) {
-					query.append("company.virtualHost IS NULL");
+					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
 				}
 				else {
 					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append("(company.virtualHost IS NULL OR ");
+						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
 					}
-
-					query.append("company.virtualHost = ?");
-
-					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
 					}
 				}
 
@@ -1406,17 +1391,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
 				if (mx == null) {
-					query.append("company.mx IS NULL");
+					query.append(_FINDER_COLUMN_MX_MX_1);
 				}
 				else {
 					if (mx.equals(StringPool.BLANK)) {
-						query.append("(company.mx IS NULL OR ");
+						query.append(_FINDER_COLUMN_MX_MX_3);
 					}
-
-					query.append("company.mx = ?");
-
-					if (mx.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_MX_MX_2);
 					}
 				}
 
@@ -1464,7 +1446,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
-				query.append("company.logoId = ?");
+				query.append(_FINDER_COLUMN_LOGOID_LOGOID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1508,7 +1490,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
-				query.append("company.system = ?");
+				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1694,6 +1676,17 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_WEBID_WEBID_1 = "companywebId IS NULL";
+	private static final String _FINDER_COLUMN_WEBID_WEBID_2 = "company.webId = ?";
+	private static final String _FINDER_COLUMN_WEBID_WEBID_3 = "(companywebId IS NULL OR company.webId = ?)";
+	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1 = "companyvirtualHost IS NULL";
+	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2 = "company.virtualHost = ?";
+	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3 = "(companyvirtualHost IS NULL OR company.virtualHost = ?)";
+	private static final String _FINDER_COLUMN_MX_MX_1 = "companymx IS NULL";
+	private static final String _FINDER_COLUMN_MX_MX_2 = "company.mx = ?";
+	private static final String _FINDER_COLUMN_MX_MX_3 = "(companymx IS NULL OR company.mx = ?)";
+	private static final String _FINDER_COLUMN_LOGOID_LOGOID_2 = "company.logoId = ?";
+	private static final String _FINDER_COLUMN_SYSTEM_SYSTEM_2 = "company.system = ?";
 	private static final String _SQL_SELECT_COMPANY = "SELECT company FROM Company company";
 	private static final String _SQL_SELECT_COMPANY_WHERE = "SELECT company FROM Company company WHERE ";
 	private static final String _SQL_COUNT_COMPANY = "SELECT COUNT(company) FROM Company company";

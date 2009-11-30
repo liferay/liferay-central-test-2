@@ -357,7 +357,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 
 				query.append(_SQL_SELECT_CONTACT_WHERE);
 
-				query.append("contact.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -413,7 +413,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 
 				query.append(_SQL_SELECT_CONTACT_WHERE);
 
-				query.append("contact.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -523,7 +523,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 
 			query.append(_SQL_SELECT_CONTACT_WHERE);
 
-			query.append("contact.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -720,7 +720,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 
 				query.append(_SQL_COUNT_CONTACT_WHERE);
 
-				query.append("contact.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -906,6 +906,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "contact.companyId = ?";
 	private static final String _SQL_SELECT_CONTACT = "SELECT contact FROM Contact contact";
 	private static final String _SQL_SELECT_CONTACT_WHERE = "SELECT contact FROM Contact contact WHERE ";
 	private static final String _SQL_COUNT_CONTACT = "SELECT COUNT(contact) FROM Contact contact";

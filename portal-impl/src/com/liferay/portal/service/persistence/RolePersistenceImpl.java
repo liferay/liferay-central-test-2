@@ -496,7 +496,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_SELECT_ROLE_WHERE);
 
-				query.append("role.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -556,7 +556,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_SELECT_ROLE_WHERE);
 
-				query.append("role.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -671,7 +671,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 			query.append(_SQL_SELECT_ROLE_WHERE);
 
-			query.append("role.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -742,17 +742,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				if (subtype == null) {
-					query.append("role.subtype IS NULL");
+					query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_1);
 				}
 				else {
 					if (subtype.equals(StringPool.BLANK)) {
-						query.append("(role.subtype IS NULL OR ");
+						query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_3);
 					}
-
-					query.append("role.subtype = ?");
-
-					if (subtype.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_2);
 					}
 				}
 
@@ -817,17 +814,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				query.append(_SQL_SELECT_ROLE_WHERE);
 
 				if (subtype == null) {
-					query.append("role.subtype IS NULL");
+					query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_1);
 				}
 				else {
 					if (subtype.equals(StringPool.BLANK)) {
-						query.append("(role.subtype IS NULL OR ");
+						query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_3);
 					}
-
-					query.append("role.subtype = ?");
-
-					if (subtype.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_2);
 					}
 				}
 
@@ -947,17 +941,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			query.append(_SQL_SELECT_ROLE_WHERE);
 
 			if (subtype == null) {
-				query.append("role.subtype IS NULL");
+				query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_1);
 			}
 			else {
 				if (subtype.equals(StringPool.BLANK)) {
-					query.append("(role.subtype IS NULL OR ");
+					query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_3);
 				}
-
-				query.append("role.subtype = ?");
-
-				if (subtype.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_2);
 				}
 			}
 
@@ -1067,22 +1058,17 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_SELECT_ROLE_WHERE);
 
-				query.append("role.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("role.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(role.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("role.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -1164,22 +1150,17 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_SELECT_ROLE_WHERE);
 
-				query.append("role.type = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_T_S_TYPE_2);
 
 				if (subtype == null) {
-					query.append("role.subtype IS NULL");
+					query.append(_FINDER_COLUMN_T_S_SUBTYPE_1);
 				}
 				else {
 					if (subtype.equals(StringPool.BLANK)) {
-						query.append("(role.subtype IS NULL OR ");
+						query.append(_FINDER_COLUMN_T_S_SUBTYPE_3);
 					}
-
-					query.append("role.subtype = ?");
-
-					if (subtype.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_T_S_SUBTYPE_2);
 					}
 				}
 
@@ -1247,22 +1228,17 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_SELECT_ROLE_WHERE);
 
-				query.append("role.type = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_T_S_TYPE_2);
 
 				if (subtype == null) {
-					query.append("role.subtype IS NULL");
+					query.append(_FINDER_COLUMN_T_S_SUBTYPE_1);
 				}
 				else {
 					if (subtype.equals(StringPool.BLANK)) {
-						query.append("(role.subtype IS NULL OR ");
+						query.append(_FINDER_COLUMN_T_S_SUBTYPE_3);
 					}
-
-					query.append("role.subtype = ?");
-
-					if (subtype.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_T_S_SUBTYPE_2);
 					}
 				}
 
@@ -1389,22 +1365,17 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 			query.append(_SQL_SELECT_ROLE_WHERE);
 
-			query.append("role.type = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_T_S_TYPE_2);
 
 			if (subtype == null) {
-				query.append("role.subtype IS NULL");
+				query.append(_FINDER_COLUMN_T_S_SUBTYPE_1);
 			}
 			else {
 				if (subtype.equals(StringPool.BLANK)) {
-					query.append("(role.subtype IS NULL OR ");
+					query.append(_FINDER_COLUMN_T_S_SUBTYPE_3);
 				}
-
-				query.append("role.subtype = ?");
-
-				if (subtype.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_T_S_SUBTYPE_2);
 				}
 			}
 
@@ -1521,15 +1492,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_SELECT_ROLE_WHERE);
 
-				query.append("role.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("role.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("role.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -1773,7 +1740,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_COUNT_ROLE_WHERE);
 
-				query.append("role.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1818,17 +1785,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				query.append(_SQL_COUNT_ROLE_WHERE);
 
 				if (subtype == null) {
-					query.append("role.subtype IS NULL");
+					query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_1);
 				}
 				else {
 					if (subtype.equals(StringPool.BLANK)) {
-						query.append("(role.subtype IS NULL OR ");
+						query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_3);
 					}
-
-					query.append("role.subtype = ?");
-
-					if (subtype.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_2);
 					}
 				}
 
@@ -1877,22 +1841,17 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_COUNT_ROLE_WHERE);
 
-				query.append("role.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("role.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(role.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("role.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -1942,22 +1901,17 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_COUNT_ROLE_WHERE);
 
-				query.append("role.type = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_T_S_TYPE_2);
 
 				if (subtype == null) {
-					query.append("role.subtype IS NULL");
+					query.append(_FINDER_COLUMN_T_S_SUBTYPE_1);
 				}
 				else {
 					if (subtype.equals(StringPool.BLANK)) {
-						query.append("(role.subtype IS NULL OR ");
+						query.append(_FINDER_COLUMN_T_S_SUBTYPE_3);
 					}
-
-					query.append("role.subtype = ?");
-
-					if (subtype.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_T_S_SUBTYPE_2);
 					}
 				}
 
@@ -2010,15 +1964,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_SQL_COUNT_ROLE_WHERE);
 
-				query.append("role.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("role.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("role.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3748,6 +3698,21 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		private RolePersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "role.companyId = ?";
+	private static final String _FINDER_COLUMN_SUBTYPE_SUBTYPE_1 = "rolesubtype IS NULL";
+	private static final String _FINDER_COLUMN_SUBTYPE_SUBTYPE_2 = "role.subtype = ?";
+	private static final String _FINDER_COLUMN_SUBTYPE_SUBTYPE_3 = "(rolesubtype IS NULL OR role.subtype = ?)";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "role.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "rolename IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_2 = "role.name = ?";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(rolename IS NULL OR role.name = ?)";
+	private static final String _FINDER_COLUMN_T_S_TYPE_2 = "role.type = ? AND ";
+	private static final String _FINDER_COLUMN_T_S_SUBTYPE_1 = "rolesubtype IS NULL";
+	private static final String _FINDER_COLUMN_T_S_SUBTYPE_2 = "role.subtype = ?";
+	private static final String _FINDER_COLUMN_T_S_SUBTYPE_3 = "(rolesubtype IS NULL OR role.subtype = ?)";
+	private static final String _FINDER_COLUMN_C_C_C_COMPANYID_2 = "role.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "role.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "role.classPK = ?";
 	private static final String _SQL_SELECT_ROLE = "SELECT role FROM Role role";
 	private static final String _SQL_SELECT_ROLE_WHERE = "SELECT role FROM Role role WHERE ";
 	private static final String _SQL_COUNT_ROLE = "SELECT COUNT(role) FROM Role role";

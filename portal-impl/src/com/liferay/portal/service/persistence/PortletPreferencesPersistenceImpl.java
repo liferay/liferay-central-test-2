@@ -459,7 +459,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.plid = ?");
+				query.append(_FINDER_COLUMN_PLID_PLID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -515,7 +515,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.plid = ?");
+				query.append(_FINDER_COLUMN_PLID_PLID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -626,7 +626,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-			query.append("portletPreferences.plid = ?");
+			query.append(_FINDER_COLUMN_PLID_PLID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -692,23 +692,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.plid = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_P_PLID_2);
 
 				if (portletId == null) {
-					query.append("portletPreferences.portletId IS NULL");
+					query.append(_FINDER_COLUMN_P_P_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append(
-							"(portletPreferences.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_P_PORTLETID_3);
 					}
-
-					query.append("portletPreferences.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_P_PORTLETID_2);
 					}
 				}
 
@@ -772,23 +766,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.plid = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_P_PLID_2);
 
 				if (portletId == null) {
-					query.append("portletPreferences.portletId IS NULL");
+					query.append(_FINDER_COLUMN_P_P_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append(
-							"(portletPreferences.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_P_PORTLETID_3);
 					}
-
-					query.append("portletPreferences.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_P_PORTLETID_2);
 					}
 				}
 
@@ -915,22 +903,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-			query.append("portletPreferences.plid = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_P_P_PLID_2);
 
 			if (portletId == null) {
-				query.append("portletPreferences.portletId IS NULL");
+				query.append(_FINDER_COLUMN_P_P_PORTLETID_1);
 			}
 			else {
 				if (portletId.equals(StringPool.BLANK)) {
-					query.append("(portletPreferences.portletId IS NULL OR ");
+					query.append(_FINDER_COLUMN_P_P_PORTLETID_3);
 				}
-
-				query.append("portletPreferences.portletId = ?");
-
-				if (portletId.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_P_P_PORTLETID_2);
 				}
 			}
 
@@ -1004,15 +987,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.ownerId = ?");
+				query.append(_FINDER_COLUMN_O_O_P_OWNERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_O_O_P_OWNERTYPE_2);
 
-				query.append("portletPreferences.ownerType = ?");
-
-				query.append(" AND ");
-
-				query.append("portletPreferences.plid = ?");
+				query.append(_FINDER_COLUMN_O_O_P_PLID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1073,15 +1052,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.ownerId = ?");
+				query.append(_FINDER_COLUMN_O_O_P_OWNERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_O_O_P_OWNERTYPE_2);
 
-				query.append("portletPreferences.ownerType = ?");
-
-				query.append(" AND ");
-
-				query.append("portletPreferences.plid = ?");
+				query.append(_FINDER_COLUMN_O_O_P_PLID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1213,15 +1188,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-			query.append("portletPreferences.ownerId = ?");
+			query.append(_FINDER_COLUMN_O_O_P_OWNERID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_O_O_P_OWNERTYPE_2);
 
-			query.append("portletPreferences.ownerType = ?");
-
-			query.append(" AND ");
-
-			query.append("portletPreferences.plid = ?");
+			query.append(_FINDER_COLUMN_O_O_P_PLID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1339,31 +1310,21 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.ownerId = ?");
+				query.append(_FINDER_COLUMN_O_O_P_P_OWNERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_O_O_P_P_OWNERTYPE_2);
 
-				query.append("portletPreferences.ownerType = ?");
-
-				query.append(" AND ");
-
-				query.append("portletPreferences.plid = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_O_O_P_P_PLID_2);
 
 				if (portletId == null) {
-					query.append("portletPreferences.portletId IS NULL");
+					query.append(_FINDER_COLUMN_O_O_P_P_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append(
-							"(portletPreferences.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_O_O_P_P_PORTLETID_3);
 					}
-
-					query.append("portletPreferences.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_O_O_P_P_PORTLETID_2);
 					}
 				}
 
@@ -1604,7 +1565,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_COUNT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.plid = ?");
+				query.append(_FINDER_COLUMN_PLID_PLID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1649,23 +1610,17 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_COUNT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.plid = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_P_PLID_2);
 
 				if (portletId == null) {
-					query.append("portletPreferences.portletId IS NULL");
+					query.append(_FINDER_COLUMN_P_P_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append(
-							"(portletPreferences.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_P_PORTLETID_3);
 					}
-
-					query.append("portletPreferences.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_P_PORTLETID_2);
 					}
 				}
 
@@ -1718,15 +1673,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_COUNT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.ownerId = ?");
+				query.append(_FINDER_COLUMN_O_O_P_OWNERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_O_O_P_OWNERTYPE_2);
 
-				query.append("portletPreferences.ownerType = ?");
-
-				query.append(" AND ");
-
-				query.append("portletPreferences.plid = ?");
+				query.append(_FINDER_COLUMN_O_O_P_PLID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1779,31 +1730,21 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_SQL_COUNT_PORTLETPREFERENCES_WHERE);
 
-				query.append("portletPreferences.ownerId = ?");
+				query.append(_FINDER_COLUMN_O_O_P_P_OWNERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_O_O_P_P_OWNERTYPE_2);
 
-				query.append("portletPreferences.ownerType = ?");
-
-				query.append(" AND ");
-
-				query.append("portletPreferences.plid = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_O_O_P_P_PLID_2);
 
 				if (portletId == null) {
-					query.append("portletPreferences.portletId IS NULL");
+					query.append(_FINDER_COLUMN_O_O_P_P_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append(
-							"(portletPreferences.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_O_O_P_P_PORTLETID_3);
 					}
-
-					query.append("portletPreferences.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_O_O_P_P_PORTLETID_2);
 					}
 				}
 
@@ -1999,6 +1940,20 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_PLID_PLID_2 = "portletPreferences.plid = ?";
+	private static final String _FINDER_COLUMN_P_P_PLID_2 = "portletPreferences.plid = ? AND ";
+	private static final String _FINDER_COLUMN_P_P_PORTLETID_1 = "portletPreferencesportletId IS NULL";
+	private static final String _FINDER_COLUMN_P_P_PORTLETID_2 = "portletPreferences.portletId = ?";
+	private static final String _FINDER_COLUMN_P_P_PORTLETID_3 = "(portletPreferencesportletId IS NULL OR portletPreferences.portletId = ?)";
+	private static final String _FINDER_COLUMN_O_O_P_OWNERID_2 = "portletPreferences.ownerId = ? AND ";
+	private static final String _FINDER_COLUMN_O_O_P_OWNERTYPE_2 = "portletPreferences.ownerType = ? AND ";
+	private static final String _FINDER_COLUMN_O_O_P_PLID_2 = "portletPreferences.plid = ?";
+	private static final String _FINDER_COLUMN_O_O_P_P_OWNERID_2 = "portletPreferences.ownerId = ? AND ";
+	private static final String _FINDER_COLUMN_O_O_P_P_OWNERTYPE_2 = "portletPreferences.ownerType = ? AND ";
+	private static final String _FINDER_COLUMN_O_O_P_P_PLID_2 = "portletPreferences.plid = ? AND ";
+	private static final String _FINDER_COLUMN_O_O_P_P_PORTLETID_1 = "portletPreferencesportletId IS NULL";
+	private static final String _FINDER_COLUMN_O_O_P_P_PORTLETID_2 = "portletPreferences.portletId = ?";
+	private static final String _FINDER_COLUMN_O_O_P_P_PORTLETID_3 = "(portletPreferencesportletId IS NULL OR portletPreferences.portletId = ?)";
 	private static final String _SQL_SELECT_PORTLETPREFERENCES = "SELECT portletPreferences FROM PortletPreferences portletPreferences";
 	private static final String _SQL_SELECT_PORTLETPREFERENCES_WHERE = "SELECT portletPreferences FROM PortletPreferences portletPreferences WHERE ";
 	private static final String _SQL_COUNT_PORTLETPREFERENCES = "SELECT COUNT(portletPreferences) FROM PortletPreferences portletPreferences";

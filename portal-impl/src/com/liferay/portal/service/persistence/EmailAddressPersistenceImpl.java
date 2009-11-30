@@ -422,7 +422,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -482,7 +482,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -602,7 +602,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-			query.append("emailAddress.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -674,7 +674,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -734,7 +734,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -851,7 +851,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-			query.append("emailAddress.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -925,11 +925,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("emailAddress.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -991,11 +989,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("emailAddress.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1123,11 +1119,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-			query.append("emailAddress.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("emailAddress.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1203,15 +1197,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("emailAddress.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("emailAddress.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -1276,15 +1266,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("emailAddress.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("emailAddress.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1421,15 +1407,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-			query.append("emailAddress.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-			query.append("emailAddress.classNameId = ?");
-
-			query.append(" AND ");
-
-			query.append("emailAddress.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1508,19 +1490,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("emailAddress.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("emailAddress.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("emailAddress.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				query.append(" ORDER BY ");
 
@@ -1590,19 +1566,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("emailAddress.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("emailAddress.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("emailAddress.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1748,19 +1718,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_SQL_SELECT_EMAILADDRESS_WHERE);
 
-			query.append("emailAddress.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-			query.append("emailAddress.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-			query.append(" AND ");
-
-			query.append("emailAddress.classPK = ?");
-
-			query.append(" AND ");
-
-			query.append("emailAddress.primary = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2006,7 +1970,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_COUNT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2050,7 +2014,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_COUNT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2097,11 +2061,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_COUNT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("emailAddress.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2150,15 +2112,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_COUNT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("emailAddress.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("emailAddress.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2210,19 +2168,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_SQL_COUNT_EMAILADDRESS_WHERE);
 
-				query.append("emailAddress.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("emailAddress.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("emailAddress.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("emailAddress.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2414,6 +2366,17 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "emailAddress.companyId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "emailAddress.userId = ?";
+	private static final String _FINDER_COLUMN_C_C_COMPANYID_2 = "emailAddress.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "emailAddress.classNameId = ?";
+	private static final String _FINDER_COLUMN_C_C_C_COMPANYID_2 = "emailAddress.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "emailAddress.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "emailAddress.classPK = ?";
+	private static final String _FINDER_COLUMN_C_C_C_P_COMPANYID_2 = "emailAddress.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2 = "emailAddress.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_CLASSPK_2 = "emailAddress.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_PRIMARY_2 = "emailAddress.primary = ?";
 	private static final String _SQL_SELECT_EMAILADDRESS = "SELECT emailAddress FROM EmailAddress emailAddress";
 	private static final String _SQL_SELECT_EMAILADDRESS_WHERE = "SELECT emailAddress FROM EmailAddress emailAddress WHERE ";
 	private static final String _SQL_COUNT_EMAILADDRESS = "SELECT COUNT(emailAddress) FROM EmailAddress emailAddress";

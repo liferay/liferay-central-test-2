@@ -362,7 +362,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
-				query.append("orgGroupPermission.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -418,7 +418,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
-				query.append("orgGroupPermission.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -533,7 +533,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 			query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
-			query.append("orgGroupPermission.id.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -599,7 +599,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
-				query.append("orgGroupPermission.id.permissionId = ?");
+				query.append(_FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -655,7 +655,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
-				query.append("orgGroupPermission.id.permissionId = ?");
+				query.append(_FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -771,7 +771,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 			query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
 
-			query.append("orgGroupPermission.id.permissionId = ?");
+			query.append(_FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -978,7 +978,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				query.append(_SQL_COUNT_ORGGROUPPERMISSION_WHERE);
 
-				query.append("orgGroupPermission.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1022,7 +1022,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				query.append(_SQL_COUNT_ORGGROUPPERMISSION_WHERE);
 
-				query.append("orgGroupPermission.id.permissionId = ?");
+				query.append(_FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1208,6 +1208,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "orgGroupPermission.id.groupId = ?";
+	private static final String _FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2 = "orgGroupPermission.id.permissionId = ?";
 	private static final String _SQL_SELECT_ORGGROUPPERMISSION = "SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission";
 	private static final String _SQL_SELECT_ORGGROUPPERMISSION_WHERE = "SELECT orgGroupPermission FROM OrgGroupPermission orgGroupPermission WHERE ";
 	private static final String _SQL_COUNT_ORGGROUPPERMISSION = "SELECT COUNT(orgGroupPermission) FROM OrgGroupPermission orgGroupPermission";

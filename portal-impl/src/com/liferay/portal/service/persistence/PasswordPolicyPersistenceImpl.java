@@ -479,11 +479,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 				query.append(_SQL_SELECT_PASSWORDPOLICY_WHERE);
 
-				query.append("passwordPolicy.companyId = ?");
+				query.append(_FINDER_COLUMN_C_DP_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("passwordPolicy.defaultPolicy = ?");
+				query.append(_FINDER_COLUMN_C_DP_DEFAULTPOLICY_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -591,22 +589,17 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 				query.append(_SQL_SELECT_PASSWORDPOLICY_WHERE);
 
-				query.append("passwordPolicy.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("passwordPolicy.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(passwordPolicy.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("passwordPolicy.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -828,11 +821,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 				query.append(_SQL_COUNT_PASSWORDPOLICY_WHERE);
 
-				query.append("passwordPolicy.companyId = ?");
+				query.append(_FINDER_COLUMN_C_DP_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("passwordPolicy.defaultPolicy = ?");
+				query.append(_FINDER_COLUMN_C_DP_DEFAULTPOLICY_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -879,22 +870,17 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 				query.append(_SQL_COUNT_PASSWORDPOLICY_WHERE);
 
-				query.append("passwordPolicy.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("passwordPolicy.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(passwordPolicy.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("passwordPolicy.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -1086,6 +1072,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_C_DP_COMPANYID_2 = "passwordPolicy.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_DP_DEFAULTPOLICY_2 = "passwordPolicy.defaultPolicy = ?";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "passwordPolicy.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "passwordPolicyname IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_2 = "passwordPolicy.name = ?";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(passwordPolicyname IS NULL OR passwordPolicy.name = ?)";
 	private static final String _SQL_SELECT_PASSWORDPOLICY = "SELECT passwordPolicy FROM PasswordPolicy passwordPolicy";
 	private static final String _SQL_SELECT_PASSWORDPOLICY_WHERE = "SELECT passwordPolicy FROM PasswordPolicy passwordPolicy WHERE ";
 	private static final String _SQL_COUNT_PASSWORDPOLICY = "SELECT COUNT(passwordPolicy) FROM PasswordPolicy passwordPolicy";

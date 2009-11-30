@@ -145,11 +145,15 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		return models;
 	}
 
-	public static final String TABLE_ASSETENTRIES_ASSETCATEGORIES = com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.TABLE_ASSETENTRIES_ASSETCATEGORIES;
+	public static final String TABLE_ASSETENTRIES_ASSETCATEGORIES = "AssetEntries_AssetCategories";
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES =
-		com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES;
-	public static final String TABLE_ASSETENTRIES_ASSETTAGS = com.liferay.portlet.asset.model.impl.AssetTagModelImpl.TABLE_ASSETENTRIES_ASSETTAGS;
-	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS = com.liferay.portlet.asset.model.impl.AssetTagModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS;
+		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.finder.cache.enabled.AssetEntries_AssetCategories"),
+			true);
+	public static final String TABLE_ASSETENTRIES_ASSETTAGS = "AssetEntries_AssetTags";
+	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.finder.cache.enabled.AssetEntries_AssetTags"),
+			true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.asset.model.AssetEntry"));
 

@@ -413,7 +413,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
-				query.append("workflowDefinitionLink.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -474,7 +474,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
-				query.append("workflowDefinitionLink.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -595,7 +595,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 			query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
-			query.append("workflowDefinitionLink.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -710,15 +710,11 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
-				query.append("workflowDefinitionLink.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_C_COMPANYID_2);
 
-				query.append("workflowDefinitionLink.companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("workflowDefinitionLink.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -948,7 +944,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 				query.append(_SQL_COUNT_WORKFLOWDEFINITIONLINK_WHERE);
 
-				query.append("workflowDefinitionLink.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -995,15 +991,11 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 				query.append(_SQL_COUNT_WORKFLOWDEFINITIONLINK_WHERE);
 
-				query.append("workflowDefinitionLink.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_C_COMPANYID_2);
 
-				query.append("workflowDefinitionLink.companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("workflowDefinitionLink.classNameId = ?");
+				query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1193,6 +1185,10 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "workflowDefinitionLink.companyId = ?";
+	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 = "workflowDefinitionLink.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_C_COMPANYID_2 = "workflowDefinitionLink.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 = "workflowDefinitionLink.classNameId = ?";
 	private static final String _SQL_SELECT_WORKFLOWDEFINITIONLINK = "SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink";
 	private static final String _SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE = "SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ";
 	private static final String _SQL_COUNT_WORKFLOWDEFINITIONLINK = "SELECT COUNT(workflowDefinitionLink) FROM WorkflowDefinitionLink workflowDefinitionLink";

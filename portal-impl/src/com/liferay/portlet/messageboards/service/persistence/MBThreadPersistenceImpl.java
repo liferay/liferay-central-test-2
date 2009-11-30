@@ -423,7 +423,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -484,7 +484,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -601,7 +601,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-			query.append("mbThread.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -675,11 +675,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -742,11 +740,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -873,11 +869,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-			query.append("mbThread.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("mbThread.categoryId = ?");
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -953,11 +947,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.status = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -1020,11 +1012,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.status = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1150,11 +1140,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-			query.append("mbThread.groupId = ?");
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("mbThread.status = ?");
+			query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1232,19 +1220,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.categoryId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
 
 				if (lastPostDate == null) {
-					query.append("mbThread.lastPostDate IS NULL");
+					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
 				}
 				else {
-					query.append("mbThread.lastPostDate = ?");
+					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
 				}
 
 				query.append(" ORDER BY ");
@@ -1315,19 +1299,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.categoryId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
 
 				if (lastPostDate == null) {
-					query.append("mbThread.lastPostDate IS NULL");
+					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
 				}
 				else {
-					query.append("mbThread.lastPostDate = ?");
+					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
 				}
 
 				if (obc != null) {
@@ -1468,19 +1448,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-			query.append("mbThread.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("mbThread.categoryId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
 
 			if (lastPostDate == null) {
-				query.append("mbThread.lastPostDate IS NULL");
+				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
 			}
 			else {
-				query.append("mbThread.lastPostDate = ?");
+				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
 			}
 
 			if (obc != null) {
@@ -1561,15 +1537,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
 
-				query.append("mbThread.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbThread.status = ?");
+				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -1635,15 +1607,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
 
-				query.append("mbThread.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbThread.status = ?");
+				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1779,15 +1747,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-			query.append("mbThread.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
 
-			query.append("mbThread.categoryId = ?");
-
-			query.append(" AND ");
-
-			query.append("mbThread.status = ?");
+			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2029,7 +1993,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2076,11 +2040,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2128,11 +2090,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.status = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2183,19 +2143,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbThread.categoryId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
 
 				if (lastPostDate == null) {
-					query.append("mbThread.lastPostDate IS NULL");
+					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
 				}
 				else {
-					query.append("mbThread.lastPostDate = ?");
+					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -2249,15 +2205,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
-				query.append("mbThread.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
 
-				query.append("mbThread.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbThread.status = ?");
+				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2371,6 +2323,18 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "mbThread.groupId = ?";
+	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "mbThread.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_CATEGORYID_2 = "mbThread.categoryId = ?";
+	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "mbThread.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_S_STATUS_2 = "mbThread.status = ?";
+	private static final String _FINDER_COLUMN_G_C_L_GROUPID_2 = "mbThread.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_L_CATEGORYID_2 = "mbThread.categoryId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_L_LASTPOSTDATE_1 = "mbThreadlastPostDate IS NULL";
+	private static final String _FINDER_COLUMN_G_C_L_LASTPOSTDATE_2 = "mbThread.lastPostDate = ?";
+	private static final String _FINDER_COLUMN_G_C_S_GROUPID_2 = "mbThread.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_S_CATEGORYID_2 = "mbThread.categoryId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_S_STATUS_2 = "mbThread.status = ?";
 	private static final String _SQL_SELECT_MBTHREAD = "SELECT mbThread FROM MBThread mbThread";
 	private static final String _SQL_SELECT_MBTHREAD_WHERE = "SELECT mbThread FROM MBThread mbThread WHERE ";
 	private static final String _SQL_COUNT_MBTHREAD = "SELECT COUNT(mbThread) FROM MBThread mbThread";

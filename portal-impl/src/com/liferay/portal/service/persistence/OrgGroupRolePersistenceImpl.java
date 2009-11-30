@@ -352,7 +352,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 				query.append(_SQL_SELECT_ORGGROUPROLE_WHERE);
 
-				query.append("orgGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -408,7 +408,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 				query.append(_SQL_SELECT_ORGGROUPROLE_WHERE);
 
-				query.append("orgGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -519,7 +519,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 			query.append(_SQL_SELECT_ORGGROUPROLE_WHERE);
 
-			query.append("orgGroupRole.id.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -585,7 +585,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 				query.append(_SQL_SELECT_ORGGROUPROLE_WHERE);
 
-				query.append("orgGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -641,7 +641,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 				query.append(_SQL_SELECT_ORGGROUPROLE_WHERE);
 
-				query.append("orgGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -752,7 +752,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 			query.append(_SQL_SELECT_ORGGROUPROLE_WHERE);
 
-			query.append("orgGroupRole.id.roleId = ?");
+			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -957,7 +957,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 				query.append(_SQL_COUNT_ORGGROUPROLE_WHERE);
 
-				query.append("orgGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1001,7 +1001,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 
 				query.append(_SQL_COUNT_ORGGROUPROLE_WHERE);
 
-				query.append("orgGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1187,6 +1187,8 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "orgGroupRole.id.groupId = ?";
+	private static final String _FINDER_COLUMN_ROLEID_ROLEID_2 = "orgGroupRole.id.roleId = ?";
 	private static final String _SQL_SELECT_ORGGROUPROLE = "SELECT orgGroupRole FROM OrgGroupRole orgGroupRole";
 	private static final String _SQL_SELECT_ORGGROUPROLE_WHERE = "SELECT orgGroupRole FROM OrgGroupRole orgGroupRole WHERE ";
 	private static final String _SQL_COUNT_ORGGROUPROLE = "SELECT COUNT(orgGroupRole) FROM OrgGroupRole orgGroupRole";

@@ -422,7 +422,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
-				query.append("tasksProposal.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -483,7 +483,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
-				query.append("tasksProposal.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -601,7 +601,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
-			query.append("tasksProposal.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -674,11 +674,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
-				query.append("tasksProposal.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("tasksProposal.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -741,11 +739,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
-				query.append("tasksProposal.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("tasksProposal.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -872,11 +868,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
-			query.append("tasksProposal.groupId = ?");
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("tasksProposal.userId = ?");
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -986,22 +980,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
-				query.append("tasksProposal.classNameId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				if (classPK == null) {
-					query.append("tasksProposal.classPK IS NULL");
+					query.append(_FINDER_COLUMN_C_C_CLASSPK_1);
 				}
 				else {
 					if (classPK.equals(StringPool.BLANK)) {
-						query.append("(tasksProposal.classPK IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_C_CLASSPK_3);
 					}
-
-					query.append("tasksProposal.classPK = ?");
-
-					if (classPK.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 					}
 				}
 
@@ -1238,7 +1227,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_SQL_COUNT_TASKSPROPOSAL_WHERE);
 
-				query.append("tasksProposal.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1282,11 +1271,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_SQL_COUNT_TASKSPROPOSAL_WHERE);
 
-				query.append("tasksProposal.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("tasksProposal.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1333,22 +1320,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_SQL_COUNT_TASKSPROPOSAL_WHERE);
 
-				query.append("tasksProposal.classNameId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				if (classPK == null) {
-					query.append("tasksProposal.classPK IS NULL");
+					query.append(_FINDER_COLUMN_C_C_CLASSPK_1);
 				}
 				else {
 					if (classPK.equals(StringPool.BLANK)) {
-						query.append("(tasksProposal.classPK IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_C_CLASSPK_3);
 					}
-
-					query.append("tasksProposal.classPK = ?");
-
-					if (classPK.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 					}
 				}
 
@@ -1450,6 +1432,13 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "tasksProposal.groupId = ?";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "tasksProposal.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "tasksProposal.userId = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "tasksProposal.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_1 = "tasksProposalclassPK IS NULL";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "tasksProposal.classPK = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_3 = "(tasksProposalclassPK IS NULL OR tasksProposal.classPK = ?)";
 	private static final String _SQL_SELECT_TASKSPROPOSAL = "SELECT tasksProposal FROM TasksProposal tasksProposal";
 	private static final String _SQL_SELECT_TASKSPROPOSAL_WHERE = "SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ";
 	private static final String _SQL_COUNT_TASKSPROPOSAL = "SELECT COUNT(tasksProposal) FROM TasksProposal tasksProposal";

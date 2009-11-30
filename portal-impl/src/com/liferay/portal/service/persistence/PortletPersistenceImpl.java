@@ -382,7 +382,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 				query.append(_SQL_SELECT_PORTLET_WHERE);
 
-				query.append("portlet.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -438,7 +438,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 				query.append(_SQL_SELECT_PORTLET_WHERE);
 
-				query.append("portlet.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -547,7 +547,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 			query.append(_SQL_SELECT_PORTLET_WHERE);
 
-			query.append("portlet.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -647,22 +647,17 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 				query.append(_SQL_SELECT_PORTLET_WHERE);
 
-				query.append("portlet.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
 				if (portletId == null) {
-					query.append("portlet.portletId IS NULL");
+					query.append(_FINDER_COLUMN_C_P_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append("(portlet.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_P_PORTLETID_3);
 					}
-
-					query.append("portlet.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_P_PORTLETID_2);
 					}
 				}
 
@@ -879,7 +874,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 				query.append(_SQL_COUNT_PORTLET_WHERE);
 
-				query.append("portlet.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -924,22 +919,17 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 				query.append(_SQL_COUNT_PORTLET_WHERE);
 
-				query.append("portlet.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
 				if (portletId == null) {
-					query.append("portlet.portletId IS NULL");
+					query.append(_FINDER_COLUMN_C_P_PORTLETID_1);
 				}
 				else {
 					if (portletId.equals(StringPool.BLANK)) {
-						query.append("(portlet.portletId IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_P_PORTLETID_3);
 					}
-
-					query.append("portlet.portletId = ?");
-
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_P_PORTLETID_2);
 					}
 				}
 
@@ -1131,6 +1121,11 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "portlet.companyId = ?";
+	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "portlet.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_PORTLETID_1 = "portletportletId IS NULL";
+	private static final String _FINDER_COLUMN_C_P_PORTLETID_2 = "portlet.portletId = ?";
+	private static final String _FINDER_COLUMN_C_P_PORTLETID_3 = "(portletportletId IS NULL OR portlet.portletId = ?)";
 	private static final String _SQL_SELECT_PORTLET = "SELECT portlet FROM Portlet portlet";
 	private static final String _SQL_SELECT_PORTLET_WHERE = "SELECT portlet FROM Portlet portlet WHERE ";
 	private static final String _SQL_COUNT_PORTLET = "SELECT COUNT(portlet) FROM Portlet portlet";

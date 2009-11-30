@@ -403,11 +403,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 				query.append(_SQL_SELECT_RATINGSENTRY_WHERE);
 
-				query.append("ratingsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("ratingsEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -465,11 +463,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 				query.append(_SQL_SELECT_RATINGSENTRY_WHERE);
 
-				query.append("ratingsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("ratingsEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -589,11 +585,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 			query.append(_SQL_SELECT_RATINGSENTRY_WHERE);
 
-			query.append("ratingsEntry.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-			query.append(" AND ");
-
-			query.append("ratingsEntry.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -701,15 +695,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 				query.append(_SQL_SELECT_RATINGSENTRY_WHERE);
 
-				query.append("ratingsEntry.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_CLASSNAMEID_2);
 
-				query.append("ratingsEntry.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("ratingsEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_U_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -929,11 +919,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 				query.append(_SQL_COUNT_RATINGSENTRY_WHERE);
 
-				query.append("ratingsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("ratingsEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -982,15 +970,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 				query.append(_SQL_COUNT_RATINGSENTRY_WHERE);
 
-				query.append("ratingsEntry.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_CLASSNAMEID_2);
 
-				query.append("ratingsEntry.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("ratingsEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_U_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1090,6 +1074,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	protected com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence")
 	protected com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence;
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "ratingsEntry.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "ratingsEntry.classPK = ?";
+	private static final String _FINDER_COLUMN_U_C_C_USERID_2 = "ratingsEntry.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_CLASSNAMEID_2 = "ratingsEntry.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_CLASSPK_2 = "ratingsEntry.classPK = ?";
 	private static final String _SQL_SELECT_RATINGSENTRY = "SELECT ratingsEntry FROM RatingsEntry ratingsEntry";
 	private static final String _SQL_SELECT_RATINGSENTRY_WHERE = "SELECT ratingsEntry FROM RatingsEntry ratingsEntry WHERE ";
 	private static final String _SQL_COUNT_RATINGSENTRY = "SELECT COUNT(ratingsEntry) FROM RatingsEntry ratingsEntry";

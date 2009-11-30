@@ -576,17 +576,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("igImage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igImage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("igImage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -651,17 +648,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("igImage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igImage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("igImage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -781,17 +775,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 			if (uuid == null) {
-				query.append("igImage.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(igImage.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("igImage.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -902,23 +893,18 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("igImage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igImage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("igImage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -997,7 +983,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1057,7 +1043,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1172,7 +1158,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-			query.append("igImage.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1275,7 +1261,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.smallImageId = ?");
+				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1381,7 +1367,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.largeImageId = ?");
+				query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1487,7 +1473,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.custom1ImageId = ?");
+				query.append(_FINDER_COLUMN_CUSTOM1IMAGEID_CUSTOM1IMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1593,7 +1579,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.custom2ImageId = ?");
+				query.append(_FINDER_COLUMN_CUSTOM2IMAGEID_CUSTOM2IMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1667,11 +1653,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1733,11 +1717,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1861,11 +1843,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-			query.append("igImage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("igImage.userId = ?");
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1938,11 +1918,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -2004,11 +1982,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2132,11 +2108,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-			query.append("igImage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("igImage.folderId = ?");
+			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2213,26 +2187,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 				if (name == null) {
-					query.append("igImage.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(igImage.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 					}
-
-					query.append("igImage.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 					}
 				}
 
@@ -2302,26 +2269,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 				if (name == null) {
-					query.append("igImage.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(igImage.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 					}
-
-					query.append("igImage.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 					}
 				}
 
@@ -2458,26 +2418,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
-			query.append("igImage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("igImage.folderId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 			if (name == null) {
-				query.append("igImage.name IS NULL");
+				query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(igImage.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 				}
-
-				query.append("igImage.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 				}
 			}
 
@@ -2757,17 +2710,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("igImage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igImage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("igImage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2817,23 +2767,18 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("igImage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igImage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("igImage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2881,7 +2826,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2925,7 +2870,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
-				query.append("igImage.smallImageId = ?");
+				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2969,7 +2914,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
-				query.append("igImage.largeImageId = ?");
+				query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3014,7 +2959,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
-				query.append("igImage.custom1ImageId = ?");
+				query.append(_FINDER_COLUMN_CUSTOM1IMAGEID_CUSTOM1IMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3059,7 +3004,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
-				query.append("igImage.custom2ImageId = ?");
+				query.append(_FINDER_COLUMN_CUSTOM2IMAGEID_CUSTOM2IMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3103,11 +3048,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3154,11 +3097,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3209,26 +3150,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
-				query.append("igImage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igImage.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 				if (name == null) {
-					query.append("igImage.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(igImage.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 					}
-
-					query.append("igImage.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 					}
 				}
 
@@ -3340,6 +3274,27 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "igImageuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "igImage.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(igImageuuid IS NULL OR igImage.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "igImageuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "igImage.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(igImageuuid IS NULL OR igImage.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "igImage.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "igImage.groupId = ?";
+	private static final String _FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2 = "igImage.smallImageId = ?";
+	private static final String _FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2 = "igImage.largeImageId = ?";
+	private static final String _FINDER_COLUMN_CUSTOM1IMAGEID_CUSTOM1IMAGEID_2 = "igImage.custom1ImageId = ?";
+	private static final String _FINDER_COLUMN_CUSTOM2IMAGEID_CUSTOM2IMAGEID_2 = "igImage.custom2ImageId = ?";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "igImage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "igImage.userId = ?";
+	private static final String _FINDER_COLUMN_G_F_GROUPID_2 = "igImage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_FOLDERID_2 = "igImage.folderId = ?";
+	private static final String _FINDER_COLUMN_G_F_N_GROUPID_2 = "igImage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_FOLDERID_2 = "igImage.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "igImagename IS NULL";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_2 = "igImage.name = ?";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_3 = "(igImagename IS NULL OR igImage.name = ?)";
 	private static final String _SQL_SELECT_IGIMAGE = "SELECT igImage FROM IGImage igImage";
 	private static final String _SQL_SELECT_IGIMAGE_WHERE = "SELECT igImage FROM IGImage igImage WHERE ";
 	private static final String _SQL_COUNT_IGIMAGE = "SELECT COUNT(igImage) FROM IGImage igImage";

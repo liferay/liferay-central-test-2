@@ -512,17 +512,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 				if (uuid == null) {
-					query.append("journalStructure.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalStructure.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("journalStructure.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -587,17 +584,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 				if (uuid == null) {
-					query.append("journalStructure.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalStructure.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("journalStructure.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -718,17 +712,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 			if (uuid == null) {
-				query.append("journalStructure.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(journalStructure.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("journalStructure.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -840,23 +831,18 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 				if (uuid == null) {
-					query.append("journalStructure.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalStructure.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("journalStructure.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("journalStructure.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -936,7 +922,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
-				query.append("journalStructure.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -996,7 +982,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
-				query.append("journalStructure.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1113,7 +1099,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
-			query.append("journalStructure.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1186,18 +1172,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 				if (structureId == null) {
-					query.append("journalStructure.structureId IS NULL");
+					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
 				}
 				else {
 					if (structureId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalStructure.structureId IS NULL OR ");
+						query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
 					}
-
-					query.append("journalStructure.structureId = ?");
-
-					if (structureId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
 					}
 				}
 
@@ -1262,18 +1244,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 				if (structureId == null) {
-					query.append("journalStructure.structureId IS NULL");
+					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
 				}
 				else {
 					if (structureId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalStructure.structureId IS NULL OR ");
+						query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
 					}
-
-					query.append("journalStructure.structureId = ?");
-
-					if (structureId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
 					}
 				}
 
@@ -1396,17 +1374,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 			if (structureId == null) {
-				query.append("journalStructure.structureId IS NULL");
+				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
 			}
 			else {
 				if (structureId.equals(StringPool.BLANK)) {
-					query.append("(journalStructure.structureId IS NULL OR ");
+					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
 				}
-
-				query.append("journalStructure.structureId = ?");
-
-				if (structureId.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
 				}
 			}
 
@@ -1517,23 +1492,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
-				query.append("journalStructure.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
 				if (structureId == null) {
-					query.append("journalStructure.structureId IS NULL");
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREID_1);
 				}
 				else {
 					if (structureId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalStructure.structureId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_S_STRUCTUREID_3);
 					}
-
-					query.append("journalStructure.structureId = ?");
-
-					if (structureId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_S_STRUCTUREID_2);
 					}
 				}
 
@@ -1616,23 +1585,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
-				query.append("journalStructure.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
 				if (parentStructureId == null) {
-					query.append("journalStructure.parentStructureId IS NULL");
+					query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_1);
 				}
 				else {
 					if (parentStructureId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalStructure.parentStructureId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3);
 					}
-
-					query.append("journalStructure.parentStructureId = ?");
-
-					if (parentStructureId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2);
 					}
 				}
 
@@ -1701,23 +1664,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
-				query.append("journalStructure.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
 				if (parentStructureId == null) {
-					query.append("journalStructure.parentStructureId IS NULL");
+					query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_1);
 				}
 				else {
 					if (parentStructureId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalStructure.parentStructureId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3);
 					}
-
-					query.append("journalStructure.parentStructureId = ?");
-
-					if (parentStructureId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2);
 					}
 				}
 
@@ -1850,23 +1807,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			query.append(_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
-			query.append("journalStructure.groupId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
 			if (parentStructureId == null) {
-				query.append("journalStructure.parentStructureId IS NULL");
+				query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_1);
 			}
 			else {
 				if (parentStructureId.equals(StringPool.BLANK)) {
-					query.append(
-						"(journalStructure.parentStructureId IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3);
 				}
-
-				query.append("journalStructure.parentStructureId = ?");
-
-				if (parentStructureId.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2);
 				}
 			}
 
@@ -2119,17 +2070,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query.append(_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
 				if (uuid == null) {
-					query.append("journalStructure.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalStructure.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("journalStructure.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2179,23 +2127,18 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query.append(_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
 				if (uuid == null) {
-					query.append("journalStructure.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalStructure.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("journalStructure.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("journalStructure.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2243,7 +2186,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
-				query.append("journalStructure.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2288,18 +2231,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query.append(_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
 				if (structureId == null) {
-					query.append("journalStructure.structureId IS NULL");
+					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
 				}
 				else {
 					if (structureId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalStructure.structureId IS NULL OR ");
+						query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
 					}
-
-					query.append("journalStructure.structureId = ?");
-
-					if (structureId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
 					}
 				}
 
@@ -2348,23 +2287,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
-				query.append("journalStructure.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
 				if (structureId == null) {
-					query.append("journalStructure.structureId IS NULL");
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREID_1);
 				}
 				else {
 					if (structureId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalStructure.structureId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_S_STRUCTUREID_3);
 					}
-
-					query.append("journalStructure.structureId = ?");
-
-					if (structureId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_S_STRUCTUREID_2);
 					}
 				}
 
@@ -2415,23 +2348,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
-				query.append("journalStructure.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
 				if (parentStructureId == null) {
-					query.append("journalStructure.parentStructureId IS NULL");
+					query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_1);
 				}
 				else {
 					if (parentStructureId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalStructure.parentStructureId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3);
 					}
-
-					query.append("journalStructure.parentStructureId = ?");
-
-					if (parentStructureId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2);
 					}
 				}
 
@@ -2543,6 +2470,25 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "journalStructureuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "journalStructure.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(journalStructureuuid IS NULL OR journalStructure.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "journalStructureuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "journalStructure.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(journalStructureuuid IS NULL OR journalStructure.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "journalStructure.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "journalStructure.groupId = ?";
+	private static final String _FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1 = "journalStructurestructureId IS NULL";
+	private static final String _FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2 = "journalStructure.structureId = ?";
+	private static final String _FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3 = "(journalStructurestructureId IS NULL OR journalStructure.structureId = ?)";
+	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "journalStructure.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_1 = "journalStructurestructureId IS NULL";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_2 = "journalStructure.structureId = ?";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_3 = "(journalStructurestructureId IS NULL OR journalStructure.structureId = ?)";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "journalStructure.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_1 = "journalStructureparentStructureId IS NULL";
+	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2 = "journalStructure.parentStructureId = ?";
+	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3 = "(journalStructureparentStructureId IS NULL OR journalStructure.parentStructureId = ?)";
 	private static final String _SQL_SELECT_JOURNALSTRUCTURE = "SELECT journalStructure FROM JournalStructure journalStructure";
 	private static final String _SQL_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT journalStructure FROM JournalStructure journalStructure WHERE ";
 	private static final String _SQL_COUNT_JOURNALSTRUCTURE = "SELECT COUNT(journalStructure) FROM JournalStructure journalStructure";

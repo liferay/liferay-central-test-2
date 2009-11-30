@@ -466,7 +466,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -527,7 +527,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -646,7 +646,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 			query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-			query.append("scProductEntry.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -719,7 +719,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -780,7 +780,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -901,7 +901,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 			query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-			query.append("scProductEntry.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -974,11 +974,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("scProductEntry.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1041,11 +1039,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("scProductEntry.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1174,11 +1170,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 			query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
-			query.append("scProductEntry.groupId = ?");
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("scProductEntry.userId = ?");
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1290,35 +1284,26 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				query.append(_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 				if (repoGroupId == null) {
-					query.append("scProductEntry.repoGroupId IS NULL");
+					query.append(_FINDER_COLUMN_RG_RA_REPOGROUPID_1);
 				}
 				else {
 					if (repoGroupId.equals(StringPool.BLANK)) {
-						query.append("(scProductEntry.repoGroupId IS NULL OR ");
+						query.append(_FINDER_COLUMN_RG_RA_REPOGROUPID_3);
 					}
-
-					query.append("scProductEntry.lower(repoGroupId) = ?");
-
-					if (repoGroupId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_RG_RA_REPOGROUPID_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (repoArtifactId == null) {
-					query.append("scProductEntry.repoArtifactId IS NULL");
+					query.append(_FINDER_COLUMN_RG_RA_REPOARTIFACTID_1);
 				}
 				else {
 					if (repoArtifactId.equals(StringPool.BLANK)) {
-						query.append(
-							"(scProductEntry.repoArtifactId IS NULL OR ");
+						query.append(_FINDER_COLUMN_RG_RA_REPOARTIFACTID_3);
 					}
-
-					query.append("scProductEntry.lower(repoArtifactId) = ?");
-
-					if (repoArtifactId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_RG_RA_REPOARTIFACTID_2);
 					}
 				}
 
@@ -1565,7 +1550,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1609,7 +1594,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1653,11 +1638,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 				query.append(_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
-				query.append("scProductEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("scProductEntry.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1705,35 +1688,26 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				query.append(_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
 				if (repoGroupId == null) {
-					query.append("scProductEntry.repoGroupId IS NULL");
+					query.append(_FINDER_COLUMN_RG_RA_REPOGROUPID_1);
 				}
 				else {
 					if (repoGroupId.equals(StringPool.BLANK)) {
-						query.append("(scProductEntry.repoGroupId IS NULL OR ");
+						query.append(_FINDER_COLUMN_RG_RA_REPOGROUPID_3);
 					}
-
-					query.append("scProductEntry.lower(repoGroupId) = ?");
-
-					if (repoGroupId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_RG_RA_REPOGROUPID_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (repoArtifactId == null) {
-					query.append("scProductEntry.repoArtifactId IS NULL");
+					query.append(_FINDER_COLUMN_RG_RA_REPOARTIFACTID_1);
 				}
 				else {
 					if (repoArtifactId.equals(StringPool.BLANK)) {
-						query.append(
-							"(scProductEntry.repoArtifactId IS NULL OR ");
+						query.append(_FINDER_COLUMN_RG_RA_REPOARTIFACTID_3);
 					}
-
-					query.append("scProductEntry.lower(repoArtifactId) = ?");
-
-					if (repoArtifactId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_RG_RA_REPOARTIFACTID_2);
 					}
 				}
 
@@ -2385,6 +2359,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		private SCProductEntryPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "scProductEntry.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "scProductEntry.companyId = ?";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "scProductEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "scProductEntry.userId = ?";
+	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_1 = "scProductEntryrepoGroupId IS NULL AND ";
+	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_2 = "scProductEntry.lower(repoGroupId) = ? AND ";
+	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_3 = "(scProductEntryrepoGroupId IS NULL OR scProductEntry.lower(repoGroupId) = ?) AND ";
+	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_1 = "scProductEntryrepoArtifactId IS NULL";
+	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_2 = "scProductEntry.lower(repoArtifactId) = ?";
+	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_3 = "(scProductEntryrepoArtifactId IS NULL OR scProductEntry.lower(repoArtifactId) = ?)";
 	private static final String _SQL_SELECT_SCPRODUCTENTRY = "SELECT scProductEntry FROM SCProductEntry scProductEntry";
 	private static final String _SQL_SELECT_SCPRODUCTENTRY_WHERE = "SELECT scProductEntry FROM SCProductEntry scProductEntry WHERE ";
 	private static final String _SQL_COUNT_SCPRODUCTENTRY = "SELECT COUNT(scProductEntry) FROM SCProductEntry scProductEntry";

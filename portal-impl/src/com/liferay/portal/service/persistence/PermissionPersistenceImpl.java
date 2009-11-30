@@ -424,7 +424,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
-				query.append("permission.resourceId = ?");
+				query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -480,7 +480,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
-				query.append("permission.resourceId = ?");
+				query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -594,7 +594,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 			query.append(_SQL_SELECT_PERMISSION_WHERE);
 
-			query.append("permission.resourceId = ?");
+			query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -696,23 +696,18 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
 				if (actionId == null) {
-					query.append("permission.actionId IS NULL");
+					query.append(_FINDER_COLUMN_A_R_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append("(permission.actionId IS NULL OR ");
+						query.append(_FINDER_COLUMN_A_R_ACTIONID_3);
 					}
-
-					query.append("permission.actionId = ?");
-
-					if (actionId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_A_R_ACTIONID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("permission.resourceId = ?");
+				query.append(_FINDER_COLUMN_A_R_RESOURCEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -928,7 +923,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 				query.append(_SQL_COUNT_PERMISSION_WHERE);
 
-				query.append("permission.resourceId = ?");
+				query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -974,23 +969,18 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				query.append(_SQL_COUNT_PERMISSION_WHERE);
 
 				if (actionId == null) {
-					query.append("permission.actionId IS NULL");
+					query.append(_FINDER_COLUMN_A_R_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append("(permission.actionId IS NULL OR ");
+						query.append(_FINDER_COLUMN_A_R_ACTIONID_3);
 					}
-
-					query.append("permission.actionId = ?");
-
-					if (actionId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_A_R_ACTIONID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("permission.resourceId = ?");
+				query.append(_FINDER_COLUMN_A_R_RESOURCEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2707,6 +2697,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_RESOURCEID_RESOURCEID_2 = "permission.resourceId = ?";
+	private static final String _FINDER_COLUMN_A_R_ACTIONID_1 = "permissionactionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_A_R_ACTIONID_2 = "permission.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_A_R_ACTIONID_3 = "(permissionactionId IS NULL OR permission.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_A_R_RESOURCEID_2 = "permission.resourceId = ?";
 	private static final String _SQL_SELECT_PERMISSION = "SELECT permission FROM Permission permission";
 	private static final String _SQL_SELECT_PERMISSION_WHERE = "SELECT permission FROM Permission permission WHERE ";
 	private static final String _SQL_COUNT_PERMISSION = "SELECT COUNT(permission) FROM Permission permission";

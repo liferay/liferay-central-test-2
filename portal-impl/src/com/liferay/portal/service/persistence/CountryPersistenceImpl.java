@@ -451,17 +451,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 				if (name == null) {
-					query.append("country.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(country.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("country.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -572,17 +569,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 				if (a2 == null) {
-					query.append("country.a2 IS NULL");
+					query.append(_FINDER_COLUMN_A2_A2_1);
 				}
 				else {
 					if (a2.equals(StringPool.BLANK)) {
-						query.append("(country.a2 IS NULL OR ");
+						query.append(_FINDER_COLUMN_A2_A2_3);
 					}
-
-					query.append("country.a2 = ?");
-
-					if (a2.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_A2_A2_2);
 					}
 				}
 
@@ -693,17 +687,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
 				if (a3 == null) {
-					query.append("country.a3 IS NULL");
+					query.append(_FINDER_COLUMN_A3_A3_1);
 				}
 				else {
 					if (a3.equals(StringPool.BLANK)) {
-						query.append("(country.a3 IS NULL OR ");
+						query.append(_FINDER_COLUMN_A3_A3_3);
 					}
-
-					query.append("country.a3 = ?");
-
-					if (a3.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_A3_A3_2);
 					}
 				}
 
@@ -781,7 +772,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
-				query.append("country.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				query.append(" ORDER BY ");
 
@@ -841,7 +832,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 				query.append(_SQL_SELECT_COUNTRY_WHERE);
 
-				query.append("country.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -956,7 +947,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 			query.append(_SQL_SELECT_COUNTRY_WHERE);
 
-			query.append("country.active = ?");
+			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1187,17 +1178,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				query.append(_SQL_COUNT_COUNTRY_WHERE);
 
 				if (name == null) {
-					query.append("country.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(country.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("country.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -1246,17 +1234,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				query.append(_SQL_COUNT_COUNTRY_WHERE);
 
 				if (a2 == null) {
-					query.append("country.a2 IS NULL");
+					query.append(_FINDER_COLUMN_A2_A2_1);
 				}
 				else {
 					if (a2.equals(StringPool.BLANK)) {
-						query.append("(country.a2 IS NULL OR ");
+						query.append(_FINDER_COLUMN_A2_A2_3);
 					}
-
-					query.append("country.a2 = ?");
-
-					if (a2.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_A2_A2_2);
 					}
 				}
 
@@ -1305,17 +1290,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				query.append(_SQL_COUNT_COUNTRY_WHERE);
 
 				if (a3 == null) {
-					query.append("country.a3 IS NULL");
+					query.append(_FINDER_COLUMN_A3_A3_1);
 				}
 				else {
 					if (a3.equals(StringPool.BLANK)) {
-						query.append("(country.a3 IS NULL OR ");
+						query.append(_FINDER_COLUMN_A3_A3_3);
 					}
-
-					query.append("country.a3 = ?");
-
-					if (a3.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_A3_A3_2);
 					}
 				}
 
@@ -1363,7 +1345,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 				query.append(_SQL_COUNT_COUNTRY_WHERE);
 
-				query.append("country.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1549,6 +1531,16 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_NAME_NAME_1 = "countryname IS NULL";
+	private static final String _FINDER_COLUMN_NAME_NAME_2 = "country.name = ?";
+	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(countryname IS NULL OR country.name = ?)";
+	private static final String _FINDER_COLUMN_A2_A2_1 = "countrya2 IS NULL";
+	private static final String _FINDER_COLUMN_A2_A2_2 = "country.a2 = ?";
+	private static final String _FINDER_COLUMN_A2_A2_3 = "(countrya2 IS NULL OR country.a2 = ?)";
+	private static final String _FINDER_COLUMN_A3_A3_1 = "countrya3 IS NULL";
+	private static final String _FINDER_COLUMN_A3_A3_2 = "country.a3 = ?";
+	private static final String _FINDER_COLUMN_A3_A3_3 = "(countrya3 IS NULL OR country.a3 = ?)";
+	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2 = "country.active = ?";
 	private static final String _SQL_SELECT_COUNTRY = "SELECT country FROM Country country";
 	private static final String _SQL_SELECT_COUNTRY_WHERE = "SELECT country FROM Country country WHERE ";
 	private static final String _SQL_COUNT_COUNTRY = "SELECT COUNT(country) FROM Country country";

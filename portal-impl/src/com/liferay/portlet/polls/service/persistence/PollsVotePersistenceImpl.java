@@ -396,7 +396,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
-				query.append("pollsVote.questionId = ?");
+				query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -452,7 +452,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
-				query.append("pollsVote.questionId = ?");
+				query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -564,7 +564,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 			query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
-			query.append("pollsVote.questionId = ?");
+			query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -630,7 +630,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
-				query.append("pollsVote.choiceId = ?");
+				query.append(_FINDER_COLUMN_CHOICEID_CHOICEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -686,7 +686,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
-				query.append("pollsVote.choiceId = ?");
+				query.append(_FINDER_COLUMN_CHOICEID_CHOICEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -796,7 +796,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 			query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
-			query.append("pollsVote.choiceId = ?");
+			query.append(_FINDER_COLUMN_CHOICEID_CHOICEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -899,11 +899,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
 
-				query.append("pollsVote.questionId = ?");
+				query.append(_FINDER_COLUMN_Q_U_QUESTIONID_2);
 
-				query.append(" AND ");
-
-				query.append("pollsVote.userId = ?");
+				query.append(_FINDER_COLUMN_Q_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1122,7 +1120,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_SQL_COUNT_POLLSVOTE_WHERE);
 
-				query.append("pollsVote.questionId = ?");
+				query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1166,7 +1164,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_SQL_COUNT_POLLSVOTE_WHERE);
 
-				query.append("pollsVote.choiceId = ?");
+				query.append(_FINDER_COLUMN_CHOICEID_CHOICEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1213,11 +1211,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_SQL_COUNT_POLLSVOTE_WHERE);
 
-				query.append("pollsVote.questionId = ?");
+				query.append(_FINDER_COLUMN_Q_U_QUESTIONID_2);
 
-				query.append(" AND ");
-
-				query.append("pollsVote.userId = ?");
+				query.append(_FINDER_COLUMN_Q_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1313,6 +1309,10 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_QUESTIONID_QUESTIONID_2 = "pollsVote.questionId = ?";
+	private static final String _FINDER_COLUMN_CHOICEID_CHOICEID_2 = "pollsVote.choiceId = ?";
+	private static final String _FINDER_COLUMN_Q_U_QUESTIONID_2 = "pollsVote.questionId = ? AND ";
+	private static final String _FINDER_COLUMN_Q_U_USERID_2 = "pollsVote.userId = ?";
 	private static final String _SQL_SELECT_POLLSVOTE = "SELECT pollsVote FROM PollsVote pollsVote";
 	private static final String _SQL_SELECT_POLLSVOTE_WHERE = "SELECT pollsVote FROM PollsVote pollsVote WHERE ";
 	private static final String _SQL_COUNT_POLLSVOTE = "SELECT COUNT(pollsVote) FROM PollsVote pollsVote";

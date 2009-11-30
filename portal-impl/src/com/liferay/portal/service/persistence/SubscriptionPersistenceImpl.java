@@ -445,7 +445,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -501,7 +501,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -612,7 +612,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-			query.append("subscription.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -680,11 +680,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_USERID_2);
 
-				query.append(" AND ");
-
-				query.append("subscription.classNameId = ?");
+				query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -742,11 +740,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_USERID_2);
 
-				query.append(" AND ");
-
-				query.append("subscription.classNameId = ?");
+				query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -868,11 +864,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-			query.append("subscription.userId = ?");
+			query.append(_FINDER_COLUMN_U_C_USERID_2);
 
-			query.append(" AND ");
-
-			query.append("subscription.classNameId = ?");
+			query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -942,15 +936,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("subscription.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("subscription.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1011,15 +1001,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("subscription.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("subscription.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1150,15 +1136,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-			query.append("subscription.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-			query.append("subscription.classNameId = ?");
-
-			query.append(" AND ");
-
-			query.append("subscription.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1275,19 +1257,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.companyId = ?");
+				query.append(_FINDER_COLUMN_C_U_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_U_C_C_USERID_2);
 
-				query.append("subscription.userId = ?");
+				query.append(_FINDER_COLUMN_C_U_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("subscription.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("subscription.classPK = ?");
+				query.append(_FINDER_COLUMN_C_U_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1522,7 +1498,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_COUNT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1569,11 +1545,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_COUNT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_USERID_2);
 
-				query.append(" AND ");
-
-				query.append("subscription.classNameId = ?");
+				query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1622,15 +1596,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_COUNT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("subscription.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("subscription.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1682,19 +1652,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_SQL_COUNT_SUBSCRIPTION_WHERE);
 
-				query.append("subscription.companyId = ?");
+				query.append(_FINDER_COLUMN_C_U_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_U_C_C_USERID_2);
 
-				query.append("subscription.userId = ?");
+				query.append(_FINDER_COLUMN_C_U_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("subscription.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("subscription.classPK = ?");
+				query.append(_FINDER_COLUMN_C_U_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1886,6 +1850,16 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "subscription.userId = ?";
+	private static final String _FINDER_COLUMN_U_C_USERID_2 = "subscription.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_CLASSNAMEID_2 = "subscription.classNameId = ?";
+	private static final String _FINDER_COLUMN_C_C_C_COMPANYID_2 = "subscription.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "subscription.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "subscription.classPK = ?";
+	private static final String _FINDER_COLUMN_C_U_C_C_COMPANYID_2 = "subscription.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_U_C_C_USERID_2 = "subscription.userId = ? AND ";
+	private static final String _FINDER_COLUMN_C_U_C_C_CLASSNAMEID_2 = "subscription.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_U_C_C_CLASSPK_2 = "subscription.classPK = ?";
 	private static final String _SQL_SELECT_SUBSCRIPTION = "SELECT subscription FROM Subscription subscription";
 	private static final String _SQL_SELECT_SUBSCRIPTION_WHERE = "SELECT subscription FROM Subscription subscription WHERE ";
 	private static final String _SQL_COUNT_SUBSCRIPTION = "SELECT COUNT(subscription) FROM Subscription subscription";

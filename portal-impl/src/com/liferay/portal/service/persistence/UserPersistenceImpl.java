@@ -701,17 +701,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (uuid == null) {
-					query.append("user.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(user.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("user.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -772,17 +769,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (uuid == null) {
-					query.append("user.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(user.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("user.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -896,17 +890,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			query.append(_SQL_SELECT_USER_WHERE);
 
 			if (uuid == null) {
-				query.append("user.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(user.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("user.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -974,7 +965,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_SELECT_USER_WHERE);
 
-				query.append("user.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1030,7 +1021,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_SELECT_USER_WHERE);
 
-				query.append("user.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1139,7 +1130,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 			query.append(_SQL_SELECT_USER_WHERE);
 
-			query.append("user.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1235,7 +1226,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_SELECT_USER_WHERE);
 
-				query.append("user.contactId = ?");
+				query.append(_FINDER_COLUMN_CONTACTID_CONTACTID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1306,17 +1297,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (emailAddress == null) {
-					query.append("user.emailAddress IS NULL");
+					query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_1);
 				}
 				else {
 					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append("(user.emailAddress IS NULL OR ");
+						query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_3);
 					}
-
-					query.append("user.emailAddress = ?");
-
-					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_2);
 					}
 				}
 
@@ -1377,17 +1365,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (emailAddress == null) {
-					query.append("user.emailAddress IS NULL");
+					query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_1);
 				}
 				else {
 					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append("(user.emailAddress IS NULL OR ");
+						query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_3);
 					}
-
-					query.append("user.emailAddress = ?");
-
-					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_2);
 					}
 				}
 
@@ -1502,17 +1487,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			query.append(_SQL_SELECT_USER_WHERE);
 
 			if (emailAddress == null) {
-				query.append("user.emailAddress IS NULL");
+				query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_1);
 			}
 			else {
 				if (emailAddress.equals(StringPool.BLANK)) {
-					query.append("(user.emailAddress IS NULL OR ");
+					query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_3);
 				}
-
-				query.append("user.emailAddress = ?");
-
-				if (emailAddress.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_2);
 				}
 			}
 
@@ -1613,17 +1595,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append(_SQL_SELECT_USER_WHERE);
 
 				if (openId == null) {
-					query.append("user.openId IS NULL");
+					query.append(_FINDER_COLUMN_OPENID_OPENID_1);
 				}
 				else {
 					if (openId.equals(StringPool.BLANK)) {
-						query.append("(user.openId IS NULL OR ");
+						query.append(_FINDER_COLUMN_OPENID_OPENID_3);
 					}
-
-					query.append("user.openId = ?");
-
-					if (openId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_OPENID_OPENID_2);
 					}
 				}
 
@@ -1729,7 +1708,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_SELECT_USER_WHERE);
 
-				query.append("user.portraitId = ?");
+				query.append(_FINDER_COLUMN_PORTRAITID_PORTRAITID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1834,11 +1813,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_SELECT_USER_WHERE);
 
-				query.append("user.companyId = ?");
+				query.append(_FINDER_COLUMN_C_U_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("user.userId = ?");
+				query.append(_FINDER_COLUMN_C_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1948,11 +1925,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_SELECT_USER_WHERE);
 
-				query.append("user.companyId = ?");
+				query.append(_FINDER_COLUMN_C_DU_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("user.defaultUser = ?");
+				query.append(_FINDER_COLUMN_C_DU_DEFAULTUSER_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2060,22 +2035,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_SELECT_USER_WHERE);
 
-				query.append("user.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_SN_COMPANYID_2);
 
 				if (screenName == null) {
-					query.append("user.screenName IS NULL");
+					query.append(_FINDER_COLUMN_C_SN_SCREENNAME_1);
 				}
 				else {
 					if (screenName.equals(StringPool.BLANK)) {
-						query.append("(user.screenName IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_SN_SCREENNAME_3);
 					}
-
-					query.append("user.screenName = ?");
-
-					if (screenName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_SN_SCREENNAME_2);
 					}
 				}
 
@@ -2188,22 +2158,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_SELECT_USER_WHERE);
 
-				query.append("user.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_EA_COMPANYID_2);
 
 				if (emailAddress == null) {
-					query.append("user.emailAddress IS NULL");
+					query.append(_FINDER_COLUMN_C_EA_EMAILADDRESS_1);
 				}
 				else {
 					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append("(user.emailAddress IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_EA_EMAILADDRESS_3);
 					}
-
-					query.append("user.emailAddress = ?");
-
-					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_EA_EMAILADDRESS_2);
 					}
 				}
 
@@ -2476,17 +2441,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append(_SQL_COUNT_USER_WHERE);
 
 				if (uuid == null) {
-					query.append("user.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(user.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("user.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2534,7 +2496,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_COUNT_USER_WHERE);
 
-				query.append("user.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2578,7 +2540,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_COUNT_USER_WHERE);
 
-				query.append("user.contactId = ?");
+				query.append(_FINDER_COLUMN_CONTACTID_CONTACTID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2624,17 +2586,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append(_SQL_COUNT_USER_WHERE);
 
 				if (emailAddress == null) {
-					query.append("user.emailAddress IS NULL");
+					query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_1);
 				}
 				else {
 					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append("(user.emailAddress IS NULL OR ");
+						query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_3);
 					}
-
-					query.append("user.emailAddress = ?");
-
-					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_2);
 					}
 				}
 
@@ -2683,17 +2642,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				query.append(_SQL_COUNT_USER_WHERE);
 
 				if (openId == null) {
-					query.append("user.openId IS NULL");
+					query.append(_FINDER_COLUMN_OPENID_OPENID_1);
 				}
 				else {
 					if (openId.equals(StringPool.BLANK)) {
-						query.append("(user.openId IS NULL OR ");
+						query.append(_FINDER_COLUMN_OPENID_OPENID_3);
 					}
-
-					query.append("user.openId = ?");
-
-					if (openId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_OPENID_OPENID_2);
 					}
 				}
 
@@ -2741,7 +2697,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_COUNT_USER_WHERE);
 
-				query.append("user.portraitId = ?");
+				query.append(_FINDER_COLUMN_PORTRAITID_PORTRAITID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2786,11 +2742,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_COUNT_USER_WHERE);
 
-				query.append("user.companyId = ?");
+				query.append(_FINDER_COLUMN_C_U_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("user.userId = ?");
+				query.append(_FINDER_COLUMN_C_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2839,11 +2793,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_COUNT_USER_WHERE);
 
-				query.append("user.companyId = ?");
+				query.append(_FINDER_COLUMN_C_DU_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("user.defaultUser = ?");
+				query.append(_FINDER_COLUMN_C_DU_DEFAULTUSER_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2890,22 +2842,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_COUNT_USER_WHERE);
 
-				query.append("user.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_SN_COMPANYID_2);
 
 				if (screenName == null) {
-					query.append("user.screenName IS NULL");
+					query.append(_FINDER_COLUMN_C_SN_SCREENNAME_1);
 				}
 				else {
 					if (screenName.equals(StringPool.BLANK)) {
-						query.append("(user.screenName IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_SN_SCREENNAME_3);
 					}
-
-					query.append("user.screenName = ?");
-
-					if (screenName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_SN_SCREENNAME_2);
 					}
 				}
 
@@ -2956,22 +2903,17 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				query.append(_SQL_COUNT_USER_WHERE);
 
-				query.append("user.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_EA_COMPANYID_2);
 
 				if (emailAddress == null) {
-					query.append("user.emailAddress IS NULL");
+					query.append(_FINDER_COLUMN_C_EA_EMAILADDRESS_1);
 				}
 				else {
 					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append("(user.emailAddress IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_EA_EMAILADDRESS_3);
 					}
-
-					query.append("user.emailAddress = ?");
-
-					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_EA_EMAILADDRESS_2);
 					}
 				}
 
@@ -5794,6 +5736,30 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		private UserPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "useruuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "user.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(useruuid IS NULL OR user.uuid = ?)";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "user.companyId = ?";
+	private static final String _FINDER_COLUMN_CONTACTID_CONTACTID_2 = "user.contactId = ?";
+	private static final String _FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_1 = "useremailAddress IS NULL";
+	private static final String _FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_2 = "user.emailAddress = ?";
+	private static final String _FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_3 = "(useremailAddress IS NULL OR user.emailAddress = ?)";
+	private static final String _FINDER_COLUMN_OPENID_OPENID_1 = "useropenId IS NULL";
+	private static final String _FINDER_COLUMN_OPENID_OPENID_2 = "user.openId = ?";
+	private static final String _FINDER_COLUMN_OPENID_OPENID_3 = "(useropenId IS NULL OR user.openId = ?)";
+	private static final String _FINDER_COLUMN_PORTRAITID_PORTRAITID_2 = "user.portraitId = ?";
+	private static final String _FINDER_COLUMN_C_U_COMPANYID_2 = "user.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_U_USERID_2 = "user.userId = ?";
+	private static final String _FINDER_COLUMN_C_DU_COMPANYID_2 = "user.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_DU_DEFAULTUSER_2 = "user.defaultUser = ?";
+	private static final String _FINDER_COLUMN_C_SN_COMPANYID_2 = "user.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_SN_SCREENNAME_1 = "userscreenName IS NULL";
+	private static final String _FINDER_COLUMN_C_SN_SCREENNAME_2 = "user.screenName = ?";
+	private static final String _FINDER_COLUMN_C_SN_SCREENNAME_3 = "(userscreenName IS NULL OR user.screenName = ?)";
+	private static final String _FINDER_COLUMN_C_EA_COMPANYID_2 = "user.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_1 = "useremailAddress IS NULL";
+	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_2 = "user.emailAddress = ?";
+	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_3 = "(useremailAddress IS NULL OR user.emailAddress = ?)";
 	private static final String _SQL_SELECT_USER = "SELECT user FROM User user";
 	private static final String _SQL_SELECT_USER_WHERE = "SELECT user FROM User user WHERE ";
 	private static final String _SQL_COUNT_USER = "SELECT COUNT(user) FROM User user";

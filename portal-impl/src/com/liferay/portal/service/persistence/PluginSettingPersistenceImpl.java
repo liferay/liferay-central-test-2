@@ -415,7 +415,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 				query.append(_SQL_SELECT_PLUGINSETTING_WHERE);
 
-				query.append("pluginSetting.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -471,7 +471,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 				query.append(_SQL_SELECT_PLUGINSETTING_WHERE);
 
-				query.append("pluginSetting.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -585,7 +585,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 			query.append(_SQL_SELECT_PLUGINSETTING_WHERE);
 
-			query.append("pluginSetting.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -696,39 +696,29 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 				query.append(_SQL_SELECT_PLUGINSETTING_WHERE);
 
-				query.append("pluginSetting.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_I_T_COMPANYID_2);
 
 				if (pluginId == null) {
-					query.append("pluginSetting.pluginId IS NULL");
+					query.append(_FINDER_COLUMN_C_I_T_PLUGINID_1);
 				}
 				else {
 					if (pluginId.equals(StringPool.BLANK)) {
-						query.append("(pluginSetting.pluginId IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_I_T_PLUGINID_3);
 					}
-
-					query.append("pluginSetting.pluginId = ?");
-
-					if (pluginId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_I_T_PLUGINID_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (pluginType == null) {
-					query.append("pluginSetting.pluginType IS NULL");
+					query.append(_FINDER_COLUMN_C_I_T_PLUGINTYPE_1);
 				}
 				else {
 					if (pluginType.equals(StringPool.BLANK)) {
-						query.append("(pluginSetting.pluginType IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_I_T_PLUGINTYPE_3);
 					}
-
-					query.append("pluginSetting.pluginType = ?");
-
-					if (pluginType.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_I_T_PLUGINTYPE_2);
 					}
 				}
 
@@ -953,7 +943,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 				query.append(_SQL_COUNT_PLUGINSETTING_WHERE);
 
-				query.append("pluginSetting.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1004,39 +994,29 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 				query.append(_SQL_COUNT_PLUGINSETTING_WHERE);
 
-				query.append("pluginSetting.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_I_T_COMPANYID_2);
 
 				if (pluginId == null) {
-					query.append("pluginSetting.pluginId IS NULL");
+					query.append(_FINDER_COLUMN_C_I_T_PLUGINID_1);
 				}
 				else {
 					if (pluginId.equals(StringPool.BLANK)) {
-						query.append("(pluginSetting.pluginId IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_I_T_PLUGINID_3);
 					}
-
-					query.append("pluginSetting.pluginId = ?");
-
-					if (pluginId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_I_T_PLUGINID_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (pluginType == null) {
-					query.append("pluginSetting.pluginType IS NULL");
+					query.append(_FINDER_COLUMN_C_I_T_PLUGINTYPE_1);
 				}
 				else {
 					if (pluginType.equals(StringPool.BLANK)) {
-						query.append("(pluginSetting.pluginType IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_I_T_PLUGINTYPE_3);
 					}
-
-					query.append("pluginSetting.pluginType = ?");
-
-					if (pluginType.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_I_T_PLUGINTYPE_2);
 					}
 				}
 
@@ -1232,6 +1212,14 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "pluginSetting.companyId = ?";
+	private static final String _FINDER_COLUMN_C_I_T_COMPANYID_2 = "pluginSetting.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINID_1 = "pluginSettingpluginId IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINID_2 = "pluginSetting.pluginId = ? AND ";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINID_3 = "(pluginSettingpluginId IS NULL OR pluginSetting.pluginId = ?) AND ";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_1 = "pluginSettingpluginType IS NULL";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_2 = "pluginSetting.pluginType = ?";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_3 = "(pluginSettingpluginType IS NULL OR pluginSetting.pluginType = ?)";
 	private static final String _SQL_SELECT_PLUGINSETTING = "SELECT pluginSetting FROM PluginSetting pluginSetting";
 	private static final String _SQL_SELECT_PLUGINSETTING_WHERE = "SELECT pluginSetting FROM PluginSetting pluginSetting WHERE ";
 	private static final String _SQL_COUNT_PLUGINSETTING = "SELECT COUNT(pluginSetting) FROM PluginSetting pluginSetting";

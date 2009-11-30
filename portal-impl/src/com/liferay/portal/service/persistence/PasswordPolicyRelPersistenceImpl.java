@@ -441,7 +441,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
-				query.append("passwordPolicyRel.passwordPolicyId = ?");
+				query.append(_FINDER_COLUMN_PASSWORDPOLICYID_PASSWORDPOLICYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -498,7 +498,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
-				query.append("passwordPolicyRel.passwordPolicyId = ?");
+				query.append(_FINDER_COLUMN_PASSWORDPOLICYID_PASSWORDPOLICYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -613,7 +613,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 			query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
-			query.append("passwordPolicyRel.passwordPolicyId = ?");
+			query.append(_FINDER_COLUMN_PASSWORDPOLICYID_PASSWORDPOLICYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -716,11 +716,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
-				query.append("passwordPolicyRel.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("passwordPolicyRel.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -837,15 +835,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
 
-				query.append("passwordPolicyRel.passwordPolicyId = ?");
+				query.append(_FINDER_COLUMN_P_C_C_PASSWORDPOLICYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_C_C_CLASSNAMEID_2);
 
-				query.append("passwordPolicyRel.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("passwordPolicyRel.classPK = ?");
+				query.append(_FINDER_COLUMN_P_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1072,7 +1066,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				query.append(_SQL_COUNT_PASSWORDPOLICYREL_WHERE);
 
-				query.append("passwordPolicyRel.passwordPolicyId = ?");
+				query.append(_FINDER_COLUMN_PASSWORDPOLICYID_PASSWORDPOLICYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1119,11 +1113,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				query.append(_SQL_COUNT_PASSWORDPOLICYREL_WHERE);
 
-				query.append("passwordPolicyRel.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("passwordPolicyRel.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1173,15 +1165,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				query.append(_SQL_COUNT_PASSWORDPOLICYREL_WHERE);
 
-				query.append("passwordPolicyRel.passwordPolicyId = ?");
+				query.append(_FINDER_COLUMN_P_C_C_PASSWORDPOLICYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_C_C_CLASSNAMEID_2);
 
-				query.append("passwordPolicyRel.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("passwordPolicyRel.classPK = ?");
+				query.append(_FINDER_COLUMN_P_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1371,6 +1359,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_PASSWORDPOLICYID_PASSWORDPOLICYID_2 =
+		"passwordPolicyRel.passwordPolicyId = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "passwordPolicyRel.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "passwordPolicyRel.classPK = ?";
+	private static final String _FINDER_COLUMN_P_C_C_PASSWORDPOLICYID_2 = "passwordPolicyRel.passwordPolicyId = ? AND ";
+	private static final String _FINDER_COLUMN_P_C_C_CLASSNAMEID_2 = "passwordPolicyRel.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_P_C_C_CLASSPK_2 = "passwordPolicyRel.classPK = ?";
 	private static final String _SQL_SELECT_PASSWORDPOLICYREL = "SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel";
 	private static final String _SQL_SELECT_PASSWORDPOLICYREL_WHERE = "SELECT passwordPolicyRel FROM PasswordPolicyRel passwordPolicyRel WHERE ";
 	private static final String _SQL_COUNT_PASSWORDPOLICYREL = "SELECT COUNT(passwordPolicyRel) FROM PasswordPolicyRel passwordPolicyRel";

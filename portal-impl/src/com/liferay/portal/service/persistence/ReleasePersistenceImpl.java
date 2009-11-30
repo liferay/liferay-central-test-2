@@ -386,17 +386,14 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 				query.append(_SQL_SELECT_RELEASE_WHERE);
 
 				if (servletContextName == null) {
-					query.append("release.servletContextName IS NULL");
+					query.append(_FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_1);
 				}
 				else {
 					if (servletContextName.equals(StringPool.BLANK)) {
-						query.append("(release.servletContextName IS NULL OR ");
+						query.append(_FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_3);
 					}
-
-					query.append("release.servletContextName = ?");
-
-					if (servletContextName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_2);
 					}
 				}
 
@@ -607,17 +604,14 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 				query.append(_SQL_COUNT_RELEASE_WHERE);
 
 				if (servletContextName == null) {
-					query.append("release.servletContextName IS NULL");
+					query.append(_FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_1);
 				}
 				else {
 					if (servletContextName.equals(StringPool.BLANK)) {
-						query.append("(release.servletContextName IS NULL OR ");
+						query.append(_FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_3);
 					}
-
-					query.append("release.servletContextName = ?");
-
-					if (servletContextName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_2);
 					}
 				}
 
@@ -807,6 +801,12 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_1 =
+		"releaseservletContextName IS NULL";
+	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_2 =
+		"release.servletContextName = ?";
+	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_3 =
+		"(releaseservletContextName IS NULL OR release.servletContextName = ?)";
 	private static final String _SQL_SELECT_RELEASE = "SELECT release FROM Release release";
 	private static final String _SQL_SELECT_RELEASE_WHERE = "SELECT release FROM Release release WHERE ";
 	private static final String _SQL_COUNT_RELEASE = "SELECT COUNT(release) FROM Release release";

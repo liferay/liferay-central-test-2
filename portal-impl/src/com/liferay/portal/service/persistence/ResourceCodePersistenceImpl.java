@@ -414,7 +414,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
-				query.append("resourceCode.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -470,7 +470,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
-				query.append("resourceCode.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -584,7 +584,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 			query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
-			query.append("resourceCode.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -650,17 +650,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 				if (name == null) {
-					query.append("resourceCode.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceCode.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("resourceCode.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -721,17 +718,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 				if (name == null) {
-					query.append("resourceCode.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceCode.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("resourceCode.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -847,17 +841,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
 			if (name == null) {
-				query.append("resourceCode.name IS NULL");
+				query.append(_FINDER_COLUMN_NAME_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(resourceCode.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_NAME_NAME_3);
 				}
-
-				query.append("resourceCode.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_NAME_NAME_2);
 				}
 			}
 
@@ -969,28 +960,21 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
 
-				query.append("resourceCode.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourceCode.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceCode.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_NAME_3);
 					}
-
-					query.append("resourceCode.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourceCode.scope = ?");
+				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1215,7 +1199,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				query.append(_SQL_COUNT_RESOURCECODE_WHERE);
 
-				query.append("resourceCode.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1260,17 +1244,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				query.append(_SQL_COUNT_RESOURCECODE_WHERE);
 
 				if (name == null) {
-					query.append("resourceCode.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceCode.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("resourceCode.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -1323,28 +1304,21 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				query.append(_SQL_COUNT_RESOURCECODE_WHERE);
 
-				query.append("resourceCode.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourceCode.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceCode.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_NAME_3);
 					}
-
-					query.append("resourceCode.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourceCode.scope = ?");
+				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1536,6 +1510,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "resourceCode.companyId = ?";
+	private static final String _FINDER_COLUMN_NAME_NAME_1 = "resourceCodename IS NULL";
+	private static final String _FINDER_COLUMN_NAME_NAME_2 = "resourceCode.name = ?";
+	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(resourceCodename IS NULL OR resourceCode.name = ?)";
+	private static final String _FINDER_COLUMN_C_N_S_COMPANYID_2 = "resourceCode.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_NAME_1 = "resourceCodename IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_N_S_NAME_2 = "resourceCode.name = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_NAME_3 = "(resourceCodename IS NULL OR resourceCode.name = ?) AND ";
+	private static final String _FINDER_COLUMN_C_N_S_SCOPE_2 = "resourceCode.scope = ?";
 	private static final String _SQL_SELECT_RESOURCECODE = "SELECT resourceCode FROM ResourceCode resourceCode";
 	private static final String _SQL_SELECT_RESOURCECODE_WHERE = "SELECT resourceCode FROM ResourceCode resourceCode WHERE ";
 	private static final String _SQL_COUNT_RESOURCECODE = "SELECT COUNT(resourceCode) FROM ResourceCode resourceCode";

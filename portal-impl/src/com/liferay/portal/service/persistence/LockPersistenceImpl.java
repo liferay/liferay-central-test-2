@@ -405,17 +405,14 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (uuid == null) {
-					query.append("lock.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(lock.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("lock.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -476,17 +473,14 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (uuid == null) {
-					query.append("lock.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(lock.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("lock.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -600,17 +594,14 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			query.append(_SQL_SELECT_LOCK_WHERE);
 
 			if (uuid == null) {
-				query.append("lock.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(lock.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("lock.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -680,10 +671,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (expirationDate == null) {
-					query.append("lock.expirationDate < null");
+					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1);
 				}
 				else {
-					query.append("lock.expirationDate < ?");
+					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -743,10 +734,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (expirationDate == null) {
-					query.append("lock.expirationDate < null");
+					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1);
 				}
 				else {
-					query.append("lock.expirationDate < ?");
+					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 				}
 
 				if (obc != null) {
@@ -861,10 +852,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			query.append(_SQL_SELECT_LOCK_WHERE);
 
 			if (expirationDate == null) {
-				query.append("lock.expirationDate < null");
+				query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1);
 			}
 			else {
-				query.append("lock.expirationDate < ?");
+				query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 			}
 
 			if (obc != null) {
@@ -968,34 +959,26 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_SELECT_LOCK_WHERE);
 
 				if (className == null) {
-					query.append("lock.className IS NULL");
+					query.append(_FINDER_COLUMN_C_K_CLASSNAME_1);
 				}
 				else {
 					if (className.equals(StringPool.BLANK)) {
-						query.append("(lock.className IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_K_CLASSNAME_3);
 					}
-
-					query.append("lock.className = ?");
-
-					if (className.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_K_CLASSNAME_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (key == null) {
-					query.append("lock.key IS NULL");
+					query.append(_FINDER_COLUMN_C_K_KEY_1);
 				}
 				else {
 					if (key.equals(StringPool.BLANK)) {
-						query.append("(lock.key IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_K_KEY_3);
 					}
-
-					query.append("lock.key = ?");
-
-					if (key.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_K_KEY_2);
 					}
 				}
 
@@ -1223,17 +1206,14 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_COUNT_LOCK_WHERE);
 
 				if (uuid == null) {
-					query.append("lock.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(lock.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("lock.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -1283,10 +1263,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_COUNT_LOCK_WHERE);
 
 				if (expirationDate == null) {
-					query.append("lock.expirationDate < null");
+					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1);
 				}
 				else {
-					query.append("lock.expirationDate < ?");
+					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1335,34 +1315,26 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_SQL_COUNT_LOCK_WHERE);
 
 				if (className == null) {
-					query.append("lock.className IS NULL");
+					query.append(_FINDER_COLUMN_C_K_CLASSNAME_1);
 				}
 				else {
 					if (className.equals(StringPool.BLANK)) {
-						query.append("(lock.className IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_K_CLASSNAME_3);
 					}
-
-					query.append("lock.className = ?");
-
-					if (className.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_K_CLASSNAME_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (key == null) {
-					query.append("lock.key IS NULL");
+					query.append(_FINDER_COLUMN_C_K_KEY_1);
 				}
 				else {
 					if (key.equals(StringPool.BLANK)) {
-						query.append("(lock.key IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_K_KEY_3);
 					}
-
-					query.append("lock.key = ?");
-
-					if (key.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_K_KEY_2);
 					}
 				}
 
@@ -1556,6 +1528,17 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "lockuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "lock.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(lockuuid IS NULL OR lock.uuid = ?)";
+	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1 = "lockexpirationDate < NULL";
+	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2 = "lock.expirationDate < ?";
+	private static final String _FINDER_COLUMN_C_K_CLASSNAME_1 = "lockclassName IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_K_CLASSNAME_2 = "lock.className = ? AND ";
+	private static final String _FINDER_COLUMN_C_K_CLASSNAME_3 = "(lockclassName IS NULL OR lock.className = ?) AND ";
+	private static final String _FINDER_COLUMN_C_K_KEY_1 = "lockkey IS NULL";
+	private static final String _FINDER_COLUMN_C_K_KEY_2 = "lock.key = ?";
+	private static final String _FINDER_COLUMN_C_K_KEY_3 = "(lockkey IS NULL OR lock.key = ?)";
 	private static final String _SQL_SELECT_LOCK = "SELECT lock FROM Lock lock";
 	private static final String _SQL_SELECT_LOCK_WHERE = "SELECT lock FROM Lock lock WHERE ";
 	private static final String _SQL_COUNT_LOCK = "SELECT COUNT(lock) FROM Lock lock";

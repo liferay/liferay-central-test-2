@@ -329,7 +329,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 				query.append(_SQL_SELECT_IMAGE_WHERE);
 
-				query.append("image.size < ?");
+				query.append(_FINDER_COLUMN_SIZE_SIZE_2);
 
 				query.append(" ORDER BY ");
 
@@ -389,7 +389,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 				query.append(_SQL_SELECT_IMAGE_WHERE);
 
-				query.append("image.size < ?");
+				query.append(_FINDER_COLUMN_SIZE_SIZE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -504,7 +504,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 			query.append(_SQL_SELECT_IMAGE_WHERE);
 
-			query.append("image.size < ?");
+			query.append(_FINDER_COLUMN_SIZE_SIZE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -713,7 +713,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 
 				query.append(_SQL_COUNT_IMAGE_WHERE);
 
-				query.append("image.size < ?");
+				query.append(_FINDER_COLUMN_SIZE_SIZE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -899,6 +899,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_SIZE_SIZE_2 = "image.size < ?";
 	private static final String _SQL_SELECT_IMAGE = "SELECT image FROM Image image";
 	private static final String _SQL_SELECT_IMAGE_WHERE = "SELECT image FROM Image image WHERE ";
 	private static final String _SQL_COUNT_IMAGE = "SELECT COUNT(image) FROM Image image";

@@ -405,7 +405,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
-				query.append("announcementsFlag.entryId = ?");
+				query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -466,7 +466,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
-				query.append("announcementsFlag.entryId = ?");
+				query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -585,7 +585,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 			query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
-			query.append("announcementsFlag.entryId = ?");
+			query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -699,15 +699,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
-				query.append("announcementsFlag.userId = ?");
+				query.append(_FINDER_COLUMN_U_E_V_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_E_V_ENTRYID_2);
 
-				query.append("announcementsFlag.entryId = ?");
-
-				query.append(" AND ");
-
-				query.append("announcementsFlag.value = ?");
+				query.append(_FINDER_COLUMN_U_E_V_VALUE_2);
 
 				query.append(" ORDER BY ");
 
@@ -935,7 +931,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSFLAG_WHERE);
 
-				query.append("announcementsFlag.entryId = ?");
+				query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -982,15 +978,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSFLAG_WHERE);
 
-				query.append("announcementsFlag.userId = ?");
+				query.append(_FINDER_COLUMN_U_E_V_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_E_V_ENTRYID_2);
 
-				query.append("announcementsFlag.entryId = ?");
-
-				query.append(" AND ");
-
-				query.append("announcementsFlag.value = ?");
+				query.append(_FINDER_COLUMN_U_E_V_VALUE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1088,6 +1080,10 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_ENTRYID_ENTRYID_2 = "announcementsFlag.entryId = ?";
+	private static final String _FINDER_COLUMN_U_E_V_USERID_2 = "announcementsFlag.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_E_V_ENTRYID_2 = "announcementsFlag.entryId = ? AND ";
+	private static final String _FINDER_COLUMN_U_E_V_VALUE_2 = "announcementsFlag.value = ?";
 	private static final String _SQL_SELECT_ANNOUNCEMENTSFLAG = "SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag";
 	private static final String _SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE = "SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag WHERE ";
 	private static final String _SQL_COUNT_ANNOUNCEMENTSFLAG = "SELECT COUNT(announcementsFlag) FROM AnnouncementsFlag announcementsFlag";

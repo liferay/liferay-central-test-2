@@ -591,17 +591,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileEntry.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFileEntry.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -667,17 +664,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileEntry.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFileEntry.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -799,17 +793,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
 			if (uuid == null) {
-				query.append("dlFileEntry.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(dlFileEntry.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("dlFileEntry.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -922,23 +913,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileEntry.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("dlFileEntry.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1019,7 +1005,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1080,7 +1066,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1198,7 +1184,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-			query.append("dlFileEntry.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1271,7 +1257,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1332,7 +1318,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1451,7 +1437,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-			query.append("dlFileEntry.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1524,11 +1510,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1591,11 +1575,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1722,11 +1704,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-			query.append("dlFileEntry.groupId = ?");
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("dlFileEntry.userId = ?");
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1801,11 +1781,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1868,11 +1846,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1999,11 +1975,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-			query.append("dlFileEntry.groupId = ?");
+			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("dlFileEntry.folderId = ?");
+			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2120,26 +2094,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileEntry.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 					}
-
-					query.append("dlFileEntry.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 					}
 				}
 
@@ -2267,26 +2234,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_T_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_T_FOLDERID_2);
 
 				if (title == null) {
-					query.append("dlFileEntry.title IS NULL");
+					query.append(_FINDER_COLUMN_G_F_T_TITLE_1);
 				}
 				else {
 					if (title.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.title IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_T_TITLE_3);
 					}
-
-					query.append("dlFileEntry.title = ?");
-
-					if (title.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_T_TITLE_2);
 					}
 				}
 
@@ -2560,17 +2520,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileEntry.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFileEntry.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2620,23 +2577,18 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileEntry.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("dlFileEntry.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2684,7 +2636,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2728,7 +2680,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2772,11 +2724,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2823,11 +2773,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2878,26 +2826,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileEntry.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 					}
-
-					query.append("dlFileEntry.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 					}
 				}
 
@@ -2954,26 +2895,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 				query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
 
-				query.append("dlFileEntry.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_T_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileEntry.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_T_FOLDERID_2);
 
 				if (title == null) {
-					query.append("dlFileEntry.title IS NULL");
+					query.append(_FINDER_COLUMN_G_F_T_TITLE_1);
 				}
 				else {
 					if (title.equals(StringPool.BLANK)) {
-						query.append("(dlFileEntry.title IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_T_TITLE_3);
 					}
-
-					query.append("dlFileEntry.title = ?");
-
-					if (title.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_T_TITLE_2);
 					}
 				}
 
@@ -3101,6 +3035,29 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "dlFileEntryuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "dlFileEntry.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(dlFileEntryuuid IS NULL OR dlFileEntry.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "dlFileEntryuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "dlFileEntry.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(dlFileEntryuuid IS NULL OR dlFileEntry.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "dlFileEntry.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "dlFileEntry.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "dlFileEntry.companyId = ?";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "dlFileEntry.userId = ?";
+	private static final String _FINDER_COLUMN_G_F_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_FOLDERID_2 = "dlFileEntry.folderId = ?";
+	private static final String _FINDER_COLUMN_G_F_N_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_FOLDERID_2 = "dlFileEntry.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "dlFileEntryname IS NULL";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_2 = "dlFileEntry.name = ?";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_3 = "(dlFileEntryname IS NULL OR dlFileEntry.name = ?)";
+	private static final String _FINDER_COLUMN_G_F_T_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_T_FOLDERID_2 = "dlFileEntry.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_T_TITLE_1 = "dlFileEntrytitle IS NULL";
+	private static final String _FINDER_COLUMN_G_F_T_TITLE_2 = "dlFileEntry.title = ?";
+	private static final String _FINDER_COLUMN_G_F_T_TITLE_3 = "(dlFileEntrytitle IS NULL OR dlFileEntry.title = ?)";
 	private static final String _SQL_SELECT_DLFILEENTRY = "SELECT dlFileEntry FROM DLFileEntry dlFileEntry";
 	private static final String _SQL_SELECT_DLFILEENTRY_WHERE = "SELECT dlFileEntry FROM DLFileEntry dlFileEntry WHERE ";
 	private static final String _SQL_COUNT_DLFILEENTRY = "SELECT COUNT(dlFileEntry) FROM DLFileEntry dlFileEntry";

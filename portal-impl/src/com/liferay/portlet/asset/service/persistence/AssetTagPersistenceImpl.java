@@ -358,7 +358,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 				query.append(_SQL_SELECT_ASSETTAG_WHERE);
 
-				query.append("assetTag.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -418,7 +418,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 				query.append(_SQL_SELECT_ASSETTAG_WHERE);
 
-				query.append("assetTag.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -534,7 +534,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 			query.append(_SQL_SELECT_ASSETTAG_WHERE);
 
-			query.append("assetTag.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -743,7 +743,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 				query.append(_SQL_COUNT_ASSETTAG_WHERE);
 
-				query.append("assetTag.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1370,6 +1370,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		private AssetTagPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "assetTag.groupId = ?";
 	private static final String _SQL_SELECT_ASSETTAG = "SELECT assetTag FROM AssetTag assetTag";
 	private static final String _SQL_SELECT_ASSETTAG_WHERE = "SELECT assetTag FROM AssetTag assetTag WHERE ";
 	private static final String _SQL_COUNT_ASSETTAG = "SELECT COUNT(assetTag) FROM AssetTag assetTag";

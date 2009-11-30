@@ -413,7 +413,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.userGroupId = ?");
+				query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -469,7 +469,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.userGroupId = ?");
+				query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -584,7 +584,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-			query.append("userGroupGroupRole.id.userGroupId = ?");
+			query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -650,7 +650,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -706,7 +706,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -821,7 +821,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-			query.append("userGroupGroupRole.id.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -887,7 +887,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -943,7 +943,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1058,7 +1058,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-			query.append("userGroupGroupRole.id.roleId = ?");
+			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1126,11 +1126,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.userGroupId = ?");
+				query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_U_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1188,11 +1186,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.userGroupId = ?");
+				query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_U_G_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1316,11 +1312,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-			query.append("userGroupGroupRole.id.userGroupId = ?");
+			query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("userGroupGroupRole.id.groupId = ?");
+			query.append(_FINDER_COLUMN_U_G_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1388,11 +1382,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroupGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_G_R_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1450,11 +1442,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroupGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_G_R_ROLEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1577,11 +1567,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
 
-			query.append("userGroupGroupRole.id.groupId = ?");
+			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("userGroupGroupRole.id.roleId = ?");
+			query.append(_FINDER_COLUMN_G_R_ROLEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1810,7 +1798,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.userGroupId = ?");
+				query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1854,7 +1842,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1898,7 +1886,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1945,11 +1933,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.userGroupId = ?");
+				query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_U_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1995,11 +1981,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
 
-				query.append("userGroupGroupRole.id.groupId = ?");
+				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroupGroupRole.id.roleId = ?");
+				query.append(_FINDER_COLUMN_G_R_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2187,6 +2171,13 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_USERGROUPID_USERGROUPID_2 = "userGroupGroupRole.id.userGroupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "userGroupGroupRole.id.groupId = ?";
+	private static final String _FINDER_COLUMN_ROLEID_ROLEID_2 = "userGroupGroupRole.id.roleId = ?";
+	private static final String _FINDER_COLUMN_U_G_USERGROUPID_2 = "userGroupGroupRole.id.userGroupId = ? AND ";
+	private static final String _FINDER_COLUMN_U_G_GROUPID_2 = "userGroupGroupRole.id.groupId = ?";
+	private static final String _FINDER_COLUMN_G_R_GROUPID_2 = "userGroupGroupRole.id.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_R_ROLEID_2 = "userGroupGroupRole.id.roleId = ?";
 	private static final String _SQL_SELECT_USERGROUPGROUPROLE = "SELECT userGroupGroupRole FROM UserGroupGroupRole userGroupGroupRole";
 	private static final String _SQL_SELECT_USERGROUPGROUPROLE_WHERE = "SELECT userGroupGroupRole FROM UserGroupGroupRole userGroupGroupRole WHERE ";
 	private static final String _SQL_COUNT_USERGROUPGROUPROLE = "SELECT COUNT(userGroupGroupRole) FROM UserGroupGroupRole userGroupGroupRole";

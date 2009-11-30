@@ -395,17 +395,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
-					query.append("resourceAction.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceAction.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("resourceAction.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -471,17 +468,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
-					query.append("resourceAction.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceAction.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("resourceAction.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -604,17 +598,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
 
 			if (name == null) {
-				query.append("resourceAction.name IS NULL");
+				query.append(_FINDER_COLUMN_NAME_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(resourceAction.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_NAME_NAME_3);
 				}
-
-				query.append("resourceAction.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_NAME_NAME_2);
 				}
 			}
 
@@ -727,34 +718,26 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
-					query.append("resourceAction.name IS NULL");
+					query.append(_FINDER_COLUMN_N_A_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceAction.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_A_NAME_3);
 					}
-
-					query.append("resourceAction.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_A_NAME_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (actionId == null) {
-					query.append("resourceAction.actionId IS NULL");
+					query.append(_FINDER_COLUMN_N_A_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append("(resourceAction.actionId IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_A_ACTIONID_3);
 					}
-
-					query.append("resourceAction.actionId = ?");
-
-					if (actionId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_A_ACTIONID_2);
 					}
 				}
 
@@ -988,17 +971,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				query.append(_SQL_COUNT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
-					query.append("resourceAction.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceAction.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("resourceAction.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -1048,34 +1028,26 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				query.append(_SQL_COUNT_RESOURCEACTION_WHERE);
 
 				if (name == null) {
-					query.append("resourceAction.name IS NULL");
+					query.append(_FINDER_COLUMN_N_A_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourceAction.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_A_NAME_3);
 					}
-
-					query.append("resourceAction.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_A_NAME_2);
 					}
 				}
-
-				query.append(" AND ");
 
 				if (actionId == null) {
-					query.append("resourceAction.actionId IS NULL");
+					query.append(_FINDER_COLUMN_N_A_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append("(resourceAction.actionId IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_A_ACTIONID_3);
 					}
-
-					query.append("resourceAction.actionId = ?");
-
-					if (actionId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_A_ACTIONID_2);
 					}
 				}
 
@@ -1269,6 +1241,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_NAME_NAME_1 = "resourceActionname IS NULL";
+	private static final String _FINDER_COLUMN_NAME_NAME_2 = "resourceAction.name = ?";
+	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(resourceActionname IS NULL OR resourceAction.name = ?)";
+	private static final String _FINDER_COLUMN_N_A_NAME_1 = "resourceActionname IS NULL AND ";
+	private static final String _FINDER_COLUMN_N_A_NAME_2 = "resourceAction.name = ? AND ";
+	private static final String _FINDER_COLUMN_N_A_NAME_3 = "(resourceActionname IS NULL OR resourceAction.name = ?) AND ";
+	private static final String _FINDER_COLUMN_N_A_ACTIONID_1 = "resourceActionactionId IS NULL";
+	private static final String _FINDER_COLUMN_N_A_ACTIONID_2 = "resourceAction.actionId = ?";
+	private static final String _FINDER_COLUMN_N_A_ACTIONID_3 = "(resourceActionactionId IS NULL OR resourceAction.actionId = ?)";
 	private static final String _SQL_SELECT_RESOURCEACTION = "SELECT resourceAction FROM ResourceAction resourceAction";
 	private static final String _SQL_SELECT_RESOURCEACTION_WHERE = "SELECT resourceAction FROM ResourceAction resourceAction WHERE ";
 	private static final String _SQL_COUNT_RESOURCEACTION = "SELECT COUNT(resourceAction) FROM ResourceAction resourceAction";

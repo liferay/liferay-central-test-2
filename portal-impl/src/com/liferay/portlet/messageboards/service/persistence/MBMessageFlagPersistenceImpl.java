@@ -496,7 +496,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -552,7 +552,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -663,7 +663,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 			query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-			query.append("mbMessageFlag.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -729,7 +729,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.threadId = ?");
+				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -785,7 +785,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.threadId = ?");
+				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -899,7 +899,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 			query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-			query.append("mbMessageFlag.threadId = ?");
+			query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -965,7 +965,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.messageId = ?");
+				query.append(_FINDER_COLUMN_MESSAGEID_MESSAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1021,7 +1021,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.messageId = ?");
+				query.append(_FINDER_COLUMN_MESSAGEID_MESSAGEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1135,7 +1135,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 			query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-			query.append("mbMessageFlag.messageId = ?");
+			query.append(_FINDER_COLUMN_MESSAGEID_MESSAGEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1201,11 +1201,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.threadId = ?");
+				query.append(_FINDER_COLUMN_T_F_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_T_F_FLAG_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1263,11 +1261,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.threadId = ?");
+				query.append(_FINDER_COLUMN_T_F_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_T_F_FLAG_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1389,11 +1385,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 			query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-			query.append("mbMessageFlag.threadId = ?");
+			query.append(_FINDER_COLUMN_T_F_THREADID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessageFlag.flag = ?");
+			query.append(_FINDER_COLUMN_T_F_FLAG_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1463,11 +1457,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.messageId = ?");
+				query.append(_FINDER_COLUMN_M_F_MESSAGEID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_M_F_FLAG_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1525,11 +1517,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.messageId = ?");
+				query.append(_FINDER_COLUMN_M_F_MESSAGEID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_M_F_FLAG_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1651,11 +1641,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 			query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-			query.append("mbMessageFlag.messageId = ?");
+			query.append(_FINDER_COLUMN_M_F_MESSAGEID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessageFlag.flag = ?");
+			query.append(_FINDER_COLUMN_M_F_FLAG_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1725,15 +1713,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.userId = ?");
+				query.append(_FINDER_COLUMN_U_T_F_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_T_F_THREADID_2);
 
-				query.append("mbMessageFlag.threadId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_U_T_F_FLAG_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1794,15 +1778,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.userId = ?");
+				query.append(_FINDER_COLUMN_U_T_F_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_T_F_THREADID_2);
 
-				query.append("mbMessageFlag.threadId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_U_T_F_FLAG_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1932,15 +1912,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 			query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-			query.append("mbMessageFlag.userId = ?");
+			query.append(_FINDER_COLUMN_U_T_F_USERID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_U_T_F_THREADID_2);
 
-			query.append("mbMessageFlag.threadId = ?");
-
-			query.append(" AND ");
-
-			query.append("mbMessageFlag.flag = ?");
+			query.append(_FINDER_COLUMN_U_T_F_FLAG_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2050,15 +2026,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_SELECT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.userId = ?");
+				query.append(_FINDER_COLUMN_U_M_F_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_M_F_MESSAGEID_2);
 
-				query.append("mbMessageFlag.messageId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_U_M_F_FLAG_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2305,7 +2277,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_COUNT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2349,7 +2321,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_COUNT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.threadId = ?");
+				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2393,7 +2365,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_COUNT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.messageId = ?");
+				query.append(_FINDER_COLUMN_MESSAGEID_MESSAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2437,11 +2409,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_COUNT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.threadId = ?");
+				query.append(_FINDER_COLUMN_T_F_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_T_F_FLAG_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2489,11 +2459,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_COUNT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.messageId = ?");
+				query.append(_FINDER_COLUMN_M_F_MESSAGEID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_M_F_FLAG_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2542,15 +2510,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_COUNT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.userId = ?");
+				query.append(_FINDER_COLUMN_U_T_F_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_T_F_THREADID_2);
 
-				query.append("mbMessageFlag.threadId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_U_T_F_FLAG_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2601,15 +2565,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 				query.append(_SQL_COUNT_MBMESSAGEFLAG_WHERE);
 
-				query.append("mbMessageFlag.userId = ?");
+				query.append(_FINDER_COLUMN_U_M_F_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_M_F_MESSAGEID_2);
 
-				query.append("mbMessageFlag.messageId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessageFlag.flag = ?");
+				query.append(_FINDER_COLUMN_U_M_F_FLAG_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2717,6 +2677,19 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "mbMessageFlag.userId = ?";
+	private static final String _FINDER_COLUMN_THREADID_THREADID_2 = "mbMessageFlag.threadId = ?";
+	private static final String _FINDER_COLUMN_MESSAGEID_MESSAGEID_2 = "mbMessageFlag.messageId = ?";
+	private static final String _FINDER_COLUMN_T_F_THREADID_2 = "mbMessageFlag.threadId = ? AND ";
+	private static final String _FINDER_COLUMN_T_F_FLAG_2 = "mbMessageFlag.flag = ?";
+	private static final String _FINDER_COLUMN_M_F_MESSAGEID_2 = "mbMessageFlag.messageId = ? AND ";
+	private static final String _FINDER_COLUMN_M_F_FLAG_2 = "mbMessageFlag.flag = ?";
+	private static final String _FINDER_COLUMN_U_T_F_USERID_2 = "mbMessageFlag.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_T_F_THREADID_2 = "mbMessageFlag.threadId = ? AND ";
+	private static final String _FINDER_COLUMN_U_T_F_FLAG_2 = "mbMessageFlag.flag = ?";
+	private static final String _FINDER_COLUMN_U_M_F_USERID_2 = "mbMessageFlag.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_M_F_MESSAGEID_2 = "mbMessageFlag.messageId = ? AND ";
+	private static final String _FINDER_COLUMN_U_M_F_FLAG_2 = "mbMessageFlag.flag = ?";
 	private static final String _SQL_SELECT_MBMESSAGEFLAG = "SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag";
 	private static final String _SQL_SELECT_MBMESSAGEFLAG_WHERE = "SELECT mbMessageFlag FROM MBMessageFlag mbMessageFlag WHERE ";
 	private static final String _SQL_COUNT_MBMESSAGEFLAG = "SELECT COUNT(mbMessageFlag) FROM MBMessageFlag mbMessageFlag";

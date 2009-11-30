@@ -572,7 +572,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -632,7 +632,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -749,7 +749,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-			query.append("socialActivity.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -821,7 +821,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -881,7 +881,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -999,7 +999,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-			query.append("socialActivity.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1071,7 +1071,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1131,7 +1131,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1248,7 +1248,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-			query.append("socialActivity.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1352,7 +1352,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.mirrorActivityId = ?");
+				query.append(_FINDER_COLUMN_MIRRORACTIVITYID_MIRRORACTIVITYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1426,7 +1426,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1486,7 +1486,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1604,7 +1604,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-			query.append("socialActivity.classNameId = ?");
+			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1676,7 +1676,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1736,7 +1736,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1855,7 +1855,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-			query.append("socialActivity.receiverUserId = ?");
+			query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1929,11 +1929,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("socialActivity.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -1995,11 +1993,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("socialActivity.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2125,11 +2121,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-			query.append("socialActivity.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-			query.append(" AND ");
-
-			query.append("socialActivity.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2206,15 +2200,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.mirrorActivityId = ?");
+				query.append(_FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_M_C_C_CLASSNAMEID_2);
 
-				query.append("socialActivity.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.classPK = ?");
+				query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -2282,15 +2272,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.mirrorActivityId = ?");
+				query.append(_FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_M_C_C_CLASSNAMEID_2);
 
-				query.append("socialActivity.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.classPK = ?");
+				query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2427,15 +2413,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-			query.append("socialActivity.mirrorActivityId = ?");
+			query.append(_FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_M_C_C_CLASSNAMEID_2);
 
-			query.append("socialActivity.classNameId = ?");
-
-			query.append(" AND ");
-
-			query.append("socialActivity.classPK = ?");
+			query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2571,31 +2553,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_USERID_2);
 
-				query.append("socialActivity.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CREATEDATE_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSNAMEID_2);
 
-				query.append("socialActivity.createDate = ?");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSPK_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_TYPE_2);
 
-				query.append("socialActivity.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_RECEIVERUSERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -2883,7 +2853,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2927,7 +2897,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2971,7 +2941,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3016,7 +2986,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.mirrorActivityId = ?");
+				query.append(_FINDER_COLUMN_MIRRORACTIVITYID_MIRRORACTIVITYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3060,7 +3030,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3105,7 +3075,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3152,11 +3122,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("socialActivity.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3206,15 +3174,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.mirrorActivityId = ?");
+				query.append(_FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_M_C_C_CLASSNAMEID_2);
 
-				query.append("socialActivity.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.classPK = ?");
+				query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3268,31 +3232,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
 
-				query.append("socialActivity.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_USERID_2);
 
-				query.append("socialActivity.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CREATEDATE_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSNAMEID_2);
 
-				query.append("socialActivity.createDate = ?");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSPK_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_TYPE_2);
 
-				query.append("socialActivity.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialActivity.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_RECEIVERUSERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3402,6 +3354,25 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "socialActivity.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "socialActivity.companyId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "socialActivity.userId = ?";
+	private static final String _FINDER_COLUMN_MIRRORACTIVITYID_MIRRORACTIVITYID_2 =
+		"socialActivity.mirrorActivityId = ?";
+	private static final String _FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2 = "socialActivity.classNameId = ?";
+	private static final String _FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2 = "socialActivity.receiverUserId = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "socialActivity.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "socialActivity.classPK = ?";
+	private static final String _FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2 = "socialActivity.mirrorActivityId = ? AND ";
+	private static final String _FINDER_COLUMN_M_C_C_CLASSNAMEID_2 = "socialActivity.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_M_C_C_CLASSPK_2 = "socialActivity.classPK = ?";
+	private static final String _FINDER_COLUMN_G_U_CD_C_C_T_R_GROUPID_2 = "socialActivity.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_CD_C_C_T_R_USERID_2 = "socialActivity.userId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_CD_C_C_T_R_CREATEDATE_2 = "socialActivity.createDate = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSNAMEID_2 = "socialActivity.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSPK_2 = "socialActivity.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_CD_C_C_T_R_TYPE_2 = "socialActivity.type = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_CD_C_C_T_R_RECEIVERUSERID_2 = "socialActivity.receiverUserId = ?";
 	private static final String _SQL_SELECT_SOCIALACTIVITY = "SELECT socialActivity FROM SocialActivity socialActivity";
 	private static final String _SQL_SELECT_SOCIALACTIVITY_WHERE = "SELECT socialActivity FROM SocialActivity socialActivity WHERE ";
 	private static final String _SQL_COUNT_SOCIALACTIVITY = "SELECT COUNT(socialActivity) FROM SocialActivity socialActivity";

@@ -353,7 +353,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
-				query.append("shoppingOrderItem.orderId = ?");
+				query.append(_FINDER_COLUMN_ORDERID_ORDERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -414,7 +414,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
-				query.append("shoppingOrderItem.orderId = ?");
+				query.append(_FINDER_COLUMN_ORDERID_ORDERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -533,7 +533,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 			query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
-			query.append("shoppingOrderItem.orderId = ?");
+			query.append(_FINDER_COLUMN_ORDERID_ORDERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -746,7 +746,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_COUNT_SHOPPINGORDERITEM_WHERE);
 
-				query.append("shoppingOrderItem.orderId = ?");
+				query.append(_FINDER_COLUMN_ORDERID_ORDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -850,6 +850,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_ORDERID_ORDERID_2 = "shoppingOrderItem.orderId = ?";
 	private static final String _SQL_SELECT_SHOPPINGORDERITEM = "SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem";
 	private static final String _SQL_SELECT_SHOPPINGORDERITEM_WHERE = "SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem WHERE ";
 	private static final String _SQL_COUNT_SHOPPINGORDERITEM = "SELECT COUNT(shoppingOrderItem) FROM ShoppingOrderItem shoppingOrderItem";

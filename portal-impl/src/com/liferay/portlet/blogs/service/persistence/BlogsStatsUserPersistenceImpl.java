@@ -445,7 +445,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -505,7 +505,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -622,7 +622,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 			query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-			query.append("blogsStatsUser.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -694,7 +694,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -754,7 +754,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -871,7 +871,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 			query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-			query.append("blogsStatsUser.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -978,11 +978,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("blogsStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1061,11 +1059,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_E_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("blogsStatsUser.entryCount != ?");
+				query.append(_FINDER_COLUMN_G_E_ENTRYCOUNT_2);
 
 				query.append(" ORDER BY ");
 
@@ -1127,11 +1123,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_E_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("blogsStatsUser.entryCount != ?");
+				query.append(_FINDER_COLUMN_G_E_ENTRYCOUNT_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1257,11 +1251,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 			query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-			query.append("blogsStatsUser.groupId = ?");
+			query.append(_FINDER_COLUMN_G_E_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("blogsStatsUser.entryCount != ?");
+			query.append(_FINDER_COLUMN_G_E_ENTRYCOUNT_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1337,11 +1329,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.companyId = ?");
+				query.append(_FINDER_COLUMN_C_E_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("blogsStatsUser.entryCount != ?");
+				query.append(_FINDER_COLUMN_C_E_ENTRYCOUNT_2);
 
 				query.append(" ORDER BY ");
 
@@ -1403,11 +1393,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.companyId = ?");
+				query.append(_FINDER_COLUMN_C_E_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("blogsStatsUser.entryCount != ?");
+				query.append(_FINDER_COLUMN_C_E_ENTRYCOUNT_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1533,11 +1521,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 			query.append(_SQL_SELECT_BLOGSSTATSUSER_WHERE);
 
-			query.append("blogsStatsUser.companyId = ?");
+			query.append(_FINDER_COLUMN_C_E_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("blogsStatsUser.entryCount != ?");
+			query.append(_FINDER_COLUMN_C_E_ENTRYCOUNT_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1777,7 +1763,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1821,7 +1807,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1865,11 +1851,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("blogsStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1918,11 +1902,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_E_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("blogsStatsUser.entryCount != ?");
+				query.append(_FINDER_COLUMN_G_E_ENTRYCOUNT_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1971,11 +1953,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 				query.append(_SQL_COUNT_BLOGSSTATSUSER_WHERE);
 
-				query.append("blogsStatsUser.companyId = ?");
+				query.append(_FINDER_COLUMN_C_E_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("blogsStatsUser.entryCount != ?");
+				query.append(_FINDER_COLUMN_C_E_ENTRYCOUNT_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2071,6 +2051,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "blogsStatsUser.groupId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "blogsStatsUser.userId = ?";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "blogsStatsUser.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "blogsStatsUser.userId = ?";
+	private static final String _FINDER_COLUMN_G_E_GROUPID_2 = "blogsStatsUser.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_E_ENTRYCOUNT_2 = "blogsStatsUser.entryCount != ?";
+	private static final String _FINDER_COLUMN_C_E_COMPANYID_2 = "blogsStatsUser.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_E_ENTRYCOUNT_2 = "blogsStatsUser.entryCount != ?";
 	private static final String _SQL_SELECT_BLOGSSTATSUSER = "SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser";
 	private static final String _SQL_SELECT_BLOGSSTATSUSER_WHERE = "SELECT blogsStatsUser FROM BlogsStatsUser blogsStatsUser WHERE ";
 	private static final String _SQL_COUNT_BLOGSSTATSUSER = "SELECT COUNT(blogsStatsUser) FROM BlogsStatsUser blogsStatsUser";

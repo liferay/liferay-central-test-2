@@ -404,7 +404,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 				query.append(_SQL_SELECT_JOURNALARTICLERESOURCE_WHERE);
 
-				query.append("journalArticleResource.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -460,7 +460,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 				query.append(_SQL_SELECT_JOURNALARTICLERESOURCE_WHERE);
 
-				query.append("journalArticleResource.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -574,7 +574,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 			query.append(_SQL_SELECT_JOURNALARTICLERESOURCE_WHERE);
 
-			query.append("journalArticleResource.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -676,23 +676,17 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 				query.append(_SQL_SELECT_JOURNALARTICLERESOURCE_WHERE);
 
-				query.append("journalArticleResource.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_A_GROUPID_2);
 
 				if (articleId == null) {
-					query.append("journalArticleResource.articleId IS NULL");
+					query.append(_FINDER_COLUMN_G_A_ARTICLEID_1);
 				}
 				else {
 					if (articleId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalArticleResource.articleId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_A_ARTICLEID_3);
 					}
-
-					query.append("journalArticleResource.articleId = ?");
-
-					if (articleId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_A_ARTICLEID_2);
 					}
 				}
 
@@ -913,7 +907,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 				query.append(_SQL_COUNT_JOURNALARTICLERESOURCE_WHERE);
 
-				query.append("journalArticleResource.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -958,23 +952,17 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 				query.append(_SQL_COUNT_JOURNALARTICLERESOURCE_WHERE);
 
-				query.append("journalArticleResource.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_A_GROUPID_2);
 
 				if (articleId == null) {
-					query.append("journalArticleResource.articleId IS NULL");
+					query.append(_FINDER_COLUMN_G_A_ARTICLEID_1);
 				}
 				else {
 					if (articleId.equals(StringPool.BLANK)) {
-						query.append(
-							"(journalArticleResource.articleId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_A_ARTICLEID_3);
 					}
-
-					query.append("journalArticleResource.articleId = ?");
-
-					if (articleId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_A_ARTICLEID_2);
 					}
 				}
 
@@ -1082,6 +1070,11 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "journalArticleResource.groupId = ?";
+	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "journalArticleResource.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_ARTICLEID_1 = "journalArticleResourcearticleId IS NULL";
+	private static final String _FINDER_COLUMN_G_A_ARTICLEID_2 = "journalArticleResource.articleId = ?";
+	private static final String _FINDER_COLUMN_G_A_ARTICLEID_3 = "(journalArticleResourcearticleId IS NULL OR journalArticleResource.articleId = ?)";
 	private static final String _SQL_SELECT_JOURNALARTICLERESOURCE = "SELECT journalArticleResource FROM JournalArticleResource journalArticleResource";
 	private static final String _SQL_SELECT_JOURNALARTICLERESOURCE_WHERE = "SELECT journalArticleResource FROM JournalArticleResource journalArticleResource WHERE ";
 	private static final String _SQL_COUNT_JOURNALARTICLERESOURCE = "SELECT COUNT(journalArticleResource) FROM JournalArticleResource journalArticleResource";

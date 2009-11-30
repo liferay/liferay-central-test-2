@@ -430,17 +430,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				if (uuid == null) {
-					query.append("announcementsEntry.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(announcementsEntry.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("announcementsEntry.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -506,17 +503,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 				if (uuid == null) {
-					query.append("announcementsEntry.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(announcementsEntry.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("announcementsEntry.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -639,17 +633,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
 			if (uuid == null) {
-				query.append("announcementsEntry.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(announcementsEntry.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("announcementsEntry.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -726,7 +717,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -787,7 +778,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -906,7 +897,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 			query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-			query.append("announcementsEntry.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -981,11 +972,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("announcementsEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -1048,11 +1037,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("announcementsEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1180,11 +1167,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 			query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-			query.append("announcementsEntry.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-			query.append(" AND ");
-
-			query.append("announcementsEntry.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1261,15 +1246,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_A_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_A_CLASSPK_2);
 
-				query.append("announcementsEntry.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("announcementsEntry.alert = ?");
+				query.append(_FINDER_COLUMN_C_C_A_ALERT_2);
 
 				query.append(" ORDER BY ");
 
@@ -1335,15 +1316,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_A_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_A_CLASSPK_2);
 
-				query.append("announcementsEntry.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("announcementsEntry.alert = ?");
+				query.append(_FINDER_COLUMN_C_C_A_ALERT_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1481,15 +1458,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 			query.append(_SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE);
 
-			query.append("announcementsEntry.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_A_CLASSNAMEID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_A_CLASSPK_2);
 
-			query.append("announcementsEntry.classPK = ?");
-
-			query.append(" AND ");
-
-			query.append("announcementsEntry.alert = ?");
+			query.append(_FINDER_COLUMN_C_C_A_ALERT_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1729,17 +1702,14 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				query.append(_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE);
 
 				if (uuid == null) {
-					query.append("announcementsEntry.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(announcementsEntry.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("announcementsEntry.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -1787,7 +1757,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1834,11 +1804,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("announcementsEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1887,15 +1855,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE);
 
-				query.append("announcementsEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_A_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_A_CLASSPK_2);
 
-				query.append("announcementsEntry.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("announcementsEntry.alert = ?");
+				query.append(_FINDER_COLUMN_C_C_A_ALERT_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2003,6 +1967,15 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence")
 	protected com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "announcementsEntryuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "announcementsEntry.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(announcementsEntryuuid IS NULL OR announcementsEntry.uuid = ?)";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "announcementsEntry.userId = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "announcementsEntry.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "announcementsEntry.classPK = ?";
+	private static final String _FINDER_COLUMN_C_C_A_CLASSNAMEID_2 = "announcementsEntry.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_A_CLASSPK_2 = "announcementsEntry.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_A_ALERT_2 = "announcementsEntry.alert = ?";
 	private static final String _SQL_SELECT_ANNOUNCEMENTSENTRY = "SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry";
 	private static final String _SQL_SELECT_ANNOUNCEMENTSENTRY_WHERE = "SELECT announcementsEntry FROM AnnouncementsEntry announcementsEntry WHERE ";
 	private static final String _SQL_COUNT_ANNOUNCEMENTSENTRY = "SELECT COUNT(announcementsEntry) FROM AnnouncementsEntry announcementsEntry";

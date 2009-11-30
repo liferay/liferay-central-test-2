@@ -407,11 +407,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 				query.append(_SQL_SELECT_EXPANDOTABLE_WHERE);
 
-				query.append("expandoTable.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("expandoTable.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -469,11 +467,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 				query.append(_SQL_SELECT_EXPANDOTABLE_WHERE);
 
-				query.append("expandoTable.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("expandoTable.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -593,11 +589,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 			query.append(_SQL_SELECT_EXPANDOTABLE_WHERE);
 
-			query.append("expandoTable.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("expandoTable.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -707,26 +701,19 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 				query.append(_SQL_SELECT_EXPANDOTABLE_WHERE);
 
-				query.append("expandoTable.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_N_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("expandoTable.classNameId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_N_CLASSNAMEID_2);
 
 				if (name == null) {
-					query.append("expandoTable.name IS NULL");
+					query.append(_FINDER_COLUMN_C_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(expandoTable.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_C_N_NAME_3);
 					}
-
-					query.append("expandoTable.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_C_N_NAME_2);
 					}
 				}
 
@@ -951,11 +938,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 				query.append(_SQL_COUNT_EXPANDOTABLE_WHERE);
 
-				query.append("expandoTable.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("expandoTable.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1006,26 +991,19 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 
 				query.append(_SQL_COUNT_EXPANDOTABLE_WHERE);
 
-				query.append("expandoTable.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_N_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("expandoTable.classNameId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_N_CLASSNAMEID_2);
 
 				if (name == null) {
-					query.append("expandoTable.name IS NULL");
+					query.append(_FINDER_COLUMN_C_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(expandoTable.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_C_N_NAME_3);
 					}
-
-					query.append("expandoTable.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_C_N_NAME_2);
 					}
 				}
 
@@ -1129,6 +1107,13 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_C_C_COMPANYID_2 = "expandoTable.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "expandoTable.classNameId = ?";
+	private static final String _FINDER_COLUMN_C_C_N_COMPANYID_2 = "expandoTable.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_N_CLASSNAMEID_2 = "expandoTable.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_N_NAME_1 = "expandoTablename IS NULL";
+	private static final String _FINDER_COLUMN_C_C_N_NAME_2 = "expandoTable.name = ?";
+	private static final String _FINDER_COLUMN_C_C_N_NAME_3 = "(expandoTablename IS NULL OR expandoTable.name = ?)";
 	private static final String _SQL_SELECT_EXPANDOTABLE = "SELECT expandoTable FROM ExpandoTable expandoTable";
 	private static final String _SQL_SELECT_EXPANDOTABLE_WHERE = "SELECT expandoTable FROM ExpandoTable expandoTable WHERE ";
 	private static final String _SQL_COUNT_EXPANDOTABLE = "SELECT COUNT(expandoTable) FROM ExpandoTable expandoTable";

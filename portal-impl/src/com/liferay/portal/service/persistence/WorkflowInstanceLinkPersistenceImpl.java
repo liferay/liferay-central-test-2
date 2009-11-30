@@ -446,19 +446,13 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 
 				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
 
-				query.append("workflowInstanceLink.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
 
-				query.append("workflowInstanceLink.companyId = ?");
+				query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("workflowInstanceLink.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("workflowInstanceLink.classPK = ?");
+				query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -677,19 +671,13 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 
 				query.append(_SQL_COUNT_WORKFLOWINSTANCELINK_WHERE);
 
-				query.append("workflowInstanceLink.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
 
-				query.append("workflowInstanceLink.companyId = ?");
+				query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("workflowInstanceLink.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("workflowInstanceLink.classPK = ?");
+				query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -881,6 +869,10 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_G_C_C_C_GROUPID_2 = "workflowInstanceLink.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_C_C_COMPANYID_2 = "workflowInstanceLink.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2 = "workflowInstanceLink.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_C_C_CLASSPK_2 = "workflowInstanceLink.classPK = ?";
 	private static final String _SQL_SELECT_WORKFLOWINSTANCELINK = "SELECT workflowInstanceLink FROM WorkflowInstanceLink workflowInstanceLink";
 	private static final String _SQL_SELECT_WORKFLOWINSTANCELINK_WHERE = "SELECT workflowInstanceLink FROM WorkflowInstanceLink workflowInstanceLink WHERE ";
 	private static final String _SQL_COUNT_WORKFLOWINSTANCELINK = "SELECT COUNT(workflowInstanceLink) FROM WorkflowInstanceLink workflowInstanceLink";

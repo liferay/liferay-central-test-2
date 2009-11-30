@@ -380,7 +380,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 				query.append(_SQL_SELECT_EXPANDOROW_WHERE);
 
-				query.append("expandoRow.tableId = ?");
+				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -436,7 +436,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 				query.append(_SQL_SELECT_EXPANDOROW_WHERE);
 
-				query.append("expandoRow.tableId = ?");
+				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -546,7 +546,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 			query.append(_SQL_SELECT_EXPANDOROW_WHERE);
 
-			query.append("expandoRow.tableId = ?");
+			query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -647,11 +647,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 				query.append(_SQL_SELECT_EXPANDOROW_WHERE);
 
-				query.append("expandoRow.tableId = ?");
+				query.append(_FINDER_COLUMN_T_C_TABLEID_2);
 
-				query.append(" AND ");
-
-				query.append("expandoRow.classPK = ?");
+				query.append(_FINDER_COLUMN_T_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -864,7 +862,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 				query.append(_SQL_COUNT_EXPANDOROW_WHERE);
 
-				query.append("expandoRow.tableId = ?");
+				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -908,11 +906,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 				query.append(_SQL_COUNT_EXPANDOROW_WHERE);
 
-				query.append("expandoRow.tableId = ?");
+				query.append(_FINDER_COLUMN_T_C_TABLEID_2);
 
-				query.append(" AND ");
-
-				query.append("expandoRow.classPK = ?");
+				query.append(_FINDER_COLUMN_T_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1010,6 +1006,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_TABLEID_TABLEID_2 = "expandoRow.tableId = ?";
+	private static final String _FINDER_COLUMN_T_C_TABLEID_2 = "expandoRow.tableId = ? AND ";
+	private static final String _FINDER_COLUMN_T_C_CLASSPK_2 = "expandoRow.classPK = ?";
 	private static final String _SQL_SELECT_EXPANDOROW = "SELECT expandoRow FROM ExpandoRow expandoRow";
 	private static final String _SQL_SELECT_EXPANDOROW_WHERE = "SELECT expandoRow FROM ExpandoRow expandoRow WHERE ";
 	private static final String _SQL_COUNT_EXPANDOROW = "SELECT COUNT(expandoRow) FROM ExpandoRow expandoRow";

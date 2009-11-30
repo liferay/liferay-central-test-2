@@ -555,7 +555,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.smallImageId = ?");
+				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -661,7 +661,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.mediumImageId = ?");
+				query.append(_FINDER_COLUMN_MEDIUMIMAGEID_MEDIUMIMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -767,7 +767,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.largeImageId = ?");
+				query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -843,11 +843,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("shoppingItem.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -909,11 +907,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("shoppingItem.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1039,11 +1035,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 			query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
-			query.append("shoppingItem.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("shoppingItem.categoryId = ?");
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1152,22 +1146,17 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
 				if (sku == null) {
-					query.append("shoppingItem.sku IS NULL");
+					query.append(_FINDER_COLUMN_C_S_SKU_1);
 				}
 				else {
 					if (sku.equals(StringPool.BLANK)) {
-						query.append("(shoppingItem.sku IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_S_SKU_3);
 					}
-
-					query.append("shoppingItem.sku = ?");
-
-					if (sku.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_S_SKU_2);
 					}
 				}
 
@@ -1417,7 +1406,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.smallImageId = ?");
+				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1462,7 +1451,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.mediumImageId = ?");
+				query.append(_FINDER_COLUMN_MEDIUMIMAGEID_MEDIUMIMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1506,7 +1495,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.largeImageId = ?");
+				query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1553,11 +1542,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("shoppingItem.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1603,22 +1590,17 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
 
-				query.append("shoppingItem.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
 				if (sku == null) {
-					query.append("shoppingItem.sku IS NULL");
+					query.append(_FINDER_COLUMN_C_S_SKU_1);
 				}
 				else {
 					if (sku.equals(StringPool.BLANK)) {
-						query.append("(shoppingItem.sku IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_S_SKU_3);
 					}
-
-					query.append("shoppingItem.sku = ?");
-
-					if (sku.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_S_SKU_2);
 					}
 				}
 
@@ -1942,6 +1924,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		private MappingSqlQuery _mappingSqlQuery;
 	}
 
+	private static final String _FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2 = "shoppingItem.smallImageId = ?";
+	private static final String _FINDER_COLUMN_MEDIUMIMAGEID_MEDIUMIMAGEID_2 = "shoppingItem.mediumImageId = ?";
+	private static final String _FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2 = "shoppingItem.largeImageId = ?";
+	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "shoppingItem.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_CATEGORYID_2 = "shoppingItem.categoryId = ?";
+	private static final String _FINDER_COLUMN_C_S_COMPANYID_2 = "shoppingItem.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_S_SKU_1 = "shoppingItemsku IS NULL";
+	private static final String _FINDER_COLUMN_C_S_SKU_2 = "shoppingItem.sku = ?";
+	private static final String _FINDER_COLUMN_C_S_SKU_3 = "(shoppingItemsku IS NULL OR shoppingItem.sku = ?)";
 	private static final String _SQL_SELECT_SHOPPINGITEM = "SELECT shoppingItem FROM ShoppingItem shoppingItem";
 	private static final String _SQL_SELECT_SHOPPINGITEM_WHERE = "SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ";
 	private static final String _SQL_COUNT_SHOPPINGITEM = "SELECT COUNT(shoppingItem) FROM ShoppingItem shoppingItem";

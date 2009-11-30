@@ -428,17 +428,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
-					query.append("pollsQuestion.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(pollsQuestion.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("pollsQuestion.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -503,17 +500,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
-					query.append("pollsQuestion.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(pollsQuestion.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("pollsQuestion.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -634,17 +628,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 			if (uuid == null) {
-				query.append("pollsQuestion.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(pollsQuestion.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("pollsQuestion.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -756,23 +747,18 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
-					query.append("pollsQuestion.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(pollsQuestion.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("pollsQuestion.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("pollsQuestion.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -852,7 +838,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
-				query.append("pollsQuestion.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -912,7 +898,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
-				query.append("pollsQuestion.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1029,7 +1015,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
 
-			query.append("pollsQuestion.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1254,17 +1240,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query.append(_SQL_COUNT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
-					query.append("pollsQuestion.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(pollsQuestion.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("pollsQuestion.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -1314,23 +1297,18 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query.append(_SQL_COUNT_POLLSQUESTION_WHERE);
 
 				if (uuid == null) {
-					query.append("pollsQuestion.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(pollsQuestion.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("pollsQuestion.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("pollsQuestion.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1378,7 +1356,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				query.append(_SQL_COUNT_POLLSQUESTION_WHERE);
 
-				query.append("pollsQuestion.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1472,6 +1450,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "pollsQuestionuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "pollsQuestion.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(pollsQuestionuuid IS NULL OR pollsQuestion.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "pollsQuestionuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "pollsQuestion.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(pollsQuestionuuid IS NULL OR pollsQuestion.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "pollsQuestion.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "pollsQuestion.groupId = ?";
 	private static final String _SQL_SELECT_POLLSQUESTION = "SELECT pollsQuestion FROM PollsQuestion pollsQuestion";
 	private static final String _SQL_SELECT_POLLSQUESTION_WHERE = "SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ";
 	private static final String _SQL_COUNT_POLLSQUESTION = "SELECT COUNT(pollsQuestion) FROM PollsQuestion pollsQuestion";

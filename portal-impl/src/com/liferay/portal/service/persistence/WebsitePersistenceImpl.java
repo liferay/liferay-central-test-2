@@ -415,7 +415,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -475,7 +475,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -591,7 +591,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-			query.append("website.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -661,7 +661,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -721,7 +721,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -836,7 +836,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-			query.append("website.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -909,11 +909,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("website.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -975,11 +973,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("website.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1104,11 +1100,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-			query.append("website.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("website.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1183,15 +1177,11 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("website.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("website.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -1256,15 +1246,11 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("website.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("website.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1400,15 +1386,11 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-			query.append("website.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-			query.append("website.classNameId = ?");
-
-			query.append(" AND ");
-
-			query.append("website.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1486,19 +1468,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("website.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("website.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("website.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				query.append(" ORDER BY ");
 
@@ -1568,19 +1544,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("website.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("website.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("website.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1724,19 +1694,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_SQL_SELECT_WEBSITE_WHERE);
 
-			query.append("website.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-			query.append("website.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-			query.append(" AND ");
-
-			query.append("website.classPK = ?");
-
-			query.append(" AND ");
-
-			query.append("website.primary = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1979,7 +1943,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2023,7 +1987,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
-				query.append("website.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2070,11 +2034,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("website.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2123,15 +2085,11 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("website.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("website.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2183,19 +2141,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_SQL_COUNT_WEBSITE_WHERE);
 
-				query.append("website.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("website.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("website.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("website.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2387,6 +2339,17 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "website.companyId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "website.userId = ?";
+	private static final String _FINDER_COLUMN_C_C_COMPANYID_2 = "website.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "website.classNameId = ?";
+	private static final String _FINDER_COLUMN_C_C_C_COMPANYID_2 = "website.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "website.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "website.classPK = ?";
+	private static final String _FINDER_COLUMN_C_C_C_P_COMPANYID_2 = "website.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2 = "website.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_CLASSPK_2 = "website.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_PRIMARY_2 = "website.primary = ?";
 	private static final String _SQL_SELECT_WEBSITE = "SELECT website FROM Website website";
 	private static final String _SQL_SELECT_WEBSITE_WHERE = "SELECT website FROM Website website WHERE ";
 	private static final String _SQL_COUNT_WEBSITE = "SELECT COUNT(website) FROM Website website";

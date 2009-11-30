@@ -417,7 +417,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 				query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
-				query.append("layoutSet.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -473,7 +473,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 				query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
-				query.append("layoutSet.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -584,7 +584,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 			query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
-			query.append("layoutSet.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -683,17 +683,14 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 				query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
 				if (virtualHost == null) {
-					query.append("layoutSet.virtualHost IS NULL");
+					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
 				}
 				else {
 					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append("(layoutSet.virtualHost IS NULL OR ");
+						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
 					}
-
-					query.append("layoutSet.virtualHost = ?");
-
-					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
 					}
 				}
 
@@ -805,11 +802,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 				query.append(_SQL_SELECT_LAYOUTSET_WHERE);
 
-				query.append("layoutSet.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layoutSet.privateLayout = ?");
+				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1029,7 +1024,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 				query.append(_SQL_COUNT_LAYOUTSET_WHERE);
 
-				query.append("layoutSet.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1074,17 +1069,14 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 				query.append(_SQL_COUNT_LAYOUTSET_WHERE);
 
 				if (virtualHost == null) {
-					query.append("layoutSet.virtualHost IS NULL");
+					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
 				}
 				else {
 					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append("(layoutSet.virtualHost IS NULL OR ");
+						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
 					}
-
-					query.append("layoutSet.virtualHost = ?");
-
-					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
 					}
 				}
 
@@ -1135,11 +1127,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 				query.append(_SQL_COUNT_LAYOUTSET_WHERE);
 
-				query.append("layoutSet.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layoutSet.privateLayout = ?");
+				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1327,6 +1317,12 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "layoutSet.groupId = ?";
+	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1 = "layoutSetvirtualHost IS NULL";
+	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2 = "layoutSet.virtualHost = ?";
+	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3 = "(layoutSetvirtualHost IS NULL OR layoutSet.virtualHost = ?)";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "layoutSet.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_PRIVATELAYOUT_2 = "layoutSet.privateLayout = ?";
 	private static final String _SQL_SELECT_LAYOUTSET = "SELECT layoutSet FROM LayoutSet layoutSet";
 	private static final String _SQL_SELECT_LAYOUTSET_WHERE = "SELECT layoutSet FROM LayoutSet layoutSet WHERE ";
 	private static final String _SQL_COUNT_LAYOUTSET = "SELECT COUNT(layoutSet) FROM LayoutSet layoutSet";

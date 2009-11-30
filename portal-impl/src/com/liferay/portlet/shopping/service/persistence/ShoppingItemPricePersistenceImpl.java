@@ -353,7 +353,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_SELECT_SHOPPINGITEMPRICE_WHERE);
 
-				query.append("shoppingItemPrice.itemId = ?");
+				query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
 
 				query.append(" ORDER BY ");
 
@@ -414,7 +414,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_SELECT_SHOPPINGITEMPRICE_WHERE);
 
-				query.append("shoppingItemPrice.itemId = ?");
+				query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -533,7 +533,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 
 			query.append(_SQL_SELECT_SHOPPINGITEMPRICE_WHERE);
 
-			query.append("shoppingItemPrice.itemId = ?");
+			query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -746,7 +746,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_COUNT_SHOPPINGITEMPRICE_WHERE);
 
-				query.append("shoppingItemPrice.itemId = ?");
+				query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -850,6 +850,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_ITEMID_ITEMID_2 = "shoppingItemPrice.itemId = ?";
 	private static final String _SQL_SELECT_SHOPPINGITEMPRICE = "SELECT shoppingItemPrice FROM ShoppingItemPrice shoppingItemPrice";
 	private static final String _SQL_SELECT_SHOPPINGITEMPRICE_WHERE = "SELECT shoppingItemPrice FROM ShoppingItemPrice shoppingItemPrice WHERE ";
 	private static final String _SQL_COUNT_SHOPPINGITEMPRICE = "SELECT COUNT(shoppingItemPrice) FROM ShoppingItemPrice shoppingItemPrice";

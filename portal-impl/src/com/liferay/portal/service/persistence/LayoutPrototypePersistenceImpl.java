@@ -362,7 +362,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
 
-				query.append("layoutPrototype.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -418,7 +418,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
 
-				query.append("layoutPrototype.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -532,7 +532,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 			query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
 
-			query.append("layoutPrototype.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -600,11 +600,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
 
-				query.append("layoutPrototype.companyId = ?");
+				query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("layoutPrototype.active = ?");
+				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -662,11 +660,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
 
-				query.append("layoutPrototype.companyId = ?");
+				query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("layoutPrototype.active = ?");
+				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -788,11 +784,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 			query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
 
-			query.append("layoutPrototype.companyId = ?");
+			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("layoutPrototype.active = ?");
+			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1000,7 +994,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				query.append(_SQL_COUNT_LAYOUTPROTOTYPE_WHERE);
 
-				query.append("layoutPrototype.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1047,11 +1041,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				query.append(_SQL_COUNT_LAYOUTPROTOTYPE_WHERE);
 
-				query.append("layoutPrototype.companyId = ?");
+				query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("layoutPrototype.active = ?");
+				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1239,6 +1231,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "layoutPrototype.companyId = ?";
+	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 = "layoutPrototype.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 = "layoutPrototype.active = ?";
 	private static final String _SQL_SELECT_LAYOUTPROTOTYPE = "SELECT layoutPrototype FROM LayoutPrototype layoutPrototype";
 	private static final String _SQL_SELECT_LAYOUTPROTOTYPE_WHERE = "SELECT layoutPrototype FROM LayoutPrototype layoutPrototype WHERE ";
 	private static final String _SQL_COUNT_LAYOUTPROTOTYPE = "SELECT COUNT(layoutPrototype) FROM LayoutPrototype layoutPrototype";

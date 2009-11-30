@@ -520,17 +520,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -596,17 +593,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -728,17 +722,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
 			if (uuid == null) {
-				query.append("dlFolder.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(dlFolder.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("dlFolder.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -850,23 +841,18 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("dlFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -946,7 +932,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1007,7 +993,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1124,7 +1110,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-			query.append("dlFolder.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1196,7 +1182,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1257,7 +1243,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1375,7 +1361,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-			query.append("dlFolder.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1449,11 +1435,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1516,11 +1500,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1647,11 +1629,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-			query.append("dlFolder.groupId = ?");
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("dlFolder.parentFolderId = ?");
+			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1725,22 +1705,17 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.parentFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_N_PARENTFOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFolder.name IS NULL");
+					query.append(_FINDER_COLUMN_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_N_NAME_3);
 					}
-
-					query.append("dlFolder.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_N_NAME_2);
 					}
 				}
 
@@ -1809,22 +1784,17 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.parentFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_N_PARENTFOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFolder.name IS NULL");
+					query.append(_FINDER_COLUMN_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_N_NAME_3);
 					}
-
-					query.append("dlFolder.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_N_NAME_2);
 					}
 				}
 
@@ -1955,22 +1925,17 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-			query.append("dlFolder.parentFolderId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_P_N_PARENTFOLDERID_2);
 
 			if (name == null) {
-				query.append("dlFolder.name IS NULL");
+				query.append(_FINDER_COLUMN_P_N_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(dlFolder.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_P_N_NAME_3);
 				}
-
-				query.append("dlFolder.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_P_N_NAME_2);
 				}
 			}
 
@@ -2090,26 +2055,19 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFolder.parentFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFolder.name IS NULL");
+					query.append(_FINDER_COLUMN_G_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_N_NAME_3);
 					}
-
-					query.append("dlFolder.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_N_NAME_2);
 					}
 				}
 
@@ -2375,17 +2333,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query.append(_SQL_COUNT_DLFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2435,23 +2390,18 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query.append(_SQL_COUNT_DLFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("dlFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2499,7 +2449,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_COUNT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2543,7 +2493,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_COUNT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2590,11 +2540,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_COUNT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2641,22 +2589,17 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_COUNT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.parentFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_N_PARENTFOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFolder.name IS NULL");
+					query.append(_FINDER_COLUMN_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_N_NAME_3);
 					}
-
-					query.append("dlFolder.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_N_NAME_2);
 					}
 				}
 
@@ -2711,26 +2654,19 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				query.append(_SQL_COUNT_DLFOLDER_WHERE);
 
-				query.append("dlFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFolder.parentFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFolder.name IS NULL");
+					query.append(_FINDER_COLUMN_G_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFolder.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_N_NAME_3);
 					}
-
-					query.append("dlFolder.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_N_NAME_2);
 					}
 				}
 
@@ -2846,6 +2782,26 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "dlFolderuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "dlFolder.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(dlFolderuuid IS NULL OR dlFolder.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "dlFolderuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "dlFolder.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(dlFolderuuid IS NULL OR dlFolder.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "dlFolder.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "dlFolder.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "dlFolder.companyId = ?";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "dlFolder.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_PARENTFOLDERID_2 = "dlFolder.parentFolderId = ?";
+	private static final String _FINDER_COLUMN_P_N_PARENTFOLDERID_2 = "dlFolder.parentFolderId = ? AND ";
+	private static final String _FINDER_COLUMN_P_N_NAME_1 = "dlFoldername IS NULL";
+	private static final String _FINDER_COLUMN_P_N_NAME_2 = "dlFolder.name = ?";
+	private static final String _FINDER_COLUMN_P_N_NAME_3 = "(dlFoldername IS NULL OR dlFolder.name = ?)";
+	private static final String _FINDER_COLUMN_G_P_N_GROUPID_2 = "dlFolder.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_N_PARENTFOLDERID_2 = "dlFolder.parentFolderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_N_NAME_1 = "dlFoldername IS NULL";
+	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "dlFolder.name = ?";
+	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(dlFoldername IS NULL OR dlFolder.name = ?)";
 	private static final String _SQL_SELECT_DLFOLDER = "SELECT dlFolder FROM DLFolder dlFolder";
 	private static final String _SQL_SELECT_DLFOLDER_WHERE = "SELECT dlFolder FROM DLFolder dlFolder WHERE ";
 	private static final String _SQL_COUNT_DLFOLDER = "SELECT COUNT(dlFolder) FROM DLFolder dlFolder";

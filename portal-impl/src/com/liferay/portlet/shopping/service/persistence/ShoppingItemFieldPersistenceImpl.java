@@ -348,7 +348,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_SELECT_SHOPPINGITEMFIELD_WHERE);
 
-				query.append("shoppingItemField.itemId = ?");
+				query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
 
 				query.append(" ORDER BY ");
 
@@ -409,7 +409,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_SELECT_SHOPPINGITEMFIELD_WHERE);
 
-				query.append("shoppingItemField.itemId = ?");
+				query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -528,7 +528,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 			query.append(_SQL_SELECT_SHOPPINGITEMFIELD_WHERE);
 
-			query.append("shoppingItemField.itemId = ?");
+			query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -741,7 +741,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				query.append(_SQL_COUNT_SHOPPINGITEMFIELD_WHERE);
 
-				query.append("shoppingItemField.itemId = ?");
+				query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -845,6 +845,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_ITEMID_ITEMID_2 = "shoppingItemField.itemId = ?";
 	private static final String _SQL_SELECT_SHOPPINGITEMFIELD = "SELECT shoppingItemField FROM ShoppingItemField shoppingItemField";
 	private static final String _SQL_SELECT_SHOPPINGITEMFIELD_WHERE = "SELECT shoppingItemField FROM ShoppingItemField shoppingItemField WHERE ";
 	private static final String _SQL_COUNT_SHOPPINGITEMFIELD = "SELECT COUNT(shoppingItemField) FROM ShoppingItemField shoppingItemField";

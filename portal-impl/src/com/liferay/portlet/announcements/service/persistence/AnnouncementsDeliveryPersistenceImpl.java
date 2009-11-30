@@ -405,7 +405,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
 
-				query.append("announcementsDelivery.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -461,7 +461,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
 
-				query.append("announcementsDelivery.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -573,7 +573,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 			query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
 
-			query.append("announcementsDelivery.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -674,22 +674,17 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
 
-				query.append("announcementsDelivery.userId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_T_USERID_2);
 
 				if (type == null) {
-					query.append("announcementsDelivery.type IS NULL");
+					query.append(_FINDER_COLUMN_U_T_TYPE_1);
 				}
 				else {
 					if (type.equals(StringPool.BLANK)) {
-						query.append("(announcementsDelivery.type IS NULL OR ");
+						query.append(_FINDER_COLUMN_U_T_TYPE_3);
 					}
-
-					query.append("announcementsDelivery.type = ?");
-
-					if (type.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_U_T_TYPE_2);
 					}
 				}
 
@@ -907,7 +902,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE);
 
-				query.append("announcementsDelivery.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -951,22 +946,17 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE);
 
-				query.append("announcementsDelivery.userId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_T_USERID_2);
 
 				if (type == null) {
-					query.append("announcementsDelivery.type IS NULL");
+					query.append(_FINDER_COLUMN_U_T_TYPE_1);
 				}
 				else {
 					if (type.equals(StringPool.BLANK)) {
-						query.append("(announcementsDelivery.type IS NULL OR ");
+						query.append(_FINDER_COLUMN_U_T_TYPE_3);
 					}
-
-					query.append("announcementsDelivery.type = ?");
-
-					if (type.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_U_T_TYPE_2);
 					}
 				}
 
@@ -1066,6 +1056,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "announcementsDelivery.userId = ?";
+	private static final String _FINDER_COLUMN_U_T_USERID_2 = "announcementsDelivery.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_T_TYPE_1 = "announcementsDeliverytype IS NULL";
+	private static final String _FINDER_COLUMN_U_T_TYPE_2 = "announcementsDelivery.type = ?";
+	private static final String _FINDER_COLUMN_U_T_TYPE_3 = "(announcementsDeliverytype IS NULL OR announcementsDelivery.type = ?)";
 	private static final String _SQL_SELECT_ANNOUNCEMENTSDELIVERY = "SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery";
 	private static final String _SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE = "SELECT announcementsDelivery FROM AnnouncementsDelivery announcementsDelivery WHERE ";
 	private static final String _SQL_COUNT_ANNOUNCEMENTSDELIVERY = "SELECT COUNT(announcementsDelivery) FROM AnnouncementsDelivery announcementsDelivery";

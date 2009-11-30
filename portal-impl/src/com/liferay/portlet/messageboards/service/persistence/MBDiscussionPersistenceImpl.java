@@ -413,7 +413,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
-				query.append("mbDiscussion.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -469,7 +469,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
-				query.append("mbDiscussion.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -583,7 +583,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 			query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
-			query.append("mbDiscussion.classNameId = ?");
+			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -681,7 +681,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
-				query.append("mbDiscussion.threadId = ?");
+				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -788,11 +788,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
 
-				query.append("mbDiscussion.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("mbDiscussion.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1012,7 +1010,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 				query.append(_SQL_COUNT_MBDISCUSSION_WHERE);
 
-				query.append("mbDiscussion.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1056,7 +1054,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 				query.append(_SQL_COUNT_MBDISCUSSION_WHERE);
 
-				query.append("mbDiscussion.threadId = ?");
+				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1103,11 +1101,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 				query.append(_SQL_COUNT_MBDISCUSSION_WHERE);
 
-				query.append("mbDiscussion.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("mbDiscussion.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1213,6 +1209,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2 = "mbDiscussion.classNameId = ?";
+	private static final String _FINDER_COLUMN_THREADID_THREADID_2 = "mbDiscussion.threadId = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "mbDiscussion.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "mbDiscussion.classPK = ?";
 	private static final String _SQL_SELECT_MBDISCUSSION = "SELECT mbDiscussion FROM MBDiscussion mbDiscussion";
 	private static final String _SQL_SELECT_MBDISCUSSION_WHERE = "SELECT mbDiscussion FROM MBDiscussion mbDiscussion WHERE ";
 	private static final String _SQL_COUNT_MBDISCUSSION = "SELECT COUNT(mbDiscussion) FROM MBDiscussion mbDiscussion";

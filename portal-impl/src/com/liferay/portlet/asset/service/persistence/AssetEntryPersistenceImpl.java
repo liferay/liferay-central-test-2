@@ -431,7 +431,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
-				query.append("assetEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -487,7 +487,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
-				query.append("assetEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -598,7 +598,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 			query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
-			query.append("assetEntry.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -701,11 +701,9 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
-				query.append("assetEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("assetEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -918,7 +916,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				query.append(_SQL_COUNT_ASSETENTRY_WHERE);
 
-				query.append("assetEntry.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -965,11 +963,9 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				query.append(_SQL_COUNT_ASSETENTRY_WHERE);
 
-				query.append("assetEntry.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("assetEntry.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2164,6 +2160,9 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		private AssetEntryPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "assetEntry.companyId = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "assetEntry.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "assetEntry.classPK = ?";
 	private static final String _SQL_SELECT_ASSETENTRY = "SELECT assetEntry FROM AssetEntry assetEntry";
 	private static final String _SQL_SELECT_ASSETENTRY_WHERE = "SELECT assetEntry FROM AssetEntry assetEntry WHERE ";
 	private static final String _SQL_COUNT_ASSETENTRY = "SELECT COUNT(assetEntry) FROM AssetEntry assetEntry";

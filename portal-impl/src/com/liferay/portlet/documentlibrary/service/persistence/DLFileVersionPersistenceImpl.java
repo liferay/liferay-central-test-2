@@ -458,26 +458,19 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-				query.append("dlFileVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileVersion.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileVersion.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 					}
-
-					query.append("dlFileVersion.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 					}
 				}
 
@@ -550,26 +543,19 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-				query.append("dlFileVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileVersion.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileVersion.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 					}
-
-					query.append("dlFileVersion.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 					}
 				}
 
@@ -712,26 +698,19 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 			query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-			query.append("dlFileVersion.groupId = ?");
+			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("dlFileVersion.folderId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 			if (name == null) {
-				query.append("dlFileVersion.name IS NULL");
+				query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(dlFileVersion.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 				}
-
-				query.append("dlFileVersion.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 				}
 			}
 
@@ -861,32 +840,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-				query.append("dlFileVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_V_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_V_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileVersion.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_V_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileVersion.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_V_NAME_3);
 					}
-
-					query.append("dlFileVersion.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_V_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.version = ?");
+				query.append(_FINDER_COLUMN_G_F_N_V_VERSION_2);
 
 				query.append(" ORDER BY ");
 
@@ -978,32 +948,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-				query.append("dlFileVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_S_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileVersion.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_S_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileVersion.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_S_NAME_3);
 					}
-
-					query.append("dlFileVersion.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_S_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.status = ?");
+				query.append(_FINDER_COLUMN_G_F_N_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -1076,32 +1037,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-				query.append("dlFileVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_S_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileVersion.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_S_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileVersion.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_S_NAME_3);
 					}
-
-					query.append("dlFileVersion.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_S_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.status = ?");
+				query.append(_FINDER_COLUMN_G_F_N_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1251,32 +1203,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 			query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-			query.append("dlFileVersion.groupId = ?");
+			query.append(_FINDER_COLUMN_G_F_N_S_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("dlFileVersion.folderId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_F_N_S_FOLDERID_2);
 
 			if (name == null) {
-				query.append("dlFileVersion.name IS NULL");
+				query.append(_FINDER_COLUMN_G_F_N_S_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(dlFileVersion.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_F_N_S_NAME_3);
 				}
-
-				query.append("dlFileVersion.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_F_N_S_NAME_2);
 				}
 			}
 
-			query.append(" AND ");
-
-			query.append("dlFileVersion.status = ?");
+			query.append(_FINDER_COLUMN_G_F_N_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1521,26 +1464,19 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				query.append(_SQL_COUNT_DLFILEVERSION_WHERE);
 
-				query.append("dlFileVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileVersion.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileVersion.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
 					}
-
-					query.append("dlFileVersion.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
 					}
 				}
 
@@ -1597,32 +1533,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				query.append(_SQL_COUNT_DLFILEVERSION_WHERE);
 
-				query.append("dlFileVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_V_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_V_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileVersion.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_V_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileVersion.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_V_NAME_3);
 					}
-
-					query.append("dlFileVersion.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_V_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.version = ?");
+				query.append(_FINDER_COLUMN_G_F_N_V_VERSION_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1679,32 +1606,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				query.append(_SQL_COUNT_DLFILEVERSION_WHERE);
 
-				query.append("dlFileVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_N_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.folderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_N_S_FOLDERID_2);
 
 				if (name == null) {
-					query.append("dlFileVersion.name IS NULL");
+					query.append(_FINDER_COLUMN_G_F_N_S_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(dlFileVersion.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_N_S_NAME_3);
 					}
-
-					query.append("dlFileVersion.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_N_S_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileVersion.status = ?");
+				query.append(_FINDER_COLUMN_G_F_N_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1812,6 +1730,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
+	private static final String _FINDER_COLUMN_G_F_N_GROUPID_2 = "dlFileVersion.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_FOLDERID_2 = "dlFileVersion.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "dlFileVersionname IS NULL";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_2 = "dlFileVersion.name = ?";
+	private static final String _FINDER_COLUMN_G_F_N_NAME_3 = "(dlFileVersionname IS NULL OR dlFileVersion.name = ?)";
+	private static final String _FINDER_COLUMN_G_F_N_V_GROUPID_2 = "dlFileVersion.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_V_FOLDERID_2 = "dlFileVersion.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_V_NAME_1 = "dlFileVersionname IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_F_N_V_NAME_2 = "dlFileVersion.name = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_V_NAME_3 = "(dlFileVersionname IS NULL OR dlFileVersion.name = ?) AND ";
+	private static final String _FINDER_COLUMN_G_F_N_V_VERSION_2 = "dlFileVersion.version = ?";
+	private static final String _FINDER_COLUMN_G_F_N_S_GROUPID_2 = "dlFileVersion.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_S_FOLDERID_2 = "dlFileVersion.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_S_NAME_1 = "dlFileVersionname IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_F_N_S_NAME_2 = "dlFileVersion.name = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_N_S_NAME_3 = "(dlFileVersionname IS NULL OR dlFileVersion.name = ?) AND ";
+	private static final String _FINDER_COLUMN_G_F_N_S_STATUS_2 = "dlFileVersion.status = ?";
 	private static final String _SQL_SELECT_DLFILEVERSION = "SELECT dlFileVersion FROM DLFileVersion dlFileVersion";
 	private static final String _SQL_SELECT_DLFILEVERSION_WHERE = "SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ";
 	private static final String _SQL_COUNT_DLFILEVERSION = "SELECT COUNT(dlFileVersion) FROM DLFileVersion dlFileVersion";

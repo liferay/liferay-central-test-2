@@ -450,17 +450,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("mbCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -526,17 +523,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("mbCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -658,17 +652,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 			if (uuid == null) {
-				query.append("mbCategory.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(mbCategory.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("mbCategory.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -781,23 +772,18 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("mbCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("mbCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("mbCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -878,7 +864,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -939,7 +925,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1057,7 +1043,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-			query.append("mbCategory.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1130,7 +1116,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1191,7 +1177,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1309,7 +1295,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-			query.append("mbCategory.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1384,11 +1370,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1451,11 +1435,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1582,11 +1564,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-			query.append("mbCategory.groupId = ?");
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("mbCategory.parentCategoryId = ?");
+			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1828,17 +1808,14 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("mbCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -1888,23 +1865,18 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("mbCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("mbCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("mbCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1952,7 +1924,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1996,7 +1968,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2043,11 +2015,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
-				query.append("mbCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2161,6 +2131,17 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "mbCategoryuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "mbCategory.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(mbCategoryuuid IS NULL OR mbCategory.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "mbCategoryuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "mbCategory.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(mbCategoryuuid IS NULL OR mbCategory.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "mbCategory.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "mbCategory.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "mbCategory.companyId = ?";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "mbCategory.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_2 = "mbCategory.parentCategoryId = ?";
 	private static final String _SQL_SELECT_MBCATEGORY = "SELECT mbCategory FROM MBCategory mbCategory";
 	private static final String _SQL_SELECT_MBCATEGORY_WHERE = "SELECT mbCategory FROM MBCategory mbCategory WHERE ";
 	private static final String _SQL_COUNT_MBCATEGORY = "SELECT COUNT(mbCategory) FROM MBCategory mbCategory";

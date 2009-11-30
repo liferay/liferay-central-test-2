@@ -417,7 +417,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -477,7 +477,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -594,7 +594,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 			query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-			query.append("mbStatsUser.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -666,7 +666,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -726,7 +726,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -843,7 +843,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 			query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-			query.append("mbStatsUser.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -950,11 +950,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1033,11 +1031,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_M_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbStatsUser.messageCount != ?");
+				query.append(_FINDER_COLUMN_G_M_MESSAGECOUNT_2);
 
 				query.append(" ORDER BY ");
 
@@ -1099,11 +1095,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_M_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbStatsUser.messageCount != ?");
+				query.append(_FINDER_COLUMN_G_M_MESSAGECOUNT_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1229,11 +1223,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 			query.append(_SQL_SELECT_MBSTATSUSER_WHERE);
 
-			query.append("mbStatsUser.groupId = ?");
+			query.append(_FINDER_COLUMN_G_M_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("mbStatsUser.messageCount != ?");
+			query.append(_FINDER_COLUMN_G_M_MESSAGECOUNT_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1466,7 +1458,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_COUNT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1510,7 +1502,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_COUNT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1554,11 +1546,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_COUNT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbStatsUser.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1607,11 +1597,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 				query.append(_SQL_COUNT_MBSTATSUSER_WHERE);
 
-				query.append("mbStatsUser.groupId = ?");
+				query.append(_FINDER_COLUMN_G_M_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbStatsUser.messageCount != ?");
+				query.append(_FINDER_COLUMN_G_M_MESSAGECOUNT_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1717,6 +1705,12 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "mbStatsUser.groupId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "mbStatsUser.userId = ?";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "mbStatsUser.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "mbStatsUser.userId = ?";
+	private static final String _FINDER_COLUMN_G_M_GROUPID_2 = "mbStatsUser.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_M_MESSAGECOUNT_2 = "mbStatsUser.messageCount != ?";
 	private static final String _SQL_SELECT_MBSTATSUSER = "SELECT mbStatsUser FROM MBStatsUser mbStatsUser";
 	private static final String _SQL_SELECT_MBSTATSUSER_WHERE = "SELECT mbStatsUser FROM MBStatsUser mbStatsUser WHERE ";
 	private static final String _SQL_COUNT_MBSTATSUSER = "SELECT COUNT(mbStatsUser) FROM MBStatsUser mbStatsUser";

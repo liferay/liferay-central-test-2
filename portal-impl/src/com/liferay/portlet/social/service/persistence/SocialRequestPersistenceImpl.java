@@ -612,17 +612,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
-					query.append("socialRequest.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(socialRequest.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("socialRequest.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -687,17 +684,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
-					query.append("socialRequest.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(socialRequest.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("socialRequest.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -818,17 +812,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 			if (uuid == null) {
-				query.append("socialRequest.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(socialRequest.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("socialRequest.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -940,23 +931,18 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
-					query.append("socialRequest.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(socialRequest.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("socialRequest.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("socialRequest.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1036,7 +1022,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1096,7 +1082,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1214,7 +1200,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-			query.append("socialRequest.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1286,7 +1272,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1346,7 +1332,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1463,7 +1449,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-			query.append("socialRequest.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1535,7 +1521,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1595,7 +1581,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1714,7 +1700,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-			query.append("socialRequest.receiverUserId = ?");
+			query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1786,11 +1772,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_U_S_USERID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_U_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -1852,11 +1836,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_U_S_USERID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_U_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1982,11 +1964,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-			query.append("socialRequest.userId = ?");
+			query.append(_FINDER_COLUMN_U_S_USERID_2);
 
-			query.append(" AND ");
-
-			query.append("socialRequest.status = ?");
+			query.append(_FINDER_COLUMN_U_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2062,11 +2042,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_R_S_RECEIVERUSERID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_R_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -2128,11 +2106,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_R_S_RECEIVERUSERID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_R_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2258,11 +2234,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-			query.append("socialRequest.receiverUserId = ?");
+			query.append(_FINDER_COLUMN_R_S_RECEIVERUSERID_2);
 
-			query.append(" AND ");
-
-			query.append("socialRequest.status = ?");
+			query.append(_FINDER_COLUMN_R_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2387,23 +2361,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_CLASSNAMEID_2);
 
-				query.append("socialRequest.classNameId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_CLASSPK_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_TYPE_2);
 
-				query.append("socialRequest.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_RECEIVERUSERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -2492,23 +2458,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_CLASSNAMEID_2);
 
-				query.append("socialRequest.classNameId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_CLASSPK_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_TYPE_2);
 
-				query.append("socialRequest.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -2580,23 +2538,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_CLASSNAMEID_2);
 
-				query.append("socialRequest.classNameId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_CLASSPK_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_TYPE_2);
 
-				query.append("socialRequest.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2749,23 +2699,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-			query.append("socialRequest.userId = ?");
+			query.append(_FINDER_COLUMN_U_C_C_T_S_USERID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_U_C_C_T_S_CLASSNAMEID_2);
 
-			query.append("socialRequest.classNameId = ?");
+			query.append(_FINDER_COLUMN_U_C_C_T_S_CLASSPK_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_U_C_C_T_S_TYPE_2);
 
-			query.append("socialRequest.classPK = ?");
-
-			query.append(" AND ");
-
-			query.append("socialRequest.type = ?");
-
-			query.append(" AND ");
-
-			query.append("socialRequest.status = ?");
+			query.append(_FINDER_COLUMN_U_C_C_T_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2848,23 +2790,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_CLASSPK_2);
 
-				query.append("socialRequest.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_TYPE_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_RECEIVERUSERID_2);
 
-				query.append("socialRequest.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.receiverUserId = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -2936,23 +2870,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_CLASSPK_2);
 
-				query.append("socialRequest.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_TYPE_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_RECEIVERUSERID_2);
 
-				query.append("socialRequest.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.receiverUserId = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -3108,23 +3034,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_SQL_SELECT_SOCIALREQUEST_WHERE);
 
-			query.append("socialRequest.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_T_R_S_CLASSNAMEID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_T_R_S_CLASSPK_2);
 
-			query.append("socialRequest.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_T_R_S_TYPE_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_T_R_S_RECEIVERUSERID_2);
 
-			query.append("socialRequest.type = ?");
-
-			query.append(" AND ");
-
-			query.append("socialRequest.receiverUserId = ?");
-
-			query.append(" AND ");
-
-			query.append("socialRequest.status = ?");
+			query.append(_FINDER_COLUMN_C_C_T_R_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -3408,17 +3326,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
-					query.append("socialRequest.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(socialRequest.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("socialRequest.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -3468,23 +3383,18 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
 				if (uuid == null) {
-					query.append("socialRequest.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(socialRequest.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("socialRequest.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("socialRequest.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3532,7 +3442,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3576,7 +3486,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3621,7 +3531,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3665,11 +3575,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_U_S_USERID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_U_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3718,11 +3626,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_R_S_RECEIVERUSERID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_R_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3772,23 +3678,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_CLASSNAMEID_2);
 
-				query.append("socialRequest.classNameId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_CLASSPK_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_TYPE_2);
 
-				query.append("socialRequest.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.receiverUserId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_R_RECEIVERUSERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3844,23 +3742,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.userId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_USERID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_CLASSNAMEID_2);
 
-				query.append("socialRequest.classNameId = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_CLASSPK_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_TYPE_2);
 
-				query.append("socialRequest.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_U_C_C_T_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3916,23 +3806,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_SQL_COUNT_SOCIALREQUEST_WHERE);
 
-				query.append("socialRequest.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_CLASSPK_2);
 
-				query.append("socialRequest.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_TYPE_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_RECEIVERUSERID_2);
 
-				query.append("socialRequest.type = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.receiverUserId = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRequest.status = ?");
+				query.append(_FINDER_COLUMN_C_C_T_R_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -4034,6 +3916,35 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "socialRequestuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "socialRequest.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(socialRequestuuid IS NULL OR socialRequest.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "socialRequestuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "socialRequest.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(socialRequestuuid IS NULL OR socialRequest.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "socialRequest.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "socialRequest.companyId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "socialRequest.userId = ?";
+	private static final String _FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2 = "socialRequest.receiverUserId = ?";
+	private static final String _FINDER_COLUMN_U_S_USERID_2 = "socialRequest.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_S_STATUS_2 = "socialRequest.status = ?";
+	private static final String _FINDER_COLUMN_R_S_RECEIVERUSERID_2 = "socialRequest.receiverUserId = ? AND ";
+	private static final String _FINDER_COLUMN_R_S_STATUS_2 = "socialRequest.status = ?";
+	private static final String _FINDER_COLUMN_U_C_C_T_R_USERID_2 = "socialRequest.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_T_R_CLASSNAMEID_2 = "socialRequest.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_T_R_CLASSPK_2 = "socialRequest.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_T_R_TYPE_2 = "socialRequest.type = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_T_R_RECEIVERUSERID_2 = "socialRequest.receiverUserId = ?";
+	private static final String _FINDER_COLUMN_U_C_C_T_S_USERID_2 = "socialRequest.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_T_S_CLASSNAMEID_2 = "socialRequest.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_T_S_CLASSPK_2 = "socialRequest.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_T_S_TYPE_2 = "socialRequest.type = ? AND ";
+	private static final String _FINDER_COLUMN_U_C_C_T_S_STATUS_2 = "socialRequest.status = ?";
+	private static final String _FINDER_COLUMN_C_C_T_R_S_CLASSNAMEID_2 = "socialRequest.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_T_R_S_CLASSPK_2 = "socialRequest.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_T_R_S_TYPE_2 = "socialRequest.type = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_T_R_S_RECEIVERUSERID_2 = "socialRequest.receiverUserId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_T_R_S_STATUS_2 = "socialRequest.status = ?";
 	private static final String _SQL_SELECT_SOCIALREQUEST = "SELECT socialRequest FROM SocialRequest socialRequest";
 	private static final String _SQL_SELECT_SOCIALREQUEST_WHERE = "SELECT socialRequest FROM SocialRequest socialRequest WHERE ";
 	private static final String _SQL_COUNT_SOCIALREQUEST = "SELECT COUNT(socialRequest) FROM SocialRequest socialRequest";

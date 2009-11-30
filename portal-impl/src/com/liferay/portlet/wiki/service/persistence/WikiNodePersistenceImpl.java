@@ -466,17 +466,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				if (uuid == null) {
-					query.append("wikiNode.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(wikiNode.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("wikiNode.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -541,17 +538,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				if (uuid == null) {
-					query.append("wikiNode.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(wikiNode.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("wikiNode.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -672,17 +666,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 			if (uuid == null) {
-				query.append("wikiNode.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(wikiNode.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("wikiNode.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -793,23 +784,18 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
 				if (uuid == null) {
-					query.append("wikiNode.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(wikiNode.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("wikiNode.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("wikiNode.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -888,7 +874,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
-				query.append("wikiNode.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -948,7 +934,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
-				query.append("wikiNode.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1064,7 +1050,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			query.append(_SQL_SELECT_WIKINODE_WHERE);
 
-			query.append("wikiNode.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1135,7 +1121,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
-				query.append("wikiNode.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1195,7 +1181,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
-				query.append("wikiNode.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1311,7 +1297,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			query.append(_SQL_SELECT_WIKINODE_WHERE);
 
-			query.append("wikiNode.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1417,22 +1403,17 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_SQL_SELECT_WIKINODE_WHERE);
 
-				query.append("wikiNode.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_N_GROUPID_2);
 
 				if (name == null) {
-					query.append("wikiNode.name IS NULL");
+					query.append(_FINDER_COLUMN_G_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(wikiNode.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_N_NAME_3);
 					}
-
-					query.append("wikiNode.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_N_NAME_2);
 					}
 				}
 
@@ -1679,17 +1660,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
 				if (uuid == null) {
-					query.append("wikiNode.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(wikiNode.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("wikiNode.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -1739,23 +1717,18 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
 				if (uuid == null) {
-					query.append("wikiNode.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(wikiNode.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("wikiNode.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("wikiNode.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1803,7 +1776,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
-				query.append("wikiNode.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1847,7 +1820,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
-				query.append("wikiNode.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1891,22 +1864,17 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_SQL_COUNT_WIKINODE_WHERE);
 
-				query.append("wikiNode.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_N_GROUPID_2);
 
 				if (name == null) {
-					query.append("wikiNode.name IS NULL");
+					query.append(_FINDER_COLUMN_G_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(wikiNode.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_N_NAME_3);
 					}
-
-					query.append("wikiNode.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_N_NAME_2);
 					}
 				}
 
@@ -2010,6 +1978,19 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "wikiNodeuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "wikiNode.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(wikiNodeuuid IS NULL OR wikiNode.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "wikiNodeuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "wikiNode.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(wikiNodeuuid IS NULL OR wikiNode.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "wikiNode.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "wikiNode.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "wikiNode.companyId = ?";
+	private static final String _FINDER_COLUMN_G_N_GROUPID_2 = "wikiNode.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_N_NAME_1 = "wikiNodename IS NULL";
+	private static final String _FINDER_COLUMN_G_N_NAME_2 = "wikiNode.name = ?";
+	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(wikiNodename IS NULL OR wikiNode.name = ?)";
 	private static final String _SQL_SELECT_WIKINODE = "SELECT wikiNode FROM WikiNode wikiNode";
 	private static final String _SQL_SELECT_WIKINODE_WHERE = "SELECT wikiNode FROM WikiNode wikiNode WHERE ";
 	private static final String _SQL_COUNT_WIKINODE = "SELECT COUNT(wikiNode) FROM WikiNode wikiNode";

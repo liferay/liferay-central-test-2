@@ -380,7 +380,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
-				query.append("resource.codeId = ?");
+				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -436,7 +436,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
-				query.append("resource.codeId = ?");
+				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -546,7 +546,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 			query.append(_SQL_SELECT_RESOURCE_WHERE);
 
-			query.append("resource.codeId = ?");
+			query.append(_FINDER_COLUMN_CODEID_CODEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -646,22 +646,17 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
-				query.append("resource.codeId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_P_CODEID_2);
 
 				if (primKey == null) {
-					query.append("resource.primKey IS NULL");
+					query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
 				}
 				else {
 					if (primKey.equals(StringPool.BLANK)) {
-						query.append("(resource.primKey IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
 					}
-
-					query.append("resource.primKey = ?");
-
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
 					}
 				}
 
@@ -878,7 +873,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 				query.append(_SQL_COUNT_RESOURCE_WHERE);
 
-				query.append("resource.codeId = ?");
+				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -923,22 +918,17 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 				query.append(_SQL_COUNT_RESOURCE_WHERE);
 
-				query.append("resource.codeId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_P_CODEID_2);
 
 				if (primKey == null) {
-					query.append("resource.primKey IS NULL");
+					query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
 				}
 				else {
 					if (primKey.equals(StringPool.BLANK)) {
-						query.append("(resource.primKey IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
 					}
-
-					query.append("resource.primKey = ?");
-
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
 					}
 				}
 
@@ -1130,6 +1120,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_CODEID_CODEID_2 = "resource.codeId = ?";
+	private static final String _FINDER_COLUMN_C_P_CODEID_2 = "resource.codeId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_PRIMKEY_1 = "resourceprimKey IS NULL";
+	private static final String _FINDER_COLUMN_C_P_PRIMKEY_2 = "resource.primKey = ?";
+	private static final String _FINDER_COLUMN_C_P_PRIMKEY_3 = "(resourceprimKey IS NULL OR resource.primKey = ?)";
 	private static final String _SQL_SELECT_RESOURCE = "SELECT resource FROM Resource resource";
 	private static final String _SQL_SELECT_RESOURCE_WHERE = "SELECT resource FROM Resource resource WHERE ";
 	private static final String _SQL_COUNT_RESOURCE = "SELECT COUNT(resource) FROM Resource resource";

@@ -504,17 +504,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileShortcut.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFileShortcut.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -575,17 +572,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileShortcut.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFileShortcut.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -701,17 +695,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			if (uuid == null) {
-				query.append("dlFileShortcut.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(dlFileShortcut.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("dlFileShortcut.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -817,23 +808,18 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileShortcut.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("dlFileShortcut.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -909,11 +895,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -971,11 +955,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1097,11 +1079,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-			query.append("dlFileShortcut.groupId = ?");
+			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("dlFileShortcut.folderId = ?");
+			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1171,15 +1151,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_S_FOLDERID_2);
 
-				query.append("dlFileShortcut.folderId = ?");
-
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.status = ?");
+				query.append(_FINDER_COLUMN_G_F_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1240,15 +1216,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_S_FOLDERID_2);
 
-				query.append("dlFileShortcut.folderId = ?");
-
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.status = ?");
+				query.append(_FINDER_COLUMN_G_F_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1379,15 +1351,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-			query.append("dlFileShortcut.groupId = ?");
+			query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_F_S_FOLDERID_2);
 
-			query.append("dlFileShortcut.folderId = ?");
-
-			query.append(" AND ");
-
-			query.append("dlFileShortcut.status = ?");
+			query.append(_FINDER_COLUMN_G_F_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1461,26 +1429,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.toFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_TF_TN_TOFOLDERID_2);
 
 				if (toName == null) {
-					query.append("dlFileShortcut.toName IS NULL");
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_1);
 				}
 				else {
 					if (toName.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.toName IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_TF_TN_TONAME_3);
 					}
-
-					query.append("dlFileShortcut.toName = ?");
-
-					if (toName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_TF_TN_TONAME_2);
 					}
 				}
 
@@ -1547,26 +1508,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.toFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_TF_TN_TOFOLDERID_2);
 
 				if (toName == null) {
-					query.append("dlFileShortcut.toName IS NULL");
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_1);
 				}
 				else {
 					if (toName.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.toName IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_TF_TN_TONAME_3);
 					}
-
-					query.append("dlFileShortcut.toName = ?");
-
-					if (toName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_TF_TN_TONAME_2);
 					}
 				}
 
@@ -1701,26 +1655,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-			query.append("dlFileShortcut.groupId = ?");
+			query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("dlFileShortcut.toFolderId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_TF_TN_TOFOLDERID_2);
 
 			if (toName == null) {
-				query.append("dlFileShortcut.toName IS NULL");
+				query.append(_FINDER_COLUMN_G_TF_TN_TONAME_1);
 			}
 			else {
 				if (toName.equals(StringPool.BLANK)) {
-					query.append("(dlFileShortcut.toName IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_3);
 				}
-
-				query.append("dlFileShortcut.toName = ?");
-
-				if (toName.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_2);
 				}
 			}
 
@@ -1798,32 +1745,23 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.toFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_TOFOLDERID_2);
 
 				if (toName == null) {
-					query.append("dlFileShortcut.toName IS NULL");
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_1);
 				}
 				else {
 					if (toName.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.toName IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_3);
 					}
-
-					query.append("dlFileShortcut.toName = ?");
-
-					if (toName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.status = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1892,32 +1830,23 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.toFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_TOFOLDERID_2);
 
 				if (toName == null) {
-					query.append("dlFileShortcut.toName IS NULL");
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_1);
 				}
 				else {
 					if (toName.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.toName IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_3);
 					}
-
-					query.append("dlFileShortcut.toName = ?");
-
-					if (toName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.status = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2059,32 +1988,23 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-			query.append("dlFileShortcut.groupId = ?");
+			query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("dlFileShortcut.toFolderId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_TF_TN_S_TOFOLDERID_2);
 
 			if (toName == null) {
-				query.append("dlFileShortcut.toName IS NULL");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_1);
 			}
 			else {
 				if (toName.equals(StringPool.BLANK)) {
-					query.append("(dlFileShortcut.toName IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_3);
 				}
-
-				query.append("dlFileShortcut.toName = ?");
-
-				if (toName.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_2);
 				}
 			}
 
-			query.append(" AND ");
-
-			query.append("dlFileShortcut.status = ?");
+			query.append(_FINDER_COLUMN_G_TF_TN_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2330,17 +2250,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileShortcut.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("dlFileShortcut.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2390,23 +2307,18 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 				if (uuid == null) {
-					query.append("dlFileShortcut.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("dlFileShortcut.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2455,11 +2367,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.folderId = ?");
+				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2508,15 +2418,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_S_FOLDERID_2);
 
-				query.append("dlFileShortcut.folderId = ?");
-
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.status = ?");
+				query.append(_FINDER_COLUMN_G_F_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2569,26 +2475,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.toFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_TF_TN_TOFOLDERID_2);
 
 				if (toName == null) {
-					query.append("dlFileShortcut.toName IS NULL");
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_1);
 				}
 				else {
 					if (toName.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.toName IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_TF_TN_TONAME_3);
 					}
-
-					query.append("dlFileShortcut.toName = ?");
-
-					if (toName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_TF_TN_TONAME_2);
 					}
 				}
 
@@ -2645,32 +2544,23 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
-				query.append("dlFileShortcut.groupId = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.toFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_TOFOLDERID_2);
 
 				if (toName == null) {
-					query.append("dlFileShortcut.toName IS NULL");
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_1);
 				}
 				else {
 					if (toName.equals(StringPool.BLANK)) {
-						query.append("(dlFileShortcut.toName IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_3);
 					}
-
-					query.append("dlFileShortcut.toName = ?");
-
-					if (toName.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("dlFileShortcut.status = ?");
+				query.append(_FINDER_COLUMN_G_TF_TN_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2780,6 +2670,29 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence")
 	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "dlFileShortcutuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "dlFileShortcut.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(dlFileShortcutuuid IS NULL OR dlFileShortcut.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "dlFileShortcutuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "dlFileShortcut.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(dlFileShortcutuuid IS NULL OR dlFileShortcut.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "dlFileShortcut.groupId = ?";
+	private static final String _FINDER_COLUMN_G_F_GROUPID_2 = "dlFileShortcut.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_FOLDERID_2 = "dlFileShortcut.folderId = ?";
+	private static final String _FINDER_COLUMN_G_F_S_GROUPID_2 = "dlFileShortcut.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_S_FOLDERID_2 = "dlFileShortcut.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_S_STATUS_2 = "dlFileShortcut.status = ?";
+	private static final String _FINDER_COLUMN_G_TF_TN_GROUPID_2 = "dlFileShortcut.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_TF_TN_TOFOLDERID_2 = "dlFileShortcut.toFolderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_TF_TN_TONAME_1 = "dlFileShortcuttoName IS NULL";
+	private static final String _FINDER_COLUMN_G_TF_TN_TONAME_2 = "dlFileShortcut.toName = ?";
+	private static final String _FINDER_COLUMN_G_TF_TN_TONAME_3 = "(dlFileShortcuttoName IS NULL OR dlFileShortcut.toName = ?)";
+	private static final String _FINDER_COLUMN_G_TF_TN_S_GROUPID_2 = "dlFileShortcut.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_TF_TN_S_TOFOLDERID_2 = "dlFileShortcut.toFolderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_TF_TN_S_TONAME_1 = "dlFileShortcuttoName IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_TF_TN_S_TONAME_2 = "dlFileShortcut.toName = ? AND ";
+	private static final String _FINDER_COLUMN_G_TF_TN_S_TONAME_3 = "(dlFileShortcuttoName IS NULL OR dlFileShortcut.toName = ?) AND ";
+	private static final String _FINDER_COLUMN_G_TF_TN_S_STATUS_2 = "dlFileShortcut.status = ?";
 	private static final String _SQL_SELECT_DLFILESHORTCUT = "SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut";
 	private static final String _SQL_SELECT_DLFILESHORTCUT_WHERE = "SELECT dlFileShortcut FROM DLFileShortcut dlFileShortcut WHERE ";
 	private static final String _SQL_COUNT_DLFILESHORTCUT = "SELECT COUNT(dlFileShortcut) FROM DLFileShortcut dlFileShortcut";

@@ -422,7 +422,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
-				query.append("userGroup.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -482,7 +482,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
-				query.append("userGroup.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -599,7 +599,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			query.append(_SQL_SELECT_USERGROUP_WHERE);
 
-			query.append("userGroup.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -673,11 +673,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
-				query.append("userGroup.companyId = ?");
+				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroup.parentUserGroupId = ?");
+				query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -739,11 +737,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
-				query.append("userGroup.companyId = ?");
+				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroup.parentUserGroupId = ?");
+				query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -869,11 +865,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			query.append(_SQL_SELECT_USERGROUP_WHERE);
 
-			query.append("userGroup.companyId = ?");
+			query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("userGroup.parentUserGroupId = ?");
+			query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -982,22 +976,17 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
-				query.append("userGroup.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("userGroup.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(userGroup.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("userGroup.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -1232,7 +1221,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
-				query.append("userGroup.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1279,11 +1268,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
-				query.append("userGroup.companyId = ?");
+				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("userGroup.parentUserGroupId = ?");
+				query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1330,22 +1317,17 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
-				query.append("userGroup.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("userGroup.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(userGroup.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("userGroup.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -2042,6 +2024,13 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		private UserGroupPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "userGroup.companyId = ?";
+	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "userGroup.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_PARENTUSERGROUPID_2 = "userGroup.parentUserGroupId = ?";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "userGroup.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "userGroupname IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_2 = "userGroup.name = ?";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(userGroupname IS NULL OR userGroup.name = ?)";
 	private static final String _SQL_SELECT_USERGROUP = "SELECT userGroup FROM UserGroup userGroup";
 	private static final String _SQL_SELECT_USERGROUP_WHERE = "SELECT userGroup FROM UserGroup userGroup WHERE ";
 	private static final String _SQL_COUNT_USERGROUP = "SELECT COUNT(userGroup) FROM UserGroup userGroup";

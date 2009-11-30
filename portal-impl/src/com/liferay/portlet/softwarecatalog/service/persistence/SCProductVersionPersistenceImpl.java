@@ -417,7 +417,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 				query.append(_SQL_SELECT_SCPRODUCTVERSION_WHERE);
 
-				query.append("scProductVersion.productEntryId = ?");
+				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -477,7 +477,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 				query.append(_SQL_SELECT_SCPRODUCTVERSION_WHERE);
 
-				query.append("scProductVersion.productEntryId = ?");
+				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -598,7 +598,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 			query.append(_SQL_SELECT_SCPRODUCTVERSION_WHERE);
 
-			query.append("scProductVersion.productEntryId = ?");
+			query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -703,19 +703,14 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				query.append(_SQL_SELECT_SCPRODUCTVERSION_WHERE);
 
 				if (directDownloadURL == null) {
-					query.append("scProductVersion.directDownloadURL IS NULL");
+					query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1);
 				}
 				else {
 					if (directDownloadURL.equals(StringPool.BLANK)) {
-						query.append(
-							"(scProductVersion.directDownloadURL IS NULL OR ");
+						query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3);
 					}
-
-					query.append(
-						"scProductVersion.lower(directDownloadURL) = ?");
-
-					if (directDownloadURL.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2);
 					}
 				}
 
@@ -944,7 +939,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 
 				query.append(_SQL_COUNT_SCPRODUCTVERSION_WHERE);
 
-				query.append("scProductVersion.productEntryId = ?");
+				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -990,19 +985,14 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				query.append(_SQL_COUNT_SCPRODUCTVERSION_WHERE);
 
 				if (directDownloadURL == null) {
-					query.append("scProductVersion.directDownloadURL IS NULL");
+					query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1);
 				}
 				else {
 					if (directDownloadURL.equals(StringPool.BLANK)) {
-						query.append(
-							"(scProductVersion.directDownloadURL IS NULL OR ");
+						query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3);
 					}
-
-					query.append(
-						"scProductVersion.lower(directDownloadURL) = ?");
-
-					if (directDownloadURL.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2);
 					}
 				}
 
@@ -1658,6 +1648,13 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		private SCProductVersionPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2 = "scProductVersion.productEntryId = ?";
+	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1 =
+		"scProductVersiondirectDownloadURL IS NULL";
+	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2 =
+		"scProductVersion.lower(directDownloadURL) = ?";
+	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3 =
+		"(scProductVersiondirectDownloadURL IS NULL OR scProductVersion.lower(directDownloadURL) = ?)";
 	private static final String _SQL_SELECT_SCPRODUCTVERSION = "SELECT scProductVersion FROM SCProductVersion scProductVersion";
 	private static final String _SQL_SELECT_SCPRODUCTVERSION_WHERE = "SELECT scProductVersion FROM SCProductVersion scProductVersion WHERE ";
 	private static final String _SQL_COUNT_SCPRODUCTVERSION = "SELECT COUNT(scProductVersion) FROM SCProductVersion scProductVersion";

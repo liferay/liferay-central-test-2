@@ -482,17 +482,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMailingList.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMailingList.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbMailingList.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -553,17 +550,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMailingList.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMailingList.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbMailingList.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -679,17 +673,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 			if (uuid == null) {
-				query.append("mbMailingList.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(mbMailingList.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("mbMailingList.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -795,23 +786,18 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMailingList.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMailingList.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("mbMailingList.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("mbMailingList.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -887,7 +873,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
-				query.append("mbMailingList.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -943,7 +929,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
-				query.append("mbMailingList.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1055,7 +1041,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 			query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
-			query.append("mbMailingList.active = ?");
+			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1158,11 +1144,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				query.append(_SQL_SELECT_MBMAILINGLIST_WHERE);
 
-				query.append("mbMailingList.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMailingList.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1389,17 +1373,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				query.append(_SQL_COUNT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMailingList.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMailingList.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbMailingList.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -1449,23 +1430,18 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				query.append(_SQL_COUNT_MBMAILINGLIST_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMailingList.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMailingList.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("mbMailingList.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("mbMailingList.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1513,7 +1489,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				query.append(_SQL_COUNT_MBMAILINGLIST_WHERE);
 
-				query.append("mbMailingList.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1560,11 +1536,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				query.append(_SQL_COUNT_MBMAILINGLIST_WHERE);
 
-				query.append("mbMailingList.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMailingList.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1670,6 +1644,16 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "mbMailingListuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "mbMailingList.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(mbMailingListuuid IS NULL OR mbMailingList.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "mbMailingListuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "mbMailingList.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(mbMailingListuuid IS NULL OR mbMailingList.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "mbMailingList.groupId = ?";
+	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2 = "mbMailingList.active = ?";
+	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "mbMailingList.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_CATEGORYID_2 = "mbMailingList.categoryId = ?";
 	private static final String _SQL_SELECT_MBMAILINGLIST = "SELECT mbMailingList FROM MBMailingList mbMailingList";
 	private static final String _SQL_SELECT_MBMAILINGLIST_WHERE = "SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ";
 	private static final String _SQL_COUNT_MBMAILINGLIST = "SELECT COUNT(mbMailingList) FROM MBMailingList mbMailingList";

@@ -405,7 +405,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_SELECT_MBBAN_WHERE);
 
-				query.append("mbBan.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -461,7 +461,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_SELECT_MBBAN_WHERE);
 
-				query.append("mbBan.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -570,7 +570,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 			query.append(_SQL_SELECT_MBBAN_WHERE);
 
-			query.append("mbBan.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -634,7 +634,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_SELECT_MBBAN_WHERE);
 
-				query.append("mbBan.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -690,7 +690,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_SELECT_MBBAN_WHERE);
 
-				query.append("mbBan.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -799,7 +799,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 			query.append(_SQL_SELECT_MBBAN_WHERE);
 
-			query.append("mbBan.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -864,7 +864,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_SELECT_MBBAN_WHERE);
 
-				query.append("mbBan.banUserId = ?");
+				query.append(_FINDER_COLUMN_BANUSERID_BANUSERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -920,7 +920,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_SELECT_MBBAN_WHERE);
 
-				query.append("mbBan.banUserId = ?");
+				query.append(_FINDER_COLUMN_BANUSERID_BANUSERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1029,7 +1029,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 			query.append(_SQL_SELECT_MBBAN_WHERE);
 
-			query.append("mbBan.banUserId = ?");
+			query.append(_FINDER_COLUMN_BANUSERID_BANUSERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1131,11 +1131,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_SELECT_MBBAN_WHERE);
 
-				query.append("mbBan.groupId = ?");
+				query.append(_FINDER_COLUMN_G_B_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbBan.banUserId = ?");
+				query.append(_FINDER_COLUMN_G_B_BANUSERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1359,7 +1357,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_COUNT_MBBAN_WHERE);
 
-				query.append("mbBan.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1403,7 +1401,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_COUNT_MBBAN_WHERE);
 
-				query.append("mbBan.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1447,7 +1445,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_COUNT_MBBAN_WHERE);
 
-				query.append("mbBan.banUserId = ?");
+				query.append(_FINDER_COLUMN_BANUSERID_BANUSERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1494,11 +1492,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 				query.append(_SQL_COUNT_MBBAN_WHERE);
 
-				query.append("mbBan.groupId = ?");
+				query.append(_FINDER_COLUMN_G_B_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbBan.banUserId = ?");
+				query.append(_FINDER_COLUMN_G_B_BANUSERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1604,6 +1600,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "mbBan.groupId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "mbBan.userId = ?";
+	private static final String _FINDER_COLUMN_BANUSERID_BANUSERID_2 = "mbBan.banUserId = ?";
+	private static final String _FINDER_COLUMN_G_B_GROUPID_2 = "mbBan.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_B_BANUSERID_2 = "mbBan.banUserId = ?";
 	private static final String _SQL_SELECT_MBBAN = "SELECT mbBan FROM MBBan mbBan";
 	private static final String _SQL_SELECT_MBBAN_WHERE = "SELECT mbBan FROM MBBan mbBan WHERE ";
 	private static final String _SQL_COUNT_MBBAN = "SELECT COUNT(mbBan) FROM MBBan mbBan";

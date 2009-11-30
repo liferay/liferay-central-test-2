@@ -412,7 +412,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -472,7 +472,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -587,7 +587,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
-			query.append("phone.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -657,7 +657,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -717,7 +717,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -832,7 +832,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
-			query.append("phone.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -905,11 +905,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("phone.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -971,11 +969,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("phone.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1100,11 +1096,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
-			query.append("phone.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("phone.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1179,15 +1173,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("phone.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("phone.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -1252,15 +1242,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("phone.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("phone.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1396,15 +1382,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
-			query.append("phone.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-			query.append("phone.classNameId = ?");
-
-			query.append(" AND ");
-
-			query.append("phone.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1482,19 +1464,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("phone.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("phone.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("phone.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				query.append(" ORDER BY ");
 
@@ -1564,19 +1540,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("phone.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("phone.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("phone.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1720,19 +1690,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
-			query.append("phone.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-			query.append("phone.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-			query.append(" AND ");
-
-			query.append("phone.classPK = ?");
-
-			query.append(" AND ");
-
-			query.append("phone.primary = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1975,7 +1939,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2019,7 +1983,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
-				query.append("phone.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2066,11 +2030,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("phone.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2119,15 +2081,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("phone.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("phone.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2179,19 +2137,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
-				query.append("phone.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("phone.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("phone.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("phone.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2383,6 +2335,17 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "phone.companyId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "phone.userId = ?";
+	private static final String _FINDER_COLUMN_C_C_COMPANYID_2 = "phone.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "phone.classNameId = ?";
+	private static final String _FINDER_COLUMN_C_C_C_COMPANYID_2 = "phone.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "phone.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "phone.classPK = ?";
+	private static final String _FINDER_COLUMN_C_C_C_P_COMPANYID_2 = "phone.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2 = "phone.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_CLASSPK_2 = "phone.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_PRIMARY_2 = "phone.primary = ?";
 	private static final String _SQL_SELECT_PHONE = "SELECT phone FROM Phone phone";
 	private static final String _SQL_SELECT_PHONE_WHERE = "SELECT phone FROM Phone phone WHERE ";
 	private static final String _SQL_COUNT_PHONE = "SELECT COUNT(phone) FROM Phone phone";

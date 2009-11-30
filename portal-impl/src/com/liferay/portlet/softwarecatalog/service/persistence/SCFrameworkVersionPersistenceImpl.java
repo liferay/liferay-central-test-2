@@ -409,7 +409,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -469,7 +469,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -589,7 +589,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 			query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-			query.append("scFrameworkVersion.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -661,7 +661,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -721,7 +721,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -841,7 +841,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 			query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-			query.append("scFrameworkVersion.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -915,11 +915,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_A_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("scFrameworkVersion.active = ?");
+				query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 				query.append(" ORDER BY ");
 
@@ -981,11 +979,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_A_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("scFrameworkVersion.active = ?");
+				query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1113,11 +1109,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 			query.append(_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 
-			query.append("scFrameworkVersion.groupId = ?");
+			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("scFrameworkVersion.active = ?");
+			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1343,7 +1337,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_COUNT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1387,7 +1381,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_COUNT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1434,11 +1428,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 				query.append(_SQL_COUNT_SCFRAMEWORKVERSION_WHERE);
 
-				query.append("scFrameworkVersion.groupId = ?");
+				query.append(_FINDER_COLUMN_G_A_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("scFrameworkVersion.active = ?");
+				query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2092,6 +2084,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		private SCFrameworkVersionPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "scFrameworkVersion.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "scFrameworkVersion.companyId = ?";
+	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "scFrameworkVersion.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "scFrameworkVersion.active = ?";
 	private static final String _SQL_SELECT_SCFRAMEWORKVERSION = "SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion";
 	private static final String _SQL_SELECT_SCFRAMEWORKVERSION_WHERE = "SELECT scFrameworkVersion FROM SCFrameworkVersion scFrameworkVersion WHERE ";
 	private static final String _SQL_COUNT_SCFRAMEWORKVERSION = "SELECT COUNT(scFrameworkVersion) FROM SCFrameworkVersion scFrameworkVersion";

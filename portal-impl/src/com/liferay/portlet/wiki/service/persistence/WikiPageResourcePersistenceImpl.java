@@ -417,22 +417,17 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 				query.append(_SQL_SELECT_WIKIPAGERESOURCE_WHERE);
 
-				query.append("wikiPageResource.nodeId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_N_T_NODEID_2);
 
 				if (title == null) {
-					query.append("wikiPageResource.title IS NULL");
+					query.append(_FINDER_COLUMN_N_T_TITLE_1);
 				}
 				else {
 					if (title.equals(StringPool.BLANK)) {
-						query.append("(wikiPageResource.title IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_T_TITLE_3);
 					}
-
-					query.append("wikiPageResource.title = ?");
-
-					if (title.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_T_TITLE_2);
 					}
 				}
 
@@ -644,22 +639,17 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 				query.append(_SQL_COUNT_WIKIPAGERESOURCE_WHERE);
 
-				query.append("wikiPageResource.nodeId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_N_T_NODEID_2);
 
 				if (title == null) {
-					query.append("wikiPageResource.title IS NULL");
+					query.append(_FINDER_COLUMN_N_T_TITLE_1);
 				}
 				else {
 					if (title.equals(StringPool.BLANK)) {
-						query.append("(wikiPageResource.title IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_T_TITLE_3);
 					}
-
-					query.append("wikiPageResource.title = ?");
-
-					if (title.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_T_TITLE_2);
 					}
 				}
 
@@ -759,6 +749,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_N_T_NODEID_2 = "wikiPageResource.nodeId = ? AND ";
+	private static final String _FINDER_COLUMN_N_T_TITLE_1 = "wikiPageResourcetitle IS NULL";
+	private static final String _FINDER_COLUMN_N_T_TITLE_2 = "wikiPageResource.title = ?";
+	private static final String _FINDER_COLUMN_N_T_TITLE_3 = "(wikiPageResourcetitle IS NULL OR wikiPageResource.title = ?)";
 	private static final String _SQL_SELECT_WIKIPAGERESOURCE = "SELECT wikiPageResource FROM WikiPageResource wikiPageResource";
 	private static final String _SQL_SELECT_WIKIPAGERESOURCE_WHERE = "SELECT wikiPageResource FROM WikiPageResource wikiPageResource WHERE ";
 	private static final String _SQL_COUNT_WIKIPAGERESOURCE = "SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource";

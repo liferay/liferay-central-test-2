@@ -472,7 +472,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -532,7 +532,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -648,7 +648,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-			query.append("tasksReview.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -720,7 +720,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
 				query.append(" ORDER BY ");
 
@@ -780,7 +780,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -898,7 +898,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-			query.append("tasksReview.proposalId = ?");
+			query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1007,11 +1007,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.userId = ?");
+				query.append(_FINDER_COLUMN_U_P_USERID_2);
 
-				query.append(" AND ");
-
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_U_P_PROPOSALID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1090,11 +1088,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_PROPOSALID_2);
 
-				query.append(" AND ");
-
-				query.append("tasksReview.stage = ?");
+				query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
 				query.append(" ORDER BY ");
 
@@ -1156,11 +1152,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_PROPOSALID_2);
 
-				query.append(" AND ");
-
-				query.append("tasksReview.stage = ?");
+				query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1286,11 +1280,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-			query.append("tasksReview.proposalId = ?");
+			query.append(_FINDER_COLUMN_P_S_PROPOSALID_2);
 
-			query.append(" AND ");
-
-			query.append("tasksReview.stage = ?");
+			query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1367,15 +1359,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_C_PROPOSALID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_S_C_STAGE_2);
 
-				query.append("tasksReview.stage = ?");
-
-				query.append(" AND ");
-
-				query.append("tasksReview.completed = ?");
+				query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
 				query.append(" ORDER BY ");
 
@@ -1441,15 +1429,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_C_PROPOSALID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_S_C_STAGE_2);
 
-				query.append("tasksReview.stage = ?");
-
-				query.append(" AND ");
-
-				query.append("tasksReview.completed = ?");
+				query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1586,15 +1570,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-			query.append("tasksReview.proposalId = ?");
+			query.append(_FINDER_COLUMN_P_S_C_PROPOSALID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_P_S_C_STAGE_2);
 
-			query.append("tasksReview.stage = ?");
-
-			query.append(" AND ");
-
-			query.append("tasksReview.completed = ?");
+			query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1673,19 +1653,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_PROPOSALID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_S_C_R_STAGE_2);
 
-				query.append("tasksReview.stage = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_COMPLETED_2);
 
-				query.append(" AND ");
-
-				query.append("tasksReview.completed = ?");
-
-				query.append(" AND ");
-
-				query.append("tasksReview.rejected = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
 				query.append(" ORDER BY ");
 
@@ -1755,19 +1729,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_PROPOSALID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_S_C_R_STAGE_2);
 
-				query.append("tasksReview.stage = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_COMPLETED_2);
 
-				query.append(" AND ");
-
-				query.append("tasksReview.completed = ?");
-
-				query.append(" AND ");
-
-				query.append("tasksReview.rejected = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1912,19 +1880,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
-			query.append("tasksReview.proposalId = ?");
+			query.append(_FINDER_COLUMN_P_S_C_R_PROPOSALID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_P_S_C_R_STAGE_2);
 
-			query.append("tasksReview.stage = ?");
+			query.append(_FINDER_COLUMN_P_S_C_R_COMPLETED_2);
 
-			query.append(" AND ");
-
-			query.append("tasksReview.completed = ?");
-
-			query.append(" AND ");
-
-			query.append("tasksReview.rejected = ?");
+			query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2176,7 +2138,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2220,7 +2182,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2267,11 +2229,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.userId = ?");
+				query.append(_FINDER_COLUMN_U_P_USERID_2);
 
-				query.append(" AND ");
-
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_U_P_PROPOSALID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2319,11 +2279,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_PROPOSALID_2);
 
-				query.append(" AND ");
-
-				query.append("tasksReview.stage = ?");
+				query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2373,15 +2331,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_C_PROPOSALID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_S_C_STAGE_2);
 
-				query.append("tasksReview.stage = ?");
-
-				query.append(" AND ");
-
-				query.append("tasksReview.completed = ?");
+				query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2433,19 +2387,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
-				query.append("tasksReview.proposalId = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_PROPOSALID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_S_C_R_STAGE_2);
 
-				query.append("tasksReview.stage = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_COMPLETED_2);
 
-				query.append(" AND ");
-
-				query.append("tasksReview.completed = ?");
-
-				query.append(" AND ");
-
-				query.append("tasksReview.rejected = ?");
+				query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2545,6 +2493,19 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "tasksReview.userId = ?";
+	private static final String _FINDER_COLUMN_PROPOSALID_PROPOSALID_2 = "tasksReview.proposalId = ?";
+	private static final String _FINDER_COLUMN_U_P_USERID_2 = "tasksReview.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_P_PROPOSALID_2 = "tasksReview.proposalId = ?";
+	private static final String _FINDER_COLUMN_P_S_PROPOSALID_2 = "tasksReview.proposalId = ? AND ";
+	private static final String _FINDER_COLUMN_P_S_STAGE_2 = "tasksReview.stage = ?";
+	private static final String _FINDER_COLUMN_P_S_C_PROPOSALID_2 = "tasksReview.proposalId = ? AND ";
+	private static final String _FINDER_COLUMN_P_S_C_STAGE_2 = "tasksReview.stage = ? AND ";
+	private static final String _FINDER_COLUMN_P_S_C_COMPLETED_2 = "tasksReview.completed = ?";
+	private static final String _FINDER_COLUMN_P_S_C_R_PROPOSALID_2 = "tasksReview.proposalId = ? AND ";
+	private static final String _FINDER_COLUMN_P_S_C_R_STAGE_2 = "tasksReview.stage = ? AND ";
+	private static final String _FINDER_COLUMN_P_S_C_R_COMPLETED_2 = "tasksReview.completed = ? AND ";
+	private static final String _FINDER_COLUMN_P_S_C_R_REJECTED_2 = "tasksReview.rejected = ?";
 	private static final String _SQL_SELECT_TASKSREVIEW = "SELECT tasksReview FROM TasksReview tasksReview";
 	private static final String _SQL_SELECT_TASKSREVIEW_WHERE = "SELECT tasksReview FROM TasksReview tasksReview WHERE ";
 	private static final String _SQL_COUNT_TASKSREVIEW = "SELECT COUNT(tasksReview) FROM TasksReview tasksReview";

@@ -446,7 +446,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -506,7 +506,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -622,7 +622,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-			query.append("address.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -692,7 +692,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -752,7 +752,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -867,7 +867,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-			query.append("address.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -940,11 +940,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1006,11 +1004,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1135,11 +1131,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-			query.append("address.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("address.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1214,15 +1208,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -1287,15 +1277,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1431,15 +1417,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-			query.append("address.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-			query.append("address.classNameId = ?");
-
-			query.append(" AND ");
-
-			query.append("address.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1517,19 +1499,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_M_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("address.mailing = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_MAILING_2);
 
 				query.append(" ORDER BY ");
 
@@ -1599,19 +1575,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_M_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("address.mailing = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_MAILING_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1755,19 +1725,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-			query.append("address.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_M_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_M_CLASSNAMEID_2);
 
-			query.append("address.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_M_CLASSPK_2);
 
-			query.append(" AND ");
-
-			query.append("address.classPK = ?");
-
-			query.append(" AND ");
-
-			query.append("address.mailing = ?");
+			query.append(_FINDER_COLUMN_C_C_C_M_MAILING_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1847,19 +1811,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("address.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				query.append(" ORDER BY ");
 
@@ -1929,19 +1887,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("address.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2085,19 +2037,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_SQL_SELECT_ADDRESS_WHERE);
 
-			query.append("address.companyId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-			query.append("address.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-			query.append(" AND ");
-
-			query.append("address.classPK = ?");
-
-			query.append(" AND ");
-
-			query.append("address.primary = ?");
+			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2348,7 +2294,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2392,7 +2338,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
-				query.append("address.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2439,11 +2385,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2492,15 +2436,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2552,19 +2492,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_M_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("address.mailing = ?");
+				query.append(_FINDER_COLUMN_C_C_C_M_MAILING_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2618,19 +2552,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_SQL_COUNT_ADDRESS_WHERE);
 
-				query.append("address.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
 
-				query.append("address.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
 
-				query.append(" AND ");
-
-				query.append("address.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("address.primary = ?");
+				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2822,6 +2750,21 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "address.companyId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "address.userId = ?";
+	private static final String _FINDER_COLUMN_C_C_COMPANYID_2 = "address.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "address.classNameId = ?";
+	private static final String _FINDER_COLUMN_C_C_C_COMPANYID_2 = "address.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "address.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "address.classPK = ?";
+	private static final String _FINDER_COLUMN_C_C_C_M_COMPANYID_2 = "address.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_M_CLASSNAMEID_2 = "address.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_M_CLASSPK_2 = "address.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_M_MAILING_2 = "address.mailing = ?";
+	private static final String _FINDER_COLUMN_C_C_C_P_COMPANYID_2 = "address.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2 = "address.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_CLASSPK_2 = "address.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_P_PRIMARY_2 = "address.primary = ?";
 	private static final String _SQL_SELECT_ADDRESS = "SELECT address FROM Address address";
 	private static final String _SQL_SELECT_ADDRESS_WHERE = "SELECT address FROM Address address WHERE ";
 	private static final String _SQL_COUNT_ADDRESS = "SELECT COUNT(address) FROM Address address";

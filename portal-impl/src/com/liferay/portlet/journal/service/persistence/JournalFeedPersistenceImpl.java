@@ -473,17 +473,14 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				query.append(_SQL_SELECT_JOURNALFEED_WHERE);
 
 				if (uuid == null) {
-					query.append("journalFeed.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalFeed.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("journalFeed.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -548,17 +545,14 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				query.append(_SQL_SELECT_JOURNALFEED_WHERE);
 
 				if (uuid == null) {
-					query.append("journalFeed.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalFeed.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("journalFeed.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -679,17 +673,14 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 			query.append(_SQL_SELECT_JOURNALFEED_WHERE);
 
 			if (uuid == null) {
-				query.append("journalFeed.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(journalFeed.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("journalFeed.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -801,23 +792,18 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				query.append(_SQL_SELECT_JOURNALFEED_WHERE);
 
 				if (uuid == null) {
-					query.append("journalFeed.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalFeed.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("journalFeed.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("journalFeed.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -897,7 +883,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 				query.append(_SQL_SELECT_JOURNALFEED_WHERE);
 
-				query.append("journalFeed.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -957,7 +943,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 				query.append(_SQL_SELECT_JOURNALFEED_WHERE);
 
-				query.append("journalFeed.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1073,7 +1059,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 			query.append(_SQL_SELECT_JOURNALFEED_WHERE);
 
-			query.append("journalFeed.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1180,22 +1166,17 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 				query.append(_SQL_SELECT_JOURNALFEED_WHERE);
 
-				query.append("journalFeed.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
 				if (feedId == null) {
-					query.append("journalFeed.feedId IS NULL");
+					query.append(_FINDER_COLUMN_G_F_FEEDID_1);
 				}
 				else {
 					if (feedId.equals(StringPool.BLANK)) {
-						query.append("(journalFeed.feedId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_FEEDID_3);
 					}
-
-					query.append("journalFeed.feedId = ?");
-
-					if (feedId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_FEEDID_2);
 					}
 				}
 
@@ -1437,17 +1418,14 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				query.append(_SQL_COUNT_JOURNALFEED_WHERE);
 
 				if (uuid == null) {
-					query.append("journalFeed.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalFeed.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("journalFeed.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -1497,23 +1475,18 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				query.append(_SQL_COUNT_JOURNALFEED_WHERE);
 
 				if (uuid == null) {
-					query.append("journalFeed.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(journalFeed.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("journalFeed.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("journalFeed.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1561,7 +1534,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 				query.append(_SQL_COUNT_JOURNALFEED_WHERE);
 
-				query.append("journalFeed.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1606,22 +1579,17 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 				query.append(_SQL_COUNT_JOURNALFEED_WHERE);
 
-				query.append("journalFeed.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
 				if (feedId == null) {
-					query.append("journalFeed.feedId IS NULL");
+					query.append(_FINDER_COLUMN_G_F_FEEDID_1);
 				}
 				else {
 					if (feedId.equals(StringPool.BLANK)) {
-						query.append("(journalFeed.feedId IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_F_FEEDID_3);
 					}
-
-					query.append("journalFeed.feedId = ?");
-
-					if (feedId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_F_FEEDID_2);
 					}
 				}
 
@@ -1731,6 +1699,18 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "journalFeeduuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "journalFeed.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(journalFeeduuid IS NULL OR journalFeed.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "journalFeeduuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "journalFeed.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(journalFeeduuid IS NULL OR journalFeed.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "journalFeed.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "journalFeed.groupId = ?";
+	private static final String _FINDER_COLUMN_G_F_GROUPID_2 = "journalFeed.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_FEEDID_1 = "journalFeedfeedId IS NULL";
+	private static final String _FINDER_COLUMN_G_F_FEEDID_2 = "journalFeed.feedId = ?";
+	private static final String _FINDER_COLUMN_G_F_FEEDID_3 = "(journalFeedfeedId IS NULL OR journalFeed.feedId = ?)";
 	private static final String _SQL_SELECT_JOURNALFEED = "SELECT journalFeed FROM JournalFeed journalFeed";
 	private static final String _SQL_SELECT_JOURNALFEED_WHERE = "SELECT journalFeed FROM JournalFeed journalFeed WHERE ";
 	private static final String _SQL_COUNT_JOURNALFEED = "SELECT COUNT(journalFeed) FROM JournalFeed journalFeed";

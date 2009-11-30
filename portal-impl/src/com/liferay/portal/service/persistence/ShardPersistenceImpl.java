@@ -416,17 +416,14 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 				query.append(_SQL_SELECT_SHARD_WHERE);
 
 				if (name == null) {
-					query.append("shard.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(shard.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("shard.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -538,11 +535,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 
 				query.append(_SQL_SELECT_SHARD_WHERE);
 
-				query.append("shard.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("shard.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -756,17 +751,14 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 				query.append(_SQL_COUNT_SHARD_WHERE);
 
 				if (name == null) {
-					query.append("shard.name IS NULL");
+					query.append(_FINDER_COLUMN_NAME_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(shard.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_NAME_NAME_3);
 					}
-
-					query.append("shard.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_NAME_NAME_2);
 					}
 				}
 
@@ -817,11 +809,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 
 				query.append(_SQL_COUNT_SHARD_WHERE);
 
-				query.append("shard.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("shard.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1009,6 +999,11 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_NAME_NAME_1 = "shardname IS NULL";
+	private static final String _FINDER_COLUMN_NAME_NAME_2 = "shard.name = ?";
+	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(shardname IS NULL OR shard.name = ?)";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "shard.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "shard.classPK = ?";
 	private static final String _SQL_SELECT_SHARD = "SELECT shard FROM Shard shard";
 	private static final String _SQL_SELECT_SHARD_WHERE = "SELECT shard FROM Shard shard WHERE ";
 	private static final String _SQL_COUNT_SHARD = "SELECT COUNT(shard) FROM Shard shard";

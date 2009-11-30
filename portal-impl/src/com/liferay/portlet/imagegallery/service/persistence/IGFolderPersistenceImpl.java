@@ -501,17 +501,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("igFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("igFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -577,17 +574,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("igFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("igFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -709,17 +703,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 			if (uuid == null) {
-				query.append("igFolder.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(igFolder.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("igFolder.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -831,23 +822,18 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("igFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("igFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -927,7 +913,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -988,7 +974,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1105,7 +1091,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-			query.append("igFolder.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1177,7 +1163,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-				query.append("igFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1238,7 +1224,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-				query.append("igFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1356,7 +1342,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-			query.append("igFolder.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1430,11 +1416,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1497,11 +1481,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1628,11 +1610,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-			query.append("igFolder.groupId = ?");
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("igFolder.parentFolderId = ?");
+			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1748,26 +1728,19 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igFolder.parentFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
 
 				if (name == null) {
-					query.append("igFolder.name IS NULL");
+					query.append(_FINDER_COLUMN_G_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(igFolder.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_N_NAME_3);
 					}
-
-					query.append("igFolder.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_N_NAME_2);
 					}
 				}
 
@@ -2026,17 +1999,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("igFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("igFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2086,23 +2056,18 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("igFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(igFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("igFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2150,7 +2115,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2194,7 +2159,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
-				query.append("igFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2241,11 +2206,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2296,26 +2259,19 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
-				query.append("igFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("igFolder.parentFolderId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
 
 				if (name == null) {
-					query.append("igFolder.name IS NULL");
+					query.append(_FINDER_COLUMN_G_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(igFolder.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_N_NAME_3);
 					}
-
-					query.append("igFolder.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_N_NAME_2);
 					}
 				}
 
@@ -2423,6 +2379,22 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "igFolderuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "igFolder.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(igFolderuuid IS NULL OR igFolder.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "igFolderuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "igFolder.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(igFolderuuid IS NULL OR igFolder.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "igFolder.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "igFolder.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "igFolder.companyId = ?";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "igFolder.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_PARENTFOLDERID_2 = "igFolder.parentFolderId = ?";
+	private static final String _FINDER_COLUMN_G_P_N_GROUPID_2 = "igFolder.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_N_PARENTFOLDERID_2 = "igFolder.parentFolderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_N_NAME_1 = "igFoldername IS NULL";
+	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "igFolder.name = ?";
+	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFoldername IS NULL OR igFolder.name = ?)";
 	private static final String _SQL_SELECT_IGFOLDER = "SELECT igFolder FROM IGFolder igFolder";
 	private static final String _SQL_SELECT_IGFOLDER_WHERE = "SELECT igFolder FROM IGFolder igFolder WHERE ";
 	private static final String _SQL_COUNT_IGFOLDER = "SELECT COUNT(igFolder) FROM IGFolder igFolder";

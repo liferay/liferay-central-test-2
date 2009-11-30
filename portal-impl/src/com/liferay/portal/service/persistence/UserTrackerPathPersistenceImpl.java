@@ -343,7 +343,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 				query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
-				query.append("userTrackerPath.userTrackerId = ?");
+				query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -399,7 +399,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 				query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
-				query.append("userTrackerPath.userTrackerId = ?");
+				query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -514,7 +514,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 			query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
-			query.append("userTrackerPath.userTrackerId = ?");
+			query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -716,7 +716,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 				query.append(_SQL_COUNT_USERTRACKERPATH_WHERE);
 
-				query.append("userTrackerPath.userTrackerId = ?");
+				query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -902,6 +902,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2 = "userTrackerPath.userTrackerId = ?";
 	private static final String _SQL_SELECT_USERTRACKERPATH = "SELECT userTrackerPath FROM UserTrackerPath userTrackerPath";
 	private static final String _SQL_SELECT_USERTRACKERPATH_WHERE = "SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ";
 	private static final String _SQL_COUNT_USERTRACKERPATH = "SELECT COUNT(userTrackerPath) FROM UserTrackerPath userTrackerPath";

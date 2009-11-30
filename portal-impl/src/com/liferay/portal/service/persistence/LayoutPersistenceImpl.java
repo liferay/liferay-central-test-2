@@ -590,7 +590,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -651,7 +651,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -767,7 +767,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-			query.append("layout.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -839,7 +839,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -900,7 +900,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1016,7 +1016,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-			query.append("layout.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1119,7 +1119,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.dlFolderId = ?");
+				query.append(_FINDER_COLUMN_DLFOLDERID_DLFOLDERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1226,7 +1226,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.iconImageId = ?");
+				query.append(_FINDER_COLUMN_ICONIMAGEID_ICONIMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1303,11 +1303,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layout.privateLayout = ?");
+				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 				query.append(" ORDER BY ");
 
@@ -1370,11 +1368,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layout.privateLayout = ?");
+				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1500,11 +1496,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-			query.append("layout.groupId = ?");
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("layout.privateLayout = ?");
+			query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1619,15 +1613,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_L_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_L_PRIVATELAYOUT_2);
 
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
-
-				query.append("layout.layoutId = ?");
+				query.append(_FINDER_COLUMN_G_P_L_LAYOUTID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1711,15 +1701,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_P_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_P_PRIVATELAYOUT_2);
 
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
-
-				query.append("layout.parentLayoutId = ?");
+				query.append(_FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1787,15 +1773,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_P_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_P_PRIVATELAYOUT_2);
 
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
-
-				query.append("layout.parentLayoutId = ?");
+				query.append(_FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1932,15 +1914,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-			query.append("layout.groupId = ?");
+			query.append(_FINDER_COLUMN_G_P_P_GROUPID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_P_P_PRIVATELAYOUT_2);
 
-			query.append("layout.privateLayout = ?");
-
-			query.append(" AND ");
-
-			query.append("layout.parentLayoutId = ?");
+			query.append(_FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2059,26 +2037,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_F_PRIVATELAYOUT_2);
 
 				if (friendlyURL == null) {
-					query.append("layout.friendlyURL IS NULL");
+					query.append(_FINDER_COLUMN_G_P_F_FRIENDLYURL_1);
 				}
 				else {
 					if (friendlyURL.equals(StringPool.BLANK)) {
-						query.append("(layout.friendlyURL IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_F_FRIENDLYURL_3);
 					}
-
-					query.append("layout.friendlyURL = ?");
-
-					if (friendlyURL.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_F_FRIENDLYURL_2);
 					}
 				}
 
@@ -2168,26 +2139,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_T_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_T_PRIVATELAYOUT_2);
 
 				if (type == null) {
-					query.append("layout.type IS NULL");
+					query.append(_FINDER_COLUMN_G_P_T_TYPE_1);
 				}
 				else {
 					if (type.equals(StringPool.BLANK)) {
-						query.append("(layout.type IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_T_TYPE_3);
 					}
-
-					query.append("layout.type = ?");
-
-					if (type.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_T_TYPE_2);
 					}
 				}
 
@@ -2259,26 +2223,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_T_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_T_PRIVATELAYOUT_2);
 
 				if (type == null) {
-					query.append("layout.type IS NULL");
+					query.append(_FINDER_COLUMN_G_P_T_TYPE_1);
 				}
 				else {
 					if (type.equals(StringPool.BLANK)) {
-						query.append("(layout.type IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_T_TYPE_3);
 					}
-
-					query.append("layout.type = ?");
-
-					if (type.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_T_TYPE_2);
 					}
 				}
 
@@ -2418,26 +2375,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-			query.append("layout.groupId = ?");
+			query.append(_FINDER_COLUMN_G_P_T_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("layout.privateLayout = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_P_T_PRIVATELAYOUT_2);
 
 			if (type == null) {
-				query.append("layout.type IS NULL");
+				query.append(_FINDER_COLUMN_G_P_T_TYPE_1);
 			}
 			else {
 				if (type.equals(StringPool.BLANK)) {
-					query.append("(layout.type IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_P_T_TYPE_3);
 				}
-
-				query.append("layout.type = ?");
-
-				if (type.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_P_T_TYPE_2);
 				}
 			}
 
@@ -2711,7 +2661,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2755,7 +2705,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2799,7 +2749,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.dlFolderId = ?");
+				query.append(_FINDER_COLUMN_DLFOLDERID_DLFOLDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2843,7 +2793,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.iconImageId = ?");
+				query.append(_FINDER_COLUMN_ICONIMAGEID_ICONIMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2890,11 +2840,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layout.privateLayout = ?");
+				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2944,15 +2892,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_L_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_L_PRIVATELAYOUT_2);
 
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
-
-				query.append("layout.layoutId = ?");
+				query.append(_FINDER_COLUMN_G_P_L_LAYOUTID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3004,15 +2948,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_P_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_P_PRIVATELAYOUT_2);
 
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
-
-				query.append("layout.parentLayoutId = ?");
+				query.append(_FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3065,26 +3005,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_F_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_F_PRIVATELAYOUT_2);
 
 				if (friendlyURL == null) {
-					query.append("layout.friendlyURL IS NULL");
+					query.append(_FINDER_COLUMN_G_P_F_FRIENDLYURL_1);
 				}
 				else {
 					if (friendlyURL.equals(StringPool.BLANK)) {
-						query.append("(layout.friendlyURL IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_F_FRIENDLYURL_3);
 					}
-
-					query.append("layout.friendlyURL = ?");
-
-					if (friendlyURL.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_F_FRIENDLYURL_2);
 					}
 				}
 
@@ -3141,26 +3074,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-				query.append("layout.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_T_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("layout.privateLayout = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_P_T_PRIVATELAYOUT_2);
 
 				if (type == null) {
-					query.append("layout.type IS NULL");
+					query.append(_FINDER_COLUMN_G_P_T_TYPE_1);
 				}
 				else {
 					if (type.equals(StringPool.BLANK)) {
-						query.append("(layout.type IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_P_T_TYPE_3);
 					}
-
-					query.append("layout.type = ?");
-
-					if (type.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_P_T_TYPE_2);
 					}
 				}
 
@@ -3366,6 +3292,28 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence")
 	protected com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "layout.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "layout.companyId = ?";
+	private static final String _FINDER_COLUMN_DLFOLDERID_DLFOLDERID_2 = "layout.dlFolderId = ?";
+	private static final String _FINDER_COLUMN_ICONIMAGEID_ICONIMAGEID_2 = "layout.iconImageId = ?";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "layout.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_PRIVATELAYOUT_2 = "layout.privateLayout = ?";
+	private static final String _FINDER_COLUMN_G_P_L_GROUPID_2 = "layout.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_L_PRIVATELAYOUT_2 = "layout.privateLayout = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_L_LAYOUTID_2 = "layout.layoutId = ?";
+	private static final String _FINDER_COLUMN_G_P_P_GROUPID_2 = "layout.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_P_PRIVATELAYOUT_2 = "layout.privateLayout = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2 = "layout.parentLayoutId = ?";
+	private static final String _FINDER_COLUMN_G_P_F_GROUPID_2 = "layout.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_F_PRIVATELAYOUT_2 = "layout.privateLayout = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_F_FRIENDLYURL_1 = "layoutfriendlyURL IS NULL";
+	private static final String _FINDER_COLUMN_G_P_F_FRIENDLYURL_2 = "layout.friendlyURL = ?";
+	private static final String _FINDER_COLUMN_G_P_F_FRIENDLYURL_3 = "(layoutfriendlyURL IS NULL OR layout.friendlyURL = ?)";
+	private static final String _FINDER_COLUMN_G_P_T_GROUPID_2 = "layout.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_T_PRIVATELAYOUT_2 = "layout.privateLayout = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_T_TYPE_1 = "layouttype IS NULL";
+	private static final String _FINDER_COLUMN_G_P_T_TYPE_2 = "layout.type = ?";
+	private static final String _FINDER_COLUMN_G_P_T_TYPE_3 = "(layouttype IS NULL OR layout.type = ?)";
 	private static final String _SQL_SELECT_LAYOUT = "SELECT layout FROM Layout layout";
 	private static final String _SQL_SELECT_LAYOUT_WHERE = "SELECT layout FROM Layout layout WHERE ";
 	private static final String _SQL_COUNT_LAYOUT = "SELECT COUNT(layout) FROM Layout layout";

@@ -376,7 +376,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
-				query.append("scLicense.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				query.append(" ORDER BY ");
 
@@ -436,7 +436,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
-				query.append("scLicense.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -552,7 +552,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
-			query.append("scLicense.active = ?");
+			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -626,11 +626,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
-				query.append("scLicense.active = ?");
+				query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
 
-				query.append(" AND ");
-
-				query.append("scLicense.recommended = ?");
+				query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
 
 				query.append(" ORDER BY ");
 
@@ -692,11 +690,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
-				query.append("scLicense.active = ?");
+				query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
 
-				query.append(" AND ");
-
-				query.append("scLicense.recommended = ?");
+				query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -822,11 +818,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			query.append(_SQL_SELECT_SCLICENSE_WHERE);
 
-			query.append("scLicense.active = ?");
+			query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
 
-			query.append(" AND ");
-
-			query.append("scLicense.recommended = ?");
+			query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1046,7 +1040,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append(_SQL_COUNT_SCLICENSE_WHERE);
 
-				query.append("scLicense.active = ?");
+				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1093,11 +1087,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append(_SQL_COUNT_SCLICENSE_WHERE);
 
-				query.append("scLicense.active = ?");
+				query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
 
-				query.append(" AND ");
-
-				query.append("scLicense.recommended = ?");
+				query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1744,6 +1736,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		private SCLicensePersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2 = "scLicense.active = ?";
+	private static final String _FINDER_COLUMN_A_R_ACTIVE_2 = "scLicense.active = ? AND ";
+	private static final String _FINDER_COLUMN_A_R_RECOMMENDED_2 = "scLicense.recommended = ?";
 	private static final String _SQL_SELECT_SCLICENSE = "SELECT scLicense FROM SCLicense scLicense";
 	private static final String _SQL_SELECT_SCLICENSE_WHERE = "SELECT scLicense FROM SCLicense scLicense WHERE ";
 	private static final String _SQL_COUNT_SCLICENSE = "SELECT COUNT(scLicense) FROM SCLicense scLicense";

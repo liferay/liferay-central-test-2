@@ -530,17 +530,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("assetCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("assetCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -605,17 +602,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("assetCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("assetCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -736,17 +730,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 			if (uuid == null) {
-				query.append("assetCategory.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(assetCategory.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("assetCategory.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -858,23 +849,18 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("assetCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("assetCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("assetCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -954,7 +940,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_PARENTCATEGORYID_PARENTCATEGORYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1014,7 +1000,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_PARENTCATEGORYID_PARENTCATEGORYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1133,7 +1119,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-			query.append("assetCategory.parentCategoryId = ?");
+			query.append(_FINDER_COLUMN_PARENTCATEGORYID_PARENTCATEGORYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1205,7 +1191,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_VOCABULARYID_VOCABULARYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1265,7 +1251,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_VOCABULARYID_VOCABULARYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1383,7 +1369,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-			query.append("assetCategory.vocabularyId = ?");
+			query.append(_FINDER_COLUMN_VOCABULARYID_VOCABULARYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1455,22 +1441,17 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_N_PARENTCATEGORYID_2);
 
 				if (name == null) {
-					query.append("assetCategory.name IS NULL");
+					query.append(_FINDER_COLUMN_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_N_NAME_3);
 					}
-
-					query.append("assetCategory.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_N_NAME_2);
 					}
 				}
 
@@ -1538,22 +1519,17 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_N_PARENTCATEGORYID_2);
 
 				if (name == null) {
-					query.append("assetCategory.name IS NULL");
+					query.append(_FINDER_COLUMN_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_N_NAME_3);
 					}
-
-					query.append("assetCategory.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_N_NAME_2);
 					}
 				}
 
@@ -1683,22 +1659,17 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-			query.append("assetCategory.parentCategoryId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_P_N_PARENTCATEGORYID_2);
 
 			if (name == null) {
-				query.append("assetCategory.name IS NULL");
+				query.append(_FINDER_COLUMN_P_N_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(assetCategory.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_P_N_NAME_3);
 				}
-
-				query.append("assetCategory.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_P_N_NAME_2);
 				}
 			}
 
@@ -1778,11 +1749,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_P_V_PARENTCATEGORYID_2);
 
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_P_V_VOCABULARYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1845,11 +1814,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_P_V_PARENTCATEGORYID_2);
 
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_P_V_VOCABULARYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1978,11 +1945,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
-			query.append("assetCategory.parentCategoryId = ?");
+			query.append(_FINDER_COLUMN_P_V_PARENTCATEGORYID_2);
 
-			query.append(" AND ");
-
-			query.append("assetCategory.vocabularyId = ?");
+			query.append(_FINDER_COLUMN_P_V_VOCABULARYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2057,23 +2022,18 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (name == null) {
-					query.append("assetCategory.name IS NULL");
+					query.append(_FINDER_COLUMN_N_V_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_V_NAME_3);
 					}
-
-					query.append("assetCategory.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_V_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_N_V_VOCABULARYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -2138,23 +2098,18 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 				if (name == null) {
-					query.append("assetCategory.name IS NULL");
+					query.append(_FINDER_COLUMN_N_V_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_V_NAME_3);
 					}
-
-					query.append("assetCategory.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_V_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_N_V_VOCABULARYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2283,23 +2238,18 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
 
 			if (name == null) {
-				query.append("assetCategory.name IS NULL");
+				query.append(_FINDER_COLUMN_N_V_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(assetCategory.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_N_V_NAME_3);
 				}
-
-				query.append("assetCategory.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_N_V_NAME_2);
 				}
 			}
 
-			query.append(" AND ");
-
-			query.append("assetCategory.vocabularyId = ?");
+			query.append(_FINDER_COLUMN_N_V_VOCABULARYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2559,17 +2509,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("assetCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("assetCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2619,23 +2566,18 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				if (uuid == null) {
-					query.append("assetCategory.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("assetCategory.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("assetCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2684,7 +2626,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_PARENTCATEGORYID_PARENTCATEGORYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2728,7 +2670,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_VOCABULARYID_VOCABULARYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2773,22 +2715,17 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_P_N_PARENTCATEGORYID_2);
 
 				if (name == null) {
-					query.append("assetCategory.name IS NULL");
+					query.append(_FINDER_COLUMN_P_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_P_N_NAME_3);
 					}
-
-					query.append("assetCategory.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_P_N_NAME_2);
 					}
 				}
 
@@ -2841,11 +2778,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
-				query.append("assetCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_P_V_PARENTCATEGORYID_2);
 
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_P_V_VOCABULARYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2893,23 +2828,18 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
 
 				if (name == null) {
-					query.append("assetCategory.name IS NULL");
+					query.append(_FINDER_COLUMN_N_V_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(assetCategory.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_N_V_NAME_3);
 					}
-
-					query.append("assetCategory.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_N_V_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("assetCategory.vocabularyId = ?");
+				query.append(_FINDER_COLUMN_N_V_VOCABULARYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3792,6 +3722,26 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		private SqlUpdate _sqlUpdate;
 	}
 
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "assetCategoryuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "assetCategory.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(assetCategoryuuid IS NULL OR assetCategory.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "assetCategoryuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "assetCategory.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(assetCategoryuuid IS NULL OR assetCategory.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "assetCategory.groupId = ?";
+	private static final String _FINDER_COLUMN_PARENTCATEGORYID_PARENTCATEGORYID_2 =
+		"assetCategory.parentCategoryId = ?";
+	private static final String _FINDER_COLUMN_VOCABULARYID_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
+	private static final String _FINDER_COLUMN_P_N_PARENTCATEGORYID_2 = "assetCategory.parentCategoryId = ? AND ";
+	private static final String _FINDER_COLUMN_P_N_NAME_1 = "assetCategoryname IS NULL";
+	private static final String _FINDER_COLUMN_P_N_NAME_2 = "assetCategory.name = ?";
+	private static final String _FINDER_COLUMN_P_N_NAME_3 = "(assetCategoryname IS NULL OR assetCategory.name = ?)";
+	private static final String _FINDER_COLUMN_P_V_PARENTCATEGORYID_2 = "assetCategory.parentCategoryId = ? AND ";
+	private static final String _FINDER_COLUMN_P_V_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
+	private static final String _FINDER_COLUMN_N_V_NAME_1 = "assetCategoryname IS NULL AND ";
+	private static final String _FINDER_COLUMN_N_V_NAME_2 = "assetCategory.name = ? AND ";
+	private static final String _FINDER_COLUMN_N_V_NAME_3 = "(assetCategoryname IS NULL OR assetCategory.name = ?) AND ";
+	private static final String _FINDER_COLUMN_N_V_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
 	private static final String _SQL_SELECT_ASSETCATEGORY = "SELECT assetCategory FROM AssetCategory assetCategory";
 	private static final String _SQL_SELECT_ASSETCATEGORY_WHERE = "SELECT assetCategory FROM AssetCategory assetCategory WHERE ";
 	private static final String _SQL_COUNT_ASSETCATEGORY = "SELECT COUNT(assetCategory) FROM AssetCategory assetCategory";

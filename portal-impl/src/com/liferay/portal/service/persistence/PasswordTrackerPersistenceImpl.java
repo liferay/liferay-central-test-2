@@ -343,7 +343,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 
 				query.append(_SQL_SELECT_PASSWORDTRACKER_WHERE);
 
-				query.append("passwordTracker.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -404,7 +404,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 
 				query.append(_SQL_SELECT_PASSWORDTRACKER_WHERE);
 
-				query.append("passwordTracker.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -522,7 +522,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 
 			query.append(_SQL_SELECT_PASSWORDTRACKER_WHERE);
 
-			query.append("passwordTracker.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -735,7 +735,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 
 				query.append(_SQL_COUNT_PASSWORDTRACKER_WHERE);
 
-				query.append("passwordTracker.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -921,6 +921,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "passwordTracker.userId = ?";
 	private static final String _SQL_SELECT_PASSWORDTRACKER = "SELECT passwordTracker FROM PasswordTracker passwordTracker";
 	private static final String _SQL_SELECT_PASSWORDTRACKER_WHERE = "SELECT passwordTracker FROM PasswordTracker passwordTracker WHERE ";
 	private static final String _SQL_COUNT_PASSWORDTRACKER = "SELECT COUNT(passwordTracker) FROM PasswordTracker passwordTracker";

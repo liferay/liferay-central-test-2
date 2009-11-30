@@ -398,7 +398,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 				query.append(_SQL_SELECT_EXPANDOCOLUMN_WHERE);
 
-				query.append("expandoColumn.tableId = ?");
+				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -458,7 +458,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 				query.append(_SQL_SELECT_EXPANDOCOLUMN_WHERE);
 
-				query.append("expandoColumn.tableId = ?");
+				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -575,7 +575,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 			query.append(_SQL_SELECT_EXPANDOCOLUMN_WHERE);
 
-			query.append("expandoColumn.tableId = ?");
+			query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -682,22 +682,17 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 				query.append(_SQL_SELECT_EXPANDOCOLUMN_WHERE);
 
-				query.append("expandoColumn.tableId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_T_N_TABLEID_2);
 
 				if (name == null) {
-					query.append("expandoColumn.name IS NULL");
+					query.append(_FINDER_COLUMN_T_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(expandoColumn.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_T_N_NAME_3);
 					}
-
-					query.append("expandoColumn.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_T_N_NAME_2);
 					}
 				}
 
@@ -925,7 +920,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 				query.append(_SQL_COUNT_EXPANDOCOLUMN_WHERE);
 
-				query.append("expandoColumn.tableId = ?");
+				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -969,22 +964,17 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 				query.append(_SQL_COUNT_EXPANDOCOLUMN_WHERE);
 
-				query.append("expandoColumn.tableId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_T_N_TABLEID_2);
 
 				if (name == null) {
-					query.append("expandoColumn.name IS NULL");
+					query.append(_FINDER_COLUMN_T_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(expandoColumn.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_T_N_NAME_3);
 					}
-
-					query.append("expandoColumn.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_T_N_NAME_2);
 					}
 				}
 
@@ -1086,6 +1076,11 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_TABLEID_TABLEID_2 = "expandoColumn.tableId = ?";
+	private static final String _FINDER_COLUMN_T_N_TABLEID_2 = "expandoColumn.tableId = ? AND ";
+	private static final String _FINDER_COLUMN_T_N_NAME_1 = "expandoColumnname IS NULL";
+	private static final String _FINDER_COLUMN_T_N_NAME_2 = "expandoColumn.name = ?";
+	private static final String _FINDER_COLUMN_T_N_NAME_3 = "(expandoColumnname IS NULL OR expandoColumn.name = ?)";
 	private static final String _SQL_SELECT_EXPANDOCOLUMN = "SELECT expandoColumn FROM ExpandoColumn expandoColumn";
 	private static final String _SQL_SELECT_EXPANDOCOLUMN_WHERE = "SELECT expandoColumn FROM ExpandoColumn expandoColumn WHERE ";
 	private static final String _SQL_COUNT_EXPANDOCOLUMN = "SELECT COUNT(expandoColumn) FROM ExpandoColumn expandoColumn";

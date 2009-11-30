@@ -406,7 +406,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
-				query.append("shoppingCart.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -462,7 +462,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
-				query.append("shoppingCart.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -572,7 +572,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 			query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
-			query.append("shoppingCart.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -638,7 +638,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
-				query.append("shoppingCart.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -694,7 +694,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
-				query.append("shoppingCart.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -804,7 +804,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 			query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
-			query.append("shoppingCart.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -905,11 +905,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 				query.append(_SQL_SELECT_SHOPPINGCART_WHERE);
 
-				query.append("shoppingCart.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("shoppingCart.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1128,7 +1126,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 				query.append(_SQL_COUNT_SHOPPINGCART_WHERE);
 
-				query.append("shoppingCart.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1172,7 +1170,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 				query.append(_SQL_COUNT_SHOPPINGCART_WHERE);
 
-				query.append("shoppingCart.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1216,11 +1214,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 				query.append(_SQL_COUNT_SHOPPINGCART_WHERE);
 
-				query.append("shoppingCart.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("shoppingCart.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1326,6 +1322,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingCart.groupId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "shoppingCart.userId = ?";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "shoppingCart.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "shoppingCart.userId = ?";
 	private static final String _SQL_SELECT_SHOPPINGCART = "SELECT shoppingCart FROM ShoppingCart shoppingCart";
 	private static final String _SQL_SELECT_SHOPPINGCART_WHERE = "SELECT shoppingCart FROM ShoppingCart shoppingCart WHERE ";
 	private static final String _SQL_COUNT_SHOPPINGCART = "SELECT COUNT(shoppingCart) FROM ShoppingCart shoppingCart";

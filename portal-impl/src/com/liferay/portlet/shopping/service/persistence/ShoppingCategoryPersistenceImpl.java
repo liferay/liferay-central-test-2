@@ -370,7 +370,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 				query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
-				query.append("shoppingCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -431,7 +431,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 				query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
-				query.append("shoppingCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -550,7 +550,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 			query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
-			query.append("shoppingCategory.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -625,11 +625,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 				query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
-				query.append("shoppingCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("shoppingCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -693,11 +691,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 				query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
-				query.append("shoppingCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("shoppingCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -826,11 +822,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 			query.append(_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
-			query.append("shoppingCategory.groupId = ?");
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("shoppingCategory.parentCategoryId = ?");
+			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1053,7 +1047,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 				query.append(_SQL_COUNT_SHOPPINGCATEGORY_WHERE);
 
-				query.append("shoppingCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1100,11 +1094,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 				query.append(_SQL_COUNT_SHOPPINGCATEGORY_WHERE);
 
-				query.append("shoppingCategory.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("shoppingCategory.parentCategoryId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1210,6 +1202,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingCategory.groupId = ?";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "shoppingCategory.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_2 = "shoppingCategory.parentCategoryId = ?";
 	private static final String _SQL_SELECT_SHOPPINGCATEGORY = "SELECT shoppingCategory FROM ShoppingCategory shoppingCategory";
 	private static final String _SQL_SELECT_SHOPPINGCATEGORY_WHERE = "SELECT shoppingCategory FROM ShoppingCategory shoppingCategory WHERE ";
 	private static final String _SQL_COUNT_SHOPPINGCATEGORY = "SELECT COUNT(shoppingCategory) FROM ShoppingCategory shoppingCategory";

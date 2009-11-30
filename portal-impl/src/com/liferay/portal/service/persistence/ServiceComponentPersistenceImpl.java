@@ -396,18 +396,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
-					query.append("serviceComponent.buildNamespace IS NULL");
+					query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_1);
 				}
 				else {
 					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(
-							"(serviceComponent.buildNamespace IS NULL OR ");
+						query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_3);
 					}
-
-					query.append("serviceComponent.buildNamespace = ?");
-
-					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_2);
 					}
 				}
 
@@ -473,18 +469,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
-					query.append("serviceComponent.buildNamespace IS NULL");
+					query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_1);
 				}
 				else {
 					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(
-							"(serviceComponent.buildNamespace IS NULL OR ");
+						query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_3);
 					}
-
-					query.append("serviceComponent.buildNamespace = ?");
-
-					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_2);
 					}
 				}
 
@@ -611,17 +603,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
 			if (buildNamespace == null) {
-				query.append("serviceComponent.buildNamespace IS NULL");
+				query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_1);
 			}
 			else {
 				if (buildNamespace.equals(StringPool.BLANK)) {
-					query.append("(serviceComponent.buildNamespace IS NULL OR ");
+					query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_3);
 				}
-
-				query.append("serviceComponent.buildNamespace = ?");
-
-				if (buildNamespace.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_2);
 				}
 			}
 
@@ -736,24 +725,18 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
-					query.append("serviceComponent.buildNamespace IS NULL");
+					query.append(_FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_1);
 				}
 				else {
 					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(
-							"(serviceComponent.buildNamespace IS NULL OR ");
+						query.append(_FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_3);
 					}
-
-					query.append("serviceComponent.buildNamespace = ?");
-
-					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("serviceComponent.buildNumber = ?");
+				query.append(_FINDER_COLUMN_BNS_BNU_BUILDNUMBER_2);
 
 				query.append(" ORDER BY ");
 
@@ -987,18 +970,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				query.append(_SQL_COUNT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
-					query.append("serviceComponent.buildNamespace IS NULL");
+					query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_1);
 				}
 				else {
 					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(
-							"(serviceComponent.buildNamespace IS NULL OR ");
+						query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_3);
 					}
-
-					query.append("serviceComponent.buildNamespace = ?");
-
-					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_2);
 					}
 				}
 
@@ -1048,24 +1027,18 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				query.append(_SQL_COUNT_SERVICECOMPONENT_WHERE);
 
 				if (buildNamespace == null) {
-					query.append("serviceComponent.buildNamespace IS NULL");
+					query.append(_FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_1);
 				}
 				else {
 					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(
-							"(serviceComponent.buildNamespace IS NULL OR ");
+						query.append(_FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_3);
 					}
-
-					query.append("serviceComponent.buildNamespace = ?");
-
-					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("serviceComponent.buildNumber = ?");
+				query.append(_FINDER_COLUMN_BNS_BNU_BUILDNUMBER_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1255,6 +1228,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_1 = "serviceComponentbuildNamespace IS NULL";
+	private static final String _FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_2 = "serviceComponent.buildNamespace = ?";
+	private static final String _FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_3 = "(serviceComponentbuildNamespace IS NULL OR serviceComponent.buildNamespace = ?)";
+	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_1 = "serviceComponentbuildNamespace IS NULL AND ";
+	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_2 = "serviceComponent.buildNamespace = ? AND ";
+	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_3 = "(serviceComponentbuildNamespace IS NULL OR serviceComponent.buildNamespace = ?) AND ";
+	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNUMBER_2 = "serviceComponent.buildNumber = ?";
 	private static final String _SQL_SELECT_SERVICECOMPONENT = "SELECT serviceComponent FROM ServiceComponent serviceComponent";
 	private static final String _SQL_SELECT_SERVICECOMPONENT_WHERE = "SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ";
 	private static final String _SQL_COUNT_SERVICECOMPONENT = "SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent";

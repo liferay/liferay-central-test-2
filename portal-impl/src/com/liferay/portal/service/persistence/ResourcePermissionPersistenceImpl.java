@@ -481,7 +481,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -537,7 +537,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -651,7 +651,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-			query.append("resourcePermission.roleId = ?");
+			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -721,28 +721,21 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourcePermission.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_NAME_3);
 					}
-
-					query.append("resourcePermission.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.scope = ?");
+				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -807,28 +800,21 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourcePermission.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_NAME_3);
 					}
-
-					query.append("resourcePermission.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.scope = ?");
+				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -962,28 +948,21 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-			query.append("resourcePermission.companyId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
 
 			if (name == null) {
-				query.append("resourcePermission.name IS NULL");
+				query.append(_FINDER_COLUMN_C_N_S_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(resourcePermission.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_C_N_S_NAME_3);
 				}
-
-				query.append("resourcePermission.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_NAME_2);
 				}
 			}
 
-			query.append(" AND ");
-
-			query.append("resourcePermission.scope = ?");
+			query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1061,43 +1040,31 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourcePermission.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
 					}
-
-					query.append("resourcePermission.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.scope = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
 
 				if (primKey == null) {
-					query.append("resourcePermission.primKey IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
 				}
 				else {
 					if (primKey.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.primKey IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
 					}
-
-					query.append("resourcePermission.primKey = ?");
-
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
 					}
 				}
 
@@ -1171,43 +1138,31 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourcePermission.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
 					}
-
-					query.append("resourcePermission.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.scope = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
 
 				if (primKey == null) {
-					query.append("resourcePermission.primKey IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
 				}
 				else {
 					if (primKey.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.primKey IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
 					}
-
-					query.append("resourcePermission.primKey = ?");
-
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
 					}
 				}
 
@@ -1353,43 +1308,31 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-			query.append("resourcePermission.companyId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
 
 			if (name == null) {
-				query.append("resourcePermission.name IS NULL");
+				query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
 			}
 			else {
 				if (name.equals(StringPool.BLANK)) {
-					query.append("(resourcePermission.name IS NULL OR ");
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
 				}
-
-				query.append("resourcePermission.name = ?");
-
-				if (name.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
 				}
 			}
 
-			query.append(" AND ");
-
-			query.append("resourcePermission.scope = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
 
 			if (primKey == null) {
-				query.append("resourcePermission.primKey IS NULL");
+				query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
 			}
 			else {
 				if (primKey.equals(StringPool.BLANK)) {
-					query.append("(resourcePermission.primKey IS NULL OR ");
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
 				}
-
-				query.append("resourcePermission.primKey = ?");
-
-				if (primKey.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
 				}
 			}
 
@@ -1520,49 +1463,35 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_R_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourcePermission.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_3);
 					}
-
-					query.append("resourcePermission.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.scope = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_R_SCOPE_2);
 
 				if (primKey == null) {
-					query.append("resourcePermission.primKey IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_1);
 				}
 				else {
 					if (primKey.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.primKey IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_3);
 					}
-
-					query.append("resourcePermission.primKey = ?");
-
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.roleId = ?");
+				query.append(_FINDER_COLUMN_C_N_S_P_R_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1808,7 +1737,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.roleId = ?");
+				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1857,28 +1786,21 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourcePermission.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_NAME_3);
 					}
-
-					query.append("resourcePermission.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.scope = ?");
+				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1935,43 +1857,31 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourcePermission.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
 					}
-
-					query.append("resourcePermission.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.scope = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
 
 				if (primKey == null) {
-					query.append("resourcePermission.primKey IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
 				}
 				else {
 					if (primKey.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.primKey IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
 					}
-
-					query.append("resourcePermission.primKey = ?");
-
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
 					}
 				}
 
@@ -2034,49 +1944,35 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
 
-				query.append("resourcePermission.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_R_COMPANYID_2);
 
 				if (name == null) {
-					query.append("resourcePermission.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_3);
 					}
-
-					query.append("resourcePermission.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.scope = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_S_P_R_SCOPE_2);
 
 				if (primKey == null) {
-					query.append("resourcePermission.primKey IS NULL");
+					query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_1);
 				}
 				else {
 					if (primKey.equals(StringPool.BLANK)) {
-						query.append("(resourcePermission.primKey IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_3);
 					}
-
-					query.append("resourcePermission.primKey = ?");
-
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("resourcePermission.roleId = ?");
+				query.append(_FINDER_COLUMN_C_N_S_P_R_ROLEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2274,6 +2170,29 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_ROLEID_ROLEID_2 = "resourcePermission.roleId = ?";
+	private static final String _FINDER_COLUMN_C_N_S_COMPANYID_2 = "resourcePermission.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_NAME_1 = "resourcePermissionname IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_N_S_NAME_2 = "resourcePermission.name = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_NAME_3 = "(resourcePermissionname IS NULL OR resourcePermission.name = ?) AND ";
+	private static final String _FINDER_COLUMN_C_N_S_SCOPE_2 = "resourcePermission.scope = ?";
+	private static final String _FINDER_COLUMN_C_N_S_P_COMPANYID_2 = "resourcePermission.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_NAME_1 = "resourcePermissionname IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_NAME_2 = "resourcePermission.name = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_NAME_3 = "(resourcePermissionname IS NULL OR resourcePermission.name = ?) AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_SCOPE_2 = "resourcePermission.scope = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_PRIMKEY_1 = "resourcePermissionprimKey IS NULL";
+	private static final String _FINDER_COLUMN_C_N_S_P_PRIMKEY_2 = "resourcePermission.primKey = ?";
+	private static final String _FINDER_COLUMN_C_N_S_P_PRIMKEY_3 = "(resourcePermissionprimKey IS NULL OR resourcePermission.primKey = ?)";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_COMPANYID_2 = "resourcePermission.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_NAME_1 = "resourcePermissionname IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_NAME_2 = "resourcePermission.name = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_NAME_3 = "(resourcePermissionname IS NULL OR resourcePermission.name = ?) AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_SCOPE_2 = "resourcePermission.scope = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_PRIMKEY_1 = "resourcePermissionprimKey IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_PRIMKEY_2 = "resourcePermission.primKey = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_PRIMKEY_3 = "(resourcePermissionprimKey IS NULL OR resourcePermission.primKey = ?) AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_ROLEID_2 = "resourcePermission.roleId = ?";
 	private static final String _SQL_SELECT_RESOURCEPERMISSION = "SELECT resourcePermission FROM ResourcePermission resourcePermission";
 	private static final String _SQL_SELECT_RESOURCEPERMISSION_WHERE = "SELECT resourcePermission FROM ResourcePermission resourcePermission WHERE ";
 	private static final String _SQL_COUNT_RESOURCEPERMISSION = "SELECT COUNT(resourcePermission) FROM ResourcePermission resourcePermission";

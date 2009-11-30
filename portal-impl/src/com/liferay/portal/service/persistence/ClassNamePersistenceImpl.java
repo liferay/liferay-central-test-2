@@ -381,17 +381,14 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 				query.append(_SQL_SELECT_CLASSNAME_WHERE);
 
 				if (value == null) {
-					query.append("className.value IS NULL");
+					query.append(_FINDER_COLUMN_VALUE_VALUE_1);
 				}
 				else {
 					if (value.equals(StringPool.BLANK)) {
-						query.append("(className.value IS NULL OR ");
+						query.append(_FINDER_COLUMN_VALUE_VALUE_3);
 					}
-
-					query.append("className.value = ?");
-
-					if (value.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_VALUE_VALUE_2);
 					}
 				}
 
@@ -601,17 +598,14 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 				query.append(_SQL_COUNT_CLASSNAME_WHERE);
 
 				if (value == null) {
-					query.append("className.value IS NULL");
+					query.append(_FINDER_COLUMN_VALUE_VALUE_1);
 				}
 				else {
 					if (value.equals(StringPool.BLANK)) {
-						query.append("(className.value IS NULL OR ");
+						query.append(_FINDER_COLUMN_VALUE_VALUE_3);
 					}
-
-					query.append("className.value = ?");
-
-					if (value.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_VALUE_VALUE_2);
 					}
 				}
 
@@ -801,6 +795,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_VALUE_VALUE_1 = "classNamevalue IS NULL";
+	private static final String _FINDER_COLUMN_VALUE_VALUE_2 = "className.value = ?";
+	private static final String _FINDER_COLUMN_VALUE_VALUE_3 = "(classNamevalue IS NULL OR className.value = ?)";
 	private static final String _SQL_SELECT_CLASSNAME = "SELECT className FROM ClassName className";
 	private static final String _SQL_SELECT_CLASSNAME_WHERE = "SELECT className FROM ClassName className WHERE ";
 	private static final String _SQL_COUNT_CLASSNAME = "SELECT COUNT(className) FROM ClassName className";

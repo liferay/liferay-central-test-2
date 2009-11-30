@@ -697,7 +697,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -757,7 +757,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -872,7 +872,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 			query.append(_SQL_SELECT_GROUP__WHERE);
 
-			query.append("group_.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -974,7 +974,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.liveGroupId = ?");
+				query.append(_FINDER_COLUMN_LIVEGROUPID_LIVEGROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1083,22 +1083,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("group_.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(group_.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("group_.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -1215,22 +1210,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_F_COMPANYID_2);
 
 				if (friendlyURL == null) {
-					query.append("group_.friendlyURL IS NULL");
+					query.append(_FINDER_COLUMN_C_F_FRIENDLYURL_1);
 				}
 				else {
 					if (friendlyURL.equals(StringPool.BLANK)) {
-						query.append("(group_.friendlyURL IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_F_FRIENDLYURL_3);
 					}
-
-					query.append("group_.friendlyURL = ?");
-
-					if (friendlyURL.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_F_FRIENDLYURL_2);
 					}
 				}
 
@@ -1314,11 +1304,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.type = ?");
+				query.append(_FINDER_COLUMN_T_A_TYPE_2);
 
-				query.append(" AND ");
-
-				query.append("group_.active = ?");
+				query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
 
 				query.append(" ORDER BY ");
 
@@ -1380,11 +1368,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.type = ?");
+				query.append(_FINDER_COLUMN_T_A_TYPE_2);
 
-				query.append(" AND ");
-
-				query.append("group_.active = ?");
+				query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1508,11 +1494,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 			query.append(_SQL_SELECT_GROUP__WHERE);
 
-			query.append("group_.type = ?");
+			query.append(_FINDER_COLUMN_T_A_TYPE_2);
 
-			query.append(" AND ");
-
-			query.append("group_.active = ?");
+			query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1625,15 +1609,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("group_.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("group_.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -1755,26 +1735,19 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_C_L_N_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("group_.liveGroupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_L_N_LIVEGROUPID_2);
 
 				if (name == null) {
-					query.append("group_.name IS NULL");
+					query.append(_FINDER_COLUMN_C_L_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(group_.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_L_N_NAME_3);
 					}
-
-					query.append("group_.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_L_N_NAME_2);
 					}
 				}
 
@@ -1907,30 +1880,21 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_L_N_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_L_N_CLASSNAMEID_2);
 
-				query.append("group_.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("group_.liveGroupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_L_N_LIVEGROUPID_2);
 
 				if (name == null) {
-					query.append("group_.name IS NULL");
+					query.append(_FINDER_COLUMN_C_C_L_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(group_.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_C_L_N_NAME_3);
 					}
-
-					query.append("group_.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_C_L_N_NAME_2);
 					}
 				}
 
@@ -2205,7 +2169,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2249,7 +2213,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
-				query.append("group_.liveGroupId = ?");
+				query.append(_FINDER_COLUMN_LIVEGROUPID_LIVEGROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2294,22 +2258,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
 				if (name == null) {
-					query.append("group_.name IS NULL");
+					query.append(_FINDER_COLUMN_C_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(group_.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_N_NAME_3);
 					}
-
-					query.append("group_.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_N_NAME_2);
 					}
 				}
 
@@ -2360,22 +2319,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_F_COMPANYID_2);
 
 				if (friendlyURL == null) {
-					query.append("group_.friendlyURL IS NULL");
+					query.append(_FINDER_COLUMN_C_F_FRIENDLYURL_1);
 				}
 				else {
 					if (friendlyURL.equals(StringPool.BLANK)) {
-						query.append("(group_.friendlyURL IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_F_FRIENDLYURL_3);
 					}
-
-					query.append("group_.friendlyURL = ?");
-
-					if (friendlyURL.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_F_FRIENDLYURL_2);
 					}
 				}
 
@@ -2427,11 +2381,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
-				query.append("group_.type = ?");
+				query.append(_FINDER_COLUMN_T_A_TYPE_2);
 
-				query.append(" AND ");
-
-				query.append("group_.active = ?");
+				query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2480,15 +2432,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
 
-				query.append("group_.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("group_.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2541,26 +2489,19 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_C_L_N_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("group_.liveGroupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_L_N_LIVEGROUPID_2);
 
 				if (name == null) {
-					query.append("group_.name IS NULL");
+					query.append(_FINDER_COLUMN_C_L_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(group_.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_L_N_NAME_3);
 					}
-
-					query.append("group_.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_L_N_NAME_2);
 					}
 				}
 
@@ -2618,30 +2559,21 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
-				query.append("group_.companyId = ?");
+				query.append(_FINDER_COLUMN_C_C_L_N_COMPANYID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_L_N_CLASSNAMEID_2);
 
-				query.append("group_.classNameId = ?");
-
-				query.append(" AND ");
-
-				query.append("group_.liveGroupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_L_N_LIVEGROUPID_2);
 
 				if (name == null) {
-					query.append("group_.name IS NULL");
+					query.append(_FINDER_COLUMN_C_C_L_N_NAME_1);
 				}
 				else {
 					if (name.equals(StringPool.BLANK)) {
-						query.append("(group_.name IS NULL OR ");
+						query.append(_FINDER_COLUMN_C_C_L_N_NAME_3);
 					}
-
-					query.append("group_.name = ?");
-
-					if (name.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_C_C_L_N_NAME_2);
 					}
 				}
 
@@ -5483,6 +5415,32 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		private GroupPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "group_.companyId = ?";
+	private static final String _FINDER_COLUMN_LIVEGROUPID_LIVEGROUPID_2 = "group_.liveGroupId = ?";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "group_.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "group_name IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_2 = "group_.name = ?";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(group_name IS NULL OR group_.name = ?)";
+	private static final String _FINDER_COLUMN_C_F_COMPANYID_2 = "group_.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_F_FRIENDLYURL_1 = "group_friendlyURL IS NULL";
+	private static final String _FINDER_COLUMN_C_F_FRIENDLYURL_2 = "group_.friendlyURL = ?";
+	private static final String _FINDER_COLUMN_C_F_FRIENDLYURL_3 = "(group_friendlyURL IS NULL OR group_.friendlyURL = ?)";
+	private static final String _FINDER_COLUMN_T_A_TYPE_2 = "group_.type = ? AND ";
+	private static final String _FINDER_COLUMN_T_A_ACTIVE_2 = "group_.active = ?";
+	private static final String _FINDER_COLUMN_C_C_C_COMPANYID_2 = "group_.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "group_.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "group_.classPK = ?";
+	private static final String _FINDER_COLUMN_C_L_N_COMPANYID_2 = "group_.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_L_N_LIVEGROUPID_2 = "group_.liveGroupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_L_N_NAME_1 = "group_name IS NULL";
+	private static final String _FINDER_COLUMN_C_L_N_NAME_2 = "group_.name = ?";
+	private static final String _FINDER_COLUMN_C_L_N_NAME_3 = "(group_name IS NULL OR group_.name = ?)";
+	private static final String _FINDER_COLUMN_C_C_L_N_COMPANYID_2 = "group_.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_L_N_CLASSNAMEID_2 = "group_.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_L_N_LIVEGROUPID_2 = "group_.liveGroupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_L_N_NAME_1 = "group_name IS NULL";
+	private static final String _FINDER_COLUMN_C_C_L_N_NAME_2 = "group_.name = ?";
+	private static final String _FINDER_COLUMN_C_C_L_N_NAME_3 = "(group_name IS NULL OR group_.name = ?)";
 	private static final String _SQL_SELECT_GROUP_ = "SELECT group_ FROM Group group_";
 	private static final String _SQL_SELECT_GROUP__WHERE = "SELECT group_ FROM Group group_ WHERE ";
 	private static final String _SQL_COUNT_GROUP_ = "SELECT COUNT(group_) FROM Group group_";

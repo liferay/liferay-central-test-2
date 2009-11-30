@@ -462,17 +462,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("bookmarksFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(bookmarksFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("bookmarksFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -538,17 +535,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("bookmarksFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(bookmarksFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("bookmarksFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -670,17 +664,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 			if (uuid == null) {
-				query.append("bookmarksFolder.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(bookmarksFolder.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("bookmarksFolder.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -793,23 +784,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("bookmarksFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(bookmarksFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("bookmarksFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("bookmarksFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -890,7 +876,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -951,7 +937,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1070,7 +1056,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-			query.append("bookmarksFolder.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1143,7 +1129,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1204,7 +1190,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1323,7 +1309,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-			query.append("bookmarksFolder.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1398,11 +1384,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("bookmarksFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1465,11 +1449,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("bookmarksFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1597,11 +1579,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
-			query.append("bookmarksFolder.groupId = ?");
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("bookmarksFolder.parentFolderId = ?");
+			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1843,17 +1823,14 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("bookmarksFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(bookmarksFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("bookmarksFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -1903,23 +1880,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
 				if (uuid == null) {
-					query.append("bookmarksFolder.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(bookmarksFolder.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("bookmarksFolder.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("bookmarksFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1967,7 +1939,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2011,7 +1983,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2058,11 +2030,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
-				query.append("bookmarksFolder.groupId = ?");
+				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("bookmarksFolder.parentFolderId = ?");
+				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2160,6 +2130,17 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "bookmarksFolderuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "bookmarksFolder.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(bookmarksFolderuuid IS NULL OR bookmarksFolder.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "bookmarksFolderuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "bookmarksFolder.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(bookmarksFolderuuid IS NULL OR bookmarksFolder.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "bookmarksFolder.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "bookmarksFolder.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "bookmarksFolder.companyId = ?";
+	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "bookmarksFolder.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_PARENTFOLDERID_2 = "bookmarksFolder.parentFolderId = ?";
 	private static final String _SQL_SELECT_BOOKMARKSFOLDER = "SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder";
 	private static final String _SQL_SELECT_BOOKMARKSFOLDER_WHERE = "SELECT bookmarksFolder FROM BookmarksFolder bookmarksFolder WHERE ";
 	private static final String _SQL_COUNT_BOOKMARKSFOLDER = "SELECT COUNT(bookmarksFolder) FROM BookmarksFolder bookmarksFolder";

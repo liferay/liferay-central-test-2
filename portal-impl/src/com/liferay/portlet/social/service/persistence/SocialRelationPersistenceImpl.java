@@ -536,17 +536,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
 				if (uuid == null) {
-					query.append("socialRelation.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(socialRelation.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("socialRelation.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -607,17 +604,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
 				if (uuid == null) {
-					query.append("socialRelation.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(socialRelation.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("socialRelation.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -733,17 +727,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
 			if (uuid == null) {
-				query.append("socialRelation.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(socialRelation.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("socialRelation.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -813,7 +804,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -869,7 +860,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -981,7 +972,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 			query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-			query.append("socialRelation.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1047,7 +1038,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId1 = ?");
+				query.append(_FINDER_COLUMN_USERID1_USERID1_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1103,7 +1094,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId1 = ?");
+				query.append(_FINDER_COLUMN_USERID1_USERID1_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1214,7 +1205,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 			query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-			query.append("socialRelation.userId1 = ?");
+			query.append(_FINDER_COLUMN_USERID1_USERID1_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1280,7 +1271,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId2 = ?");
+				query.append(_FINDER_COLUMN_USERID2_USERID2_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1336,7 +1327,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId2 = ?");
+				query.append(_FINDER_COLUMN_USERID2_USERID2_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1447,7 +1438,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 			query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-			query.append("socialRelation.userId2 = ?");
+			query.append(_FINDER_COLUMN_USERID2_USERID2_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1512,7 +1503,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_TYPE_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1568,7 +1559,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_TYPE_TYPE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1678,7 +1669,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 			query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-			query.append("socialRelation.type = ?");
+			query.append(_FINDER_COLUMN_TYPE_TYPE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1746,11 +1737,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.companyId = ?");
+				query.append(_FINDER_COLUMN_C_T_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_C_T_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1808,11 +1797,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.companyId = ?");
+				query.append(_FINDER_COLUMN_C_T_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_C_T_TYPE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1932,11 +1919,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 			query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-			query.append("socialRelation.companyId = ?");
+			query.append(_FINDER_COLUMN_C_T_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("socialRelation.type = ?");
+			query.append(_FINDER_COLUMN_C_T_TYPE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2004,11 +1989,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId1 = ?");
+				query.append(_FINDER_COLUMN_U1_T_USERID1_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_U1_T_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2066,11 +2049,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId1 = ?");
+				query.append(_FINDER_COLUMN_U1_T_USERID1_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_U1_T_TYPE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2190,11 +2171,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 			query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-			query.append("socialRelation.userId1 = ?");
+			query.append(_FINDER_COLUMN_U1_T_USERID1_2);
 
-			query.append(" AND ");
-
-			query.append("socialRelation.type = ?");
+			query.append(_FINDER_COLUMN_U1_T_TYPE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2262,11 +2241,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId2 = ?");
+				query.append(_FINDER_COLUMN_U2_T_USERID2_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_U2_T_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2324,11 +2301,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId2 = ?");
+				query.append(_FINDER_COLUMN_U2_T_USERID2_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_U2_T_TYPE_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2448,11 +2423,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 			query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-			query.append("socialRelation.userId2 = ?");
+			query.append(_FINDER_COLUMN_U2_T_USERID2_2);
 
-			query.append(" AND ");
-
-			query.append("socialRelation.type = ?");
+			query.append(_FINDER_COLUMN_U2_T_TYPE_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2560,15 +2533,11 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_SELECT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId1 = ?");
+				query.append(_FINDER_COLUMN_U1_U2_T_USERID1_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U1_U2_T_USERID2_2);
 
-				query.append("socialRelation.userId2 = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_U1_U2_T_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2827,17 +2796,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
 				if (uuid == null) {
-					query.append("socialRelation.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(socialRelation.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("socialRelation.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2885,7 +2851,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2929,7 +2895,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId1 = ?");
+				query.append(_FINDER_COLUMN_USERID1_USERID1_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2973,7 +2939,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId2 = ?");
+				query.append(_FINDER_COLUMN_USERID2_USERID2_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3017,7 +2983,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_TYPE_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3063,11 +3029,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.companyId = ?");
+				query.append(_FINDER_COLUMN_C_T_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_C_T_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3113,11 +3077,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId1 = ?");
+				query.append(_FINDER_COLUMN_U1_T_USERID1_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_U1_T_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3163,11 +3125,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId2 = ?");
+				query.append(_FINDER_COLUMN_U2_T_USERID2_2);
 
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_U2_T_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3216,15 +3176,11 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 				query.append(_SQL_COUNT_SOCIALRELATION_WHERE);
 
-				query.append("socialRelation.userId1 = ?");
+				query.append(_FINDER_COLUMN_U1_U2_T_USERID1_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_U1_U2_T_USERID2_2);
 
-				query.append("socialRelation.userId2 = ?");
-
-				query.append(" AND ");
-
-				query.append("socialRelation.type = ?");
+				query.append(_FINDER_COLUMN_U1_U2_T_TYPE_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -3322,6 +3278,22 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "socialRelationuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "socialRelation.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(socialRelationuuid IS NULL OR socialRelation.uuid = ?)";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "socialRelation.companyId = ?";
+	private static final String _FINDER_COLUMN_USERID1_USERID1_2 = "socialRelation.userId1 = ?";
+	private static final String _FINDER_COLUMN_USERID2_USERID2_2 = "socialRelation.userId2 = ?";
+	private static final String _FINDER_COLUMN_TYPE_TYPE_2 = "socialRelation.type = ?";
+	private static final String _FINDER_COLUMN_C_T_COMPANYID_2 = "socialRelation.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_T_TYPE_2 = "socialRelation.type = ?";
+	private static final String _FINDER_COLUMN_U1_T_USERID1_2 = "socialRelation.userId1 = ? AND ";
+	private static final String _FINDER_COLUMN_U1_T_TYPE_2 = "socialRelation.type = ?";
+	private static final String _FINDER_COLUMN_U2_T_USERID2_2 = "socialRelation.userId2 = ? AND ";
+	private static final String _FINDER_COLUMN_U2_T_TYPE_2 = "socialRelation.type = ?";
+	private static final String _FINDER_COLUMN_U1_U2_T_USERID1_2 = "socialRelation.userId1 = ? AND ";
+	private static final String _FINDER_COLUMN_U1_U2_T_USERID2_2 = "socialRelation.userId2 = ? AND ";
+	private static final String _FINDER_COLUMN_U1_U2_T_TYPE_2 = "socialRelation.type = ?";
 	private static final String _SQL_SELECT_SOCIALRELATION = "SELECT socialRelation FROM SocialRelation socialRelation";
 	private static final String _SQL_SELECT_SOCIALRELATION_WHERE = "SELECT socialRelation FROM SocialRelation socialRelation WHERE ";
 	private static final String _SQL_COUNT_SOCIALRELATION = "SELECT COUNT(socialRelation) FROM SocialRelation socialRelation";

@@ -370,7 +370,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
-				query.append("userTracker.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -426,7 +426,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
-				query.append("userTracker.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -540,7 +540,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
-			query.append("userTracker.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -606,7 +606,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
-				query.append("userTracker.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -662,7 +662,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
-				query.append("userTracker.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -773,7 +773,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
-			query.append("userTracker.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -840,17 +840,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 				if (sessionId == null) {
-					query.append("userTracker.sessionId IS NULL");
+					query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_1);
 				}
 				else {
 					if (sessionId.equals(StringPool.BLANK)) {
-						query.append("(userTracker.sessionId IS NULL OR ");
+						query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_3);
 					}
-
-					query.append("userTracker.sessionId = ?");
-
-					if (sessionId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_2);
 					}
 				}
 
@@ -911,17 +908,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 				if (sessionId == null) {
-					query.append("userTracker.sessionId IS NULL");
+					query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_1);
 				}
 				else {
 					if (sessionId.equals(StringPool.BLANK)) {
-						query.append("(userTracker.sessionId IS NULL OR ");
+						query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_3);
 					}
-
-					query.append("userTracker.sessionId = ?");
-
-					if (sessionId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_2);
 					}
 				}
 
@@ -1040,17 +1034,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			query.append(_SQL_SELECT_USERTRACKER_WHERE);
 
 			if (sessionId == null) {
-				query.append("userTracker.sessionId IS NULL");
+				query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_1);
 			}
 			else {
 				if (sessionId.equals(StringPool.BLANK)) {
-					query.append("(userTracker.sessionId IS NULL OR ");
+					query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_3);
 				}
-
-				query.append("userTracker.sessionId = ?");
-
-				if (sessionId.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_2);
 				}
 			}
 
@@ -1265,7 +1256,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				query.append(_SQL_COUNT_USERTRACKER_WHERE);
 
-				query.append("userTracker.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1309,7 +1300,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				query.append(_SQL_COUNT_USERTRACKER_WHERE);
 
-				query.append("userTracker.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1354,17 +1345,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				query.append(_SQL_COUNT_USERTRACKER_WHERE);
 
 				if (sessionId == null) {
-					query.append("userTracker.sessionId IS NULL");
+					query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_1);
 				}
 				else {
 					if (sessionId.equals(StringPool.BLANK)) {
-						query.append("(userTracker.sessionId IS NULL OR ");
+						query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_3);
 					}
-
-					query.append("userTracker.sessionId = ?");
-
-					if (sessionId.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_2);
 					}
 				}
 
@@ -1554,6 +1542,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "userTracker.companyId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "userTracker.userId = ?";
+	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_1 = "userTrackersessionId IS NULL";
+	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_2 = "userTracker.sessionId = ?";
+	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_3 = "(userTrackersessionId IS NULL OR userTracker.sessionId = ?)";
 	private static final String _SQL_SELECT_USERTRACKER = "SELECT userTracker FROM UserTracker userTracker";
 	private static final String _SQL_SELECT_USERTRACKER_WHERE = "SELECT userTracker FROM UserTracker userTracker WHERE ";
 	private static final String _SQL_COUNT_USERTRACKER = "SELECT COUNT(userTracker) FROM UserTracker userTracker";

@@ -486,17 +486,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				if (uuid == null) {
-					query.append("calEvent.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(calEvent.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("calEvent.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -562,17 +559,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				if (uuid == null) {
-					query.append("calEvent.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(calEvent.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("calEvent.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -694,17 +688,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 			if (uuid == null) {
-				query.append("calEvent.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(calEvent.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("calEvent.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -816,23 +807,18 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
 				if (uuid == null) {
-					query.append("calEvent.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(calEvent.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("calEvent.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("calEvent.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -913,7 +899,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -974,7 +960,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1091,7 +1077,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-			query.append("calEvent.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1162,7 +1148,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1223,7 +1209,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1340,7 +1326,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-			query.append("calEvent.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1412,7 +1398,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.remindBy != ?");
+				query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
 
 				query.append(" ORDER BY ");
 
@@ -1473,7 +1459,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.remindBy != ?");
+				query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1590,7 +1576,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-			query.append("calEvent.remindBy != ?");
+			query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1662,22 +1648,17 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_T_GROUPID_2);
 
 				if (type == null) {
-					query.append("calEvent.type IS NULL");
+					query.append(_FINDER_COLUMN_G_T_TYPE_1);
 				}
 				else {
 					if (type.equals(StringPool.BLANK)) {
-						query.append("(calEvent.type IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_T_TYPE_3);
 					}
-
-					query.append("calEvent.type = ?");
-
-					if (type.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_T_TYPE_2);
 					}
 				}
 
@@ -1746,22 +1727,17 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_T_GROUPID_2);
 
 				if (type == null) {
-					query.append("calEvent.type IS NULL");
+					query.append(_FINDER_COLUMN_G_T_TYPE_1);
 				}
 				else {
 					if (type.equals(StringPool.BLANK)) {
-						query.append("(calEvent.type IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_T_TYPE_3);
 					}
-
-					query.append("calEvent.type = ?");
-
-					if (type.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_T_TYPE_2);
 					}
 				}
 
@@ -1891,22 +1867,17 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-			query.append("calEvent.groupId = ?");
-
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
 
 			if (type == null) {
-				query.append("calEvent.type IS NULL");
+				query.append(_FINDER_COLUMN_G_T_TYPE_1);
 			}
 			else {
 				if (type.equals(StringPool.BLANK)) {
-					query.append("(calEvent.type IS NULL OR ");
+					query.append(_FINDER_COLUMN_G_T_TYPE_3);
 				}
-
-				query.append("calEvent.type = ?");
-
-				if (type.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_G_T_TYPE_2);
 				}
 			}
 
@@ -1986,11 +1957,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
+				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("calEvent.repeating = ?");
+				query.append(_FINDER_COLUMN_G_R_REPEATING_2);
 
 				query.append(" ORDER BY ");
 
@@ -2053,11 +2022,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
+				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("calEvent.repeating = ?");
+				query.append(_FINDER_COLUMN_G_R_REPEATING_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2184,11 +2151,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_SQL_SELECT_CALEVENT_WHERE);
 
-			query.append("calEvent.groupId = ?");
+			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("calEvent.repeating = ?");
+			query.append(_FINDER_COLUMN_G_R_REPEATING_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2441,17 +2406,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				if (uuid == null) {
-					query.append("calEvent.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(calEvent.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("calEvent.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -2501,23 +2463,18 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
 				if (uuid == null) {
-					query.append("calEvent.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(calEvent.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("calEvent.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("calEvent.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2565,7 +2522,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
-				query.append("calEvent.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2609,7 +2566,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2653,7 +2610,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
-				query.append("calEvent.remindBy != ?");
+				query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2697,22 +2654,17 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
-
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_T_GROUPID_2);
 
 				if (type == null) {
-					query.append("calEvent.type IS NULL");
+					query.append(_FINDER_COLUMN_G_T_TYPE_1);
 				}
 				else {
 					if (type.equals(StringPool.BLANK)) {
-						query.append("(calEvent.type IS NULL OR ");
+						query.append(_FINDER_COLUMN_G_T_TYPE_3);
 					}
-
-					query.append("calEvent.type = ?");
-
-					if (type.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_G_T_TYPE_2);
 					}
 				}
 
@@ -2765,11 +2717,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_SQL_COUNT_CALEVENT_WHERE);
 
-				query.append("calEvent.groupId = ?");
+				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("calEvent.repeating = ?");
+				query.append(_FINDER_COLUMN_G_R_REPEATING_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -2875,6 +2825,22 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "calEventuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "calEvent.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(calEventuuid IS NULL OR calEvent.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "calEventuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "calEvent.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(calEventuuid IS NULL OR calEvent.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "calEvent.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "calEvent.companyId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "calEvent.groupId = ?";
+	private static final String _FINDER_COLUMN_REMINDBY_REMINDBY_2 = "calEvent.remindBy != ?";
+	private static final String _FINDER_COLUMN_G_T_GROUPID_2 = "calEvent.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_T_TYPE_1 = "calEventtype IS NULL";
+	private static final String _FINDER_COLUMN_G_T_TYPE_2 = "calEvent.type = ?";
+	private static final String _FINDER_COLUMN_G_T_TYPE_3 = "(calEventtype IS NULL OR calEvent.type = ?)";
+	private static final String _FINDER_COLUMN_G_R_GROUPID_2 = "calEvent.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_R_REPEATING_2 = "calEvent.repeating = ?";
 	private static final String _SQL_SELECT_CALEVENT = "SELECT calEvent FROM CalEvent calEvent";
 	private static final String _SQL_SELECT_CALEVENT_WHERE = "SELECT calEvent FROM CalEvent calEvent WHERE ";
 	private static final String _SQL_COUNT_CALEVENT = "SELECT COUNT(calEvent) FROM CalEvent calEvent";

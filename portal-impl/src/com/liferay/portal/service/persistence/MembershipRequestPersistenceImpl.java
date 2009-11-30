@@ -385,7 +385,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -445,7 +445,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -565,7 +565,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-			query.append("membershipRequest.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -637,7 +637,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -697,7 +697,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -817,7 +817,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-			query.append("membershipRequest.userId = ?");
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -891,11 +891,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("membershipRequest.statusId = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUSID_2);
 
 				query.append(" ORDER BY ");
 
@@ -957,11 +955,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("membershipRequest.statusId = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUSID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1089,11 +1085,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
 
-			query.append("membershipRequest.groupId = ?");
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("membershipRequest.statusId = ?");
+			query.append(_FINDER_COLUMN_G_S_STATUSID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1319,7 +1313,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_COUNT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1363,7 +1357,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_COUNT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.userId = ?");
+				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1409,11 +1403,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_SQL_COUNT_MEMBERSHIPREQUEST_WHERE);
 
-				query.append("membershipRequest.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("membershipRequest.statusId = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUSID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1601,6 +1593,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "membershipRequest.groupId = ?";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "membershipRequest.userId = ?";
+	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "membershipRequest.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_S_STATUSID_2 = "membershipRequest.statusId = ?";
 	private static final String _SQL_SELECT_MEMBERSHIPREQUEST = "SELECT membershipRequest FROM MembershipRequest membershipRequest";
 	private static final String _SQL_SELECT_MEMBERSHIPREQUEST_WHERE = "SELECT membershipRequest FROM MembershipRequest membershipRequest WHERE ";
 	private static final String _SQL_COUNT_MEMBERSHIPREQUEST = "SELECT COUNT(membershipRequest) FROM MembershipRequest membershipRequest";

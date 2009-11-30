@@ -406,7 +406,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
 
-				query.append("assetTagStats.tagId = ?");
+				query.append(_FINDER_COLUMN_TAGID_TAGID_2);
 
 				query.append(" ORDER BY ");
 
@@ -466,7 +466,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
 
-				query.append("assetTagStats.tagId = ?");
+				query.append(_FINDER_COLUMN_TAGID_TAGID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -582,7 +582,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 			query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
 
-			query.append("assetTagStats.tagId = ?");
+			query.append(_FINDER_COLUMN_TAGID_TAGID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -654,7 +654,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
 
-				query.append("assetTagStats.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -714,7 +714,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
 
-				query.append("assetTagStats.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -832,7 +832,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 			query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
 
-			query.append("assetTagStats.classNameId = ?");
+			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -941,11 +941,9 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
 
-				query.append("assetTagStats.tagId = ?");
+				query.append(_FINDER_COLUMN_T_C_TAGID_2);
 
-				query.append(" AND ");
-
-				query.append("assetTagStats.classNameId = ?");
+				query.append(_FINDER_COLUMN_T_C_CLASSNAMEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1174,7 +1172,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				query.append(_SQL_COUNT_ASSETTAGSTATS_WHERE);
 
-				query.append("assetTagStats.tagId = ?");
+				query.append(_FINDER_COLUMN_TAGID_TAGID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1218,7 +1216,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				query.append(_SQL_COUNT_ASSETTAGSTATS_WHERE);
 
-				query.append("assetTagStats.classNameId = ?");
+				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1265,11 +1263,9 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				query.append(_SQL_COUNT_ASSETTAGSTATS_WHERE);
 
-				query.append("assetTagStats.tagId = ?");
+				query.append(_FINDER_COLUMN_T_C_TAGID_2);
 
-				query.append(" AND ");
-
-				query.append("assetTagStats.classNameId = ?");
+				query.append(_FINDER_COLUMN_T_C_CLASSNAMEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1373,6 +1369,10 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_TAGID_TAGID_2 = "assetTagStats.tagId = ?";
+	private static final String _FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2 = "assetTagStats.classNameId = ?";
+	private static final String _FINDER_COLUMN_T_C_TAGID_2 = "assetTagStats.tagId = ? AND ";
+	private static final String _FINDER_COLUMN_T_C_CLASSNAMEID_2 = "assetTagStats.classNameId = ?";
 	private static final String _SQL_SELECT_ASSETTAGSTATS = "SELECT assetTagStats FROM AssetTagStats assetTagStats";
 	private static final String _SQL_SELECT_ASSETTAGSTATS_WHERE = "SELECT assetTagStats FROM AssetTagStats assetTagStats WHERE ";
 	private static final String _SQL_COUNT_ASSETTAGSTATS = "SELECT COUNT(assetTagStats) FROM AssetTagStats assetTagStats";

@@ -724,17 +724,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMessage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMessage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbMessage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -800,17 +797,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMessage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMessage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbMessage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -932,17 +926,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 			if (uuid == null) {
-				query.append("mbMessage.uuid IS NULL");
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
 			else {
 				if (uuid.equals(StringPool.BLANK)) {
-					query.append("(mbMessage.uuid IS NULL OR ");
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
 				}
-
-				query.append("mbMessage.uuid = ?");
-
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(")");
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
 				}
 			}
 
@@ -1055,23 +1046,18 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMessage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMessage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("mbMessage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1152,7 +1138,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1213,7 +1199,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1330,7 +1316,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.groupId = ?");
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1403,7 +1389,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1464,7 +1450,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1582,7 +1568,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.companyId = ?");
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1655,7 +1641,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1716,7 +1702,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -1834,7 +1820,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.threadId = ?");
+			query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -1907,9 +1893,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
-
-				query.append(" AND mbMessage.parentMessageId != 0 ");
+				query.append(_FINDER_COLUMN_THREADREPLIES_THREADID_2);
 
 				query.append(" ORDER BY ");
 
@@ -1970,9 +1954,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
-
-				query.append(" AND mbMessage.parentMessageId != 0 ");
+				query.append(_FINDER_COLUMN_THREADREPLIES_THREADID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2091,9 +2073,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.threadId = ?");
-
-			query.append(" AND mbMessage.parentMessageId != 0 ");
+			query.append(_FINDER_COLUMN_THREADREPLIES_THREADID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2166,11 +2146,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				query.append(" ORDER BY ");
 
@@ -2233,11 +2211,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2363,11 +2339,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.userId = ?");
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2444,11 +2418,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -2511,11 +2483,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2642,11 +2612,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.categoryId = ?");
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -2723,11 +2691,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -2790,11 +2756,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -2920,11 +2884,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.status = ?");
+			query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -3001,11 +2963,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.companyId = ?");
+				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -3068,11 +3028,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.companyId = ?");
+				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -3199,11 +3157,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.companyId = ?");
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.status = ?");
+			query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -3280,11 +3236,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				query.append(" ORDER BY ");
 
@@ -3347,11 +3301,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -3478,11 +3430,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.classPK = ?");
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -3559,11 +3509,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_T_P_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.parentMessageId = ?");
+				query.append(_FINDER_COLUMN_T_P_PARENTMESSAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -3626,11 +3574,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_T_P_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.parentMessageId = ?");
+				query.append(_FINDER_COLUMN_T_P_PARENTMESSAGEID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -3757,11 +3703,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.threadId = ?");
+			query.append(_FINDER_COLUMN_T_P_THREADID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.parentMessageId = ?");
+			query.append(_FINDER_COLUMN_T_P_PARENTMESSAGEID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -3838,11 +3782,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_T_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_T_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -3905,11 +3847,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_T_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_T_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -4035,11 +3975,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.threadId = ?");
+			query.append(_FINDER_COLUMN_T_S_THREADID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.status = ?");
+			query.append(_FINDER_COLUMN_T_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -4116,13 +4054,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_TR_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
-
-				query.append(" AND mbMessage.parentMessageId != 0 ");
+				query.append(_FINDER_COLUMN_TR_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -4185,13 +4119,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_TR_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
-
-				query.append(" AND mbMessage.parentMessageId != 0 ");
+				query.append(_FINDER_COLUMN_TR_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -4318,13 +4248,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.threadId = ?");
+			query.append(_FINDER_COLUMN_TR_S_THREADID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.status = ?");
-
-			query.append(" AND mbMessage.parentMessageId != 0 ");
+			query.append(_FINDER_COLUMN_TR_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -4401,15 +4327,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_S_USERID_2);
 
-				query.append("mbMessage.userId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -4474,15 +4396,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_S_USERID_2);
 
-				query.append("mbMessage.userId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -4617,15 +4535,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_U_S_USERID_2);
 
-			query.append("mbMessage.userId = ?");
-
-			query.append(" AND ");
-
-			query.append("mbMessage.status = ?");
+			query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -4704,15 +4618,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_T_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
 
 				query.append(" ORDER BY ");
 
@@ -4778,15 +4688,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_T_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -4924,15 +4830,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_C_T_CATEGORYID_2);
 
-			query.append("mbMessage.categoryId = ?");
-
-			query.append(" AND ");
-
-			query.append("mbMessage.threadId = ?");
+			query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -5011,15 +4913,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -5085,15 +4983,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -5231,15 +5125,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
 
-			query.append("mbMessage.categoryId = ?");
-
-			query.append(" AND ");
-
-			query.append("mbMessage.status = ?");
+			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -5318,15 +5208,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_S_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_S_CLASSPK_2);
 
-				query.append("mbMessage.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_C_C_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -5392,15 +5278,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_S_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_S_CLASSPK_2);
 
-				query.append("mbMessage.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_C_C_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -5538,15 +5420,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.classNameId = ?");
+			query.append(_FINDER_COLUMN_C_C_S_CLASSNAMEID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_C_C_S_CLASSPK_2);
 
-			query.append("mbMessage.classPK = ?");
-
-			query.append(" AND ");
-
-			query.append("mbMessage.status = ?");
+			query.append(_FINDER_COLUMN_C_C_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -5626,19 +5504,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_T_S_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.threadId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
 
 				query.append(" ORDER BY ");
 
@@ -5709,19 +5581,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_T_S_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.threadId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -5867,19 +5733,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
 
-			query.append("mbMessage.groupId = ?");
+			query.append(_FINDER_COLUMN_G_C_T_S_GROUPID_2);
 
-			query.append(" AND ");
+			query.append(_FINDER_COLUMN_G_C_T_S_CATEGORYID_2);
 
-			query.append("mbMessage.categoryId = ?");
+			query.append(_FINDER_COLUMN_G_C_T_S_THREADID_2);
 
-			query.append(" AND ");
-
-			query.append("mbMessage.threadId = ?");
-
-			query.append(" AND ");
-
-			query.append("mbMessage.status = ?");
+			query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -6221,17 +6081,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMessage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMessage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_UUID_3);
 					}
-
-					query.append("mbMessage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_UUID_2);
 					}
 				}
 
@@ -6281,23 +6138,18 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
 				if (uuid == null) {
-					query.append("mbMessage.uuid IS NULL");
+					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 				}
 				else {
 					if (uuid.equals(StringPool.BLANK)) {
-						query.append("(mbMessage.uuid IS NULL OR ");
+						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
 					}
-
-					query.append("mbMessage.uuid = ?");
-
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(")");
+					else {
+						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 					}
 				}
 
-				query.append(" AND ");
-
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6345,7 +6197,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6389,7 +6241,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.companyId = ?");
+				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6433,7 +6285,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6477,9 +6329,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
-
-				query.append(" AND mbMessage.parentMessageId != 0 ");
+				query.append(_FINDER_COLUMN_THREADREPLIES_THREADID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6523,11 +6373,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.userId = ?");
+				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6576,11 +6424,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6628,11 +6474,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6680,11 +6524,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.companyId = ?");
+				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6733,11 +6575,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.classPK = ?");
+				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6786,11 +6626,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_T_P_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.parentMessageId = ?");
+				query.append(_FINDER_COLUMN_T_P_PARENTMESSAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6838,11 +6676,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_T_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_T_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6890,13 +6726,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_TR_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
-
-				query.append(" AND mbMessage.parentMessageId != 0 ");
+				query.append(_FINDER_COLUMN_TR_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -6945,15 +6777,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_U_S_USERID_2);
 
-				query.append("mbMessage.userId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -7004,15 +6832,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_T_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.threadId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -7063,15 +6887,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -7122,15 +6942,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.classNameId = ?");
+				query.append(_FINDER_COLUMN_C_C_S_CLASSNAMEID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_C_C_S_CLASSPK_2);
 
-				query.append("mbMessage.classPK = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_C_C_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -7182,19 +6998,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_SQL_COUNT_MBMESSAGE_WHERE);
 
-				query.append("mbMessage.groupId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_GROUPID_2);
 
-				query.append(" AND ");
+				query.append(_FINDER_COLUMN_G_C_T_S_CATEGORYID_2);
 
-				query.append("mbMessage.categoryId = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_THREADID_2);
 
-				query.append(" AND ");
-
-				query.append("mbMessage.threadId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMessage.status = ?");
+				query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -7324,6 +7134,49 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "mbMessageuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "mbMessage.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(mbMessageuuid IS NULL OR mbMessage.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "mbMessageuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "mbMessage.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(mbMessageuuid IS NULL OR mbMessage.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "mbMessage.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "mbMessage.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "mbMessage.companyId = ?";
+	private static final String _FINDER_COLUMN_THREADID_THREADID_2 = "mbMessage.threadId = ?";
+	private static final String _FINDER_COLUMN_THREADREPLIES_THREADID_2 = "mbMessage.threadId = ? AND mbMessage.parentMessageId != 0";
+	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "mbMessage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_USERID_2 = "mbMessage.userId = ?";
+	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "mbMessage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_CATEGORYID_2 = "mbMessage.categoryId = ?";
+	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "mbMessage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_S_STATUS_2 = "mbMessage.status = ?";
+	private static final String _FINDER_COLUMN_C_S_COMPANYID_2 = "mbMessage.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_S_STATUS_2 = "mbMessage.status = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "mbMessage.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "mbMessage.classPK = ?";
+	private static final String _FINDER_COLUMN_T_P_THREADID_2 = "mbMessage.threadId = ? AND ";
+	private static final String _FINDER_COLUMN_T_P_PARENTMESSAGEID_2 = "mbMessage.parentMessageId = ?";
+	private static final String _FINDER_COLUMN_T_S_THREADID_2 = "mbMessage.threadId = ? AND ";
+	private static final String _FINDER_COLUMN_T_S_STATUS_2 = "mbMessage.status = ?";
+	private static final String _FINDER_COLUMN_TR_S_THREADID_2 = "mbMessage.threadId = ? AND ";
+	private static final String _FINDER_COLUMN_TR_S_STATUS_2 = "mbMessage.status = ? AND mbMessage.parentMessageId != 0";
+	private static final String _FINDER_COLUMN_G_U_S_GROUPID_2 = "mbMessage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_S_USERID_2 = "mbMessage.userId = ? AND ";
+	private static final String _FINDER_COLUMN_G_U_S_STATUS_2 = "mbMessage.status = ?";
+	private static final String _FINDER_COLUMN_G_C_T_GROUPID_2 = "mbMessage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_T_CATEGORYID_2 = "mbMessage.categoryId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_T_THREADID_2 = "mbMessage.threadId = ?";
+	private static final String _FINDER_COLUMN_G_C_S_GROUPID_2 = "mbMessage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_S_CATEGORYID_2 = "mbMessage.categoryId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_S_STATUS_2 = "mbMessage.status = ?";
+	private static final String _FINDER_COLUMN_C_C_S_CLASSNAMEID_2 = "mbMessage.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_S_CLASSPK_2 = "mbMessage.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_S_STATUS_2 = "mbMessage.status = ?";
+	private static final String _FINDER_COLUMN_G_C_T_S_GROUPID_2 = "mbMessage.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_T_S_CATEGORYID_2 = "mbMessage.categoryId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_T_S_THREADID_2 = "mbMessage.threadId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_T_S_STATUS_2 = "mbMessage.status = ?";
 	private static final String _SQL_SELECT_MBMESSAGE = "SELECT mbMessage FROM MBMessage mbMessage";
 	private static final String _SQL_SELECT_MBMESSAGE_WHERE = "SELECT mbMessage FROM MBMessage mbMessage WHERE ";
 	private static final String _SQL_COUNT_MBMESSAGE = "SELECT COUNT(mbMessage) FROM MBMessage mbMessage";

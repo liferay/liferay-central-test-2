@@ -460,7 +460,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.productEntryId = ?");
+				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 				query.append(" ORDER BY ");
 
@@ -521,7 +521,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.productEntryId = ?");
+				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 				if (obc != null) {
 					query.append(" ORDER BY ");
@@ -643,7 +643,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 			query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
-			query.append("scProductScreenshot.productEntryId = ?");
+			query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 			if (obc != null) {
 				query.append(" ORDER BY ");
@@ -748,7 +748,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.thumbnailId = ?");
+				query.append(_FINDER_COLUMN_THUMBNAILID_THUMBNAILID_2);
 
 				query.append(" ORDER BY ");
 
@@ -855,7 +855,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.fullImageId = ?");
+				query.append(_FINDER_COLUMN_FULLIMAGEID_FULLIMAGEID_2);
 
 				query.append(" ORDER BY ");
 
@@ -968,11 +968,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.productEntryId = ?");
+				query.append(_FINDER_COLUMN_P_P_PRODUCTENTRYID_2);
 
-				query.append(" AND ");
-
-				query.append("scProductScreenshot.priority = ?");
+				query.append(_FINDER_COLUMN_P_P_PRIORITY_2);
 
 				query.append(" ORDER BY ");
 
@@ -1215,7 +1213,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.productEntryId = ?");
+				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1259,7 +1257,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.thumbnailId = ?");
+				query.append(_FINDER_COLUMN_THUMBNAILID_THUMBNAILID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1303,7 +1301,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.fullImageId = ?");
+				query.append(_FINDER_COLUMN_FULLIMAGEID_FULLIMAGEID_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1350,11 +1348,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
-				query.append("scProductScreenshot.productEntryId = ?");
+				query.append(_FINDER_COLUMN_P_P_PRODUCTENTRYID_2);
 
-				query.append(" AND ");
-
-				query.append("scProductScreenshot.priority = ?");
+				query.append(_FINDER_COLUMN_P_P_PRIORITY_2);
 
 				Query q = session.createQuery(query.toString());
 
@@ -1456,6 +1452,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2 = "scProductScreenshot.productEntryId = ?";
+	private static final String _FINDER_COLUMN_THUMBNAILID_THUMBNAILID_2 = "scProductScreenshot.thumbnailId = ?";
+	private static final String _FINDER_COLUMN_FULLIMAGEID_FULLIMAGEID_2 = "scProductScreenshot.fullImageId = ?";
+	private static final String _FINDER_COLUMN_P_P_PRODUCTENTRYID_2 = "scProductScreenshot.productEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_P_P_PRIORITY_2 = "scProductScreenshot.priority = ?";
 	private static final String _SQL_SELECT_SCPRODUCTSCREENSHOT = "SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot";
 	private static final String _SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE = "SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ";
 	private static final String _SQL_COUNT_SCPRODUCTSCREENSHOT = "SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot";
