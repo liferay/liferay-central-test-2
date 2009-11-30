@@ -35,7 +35,7 @@ List<ToolTag> toolTags = (List<ToolTag>)request.getAttribute("aui:panel:toolTags
 
 </div>
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
 	AUI().ready(
 		'panel',
 		'anim',

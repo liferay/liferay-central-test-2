@@ -151,7 +151,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 	/>
 </c:if>
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
 	AUI().ready(
 		'liferay-search-container',
 		function () {

@@ -173,7 +173,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 		</table>
 
-		<script type="text/javascript" charset="utf-8">
+		<script type="text/javascript">
 			AUI().ready(
 				function(A) {
 					var subscriptionsTable = A.one('#<portlet:namespace />subscriptions');

@@ -115,7 +115,7 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 	/>
 </c:if>
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
 	AUI().ready(
 		'liferay-search-container',
 		function () {
