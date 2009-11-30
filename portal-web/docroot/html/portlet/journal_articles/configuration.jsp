@@ -26,6 +26,7 @@
 
 <%
 String cur = ParamUtil.getString(request, "cur");
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 groupId = ParamUtil.getLong(request, "groupId", groupId);
