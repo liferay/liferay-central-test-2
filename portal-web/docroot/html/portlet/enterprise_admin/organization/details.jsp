@@ -107,7 +107,7 @@ if (organization != null) {
 
 				rowColumns.push(<portlet:namespace />createURL(href, name));
 				rowColumns.push(<portlet:namespace />createURL(href, type));
-				rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />parentOrganizationSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+				rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
 
 				searchContainer.deleteRow(1, searchContainer.getData());
 				searchContainer.addRow(rowColumns, organizationId);
@@ -326,7 +326,7 @@ if (parentOrganization != null) {
 		/>
 
 		<liferay-ui:search-container-column-text>
-			<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges(); Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer').deleteRow(this, <%= curOrganization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+			<a class="modify-link" data-rowId="<%= curOrganization.getOrganizationId() %>" href="javascript:;"><%= removeOrganizationIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -346,6 +346,7 @@ if (parentOrganization != null) {
 <script type="text/javascript">
 	AUI().ready(
 		'liferay-dynamic-select',
+		'liferay-search-container',
 		function () {
 			new Liferay.DynamicSelect(
 				[
@@ -364,6 +365,21 @@ if (parentOrganization != null) {
 						selectData: Liferay.Address.getRegions
 					}
 				]
+			);
+
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
+
+			searchContainer.get('contentBox').delegate(
+				'click',
+				function(event) {
+					var link = event.currentTarget;
+					var tr = link.ancestor('tr');
+
+					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+
+					<portlet:namespace />trackChanges();
+				},
+				'.modify-link'
 			);
 		}
 	);

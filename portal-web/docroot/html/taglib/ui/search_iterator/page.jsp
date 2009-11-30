@@ -282,12 +282,13 @@ List<String> primaryKeys = new ArrayList<String>();
 
 	<script type="text/javascript">
 		AUI().ready(
+			'liferay-search-container',
 			function () {
 				new Liferay.SearchContainer(
 					{
 						id: '<%= id %>'
 					}
-				);
+				).render();
 			}
 		);
 	</script>

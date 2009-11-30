@@ -42,19 +42,24 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 	}
 
 	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer');
+		AUI().use(
+			'liferay-search-container',
+			function(A) {
+				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer');
 
-		var rowColumns = [];
+				var rowColumns = [];
 
-		rowColumns.push(name);
-		rowColumns.push(type);
-		rowColumns.push('<%= RoleConstants.ORGANIZATION_MEMBER %>');
-		rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeOrganizationIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />organizationsSearchContainer\').deleteRow(this, ' + organizationId + ')'));
+				rowColumns.push(name);
+				rowColumns.push(type);
+				rowColumns.push('<%= RoleConstants.ORGANIZATION_MEMBER %>');
+				rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
 
-		searchContainer.addRow(rowColumns, organizationId);
-		searchContainer.updateDataStore();
+				searchContainer.addRow(rowColumns, organizationId);
+				searchContainer.updateDataStore();
 
-		<portlet:namespace />trackChanges();
+				<portlet:namespace />trackChanges();
+			}
+		);
 	}
 
 	function <portlet:namespace />trackChanges() {
@@ -126,7 +131,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges(); Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer').deleteRow(this, <%= organization.getOrganizationId() %>);"><%= removeOrganizationIcon %></a>
+				<a class="modify-link" data-rowId="<%= organization.getOrganizationId() %>" href="javascript:;"><%= removeOrganizationIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>
@@ -145,3 +150,25 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		cssClass="modify-link"
 	/>
 </c:if>
+
+<script type="text/javascript" charset="utf-8">
+	AUI().ready(
+		'liferay-search-container',
+		function () {
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer');
+
+			searchContainer.get('contentBox').delegate(
+				'click',
+				function(event) {
+					var link = event.currentTarget;
+					var tr = link.ancestor('tr');
+
+					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+
+					<portlet:namespace />trackChanges();
+				},
+				'.modify-link'
+			);
+		}
+	);
+</script>

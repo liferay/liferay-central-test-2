@@ -1,160 +1,216 @@
-;(function() {
-	var SearchContainer = function(options) {
-		var instance = this;
+AUI().add(
+	'liferay-search-container',
+	function(A) {
+		var Lang = A.Lang;
 
-		instance._id = options.id || '';
-		instance._container = jQuery('#' + instance._id + 'SearchContainer');
-		instance._dataStore = jQuery('#' + instance._id + 'PrimaryKeys');
+		var CSS_TEMPLATE = 'lfr-template';
 
-		instance._table = instance._container.find('table');
+		var SearchContainer = function(config) {
+			config.contentBox = config.contentBox || '#' + config.id + 'SearchContainer';
 
-		instance._table.attr('data-searchContainerId', instance._id);
+			SearchContainer.superclass.constructor.apply(this, arguments);
+		};
 
-		SearchContainer.register(instance._id, instance);
+		SearchContainer.NAME = 'searchcontainer';
 
-		var initialIds = instance._dataStore.val();
+		SearchContainer.ATTRS = {
+			id: {
+				value: ''
+			}
+		};
 
-		if (initialIds) {
-			initialIds = initialIds.split(',');
+		A.extend(
+			SearchContainer,
+			A.Widget,
+			{
+				initializer: function() {
+					var instance = this;
 
-			instance.updateDataStore(initialIds);
-		}
-	};
+					instance._ids = [];
+				},
 
-	SearchContainer.prototype = {
-		addRow: function(arr, id) {
-			var instance = this;
+				renderUI: function() {
+					var instance = this;
 
-			if (id) {
-				var row = instance._table.find('.lfr-template').clone();
-				var cells = row.find('> td');
+					var id = instance.get('id')
 
-				cells.empty();
+					instance._dataStore = A.one('#' + id + 'PrimaryKeys');
+					instance._table = instance.get('contentBox').one('table');
 
-				jQuery.each(
-					arr,
-					function(i, n) {
-						if (cells[i]) {
-							cells.eq(i).html(n);
+					if (instance._table) {
+						instance._table.setAttribute('data-searchContainerId', id);
+
+						SearchContainer.register(instance);
+					}
+				},
+
+				syncUI: function() {
+					var instance = this;
+
+					var dataStore = instance._dataStore;
+
+					var initialIds = dataStore && dataStore.val();
+
+					if (initialIds) {
+						initialIds = initialIds.split(',');
+
+						instance.updateDataStore(initialIds);
+					}
+				},
+
+				addRow: function(arr, id) {
+					var instance = this;
+
+					if (id) {
+						var row = instance._table.one('.' + CSS_TEMPLATE);
+
+						if (row) {
+							row = row.cloneNode(true);
+
+							var cells = row.all('> td');
+
+							cells.empty();
+
+							A.each(
+								arr,
+								function(item, index, collection) {
+									var cell = cells.item(index);
+
+									if (cell) {
+										cell.html(item);
+									}
+								}
+							);
+
+							instance._table.appendChild(row);
+
+							row.removeClass(CSS_TEMPLATE);
+
+							instance._ids.push(id);
+						}
+
+						instance.updateDataStore();
+
+						instance.fire(
+							'addRow',
+							{
+								id: id,
+								ids: instance._ids,
+								row: row,
+								rowData: arr
+							}
+						);
+					}
+				},
+
+				deleteRow: function(obj, id) {
+					var instance = this;
+
+					if (Lang.isNumber(obj) || Lang.isString(obj)) {
+						obj = instance._table.all('tr:not(.' + CSS_TEMPLATE + ')').item(obj);
+					}
+					else {
+						obj = A.one(obj);
+					}
+
+					if (id) {
+						var index = A.Array.indexOf(instance._ids, id.toString());
+
+						if (index > -1) {
+							instance._ids.splice(index, 1);
+
+							instance.updateDataStore();
 						}
 					}
-				);
 
-				instance._table.append(row);
-
-				row.removeClass('lfr-template');
-
-				instance._ids.push(id);
-			}
-
-			instance.updateDataStore();
-
-			instance.trigger('addRow', {ids: instance._ids, rowData: arr});
-		},
-
-		bind: function(event, func) {
-			var instance = this;
-
-			instance._container.bind(event, func);
-		},
-
-		deleteRow: function(obj, id) {
-			var instance = this;
-
-			if (typeof obj == 'number' || typeof obj == 'string') {
-				obj = instance._table.find('tr').not('.lfr-template').eq(obj);
-			}
-			else if (obj.nodeName) {
-				obj = jQuery(obj);
-			}
-			else if (obj.jquery) {
-				obj = obj;
-			}
-
-			if (id) {
-				var pos = instance._ids.indexOf(id.toString());
-
-				if (pos > -1) {
-					instance._ids.splice(pos, 1);
-					instance.updateDataStore();
-				}
-			}
-
-			instance.trigger('deleteRow', {ids: instance._ids, row: obj});
-
-			if (!obj.is('tr')) {
-				obj = obj.parents('tr:first');
-			}
-
-			obj.remove();
-		},
-
-		getData: function(toArray) {
-			var instance = this;
-
-			var ids = instance._ids;
-
-			if (!toArray) {
-				ids = ids.join(',');
-			}
-
-			return ids;
-		},
-
-		updateDataStore: function(ids) {
-			var instance = this;
-
-			if (ids) {
-				if (typeof ids == 'string') {
-					ids = ids.split(',');
-				}
-
-				instance._ids = ids;
-			}
-
-			instance._dataStore.val(instance._ids.join(','));
-		},
-
-		trigger: function(event, data) {
-			var instance = this;
-
-			instance._container.trigger(event, data);
-		},
-
-		_ids: []
-	};
-
-	jQuery.extend(
-		SearchContainer,
-		{
-			get: function(id) {
-				var instance = this;
-
-				var searchContainer = null;
-
-				if (instance._cache[id]) {
-					searchContainer = instance._cache[id];
-				}
-				else {
-					searchContainer = new SearchContainer(
+					instance.fire(
+						'deleteRow',
 						{
-							id: id
+							id: id,
+							ids: instance._ids,
+							row: obj
 						}
 					);
+
+					if (obj) {
+						if (obj.get('nodeName').toLowerCase() !== 'tr') {
+							obj = obj.ancestor('tr');
+						}
+
+						obj.remove();
+					}
+				},
+
+				getData: function(toArray) {
+					var instance = this;
+
+					var ids = instance._ids;
+
+					if (!toArray) {
+						ids = ids.join(',');
+					}
+
+					return ids;
+				},
+
+				updateDataStore: function(ids) {
+					var instance = this;
+
+					if (ids) {
+						if (typeof ids == 'string') {
+							ids = ids.split(',');
+						}
+
+						instance._ids = ids;
+					}
+
+					var dataStore = instance._dataStore;
+
+					if (dataStore) {
+						dataStore.val(instance._ids.join(','));
+					}
 				}
+			}
+		);
 
-				return searchContainer;
-			},
+		A.mix(
+			SearchContainer,
+			{
+				get: function(id) {
+					var instance = this;
 
-			register: function(id, obj) {
-				var instance = this;
+					var searchContainer = null;
 
-				instance._cache[id] = obj;
-			},
+					if (instance._cache[id]) {
+						searchContainer = instance._cache[id];
+					}
+					else {
+						searchContainer = new SearchContainer(
+							{
+								id: id
+							}
+						).render();
+					}
 
-			_cache: {}
-		}
-	);
+					return searchContainer;
+				},
 
-	Liferay.SearchContainer = SearchContainer;
-})();
+				register: function(obj) {
+					var instance = this;
+
+					var id = obj.get('id');
+
+					instance._cache[id] = obj;
+				},
+
+				_cache: {}
+			}
+		);
+
+		Liferay.SearchContainer = SearchContainer;
+	},
+	'',
+	{
+		requires: ['selector-css3']
+	}
+);

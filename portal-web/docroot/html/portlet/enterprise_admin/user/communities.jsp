@@ -42,18 +42,23 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 	}
 
 	function <portlet:namespace />selectGroup(groupId, name) {
-		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer');
+		AUI().use(
+			'liferay-search-container',
+			function(A) {
+				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer');
 
-		var rowColumns = [];
+				var rowColumns = [];
 
-		rowColumns.push(name);
-		rowColumns.push('<%= RoleConstants.COMMUNITY_MEMBER %>');
-		rowColumns.push(<portlet:namespace />createURL('javascript:;', '<%= UnicodeFormatter.toString(removeGroupIcon) %>', 'Liferay.SearchContainer.get(\'<portlet:namespace />groupsSearchContainer\').deleteRow(this, ' + groupId + ')'));
+				rowColumns.push(name);
+				rowColumns.push('<%= RoleConstants.COMMUNITY_MEMBER %>');
+				rowColumns.push('<a class="modify-link" data-rowId="' + groupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeGroupIcon) %></a>');
 
-		searchContainer.addRow(rowColumns, groupId);
-		searchContainer.updateDataStore();
+				searchContainer.addRow(rowColumns, groupId);
+				searchContainer.updateDataStore();
 
-		<portlet:namespace />trackChanges();
+				<portlet:namespace />trackChanges();
+			}
+		);
 	}
 
 	function <portlet:namespace />trackChanges() {
@@ -118,7 +123,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 			<liferay-ui:search-container-column-text>
-				<a class="modify-link" href="javascript:;" onclick="<portlet:namespace />trackChanges(); Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer').deleteRow(this, <%= group.getGroupId() %>);"><%= removeGroupIcon %></a>
+				<a class="modify-link" data-rowId="<%= group.getGroupId() %>" href="javascript:;"><%= removeGroupIcon %></a>
 			</liferay-ui:search-container-column-text>
 		</c:if>
 	</liferay-ui:search-container-row>
@@ -137,3 +142,25 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 		cssClass="modify-link"
 	/>
 </c:if>
+
+<script type="text/javascript" charset="utf-8">
+	AUI().ready(
+		'liferay-search-container',
+		function () {
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />groupsSearchContainer');
+
+			searchContainer.get('contentBox').delegate(
+				'click',
+				function(event) {
+					var link = event.currentTarget;
+					var tr = link.ancestor('tr');
+
+					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+
+					<portlet:namespace />trackChanges();
+				},
+				'.modify-link'
+			);
+		}
+	);
+</script>
