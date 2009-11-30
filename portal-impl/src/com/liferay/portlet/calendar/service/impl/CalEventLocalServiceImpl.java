@@ -121,6 +121,7 @@ import net.fortuna.ical4j.model.property.Description;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Duration;
+import net.fortuna.ical4j.model.property.Method;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.RRule;
 import net.fortuna.ical4j.model.property.Summary;
@@ -1389,6 +1390,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		props.add(prodId);
 		props.add(Version.VERSION_2_0);
 		props.add(CalScale.GREGORIAN);
+
+		// LPS-6058
+
+		props.add(Method.PUBLISH);
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		TimeZone timeZone = user.getTimeZone();
