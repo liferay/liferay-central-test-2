@@ -56,7 +56,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 			}
 			%>
 
-				<aui:option label="custom" selected='<%= displayStyle.equals("[custom]") %>' value="[custom]" />
+			<aui:option label="custom" selected='<%= displayStyle.equals("[custom]") %>' value="[custom]" />
 		</aui:select>
 
 		<aui:select name="bulletStyle">
@@ -72,7 +72,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 			%>
 
 			<c:if test="<%= bulletStyleOptions.length == 0 %>">
-				<aui:option label="(default)" value="" />
+				<aui:option label="default" value="" />
 			</c:if>
 		</aui:select>
 	</aui:fieldset>
@@ -91,7 +91,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 				<aui:option label="relative-parent-up-by" selected='<%= rootLayoutType.equals("relative") %>' value="relative" />
 			</aui:select>
 
-			<aui:select label="root-layout-level" name="rootLayoutLevel">
+			<aui:select name="rootLayoutLevel">
 
 				<%
 				for (int i = 0; i <= 4; i++) {
@@ -120,7 +120,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 	<aui:button-row>
 		<aui:button name="saveButton" type="submit" value="save" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+		<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 
