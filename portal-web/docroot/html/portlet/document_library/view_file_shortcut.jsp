@@ -257,10 +257,10 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 		<c:when test='<%= tabs2.equals("version-history") %>'>
 
 			<%
-			boolean shotNonApprovedDocuments = false;
+			boolean showNonApprovedDocuments = false;
 
 			if ((user.getUserId() == fileShortcut.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
-				shotNonApprovedDocuments = true;
+				showNonApprovedDocuments = true;
 			}
 
 			SearchContainer searchContainer = new SearchContainer();
@@ -271,7 +271,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 			headerNames.add("date");
 			headerNames.add("size");
 
-			if (shotNonApprovedDocuments) {
+			if (showNonApprovedDocuments) {
 				headerNames.add("status");
 			}
 
@@ -281,7 +281,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 
 			int status = StatusConstants.APPROVED;
 
-			if (shotNonApprovedDocuments) {
+			if (showNonApprovedDocuments) {
 				status = StatusConstants.ANY;
 			}
 
@@ -312,7 +312,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 
 				// Status
 
-				if (shotNonApprovedDocuments) {
+				if (showNonApprovedDocuments) {
 					row.addText(LanguageUtil.get(pageContext, (fileVersion.getStatus() == StatusConstants.APPROVED)? "approved" : "not-approved"));
 				}
 

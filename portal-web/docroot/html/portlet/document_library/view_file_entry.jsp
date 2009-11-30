@@ -371,7 +371,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 
 			<%
 			boolean comparableFileEntry = false;
-			boolean shotNonApprovedDocuments = false;
+			boolean showNonApprovedDocuments = false;
 
 			String[] comparableFileExtensions = PropsValues.DL_COMPARABLE_FILE_EXTENSIONS;
 
@@ -386,7 +386,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 			}
 
 			if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
-				shotNonApprovedDocuments = true;
+				showNonApprovedDocuments = true;
 			}
 
 			SearchContainer searchContainer = new SearchContainer();
@@ -397,7 +397,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 			headerNames.add("date");
 			headerNames.add("size");
 
-			if (shotNonApprovedDocuments) {
+			if (showNonApprovedDocuments) {
 				headerNames.add("status");
 			}
 
@@ -419,7 +419,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 
 			int status = StatusConstants.APPROVED;
 
-			if (shotNonApprovedDocuments) {
+			if (showNonApprovedDocuments) {
 				status = StatusConstants.ANY;
 			}
 
@@ -454,7 +454,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 
 				// Status
 
-				if (shotNonApprovedDocuments) {
+				if (showNonApprovedDocuments) {
 					row.addText(LanguageUtil.get(pageContext, (fileVersion.getStatus() == StatusConstants.APPROVED)? "approved" : "not-approved"));
 				}
 
