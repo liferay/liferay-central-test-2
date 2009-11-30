@@ -467,7 +467,8 @@ Liferay.Util = {
 					try {
 						el.focus();
 					}
-					catch (e) {}
+					catch (e) {
+					}
 				}
 			}
 		);
