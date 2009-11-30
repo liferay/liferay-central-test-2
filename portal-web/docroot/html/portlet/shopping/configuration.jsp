@@ -85,7 +85,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="ccTypes" type="hidden" value="" />
+	<aui:input name="ccTypes" type="hidden" />
 
 	<liferay-ui:tabs
 		names="payment-settings,shipping-calculation,insurance-calculation,emails"
@@ -413,7 +413,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:button-row>
 		<aui:button name="saveButton" type="submit" value="save" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+		<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 
