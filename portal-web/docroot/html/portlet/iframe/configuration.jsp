@@ -49,15 +49,15 @@ String htmlAttributes =
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			var authCheckbox = jQuery('#<portlet:namespace />authCheckbox');
-			var auth = jQuery('#<portlet:namespace />auth');
+		function(A) {
+			var authCheckbox = A.one('#<portlet:namespace />authCheckbox');
+			var auth = A.one('#<portlet:namespace />auth');
 
 			function toggleAuthOptions() {
-				var authenticationOptions = jQuery('#<portlet:namespace />authenticationOptions');
-				var formAuthOptions = jQuery('#<portlet:namespace />formAuthOptions');
-				var basicAuthOptions = jQuery('#<portlet:namespace />basicAuthOptions');
-				var currentLoginMsg = jQuery('#<portlet:namespace />currentLoginMsg');
+				var authenticationOptions = A.one('#<portlet:namespace />authenticationOptions');
+				var formAuthOptions = A.one('#<portlet:namespace />formAuthOptions');
+				var basicAuthOptions = A.one('#<portlet:namespace />basicAuthOptions');
+				var currentLoginMsg = A.one('#<portlet:namespace />currentLoginMsg');
 
 				if (auth.val() == 'true') {
 					authenticationOptions.show();
@@ -73,41 +73,33 @@ String htmlAttributes =
 				}
 			}
 
-			var authType = jQuery('select[@name=<portlet:namespace />authType]');
+			var authType = A.one('select[name=<portlet:namespace />authType]');
 
 			function toggleAuthTypeOptions() {
-				var formAuthOptions = jQuery('#<portlet:namespace />formAuthOptions');
-				var basicAuthOptions = jQuery('#<portlet:namespace />basicAuthOptions');
+				var formAuthOptions = A.one('#<portlet:namespace />formAuthOptions');
+				var basicAuthOptions = A.one('#<portlet:namespace />basicAuthOptions');
 
 				if (authType.val() == 'form') {
 					formAuthOptions.show();
-					formAuthOptions.find('input').attr('disabled', false);
+					formAuthOptions.all('input').set('disabled', false);
 
 					basicAuthOptions.hide();
-					basicAuthOptions.find('input').attr('disabled', true);
+					basicAuthOptions.all('input').set('disabled', true);
 				}
 				else {
 					formAuthOptions.hide();
-					formAuthOptions.find('input').attr('disabled', true);
+					formAuthOptions.all('input').set('disabled', true);
 
 					basicAuthOptions.show();
-					basicAuthOptions.find('input').attr('disabled', false);
+					basicAuthOptions.all('input').set('disabled', false);
 				}
 			}
 
 			toggleAuthOptions();
 
-			authCheckbox.click(
-				function(event) {
-					toggleAuthOptions();
-				}
-			);
+			authCheckbox.on('click', toggleAuthOptions);
 
-			authType.change(
-				function(event) {
-					toggleAuthTypeOptions();
-				}
-			);
+			authType.on('change', toggleAuthTypeOptions);
 		}
 	);
 </script>
@@ -121,7 +113,7 @@ String htmlAttributes =
 	<aui:fieldset>
 		<aui:legend label="general" />
 
-		<aui:input cssClass="lfr-input-text-container" label="source-url" name="src" type="text" value="<%= src %>" />
+		<aui:input cssClass="lfr-input-text-container" label="source-url" name="src" prefix="<%= relative ? "..." : StringPool.BLANK %>" type="text" value="<%= src %>" />
 
 		<aui:input inlineLabel="left" label="relative-to-context-path" name="relative" type="checkbox" value="<%= relative %>" />
 	</aui:fieldset>
@@ -200,7 +192,7 @@ String htmlAttributes =
 	<aui:button-row>
 		<aui:button name="saveButton" type="submit" value="save" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+		<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 
