@@ -67,6 +67,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 				_last = false;
 				_model = null;
 				_name = null;
+				_prefix = null;
 				_suffix = null;
 				_type = null;
 				_value = null;
@@ -114,6 +115,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		request.setAttribute("aui:input:last", String.valueOf(_last));
 		request.setAttribute("aui:input:model", _model);
 		request.setAttribute("aui:input:name", _name);
+		request.setAttribute("aui:input:prefix", _prefix);
 		request.setAttribute("aui:input:suffix", _suffix);
 		request.setAttribute("aui:input:type", _type);
 		request.setAttribute("aui:input:value", _value);
@@ -185,6 +187,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		_name = name;
 	}
 
+	public void setPrefix(String prefix) {
+		_prefix = prefix;
+	}
+
 	public void setSuffix(String suffix) {
 		_suffix = suffix;
 	}
@@ -219,6 +225,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 	private boolean _last;
 	private Class<?> _model;
 	private String _name;
+	private String _prefix;
 	private String _suffix;
 	private String _type;
 	private Object _value;

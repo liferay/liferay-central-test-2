@@ -42,6 +42,7 @@ String label = GetterUtil.getString((String)request.getAttribute("aui:input:labe
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
 Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:name"));
+String prefix = GetterUtil.getString((String)request.getAttribute("aui:input:prefix"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suffix"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
@@ -81,6 +82,10 @@ if (type.equals("checkbox") || (model != null) && type.equals("boolean")) {
 				</c:if>
 			</label>
 		</c:if>
+</c:if>
+
+<c:if test="<%= Validator.isNotNull(prefix) %>">
+	<span class="aui-prefix"><liferay-ui:message key="<%= prefix %>" /></span>
 </c:if>
 
 <c:choose>
