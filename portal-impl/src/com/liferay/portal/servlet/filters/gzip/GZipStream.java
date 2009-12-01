@@ -56,48 +56,35 @@ public class GZipStream extends ServletOutputStream {
 		if (_closed) {
 			throw new IOException();
 		}
+		ByteArrayOutputStream baos = (ByteArrayOutputStream)_bufferedOutput;
 
-		if (_bufferedOutput instanceof ByteArrayOutputStream) {
-			ByteArrayOutputStream baos = (ByteArrayOutputStream)_bufferedOutput;
+		if (baos.size() > 20) {
+			ByteArrayOutputStream compressedContent =
+				new ByteArrayOutputStream();
 
-			if (baos.size() > 20) {
-				ByteArrayOutputStream compressedContent =
-					new ByteArrayOutputStream();
+			GZIPOutputStream gzipOutput = new GZIPOutputStream(
+				compressedContent);
 
-				GZIPOutputStream gzipOutput = new GZIPOutputStream(
-					compressedContent);
-
-				gzipOutput.write(baos.toByteArray());
-				gzipOutput.finish();
-
-				byte[] compressedBytes = compressedContent.toByteArray();
-
-				_response.setContentLength(compressedBytes.length);
-				_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
-
-				_output.write(compressedBytes);
-			}
-			else {
-				_response.setContentLength(baos.size());
-
-				_output.write(baos.toByteArray());
-			}
-
-			_output.flush();
-			_output.close();
-
-			_closed = true;
-		}
-		else if (_bufferedOutput instanceof GZIPOutputStream) {
-			GZIPOutputStream gzipOutput = (GZIPOutputStream)_bufferedOutput;
-
+			gzipOutput.write(baos.toByteArray());
 			gzipOutput.finish();
 
-			_output.flush();
-			_output.close();
+			byte[] compressedBytes = compressedContent.toByteArray();
 
-			_closed = true;
+			_response.setContentLength(compressedBytes.length);
+			_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
+
+			_output.write(compressedBytes);
 		}
+		else {
+			_response.setContentLength(baos.size());
+
+			_output.write(baos.toByteArray());
+		}
+
+		_output.flush();
+		_output.close();
+
+		_closed = true;
 	}
 
 	public void flush() throws IOException {
