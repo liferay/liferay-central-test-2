@@ -613,7 +613,7 @@ public class SourceFormatter {
 			}
 
 			if ((excluded == null) && (line.length() > 80) &&
-				(!line.startsWith("import "))) {
+				!line.startsWith("import ") && !line.startsWith("package ")) {
 
 				if (line.contains(
 						"private static Log _log = LogFactoryUtil.getLog(")) {
