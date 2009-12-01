@@ -1099,10 +1099,6 @@
 	margin-left: 0px;
 }
 
-.js .lfr-fallback {
-	display: none;
-}
-
 .lfr-button {
 	background: url() no-repeat 0 50%;
 	padding: 2px 0 2px 20px;

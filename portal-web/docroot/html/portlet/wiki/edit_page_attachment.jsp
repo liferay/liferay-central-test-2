@@ -71,7 +71,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
 	</div>
 
-	<div class="lfr-fallback" id="<portlet:namespace />fallback">
+	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
 		<aui:fieldset>
 			<aui:legend label="upload-files" />
 

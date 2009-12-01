@@ -16,7 +16,7 @@ AUI().add(
 		 * buttonText {string}: The text to be displayed on the upload button.
 		 * buttonUrl {string}: A relative (to the flash) file that will be used as the background image of the button.
 		 * buttonWidth {number}: The buttons width.
-		 * fallbackContainer {string|object}: A jQuery selector or DOM element of the container holding a fallback (in case flash is not supported).
+		 * fallbackContainer {string|object}: A CSS selector or DOM element of the container holding a fallback (in case flash is not supported).
 		 * fileDescription {string}: A string describing what files can be uploaded.
 		 * namespace {string}: A unique string so that the global callback methods don't collide.
 		 * overlayButton {boolean}: Whether the button is overlayed upon the HTML link.
@@ -33,8 +33,8 @@ AUI().add(
 
 			options = options || {};
 
-			instance._container = jQuery(options.container);
-			instance._fallbackContainer = jQuery(options.fallbackContainer || []);
+			instance._container = A.one(options.container);
+			instance._fallbackContainer = A.one(options.fallbackContainer);
 			instance._namespaceId = options.namespace || '_liferay_pns_' + Liferay.Util.randomInt() + '_';
 			instance._maxFileSize = options.maxFileSize || 0;
 			instance._allowedFileTypes = options.allowedFileTypes;
@@ -64,7 +64,7 @@ AUI().add(
 
 			var loc = location.href;
 
-			if (loc.indexOf(instance._classicUploaderParam) > -1 && instance._fallbackContainer.length) {
+			if ((loc.indexOf(instance._classicUploaderParam) > -1) && instance._fallbackContainer) {
 				instance._fallbackContainer.show();
 
 				instance._setupIframe();
@@ -86,12 +86,12 @@ AUI().add(
 			instance._uploadStatusText = Liferay.Language.get('uploading-file-x-of-x');
 			instance._uploadFilesText = Liferay.Language.get('upload-files');
 
-			if (instance._fallbackContainer.length) {
+			if (instance._fallbackContainer) {
 				instance._useFallbackText = Liferay.Language.get('use-the-classic-uploader');
 				instance._useNewUploaderText = Liferay.Language.get('use-the-new-uploader');
 			}
 
-			if (instance._flashVersion < 9 && instance._fallbackContainer.length) {
+			if (instance._flashVersion < 9 && instance._fallbackContainer) {
 				instance._fallbackContainer.show();
 
 				instance._setupIframe();
@@ -115,7 +115,11 @@ AUI().add(
 					stats = instance._getStats();
 				}
 
-				instance._fileList.find('.upload-error').remove();
+				var uploadError = instance._fileList.all('.upload-error');
+
+				if (uploadError) {
+					uploadError.remove();
+				}
 
 				if (stats.in_progress === 0) {
 					instance._queueCancelled = false;
@@ -136,7 +140,7 @@ AUI().add(
 				var fileId = instance._namespace(file.id);
 				var fileName = file.name;
 
-				var li = jQuery(
+				var li = A.Node.create(
 					'<li class="upload-file" id="' + fileId + '">' +
 						'<span class="file-title">' + fileName + '</span>' +
 						'<span class="progress-bar">' +
@@ -145,18 +149,21 @@ AUI().add(
 						'<a class="lfr-button cancel-button" href="javascript:;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>' +
 					'</li>');
 
-				li.find('.cancel-button').click(
-					function() {
-						instance._uploader.cancelUpload(file.id);
-					}
-				);
+				var cancelButton = li.all('.cancel-button');
 
-				var uploadedFiles = listingFiles.find('.upload-complete');
+				if (cancelButton) {
+					cancelButton.on(
+						'click',
+						function() {
+							instance._uploader.cancelUpload(file.id);
+						}
+					);
+				}
 
-				uploadedFiles = uploadedFiles.filter(':first');
+				var uploadedFiles = listingFiles.one('.upload-complete');
 
-				if (uploadedFiles.length) {
-					uploadedFiles.before(li);
+				if (uploadedFiles) {
+					uploadedFiles.placeBefore(li);
 				}
 				else {
 					listingFiles.append(li);
@@ -185,20 +192,24 @@ AUI().add(
 
 				var fileId = instance._namespace(file.id);
 				var fileName = file.name;
-				var li = jQuery('#' + fileId);
+				var li = A.one('#' + fileId);
 
 				instance._updateList(stats.files_queued);
 
-				li.fadeOut('slow');
+				if (li) {
+					li.hide();
+				}
 			},
 
 			fileUploadComplete: function(file) {
 				var instance = this;
 
 				var fileId = instance._namespace(file.id);
-				var li = jQuery('#' + fileId);
+				var li = A.one('#' + fileId);
 
-				li.removeClass('file-uploading').addClass('upload-complete');
+				if (li) {
+					li.removeClass('file-uploading').addClass('upload-complete');
+				}
 
 				var uploader = instance._uploader;
 				var stats = instance._getStats();
@@ -237,19 +248,20 @@ AUI().add(
 				var instance = this;
 
 				var listingFiles = instance._fileList;
-				var listingUl = listingFiles.find('ul');
+				var listingUl = listingFiles.all('ul');
 
-				if (!listingUl.length) {
+				if (listingUl && !listingUl.size()) {
 					instance._listInfo.append('<h4>' + instance._fileListText + '</h4>');
 
-					listingUl = jQuery('<ul class="lfr-component"></ul>');
+					listingUl = A.Node.create('<ul class="lfr-component"></ul>');
 
 					listingFiles.append(listingUl);
 
 					instance._uploadTarget.append(instance._clearUploadsButton);
 					instance._clearUploadsButton.hide();
 
-					instance._cancelButton.click(
+					instance._cancelButton.on(
+						'click',
 						function() {
 							instance.cancelUploads();
 							instance._clearUploadsButton.hide();
@@ -303,9 +315,7 @@ AUI().add(
 				instance._updateList(0, instance._uploadsCompleteText);
 				instance._uploadButton.hide();
 
-				if (instance._clearUploadsButton.is(':hidden')) {
-					instance._clearUploadsButton.show();
-				}
+				instance._clearUploadsButton.show();
 
 				if (instance._onUploadsComplete) {
 					instance._onUploadsComplete();
@@ -332,9 +342,11 @@ AUI().add(
 
 				instance._updateList(listLength, currentListText);
 
-				var li = jQuery('#' + fileId);
+				var li = A.one('#' + fileId);
 
-				li.addClass('file-uploading');
+				if (li) {
+					li.addClass('file-uploading');
+				}
 
 				return true;
 			},
@@ -348,14 +360,11 @@ AUI().add(
 			_clearUploads: function() {
 				var instance = this;
 
-				var completeUploads = instance.getFileListUl().find('.upload-complete, .upload-error');
+				var completeUploads = instance.getFileListUl().all('.upload-complete,.upload-error');
 
-				completeUploads.fadeOut(
-					'slow',
-					function() {
-						jQuery(this).remove();
-					}
-				);
+				if (completeUploads) {
+					completeUploads.remove();
+				}
 
 				instance._clearUploadsButton.hide();
 			},
@@ -451,54 +460,71 @@ AUI().add(
 					instance._listInfoId = instance._namespace('listInfo');
 					instance._fileListId = instance._namespace('fileList');
 
-					instance._uploadTarget = jQuery('<div id="' + instance._uploadTargetId + '" class="float-container upload-target"></div>');
+					instance._uploadTarget = A.Node.create('<div id="' + instance._uploadTargetId + '" class="float-container upload-target"></div>');
 
-					instance._uploadTarget.css('position', 'relative');
+					instance._uploadTarget.setStyle('position', 'relative');
 
-					instance._listInfo = jQuery('<div id="' + instance._listInfoId + '" class="upload-list-info"></div>');
-					instance._fileList = jQuery('<div id="' + instance._fileListId + '" class="upload-list"></div>');
-					instance._cancelButton = jQuery('<a class="lfr-button cancel-uploads" href="javascript:;">' + instance._cancelUploadsText + '</a>');
-					instance._clearUploadsButton = jQuery('<a class="lfr-button clear-uploads" href="javascript:;">' + instance._clearRecentUploadsText + '</a>');
+					instance._listInfo = A.Node.create('<div id="' + instance._listInfoId + '" class="upload-list-info"></div>');
+					instance._fileList = A.Node.create('<div id="' + instance._fileListId + '" class="upload-list"></div>');
+					instance._cancelButton = A.Node.create('<a class="lfr-button cancel-uploads" href="javascript:;">' + instance._cancelUploadsText + '</a>');
+					instance._clearUploadsButton = A.Node.create('<a class="lfr-button clear-uploads" href="javascript:;">' + instance._clearRecentUploadsText + '</a>');
 
-					instance._browseButton = jQuery('<a class="lfr-button browse-button" href="javascript:;">' + instance._browseText + '</a>');
-					instance._uploadButton = jQuery('<a class="lfr-button upload-button" href="javascript:;">' + instance._uploadFilesText + '</a>');
+					instance._browseButton = A.Node.create('<a class="lfr-button browse-button" href="javascript:;">' + instance._browseText + '</a>');
+					instance._uploadButton = A.Node.create('<a class="lfr-button upload-button" href="javascript:;">' + instance._uploadFilesText + '</a>');
 
-					instance._container.prepend([instance._uploadTarget[0], instance._listInfo[0], instance._fileList[0]]);
-					instance._uploadTarget.append([instance._browseButton[0], instance._buttonPlaceHolder[0], instance._uploadButton[0], instance._cancelButton[0]]);
+					var container = instance._container;
+					var uploadTarget = instance._uploadTarget;
 
-					instance._clearUploadsButton.click(
+					container.append(uploadTarget);
+					container.append(instance._listInfo);
+					container.append(instance._fileList);
+
+					uploadTarget.append(instance._browseButton);
+					uploadTarget.append(instance._buttonPlaceHolder);
+					uploadTarget.append(instance._uploadButton);
+					uploadTarget.append(instance._cancelButton);
+
+					instance._clearUploadsButton.on(
+						'click',
 						function() {
 							instance._clearUploads();
 						}
 					);
 
 					if (instance._overlayButton) {
-						var buttonWidth = instance._browseButton.outerWidth();
-						var buttonHeight = instance._browseButton.outerHeight();
-						var buttonOffset = instance._browseButton.offset();
+						var buttonWidth = instance._browseButton.get('offsetWidth');
+						var buttonHeight = instance._browseButton.get('offsetHeight');
 
-						var flashObj = jQuery('#' + instance._uploader.movieName);
+						var flashObj = A.one('#' + instance._uploader.movieName);
 
-						flashObj.css(
-							{
-								left: buttonOffset.left,
-								position: 'absolute',
-								top: buttonOffset.top,
-								zIndex: 100000
-							}
-						);
+						if (flashObj) {
+							var buttonOffset = instance._browseButton.getXY();
+							var left = buttonOffset[0] + 'px';
+							var top = buttonOffset[1] + 'px';
+
+							flashObj.setStyles(
+								{
+									left: left,
+									position: 'absolute',
+									top: top,
+									zIndex: 100000
+								}
+							);
+						}
 
 						instance._uploader.setButtonDimensions(buttonWidth, buttonHeight);
 					}
 					else {
-						instance._browseButton.click(
+						instance._browseButton.on(
+							'click',
 							function() {
 								instance._uploader.selectFiles();
 							}
 						);
 					}
 
-					instance._uploadButton.click(
+					instance._uploadButton.on(
+						'click',
 						function() {
 							instance._uploader.startUpload();
 						}
@@ -507,17 +533,18 @@ AUI().add(
 					instance._uploadButton.hide();
 					instance._cancelButton.hide();
 
-					if (instance._fallbackContainer.length) {
-						instance._useFallbackButton = jQuery('<a class="use-fallback using-new-uploader" href="javascript:;">' + instance._useFallbackText + '</a>');
-						instance._fallbackContainer.after(instance._useFallbackButton);
+					if (instance._fallbackContainer) {
+						instance._useFallbackButton = A.Node.create('<a class="use-fallback using-new-uploader" href="javascript:;">' + instance._useFallbackText + '</a>');
+						instance._fallbackContainer.placeAfter(instance._useFallbackButton);
 
-						instance._useFallbackButton.click(
-							function() {
-								var fallback = jQuery(this);
+						instance._useFallbackButton.on(
+							'click',
+							function(event) {
+								var fallback = event.target;
 								var newUploaderClass = 'using-new-uploader';
 								var fallbackClass = 'using-classic-uploader';
 
-								if (fallback.is('.' + newUploaderClass)) {
+								if (fallback && fallback.test('.' + newUploaderClass)) {
 									instance._container.hide();
 									instance._fallbackContainer.show();
 
@@ -554,12 +581,16 @@ AUI().add(
 				var instance = this;
 
 				if (!instance._fallbackIframe) {
-					instance._fallbackIframe = instance._fallbackContainer.find('iframe[id$=-iframe]');
+					instance._fallbackIframe = instance._fallbackContainer.all('iframe[id$=-iframe]');
 
-					if (instance._fallbackIframe.length) {
-						var frameHeight = jQuery('#content-wrapper', instance._fallbackIframe[0].contentWindow).height() || 250;
+					if (instance._fallbackIframe && instance._fallbackIframe.size()) {
+						var contentWrapper = instance._fallbackIframe.one('#content-wrapper');
 
-						instance._fallbackIframe.height(frameHeight + 150);
+						if (contentWrapper) {
+							var frameHeight = contentWrapper.get('offsetHeight') || 250;
+						}
+
+						instance._fallbackIframe.setStyle('height', frameHeight + 150 + 'px');
 					}
 				}
 			},
@@ -570,7 +601,7 @@ AUI().add(
 				if (instance._allowedFileTypes.indexOf('*') == -1) {
 					var fileTypes = instance._allowedFileTypes.split(',');
 
-					fileTypes = jQuery.map(
+					fileTypes = A.Array.map(
 						fileTypes,
 						function(value, key) {
 							var fileType = value;
@@ -585,9 +616,9 @@ AUI().add(
 					instance._allowedFileTypes = fileTypes.join(';');
 				}
 
-				instance._buttonPlaceHolder = jQuery('<div id="' + instance._buttonPlaceHolderId + '"></div>');
+				instance._buttonPlaceHolder = A.Node.create('<div id="' + instance._buttonPlaceHolderId + '"></div>');
 
-				jQuery(document.body).append(instance._buttonPlaceHolder);
+				A.getBody().append(instance._buttonPlaceHolder);
 
 				instance._uploader = new SWFUpload(
 					{
@@ -612,7 +643,7 @@ AUI().add(
 						upload_queue_complete_callback: window[instance._uploadsComplete],
 						upload_error_handler: window[instance._uploadError],
 						upload_cancel_callback: window[instance._cancelUploads],
-						auto_upload : false,
+						auto_upload: false,
 						file_post_name: 'file',
 						create_ui: true,
 						button_image_url: instance._buttonUrl,
@@ -634,7 +665,7 @@ AUI().add(
 			_updateList: function(listLength, message) {
 				var instance = this;
 
-				var infoTitle = instance._listInfo.find('h4');
+				var infoTitle = instance._listInfo.all('h4');
 				var listText = '';
 
 				if (!message) {
@@ -644,7 +675,9 @@ AUI().add(
 					listText = message;
 				}
 
-				infoTitle.html(listText);
+				if (infoTitle) {
+					infoTitle.html(listText);
+				}
 			}
 		};
 
@@ -652,6 +685,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['substitute']
+		requires: ['collection', 'substitute']
 	}
 );

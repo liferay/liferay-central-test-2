@@ -172,7 +172,7 @@ portletURL.setParameter("name", name);
 		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
 	</div>
 
-	<div class="lfr-fallback" id="<portlet:namespace />fallback">
+	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
 </c:if>
 
 <portlet:actionURL var="editFileEntryURL">
