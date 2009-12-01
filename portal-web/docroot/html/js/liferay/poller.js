@@ -33,8 +33,8 @@
 	var _timerId = null;
 
 	var _url = '/poller';
-	var _receiveChannel = _url + '/receive';
-	var _sendChannel = _url + '/send';
+	var _receiveChannel = themeDisplay.getPathContext() + _url + '/receive';
+	var _sendChannel = themeDisplay.getPathContext() + _url + '/send';
 
 	var _closeCurlyBrace = '}';
 	var _escapedCloseCurlyBrace = '[$CLOSE_CURLY_BRACE$]';
