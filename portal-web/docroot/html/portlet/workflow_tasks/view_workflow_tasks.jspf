@@ -67,8 +67,8 @@ try {
 
 			<portlet:renderURL var="rowURL">
 				<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
-				<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 			</portlet:renderURL>
 
 			<liferay-ui:search-container-column-text
@@ -104,8 +104,12 @@ try {
 				href="<%= rowURL %>"
 			>
 				<%
-				String dueDateLabel = (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate());
-				buffer.append(dueDateLabel);
+				if (workflowTask.getDueDate() == null) {
+					buffer.append(LanguageUtil.get(pageContext, "never"));
+				}
+				else {
+					buffer.append(dateFormatDateTime.format(workflowTask.getDueDate()));
+				}
 				%>
 
 			</liferay-ui:search-container-column-text>
@@ -121,12 +125,13 @@ try {
 
 				Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
 
-				String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-				long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
 				long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
 				long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);
+				String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
+				long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
 
 				String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
+
 				buffer.append(state);
 				%>
 

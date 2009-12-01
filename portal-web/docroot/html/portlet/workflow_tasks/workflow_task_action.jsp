@@ -61,7 +61,9 @@ List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(us
 		</portlet:actionURL>
 
 		<liferay-ui:icon image="edit" message="<%= message %>" url="<%= editURL %>" />
+
 	<%
 	}
 	%>
+
 </liferay-ui:icon-menu>

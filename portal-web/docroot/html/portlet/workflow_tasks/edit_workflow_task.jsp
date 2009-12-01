@@ -29,35 +29,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowTask workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);
 
-long workflowTaskId = BeanParamUtil.getLong(workflowTask, request, "workflowTaskId");
-long assigneeUserId = workflowTask.getAssigneeUserId();
-String description = BeanPropertiesUtil.getString(workflowTask.getDescription(), StringPool.BLANK);
-Date createDate = workflowTask.getCreateDate();
-Date dueDate = workflowTask.getDueDate();
-
 WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
 
 Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
 
-String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
 long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
 long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);
-
-String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
-
-WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
-PortletURL assetURLEdit =  workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
-
-if (assetURLEdit != null) {
-	assetURLEdit.setWindowState(WindowState.MAXIMIZED);
-	assetURLEdit.setPortletMode(PortletMode.VIEW);
-
-	assetURLEdit.setParameter("redirect", currentURL);
-}
-
-List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
+String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
+long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
 %>
 
 <script type="text/javascript">
@@ -80,50 +59,74 @@ List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(us
 
 <aui:form action="<%= editWorkflowTaskURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="workflowTaskId" type="hidden" value="<%= String.valueOf(workflowTaskId) %>" />
-	<aui:input name="assigneeUserId" type="hidden" value="<%= String.valueOf(assigneeUserId) %>" />
-	<aui:input name="transitionName" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="assigneeUserId" type="hidden" value="<%= String.valueOf(workflowTask.getAssigneeUserId()) %>" />
+	<aui:input name="workflowTaskId" type="hidden" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+	<aui:input name="transitionName" type="hidden" />
 
 	<aui:fieldset>
-		<aui:field-wrapper label="name" inlineLabel="true">
+		<aui:field-wrapper inlineLabel="true" label="name">
 			<%= workflowTask.getName() %>
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="description">
-			<%= description %>
+			<%= workflowTask.getDescription() %>
 		</aui:field-wrapper>
 
-		<aui:field-wrapper label="asset-title" inlineLabel="true">
-			<aui:a href="<%= assetURLEdit.toString() %>"><%= workflowHandler.getTitle(classPK) %></aui:a>
+		<%
+		WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
+		PortletURL editPortletURL =  workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+		%>
+
+		<c:if test="<%= editPortletURL != null %>">
+
+			<%
+			editPortletURL.setWindowState(WindowState.MAXIMIZED);
+			editPortletURL.setPortletMode(PortletMode.VIEW);
+
+			editPortletURL.setParameter("redirect", currentURL);
+			%>
+
+			<aui:field-wrapper inlineLabel="true" label="asset-title">
+				<aui:a href="<%= editPortletURL.toString() %>"><%= workflowHandler.getTitle(classPK) %></aui:a>
+			</aui:field-wrapper>
+		</c:if>
+
+		<aui:field-wrapper inlineLabel="true" label="state">
+			<%= WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK) %>
 		</aui:field-wrapper>
 
-		<aui:field-wrapper label="state" inlineLabel="true">
-			<%= state %>
+		<aui:field-wrapper inlineLabel="true" label="create-date">
+			<%= dateFormatDateTime.format(workflowTask.getCreateDate()) %>
 		</aui:field-wrapper>
 
-		<aui:field-wrapper label="create-date" inlineLabel="true">
-			<%= dateFormatDateTime.format(createDate) %>
-		</aui:field-wrapper>
-
-		<aui:field-wrapper label="due-date" inlineLabel="true">
-			<%= (dueDate == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(dueDate) %>
+		<aui:field-wrapper inlineLabel="true" label="due-date">
+			<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
 		</aui:field-wrapper>
 
 		<br />
 
 		<aui:button-row>
-			<% for (String transitionName : transitionNames) {
-					String message = "proceed";
 
-					if (Validator.isNotNull(transitionName)) {
-						message = transitionName;
-					}
+			<%
+			List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(user.getUserId(), workflowTask.getWorkflowTaskId());
 
-					String clickHandler = renderResponse.getNamespace() + "saveTask('"+ message +"')";
+			for (String transitionName : transitionNames) {
+				String message = "proceed";
+
+				if (Validator.isNotNull(transitionName)) {
+					message = transitionName;
+				}
+
+				String taglibOnClick = renderResponse.getNamespace() + "saveTask('" + message + "');";
 			%>
-					<aui:button name='<%= message + \"Button\" %>' onClick="<%= clickHandler %>" type="button" value="<%= message %>" />
-			<% } %>
+
+				<aui:button name='<%= message + "Button" %>' onClick="<%= taglibOnClick %>" type="button" value="<%= message %>" />
+
+			<%
+			}
+			%>
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 		</aui:button-row>
