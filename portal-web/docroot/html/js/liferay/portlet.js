@@ -427,7 +427,14 @@ Liferay.Portlet = {
 						if (portletCSSLink) {
 							portletCSSLink.on(
 								'click',
-								A.bind(Liferay.PortletCSS.init, Liferay.PortletCSS, portletId)
+								function(event) {
+									A.use(
+										'liferay-look-and-feel',
+										function() {
+											Liferay.PortletCSS.init(portletId);
+										}
+									);
+								}
 							);
 						}
 					}
