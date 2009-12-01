@@ -1002,9 +1002,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	private static final String _SQL_SELECT_SHARD_WHERE = "SELECT shard FROM Shard shard WHERE ";
 	private static final String _SQL_COUNT_SHARD = "SELECT COUNT(shard) FROM Shard shard";
 	private static final String _SQL_COUNT_SHARD_WHERE = "SELECT COUNT(shard) FROM Shard shard WHERE ";
-	private static final String _FINDER_COLUMN_NAME_NAME_1 = "shardname IS NULL";
+	private static final String _FINDER_COLUMN_NAME_NAME_1 = "shard.name IS NULL";
 	private static final String _FINDER_COLUMN_NAME_NAME_2 = "shard.name = ?";
-	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(shardname IS NULL OR shard.name = ?)";
+	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(shard.name IS NULL OR shard.name = ?)";
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "shard.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "shard.classPK = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shard.";

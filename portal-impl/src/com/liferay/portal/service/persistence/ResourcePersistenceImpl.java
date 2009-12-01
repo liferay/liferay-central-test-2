@@ -1109,9 +1109,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	private static final String _SQL_COUNT_RESOURCE_WHERE = "SELECT COUNT(resource) FROM Resource resource WHERE ";
 	private static final String _FINDER_COLUMN_CODEID_CODEID_2 = "resource.codeId = ?";
 	private static final String _FINDER_COLUMN_C_P_CODEID_2 = "resource.codeId = ? AND ";
-	private static final String _FINDER_COLUMN_C_P_PRIMKEY_1 = "resourceprimKey IS NULL";
+	private static final String _FINDER_COLUMN_C_P_PRIMKEY_1 = "resource.primKey IS NULL";
 	private static final String _FINDER_COLUMN_C_P_PRIMKEY_2 = "resource.primKey = ?";
-	private static final String _FINDER_COLUMN_C_P_PRIMKEY_3 = "(resourceprimKey IS NULL OR resource.primKey = ?)";
+	private static final String _FINDER_COLUMN_C_P_PRIMKEY_3 = "(resource.primKey IS NULL OR resource.primKey = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "resource.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Resource exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Resource exists with the key {";

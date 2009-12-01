@@ -3116,9 +3116,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "organization.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2 = "organization.parentOrganizationId = ?";
 	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "organization.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_N_NAME_1 = "organizationname IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "organization.name IS NULL";
 	private static final String _FINDER_COLUMN_C_N_NAME_2 = "organization.name = ?";
-	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(organizationname IS NULL OR organization.name = ?)";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(organization.name IS NULL OR organization.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "organization.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Organization exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Organization exists with the key {";

@@ -1200,12 +1200,12 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	private static final String _SQL_COUNT_PLUGINSETTING_WHERE = "SELECT COUNT(pluginSetting) FROM PluginSetting pluginSetting WHERE ";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "pluginSetting.companyId = ?";
 	private static final String _FINDER_COLUMN_C_I_T_COMPANYID_2 = "pluginSetting.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_I_T_PLUGINID_1 = "pluginSettingpluginId IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINID_1 = "pluginSetting.pluginId IS NULL AND ";
 	private static final String _FINDER_COLUMN_C_I_T_PLUGINID_2 = "pluginSetting.pluginId = ? AND ";
-	private static final String _FINDER_COLUMN_C_I_T_PLUGINID_3 = "(pluginSettingpluginId IS NULL OR pluginSetting.pluginId = ?) AND ";
-	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_1 = "pluginSettingpluginType IS NULL";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINID_3 = "(pluginSetting.pluginId IS NULL OR pluginSetting.pluginId = ?) AND ";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_1 = "pluginSetting.pluginType IS NULL";
 	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_2 = "pluginSetting.pluginType = ?";
-	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_3 = "(pluginSettingpluginType IS NULL OR pluginSetting.pluginType = ?)";
+	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_3 = "(pluginSetting.pluginType IS NULL OR pluginSetting.pluginType = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "pluginSetting.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PluginSetting exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PluginSetting exists with the key {";

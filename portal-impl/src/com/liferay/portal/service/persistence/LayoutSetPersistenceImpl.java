@@ -1310,9 +1310,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	private static final String _SQL_COUNT_LAYOUTSET = "SELECT COUNT(layoutSet) FROM LayoutSet layoutSet";
 	private static final String _SQL_COUNT_LAYOUTSET_WHERE = "SELECT COUNT(layoutSet) FROM LayoutSet layoutSet WHERE ";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "layoutSet.groupId = ?";
-	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1 = "layoutSetvirtualHost IS NULL";
+	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1 = "layoutSet.virtualHost IS NULL";
 	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2 = "layoutSet.virtualHost = ?";
-	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3 = "(layoutSetvirtualHost IS NULL OR layoutSet.virtualHost = ?)";
+	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3 = "(layoutSet.virtualHost IS NULL OR layoutSet.virtualHost = ?)";
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "layoutSet.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PRIVATELAYOUT_2 = "layoutSet.privateLayout = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layoutSet.";

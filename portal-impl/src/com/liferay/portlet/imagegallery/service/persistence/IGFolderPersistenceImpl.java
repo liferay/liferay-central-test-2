@@ -2294,12 +2294,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _SQL_SELECT_IGFOLDER_WHERE = "SELECT igFolder FROM IGFolder igFolder WHERE ";
 	private static final String _SQL_COUNT_IGFOLDER = "SELECT COUNT(igFolder) FROM IGFolder igFolder";
 	private static final String _SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(igFolder) FROM IGFolder igFolder WHERE ";
-	private static final String _FINDER_COLUMN_UUID_UUID_1 = "igFolderuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "igFolder.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "igFolder.uuid = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(igFolderuuid IS NULL OR igFolder.uuid = ?)";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "igFolderuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(igFolder.uuid IS NULL OR igFolder.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "igFolder.uuid IS NULL AND ";
 	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "igFolder.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(igFolderuuid IS NULL OR igFolder.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(igFolder.uuid IS NULL OR igFolder.uuid = ?) AND ";
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "igFolder.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "igFolder.groupId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "igFolder.companyId = ?";
@@ -2307,9 +2307,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _FINDER_COLUMN_G_P_PARENTFOLDERID_2 = "igFolder.parentFolderId = ?";
 	private static final String _FINDER_COLUMN_G_P_N_GROUPID_2 = "igFolder.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_N_PARENTFOLDERID_2 = "igFolder.parentFolderId = ? AND ";
-	private static final String _FINDER_COLUMN_G_P_N_NAME_1 = "igFoldername IS NULL";
+	private static final String _FINDER_COLUMN_G_P_N_NAME_1 = "igFolder.name IS NULL";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "igFolder.name = ?";
-	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFoldername IS NULL OR igFolder.name = ?)";
+	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFolder.name IS NULL OR igFolder.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igFolder.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No IGFolder exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No IGFolder exists with the key {";

@@ -1112,9 +1112,9 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	private static final String _SQL_COUNT_PORTLET_WHERE = "SELECT COUNT(portlet) FROM Portlet portlet WHERE ";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "portlet.companyId = ?";
 	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "portlet.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_P_PORTLETID_1 = "portletportletId IS NULL";
+	private static final String _FINDER_COLUMN_C_P_PORTLETID_1 = "portlet.portletId IS NULL";
 	private static final String _FINDER_COLUMN_C_P_PORTLETID_2 = "portlet.portletId = ?";
-	private static final String _FINDER_COLUMN_C_P_PORTLETID_3 = "(portletportletId IS NULL OR portlet.portletId = ?)";
+	private static final String _FINDER_COLUMN_C_P_PORTLETID_3 = "(portlet.portletId IS NULL OR portlet.portletId = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "portlet.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Portlet exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Portlet exists with the key {";

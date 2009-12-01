@@ -1098,9 +1098,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "expandoTable.classNameId = ?";
 	private static final String _FINDER_COLUMN_C_C_N_COMPANYID_2 = "expandoTable.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_N_CLASSNAMEID_2 = "expandoTable.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_N_NAME_1 = "expandoTablename IS NULL";
+	private static final String _FINDER_COLUMN_C_C_N_NAME_1 = "expandoTable.name IS NULL";
 	private static final String _FINDER_COLUMN_C_C_N_NAME_2 = "expandoTable.name = ?";
-	private static final String _FINDER_COLUMN_C_C_N_NAME_3 = "(expandoTablename IS NULL OR expandoTable.name = ?)";
+	private static final String _FINDER_COLUMN_C_C_N_NAME_3 = "(expandoTable.name IS NULL OR expandoTable.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "expandoTable.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ExpandoTable exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ExpandoTable exists with the key {";

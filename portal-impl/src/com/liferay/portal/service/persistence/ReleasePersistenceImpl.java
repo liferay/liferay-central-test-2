@@ -799,11 +799,11 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	private static final String _SQL_COUNT_RELEASE = "SELECT COUNT(release) FROM Release release";
 	private static final String _SQL_COUNT_RELEASE_WHERE = "SELECT COUNT(release) FROM Release release WHERE ";
 	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_1 =
-		"releaseservletContextName IS NULL";
+		"release.servletContextName IS NULL";
 	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_2 =
 		"release.servletContextName = ?";
 	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_3 =
-		"(releaseservletContextName IS NULL OR release.servletContextName = ?)";
+		"(release.servletContextName IS NULL OR release.servletContextName = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "release.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Release exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Release exists with the key {";

@@ -1399,14 +1399,14 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	private static final String _SQL_SELECT_POLLSCHOICE_WHERE = "SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ";
 	private static final String _SQL_COUNT_POLLSCHOICE = "SELECT COUNT(pollsChoice) FROM PollsChoice pollsChoice";
 	private static final String _SQL_COUNT_POLLSCHOICE_WHERE = "SELECT COUNT(pollsChoice) FROM PollsChoice pollsChoice WHERE ";
-	private static final String _FINDER_COLUMN_UUID_UUID_1 = "pollsChoiceuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "pollsChoice.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "pollsChoice.uuid = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(pollsChoiceuuid IS NULL OR pollsChoice.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(pollsChoice.uuid IS NULL OR pollsChoice.uuid = ?)";
 	private static final String _FINDER_COLUMN_QUESTIONID_QUESTIONID_2 = "pollsChoice.questionId = ?";
 	private static final String _FINDER_COLUMN_Q_N_QUESTIONID_2 = "pollsChoice.questionId = ? AND ";
-	private static final String _FINDER_COLUMN_Q_N_NAME_1 = "pollsChoicename IS NULL";
+	private static final String _FINDER_COLUMN_Q_N_NAME_1 = "pollsChoice.name IS NULL";
 	private static final String _FINDER_COLUMN_Q_N_NAME_2 = "pollsChoice.name = ?";
-	private static final String _FINDER_COLUMN_Q_N_NAME_3 = "(pollsChoicename IS NULL OR pollsChoice.name = ?)";
+	private static final String _FINDER_COLUMN_Q_N_NAME_3 = "(pollsChoice.name IS NULL OR pollsChoice.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "pollsChoice.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PollsChoice exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PollsChoice exists with the key {";

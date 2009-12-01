@@ -1505,9 +1505,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	private static final String _SQL_COUNT_USERTRACKER_WHERE = "SELECT COUNT(userTracker) FROM UserTracker userTracker WHERE ";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "userTracker.companyId = ?";
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "userTracker.userId = ?";
-	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_1 = "userTrackersessionId IS NULL";
+	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_1 = "userTracker.sessionId IS NULL";
 	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_2 = "userTracker.sessionId = ?";
-	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_3 = "(userTrackersessionId IS NULL OR userTracker.sessionId = ?)";
+	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_3 = "(userTracker.sessionId IS NULL OR userTracker.sessionId = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "userTracker.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No UserTracker exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No UserTracker exists with the key {";

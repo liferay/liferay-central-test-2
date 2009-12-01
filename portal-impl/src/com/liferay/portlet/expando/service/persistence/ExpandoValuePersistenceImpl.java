@@ -3583,9 +3583,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	private static final String _FINDER_COLUMN_T_C_C_CLASSPK_2 = "expandoValue.classPK = ?";
 	private static final String _FINDER_COLUMN_T_C_D_TABLEID_2 = "expandoValue.tableId = ? AND ";
 	private static final String _FINDER_COLUMN_T_C_D_COLUMNID_2 = "expandoValue.columnId = ? AND ";
-	private static final String _FINDER_COLUMN_T_C_D_DATA_1 = "expandoValuedata IS NULL";
+	private static final String _FINDER_COLUMN_T_C_D_DATA_1 = "expandoValue.data IS NULL";
 	private static final String _FINDER_COLUMN_T_C_D_DATA_2 = "expandoValue.data = ?";
-	private static final String _FINDER_COLUMN_T_C_D_DATA_3 = "(expandoValuedata IS NULL OR expandoValue.data = ?)";
+	private static final String _FINDER_COLUMN_T_C_D_DATA_3 = "(expandoValue.data IS NULL OR expandoValue.data = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "expandoValue.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ExpandoValue exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ExpandoValue exists with the key {";

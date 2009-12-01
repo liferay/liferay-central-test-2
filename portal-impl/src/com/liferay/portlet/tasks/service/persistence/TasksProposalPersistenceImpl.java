@@ -1386,9 +1386,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "tasksProposal.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "tasksProposal.userId = ?";
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "tasksProposal.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_CLASSPK_1 = "tasksProposalclassPK IS NULL";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_1 = "tasksProposal.classPK IS NULL";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "tasksProposal.classPK = ?";
-	private static final String _FINDER_COLUMN_C_C_CLASSPK_3 = "(tasksProposalclassPK IS NULL OR tasksProposal.classPK = ?)";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_3 = "(tasksProposal.classPK IS NULL OR tasksProposal.classPK = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "tasksProposal.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No TasksProposal exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No TasksProposal exists with the key {";

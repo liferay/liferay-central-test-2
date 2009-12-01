@@ -1488,13 +1488,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	private static final String _SQL_COUNT_RESOURCECODE = "SELECT COUNT(resourceCode) FROM ResourceCode resourceCode";
 	private static final String _SQL_COUNT_RESOURCECODE_WHERE = "SELECT COUNT(resourceCode) FROM ResourceCode resourceCode WHERE ";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "resourceCode.companyId = ?";
-	private static final String _FINDER_COLUMN_NAME_NAME_1 = "resourceCodename IS NULL";
+	private static final String _FINDER_COLUMN_NAME_NAME_1 = "resourceCode.name IS NULL";
 	private static final String _FINDER_COLUMN_NAME_NAME_2 = "resourceCode.name = ?";
-	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(resourceCodename IS NULL OR resourceCode.name = ?)";
+	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(resourceCode.name IS NULL OR resourceCode.name = ?)";
 	private static final String _FINDER_COLUMN_C_N_S_COMPANYID_2 = "resourceCode.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_N_S_NAME_1 = "resourceCodename IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_N_S_NAME_1 = "resourceCode.name IS NULL AND ";
 	private static final String _FINDER_COLUMN_C_N_S_NAME_2 = "resourceCode.name = ? AND ";
-	private static final String _FINDER_COLUMN_C_N_S_NAME_3 = "(resourceCodename IS NULL OR resourceCode.name = ?) AND ";
+	private static final String _FINDER_COLUMN_C_N_S_NAME_3 = "(resourceCode.name IS NULL OR resourceCode.name = ?) AND ";
 	private static final String _FINDER_COLUMN_C_N_S_SCOPE_2 = "resourceCode.scope = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "resourceCode.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ResourceCode exists with the primary key ";

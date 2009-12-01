@@ -2297,12 +2297,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "scProductEntry.companyId = ?";
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "scProductEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "scProductEntry.userId = ?";
-	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_1 = "scProductEntryrepoGroupId IS NULL AND ";
+	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_1 = "scProductEntry.repoGroupId IS NULL AND ";
 	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_2 = "scProductEntry.lower(repoGroupId) = ? AND ";
-	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_3 = "(scProductEntryrepoGroupId IS NULL OR scProductEntry.lower(repoGroupId) = ?) AND ";
-	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_1 = "scProductEntryrepoArtifactId IS NULL";
+	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_3 = "(scProductEntry.repoGroupId IS NULL OR scProductEntry.lower(repoGroupId) = ?) AND ";
+	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_1 = "scProductEntry.repoArtifactId IS NULL";
 	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_2 = "scProductEntry.lower(repoArtifactId) = ?";
-	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_3 = "(scProductEntryrepoArtifactId IS NULL OR scProductEntry.lower(repoArtifactId) = ?)";
+	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_3 = "(scProductEntry.repoArtifactId IS NULL OR scProductEntry.lower(repoArtifactId) = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scProductEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCProductEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCProductEntry exists with the key {";

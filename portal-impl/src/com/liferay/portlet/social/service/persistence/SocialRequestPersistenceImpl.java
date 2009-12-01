@@ -3781,12 +3781,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	private static final String _SQL_SELECT_SOCIALREQUEST_WHERE = "SELECT socialRequest FROM SocialRequest socialRequest WHERE ";
 	private static final String _SQL_COUNT_SOCIALREQUEST = "SELECT COUNT(socialRequest) FROM SocialRequest socialRequest";
 	private static final String _SQL_COUNT_SOCIALREQUEST_WHERE = "SELECT COUNT(socialRequest) FROM SocialRequest socialRequest WHERE ";
-	private static final String _FINDER_COLUMN_UUID_UUID_1 = "socialRequestuuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "socialRequest.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "socialRequest.uuid = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(socialRequestuuid IS NULL OR socialRequest.uuid = ?)";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "socialRequestuuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(socialRequest.uuid IS NULL OR socialRequest.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "socialRequest.uuid IS NULL AND ";
 	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "socialRequest.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(socialRequestuuid IS NULL OR socialRequest.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(socialRequest.uuid IS NULL OR socialRequest.uuid = ?) AND ";
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "socialRequest.groupId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "socialRequest.companyId = ?";
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "socialRequest.userId = ?";

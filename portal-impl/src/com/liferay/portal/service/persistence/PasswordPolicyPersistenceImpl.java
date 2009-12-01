@@ -1076,9 +1076,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	private static final String _FINDER_COLUMN_C_DP_COMPANYID_2 = "passwordPolicy.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_DP_DEFAULTPOLICY_2 = "passwordPolicy.defaultPolicy = ?";
 	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "passwordPolicy.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_N_NAME_1 = "passwordPolicyname IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "passwordPolicy.name IS NULL";
 	private static final String _FINDER_COLUMN_C_N_NAME_2 = "passwordPolicy.name = ?";
-	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(passwordPolicyname IS NULL OR passwordPolicy.name = ?)";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(passwordPolicy.name IS NULL OR passwordPolicy.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "passwordPolicy.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PasswordPolicy exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PasswordPolicy exists with the key {";

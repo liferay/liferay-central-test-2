@@ -2697,9 +2697,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Permissions WHERE permissionId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Permissions WHERE permissionId = ? AND userId = ?";
 	private static final String _FINDER_COLUMN_RESOURCEID_RESOURCEID_2 = "permission.resourceId = ?";
-	private static final String _FINDER_COLUMN_A_R_ACTIONID_1 = "permissionactionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_A_R_ACTIONID_1 = "permission.actionId IS NULL AND ";
 	private static final String _FINDER_COLUMN_A_R_ACTIONID_2 = "permission.actionId = ? AND ";
-	private static final String _FINDER_COLUMN_A_R_ACTIONID_3 = "(permissionactionId IS NULL OR permission.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_A_R_ACTIONID_3 = "(permission.actionId IS NULL OR permission.actionId = ?) AND ";
 	private static final String _FINDER_COLUMN_A_R_RESOURCEID_2 = "permission.resourceId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "permission.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Permission exists with the primary key ";
