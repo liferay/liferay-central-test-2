@@ -37,88 +37,75 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<liferay-ui:tabs
-	names="general,email-notifications"
-	param="tabs1"
-	url="<%= portletURL %>"
-/>
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 
-<c:choose>
-	<c:when test='<%= tabs1.equals("email-notifications") %>'>
-		<script type="text/javascript">
+	<liferay-ui:tabs
+		names="general,email-notifications"
+		param="tabs1"
+		url="<%= portletURL %>"
+	/>
 
-			<%
-			String currentLanguageId = LanguageUtil.getLanguageId(request);
-			Locale defaultLocale = LocaleUtil.getDefault();
-			String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+	<c:choose>
+		<c:when test='<%= tabs1.equals("email-notifications") %>'>
+			<script type="text/javascript">
 
-			Locale[] locales = LanguageUtil.getAvailableLocales();
+				<%
+				String currentLanguageId = LanguageUtil.getLanguageId(request);
+				Locale defaultLocale = LocaleUtil.getDefault();
+				String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
-			String emailFromName = PrefsParamUtil.getString(preferences, request, "emailFromName");
-			String emailFromAddress = PrefsParamUtil.getString(preferences, request, "emailFromAddress");
+				Locale[] locales = LanguageUtil.getAvailableLocales();
 
-			String emailPasswordSentSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordSentSubject_" + currentLanguageId, StringPool.BLANK);
-			String emailPasswordSentBody = PrefsParamUtil.getString(preferences, request, "emailPasswordSentBody_" + currentLanguageId, StringPool.BLANK);
+				String emailFromName = PrefsParamUtil.getString(preferences, request, "emailFromName");
+				String emailFromAddress = PrefsParamUtil.getString(preferences, request, "emailFromAddress");
 
-			String editorParam = "emailPasswordSentBody_" + currentLanguageId;
-			String editorContent = emailPasswordSentBody;
-			%>
+				String emailPasswordSentSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordSentSubject_" + currentLanguageId, StringPool.BLANK);
+				String emailPasswordSentBody = PrefsParamUtil.getString(preferences, request, "emailPasswordSentBody_" + currentLanguageId, StringPool.BLANK);
 
-			function <portlet:namespace />initEditor() {
-				return "<%= UnicodeFormatter.toString(editorContent) %>";
-			}
+				String editorParam = "emailPasswordSentBody_" + currentLanguageId;
+				String editorContent = emailPasswordSentBody;
+				%>
 
-			function <portlet:namespace />saveConfiguration() {
-				<c:if test='<%= tabs2.endsWith("-notification") %>'>
-					document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
-				</c:if>
+				function <portlet:namespace />initEditor() {
+					return "<%= UnicodeFormatter.toString(editorContent) %>";
+				}
 
-				submitForm(document.<portlet:namespace />fm);
-			}
+				function <portlet:namespace />saveConfiguration() {
+					<c:if test='<%= tabs2.endsWith("-notification") %>'>
+						document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
+					</c:if>
 
-			function <portlet:namespace />updateLanguage() {
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
-				submitForm(document.<portlet:namespace />fm);
-			}
-		</script>
+					submitForm(document.<portlet:namespace />fm);
+				}
 
-		<liferay-ui:tabs
-			names="general,password-changed-notification"
-			param="tabs2"
-			url="<%= portletURL %>"
-		/>
+				function <portlet:namespace />updateLanguage() {
+					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
+					submitForm(document.<portlet:namespace />fm);
+				}
+			</script>
 
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="enter-custom-values-or-leave-it-blank-to-use-the-default-portal-settings" />
-		</div>
+			<liferay-ui:tabs
+				names="general,password-changed-notification"
+				param="tabs2"
+				url="<%= portletURL %>"
+			/>
 
-		<c:choose>
-			<c:when test='<%= tabs2.equals("password-changed-notification") %>'>
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="enabled" />
-					</td>
-					<td>
-						<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue='<%= PrefsParamUtil.getBoolean(preferences, request, "emailPasswordSentEnabled", true) %>' />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="language" />
-					</td>
-					<td>
-						<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage(this);">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="enter-custom-values-or-leave-it-blank-to-use-the-default-portal-settings" />
+			</div>
+
+			<c:choose>
+				<c:when test='<%= tabs2.equals("password-changed-notification") %>'>
+					<aui:fieldset>
+						<aui:input inlineLabel="left" label="enabled" name="emailPasswordSentEnabled" type="checkbox" value='<%= PrefsParamUtil.getBoolean(preferences, request, "emailPasswordSentEnabled", true) %>' />
+
+						<aui:select label="language" name="languageId" onChange='<%= renderResponse.getNamespace() + "updateLanguage(this);" %>'>
 
 							<%
 							for (int i = 0; i < locales.length; i++) {
@@ -131,197 +118,150 @@ String redirect = ParamUtil.getString(request, "redirect");
 								}
 							%>
 
-								<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
+								<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 							<%
 							}
 							%>
 
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="subject" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />emailPasswordSentSubject_<%= currentLanguageId %>" type="text" value="<%= emailPasswordSentSubject %>" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="body" />
-					</td>
-					<td>
-						<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+						</aui:select>
 
-						<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="" />
-					</td>
-				</tr>
-				</table>
+						<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "emailPasswordSentSubject" + StringPool.UNDERLINE + currentLanguageId %>' value="<%= emailPasswordSentSubject %>" />
 
-				<br />
+						<aui:field-wrapper label="body">
+							<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-				<strong><liferay-ui:message key="definition-of-terms" /></strong>
+							<aui:input name="<%= editorParam %>" type="hidden" value="" />
+						</aui:field-wrapper>
+					</aui:fieldset>
 
-				<br /><br />
+					<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<strong>[$FROM_ADDRESS$]</strong>
-					</td>
-					<td>
-						<%= preferences.getValue("emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS)) %>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>[$FROM_NAME$]</strong>
-					</td>
-					<td>
-						<%= preferences.getValue("emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME)) %>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>[$PORTAL_URL$]</strong>
-					</td>
-					<td>
-						<%= company.getVirtualHost() %>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>[$REMOTE_ADDRESS$]</strong>
-					</td>
-					<td>
-						The browser's remote address
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>[$REMOTE_HOST$]</strong>
-					</td>
-					<td>
-						The browser's remote host
-					</td>
-				</tr>
+					<br /><br />
 
-				<tr>
-					<td>
-						<strong>[$TO_ADDRESS$]</strong>
-					</td>
-					<td>
-						The address of the email recipient
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>[$TO_NAME$]</strong>
-					</td>
-					<td>
-						The name of the email recipient
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-						<strong>[$USER_AGENT$]</strong>
-					</td>
-					<td>
-						The browser's user agent
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-						<strong>[$USER_ID$]</strong>
-					</td>
-					<td>
-						The user ID
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>[$USER_PASSWORD$]</strong>
-					</td>
-					<td>
-						The user password
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<strong>[$USER_SCREENNAME$]</strong>
-					</td>
-					<td>
-						The user screen name
-					</td>
-				</tr>
-				</table>
-			</c:when>
-			<c:otherwise>
-				<table class="lfr-table">
+					<table class="lfr-table">
 					<tr>
 						<td>
-							<liferay-ui:message key="name" />
+							<strong>[$FROM_ADDRESS$]</strong>
 						</td>
 						<td>
-							<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+							<%= preferences.getValue("emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS)) %>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<liferay-ui:message key="address" />
+							<strong>[$FROM_NAME$]</strong>
 						</td>
 						<td>
-							<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
-
-							<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+							<%= preferences.getValue("emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME)) %>
 						</td>
 					</tr>
-				</table>
-			</c:otherwise>
-		</c:choose>
+					<tr>
+						<td>
+							<strong>[$PORTAL_URL$]</strong>
+						</td>
+						<td>
+							<%= company.getVirtualHost() %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$REMOTE_ADDRESS$]</strong>
+						</td>
+						<td>
+							The browser's remote address
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$REMOTE_HOST$]</strong>
+						</td>
+						<td>
+							The browser's remote host
+						</td>
+					</tr>
 
-		<br />
+					<tr>
+						<td>
+							<strong>[$TO_ADDRESS$]</strong>
+						</td>
+						<td>
+							The address of the email recipient
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$TO_NAME$]</strong>
+						</td>
+						<td>
+							The name of the email recipient
+						</td>
+					</tr>
 
-		<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveConfiguration();" />
-	</c:when>
-	<c:otherwise>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="authentication-type" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />authType">
-					<option value=""><liferay-ui:message key="default" /></option>
-					<option <%= authType.equals(CompanyConstants.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_EA %>"><liferay-ui:message key="by-email-address" /></option>
-					<option <%= authType.equals(CompanyConstants.AUTH_TYPE_SN) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_SN %>"><liferay-ui:message key="by-screen-name" /></option>
-					<option <%= authType.equals(CompanyConstants.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_ID %>"><liferay-ui:message key="by-user-id" /></option>
-				</select>
-			</td>
-		</tr>
-		</table>
+					<tr>
+						<td>
+							<strong>[$USER_AGENT$]</strong>
+						</td>
+						<td>
+							The browser's user agent
+						</td>
+					</tr>
 
-		<br />
+					<tr>
+						<td>
+							<strong>[$USER_ID$]</strong>
+						</td>
+						<td>
+							The user ID
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$USER_PASSWORD$]</strong>
+						</td>
+						<td>
+							The user password
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>[$USER_SCREENNAME$]</strong>
+						</td>
+						<td>
+							The user screen name
+						</td>
+					</tr>
+					</table>
+				</c:when>
+				<c:otherwise>
+					<aui:fieldset>
+						<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" value="<%= emailFromName %>" />
 
-		<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-	</c:otherwise>
-</c:choose>
+						<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 
-</form>
+						<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
+					</aui:fieldset>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+			<aui:fieldset>
+				<aui:select label="authentication-type" name="authType">
+					<aui:option label="default" value="" />
+					<aui:option label="by-email-address" selected="<%= authType.equals(CompanyConstants.AUTH_TYPE_EA) %>" value="<%= CompanyConstants.AUTH_TYPE_EA %>" />
+					<aui:option label="by-screen-name" selected="<%= authType.equals(CompanyConstants.AUTH_TYPE_SN) %>" value="<%= CompanyConstants.AUTH_TYPE_SN %>" />
+					<aui:option label="by-user-id" selected="<%= authType.equals(CompanyConstants.AUTH_TYPE_ID) %>" value="<%= CompanyConstants.AUTH_TYPE_ID %>" />
+				</aui:select>
+			</aui:fieldset>
+		</c:otherwise>
+	</c:choose>
+
+	<aui:button-row>
+		<aui:button name="saveButton" type="submit" value="save" />
+
+		<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.login.configuration.jsp";
