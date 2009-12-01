@@ -4100,8 +4100,8 @@ public class PortalImpl implements Portal {
 	private String _cdnHostHttps;
 	private String _computerAddress;
 	private String _computerName;
-	private String[] _customSqlClassNameIds = null;
-	private String[] _customSqlClassNames = null;
+	private String[] _customSqlClassNameIds;
+	private String[] _customSqlClassNames;
 	private String _pathContext;
 	private String _pathFriendlyURLPrivateGroup;
 	private String _pathFriendlyURLPrivateUser;
