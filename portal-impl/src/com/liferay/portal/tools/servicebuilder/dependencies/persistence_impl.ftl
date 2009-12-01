@@ -2496,11 +2496,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_1 =
 
 				<#if finderCol.comparator == "=">
-					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>${finderCol.name} IS NULL${finderColConjunction}"
+					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>.${finderCol.name} IS NULL${finderColConjunction}"
 				<#elseif finderCol.comparator == "<>" || finderCol.comparator = "!=">
-					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>${finderCol.name} IS NOT NULL${finderColConjunction}"
+					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>.${finderCol.name} IS NOT NULL${finderColConjunction}"
 				<#else>
-					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>${finderCol.name} ${finderCol.comparator} NULL${finderColConjunction}"
+					"${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>.${finderCol.name} ${finderCol.comparator} NULL${finderColConjunction}"
 				</#if>
 
 				;
@@ -2523,7 +2523,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_2 = "${finderColExpression}${finderColConjunction}";
 
 			<#if finderCol.type == "String">
-				private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_3 = "(${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>${finderCol.name} IS NULL OR ${finderColExpression})${finderColConjunction}";
+				private static final String _FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_3 = "(${entity.alias}<#if entity.hasCompoundPK() && finderCol.isPrimary()>.id</#if>.${finderCol.name} IS NULL OR ${finderColExpression})${finderColConjunction}";
 			</#if>
 		</#list>
 	</#list>
