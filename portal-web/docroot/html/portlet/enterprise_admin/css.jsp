@@ -237,7 +237,7 @@
 
 .portlet-enterprise-admin .instant-messenger, .portlet-enterprise-admin .social-network {
 	clear: both;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .portlet-enterprise-admin .instant-messenger img, .portlet-enterprise-admin .social-network img {

@@ -67,14 +67,14 @@
 	background: url(<%= themeImagesPath %>/common/date.png) no-repeat 0 50%;
 	color: #999;
 	float: left;
-	overflow: auto;
+	overflow: hidden;
 	padding-left: 25px;
 	padding-right: 10px;
 }
 
 .portlet-blogs-aggregator .entry-tags {
 	border-left: 1px solid #999;
-	overflow: auto;
+	overflow: hidden;
 	padding-left: 10px;
 	padding-right: 10px;
 }

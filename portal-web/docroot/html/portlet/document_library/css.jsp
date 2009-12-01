@@ -86,7 +86,7 @@
 	color: #999;
 	float: left;
 	margin-right: 10px;
-	overflow: auto;
+	overflow: hidden;
 	padding-left: 25px;
 	padding-right: 10px;
 }
@@ -107,7 +107,7 @@
 
 .portlet-document-library .file-entry-downloads {
 	color: #999;
-	overflow: auto;
+	overflow: hidden;
 	padding-left: 10px;
 }
 
@@ -173,7 +173,7 @@
 .portlet-document-library .folder-file-entries {
 	background: url(<%= themeImagesPath %>/common/page.png) no-repeat 0 50%;
 	color: #999;
-	overflow: auto;
+	overflow: hidden;
 	padding-left: 25px;
 }
 
