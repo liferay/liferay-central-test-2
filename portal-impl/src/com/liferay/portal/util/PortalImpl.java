@@ -1560,6 +1560,43 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public String getLayoutFullURL(long groupId, String portletId)
+		throws PortalException, SystemException {
+
+		StringBuilder sb = new StringBuilder();
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		Company company = CompanyLocalServiceUtil.getCompany(
+			group.getCompanyId());
+
+		long plid = getPlidFromPortletId(groupId, portletId);
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		String portalURL = getPortalURL(
+			company.getVirtualHost(), getPortalPort(), false);
+
+		sb.append(portalURL);
+
+		if (layout.isPrivateLayout()) {
+			if (group.isUser()) {
+				sb.append(PortalUtil.getPathFriendlyURLPrivateUser());
+			}
+			else {
+				sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
+			}
+		}
+		else {
+			sb.append(PortalUtil.getPathFriendlyURLPublic());
+		}
+
+		sb.append(group.getFriendlyURL());
+		sb.append(layout.getFriendlyURL());
+
+		return sb.toString();
+	}
+
 	public String getLayoutFullURL(ThemeDisplay themeDisplay) {
 		return getLayoutFullURL(themeDisplay.getLayout(), themeDisplay);
 	}

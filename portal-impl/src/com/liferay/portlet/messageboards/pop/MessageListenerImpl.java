@@ -36,6 +36,8 @@ import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -181,7 +183,8 @@ public class MessageListenerImpl implements MessageListener {
 			serviceContext.setAddCommunityPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setLayoutFullURL(
-				MBUtil.getLayoutFullURL(company.getCompanyId(), groupId));
+				PortalUtil.getLayoutFullURL(
+					groupId, PortletKeys.MESSAGE_BOARDS));
 			serviceContext.setScopeGroupId(groupId);
 
 			if (parentMessage == null) {

@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.messageboards.util;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -34,15 +32,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
@@ -51,7 +45,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
@@ -369,41 +362,6 @@ public class MBUtil {
 				PropsValues.
 					MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX);
 		}
-	}
-
-	public static String getLayoutFullURL(long companyId, long groupId)
-		throws PortalException, SystemException {
-
-		StringBuilder builder = new StringBuilder();
-
-		Company company = CompanyLocalServiceUtil.getCompany(companyId);
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		long plid = PortalUtil.getPlidFromPortletId(
-			groupId, PortletKeys.MESSAGE_BOARDS);
-
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-		String portalURL = PortalUtil.getPortalURL(company.getVirtualHost(),
-			PortalUtil.getPortalPort(), false);
-
-		builder.append(portalURL);
-
-		if (layout.isPrivateLayout()) {
-			if (group.isUser()) {
-				builder.append(PortalUtil.getPathFriendlyURLPrivateUser());
-			}
-			else {
-				builder.append(PortalUtil.getPathFriendlyURLPrivateGroup());
-			}
-		}
-		else {
-			builder.append(PortalUtil.getPathFriendlyURLPublic());
-		}
-
-		builder.append(group.getFriendlyURL());
-		builder.append(layout.getFriendlyURL());
-
-		return builder.toString();
 	}
 
 	public static String getMailId(String mx, long categoryId, long messageId) {

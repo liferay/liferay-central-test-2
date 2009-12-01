@@ -274,6 +274,9 @@ public interface Portal {
 	public String getLayoutFullURL(
 		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser);
 
+	public String getLayoutFullURL(long groupId, String portletId)
+		throws PortalException, SystemException;
+
 	public String getLayoutFullURL(ThemeDisplay themeDisplay);
 
 	public String getLayoutSetFriendlyURL(
@@ -396,10 +399,10 @@ public interface Portal {
 
 	public String getPortletTitle(Portlet portlet, Locale locale);
 
-	public String getPortletTitle(Portlet portlet, String languageId);
-
 	public String getPortletTitle(
 		Portlet portlet, ServletContext servletContext, Locale locale);
+
+	public String getPortletTitle(Portlet portlet, String languageId);
 
 	public String getPortletTitle(Portlet portlet, User user);
 

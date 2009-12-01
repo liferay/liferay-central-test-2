@@ -446,6 +446,12 @@ public class PortalUtil {
 		return getPortal().getLayoutFullURL(layout, themeDisplay, doAsUser);
 	}
 
+	public static String getLayoutFullURL(long groupId, String portletId)
+		throws PortalException, SystemException {
+
+		return getPortal().getLayoutFullURL(groupId, portletId);
+	}
+
 	public static String getLayoutFullURL(ThemeDisplay themeDisplay) {
 		return getPortal().getLayoutFullURL(themeDisplay);
 	}
