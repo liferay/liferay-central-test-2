@@ -25,6 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-textarea:cssClass"));
 String param = (String)request.getAttribute("liferay-ui:input-textarea:param");
 String defaultValue = (String)request.getAttribute("liferay-ui:input-textarea:defaultValue");
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-textarea:disabled"));
@@ -32,7 +33,7 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 String value = ParamUtil.getString(request, param, defaultValue);
 %>
 
-<textarea class="lfr-textarea" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onKeyDown="Liferay.Util.disableEsc();"><%= value %></textarea>
+<textarea class="lfr-textarea <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onKeyDown="Liferay.Util.disableEsc();"><%= value %></textarea>
 
 <script type="text/javascript">
 	AUI().ready(

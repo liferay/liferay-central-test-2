@@ -37,9 +37,14 @@ public class InputResourceTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-resource:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-resource:url", _url);
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setUrl(String url) {
@@ -53,6 +58,7 @@ public class InputResourceTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/input_resource/page.jsp";
 
+	private String _cssClass;
 	private String _url;
 
 }

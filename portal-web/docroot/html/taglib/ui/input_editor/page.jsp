@@ -25,6 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"), namespace + "editor");
 
 String editorImpl = (String)request.getAttribute("liferay-ui:input-editor:editorImpl");
@@ -94,4 +95,4 @@ sb.append(HttpUtil.encodeURL(cssClasses));
 String editorURL = sb.toString();
 %>
 
-<iframe frameborder="0" height="<%= height %>" id="<%= name %>" name="<%= name %>" scrolling="no" src="<%= editorURL %>" width="<%= width %>"></iframe>
+<iframe <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> frameborder="0" height="<%= height %>" id="<%= name %>" name="<%= name %>" scrolling="no" src="<%= editorURL %>" width="<%= width %>"></iframe>

@@ -25,6 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-time-zone:cssClass"));
 String name = namespace + request.getAttribute("liferay-ui:input-time-zone:name");
 String value = (String)request.getAttribute("liferay-ui:input-time-zone:value");
 boolean nullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-time-zone:nullable"));
@@ -38,7 +39,7 @@ NumberFormat numberFormat = NumberFormat.getInstance(locale);
 numberFormat.setMinimumIntegerDigits(2);
 %>
 
-<select <%= disabled ? "disabled=\"disabled\"" : "" %> name="<%= name %>">
+<select <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= disabled ? "disabled=\"disabled\"" : "" %> name="<%= name %>">
 	<c:if test="<%= nullable %>">
 		<option value=""></option>
 	</c:if>

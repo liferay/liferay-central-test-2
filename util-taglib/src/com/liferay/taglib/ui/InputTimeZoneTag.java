@@ -40,6 +40,7 @@ public class InputTimeZoneTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-time-zone:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-time-zone:name", _name);
 		request.setAttribute("liferay-ui:input-time-zone:value", _value);
 		request.setAttribute(
@@ -53,6 +54,10 @@ public class InputTimeZoneTag extends IncludeTag {
 			"liferay-ui:input-time-zone:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setName(String name) {
@@ -86,6 +91,7 @@ public class InputTimeZoneTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/input_time_zone/page.jsp";
 
+	private String _cssClass;
 	private String _name;
 	private String _value = TimeZoneUtil.getDefault().getID();
 	private boolean _nullable;

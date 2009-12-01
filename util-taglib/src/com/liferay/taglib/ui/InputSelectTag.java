@@ -37,6 +37,7 @@ public class InputSelectTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-select:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-select:formName", _formName);
 		request.setAttribute("liferay-ui:input-select:param", _param);
 		request.setAttribute(
@@ -45,6 +46,10 @@ public class InputSelectTag extends IncludeTag {
 			"liferay-ui:input-select:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setFormName(String formName) {
@@ -70,6 +75,7 @@ public class InputSelectTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/input_select/page.jsp";
 
+	private String _cssClass;
 	private String _formName = "fm";
 	private String _param;
 	private Boolean _defaultValue = Boolean.FALSE;

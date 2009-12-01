@@ -31,6 +31,7 @@ if (GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:di
 	namespace = StringPool.BLANK;
 }
 
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:cssClass"));
 String formName = namespace + request.getAttribute("liferay-ui:input-date:formName");
 String monthParam = namespace + request.getAttribute("liferay-ui:input-date:monthParam");
 int monthValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:monthValue"));
@@ -98,7 +99,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 	);
 </script>
 
-<div id="<%= randomNamespace %>displayDate"></div>
+<div <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> id="<%= randomNamespace %>displayDate"></div>
 
 <c:choose>
 	<c:when test="<%= monthAndYearParam.equals(namespace) %>">

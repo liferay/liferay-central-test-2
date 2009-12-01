@@ -37,6 +37,7 @@ public class InputCheckBoxTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-checkbox:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-checkbox:formName", _formName);
 		request.setAttribute("liferay-ui:input-checkbox:param", _param);
 		request.setAttribute("liferay-ui:input-checkbox:id", _id);
@@ -47,6 +48,10 @@ public class InputCheckBoxTag extends IncludeTag {
 			"liferay-ui:input-checkbox:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setFormName(String formName) {
@@ -80,6 +85,7 @@ public class InputCheckBoxTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/input_checkbox/page.jsp";
 
+	private String _cssClass;
 	private String _formName = "fm";
 	private String _param;
 	private String _id;

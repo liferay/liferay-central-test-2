@@ -40,6 +40,7 @@ public class InputMoveBoxesTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-move-boxes:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-move-boxes:formName", _formName);
 		request.setAttribute(
 			"liferay-ui:input-move-boxes:leftTitle", _leftTitle);
@@ -63,6 +64,10 @@ public class InputMoveBoxesTag extends IncludeTag {
 			"liferay-ui:input-move-boxes:rightList", _rightList);
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setFormName(String formName) {
@@ -116,6 +121,7 @@ public class InputMoveBoxesTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/input_move_boxes/page.jsp";
 
+	private String _cssClass;
 	private String _formName = "fm";
 	private String _leftTitle;
 	private String _rightTitle;

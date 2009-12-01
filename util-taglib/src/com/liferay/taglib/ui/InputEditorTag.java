@@ -37,6 +37,7 @@ public class InputEditorTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-editor:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-editor:name", _name);
 		request.setAttribute("liferay-ui:input-editor:editorImpl", _editorImpl);
 		request.setAttribute("liferay-ui:input-editor:toolbarSet", _toolbarSet);
@@ -47,6 +48,10 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:width", _width);
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setName(String name) {
@@ -83,6 +88,7 @@ public class InputEditorTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/input_editor/page.jsp";
 
+	private String _cssClass;
 	private String _name;
 	private String _editorImpl;
 	private String _toolbarSet;

@@ -38,6 +38,7 @@ public class InputTextAreaTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-textarea:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-textarea:param", _param);
 		request.setAttribute(
 			"liferay-ui:input-textarea:defaultValue", _defaultValue);
@@ -45,6 +46,10 @@ public class InputTextAreaTag extends IncludeTag {
 			"liferay-ui:input-textarea:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setParam(String param) {
@@ -66,6 +71,7 @@ public class InputTextAreaTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/input_textarea/page.jsp";
 
+	private String _cssClass;
 	private String _param;
 	private String _defaultValue = StringPool.BLANK;
 	private boolean _disabled;

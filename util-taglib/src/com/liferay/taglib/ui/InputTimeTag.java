@@ -37,6 +37,7 @@ public class InputTimeTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-time:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-time:hourParam", _hourParam);
 		request.setAttribute(
 			"liferay-ui:input-time:hourValue", String.valueOf(_hourValue));
@@ -64,6 +65,9 @@ public class InputTimeTag extends IncludeTag {
 		return EVAL_BODY_BUFFERED;
 	}
 
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
+	}
 	public void setHourParam(String hourParam) {
 		_hourParam = hourParam;
 	}
@@ -114,6 +118,7 @@ public class InputTimeTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/input_time/page.jsp";
 
+	private String _cssClass;
 	private String _hourParam;
 	private int _hourValue;
 	private boolean _hourNullable;

@@ -46,6 +46,7 @@ public class InputRepeatTag extends IncludeTag {
 		}
 		finally {
 			if (!ServerDetector.isResin()) {
+				_cssClass = null;
 				_event = null;
 			}
 		}
@@ -55,9 +56,14 @@ public class InputRepeatTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-repeat:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-repeat:event", _event);
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setEvent(CalEvent event) {
@@ -71,6 +77,7 @@ public class InputRepeatTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/input_repeat/page.jsp";
 
+	private String _cssClass;
 	private CalEvent _event;
 
 }

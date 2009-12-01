@@ -25,6 +25,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-move-boxes:cssClass"));
 String formName = namespace + request.getAttribute("liferay-ui:input-move-boxes:formName");
 
 String leftTitle = LanguageUtil.get(pageContext, (String)request.getAttribute("liferay-ui:input-move-boxes:leftTitle"));
@@ -43,7 +44,7 @@ List leftList = (List)request.getAttribute("liferay-ui:input-move-boxes:leftList
 List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightList");
 %>
 
-<div class="taglib-move-boxes">
+<div class="taglib-move-boxes <%= cssClass %>">
 	<table class="lfr-table">
 	<tr>
 		<td>

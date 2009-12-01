@@ -28,6 +28,8 @@
 <%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 
 <%
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-repeat:cssClass"));
+
 CalEvent event = (CalEvent)request.getAttribute("liferay-ui:input-repeat:event");
 
 Recurrence recurrence = null;
@@ -226,7 +228,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 	}
 </script>
 
-<aui:fieldset cssClass="taglib-input-repeat">
+<aui:fieldset cssClass='<%= "taglib-input-repeat " + cssClass %>'>
 	<aui:column columnWidth="25">
 		<aui:field-wrapper label="repeat" name="recurrenceType">
 

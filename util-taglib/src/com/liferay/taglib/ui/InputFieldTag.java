@@ -39,6 +39,7 @@ public class InputFieldTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		request.setAttribute("liferay-ui:input-field:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-field:formName", _formName);
 		request.setAttribute("liferay-ui:input-field:model", _model.getName());
 		request.setAttribute("liferay-ui:input-field:bean", _bean);
@@ -51,6 +52,10 @@ public class InputFieldTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-field:format", _format);
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setFormName(String formName) {
@@ -91,6 +96,7 @@ public class InputFieldTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/input_field/page.jsp";
 
+	private String _cssClass;
 	private String _formName = "fm";
 	private Class<?> _model;
 	private Object _bean;

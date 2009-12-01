@@ -25,7 +25,8 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-resource:cssClass"));
 String url = (String)request.getAttribute("liferay-ui:input-resource:url");
 %>
 
-<input class="form-text" readonly="true" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= HtmlUtil.escapeAttribute(url) %>" onClick="Liferay.Util.selectAndCopy(this);" />
+<input class="form-text <%= cssClass %>" readonly="true" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= HtmlUtil.escapeAttribute(url) %>" onClick="Liferay.Util.selectAndCopy(this);" />
