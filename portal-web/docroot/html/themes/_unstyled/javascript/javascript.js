@@ -15,10 +15,10 @@ Liferay.Portlet.ready(
 	This function gets loaded after each and every portlet on the page.
 
 	portletId: the current portlet's id
-	jQueryObj: the jQuery wrapped object of the current portlet
+	node: the Alloy Node object of the current portlet
 	*/
 
-	function(portletId, jQueryObj) {
+	function(portletId, node) {
 	}
 );
 
