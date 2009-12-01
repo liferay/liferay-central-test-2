@@ -24,11 +24,10 @@ package com.liferay.portlet.workflowtasks.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -75,22 +74,36 @@ public class EditWorkflowTaskAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
+		try {
+			ActionUtil.getWorkflowTask(renderRequest);
+		}
+		catch (Exception e) {
+			if (e instanceof WorkflowException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(renderRequest, e.getClass().getName());
+
+				return mapping.findForward("portlet.workflow_tasks.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.workflow_tasks.view"));
+			renderRequest, "portlet.workflow_tasks.edit_workflow_task"));
 	}
 
 	protected void updateTask(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
+		long assigneeUserId = ParamUtil.getLong(
+			actionRequest, "assigneeUserId");
 		long workflowTaskId = ParamUtil.getLong(
 			actionRequest, "workflowTaskId");
 		String transitionName = ParamUtil.getString(
 			actionRequest, "transitionName");
 
 		WorkflowTaskManagerUtil.completeWorkflowTask(
-			themeDisplay.getUserId(), workflowTaskId, transitionName, null,
-			null);
+			assigneeUserId, workflowTaskId, transitionName, null, null);
 	}
 
 }

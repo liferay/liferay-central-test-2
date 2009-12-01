@@ -33,6 +33,13 @@ List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(us
 %>
 
 <liferay-ui:icon-menu>
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
 	<%
 	for (String transitionName : transitionNames) {
@@ -42,11 +49,11 @@ List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(us
 			message = transitionName;
 		}
 	%>
-
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="workflowTaskId" value="<%= StringUtil.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+			<portlet:param name="assigneeUserId" value="<%= StringUtil.valueOf(workflowTask.getAssigneeUserId()) %>" />
 
 			<c:if test="<%= transitionName != null %>">
 				<portlet:param name="transitionName" value="<%= transitionName %>" />
@@ -54,9 +61,7 @@ List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(us
 		</portlet:actionURL>
 
 		<liferay-ui:icon image="edit" message="<%= message %>" url="<%= editURL %>" />
-
 	<%
 	}
 	%>
-
 </liferay-ui:icon-menu>

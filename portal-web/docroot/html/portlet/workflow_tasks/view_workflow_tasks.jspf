@@ -23,11 +23,11 @@
 %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
+String tabs1 = ParamUtil.getString(request, "tabs1", "my-pending-tasks");
 
 boolean completed = false;
 
-if (tabs1.equals("completed")) {
+if (tabs1.equals("my-completed-tasks")) {
 	completed = true;
 }
 
@@ -37,7 +37,7 @@ portletURL.setParameter("tabs1", tabs1);
 %>
 
 <liferay-ui:tabs
-	names="pending,completed"
+	names="my-pending-tasks,my-completed-tasks"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -47,6 +47,7 @@ try {
 
 	<liferay-ui:search-container
 		emptyResultsMessage='<%= LanguageUtil.get(pageContext, completed ? "there-are-no-completed-tasks" : "there-are-no-pending-tasks-assigned-to-you") %>'
+		headerNames="name,asset-title,due-date,state"
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
@@ -64,52 +65,72 @@ try {
 				value="<%= workflowTask %>"
 			/>
 
+			<portlet:renderURL var="rowURL">
+				<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
+				<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+			</portlet:renderURL>
+
 			<liferay-ui:search-container-column-text
 				name="name"
+				href="<%= rowURL %>"
 				property="name"
 			/>
 
-			<%
-			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
-
-			Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
-
-			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-			long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
-
-			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
-			PortletURL rowURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
-
-			if (rowURL != null) {
-				rowURL.setWindowState(WindowState.MAXIMIZED);
-				rowURL.setPortletMode(PortletMode.VIEW);
-
-				rowURL.setParameter("redirect", currentURL);
-			}
-			%>
-
 			<liferay-ui:search-container-column-text
 				buffer="buffer"
-				href="<%= rowURL %>"
 				name="asset-title"
+				href="<%= rowURL %>"
 			>
 
 				<%
+				WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
+
+				Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
+
+				String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
+				long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
+
+				WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
 				buffer.append(workflowHandler.getTitle(classPK));
 				%>
 
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
-				name="create-date"
-				property="createDate"
-			/>
+				buffer="buffer"
+				name="due-date"
+				href="<%= rowURL %>"
+			>
+				<%
+				String dueDateLabel = (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate());
+				buffer.append(dueDateLabel);
+				%>
+
+			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
-				name="due-date"
-				property="dueDate"
-			/>
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="state"
+			>
+
+				<%
+				WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(workflowTask.getWorkflowInstanceId());
+
+				Map<String, Object> workflowInstanceContext = workflowInstance.getContext();
+
+				String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
+				long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
+				long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
+				long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);
+
+				String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
+				buffer.append(state);
+				%>
+
+			</liferay-ui:search-container-column-text>
 
 			<c:if test="<%= !completed %>">
 				<liferay-ui:search-container-column-jsp

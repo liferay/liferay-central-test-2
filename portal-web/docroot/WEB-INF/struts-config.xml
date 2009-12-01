@@ -1828,6 +1828,7 @@
 		<!-- Workflow Tasks -->
 
 		<action path="/workflow_tasks/edit_workflow_task" type="com.liferay.portlet.workflowtasks.action.EditWorkflowTaskAction">
+			<forward name="portlet.workflow_tasks.edit_workflow_task" path="portlet.workflow_tasks.edit_workflow_task" />
 			<forward name="portlet.workflow_tasks.error" path="portlet.workflow_tasks.error" />
 		</action>
 

@@ -430,6 +430,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String WORKFLOW_DEFINITION = "WORKFLOW_DEFINITION";
 
+	public static final String WORKFLOW_TASK = "WORKFLOW_TASK";
+
 	public static final String WSRP_NEW_SESSION = "WSRP_NEW_SESSION";
 
 	public static final String WSRP_PRODUCER = "WSRP_PRODUCER";

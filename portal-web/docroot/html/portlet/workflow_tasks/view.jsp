@@ -26,7 +26,7 @@
 
 <c:choose>
 	<c:when test="<%= WorkflowEngineManagerUtil.isDeployed() %>">
-		<%@ include file="/html/portlet/workflow_tasks/view_tasks.jspf" %>
+		<%@ include file="/html/portlet/workflow_tasks/view_workflow_tasks.jspf" %>
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-info">
