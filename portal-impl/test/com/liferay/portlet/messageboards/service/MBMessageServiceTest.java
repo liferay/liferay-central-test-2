@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.DoAsUserThread;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -71,8 +72,10 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCommunityPermissions(
+			new String[] {ActionKeys.ADD_MESSAGE, ActionKeys.VIEW});
+		serviceContext.setGuestPermissions(
+			new String[] {ActionKeys.ADD_MESSAGE, ActionKeys.VIEW});
 		serviceContext.setScopeGroupId(group.getGroupId());
 
 		_category = MBCategoryServiceUtil.addCategory(
