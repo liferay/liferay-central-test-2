@@ -226,8 +226,6 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		//Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		long organizationId = ParamUtil.getLong(
 			actionRequest, "organizationIdsPosValue");
