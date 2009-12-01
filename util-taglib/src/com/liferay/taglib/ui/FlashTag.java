@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -236,20 +237,20 @@ public class FlashTag extends IncludeTag {
 
 	private String _align = "left";
 	private String _allowScriptAccess = "sameDomain";
-	private String _base = ".";
+	private String _base = StringPool.PERIOD;
 	private String _bgcolor = "#FFFFFF";
-	private String _devicefont = "true";
-	private String _flashvars = "";
+	private String _devicefont = Boolean.TRUE.toString();
+	private String _flashvars = StringPool.BLANK;
 	private String _height = "500";
-	private String _id = "";
-	private String _loop = "true";
-	private String _menu = "false";
-	private String _movie = "";
-	private String _play = "false";
+	private String _id = StringPool.BLANK;
+	private String _loop = Boolean.TRUE.toString();
+	private String _menu = Boolean.FALSE.toString();
+	private String _movie = StringPool.BLANK;
+	private String _play = Boolean.FALSE.toString();
 	private String _quality = "best";
-	private String _salign = "";
+	private String _salign = StringPool.BLANK;
 	private String _scale = "showall";
-	private String _swliveconnect = "false";
+	private String _swliveconnect = Boolean.FALSE.toString();
 	private String _version = "7";
 	private String _width = "100%";
 	private String _wmode = "opaque";

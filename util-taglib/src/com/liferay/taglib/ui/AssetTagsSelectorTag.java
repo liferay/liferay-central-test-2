@@ -43,14 +43,14 @@ public class AssetTagsSelectorTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:asset-tags-selector:classPK", String.valueOf(_classPK));
 		request.setAttribute(
-			"liferay-ui:asset-tags-selector:hiddenInput", _hiddenInput);
+			"liferay-ui:asset-tags-selector:contentCallback",
+			String.valueOf(_contentCallback));
 		request.setAttribute(
 			"liferay-ui:asset-tags-selector:curTags", _curTags);
 		request.setAttribute(
 			"liferay-ui:asset-tags-selector:focus", String.valueOf(_focus));
 		request.setAttribute(
-			"liferay-ui:asset-tags-selector:contentCallback",
-			String.valueOf(_contentCallback));
+			"liferay-ui:asset-tags-selector:hiddenInput", _hiddenInput);
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -63,8 +63,8 @@ public class AssetTagsSelectorTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
-	public void setHiddenInput(String hiddenInput) {
-		_hiddenInput = hiddenInput;
+	public void setContentCallback(String contentCallback) {
+		_contentCallback = contentCallback;
 	}
 
 	public void setCurTags(String curTags) {
@@ -75,8 +75,8 @@ public class AssetTagsSelectorTag extends IncludeTag {
 		_focus = focus;
 	}
 
-	public void setContentCallback(String contentCallback) {
-		_contentCallback = contentCallback;
+	public void setHiddenInput(String hiddenInput) {
+		_hiddenInput = hiddenInput;
 	}
 
 	protected String getDefaultPage() {
@@ -88,9 +88,9 @@ public class AssetTagsSelectorTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
-	private String _hiddenInput = "assetTagNames";
+	private String _contentCallback;
 	private String _curTags;
 	private boolean _focus;
-	private String _contentCallback;
+	private String _hiddenInput = "assetTagNames";
 
 }

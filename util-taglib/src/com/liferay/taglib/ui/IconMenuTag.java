@@ -40,24 +40,6 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  */
 public class IconMenuTag extends BodyTagSupport {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:icon-menu:message", _message);
-		request.setAttribute(
-			"liferay-ui:icon-menu:showExpanded",String.valueOf(_showExpanded));
-		request.setAttribute(
-			"liferay-ui:icon-menu:showWhenSingleIcon",
-			String.valueOf(_showWhenSingleIcon));
-		request.setAttribute("liferay-ui:icon-menu:align", _align);
-		request.setAttribute("liferay-ui:icon-menu:cssClass", _cssClass);
-		request.setAttribute(
-			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
-
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public int doAfterBody() {
 		BodyContent bodyContent = getBodyContent();
 
@@ -116,11 +98,11 @@ public class IconMenuTag extends BodyTagSupport {
 				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
 
+			request.removeAttribute("liferay-ui:icon-menu:align");
+			request.removeAttribute("liferay-ui:icon-menu:cssClass");
 			request.removeAttribute("liferay-ui:icon-menu:message");
 			request.removeAttribute("liferay-ui:icon-menu:showExpanded");
 			request.removeAttribute("liferay-ui:icon-menu:showWhenSingleIcon");
-			request.removeAttribute("liferay-ui:icon-menu:align");
-			request.removeAttribute("liferay-ui:icon-menu:cssClass");
 
 			return EVAL_PAGE;
 		}
@@ -129,15 +111,42 @@ public class IconMenuTag extends BodyTagSupport {
 		}
 		finally {
 			if (!ServerDetector.isResin()) {
-				_startPage = null;
+				_align = "right";
+				_bodyContentString = StringPool.BLANK;
+				_cssClass = null;
 				_endPage = null;
 				_message = "actions";
 				_showExpanded = false;
 				_showWhenSingleIcon = false;
-				_align = "right";
-				_cssClass = null;
-				_bodyContentString = StringPool.BLANK;
+				_startPage = null;
 			}
+		}
+	}
+
+	public int doStartTag() {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		request.setAttribute("liferay-ui:icon-menu:align", _align);
+		request.setAttribute("liferay-ui:icon-menu:cssClass", _cssClass);
+		request.setAttribute(
+			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
+		request.setAttribute("liferay-ui:icon-menu:message", _message);
+		request.setAttribute(
+			"liferay-ui:icon-menu:showExpanded",String.valueOf(_showExpanded));
+		request.setAttribute(
+			"liferay-ui:icon-menu:showWhenSingleIcon",
+			String.valueOf(_showWhenSingleIcon));
+
+		return EVAL_BODY_BUFFERED;
+	}
+
+	public String getEndPage() {
+		if (Validator.isNull(_endPage)) {
+			return _END_PAGE;
+		}
+		else {
+			return _endPage;
 		}
 	}
 
@@ -150,17 +159,12 @@ public class IconMenuTag extends BodyTagSupport {
 		}
 	}
 
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
+	public void setAlign(String align) {
+		_align = align;
 	}
 
-	public String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
 	}
 
 	public void setEndPage(String endPage) {
@@ -179,26 +183,22 @@ public class IconMenuTag extends BodyTagSupport {
 		_showWhenSingleIcon = showWhenSingleIcon;
 	}
 
-	public void setAlign(String align) {
-		_align = align;
+	public void setStartPage(String startPage) {
+		_startPage = startPage;
 	}
 
-	public void setCssClass(String cssClass) {
-		_cssClass = cssClass;
-	}
+	private static final String _END_PAGE = "/html/taglib/ui/icon_menu/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/icon_menu/start.jsp";
 
-	private static final String _END_PAGE = "/html/taglib/ui/icon_menu/end.jsp";
-
-	private String _startPage;
+	private String _align = "right";
+	private String _bodyContentString = StringPool.BLANK;
+	private String _cssClass;
 	private String _endPage;
 	private String _message = "actions";
 	private boolean _showExpanded;
 	private boolean _showWhenSingleIcon;
-	private String _align = "right";
-	private String _cssClass;
-	private String _bodyContentString = StringPool.BLANK;
+	private String _startPage;
 
 }

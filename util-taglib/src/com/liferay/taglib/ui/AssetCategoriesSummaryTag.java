@@ -53,6 +53,10 @@ public class AssetCategoriesSummaryTag extends IncludeTag {
 		return EVAL_BODY_BUFFERED;
 	}
 
+	public PortletURL getPortletURL() {
+		return _portletURL;
+	}
+
 	public void setClassName(String className) {
 		_className = className;
 	}
@@ -63,10 +67,6 @@ public class AssetCategoriesSummaryTag extends IncludeTag {
 
 	public void setMessage(String message) {
 		_message = message;
-	}
-
-	public PortletURL getPortletURL() {
-		return _portletURL;
 	}
 
 	public void setPortletURL(PortletURL portletURL) {

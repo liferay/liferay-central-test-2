@@ -41,10 +41,6 @@ import javax.servlet.jsp.JspException;
  */
 public class BoxTag extends ParamAndPropertyAncestorTagImpl {
 
-	public int doStartTag() {
-		return EVAL_BODY_BUFFERED;
-	}
-
 	public int doAfterBody() {
 		_bodyContentString = getBodyContent().getString();
 
@@ -109,28 +105,32 @@ public class BoxTag extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public boolean isTheme() {
-		return false;
-	}
-
-	public String getTop() {
-		return _top;
-	}
-
-	public void setTop(String top) {
-		_top = top;
+	public int doStartTag() {
+		return EVAL_BODY_BUFFERED;
 	}
 
 	public String getBottom() {
 		return _bottom;
 	}
 
+	public String getTop() {
+		return _top;
+	}
+
+	public boolean isTheme() {
+		return false;
+	}
+
 	public void setBottom(String bottom) {
 		_bottom = bottom;
 	}
 
-	private String _top;
-	private String _bottom;
+	public void setTop(String top) {
+		_top = top;
+	}
+
 	private String _bodyContentString = StringPool.BLANK;
+	private String _bottom;
+	private String _top;
 
 }

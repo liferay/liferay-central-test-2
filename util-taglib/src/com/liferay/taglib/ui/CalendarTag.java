@@ -41,47 +41,47 @@ public class CalendarTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute(
-			"liferay-ui:calendar:month", String.valueOf(_month));
+		request.setAttribute("liferay-ui:calendar:data", _data);
 		request.setAttribute("liferay-ui:calendar:day", String.valueOf(_day));
-		request.setAttribute("liferay-ui:calendar:year", String.valueOf(_year));
 		request.setAttribute(
 			"liferay-ui:calendar:headerPattern", _headerPattern);
 		request.setAttribute("liferay-ui:calendar:headerFormat", _headerFormat);
-		request.setAttribute("liferay-ui:calendar:data", _data);
+		request.setAttribute(
+			"liferay-ui:calendar:month", String.valueOf(_month));
 		request.setAttribute(
 			"liferay-ui:calendar:showAllPotentialWeeks",
 			String.valueOf(_showAllPotentialWeeks));
+		request.setAttribute("liferay-ui:calendar:year", String.valueOf(_year));
 
 		return EVAL_BODY_BUFFERED;
-	}
-
-	public void setMonth(int month) {
-		_month = month;
-	}
-
-	public void setDay(int day) {
-		_day = day;
-	}
-
-	public void setYear(int year) {
-		_year = year;
-	}
-
-	public void setHeaderPattern(String headerPattern) {
-		_headerPattern = headerPattern;
-	}
-
-	public void setHeaderFormat(Format headerFormat) {
-		_headerFormat = headerFormat;
 	}
 
 	public void setData(Set<Integer> data) {
 		_data = data;
 	}
 
+	public void setDay(int day) {
+		_day = day;
+	}
+
+	public void setHeaderFormat(Format headerFormat) {
+		_headerFormat = headerFormat;
+	}
+
+	public void setHeaderPattern(String headerPattern) {
+		_headerPattern = headerPattern;
+	}
+
+	public void setMonth(int month) {
+		_month = month;
+	}
+
 	public void setShowAllPotentialWeeks(boolean showAllPotentialWeeks) {
 		_showAllPotentialWeeks = showAllPotentialWeeks;
+	}
+
+	public void setYear(int year) {
+		_year = year;
 	}
 
 	protected String getDefaultPage() {
@@ -90,12 +90,12 @@ public class CalendarTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/calendar/page.jsp";
 
-	private int _month;
-	private int _day;
-	private int _year;
-	private String _headerPattern;
-	private Format _headerFormat;
 	private Set<Integer> _data;
+	private int _day;
+	private Format _headerFormat;
+	private String _headerPattern;
+	private int _month;
 	private boolean _showAllPotentialWeeks;
+	private int _year;
 
 }

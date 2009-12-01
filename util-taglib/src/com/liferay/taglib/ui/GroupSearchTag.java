@@ -41,17 +41,28 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class GroupSearchTag extends TagSupport {
 
+	public int doEndTag() throws JspException {
+		try {
+			PortalIncludeUtil.include(pageContext, getEndPage());
+
+			return EVAL_PAGE;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+	}
+
 	public int doStartTag() throws JspException {
 		try {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
 			request.setAttribute(
+				"liferay-ui:group-search:groupParams", _groupParams);
+			request.setAttribute(
 				"liferay-ui:group-search:portletURL", _portletURL);
 			request.setAttribute(
 				"liferay-ui:group-search:rowChecker", _rowChecker);
-			request.setAttribute(
-				"liferay-ui:group-search:groupParams", _groupParams);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -62,14 +73,12 @@ public class GroupSearchTag extends TagSupport {
 		}
 	}
 
-	public int doEndTag() throws JspException {
-		try {
-			PortalIncludeUtil.include(pageContext, getEndPage());
-
-			return EVAL_PAGE;
+	public String getEndPage() {
+		if (Validator.isNull(_endPage)) {
+			return _END_PAGE;
 		}
-		catch (Exception e) {
-			throw new JspException(e);
+		else {
+			return _endPage;
 		}
 	}
 
@@ -82,21 +91,12 @@ public class GroupSearchTag extends TagSupport {
 		}
 	}
 
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
-	}
-
-	public String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
 	public void setEndPage(String endPage) {
 		_endPage = endPage;
+	}
+
+	public void setGroupParams(LinkedHashMap<String, Object> groupParams) {
+		_groupParams = groupParams;
 	}
 
 	public void setPortletURL(PortletURL portletURL) {
@@ -107,20 +107,20 @@ public class GroupSearchTag extends TagSupport {
 		_rowChecker = rowChecker;
 	}
 
-	public void setGroupParams(LinkedHashMap<String, Object> groupParams) {
-		_groupParams = groupParams;
+	public void setStartPage(String startPage) {
+		_startPage = startPage;
 	}
-
-	private static final String _START_PAGE =
-		"/html/taglib/ui/group_search/start.jsp";
 
 	private static final String _END_PAGE =
 		"/html/taglib/ui/group_search/end.jsp";
 
-	private String _startPage;
+	private static final String _START_PAGE =
+		"/html/taglib/ui/group_search/start.jsp";
+
 	private String _endPage;
+	private LinkedHashMap<String, Object> _groupParams;
 	private PortletURL _portletURL;
 	private RowChecker _rowChecker;
-	private LinkedHashMap<String, Object> _groupParams;
+	private String _startPage;
 
 }

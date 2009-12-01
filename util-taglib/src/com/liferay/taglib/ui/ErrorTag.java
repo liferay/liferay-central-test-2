@@ -42,41 +42,6 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class ErrorTag extends TagSupport {
 
-	public int doStartTag() throws JspException {
-		try {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
-			RenderRequest renderRequest = (RenderRequest)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST);
-
-			request.setAttribute("liferay-ui:error:key", _key);
-			request.setAttribute("liferay-ui:error:message", _message);
-			request.setAttribute(
-				"liferay-ui:error:translateMessage",
-				String.valueOf(_translateMessage));
-			request.setAttribute("liferay-ui:error:rowBreak", _rowBreak);
-
-			if ((_exception != null) && (Validator.isNull(_message)) &&
-				(SessionErrors.contains(renderRequest, _exception.getName()))) {
-
-				PortalIncludeUtil.include(pageContext, getStartPage());
-
-				pageContext.setAttribute(
-					"errorException",
-					SessionErrors.get(renderRequest, _exception.getName()));
-
-				return EVAL_BODY_INCLUDE;
-			}
-			else {
-				return SKIP_BODY;
-			}
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
-	}
-
 	public int doEndTag() throws JspException {
 		try {
 			HttpServletRequest request =
@@ -120,17 +85,39 @@ public class ErrorTag extends TagSupport {
 		}
 	}
 
-	public String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
-	}
+	public int doStartTag() throws JspException {
+		try {
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-	public void setStartPage(String startPage) {
-		_startPage = startPage;
+			RenderRequest renderRequest = (RenderRequest)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
+
+			request.setAttribute("liferay-ui:error:key", _key);
+			request.setAttribute("liferay-ui:error:message", _message);
+			request.setAttribute("liferay-ui:error:rowBreak", _rowBreak);
+			request.setAttribute(
+				"liferay-ui:error:translateMessage",
+				String.valueOf(_translateMessage));
+
+			if ((_exception != null) && (Validator.isNull(_message)) &&
+				(SessionErrors.contains(renderRequest, _exception.getName()))) {
+
+				PortalIncludeUtil.include(pageContext, getStartPage());
+
+				pageContext.setAttribute(
+					"errorException",
+					SessionErrors.get(renderRequest, _exception.getName()));
+
+				return EVAL_BODY_INCLUDE;
+			}
+			else {
+				return SKIP_BODY;
+			}
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public String getEndPage() {
@@ -139,6 +126,15 @@ public class ErrorTag extends TagSupport {
 		}
 		else {
 			return _endPage;
+		}
+	}
+
+	public String getStartPage() {
+		if (Validator.isNull(_startPage)) {
+			return _START_PAGE;
+		}
+		else {
+			return _startPage;
 		}
 	}
 
@@ -162,24 +158,28 @@ public class ErrorTag extends TagSupport {
 		_message = message;
 	}
 
-	public void setTranslateMessage(boolean translateMessage) {
-		_translateMessage = translateMessage;
-	}
-
 	public void setRowBreak(String rowBreak) {
 		_rowBreak = HtmlUtil.unescape(rowBreak);
 	}
 
-	private static final String _START_PAGE = "/html/taglib/ui/error/start.jsp";
+	public void setStartPage(String startPage) {
+		_startPage = startPage;
+	}
+
+	public void setTranslateMessage(boolean translateMessage) {
+		_translateMessage = translateMessage;
+	}
 
 	private static final String _END_PAGE = "/html/taglib/ui/error/end.jsp";
 
-	private String _startPage;
+	private static final String _START_PAGE = "/html/taglib/ui/error/start.jsp";
+
 	private String _endPage;
 	private Class<?> _exception;
 	private String _key;
 	private String _message;
-	private boolean _translateMessage = true;
 	private String _rowBreak = StringPool.BLANK;
+	private String _startPage;
+	private boolean _translateMessage = true;
 
 }

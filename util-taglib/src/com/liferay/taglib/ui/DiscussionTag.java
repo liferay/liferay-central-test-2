@@ -37,28 +37,20 @@ public class DiscussionTag extends IncludeTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute("liferay-ui:discussion:formName", _formName);
-		request.setAttribute("liferay-ui:discussion:formAction", _formAction);
 		request.setAttribute("liferay-ui:discussion:className", _className);
 		request.setAttribute(
 			"liferay-ui:discussion:classPK", String.valueOf(_classPK));
-		request.setAttribute(
-			"liferay-ui:discussion:userId", String.valueOf(_userId));
-		request.setAttribute("liferay-ui:discussion:subject", _subject);
-		request.setAttribute("liferay-ui:discussion:redirect", _redirect);
+		request.setAttribute("liferay-ui:discussion:formAction", _formAction);
+		request.setAttribute("liferay-ui:discussion:formName", _formName);
 		request.setAttribute(
 			"liferay-ui:discussion:ratingsEnabled",
 			String.valueOf(_ratingsEnabled));
+		request.setAttribute("liferay-ui:discussion:redirect", _redirect);
+		request.setAttribute("liferay-ui:discussion:subject", _subject);
+		request.setAttribute(
+			"liferay-ui:discussion:userId", String.valueOf(_userId));
 
 		return EVAL_BODY_BUFFERED;
-	}
-
-	public void setFormName(String formName) {
-		_formName = formName;
-	}
-
-	public void setFormAction(String formAction) {
-		_formAction = formAction;
 	}
 
 	public void setClassName(String className) {
@@ -69,20 +61,28 @@ public class DiscussionTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
-	public void setUserId(long userId) {
-		_userId = userId;
+	public void setFormAction(String formAction) {
+		_formAction = formAction;
 	}
 
-	public void setSubject(String subject) {
-		_subject = subject;
+	public void setFormName(String formName) {
+		_formName = formName;
+	}
+
+	public void setRatingsEnabled(boolean ratingsEnabled) {
+		_ratingsEnabled = ratingsEnabled;
 	}
 
 	public void setRedirect(String redirect) {
 		_redirect = redirect;
 	}
 
-	public void setRatingsEnabled(boolean ratingsEnabled) {
-		_ratingsEnabled = ratingsEnabled;
+	public void setSubject(String subject) {
+		_subject = subject;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
 	}
 
 	protected String getDefaultPage() {
@@ -91,13 +91,13 @@ public class DiscussionTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/discussion/page.jsp";
 
-	private String _formName = "fm";
-	private String _formAction;
 	private String _className;
 	private long _classPK;
-	private long _userId;
-	private String _subject;
-	private String _redirect;
+	private String _formAction;
+	private String _formName = "fm";
 	private boolean _ratingsEnabled = true;
+	private String _redirect;
+	private String _subject;
+	private long _userId;
 
 }
