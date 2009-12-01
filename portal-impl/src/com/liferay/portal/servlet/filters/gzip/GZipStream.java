@@ -56,6 +56,7 @@ public class GZipStream extends ServletOutputStream {
 		if (_closed) {
 			throw new IOException();
 		}
+
 		ByteArrayOutputStream baos = (ByteArrayOutputStream)_bufferedOutput;
 
 		if (baos.size() > 20) {
