@@ -71,6 +71,12 @@ public class WorkflowTaskManagerUtil {
 			userId, workflowTaskId);
 	}
 
+	public static WorkflowTask getWorkflowTask(long workflowTaskId)
+		throws WorkflowException {
+
+		return _workflowTaskManager.getWorkflowTask(workflowTaskId);
+	}
+
 	public static int getWorkflowTaskCountByRole(long roleId, Boolean completed)
 		throws WorkflowException {
 

@@ -57,6 +57,9 @@ public interface WorkflowTaskManager {
 	public List<String> getNextTransitionNames(long userId, long workflowTaskId)
 		throws WorkflowException;
 
+	public WorkflowTask getWorkflowTask(long workflowTaskId)
+		throws WorkflowException;
+
 	public int getWorkflowTaskCountByRole(long roleId, Boolean completed)
 		throws WorkflowException;
 

@@ -68,6 +68,10 @@ public class WorkflowTaskManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public WorkflowTask getWorkflowTask(long workflowTaskId) {
+		throw new UnsupportedOperationException();
+	}
+
 	public int getWorkflowTaskCountByRole(long roleId, Boolean completed) {
 		throw new UnsupportedOperationException();
 	}
