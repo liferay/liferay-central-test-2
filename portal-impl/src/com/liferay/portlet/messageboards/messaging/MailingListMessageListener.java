@@ -28,10 +28,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
@@ -159,9 +157,7 @@ public class MailingListMessageListener implements MessageListener {
 			}
 		}
 
-		Company company = CompanyLocalServiceUtil.getCompany(
-			mailingListRequest.getCompanyId());
-
+		long companyId = mailingListRequest.getCompanyId();
 		long groupId = mailingListRequest.getGroupId();
 		long categoryId = mailingListRequest.getCategoryId();
 
@@ -172,11 +168,10 @@ public class MailingListMessageListener implements MessageListener {
 		boolean anonymous = false;
 
 		User user = UserLocalServiceUtil.getUserById(
-			company.getCompanyId(), mailingListRequest.getUserId());
+			companyId, mailingListRequest.getUserId());
 
 		try {
-			user = UserLocalServiceUtil.getUserByEmailAddress(
-				company.getCompanyId(), from);
+			user = UserLocalServiceUtil.getUserByEmailAddress(companyId, from);
 		}
 		catch (NoSuchUserException nsue) {
 			anonymous = true;
@@ -217,6 +212,9 @@ public class MailingListMessageListener implements MessageListener {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setLayoutFullURL(
+			MBUtil.getLayoutFullURL(companyId, groupId));
+		serviceContext.setScopeGroupId(groupId);
 
 		if (parentMessage == null) {
 			MBMessageServiceUtil.addMessage(

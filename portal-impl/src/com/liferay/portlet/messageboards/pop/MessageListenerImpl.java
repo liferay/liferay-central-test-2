@@ -180,6 +180,9 @@ public class MessageListenerImpl implements MessageListener {
 
 			serviceContext.setAddCommunityPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
+			serviceContext.setLayoutFullURL(
+				MBUtil.getLayoutFullURL(company.getCompanyId(), groupId));
+			serviceContext.setScopeGroupId(groupId);
 
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(
