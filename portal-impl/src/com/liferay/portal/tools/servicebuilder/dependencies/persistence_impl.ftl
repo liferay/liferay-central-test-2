@@ -659,7 +659,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						<#include "persistence_impl_finder_col.ftl">
 
 						<#if entity.getOrder()??>
-							query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
+							query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
 						</#if>
 
 						String sql = query.toString();
@@ -785,7 +785,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						<#if entity.getOrder()??>
 							else {
-								query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
+								query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
 							}
 						</#if>
 
@@ -969,7 +969,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					<#if entity.getOrder()??>
 						else {
-							query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
+							query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
 						}
 					</#if>
 
@@ -1139,7 +1139,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						<#include "persistence_impl_finder_col.ftl">
 
 						<#if entity.getOrder()??>
-							query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
+							query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
 						</#if>
 
 						String sql = query.toString();
@@ -1303,7 +1303,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				<#if entity.getOrder()??>
 					else {
-						sql = _SQL_SELECT_${entity.alias?upper_case}.concat(${entity.name}ModelImpl.ORDER_BY_SQL);
+						sql = _SQL_SELECT_${entity.alias?upper_case}.concat(${entity.name}ModelImpl.ORDER_BY_JPQL);
 					}
 				<#else>
 					sql = _SQL_SELECT_${entity.alias?upper_case};

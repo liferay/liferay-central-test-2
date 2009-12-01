@@ -87,29 +87,47 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	public static final String TABLE_SQL_DROP = "drop table ${entity.table}";
 
 	<#if entity.getOrder()??>
-		<#assign orderByExpression = "">
-
 		<#assign orderList = entity.getOrder().getColumns()>
+
+		<#assign orderByJPQL = "">
 
 		<#list orderList as order>
 			<#if entity.hasCompoundPK() && order.isPrimary()>
-				<#assign orderByExpression = orderByExpression + entity.alias + ".id." + order.name>
+				<#assign orderByJPQL = orderByJPQL + entity.alias + ".id." + order.name>
 			<#else>
-				<#assign orderByExpression = orderByExpression + entity.alias + "." + order.name>
+				<#assign orderByJPQL = orderByJPQL + entity.alias + "." + order.name>
 			</#if>
 
 			<#if order.isOrderByAscending()>
-				<#assign orderByExpression = orderByExpression + " ASC">
+				<#assign orderByJPQL = orderByJPQL + " ASC">
 			<#else>
-				<#assign orderByExpression = orderByExpression + " DESC">
+				<#assign orderByJPQL = orderByJPQL + " DESC">
 			</#if>
 
 			<#if order_has_next>
-				<#assign orderByExpression = orderByExpression + ", ">
+				<#assign orderByJPQL = orderByJPQL + ", ">
 			</#if>
 		</#list>
 
-		public static final String ORDER_BY_SQL = " ORDER BY ${orderByExpression}";
+		public static final String ORDER_BY_JPQL = " ORDER BY ${orderByJPQL}";
+
+		<#assign orderBySQL = "">
+
+		<#list orderList as order>
+			<#assign orderBySQL = orderBySQL + entity.table + "." + order.DBName>
+
+			<#if order.isOrderByAscending()>
+				<#assign orderBySQL = orderBySQL + " ASC">
+			<#else>
+				<#assign orderBySQL = orderBySQL + " DESC">
+			</#if>
+
+			<#if order_has_next>
+				<#assign orderBySQL = orderBySQL + ", ">
+			</#if>
+		</#list>
+
+		public static final String ORDER_BY_SQL = " ORDER BY ${orderBySQL}";
 	</#if>
 
 	public static final String DATA_SOURCE = "${entity.dataSource}";
