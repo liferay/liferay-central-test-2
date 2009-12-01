@@ -60,7 +60,6 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 <aui:form action="<%= editWorkflowTaskURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="assigneeUserId" type="hidden" value="<%= String.valueOf(workflowTask.getAssigneeUserId()) %>" />
 	<aui:input name="workflowTaskId" type="hidden" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 	<aui:input name="transitionName" type="hidden" />
 
