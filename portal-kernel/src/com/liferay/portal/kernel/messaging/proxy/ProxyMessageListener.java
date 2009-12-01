@@ -62,7 +62,9 @@ public class ProxyMessageListener implements MessageListener {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
 
 			proxyResponse.setException(e);
 		}
