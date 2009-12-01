@@ -137,12 +137,11 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 
 			if (className == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No ClassName exists with the primary key " +
-						classNameId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + classNameId);
 				}
 
-				throw new NoSuchClassNameException(
-					"No ClassName exists with the primary key " + classNameId);
+				throw new NoSuchClassNameException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					classNameId);
 			}
 
 			return remove(className);
@@ -287,12 +286,11 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 
 		if (className == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No ClassName exists with the primary key " +
-					classNameId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + classNameId);
 			}
 
-			throw new NoSuchClassNameException(
-				"No ClassName exists with the primary key " + classNameId);
+			throw new NoSuchClassNameException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				classNameId);
 		}
 
 		return className;
@@ -337,11 +335,12 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		ClassName className = fetchByValue(value);
 
 		if (className == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No ClassName exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("value=" + value);
+			msg.append("value=");
+			msg.append(value);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -376,7 +375,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_CLASSNAME_WHERE);
 
@@ -392,7 +391,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -510,33 +511,23 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_CLASSNAME);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_CLASSNAME);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("className.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_CLASSNAME;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<ClassName>)QueryUtil.list(q, getDialect(),
@@ -593,7 +584,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_CLASSNAME_WHERE);
 
@@ -609,7 +600,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -795,12 +788,15 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-	private static final String _FINDER_COLUMN_VALUE_VALUE_1 = "classNamevalue IS NULL";
-	private static final String _FINDER_COLUMN_VALUE_VALUE_2 = "className.value = ?";
-	private static final String _FINDER_COLUMN_VALUE_VALUE_3 = "(classNamevalue IS NULL OR className.value = ?)";
 	private static final String _SQL_SELECT_CLASSNAME = "SELECT className FROM ClassName className";
 	private static final String _SQL_SELECT_CLASSNAME_WHERE = "SELECT className FROM ClassName className WHERE ";
 	private static final String _SQL_COUNT_CLASSNAME = "SELECT COUNT(className) FROM ClassName className";
 	private static final String _SQL_COUNT_CLASSNAME_WHERE = "SELECT COUNT(className) FROM ClassName className WHERE ";
+	private static final String _FINDER_COLUMN_VALUE_VALUE_1 = "classNamevalue IS NULL";
+	private static final String _FINDER_COLUMN_VALUE_VALUE_2 = "className.value = ?";
+	private static final String _FINDER_COLUMN_VALUE_VALUE_3 = "(classNamevalue IS NULL OR className.value = ?)";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "className.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ClassName exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ClassName exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ClassNamePersistenceImpl.class);
 }

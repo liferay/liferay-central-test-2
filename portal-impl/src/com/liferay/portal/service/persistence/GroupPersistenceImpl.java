@@ -263,12 +263,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 			if (group == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Group exists with the primary key " +
-						groupId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + groupId);
 				}
 
-				throw new NoSuchGroupException(
-					"No Group exists with the primary key " + groupId);
+				throw new NoSuchGroupException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					groupId);
 			}
 
 			return remove(group);
@@ -638,11 +637,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 		if (group == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Group exists with the primary key " + groupId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + groupId);
 			}
 
-			throw new NoSuchGroupException(
-				"No Group exists with the primary key " + groupId);
+			throw new NoSuchGroupException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				groupId);
 		}
 
 		return group;
@@ -693,17 +692,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				query.append(" ORDER BY ");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("group_.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -753,41 +752,31 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("group_.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("group_.name ASC");
+					query.append(GroupModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -820,11 +809,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -842,11 +832,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -868,41 +859,31 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_GROUP__WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("group_.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("group_.name ASC");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -931,11 +912,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByLiveGroupId(liveGroupId);
 
 		if (group == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("liveGroupId=" + liveGroupId);
+			msg.append("liveGroupId=");
+			msg.append(liveGroupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -970,17 +952,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
 				query.append(_FINDER_COLUMN_LIVEGROUPID_LIVEGROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("group_.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1036,14 +1018,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_N(companyId, name);
 
 		if (group == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1079,7 +1062,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
@@ -1097,11 +1080,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("group_.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1163,14 +1146,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_F(companyId, friendlyURL);
 
 		if (group == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("friendlyURL=" + friendlyURL);
+			msg.append(", friendlyURL=");
+			msg.append(friendlyURL);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1206,7 +1190,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
@@ -1224,11 +1208,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("group_.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1300,7 +1284,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
@@ -1308,11 +1292,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
 
-				query.append(" ORDER BY ");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("group_.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1364,7 +1348,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
@@ -1373,34 +1365,16 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("group_.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("group_.name ASC");
+					query.append(GroupModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1435,14 +1409,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByT_A(type, active, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("type=" + type);
+			msg.append("type=");
+			msg.append(type);
 
-			msg.append(", ");
-			msg.append("active=" + active);
+			msg.append(", active=");
+			msg.append(active);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1460,14 +1435,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		List<Group> list = findByT_A(type, active, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("type=" + type);
+			msg.append("type=");
+			msg.append(type);
 
-			msg.append(", ");
-			msg.append("active=" + active);
+			msg.append(", active=");
+			msg.append(active);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1490,7 +1466,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_GROUP__WHERE);
 
@@ -1499,34 +1483,16 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("group_.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("group_.name ASC");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1557,17 +1523,18 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_C_C(companyId, classNameId, classPK);
 
 		if (group == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
-			msg.append(", ");
-			msg.append("classPK=" + classPK);
+			msg.append(", classPK=");
+			msg.append(classPK);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1605,7 +1572,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
@@ -1615,11 +1582,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				query.append(" ORDER BY ");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("group_.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1681,17 +1648,18 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_L_N(companyId, liveGroupId, name);
 
 		if (group == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("liveGroupId=" + liveGroupId);
+			msg.append(", liveGroupId=");
+			msg.append(liveGroupId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1731,7 +1699,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
@@ -1751,11 +1719,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("group_.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1821,20 +1789,21 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		Group group = fetchByC_C_L_N(companyId, classNameId, liveGroupId, name);
 
 		if (group == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(10);
 
-			msg.append("No Group exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
-			msg.append(", ");
-			msg.append("liveGroupId=" + liveGroupId);
+			msg.append(", liveGroupId=");
+			msg.append(liveGroupId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1876,7 +1845,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(6);
 
 				query.append(_SQL_SELECT_GROUP__WHERE);
 
@@ -1898,11 +1867,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(GroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("group_.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2028,39 +1997,25 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_GROUP_);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_GROUP_);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("group_.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("group_.name ASC");
+					sql = _SQL_SELECT_GROUP_.concat(GroupModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<Group>)QueryUtil.list(q, getDialect(), start,
@@ -2165,13 +2120,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2209,13 +2166,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
 				query.append(_FINDER_COLUMN_LIVEGROUPID_LIVEGROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2254,7 +2213,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
@@ -2272,7 +2231,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2315,7 +2276,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
@@ -2333,7 +2294,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2377,7 +2340,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
@@ -2385,7 +2348,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2428,7 +2393,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
@@ -2438,7 +2403,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2485,7 +2452,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
@@ -2505,7 +2472,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2555,7 +2524,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_COUNT_GROUP__WHERE);
 
@@ -2577,7 +2546,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2680,22 +2651,22 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETORGANIZATIONS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETORGANIZATIONS);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
 				else {
-					sb.append(" ORDER BY ");
-
-					sb.append("Organization_.name ASC");
+					sql = _SQL_GETORGANIZATIONS.concat(com.liferay.portal.model.impl.OrganizationModelImpl.ORDER_BY_SQL);
 				}
-
-				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -3032,16 +3003,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETPERMISSIONS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETPERMISSIONS);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
-				String sql = sb.toString();
+				sql = _SQL_GETPERMISSIONS;
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -3374,22 +3349,22 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETROLES);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETROLES);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
 				else {
-					sb.append(" ORDER BY ");
-
-					sb.append("Role_.name ASC");
+					sql = _SQL_GETROLES.concat(com.liferay.portal.model.impl.RoleModelImpl.ORDER_BY_SQL);
 				}
-
-				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -3710,22 +3685,22 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETUSERGROUPS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETUSERGROUPS);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
 				else {
-					sb.append(" ORDER BY ");
-
-					sb.append("UserGroup.name ASC");
+					sql = _SQL_GETUSERGROUPS.concat(com.liferay.portal.model.impl.UserGroupModelImpl.ORDER_BY_SQL);
 				}
-
-				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -4056,16 +4031,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETUSERS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETUSERS);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
-				String sql = sb.toString();
+				sql = _SQL_GETUSERS;
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -5415,6 +5394,25 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		private GroupPersistenceImpl _persistenceImpl;
 	}
 
+	private static final String _SQL_SELECT_GROUP_ = "SELECT group_ FROM Group group_";
+	private static final String _SQL_SELECT_GROUP__WHERE = "SELECT group_ FROM Group group_ WHERE ";
+	private static final String _SQL_COUNT_GROUP_ = "SELECT COUNT(group_) FROM Group group_";
+	private static final String _SQL_COUNT_GROUP__WHERE = "SELECT COUNT(group_) FROM Group group_ WHERE ";
+	private static final String _SQL_GETORGANIZATIONS = "SELECT {Organization_.*} FROM Organization_ INNER JOIN Groups_Orgs ON (Groups_Orgs.organizationId = Organization_.organizationId) WHERE (Groups_Orgs.groupId = ?)";
+	private static final String _SQL_GETORGANIZATIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Orgs WHERE groupId = ?";
+	private static final String _SQL_CONTAINSORGANIZATION = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Orgs WHERE groupId = ? AND organizationId = ?";
+	private static final String _SQL_GETPERMISSIONS = "SELECT {Permission_.*} FROM Permission_ INNER JOIN Groups_Permissions ON (Groups_Permissions.permissionId = Permission_.permissionId) WHERE (Groups_Permissions.groupId = ?)";
+	private static final String _SQL_GETPERMISSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE groupId = ?";
+	private static final String _SQL_CONTAINSPERMISSION = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE groupId = ? AND permissionId = ?";
+	private static final String _SQL_GETROLES = "SELECT {Role_.*} FROM Role_ INNER JOIN Groups_Roles ON (Groups_Roles.roleId = Role_.roleId) WHERE (Groups_Roles.groupId = ?)";
+	private static final String _SQL_GETROLESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE groupId = ?";
+	private static final String _SQL_CONTAINSROLE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE groupId = ? AND roleId = ?";
+	private static final String _SQL_GETUSERGROUPS = "SELECT {UserGroup.*} FROM UserGroup INNER JOIN Groups_UserGroups ON (Groups_UserGroups.userGroupId = UserGroup.userGroupId) WHERE (Groups_UserGroups.groupId = ?)";
+	private static final String _SQL_GETUSERGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE groupId = ?";
+	private static final String _SQL_CONTAINSUSERGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE groupId = ? AND userGroupId = ?";
+	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_Groups ON (Users_Groups.userId = User_.userId) WHERE (Users_Groups.groupId = ?)";
+	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE groupId = ?";
+	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE groupId = ? AND userId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "group_.companyId = ?";
 	private static final String _FINDER_COLUMN_LIVEGROUPID_LIVEGROUPID_2 = "group_.liveGroupId = ?";
 	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "group_.companyId = ? AND ";
@@ -5441,24 +5439,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	private static final String _FINDER_COLUMN_C_C_L_N_NAME_1 = "group_name IS NULL";
 	private static final String _FINDER_COLUMN_C_C_L_N_NAME_2 = "group_.name = ?";
 	private static final String _FINDER_COLUMN_C_C_L_N_NAME_3 = "(group_name IS NULL OR group_.name = ?)";
-	private static final String _SQL_SELECT_GROUP_ = "SELECT group_ FROM Group group_";
-	private static final String _SQL_SELECT_GROUP__WHERE = "SELECT group_ FROM Group group_ WHERE ";
-	private static final String _SQL_COUNT_GROUP_ = "SELECT COUNT(group_) FROM Group group_";
-	private static final String _SQL_COUNT_GROUP__WHERE = "SELECT COUNT(group_) FROM Group group_ WHERE ";
-	private static final String _SQL_GETORGANIZATIONS = "SELECT {Organization_.*} FROM Organization_ INNER JOIN Groups_Orgs ON (Groups_Orgs.organizationId = Organization_.organizationId) WHERE (Groups_Orgs.groupId = ?)";
-	private static final String _SQL_GETORGANIZATIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Orgs WHERE groupId = ?";
-	private static final String _SQL_CONTAINSORGANIZATION = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Orgs WHERE groupId = ? AND organizationId = ?";
-	private static final String _SQL_GETPERMISSIONS = "SELECT {Permission_.*} FROM Permission_ INNER JOIN Groups_Permissions ON (Groups_Permissions.permissionId = Permission_.permissionId) WHERE (Groups_Permissions.groupId = ?)";
-	private static final String _SQL_GETPERMISSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE groupId = ?";
-	private static final String _SQL_CONTAINSPERMISSION = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE groupId = ? AND permissionId = ?";
-	private static final String _SQL_GETROLES = "SELECT {Role_.*} FROM Role_ INNER JOIN Groups_Roles ON (Groups_Roles.roleId = Role_.roleId) WHERE (Groups_Roles.groupId = ?)";
-	private static final String _SQL_GETROLESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE groupId = ?";
-	private static final String _SQL_CONTAINSROLE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE groupId = ? AND roleId = ?";
-	private static final String _SQL_GETUSERGROUPS = "SELECT {UserGroup.*} FROM UserGroup INNER JOIN Groups_UserGroups ON (Groups_UserGroups.userGroupId = UserGroup.userGroupId) WHERE (Groups_UserGroups.groupId = ?)";
-	private static final String _SQL_GETUSERGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE groupId = ?";
-	private static final String _SQL_CONTAINSUSERGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE groupId = ? AND userGroupId = ?";
-	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_Groups ON (Users_Groups.userId = User_.userId) WHERE (Users_Groups.groupId = ?)";
-	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE groupId = ?";
-	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE groupId = ? AND userId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "group_.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Group exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Group exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(GroupPersistenceImpl.class);
 }

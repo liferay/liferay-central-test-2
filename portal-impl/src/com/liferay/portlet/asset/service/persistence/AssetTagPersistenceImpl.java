@@ -155,12 +155,11 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 			if (assetTag == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No AssetTag exists with the primary key " +
-						tagId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + tagId);
 				}
 
-				throw new NoSuchTagException(
-					"No AssetTag exists with the primary key " + tagId);
+				throw new NoSuchTagException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					tagId);
 			}
 
 			return remove(assetTag);
@@ -299,11 +298,11 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 		if (assetTag == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No AssetTag exists with the primary key " + tagId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + tagId);
 			}
 
-			throw new NoSuchTagException(
-				"No AssetTag exists with the primary key " + tagId);
+			throw new NoSuchTagException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				tagId);
 		}
 
 		return assetTag;
@@ -354,17 +353,17 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_ASSETTAG_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(AssetTagModelImpl.ORDER_BY_JPQL);
 
-				query.append("assetTag.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -414,41 +413,31 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_ASSETTAG_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("assetTag.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("assetTag.name ASC");
+					query.append(AssetTagModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -482,11 +471,12 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		List<AssetTag> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No AssetTag exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -504,11 +494,12 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		List<AssetTag> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No AssetTag exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -530,41 +521,31 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_ASSETTAG_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("assetTag.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("assetTag.name ASC");
+				query.append(AssetTagModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -651,39 +632,25 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_ASSETTAG);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_ASSETTAG);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("assetTag.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("assetTag.name ASC");
+					sql = _SQL_SELECT_ASSETTAG.concat(AssetTagModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<AssetTag>)QueryUtil.list(q, getDialect(),
@@ -739,13 +706,15 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_ASSETTAG_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -840,16 +809,20 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETASSETENTRIES);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETASSETENTRIES);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
-				String sql = sb.toString();
+				sql = _SQL_GETASSETENTRIES;
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -1370,7 +1343,6 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		private AssetTagPersistenceImpl _persistenceImpl;
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "assetTag.groupId = ?";
 	private static final String _SQL_SELECT_ASSETTAG = "SELECT assetTag FROM AssetTag assetTag";
 	private static final String _SQL_SELECT_ASSETTAG_WHERE = "SELECT assetTag FROM AssetTag assetTag WHERE ";
 	private static final String _SQL_COUNT_ASSETTAG = "SELECT COUNT(assetTag) FROM AssetTag assetTag";
@@ -1378,5 +1350,9 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	private static final String _SQL_GETASSETENTRIES = "SELECT {AssetEntry.*} FROM AssetEntry INNER JOIN AssetEntries_AssetTags ON (AssetEntries_AssetTags.entryId = AssetEntry.entryId) WHERE (AssetEntries_AssetTags.tagId = ?)";
 	private static final String _SQL_GETASSETENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE tagId = ?";
 	private static final String _SQL_CONTAINSASSETENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE tagId = ? AND entryId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "assetTag.groupId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "assetTag.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetTag exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetTag exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(AssetTagPersistenceImpl.class);
 }

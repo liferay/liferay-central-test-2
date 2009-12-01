@@ -169,12 +169,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 			if (assetEntry == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No AssetEntry exists with the primary key " +
-						entryId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + entryId);
 				}
 
-				throw new NoSuchEntryException(
-					"No AssetEntry exists with the primary key " + entryId);
+				throw new NoSuchEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					entryId);
 			}
 
 			return remove(assetEntry);
@@ -370,12 +369,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 		if (assetEntry == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No AssetEntry exists with the primary key " +
-					entryId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + entryId);
 			}
 
-			throw new NoSuchEntryException(
-				"No AssetEntry exists with the primary key " + entryId);
+			throw new NoSuchEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				entryId);
 		}
 
 		return assetEntry;
@@ -427,13 +425,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -483,35 +483,27 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
 
 				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("assetEntry.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -545,11 +537,12 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		List<AssetEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No AssetEntry exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -567,11 +560,12 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		List<AssetEntry> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No AssetEntry exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -594,35 +588,27 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("assetEntry.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -652,14 +638,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		AssetEntry assetEntry = fetchByC_C(classNameId, classPK);
 
 		if (assetEntry == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No AssetEntry exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("classNameId=" + classNameId);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 
-			msg.append(", ");
-			msg.append("classPK=" + classPK);
+			msg.append(", classPK=");
+			msg.append(classPK);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -697,7 +684,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_ASSETENTRY_WHERE);
 
@@ -705,7 +692,9 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -823,33 +812,23 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_ASSETENTRY);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_ASSETENTRY);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("assetEntry.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_ASSETENTRY;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<AssetEntry>)QueryUtil.list(q, getDialect(),
@@ -912,13 +891,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_ASSETENTRY_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -959,7 +940,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_ASSETENTRY_WHERE);
 
@@ -967,7 +948,9 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1065,22 +1048,22 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETASSETCATEGORIES);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETASSETCATEGORIES);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
 				else {
-					sb.append(" ORDER BY ");
-
-					sb.append("AssetCategory.name ASC");
+					sql = _SQL_GETASSETCATEGORIES.concat(com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl.ORDER_BY_SQL);
 				}
-
-				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -1419,22 +1402,22 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETASSETTAGS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETASSETTAGS);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
 				else {
-					sb.append(" ORDER BY ");
-
-					sb.append("AssetTag.name ASC");
+					sql = _SQL_GETASSETTAGS.concat(com.liferay.portlet.asset.model.impl.AssetTagModelImpl.ORDER_BY_SQL);
 				}
-
-				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -2160,9 +2143,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		private AssetEntryPersistenceImpl _persistenceImpl;
 	}
 
-	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "assetEntry.companyId = ?";
-	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "assetEntry.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "assetEntry.classPK = ?";
 	private static final String _SQL_SELECT_ASSETENTRY = "SELECT assetEntry FROM AssetEntry assetEntry";
 	private static final String _SQL_SELECT_ASSETENTRY_WHERE = "SELECT assetEntry FROM AssetEntry assetEntry WHERE ";
 	private static final String _SQL_COUNT_ASSETENTRY = "SELECT COUNT(assetEntry) FROM AssetEntry assetEntry";
@@ -2173,5 +2153,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	private static final String _SQL_GETASSETTAGS = "SELECT {AssetTag.*} FROM AssetTag INNER JOIN AssetEntries_AssetTags ON (AssetEntries_AssetTags.tagId = AssetTag.tagId) WHERE (AssetEntries_AssetTags.entryId = ?)";
 	private static final String _SQL_GETASSETTAGSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE entryId = ?";
 	private static final String _SQL_CONTAINSASSETTAG = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE entryId = ? AND tagId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "assetEntry.companyId = ?";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "assetEntry.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "assetEntry.classPK = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "assetEntry.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetEntry exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetEntry exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(AssetEntryPersistenceImpl.class);
 }

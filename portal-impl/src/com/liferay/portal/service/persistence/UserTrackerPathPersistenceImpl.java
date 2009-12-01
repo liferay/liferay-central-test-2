@@ -146,12 +146,11 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 			if (userTrackerPath == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No UserTrackerPath exists with the primary key " +
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 						userTrackerPathId);
 				}
 
-				throw new NoSuchUserTrackerPathException(
-					"No UserTrackerPath exists with the primary key " +
+				throw new NoSuchUserTrackerPathException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					userTrackerPathId);
 			}
 
@@ -280,12 +279,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 		if (userTrackerPath == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No UserTrackerPath exists with the primary key " +
-					userTrackerPathId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + userTrackerPathId);
 			}
 
-			throw new NoSuchUserTrackerPathException(
-				"No UserTrackerPath exists with the primary key " +
+			throw new NoSuchUserTrackerPathException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 				userTrackerPathId);
 		}
 
@@ -339,13 +336,15 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
 				query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -395,35 +394,27 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
 
 				query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
 				query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("userTrackerPath.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -459,11 +450,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No UserTrackerPath exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userTrackerId=" + userTrackerId);
+			msg.append("userTrackerId=");
+			msg.append(userTrackerId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -483,11 +475,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No UserTrackerPath exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userTrackerId=" + userTrackerId);
+			msg.append("userTrackerId=");
+			msg.append(userTrackerId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -510,35 +503,27 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
 
 			query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("userTrackerPath.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -627,33 +612,23 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_USERTRACKERPATH);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_USERTRACKERPATH);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("userTrackerPath.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_USERTRACKERPATH;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<UserTrackerPath>)QueryUtil.list(q,
@@ -712,13 +687,15 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_USERTRACKERPATH_WHERE);
 
 				query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -902,10 +879,13 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-	private static final String _FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2 = "userTrackerPath.userTrackerId = ?";
 	private static final String _SQL_SELECT_USERTRACKERPATH = "SELECT userTrackerPath FROM UserTrackerPath userTrackerPath";
 	private static final String _SQL_SELECT_USERTRACKERPATH_WHERE = "SELECT userTrackerPath FROM UserTrackerPath userTrackerPath WHERE ";
 	private static final String _SQL_COUNT_USERTRACKERPATH = "SELECT COUNT(userTrackerPath) FROM UserTrackerPath userTrackerPath";
 	private static final String _SQL_COUNT_USERTRACKERPATH_WHERE = "SELECT COUNT(userTrackerPath) FROM UserTrackerPath userTrackerPath WHERE ";
+	private static final String _FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2 = "userTrackerPath.userTrackerId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "userTrackerPath.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No UserTrackerPath exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No UserTrackerPath exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(UserTrackerPathPersistenceImpl.class);
 }

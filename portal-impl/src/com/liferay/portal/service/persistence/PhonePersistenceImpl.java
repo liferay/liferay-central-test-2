@@ -217,12 +217,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			if (phone == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Phone exists with the primary key " +
-						phoneId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + phoneId);
 				}
 
-				throw new NoSuchPhoneException(
-					"No Phone exists with the primary key " + phoneId);
+				throw new NoSuchPhoneException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					phoneId);
 			}
 
 			return remove(phone);
@@ -353,11 +352,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 		if (phone == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Phone exists with the primary key " + phoneId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + phoneId);
 			}
 
-			throw new NoSuchPhoneException(
-				"No Phone exists with the primary key " + phoneId);
+			throw new NoSuchPhoneException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				phoneId);
 		}
 
 		return phone;
@@ -408,17 +407,17 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				query.append(" ORDER BY ");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 
-				query.append("phone.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -468,41 +467,31 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("phone.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("phone.createDate ASC");
+					query.append(PhoneModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -535,11 +524,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		List<Phone> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -557,11 +547,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		List<Phone> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -583,41 +574,31 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("phone.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("phone.createDate ASC");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -653,17 +634,17 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				query.append(" ORDER BY ");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 
-				query.append("phone.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -713,41 +694,31 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("phone.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("phone.createDate ASC");
+					query.append(PhoneModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -780,11 +751,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		List<Phone> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userId=" + userId);
+			msg.append("userId=");
+			msg.append(userId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -802,11 +774,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		List<Phone> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userId=" + userId);
+			msg.append("userId=");
+			msg.append(userId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -828,41 +801,31 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("phone.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("phone.createDate ASC");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -901,7 +864,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -909,11 +872,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				query.append(" ORDER BY ");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 
-				query.append("phone.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -965,7 +928,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -974,34 +945,16 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("phone.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("phone.createDate ASC");
+					query.append(PhoneModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1036,14 +989,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		List<Phone> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1062,14 +1016,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1092,7 +1047,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -1101,34 +1064,16 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("phone.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("phone.createDate ASC");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1169,7 +1114,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -1179,11 +1124,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				query.append(" ORDER BY ");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 
-				query.append("phone.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1238,7 +1183,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(5 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(5);
+				}
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -1249,34 +1202,16 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("phone.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("phone.createDate ASC");
+					query.append(PhoneModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1315,17 +1250,18 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
-			msg.append(", ");
-			msg.append("classPK=" + classPK);
+			msg.append(", classPK=");
+			msg.append(classPK);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1345,17 +1281,18 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
-			msg.append(", ");
-			msg.append("classPK=" + classPK);
+			msg.append(", classPK=");
+			msg.append(classPK);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1378,7 +1315,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(5 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -1389,34 +1334,16 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("phone.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("phone.createDate ASC");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1460,7 +1387,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(6);
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -1472,11 +1399,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-				query.append(" ORDER BY ");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 
-				query.append("phone.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1536,7 +1463,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(6 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(6);
+				}
 
 				query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -1549,34 +1484,16 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("phone.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("phone.createDate ASC");
+					query.append(PhoneModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1617,20 +1534,21 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				primary, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(10);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
-			msg.append(", ");
-			msg.append("classPK=" + classPK);
+			msg.append(", classPK=");
+			msg.append(classPK);
 
-			msg.append(", ");
-			msg.append("primary=" + primary);
+			msg.append(", primary=");
+			msg.append(primary);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1650,20 +1568,21 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				primary, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(10);
 
-			msg.append("No Phone exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
-			msg.append(", ");
-			msg.append("classPK=" + classPK);
+			msg.append(", classPK=");
+			msg.append(classPK);
 
-			msg.append(", ");
-			msg.append("primary=" + primary);
+			msg.append(", primary=");
+			msg.append(primary);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1686,7 +1605,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(6 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(6);
+			}
 
 			query.append(_SQL_SELECT_PHONE_WHERE);
 
@@ -1699,34 +1626,16 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("phone.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("phone.createDate ASC");
+				query.append(PhoneModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1819,39 +1728,25 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_PHONE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_PHONE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("phone.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("phone.createDate ASC");
+					sql = _SQL_SELECT_PHONE.concat(PhoneModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<Phone>)QueryUtil.list(q, getDialect(), start,
@@ -1935,13 +1830,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1979,13 +1876,15 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2026,7 +1925,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
@@ -2034,7 +1933,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2077,7 +1978,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
@@ -2087,7 +1988,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2133,7 +2036,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_COUNT_PHONE_WHERE);
 
@@ -2145,7 +2048,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2335,6 +2240,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_PHONE = "SELECT phone FROM Phone phone";
+	private static final String _SQL_SELECT_PHONE_WHERE = "SELECT phone FROM Phone phone WHERE ";
+	private static final String _SQL_COUNT_PHONE = "SELECT COUNT(phone) FROM Phone phone";
+	private static final String _SQL_COUNT_PHONE_WHERE = "SELECT COUNT(phone) FROM Phone phone WHERE ";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "phone.companyId = ?";
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "phone.userId = ?";
 	private static final String _FINDER_COLUMN_C_C_COMPANYID_2 = "phone.companyId = ? AND ";
@@ -2346,9 +2255,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	private static final String _FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2 = "phone.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_C_P_CLASSPK_2 = "phone.classPK = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_C_P_PRIMARY_2 = "phone.primary = ?";
-	private static final String _SQL_SELECT_PHONE = "SELECT phone FROM Phone phone";
-	private static final String _SQL_SELECT_PHONE_WHERE = "SELECT phone FROM Phone phone WHERE ";
-	private static final String _SQL_COUNT_PHONE = "SELECT COUNT(phone) FROM Phone phone";
-	private static final String _SQL_COUNT_PHONE_WHERE = "SELECT COUNT(phone) FROM Phone phone WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "phone.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Phone exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Phone exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PhonePersistenceImpl.class);
 }

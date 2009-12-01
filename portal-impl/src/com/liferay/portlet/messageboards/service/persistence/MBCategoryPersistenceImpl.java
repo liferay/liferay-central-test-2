@@ -209,12 +209,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			if (mbCategory == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No MBCategory exists with the primary key " +
-						categoryId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + categoryId);
 				}
 
-				throw new NoSuchCategoryException(
-					"No MBCategory exists with the primary key " + categoryId);
+				throw new NoSuchCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					categoryId);
 			}
 
 			return remove(mbCategory);
@@ -388,12 +387,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 		if (mbCategory == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No MBCategory exists with the primary key " +
-					categoryId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + categoryId);
 			}
 
-			throw new NoSuchCategoryException(
-				"No MBCategory exists with the primary key " + categoryId);
+			throw new NoSuchCategoryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				categoryId);
 		}
 
 		return mbCategory;
@@ -445,7 +443,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
@@ -461,12 +459,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -518,7 +515,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
@@ -535,35 +540,16 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("mbCategory.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("mbCategory.parentCategoryId ASC, ");
-					query.append("mbCategory.name ASC");
+					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -599,11 +585,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -621,11 +608,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -647,7 +635,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
@@ -664,35 +660,16 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("mbCategory.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -724,14 +701,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		MBCategory mbCategory = fetchByUUID_G(uuid, groupId);
 
 		if (mbCategory == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
-			msg.append(", ");
-			msg.append("groupId=" + groupId);
+			msg.append(", groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -767,7 +745,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
@@ -785,12 +763,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -860,18 +837,17 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -921,42 +897,31 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("mbCategory.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("mbCategory.parentCategoryId ASC, ");
-					query.append("mbCategory.name ASC");
+					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -990,11 +955,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1012,11 +978,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1039,42 +1006,31 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("mbCategory.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1112,18 +1068,17 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				query.append(" ORDER BY ");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1173,42 +1128,31 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("mbCategory.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("mbCategory.parentCategoryId ASC, ");
-					query.append("mbCategory.name ASC");
+					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1242,11 +1186,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1264,11 +1209,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1291,42 +1237,31 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("mbCategory.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1366,7 +1301,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
@@ -1374,12 +1309,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
-				query.append(" ORDER BY ");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1431,7 +1365,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
@@ -1440,35 +1382,16 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("mbCategory.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("mbCategory.parentCategoryId ASC, ");
-					query.append("mbCategory.name ASC");
+					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1504,14 +1427,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		List<MBCategory> list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("parentCategoryId=" + parentCategoryId);
+			msg.append(", parentCategoryId=");
+			msg.append(parentCategoryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1530,14 +1454,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No MBCategory exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("parentCategoryId=" + parentCategoryId);
+			msg.append(", parentCategoryId=");
+			msg.append(parentCategoryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1560,7 +1485,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
@@ -1569,35 +1502,16 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("mbCategory.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("mbCategory.parentCategoryId ASC, ");
-				query.append("mbCategory.name ASC");
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1688,40 +1602,25 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_MBCATEGORY);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_MBCATEGORY);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("mbCategory.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("mbCategory.parentCategoryId ASC, ");
-					query.append("mbCategory.name ASC");
+					sql = _SQL_SELECT_MBCATEGORY.concat(MBCategoryModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<MBCategory>)QueryUtil.list(q, getDialect(),
@@ -1803,7 +1702,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
@@ -1819,7 +1718,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1860,7 +1761,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
@@ -1878,7 +1779,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1920,13 +1823,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1964,13 +1869,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2011,7 +1918,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
@@ -2019,7 +1926,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2131,6 +2040,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _SQL_SELECT_MBCATEGORY = "SELECT mbCategory FROM MBCategory mbCategory";
+	private static final String _SQL_SELECT_MBCATEGORY_WHERE = "SELECT mbCategory FROM MBCategory mbCategory WHERE ";
+	private static final String _SQL_COUNT_MBCATEGORY = "SELECT COUNT(mbCategory) FROM MBCategory mbCategory";
+	private static final String _SQL_COUNT_MBCATEGORY_WHERE = "SELECT COUNT(mbCategory) FROM MBCategory mbCategory WHERE ";
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "mbCategoryuuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "mbCategory.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(mbCategoryuuid IS NULL OR mbCategory.uuid = ?)";
@@ -2142,9 +2055,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "mbCategory.companyId = ?";
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "mbCategory.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_2 = "mbCategory.parentCategoryId = ?";
-	private static final String _SQL_SELECT_MBCATEGORY = "SELECT mbCategory FROM MBCategory mbCategory";
-	private static final String _SQL_SELECT_MBCATEGORY_WHERE = "SELECT mbCategory FROM MBCategory mbCategory WHERE ";
-	private static final String _SQL_COUNT_MBCATEGORY = "SELECT COUNT(mbCategory) FROM MBCategory mbCategory";
-	private static final String _SQL_COUNT_MBCATEGORY_WHERE = "SELECT COUNT(mbCategory) FROM MBCategory mbCategory WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "mbCategory.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MBCategory exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MBCategory exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(MBCategoryPersistenceImpl.class);
 }

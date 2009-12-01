@@ -180,12 +180,11 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 
 			if (pollsChoice == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No PollsChoice exists with the primary key " +
-						choiceId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + choiceId);
 				}
 
-				throw new NoSuchChoiceException(
-					"No PollsChoice exists with the primary key " + choiceId);
+				throw new NoSuchChoiceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					choiceId);
 			}
 
 			return remove(pollsChoice);
@@ -355,12 +354,11 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 
 		if (pollsChoice == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No PollsChoice exists with the primary key " +
-					choiceId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + choiceId);
 			}
 
-			throw new NoSuchChoiceException(
-				"No PollsChoice exists with the primary key " + choiceId);
+			throw new NoSuchChoiceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				choiceId);
 		}
 
 		return pollsChoice;
@@ -412,7 +410,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_POLLSCHOICE_WHERE);
 
@@ -428,12 +426,11 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(PollsChoiceModelImpl.ORDER_BY_JPQL);
 
-				query.append("pollsChoice.questionId ASC, ");
-				query.append("pollsChoice.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -485,7 +482,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_POLLSCHOICE_WHERE);
 
@@ -502,35 +507,16 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("pollsChoice.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("pollsChoice.questionId ASC, ");
-					query.append("pollsChoice.name ASC");
+					query.append(PollsChoiceModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -566,11 +552,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		List<PollsChoice> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No PollsChoice exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -588,11 +575,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		List<PollsChoice> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No PollsChoice exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -614,7 +602,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_POLLSCHOICE_WHERE);
 
@@ -631,35 +627,16 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("pollsChoice.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("pollsChoice.questionId ASC, ");
-				query.append("pollsChoice.name ASC");
+				query.append(PollsChoiceModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -699,18 +676,17 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_POLLSCHOICE_WHERE);
 
 				query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
-				query.append(" ORDER BY ");
+				query.append(PollsChoiceModelImpl.ORDER_BY_JPQL);
 
-				query.append("pollsChoice.questionId ASC, ");
-				query.append("pollsChoice.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -760,42 +736,31 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_POLLSCHOICE_WHERE);
 
 				query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("pollsChoice.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("pollsChoice.questionId ASC, ");
-					query.append("pollsChoice.name ASC");
+					query.append(PollsChoiceModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -829,11 +794,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		List<PollsChoice> list = findByQuestionId(questionId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No PollsChoice exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("questionId=" + questionId);
+			msg.append("questionId=");
+			msg.append(questionId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -852,11 +818,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No PollsChoice exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("questionId=" + questionId);
+			msg.append("questionId=");
+			msg.append(questionId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -879,42 +846,31 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_POLLSCHOICE_WHERE);
 
 			query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("pollsChoice.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("pollsChoice.questionId ASC, ");
-				query.append("pollsChoice.name ASC");
+				query.append(PollsChoiceModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -944,14 +900,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		PollsChoice pollsChoice = fetchByQ_N(questionId, name);
 
 		if (pollsChoice == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No PollsChoice exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("questionId=" + questionId);
+			msg.append("questionId=");
+			msg.append(questionId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -987,7 +944,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_POLLSCHOICE_WHERE);
 
@@ -1005,12 +962,11 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(PollsChoiceModelImpl.ORDER_BY_JPQL);
 
-				query.append("pollsChoice.questionId ASC, ");
-				query.append("pollsChoice.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1131,40 +1087,25 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_POLLSCHOICE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_POLLSCHOICE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("pollsChoice.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("pollsChoice.questionId ASC, ");
-					query.append("pollsChoice.name ASC");
+					sql = _SQL_SELECT_POLLSCHOICE.concat(PollsChoiceModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<PollsChoice>)QueryUtil.list(q, getDialect(),
@@ -1233,7 +1174,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_POLLSCHOICE_WHERE);
 
@@ -1249,7 +1190,9 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1289,13 +1232,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_POLLSCHOICE_WHERE);
 
 				query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1334,7 +1279,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_POLLSCHOICE_WHERE);
 
@@ -1352,7 +1297,9 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1448,6 +1395,10 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_POLLSCHOICE = "SELECT pollsChoice FROM PollsChoice pollsChoice";
+	private static final String _SQL_SELECT_POLLSCHOICE_WHERE = "SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ";
+	private static final String _SQL_COUNT_POLLSCHOICE = "SELECT COUNT(pollsChoice) FROM PollsChoice pollsChoice";
+	private static final String _SQL_COUNT_POLLSCHOICE_WHERE = "SELECT COUNT(pollsChoice) FROM PollsChoice pollsChoice WHERE ";
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "pollsChoiceuuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "pollsChoice.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(pollsChoiceuuid IS NULL OR pollsChoice.uuid = ?)";
@@ -1456,9 +1407,8 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	private static final String _FINDER_COLUMN_Q_N_NAME_1 = "pollsChoicename IS NULL";
 	private static final String _FINDER_COLUMN_Q_N_NAME_2 = "pollsChoice.name = ?";
 	private static final String _FINDER_COLUMN_Q_N_NAME_3 = "(pollsChoicename IS NULL OR pollsChoice.name = ?)";
-	private static final String _SQL_SELECT_POLLSCHOICE = "SELECT pollsChoice FROM PollsChoice pollsChoice";
-	private static final String _SQL_SELECT_POLLSCHOICE_WHERE = "SELECT pollsChoice FROM PollsChoice pollsChoice WHERE ";
-	private static final String _SQL_COUNT_POLLSCHOICE = "SELECT COUNT(pollsChoice) FROM PollsChoice pollsChoice";
-	private static final String _SQL_COUNT_POLLSCHOICE_WHERE = "SELECT COUNT(pollsChoice) FROM PollsChoice pollsChoice WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "pollsChoice.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PollsChoice exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PollsChoice exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PollsChoicePersistenceImpl.class);
 }

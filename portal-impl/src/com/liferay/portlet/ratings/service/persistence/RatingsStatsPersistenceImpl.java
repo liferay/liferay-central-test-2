@@ -144,12 +144,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 			if (ratingsStats == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No RatingsStats exists with the primary key " +
-						statsId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + statsId);
 				}
 
-				throw new NoSuchStatsException(
-					"No RatingsStats exists with the primary key " + statsId);
+				throw new NoSuchStatsException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					statsId);
 			}
 
 			return remove(ratingsStats);
@@ -309,12 +308,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 		if (ratingsStats == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No RatingsStats exists with the primary key " +
-					statsId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + statsId);
 			}
 
-			throw new NoSuchStatsException(
-				"No RatingsStats exists with the primary key " + statsId);
+			throw new NoSuchStatsException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				statsId);
 		}
 
 		return ratingsStats;
@@ -359,14 +357,15 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		RatingsStats ratingsStats = fetchByC_C(classNameId, classPK);
 
 		if (ratingsStats == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No RatingsStats exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("classNameId=" + classNameId);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 
-			msg.append(", ");
-			msg.append("classPK=" + classPK);
+			msg.append(", classPK=");
+			msg.append(classPK);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -404,7 +403,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_RATINGSSTATS_WHERE);
 
@@ -412,7 +411,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -530,33 +531,23 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_RATINGSSTATS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_RATINGSSTATS);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("ratingsStats.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_RATINGSSTATS;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<RatingsStats>)QueryUtil.list(q, getDialect(),
@@ -616,7 +607,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_RATINGSSTATS_WHERE);
 
@@ -624,7 +615,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -716,11 +709,14 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "ratingsStats.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "ratingsStats.classPK = ?";
 	private static final String _SQL_SELECT_RATINGSSTATS = "SELECT ratingsStats FROM RatingsStats ratingsStats";
 	private static final String _SQL_SELECT_RATINGSSTATS_WHERE = "SELECT ratingsStats FROM RatingsStats ratingsStats WHERE ";
 	private static final String _SQL_COUNT_RATINGSSTATS = "SELECT COUNT(ratingsStats) FROM RatingsStats ratingsStats";
 	private static final String _SQL_COUNT_RATINGSSTATS_WHERE = "SELECT COUNT(ratingsStats) FROM RatingsStats ratingsStats WHERE ";
+	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "ratingsStats.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "ratingsStats.classPK = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "ratingsStats.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No RatingsStats exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No RatingsStats exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(RatingsStatsPersistenceImpl.class);
 }

@@ -137,12 +137,11 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 
 			if (release == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Release exists with the primary key " +
-						releaseId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + releaseId);
 				}
 
-				throw new NoSuchReleaseException(
-					"No Release exists with the primary key " + releaseId);
+				throw new NoSuchReleaseException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					releaseId);
 			}
 
 			return remove(release);
@@ -292,12 +291,11 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 
 		if (release == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Release exists with the primary key " +
-					releaseId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + releaseId);
 			}
 
-			throw new NoSuchReleaseException(
-				"No Release exists with the primary key " + releaseId);
+			throw new NoSuchReleaseException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				releaseId);
 		}
 
 		return release;
@@ -341,11 +339,12 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		Release release = fetchByServletContextName(servletContextName);
 
 		if (release == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Release exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("servletContextName=" + servletContextName);
+			msg.append("servletContextName=");
+			msg.append(servletContextName);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -381,7 +380,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_RELEASE_WHERE);
 
@@ -397,7 +396,9 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -515,33 +516,23 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_RELEASE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_RELEASE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("release.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_RELEASE;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<Release>)QueryUtil.list(q, getDialect(),
@@ -599,7 +590,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_RELEASE_WHERE);
 
@@ -615,7 +606,9 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -801,15 +794,18 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_RELEASE = "SELECT release FROM Release release";
+	private static final String _SQL_SELECT_RELEASE_WHERE = "SELECT release FROM Release release WHERE ";
+	private static final String _SQL_COUNT_RELEASE = "SELECT COUNT(release) FROM Release release";
+	private static final String _SQL_COUNT_RELEASE_WHERE = "SELECT COUNT(release) FROM Release release WHERE ";
 	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_1 =
 		"releaseservletContextName IS NULL";
 	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_2 =
 		"release.servletContextName = ?";
 	private static final String _FINDER_COLUMN_SERVLETCONTEXTNAME_SERVLETCONTEXTNAME_3 =
 		"(releaseservletContextName IS NULL OR release.servletContextName = ?)";
-	private static final String _SQL_SELECT_RELEASE = "SELECT release FROM Release release";
-	private static final String _SQL_SELECT_RELEASE_WHERE = "SELECT release FROM Release release WHERE ";
-	private static final String _SQL_COUNT_RELEASE = "SELECT COUNT(release) FROM Release release";
-	private static final String _SQL_COUNT_RELEASE_WHERE = "SELECT COUNT(release) FROM Release release WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "release.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Release exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Release exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ReleasePersistenceImpl.class);
 }

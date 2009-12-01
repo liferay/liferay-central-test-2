@@ -183,12 +183,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			if (userGroup == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No UserGroup exists with the primary key " +
-						userGroupId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + userGroupId);
 				}
 
-				throw new NoSuchUserGroupException(
-					"No UserGroup exists with the primary key " + userGroupId);
+				throw new NoSuchUserGroupException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					userGroupId);
 			}
 
 			return remove(userGroup);
@@ -360,12 +359,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 		if (userGroup == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No UserGroup exists with the primary key " +
-					userGroupId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + userGroupId);
 			}
 
-			throw new NoSuchUserGroupException(
-				"No UserGroup exists with the primary key " + userGroupId);
+			throw new NoSuchUserGroupException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				userGroupId);
 		}
 
 		return userGroup;
@@ -418,17 +416,17 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				query.append(" ORDER BY ");
+				query.append(UserGroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("userGroup.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -478,41 +476,31 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("userGroup.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("userGroup.name ASC");
+					query.append(UserGroupModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -546,11 +534,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		List<UserGroup> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No UserGroup exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -568,11 +557,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		List<UserGroup> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No UserGroup exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -595,41 +585,31 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_USERGROUP_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("userGroup.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("userGroup.name ASC");
+				query.append(UserGroupModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -669,7 +649,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
@@ -677,11 +657,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(UserGroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("userGroup.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -733,7 +713,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
@@ -742,34 +730,16 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("userGroup.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("userGroup.name ASC");
+					query.append(UserGroupModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -805,14 +775,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		List<UserGroup> list = findByC_P(companyId, parentUserGroupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No UserGroup exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("parentUserGroupId=" + parentUserGroupId);
+			msg.append(", parentUserGroupId=");
+			msg.append(parentUserGroupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -831,14 +802,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No UserGroup exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("parentUserGroupId=" + parentUserGroupId);
+			msg.append(", parentUserGroupId=");
+			msg.append(parentUserGroupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -861,7 +833,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_USERGROUP_WHERE);
 
@@ -870,34 +850,16 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("userGroup.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("userGroup.name ASC");
+				query.append(UserGroupModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -929,14 +891,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		UserGroup userGroup = fetchByC_N(companyId, name);
 
 		if (userGroup == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No UserGroup exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -972,7 +935,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_USERGROUP_WHERE);
 
@@ -990,11 +953,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(UserGroupModelImpl.ORDER_BY_JPQL);
 
-				query.append("userGroup.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1115,39 +1078,25 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_USERGROUP);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_USERGROUP);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("userGroup.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("userGroup.name ASC");
+					sql = _SQL_SELECT_USERGROUP.concat(UserGroupModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<UserGroup>)QueryUtil.list(q, getDialect(),
@@ -1217,13 +1166,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1264,7 +1215,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
@@ -1272,7 +1223,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1313,7 +1266,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_USERGROUP_WHERE);
 
@@ -1331,7 +1284,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1429,16 +1384,20 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETUSERS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETUSERS);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
-				String sql = sb.toString();
+				sql = _SQL_GETUSERS;
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -2024,13 +1983,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		private UserGroupPersistenceImpl _persistenceImpl;
 	}
 
-	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "userGroup.companyId = ?";
-	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "userGroup.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_P_PARENTUSERGROUPID_2 = "userGroup.parentUserGroupId = ?";
-	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "userGroup.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_N_NAME_1 = "userGroupname IS NULL";
-	private static final String _FINDER_COLUMN_C_N_NAME_2 = "userGroup.name = ?";
-	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(userGroupname IS NULL OR userGroup.name = ?)";
 	private static final String _SQL_SELECT_USERGROUP = "SELECT userGroup FROM UserGroup userGroup";
 	private static final String _SQL_SELECT_USERGROUP_WHERE = "SELECT userGroup FROM UserGroup userGroup WHERE ";
 	private static final String _SQL_COUNT_USERGROUP = "SELECT COUNT(userGroup) FROM UserGroup userGroup";
@@ -2038,5 +1990,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_UserGroups ON (Users_UserGroups.userId = User_.userId) WHERE (Users_UserGroups.userGroupId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "userGroup.companyId = ?";
+	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "userGroup.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_PARENTUSERGROUPID_2 = "userGroup.parentUserGroupId = ?";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "userGroup.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "userGroupname IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_2 = "userGroup.name = ?";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(userGroupname IS NULL OR userGroup.name = ?)";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "userGroup.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No UserGroup exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No UserGroup exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(UserGroupPersistenceImpl.class);
 }

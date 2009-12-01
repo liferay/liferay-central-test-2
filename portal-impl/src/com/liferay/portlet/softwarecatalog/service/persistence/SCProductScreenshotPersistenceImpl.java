@@ -186,13 +186,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 			if (scProductScreenshot == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No SCProductScreenshot exists with the primary key " +
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 						productScreenshotId);
 				}
 
-				throw new NoSuchProductScreenshotException(
-					"No SCProductScreenshot exists with the primary key " +
+				throw new NoSuchProductScreenshotException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					productScreenshotId);
 			}
 
@@ -397,12 +395,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 		if (scProductScreenshot == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No SCProductScreenshot exists with the primary key " +
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					productScreenshotId);
 			}
 
-			throw new NoSuchProductScreenshotException(
-				"No SCProductScreenshot exists with the primary key " +
+			throw new NoSuchProductScreenshotException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 				productScreenshotId);
 		}
 
@@ -456,18 +453,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
-				query.append(" ORDER BY ");
+				query.append(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
 
-				query.append("scProductScreenshot.productEntryId ASC, ");
-				query.append("scProductScreenshot.priority ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -517,42 +513,31 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("scProductScreenshot.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("scProductScreenshot.productEntryId ASC, ");
-					query.append("scProductScreenshot.priority ASC");
+					query.append(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -588,11 +573,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No SCProductScreenshot exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("productEntryId=" + productEntryId);
+			msg.append("productEntryId=");
+			msg.append(productEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -612,11 +598,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No SCProductScreenshot exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("productEntryId=" + productEntryId);
+			msg.append("productEntryId=");
+			msg.append(productEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -639,42 +626,31 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 			query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("scProductScreenshot.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("scProductScreenshot.productEntryId ASC, ");
-				query.append("scProductScreenshot.priority ASC");
+				query.append(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -704,11 +680,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		SCProductScreenshot scProductScreenshot = fetchByThumbnailId(thumbnailId);
 
 		if (scProductScreenshot == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No SCProductScreenshot exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("thumbnailId=" + thumbnailId);
+			msg.append("thumbnailId=");
+			msg.append(thumbnailId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -744,18 +721,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append(_FINDER_COLUMN_THUMBNAILID_THUMBNAILID_2);
 
-				query.append(" ORDER BY ");
+				query.append(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
 
-				query.append("scProductScreenshot.productEntryId ASC, ");
-				query.append("scProductScreenshot.priority ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -811,11 +787,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		SCProductScreenshot scProductScreenshot = fetchByFullImageId(fullImageId);
 
 		if (scProductScreenshot == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No SCProductScreenshot exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("fullImageId=" + fullImageId);
+			msg.append("fullImageId=");
+			msg.append(fullImageId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -851,18 +828,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append(_FINDER_COLUMN_FULLIMAGEID_FULLIMAGEID_2);
 
-				query.append(" ORDER BY ");
+				query.append(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
 
-				query.append("scProductScreenshot.productEntryId ASC, ");
-				query.append("scProductScreenshot.priority ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -919,14 +895,15 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				priority);
 
 		if (scProductScreenshot == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No SCProductScreenshot exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("productEntryId=" + productEntryId);
+			msg.append("productEntryId=");
+			msg.append(productEntryId);
 
-			msg.append(", ");
-			msg.append("priority=" + priority);
+			msg.append(", priority=");
+			msg.append(priority);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -964,7 +941,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
 
@@ -972,12 +949,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_FINDER_COLUMN_P_P_PRIORITY_2);
 
-				query.append(" ORDER BY ");
+				query.append(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
 
-				query.append("scProductScreenshot.productEntryId ASC, ");
-				query.append("scProductScreenshot.priority ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1095,40 +1071,25 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("scProductScreenshot.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("scProductScreenshot.productEntryId ASC, ");
-					query.append("scProductScreenshot.priority ASC");
+					sql = _SQL_SELECT_SCPRODUCTSCREENSHOT.concat(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<SCProductScreenshot>)QueryUtil.list(q,
@@ -1209,13 +1170,15 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1253,13 +1216,15 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append(_FINDER_COLUMN_THUMBNAILID_THUMBNAILID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1297,13 +1262,15 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
 				query.append(_FINDER_COLUMN_FULLIMAGEID_FULLIMAGEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1344,7 +1311,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE);
 
@@ -1352,7 +1319,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				query.append(_FINDER_COLUMN_P_P_PRIORITY_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1452,14 +1421,17 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_SCPRODUCTSCREENSHOT = "SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot";
+	private static final String _SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE = "SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ";
+	private static final String _SQL_COUNT_SCPRODUCTSCREENSHOT = "SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot";
+	private static final String _SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE = "SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot WHERE ";
 	private static final String _FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2 = "scProductScreenshot.productEntryId = ?";
 	private static final String _FINDER_COLUMN_THUMBNAILID_THUMBNAILID_2 = "scProductScreenshot.thumbnailId = ?";
 	private static final String _FINDER_COLUMN_FULLIMAGEID_FULLIMAGEID_2 = "scProductScreenshot.fullImageId = ?";
 	private static final String _FINDER_COLUMN_P_P_PRODUCTENTRYID_2 = "scProductScreenshot.productEntryId = ? AND ";
 	private static final String _FINDER_COLUMN_P_P_PRIORITY_2 = "scProductScreenshot.priority = ?";
-	private static final String _SQL_SELECT_SCPRODUCTSCREENSHOT = "SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot";
-	private static final String _SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE = "SELECT scProductScreenshot FROM SCProductScreenshot scProductScreenshot WHERE ";
-	private static final String _SQL_COUNT_SCPRODUCTSCREENSHOT = "SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot";
-	private static final String _SQL_COUNT_SCPRODUCTSCREENSHOT_WHERE = "SELECT COUNT(scProductScreenshot) FROM SCProductScreenshot scProductScreenshot WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "scProductScreenshot.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCProductScreenshot exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCProductScreenshot exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SCProductScreenshotPersistenceImpl.class);
 }

@@ -192,12 +192,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			if (portletItem == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No PortletItem exists with the primary key " +
-						portletItemId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + portletItemId);
 				}
 
-				throw new NoSuchPortletItemException(
-					"No PortletItem exists with the primary key " +
+				throw new NoSuchPortletItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					portletItemId);
 			}
 
@@ -382,12 +380,11 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 		if (portletItem == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No PortletItem exists with the primary key " +
-					portletItemId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + portletItemId);
 			}
 
-			throw new NoSuchPortletItemException(
-				"No PortletItem exists with the primary key " + portletItemId);
+			throw new NoSuchPortletItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				portletItemId);
 		}
 
 		return portletItem;
@@ -442,7 +439,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
@@ -450,7 +447,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -502,7 +501,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
@@ -511,28 +518,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("portletItem.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -569,14 +560,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		List<PortletItem> list = findByG_C(groupId, classNameId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No PortletItem exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -596,14 +588,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No PortletItem exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -626,7 +619,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
@@ -635,28 +636,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("portletItem.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -700,7 +685,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
@@ -720,7 +705,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -779,7 +766,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(5 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
@@ -800,28 +795,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("portletItem.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -863,17 +842,18 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No PortletItem exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("portletId=" + portletId);
+			msg.append(", portletId=");
+			msg.append(portletId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -893,17 +873,18 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No PortletItem exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("portletId=" + portletId);
+			msg.append(", portletId=");
+			msg.append(portletId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -926,7 +907,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(5 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
@@ -947,28 +936,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("portletItem.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1006,20 +979,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				classNameId);
 
 		if (portletItem == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(10);
 
-			msg.append("No PortletItem exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
-			msg.append(", ");
-			msg.append("portletId=" + portletId);
+			msg.append(", portletId=");
+			msg.append(portletId);
 
-			msg.append(", ");
-			msg.append("classNameId=" + classNameId);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1062,7 +1036,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
 
@@ -1094,7 +1068,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_FINDER_COLUMN_G_N_P_C_CLASSNAMEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1224,33 +1200,23 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_PORTLETITEM);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_PORTLETITEM);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("portletItem.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_PORTLETITEM;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<PortletItem>)QueryUtil.list(q, getDialect(),
@@ -1326,7 +1292,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
@@ -1334,7 +1300,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1379,7 +1347,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
@@ -1399,7 +1367,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1450,7 +1420,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_COUNT_PORTLETITEM_WHERE);
 
@@ -1482,7 +1452,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_FINDER_COLUMN_G_N_P_C_CLASSNAMEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1676,6 +1648,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_PORTLETITEM = "SELECT portletItem FROM PortletItem portletItem";
+	private static final String _SQL_SELECT_PORTLETITEM_WHERE = "SELECT portletItem FROM PortletItem portletItem WHERE ";
+	private static final String _SQL_COUNT_PORTLETITEM = "SELECT COUNT(portletItem) FROM PortletItem portletItem";
+	private static final String _SQL_COUNT_PORTLETITEM_WHERE = "SELECT COUNT(portletItem) FROM PortletItem portletItem WHERE ";
 	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "portletItem.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_CLASSNAMEID_2 = "portletItem.classNameId = ?";
 	private static final String _FINDER_COLUMN_G_P_C_GROUPID_2 = "portletItem.groupId = ? AND ";
@@ -1691,9 +1667,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	private static final String _FINDER_COLUMN_G_N_P_C_PORTLETID_2 = "portletItem.portletId = ? AND ";
 	private static final String _FINDER_COLUMN_G_N_P_C_PORTLETID_3 = "(portletItemportletId IS NULL OR portletItem.portletId = ?) AND ";
 	private static final String _FINDER_COLUMN_G_N_P_C_CLASSNAMEID_2 = "portletItem.classNameId = ?";
-	private static final String _SQL_SELECT_PORTLETITEM = "SELECT portletItem FROM PortletItem portletItem";
-	private static final String _SQL_SELECT_PORTLETITEM_WHERE = "SELECT portletItem FROM PortletItem portletItem WHERE ";
-	private static final String _SQL_COUNT_PORTLETITEM = "SELECT COUNT(portletItem) FROM PortletItem portletItem";
-	private static final String _SQL_COUNT_PORTLETITEM_WHERE = "SELECT COUNT(portletItem) FROM PortletItem portletItem WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "portletItem.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PortletItem exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PortletItem exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PortletItemPersistenceImpl.class);
 }

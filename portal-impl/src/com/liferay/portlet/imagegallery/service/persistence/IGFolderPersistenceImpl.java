@@ -231,12 +231,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			if (igFolder == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No IGFolder exists with the primary key " +
-						folderId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + folderId);
 				}
 
-				throw new NoSuchFolderException(
-					"No IGFolder exists with the primary key " + folderId);
+				throw new NoSuchFolderException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					folderId);
 			}
 
 			return remove(igFolder);
@@ -440,12 +439,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 		if (igFolder == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No IGFolder exists with the primary key " +
-					folderId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + folderId);
 			}
 
-			throw new NoSuchFolderException(
-				"No IGFolder exists with the primary key " + folderId);
+			throw new NoSuchFolderException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				folderId);
 		}
 
 		return igFolder;
@@ -496,7 +494,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
@@ -512,12 +510,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -569,7 +566,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
@@ -586,35 +591,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igFolder.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igFolder.folderId ASC, ");
-					query.append("igFolder.name ASC");
+					query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -650,11 +636,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		List<IGFolder> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -672,11 +659,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		List<IGFolder> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -698,7 +686,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
@@ -715,35 +711,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igFolder.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -774,14 +751,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		IGFolder igFolder = fetchByUUID_G(uuid, groupId);
 
 		if (igFolder == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
-			msg.append(", ");
-			msg.append("groupId=" + groupId);
+			msg.append(", groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -817,7 +795,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
@@ -835,12 +813,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -909,18 +886,17 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -970,42 +946,31 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igFolder.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igFolder.folderId ASC, ");
-					query.append("igFolder.name ASC");
+					query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1039,11 +1004,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		List<IGFolder> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1061,11 +1027,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		List<IGFolder> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1087,42 +1054,31 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igFolder.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1159,18 +1115,17 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1220,42 +1175,31 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igFolder.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igFolder.folderId ASC, ");
-					query.append("igFolder.name ASC");
+					query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1289,11 +1233,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		List<IGFolder> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1311,11 +1256,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		List<IGFolder> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("companyId=" + companyId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1338,42 +1284,31 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igFolder.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1412,7 +1347,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
@@ -1420,12 +1355,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1477,7 +1411,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
@@ -1486,35 +1428,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igFolder.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igFolder.folderId ASC, ");
-					query.append("igFolder.name ASC");
+					query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1550,14 +1473,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		List<IGFolder> list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("parentFolderId=" + parentFolderId);
+			msg.append(", parentFolderId=");
+			msg.append(parentFolderId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1576,14 +1500,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("parentFolderId=" + parentFolderId);
+			msg.append(", parentFolderId=");
+			msg.append(parentFolderId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1606,7 +1531,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
@@ -1615,35 +1548,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igFolder.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1674,17 +1588,18 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		IGFolder igFolder = fetchByG_P_N(groupId, parentFolderId, name);
 
 		if (igFolder == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No IGFolder exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("parentFolderId=" + parentFolderId);
+			msg.append(", parentFolderId=");
+			msg.append(parentFolderId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1724,7 +1639,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_IGFOLDER_WHERE);
 
@@ -1744,12 +1659,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
 
-				query.append("igFolder.folderId ASC, ");
-				query.append("igFolder.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1872,40 +1786,25 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_IGFOLDER);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_IGFOLDER);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igFolder.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igFolder.folderId ASC, ");
-					query.append("igFolder.name ASC");
+					sql = _SQL_SELECT_IGFOLDER.concat(IGFolderModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<IGFolder>)QueryUtil.list(q, getDialect(),
@@ -1994,7 +1893,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
@@ -2010,7 +1909,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2051,7 +1952,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
@@ -2069,7 +1970,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2111,13 +2014,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2155,13 +2060,15 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2202,7 +2109,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
@@ -2210,7 +2117,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2255,7 +2164,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_IGFOLDER_WHERE);
 
@@ -2275,7 +2184,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2379,6 +2290,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _SQL_SELECT_IGFOLDER = "SELECT igFolder FROM IGFolder igFolder";
+	private static final String _SQL_SELECT_IGFOLDER_WHERE = "SELECT igFolder FROM IGFolder igFolder WHERE ";
+	private static final String _SQL_COUNT_IGFOLDER = "SELECT COUNT(igFolder) FROM IGFolder igFolder";
+	private static final String _SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(igFolder) FROM IGFolder igFolder WHERE ";
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "igFolderuuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "igFolder.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(igFolderuuid IS NULL OR igFolder.uuid = ?)";
@@ -2395,9 +2310,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _FINDER_COLUMN_G_P_N_NAME_1 = "igFoldername IS NULL";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "igFolder.name = ?";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFoldername IS NULL OR igFolder.name = ?)";
-	private static final String _SQL_SELECT_IGFOLDER = "SELECT igFolder FROM IGFolder igFolder";
-	private static final String _SQL_SELECT_IGFOLDER_WHERE = "SELECT igFolder FROM IGFolder igFolder WHERE ";
-	private static final String _SQL_COUNT_IGFOLDER = "SELECT COUNT(igFolder) FROM IGFolder igFolder";
-	private static final String _SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(igFolder) FROM IGFolder igFolder WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "igFolder.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No IGFolder exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No IGFolder exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(IGFolderPersistenceImpl.class);
 }

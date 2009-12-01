@@ -220,13 +220,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			if (journalArticleImage == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No JournalArticleImage exists with the primary key " +
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 						articleImageId);
 				}
 
-				throw new NoSuchArticleImageException(
-					"No JournalArticleImage exists with the primary key " +
+				throw new NoSuchArticleImageException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					articleImageId);
 			}
 
@@ -432,12 +430,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 		if (journalArticleImage == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No JournalArticleImage exists with the primary key " +
-					articleImageId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + articleImageId);
 			}
 
-			throw new NoSuchArticleImageException(
-				"No JournalArticleImage exists with the primary key " +
+			throw new NoSuchArticleImageException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 				articleImageId);
 		}
 
@@ -491,13 +487,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -547,35 +545,27 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
 
 				query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalArticleImage.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -610,11 +600,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		List<JournalArticleImage> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalArticleImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -634,11 +625,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalArticleImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -661,35 +653,27 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalArticleImage.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -727,13 +711,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_TEMPIMAGE_TEMPIMAGE_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -783,35 +769,27 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
 
 				query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_TEMPIMAGE_TEMPIMAGE_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalArticleImage.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -846,11 +824,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		List<JournalArticleImage> list = findByTempImage(tempImage, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalArticleImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("tempImage=" + tempImage);
+			msg.append("tempImage=");
+			msg.append(tempImage);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -870,11 +849,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalArticleImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("tempImage=" + tempImage);
+			msg.append("tempImage=");
+			msg.append(tempImage);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -897,35 +877,27 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_TEMPIMAGE_TEMPIMAGE_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalArticleImage.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -967,7 +939,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
@@ -987,7 +959,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				query.append(_FINDER_COLUMN_G_A_V_VERSION_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1047,7 +1021,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(5 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
@@ -1068,28 +1050,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				query.append(_FINDER_COLUMN_G_A_V_VERSION_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalArticleImage.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1131,17 +1097,18 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				version, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No JournalArticleImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("articleId=" + articleId);
+			msg.append(", articleId=");
+			msg.append(articleId);
 
-			msg.append(", ");
-			msg.append("version=" + version);
+			msg.append(", version=");
+			msg.append(version);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1161,17 +1128,18 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				version, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No JournalArticleImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("articleId=" + articleId);
+			msg.append(", articleId=");
+			msg.append(articleId);
 
-			msg.append(", ");
-			msg.append("version=" + version);
+			msg.append(", version=");
+			msg.append(version);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1194,7 +1162,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(5 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
@@ -1215,28 +1191,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			query.append(_FINDER_COLUMN_G_A_V_VERSION_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalArticleImage.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1274,26 +1234,27 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				articleId, version, elInstanceId, elName, languageId);
 
 		if (journalArticleImage == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(14);
 
-			msg.append("No JournalArticleImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("articleId=" + articleId);
+			msg.append(", articleId=");
+			msg.append(articleId);
 
-			msg.append(", ");
-			msg.append("version=" + version);
+			msg.append(", version=");
+			msg.append(version);
 
-			msg.append(", ");
-			msg.append("elInstanceId=" + elInstanceId);
+			msg.append(", elInstanceId=");
+			msg.append(elInstanceId);
 
-			msg.append(", ");
-			msg.append("elName=" + elName);
+			msg.append(", elName=");
+			msg.append(elName);
 
-			msg.append(", ");
-			msg.append("languageId=" + languageId);
+			msg.append(", languageId=");
+			msg.append(languageId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1342,7 +1303,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(7);
 
 				query.append(_SQL_SELECT_JOURNALARTICLEIMAGE_WHERE);
 
@@ -1398,7 +1359,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1542,33 +1505,23 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_JOURNALARTICLEIMAGE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_JOURNALARTICLEIMAGE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalArticleImage.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_JOURNALARTICLEIMAGE;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<JournalArticleImage>)QueryUtil.list(q,
@@ -1648,13 +1601,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_JOURNALARTICLEIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1692,13 +1647,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_JOURNALARTICLEIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_TEMPIMAGE_TEMPIMAGE_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1741,7 +1698,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_JOURNALARTICLEIMAGE_WHERE);
 
@@ -1761,7 +1718,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				query.append(_FINDER_COLUMN_G_A_V_VERSION_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1817,7 +1776,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(7);
 
 				query.append(_SQL_COUNT_JOURNALARTICLEIMAGE_WHERE);
 
@@ -1873,7 +1832,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1993,6 +1954,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_JOURNALARTICLEIMAGE = "SELECT journalArticleImage FROM JournalArticleImage journalArticleImage";
+	private static final String _SQL_SELECT_JOURNALARTICLEIMAGE_WHERE = "SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ";
+	private static final String _SQL_COUNT_JOURNALARTICLEIMAGE = "SELECT COUNT(journalArticleImage) FROM JournalArticleImage journalArticleImage";
+	private static final String _SQL_COUNT_JOURNALARTICLEIMAGE_WHERE = "SELECT COUNT(journalArticleImage) FROM JournalArticleImage journalArticleImage WHERE ";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "journalArticleImage.groupId = ?";
 	private static final String _FINDER_COLUMN_TEMPIMAGE_TEMPIMAGE_2 = "journalArticleImage.tempImage = ?";
 	private static final String _FINDER_COLUMN_G_A_V_GROUPID_2 = "journalArticleImage.groupId = ? AND ";
@@ -2014,9 +1979,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	private static final String _FINDER_COLUMN_G_A_V_E_E_L_LANGUAGEID_1 = "journalArticleImagelanguageId IS NULL";
 	private static final String _FINDER_COLUMN_G_A_V_E_E_L_LANGUAGEID_2 = "journalArticleImage.languageId = ?";
 	private static final String _FINDER_COLUMN_G_A_V_E_E_L_LANGUAGEID_3 = "(journalArticleImagelanguageId IS NULL OR journalArticleImage.languageId = ?)";
-	private static final String _SQL_SELECT_JOURNALARTICLEIMAGE = "SELECT journalArticleImage FROM JournalArticleImage journalArticleImage";
-	private static final String _SQL_SELECT_JOURNALARTICLEIMAGE_WHERE = "SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ";
-	private static final String _SQL_COUNT_JOURNALARTICLEIMAGE = "SELECT COUNT(journalArticleImage) FROM JournalArticleImage journalArticleImage";
-	private static final String _SQL_COUNT_JOURNALARTICLEIMAGE_WHERE = "SELECT COUNT(journalArticleImage) FROM JournalArticleImage journalArticleImage WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "journalArticleImage.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalArticleImage exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalArticleImage exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(JournalArticleImagePersistenceImpl.class);
 }

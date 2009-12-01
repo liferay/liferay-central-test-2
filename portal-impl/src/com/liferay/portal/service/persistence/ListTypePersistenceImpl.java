@@ -142,12 +142,11 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 
 			if (listType == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No ListType exists with the primary key " +
-						listTypeId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + listTypeId);
 				}
 
-				throw new NoSuchListTypeException(
-					"No ListType exists with the primary key " + listTypeId);
+				throw new NoSuchListTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					listTypeId);
 			}
 
 			return remove(listType);
@@ -269,12 +268,11 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 
 		if (listType == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No ListType exists with the primary key " +
-					listTypeId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + listTypeId);
 			}
 
-			throw new NoSuchListTypeException(
-				"No ListType exists with the primary key " + listTypeId);
+			throw new NoSuchListTypeException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				listTypeId);
 		}
 
 		return listType;
@@ -325,7 +323,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_LISTTYPE_WHERE);
 
@@ -341,11 +339,11 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(ListTypeModelImpl.ORDER_BY_JPQL);
 
-				query.append("listType.name ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -397,7 +395,15 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_LISTTYPE_WHERE);
 
@@ -414,34 +420,16 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("listType.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("listType.name ASC");
+					query.append(ListTypeModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -477,11 +465,12 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		List<ListType> list = findByType(type, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No ListType exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("type=" + type);
+			msg.append("type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -499,11 +488,12 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		List<ListType> list = findByType(type, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No ListType exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("type=" + type);
+			msg.append("type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -525,7 +515,15 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_LISTTYPE_WHERE);
 
@@ -542,34 +540,16 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("listType.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("listType.name ASC");
+				query.append(ListTypeModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -658,39 +638,25 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_LISTTYPE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_LISTTYPE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("listType.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("listType.name ASC");
+					sql = _SQL_SELECT_LISTTYPE.concat(ListTypeModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<ListType>)QueryUtil.list(q, getDialect(),
@@ -746,7 +712,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_LISTTYPE_WHERE);
 
@@ -762,7 +728,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -948,12 +916,15 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-	private static final String _FINDER_COLUMN_TYPE_TYPE_1 = "listTypetype IS NULL";
-	private static final String _FINDER_COLUMN_TYPE_TYPE_2 = "listType.type = ?";
-	private static final String _FINDER_COLUMN_TYPE_TYPE_3 = "(listTypetype IS NULL OR listType.type = ?)";
 	private static final String _SQL_SELECT_LISTTYPE = "SELECT listType FROM ListType listType";
 	private static final String _SQL_SELECT_LISTTYPE_WHERE = "SELECT listType FROM ListType listType WHERE ";
 	private static final String _SQL_COUNT_LISTTYPE = "SELECT COUNT(listType) FROM ListType listType";
 	private static final String _SQL_COUNT_LISTTYPE_WHERE = "SELECT COUNT(listType) FROM ListType listType WHERE ";
+	private static final String _FINDER_COLUMN_TYPE_TYPE_1 = "listTypetype IS NULL";
+	private static final String _FINDER_COLUMN_TYPE_TYPE_2 = "listType.type = ?";
+	private static final String _FINDER_COLUMN_TYPE_TYPE_3 = "(listTypetype IS NULL OR listType.type = ?)";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "listType.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ListType exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ListType exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ListTypePersistenceImpl.class);
 }

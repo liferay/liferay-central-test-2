@@ -169,13 +169,10 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 			if (announcementsFlag == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No AnnouncementsFlag exists with the primary key " +
-						flagId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + flagId);
 				}
 
-				throw new NoSuchFlagException(
-					"No AnnouncementsFlag exists with the primary key " +
+				throw new NoSuchFlagException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					flagId);
 			}
 
@@ -343,12 +340,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 		if (announcementsFlag == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No AnnouncementsFlag exists with the primary key " +
-					flagId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + flagId);
 			}
 
-			throw new NoSuchFlagException(
-				"No AnnouncementsFlag exists with the primary key " + flagId);
+			throw new NoSuchFlagException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				flagId);
 		}
 
 		return announcementsFlag;
@@ -401,18 +397,17 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
 				query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
 
-				query.append(" ORDER BY ");
+				query.append(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
 
-				query.append("announcementsFlag.userId ASC, ");
-				query.append("announcementsFlag.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -462,42 +457,31 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
 				query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("announcementsFlag.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("announcementsFlag.userId ASC, ");
-					query.append("announcementsFlag.createDate ASC");
+					query.append(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -531,11 +515,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		List<AnnouncementsFlag> list = findByEntryId(entryId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No AnnouncementsFlag exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("entryId=" + entryId);
+			msg.append("entryId=");
+			msg.append(entryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -554,11 +539,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No AnnouncementsFlag exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("entryId=" + entryId);
+			msg.append("entryId=");
+			msg.append(entryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -581,42 +567,31 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
 			query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("announcementsFlag.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("announcementsFlag.userId ASC, ");
-				query.append("announcementsFlag.createDate ASC");
+				query.append(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -647,17 +622,18 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				value);
 
 		if (announcementsFlag == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No AnnouncementsFlag exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userId=" + userId);
+			msg.append("userId=");
+			msg.append(userId);
 
-			msg.append(", ");
-			msg.append("entryId=" + entryId);
+			msg.append(", entryId=");
+			msg.append(entryId);
 
-			msg.append(", ");
-			msg.append("value=" + value);
+			msg.append(", value=");
+			msg.append(value);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -695,7 +671,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
 
@@ -705,12 +681,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				query.append(_FINDER_COLUMN_U_E_V_VALUE_2);
 
-				query.append(" ORDER BY ");
+				query.append(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
 
-				query.append("announcementsFlag.userId ASC, ");
-				query.append("announcementsFlag.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -831,40 +806,25 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("announcementsFlag.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("announcementsFlag.userId ASC, ");
-					query.append("announcementsFlag.createDate ASC");
+					sql = _SQL_SELECT_ANNOUNCEMENTSFLAG.concat(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<AnnouncementsFlag>)QueryUtil.list(q,
@@ -927,13 +887,15 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSFLAG_WHERE);
 
 				query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -974,7 +936,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_ANNOUNCEMENTSFLAG_WHERE);
 
@@ -984,7 +946,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				query.append(_FINDER_COLUMN_U_E_V_VALUE_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1080,13 +1044,16 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	private static final String _FINDER_COLUMN_ENTRYID_ENTRYID_2 = "announcementsFlag.entryId = ?";
-	private static final String _FINDER_COLUMN_U_E_V_USERID_2 = "announcementsFlag.userId = ? AND ";
-	private static final String _FINDER_COLUMN_U_E_V_ENTRYID_2 = "announcementsFlag.entryId = ? AND ";
-	private static final String _FINDER_COLUMN_U_E_V_VALUE_2 = "announcementsFlag.value = ?";
 	private static final String _SQL_SELECT_ANNOUNCEMENTSFLAG = "SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag";
 	private static final String _SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE = "SELECT announcementsFlag FROM AnnouncementsFlag announcementsFlag WHERE ";
 	private static final String _SQL_COUNT_ANNOUNCEMENTSFLAG = "SELECT COUNT(announcementsFlag) FROM AnnouncementsFlag announcementsFlag";
 	private static final String _SQL_COUNT_ANNOUNCEMENTSFLAG_WHERE = "SELECT COUNT(announcementsFlag) FROM AnnouncementsFlag announcementsFlag WHERE ";
+	private static final String _FINDER_COLUMN_ENTRYID_ENTRYID_2 = "announcementsFlag.entryId = ?";
+	private static final String _FINDER_COLUMN_U_E_V_USERID_2 = "announcementsFlag.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_E_V_ENTRYID_2 = "announcementsFlag.entryId = ? AND ";
+	private static final String _FINDER_COLUMN_U_E_V_VALUE_2 = "announcementsFlag.value = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "announcementsFlag.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AnnouncementsFlag exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AnnouncementsFlag exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsFlagPersistenceImpl.class);
 }

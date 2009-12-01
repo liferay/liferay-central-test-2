@@ -167,12 +167,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 			if (permission == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Permission exists with the primary key " +
-						permissionId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + permissionId);
 				}
 
-				throw new NoSuchPermissionException(
-					"No Permission exists with the primary key " +
+				throw new NoSuchPermissionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					permissionId);
 			}
 
@@ -362,12 +360,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 		if (permission == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Permission exists with the primary key " +
-					permissionId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + permissionId);
 			}
 
-			throw new NoSuchPermissionException(
-				"No Permission exists with the primary key " + permissionId);
+			throw new NoSuchPermissionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				permissionId);
 		}
 
 		return permission;
@@ -420,13 +417,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
 				query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -476,35 +475,27 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
 
 				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
 				query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("permission.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -539,11 +530,12 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		List<Permission> list = findByResourceId(resourceId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Permission exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("resourceId=" + resourceId);
+			msg.append("resourceId=");
+			msg.append(resourceId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -563,11 +555,12 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Permission exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("resourceId=" + resourceId);
+			msg.append("resourceId=");
+			msg.append(resourceId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -590,35 +583,27 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_PERMISSION_WHERE);
 
 			query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("permission.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -648,14 +633,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		Permission permission = fetchByA_R(actionId, resourceId);
 
 		if (permission == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No Permission exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("actionId=" + actionId);
+			msg.append("actionId=");
+			msg.append(actionId);
 
-			msg.append(", ");
-			msg.append("resourceId=" + resourceId);
+			msg.append(", resourceId=");
+			msg.append(resourceId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -691,7 +677,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_PERMISSION_WHERE);
 
@@ -709,7 +695,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 				query.append(_FINDER_COLUMN_A_R_RESOURCEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -830,33 +818,23 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_PERMISSION);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_PERMISSION);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("permission.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_PERMISSION;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<Permission>)QueryUtil.list(q, getDialect(),
@@ -919,13 +897,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_PERMISSION_WHERE);
 
 				query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -964,7 +944,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_PERMISSION_WHERE);
 
@@ -982,7 +962,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 				query.append(_FINDER_COLUMN_A_R_RESOURCEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1080,22 +1062,22 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETGROUPS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETGROUPS);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
 				else {
-					sb.append(" ORDER BY ");
-
-					sb.append("Group_.name ASC");
+					sql = _SQL_GETGROUPS.concat(com.liferay.portal.model.impl.GroupModelImpl.ORDER_BY_SQL);
 				}
-
-				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -1418,22 +1400,22 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETROLES);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETROLES);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
 				else {
-					sb.append(" ORDER BY ");
-
-					sb.append("Role_.name ASC");
+					sql = _SQL_GETROLES.concat(com.liferay.portal.model.impl.RoleModelImpl.ORDER_BY_SQL);
 				}
-
-				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -1754,16 +1736,20 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			try {
 				session = openSession();
 
-				StringBundler sb = new StringBundler();
-
-				sb.append(_SQL_GETUSERS);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					sb.append(" ORDER BY ");
-					sb.append(obc.getOrderBy());
+					query = new StringBundler(3);
+
+					query.append(_SQL_GETUSERS);
+					query.append(ORDER_BY_CLAUSE);
+					query.append(obc.getOrderBy());
+
+					sql = query.toString();
 				}
 
-				String sql = sb.toString();
+				sql = _SQL_GETUSERS;
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -2697,11 +2683,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
-	private static final String _FINDER_COLUMN_RESOURCEID_RESOURCEID_2 = "permission.resourceId = ?";
-	private static final String _FINDER_COLUMN_A_R_ACTIONID_1 = "permissionactionId IS NULL AND ";
-	private static final String _FINDER_COLUMN_A_R_ACTIONID_2 = "permission.actionId = ? AND ";
-	private static final String _FINDER_COLUMN_A_R_ACTIONID_3 = "(permissionactionId IS NULL OR permission.actionId = ?) AND ";
-	private static final String _FINDER_COLUMN_A_R_RESOURCEID_2 = "permission.resourceId = ?";
 	private static final String _SQL_SELECT_PERMISSION = "SELECT permission FROM Permission permission";
 	private static final String _SQL_SELECT_PERMISSION_WHERE = "SELECT permission FROM Permission permission WHERE ";
 	private static final String _SQL_COUNT_PERMISSION = "SELECT COUNT(permission) FROM Permission permission";
@@ -2715,5 +2696,13 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_Permissions ON (Users_Permissions.userId = User_.userId) WHERE (Users_Permissions.permissionId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Permissions WHERE permissionId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Permissions WHERE permissionId = ? AND userId = ?";
+	private static final String _FINDER_COLUMN_RESOURCEID_RESOURCEID_2 = "permission.resourceId = ?";
+	private static final String _FINDER_COLUMN_A_R_ACTIONID_1 = "permissionactionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_A_R_ACTIONID_2 = "permission.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_A_R_ACTIONID_3 = "(permissionactionId IS NULL OR permission.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_A_R_RESOURCEID_2 = "permission.resourceId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "permission.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Permission exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Permission exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PermissionPersistenceImpl.class);
 }

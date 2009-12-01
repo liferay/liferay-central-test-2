@@ -282,13 +282,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			if (journalContentSearch == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No JournalContentSearch exists with the primary key " +
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 						contentSearchId);
 				}
 
-				throw new NoSuchContentSearchException(
-					"No JournalContentSearch exists with the primary key " +
+				throw new NoSuchContentSearchException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					contentSearchId);
 			}
 
@@ -480,13 +478,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 		if (journalContentSearch == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"No JournalContentSearch exists with the primary key " +
-					contentSearchId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + contentSearchId);
 			}
 
-			throw new NoSuchContentSearchException(
-				"No JournalContentSearch exists with the primary key " +
+			throw new NoSuchContentSearchException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 				contentSearchId);
 		}
 
@@ -540,7 +535,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -556,7 +551,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -608,7 +605,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -625,28 +630,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalContentSearch.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -683,11 +672,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		List<JournalContentSearch> list = findByArticleId(articleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("articleId=" + articleId);
+			msg.append("articleId=");
+			msg.append(articleId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -707,11 +697,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("articleId=" + articleId);
+			msg.append("articleId=");
+			msg.append(articleId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -734,7 +725,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -751,28 +750,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalContentSearch.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -814,7 +797,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -822,7 +805,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -875,7 +860,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -884,28 +877,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalContentSearch.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -943,14 +920,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -970,14 +948,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1000,7 +979,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1009,28 +996,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalContentSearch.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1070,7 +1041,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1088,7 +1059,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1144,7 +1117,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1163,28 +1144,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalContentSearch.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1224,14 +1189,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("articleId=" + articleId);
+			msg.append(", articleId=");
+			msg.append(articleId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1251,14 +1217,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("articleId=" + articleId);
+			msg.append(", articleId=");
+			msg.append(articleId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1281,7 +1248,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1300,28 +1275,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalContentSearch.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1366,7 +1325,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1376,7 +1335,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				query.append(_FINDER_COLUMN_G_P_L_LAYOUTID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1433,7 +1394,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(5 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1444,28 +1413,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				query.append(_FINDER_COLUMN_G_P_L_LAYOUTID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalContentSearch.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1505,17 +1458,18 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				layoutId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
-			msg.append(", ");
-			msg.append("layoutId=" + layoutId);
+			msg.append(", layoutId=");
+			msg.append(layoutId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1535,17 +1489,18 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				layoutId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
-			msg.append(", ");
-			msg.append("layoutId=" + layoutId);
+			msg.append(", layoutId=");
+			msg.append(layoutId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1569,7 +1524,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(5 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1580,28 +1543,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			query.append(_FINDER_COLUMN_G_P_L_LAYOUTID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalContentSearch.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1647,7 +1594,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1667,7 +1614,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1727,7 +1676,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(5 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1748,28 +1705,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalContentSearch.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1811,17 +1752,18 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				articleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
-			msg.append(", ");
-			msg.append("articleId=" + articleId);
+			msg.append(", articleId=");
+			msg.append(articleId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1841,17 +1783,18 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				articleId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
-			msg.append(", ");
-			msg.append("articleId=" + articleId);
+			msg.append(", articleId=");
+			msg.append(articleId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1875,7 +1818,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(5 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1896,28 +1847,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalContentSearch.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1967,7 +1902,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -1989,7 +1924,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2053,7 +1990,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(6 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(5);
+				}
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2076,28 +2021,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalContentSearch.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2142,20 +2071,21 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				layoutId, portletId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(10);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
-			msg.append(", ");
-			msg.append("layoutId=" + layoutId);
+			msg.append(", layoutId=");
+			msg.append(layoutId);
 
-			msg.append(", ");
-			msg.append("portletId=" + portletId);
+			msg.append(", portletId=");
+			msg.append(portletId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2176,20 +2106,21 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				layoutId, portletId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(10);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
-			msg.append(", ");
-			msg.append("layoutId=" + layoutId);
+			msg.append(", layoutId=");
+			msg.append(layoutId);
 
-			msg.append(", ");
-			msg.append("portletId=" + portletId);
+			msg.append(", portletId=");
+			msg.append(portletId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2213,7 +2144,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(6 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
 
 			query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2236,28 +2175,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalContentSearch.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2297,23 +2220,24 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				privateLayout, layoutId, portletId, articleId);
 
 		if (journalContentSearch == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(12);
 
-			msg.append("No JournalContentSearch exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("privateLayout=" + privateLayout);
+			msg.append(", privateLayout=");
+			msg.append(privateLayout);
 
-			msg.append(", ");
-			msg.append("layoutId=" + layoutId);
+			msg.append(", layoutId=");
+			msg.append(layoutId);
 
-			msg.append(", ");
-			msg.append("portletId=" + portletId);
+			msg.append(", portletId=");
+			msg.append(portletId);
 
-			msg.append(", ");
-			msg.append("articleId=" + articleId);
+			msg.append(", articleId=");
+			msg.append(articleId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2359,7 +2283,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(6);
 
 				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2393,7 +2317,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2528,33 +2454,23 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_JOURNALCONTENTSEARCH);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_JOURNALCONTENTSEARCH);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalContentSearch.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_JOURNALCONTENTSEARCH;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<JournalContentSearch>)QueryUtil.list(q,
@@ -2660,7 +2576,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2676,7 +2592,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2719,7 +2637,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2727,7 +2645,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2768,7 +2688,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2786,7 +2706,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2832,7 +2754,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2842,7 +2764,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				query.append(_FINDER_COLUMN_G_P_L_LAYOUTID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2889,7 +2813,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2909,7 +2833,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2959,7 +2885,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_COUNT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -2981,7 +2907,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3036,7 +2964,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(6);
 
 				query.append(_SQL_COUNT_JOURNALCONTENTSEARCH_WHERE);
 
@@ -3070,7 +2998,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3188,6 +3118,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	private static final String _SQL_SELECT_JOURNALCONTENTSEARCH = "SELECT journalContentSearch FROM JournalContentSearch journalContentSearch";
+	private static final String _SQL_SELECT_JOURNALCONTENTSEARCH_WHERE = "SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ";
+	private static final String _SQL_COUNT_JOURNALCONTENTSEARCH = "SELECT COUNT(journalContentSearch) FROM JournalContentSearch journalContentSearch";
+	private static final String _SQL_COUNT_JOURNALCONTENTSEARCH_WHERE = "SELECT COUNT(journalContentSearch) FROM JournalContentSearch journalContentSearch WHERE ";
 	private static final String _FINDER_COLUMN_ARTICLEID_ARTICLEID_1 = "journalContentSearcharticleId IS NULL";
 	private static final String _FINDER_COLUMN_ARTICLEID_ARTICLEID_2 = "journalContentSearch.articleId = ?";
 	private static final String _FINDER_COLUMN_ARTICLEID_ARTICLEID_3 = "(journalContentSearcharticleId IS NULL OR journalContentSearch.articleId = ?)";
@@ -3220,9 +3154,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	private static final String _FINDER_COLUMN_G_P_L_P_A_ARTICLEID_1 = "journalContentSearcharticleId IS NULL";
 	private static final String _FINDER_COLUMN_G_P_L_P_A_ARTICLEID_2 = "journalContentSearch.articleId = ?";
 	private static final String _FINDER_COLUMN_G_P_L_P_A_ARTICLEID_3 = "(journalContentSearcharticleId IS NULL OR journalContentSearch.articleId = ?)";
-	private static final String _SQL_SELECT_JOURNALCONTENTSEARCH = "SELECT journalContentSearch FROM JournalContentSearch journalContentSearch";
-	private static final String _SQL_SELECT_JOURNALCONTENTSEARCH_WHERE = "SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ";
-	private static final String _SQL_COUNT_JOURNALCONTENTSEARCH = "SELECT COUNT(journalContentSearch) FROM JournalContentSearch journalContentSearch";
-	private static final String _SQL_COUNT_JOURNALCONTENTSEARCH_WHERE = "SELECT COUNT(journalContentSearch) FROM JournalContentSearch journalContentSearch WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "journalContentSearch.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalContentSearch exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalContentSearch exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(JournalContentSearchPersistenceImpl.class);
 }

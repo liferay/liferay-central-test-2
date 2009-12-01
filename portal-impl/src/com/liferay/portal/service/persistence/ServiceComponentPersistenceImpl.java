@@ -161,13 +161,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 			if (serviceComponent == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No ServiceComponent exists with the primary key " +
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 						serviceComponentId);
 				}
 
-				throw new NoSuchServiceComponentException(
-					"No ServiceComponent exists with the primary key " +
+				throw new NoSuchServiceComponentException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					serviceComponentId);
 			}
 
@@ -332,12 +330,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 		if (serviceComponent == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No ServiceComponent exists with the primary key " +
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					serviceComponentId);
 			}
 
-			throw new NoSuchServiceComponentException(
-				"No ServiceComponent exists with the primary key " +
+			throw new NoSuchServiceComponentException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 				serviceComponentId);
 		}
 
@@ -391,7 +388,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
@@ -407,12 +404,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(ServiceComponentModelImpl.ORDER_BY_JPQL);
 
-				query.append("serviceComponent.buildNamespace DESC, ");
-				query.append("serviceComponent.buildNumber DESC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -464,7 +460,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
@@ -481,35 +485,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("serviceComponent.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("serviceComponent.buildNamespace DESC, ");
-					query.append("serviceComponent.buildNumber DESC");
+					query.append(ServiceComponentModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -547,11 +532,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No ServiceComponent exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("buildNamespace=" + buildNamespace);
+			msg.append("buildNamespace=");
+			msg.append(buildNamespace);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -571,11 +557,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No ServiceComponent exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("buildNamespace=" + buildNamespace);
+			msg.append("buildNamespace=");
+			msg.append(buildNamespace);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -598,7 +585,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
@@ -615,35 +610,16 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("serviceComponent.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("serviceComponent.buildNamespace DESC, ");
-				query.append("serviceComponent.buildNumber DESC");
+				query.append(ServiceComponentModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -677,14 +653,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				buildNumber);
 
 		if (serviceComponent == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No ServiceComponent exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("buildNamespace=" + buildNamespace);
+			msg.append("buildNamespace=");
+			msg.append(buildNamespace);
 
-			msg.append(", ");
-			msg.append("buildNumber=" + buildNumber);
+			msg.append(", buildNumber=");
+			msg.append(buildNumber);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -720,7 +697,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
 
@@ -738,12 +715,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 				query.append(_FINDER_COLUMN_BNS_BNU_BUILDNUMBER_2);
 
-				query.append(" ORDER BY ");
+				query.append(ServiceComponentModelImpl.ORDER_BY_JPQL);
 
-				query.append("serviceComponent.buildNamespace DESC, ");
-				query.append("serviceComponent.buildNumber DESC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -865,40 +841,25 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_SERVICECOMPONENT);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_SERVICECOMPONENT);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("serviceComponent.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("serviceComponent.buildNamespace DESC, ");
-					query.append("serviceComponent.buildNumber DESC");
+					sql = _SQL_SELECT_SERVICECOMPONENT.concat(ServiceComponentModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<ServiceComponent>)QueryUtil.list(q,
@@ -965,7 +926,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_SERVICECOMPONENT_WHERE);
 
@@ -981,7 +942,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1022,7 +985,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_SERVICECOMPONENT_WHERE);
 
@@ -1040,7 +1003,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 				query.append(_FINDER_COLUMN_BNS_BNU_BUILDNUMBER_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1228,6 +1193,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_SERVICECOMPONENT = "SELECT serviceComponent FROM ServiceComponent serviceComponent";
+	private static final String _SQL_SELECT_SERVICECOMPONENT_WHERE = "SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ";
+	private static final String _SQL_COUNT_SERVICECOMPONENT = "SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent";
+	private static final String _SQL_COUNT_SERVICECOMPONENT_WHERE = "SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent WHERE ";
 	private static final String _FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_1 = "serviceComponentbuildNamespace IS NULL";
 	private static final String _FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_2 = "serviceComponent.buildNamespace = ?";
 	private static final String _FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_3 = "(serviceComponentbuildNamespace IS NULL OR serviceComponent.buildNamespace = ?)";
@@ -1235,9 +1204,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_2 = "serviceComponent.buildNamespace = ? AND ";
 	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_3 = "(serviceComponentbuildNamespace IS NULL OR serviceComponent.buildNamespace = ?) AND ";
 	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNUMBER_2 = "serviceComponent.buildNumber = ?";
-	private static final String _SQL_SELECT_SERVICECOMPONENT = "SELECT serviceComponent FROM ServiceComponent serviceComponent";
-	private static final String _SQL_SELECT_SERVICECOMPONENT_WHERE = "SELECT serviceComponent FROM ServiceComponent serviceComponent WHERE ";
-	private static final String _SQL_COUNT_SERVICECOMPONENT = "SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent";
-	private static final String _SQL_COUNT_SERVICECOMPONENT_WHERE = "SELECT COUNT(serviceComponent) FROM ServiceComponent serviceComponent WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "serviceComponent.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ServiceComponent exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ServiceComponent exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ServiceComponentPersistenceImpl.class);
 }

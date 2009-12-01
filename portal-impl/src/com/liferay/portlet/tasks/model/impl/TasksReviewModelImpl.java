@@ -85,6 +85,8 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 		};
 	public static final String TABLE_SQL_CREATE = "create table TasksReview (reviewId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,proposalId LONG,assignedByUserId LONG,assignedByUserName VARCHAR(75) null,stage INTEGER,completed BOOLEAN,rejected BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table TasksReview";
+	public static final String ORDER_BY_JPQL = " ORDER BY tasksReview.createDate ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY TasksReview.createDate ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";

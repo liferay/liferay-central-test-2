@@ -179,12 +179,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 			if (company == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Company exists with the primary key " +
-						companyId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + companyId);
 				}
 
-				throw new NoSuchCompanyException(
-					"No Company exists with the primary key " + companyId);
+				throw new NoSuchCompanyException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					companyId);
 			}
 
 			return remove(company);
@@ -384,12 +383,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 		if (company == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Company exists with the primary key " +
-					companyId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + companyId);
 			}
 
-			throw new NoSuchCompanyException(
-				"No Company exists with the primary key " + companyId);
+			throw new NoSuchCompanyException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				companyId);
 		}
 
 		return company;
@@ -433,11 +431,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		Company company = fetchByWebId(webId);
 
 		if (company == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Company exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("webId=" + webId);
+			msg.append("webId=");
+			msg.append(webId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -472,7 +471,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
@@ -488,7 +487,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -547,11 +548,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		Company company = fetchByVirtualHost(virtualHost);
 
 		if (company == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Company exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("virtualHost=" + virtualHost);
+			msg.append("virtualHost=");
+			msg.append(virtualHost);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -587,7 +589,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
@@ -603,7 +605,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -662,11 +666,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		Company company = fetchByMx(mx);
 
 		if (company == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Company exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("mx=" + mx);
+			msg.append("mx=");
+			msg.append(mx);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -701,7 +706,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
@@ -717,7 +722,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -776,11 +783,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		Company company = fetchByLogoId(logoId);
 
 		if (company == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Company exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("logoId=" + logoId);
+			msg.append("logoId=");
+			msg.append(logoId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -815,13 +823,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
 				query.append(_FINDER_COLUMN_LOGOID_LOGOID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -884,13 +894,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
 				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -940,35 +952,27 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
 
 				query.append(_SQL_SELECT_COMPANY_WHERE);
 
 				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("company.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1001,11 +1005,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		List<Company> list = findBySystem(system, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Company exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("system=" + system);
+			msg.append("system=");
+			msg.append(system);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1023,11 +1028,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		List<Company> list = findBySystem(system, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Company exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("system=" + system);
+			msg.append("system=");
+			msg.append(system);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1049,35 +1055,27 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_COMPANY_WHERE);
 
 			query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("company.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1164,33 +1162,23 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_COMPANY);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_COMPANY);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("company.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_COMPANY;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<Company>)QueryUtil.list(q, getDialect(),
@@ -1274,7 +1262,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
@@ -1290,7 +1278,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1330,7 +1320,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
@@ -1346,7 +1336,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1386,7 +1378,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
@@ -1402,7 +1394,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1442,13 +1436,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
 				query.append(_FINDER_COLUMN_LOGOID_LOGOID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1486,13 +1482,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_COMPANY_WHERE);
 
 				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1676,6 +1674,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_COMPANY = "SELECT company FROM Company company";
+	private static final String _SQL_SELECT_COMPANY_WHERE = "SELECT company FROM Company company WHERE ";
+	private static final String _SQL_COUNT_COMPANY = "SELECT COUNT(company) FROM Company company";
+	private static final String _SQL_COUNT_COMPANY_WHERE = "SELECT COUNT(company) FROM Company company WHERE ";
 	private static final String _FINDER_COLUMN_WEBID_WEBID_1 = "companywebId IS NULL";
 	private static final String _FINDER_COLUMN_WEBID_WEBID_2 = "company.webId = ?";
 	private static final String _FINDER_COLUMN_WEBID_WEBID_3 = "(companywebId IS NULL OR company.webId = ?)";
@@ -1687,9 +1689,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	private static final String _FINDER_COLUMN_MX_MX_3 = "(companymx IS NULL OR company.mx = ?)";
 	private static final String _FINDER_COLUMN_LOGOID_LOGOID_2 = "company.logoId = ?";
 	private static final String _FINDER_COLUMN_SYSTEM_SYSTEM_2 = "company.system = ?";
-	private static final String _SQL_SELECT_COMPANY = "SELECT company FROM Company company";
-	private static final String _SQL_SELECT_COMPANY_WHERE = "SELECT company FROM Company company WHERE ";
-	private static final String _SQL_COUNT_COMPANY = "SELECT COUNT(company) FROM Company company";
-	private static final String _SQL_COUNT_COMPANY_WHERE = "SELECT COUNT(company) FROM Company company WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "company.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Company exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Company exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(CompanyPersistenceImpl.class);
 }

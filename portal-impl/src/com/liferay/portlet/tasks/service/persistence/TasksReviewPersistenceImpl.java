@@ -238,12 +238,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			if (tasksReview == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No TasksReview exists with the primary key " +
-						reviewId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + reviewId);
 				}
 
-				throw new NoSuchReviewException(
-					"No TasksReview exists with the primary key " + reviewId);
+				throw new NoSuchReviewException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					reviewId);
 			}
 
 			return remove(tasksReview);
@@ -410,12 +409,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 		if (tasksReview == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No TasksReview exists with the primary key " +
-					reviewId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + reviewId);
 			}
 
-			throw new NoSuchReviewException(
-				"No TasksReview exists with the primary key " + reviewId);
+			throw new NoSuchReviewException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				reviewId);
 		}
 
 		return tasksReview;
@@ -468,17 +466,17 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				query.append(" ORDER BY ");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 
-				query.append("tasksReview.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -528,41 +526,31 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("tasksReview.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("tasksReview.createDate ASC");
+					query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -596,11 +584,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		List<TasksReview> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userId=" + userId);
+			msg.append("userId=");
+			msg.append(userId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -618,11 +607,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		List<TasksReview> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userId=" + userId);
+			msg.append("userId=");
+			msg.append(userId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -644,41 +634,31 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("tasksReview.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("tasksReview.createDate ASC");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -716,17 +696,17 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
 				query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
-				query.append(" ORDER BY ");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 
-				query.append("tasksReview.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -776,41 +756,31 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
 				query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("tasksReview.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("tasksReview.createDate ASC");
+					query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -844,11 +814,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		List<TasksReview> list = findByProposalId(proposalId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("proposalId=" + proposalId);
+			msg.append("proposalId=");
+			msg.append(proposalId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -867,11 +838,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("proposalId=" + proposalId);
+			msg.append("proposalId=");
+			msg.append(proposalId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -894,41 +866,31 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
 			query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("tasksReview.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("tasksReview.createDate ASC");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -958,14 +920,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		TasksReview tasksReview = fetchByU_P(userId, proposalId);
 
 		if (tasksReview == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("userId=" + userId);
+			msg.append("userId=");
+			msg.append(userId);
 
-			msg.append(", ");
-			msg.append("proposalId=" + proposalId);
+			msg.append(", proposalId=");
+			msg.append(proposalId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1003,7 +966,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1011,11 +974,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_U_P_PROPOSALID_2);
 
-				query.append(" ORDER BY ");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 
-				query.append("tasksReview.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1084,7 +1047,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1092,11 +1055,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
-				query.append(" ORDER BY ");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 
-				query.append("tasksReview.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1148,7 +1111,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1157,34 +1128,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("tasksReview.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("tasksReview.createDate ASC");
+					query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1220,14 +1173,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		List<TasksReview> list = findByP_S(proposalId, stage, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("proposalId=" + proposalId);
+			msg.append("proposalId=");
+			msg.append(proposalId);
 
-			msg.append(", ");
-			msg.append("stage=" + stage);
+			msg.append(", stage=");
+			msg.append(stage);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1246,14 +1200,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("proposalId=" + proposalId);
+			msg.append("proposalId=");
+			msg.append(proposalId);
 
-			msg.append(", ");
-			msg.append("stage=" + stage);
+			msg.append(", stage=");
+			msg.append(stage);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1276,7 +1231,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1285,34 +1248,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("tasksReview.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("tasksReview.createDate ASC");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1355,7 +1300,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1365,11 +1310,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
-				query.append(" ORDER BY ");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 
-				query.append("tasksReview.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1425,7 +1370,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(5 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(5);
+				}
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1436,34 +1389,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("tasksReview.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("tasksReview.createDate ASC");
+					query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1503,17 +1438,18 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("proposalId=" + proposalId);
+			msg.append("proposalId=");
+			msg.append(proposalId);
 
-			msg.append(", ");
-			msg.append("stage=" + stage);
+			msg.append(", stage=");
+			msg.append(stage);
 
-			msg.append(", ");
-			msg.append("completed=" + completed);
+			msg.append(", completed=");
+			msg.append(completed);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1533,17 +1469,18 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("proposalId=" + proposalId);
+			msg.append("proposalId=");
+			msg.append(proposalId);
 
-			msg.append(", ");
-			msg.append("stage=" + stage);
+			msg.append(", stage=");
+			msg.append(stage);
 
-			msg.append(", ");
-			msg.append("completed=" + completed);
+			msg.append(", completed=");
+			msg.append(completed);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1566,7 +1503,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(5 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1577,34 +1522,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("tasksReview.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("tasksReview.createDate ASC");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1649,7 +1576,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(6);
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1661,11 +1588,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
-				query.append(" ORDER BY ");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 
-				query.append("tasksReview.createDate ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1725,7 +1652,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(6 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(6);
+				}
 
 				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1738,34 +1673,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("tasksReview.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("tasksReview.createDate ASC");
+					query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1807,20 +1724,21 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				rejected, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(10);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("proposalId=" + proposalId);
+			msg.append("proposalId=");
+			msg.append(proposalId);
 
-			msg.append(", ");
-			msg.append("stage=" + stage);
+			msg.append(", stage=");
+			msg.append(stage);
 
-			msg.append(", ");
-			msg.append("completed=" + completed);
+			msg.append(", completed=");
+			msg.append(completed);
 
-			msg.append(", ");
-			msg.append("rejected=" + rejected);
+			msg.append(", rejected=");
+			msg.append(rejected);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1840,20 +1758,21 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				rejected, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(10);
 
-			msg.append("No TasksReview exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("proposalId=" + proposalId);
+			msg.append("proposalId=");
+			msg.append(proposalId);
 
-			msg.append(", ");
-			msg.append("stage=" + stage);
+			msg.append(", stage=");
+			msg.append(stage);
 
-			msg.append(", ");
-			msg.append("completed=" + completed);
+			msg.append(", completed=");
+			msg.append(completed);
 
-			msg.append(", ");
-			msg.append("rejected=" + rejected);
+			msg.append(", rejected=");
+			msg.append(rejected);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1876,7 +1795,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(6 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(6);
+			}
 
 			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
 
@@ -1889,34 +1816,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("tasksReview.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("tasksReview.createDate ASC");
+				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2011,39 +1920,25 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_TASKSREVIEW);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_TASKSREVIEW);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("tasksReview.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("tasksReview.createDate ASC");
+					sql = _SQL_SELECT_TASKSREVIEW.concat(TasksReviewModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<TasksReview>)QueryUtil.list(q, getDialect(),
@@ -2134,13 +2029,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2178,13 +2075,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
 				query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2225,7 +2124,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
@@ -2233,7 +2132,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_U_P_PROPOSALID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2275,7 +2176,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
@@ -2283,7 +2184,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2327,7 +2230,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
@@ -2337,7 +2240,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2383,7 +2288,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_COUNT_TASKSREVIEW_WHERE);
 
@@ -2395,7 +2300,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2493,6 +2400,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _SQL_SELECT_TASKSREVIEW = "SELECT tasksReview FROM TasksReview tasksReview";
+	private static final String _SQL_SELECT_TASKSREVIEW_WHERE = "SELECT tasksReview FROM TasksReview tasksReview WHERE ";
+	private static final String _SQL_COUNT_TASKSREVIEW = "SELECT COUNT(tasksReview) FROM TasksReview tasksReview";
+	private static final String _SQL_COUNT_TASKSREVIEW_WHERE = "SELECT COUNT(tasksReview) FROM TasksReview tasksReview WHERE ";
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "tasksReview.userId = ?";
 	private static final String _FINDER_COLUMN_PROPOSALID_PROPOSALID_2 = "tasksReview.proposalId = ?";
 	private static final String _FINDER_COLUMN_U_P_USERID_2 = "tasksReview.userId = ? AND ";
@@ -2506,9 +2417,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	private static final String _FINDER_COLUMN_P_S_C_R_STAGE_2 = "tasksReview.stage = ? AND ";
 	private static final String _FINDER_COLUMN_P_S_C_R_COMPLETED_2 = "tasksReview.completed = ? AND ";
 	private static final String _FINDER_COLUMN_P_S_C_R_REJECTED_2 = "tasksReview.rejected = ?";
-	private static final String _SQL_SELECT_TASKSREVIEW = "SELECT tasksReview FROM TasksReview tasksReview";
-	private static final String _SQL_SELECT_TASKSREVIEW_WHERE = "SELECT tasksReview FROM TasksReview tasksReview WHERE ";
-	private static final String _SQL_COUNT_TASKSREVIEW = "SELECT COUNT(tasksReview) FROM TasksReview tasksReview";
-	private static final String _SQL_COUNT_TASKSREVIEW_WHERE = "SELECT COUNT(tasksReview) FROM TasksReview tasksReview WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "tasksReview.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No TasksReview exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No TasksReview exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(TasksReviewPersistenceImpl.class);
 }

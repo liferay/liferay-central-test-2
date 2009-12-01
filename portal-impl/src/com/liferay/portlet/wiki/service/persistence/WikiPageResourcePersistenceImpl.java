@@ -147,13 +147,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 			if (wikiPageResource == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"No WikiPageResource exists with the primary key " +
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 						resourcePrimKey);
 				}
 
-				throw new NoSuchPageResourceException(
-					"No WikiPageResource exists with the primary key " +
+				throw new NoSuchPageResourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					resourcePrimKey);
 			}
 
@@ -319,12 +317,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 		if (wikiPageResource == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No WikiPageResource exists with the primary key " +
-					resourcePrimKey);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + resourcePrimKey);
 			}
 
-			throw new NoSuchPageResourceException(
-				"No WikiPageResource exists with the primary key " +
+			throw new NoSuchPageResourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 				resourcePrimKey);
 		}
 
@@ -370,14 +366,15 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		WikiPageResource wikiPageResource = fetchByN_T(nodeId, title);
 
 		if (wikiPageResource == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No WikiPageResource exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("nodeId=" + nodeId);
+			msg.append("nodeId=");
+			msg.append(nodeId);
 
-			msg.append(", ");
-			msg.append("title=" + title);
+			msg.append(", title=");
+			msg.append(title);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -413,7 +410,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_WIKIPAGERESOURCE_WHERE);
 
@@ -431,7 +428,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -552,33 +551,23 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_WIKIPAGERESOURCE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_WIKIPAGERESOURCE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("wikiPageResource.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_WIKIPAGERESOURCE;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<WikiPageResource>)QueryUtil.list(q,
@@ -635,7 +624,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_WIKIPAGERESOURCE_WHERE);
 
@@ -653,7 +642,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -749,13 +740,16 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	private static final String _FINDER_COLUMN_N_T_NODEID_2 = "wikiPageResource.nodeId = ? AND ";
-	private static final String _FINDER_COLUMN_N_T_TITLE_1 = "wikiPageResourcetitle IS NULL";
-	private static final String _FINDER_COLUMN_N_T_TITLE_2 = "wikiPageResource.title = ?";
-	private static final String _FINDER_COLUMN_N_T_TITLE_3 = "(wikiPageResourcetitle IS NULL OR wikiPageResource.title = ?)";
 	private static final String _SQL_SELECT_WIKIPAGERESOURCE = "SELECT wikiPageResource FROM WikiPageResource wikiPageResource";
 	private static final String _SQL_SELECT_WIKIPAGERESOURCE_WHERE = "SELECT wikiPageResource FROM WikiPageResource wikiPageResource WHERE ";
 	private static final String _SQL_COUNT_WIKIPAGERESOURCE = "SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource";
 	private static final String _SQL_COUNT_WIKIPAGERESOURCE_WHERE = "SELECT COUNT(wikiPageResource) FROM WikiPageResource wikiPageResource WHERE ";
+	private static final String _FINDER_COLUMN_N_T_NODEID_2 = "wikiPageResource.nodeId = ? AND ";
+	private static final String _FINDER_COLUMN_N_T_TITLE_1 = "wikiPageResourcetitle IS NULL";
+	private static final String _FINDER_COLUMN_N_T_TITLE_2 = "wikiPageResource.title = ?";
+	private static final String _FINDER_COLUMN_N_T_TITLE_3 = "(wikiPageResourcetitle IS NULL OR wikiPageResource.title = ?)";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiPageResource.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WikiPageResource exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WikiPageResource exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(WikiPageResourcePersistenceImpl.class);
 }

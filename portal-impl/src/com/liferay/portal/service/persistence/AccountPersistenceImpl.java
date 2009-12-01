@@ -125,12 +125,11 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 
 			if (account == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Account exists with the primary key " +
-						accountId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + accountId);
 				}
 
-				throw new NoSuchAccountException(
-					"No Account exists with the primary key " + accountId);
+				throw new NoSuchAccountException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					accountId);
 			}
 
 			return remove(account);
@@ -265,12 +264,11 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 
 		if (account == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Account exists with the primary key " +
-					accountId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + accountId);
 			}
 
-			throw new NoSuchAccountException(
-				"No Account exists with the primary key " + accountId);
+			throw new NoSuchAccountException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				accountId);
 		}
 
 		return account;
@@ -372,33 +370,23 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_ACCOUNT);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_ACCOUNT);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("account.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_ACCOUNT;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<Account>)QueryUtil.list(q, getDialect(),
@@ -596,5 +584,8 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	private static final String _SQL_SELECT_ACCOUNT = "SELECT account FROM Account account";
 	private static final String _SQL_COUNT_ACCOUNT = "SELECT COUNT(account) FROM Account account";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "account.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Account exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Account exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(AccountPersistenceImpl.class);
 }

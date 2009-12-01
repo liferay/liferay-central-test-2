@@ -142,12 +142,11 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 
 			if (orgLabor == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No OrgLabor exists with the primary key " +
-						orgLaborId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + orgLaborId);
 				}
 
-				throw new NoSuchOrgLaborException(
-					"No OrgLabor exists with the primary key " + orgLaborId);
+				throw new NoSuchOrgLaborException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					orgLaborId);
 			}
 
 			return remove(orgLabor);
@@ -283,12 +282,11 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 
 		if (orgLabor == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No OrgLabor exists with the primary key " +
-					orgLaborId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + orgLaborId);
 			}
 
-			throw new NoSuchOrgLaborException(
-				"No OrgLabor exists with the primary key " + orgLaborId);
+			throw new NoSuchOrgLaborException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				orgLaborId);
 		}
 
 		return orgLabor;
@@ -341,18 +339,17 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_ORGLABOR_WHERE);
 
 				query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
-				query.append(" ORDER BY ");
+				query.append(OrgLaborModelImpl.ORDER_BY_JPQL);
 
-				query.append("orgLabor.organizationId ASC, ");
-				query.append("orgLabor.typeId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -402,42 +399,31 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_ORGLABOR_WHERE);
 
 				query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("orgLabor.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("orgLabor.organizationId ASC, ");
-					query.append("orgLabor.typeId ASC");
+					query.append(OrgLaborModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -471,11 +457,12 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		List<OrgLabor> list = findByOrganizationId(organizationId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No OrgLabor exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("organizationId=" + organizationId);
+			msg.append("organizationId=");
+			msg.append(organizationId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -494,11 +481,12 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No OrgLabor exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("organizationId=" + organizationId);
+			msg.append("organizationId=");
+			msg.append(organizationId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -521,42 +509,31 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_ORGLABOR_WHERE);
 
 			query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("orgLabor.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("orgLabor.organizationId ASC, ");
-				query.append("orgLabor.typeId ASC");
+				query.append(OrgLaborModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -643,40 +620,25 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_ORGLABOR);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_ORGLABOR);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("orgLabor.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("orgLabor.organizationId ASC, ");
-					query.append("orgLabor.typeId ASC");
+					sql = _SQL_SELECT_ORGLABOR.concat(OrgLaborModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<OrgLabor>)QueryUtil.list(q, getDialect(),
@@ -734,13 +696,15 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_ORGLABOR_WHERE);
 
 				query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -924,10 +888,13 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-	private static final String _FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2 = "orgLabor.organizationId = ?";
 	private static final String _SQL_SELECT_ORGLABOR = "SELECT orgLabor FROM OrgLabor orgLabor";
 	private static final String _SQL_SELECT_ORGLABOR_WHERE = "SELECT orgLabor FROM OrgLabor orgLabor WHERE ";
 	private static final String _SQL_COUNT_ORGLABOR = "SELECT COUNT(orgLabor) FROM OrgLabor orgLabor";
 	private static final String _SQL_COUNT_ORGLABOR_WHERE = "SELECT COUNT(orgLabor) FROM OrgLabor orgLabor WHERE ";
+	private static final String _FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2 = "orgLabor.organizationId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "orgLabor.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No OrgLabor exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No OrgLabor exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(OrgLaborPersistenceImpl.class);
 }

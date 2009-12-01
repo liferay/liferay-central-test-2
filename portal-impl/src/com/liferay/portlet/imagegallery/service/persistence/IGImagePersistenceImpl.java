@@ -271,12 +271,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			if (igImage == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No IGImage exists with the primary key " +
-						imageId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + imageId);
 				}
 
-				throw new NoSuchImageException(
-					"No IGImage exists with the primary key " + imageId);
+				throw new NoSuchImageException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					imageId);
 			}
 
 			return remove(igImage);
@@ -516,11 +515,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 		if (igImage == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No IGImage exists with the primary key " + imageId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + imageId);
 			}
 
-			throw new NoSuchImageException(
-				"No IGImage exists with the primary key " + imageId);
+			throw new NoSuchImageException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				imageId);
 		}
 
 		return igImage;
@@ -571,7 +570,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -587,11 +586,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -643,7 +642,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -660,34 +667,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igImage.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igImage.imageId ASC");
+					query.append(IGImageModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -722,11 +711,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -744,11 +734,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -770,7 +761,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -787,34 +786,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igImage.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igImage.imageId ASC");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -845,14 +826,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		IGImage igImage = fetchByUUID_G(uuid, groupId);
 
 		if (igImage == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
-			msg.append(", ");
-			msg.append("groupId=" + groupId);
+			msg.append(", groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -888,7 +870,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -906,11 +888,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -979,17 +961,17 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1039,41 +1021,31 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igImage.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igImage.imageId ASC");
+					query.append(IGImageModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1106,11 +1078,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1128,11 +1101,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1154,41 +1128,31 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igImage.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igImage.imageId ASC");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1217,11 +1181,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		IGImage igImage = fetchBySmallImageId(smallImageId);
 
 		if (igImage == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("smallImageId=" + smallImageId);
+			msg.append("smallImageId=");
+			msg.append(smallImageId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1257,17 +1222,17 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1323,11 +1288,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		IGImage igImage = fetchByLargeImageId(largeImageId);
 
 		if (igImage == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("largeImageId=" + largeImageId);
+			msg.append("largeImageId=");
+			msg.append(largeImageId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1363,17 +1329,17 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1429,11 +1395,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		IGImage igImage = fetchByCustom1ImageId(custom1ImageId);
 
 		if (igImage == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("custom1ImageId=" + custom1ImageId);
+			msg.append("custom1ImageId=");
+			msg.append(custom1ImageId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1469,17 +1436,17 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_CUSTOM1IMAGEID_CUSTOM1IMAGEID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1535,11 +1502,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		IGImage igImage = fetchByCustom2ImageId(custom2ImageId);
 
 		if (igImage == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("custom2ImageId=" + custom2ImageId);
+			msg.append("custom2ImageId=");
+			msg.append(custom2ImageId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1575,17 +1543,17 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_CUSTOM2IMAGEID_CUSTOM2IMAGEID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1649,7 +1617,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -1657,11 +1625,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1713,7 +1681,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -1722,34 +1698,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igImage.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igImage.imageId ASC");
+					query.append(IGImageModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1784,14 +1742,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("userId=" + userId);
+			msg.append(", userId=");
+			msg.append(userId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1809,14 +1768,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByG_U(groupId, userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("userId=" + userId);
+			msg.append(", userId=");
+			msg.append(userId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1839,7 +1799,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -1848,34 +1816,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igImage.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igImage.imageId ASC");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1914,7 +1864,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -1922,11 +1872,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1978,7 +1928,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -1987,34 +1945,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igImage.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igImage.imageId ASC");
+					query.append(IGImageModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2049,14 +1989,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByG_F(groupId, folderId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("folderId=" + folderId);
+			msg.append(", folderId=");
+			msg.append(folderId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2074,14 +2015,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByG_F(groupId, folderId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("folderId=" + folderId);
+			msg.append(", folderId=");
+			msg.append(folderId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2104,7 +2046,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -2113,34 +2063,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igImage.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igImage.imageId ASC");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2183,7 +2115,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -2203,11 +2135,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 
-				query.append("igImage.imageId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2265,7 +2197,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(5 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(5);
+				}
 
 				query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -2286,34 +2226,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igImage.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igImage.imageId ASC");
+					query.append(IGImageModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2352,17 +2274,18 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		List<IGImage> list = findByG_F_N(groupId, folderId, name, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("folderId=" + folderId);
+			msg.append(", folderId=");
+			msg.append(folderId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2381,17 +2304,18 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(8);
 
-			msg.append("No IGImage exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("folderId=" + folderId);
+			msg.append(", folderId=");
+			msg.append(folderId);
 
-			msg.append(", ");
-			msg.append("name=" + name);
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2414,7 +2338,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(5 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
 
 			query.append(_SQL_SELECT_IGIMAGE_WHERE);
 
@@ -2435,34 +2367,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("igImage.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("igImage.imageId ASC");
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2555,39 +2469,25 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_IGIMAGE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_IGIMAGE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("igImage.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("igImage.imageId ASC");
+					sql = _SQL_SELECT_IGIMAGE.concat(IGImageModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<IGImage>)QueryUtil.list(q, getDialect(),
@@ -2705,7 +2605,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
@@ -2721,7 +2621,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2762,7 +2664,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
@@ -2780,7 +2682,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2822,13 +2726,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2866,13 +2772,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2910,13 +2818,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2955,13 +2865,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_CUSTOM1IMAGEID_CUSTOM1IMAGEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3000,13 +2912,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
 				query.append(_FINDER_COLUMN_CUSTOM2IMAGEID_CUSTOM2IMAGEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3044,7 +2958,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
@@ -3052,7 +2966,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3093,7 +3009,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
@@ -3101,7 +3017,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3146,7 +3064,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_IGIMAGE_WHERE);
 
@@ -3166,7 +3084,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3274,6 +3194,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	private static final String _SQL_SELECT_IGIMAGE = "SELECT igImage FROM IGImage igImage";
+	private static final String _SQL_SELECT_IGIMAGE_WHERE = "SELECT igImage FROM IGImage igImage WHERE ";
+	private static final String _SQL_COUNT_IGIMAGE = "SELECT COUNT(igImage) FROM IGImage igImage";
+	private static final String _SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(igImage) FROM IGImage igImage WHERE ";
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "igImageuuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "igImage.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(igImageuuid IS NULL OR igImage.uuid = ?)";
@@ -3295,9 +3219,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "igImagename IS NULL";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_2 = "igImage.name = ?";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_3 = "(igImagename IS NULL OR igImage.name = ?)";
-	private static final String _SQL_SELECT_IGIMAGE = "SELECT igImage FROM IGImage igImage";
-	private static final String _SQL_SELECT_IGIMAGE_WHERE = "SELECT igImage FROM IGImage igImage WHERE ";
-	private static final String _SQL_COUNT_IGIMAGE = "SELECT COUNT(igImage) FROM IGImage igImage";
-	private static final String _SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(igImage) FROM IGImage igImage WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "igImage.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No IGImage exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No IGImage exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(IGImagePersistenceImpl.class);
 }

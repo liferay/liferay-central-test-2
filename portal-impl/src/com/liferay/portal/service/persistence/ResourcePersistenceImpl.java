@@ -155,12 +155,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 			if (resource == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Resource exists with the primary key " +
-						resourceId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + resourceId);
 				}
 
-				throw new NoSuchResourceException(
-					"No Resource exists with the primary key " + resourceId);
+				throw new NoSuchResourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					resourceId);
 			}
 
 			return remove(resource);
@@ -319,12 +318,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 		if (resource == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Resource exists with the primary key " +
-					resourceId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + resourceId);
 			}
 
-			throw new NoSuchResourceException(
-				"No Resource exists with the primary key " + resourceId);
+			throw new NoSuchResourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				resourceId);
 		}
 
 		return resource;
@@ -376,13 +374,15 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
 				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -432,35 +432,27 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(2);
+				}
 
 				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
 				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("resource.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -494,11 +486,12 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		List<Resource> list = findByCodeId(codeId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Resource exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("codeId=" + codeId);
+			msg.append("codeId=");
+			msg.append(codeId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -516,11 +509,12 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		List<Resource> list = findByCodeId(codeId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No Resource exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("codeId=" + codeId);
+			msg.append("codeId=");
+			msg.append(codeId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -542,35 +536,27 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_RESOURCE_WHERE);
 
 			query.append(_FINDER_COLUMN_CODEID_CODEID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("resource.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -599,14 +585,15 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		Resource resource = fetchByC_P(codeId, primKey);
 
 		if (resource == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No Resource exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("codeId=" + codeId);
+			msg.append("codeId=");
+			msg.append(codeId);
 
-			msg.append(", ");
-			msg.append("primKey=" + primKey);
+			msg.append(", primKey=");
+			msg.append(primKey);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -642,7 +629,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_RESOURCE_WHERE);
 
@@ -660,7 +647,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -780,33 +769,23 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_RESOURCE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_RESOURCE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("resource.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
-				Query q = session.createQuery(query.toString());
+				sql = _SQL_SELECT_RESOURCE;
+
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<Resource>)QueryUtil.list(q, getDialect(),
@@ -869,13 +848,15 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_RESOURCE_WHERE);
 
 				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -914,7 +895,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_RESOURCE_WHERE);
 
@@ -932,7 +913,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1120,14 +1103,17 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
 	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_RESOURCE = "SELECT resource FROM Resource resource";
+	private static final String _SQL_SELECT_RESOURCE_WHERE = "SELECT resource FROM Resource resource WHERE ";
+	private static final String _SQL_COUNT_RESOURCE = "SELECT COUNT(resource) FROM Resource resource";
+	private static final String _SQL_COUNT_RESOURCE_WHERE = "SELECT COUNT(resource) FROM Resource resource WHERE ";
 	private static final String _FINDER_COLUMN_CODEID_CODEID_2 = "resource.codeId = ?";
 	private static final String _FINDER_COLUMN_C_P_CODEID_2 = "resource.codeId = ? AND ";
 	private static final String _FINDER_COLUMN_C_P_PRIMKEY_1 = "resourceprimKey IS NULL";
 	private static final String _FINDER_COLUMN_C_P_PRIMKEY_2 = "resource.primKey = ?";
 	private static final String _FINDER_COLUMN_C_P_PRIMKEY_3 = "(resourceprimKey IS NULL OR resource.primKey = ?)";
-	private static final String _SQL_SELECT_RESOURCE = "SELECT resource FROM Resource resource";
-	private static final String _SQL_SELECT_RESOURCE_WHERE = "SELECT resource FROM Resource resource WHERE ";
-	private static final String _SQL_COUNT_RESOURCE = "SELECT COUNT(resource) FROM Resource resource";
-	private static final String _SQL_COUNT_RESOURCE_WHERE = "SELECT COUNT(resource) FROM Resource resource WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "resource.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Resource exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Resource exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ResourcePersistenceImpl.class);
 }

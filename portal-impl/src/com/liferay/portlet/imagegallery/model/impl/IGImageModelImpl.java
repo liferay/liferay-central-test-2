@@ -85,6 +85,8 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 		};
 	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(75) null,description STRING null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table IGImage";
+	public static final String ORDER_BY_JPQL = " ORDER BY igImage.imageId ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY IGImage.imageId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";

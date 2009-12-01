@@ -246,12 +246,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			if (journalTemplate == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No JournalTemplate exists with the primary key " +
-						id);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
 				}
 
-				throw new NoSuchTemplateException(
-					"No JournalTemplate exists with the primary key " + id);
+				throw new NoSuchTemplateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					id);
 			}
 
 			return remove(journalTemplate);
@@ -484,12 +483,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 		if (journalTemplate == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No JournalTemplate exists with the primary key " +
-					id);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + id);
 			}
 
-			throw new NoSuchTemplateException(
-				"No JournalTemplate exists with the primary key " + id);
+			throw new NoSuchTemplateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				id);
 		}
 
 		return journalTemplate;
@@ -541,7 +539,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -557,11 +555,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 
-				query.append("journalTemplate.templateId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -613,7 +611,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -630,34 +636,16 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalTemplate.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("journalTemplate.templateId ASC");
+					query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -693,11 +681,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		List<JournalTemplate> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -715,11 +704,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		List<JournalTemplate> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -741,7 +731,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -758,34 +756,16 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalTemplate.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("journalTemplate.templateId ASC");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -817,14 +797,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		JournalTemplate journalTemplate = fetchByUUID_G(uuid, groupId);
 
 		if (journalTemplate == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("uuid=" + uuid);
+			msg.append("uuid=");
+			msg.append(uuid);
 
-			msg.append(", ");
-			msg.append("groupId=" + groupId);
+			msg.append(", groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -860,7 +841,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -878,11 +859,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 
-				query.append("journalTemplate.templateId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -952,17 +933,17 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				query.append(" ORDER BY ");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 
-				query.append("journalTemplate.templateId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1012,41 +993,31 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalTemplate.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("journalTemplate.templateId ASC");
+					query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1080,11 +1051,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		List<JournalTemplate> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1103,11 +1075,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1129,41 +1102,31 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalTemplate.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("journalTemplate.templateId ASC");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1201,7 +1164,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -1217,11 +1180,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 
-				query.append("journalTemplate.templateId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1273,7 +1236,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(3 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -1290,34 +1261,16 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalTemplate.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("journalTemplate.templateId ASC");
+					query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1353,11 +1306,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		List<JournalTemplate> list = findByTemplateId(templateId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("templateId=" + templateId);
+			msg.append("templateId=");
+			msg.append(templateId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1376,11 +1330,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("templateId=" + templateId);
+			msg.append("templateId=");
+			msg.append(templateId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1403,7 +1358,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(3 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -1420,34 +1383,16 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalTemplate.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("journalTemplate.templateId ASC");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1479,11 +1424,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		JournalTemplate journalTemplate = fetchBySmallImageId(smallImageId);
 
 		if (journalTemplate == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(4);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("smallImageId=" + smallImageId);
+			msg.append("smallImageId=");
+			msg.append(smallImageId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1519,17 +1465,17 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
 				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
 
-				query.append(" ORDER BY ");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 
-				query.append("journalTemplate.templateId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1585,14 +1531,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		JournalTemplate journalTemplate = fetchByG_T(groupId, templateId);
 
 		if (journalTemplate == null) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("templateId=" + templateId);
+			msg.append(", templateId=");
+			msg.append(templateId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1628,7 +1575,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -1646,11 +1593,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 
-				query.append("journalTemplate.templateId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1720,7 +1667,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -1738,11 +1685,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				query.append(" ORDER BY ");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 
-				query.append("journalTemplate.templateId ASC");
+				String sql = query.toString();
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1798,7 +1745,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = null;
+
+				if (obc != null) {
+					query = new StringBundler(4 +
+							(obc.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(4);
+				}
 
 				query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -1817,34 +1772,16 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				}
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalTemplate.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("journalTemplate.templateId ASC");
+					query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1882,14 +1819,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		List<JournalTemplate> list = findByG_S(groupId, structureId, 0, 1, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("structureId=" + structureId);
+			msg.append(", structureId=");
+			msg.append(structureId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1908,14 +1846,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				count, obc);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler();
+			StringBundler msg = new StringBundler(6);
 
-			msg.append("No JournalTemplate exists with the key {");
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=" + groupId);
+			msg.append("groupId=");
+			msg.append(groupId);
 
-			msg.append(", ");
-			msg.append("structureId=" + structureId);
+			msg.append(", structureId=");
+			msg.append(structureId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1938,7 +1877,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		try {
 			session = openSession();
 
-			StringBundler query = new StringBundler();
+			StringBundler query = null;
+
+			if (obc != null) {
+				query = new StringBundler(4 +
+						(obc.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
@@ -1957,34 +1904,16 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			}
 
 			if (obc != null) {
-				query.append(" ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("journalTemplate.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 			}
 
 			else {
-				query.append(" ORDER BY ");
-
-				query.append("journalTemplate.templateId ASC");
+				query.append(JournalTemplateModelImpl.ORDER_BY_JPQL);
 			}
 
-			Query q = session.createQuery(query.toString());
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2077,39 +2006,25 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_JOURNALTEMPLATE);
+				StringBundler query = null;
+				String sql = null;
 
 				if (obc != null) {
-					query.append(" ORDER BY ");
+					query = new StringBundler(2 +
+							(obc.getOrderByFields().length * 3));
 
-					String[] orderByFields = obc.getOrderByFields();
+					query.append(_SQL_SELECT_JOURNALTEMPLATE);
 
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("journalTemplate.");
-						query.append(orderByFields[i]);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
 
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
+					sql = query.toString();
 				}
 
 				else {
-					query.append(" ORDER BY ");
-
-					query.append("journalTemplate.templateId ASC");
+					sql = _SQL_SELECT_JOURNALTEMPLATE.concat(JournalTemplateModelImpl.ORDER_BY_JPQL);
 				}
 
-				Query q = session.createQuery(query.toString());
+				Query q = session.createQuery(sql);
 
 				if (obc == null) {
 					list = (List<JournalTemplate>)QueryUtil.list(q,
@@ -2205,7 +2120,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
@@ -2221,7 +2136,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2262,7 +2179,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
@@ -2280,7 +2197,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2322,13 +2241,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2366,7 +2287,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
@@ -2382,7 +2303,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2422,13 +2345,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(2);
 
 				query.append(_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
 				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2467,7 +2392,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
@@ -2485,7 +2410,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2528,7 +2455,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler();
+				StringBundler query = new StringBundler(3);
 
 				query.append(_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
@@ -2546,7 +2473,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				Query q = session.createQuery(query.toString());
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2656,6 +2585,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	private static final String _SQL_SELECT_JOURNALTEMPLATE = "SELECT journalTemplate FROM JournalTemplate journalTemplate";
+	private static final String _SQL_SELECT_JOURNALTEMPLATE_WHERE = "SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ";
+	private static final String _SQL_COUNT_JOURNALTEMPLATE = "SELECT COUNT(journalTemplate) FROM JournalTemplate journalTemplate";
+	private static final String _SQL_COUNT_JOURNALTEMPLATE_WHERE = "SELECT COUNT(journalTemplate) FROM JournalTemplate journalTemplate WHERE ";
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "journalTemplateuuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "journalTemplate.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(journalTemplateuuid IS NULL OR journalTemplate.uuid = ?)";
@@ -2676,9 +2609,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_1 = "journalTemplatestructureId IS NULL";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_2 = "journalTemplate.structureId = ?";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_3 = "(journalTemplatestructureId IS NULL OR journalTemplate.structureId = ?)";
-	private static final String _SQL_SELECT_JOURNALTEMPLATE = "SELECT journalTemplate FROM JournalTemplate journalTemplate";
-	private static final String _SQL_SELECT_JOURNALTEMPLATE_WHERE = "SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ";
-	private static final String _SQL_COUNT_JOURNALTEMPLATE = "SELECT COUNT(journalTemplate) FROM JournalTemplate journalTemplate";
-	private static final String _SQL_COUNT_JOURNALTEMPLATE_WHERE = "SELECT COUNT(journalTemplate) FROM JournalTemplate journalTemplate WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "journalTemplate.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalTemplate exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalTemplate exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(JournalTemplatePersistenceImpl.class);
 }
