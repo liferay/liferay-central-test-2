@@ -71,6 +71,12 @@ public class WorkflowTaskManagerUtil {
 			userId, workflowTaskId);
 	}
 
+	public static long[] getPooledActorsIds(long workflowTaskId)
+		throws WorkflowException {
+
+		return _workflowTaskManager.getPooledActorsIds(workflowTaskId);
+	}
+
 	public static WorkflowTask getWorkflowTask(long workflowTaskId)
 		throws WorkflowException {
 

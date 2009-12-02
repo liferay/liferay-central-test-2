@@ -23,11 +23,11 @@
 package com.liferay.portlet.workflowtasks.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -45,6 +45,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditWorkflowTaskAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Marcellus Tavares
  */
 public class EditWorkflowTaskAction extends PortletAction {
 
@@ -53,8 +54,16 @@ public class EditWorkflowTaskAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
 		try {
-			updateTask(actionRequest);
+
+			if (cmd.equals(Constants.SAVE)) {
+				updateTask(actionRequest);
+			}
+			else if (cmd.equals("assign_task")) {
+				assignTask(actionRequest);
+			}
 
 			sendRedirect(actionRequest, actionResponse);
 		}
@@ -80,8 +89,7 @@ public class EditWorkflowTaskAction extends PortletAction {
 			ActionUtil.getWorkflowTask(renderRequest);
 		}
 		catch (Exception e) {
-			if (e instanceof PrincipalException ||
-				e instanceof WorkflowException) {
+			if (e instanceof WorkflowException) {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
@@ -94,6 +102,20 @@ public class EditWorkflowTaskAction extends PortletAction {
 
 		return mapping.findForward(getForward(
 			renderRequest, "portlet.workflow_tasks.edit_workflow_task"));
+	}
+
+	protected void assignTask(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long assigneeUserId = ParamUtil.getLong(
+			actionRequest, "assigneeUserId");
+		long workflowTaskId = ParamUtil.getLong(
+			actionRequest, "workflowTaskId");
+
+		WorkflowTaskManagerUtil.assignWorkflowTaskToUser(
+			themeDisplay.getUserId(), workflowTaskId, assigneeUserId, null,
+			null);
 	}
 
 	protected void updateTask(ActionRequest actionRequest) throws Exception {

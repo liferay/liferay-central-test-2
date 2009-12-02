@@ -68,6 +68,10 @@ public class WorkflowTaskManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public long[] getPooledActorsIds(long workflowTaskId) {
+		throw new UnsupportedOperationException();
+	}
+
 	public WorkflowTask getWorkflowTask(long workflowTaskId) {
 		throw new UnsupportedOperationException();
 	}

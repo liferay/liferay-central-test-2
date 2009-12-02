@@ -40,7 +40,15 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />assignTask() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "assign_task";
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />saveTask(transitionName) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SAVE %>";
+
 		if (transitionName) {
 			document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
 		}
@@ -64,12 +72,12 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<aui:input name="transitionName" type="hidden" />
 
 	<aui:fieldset>
-		<aui:field-wrapper inlineLabel="true" label="name">
+		<aui:field-wrapper inlineLabel="left" label="name">
 			<%= workflowTask.getName() %>
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="description">
-			<%= workflowTask.getDescription() %>
+			<%= (workflowTask.getDescription() == null) ? StringPool.BLANK : workflowTask.getDescription() %>
 		</aui:field-wrapper>
 
 		<%
@@ -87,22 +95,42 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 			editPortletURL.setParameter("redirect", currentURL);
 			%>
 
-			<aui:field-wrapper inlineLabel="true" label="asset-title">
+			<aui:field-wrapper inlineLabel="left" label="asset-title">
 				<aui:a href="<%= editPortletURL.toString() %>"><%= workflowHandler.getTitle(classPK) %></aui:a>
 			</aui:field-wrapper>
 		</c:if>
 
-		<aui:field-wrapper inlineLabel="true" label="state">
+		<aui:field-wrapper inlineLabel="left" label="state">
 			<%= WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK) %>
 		</aui:field-wrapper>
 
-		<aui:field-wrapper inlineLabel="true" label="create-date">
+		<aui:field-wrapper inlineLabel="left" label="create-date">
 			<%= dateFormatDateTime.format(workflowTask.getCreateDate()) %>
 		</aui:field-wrapper>
 
-		<aui:field-wrapper inlineLabel="true" label="due-date">
+		<aui:field-wrapper inlineLabel="left" label="due-date">
 			<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
 		</aui:field-wrapper>
+
+		<%
+		long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(workflowTask.getWorkflowTaskId());
+		%>
+
+		<c:if test="<%= pooledActorsIds != null %>">
+			<aui:select inlineLabel="left" label="owner" name="assigneeUserId">
+				<%
+				for (long pooledActorId : pooledActorsIds) {
+				%>
+
+					<aui:option label="<%= PortalUtil.getUserName(pooledActorId, StringPool.BLANK) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
+
+				<%
+				}
+				%>
+
+				<aui:button name="assignButton" onClick='<%= renderResponse.getNamespace() + "assignTask();" %>' type="button" value="assign" />
+			</aui:select>
+		</c:if>
 
 		<br />
 
