@@ -57,12 +57,11 @@ public class EditWorkflowTaskAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-
-			if (cmd.equals(Constants.SAVE)) {
-				updateTask(actionRequest);
-			}
-			else if (cmd.equals("assign_task")) {
+			if (cmd.equals(Constants.ASSIGN)) {
 				assignTask(actionRequest);
+			}
+			else if (cmd.equals(Constants.SAVE)) {
+				updateTask(actionRequest);
 			}
 
 			sendRedirect(actionRequest, actionResponse);
@@ -108,10 +107,10 @@ public class EditWorkflowTaskAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long assigneeUserId = ParamUtil.getLong(
-			actionRequest, "assigneeUserId");
 		long workflowTaskId = ParamUtil.getLong(
 			actionRequest, "workflowTaskId");
+		long assigneeUserId = ParamUtil.getLong(
+			actionRequest, "assigneeUserId");
 
 		WorkflowTaskManagerUtil.assignWorkflowTaskToUser(
 			themeDisplay.getUserId(), workflowTaskId, assigneeUserId, null,

@@ -41,8 +41,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 
 <script type="text/javascript">
 	function <portlet:namespace />assignTask() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "assign_task";
-
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.ASSIGN %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -77,7 +76,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="description">
-			<%= (workflowTask.getDescription() == null) ? StringPool.BLANK : workflowTask.getDescription() %>
+			<%= GetterUtil.getString(workflowTask.getDescription()) %>
 		</aui:field-wrapper>
 
 		<%
@@ -118,6 +117,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 
 		<c:if test="<%= pooledActorsIds != null %>">
 			<aui:select inlineLabel="left" label="owner" name="assigneeUserId">
+
 				<%
 				for (long pooledActorId : pooledActorsIds) {
 				%>
